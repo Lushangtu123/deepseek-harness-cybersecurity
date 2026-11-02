@@ -18,6 +18,9 @@ test('all visible homepage text is translatable except language-neutral names', 
 });
 """
 FIXTURES={'repro.mjs':REPRO,'escaped.mjs':REPRO.replace('/<!--','/\\x3c!--'),
+ 'semicolon.mjs':REPRO.replace("DOCTYPE[^>]*>/g, '')","DOCTYPE[^>]*>/g, '');"),
+ 'no-comment.mjs':REPRO.replace('<!--[\\s\\S]*?-->|',''),
+ 'positive-after.mjs':REPRO+'\nexport function call(input) { return eval(input); }\n',
  'benign.mjs':'export const read = input => JSON.parse(input);\n',
  'positive.mjs':'export function call(input) { return eval(input); }\n',
  'invalid.mjs':'function broken( {\n'}
@@ -47,8 +50,8 @@ def evaluate(value,exit_code):
  for finding in value['results']:
   if not isinstance(finding,dict) or finding.get('check_id') not in ['probe.expression','probe.eval']:raise ProbeError('Parser control result invalid')
   name=target(finding.get('path'));key='expressionMatches' if finding['check_id']=='probe.expression' else 'evalMatches';cases[name][key]+=1
- controls=all(cases[name]['scanned'] and not cases[name]['errors'] and cases[name]['expressionMatches']>0 for name in ['escaped.mjs','benign.mjs','positive.mjs']) and cases['positive.mjs']['evalMatches']>0 and cases['benign.mjs']['evalMatches']==0 and cases['invalid.mjs']['scanned'] and bool(cases['invalid.mjs']['errors']) and all(code in ['PartialParsing','ParseError','LexicalError'] for code in cases['invalid.mjs']['errors']) and cases['repro.mjs']['scanned']
- ready=controls and not cases['repro.mjs']['errors'] and cases['repro.mjs']['expressionMatches']>0
+ controls=all(cases[name]['scanned'] and not cases[name]['errors'] and cases[name]['expressionMatches']>0 for name in ['escaped.mjs','no-comment.mjs','benign.mjs','positive.mjs']) and cases['positive.mjs']['evalMatches']>0 and cases['benign.mjs']['evalMatches']==0 and cases['invalid.mjs']['scanned'] and bool(cases['invalid.mjs']['errors']) and all(code in ['PartialParsing','ParseError','LexicalError'] for code in cases['invalid.mjs']['errors']) and all(cases[name]['scanned'] for name in ['repro.mjs','semicolon.mjs','positive-after.mjs'])
+ ready=controls and all(not cases[name]['errors'] and cases[name]['expressionMatches']>0 for name in ['repro.mjs','semicolon.mjs','positive-after.mjs']) and cases['positive-after.mjs']['evalMatches']>0
  return {'version':1,'executionOk':True,'controlsPassed':bool(controls),'parserReady':bool(ready),'exitCode':0 if ready else 2 if controls else 1,'fixtureCount':len(FIXTURES),'cases':cases,'limits':'Synthetic parser and rule controls only; no proof of complete project coverage or exploitability.'}
 
 def plan(image,inputs,outputs,name):

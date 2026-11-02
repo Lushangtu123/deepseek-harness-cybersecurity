@@ -43,7 +43,7 @@ export function parseScanOutput(tool,value,secrets=[]){
  if(tool==='semgrep'){
   if(!Array.isArray(value.results)||!Array.isArray(value.errors))fail('Semgrep响应结构无效');
   complete=value.errors.length===0&&Array.isArray(value.paths?.scanned)&&value.paths.scanned.length>0;
-  for(const e of value.errors){const locations=Array.isArray(e?.type)?e.type[1]:null,location=Array.isArray(locations)?locations[0]:null;diagnostic(Array.isArray(e?.type)?e.type[0]:e?.type,e?.path||location?.path||'',location?.start?.line)}
+  for(const e of value.errors){const locations=Array.isArray(e?.type)?e.type[1]:null;for(const location of Array.isArray(locations)&&locations.length?locations:[null])diagnostic(Array.isArray(e?.type)?e.type[0]:e?.type,location?.path||e?.path||'',location?.start?.line)}
   if(!value.paths?.scanned?.length)diagnostic('coverage-unrecorded');
   for(const file of value.paths?.scanned||[])if(typeof file==='string')coverageFiles.push(clean(file,800).replace(/^\/src\//,''));
   for(const row of value.results){if(!row||typeof row.check_id!=='string'||typeof row.path!=='string'||!Number.isInteger(row.start?.line)||typeof row.extra?.message!=='string')fail('Semgrep记录结构无效');finding(row.check_id,row.extra.message,row.extra.severity,row.path+':'+row.start.line,'规则命中；源码片段未收录');}

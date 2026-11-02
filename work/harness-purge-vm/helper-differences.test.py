@@ -20,6 +20,6 @@ class Helpers(unittest.TestCase):
      self.assertEqual(recovery['state'],'older' if changed else 'matches')
      self.assertEqual(recovery['helpersMatch'],not changed)
      self.assertEqual(recovery['groups']['tools']['differentFiles'],['host-tools/web-health.mjs'] if changed else [])
-     self.assertEqual(recovery['groups']['tools']['filesChecked'],13)
+     self.assertEqual(recovery['groups']['tools']['filesChecked'],41)
      self.assertEqual(image.call_args.kwargs.get('helper'),b'original')
 if __name__=='__main__':unittest.main()

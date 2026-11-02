@@ -2,18 +2,21 @@ from pathlib import Path
 import importlib.util,json,unittest
 SCRIPT=Path(__file__).resolve().parent.parent/'package/scripts/security-parser-check.py'
 class ParserProbeTest(unittest.TestCase):
+ def test_gate_includes_html_regex_variants_and_positive_after_gap(self):
+  m=self.module();self.assertIn('semicolon.mjs',m.FIXTURES);self.assertIn('no-comment.mjs',m.FIXTURES);self.assertIn('positive-after.mjs',m.FIXTURES)
+  value=self.fixture(m,False);value['results']=[r for r in value['results'] if not (r['check_id']=='probe.eval' and r['path']=='/src/positive-after.mjs')];result=m.evaluate(value,0);self.assertFalse(result['parserReady'],'Missing positive-after eval control must fail')
  def module(self):
   self.assertTrue(SCRIPT.is_file(),'A reusable offline parser check is missing')
   spec=importlib.util.spec_from_file_location('parser_probe',SCRIPT);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
  def fixture(self,m,broken=True):
   names=list(m.FIXTURES)
-  result={'paths':{'scanned':['/src/'+name for name in names]},'errors':[{'type':'ParseError','path':'/src/invalid.mjs','message':'PRIVATE_RAW_DIAGNOSTIC'}], 'results':[{'check_id':'probe.expression','path':'/src/'+name} for name in names if name!='invalid.mjs']+[{'check_id':'probe.eval','path':'/src/positive.mjs'}]}
+  result={'paths':{'scanned':['/src/'+name for name in names]},'errors':[{'type':'ParseError','path':'/src/invalid.mjs','message':'PRIVATE_RAW_DIAGNOSTIC'}], 'results':[{'check_id':'probe.expression','path':'/src/'+name} for name in names if name!='invalid.mjs']+[{'check_id':'probe.eval','path':'/src/'+name} for name in ['positive.mjs','positive-after.mjs']]}
   if broken:result['errors'].append({'type':['PartialParsing',[{'path':'/src/repro.mjs','start':{'line':5}}]],'message':'PRIVATE_RAW_DIAGNOSTIC'})
   return result
  def test_complete_execution_with_exit_zero_is_still_a_failed_parser_gate(self):
   m=self.module();result=m.evaluate(self.fixture(m),0)
   self.assertTrue(result['executionOk']);self.assertTrue(result['controlsPassed']);self.assertFalse(result['parserReady']);self.assertEqual(result['exitCode'],2)
-  self.assertEqual(result['cases']['repro.mjs']['errors'],['PartialParsing']);self.assertNotIn('PRIVATE_RAW_DIAGNOSTIC',json.dumps(result));self.assertEqual(result['fixtureCount'],5)
+  self.assertEqual(result['cases']['repro.mjs']['errors'],['PartialParsing']);self.assertNotIn('PRIVATE_RAW_DIAGNOSTIC',json.dumps(result));self.assertEqual(result['fixtureCount'],8)
  def test_fixed_candidate_must_pass_all_controls_before_parser_ready(self):
   m=self.module();good=self.fixture(m,False);result=m.evaluate(good,0);self.assertTrue(result['parserReady']);self.assertEqual(result['exitCode'],0)
   for change in ['missing-target','missing-positive','benign-false-positive','missing-invalid-error','escaped-error']:

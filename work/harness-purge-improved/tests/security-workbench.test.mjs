@@ -15,6 +15,10 @@ async function fixture(runner){
  return{bench,store,root,workspace,repo,scope,close:async()=>{await bench.dispose();store.close();fs.rmSync(root,{recursive:true,force:true})}};
 }
 const tick=()=>new Promise(setImmediate);
+test('Every Semgrep partial-parse location remains visible with bounded diagnostics',async()=>{
+ const {parseScanOutput}=await api();const locations=Array.from({length:23},(_,i)=>({path:'/src/gap'+i+'.mjs',start:{line:i+1}}));const r=parseScanOutput('semgrep',{results:[],errors:[{type:['PartialParsing',locations]}],paths:{scanned:locations.map(x=>x.path)}});
+ assert.equal(r.complete,false);assert.equal(r.diagnostics.total,23);assert.equal(r.diagnostics.items.length,20);assert.equal(r.diagnostics.truncated,true);assert.deepEqual(r.diagnostics.items[1],{code:'PartialParsing',path:'gap1.mjs',line:2});
+});
 test('Project scope validates workspace boundaries, loopback targets, expiration and revision',async()=>{
  const f=await fixture();try{
   for(const change of [{repoRoot:f.root},{url:'https://outside.invalid'},{url:'http://127.0.0.1:49226'},{expiresAt:'2000-01-01T00:00:00Z'},{tools:['shell']},{confirm:false}])assert.throws(()=>f.bench.saveScope('a',f.scope(change)));

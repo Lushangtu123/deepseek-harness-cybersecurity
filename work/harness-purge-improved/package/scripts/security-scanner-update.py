@@ -152,7 +152,7 @@ def main(argv=None):
    if os.path.lexists(ROOT/'maintenance.json'):raise UpdateError('Maintenance pending recovery')
    report=candidate_probe(args.image_id,args.version)
    if ordinary(ROOT/'images.json')!=raw:raise UpdateError('Manifest changed during check')
-   result={'checkedAt':stamp(),'manifestSha256':sha(raw),'changed':False,'candidate':{'imageId':args.image_id,'version':args.version},'admitted':report['parserReady'] is True and report['controlsPassed'] is True,'parser':report,'scope':'Five synthetic parser/rule controls, not complete project coverage'}
+   result={'checkedAt':stamp(),'manifestSha256':sha(raw),'changed':False,'candidate':{'imageId':args.image_id,'version':args.version},'admitted':report['parserReady'] is True and report['controlsPassed'] is True,'parser':report,'scope':'Eight synthetic parser/rule controls, not complete project coverage'}
    print(json.dumps(result,ensure_ascii=False,indent=2));return 0 if result['admitted'] else 2
   print(json.dumps(result,ensure_ascii=False,indent=2));return 0
  except KeyboardInterrupt:print(json.dumps({'ok':False,'error':'操作已中断；请先核对维护记录，不自动重试。'},ensure_ascii=False));return 130

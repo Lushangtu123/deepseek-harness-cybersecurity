@@ -1,0 +1,187 @@
+{
+  "date": "2026-11-01",
+  "timezone": "America/Los_Angeles",
+  "harnessRecovery": {
+    "recoveryPoint": "ready-security-review-20261101",
+    "selectedProofFiles": 2671,
+    "programFiles": 139,
+    "snapshotCount": 25,
+    "previous24SnapshotsPreserved": true,
+    "selectedKaliBridgeCovered": true,
+    "linkedKaliArchive": "kali-recoveries/ready-security-review-20261101/Kali.utm",
+    "harnessDiskIncludesPrivateConnectionMaterial": true,
+    "publicSecretExported": false,
+    "originalVmResumed": true,
+    "restoredCopyBooted": true,
+    "restoredProofFilesMatched": 2671,
+    "restoredProgramFilesMatched": 139,
+    "restoredKaliBridgeWorked": true,
+    "originalDiskReturned": true,
+    "originalUnchangedWhileCopyBooted": true,
+    "hostHelperRegistry": "The preexisting Kali proxy matched reviewed source; its stale recorded hash was reconciled before bundling.",
+    "temporaryBootDiskRemoved": true
+  },
+  "kaliRecovery": {
+    "backupFilesMatched": 4,
+    "qcowCheckPassed": true,
+    "standaloneNoBackingFile": true,
+    "backupArchiveUnchangedAfterCopyBoot": true,
+    "originalKaliStarted": true,
+    "vmCount": 4,
+    "hostFDAAdded": false,
+    "restoredCopyBooted": true,
+    "ordinaryUid": 1000,
+    "systemAndToolFilesMatched": 12,
+    "sourceAndCopyNotRunTogether": true,
+    "localPrivateArchive": true,
+    "credentialsPublished": false,
+    "backupArchiveRetained": true,
+    "temporaryBootCopiesRemoved": true,
+    "temporaryShortcutRemoved": true
+  },
+  "parser": {
+    "installedVersion": "1.182.1",
+    "officialCandidateVersion": "1.183.0",
+    "candidateSource": "https://pypi.org/project/semgrep/1.183.0/",
+    "candidateInstalled": false,
+    "fixtures": 8,
+    "engineFixturePairs": 16,
+    "results": [
+      {
+        "engine": "installed",
+        "file": "repro.mjs",
+        "errorLines": 6
+      },
+      {
+        "engine": "installed",
+        "file": "escaped.mjs",
+        "errorLines": 0
+      },
+      {
+        "engine": "installed",
+        "file": "semicolon.mjs",
+        "errorLines": 6
+      },
+      {
+        "engine": "installed",
+        "file": "no-comment.mjs",
+        "errorLines": 0
+      },
+      {
+        "engine": "installed",
+        "file": "positive.mjs",
+        "errorLines": 0
+      },
+      {
+        "engine": "installed",
+        "file": "benign.mjs",
+        "errorLines": 0
+      },
+      {
+        "engine": "installed",
+        "file": "invalid.mjs",
+        "errorLines": 1
+      },
+      {
+        "engine": "installed",
+        "file": "positive-after.mjs",
+        "errorLines": 6
+      },
+      {
+        "engine": "candidate",
+        "file": "repro.mjs",
+        "errorLines": 6
+      },
+      {
+        "engine": "candidate",
+        "file": "escaped.mjs",
+        "errorLines": 0
+      },
+      {
+        "engine": "candidate",
+        "file": "semicolon.mjs",
+        "errorLines": 6
+      },
+      {
+        "engine": "candidate",
+        "file": "no-comment.mjs",
+        "errorLines": 0
+      },
+      {
+        "engine": "candidate",
+        "file": "positive.mjs",
+        "errorLines": 0
+      },
+      {
+        "engine": "candidate",
+        "file": "benign.mjs",
+        "errorLines": 0
+      },
+      {
+        "engine": "candidate",
+        "file": "invalid.mjs",
+        "errorLines": 1
+      },
+      {
+        "engine": "candidate",
+        "file": "positive-after.mjs",
+        "errorLines": 6
+      }
+    ],
+    "syntheticNodeSyntaxValidExceptIntentionalInvalid": true,
+    "sourceExecuted": false,
+    "network": "none",
+    "upstreamGapStillPresent": true,
+    "scannerGate": {
+      "executionOk": true,
+      "controlsPassed": true,
+      "parserReady": false,
+      "exitCode": 2
+    },
+    "harnessRepair": "Grouped parser diagnostics and bounded text supplements now consider every location, rather than only index0; partial scans stay partial.",
+    "candidateGateRepair": "Includes semicolon/no-comment/positive-after variants; requires eval control after the gap before readiness.",
+    "internalUpstreamParserTransitionRootCause": "not fully located; no patched grammar claimed"
+  },
+  "protectedState": {
+    "protectedProjectFilesMatched": 459,
+    "projectHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "findingsByStatus": {
+      "unverified": 95
+    },
+    "scannerManifestUnchanged": true,
+    "programHashesMatched": 139,
+    "installedToolsPresent": true,
+    "harnessActive": true,
+    "pentagiRunning": true,
+    "harnessVmConfigurationUnchanged": true,
+    "otherThreeHostHelpersUnchanged": true,
+    "proxyMatchesReviewedSource": true,
+    "hostResourceLimitsUnchanged": true,
+    "snapshotCount": 25,
+    "currentRecoveryCoversKaliBridge": true
+  },
+  "checks": {
+    "python": 283,
+    "pluginNode": 513,
+    "hostNode": 139,
+    "restoreRoot": 18,
+    "finalRevisionAndCloud": "Final code passed Mac/Linux suites; final documentation-only corrections pass export verification, exact-commit Actions checked after push.",
+    "finalMacCiPassed": true,
+    "finalActualLinuxCiPassed": true
+  },
+  "limits": [
+    "Both recovery artifacts are on this Mac; they do not protect against loss of its disk.",
+    "Harness and Kali were backed up separately, not as an atomic distributed snapshot.",
+    "The selected proof inventory is bounded, not a hash of every file in either operating system.",
+    "No real project scan or finding review;95findings stayunverified.",
+    "Semgrep upstream gap remains; no source rewrite, hidden exclusion or scanner promotion."
+  ],
+  "browserAcceptance": {
+    "browser": "Google Chrome",
+    "recoveryPage": "/__harness/recovery",
+    "currentRecoveryVisible": "ready-security-review-20261101",
+    "snapshotCountVisible": 25,
+    "currentRow": "快照已存在 / 归档摘要匹配"
+  }
+}

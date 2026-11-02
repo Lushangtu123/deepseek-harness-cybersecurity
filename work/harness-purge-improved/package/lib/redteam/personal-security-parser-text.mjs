@@ -13,9 +13,11 @@ export function supplementParserGaps(root,errors,{signal,deadline=Infinity,ident
  const scopeChanged=()=>Object.assign(Error('仓库目录已变化，未执行文本补查'),{code:'SCAN_SCOPE_CHANGED'});
  const stableRoot=()=>{try{const info=lstatSync(root);if(!info.isDirectory()||info.isSymbolicLink()||realpathSync(root)!==root||identity&&(info.dev!==identity.dev||info.ino!==identity.ino))throw scopeChanged()}catch{throw scopeChanged()}};
  stableRoot();const canonical=root,candidates=new Set(),findings=[];let checkedFiles=0,skippedFiles=0,consideredFiles=0,totalBytes=0,truncated=false;
- for(const error of errors.slice(0,20000)){
+ let locationCount=0;
+ locations:for(const error of errors.slice(0,20000)){
   const kind=Array.isArray(error?.type)?error.type[0]:error?.type;if(!['PartialParsing','ParseError','SyntaxError'].includes(kind))continue;
-  const location=Array.isArray(error.type)&&Array.isArray(error.type[1])?error.type[1][0]:null,path=error.path||location?.path||'';candidates.add(typeof path==='string'?path:'');
+  const grouped=Array.isArray(error.type)&&Array.isArray(error.type[1])?error.type[1]:null;
+  for(const location of grouped?.length?grouped:[null]){pending();if(locationCount++>=20000){truncated=true;break locations}const path=location?.path||error.path||'';candidates.add(typeof path==='string'?path:'')}
  }
  if(errors.length>20000)truncated=true;
  for(const candidate of candidates){
