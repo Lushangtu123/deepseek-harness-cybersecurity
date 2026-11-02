@@ -266,8 +266,8 @@ export class SecurityWorkbench{
   const run=get();return{ok:true,engagement:eng,run,timedOut:run.state==='running'};
  }
  saveScope(eng,input){
-  only(input,['requestId','revision','repoRoot','tools','url','expiresAt','confirm','authProfile','jointKali']);const id=requestId(input.requestId),db=this.db(eng),hash=digest(input);
-  if(input.jointKali!==undefined&&typeof input.jointKali!=='boolean')fail('Kali副本交接授权无效');
+  only(input,['requestId','revision','repoRoot','tools','url','expiresAt','confirm','authProfile','jointKali','jointRea','jointPentagi']);const id=requestId(input.requestId),db=this.db(eng),hash=digest(input);
+  for(const key of ['jointKali','jointRea','jointPentagi'])if(input[key]!==undefined&&typeof input[key]!=='boolean')fail('工具副本交接授权无效');
   const existing=db.prepare('SELECT data FROM security_event WHERE request_id=?').get(id);if(existing){const value=JSON.parse(existing.data);if(value.hash!==hash)fail('重复请求内容不同');return value.result}
   if(this.active||this.joint.active)fail('任务正在运行，暂不能修改范围');const previous=this.profile(db);if(input.revision!==(previous?.revision||0))fail('范围已变化，请刷新后重试');
   if(input.confirm!==true||!Array.isArray(input.tools)||!input.tools.length||input.tools.some(tool=>!TOOLS.includes(tool))||new Set(input.tools).size!==input.tools.length)fail('请明确确认允许的扫描器');
@@ -276,7 +276,7 @@ export class SecurityWorkbench{
   const expiry=Date.parse(input.expiresAt);if(!Number.isFinite(expiry)||expiry<=Date.now()||expiry>Date.now()+31*86400000)fail('授权期限必须在未来31天以内');
   let url=null;if(input.url){const parsed=new URL(input.url);if(parsed.protocol!=='http:'||parsed.hostname!=='127.0.0.1'||!parsed.port||Number(parsed.port)<1024||[3080,18443,49222,49223,49224,49226,49090].includes(Number(parsed.port))||parsed.username||parsed.password||parsed.search||parsed.hash||parsed.pathname!=='/')fail('仅允许VM内明确端口的127.0.0.1 HTTP根地址，不接受管理端口');url=parsed.origin}
   const authProfile=input.authProfile??'';if(typeof authProfile!=='string'||authProfile!==''&&(!/^[a-z][a-z0-9_-]{0,47}$/.test(authProfile)||!url||!input.tools.includes('zap')))fail('认证配置名无效或未允许ZAP本地网址');
-  const data={repoRoot:root,tools:input.tools,url,expiresAt:new Date(expiry).toISOString(),...(authProfile?{authProfile}:{}),...(input.jointKali!==undefined?{jointKali:input.jointKali}:{})},result={...data,revision:(previous?.revision||0)+1};
+  const data={repoRoot:root,tools:input.tools,url,expiresAt:new Date(expiry).toISOString(),...(authProfile?{authProfile}:{}),...Object.fromEntries(['jointKali','jointRea','jointPentagi'].filter(k=>input[k]!==undefined).map(k=>[k,input[k]]))},result={...data,revision:(previous?.revision||0)+1};
   db.exec('SAVEPOINT security_scope_save');try{db.prepare('INSERT INTO security_scope VALUES(1,?,?,?) ON CONFLICT(id) DO UPDATE SET revision=excluded.revision,data=excluded.data,request_id=excluded.request_id').run(result.revision,JSON.stringify(data),id);this.event(db,id,'scope','1',{hash,result});db.exec('RELEASE security_scope_save')}catch(error){db.exec('ROLLBACK TO security_scope_save;RELEASE security_scope_save');throw error}return result;
  }
  event(db,id,kind,record,data){db.prepare('INSERT INTO security_event(request_id,kind,record_id,at,data) VALUES(?,?,?,?,?)').run(id,kind,String(record),stamp(),JSON.stringify(redactDisplay(data)))}

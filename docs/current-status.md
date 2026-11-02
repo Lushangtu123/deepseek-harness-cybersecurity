@@ -1,5 +1,18 @@
 # 当前部署与验收状态
 
+2026-11-02（America/Los_Angeles），VM 改进版已部署 **1.1.77-personal.4、148项程序**。联合审查新增 REA＋reverse-skill 静态 JavaScript 图及独立隔离 PentAGI 子任务，单独保存副本交接授权；PentAGI 上限16次请求/每次2048输出tokens，不是货币金额上限，付费步骤不会因刷新自动勾选。[使用与边界](managed-joint-adapters.md) · [结构化验收](managed-joint-adapters-verification.json)。
+
+实际五步骤后台联合验收完成：Semgrep、Trivy、Kali、REA、PentAGI 共7条合成待验证命中，4份源码、3项分析产物，PentAGI预留13次模型请求；普通发现表保持0新增。Chrome核对授权项、五步状态、停止确认和报告下载；下载任务及数量与后台一致。新版实际模型通过5次原生工具调用完成绑定、计划、原任务读取及两页分析产物读取，没有重新启动审查。源码指令未在原项目执行。取消、超时和控制进程退出故障均有实际触发、同ID查询及清理记录。
+
+Mac与Linux回归通过293项Python、533项插件Node、139项入口Node，另有18项Linux恢复根测试。真实项目459文件、HEAD、六张审计表与95条待验证发现保持不变。独立代码复核工具因额度限制未返回评审；不能把本轮测试描述为已完成独立复核。
+
+更新前已创建 `ready-joint-review-20261102`（.3/146项程序）及含Bandit1.9.4的Kali配套私有档案，保留原25点，共26点；两份恢复副本实际启动。Harness首次最后列表断言因移除Kali验收快捷方式失败，随后最终核对通过，原盘与原两台VM恢复。为遵守仅更新VM，Mac管理器代码未改，全局当前标签仍指旧点；新点需使用本轮私有明确恢复入口。该恢复点是更新前备份，**不覆盖新增.4程序**，不能将旧徽标当作本轮备份证明。
+
+REA本轮仅静态JavaScript图，二进制/Ghidra尚未纳入受管自动调度；PentAGI子任务结果和模型判断保持未验证。Semgrep解析缺口、人工安全判断和真实95条发现未在本轮处理。
+
+以下为上一轮第一阶段记录：
+
+
 2026-11-02（America/Los_Angeles），仅 VM 改进版更新至 **1.1.77-personal.3、146项程序**，新增可选[联合安全审查](joint-security-review.md)：固定脱敏副本，按需选择 Semgrep、Trivy、Kali 离线 Bandit，持久任务、取消/重启恢复、独立发现和统一 JSON 证据。默认日常、受限审查和原版模式保留，Mac 版 Harness 与宿主配置未改。
 
 原生三步骤验收产生7条合成待验证命中；DeepSeek在Chrome实际完成8次工具调用并自行选择三步骤。模型把调用数误写成6次，以原生轨迹计数为准。随后修正Kali完成标志为“交接的Python子集”，补充原生验收证明Python子集完成、整体覆盖仍不完整。正常、重复请求、取消、超时、工作进程退出、启动窗口退出、后台重启及停止核对均有本轮验收；Chrome导出的JSON与后台副本一致。Mac和实际Linux通过284项Python、529项插件Node、139项入口Node及18项Linux恢复根测试。真实项目459文件、HEAD、六张审计表及95条待验证发现保持不变。详见[结构化验收](joint-security-review-verification.json)。

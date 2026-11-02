@@ -12,7 +12,7 @@ class BootstrapTests(unittest.TestCase):
    result=subprocess.run([sys.executable,'-B',str(SCRIPT)],env={**os.environ,'HOME':folder},capture_output=True,text=True,timeout=10)
    self.assertEqual(result.returncode,0,result.stderr)
    value=json.loads(result.stdout)
-   self.assertTrue(value['readOnly']);self.assertFalse(value['automaticChanges']);self.assertEqual(value['programFiles'],146)
+   self.assertTrue(value['readOnly']);self.assertFalse(value['automaticChanges']);self.assertEqual(value['programFiles'],148)
    self.assertEqual(value['scope'],'basic-harness-plugin-web');self.assertFalse(value['copiesCredentials']);self.assertFalse(value['installsProfessionalTools'])
    self.assertEqual(list(home.iterdir()),[])
 
