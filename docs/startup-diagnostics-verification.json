@@ -1,0 +1,126 @@
+{
+  "date": "2026-11-02",
+  "scope": "VM-only startup recovery and diagnostics",
+  "version": "1.1.77-personal.6",
+  "programFiles": 149,
+  "historicalRootCause": "unresolved: original response/event no longer retained; current success does not locate it",
+  "confirmedBugFixed": "deferred DOMContentLoaded empty-root warning rechecks mounted root before display",
+  "diagnostics": {
+    "endpoint": "/dsh-purge/startup-diagnostics",
+    "ownerAuthenticated": true,
+    "sameOriginJsonPostOnly": true,
+    "serverEpisodes": 30,
+    "eventsPerEpisode": 12,
+    "browserPendingEvents": 24,
+    "serverMaxBytes": 131072,
+    "postMaxBytes": 2048,
+    "deliveryDeadlineMs": 5000,
+    "rawUrlsAndQueriesRetained": false,
+    "rawMessagesOrStacksRetained": false,
+    "failedResourcePath": "SHA-256 pathname only; status0 means browser has no HTTP status",
+    "idempotency": "retained page plus event sequence",
+    "firstFailurePreservedAcrossNormalEvents": true,
+    "noAutomaticPageReloadOrUserActionReplay": true
+  },
+  "review": {
+    "reviewer": "Codex startup_diagnostics_review",
+    "initialP2Fixed": [
+      "generic fetch rejection wrongly classified module import",
+      "queue overflow loses undelivered first failure",
+      "array IDs bypass strict idempotency lookup",
+      "acknowledgment of evicted in-flight event removes wrong queued item"
+    ],
+    "focusedTests": 13,
+    "finalAssessment": "All confirmed findings addressed; no remaining finding in focused acknowledgment fix"
+  },
+  "tests": {
+    "python": 293,
+    "pluginNode": 545,
+    "hostNode": 139,
+    "linuxRecoveryRoot": 18
+  },
+  "nativeAuthentication": {
+    "ok": true,
+    "constructedFixturePage": "e1a6889da51d4a53a73e832026110200",
+    "nativeOwnerAdmission": true,
+    "foreignOriginDenied": true,
+    "unauthenticatedReadDenied": true,
+    "duplicateNotReappended": true,
+    "invalidTypeAndExtraFieldsDenied": true,
+    "eventsObserved": [
+      "script-error",
+      "mounted"
+    ],
+    "firstFailureRetained": true,
+    "episodeCount": 1,
+    "rawPayloadNotEchoed": true,
+    "indexIncludesEarlyDiagnostics": true,
+    "scope": "Constructed event fixture through actual authenticated VM HTTP endpoint, not historical fault reproduction"
+  },
+  "nativePersistence": {
+    "unchangedAcrossActualServiceRestart": true,
+    "normalBrowserMounts": 3,
+    "mountElapsedMs": [
+      76,
+      68,
+      61
+    ],
+    "firstFailureRetained": true,
+    "syntheticFirstFailureIsProtocolFixture": true,
+    "browserFailuresThisObservedSet": 0,
+    "journalBytes": 1681,
+    "journalMode": "0o600",
+    "scope": "Three actual Chrome successful mounts plus constructed HTTP failure, disk journal matched across real Harness service restart; not old fault reproduction"
+  },
+  "cleanup": {
+    "onlyConstructedFixtureRemoved": true,
+    "originalBrowserEpisodesRetained": 3,
+    "firstActualFailure": null,
+    "privateBeforeCopyRetained": true,
+    "snapshotContainsDocumentedProtocolFixture": true
+  },
+  "checkpoint": {
+    "name": "ready-startup-diagnostics-20261102",
+    "selectedProofFiles": 2812,
+    "programFiles": 149,
+    "snapshotCount": 28,
+    "previous27Preserved": true,
+    "independentRestoredDiskActuallyBooted": true,
+    "originalDiskReturned": true,
+    "originalNowStarted": true,
+    "containsDocumentedConstructedProtocolFixture": true,
+    "fixtureRemovedFromCurrentJournalAfterCopyVerification": true,
+    "hostManagerUnchanged": true,
+    "explicitPrivateEntryRequired": true,
+    "kaliNotChangedThisRound": true
+  },
+  "protected": {
+    "protectedProjectFilesMatched": 459,
+    "projectHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "findingsByStatus": {
+      "unverified": 95
+    },
+    "scannerManifestUnchanged": true,
+    "programHashesMatched": 149,
+    "installedToolsPresent": true,
+    "harnessActive": true,
+    "pentagiRunning": true,
+    "hostHelpersUnchanged": 5,
+    "hostLaunchDefinitionsUnchanged": true,
+    "vmConfigurationUnchanged": true,
+    "originalDiskInodeUnchanged": true,
+    "utmListUnchanged": true,
+    "allPreviousSnapshotsPreserved": true,
+    "snapshotCount": 28
+  },
+  "limitations": [
+    "historical occasional failure not reproduced or root-located",
+    "three native Chrome successful loads are bounded observations, not proof of continuous availability",
+    "browser event reports are not complete server/network tracing; browser storage and server unavailability can still prevent receipt",
+    "journal first failure retention is bounded and read-only endpoint has no user reset control",
+    "current private journal had only3actual mounted records after fixture cleanup; no real failure was deleted",
+    "new snapshot retains the explicitly documented constructed fixture; disks/private logs are not public exports",
+    "Mac global recovery label unchanged; recovery archives remain only on this Mac"
+  ]
+}
