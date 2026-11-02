@@ -2,6 +2,7 @@ import { kaliPreflight } from './personal-kali-environment.mjs'
 import { projectSlotsFor } from './personal-project-slots.mjs'
 import { handleSecurityOp } from './personal-security-workbench.mjs'
 import { securityModelWire } from './personal-security-model.mjs'
+import { jointModelWire } from './personal-joint-review.mjs'
 import { sessionInfoOf, bindingKeyOf, resolveEngagement } from './personal-session-resolution.mjs'
 import { redactDisplay } from './personal-evidence-redaction.mjs'
 import { installNativeEvidenceObserver, listNativeReceipts } from './personal-evidence-receipts.mjs'
@@ -279,6 +280,7 @@ export function apply(ctx) {
       try { id = resolveEngagement(store, exec, args.engagement); } catch {}
       const safe = id && store.redactResult ? store.redactResult(id, value) : redactDisplay(value);
       if(wrapped.name==='redteam_security_audit')return securityModelWire(value,safe);
+      if(wrapped.name==='redteam_joint_review')return jointModelWire(value,safe);
       return typeof safe === 'string' ? safe : JSON.stringify(safe, null, wrapped.name==='redteam_security_audit'?0:2);
     } });
   }
@@ -286,6 +288,31 @@ export function apply(ctx) {
     const keys = bindKeysOf(exec, store)
     return keys.length ? store.sessionBindings.find(keys) : undefined
   });
+
+  ctx.tools.register(reviewedTool(defineTool({
+    name: 'redteam_joint_review',
+    description: 'VM专用联合安全审查第一阶段。先plan核对已保存范围和就绪步骤；start选择semgrep源码、trivy依赖/配置、kali离线Python Bandit，不执行项目代码。Kali副本交接须在页面保存授权，模型不能自授予。固定脱敏源码副本及文件哈希，30–900秒统一子任务预算（不含DeepSeek聊天费用，不调用外部模型子任务）。返回持久任务id；断线后status/wait原id，同一启动必须复用requestId，未知Kali状态阻止新任务。cancel等待子任务停止确认；服务重启不自动重跑。report以<=6000字节分页返回findings/files/exclusions，持续至page.complete。完成仅代表已选步骤结束，工具命中保持待验证，人工项、未选工具与排除文件明确未覆盖。REA/PentAGI尚未纳入此受管调度，不会自动派发。',
+    parameters: {
+      action:{type:'string',enum:['plan','start','status','wait','cancel','report'],required:true},
+      engagement:{type:'string',description:'可省略；显式提供须等于当前会话绑定项目'},
+      requestId:{type:'string',description:'start唯一请求号8–100位，重试必须复用'},
+      profileRevision:{type:'integer',description:'start使用plan返回的当前范围版本'},
+      steps:{type:'array',items:{type:'string',enum:['semgrep','trivy','kali']},description:'start选择已授权和就绪步骤；不必每次全部运行'},
+      budgetSeconds:{type:'integer',description:'start总子任务时限30–900秒，默认360'},
+      id:{type:'string',description:'已返回的原联合任务id，用于status/wait/cancel/report'},
+      waitSeconds:{type:'integer',description:'wait有界等待0–30秒，默认15'},
+      section:{type:'string',enum:['findings','files','exclusions','diagnostics'],description:'report分页类型；diagnostics读取解析/文件错误；task保留实际总量和截断标记'},
+      cursor:{type:'string',description:'report原样传回上一页nextCursor'},
+      limit:{type:'integer',description:'report每页1–10，默认5，字节预算可能更少'},
+    },
+    output:{schema:{type:'string'},render:(_args,value)=>text(value)},
+    async execute(args,exec){
+      const engagement=resolveEngagement(store,exec);
+      if(args.engagement!==undefined&&args.engagement!==engagement)throw Error('联合审查项目必须与当前会话绑定一致');
+      const {engagement:ignored,...input}=args;
+      return JSON.stringify(await handleSecurityOp(store,{op:'securityJoint',engagement,...input},{model:true}));
+    },
+  })))
 
   ctx.tools.register(reviewedTool(defineTool({
     name: 'redteam_security_audit',

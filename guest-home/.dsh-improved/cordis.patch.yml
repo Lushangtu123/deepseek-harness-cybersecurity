@@ -69,3 +69,8 @@
 - insert:
     - id: personal-review
       name: dsh-purge/personal-review
+
+# VM-only optional managed joint workflow; existing presets stay available.
+- insert:
+    - id: personal-joint
+      name: dsh-purge/personal-joint

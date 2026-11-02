@@ -3,7 +3,7 @@ import {lstatSync} from 'node:fs';
 import {randomUUID} from 'node:crypto';
 
 export const SECURITY_SOCKET='/run/user/1000/harness-security.sock';
-const OPS=new Set(['securityStatus','securityScopeSave','securityStart','securityCancel','securityReview','securityReport','securityCompare','securityWait','securityPreflight','securitySource','securityKaliCheck']);
+const OPS=new Set(['securityStatus','securityScopeSave','securityStart','securityCancel','securityReview','securityReport','securityCompare','securityWait','securityPreflight','securitySource','securityKaliCheck','securityJoint']);
 const MAX_REQUEST=65536,MAX_RESPONSE=32*1024*1024;
 const unavailable=()=>Error('安全审计后台服务不可用或响应未确认；请重新读取状态，启动请求必须保留原requestId，不会自动重发');
 const STAGES=new Set(['socket','encode','connect','wait','response','dispatch','complete']);

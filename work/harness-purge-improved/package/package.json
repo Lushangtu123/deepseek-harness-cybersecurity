@@ -1,6 +1,6 @@
 {
   "name": "dsh-purge",
-  "version": "1.1.77-personal.2",
+  "version": "1.1.77-personal.3",
   "description": "Personal consent, evidence and reliability fork of dsh-purge; original preserved separately",
   "type": "module",
   "main": "lib/index.js",
@@ -18,7 +18,9 @@
     "./personal-daily-filter": "./lib/personal-daily-filter.js",
     "./personal-redteam": "./lib/personal-redteam.js",
     "./personal-review": "./lib/personal-review.js",
-    "./personal-review-filter": "./lib/personal-review-filter.js"
+    "./personal-review-filter": "./lib/personal-review-filter.js",
+    "./personal-joint": "./lib/personal-joint.js",
+    "./personal-joint-filter": "./lib/personal-joint-filter.js"
   },
   "bin": {
     "dsh-purge": "bin/personal-cli.mjs"

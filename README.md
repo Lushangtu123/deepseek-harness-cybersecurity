@@ -13,6 +13,7 @@
 | 能力 | 使用方式与范围 |
 | --- | --- |
 | 代码与依赖审计 | Semgrep 检查代码，Trivy 检查依赖、配置和凭据痕迹；任务保留工具版本、范围与覆盖情况。 |
+| 联合安全审查 | VM 可选独立预设：固定项目副本，按需选择 Semgrep、Trivy 和 Kali 离线 Bandit，统一任务、覆盖诊断与 JSON 证据。[使用与限制](docs/joint-security-review.md)。 |
 | 本地 Web 测试 | ZAP 接入 VM 内指定回环网址，支持命名的私有 Cookie/Bearer 会话；当前入口不接受任意公网目标。 |
 | Kali 工具调用 | 聊天或 Shell 通过专用 SSH 调用独立 Kali；环境适配页显示真实工具路径与连接状态。 |
 | 逆向分析 | REA、Ghidra 与 reverse-skill 提供分析入口；样本和所需工具在 VM 内准备。 |

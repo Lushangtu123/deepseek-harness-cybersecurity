@@ -1,4 +1,5 @@
 import {buildReviewPreflight,reviewScopePathReady,readReviewSource,runKaliReviewCheck} from './personal-security-review.mjs';
+import {JointReview,jointModelWire} from './personal-joint-review.mjs';
 import {createHash,randomUUID} from 'node:crypto';
 import {existsSync,readFileSync,realpathSync,mkdirSync,writeFileSync,lstatSync,openSync,closeSync,constants,unlinkSync} from 'node:fs';
 import {join,resolve,relative,sep} from 'node:path';
@@ -29,6 +30,7 @@ CREATE TABLE IF NOT EXISTS security_run(id TEXT PRIMARY KEY,request_id TEXT UNIQ
 CREATE TABLE IF NOT EXISTS security_finding(id INTEGER PRIMARY KEY AUTOINCREMENT,fingerprint TEXT UNIQUE NOT NULL,tool TEXT NOT NULL,rule TEXT NOT NULL,title TEXT NOT NULL,severity TEXT NOT NULL,location TEXT NOT NULL,evidence TEXT NOT NULL,status TEXT NOT NULL,revision INTEGER NOT NULL DEFAULT 1,first_run TEXT NOT NULL,last_run TEXT NOT NULL,coverage_key TEXT NOT NULL,note TEXT NOT NULL DEFAULT '');
 CREATE TABLE IF NOT EXISTS security_run_snapshot(run_id TEXT PRIMARY KEY,data TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS security_finding_subject(finding_id INTEGER PRIMARY KEY,data TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS security_joint_finding(run_id TEXT NOT NULL,ordinal INTEGER NOT NULL,data TEXT NOT NULL,PRIMARY KEY(run_id,ordinal));
 CREATE TABLE IF NOT EXISTS security_event(id INTEGER PRIMARY KEY AUTOINCREMENT,request_id TEXT UNIQUE NOT NULL,kind TEXT NOT NULL,record_id TEXT NOT NULL,at TEXT NOT NULL,data TEXT NOT NULL);`;
 
 export function parseScanOutput(tool,value,secrets=[]){
@@ -171,7 +173,7 @@ def zap_pre_shutdown(zap):
         _auth_save()
 `: '');
 }
-async function runScanner(tool,profile,{signal,runDir}){
+async function runScanner(tool,profile,{signal,runDir,revisionRef:pinnedRevision}){
  const rootIdentity=lstatSync(profile.repoRoot);if(!rootIdentity.isDirectory()||rootIdentity.isSymbolicLink()||realpathSync(profile.repoRoot)!==profile.repoRoot)throw Object.assign(Error('仓库目录已变化'),{code:'SCAN_SCOPE_CHANGED'});
  const deadline=performance.now()+240000,auth=tool==='zap'&&profile.authProfile?readZapAuthProfile(profile.authProfile,profile.url):null;
  const before=auth?await verifyZapSession(auth,{signal,timeoutMs:Math.min(3000,deadline-performance.now())}):null;
@@ -220,7 +222,7 @@ async function runScanner(tool,profile,{signal,runDir}){
    const proof=envelope.authentication,matched=proof?.version===1&&proof?.revision===auth.revision;
    parsed.authentication={version:1,profile:profile.authProfile,revision:auth.revision,before:before?.verified===true,after:after?.verified===true,scannerBefore:matched&&proof.before===true,scannerAfter:matched&&proof.after===true,checkedRequests:matched&&proof.checkedRequests===2?2:0};
   }
-  let revisionRef='工作区未确认';try{revisionRef=execFileSync('/usr/bin/git',['-C',profile.repoRoot,'rev-parse','HEAD'],{timeout:3000,encoding:'utf8'}).trim()}catch{}
+  let revisionRef=pinnedRevision??'工作区未确认';if(pinnedRevision===undefined)try{revisionRef=execFileSync('/usr/bin/git',['-C',profile.repoRoot,'rev-parse','HEAD'],{timeout:3000,encoding:'utf8'}).trim()}catch{}
   return{...parsed,coverageKey:plan.coverageKey,version:plan.version,revisionRef};
  }finally{
   try{if(termination)await termination}
@@ -239,7 +241,7 @@ function authenticatedResult(profile,result){
 }
 
 export class SecurityWorkbench{
- constructor(store,{workspaceRoot='/home/purge/workspace',runner=runScanner,toolStatus=installedSecurityTools,authStatus=readZapAuthStatus}={}){this.store=store;this.workspaceRoot=resolve(workspaceRoot);this.runner=runner;this.toolStatus=toolStatus;this.authStatus=authStatus;this.initialized=new Set();this.active=null;this.disposed=false}
+ constructor(store,{workspaceRoot='/home/purge/workspace',runner=runScanner,toolStatus=installedSecurityTools,authStatus=readZapAuthStatus,jointOptions={}}={}){this.store=store;this.workspaceRoot=resolve(workspaceRoot);this.runner=runner;this.toolStatus=toolStatus;this.authStatus=authStatus;this.initialized=new Set();this.active=null;this.disposed=false;this.joint=new JointReview(this,jointOptions)}
  db(eng){
   if(this.disposed)fail('工作台正在关闭');
   this.store.sessionBindings.validateTarget(eng);
@@ -264,36 +266,41 @@ export class SecurityWorkbench{
   const run=get();return{ok:true,engagement:eng,run,timedOut:run.state==='running'};
  }
  saveScope(eng,input){
-  only(input,['requestId','revision','repoRoot','tools','url','expiresAt','confirm','authProfile']);const id=requestId(input.requestId),db=this.db(eng),hash=digest(input);
+  only(input,['requestId','revision','repoRoot','tools','url','expiresAt','confirm','authProfile','jointKali']);const id=requestId(input.requestId),db=this.db(eng),hash=digest(input);
+  if(input.jointKali!==undefined&&typeof input.jointKali!=='boolean')fail('Kali副本交接授权无效');
   const existing=db.prepare('SELECT data FROM security_event WHERE request_id=?').get(id);if(existing){const value=JSON.parse(existing.data);if(value.hash!==hash)fail('重复请求内容不同');return value.result}
-  if(this.active)fail('任务正在运行，暂不能修改范围');const previous=this.profile(db);if(input.revision!==(previous?.revision||0))fail('范围已变化，请刷新后重试');
+  if(this.active||this.joint.active)fail('任务正在运行，暂不能修改范围');const previous=this.profile(db);if(input.revision!==(previous?.revision||0))fail('范围已变化，请刷新后重试');
   if(input.confirm!==true||!Array.isArray(input.tools)||!input.tools.length||input.tools.some(tool=>!TOOLS.includes(tool))||new Set(input.tools).size!==input.tools.length)fail('请明确确认允许的扫描器');
   const root=resolve(String(input.repoRoot||''));if(!root.startsWith(this.workspaceRoot+sep)||root!==realpathSync(root)||!lstatSync(root).isDirectory())fail('仓库必须是VM工作区内的普通目录，不能跨越链接');
   if(/[\x00-\x1f,]/.test(root))fail('仓库路径包含不支持的字符');
   const expiry=Date.parse(input.expiresAt);if(!Number.isFinite(expiry)||expiry<=Date.now()||expiry>Date.now()+31*86400000)fail('授权期限必须在未来31天以内');
   let url=null;if(input.url){const parsed=new URL(input.url);if(parsed.protocol!=='http:'||parsed.hostname!=='127.0.0.1'||!parsed.port||Number(parsed.port)<1024||[3080,18443,49222,49223,49224,49226,49090].includes(Number(parsed.port))||parsed.username||parsed.password||parsed.search||parsed.hash||parsed.pathname!=='/')fail('仅允许VM内明确端口的127.0.0.1 HTTP根地址，不接受管理端口');url=parsed.origin}
   const authProfile=input.authProfile??'';if(typeof authProfile!=='string'||authProfile!==''&&(!/^[a-z][a-z0-9_-]{0,47}$/.test(authProfile)||!url||!input.tools.includes('zap')))fail('认证配置名无效或未允许ZAP本地网址');
-  const data={repoRoot:root,tools:input.tools,url,expiresAt:new Date(expiry).toISOString(),...(authProfile?{authProfile}:{})},result={...data,revision:(previous?.revision||0)+1};
+  const data={repoRoot:root,tools:input.tools,url,expiresAt:new Date(expiry).toISOString(),...(authProfile?{authProfile}:{}),...(input.jointKali!==undefined?{jointKali:input.jointKali}:{})},result={...data,revision:(previous?.revision||0)+1};
   db.exec('SAVEPOINT security_scope_save');try{db.prepare('INSERT INTO security_scope VALUES(1,?,?,?) ON CONFLICT(id) DO UPDATE SET revision=excluded.revision,data=excluded.data,request_id=excluded.request_id').run(result.revision,JSON.stringify(data),id);this.event(db,id,'scope','1',{hash,result});db.exec('RELEASE security_scope_save')}catch(error){db.exec('ROLLBACK TO security_scope_save;RELEASE security_scope_save');throw error}return result;
  }
  event(db,id,kind,record,data){db.prepare('INSERT INTO security_event(request_id,kind,record_id,at,data) VALUES(?,?,?,?,?)').run(id,kind,String(record),stamp(),JSON.stringify(redactDisplay(data)))}
- start(eng,input){
+ start(eng,input,jointContext=null){
   only(input,['requestId','profileRevision','tool','retestFindingId']);const db=this.db(eng),id=requestId(input.requestId),hash=digest(input),previous=db.prepare('SELECT * FROM security_run WHERE request_id=?').get(id);if(previous){if(previous.request_hash!==hash)fail('重复请求内容不同');return{id:previous.id,state:previous.state}}
-  if(this.disposed)fail('工作台正在关闭');if(this.blocked)fail('上次容器停止未确认，请检查VM运行状态后重启入口');if(this.active)fail('任务正在运行，请等待或取消');const profile=this.profile(db);
+  if(this.disposed)fail('工作台正在关闭');if(this.blocked)fail('上次容器停止未确认，请检查VM运行状态后重启入口');if(this.active||this.joint.active&&jointContext!==this.joint.active)fail('任务正在运行，请等待或取消');const profile=this.profile(db);
   if(!profile||profile.revision!==input.profileRevision||Date.parse(profile.expiresAt)<=Date.now()||!profile.tools.includes(input.tool))fail('项目范围未授权、已过期或已变化');
   const runtime=this.toolStatus({force:true})[input.tool];if(!runtime?.ready)fail(runtime?.reason||'扫描器或数据库未就绪');if(realpathSync(profile.repoRoot)!==profile.repoRoot)fail('仓库路径已变化');if(input.tool==='zap'&&!profile.url)fail('请先配置VM本地URL');
   if(input.retestFindingId){const finding=db.prepare('SELECT * FROM security_finding WHERE id=?').get(numeric(input.retestFindingId));if(!finding||finding.tool!==input.tool||finding.status!=='fixed')fail('仅可复测本项目已记录修复的同类发现')}
-  const runId=randomUUID(),details={profile,version:runtime.version,runtime:{checkedAt:runtime.checkedAt||null,database:runtime.database||null,rules:runtime.rules||null,warning:runtime.warning||null},retestFindingId:input.retestFindingId||null};
+  const managed=jointContext&&jointContext===this.joint.active?jointContext:null;
+  const executionProfile=managed?{...profile,repoRoot:managed.data.snapshot.sourceRoot}:profile;
+  const runId=randomUUID(),details={profile,version:runtime.version,runtime:{checkedAt:runtime.checkedAt||null,database:runtime.database||null,rules:runtime.rules||null,warning:runtime.warning||null},retestFindingId:input.retestFindingId||null,...(managed?{joint:{id:managed.id,snapshotId:managed.data.snapshot.id,git:managed.data.snapshot.git}}:{})};
   db.prepare('INSERT INTO security_run(id,request_id,request_hash,tool,profile_revision,state,started_at,details) VALUES(?,?,?,?,?,?,?,?)').run(runId,id,hash,input.tool,profile.revision,'running',stamp(),JSON.stringify(details));
   const controller=new AbortController();this.active={id:runId,eng,controller};
-  const promise=Promise.resolve().then(()=>this.disposed?null:this.runner(input.tool,profile,{signal:controller.signal,runDir:join(this.store.dirOf(eng),'runs','security',runId)})).then(result=>{
+  const promise=Promise.resolve().then(()=>{controller.signal.throwIfAborted();return this.disposed?null:this.runner(input.tool,executionProfile,{signal:controller.signal,runDir:join(this.store.dirOf(eng),'runs','security',runId),...(managed?{revisionRef:managed.data.snapshot.git.head??'未记录'}:{})})}).then(result=>{
    if(this.disposed)return;
    if(controller.signal.aborted){db.prepare("UPDATE security_run SET state='cancelled',finished_at=? WHERE id=?").run(stamp(),runId);return}
    if(!result||!Array.isArray(result.findings)||typeof result.complete!=='boolean'||typeof result.coverageKey!=='string')fail('扫描回执无效');
+   if(managed){const admitted=new Set(managed.data.snapshot.files.map(f=>f.path));if(result.findings.some(f=>!admitted.has(String(f.location).replace(/:\d+$/,'')))||(result.coverageFiles??[]).some(f=>!admitted.has(f)))fail('扫描结果超出联合项目副本文件集合')}
    if(input.tool==='zap'&&profile.authProfile){result=authenticatedResult(profile,result);details.authentication=result.authentication}
    if(result.supplemental!==undefined){if(input.tool!=='semgrep'||result.complete||!validParserTextSummary(result.supplemental))fail('文本补查回执无效');details.supplemental={...result.supplemental}}
    db.exec('SAVEPOINT security_results');try{
     const seen=new Set(),normalized=[];for(const raw of result.findings){const item={rule:clean(raw.rule,240),title:clean(raw.title,400),severity:clean(raw.severity,20),location:clean(raw.location,800),evidence:clean(raw.evidence),subject:normalizeSubject(raw.subject)};if(!item.rule||!item.location)fail('发现记录无效');normalized.push({rule:item.rule,title:item.title,severity:item.severity,location:item.location,subject:item.subject});const fingerprint=digest([input.tool,profile.repoRoot,input.tool==='zap'?profile.url:null,item.rule,item.location,...(item.subject?['package-identity-1',item.subject.key]:[])]);seen.add(fingerprint);const old=db.prepare('SELECT * FROM security_finding WHERE fingerprint=?').get(fingerprint);
+     if(managed){db.prepare('INSERT INTO security_joint_finding VALUES(?,?,?)').run(runId,normalized.length,JSON.stringify({...item,tool:input.tool,status:'unverified'}));continue}
      if(old){const status=['fixed','retest-passed'].includes(old.status)?'reopened':old.status;db.prepare('UPDATE security_finding SET title=?,severity=?,evidence=?,status=?,last_run=?,coverage_key=?,revision=revision+1 WHERE id=?').run(item.title,item.severity,item.evidence,status,runId,result.coverageKey,old.id);if(status!==old.status)this.event(db,'reopen-'+randomUUID(),'finding',old.id,{from:old.status,to:status,runId})}
      else db.prepare('INSERT INTO security_finding(fingerprint,tool,rule,title,severity,location,evidence,status,first_run,last_run,coverage_key) VALUES(?,?,?,?,?,?,?,?,?,?,?)').run(fingerprint,input.tool,item.rule,item.title,item.severity,item.location,item.evidence,'unverified',runId,runId,result.coverageKey);
      const storedId=old?.id??db.prepare('SELECT id FROM security_finding WHERE fingerprint=?').get(fingerprint).id;
@@ -350,22 +357,26 @@ export class SecurityWorkbench{
   const snapshot=id=>db.prepare('SELECT data FROM security_run_snapshot WHERE run_id=?').get(id)?.data;
   return{ok:true,engagement:eng,baseRunId:baseId,currentRunId:currentId,...compareScanSnapshots(base,current,snapshot(baseId),snapshot(currentId))};
  }
- async dispose(){if(this.disposed)return;const active=this.active;if(active)this.db(active.eng).prepare("UPDATE security_run SET state='interrupted',finished_at=?,error_code='服务关闭，结果未确认' WHERE id=?").run(stamp(),active.id);this.disposed=true;if(active){active.controller.abort();await active.promise}}
+ async dispose(){if(this.disposed)return;await this.joint.dispose();const active=this.active;if(active)this.db(active.eng).prepare("UPDATE security_run SET state='interrupted',finished_at=?,error_code='服务关闭，结果未确认' WHERE id=?").run(stamp(),active.id);this.disposed=true;if(active){active.controller.abort();await active.promise}}
 }
 
 const benches=new WeakMap();
 export function securityFor(store){let value=benches.get(store);if(!value){value=new SecurityWorkbench(store);benches.set(store,value)}return value}
 export function disposeSecurity(store){return benches.get(store)?.dispose()}
 export async function handleSecurityOp(store,request,{model=false}={}){
- if(!['securityStatus','securityScopeSave','securityStart','securityCancel','securityReview','securityReport','securityCompare','securityWait','securityPreflight','securitySource','securityKaliCheck'].includes(request?.op))return undefined;
+ if(!['securityStatus','securityScopeSave','securityStart','securityCancel','securityReview','securityReport','securityCompare','securityWait','securityPreflight','securitySource','securityKaliCheck','securityJoint'].includes(request?.op))return undefined;
  if(process.platform!=='linux'||homedir()!=='/home/purge'||process.env.DSH_HOME!=='/home/purge/.dsh-improved')return{ok:false,error:'安全审计仅在专用VM改进版可用'};
  if(store.root!=='/home/purge/.dsh-improved/redteam')return{ok:false,error:'安全审计后台目录未确认'};
  try{return await requestSecurityService(request,{model})}catch(error){return{ok:false,error:clean(error.message,300),...(error.diagnostic?{diagnostic:error.diagnostic}:{})}}
 }
 export async function executeSecurityOp(store,request,{model=false}={}){
- if(!['securityStatus','securityScopeSave','securityStart','securityCancel','securityReview','securityReport','securityCompare','securityWait','securityPreflight','securitySource','securityKaliCheck'].includes(request?.op))return undefined;
+ if(!['securityStatus','securityScopeSave','securityStart','securityCancel','securityReview','securityReport','securityCompare','securityWait','securityPreflight','securitySource','securityKaliCheck','securityJoint'].includes(request?.op))return undefined;
  try{
  const {op,engagement,...input}=request,bench=securityFor(store);
+ if(op==='securityJoint'){
+  const {action,...args}=input;if(!['plan','start','status','wait','cancel','report'].includes(action))fail('联合审查操作无效');
+  const value=await bench.joint[action](engagement,args),result=action==='start'?{ok:true,engagement,task:value}:value;return JSON.parse(jointModelWire(result,bench.store.redactResult(engagement,result)));
+ }
  if(model){if(['securityScopeSave','securityReview'].includes(op))return{ok:false,error:'请在安全审计页明确确认范围或验证结论'};return await modelSecurityResult(bench,engagement,{op,...input})}
  if(op==='securityPreflight')return bench.preflight(engagement,input);
  if(op==='securitySource')return bench.source(engagement,input);
