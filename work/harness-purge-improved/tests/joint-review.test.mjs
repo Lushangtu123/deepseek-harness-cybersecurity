@@ -107,3 +107,11 @@ test('Kali completeness describes the handed-off Python subset without claiming 
  const f=fixture({jointOptions:{kali:async(_mode,id,{snapshot})=>({id,snapshotId:snapshot.id,state:'completed',cleanupVerified:true,checkedFiles:1,version:'1.9.4',findings:[],diagnostics:[],diagnosticsTotal:0})}});
  try{const p=f.bench.profile(f.bench.db(f.eng));f.bench.saveScope(f.eng,{requestId:'complete-scope-001',revision:1,repoRoot:f.root,tools:p.tools,expiresAt:p.expiresAt,jointKali:true,confirm:true});const run=f.bench.joint.start(f.eng,{requestId:'complete-start-001',profileRevision:2,steps:['kali']});const result=await f.bench.joint.wait(f.eng,{id:run.id,waitSeconds:2});assert.equal(result.task.steps[0].complete,true);assert.equal(result.task.steps[0].coverageScope,'handed-off-python-files');assert.equal(result.task.coverageComplete,false)}finally{await f.close()}
 });
+test('Redaction-expanded files are recorded as exclusions before adapter handoff',()=>{
+ const base=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'joint-redaction-size-'))),root=path.join(base,'repo');fs.mkdirSync(root);
+ const original="password='x';\n".repeat(70000);assert.ok(Buffer.byteLength(original)<1048576);fs.writeFileSync(path.join(root,'large.js'),original);fs.writeFileSync(path.join(root,'small.js'),'export const value=1;');
+ try{
+  const captured=snapshots.createReviewSnapshot({repoRoot:root,revision:1,expiresAt:'2099-01-01T00:00:00Z'},path.join(base,'snapshot'));
+  assert.deepEqual(captured.files.map(f=>f.path),['small.js']);assert.deepEqual(captured.excluded.items,[{path:'large.js',reason:'redacted-file-exceeds-1MiB'}]);assert.equal(snapshots.verifyReviewSnapshot(captured),true);assert.equal(fs.readFileSync(path.join(root,'large.js'),'utf8'),original);
+ }finally{fs.rmSync(base,{recursive:true,force:true})}
+});

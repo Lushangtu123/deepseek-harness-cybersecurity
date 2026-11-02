@@ -1,0 +1,121 @@
+{
+  "date": "2026-11-02",
+  "scope": "VM-only improved Harness",
+  "version": "1.1.77-personal.5",
+  "programFiles": 148,
+  "independentReview": {
+    "reviewer": "Codex joint_adapters_independent_review",
+    "scope": "managed adapter feature and final focused .5 diff",
+    "confirmedP2Fixed": "JSON-escaped model summaries can exceed the complete artifact-page byte envelope",
+    "additionalFix": "record post-redaction oversized source files as explicit exclusions",
+    "finalFocusedNodeTests": 22,
+    "finalAssessment": "No new implementation problems found in the two scoped fixes; no unresolved confirmed P1/P2 in reviewed scope",
+    "notACertification": true
+  },
+  "tests": {
+    "python": 293,
+    "pluginNode": 535,
+    "hostNode": 139,
+    "linuxRecoveryRoot": 18,
+    "initialMacSandboxAttempt": "failed because existing ps observer was denied; full rerun with process inspection passed"
+  },
+  "nativeRedaction": {
+    "engagement": "joint-assurance-synthetic-20261102",
+    "taskId": "a223a252-d252-4a33-b6b8-37f85c47d6a9",
+    "state": "completed",
+    "cleanupVerified": true,
+    "admittedFiles": 1,
+    "exclusions": [
+      {
+        "path": "large.js",
+        "reason": "redacted-file-exceeds-1MiB"
+      }
+    ],
+    "artifacts": 2,
+    "modelCalls": 0,
+    "pending": 0,
+    "duplicateReturnsSameTask": true,
+    "originalSourceUnchanged": true,
+    "originalBytes": 980000,
+    "originalSha256": "65b74c1840cbaa7b59d567d47cdea12ec47e9521f422a25b72c81ddbf4389070",
+    "version": "1.1.77-personal.5"
+  },
+  "nativeReport": {
+    "variants": [
+      "quotes",
+      "backslashes",
+      "control"
+    ],
+    "maxPageBytes": 5650,
+    "limits": [
+      1,
+      10
+    ],
+    "persistedEvidenceUnchanged": true,
+    "rawHashesRetained": true,
+    "scope": "Constructed synthetic summaries through actual deployed security RPC; no new provider or scanning execution"
+  },
+  "browser": {
+    "taskId": "8dbeeaff-789c-43b3-b6df-7a248c1bcbad",
+    "downloadedBytes": 15414,
+    "sha256": "01733a19b1d2b18b6d29e95781f2d007127de9c38c7fcfa81b7f894169d59f6e",
+    "allSectionsExactlyMatchBackend": true,
+    "sections": {
+      "findings": 7,
+      "files": 4,
+      "exclusions": 1,
+      "diagnostics": 0,
+      "artifacts": 4
+    },
+    "summaryTruncationExplicit": true,
+    "rawArtifactHashRetained": true,
+    "scope": "Native Chrome download and independent full JSON comparison; constructed synthetic stress record, no new provider call"
+  },
+  "checkpoint": {
+    "name": "ready-joint-assurance-20261102",
+    "selectedProofFiles": 2810,
+    "programFiles": 148,
+    "snapshotCount": 27,
+    "previous26Preserved": true,
+    "independentRestoredDiskActuallyBooted": true,
+    "originalDiskReturned": true,
+    "originalRunning": true,
+    "noNewVmRegistered": true,
+    "kaliArchiveSelectedFilesMatched": 2221,
+    "kaliArchiveSymlinksMatched": 5,
+    "kaliArchiveFilesVerified": 4,
+    "kaliIndependentBoot": "prior same-day acceptance retained; selected files/identity rechecked this round, no new Kali copy boot",
+    "hostManagerUnchanged": true,
+    "installedGlobalCurrentLabelStillPrevious": true,
+    "restoreRequiresExplicitPrivateCheckpointEntry": true,
+    "hostLocalOnly": true
+  },
+  "protected": {
+    "protectedProjectFilesMatched": 459,
+    "projectHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "findingsByStatus": {
+      "unverified": 95
+    },
+    "scannerManifestUnchanged": true,
+    "programHashesMatched": 148,
+    "installedToolsPresent": true,
+    "harnessActive": true,
+    "pentagiRunning": true,
+    "hostHelpersUnchanged": 5,
+    "hostLaunchDefinitionsUnchanged": true,
+    "vmConfigurationUnchanged": true,
+    "originalDiskInodeUnchanged": true,
+    "utmListUnchanged": true,
+    "allPreviousSnapshotsPreserved": true,
+    "snapshotCount": 27
+  },
+  "limitations": [
+    "REA managed route remains static JavaScript; binary/Ghidra routing not added",
+    "ZAP not added to joint managed routing; existing separate local ZAP entry retained",
+    "Semgrep parser gap and manual security judgments remain",
+    "95 real project findings remain unverified by user decision",
+    "request/output-token limits are not a monetary hard cap; already accepted provider requests may not be revocable",
+    "recovery and Kali archive remain on this Mac, not off-machine disaster recovery"
+  ]
+}

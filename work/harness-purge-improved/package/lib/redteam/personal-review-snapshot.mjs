@@ -38,7 +38,7 @@ export function createReviewSnapshot(profile,target,{sanitize=redactText}={}){
    if(!safeSnapshotName(name)||!st.isFile()||st.nlink!==1||st.size>1048576){skip(name,'unsupported-or-nonordinary-file');continue}
    let raw,text;try{raw=readOrdinary(file);if(raw.includes(0))throw Error();text=new TextDecoder('utf-8',{fatal:true}).decode(raw)}catch{skip(name,'unreadable-or-changing-file');continue}
    if(/-----BEGIN [^\r\n]{0,48}PRIVATE KEY|AWS_SECRET_ACCESS_KEY\s*[:=]/i.test(text)){skip(name,'credential-material');continue}
-   const safe=String(sanitize(text)),content=Buffer.from(safe);bytes+=content.length;if(bytes>8388608||files.length>=1000)throw Error('项目副本超过1000文件或8MiB上限');
+   const safe=String(sanitize(text)),content=Buffer.from(safe);if(content.length>1048576){skip(name,'redacted-file-exceeds-1MiB');continue}bytes+=content.length;if(bytes>8388608||files.length>=1000)throw Error('项目副本超过1000文件或8MiB上限');
    const destination=join(sourceRoot,name);mkdirSync(dirname(destination),{recursive:true,mode:0o700});writeFileSync(destination,content,{flag:'wx',mode:0o400});const redacted=!raw.equals(content);if(redacted)redactedFiles++;
    files.push({path:name,sha256:hash(content),originalSha256:hash(raw),bytes:content.length,redacted});
   }

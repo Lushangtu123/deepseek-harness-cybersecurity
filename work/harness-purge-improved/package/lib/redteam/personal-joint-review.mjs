@@ -144,8 +144,18 @@ export class JointReview{
   const diagnostics=data.steps.flatMap(s=>(s.tool==='kali'?s.diagnostics:s.details?.diagnostics)?.items?.map(d=>({...d,tool:s.tool,sourceTask:s.id}))??[]);
   const unique=[...new Map(data.findings.map(f=>[hash([f.tool,f.rule,f.location,f.sourceTask]),f])).values()],rows=section==='findings'?unique:section==='files'?data.snapshot?.files??[]:section==='diagnostics'?diagnostics:section==='artifacts'?data.steps.flatMap(s=>(s.artifacts??[]).map(a=>({...a,sourceTask:s.id,snapshotId:data.snapshot.id}))):data.snapshot?.excluded.items??[],version=hash([data.id,data.state,data.finishedAt,rows]);let after=0;
   if(input.cursor){let cursor;try{cursor=JSON.parse(Buffer.from(input.cursor,'base64url').toString())}catch{throw Error('报告cursor无效')}if(input.cursor.length>512||cursor.version!==version||!Number.isSafeInteger(cursor.after)||cursor.after<0||cursor.after>rows.length)throw Error('报告已变化或cursor不属于当前任务');after=cursor.after}
-  let count=Math.min(limit,rows.length-after);const make=()=>({ok:true,engagement:eng,task:this.view(data),page:{section,items:rows.slice(after,after+count),total:rows.length,complete:after+count>=rows.length,nextCursor:after+count<rows.length?Buffer.from(JSON.stringify({version,after:after+count})).toString('base64url'):null},deduplication:'同工具、同规则、同位置、同来源任务去重；跨工具证据保留，不能自动合并为已确认漏洞。'});
-  let result=make();while(Buffer.byteLength(JSON.stringify(result))>6000&&count>1){count--;result=make()}if(Buffer.byteLength(JSON.stringify(result))>6000)throw Error('报告条目超出预算');return result;
+  let count=Math.min(limit,rows.length-after),singleItem;const make=()=>({ok:true,engagement:eng,task:this.view(data),page:{section,items:singleItem??rows.slice(after,after+count),total:rows.length,complete:after+count>=rows.length,nextCursor:after+count<rows.length?Buffer.from(JSON.stringify({version,after:after+count})).toString('base64url'):null},deduplication:'同工具、同规则、同位置、同来源任务去重；跨工具证据保留，不能自动合并为已确认漏洞。'});
+  let result=make();const oversized=()=>Buffer.byteLength(JSON.stringify(result))>6000;
+  while(oversized()&&count>1){count--;result=make()}
+  if(oversized()&&count===1&&section==='artifacts'&&Array.isArray(rows[after]?.summaries)){
+   // Fit the escaped JSON page, including task metadata, without changing raw evidence or cursors.
+   const item=structuredClone(rows[after]);singleItem=[item];
+   while(oversized()){
+    const summary=item.summaries.filter(s=>typeof s.text==='string'&&s.text.length).sort((a,b)=>Buffer.byteLength(JSON.stringify(b.text))-Buffer.byteLength(JSON.stringify(a.text)))[0];if(!summary)break;
+    summary.text=Array.from(summary.text).slice(0,Math.floor(Array.from(summary.text).length/2)).join('');summary.truncated=true;item.reportTruncated=true;result=make();
+   }
+  }
+  if(oversized())throw Error('报告条目超出预算');return result;
  }
  async dispose(){this.closed=true;const active=this.active;if(active){active.shutdown=true;active.controller.abort();await active.promise}}
 }

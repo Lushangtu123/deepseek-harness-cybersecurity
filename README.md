@@ -103,7 +103,7 @@ kali-vm shell
 
 工具通过 Harness 内的固定入口在 Kali 中执行；缺失工具不回退到本机。输入、输出、模板和词表应使用 **Kali 内路径**，项目文件与凭据不会自动复制。25 项工具已验证版本或帮助调用，具体任务、实时抓包权限、模板及外部账号仍需分别准备。完整配置、恢复与限制见[Kali 接入说明](docs/kali-connection.md)。
 
-当前恢复点已覆盖审查版程序和Kali桥接，并对Harness、Kali恢复副本实际启动验收；本机归档位置、恢复边界和仍保留的解析缺口见[恢复说明](docs/security-review-recovery.md)。
+当前 .5 恢复点与独立恢复磁盘已实际启动验收，保留原26点，共27点；Kali既有已验收归档的选定工具文件本轮重新匹配。独立复核、报告边界修复和私有明确恢复入口见[当前恢复与复核说明](docs/joint-review-assurance.md)。
 
 ## 安全审查预检与受限预设
 
@@ -141,11 +141,11 @@ python3 -B scripts/ci.py --suite all
 
 检查涵盖导出完整性、Python/Node 回归和客户端重建一致性。真实 VM 启动、账号连接、模型任务和浏览器交互，需要单独验收，不能由 CI 通过推断完成。
 
-当前个人部署运行 **dsh-purge 1.1.77-personal.2**，Kali 为 **2026.3 ARM64**。版本是部署和验收记录，不表示上游最新版本；具体来源以[导出清单](inventory/export.json)、[当前状态](docs/current-status.md)和对应验收资料为准。
+当前个人部署运行 **dsh-purge 1.1.77-personal.5**，Kali 为 **2026.3 ARM64**。版本是部署和验收记录，不表示上游最新版本；具体来源以[导出清单](inventory/export.json)、[当前状态](docs/current-status.md)和对应验收资料为准。
 
 - **Semgrep 仍有解析缺口**：已保留 `PartialParsing` 及相应失败状态，补充文本提示不等于完成语义分析。见[解析器自检](docs/semgrep-parser-check.md)。
 - **历史连接问题未全部定位**：部分旧 SSH 失败及 QEMU 内部具体缺陷尚无确定根因，后续成功不用于改写原失败记录。见[SSH 与恢复诊断](docs/reload-recovery-ssh.md)。
-- **恢复覆盖有边界**：既有 24 个恢复点保留，但尚未覆盖当前 Kali 桥接、独立 Kali 磁盘及本次工具补充，不能作为 Kali 的完整备份。
+- **恢复覆盖有边界**：.5 恢复点覆盖148项程序及2810项选定摘要；Kali另有本机私有归档。Mac全局标签仍旧，新点需明确私有入口；本机副本不替代异机灾备，见[恢复与复核说明](docs/joint-review-assurance.md)。
 - **仓库不包含整机运行资产**：VM 磁盘、恢复归档、专业二进制、容器数据、账号和凭据需独立保管；仅克隆源码无法恢复整套环境。
 
 ## 文档导航

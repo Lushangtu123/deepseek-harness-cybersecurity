@@ -1,5 +1,11 @@
 # 当前部署与验收状态
 
+2026-11-02（America/Los_Angeles），当前 VM 改进版为 **1.1.77-personal.5、148项程序**。独立代码复核已完成，修复脱敏后文件超限及模型摘要转义导致的报告单条超预算问题；22项独立聚焦测试、本地和Linux全量回归、原生REA与RPC、Chrome下载均通过。新恢复点 `ready-joint-assurance-20261102` 含2810项选定摘要，独立恢复磁盘实际启动，原盘已归还；保留原26点，共27点。Kali既有已启动验收归档的2221项工具文件与5个符号链接本轮重新匹配。真实项目与95条待验证发现未变。
+
+Mac管理器未更新，其全局旧标签不代表新点；使用本轮私有明确恢复入口。剩余项为按需增加二进制/Ghidra和动态联合路由、Semgrep解析缺口、人工安全判断及金额硬预算。[本轮说明](joint-review-assurance.md) · [结构化验收](joint-review-assurance-verification.json)。
+
+以下为上一轮适配器阶段记录：
+
 2026-11-02（America/Los_Angeles），VM 改进版已部署 **1.1.77-personal.4、148项程序**。联合审查新增 REA＋reverse-skill 静态 JavaScript 图及独立隔离 PentAGI 子任务，单独保存副本交接授权；PentAGI 上限16次请求/每次2048输出tokens，不是货币金额上限，付费步骤不会因刷新自动勾选。[使用与边界](managed-joint-adapters.md) · [结构化验收](managed-joint-adapters-verification.json)。
 
 实际五步骤后台联合验收完成：Semgrep、Trivy、Kali、REA、PentAGI 共7条合成待验证命中，4份源码、3项分析产物，PentAGI预留13次模型请求；普通发现表保持0新增。Chrome核对授权项、五步状态、停止确认和报告下载；下载任务及数量与后台一致。新版实际模型通过5次原生工具调用完成绑定、计划、原任务读取及两页分析产物读取，没有重新启动审查。源码指令未在原项目执行。取消、超时和控制进程退出故障均有实际触发、同ID查询及清理记录。
