@@ -42,7 +42,7 @@ kali-vm tool openssl version
 
 独立 Kali 2026.3 ARM64 从 64 GiB 虚拟盘启动，根分区 `/dev/vda3` 为 ext4。安装前已核对目标 VM、MAC、磁盘容量和空白盘；仅对用户明确授权的 Kali 磁盘分区，未操作宿主或 Harness 系统盘。官方安装器完整 SHA256 与官方签名均已验证；派生启动镜像仅改动 GRUB 配置及其校验记录，原始镜像保留。安装结束已正常关机、弹出光盘，再从磁盘启动。
 
-连接链为 Harness bash → `~/.local/bin/kali-vm` → SSH 经已有代理 → Kali `harness` 普通用户。当前主机名为 `kali`，UID 1000，Nmap 7.99。Kali 重启后 boot ID 实际变化，持久化标记和专用 SSH 连接仍可用。账号仅使用密钥登录，没有为图形桌面设置可用密码；无密码 sudo 被拒绝。
+连接链为 Harness bash → `~/.local/bin/kali-vm` → SSH 经已有代理 → Kali `harness` 普通用户。当前主机名为 `kali`，UID 1000，Nmap 7.99。Kali 重启后 boot ID 实际变化，持久化标记和专用 SSH 连接仍可用。Harness 远程连接仍仅使用密钥登录；按用户后续要求，现有 `harness` 账号已设置本地登录密码并通过本地密码校验，密码不写入公开仓库。SSH 密码认证继续关闭；用户组和 sudo 规则未修改，无密码 sudo 没有新增。
 
 宿主代理只将精确别名 `kali.harness.internal:443` 映射到已由宿主核实的 `192.168.64.7:22`。原公共来源白名单、DNS 非公网地址拒绝、16路并发、10分钟连接上限及现有进程配额不变。没有新守护进程、共享目录、剪贴板、USB 或宿主完全访问权限。
 

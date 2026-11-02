@@ -1,4 +1,4 @@
-# DeepSeek Harness VM 配置备份
+# DeepSeek Harness 网络安全版
 
 当前部署与本轮完成状态统一见[当前状态](docs/current-status.md)。以下带版本、日期的历史记录保留原结论。
 

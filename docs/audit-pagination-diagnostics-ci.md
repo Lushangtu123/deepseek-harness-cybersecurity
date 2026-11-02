@@ -36,7 +36,7 @@ python3 -B scripts/ci.py --suite all
 
 GitHub工作流在`main`推送、PR或手动触发时运行，官方Action固定到提交SHA，仓库权限仅`contents: read`，不持久化checkout凭据，不使用VM密钥或模型账号。它覆盖源码、单元测试及本地进程检查；UTM启动、Cordis实际加载和恢复副本验收仍需单独完成。
 
-[查看GitHub检查](https://github.com/Lushangtu123/deepseek-harness-vm/actions/workflows/verify.yml)。工作流是否通过应以对应提交的实际运行结果为准。
+[查看GitHub检查](https://github.com/Lushangtu123/deepseek-harness-cybersecurity/actions/workflows/verify.yml)。工作流是否通过应以对应提交的实际运行结果为准。
 
 首次Ubuntu CI在控制器测试中发现一个遗漏的网页入口模拟调用，尝试执行仅Mac提供的`launchctl`，因此真实失败。已补齐测试边界，并加入禁止该单元测试启动真实宿主进程的断言；代理停止异常仍必须被明确抛出。该修正只改变测试，不修改已部署的控制器或恢复点。原始失败保留在[首次运行](https://github.com/Lushangtu123/deepseek-harness-vm/actions/runs/41151882378)。
 

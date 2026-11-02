@@ -916,7 +916,7 @@
     "multiwindowIncludedInRecoveryPoint": true
   },
   "publication": {
-    "repository": "Lushangtu123/deepseek-harness-vm",
+    "repository": "Lushangtu123/deepseek-harness-cybersecurity",
     "visibility": "public",
     "explicitlyAuthorized": "2026-10-30",
     "scope": "sanitized configuration, source and verification summaries only; excludes credentials, chat, project databases and VM disks"

@@ -40,7 +40,7 @@
 
 程序部署前备份位于VM的`/home/purge/downloads/security-reload-ssh-20261030`，宿主控制器备份在原安装根的`setup/before-reload-ssh-20261030`。整机恢复仍沿用原确认流程，会回退恢复点之后的文件和数据。
 
-本地、Linux临时副本与云端CI分别核验；定向复测不重复计数。结构化结果见[本轮验收](security-reload-verification.json)，云端状态以对应提交的[实际运行](https://github.com/Lushangtu123/deepseek-harness-vm/actions/workflows/verify.yml)为准。Semgrep解析缺口、真实发现复核、认证ZAP和新机器完整部署仍不在本轮完成范围。
+本地、Linux临时副本与云端CI分别核验；定向复测不重复计数。结构化结果见[本轮验收](security-reload-verification.json)，云端状态以对应提交的[实际运行](https://github.com/Lushangtu123/deepseek-harness-cybersecurity/actions/workflows/verify.yml)为准。Semgrep解析缺口、真实发现复核、认证ZAP和新机器完整部署仍不在本轮完成范围。
 
 ## Linux夹具时间戳差异
 
