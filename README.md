@@ -1,202 +1,159 @@
 # DeepSeek Harness 网络安全版
 
-当前部署与本轮完成状态统一见[当前状态](docs/current-status.md)。以下带版本、日期的历史记录保留原结论。
+[![配置与源码校验](https://github.com/Lushangtu123/deepseek-harness-cybersecurity/actions/workflows/verify.yml/badge.svg)](https://github.com/Lushangtu123/deepseek-harness-cybersecurity/actions/workflows/verify.yml)
 
-当前配置：**合并版 · personal.2 · 本地认证与解析补查**，更新日期 **2026-11-01（America/Los_Angeles）**。这是专用 Linux VM 的已脱敏配置与代码备份，经用户授权公开发布。当前运行模式为改进版，VM 内完全访问、自动执行；Mac 仍使用原来的权限与隔离边界。
+基于 **DeepSeek Harness + 改进版 dsh-purge + 独立 Kali Linux** 的个人网络安全工作台，面向代码审计、本地应用测试、逆向分析和安全研究。
 
-## Kali Linux 连接
+在聊天中调用工具，在演练台中管理项目、任务、发现与证据，在 Shell 工作台中克隆和操作仓库。Harness 与 Kali 分别运行于专用虚拟机，Mac 提供本地网页入口和运维控制。
 
-演练台“环境适配”现可选择并保存“远程 Kali”，目录扩展到26项，实际识别25项工具和SSH调用入口；已补充8个官方ARM64工具文件，另接入11项Kali原有工具，Chrome保存与刷新验收通过；本机配置保留，不混用本机工具。VM 改进版也可在聊天中使用 `kali` 技能，通过 `kali-vm status` 和 `kali-vm exec -- 命令 参数` 调用独立 Kali。持久化 Kali 2026.3、真实模型调用、错误密钥拒绝及重启恢复已验收。专用普通用户、固定 SSH 主机公钥；沿用宿主网络隔离和进程配额，不自动 sudo 或启动 Kali。[使用与重新配置](docs/kali-connection.md)。私钥、主机信任文件和 Kali 磁盘不在公开备份内；恢复公开源码后需要重新配置连接。原恢复点尚未覆盖这次接入。
+这是个人集成与改进版本。本仓库公开保存脱敏后的配置、源码、安装工具和验收资料；**克隆仓库不等于获得完整虚拟机或可直接使用的账号环境**。
 
-## Semgrep 解析器自检
+## 能做什么
 
-新增专用VM内的离线自检命令，用5个合成正反例核对固定镜像或明确指定的已加载候选。当前原复现仍PartialParsing，工具如实返回exit2；未替换扫描器或改写项目。[使用方法](docs/semgrep-parser-check.md) · [验收记录](docs/semgrep-parser-check-verification.json)。
-
-## 容量面板与持续预警
-
-[本机容量面板](http://127.0.0.1:49226/__harness/storage)展示Mac/VM空间和VM inode，聊天VM状态栏同步显示预警。现有入口运行且Mac醒着时每60秒共享轻量采样，不扫描目录、不自动清理；停止或过期明确标注。[使用方法](docs/storage-dashboard.md) · [验收记录](docs/storage-dashboard-verification.json)。
-
-## 存储监测与清理预览
-
-Mac启动器选项12可只读查看宿主/VM容量、目录、Docker及恢复对象，显示预警和保留/待核对依据。预览本身不设置定时任务、不删除或自动清理，也不自动启动VM；持续容量采样见上文。[使用方法](docs/storage-preview.md) · [验收记录](docs/storage-preview-verification.json)。
-
-## 扫描器候选准入与输出限制
-
-Mac统一启动器选项11可检查并显式切换已加载Semgrep候选，保留原清单和中断恢复；候选必须通过自检。本轮未更换镜像，解析缺口保留。扫描器输出64MiB、自检16MiB临时空间，容量写满控制和三种合成扫描均已验收。[使用方法](docs/scanner-admission.md) · [验收记录](docs/scanner-admission-verification.json)。
-
-## 会话到期与页面恢复
-
-安全审计新增会话到期提醒和显式新名称重新导入；页面恢复只读核对，保留草稿与未确认操作，不自动重发写入。真实 VM 40 秒后台暂停后界面自行恢复，九小时仅为时钟模拟测试。[使用方法](docs/session-lifecycle.md) · [验收记录](docs/session-lifecycle-verification.json)。
-
-## 本地认证与解析缺口补查
-
-安全审计可按名称使用 VM 私有 Cookie/Bearer 会话，控制器与 ZAP 在扫描前后分别核对，失效保留部分结果。Semgrep 解析失败文件可获得有界的 info 文本提示，原 PartialParsing 和待验证状态保留。界面及实际报告已验收；[使用方法](docs/authenticated-zap.md)与[验收记录](docs/authenticated-zap-verification.json)说明范围和限制。
-
-## SSH 与 PentAGI 更新
-
-受管 SSH 共用有界跨进程通道，排队超时明确标记未发送，不重放远端命令；部署后三进程共24次真实只读请求全部成功。已完成一次PentAGI真实模型到worker文件产物及结束清理验收。故障定位、恢复点与保留限制见[本轮说明](docs/ssh-pentagi.md)及[结构化记录](docs/ssh-pentagi-verification.json)。
-
-## 安全审计工作台
-
-演练台新增“安全审计”，接入 Semgrep、Trivy 和仅限 VM 本地网址的 ZAP，提供范围确认、发现验证、修复记录、复测和报告导出。模型可调用 `redteam_security_audit`；新范围校验覆盖新增扫描入口，通用 Shell 与原版能力沿用既有权限。当前支持真实镜像/规则/漏洞库检查、库龄提示、独立只读预检及带备份的手动更新/恢复。最新分页、诊断、规则、对比、报告和页面程序已纳入当前整机恢复点。真实 DeepSeek 合成审计流程已在上一轮完成。[使用、边界与恢复说明](docs/security-audit.md)。
-
-真实模型使用原生Harness headless入口完成合成Semgrep审计，5次工具调用、1次任务、1条待验证发现；实际数据库与报告核对一致。[恢复与模型验收记录](docs/security-acceptance-verification.json)。
-
-本地规则已扩展到 **16 条（local-reviewed-2）**，覆盖Python/JavaScript/TypeScript；34个预期命中、41个排除样例经真实离线扫描核对，页面和新任务报告显示规则版本。命中仍需人工验证。[规则范围与验收](docs/security-audit.md#本地规则集-v2)。
-
-“扫描结果对比”可选择同项目两次完整任务，显示新增、仍存在、已覆盖文件中未再次命中和覆盖未证实，并下载Markdown。只比较新保存的观察快照；旧任务缺快照或策略不同会说明不可比较。未再次命中不等于已修复，不修改发现状态。[对比使用与验收](docs/security-audit.md#扫描结果对比)。
-
-审计报告下载核对当前项目和资料读取代次，拒绝刷新后的旧响应与重复连点。读取时禁用导出，导出时显示“正在导出…”，完成后恢复按钮。[下载保护与验收](docs/security-audit.md#报告下载保护)。
-
-报告新增发现状态、严重性和任务状态汇总；统计覆盖全部已保存记录，即使明细达到导出上限也会保留完整计数。当前范围与各任务当时记录的范围、版本分别展示，缺失资料标为“未记录”，不推断安全或已修复。[报告内容与限制](docs/security-audit.md#报告汇总与历史范围)。
-
-页面先核对资料中的实际展示字段、重复ID和可选总数，再采用新结果。异常读取保留上次成功资料及草稿，明确显示未确认并暂停写入/导出按钮，正常刷新后恢复。[资料校验与异常读取](docs/security-audit.md#资料校验与异常读取)。
-
-## 审计分页、诊断与自动检查
-
-任务每页10条、发现每页50条，各自筛选和翻页；搜索按字面匹配，刷新纳入新记录。运行中任务独立保留入口。SSH与私有后台错误增加有界参考号、阶段和耗时；不保存原始命令、源码或凭据，安全审计未知写入结果保留原请求，完整网页重载或关闭重开标签页后仍可明确重试同一请求；不由页面自动重放。
-
-仓库新增`python3 -B scripts/ci.py --suite all`，统一检查导出完整性、Python/Node回归和客户端重建一致性；GitHub推送/PR自动执行，不需要VM或模型密钥。当前Mac与Linux分别通过230项Python、447项插件Node、129项入口Node回归，不能将重叠的定向检查再累加。云端结果以对应提交的实际运行记录为准。[操作、CI与保留缺口](docs/audit-pagination-diagnostics-ci.md)。
-
-## 网页重载恢复与SSH采样
-
-安全审计的范围保存、任务启动和发现复核，在发送前持久保存有界原请求。完整重载或关闭重开标签页后保留未确认提示，明确点击“重试同一请求”才再次发送；后台沿用原编号去重。本地存储不可用或资料异常时暂停写入。此保护限同一浏览器来源；新增同源页面协作互斥，不是跨来源或跨浏览器配置的访问控制。
-
-统一菜单选项10对已保存SSH失败做独立固定只读采样，记录服务、启动与时间窗内的有限标记计数，不保存原命令/源码/日志正文，不重试原命令或改变SSH策略。时间窗线索不能证明连接归属；本轮再次观察到一次识别阶段连接重置，单独重试通过，根因仍未确定。[操作和限制](docs/reload-recovery-ssh.md)。
-
-## 恢复管理更新
-
-2026-10-29补充清单可靠性：异常列表结构保留旧结果，过滤和截断明确显示缺口；失败提示与本机诊断按请求编号关联。归档与快照独立续读，历史无对应快照的记录折叠显示。随后已创建包含本轮宿主入口与安全运行资产的新恢复点，详见[恢复说明](docs/restore.md)。
-
-恢复元数据损坏时只标记对应恢复点，继续核对实际运行状态。元数据与辅助文件采用普通文件、大小和链接保护；磁盘快照与镜像归档分开分页，首批固定显示当前恢复点、原版/工具链基线和最近三个恢复点。建立恢复点、恢复执行和写入使用已校验的文件内容，并核对证明文件的VM身份、模式和恢复点名称；两份列表分别保留核对时间、加载和失败状态，异常快照元数据保持未确认，大归档支持内部续扫。使用与限制见[恢复说明](docs/restore.md)。
-
-## 选择性稳定性更新
-
-个人包版本为 **1.1.77-personal.2**：从上游1.1.82回移ZIP目录项、skills软链接校验与预设清理修复，并提供显式pnpm配置维护。已有的权限位/启动器保护继续沿用。原版能力开关、owner认证、证据回执和角色绑定保留，父子会话权限继承保持原实现。[更新范围与验证](docs/stability-backports.md)。安装目录名personal.1保持稳定，实际版本以package.json为准。
-
-## 统一启动入口
-
-双击仓库根目录的 **Harness.command**，回车默认打开合并版；同一菜单还提供原版能力启停、完整原版独立配置、状态检查、正常关机、恢复，以及选项8的pnpm配置维护、选项9的漏洞库检查/更新/恢复、选项10的SSH故障关联采样。已在目标模式下不会重复切换服务，日常打开保留原版能力开关状态。它调用原Mac已有控制器，移动时保持scripts目录与命令一起。[菜单与确认说明](docs/launcher.md)。
-
-## 原版能力开关
-
-打开会话标题旁的 **dsh-purge → Permissions（权限）→ 原版能力**，拨动后确认重启服务。切换完成后刷新 Harness 并新建会话。本次导出保留已开启的选择；开关关闭时采用日常运行时，启用时采用隔离的原版补丁运行时，共用项目、会话和工作台。原版提示词、权限和沙盒行为随开关切换，详细边界见[开关说明](docs/original-capabilities.md)。
-
-上一轮容量验收时运行134项插件程序，本轮 Kali 环境适配更新后为135项；既有恢复点`ready-storage-dashboard-20261101`。独立磁盘副本实际启动，2635项选定稳定摘要与134项程序匹配，原盘换回正常运行；临时副本已清理，旧23点保留，共24点。真实项目459项受跟踪文件、HEAD与6张审计表不变，95条发现仍待验证。Semgrep语义解析缺口与QEMU内部具体缺陷继续保留。[本轮验收](docs/storage-dashboard-verification.json) · [此前SIGKILL与实际Mac睡眠验收](docs/security-lifecycle-verification.json)。源码导出不含密钥、聊天、项目数据库或VM磁盘。
-
-## 专业环境安装
-
-新增 `scripts/professional_guest.py`：默认只读计划，显式导入带独立摘要的专业资产包。最终空白 Ubuntu 24.04 ARM64 中，REA/Ghidra 合成样本、PentAGI 本地 API、原版能力启动/返回及插件页面已验证；新环境需单独选择工作区和配置模型账号。基础阶段使用网络，专业资产阶段离线导入。大型资产、账号和 VM 磁盘不进 Git。[安装步骤](docs/professional-bootstrap.md) · [本轮验收](docs/professional-bootstrap-verification.json)。
-
-## 桌宠拖角
-
-开关菜单引起的两次跳动已修正：原插件重读设置时恢复旧坐标，适配层现在在绘制前协调停靠位置。Chrome实际菜单开关及两次受控旧坐标回写检查中，角色采样帧位置均未改变；原插件设置刷新和拖动保留。[菜单验收](docs/pet-menu-verification.json)。
-
-直接拖到角落后弹回的问题已修正：拖动结束时，图片落点距相邻两边均不超过32px则进入角落停靠，保留12px边距；拖到中间继续自由移动。按压动画期间再次拖动也使用稳定尺寸，不在移动中反复改位。用户实际鼠标确认与Chrome四角事件检查均通过。[使用与边界](docs/pet-layout.md) · [验收](docs/pet-drag-verification.json)。
-
-## 多窗口与空白基础安装
-
-审计页面同源标签页使用 Web Locks 协调提交、明确重试和恢复提示清除；其他页面更新记录时只读刷新，保留不同草稿。Chrome 已验证并发拒绝和相同请求号去重；不同来源或浏览器配置仍依赖后台校验。
-
-新增只读 `python3 -B scripts/bootstrap_guest.py` 与显式 `--apply` 基础安装入口，限定空白 Ubuntu 24.04 ARM64、purge 用户和固定隔离模板，拒绝已有配置。真实空白系统中 Harness、改进版插件及网页启动经 Chrome 验证；账号、专业工具、可选插件和完整原版运行时另行配置。[步骤与边界](docs/basic-bootstrap.md)。
-
-## 内容
-
-v30 补充桌宠中断手势恢复，右键、中键及未被原插件接受的点击不会取消角落预设；恢复点管理支持分批加载归档，并明确显示扫描限制。
-
-v29 修复桌宠移动抖动和双击余额气泡被隐藏：保留与 GitHub 原项目一致的0.4.2插件，宿主适配使用稳定布局尺寸，手动拖动交回原生吸附/保存，气泡独立避让。四角菜单和详情恢复入口继续可用，见[桌宠说明](docs/pet-layout.md)。
-
-| 目录 | 保存内容 |
+| 能力 | 使用方式与范围 |
 | --- | --- |
-| `guest-home/` | 从运行中 VM 读取的配置、预设、6 组技能、systemd 服务、命令入口、REA/PentAGI 连接配置与版本检查器 |
-| `work/harness-purge-improved/` | 与当前 VM 127 项摘要一致的改进版 dsh-purge 源码及 JavaScript 回归测试 |
-| `runtime-overrides/` | 当前 VM 修改过的四个官方运行时模块及其版本、许可证；按原路径另存，不提交 node_modules |
-| `work/harness-purge-vm/` | 与当前安装一致的五个 Mac 运维工具及测试，包括网页入口、诊断、恢复点和隔离代理 |
-| `work/toolchain-version-checker/` | REA、reverse-skill、PentAGI 固定来源版本检查器及测试 |
-| `inventory/` | 导出来源、文件摘要、脱敏项目、插件版本、工具链提交和镜像摘要 |
-| `docs/` | 版本状态、验证范围与恢复说明 |
+| 代码与依赖审计 | Semgrep 检查代码，Trivy 检查依赖、配置和凭据痕迹；任务保留工具版本、范围与覆盖情况。 |
+| 本地 Web 测试 | ZAP 接入 VM 内指定回环网址，支持命名的私有 Cookie/Bearer 会话；当前入口不接受任意公网目标。 |
+| Kali 工具调用 | 聊天或 Shell 通过专用 SSH 调用独立 Kali；环境适配页显示真实工具路径与连接状态。 |
+| 逆向分析 | REA、Ghidra 与 reverse-skill 提供分析入口；样本和所需工具在 VM 内准备。 |
+| 智能体协作 | 集成 PentAGI 的任务入口，模型账号、服务和工作镜像需在本地配置。 |
+| 项目与终端 | Shell 工作台支持 `git clone` 等命令，终端与项目管理用于查看进程、目录和工作区。 |
+| 发现与报告 | 待验证、确认、误报、修复及复测记录，扫描结果对比、Markdown 报告与证据交付包。 |
+| 运维与恢复 | 状态检查、SSH 诊断、工具链版本检查、漏洞库维护、容量预警及恢复点管理。 |
 
-当前插件为 dsh-context **0.75.1**、dsh-whale-widget **0.4.2**、dshmarket **1.70.2**。插件第三方依赖通过版本清单记录，没有提交整个依赖目录。REA **6.8.0**、reverse-skill 和 PentAGI 的固定提交/镜像摘要见 [导出清单](inventory/export.json)。这些是安装记录，不表示今天的 GitHub 最新版本。
+审计命中首先进入“待验证”。未再次命中、扫描失败或覆盖不完整，都不会直接等同于“已修复”或“安全”。
 
-v18 包括：保存结果未确认时只读核对且不重发写入；刷新保留未保存输入和保存提示；名额核查显示完成数量、失败会话、类别与时间。日常精简预设、独立红队预设、Shell 工作台、终端与项目管理、版本检查、会话绑定、报告和恢复管理均保存在当前源码与配置中。
+## 架构
 
-## 隐私与备份边界
+```mermaid
+flowchart LR
+    Browser[浏览器工作台] --> Entry[Mac 本地回环入口]
+    Entry --> Harness[Harness VM<br/>Ubuntu ARM64]
+    Harness --> Audit[Semgrep · Trivy · 本地 ZAP]
+    Harness --> Reverse[REA · Ghidra · reverse-skill]
+    Harness --> PentAGI[PentAGI]
+    Harness -->|专用 SSH · 固定主机公钥| Kali[Kali Linux VM<br/>ARM64]
+```
 
-API 密钥、SSH 私钥、登录令牌、私有登录链接、个人偏好档案、聊天记录、项目数据库、工具运行日志、容器数据、VM 磁盘及恢复归档均未上传。凭据文件根本不进入导出清单；个人偏好文件替换成空白说明。技能和提示词作为配置数据保存，不在导出过程中执行。
+- **Mac**：提供受管网页入口、既有代理与 VM 运维；当前部署不授予 Mac 完全访问权限。
+- **Harness VM**：保存工作区、会话、审计数据与工具配置。当前个人部署允许 VM 内完全访问和自动执行；具体行为仍取决于运行模式。
+- **Kali VM**：使用独立持久化系统及 `harness` 普通用户。SSH 仅使用专用密钥，校验固定主机公钥，密码远程认证关闭。
 
-此仓库保存配置和代码，**不能仅靠 git clone 恢复整台虚拟机**。实际离线恢复点、磁盘和对应恢复归档仍在原 Mac 本机，当前目标见 `inventory/export.json`。新机器需要另外准备 Linux VM、Harness/Node 运行时、依赖和本机凭据。GitHub 仓库不是 VM 磁盘备份。
+演练台的审计范围校验只覆盖对应审计入口，不能当作整个 VM 的访问控制。通用 Shell 与原版能力有各自的权限行为。切换原版能力会重启服务，并改变 VM 内提示词、权限与沙盒行为，操作前请阅读[原版能力说明](docs/original-capabilities.md)。
 
-## 验证
+## 快速开始
 
-无需登录和模型调用即可检查备份文件的完整性：
+### 查看源码与检查导出
 
 ```sh
+git clone https://github.com/Lushangtu123/deepseek-harness-cybersecurity.git
+cd deepseek-harness-cybersecurity
 python3 -B scripts/verify_export.py
 ```
 
-v20校验使用明确错误和退出码；普通Python、`-O`、`PYTHONOPTIMIZE=1`均拒绝缺失/变更文件和无效摘要。结果分别列出完整性、凭据格式和不支持项，匹配数只统计实际匹配文件。
+该检查核对文件摘要、Python/JSON 结构和固定凭据模式，不启动 VM、不调用模型，也不代表完整安全审计。
 
-在专用Linux VM中取得本仓库后，可执行只读恢复预检：
+### 使用已经配置好的原 Mac 环境
+
+双击仓库根目录的 [Harness.command](Harness.command)，回车打开合并版。进入聊天后可打开 **Shell 工作台**；进入 **dsh-purge → Drill → 安全审计** 可管理审计任务，**环境适配** 可选择远程 Kali。
+
+启动器依赖原 Mac 已安装的控制器与 VM；它不负责在新电脑创建环境。保持 `Harness.command` 与 `scripts/` 的相对位置，菜单与操作说明见[统一启动入口](docs/launcher.md)。
+
+### 在新环境部署
+
+按以下顺序准备，不能在现有日常 VM 上直接运行空白安装器：
+
+1. 准备符合本项目固定模板的 **Ubuntu 24.04 ARM64 专用 VM**、`purge` UID 1000 用户、系统依赖及宿主隔离网络，见[基础安装](docs/basic-bootstrap.md)。
+2. 在该 VM 内先运行 `python3 -B scripts/bootstrap_guest.py` 查看计划；确认空白目标后，按安装文档执行显式安装。
+3. 需要 REA、Ghidra、PentAGI 等专业环境时，准备另行保管的资产包及独立摘要，按[专业环境安装](docs/professional-bootstrap.md)导入。
+4. 在本地配置模型账号、选择工作区，并启动需要的服务。源码和资产包都不提供旧账号、聊天或项目数据库。
+5. 如需 Kali，另行准备持久化 Kali VM、专用 SSH 密钥及独立核对的主机公钥，参照[Kali 接入说明](docs/kali-connection.md)。
+
+安装器适用于本项目的固定路径和网络模板，不是面向任意 Mac、Linux 或云服务器的一键部署程序。专业资产安装也不会自动完成模型账号配置或启动 PentAGI。
+
+## 调用 Kali Linux
+
+在演练台 **环境适配 → 工具执行位置** 选择“远程 Kali · 专用 SSH”，保存后查看连接和工具数量。也可在聊天中要求：
+
+> 使用 Kali 技能，检查 Kali 状态和 Nmap 版本，不扫描目标。
+
+在已配置的 Harness VM Shell 中：
 
 ```sh
-python3 -B scripts/restore_preflight.py --json
+kali-vm status
+kali-vm inventory
+kali-vm tool nmap --version
+kali-vm tool dnsx -version -duc
+kali-vm exec -- python3 --version
+kali-vm shell
 ```
 
-它核对固定架构、用户路径、程序/配置摘要、依赖及插件版本、工具安装标记、本地凭据是否已配置，以及七个固定启动入口的精确 VM 权限和可执行状态；缺项/差异退出1。凭据内容不输出，不安装或覆盖文件，不调用模型、不主动联网，也不验证令牌有效性、容器服务或整机可启动性。Mac上运行会报告环境不匹配，不尝试操作宿主。
+截至 **2026-11-01** 的验收记录，工具目录共 **26 项，实际找到 25 项**：
 
-v19会话隧道页切换项目立即隐藏旧记录；迟到响应、旧按钮和卸载回调不再误改当前项目。主动检测按钮禁用并解释会话内按范围使用工具的方式，后端拒绝规则保持。
+| 类别 | 已接入工具 |
+| --- | --- |
+| 网络与 Web 检查 | Nmap、Nuclei、Masscan、fscan、gogo、ffuf、httpx |
+| DNS 与域名 | dnsx、subfinder、dig |
+| 连接与隧道 | suo5、frpc、frps、chisel |
+| 协议与诊断 | Impacket 入口、curl、wget、OpenSSL、tcpdump、TShark |
+| Web 与文件分析 | WhatWeb、Nikto、sqlmap、file、strings |
 
-v20会话页整体验证响应数组、正整数记录ID、可展示的可空字段及统计一致性；异常响应显示记录未确认，不展示空记录结论或旧操作。复制 URL 只复制地址。`inventory/export.json` 的 `executionRequirements` 保存 VM 权限；仓库校验检查 Git 保留的可执行类别，VM 预检核对精确权限，不自动 chmod。
+唯一缺项为 **ksubdomain**：核对的官方 v2.4.0 发布资产没有 Linux ARM64 文件，当前未安装。新补充的 8 个 ARM64 二进制记录于[来源与摘要清单](work/harness-purge-vm/kali-tools-lock.json)，二进制本身不在 Git 中。
 
-在支持 `node:sqlite` 的 Node.js 环境运行代码回归：
+工具通过 Harness 内的固定入口在 Kali 中执行；缺失工具不回退到本机。输入、输出、模板和词表应使用 **Kali 内路径**，项目文件与凭据不会自动复制。25 项工具已验证版本或帮助调用，具体任务、实时抓包权限、模板及外部账号仍需分别准备。完整配置、恢复与限制见[Kali 接入说明](docs/kali-connection.md)。
+
+## 安全审计流程
+
+1. **确认范围**：选择项目，填写 VM 工作区内的仓库绝对路径、工具及到期时间；本地 Web 测试另填允许的网址。
+2. **提交任务**：由页面或绑定到同一项目的聊天调用 `redteam_security_audit`，通过持久任务 ID 查看进度。
+3. **验证发现**：记录依据，再确认问题或标记误报；记录修复后执行复测，保留覆盖缺口。
+4. **交付结果**：对比同项目的扫描观察，导出报告；需要图片附件时使用证据交付包。
+
+连接中断或结果未确认时，页面保留提示与原请求，不自动重发写入。先核对状态，再明确决定是否重试。详细范围、状态与导出限制见[安全审计工作台](docs/security-audit.md)及[报告交付包](docs/report-export.md)。
+
+## 仓库结构
+
+| 路径 | 内容 |
+| --- | --- |
+| `guest-home/` | 脱敏后的 VM 配置、技能、服务定义、命令入口及工具调用适配。 |
+| `work/harness-purge-improved/` | 改进版 dsh-purge 源码、前端构建和回归测试。 |
+| `work/harness-purge-vm/` | Mac 控制器、网页入口、代理、诊断和恢复工具，以及 Kali 客户端源码。 |
+| `work/toolchain-version-checker/` | REA、reverse-skill、PentAGI 固定来源的版本检查工具。 |
+| `runtime-overrides/` | 修改过的官方运行时模块及其来源与许可证记录。 |
+| `scripts/` | 导出校验、安装、恢复预检、维护及 CI 入口。 |
+| `inventory/` | 文件摘要、脱敏范围、固定版本、镜像与资产清单。 |
+| `docs/` | 使用指南、历史变更、验收证据与恢复限制。 |
+
+## 验证与已知限制
+
+无需 VM 和模型密钥，可在 **Python 3.13 / Node.js 24** 环境运行与 GitHub Actions 一致的检查：
 
 ```sh
-node --test work/harness-purge-improved/tests/*.test.mjs
-node --test work/harness-purge-vm/*.test.mjs
+python3 -B scripts/ci.py --suite all
 ```
 
-Python 控制器测试使用临时目录和模拟传输；逐个运行 `work/harness-purge-vm/*.test.py`；统一启动菜单另运行 `python3 -B scripts/harness_launcher.test.py`（.command路径验收需要本机Homebrew Python）。`work/toolchain-version-checker/tests/` 保存额外的版本检查边界测试。普通备份核对不需要运行控制器的启动、切换或恢复命令。
+检查涵盖导出完整性、Python/Node 回归和客户端重建一致性。真实 VM 启动、账号连接、模型任务和浏览器交互，需要单独验收，不能由 CI 通过推断完成。
 
-参见 [本次导出验证范围](docs/verification.md) 和 [恢复与路径说明](docs/restore.md)。上游代码及技能各自保留原来的许可证；本仓库不对第三方代码重新授权。
+当前个人部署运行 **dsh-purge 1.1.77-personal.2**，Kali 为 **2026.3 ARM64**。版本是部署和验收记录，不表示上游最新版本；具体来源以[导出清单](inventory/export.json)、[当前状态](docs/current-status.md)和对应验收资料为准。
 
-## v21 日常编辑保护
+- **Semgrep 仍有解析缺口**：已保留 `PartialParsing` 及相应失败状态，补充文本提示不等于完成语义分析。见[解析器自检](docs/semgrep-parser-check.md)。
+- **历史连接问题未全部定位**：部分旧 SSH 失败及 QEMU 内部具体缺陷尚无确定根因，后续成功不用于改写原失败记录。见[SSH 与恢复诊断](docs/reload-recovery-ssh.md)。
+- **恢复覆盖有边界**：既有 24 个恢复点保留，但尚未覆盖当前 Kali 桥接、独立 Kali 磁盘及本次工具补充，不能作为 Kali 的完整备份。
+- **仓库不包含整机运行资产**：VM 磁盘、恢复归档、专业二进制、容器数据、账号和凭据需独立保管；仅克隆源码无法恢复整套环境。
 
-得分表单及操作绑定项目/读取代次，旧保存、删除与迟到攻击链响应不能影响新项目；同项目写入在途时，全页刷新或A→B→A不会提前解锁，结算后只读核对，未知结果不重发。环境页刷新保留未保存字段，点击“使用当前配置”才明确采用服务端当前值；回执按字段修订合并，保留新输入并更新未编辑的工具路径。保存、分配按钮和Enter共用同步提交锁，读取失败暂停写入。保护范围为当前挂载页面，不声称跨独立窗口的统一锁或服务端幂等。
+## 文档导航
 
-## v22 配置保存与未确认提示
+| 主题 | 文档 |
+| --- | --- |
+| 部署与恢复 | [基础安装](docs/basic-bootstrap.md) · [专业环境](docs/professional-bootstrap.md) · [恢复与路径](docs/restore.md) |
+| 日常使用 | [统一启动菜单](docs/launcher.md) · [原版能力](docs/original-capabilities.md) · [Kali 接入](docs/kali-connection.md) |
+| 审计与交付 | [安全审计](docs/security-audit.md) · [认证 ZAP](docs/authenticated-zap.md) · [报告与附件](docs/report-export.md) · [证据保护](docs/evidence-protection.md) |
+| 长任务与可靠性 | [后台审计与校时](docs/background-audits-clock.md) · [会话恢复](docs/session-lifecycle.md) · [SSH 与 PentAGI](docs/ssh-pentagi.md) |
+| 工具与容量维护 | [扫描器准入](docs/scanner-admission.md) · [容量面板](docs/storage-dashboard.md) · [存储预览](docs/storage-preview.md) |
+| 界面与历史验收 | [桌宠位置](docs/pet-layout.md) · [浏览器验收流程](docs/browser-acceptance.md) · [选择性稳定性更新](docs/stability-backports.md) · [验收资料目录](docs/) |
 
-环境配置先在同目录私有临时文件中完整写入、校验和同步，再原子替换，已有文件保留普通权限位。损坏、无法读取、非普通文件或符号链接会暂停读取、保存和自动分配，不静默重置；只有文件确实不存在时才允许初始化。替换前失败保留旧文件，替换后同步或回读失败保持结果未确认，不自动回滚或重发。
+## 隐私与许可证
 
-环境页仅在请求编号和规范化后的提交字段均匹配时确认保存；回执缺失、串号或字段矛盾会保留草稿，后台只读核对不能补造原请求的成功回执。得分操作的未确认提示按项目保留，面板全页“刷新”及A→B→A不会清除；“关闭未确认提示”只隐藏提示。这里的全页刷新指面板刷新按钮，通知仅保留在当前挂载组件中，不跨浏览器重载或独立窗口。请求编号用于关联，不提供授权或服务端幂等。
+公开导出排除 API 密钥、SSH 私钥、主机信任文件、登录令牌、私有链接、聊天、项目数据库、运行日志、容器数据、VM 磁盘及恢复归档。模型账号、Kali 本地密码和连接凭据在本地配置，不写入 README。
 
-## v23 完整报告与复现入口
-
-报告使用完整命中集统一计分、过滤和封顶，不再按最早500条决定总分。默认返回完整明细；显式limit（1至2000）/offset只对合并后的明细卡分页，coverage列出原始命中、有效命中、卡片总量、返回量和下一页，summary与Markdown始终完整。面板每页25条，复制/下载仍为完整Markdown。
-
-合成HTTP保留Host、查询串和正文；curl保留已记录且与Host一致的HTTP(S)协议、请求头及字面参数，使用--data-raw避免正文@被当成文件。完整抓包不再裁到20k，Markdown代码块保留正文CR/空白；Transfer-Encoding或无法核对地址等情况保留原文并说明无法生成等价curl。原有真实curl不改写，敏感内容继续脱敏，不自动执行复现命令。
-
-报告快照、复制/下载和反馈按项目/刷新代次归属；旧内容和旧动作失效。必要结构或直接渲染字段不合法显示“报告未确认”；合法空报告与旧host缺阶段的分组回退保持。
-
-## v24 安全报告交付包
-
-导出CLI将`--out`作为父目录，每次创建独立`report-随机值/bundle`，不替换旧包。先验证源/输出不重叠，再核对正文所选附件的登记大小和SHA256；只打包引用图片，生成`manifest.json`，缺失/变更或非法文件明确失败。含空格与括号的相对图片路径可移植。面板下载仍为Markdown；使用命令与交付边界见[报告交付包](docs/report-export.md)。
-
-## v25 证据写入与初始化保护
-
-同名截图登记保留原文件与记录；新文件写入/登记失败仅清理本次拥有的文件。旧得分归档失败停止清理，后续数据库操作失败通过保存点回滚。默认阶段和得分点首次并发补种不覆盖已有编辑，阶段齐全时保留只读路径。运行说明及恢复边界见[证据保护](docs/evidence-protection.md)。
-
-## v26 桌宠显示与拖动
-
-网页入口会优先保留桌宠拖动的位置；与按钮冲突时选取最近的可用空隙，修复旧逻辑跳到固定位置或遗漏空隙而隐藏的问题。直接按住桌宠图片上下拖动，插件页和聊天页均可使用，刷新后由原插件恢复位置偏好。空间不足时仍会暂时隐藏以保留操作入口。使用和验证边界见[桌宠位置](docs/pet-layout.md)。
-
-## v27 四角停靠
-
-桌宠菜单新增“位置”：左上、右上、左下、右下、自由。拖到角落也可触发停靠；停靠时界面预留侧边空间，避免被输入框避让推回中间。窄窗口自动适配显示尺寸；“自由”恢复界面宽度和原插件尺寸。四角偏好在当前浏览器来源中保存，不修改插件的角色/大小配置。[操作说明](docs/pet-layout.md)。
-
-v27b让插件页的dsh-purge悬浮入口随预留空间移动，解决它与右下桌宠重叠而触发隐藏的问题。最终恢复点独立保存为v27b，原v27恢复点保留。
-
-## v28 窄屏排版与独立恢复
-
-窄窗口的插件组件卡片把图标、状态与开关放在上行，名称和说明使用整行。桌宠插件详情增加独立“显示桌宠 / 重置位置”入口；桌宠菜单暂时隐藏时也可访问。“显示桌宠”尝试自由安全位置，“重置位置”回到右下；未运行时说明原因并禁用恢复按钮，不自动启用插件。已开启但网页挂件尚未加载时按提示刷新。
-
-每次相关界面更新使用[固定浏览器验收流程](docs/browser-acceptance.md)，记录真实窄屏、四角、切页、刷新、临时隐藏及插件开关结果。模拟DOM回归与实际CSS验收分别记录。
+第三方代码、技能与资产沿用各自许可证，本仓库不对其统一重新授权。使用和分发时请核对对应目录的许可证，包括改进版 dsh-purge 保留的 [LICENSE](work/harness-purge-improved/package/LICENSE)、[商业条款](work/harness-purge-improved/package/LICENSE-COMMERCIAL.md)与[NOTICE](work/harness-purge-improved/package/NOTICE)。
