@@ -2,7 +2,7 @@
 
 2026-11-02（America/Los_Angeles），当前 VM 改进版为 **1.1.77-personal.5、148项程序**。独立代码复核已完成，修复脱敏后文件超限及模型摘要转义导致的报告单条超预算问题；22项独立聚焦测试、本地和Linux全量回归、原生REA与RPC、Chrome下载均通过。新恢复点 `ready-joint-assurance-20261102` 含2810项选定摘要，独立恢复磁盘实际启动，原盘已归还；保留原26点，共27点。Kali既有已启动验收归档的2221项工具文件与5个符号链接本轮重新匹配。真实项目与95条待验证发现未变。
 
-Mac管理器未更新，其全局旧标签不代表新点；使用本轮私有明确恢复入口。剩余项为按需增加二进制/Ghidra和动态联合路由、Semgrep解析缺口、人工安全判断及金额硬预算。[本轮说明](joint-review-assurance.md) · [结构化验收](joint-review-assurance-verification.json)。
+Mac管理器未更新，其全局旧标签不代表新点；使用本轮私有明确恢复入口。恢复后有一次页面资源未完整加载，手动重载恢复，诊断保留窗口已不覆盖首个异常，根因仍待定位。其余剩余项为按需增加二进制/Ghidra和动态联合路由、Semgrep解析缺口、人工安全判断及金额硬预算。[本轮说明](joint-review-assurance.md) · [结构化验收](joint-review-assurance-verification.json)。
 
 以下为上一轮适配器阶段记录：
 

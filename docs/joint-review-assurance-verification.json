@@ -116,6 +116,13 @@
     "Semgrep parser gap and manual security judgments remain",
     "95 real project findings remain unverified by user decision",
     "request/output-token limits are not a monetary hard cap; already accepted provider requests may not be revocable",
-    "recovery and Kali archive remain on this Mac, not off-machine disaster recovery"
-  ]
+    "recovery and Kali archive remain on this Mac, not off-machine disaster recovery",
+    "one post-recovery browser resource load failed then manual reload recovered; original request outside retained diagnostics window, root cause unresolved"
+  ],
+  "browserAfterRecovery": {
+    "initialResourceLoadFailureObserved": true,
+    "manualPageReloadRecovered": true,
+    "cause": "unresolved; subsequent100-event diagnostics window did not cover original failure",
+    "nativeObservation": "CUA Chrome actual rendered error followed by successful Chat after Reload"
+  }
 }
