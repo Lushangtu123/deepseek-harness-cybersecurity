@@ -4,8 +4,8 @@
   "source": "live dedicated VM and hash-matched host sources",
   "guestFiles": {
     "guest-home/.dsh-improved/cordis.patch.yml": {
-      "sourceSha256": "a0fa22c9366802c73beba011f671f3e256ccd18206a71004bc50d13082b3dd3d",
-      "sha256": "a0fa22c9366802c73beba011f671f3e256ccd18206a71004bc50d13082b3dd3d"
+      "sourceSha256": "de5a34f1e52bae3df40c7469862dba029692829fa01b5e1049e7e4a76821bffc",
+      "sha256": "de5a34f1e52bae3df40c7469862dba029692829fa01b5e1049e7e4a76821bffc"
     },
     "guest-home/.dsh-improved/AGENTS.md": {
       "sourceSha256": "b0366fce95984e239f0ad57eaf295631958356939db0d89f861a6c9d188b3a89",
@@ -607,7 +607,7 @@
     "README.zh-CN.md": "d4df0d6e57d9da7c0e147cf7bd5929b8f2aa6b4a761f0e97096fd989725d983d",
     "bin/dsh-purge.js": "759081efd77e2ac757d759eeb2d14552bfbf925944ee3a53247e36064196e1eb",
     "bin/personal-cli.mjs": "ede2f67342870cb881ec46bbb20ef390cf75f359e5fb2b9f4e3264629f51a3fc",
-    "client.js": "a79f680e5c6878f493c28339bc2dc60d6bce677dcb2c3852d8fea1c4e6effefe",
+    "client.js": "38ae7b405e577a743662b7bbfd998343098e2dcae320d4935450d0ecf9c8f6a6",
     "cordis.patch.yml": "9e1578290bd9912d47ecac286286aac6ca92f1e5241e8873f8af6c8ae35a3c44",
     "docs/banner.svg": "14c10266d5b677eab4da37b70b0da3f6c81be775c1c4604375b79c31574eeb4f",
     "docs/drill-auth-legal.html": "00c4328c1ac3ce4dad784911b7eeeec5931f5da202124028121dc55f14e601d0",
@@ -656,6 +656,8 @@
     "lib/personal-pnpm-repair.mjs": "779b1c33b8f2ae092564a8cc2555bb7b985d5f8df058e8d5a3feba51a36c662b",
     "lib/personal-redteam.js": "1fda3d86ad7f8a6ff27b0e17ee7f6a0c3c7908cf4ffab550f074b908ac35a941",
     "lib/personal-reliability.js": "2af70d04c8e0456acbd71e32e272d63148147a854513e30758ac0521915e6245",
+    "lib/personal-review-filter.js": "75c8d04aba45f7697271c97eeae3123fd01ec5e7cee7a3bfe65b7936a611d8bb",
+    "lib/personal-review.js": "2933531c74865a3b204738b070a090d37a7c0e48627c8531ff1785eb5e15436a",
     "lib/personal-startup-recovery.mjs": "c2701466715359d3906f30d515253a0885a1b6c233c94742fb9764a00ad73796",
     "lib/phase1-keep.js": "ed5beaf3339ec1e33765aa2b2bbd2d40c0b30c90476621e593b0e79e7d1b5104",
     "lib/preset-default.js": "f9c2205278d8e769042ff365116435f54a0672af715aba9c905005e1f9931555",
@@ -671,16 +673,17 @@
     "lib/redteam/personal-kali-environment.mjs": "f34264f085d1d935c1722f8839fd332fa13ce76e85c247191b328175d25a7c09",
     "lib/redteam/personal-project-slots.mjs": "ed2612f728f4f55293b325e639af0b2808cd250442c7a0cc1e1a2ba00431cdd4",
     "lib/redteam/personal-security-auth.mjs": "ad1189de9c1207ddf73937de6fd7126dfd44c423e58af7e2bd9decd48c89878b",
-    "lib/redteam/personal-security-client.mjs": "dc00d054d9671ef8e50bbf00bce99034d589c980ff37534697a76e162bda2fcd",
+    "lib/redteam/personal-security-client.mjs": "57109ef9659c41a08a1465e7be6ea0bc7b665c06158e17e6fe8925882b246642",
     "lib/redteam/personal-security-comparison.mjs": "6bfa128ddf8a6795261542369c7db7c17fb82e158b3b653278cf344aadfea303",
     "lib/redteam/personal-security-identity.mjs": "e68974ce5c706335e85bdf0ecb3d9861b0eccbee7b1e2f2b69a46b93bf14f40b",
-    "lib/redteam/personal-security-model.mjs": "25a089688f86ad549582ce1b4bcc4f57bb60832c4c6b7829e686282a53f3eb74",
+    "lib/redteam/personal-security-model.mjs": "c7a714dd36a9197a4bc5e5cf4fd09492ad662c94817191633fa49d4675b23243",
     "lib/redteam/personal-security-pages.mjs": "20c38cff0be44e4590c75df380b17d189337e22a4b78c066410b8f6eb03fba0d",
     "lib/redteam/personal-security-parser-text.mjs": "2353df1a38580ee3929c5ab04ebe13632abf41418b1dbf5d50c1903c6cbe0e6a",
-    "lib/redteam/personal-security-report.mjs": "4fd27f8bde2c8bda3948c5829b7d7d4d3352590fb4240eb23c9ae38a90596945",
+    "lib/redteam/personal-security-report.mjs": "806d11472bdb0cb5d538b7a08c12decf57a7fed73eff4f46163e6d31ed0a878e",
+    "lib/redteam/personal-security-review.mjs": "81a0004f39b5e177f6909df5316ea1b5631eb3f8107f5d78293ca74e34535a9f",
     "lib/redteam/personal-security-runtime.mjs": "c0b1c05fe2e41ffef47556b237c9bb862e2d14f8ace94d4799a3dd2dcabff531",
-    "lib/redteam/personal-security-service.mjs": "e9883dd6167a71f4a48c1fc276217e8e6f0ed675f9a5a04ce83c14b82bc73d4d",
-    "lib/redteam/personal-security-workbench.mjs": "21bab355353e9784ab39d1869799c9eab3850958b89e960c18d7b101f73dee93",
+    "lib/redteam/personal-security-service.mjs": "a939b610619f90a6107e3480f651026ecf60d72c27d241810e44b655a0cf3070",
+    "lib/redteam/personal-security-workbench.mjs": "ab83542d45eefdc1d2f96364abe58b5bbd23be2a67b561402b814e9774309cfb",
     "lib/redteam/personal-session-bindings.mjs": "ab18604ac7a30583939ee905ffa77bef26bb6c9d28ef2f9a1223f7f2e277d34a",
     "lib/redteam/personal-session-resolution.mjs": "eee3996e6531646424c8915267e547f5f9235009253f5938264f959ec5d09919",
     "lib/redteam/personal-toolchain-status.mjs": "95f433327a75f4e02498194f765830007a6b4936166c51734deb104f7c17c6f5",
@@ -695,7 +698,7 @@
     "lib/redteam/skill-fixes.js": "953a9de698d2517c0c377afd3f01fff4ac387ea948f0687a04cfb5f3100bc68f",
     "lib/redteam/store-core.js": "89c8564bd62c0a9a6ccff03e6dd48e5d39e0d5113eb8d933796accaf0863edad",
     "lib/redteam/store.js": "9652f1ae962d866fecf923fbd106de3a19c9d34e21356ff2662670ab0a2765cd",
-    "lib/redteam/tools.js": "598fd5a0007998fa3280f7c1bf236555e967d4abf644996c2fa1407d2bbf0843",
+    "lib/redteam/tools.js": "37805641248828fc5bcba24b8b97aeecd4f786dd30ddde42fe0dce72d6676a7d",
     "lib/redteam/ui.js": "49e8f7adb80fb43ae5755534cb5653ae59987bae62892a1b0f50c2578c115d98",
     "lib/redteam/validate.js": "c8818f5b8bcf0683c28b8fffc052ef9c989a5bfdd275db82e96f55b1ac8ecf29",
     "lib/restart-desktop.js": "ac01cf7b2c34a72e846bfa8d1036fcce4ac004494fc9025190195348630cbab1",
@@ -712,7 +715,7 @@
     "lib/update.js": "3b30a1856bbf31cb49e483de83d78a0533e1a695510d96ac9f53bca0db5799b4",
     "lib/web.js": "e715a801eb98b176e5e455bada74cb540cee99959ee015dd5ae4155a2070b02c",
     "lib/zip-extract.js": "e8cd202ac3ac69e71428ae3ac257ce9acc73507b83dcb24fda10b8c029b40025",
-    "package.json": "b99c543920e1ffdfe45d214a067a789e5d7436f9467b559144f21386d524cb7b",
+    "package.json": "b9d63973a24f346a9766dc2e18757e6caed5584410f94bac9e99415759b9d312",
     "presets/redteam/agent.cordis.yml": "39ea8b170a5e6daa921ea185fe9eb0dd0342eedf177b051868c77e20e1225a55",
     "presets/redteam/anchor-gate.mjs": "0c99a0dafc072a64179f9e9898aede546dbb6e701c2b453b4164a24f05fe4d16",
     "presets/redteam/preset.yml": "a83460c126cee9dc972df015a98a6869709ca64202d96e2ff42321a2876affaa",
@@ -724,6 +727,7 @@
     "scripts/export-engagement-report.mjs": "0ad1d8e29301b7215a4c233b359db5c4e5a786a28d1370632590e44217e2d3f7",
     "scripts/patch-client-dock.mjs": "31da200312b7f715f5ea98da8885b2db94193b8ebb9fb582d9f0ca076458ae3c",
     "scripts/redteam-setup.sh": "a35da25c76aadd9954615123bf8318e3624ad02d6d434ad0fc7ac6fb3beb4855",
+    "scripts/security-kali-lab.py": "4a957f390ac7bcc415f06b62cb5512f2f0ca519b0de619a3dac41d3a2f3b69fa",
     "scripts/security-local-lab.py": "ccf41c979001ebb35f9e6e4e267c7db291869dc0ef5a68a8fb03850a5b011baa",
     "scripts/security-output.sh": "3a4b8ab32794909a3b736692496c36ff5cd390005eaf404413c5f4d222a603da",
     "scripts/security-parser-check.py": "68229c4f011287bf8e837c07e375600b5d0cbb4bbb69ac556b3001f9f4f85f65",
@@ -1058,5 +1062,16 @@
       "actualVersionOrHelpChecks": 25,
       "noExtraPrivileges": true
     }
+  },
+  "securityReview": {
+    "preset": "personal-review",
+    "optional": true,
+    "defaultPresetUnchanged": true,
+    "docs": "docs/security-review.md",
+    "manualChecksRemainUnverified": true,
+    "kaliSyntheticTargetsOnly": true,
+    "hostPluginTrustRequired": true,
+    "osSandboxAdded": false,
+    "existingFindingsUnchanged": true
   }
 }

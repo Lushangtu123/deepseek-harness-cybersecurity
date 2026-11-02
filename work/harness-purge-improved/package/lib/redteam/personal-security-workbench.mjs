@@ -1,3 +1,4 @@
+import {buildReviewPreflight,reviewScopePathReady,readReviewSource,runKaliReviewCheck} from './personal-security-review.mjs';
 import {createHash,randomUUID} from 'node:crypto';
 import {existsSync,readFileSync,realpathSync,mkdirSync,writeFileSync,lstatSync,openSync,closeSync,constants,unlinkSync} from 'node:fs';
 import {join,resolve,relative,sep} from 'node:path';
@@ -248,9 +249,14 @@ export class SecurityWorkbench{
  read(eng,runtimeOptions={},pages=null){
   const db=this.db(eng),profile=this.profile(db),runView=row=>({...row,details:JSON.parse(row.details)});
   const lists=pages===null?{runs:db.prepare('SELECT * FROM security_run ORDER BY started_at DESC,id DESC LIMIT 30').all(),findings:db.prepare('SELECT * FROM security_finding ORDER BY id DESC LIMIT 500').all()}:readSecurityPages(db,eng,pages);
+  const runtime=this.toolStatus(runtimeOptions),authSession=profile?.authProfile?this.authStatus(profile.authProfile,profile.url):null;
+  const review=buildReviewPreflight({engagement:eng,profile,authSession,tools:runtime,runs:db.prepare('SELECT * FROM security_run ORDER BY started_at DESC,id DESC LIMIT 30').all()},{scopePathReady:reviewScopePathReady(profile)});
   const extra=pages===null?{}:{activeRun:(row=>row?runView(row):null)(db.prepare("SELECT * FROM security_run WHERE state='running' ORDER BY rowid DESC LIMIT 1").get()),comparisonRuns:db.prepare("SELECT * FROM security_run WHERE state='completed' AND complete=1 ORDER BY rowid DESC LIMIT 30").all().map(runView)};
-  return{ok:true,engagement:eng,totalFindings:db.prepare('SELECT COUNT(*) AS n FROM security_finding').get().n,totalRuns:db.prepare('SELECT COUNT(*) AS n FROM security_run').get().n,profile,tools:this.toolStatus(runtimeOptions),authSession:profile?.authProfile?this.authStatus(profile.authProfile,profile.url):null,...lists,runs:lists.runs.map(runView),findings:lists.findings.map(row=>decorateFinding(db,row)),...extra,scopeCoverage:'新增扫描入口；通用Shell、浏览器和原版能力沿用原权限',observedAt:stamp()};
+  return{review,ok:true,engagement:eng,totalFindings:db.prepare('SELECT COUNT(*) AS n FROM security_finding').get().n,totalRuns:db.prepare('SELECT COUNT(*) AS n FROM security_run').get().n,profile,tools:runtime,authSession,...lists,runs:lists.runs.map(runView),findings:lists.findings.map(row=>decorateFinding(db,row)),...extra,scopeCoverage:'新增扫描入口；通用Shell、浏览器和原版能力沿用原权限',observedAt:stamp()};
  }
+ preflight(eng,input={}){only(input,[]);const value=this.read(eng,{force:true});return{ok:true,engagement:eng,review:value.review}}
+ source(eng,input){return this.store.redactResult(eng,{engagement:eng,...readReviewSource(this.profile(this.db(eng)),input,value=>this.store.redactResult(eng,{text:value}).text)})}
+ async kaliCheck(eng,input){const p=this.profile(this.db(eng));if(!p||Date.parse(p.expiresAt)<=Date.now())fail('请先保存有效项目范围');if(this.rehearsalActive)fail('Kali合成验收正在运行，请核对原请求');this.rehearsalActive=true;try{return await runKaliReviewCheck(eng,input)}finally{this.rehearsalActive=false}}
  async wait(eng,input){
   only(input,['id','waitSeconds']);const id=requestId(input.id),seconds=input.waitSeconds??15;if(!Number.isSafeInteger(seconds)||seconds<0||seconds>30)fail('waitSeconds必须是0–30的整数');
   const db=this.db(eng),get=()=>{const row=db.prepare('SELECT * FROM security_run WHERE id=?').get(id);if(!row)fail('本项目不存在该任务');return{...row,details:JSON.parse(row.details)}};
@@ -351,16 +357,19 @@ const benches=new WeakMap();
 export function securityFor(store){let value=benches.get(store);if(!value){value=new SecurityWorkbench(store);benches.set(store,value)}return value}
 export function disposeSecurity(store){return benches.get(store)?.dispose()}
 export async function handleSecurityOp(store,request,{model=false}={}){
- if(!['securityStatus','securityScopeSave','securityStart','securityCancel','securityReview','securityReport','securityCompare','securityWait'].includes(request?.op))return undefined;
+ if(!['securityStatus','securityScopeSave','securityStart','securityCancel','securityReview','securityReport','securityCompare','securityWait','securityPreflight','securitySource','securityKaliCheck'].includes(request?.op))return undefined;
  if(process.platform!=='linux'||homedir()!=='/home/purge'||process.env.DSH_HOME!=='/home/purge/.dsh-improved')return{ok:false,error:'安全审计仅在专用VM改进版可用'};
  if(store.root!=='/home/purge/.dsh-improved/redteam')return{ok:false,error:'安全审计后台目录未确认'};
  try{return await requestSecurityService(request,{model})}catch(error){return{ok:false,error:clean(error.message,300),...(error.diagnostic?{diagnostic:error.diagnostic}:{})}}
 }
 export async function executeSecurityOp(store,request,{model=false}={}){
- if(!['securityStatus','securityScopeSave','securityStart','securityCancel','securityReview','securityReport','securityCompare','securityWait'].includes(request?.op))return undefined;
+ if(!['securityStatus','securityScopeSave','securityStart','securityCancel','securityReview','securityReport','securityCompare','securityWait','securityPreflight','securitySource','securityKaliCheck'].includes(request?.op))return undefined;
  try{
  const {op,engagement,...input}=request,bench=securityFor(store);
  if(model){if(['securityScopeSave','securityReview'].includes(op))return{ok:false,error:'请在安全审计页明确确认范围或验证结论'};return await modelSecurityResult(bench,engagement,{op,...input})}
+ if(op==='securityPreflight')return bench.preflight(engagement,input);
+ if(op==='securitySource')return bench.source(engagement,input);
+ if(op==='securityKaliCheck')return await bench.kaliCheck(engagement,input);
  if(op==='securityWait')return bench.wait(engagement,input);
  if(op==='securityStatus'){only(input,['refreshRuntime','pages']);if(input.refreshRuntime!==undefined&&typeof input.refreshRuntime!=='boolean')fail('资源核对参数无效');if(Object.hasOwn(input,'pages')&&input.pages===null)fail('审计分页参数无效');return bench.read(engagement,{force:input.refreshRuntime===true},input.pages??null)}if(op==='securityReport')return{ok:true,...bench.report(engagement)};
  if(model&&['securityScopeSave','securityReview'].includes(op))return{ok:false,error:'请在安全审计页明确确认范围或验证结论'};

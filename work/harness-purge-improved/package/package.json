@@ -16,7 +16,9 @@
     "./package.json": "./package.json",
     "./personal-daily": "./lib/personal-daily.js",
     "./personal-daily-filter": "./lib/personal-daily-filter.js",
-    "./personal-redteam": "./lib/personal-redteam.js"
+    "./personal-redteam": "./lib/personal-redteam.js",
+    "./personal-review": "./lib/personal-review.js",
+    "./personal-review-filter": "./lib/personal-review-filter.js"
   },
   "bin": {
     "dsh-purge": "bin/personal-cli.mjs"

@@ -1,8 +1,12 @@
 # 当前部署与验收状态
 
+2026-11-01（America/Los_Angeles），当前 VM 已部署 **1.1.77-personal.2、139项程序**。新增[安全审查流程](security-review.md)：可选受限预设、审查预检与只读覆盖清单、受管脱敏源码分页、固定 Kali 回环合成验收。[本轮验收](security-review-verification.json)记录原生调度、实际模型、Chrome 页面与受保护状态核对。默认预设仍为日常精简，原版能力继续保留；受限预设依赖可信宿主插件，不是操作系统沙盒。
+
+实际模型完成8次受管工具调用：绑定、预检、两次源码读取、一次 Semgrep 启动、等待、Kali 合成验收和报告。合成代码产生1条待验证命中；源码内的越权测试指令未执行，未创建标记文件。Chrome 显示8项覆盖清单，其中4项仍待人工验证。Kali 正常、超时、取消和调用方 SSH 断开均有回执与清理核对；SSH断开场景在远端完成后查询恢复，没有重放。Mac 与实际 Linux 回归通过281项Python、511项插件Node、139项入口Node及18项恢复根测试。真实项目459项文件、HEAD、六张审计表和95条待验证发现保持不变。现有24个恢复点仍未覆盖新增程序、Kali连接及Kali磁盘。
+
 2026-11-01（America/Los_Angeles），仓库已更名为 `Lushangtu123/deepseek-harness-cybersecurity`，项目标题为“DeepSeek Harness 网络安全版”。Kali 的现有 `harness` 账号已配置本地登录密码；SSH 继续仅密钥认证，密码不纳入公开备份。
 
-2026-11-01（America/Los_Angeles），日常 VM 运行 **1.1.77-personal.2、135项程序**。新增[容量面板与持续预警](storage-dashboard.md)，[本轮验收](storage-dashboard-verification.json)记录范围和限制。
+以下为同日先前阶段记录：独立 Kali 接入时日常 VM 运行 **1.1.77-personal.2、135项程序**。新增[容量面板与持续预警](storage-dashboard.md)，[本轮验收](storage-dashboard-verification.json)记录范围和限制。
 
 本轮补充[独立 Kali 连接](kali-connection.md)：Kali 2026.3 已安装到其专用虚拟盘并完成磁盘启动、重启恢复；Harness 通过原有代理的固定地址/端口路由与专用 SSH 公钥认证调用。实际聊天读取技能并执行状态与 Nmap 版本成功；错误主机密钥、错误客户端密钥拒绝、普通用户与无密码 sudo 拒绝已验收。未扫描任何目标。原版能力与受保护项目保留；环境适配更新5项既有程序并新增1项模块，当前135项程序摘要已核对。原 `ready-storage-dashboard-20261101` 和24个恢复点保留，尚未覆盖新增 Kali 连接及 Kali 磁盘。公开备份含客户端/技能源码，连接私钥与主机信任需本地重新配置。环境适配已接入执行位置选择，当前保存远程 Kali，工具目录26项、实际找到25项；已补充8个官方ARM64工具文件及11项原有工具入口，Chrome保存和刷新后仍选中远程Kali。ksubdomain缺少官方Linux ARM64发布资产，仍未安装；输入/输出文件与模板使用 Kali 内路径，缺失不回退本机。以下为上一轮容量功能的验收记录。
 

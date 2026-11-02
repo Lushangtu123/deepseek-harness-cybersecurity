@@ -64,3 +64,8 @@
 - insert:
     - id: personal-daily
       name: dsh-purge/personal-daily
+
+# Optional per-agent restricted audit preset; does not change the default mode.
+- insert:
+    - id: personal-review
+      name: dsh-purge/personal-review

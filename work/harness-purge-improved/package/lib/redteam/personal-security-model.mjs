@@ -19,6 +19,9 @@ export function securityModelWire(original,safe){
 }
 export async function modelSecurityResult(bench,eng,input){
  const {op,...args}=input;
+ if(op==='securityPreflight')return budget(bench.preflight(eng,args));
+ if(op==='securitySource')return budget(bench.source(eng,args));
+ if(op==='securityKaliCheck')return budget(await bench.kaliCheck(eng,args));
  if(op==='securityStart'||op==='securityCancel'){if(op==='securityCancel')keys(args,['id']);const value=op==='securityStart'?bench.start(eng,args):await bench.cancel(eng,args.id);return{ok:true,run:value,execution:'asynchronous',next:'使用wait和返回任务id等待；超时仍运行时继续同一id，不能重发start。VM独立后台持有任务，会话或headless退出不取消；VM关机或后台服务停止仍会中断。'}}
  if(op==='securityWait'){const result=await bench.wait(eng,args);return budget({...result,run:runView(result.run),next:result.timedOut?'同一任务仍由VM后台持有；可退出会话，随后用原id查询或继续wait，不能重发start。':'任务已到终态；partial不等于完整覆盖，可用report分页读取。'})}
  if(op==='securityCompare'){const value=bench.compare(eng,args);if(!value.available)return value;return budget({ok:true,engagement:eng,available:true,baseRunId:value.baseRunId,currentRunId:value.currentRunId,summary:value.summary,notice:text(value.notice,400),details:'对比明细和Markdown请在安全审计页面下载；统计来自完整已保存快照。'})}

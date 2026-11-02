@@ -31,6 +31,7 @@ export function formatSecurityReport(value,clean){
   '## 严重性分布','','包含待验证、误报和已记录修复等所有状态，不能当作当前未修复漏洞数量。','',...table(severities,summary.findings.bySeverity),
   '## 任务状态汇总','',...table(runStates,summary.runs.byState),`未完整结束的任务：${summary.runs.notComplete}。只有completed且complete=1计为完整结束；完整结束仅代表当时工具与覆盖。`,...(summary.runs.total?[]:['尚无任务，不能据此判定项目安全。']),'',
   '## 当前保存范围','','这是当前配置，不是历史任务的统一范围；历史范围以各任务保存的资料为准。','',...scope(value.profile,value.profile?.revision,'未保存范围。'),
+  '## 审查覆盖清单','','以下是最近同范围版本的工具观察；人工项未验证，不构成ASVS合规声明。','',...(value.review?.checks??[]).map(c=>'- '+text(c.label)+'：'+text(({observed:'有完整工具观察',partial:'覆盖不完整',running:'运行中',unverified:'未验证',manual:'待人工验证'})[c.state]||'未确认')),'',
   '## 发现明细',''];
  if(value.findings.some(item=>item.tool==='trivy'&&item.identityVersion===0))lines.push('本报告包含未区分依赖包身份的旧Trivy记录；历史可能已合并，保留原状态，请重新扫描并人工核对。','');
  for(const item of value.findings)lines.push('### '+text(item.title),'',field('状态',item.status),field('严重性',item.severity),field('规则',item.tool+' / '+item.rule),field('位置',item.location),field('依赖包',subjectLabel(item.subject)||'非包发现或未记录'),field('证据',item.evidence),field('验证/修复',item.note),field('来源任务',item.first_run),field('最近任务',item.last_run),'');
