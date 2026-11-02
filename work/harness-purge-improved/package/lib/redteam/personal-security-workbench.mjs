@@ -295,7 +295,13 @@ export class SecurityWorkbench{
    if(this.disposed)return;
    if(controller.signal.aborted){db.prepare("UPDATE security_run SET state='cancelled',finished_at=? WHERE id=?").run(stamp(),runId);return}
    if(!result||!Array.isArray(result.findings)||typeof result.complete!=='boolean'||typeof result.coverageKey!=='string')fail('扫描回执无效');
-   if(managed){const admitted=new Set(managed.data.snapshot.files.map(f=>f.path));if(result.findings.some(f=>!admitted.has(String(f.location).replace(/:\d+$/,'')))||(result.coverageFiles??[]).some(f=>!admitted.has(f)))fail('扫描结果超出联合项目副本文件集合')}
+   if(managed){
+    if(input.tool==='zap'){
+     const scoped=value=>{try{const u=new URL(value);return u.origin===profile.url&&!u.username&&!u.password&&!u.hash}catch{return false}};
+     if(!profile.url||result.findings.some(f=>!scoped(f.location))||(result.coverageFiles??[]).some(f=>!scoped(f)))fail('HTTP观察超出已授权本地网址');
+     result={...result,findings:result.findings.map(f=>{const u=new URL(f.location);return{...f,location:u.origin+u.pathname}})};
+    }else{const admitted=new Set(managed.data.snapshot.files.map(f=>f.path));if(result.findings.some(f=>!admitted.has(String(f.location).replace(/:\d+$/,'')))||(result.coverageFiles??[]).some(f=>!admitted.has(f)))fail('扫描结果超出联合项目副本文件集合')}
+   }
    if(input.tool==='zap'&&profile.authProfile){result=authenticatedResult(profile,result);details.authentication=result.authentication}
    if(result.supplemental!==undefined){if(input.tool!=='semgrep'||result.complete||!validParserTextSummary(result.supplemental))fail('文本补查回执无效');details.supplemental={...result.supplemental}}
    db.exec('SAVEPOINT security_results');try{

@@ -3680,7 +3680,7 @@ function createBindingMonitor({ getSessionId, read, publish, now = Date.now }) {
 // Self-contained factories, embedded by scripts/build-client.mjs; no import-time I/O.
 function createJointPanel(React,api,{storage=()=>globalThis.localStorage,exclusive=async(_eng,fn)=>fn()}={}){
  const h=React.createElement,states={running:'运行中',completed:'所选步骤已结束',partial:'覆盖不完整',failed:'失败',cancelled:'已取消',interrupted:'中断',unconfirmed:'停止或结果未确认','timed-out':'预算到期',unavailable:'工具不可用','not-run':'未运行',pending:'待运行'};
- const validTask=(v,eng)=>v===null||v&&typeof v.id==='string'&&v.engagement===eng&&Object.hasOwn(states,v.state)&&Number.isSafeInteger(v.scopeRevision)&&Array.isArray(v.steps)&&v.steps.length<=5&&v.steps.every(s=>s&&['semgrep','trivy','kali','rea','pentagi'].includes(s.tool)&&Object.hasOwn(states,s.state))&&Number.isSafeInteger(v.findings)&&typeof v.cleanupVerified==='boolean';
+ const validTask=(v,eng)=>v===null||v&&typeof v.id==='string'&&v.engagement===eng&&Object.hasOwn(states,v.state)&&Number.isSafeInteger(v.scopeRevision)&&Array.isArray(v.steps)&&v.steps.length<=6&&v.steps.every(s=>s&&['semgrep','trivy','zap','kali','rea','pentagi'].includes(s.tool)&&Object.hasOwn(states,s.state))&&Number.isSafeInteger(v.findings)&&typeof v.cleanupVerified==='boolean';
  const parse=(v,eng)=>{if(v?.ok!==true||v.engagement!==eng)throw Error(typeof v?.error==='string'?v.error:'联合回执未确认');return v};
  return function JointPanel({engagement,profile}){
   const [plan,setPlan]=React.useState(null),[task,setTask]=React.useState(null),[selected,setSelected]=React.useState([]),[busy,setBusy]=React.useState(false),[error,setError]=React.useState(''),[pending,setPending]=React.useState(false),alive=React.useRef(true),requesting=React.useRef(false);
@@ -3694,8 +3694,8 @@ function createJointPanel(React,api,{storage=()=>globalThis.localStorage,exclusi
   };
   const refresh=()=>perform(async()=>{
    const next=parse(await api({op:'securityJoint',engagement,action:'plan'}),engagement);
-   if(!Number.isSafeInteger(next.profileRevision)||!Array.isArray(next.availableSteps)||next.availableSteps.some(s=>!['semgrep','trivy'].includes(s))||typeof next.kaliAllowed!=='boolean')throw Error('联合范围资料无效');
-   if(alive.current){setPlan(next);setSelected([...next.availableSteps,...(next.kaliAllowed?['kali']:[])])}
+   if(!Number.isSafeInteger(next.profileRevision)||!Array.isArray(next.availableSteps)||next.availableSteps.some(s=>!['semgrep','trivy','zap'].includes(s))||typeof next.kaliAllowed!=='boolean')throw Error('联合范围资料无效');
+   if(alive.current){setPlan(next);setSelected([...next.availableSteps.filter(s=>s!=='zap'),...(next.kaliAllowed?['kali']:[])])}
    const original=saved(),result=await api({op:'securityJoint',engagement,action:'status',...(original?{requestId:original.requestId}:{})}),current=accept(result);
    if(original&&(current||result.requestState==='rejected'))storage().removeItem(key);if(alive.current){setPending(!!original&&!current&&result.requestState!=='rejected');if(result.requestState==='rejected')setError('原启动请求未受理：'+String(result.rejection??'请核对范围后重新提交'))}
   });
@@ -3722,8 +3722,8 @@ function createJointPanel(React,api,{storage=()=>globalThis.localStorage,exclusi
   const inProgress=task&&['running','cancelling'].includes(task.state),ready=plan&&plan.profileRevision===profile?.revision&&Date.parse(profile.expiresAt)>Date.now();
   const button=(label,fn,disabled=false)=>h('button',{type:'button',className:'rt-btn',onClick:fn,disabled:busy||disabled},label);
   return h('section',{className:'rt-card','aria-label':'联合安全审查'},h('div',{className:'rts-head'},h('h4',null,'联合安全审查'),h('span',{className:'rts-state'},'VM · 受管工具')),
-   h('p',null,'固定脱敏副本 → 选择扫描 / Kali / REA / PentAGI → 统一证据报告'),h('p',{className:'rts-meta'},'Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。'),
-   button('核对联合范围与原任务',refresh),plan&&h('div',{className:'rts-tools'},...['semgrep','trivy','kali','rea','pentagi'].map(tool=>{const allowed={kali:plan.kaliAllowed,rea:plan.reaAllowed,pentagi:plan.pentagiAllowed}[tool]??plan.availableSteps.includes(tool);return h('label',{key:tool},h('input',{type:'checkbox',checked:selected.includes(tool),disabled:busy||!allowed,onChange:e=>setSelected(old=>e.target.checked?[...old,tool]:old.filter(s=>s!==tool))}),' '+tool+(allowed?'':' · 未授权或未就绪'))})),
+   h('p',null,'源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告'),h('p',{className:'rts-meta'},'Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。'),
+   plan?.webTarget&&h('p',{className:'rts-meta'},'ZAP目标：'+plan.webTarget.origin+' · 会发送本地请求；运行应用版本与源码副本关系未证明，刷新不默认勾选。'),button('核对联合范围与原任务',refresh),plan&&h('div',{className:'rts-tools'},...['semgrep','trivy','zap','kali','rea','pentagi'].map(tool=>{const allowed={kali:plan.kaliAllowed,rea:plan.reaAllowed,pentagi:plan.pentagiAllowed}[tool]??plan.availableSteps.includes(tool);return h('label',{key:tool},h('input',{type:'checkbox',checked:selected.includes(tool),disabled:busy||!allowed,onChange:e=>setSelected(old=>e.target.checked?[...old,tool]:old.filter(s=>s!==tool))}),' '+tool+(allowed?'':' · 未授权或未就绪'))})),
    plan&&!plan.kaliAllowed&&h('p',{className:'rts-meta'},'Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。'),
    h('div',{className:'rts-actions'},button('启动联合审查',start,!ready||!selected.length||pending||inProgress),task&&button('等待原联合任务',()=>update('wait'),!inProgress),task&&button('取消或核对停止',()=>update('cancel'),!inProgress&&task.cleanupVerified),task&&button('下载联合报告 JSON',download,inProgress)),
    pending&&h('p',{className:'rts-alert'},'启动请求已保留；回执未确认时先核对原任务，不自动重发。'),error&&h('p',{className:'rts-alert',role:'alert'},error),

@@ -1,6 +1,6 @@
 {
   "name": "dsh-purge",
-  "version": "1.1.77-personal.6",
+  "version": "1.1.77-personal.7",
   "description": "Personal consent, evidence and reliability fork of dsh-purge; original preserved separately",
   "type": "module",
   "main": "lib/index.js",

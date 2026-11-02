@@ -1,0 +1,146 @@
+{
+  "date": "2026-11-02",
+  "version": "1.1.77-personal.7",
+  "programFiles": 149,
+  "scope": "VM-only existing local ZAP baseline in managed joint task; owned synthetic loopback apps only",
+  "review": {
+    "independentFocusedTests": 13,
+    "remainingSubstantiatedP1P2": 0
+  },
+  "regression": {
+    "python": 293,
+    "pluginNode": 552,
+    "hostNode": 139,
+    "extraLinuxRoot": 18,
+    "localAndLinuxAllPass": true,
+    "clientRebuildReproducible": true
+  },
+  "native": {
+    "cases": {
+      "authenticated": {
+        "state": "completed",
+        "cleanupVerified": true,
+        "findings": 18,
+        "ordinaryFindings": 0,
+        "privateSessionCopiesRemoved": true,
+        "remainingScannerContainers": 0,
+        "deduplicated": true,
+        "webFindings": 17,
+        "authentication": "verified"
+      },
+      "expired": {
+        "state": "partial",
+        "cleanupVerified": true,
+        "findings": 0,
+        "ordinaryFindings": 0,
+        "privateSessionCopiesRemoved": true,
+        "remainingScannerContainers": 0,
+        "deduplicated": true,
+        "targetRequestDelta": 0,
+        "authentication": "unconfirmed",
+        "resultAvailable": false
+      },
+      "cancel": {
+        "state": "cancelled",
+        "cleanupVerified": true,
+        "findings": 0,
+        "ordinaryFindings": 0,
+        "privateSessionCopiesRemoved": true,
+        "remainingScannerContainers": 0,
+        "deduplicated": true,
+        "fault": {
+          "containerObserved": true,
+          "container": "dsh-sec-1a7cd0b7-b870-4b60-bcdf-718f1d981e29",
+          "cancelledOriginalId": true
+        }
+      },
+      "timeout": {
+        "state": "timed-out",
+        "cleanupVerified": true,
+        "findings": 0,
+        "ordinaryFindings": 0,
+        "privateSessionCopiesRemoved": true,
+        "remainingScannerContainers": 0,
+        "deduplicated": true,
+        "fault": {
+          "containerObserved": true,
+          "container": "dsh-sec-983ee296-7034-44bd-bff7-87bbdc40c9b8",
+          "initStopSignalObserved": true
+        }
+      }
+    },
+    "protectedPageObserved": true,
+    "authenticatedRequests": 24,
+    "targetRequests": 30,
+    "scannerOutOfScopeSinkRequests": 0,
+    "sinkPositiveControlRequests": 1,
+    "logoutRequests": 0,
+    "ownedPrivateProfileRemoved": true,
+    "labServersClosed": true,
+    "scannerContainersAfter": []
+  },
+  "browser": {
+    "downloadedBytes": 14401,
+    "sha256": "099a64eb2731c6ffd7188dd05fa4aca4da02d9355688445988f1c4f8b36bbcec",
+    "taskId": "14315263-a570-4fd4-85ff-230d22cb3664",
+    "downloadMatchesBackendTaskAndEverySection": true,
+    "rawTaskHits": 23,
+    "sections": {
+      "findings": 18,
+      "files": 2,
+      "exclusions": 0,
+      "diagnostics": 0,
+      "artifacts": 1
+    },
+    "webFindings": 17,
+    "allUnverified": true,
+    "liveHttpNotSourceBytes": true
+  },
+  "recovery": {
+    "recoveryPoint": "ready-joint-zap-20261102",
+    "selectedProofFiles": 2816,
+    "programFiles": 149,
+    "snapshotCount": 29,
+    "previous28SnapshotsPreserved": true
+  },
+  "copyBoot": {
+    "restoredDiskActuallyBooted": true,
+    "independentInodeAndNoQcowBacking": true,
+    "originalInodeReturned": true,
+    "originalUnchangedWhileCopyBooted": true,
+    "originalNowStarted": true,
+    "utmListUnchanged": true,
+    "newVmRegistered": false
+  },
+  "protected": {
+    "protectedProjectFilesMatched": 459,
+    "projectHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "findingsByStatus": {
+      "unverified": 95
+    },
+    "scannerManifestUnchanged": true,
+    "programHashesMatched": 149,
+    "installedToolsPresent": true,
+    "harnessActive": true,
+    "pentagiRunning": true,
+    "hostHelpersUnchanged": 5,
+    "hostLaunchDefinitionsUnchanged": true,
+    "vmConfigurationUnchanged": true,
+    "originalDiskInodeUnchanged": true,
+    "utmListUnchanged": true,
+    "allPreviousSnapshotsPreserved": true,
+    "snapshotCount": 29
+  },
+  "limitations": [
+    "six-step pagination uses substituted adapters in regression; native new acceptance ran Semgrep+ZAP, not all six tools together",
+    "model-format native RPC was checked; no new DeepSeek/PentAGI model request this round",
+    "HTTP origin/context restriction is not operating-system network confinement; ZAP retains VM host network",
+    "running application revision not proven equal to source snapshot",
+    "authentication pre/post checks do not prove continuous login or application authentication security",
+    "all findings unverified; manual authorization, business logic and architecture checks remain",
+    "historical occasional load failure and some old SSH/QEMU causes remain unresolved",
+    "Semgrep parser gap and real project95unverified findings unchanged",
+    "Mac global recovery label unchanged; explicit private entry required; recovery remains on this Mac"
+  ]
+}

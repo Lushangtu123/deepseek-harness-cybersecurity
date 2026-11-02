@@ -291,13 +291,13 @@ export function apply(ctx) {
 
   ctx.tools.register(reviewedTool(defineTool({
     name: 'redteam_joint_review',
-    description: 'VM专用联合安全审查。先plan核对已保存范围和就绪步骤；start选择semgrep源码、trivy依赖/配置、kali离线Python Bandit、rea静态JavaScript图、pentagi隔离审查。Kali/REA不执行源码；PentAGI可在隔离禁网容器内执行命令，不能访问原项目和VM凭据。Kali副本交接须在页面保存授权，模型不能自授予。固定脱敏源码副本及文件哈希，30–900秒统一子任务预算（不含DeepSeek聊天费用；PentAGI子任务费用另计）。返回持久任务id；断线后status/wait原id，同一启动必须复用requestId，未知Kali状态阻止新任务。cancel等待子任务停止确认；服务重启不自动重跑。report以<=6000字节分页返回findings/files/exclusions，持续至page.complete。完成仅代表已选步骤结束，工具命中保持待验证，人工项、未选工具与排除文件明确未覆盖。REA仅静态JavaScript图（含reverse-skill固定方法路由）；PentAGI隔离子任务读取副本，最多16次DeepSeek请求/每次2048输出tokens，货币金额没有硬上限。须分别在页面保存授权；模型不能自行授权。report的artifacts段为分析证据与模型未验证结论，不等于漏洞命中。',
+    description: 'VM专用联合安全审查。先plan核对已保存范围和就绪步骤；start选择semgrep源码、trivy依赖/配置、zap已授权VM本地HTTP基线、kali离线Python Bandit、rea静态JavaScript图、pentagi隔离审查。Kali/REA不执行源码；PentAGI可在隔离禁网容器内执行命令，不能访问原项目和VM凭据。Kali副本交接须在页面保存授权，模型不能自授予。ZAP仅复用已保存ZAP工具和VM回环网址，可选现有私有会话，运行应用版本与源码副本关系未证明；不启动项目，HTTP命中保持待验证。固定脱敏源码副本及文件哈希，30–900秒统一子任务预算（不含DeepSeek聊天费用；PentAGI子任务费用另计）。返回持久任务id；断线后status/wait原id，同一启动必须复用requestId，未知Kali状态阻止新任务。cancel等待子任务停止确认；服务重启不自动重跑。report以<=6000字节分页返回findings/files/exclusions，持续至page.complete。完成仅代表已选步骤结束，工具命中保持待验证，人工项、未选工具与排除文件明确未覆盖。REA仅静态JavaScript图（含reverse-skill固定方法路由）；PentAGI隔离子任务读取副本，最多16次DeepSeek请求/每次2048输出tokens，货币金额没有硬上限。须分别在页面保存授权；模型不能自行授权。report的artifacts段为分析证据与模型未验证结论，不等于漏洞命中。',
     parameters: {
       action:{type:'string',enum:['plan','start','status','wait','cancel','report'],required:true},
       engagement:{type:'string',description:'可省略；显式提供须等于当前会话绑定项目'},
       requestId:{type:'string',description:'start唯一请求号8–100位，重试必须复用'},
       profileRevision:{type:'integer',description:'start使用plan返回的当前范围版本'},
-      steps:{type:'array',items:{type:'string',enum:['semgrep','trivy','kali','rea','pentagi']},description:'start选择已授权和就绪步骤；不必每次全部运行'},
+      steps:{type:'array',items:{type:'string',enum:['semgrep','trivy','zap','kali','rea','pentagi']},description:'start选择已授权和就绪步骤；不必每次全部运行'},
       budgetSeconds:{type:'integer',description:'start总子任务时限30–900秒，默认360'},
       id:{type:'string',description:'已返回的原联合任务id，用于status/wait/cancel/report'},
       waitSeconds:{type:'integer',description:'wait有界等待0–30秒，默认15'},

@@ -1,6 +1,10 @@
 # VM 联合安全审查
 
-当前 .4/148 项程序已接入 REA＋reverse-skill 和隔离 PentAGI 子任务，详见[受管适配器、授权与预算](managed-joint-adapters.md)。在“安全审计”分别保存交接授权后，联合步骤可选 `rea`、`pentagi`；付费 PentAGI 步骤不会因网页刷新自动勾选。`report` 新增 `artifacts` 分页，保留分析证据与未验证模型结论。以下为此前第一阶段的范围和实现背景；当前状态以[统一状态](current-status.md)为准。
+当前 personal.7 将已有 ZAP 本地 HTTP 基线接入同一联合任务与报告，最多六个步骤。先在“安全审计”明确保存 ZAP 和 `http://127.0.0.1:端口`；可引用已配置的私有认证会话。刷新不会自动勾选 ZAP，模型也不能自行扩大范围。运行目标必须由用户另行启动；联合任务不启动项目。
+
+ZAP 结果标记为 `live-http`、精确目标 origin、`snapshotId:null`；`repositorySnapshotId` 仅关联本次源码审查上下文，`appRevision:not-proven` 明确表示运行应用版本与源码副本关系尚未证明。认证、扫描状态及是否取得结果保存在 `artifacts`，命中保持待验证。所用基线为短时爬取和被动检查，不能证明授权、业务逻辑或整个应用安全。现有容器通过 VM host network 访问回环目标；应用层 origin/context 限制不等于操作系统网络隔离。
+
+此前 .4/148 项程序已接入 REA＋reverse-skill 和隔离 PentAGI 子任务，详见[受管适配器、授权与预算](managed-joint-adapters.md)。在“安全审计”分别保存交接授权后，联合步骤可选 `rea`、`pentagi`；付费 PentAGI 步骤不会因网页刷新自动勾选。`report` 新增 `artifacts` 分页，保留分析证据与未验证模型结论。以下为此前第一阶段的范围和实现背景；当前状态以[统一状态](current-status.md)为准。
 
 ## 第一阶段背景
 
@@ -9,9 +13,9 @@
 ## 使用
 
 1. 在演练台“安全审计”保存项目范围和允许的扫描器。需要 Kali 时，勾选“允许联合审查向专用 Kali 交接本项目脱敏 Python 副本”，再确认保存。模型不能修改这个授权。
-2. 在同页“联合安全审查”核对范围，选择 Semgrep、Trivy、Kali 中需要的步骤后启动；也可新建聊天，选择“联合安全审查”预设，明确指定已有项目，让 DeepSeek 调用 `redteam_joint_review`。
+2. 在同页“联合安全审查”核对范围，选择已授权的 Semgrep、Trivy、ZAP、Kali、REA、PentAGI 中需要的步骤后启动；也可新建聊天，选择“联合安全审查”预设，明确指定已有项目，让 DeepSeek 调用 `redteam_joint_review`。
 3. 保留返回的任务 ID。断线后用 `status` 或 `wait` 查询原任务；启动回复丢失时也可按原 `requestId` 只读查询。不要换请求号重复启动。
-4. 下载联合 JSON 报告；聊天报告分为 `findings`、`files`、`exclusions`、`diagnostics`，逐页读取至 `page.complete`。任务中的总数、保留数量及截断标记说明哪些明细没有收录。
+4. 下载联合 JSON 报告；聊天报告分为 `findings`、`files`、`exclusions`、`diagnostics`、`artifacts`，逐页读取至 `page.complete`。任务中的总数、保留数量及截断标记说明哪些明细没有收录。
 
 例如：请对已授权的“示例项目”做联合审查，先核对范围，根据文件类型选择步骤，列出工具命中、覆盖缺口及证据来源，保持发现待验证。
 

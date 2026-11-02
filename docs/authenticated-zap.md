@@ -1,5 +1,7 @@
 # 本地认证 ZAP 与解析缺口补查
 
+personal.7 也可在同页“联合安全审查”中手动选择 ZAP，或让模型通过 `redteam_joint_review` 选择已授权步骤。保存范围、命名私有会话与目标条件相同；刷新不会自动选择 ZAP。联合 HTTP 证据不绑定为源码字节证据，详见[联合审查](joint-security-review.md)。
+
 2026-11-01，专用 VM 改进版支持按名称选择私有 Cookie/Bearer 会话，并为 Semgrep 解析失败文件提供有限文本提示。[验收记录](authenticated-zap-verification.json) · [当前状态](current-status.md)。
 
 ## 先用合成靶场试用
