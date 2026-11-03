@@ -1,8 +1,10 @@
 # VM 联合安全审查
 
-当前 personal.7 将已有 ZAP 本地 HTTP 基线接入同一联合任务与报告，最多六个步骤。先在“安全审计”明确保存 ZAP 和 `http://127.0.0.1:端口`；可引用已配置的私有认证会话。刷新不会自动勾选 ZAP，模型也不能自行扩大范围。运行目标必须由用户另行启动；联合任务不启动项目。
+personal.8 可对[明确启动的标准库Python副本](runtime-source-link.md)做前后关联核对；双重通过才标记 `managed-source-copy-matched`。HTTP证据仍 `snapshotId:null`，依赖、构建和内存行为未证明。真实DeepSeek已在合成项目完成选择、启动、等待和分页读取，见[本轮验收](runtime-source-link-verification.json)。
 
-ZAP 结果标记为 `live-http`、精确目标 origin、`snapshotId:null`；`repositorySnapshotId` 仅关联本次源码审查上下文，`appRevision:not-proven` 明确表示运行应用版本与源码副本关系尚未证明。认证、扫描状态及是否取得结果保存在 `artifacts`，命中保持待验证。所用基线为短时爬取和被动检查，不能证明授权、业务逻辑或整个应用安全。现有容器通过 VM host network 访问回环目标；应用层 origin/context 限制不等于操作系统网络隔离。
+personal.7 起将已有 ZAP 本地 HTTP 基线接入同一联合任务与报告，最多六个步骤。先在“安全审计”明确保存 ZAP 和 `http://127.0.0.1:端口`；可引用已配置的私有认证会话。刷新不会自动勾选 ZAP，模型也不能自行扩大范围。运行目标必须由用户另行启动；联合任务不启动项目。
+
+ZAP 结果标记为 `live-http`、精确目标 origin、`snapshotId:null`；`repositorySnapshotId` 仅关联本次源码审查上下文，默认 `appRevision:not-proven` 明确表示运行应用版本与源码副本关系尚未证明。认证、扫描状态及是否取得结果保存在 `artifacts`，命中保持待验证。所用基线为短时爬取和被动检查，不能证明授权、业务逻辑或整个应用安全。现有容器通过 VM host network 访问回环目标；应用层 origin/context 限制不等于操作系统网络隔离。
 
 此前 .4/148 项程序已接入 REA＋reverse-skill 和隔离 PentAGI 子任务，详见[受管适配器、授权与预算](managed-joint-adapters.md)。在“安全审计”分别保存交接授权后，联合步骤可选 `rea`、`pentagi`；付费 PentAGI 步骤不会因网页刷新自动勾选。`report` 新增 `artifacts` 分页，保留分析证据与未验证模型结论。以下为此前第一阶段的范围和实现背景；当前状态以[统一状态](current-status.md)为准。
 
