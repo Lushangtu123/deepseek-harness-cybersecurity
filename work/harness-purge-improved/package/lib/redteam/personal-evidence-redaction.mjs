@@ -1,10 +1,13 @@
-const SECRET_KEY = /^(?:secret(?:_value)?|pass_key|password|passwd|access_token|refresh_token|api_key|apikey|authorization|proxy-authorization|cookie|set-cookie)$/i
-export function redactText(value, secrets = []) {
+export const SECRET_KEY = /^(?:secret(?:_value)?|pass_key|password|passwd|access_token|refresh_token|api_key|apikey|authorization|proxy-authorization|cookie|set-cookie)$/i
+export function redactKnownText(value, secrets = []) {
   let text = String(value)
   for (const secret of [...new Set(secrets.filter(s => typeof s === 'string' && s))].sort((a, b) => b.length - a.length)) {
     for (const encoded of new Set([secret, encodeURIComponent(secret)])) text = text.split(encoded).join('[REDACTED]')
   }
   return text
+}
+export function redactText(value, secrets = []) {
+  return redactKnownText(value,secrets)
     .replace(/\b(authorization|proxy-authorization|cookie|set-cookie)\s*:\s*[^\r\n"']*/gi, '$1: [REDACTED]')
     .replace(/([?&](?:token|access_token|refresh_token|api_key|apikey|key|password|secret|signature|sig)=)[^&#\s"'`<>]*/gi, '$1[REDACTED]')
     .replace(/(https?:\/\/)[^\s/@]+:[^\s/@]+@/gi, '$1[REDACTED]@')

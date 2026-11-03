@@ -1,6 +1,8 @@
 # VM 运行应用与源码副本关联
 
-此入口用于自己拥有的、单文件且仅使用标准库的 Python HTTP 应用。先在“安全审计”保存目录、ZAP 工具、VM 回环网址与有效期。其他框架、依赖安装、构建脚本、真实账号自动登录不在这个启动器的支持范围内。
+此入口默认用于自己拥有的、仅使用标准库的 Python HTTP 应用；另外支持[固定离线 PhishGuard FastAPI 模板](project-runtime-template.md)。先在“安全审计”保存目录、ZAP 工具、VM 回环网址与有效期。任意其他框架、自动依赖安装、项目构建脚本和真实账号自动登录不在支持范围内。
+
+以下命令、解释器与内部网络说明用于标准库模板；PhishGuard 的固定依赖、`-I -S` 与禁网通道见[模板说明](project-runtime-template.md)。
 
 在 VM Shell 工作台明确启动，替换项目编号和入口文件：
 
@@ -8,7 +10,7 @@
 DSH_HOME=/home/purge/.dsh-improved /home/purge/.local/node/bin/node /home/purge/tools/dsh-purge-personal-1.1.77-personal.1/scripts/security-runtime-source.mjs --engagement YOUR_SAVED_PROJECT_ID --entry app.py --seconds 360 --confirm-execute
 ```
 
-应用须读取 `HOST=0.0.0.0` 和 `PORT=8080`，根路径在十秒内返回 HTTP 200。启动器不跟随就绪探测重定向；探测被授权到期或取消中止。启动会实际执行固定脱敏副本，请先检查要运行的代码。采用与联合审查相同的凭据脱敏；脱敏可能改变语法。不支持的文件与依赖目录不会交接。解释器使用 `python3 -I -B`，不执行启动 shell、构建钩子或依赖下载；应用自己仍可在容器内创建子进程。
+应用须读取 `HOST=0.0.0.0` 和 `PORT=8080`，根路径在十秒内返回 HTTP 200。启动器不跟随就绪探测重定向；探测被授权到期或取消中止。启动会实际执行固定脱敏副本，请先检查要运行的代码。采用与联合审查相同的凭据脱敏；Python/JSON结构化处理仍可能改变占位值和应用行为，无法安全处理时拒绝复制。不支持的文件与依赖目录不会交接。解释器使用 `python3 -I -B`，不执行启动 shell、构建钩子或依赖下载；应用自己仍可在容器内创建子进程。
 
 启动器使用现有固定 Semgrep 镜像中的 Python，保留镜像摘要；非 root、只读副本和根文件系统、删除 capabilities、限制 CPU/内存/进程及临时空间，不挂载 VM 凭据或 Docker socket。专属 Docker 内部网络限制外部路由，但不隔离 VM 网关服务，不能据此把任意不可信程序当作安全。固定 VM 回环转发只连接本次容器 IP:8080，拒绝其他 Host、绝对网址和 CONNECT/升级。
 
