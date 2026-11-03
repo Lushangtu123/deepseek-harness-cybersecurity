@@ -1,4 +1,5 @@
 import {buildReviewPreflight,reviewScopePathReady,readReviewSource,runKaliReviewCheck} from './personal-security-review.mjs';
+import {RuntimeWorkbench} from './personal-runtime-ui.mjs';
 import {JointReview,jointModelWire} from './personal-joint-review.mjs';
 import {createHash,randomUUID} from 'node:crypto';
 import {existsSync,readFileSync,realpathSync,mkdirSync,writeFileSync,lstatSync,openSync,closeSync,constants,unlinkSync} from 'node:fs';
@@ -241,7 +242,7 @@ function authenticatedResult(profile,result){
 }
 
 export class SecurityWorkbench{
- constructor(store,{workspaceRoot='/home/purge/workspace',runner=runScanner,toolStatus=installedSecurityTools,authStatus=readZapAuthStatus,jointOptions={}}={}){this.store=store;this.workspaceRoot=resolve(workspaceRoot);this.runner=runner;this.toolStatus=toolStatus;this.authStatus=authStatus;this.initialized=new Set();this.active=null;this.disposed=false;this.joint=new JointReview(this,jointOptions)}
+ constructor(store,{workspaceRoot='/home/purge/workspace',runner=runScanner,toolStatus=installedSecurityTools,authStatus=readZapAuthStatus,jointOptions={}}={}){this.store=store;this.workspaceRoot=resolve(workspaceRoot);this.runner=runner;this.toolStatus=toolStatus;this.authStatus=authStatus;this.initialized=new Set();this.active=null;this.disposed=false;this.joint=new JointReview(this,jointOptions);this.runtimeUI=new RuntimeWorkbench(this)}
  db(eng){
   if(this.disposed)fail('工作台正在关闭');
   this.store.sessionBindings.validateTarget(eng);
@@ -269,7 +270,7 @@ export class SecurityWorkbench{
   only(input,['requestId','revision','repoRoot','tools','url','expiresAt','confirm','authProfile','jointKali','jointRea','jointPentagi']);const id=requestId(input.requestId),db=this.db(eng),hash=digest(input);
   for(const key of ['jointKali','jointRea','jointPentagi'])if(input[key]!==undefined&&typeof input[key]!=='boolean')fail('工具副本交接授权无效');
   const existing=db.prepare('SELECT data FROM security_event WHERE request_id=?').get(id);if(existing){const value=JSON.parse(existing.data);if(value.hash!==hash)fail('重复请求内容不同');return value.result}
-  if(this.active||this.joint.active)fail('任务正在运行，暂不能修改范围');const previous=this.profile(db);if(input.revision!==(previous?.revision||0))fail('范围已变化，请刷新后重试');
+  if(this.active||this.joint.active)fail('任务正在运行，暂不能修改范围');if(this.runtimeUI.transitionBusy())fail('应用切换正在运行，暂不能修改范围');const previous=this.profile(db);if(input.revision!==(previous?.revision||0))fail('范围已变化，请刷新后重试');
   if(input.confirm!==true||!Array.isArray(input.tools)||!input.tools.length||input.tools.some(tool=>!TOOLS.includes(tool))||new Set(input.tools).size!==input.tools.length)fail('请明确确认允许的扫描器');
   const root=resolve(String(input.repoRoot||''));if(!root.startsWith(this.workspaceRoot+sep)||root!==realpathSync(root)||!lstatSync(root).isDirectory())fail('仓库必须是VM工作区内的普通目录，不能跨越链接');
   if(/[\x00-\x1f,]/.test(root))fail('仓库路径包含不支持的字符');
@@ -282,7 +283,7 @@ export class SecurityWorkbench{
  event(db,id,kind,record,data){db.prepare('INSERT INTO security_event(request_id,kind,record_id,at,data) VALUES(?,?,?,?,?)').run(id,kind,String(record),stamp(),JSON.stringify(redactDisplay(data)))}
  start(eng,input,jointContext=null){
   only(input,['requestId','profileRevision','tool','retestFindingId']);const db=this.db(eng),id=requestId(input.requestId),hash=digest(input),previous=db.prepare('SELECT * FROM security_run WHERE request_id=?').get(id);if(previous){if(previous.request_hash!==hash)fail('重复请求内容不同');return{id:previous.id,state:previous.state}}
-  if(this.disposed)fail('工作台正在关闭');if(this.blocked)fail('上次容器停止未确认，请检查VM运行状态后重启入口');if(this.active||this.joint.active&&jointContext!==this.joint.active)fail('任务正在运行，请等待或取消');const profile=this.profile(db);
+  if(this.runtimeUI.transitionBusy())fail('应用启动或停止尚未确认，请先核对原请求');if(this.disposed)fail('工作台正在关闭');if(this.blocked)fail('上次容器停止未确认，请检查VM运行状态后重启入口');if(this.active||this.joint.active&&jointContext!==this.joint.active)fail('任务正在运行，请等待或取消');const profile=this.profile(db);
   if(!profile||profile.revision!==input.profileRevision||Date.parse(profile.expiresAt)<=Date.now()||!profile.tools.includes(input.tool))fail('项目范围未授权、已过期或已变化');
   const runtime=this.toolStatus({force:true})[input.tool];if(!runtime?.ready)fail(runtime?.reason||'扫描器或数据库未就绪');if(realpathSync(profile.repoRoot)!==profile.repoRoot)fail('仓库路径已变化');if(input.tool==='zap'&&!profile.url)fail('请先配置VM本地URL');
   if(input.retestFindingId){const finding=db.prepare('SELECT * FROM security_finding WHERE id=?').get(numeric(input.retestFindingId));if(!finding||finding.tool!==input.tool||finding.status!=='fixed')fail('仅可复测本项目已记录修复的同类发现')}
@@ -370,15 +371,16 @@ const benches=new WeakMap();
 export function securityFor(store){let value=benches.get(store);if(!value){value=new SecurityWorkbench(store);benches.set(store,value)}return value}
 export function disposeSecurity(store){return benches.get(store)?.dispose()}
 export async function handleSecurityOp(store,request,{model=false}={}){
- if(!['securityStatus','securityScopeSave','securityStart','securityCancel','securityReview','securityReport','securityCompare','securityWait','securityPreflight','securitySource','securityKaliCheck','securityJoint'].includes(request?.op))return undefined;
+ if(!['securityStatus','securityScopeSave','securityStart','securityCancel','securityReview','securityReport','securityCompare','securityWait','securityPreflight','securitySource','securityKaliCheck','securityJoint','securityRuntime'].includes(request?.op))return undefined;
  if(process.platform!=='linux'||homedir()!=='/home/purge'||process.env.DSH_HOME!=='/home/purge/.dsh-improved')return{ok:false,error:'安全审计仅在专用VM改进版可用'};
  if(store.root!=='/home/purge/.dsh-improved/redteam')return{ok:false,error:'安全审计后台目录未确认'};
  try{return await requestSecurityService(request,{model})}catch(error){return{ok:false,error:clean(error.message,300),...(error.diagnostic?{diagnostic:error.diagnostic}:{})}}
 }
 export async function executeSecurityOp(store,request,{model=false}={}){
- if(!['securityStatus','securityScopeSave','securityStart','securityCancel','securityReview','securityReport','securityCompare','securityWait','securityPreflight','securitySource','securityKaliCheck','securityJoint'].includes(request?.op))return undefined;
+ if(!['securityStatus','securityScopeSave','securityStart','securityCancel','securityReview','securityReport','securityCompare','securityWait','securityPreflight','securitySource','securityKaliCheck','securityJoint','securityRuntime'].includes(request?.op))return undefined;
  try{
- const {op,engagement,...input}=request,bench=securityFor(store);
+ const {op,engagement,...input}=request;if(op==='securityRuntime'&&model)return{ok:false,error:'运行应用仅接受页面内明确确认，模型不能启动或停止应用'};const bench=securityFor(store);
+ if(op==='securityRuntime'){const {action,...args}=input;if(!['preview','start','status','stop'].includes(action))fail('运行应用操作无效');return await bench.runtimeUI[action](engagement,args)}
  if(op==='securityJoint'){
   const {action,...args}=input;if(!['plan','start','status','wait','cancel','report'].includes(action))fail('联合审查操作无效');
   const value=await bench.joint[action](engagement,args),result=action==='start'?{ok:true,engagement,task:value}:value;return JSON.parse(jointModelWire(result,bench.store.redactResult(engagement,result)));

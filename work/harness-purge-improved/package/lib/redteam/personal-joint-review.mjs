@@ -41,6 +41,7 @@ export class JointReview{
  submit(eng,input){
   only(input,['requestId','profileRevision','steps','budgetSeconds']);const rid=identifier(input.requestId),db=this.db(eng),requestHash=hash(input),prior=db.prepare('SELECT id,request_hash FROM security_joint WHERE request_id=?').get(rid);
   if(prior){if(prior.request_hash!==requestHash)throw Error('重复请求内容不同');return this.view(this.load(eng,prior.id))}
+  if(this.bench.runtimeUI?.transitionBusy())throw Error('应用启动或停止尚未确认，请先核对原请求');
   if(this.closed||this.bench.disposed||this.active||this.bench.active||this.bench.blocked)throw Error('工作台已有任务或停止状态未确认，请核对原任务');
   for(const project of this.bench.store.listEngagements()){
    if(this.db(project.id).prepare('SELECT id FROM security_joint_pending LIMIT 1').get())throw Error('已有受管子任务停止未确认；请查询或取消原任务，不启动新请求');

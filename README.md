@@ -14,6 +14,7 @@
 | --- | --- |
 | 代码与依赖审计 | Semgrep 检查代码，Trivy 检查依赖、配置和凭据痕迹；任务保留工具版本、范围与覆盖情况。 |
 | 联合安全审查 | VM 可选独立预设：固定项目副本，按需选择 Semgrep、Trivy、本地 ZAP、Kali 离线 Bandit、REA 静态 JavaScript 图及隔离 PentAGI 子任务，统一任务和证据。[使用与限制](docs/joint-security-review.md)、[适配器边界](docs/managed-joint-adapters.md)。 |
+| 运行应用面板 | 安全审计页明确预览、确认启动/停止、查询原请求和期限；刷新不重放。[使用说明](docs/runtime-application-panel.md)。 |
 | 运行源码关联 | 明确启动标准库 Python 副本，ZAP前后核对源码/容器/转发身份；其他应用默认未证明。[使用与限制](docs/runtime-source-link.md)。 |
 | 本地 Web 测试 | ZAP 接入 VM 内指定回环网址，支持命名的私有 Cookie/Bearer 会话；当前入口不接受任意公网目标。 |
 | Kali 工具调用 | 聊天或 Shell 通过专用 SSH 调用独立 Kali；环境适配页显示真实工具路径与连接状态。 |
@@ -142,11 +143,11 @@ python3 -B scripts/ci.py --suite all
 
 检查涵盖导出完整性、Python/Node 回归和客户端重建一致性。真实 VM 启动、账号连接、模型任务和浏览器交互，需要单独验收，不能由 CI 通过推断完成。
 
-当前个人部署运行 **dsh-purge 1.1.77-personal.8**，Kali 为 **2026.3 ARM64**。版本是部署和验收记录，不表示上游最新版本；具体来源以[导出清单](inventory/export.json)、[当前状态](docs/current-status.md)和对应验收资料为准。
+当前个人部署运行 **dsh-purge 1.1.77-personal.9**，Kali 为 **2026.3 ARM64**。版本是部署和验收记录，不表示上游最新版本；具体来源以[导出清单](inventory/export.json)、[当前状态](docs/current-status.md)和对应验收资料为准。
 
 - **Semgrep 仍有解析缺口**：已保留 `PartialParsing` 及相应失败状态，补充文本提示不等于完成语义分析。见[解析器自检](docs/semgrep-parser-check.md)。
 - **历史连接问题未全部定位**：部分旧 SSH 失败及 QEMU 内部具体缺陷尚无确定根因，后续成功不用于改写原失败记录。见[SSH 与恢复诊断](docs/reload-recovery-ssh.md)。
-- **恢复覆盖有边界**：.8 恢复点覆盖151项程序及2820项选定摘要；Kali另有本机私有归档。Mac全局标签仍旧，新点需明确私有入口；本机副本不替代异机灾备，见[当前验收](docs/runtime-source-link-verification.json)。
+- **恢复覆盖有边界**：.9 恢复点覆盖152项程序及2822项选定摘要；Kali另有本机私有归档。Mac全局标签仍旧，新点需明确私有入口；本机副本不替代异机灾备，见[当前验收](docs/runtime-application-panel-verification.json)。
 - **仓库不包含整机运行资产**：VM 磁盘、恢复归档、专业二进制、容器数据、账号和凭据需独立保管；仅克隆源码无法恢复整套环境。
 
 ## 文档导航
