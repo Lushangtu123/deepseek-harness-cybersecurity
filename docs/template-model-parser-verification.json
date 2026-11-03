@@ -1,0 +1,529 @@
+{
+  "date": "2026-11-02",
+  "timezone": "America/Los_Angeles",
+  "version": "1.1.77-personal.11",
+  "programFiles": 157,
+  "scope": "VM improved header source-redaction repair plus fixed PhishGuard actual-model workflow; original project and 95 findings preserved",
+  "diagnosis": {
+    "runner": {
+      "path": "website/tools/browser-checks/run.mjs",
+      "originalSha256": "4230e2e84e87079060ceedfbdfb5afc9c70e135b53767ad6194641330ec99879",
+      "snapshotSha256": "d2ffcbc0f2140eea12c6743a5d4dc5930a37f94ed11dc03b6288d990922cd852",
+      "node": {
+        "original": {
+          "exitCode": 0,
+          "line": [],
+          "errorType": null
+        },
+        "snapshot": {
+          "exitCode": 1,
+          "line": [
+            "408"
+          ],
+          "errorType": "SyntaxError"
+        }
+      },
+      "changedLines": [
+        407,
+        408,
+        411,
+        414,
+        415
+      ]
+    },
+    "fixedRunner": {
+      "path": "website/tools/browser-checks/run.mjs",
+      "originalSha256": "4230e2e84e87079060ceedfbdfb5afc9c70e135b53767ad6194641330ec99879",
+      "snapshotSha256": "415c9fe6b4cc0f433487a5bb7605273b4c4a15e917fc7fd8702ad25332786314",
+      "node": {
+        "original": {
+          "exitCode": 0,
+          "line": [],
+          "errorType": null
+        },
+        "snapshot": {
+          "exitCode": 0,
+          "line": [],
+          "errorType": null
+        }
+      }
+    },
+    "i18n": {
+      "path": "website/static/i18n.test.mjs",
+      "originalSha256": "8d5e4618b597b073fe915a2ce2272ae7d46d0e4f8f674849daa7188196a68359",
+      "snapshotSha256": "8d5e4618b597b073fe915a2ce2272ae7d46d0e4f8f674849daa7188196a68359",
+      "node": {
+        "original": {
+          "exitCode": 0,
+          "line": [],
+          "errorType": null
+        },
+        "snapshot": {
+          "exitCode": 0,
+          "line": [],
+          "errorType": null
+        }
+      }
+    },
+    "originalAndFixedCopyParser": {
+      "runner-original.mjs": {
+        "scanned": true,
+        "diagnostics": [],
+        "matches": 635
+      },
+      "runner-snapshot.mjs": {
+        "scanned": true,
+        "diagnostics": [],
+        "matches": 635
+      },
+      "i18n-original.mjs": {
+        "scanned": true,
+        "diagnostics": [
+          {
+            "type": "PartialParsing",
+            "line": 143
+          },
+          {
+            "type": "PartialParsing",
+            "line": 201
+          },
+          {
+            "type": "PartialParsing",
+            "line": 1108
+          }
+        ],
+        "matches": 1038
+      },
+      "i18n-snapshot.mjs": {
+        "scanned": true,
+        "diagnostics": [
+          {
+            "type": "PartialParsing",
+            "line": 143
+          },
+          {
+            "type": "PartialParsing",
+            "line": 201
+          },
+          {
+            "type": "PartialParsing",
+            "line": 1108
+          }
+        ],
+        "matches": 1038
+      },
+      "i18n-escaped.mjs": {
+        "scanned": true,
+        "diagnostics": [],
+        "matches": 1041
+      },
+      "positive.mjs": {
+        "scanned": true,
+        "diagnostics": [],
+        "matches": 1
+      },
+      "benign.mjs": {
+        "scanned": true,
+        "diagnostics": [],
+        "matches": 1
+      },
+      "invalid.mjs": {
+        "scanned": true,
+        "diagnostics": [
+          {
+            "type": "PartialParsing",
+            "line": 1
+          }
+        ],
+        "matches": 0
+      }
+    },
+    "fixedScannerImage": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+    "installedScannerChanged": false,
+    "originalProjectRewritten": false,
+    "controlNote": "Initial eval-only probe could prefilter files and is not credited for parsing coverage; generic-call structural probe includes invalid and benign controls. Escaped i18n copy is a diagnostic control only, not production rewrite or semantic coverage credit."
+  },
+  "repair": {
+    "rawHttpHeaders": "whole-line masking including cookie tails",
+    "javascriptSource": "complete supported literal/template plus simple dynamic identifier/member suffix masked; complex tails rejected",
+    "commentTerminators": [
+      "LF",
+      "CR",
+      "LS",
+      "PS"
+    ],
+    "syntaxCheck": "trusted Node --check over stdin with clean environment; no source execution/import",
+    "sameAuditAndRuntimeSanitizer": true
+  },
+  "native": {
+    "healthSyntheticAndAssetChecks": {
+      "containment": {
+        "network": "none",
+        "memory": 536870912,
+        "cpu": 1000000000,
+        "pids": 64,
+        "init": true,
+        "readOnly": true,
+        "user": "1000:1000"
+      },
+      "health": {
+        "status": "ok",
+        "jev_enabled": false,
+        "jev_configured": false,
+        "commit_sha": null,
+        "model_loaded": false,
+        "content_model_loaded": false,
+        "content_model_error": null,
+        "content_model_artifact_sha256": null,
+        "content_model_id": null,
+        "model_data_source": null,
+        "sender_analysis_method": "sender-domain-heuristics",
+        "sender_history_enabled": false,
+        "sender_history_configured": false,
+        "sender_history_available": false,
+        "sender_history_error": null,
+        "distributed_rate_limit_status": "disabled",
+        "analysis_workers": 4,
+        "deployment_profile": "development",
+        "email_verification_enabled": false,
+        "rdap_lookups_enabled": false,
+        "verification_mode": "off",
+        "domain_verification_enabled": false,
+        "smtp_verification_enabled": false,
+        "verification_workers": 10
+      },
+      "syntheticContent": {
+        "status": 200,
+        "riskLevel": "safe",
+        "keys": [
+          "analysis_warnings",
+          "inline_image_coverage",
+          "remote_image_coverage",
+          "unresolved_image_coverage",
+          "risk_level",
+          "risk_label",
+          "total_score",
+          "category_results",
+          "extra_indicators",
+          "safety_signals",
+          "url_count",
+          "has_ip_url",
+          "has_shortener",
+          "risk_floor",
+          "input_mode",
+          "structure_score",
+          "combined_phishing_score",
+          "fusion_method",
+          "fusion_basis",
+          "verified_official_sender",
+          "official_channels",
+          "analysis_complete",
+          "requested_question",
+          "mail_type",
+          "analysis_warning_details",
+          "safety_signal_details"
+        ]
+      },
+      "website/static/favicon.svg": {
+        "status": 200,
+        "bytes": 555,
+        "copyHashMatched": true
+      },
+      "website/static/vendor/vision/core/tesseract-core-lstm.wasm": {
+        "status": 200,
+        "bytes": 2871085,
+        "copyHashMatched": true
+      },
+      "joint": {
+        "id": "9c228e45-e148-4b5d-98eb-cb7b5599378c",
+        "state": "partial",
+        "steps": [
+          {
+            "tool": "semgrep",
+            "id": "f62c489b-5fe1-4f6e-8645-fc579b6509d3",
+            "state": "partial",
+            "complete": false,
+            "coverageScope": "scanner-reported-files",
+            "eligibleFiles": null,
+            "cleanupVerified": null,
+            "version": "1.182.1",
+            "checkedFiles": 146,
+            "problem": null,
+            "diagnostics": {
+              "total": 3,
+              "retained": 3,
+              "truncated": false
+            },
+            "modelCalls": 0,
+            "artifacts": 0
+          },
+          {
+            "tool": "zap",
+            "id": "31f22f50-bace-4d82-987e-ab3cfe3ca353",
+            "state": "completed",
+            "complete": true,
+            "coverageScope": "live-loopback-http-responses",
+            "eligibleFiles": null,
+            "cleanupVerified": null,
+            "version": "2.17.0",
+            "checkedFiles": 0,
+            "problem": null,
+            "diagnostics": {
+              "total": 0,
+              "retained": 0,
+              "truncated": false
+            },
+            "modelCalls": 0,
+            "artifacts": 1
+          }
+        ],
+        "findings": 55,
+        "runtimeSource": {
+          "state": "managed-source-copy-matched",
+          "id": "6729aa36-e378-47b6-a35b-3d8dc801d226",
+          "copySha256": "4796ed7fea61d8b2caf2795bc880f3dfc22790f393d990272e7618bdd7dc109c",
+          "files": 381,
+          "template": "phishguard-fastapi-v1",
+          "runtimeAssets": 38,
+          "dependencyTreeSha256": "83f09657a42907fc98f0592831d049ad3afc7775d7846b11025b73fc197d8452",
+          "before": true,
+          "after": true,
+          "claim": "仅核对列明副本与容器及转发入口的前后身份；依赖、构建可复现性和进程内存行为未证明。"
+        }
+      },
+      "sourceSyntax": {
+        "runnerAndCasesValid": true,
+        "remainingSemgrepDiagnostics": 3
+      },
+      "stop": {
+        "phase": "closed",
+        "cleanupVerified": true,
+        "containerNetworkIndexAndLoopbackClosed": true
+      }
+    },
+    "cleanupVerified": true
+  },
+  "actualModel": {
+    "displayedModel": "DeepSeek-V4.1-Flash / High",
+    "firstTurnToolRows": 13,
+    "firstTurnRequestRows": 14,
+    "toolBreakdown": {
+      "bind": 1,
+      "plan": 1,
+      "start": 1,
+      "wait": 1,
+      "findingsReport": 7,
+      "diagnosticsReport": 1,
+      "artifactsReport": 1
+    },
+    "sameOriginalTask": true,
+    "task": {
+      "id": "bd86f6bf-d1b3-474c-b3df-f55172f4e956",
+      "engagement": "phishguard-model-closure-20261102",
+      "state": "partial",
+      "scopeRevision": 1,
+      "startedAt": "2026-11-03T05:12:54.464Z",
+      "finishedAt": "2026-11-03T05:13:28.634Z",
+      "deadline": "2026-11-03T05:15:54.464Z",
+      "budgetSeconds": 180,
+      "modelCalls": 0,
+      "cleanupVerified": true,
+      "problem": null,
+      "webTarget": {
+        "origin": "http://127.0.0.1:18787",
+        "mode": "loopback-baseline",
+        "appRevision": "managed-source-copy-matched",
+        "authenticated": false
+      },
+      "snapshot": {
+        "id": "513531d7a98f204b017f8fe02ad3544919e5441557b9abf012411b9d6cbd48dc",
+        "files": 381,
+        "bytes": 6949799,
+        "git": {
+          "head": "3b512cd629e3d10dc658e3fc7b07ee9b16153c30",
+          "dirty": null,
+          "statusHash": null
+        },
+        "excluded": 43,
+        "exclusionsRetained": 20,
+        "exclusionsTruncated": true,
+        "redactedFiles": 20
+      },
+      "steps": [
+        {
+          "tool": "semgrep",
+          "id": "dbfbd0a6-0a3e-4992-b4f9-8072475a88ce",
+          "state": "partial",
+          "complete": false,
+          "coverageScope": "scanner-reported-files",
+          "eligibleFiles": null,
+          "cleanupVerified": null,
+          "version": "1.182.1",
+          "checkedFiles": 146,
+          "problem": null,
+          "diagnostics": {
+            "total": 3,
+            "retained": 3,
+            "truncated": false
+          },
+          "modelCalls": 0,
+          "artifacts": 0
+        },
+        {
+          "tool": "zap",
+          "id": "5e8243b7-3fae-42c9-857a-2fa39fd91c1d",
+          "state": "completed",
+          "complete": true,
+          "coverageScope": "live-loopback-http-responses",
+          "eligibleFiles": null,
+          "cleanupVerified": null,
+          "version": "2.17.0",
+          "checkedFiles": 0,
+          "problem": null,
+          "diagnostics": {
+            "total": 0,
+            "retained": 0,
+            "truncated": false
+          },
+          "modelCalls": 0,
+          "artifacts": 1
+        }
+      ],
+      "findings": 56,
+      "coverageComplete": false,
+      "manualChecks": [
+        "authentication",
+        "authorization",
+        "business-logic",
+        "architecture"
+      ],
+      "notice": "完成表示已选步骤结束；命中保持待验证。Git未提交状态未探测，按逐文件哈希固定实际内容。脱敏/排除文件、手工项与未选工具仍未覆盖；REA仅静态JavaScript图；PentAGI输出是未验证模型结论，调用次数预算不等同货币金额上限。"
+    },
+    "allReportSectionsRead": true,
+    "allUnverified": true,
+    "sectionCounts": {
+      "findings": 49,
+      "files": 381,
+      "exclusions": 20,
+      "diagnostics": 3,
+      "artifacts": 1
+    },
+    "ordinaryFindings": 0,
+    "parentTasks": 1,
+    "scannerTasks": 2,
+    "firstReportInterpretationError": "Attributed the entire 381 snapshot files vs 146 scanner-reported files difference to three parse diagnostics; unsupported by those counters.",
+    "operatorCorrection": {
+      "requested": true,
+      "extraRequestRows": 1,
+      "extraToolRows": 0,
+      "claimWithdrawnObserved": true,
+      "totalObservedRequestRows": 15,
+      "doesNotEstablishAutonomousErrorFreeReporting": true
+    },
+    "runtimeSource": {
+      "state": "managed-source-copy-matched",
+      "id": "421378a2-2fec-4595-a5b6-a3ef439b7390",
+      "copySha256": "4796ed7fea61d8b2caf2795bc880f3dfc22790f393d990272e7618bdd7dc109c",
+      "files": 381,
+      "template": "phishguard-fastapi-v1",
+      "runtimeAssets": 38,
+      "dependencyTreeSha256": "83f09657a42907fc98f0592831d049ad3afc7775d7846b11025b73fc197d8452",
+      "before": true,
+      "after": true,
+      "claim": "仅核对列明副本与容器及转发入口的前后身份；依赖、构建可复现性和进程内存行为未证明。"
+    },
+    "cleanup": {
+      "ok": true,
+      "id": "421378a2-2fec-4595-a5b6-a3ef439b7390",
+      "cleanupVerified": true
+    }
+  },
+  "chromeDownload": {
+    "downloadBytes": 143558,
+    "sha256": "402323d1dd28dd78fa86475cf0fa8e23981ec28c44bbad282452ab61dc4434e5",
+    "taskId": "bd86f6bf-d1b3-474c-b3df-f55172f4e956",
+    "allSectionsMatchBackend": true,
+    "sections": {
+      "findings": 49,
+      "files": 381,
+      "exclusions": 20,
+      "diagnostics": 3,
+      "artifacts": 1
+    },
+    "allUnverified": true,
+    "runtimeSourceState": "managed-source-copy-matched"
+  },
+  "independentReview": {
+    "scope": "header redaction, JS syntax gate and production option forwarding",
+    "focusedChecks": 42,
+    "remainingActionableP1P2InFocusedRecheck": 0,
+    "wholeRepositoryIndependentAudit": false
+  },
+  "regression": {
+    "python": 295,
+    "pluginNode": 607,
+    "hostNode": 139,
+    "extraLinuxRoot": 18
+  },
+  "recovery": {
+    "recoveryPoint": "ready-template-model-parser-20261102",
+    "selectedProofFiles": 2832,
+    "programFiles": 157,
+    "snapshotCount": 33,
+    "previous32SnapshotsPreserved": true,
+    "selectedKaliBridgeCovered": true,
+    "linkedKaliArchive": "kali-recoveries/ready-joint-review-20261102/Kali.utm",
+    "harnessDiskIncludesPrivateConnectionMaterial": true,
+    "publicSecretExported": false,
+    "originalVmResumed": true
+  },
+  "copyBoot": {
+    "recoveryPoint": "ready-template-model-parser-20261102",
+    "restoredDiskActuallyBooted": true,
+    "independentInodeAndNoQcowBacking": true,
+    "existingVirtualHardwareReused": true,
+    "originalInodeReturned": true,
+    "originalUnchangedWhileCopyBooted": true,
+    "originalNowStarted": true,
+    "newCrashFixturePreservedOnOriginal": true,
+    "utmListUnchanged": true,
+    "newVmRegistered": false,
+    "isolationValidated": true,
+    "phase": "original-running"
+  },
+  "protected": {
+    "protectedProjectFilesMatched": 459,
+    "projectHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "findingsByStatus": {
+      "unverified": 95
+    },
+    "scannerManifestUnchanged": true,
+    "programHashesMatched": 157,
+    "installedToolsPresent": true,
+    "harnessActive": true,
+    "pentagiRunning": true,
+    "hostHelpersUnchanged": 5,
+    "hostLaunchDefinitionsUnchanged": true,
+    "vmConfigurationUnchanged": true,
+    "originalDiskInodeUnchanged": true,
+    "utmListUnchanged": true,
+    "allPreviousSnapshotsPreserved": true,
+    "snapshotCount": 33,
+    "qaJointState": "partial",
+    "qaFindings": 56,
+    "qaAllUnverified": true,
+    "qaJointCleanupVerified": true,
+    "noRuntimeContainersNetworksOrOriginIndex": true
+  },
+  "limitations": [
+    "Three real Semgrep PartialParsing locations remain; all findings unverified and joint task partial.",
+    "Snapshot file count and scanner reported file count have different denominators; no complete attribution or security coverage percentage inferred.",
+    "The first model report required an operator correction; preserved separately from successful tool execution.",
+    "Only Semgrep and local ZAP selected; no all-tools or private-account audit. ML/auth/business/browser application flows remain outside this acceptance.",
+    "Source redaction supports bounded JS header forms and may change application values; complex forms reject. Syntax success does not prove semantic equivalence or complete secret detection.",
+    "Frozen dependency identity is not dependency security or source-to-wheel reproducibility, and browser navigation is outside server network-none.",
+    "Same-UID authorized original Shell outside record trust boundary; Mac permissions/config and Kali unchanged.",
+    "No monetary hard cap or off-Mac recovery added. Mac global recovery label still old; explicit private recovery entry required."
+  ]
+}

@@ -1,5 +1,15 @@
 # 当前部署与验收状态
 
+2026-11-02（America/Los_Angeles），VM 改进版为 **1.1.77-personal.11、157项程序**。修复JavaScript认证头源码脱敏截断并增加静态语法核对；原始HTTP整行隐藏、源码完整值替换、复杂形式拒绝。原4条诊断中1条为Harness副本损坏，修复后消失；另外3条原文件与副本字节相同、Node通过，但Semgrep仍PartialParsing。私有等价转义对照定位到HTML注释正则开头，不改原文件、不切换扫描器。[归因及流程](template-model-parser.md) · [结构化验收](template-model-parser-verification.json)。
+
+Chrome真实DeepSeek首轮13次工具调用：绑定、计划、一次Semgrep＋ZAP任务、等待同一ID、7页发现＋1页诊断＋1页产物。轨迹14个Request条目；后台确认1父任务/2扫描、56原始/49去重且全部待验证、普通发现0，运行副本前后匹配381文本/38资源。模型报告误将146与381数量差异全归因于解析错误，经操作方指出后另1个Request、0工具调用撤回解释。保留原错及人工纠正，不能记为自主无错报告。下载140KB报告五节逐值匹配后台；原应用已停止，资源已清理。
+
+独立针对性代码复核42项通过；Mac与Linux回归 **295 Python / 607插件Node / 139入口Node**，另18项Linux恢复根检查通过。真实459文件、HEAD、六张审计表和95条待验证发现不变；Mac5项管理工具、启动项、权限与VM配置不变，Kali未更新。
+
+新恢复点 `ready-template-model-parser-20261102` 覆盖157程序/2832项选定摘要；独立磁盘副本实际启动、固定镜像与6个依赖模块导入通过，原盘已归还运行。保留旧32点，共33点。本轮仅针对性复核，不是全仓独立安全审计。3处Semgrep缺口、模型报告人工核对、认证/权限/业务验证、金额硬限额与异机备份仍有边界。
+
+以下保留此前 .10 验收：
+
 2026-11-02（America/Los_Angeles），VM 改进版为 **1.1.77-personal.10、157项程序**。新增[固定离线 PhishGuard FastAPI 运行模板](project-runtime-template.md)：冻结现有依赖树和镜像，不修改原项目虚拟环境；容器 `network none`，通过限时固定 exec 通道检查 HTTP。JSON/Python 按结构脱敏；原有标准库模板、确认启停、原请求恢复与独立期限保留。[本轮结构化验收](project-runtime-template-verification.json)。
 
 实机根路径、健康检查、合成内容请求均返回200，WASM/favicon与副本摘要一致；存在可达VM监听器的正控制下，容器访问VM网关和TEST-NET均被阻断。暂停内部relay后约6.5秒触发由 VM 进程持有的通道期限并回收客户端；源码资源及CPU限制变化使关联未确认，手动停止与30秒到期均清理。计时与回收由 VM 完成，Mac 权限未扩大。

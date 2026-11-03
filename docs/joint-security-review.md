@@ -58,3 +58,9 @@ ZAP 结果标记为 `live-http`、精确目标 origin、`snapshotId:null`；`rep
 `completed` 只表示已选步骤执行结束，不能表示项目安全、漏洞已复现或覆盖完整。登录、角色与越权、业务逻辑、架构、未选工具和排除内容保持未验证。工具命中始终先记为待验证。
 
 Kali 使用隔离用户环境 `~/.local/share/harness-security/bandit-1.9.4`，实际运行前通过该解释器读取安装版本。依赖的官方 PyPI 版本与 wheel 哈希固定在插件 `scripts/security-kali-bandit-requirements.txt`；恢复或迁移安装必须使用 `pip --only-binary=:all: --require-hashes`，不能直接以未固定的最新版替代。
+
+## 报告统计口径
+
+`snapshot.files` 是纳入受管副本的文本文件数量，`checkedFiles` 是特定扫描器实际上报的检查数；规则语言、文件类型等也可能影响数量。不能将二者差值全部归因于解析诊断，也不能直接据此计算安全覆盖率。`PartialParsing` 等诊断仍使对应检查保持部分覆盖。
+
+任务摘要的命中数可能是原始条目数，分页报告的 `page.total` 是去重后的条目数；分别记录，不据数量差异重启任务。所有命中仍待验证。模型生成的归因与安全判断需要核对原始回执，本轮[实际验收及人工纠正](template-model-parser.md)保留了一个示例。

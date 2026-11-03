@@ -1,6 +1,7 @@
 import {createHash} from 'node:crypto';
 import {mkdirSync,readdirSync,lstatSync,realpathSync,openSync,closeSync,readSync,fstatSync,writeFileSync,constants} from 'node:fs';
 import {join,dirname} from 'node:path';
+import {execFileSync} from 'node:child_process';
 import {sanitizePythonSource} from './personal-review-python.mjs';
 import {redactText,SECRET_KEY} from './personal-evidence-redaction.mjs';
 const hash=value=>createHash('sha256').update(value).digest('hex');
@@ -28,8 +29,13 @@ export function readReviewFile(file,maxBytes=1048576){
 function uniqueJSONKeys(text,sanitize){
  let unsafeNumbers=false;const stack=[];for(let i=0;i<text.length;i++){const c=text[i];if(c==='"'){let end=i+1;for(;end<text.length;end++){if(text[end]==='\\'){end++;continue}if(text[end]==='"')break}const top=stack.at(-1);if(top?.keys&&top.key){const key=JSON.parse(text.slice(i,end+1));if(top.keys.has(key))throw Error('JSON包含重复键，不能脱敏复制');top.keys.add(key);top.key=false}i=end}else if(c==='{')stack.push({keys:new Set(),key:true});else if(c==='[')stack.push({});else if(c==='}'||c===']')stack.pop();else if(c===','&&stack.at(-1)?.keys)stack.at(-1).key=true;else if(c==='-'||c>='0'&&c<='9'||c==='t'||c==='f'||c==='n'){let end=i+1;while(end<text.length&&!/[\s,\]\}]/.test(text[end]))end++;const raw=text.slice(i,end);if(String(sanitize(raw))!==raw)throw Error('JSON标量包含需脱敏值，不能安全复制');const value=JSON.parse(raw);if(typeof value==='number'&&(!Number.isFinite(value)||Number.isInteger(value)&&!Number.isSafeInteger(value)))unsafeNumbers=true;i=end-1}}return unsafeNumbers;
 }
+function javascriptSyntax(text,mode){
+ try{execFileSync(process.execPath,['--check','--input-type='+mode],{input:text,encoding:'utf8',timeout:5000,maxBuffer:65536,env:{PATH:'/usr/bin:/bin',LANG:'C.UTF-8'},stdio:['pipe','pipe','pipe']});return true}
+ catch(e){if(e.status===1&&String(e.stderr).includes('SyntaxError'))return false;throw Error('JavaScript语法核对未完成；未执行源码')}
+}
 export function sanitizeReviewText(text,name,sanitize=redactText,sanitizeKnown=sanitize===redactText?String:sanitize){
  if(/\.py$/i.test(name))return sanitizePythonSource(text,sanitize,sanitizeKnown);
+ if(/\.(?:m?js|cjs)$/i.test(name)){const safe=String(sanitize===redactText?redactText(text,[],{javascript:true}):sanitize(text,{javascript:true}));if(safe!==text){const modes=/\.mjs$/i.test(name)?['module']:/\.cjs$/i.test(name)?['commonjs']:['module','commonjs'];for(const mode of modes)if(javascriptSyntax(text,mode)){if(!javascriptSyntax(safe,mode))throw Error('JavaScript脱敏会破坏语法，拒绝复制');break}}if(String(sanitizeKnown(safe))!==safe)throw Error('JavaScript源码仍含已登记敏感值');return safe}
  if(!/\.(?:json|map)$/i.test(name))return String(sanitize(text));
  let value;try{value=JSON.parse(text)}catch{return String(sanitize(text))}const unsafeNumbers=uniqueJSONKeys(text,sanitize);
  const visit=v=>{if(typeof v==='string')return String(sanitize(v));if(v===null||typeof v!=='object'){const raw=JSON.stringify(v);if(String(sanitize(raw))!==raw)throw Error('JSON标量包含需脱敏值，不能安全复制');return v}if(Array.isArray(v))return v.map(visit);const out=Object.create(null);for(const [key,item] of Object.entries(v)){const safe=String(sanitize(key));if(Object.hasOwn(out,safe))throw Error('JSON脱敏后键名冲突');out[safe]=SECRET_KEY.test(key)?'[REDACTED]':visit(item)}return out};

@@ -966,11 +966,11 @@ export class RedteamStore {
   }
 
   /** Public display boundary. Raw evidence stays in SQLite, never in default lists/exports. */
-  redactResult(id, value, {knownOnly=false}={}) {
+  redactResult(id, value, {knownOnly=false,javascript=false}={}) {
     const db = this.db(id)
     const secrets = db.prepare("SELECT secret_value AS value FROM credential WHERE COALESCE(secret_value,'') <> '' UNION SELECT pass_key AS value FROM webshell WHERE COALESCE(pass_key,'') <> ''")
       .all().map(row => row.value)
-    return knownOnly ? redactKnownText(value, secrets) : redactDisplay(value, secrets)
+    return knownOnly ? redactKnownText(value, secrets) : redactDisplay(value, secrets, {javascript})
   }
 
   /* ---------- 当前靶标 ---------- */

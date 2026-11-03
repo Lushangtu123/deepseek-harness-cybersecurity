@@ -60,7 +60,7 @@ export class JointReview{
   try{
    timer=setTimeout(()=>{active.expired=true;controller.abort()},Math.max(1,Date.parse(data.deadline)-Date.now()));check();
    const parent=join(this.bench.store.dirOf(eng),'runs','joint');mkdirSync(parent,{recursive:true,mode:0o700});
-   data.snapshot=createReviewSnapshot(profile,join(parent,data.id),{sanitize:value=>this.bench.store.redactResult(eng,{text:value}).text,sanitizeKnown:value=>this.bench.store.redactResult(eng,value,{knownOnly:true})});this.save(eng,data);
+   data.snapshot=createReviewSnapshot(profile,join(parent,data.id),{sanitize:(value,options)=>this.bench.store.redactResult(eng,{text:value},options).text,sanitizeKnown:value=>this.bench.store.redactResult(eng,value,{knownOnly:true})});this.save(eng,data);
    for(const step of data.steps){
     check();verifyReviewSnapshot(data.snapshot);step.state='running';this.save(eng,data);
     if(step.tool==='kali')await this.runKali(active,step);
