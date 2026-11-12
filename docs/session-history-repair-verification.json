@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-12",
+  "timezone": "America/Los_Angeles",
+  "version": "1.1.77-personal.13",
+  "baseCommit": "53627fb75ddc0f41f755289d44757162fe356e64",
+  "rootCause": "The original region pre-step gate persisted a complete refusal step and returned enter with empty messages, leaving the driver counter unchanged. A later admitted step could reuse the same turn/step coordinates.",
+  "fix": "A detected denial returns reject even if its local reply cannot be written. The driver closes that turn before admitting more input.",
+  "firstDuplicateBeforePersonal12Deployment": true,
+  "checks": {
+    "python": 295,
+    "pluginNode": 617,
+    "hostNode": 139,
+    "exportIntegrity": true,
+    "reproducibleClient": true,
+    "nativeGateTurnValid": true,
+    "authenticatedEntry": true,
+    "modelRequests": 0
+  },
+  "restoredHistories": [
+    {
+      "role": "parent",
+      "events": 2369,
+      "userMessages": 18,
+      "assistantMessages": 327,
+      "correctedMetadataEvents": 208,
+      "allPayloadsPreserved": true,
+      "nativeRead": true
+    },
+    {
+      "role": "current",
+      "events": 2565,
+      "userMessages": 21,
+      "assistantMessages": 355,
+      "correctedMetadataEvents": 216,
+      "allPayloadsPreserved": true,
+      "nativeRead": true
+    }
+  ],
+  "backup": {
+    "originalLogsSaved": 2,
+    "previousProgramFilesSaved": 3,
+    "storage": "private VM backup",
+    "wholeVmRecoveryPointCreated": false
+  },
+  "deployment": {
+    "programFiles": 169,
+    "updatedProgramFiles": 3,
+    "temporaryRegistrationRestored": true,
+    "otherLocalProgramEditsPreserved": true
+  },
+  "candidateCorrection": "The first candidate passed logical validation but failed native storage framing. It was rolled back. The installed candidate stores the header in an independent Zstandard frame and passed native reads.",
+  "githubActions": "Account billing lock prevented the preceding cloud workflow from starting. Local full checks were run for this fix."
+}

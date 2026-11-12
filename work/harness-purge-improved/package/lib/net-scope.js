@@ -821,12 +821,13 @@ export function installRegionGate(ctx) {
     }
     if (!hit) return forward();
     try {
-      const parked = await parkDenial(payload);
-      if (parked) return { kind: "enter", messages: [] };
+      await parkDenial(payload);
     } catch {
-      /* 禁止句没写上时不能把这一轮收成空白。 */
+      /* The turn must remain blocked even if its local reply cannot be stored. */
     }
-    return forward();
+    // parkDenial owns one complete step. The loop must close this turn before
+    // admitting another request, since its private step counter was not advanced.
+    return { kind: "reject" };
   };
   const toolHook = async (exec, next) => {
     const forward = () => (typeof next === "function" ? next() : denyToolResult());
