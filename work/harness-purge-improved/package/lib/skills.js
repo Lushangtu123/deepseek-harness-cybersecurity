@@ -4,7 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import crypto from "node:crypto";
 import { findDshHome, atomicWriteFile } from "./core.js";
-import { extractZipArchive, listZipFile } from "./zip-extract.js";
+import { extractZipBuffer } from "./zip-extract.js";
 
 export { findDshHome };
 
@@ -481,19 +481,6 @@ function listArchiveEntries(archivePath) {
     timeout: 15000,
   });
   if (result.status === 0) return splitLines(result.stdout);
-  if (/\.zip$/i.test(archivePath)) {
-    const unzip = spawnSync("unzip", ["-Z1", archivePath], {
-      windowsHide: true,
-      encoding: "utf8",
-      timeout: 15000,
-    });
-    if (unzip.status === 0) return splitLines(unzip.stdout);
-    try {
-      return listZipFile(archivePath);
-    } catch {
-      return null;
-    }
-  }
   return null;
 }
 
@@ -504,14 +491,6 @@ function extractArchive(archivePath, dest) {
   }
   if (entries && entries.length > MAX_IMPORT_FILES) {
     throw new Error("Too many files in the archive");
-  }
-  if (/\.zip$/i.test(archivePath)) {
-    try {
-      extractZipArchive(archivePath, dest);
-      return;
-    } catch (error) {
-      throw new Error(String(error && error.message ? error.message : error));
-    }
   }
   const result = spawnSync("tar", ["-xf", archivePath, "-C", dest], {
     windowsHide: true,
@@ -662,8 +641,13 @@ export async function importArchive(dshHome, buffer, filename = "skill.zip") {
   const unpacked = path.join(temp, "unpacked");
   try {
     await fsp.mkdir(unpacked, { recursive: true });
-    await fsp.writeFile(archive, bytes);
-    extractArchive(archive, unpacked);
+    const magic = bytes.length >= 4 ? bytes.readUInt32LE(0) : 0;
+    if (/\.zip$/i.test(filename) || magic === 0x04034b50 || magic === 0x06054b50 || magic === 0x08074b50) {
+      extractZipBuffer(bytes, unpacked, { maxBytes: MAX_UNPACKED_BYTES, maxEntries: MAX_IMPORT_FILES });
+    } else {
+      await fsp.writeFile(archive, bytes);
+      extractArchive(archive, unpacked);
+    }
     let total = 0;
     await walkFiles(unpacked, async (fp) => {
       // 非 ENOENT 的 fs 错误要 rethrow,否则磁盘损坏 / EACCES / EMFILE 都被吞,

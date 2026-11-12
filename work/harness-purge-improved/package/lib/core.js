@@ -6026,6 +6026,25 @@ export async function dropStaleUserProfilePatchBackups(dshHome = findDshHome()) 
 
 const BAK_SUFFIX = ".dshpurge.bak";
 
+// Never use an empty backup as the restored program. Keep prior quarantines.
+function quarantineEmptyBackup(bak) {
+  const info = fs.lstatSync(bak);
+  if (!info.isFile()) throw new Error("Backup is not a regular file");
+  if (info.size !== 0) return false;
+  for (let i = 0; i < 64; i += 1) {
+    const quarantined = bak + (i === 0 ? ".bad" : `.bad.${i}`);
+    try {
+      fs.copyFileSync(bak, quarantined, nodeFs.constants.COPYFILE_EXCL);
+    } catch (error) {
+      if (error?.code === "EEXIST") continue;
+      throw error;
+    }
+    fs.unlinkSync(bak);
+    return true;
+  }
+  throw new Error("No available quarantine name for empty backup");
+}
+
 function shouldRestoreOriginal(original, bak) {
   if (isUserProfilePatchFile(original)) return false;
   let bakStat;
@@ -6225,6 +6244,10 @@ export async function revertAll(aiBase, options = {}) {
     }
     if (fs.existsSync(bak)) {
       try {
+        if (quarantineEmptyBackup(bak)) {
+          skipped.push(fp);
+          continue;
+        }
         if (fs.existsSync(fp) && await sameFileBytes(fp, bak)) {
           skipped.push(fp);
           continue;
@@ -7638,6 +7661,7 @@ async function restoreFromBak(fp, bak, status) {
     await fsp.unlink(bak);
     return `${status}_skipped_symlink`;
   }
+  if (quarantineEmptyBackup(bak)) return "skipped_empty_backup";
   await fsp.copyFile(bak, fp);
   await fsp.unlink(bak);
   return status;

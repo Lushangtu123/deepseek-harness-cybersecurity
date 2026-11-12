@@ -25,19 +25,28 @@ function safeZipName(name) {
   return parts.join("/");
 }
 
-function findEocd(buf) {
+function findEocd(buf, strict = false) {
   const min = Math.max(0, buf.length - 22 - 65535);
   for (let i = buf.length - 22; i >= min; i -= 1) {
-    if (buf.readUInt32LE(i) === 0x06054b50) return i;
+    if (buf.readUInt32LE(i) !== 0x06054b50) continue;
+    if (!strict || i + 22 + buf.readUInt16LE(i + 20) === buf.length) return i;
   }
   throw new Error("Not a zip file");
 }
 
-function readZipEntries(buf) {
+function readZipEntries(buf, limits) {
   if (!Buffer.isBuffer(buf) || buf.length < 22) throw new Error("Not a zip file");
-  const eocd = findEocd(buf);
+  const eocd = findEocd(buf, Boolean(limits));
   const total = buf.readUInt16LE(eocd + 10);
   let cursor = buf.readUInt32LE(eocd + 16);
+  if (limits) {
+    if (total > limits.maxEntries) throw new Error("Too many ZIP entries");
+    const centralSize = buf.readUInt32LE(eocd + 12);
+    if (buf.readUInt16LE(eocd + 4) || buf.readUInt16LE(eocd + 6)
+        || buf.readUInt16LE(eocd + 8) !== total || cursor + centralSize !== eocd) {
+      throw new Error("Corrupt or unsupported ZIP directory");
+    }
+  }
   const entries = [];
   for (let n = 0; n < total; n += 1) {
     if (cursor + 46 > buf.length || buf.readUInt32LE(cursor) !== 0x02014b50) {
@@ -50,9 +59,19 @@ function readZipEntries(buf) {
     const commentLen = buf.readUInt16LE(cursor + 32);
     const localOffset = buf.readUInt32LE(cursor + 42);
     const name = buf.toString("utf8", cursor + 46, cursor + 46 + nameLen);
-    entries.push({ name, method, compSize, localOffset });
-    cursor += 46 + nameLen + extraLen + commentLen;
+    const next = cursor + 46 + nameLen + extraLen + commentLen;
+    if (limits && next > eocd) throw new Error("Truncated ZIP directory");
+    entries.push({
+      name, method, compSize, localOffset,
+      flags: buf.readUInt16LE(cursor + 8),
+      crc: buf.readUInt32LE(cursor + 16),
+      size: buf.readUInt32LE(cursor + 24),
+      type: (buf.readUInt32LE(cursor + 38) >>> 16) & 0o170000,
+      rawName: buf.subarray(cursor + 46, cursor + 46 + nameLen),
+    });
+    cursor = next;
   }
+  if (limits && cursor !== eocd) throw new Error("Corrupt ZIP directory size");
   return entries;
 }
 
@@ -73,16 +92,40 @@ function localDataOffset(buf, localOffset) {
   return localOffset + 30 + nameLen + extraLen;
 }
 
-export function extractZipBuffer(buf, dest) {
+const crcTable = typeof zlib.crc32 === "function" ? null : Uint32Array.from({ length: 256 }, (_, index) => {
+  let crc = index;
+  for (let i = 0; i < 8; i += 1) crc = (crc >>> 1) ^ ((crc & 1) ? 0xedb88320 : 0);
+  return crc;
+});
+
+function crc32(bytes) {
+  if (crcTable === null) return zlib.crc32(bytes);
+  let crc = 0xffffffff;
+  for (const byte of bytes) crc = (crc >>> 8) ^ crcTable[(crc ^ byte) & 0xff];
+  return (crc ^ 0xffffffff) >>> 0;
+}
+
+export function extractZipBuffer(buf, dest, limits) {
   fs.mkdirSync(dest, { recursive: true });
   const root = path.resolve(dest);
   const prefix = root.endsWith(path.sep) ? root : root + path.sep;
-  for (const entry of readZipEntries(buf)) {
+  const entries = readZipEntries(buf, limits);
+  const centralStart = limits ? buf.readUInt32LE(findEocd(buf, true) + 16) : 0;
+  let remaining = limits?.maxBytes;
+  for (const entry of entries) {
+    const directory = /[/\\]$/.test(entry.name);
+    if (limits) {
+      if (/^[\\/]|[:\x00-\x1f]/.test(entry.name)) throw new Error("Invalid ZIP path");
+      if (entry.type && entry.type !== (directory ? 0o040000 : 0o100000)) {
+        throw new Error("Unsupported ZIP entry type");
+      }
+      if (entry.flags & 1) throw new Error("Encrypted ZIP entries are unsupported");
+    }
     const rel = safeZipName(entry.name);
     if (!rel) continue;
     const out = path.resolve(root, rel);
     if (out !== root && !out.startsWith(prefix)) throw new Error("Invalid zip path");
-    if (/[/\\]$/.test(String(entry.name))) {
+    if (directory && !limits) {
       fs.mkdirSync(out, { recursive: true });
       continue;
     }
@@ -95,10 +138,39 @@ export function extractZipBuffer(buf, dest) {
     const start = localDataOffset(buf, entry.localOffset);
     const end = start + entry.compSize;
     if (end > buf.length) throw new Error("Truncated zip data");
+    if (limits) {
+      const nameStart = entry.localOffset + 30;
+      const localName = buf.subarray(nameStart, nameStart + buf.readUInt16LE(entry.localOffset + 26));
+      if (end > centralStart || !localName.equals(entry.rawName)
+          || buf.readUInt16LE(entry.localOffset + 6) !== entry.flags
+          || buf.readUInt16LE(entry.localOffset + 8) !== entry.method) {
+        throw new Error("ZIP local entry does not match its directory");
+      }
+      if (entry.size > remaining || (entry.method === 0 && entry.compSize > remaining)) {
+        throw new Error("ZIP output exceeds size limit");
+      }
+    }
     const compressed = buf.subarray(start, end);
-    const body = entry.method === 0 ? compressed : zlib.inflateRawSync(compressed);
-    fs.mkdirSync(path.dirname(out), { recursive: true });
-    fs.writeFileSync(out, body);
+    let body = compressed;
+    if (entry.method === 8) {
+      try {
+        body = zlib.inflateRawSync(compressed, limits ? { maxOutputLength: Math.max(1, remaining) } : undefined);
+      } catch (error) {
+        if (limits && error?.code === "ERR_BUFFER_TOO_LARGE") throw new Error("ZIP output exceeds size limit");
+        throw error;
+      }
+    }
+    if (limits) {
+      if (body.length > remaining) throw new Error("ZIP output exceeds size limit");
+      if (body.length !== entry.size || (directory && body.length)) throw new Error("Invalid ZIP entry size");
+      if (crc32(body) !== entry.crc) throw new Error("ZIP CRC check failed");
+      remaining -= body.length;
+    }
+    if (directory) fs.mkdirSync(out, { recursive: true });
+    else {
+      fs.mkdirSync(path.dirname(out), { recursive: true });
+      fs.writeFileSync(out, body, limits ? { flag: "wx" } : undefined);
+    }
   }
 }
 

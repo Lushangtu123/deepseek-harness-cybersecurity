@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "configuration": "merged-kali-tools-personal2",
-  "source": "live dedicated VM and hash-matched host sources",
+  "source": "sanitized repository baseline with selective personal.12 plugin deployment; additional VM local edits retained",
   "guestFiles": {
     "guest-home/.dsh-improved/cordis.patch.yml": {
       "sourceSha256": "01605d29a130f965ee20e1e850e16b03e826f4d6b874eff13f4bba1f3fbb0bae",
@@ -602,7 +602,7 @@
     "LICENSE": "b45f2c5ef6ed471d1dcdf63c10e432d856c8867be2828aece1b383bbece7662a",
     "LICENSE-COMMERCIAL.md": "a0d104262cb7db3c99a3f82a7089a5538237b364a6ece72af34ffc04e7ac522f",
     "NOTICE": "ad63c4be7b12bdc1a43b05d49a831933671be7f2a6f723a6c079e8653a8ac54f",
-    "PERSONAL-CHANGES.md": "76088dec50db57ad713d5b5f5d689390399aa0c7660e16dc3b6ce551af9ee1f3",
+    "PERSONAL-CHANGES.md": "e4c9127423604533643f73b108111d3109a645b470098eb36bf7fa2538001e72",
     "README.md": "f932bb24fdcdf0b05196b7fec67bbb884f5ebbb0df04fadcc4890f87a28d6a0d",
     "README.zh-CN.md": "d4df0d6e57d9da7c0e147cf7bd5929b8f2aa6b4a761f0e97096fd989725d983d",
     "bin/dsh-purge.js": "759081efd77e2ac757d759eeb2d14552bfbf925944ee3a53247e36064196e1eb",
@@ -631,7 +631,7 @@
     "lib/capability-protocol.js": "49a7c72d99b41128d50a105af7d7c4138654f2e9a4513a62fd535e1653dda2b7",
     "lib/child-process-hide.mjs": "d22546fd288373c529376835acb5dd2d54c96261c7a9c7f42f6ca44251668088",
     "lib/continue-retry.js": "b4710fb4eb9990801756e5396f447f9da227177db78d3fff4880509d527be6d0",
-    "lib/core.js": "9ce5088c667195c74037249c2480ffeac905c0e57b9d121e41e48e5858377739",
+    "lib/core.js": "c09bff750003bfc551d51171ac9ffb180eff31767da8501253af9126acf38bf4",
     "lib/default-prompt-inject.en.md": "1dd2fc61e09b5e10676001324fcf7961f165b3e7b3c3c5bcb9ef9de48977e983",
     "lib/default-prompt-inject.md.bak": "fa2f43cbaefb801257d8af9dc929f9ac50d7acf812d6f1cccf8738c3617ae668",
     "lib/default-prompt-inject.zh.md": "5bb958ea89006198f6cca1cc5d24387fb7457036e22593a067ce947390957bdc",
@@ -643,7 +643,7 @@
     "lib/host-clean.js": "3974977c015ec7ef198b530321deccea7407300f455fb0e46f17e7e587ca5ad4",
     "lib/host.js": "954009fc82fceef7f2e55743b873055681991906192a7d02ef7c355f6edf5d62",
     "lib/identity.js": "00e9663078443b41e766d127ef8eb2ecf52f2cdc8795f2138d2022ec9a2bb4dd",
-    "lib/index.js": "5faf8f00b38d801d118e5baec0a405881d502c74620a27998046c3cbaf4d47f6",
+    "lib/index.js": "d950d726a30e73996bbde4728d56c65aef32a1fd5925bc83d8de0fb49b0128cc",
     "lib/mnemon-settings.js": "b49cfa6bbe26477ab520a1d1af3b146123bc72c50d4a9810a7fd3227bc46dd88",
     "lib/net-scope.js": "328a08ede7b68dee20eac1cb4ddc27f04aa61eacfadb64624d2f70f0d8f05d77",
     "lib/official-update.js": "b044b2bd748026e6e6b6154313b9f5161e064b3286bc50a768b5543f409626f9",
@@ -718,7 +718,7 @@
     "lib/rewind.js": "f05b181ffd7aceb27043efc58d3bb69b2b2fa892a959801476d4023fadbac72f",
     "lib/rules.js": "2dad38c6504aea63de269d57a89246990dc00b49f5e7ca58eed3e504ac9f887f",
     "lib/settle-policy.js": "156b8ce93045c14a0fe3ee41f1f8f07a5c3637dc8faaecdc0747ba5b32029ea9",
-    "lib/skills.js": "37138e14e2dad92a18b63319b9a87d65228c7852fcdd2656054d61593f4dfcee",
+    "lib/skills.js": "fb1050e91b8041fe81c45c9f7b3153c460f97f00990d6d0d4d450954caece259",
     "lib/surface.js": "c27259aa8deb2e3f576a1c8a065f3c13b3b4a9efc80a0509259fcdce6df2aed2",
     "lib/table-key.js": "cd7ab3512992f35f5bc08150da245f60bf4f11efbf83f3120583a8e7ef821cda",
     "lib/table-read.js": "b97cd96220253eadacb1f9164bf574287b3eda7b5d9c2fad41911993ade8bf8e",
@@ -726,8 +726,8 @@
     "lib/uninstall.js": "cc5bfce22028e9970d631cf783876a795b0ab67c86ef4e847815f9ff9bba3f3e",
     "lib/update.js": "3b30a1856bbf31cb49e483de83d78a0533e1a695510d96ac9f53bca0db5799b4",
     "lib/web.js": "e715a801eb98b176e5e455bada74cb540cee99959ee015dd5ae4155a2070b02c",
-    "lib/zip-extract.js": "e8cd202ac3ac69e71428ae3ac257ce9acc73507b83dcb24fda10b8c029b40025",
-    "package.json": "28b097fc6920b7fe150cda07fa017166cfb09124106436fc1d0e3afa721964d6",
+    "lib/zip-extract.js": "28a326ccb1d9d8e38a938b6c316bffef0b5a5724b07ed9f9f6ba3d90dbfc4302",
+    "package.json": "aaab8f448138ce63d05e8e163376c4dbbb633c9f12e65411305a2d8e8e87fbe0",
     "presets/redteam/agent.cordis.yml": "39ea8b170a5e6daa921ea185fe9eb0dd0342eedf177b051868c77e20e1225a55",
     "presets/redteam/anchor-gate.mjs": "0c99a0dafc072a64179f9e9898aede546dbb6e701c2b453b4164a24f05fe4d16",
     "presets/redteam/preset.yml": "a83460c126cee9dc972df015a98a6869709ca64202d96e2ff42321a2876affaa",
@@ -1091,5 +1091,23 @@
     "hostPluginTrustRequired": true,
     "osSandboxAdded": false,
     "existingFindingsUnchanged": true
+  },
+  "personal12Update": {
+    "version": "1.1.77-personal.12",
+    "date": "2026-11-12",
+    "verification": "docs/personal12-verification.json",
+    "updatedFiles": [
+      "PERSONAL-CHANGES.md",
+      "lib/core.js",
+      "lib/index.js",
+      "lib/skills.js",
+      "lib/zip-extract.js",
+      "package.json"
+    ],
+    "repositoryProgramFiles": 157,
+    "vmProgramFiles": 169,
+    "retainedPreExistingVmSourceDifferences": 24,
+    "excludePresetsDefault": [],
+    "backup": "private six-file backup; existing whole-VM recovery points retained"
   }
 }

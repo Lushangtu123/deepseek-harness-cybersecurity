@@ -63,3 +63,20 @@ test('enabled mode explains original permission semantics instead of promising d
   assert.match(rendered,/按原版补丁运行/);
   assert.doesNotMatch(rendered,/人工审批档位仍逐次确认/);
 });
+
+test('a selected preset suppresses Purge sections while another session keeps them', async () => {
+  const { registerPromptSections } = await import('../package/lib/index.js');
+  const sections = new Map();
+  registerPromptSections({ systemPrompt: { section(section) { sections.set(section.name, section); } } },
+    { excludePresets: ['personal-daily'], postPrompt: 'test section', postPromptOrder: 10 });
+  const session = {
+    header: { agentPreset: 'standard' },
+    events: [{ type: 'agent-preset/selected', data: { agentPreset: 'personal-daily' } }],
+  };
+  const excluded = { agent: { session } };
+  assert.equal(sections.get('dsh-purge:post').text(excluded), '');
+  assert.equal(sections.get('dshpg-capabilities').text(excluded), '');
+  const allowed = { agent: { session: { header: { agentPreset: 'standard' } } } };
+  assert.equal(sections.get('dsh-purge:post').text(allowed), 'test section');
+  assert.equal(sections.get('dsh-purge:post').text(excluded), '');
+});

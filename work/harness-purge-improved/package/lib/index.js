@@ -20,6 +20,8 @@ import {
   adaptInjectForMinimalPreset,
   isMnemonPluginMessage,
   isRedteamSession,
+  sessionAgentPreset,
+  sessionForInject,
   installAssembleGuard,
   modePromptText,
   peelChatmlEnvelope,
@@ -56,6 +58,7 @@ const DEFAULTS = {
   autoUpdateOnStart: false,
   autoRevertOnMissing: false,
   injectOnce: false,
+  excludePresets: [],
   stripMnemon: true,
   postPrompt: "",
   postPromptOrder: 5100,
@@ -168,8 +171,23 @@ function renderStatus(state) {
   return out.join("\n");
 }
 
-function injectAllowedNow(config) {
-  return config.enabled !== false;
+function presetExclusions(config) {
+  return Array.isArray(config.excludePresets)
+    ? config.excludePresets.filter(id => typeof id === "string" && id.trim()).map(id => id.trim())
+    : [];
+}
+
+function presetExcludesInjection(config, context) {
+  const ids = presetExclusions(config);
+  if (!ids.length) return false;
+  if (ids.includes(sessionAgentPreset(context))) return true;
+  const inherited = sessionForInject(context);
+  const own = context?.agent?.session || context?.session;
+  return inherited !== own && ids.includes(sessionAgentPreset({ session: inherited }));
+}
+
+function injectAllowedNow(config, context) {
+  return config.enabled !== false && !presetExcludesInjection(config, context);
 }
 
 /** 提示词框自改 > prompt-inject.md > 加密默认（见 rules.resolveInjectText）。 */
@@ -213,7 +231,7 @@ function refreshHungOperator(dshHome = core.findDshHome()) {
   return out;
 }
 
-function installHungPromptGlobal() {
+function installHungPromptGlobal(config) {
   // host 侧 inject 兜底:正常 cordis assemble 钩子 (rewriteLiveAssembly) 跟这条路径互斥,
   // 不会重复注入;插件首装 / 预设切换 / hung session / 新对话首轮钩子未就绪窗口,靠这里兜。
   // [v10 四重 fallback] 新对话首轮 refreshHungOperator 若因 cache 未就绪 / sync disk 失败 /
@@ -223,7 +241,10 @@ function installHungPromptGlobal() {
   //   2) hungOperatorPrompt   — 上次挂上的内存钉子(进程生命周期)
   //   3) readPromptInjectFileSync — 直读磁盘 prompt-inject.md,绕过 sync/resolve
   //   4) defaultOverrideText — 加密槽解包,除非插件安装残缺否则非空
-  const fn = () => {
+  const fn = (context) => {
+    // rc.3's patched fallback does not pass the session. A scoped configuration
+    // must use the normal assembly hooks instead of guessing a preset globally.
+    if (presetExclusions(config).length && (!context || !injectAllowedNow(config, context))) return "";
     const norm = (s) => peelChatmlEnvelope(String(s || "").replace(/\r\n/g, "\n"));
     let home = "";
     try { home = core.findDshHome(); } catch { home = ""; }
@@ -388,7 +409,7 @@ export function registerPromptSections(ctx, config) {
     order: GLOBAL_PROMPT_ORDER,
     interpolate: false,
     text: (context) => {
-      if (!injectAllowedNow(config)) return "";
+      if (!injectAllowedNow(config, context)) return "";
       // 标准、极简都注入同一份正文。极简只改工具句，不决定注不注入。
       return escapeDshInterpolation(
         peelChatmlEnvelope(adaptInjectForMinimalPreset(readInjectFallback(context), context)),
@@ -402,7 +423,7 @@ export function registerPromptSections(ctx, config) {
       order: GLOBAL_PROMPT_ORDER + 1,
       interpolate: false,
       text: (context) => {
-        if (!injectAllowedNow(config)) return "";
+        if (!injectAllowedNow(config, context)) return "";
         const redteam = isRedteamSession(context);
         return capabilityProtocolText({
           redteam,
@@ -425,7 +446,7 @@ export function registerPromptSections(ctx, config) {
   addPromptSection(ctx, {
     name: "dsh-purge:post",
     order: config.postPromptOrder,
-    text: () => (injectAllowedNow(config) ? postPrompt : ""),
+    text: (context) => (injectAllowedNow(config, context) ? postPrompt : ""),
   });
 }
 
@@ -502,6 +523,11 @@ function installMnemonMessageStrip(ctx, config = {}) {
 }
 
 function rewriteLiveAssembly(config, assembled, context, decision = { mode: "full", taskKind: "general" }, host) {
+  if (presetExcludesInjection(config, context)) {
+    if (!Array.isArray(assembled?.sections)) return assembled;
+    const excluded = new Set(["dsh-purge", "dsh-purge:identity", CAPABILITY_SECTION, "dsh-purge:post"]);
+    return { ...assembled, sections: assembled.sections.filter(section => !excluded.has(section?.name)) };
+  }
   const enabled = config.enabled !== false;
   const redteam = enabled && isRedteamSession(context);
   const full = enabled ? readInjectFallback(context) : "";
@@ -812,7 +838,7 @@ function installIdentityOverride(ctx, config = {}) {
     return prompt || null;
   };
   globalThis.__dshPurgePrepareAssemble = prepareAssemble;
-  const hungFn = installHungPromptGlobal();
+  installHungPromptGlobal(config);
   // complete:true 会在 waterfall 之后盖掉 sections；包住 assemble 返回值，每轮都补回注入。
   wrapAssemble("init");
   // guard 需要在每次 cordis 换 systemPrompt 代理时重挂（session 内切预设、subagent fork、
@@ -1479,7 +1505,7 @@ export function apply(ctx, config) {
       const home = core.pinDshHome() || core.findDshHome();
       const disabled = path.join(home, ".hung-disabled");
       if (fs.existsSync(disabled)) fs.unlinkSync(disabled);
-      installHungPromptGlobal();
+      installHungPromptGlobal(cfg);
       core.seedPromptInjectAtBoot(home);
       refreshHungOperator(home);
       core.applyRuntimeEnv();

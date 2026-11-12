@@ -94,6 +94,37 @@ test('npm launcher link and target survive patch, repeated patch, and restore', 
   assert.equal(fs.readFileSync(target, 'utf8'), old);
 });
 
+test('rollback quarantines an empty launcher backup without replacing the launcher', async () => {
+  const dir = fixture('empty-launcher-backup');
+  const launcher = path.join(dir, 'dsh');
+  const backup = core.shimBackupPath(launcher);
+  write(launcher, '#!/bin/sh\nprintf fixture\n', 0o755);
+  write(backup, '');
+  write(backup + '.bad', 'prior quarantine');
+  assert.equal((await core.revertShim(dir, { scrubDesktop: false })).dsh, 'skipped_empty_backup');
+  assert.equal(fs.readFileSync(launcher, 'utf8'), '#!/bin/sh\nprintf fixture\n');
+  assert.equal(fs.statSync(launcher).mode & 0o777, 0o755);
+  assert.equal(fs.existsSync(backup), false);
+  assert.equal(fs.readFileSync(backup + '.bad', 'utf8'), 'prior quarantine');
+  assert.equal(fs.statSync(backup + '.bad.1').size, 0);
+});
+
+test('host rollback quarantines an empty module backup and restores other valid modules', async () => {
+  const ai = fixture('empty-module-backup');
+  const loop = path.join(ai, 'dsh-agent-loop/lib/index.js');
+  const tools = path.join(ai, 'dsh-tools/lib/index.js');
+  write(loop, 'running loop');
+  write(loop + '.dshpurge.bak', '');
+  write(tools, 'patched tools');
+  write(tools + '.dshpurge.bak', 'original tools');
+  const result = await core.revertAll(ai);
+  assert.ok(result.skipped.includes(loop));
+  assert.ok(result.reverted.includes(tools));
+  assert.equal(fs.readFileSync(loop, 'utf8'), 'running loop');
+  assert.equal(fs.statSync(loop + '.dshpurge.bak.bad').size, 0);
+  assert.equal(fs.readFileSync(tools, 'utf8'), 'original tools');
+});
+
 test('staged update switches complete packages and preserves unrelated entries', async () => {
   const { beginPackageUpdate } = await api(), dir = fixture('transaction');
   const source = path.join(dir, 'source'), dest = path.join(dir, 'installed');

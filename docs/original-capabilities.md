@@ -27,3 +27,17 @@
 该阶段恢复点为 `ready-merged-stability-20261029`，合并版r1和v30等旧点保留。恢复前结束任务并正常关闭VM，使用原Mac上的恢复入口。恢复会回退该点之后的文件、会话及配置。
 
 本仓库保存关闭状态标记、插件源码和宿主控制器，不包含完整原版安装、62,988项运行时副本或恢复磁盘。Git clone不能单独重建底层原版补丁或整台VM；新机器须另外准备匹配版本、依赖、凭据及隔离环境。普通仓库测试不执行真实切换、模型调用或对外部目标探测。
+
+
+## 按预设排除 Purge 提示词
+
+从 personal.12 起，可在 VM 的 `/home/purge/.dsh-improved/profiles/web/cordis.patch.yml` 现有 `dsh-purge` 项目的 `config` 下加入 `excludePresets`。保留已有配置，例如：
+
+```yaml
+- id: dsh-purge
+  config:
+    executionMode: vm-autonomous
+    excludePresets: [personal-daily]
+```
+
+`personal-daily` 对应「日常精简」。列表使用预设 ID，支持多个 ID，空列表为默认行为。保存后重启 Harness 服务，新请求按当前预设判断。子代理在其自身预设或所继承的父会话预设命中时也跳过注入。工作台、工具、授权提示和项目角色继续可用。底层运行时权限仍由原版能力总开关和现有权限配置决定。配置非空时，rc.3 的无会话补充注入停用，普通会话的注入依赖正常提示词组装。

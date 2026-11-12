@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-12",
+  "timezone": "America/Los_Angeles",
+  "version": "1.1.77-personal.12",
+  "baseCommit": "7dc7cf86264594e19371becbb5803f4e5f660b16",
+  "changes": [
+    "verified-bounded-skill-zip-import",
+    "empty-backup-quarantine",
+    "preset-prompt-exclusions"
+  ],
+  "localChecks": {
+    "python": 295,
+    "pluginNode": 614,
+    "hostNode": 139,
+    "exportIntegrity": true,
+    "reproducibleClient": true
+  },
+  "guestChecks": {
+    "candidateRegressionTests": 27,
+    "nativePresetAssembly": {
+      "modelRequests": 0,
+      "scopedPreset": true,
+      "activeOriginal": true,
+      "ok": true
+    },
+    "authenticatedEntry": true,
+    "profileRestored": true,
+    "programInventoryMatched": 169,
+    "otherProgramFilesPreserved": 163
+  },
+  "deployment": {
+    "updatedFiles": {
+      "PERSONAL-CHANGES.md": {
+        "before": "76088dec50db57ad713d5b5f5d689390399aa0c7660e16dc3b6ce551af9ee1f3",
+        "after": "e4c9127423604533643f73b108111d3109a645b470098eb36bf7fa2538001e72",
+        "mode": 420
+      },
+      "lib/core.js": {
+        "before": "9ce5088c667195c74037249c2480ffeac905c0e57b9d121e41e48e5858377739",
+        "after": "c09bff750003bfc551d51171ac9ffb180eff31767da8501253af9126acf38bf4",
+        "mode": 420
+      },
+      "lib/index.js": {
+        "before": "5faf8f00b38d801d118e5baec0a405881d502c74620a27998046c3cbaf4d47f6",
+        "after": "d950d726a30e73996bbde4728d56c65aef32a1fd5925bc83d8de0fb49b0128cc",
+        "mode": 420
+      },
+      "lib/skills.js": {
+        "before": "37138e14e2dad92a18b63319b9a87d65228c7852fcdd2656054d61593f4dfcee",
+        "after": "fb1050e91b8041fe81c45c9f7b3153c460f97f00990d6d0d4d450954caece259",
+        "mode": 420
+      },
+      "lib/zip-extract.js": {
+        "before": "e8cd202ac3ac69e71428ae3ac257ce9acc73507b83dcb24fda10b8c029b40025",
+        "after": "28a326ccb1d9d8e38a938b6c316bffef0b5a5724b07ed9f9f6ba3d90dbfc4302",
+        "mode": 420
+      },
+      "package.json": {
+        "before": "28b097fc6920b7fe150cda07fa017166cfb09124106436fc1d0e3afa721964d6",
+        "after": "aaab8f448138ce63d05e8e163376c4dbbb633c9f12e65411305a2d8e8e87fbe0",
+        "mode": 420
+      }
+    },
+    "fileBackupSaved": true,
+    "scope": "Six selected plugin files deployed over the running VM. 24 pre-existing source differences relative to the GitHub baseline are retained.",
+    "originalCapabilitiesEnabled": true,
+    "excludePresetsDefault": [],
+    "qaSessionArtifactsArchived": 12
+  },
+  "initialAttempt": {
+    "rollbackVerified": true,
+    "cause": "Deployment helper incorrectly required anonymous HTTP 200. The private entry correctly returned 401.",
+    "resolution": "Used the existing authenticated guest plugin and Mac entry readiness checks."
+  },
+  "recovery": {
+    "type": "six-file private backup",
+    "wholeVmRecoveryPointCreated": false
+  },
+  "sources": [
+    "https://github.com/kingcharleslzy-ai/dsh-purge/tree/v1.6.97",
+    "https://github.com/realMisakaMikoto/dsh-purge/tree/v1.2.3"
+  ]
+}
