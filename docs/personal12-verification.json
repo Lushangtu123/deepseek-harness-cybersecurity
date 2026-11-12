@@ -79,5 +79,24 @@
   "sources": [
     "https://github.com/kingcharleslzy-ai/dsh-purge/tree/v1.6.97",
     "https://github.com/realMisakaMikoto/dsh-purge/tree/v1.2.3"
-  ]
+  ],
+  "linuxChecks": {
+    "ok": true,
+    "pythonVersion": "Python 3.12.3",
+    "nodeVersion": "v24.22.1",
+    "pythonTests": 295,
+    "nodePassCounts": [
+      "614",
+      "139"
+    ],
+    "failures": [],
+    "sourceCommit": "a6a995c10e6dc712886436d9672501713dfc4d0e"
+  },
+  "githubActions": {
+    "run": "https://github.com/Lushangtu123/deepseek-harness-cybersecurity/actions/runs/43315288554",
+    "state": "job-not-started",
+    "reason": "GitHub account locked due to a billing issue",
+    "workflowPythonVersion": "3.13",
+    "fallback": "Full commit checks passed locally on Python 3.13 and in the VM on Python 3.12.3 with Node 24.22.1."
+  }
 }
