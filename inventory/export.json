@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "configuration": "merged-kali-tools-personal2",
-  "source": "sanitized repository baseline with selective personal.13 lifecycle fix; additional VM local edits retained",
+  "source": "sanitized repository baseline with selective personal.14 security-review scope fix; additional VM local edits retained",
   "guestFiles": {
     "guest-home/.dsh-improved/cordis.patch.yml": {
       "sourceSha256": "01605d29a130f965ee20e1e850e16b03e826f4d6b874eff13f4bba1f3fbb0bae",

@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-13",
+  "timezone": "America/Los_Angeles",
+  "version": "1.1.77-personal.14",
+  "baseCommit": "2affae8f2420a25d51e86939259147284c8b3a54",
+  "rootCauses": [
+    "Negated defensive constraints matched attack keywords.",
+    "A task without a host was assigned an unspecified domain.",
+    "The redteam preset and previous tool arguments were treated as current network actions.",
+    "Native execution arguments and deny/reason ABI were missing."
+  ],
+  "changes": [
+    "Clause-bounded negative constraints; no fabricated network target.",
+    "Local data tools treat URLs in source, paths and reports as data.",
+    "Single curl -q downloads from GitHub raw/codeload to local files; no extra configuration, upload or compound-command exception.",
+    "Live target checks at tool dispatch; native arguments and deny/reason ABI.",
+    "VM authorization section describes allowed security review and source preparation."
+  ],
+  "checks": {
+    "linuxPython": 295,
+    "linuxPluginNode": 624,
+    "linuxHostNode": 139,
+    "linuxExportIntegrity": true,
+    "linuxReproducibleClient": true,
+    "macPluginNode": 624,
+    "macFullSuite": "Blocked at two pre-existing ssh-correlation checks because sandbox denies ps; full Linux suite passed.",
+    "nativeExactOriginalRequestAllowed": true,
+    "nativePreparation": {
+      "readSource": "dispatch",
+      "sourcePreparation": "dispatch",
+      "publicAction": "post-result"
+    },
+    "nativeDenialTurnValid": true,
+    "modelRequests": 0,
+    "toolBodiesInvoked": 0,
+    "authenticatedHostEntry": true
+  },
+  "deployment": {
+    "programFiles": 169,
+    "updatedFiles": 4,
+    "configurationRestored": true,
+    "otherLocalProgramEditsPreserved": true,
+    "privateBackup": "/home/purge/.cache/dsh-purge-personal14-a107b7a2f229",
+    "wholeVmRecoveryPointCreated": false
+  },
+  "limits": [
+    "Finite heuristic, not proof of authorization or a network sandbox.",
+    "General shell commands with public host literals remain conservative; arbitrary public active testing was not enabled.",
+    "No live-target testing, real-project scan, R3 acceptance, candidate mutation, scoring change, or history rewrite.",
+    "GitHub Actions previously could not start due to account billing lock; this round cloud result checked separately."
+  ]
+}

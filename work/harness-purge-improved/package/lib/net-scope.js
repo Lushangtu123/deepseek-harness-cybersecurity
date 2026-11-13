@@ -506,7 +506,10 @@ function scanHas(re, text) {
 }
 
 export function isAttackTask(text) {
-  const sample = String(text || "");
+  // Negation applies only to its own bounded clause, never to the whole task.
+  const sample = String(text || "")
+    .replace(/(?:不(?:提供|执行|进行|实施|开展|允许)|不得|不要|禁止)[^，,。；;\n]{0,60}?(?:攻击(?:细节)?|渗透测试|红队|入侵|爆破|提权|端口扫描)/g, " ")
+    .replace(/\b(?:do\s+not|don't|never)\s+(?:(?:perform|run|conduct|provide)\s+)?(?:an?\s+)?(?:attack|exploit|pentest|breach)\b/gi, " ");
   if (isBenignNetworkTopic(sample)) return false;
   return scanHas(ATTACK, sample);
 }
@@ -565,13 +568,15 @@ export async function publicHostHit(text) {
 }
 
 export async function taskTargetHit(text) {
-  if (!isAttackTask(text)) return null;
-  let found = false;
-  for (const host of hostsInTask(text)) {
-    if (hostOf(host)) found = true;
+  // A missing target is an opportunity to plan/clarify, not a fabricated domain.
+  // References in another clause are not destinations of an attack instruction.
+  for (const clause of String(text || "").split(/[。；;\n]/)) {
+    if (!isAttackTask(clause)) continue;
+    if (/^\s*[-*]?\s*(?:参考|来源|依据|公告|修复提交|reference|source|advisory)\s*[:：]/i.test(clause)) continue;
+    const hit = await publicHostHit(clause);
+    if (hit) return hit;
   }
-  if (!found) return taskHit("unspecified", "domain");
-  return publicHostHit(text);
+  return null;
 }
 
 function blobOf(value, depth = 0) {
@@ -621,10 +626,81 @@ export function execArgText(exec) {
   if (!exec || typeof exec !== "object") return "";
   return blobOf({
     name: exec.tool?.name || exec.name || exec.toolName,
-    args: exec.args ?? exec.input ?? exec.parameters ?? exec.params,
+    args: exec.arguments ?? exec.args ?? exec.input ?? exec.parameters ?? exec.params,
     command: exec.command,
     call: exec.toolCall ?? exec.call,
   });
+}
+
+// These native tools manipulate local data. A URL in source, a search pattern or
+// report text is not a network request. Host permissions still apply downstream.
+const DATA_TOOLS = new Set(["read", "glob", "grep", "write", "edit", "apply_patch", "working_directory"]);
+
+function commandWords(command) {
+  const text = String(command || "").trim();
+  // Deliberately not a shell parser: only one literal command is eligible for
+  // the download exception. Expansions, substitutions and compound commands fall
+  // back to the ordinary destination check, even inside quotes.
+  if (!text || text.length > 8192 || /[$`\\<>|;&\r\n\x00]/.test(text)) return null;
+  const words = [], token = /\s*(?:"([^"\n]*)"|'([^'\n]*)'|([^\s"']+))/gy;
+  let at = 0;
+  while (at < text.length) {
+    token.lastIndex = at;
+    const match = token.exec(text);
+    if (!match || (token.lastIndex < text.length && !/\s/.test(text[token.lastIndex]))) return null;
+    words.push(match[1] ?? match[2] ?? match[3]);
+    at = token.lastIndex;
+  }
+  return words;
+}
+
+function sourceUrl(raw) {
+  try {
+    const url = new URL(raw);
+    if (url.protocol !== "https:" || url.username || url.password || url.port || url.search || url.hash) return false;
+    const pair = "[A-Za-z0-9_-][A-Za-z0-9_.-]*/[A-Za-z0-9_-][A-Za-z0-9_.-]*";
+    if (url.hostname === "raw.githubusercontent.com") return new RegExp(`^/${pair}/[A-Za-z0-9_.-]+/.+`).test(url.pathname);
+    if (url.hostname === "codeload.github.com") return new RegExp(`^/${pair}/(?:tar\\.gz|zip)/(?:[A-Fa-f0-9]{40}|refs/(?:heads|tags)/[A-Za-z0-9_./-]+)$`).test(url.pathname);
+    return false;
+  } catch { return false; }
+}
+
+function sourceDownload(command) {
+  const words = commandWords(command);
+  if (!words) return false;
+  const [program, ...args] = words;
+  if (["curl", "/usr/bin/curl"].includes(program)) {
+    let url = "", output = "";
+    for (let i = 0; i < args.length; i++) {
+      const arg = args[i];
+      if (["--fail", "--silent", "--show-error", "--location", "--disable"].includes(arg) || /^-[fsSLq]+$/.test(arg)) continue;
+      if (["-o", "--output"].includes(arg) && !output) {
+        output = args[++i] || "";
+        if (!output || output.startsWith("-") || /^(?:\/dev|\/proc|\/sys)(?:\/|$)/.test(output)) return false;
+      } else if (!url && sourceUrl(arg)) url = arg;
+      else return false;
+    }
+    // -q must be first: do not inherit a user's curlrc redirects/uploads/hooks.
+    return !!url && !!output && ["-q", "--disable"].includes(args[0]);
+  }
+  return false;
+}
+
+async function executionTargetHit(exec) {
+  const name = String(exec?.tool?.name || exec?.name || exec?.toolName || "");
+  if (DATA_TOOLS.has(name)) return null;
+  let args = exec?.arguments ?? exec?.args ?? exec?.input ?? exec?.parameters ?? exec?.params;
+  if (typeof args === "string") {
+    try { args = JSON.parse(args); } catch { /* Inspect the raw text below. */ }
+  }
+  if (["bash", "shell", "exec_command"].includes(name)) {
+    const command = args?.command ?? args?.cmd ?? exec?.command;
+    if (typeof command === "string") {
+      if (sourceDownload(command)) return null;
+      return publicHostHit(command);
+    }
+  }
+  return publicHostHit(execArgText(exec));
 }
 
 function isRedteamPayload(payload) {
@@ -786,36 +862,22 @@ async function parkDenial(payload) {
 }
 
 function denyToolResult() {
-  return { isError: true, content: DENIAL, output: DENIAL, text: DENIAL };
+  return { kind: "deny", reason: DENIAL, isError: true, content: DENIAL, output: DENIAL, text: DENIAL };
 }
 
 export function installRegionGate(ctx) {
   if (!ctx || typeof ctx.on !== "function") return;
-  const scoped = new WeakMap();
   const hook = async (payload, next) => {
     const forward = () => (typeof next === "function" ? next() : { kind: "enter", messages: payload?.messages || [] });
     const step = Number(payload?.step);
-    const turn = Number(payload?.turn);
-    const session = sessionOf(payload) || payload?.agent?.session;
+    // Actual dispatch is checked by toolHook. Re-reading old tool calls here
+    // mistakes a completed request or quoted source for the next action.
+    if (step !== 1) return forward();
     let hit = null;
     try {
       const task = currentTaskText(payload?.messages);
-      const redteam = isRedteamPayload(payload);
-      const marked = session ? scoped.get(session) === turn : false;
-      if (step === 1) {
-        if (!task && !redteam) return forward();
-        if (task && isCheatTask(task)) hit = taskHit("cheat", "cheat");
-        else if (task && isAttackTask(task)) {
-          if (session && Number.isSafeInteger(turn)) scoped.set(session, turn);
-          hit = await taskTargetHit(task);
-        } else if (redteam) {
-          if (session && Number.isSafeInteger(turn)) scoped.set(session, turn);
-          hit = task ? await publicHostHit(task) : null;
-        } else return forward();
-      } else if (redteam || marked || isAttackTask(task)) {
-        if (isCheatTask(task)) hit = taskHit("cheat", "cheat");
-        else hit = await publicHostHit(latestToolText(payload?.messages));
-      } else return forward();
+      if (task && isCheatTask(task)) hit = taskHit("cheat", "cheat");
+      else hit = await taskTargetHit(task);
     } catch {
       return forward();
     }
@@ -832,9 +894,7 @@ export function installRegionGate(ctx) {
   const toolHook = async (exec, next) => {
     const forward = () => (typeof next === "function" ? next() : denyToolResult());
     try {
-      const blob = execArgText(exec);
-      if (!blob.trim()) return forward();
-      const hit = await publicHostHit(blob);
+      const hit = await executionTargetHit(exec);
       if (!hit) return forward();
     } catch {
       return forward();
