@@ -24,7 +24,7 @@ test('original capabilities default off and require the dedicated VM overlay', a
   ]) assert.equal(originalCapabilitiesEnabled({...runtime, ...changed}), false);
 });
 
-test('original composition includes all original runtime hooks only in explicit mode', async () => {
+test('personal original mode retains capabilities without the legacy text-based network gate by default', async () => {
   const { installOriginalCapabilities } = await load();
   assert.equal(typeof installOriginalCapabilities, 'function');
   const calls = [], names = ['identity', 'region', 'freshPermissions', 'rewind', 'cwd', 'mnemon', 'prompts', 'retry'];
@@ -32,7 +32,26 @@ test('original composition includes all original runtime hooks only in explicit 
   installOriginalCapabilities({}, {}, ops, {...runtime, env: {}});
   assert.deepEqual(calls, []);
   installOriginalCapabilities({}, {}, ops, runtime);
-  assert.deepEqual(calls, names);
+  assert.deepEqual(calls, names.filter(name => name !== 'region'));
+});
+
+test('the legacy region heuristic requires explicit boolean opt-in', async () => {
+  const { installOriginalCapabilities } = await load();
+  for (const value of [true, false, 'true', 1, undefined]) {
+    const calls = [], names = ['identity', 'region', 'freshPermissions', 'rewind', 'cwd', 'mnemon', 'prompts', 'retry'];
+    const ops = Object.fromEntries(names.map(name => [name, () => calls.push(name)]));
+    installOriginalCapabilities({}, { legacyRegionGate: value }, ops, runtime);
+    assert.equal(calls.includes('region'), value === true);
+    assert.equal(calls.length, value === true ? 8 : 7);
+  }
+});
+
+test('legacy region opt-in cannot enable original capabilities outside the dedicated VM overlay', async () => {
+  const { installOriginalCapabilities } = await load();
+  const calls = [], names = ['identity', 'region', 'freshPermissions', 'rewind', 'cwd', 'mnemon', 'prompts', 'retry'];
+  const ops = Object.fromEntries(names.map(name => [name, () => calls.push(name)]));
+  assert.equal(installOriginalCapabilities({}, { legacyRegionGate: true }, ops, { ...runtime, platform: 'darwin' }), false);
+  assert.deepEqual(calls, []);
 });
 
 test('the normal settings page never mounts legacy patch or prompt editors', () => {

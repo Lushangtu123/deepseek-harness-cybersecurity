@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-13",
+  "timezone": "America/Los_Angeles",
+  "version": "1.1.77-personal.15",
+  "baseCommit": "f45426e17866b768ceabb9a21076236d6d48eab4",
+  "status": "deployed-and-verified",
+  "rootCause": "The optional legacy region gate extracts domain-shaped strings from arbitrary tool text. Actual denied calls contained json.load, json.tool, sys.executable and Docker .Config.Entrypoint, plus ordinary GitHub metadata/source requests. The personal.14 partial fix did not resolve this general classification error.",
+  "change": "Dedicated personal VM original capability composition skips region registration unless config.legacyRegionGate is boolean true. Other original hooks are retained.",
+  "checks": {
+    "linuxPython": 295,
+    "linuxPluginNode": 626,
+    "linuxHostNode": 139,
+    "linuxExportIntegrity": true,
+    "linuxReproducibleClient": true,
+    "explicitBooleanOptIn": true,
+    "originalModeStillRequiresDedicatedVM": true,
+    "personalControlsAndManagedReviewGuards": true,
+    "totalLinuxTests": 1060
+  },
+  "native": {
+    "modelRequests": 0,
+    "toolBodiesInvoked": 1,
+    "defaultLegacyGate": false,
+    "explicitOptIn": true,
+    "originalRejectedCalls": 27,
+    "originalCasesSha256": "5810b0a92bbab0b340054e20dacf193c327fc4104c201b551d5ecb5cd5b8690b",
+    "nativeStandardToolsMounted": true,
+    "nativeScopedGuardStillEnforced": true,
+    "nativeLocalJsonExecution": true,
+    "ok": true,
+    "originalCallsPreparedForDispatch": 27,
+    "originalCallsExecuted": 0,
+    "localJsonExecution": {
+      "exitCode": 0,
+      "stdout": "PERSONAL15_JSON=True\n",
+      "networkOperationsRequested": 0
+    }
+  },
+  "deployment": {
+    "phase": "verified",
+    "backup": "/home/purge/.cache/dsh-purge-personal15-106758dc5d79",
+    "programFiles": 169,
+    "updatedFiles": 3,
+    "configurationRestored": true,
+    "unrelatedProgramEditsPreserved": true,
+    "authenticatedHostEntry": true,
+    "wholeVmRecoveryPointCreated": false
+  },
+  "unchanged": [
+    "Session permission and approval controls",
+    "Managed review tool restrictions, project scope and evidence checks",
+    "VM isolation and egress configuration",
+    "Original prompts and other original capability hooks",
+    "Frozen precheck candidate, scanning contracts and scoring thresholds",
+    "Existing user session history"
+  ],
+  "limits": [
+    "Disabling this heuristic does not grant authorization for unrelated external targets.",
+    "Model provider policies, tool availability, network failures and managed scope guards can still reject work.",
+    "This change is not a network sandbox or an R3 acceptance result."
+  ],
+  "diagnosticAttempts": {
+    "rolledBack": 2,
+    "cause": "The native validation helper created a QA agent without selecting the standard preset; the added local execution returned UNKNOWN_TOOL for bash. The helper was corrected to select standard and assert that all required native tools exist. The tested production candidate did not change.",
+    "originalReceiptsRetained": true,
+    "correctedProbePassed": true
+  }
+}

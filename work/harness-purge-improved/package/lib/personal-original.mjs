@@ -14,6 +14,11 @@ export function originalCapabilitiesEnabled(runtime = {
 export function installOriginalCapabilities(ctx, config, operations, runtime) {
   if (!originalCapabilitiesEnabled(runtime)) return false;
   for (const name of ['identity', 'region', 'freshPermissions', 'rewind', 'cwd', 'mnemon', 'prompts', 'retry']) {
+    // The legacy gate guesses network destinations from arbitrary text. Python
+    // attributes, Docker templates and read-only references are not endpoints.
+    // Keep it opt-in; personal/session controls, managed scope guards and VM
+    // egress isolation remain the execution authority in the personal VM.
+    if (name === 'region' && config?.legacyRegionGate !== true) continue;
     operations[name](ctx, config);
   }
   return true;
