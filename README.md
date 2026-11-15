@@ -143,7 +143,7 @@ python3 -B scripts/ci.py --suite all
 
 检查涵盖导出完整性、Python/Node 回归和客户端重建一致性。真实 VM 启动、账号连接、模型任务和浏览器交互，需要单独验收，不能由 CI 通过推断完成。
 
-当前仓库的插件版本为 **dsh-purge 1.1.77-personal.15**，个人 VM 默认关闭会误判源码/API 名称及只读引用的旧域名启发式，继续使用会话权限、受管项目范围和 VM 隔离；旧拦截层可显式启用，拒绝后的会话生命周期修复继续保留，保留此前的技能 ZIP 校验、空备份保护与[按预设排除 Purge 提示词](docs/original-capabilities.md#按预设排除-purge-提示词)。Kali 部署和整机恢复点见[当前状态](docs/current-status.md)和对应验收资料。
+当前仓库的插件版本为 **dsh-purge 1.1.77-personal.16**，[拒绝诊断与授权说明](docs/security-permissions.md)区分插件、宿主、模型服务、网络与额度问题；个人 VM 默认关闭会误判源码/API 名称及只读引用的旧域名启发式，继续使用会话权限、受管项目范围和 VM 隔离；旧拦截层可显式启用，拒绝后的会话生命周期修复继续保留，保留此前的技能 ZIP 校验、空备份保护与[按预设排除 Purge 提示词](docs/original-capabilities.md#按预设排除-purge-提示词)。Kali 部署和整机恢复点见[当前状态](docs/current-status.md)和对应验收资料。
 
 - **Semgrep 仍有解析缺口**：已保留 `PartialParsing` 及相应失败状态，补充文本提示不等于完成语义分析。见[解析器自检](docs/semgrep-parser-check.md)。
 - **历史连接问题未全部定位**：部分旧 SSH 失败及 QEMU 内部具体缺陷尚无确定根因，后续成功不用于改写原失败记录。见[SSH 与恢复诊断](docs/reload-recovery-ssh.md)。

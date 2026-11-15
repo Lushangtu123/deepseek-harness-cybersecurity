@@ -1,4 +1,5 @@
 import {bindingKeyOf} from './redteam/personal-session-resolution.mjs';
+import {permissionDiagnostic} from './personal-controls.mjs';
 const ALLOW=new Set(['redteam_security_audit','redteam_session_info','redteam_session_bind']);
 const ACTIONS=new Set(['status','preflight','source','kali_check','start','cancel','wait','report','compare']);
 export function reviewToolDenial(exec,{bound=null,targets=[],unavailable=false}={}){
@@ -17,16 +18,17 @@ export function reviewToolDenial(exec,{bound=null,targets=[],unavailable=false}=
 export const inject=['tools','redteam'];
 export function applyManagedReviewFilter(ctx,{allow=ALLOW,denial=reviewToolDenial,scope='personal-review.tool-filter'}={}){
  if(typeof ctx.tools?.guard!=='function'||typeof ctx.tools?.restrict!=='function'||typeof ctx.tools?.presentAs!=='function')throw Error('Native execution guard unavailable');
+ const explain=(exec,reason,code='review-scope')=>permissionDiagnostic(exec,{source:`dsh-purge:${scope}`,code,reason}).reason;
  let signature,release,disposed=false;const reserved=new Map(),definitions=new Map();const presentation=ctx.tools.presentAs('native');
  const identity=exec=>{const expected=definitions.get(exec.name);return expected&&typeof ctx.root.tools.get==='function'&&ctx.root.tools.get(exec.name,exec.agent)===expected};
  const sync=()=>{if(disposed)return;for(const name of allow){const definition=ctx.root.tools.get?.(name);if(definition&&!definitions.has(name))definitions.set(name,definition)}const names=ctx.root.tools.schemas().map(x=>x.name).filter(x=>allow.has(x));const key=names.sort().join('\n');if(key===signature)return;signature=key;const previous=release;release=ctx.tools.restrict({allow:names});previous?.()};
  const guard=ctx.tools.guard(exec=>{
-  if(!allow.has(exec.name))return denial(exec);
-  if(!identity(exec))return '审查工具身份未确认或已被同名工具覆盖';
-  try{const {chain,rootId}=bindingKeyOf(exec,ctx.redteam,{remember:false});if(!chain.length||!rootId)throw Error();const bound=ctx.redteam.sessionBindings.find(chain)??null,targets=exec.name==='redteam_session_bind'?ctx.redteam.listEngagements():[];const rejected=denial(exec,{bound,targets});if(rejected)return rejected;const target=exec.name==='redteam_session_bind'?(targets.find(t=>t.id===exec.arguments.engagement)??targets.find(t=>t.name===exec.arguments.engagement))?.id:bound;const pin=reserved.get(rootId);if(pin&&target&&pin!==target)return '审查会话的首次项目已预留，拒绝并发绑定或切换';if(target&&!pin)reserved.set(rootId,target);return;}
-  catch{return denial(exec,{unavailable:true})}
+  if(!allow.has(exec.name))return explain(exec,denial(exec),'review-tool-not-allowed');
+  if(!identity(exec))return explain(exec,'审查工具身份未确认或已被同名工具覆盖','review-tool-identity');
+  try{const {chain,rootId}=bindingKeyOf(exec,ctx.redteam,{remember:false});if(!chain.length||!rootId)throw Error();const bound=ctx.redteam.sessionBindings.find(chain)??null,targets=exec.name==='redteam_session_bind'?ctx.redteam.listEngagements():[];const rejected=denial(exec,{bound,targets});if(rejected)return explain(exec,rejected);const target=exec.name==='redteam_session_bind'?(targets.find(t=>t.id===exec.arguments.engagement)??targets.find(t=>t.name===exec.arguments.engagement))?.id:bound;const pin=reserved.get(rootId);if(pin&&target&&pin!==target)return explain(exec,'审查会话的首次项目已预留，拒绝并发绑定或切换','review-binding-reserved');if(target&&!pin)reserved.set(rootId,target);return;}
+  catch{return explain(exec,denial(exec,{unavailable:true}),'review-binding-unavailable')}
  });
- ctx.on('tools/execute',async(exec,next)=>{if(!allow.has(exec.name)||!identity(exec))throw Error('审查工具身份在执行前变化，拒绝调用');return next()});
+ ctx.on('tools/execute',async(exec,next)=>{if(!allow.has(exec.name)||!identity(exec))throw Error(explain(exec,'审查工具身份在执行前变化，拒绝调用','review-tool-identity'));return next()});
  ctx.on('tools/change',sync);ctx.effect(()=>()=>{disposed=true;release?.();guard?.();presentation?.()},scope);sync();
 }
 export function apply(ctx){return applyManagedReviewFilter(ctx)}

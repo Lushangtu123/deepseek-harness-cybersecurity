@@ -3,6 +3,7 @@ import path from "node:path";
 import { randomUUID } from "node:crypto";
 import dns from "node:dns/promises";
 import { findDshHome } from "./core.js";
+import { permissionDiagnostic } from "./personal-controls.mjs";
 
 const SUFFIXES = [
   [".xn--fiqs8s", "CN"],
@@ -234,8 +235,6 @@ async function lookupIps(name) {
   if (lookupCache.size > 256) lookupCache.delete(lookupCache.keys().next().value);
   return ips;
 }
-
-const DENIAL = "不行，这是严令禁止的";
 
 // 渗透(?!测试)：「渗透测试 / IP 与渗透测试」不是攻击任务（#73）。
 // exploit(?!-)：exploit-db.com 等资料站不算 exploit 关键词。
@@ -759,12 +758,12 @@ function sessionOf(payload) {
   return null;
 }
 
-async function denialMessage() {
+async function denialMessage(text) {
   try {
     const mod = await import("@deepseek-ai/dsh-llm");
     if (typeof mod.createAssistantMessage === "function") {
       return mod.createAssistantMessage({
-        content: [{ type: "text", text: DENIAL }],
+        content: [{ type: "text", text }],
         source: { provider: "deepseek", model: "deepseek-chat" },
       });
     }
@@ -774,7 +773,7 @@ async function denialMessage() {
   return {
     id: randomUUID(),
     role: "assistant",
-    content: [{ type: "text", text: DENIAL }],
+    content: [{ type: "text", text }],
     source: { kind: "model", provider: "deepseek", model: "deepseek-chat" },
   };
 }
@@ -786,11 +785,11 @@ const COMPACT_STREAM_TYPES = new Set([
   "tool-call-chunks",
 ]);
 
-function denialChunks() {
+function denialChunks(text) {
   return [
     { type: "block-start", index: 0, blockType: "text" },
-    { type: "text-delta", index: 0, text: DENIAL },
-    { type: "block-end", index: 0, block: { type: "text", text: DENIAL } },
+    { type: "text-delta", index: 0, text },
+    { type: "block-end", index: 0, block: { type: "text", text } },
     { type: "finish", reason: "stop" },
   ];
 }
@@ -798,9 +797,9 @@ function denialChunks() {
 /** 宿主持久化只要 Accumulator 紧致记录；裸 chunk 会让 firstRunMemberTime 读 undefined.length（#84）。
  *  审查「4.1 才是正解」: 每个 chunk 包成 { type: "chunk", time, chunk },走 compact chunk
  *  单条路径,避免批记录 (text-chunks 需要 .texts 字段而不是 .chunks) 字段名错配再次崩溃。 */
-function denialStream(now = Date.now()) {
+function denialStream(text, now = Date.now()) {
   const time0 = Number.isSafeInteger(now) ? now : Date.now();
-  const chunks = denialChunks();
+  const chunks = denialChunks(text);
   const records = chunks.map((chunk, i) => ({
     type: "chunk",
     time: time0 + i,
@@ -814,16 +813,16 @@ function denialStream(now = Date.now()) {
   return records;
 }
 
-async function appendDenial(session, turn, step) {
+async function appendDenial(session, turn, step, text) {
   session.append("assistant/message", {
     turn,
     step,
-    message: await denialMessage(),
-    stream: denialStream(),
+    message: await denialMessage(text),
+    stream: denialStream(text),
   }, { surfaceOp: "append" });
 }
 
-async function parkDenial(payload) {
+async function parkDenial(payload, text) {
   const session = sessionOf(payload);
   const turn = Number(payload?.turn);
   const step = Number(payload?.step);
@@ -839,7 +838,7 @@ async function parkDenial(payload) {
     }
     session.append("step/start", { turn, step });
     outerOpened = true;
-    await appendDenial(session, turn, step);
+    await appendDenial(session, turn, step, text);
     session.append("step/end", { turn, step });
     return true;
   } catch {
@@ -848,7 +847,7 @@ async function parkDenial(payload) {
         session.append("step/start", { turn, step });
         innerOpened = true;
       }
-      await appendDenial(session, turn, step);
+      await appendDenial(session, turn, step, text);
       session.append("step/end", { turn, step });
       return true;
     } catch {
@@ -861,8 +860,14 @@ async function parkDenial(payload) {
   }
 }
 
-function denyToolResult() {
-  return { kind: "deny", reason: DENIAL, isError: true, content: DENIAL, output: DENIAL, text: DENIAL };
+function legacyDenial(exec, hit) {
+  return permissionDiagnostic(exec, {source: "dsh-purge:legacy-region", code: hit?.kind === "cheat" ? "legacy-topic" : "legacy-network-target",
+    target: hit?.label, reason: hit?.kind === "cheat" ? "显式启用的旧关键词规则命中当前请求。"
+      : "显式启用的旧范围启发式命中非本地或解析未确认的目标；该规则不能证明授权状态或漏洞是否存在。"});
+}
+
+function denyToolResult(decision) {
+  return { ...decision, isError: true, content: decision.reason, output: decision.reason, text: decision.reason };
 }
 
 export function installRegionGate(ctx) {
@@ -883,7 +888,7 @@ export function installRegionGate(ctx) {
     }
     if (!hit) return forward();
     try {
-      await parkDenial(payload);
+      await parkDenial(payload, legacyDenial({name: "agent/pre-step"}, hit).reason);
     } catch {
       /* The turn must remain blocked even if its local reply cannot be stored. */
     }
@@ -892,18 +897,21 @@ export function installRegionGate(ctx) {
     return { kind: "reject" };
   };
   const toolHook = async (exec, next) => {
-    const forward = () => (typeof next === "function" ? next() : denyToolResult());
+    const forward = () => (typeof next === "function" ? next() : denyToolResult(permissionDiagnostic(exec, {
+      source: "dsh-purge:legacy-region", code: "dispatch-unavailable", reason: "缺少宿主后续分发处理器，无法继续调用。"})));
+    let hit;
     try {
-      const hit = await executionTargetHit(exec);
+      hit = await executionTargetHit(exec);
       if (!hit) return forward();
     } catch {
       return forward();
     }
+    const decision = legacyDenial(exec, hit);
     if (exec && typeof exec === "object") {
       exec.blocked = true;
-      exec.error = DENIAL;
+      exec.error = decision.reason;
     }
-    return denyToolResult();
+    return denyToolResult(decision);
   };
   const arm = () => {
     if (ctx.__dshPurgeRegionGate) return true;

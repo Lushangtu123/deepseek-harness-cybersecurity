@@ -1,0 +1,51 @@
+{
+  "version": "1.1.77-personal.16",
+  "date": "2026-11-14",
+  "status": "verified",
+  "scope": "permission policy and local denial diagnostics",
+  "linuxRegression": {
+    "pythonTests": 295,
+    "pluginNodeTests": 636,
+    "hostNodeTests": 139,
+    "total": 1070,
+    "exportIntegrity": true,
+    "clientRebuild": true
+  },
+  "independentReview": {
+    "focusedTestsPassed": 58,
+    "unresolvedCriticalOrImportantFindings": 0,
+    "scope": "working-tree source and actual SDK approval/dispatch implementation"
+  },
+  "native": {
+    "modelRequests": 0,
+    "toolBodiesInvoked": 1,
+    "authorizedLocalPreparation": true,
+    "nativeDownstreamDenialPreserved": true,
+    "nativeMonotonicGuardEnforced": true,
+    "vmPermissionMismatchDenied": true,
+    "nativeManagedReviewScopeDiagnostic": true,
+    "nativeLocalJsonExecution": true,
+    "ok": true
+  },
+  "deployment": {
+    "programFiles": 169,
+    "updatedFiles": 5,
+    "updatedNames": [
+      "PERSONAL-CHANGES.md",
+      "lib/net-scope.js",
+      "lib/personal-controls.mjs",
+      "lib/personal-review-filter.js",
+      "package.json"
+    ],
+    "privateBackupSaved": true,
+    "configurationRestored": true,
+    "unrelatedProgramEditsPreserved": true,
+    "authenticatedHostEntry": true
+  },
+  "limitations": [
+    "No model request or actual provider quota failure was induced; quota categorization is an instruction, not a rewrite of provider/Codex errors.",
+    "Native synthetic denial checks prepare tool dispatch without running those tool bodies; the sole body executed only local JSON parsing.",
+    "No real-project scan, R3 acceptance, frozen candidate change, chat-history rewrite or whole-VM recovery test was performed.",
+    "URL/common-field redaction is not complete secret detection."
+  ]
+}
