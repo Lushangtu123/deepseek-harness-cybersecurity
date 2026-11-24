@@ -1,0 +1,17 @@
+[
+  {
+    "id": "unicode-lf",
+    "file": "unicode-lf.py",
+    "source": "def run(value):\n    if value not in (\"6*7\",):\n        return \"blocked\"\n    scope = {}\n    \"中文字🙂\"; eval(value, scope); exec(value, scope)\n"
+  },
+  {
+    "id": "unicode-crlf",
+    "file": "unicode-crlf.py",
+    "source": "def run(value):\r\n    if value not in (\"6*7\",):\r\n        return \"blocked\"\r\n    scope = {}\r\n    \"中文字🙂\"; eval(value, scope); exec(value, scope)\r\n"
+  },
+  {
+    "id": "unicode-tabs",
+    "file": "unicode-tabs.py",
+    "source": "def run(value):\n\tif value not in (\"6*7\",):\n\t\treturn \"blocked\"\n\tscope = {}\n\t\"中文字🙂\"; eval(value, scope); exec(value, scope)\n"
+  }
+]

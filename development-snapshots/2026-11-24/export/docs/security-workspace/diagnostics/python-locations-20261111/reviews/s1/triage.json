@@ -1,0 +1,27 @@
+{
+  "confirmedAndFixed": [
+    "unhashable-rule-type",
+    "report-v1-test-expectation",
+    "managed-output-buffer-cap",
+    "managed-prefilter-unmatched-retention",
+    "missing-position-batch-rejection"
+  ],
+  "testOnly": [
+    "caller-source-hash-and-canonical-id-assertions"
+  ],
+  "retainedLimits": [
+    "2MiB output cap; oversized unavailable",
+    "guard modelling unchanged; structure only",
+    "Mac /usr/bin/python3 3.9 does not parse existing match syntax; target VM 3.12 required"
+  ],
+  "reviewStatus": "closed: s1-r4 mapping / s1-r6 managed; completed DeepSeek V4.1 Flash high after Claude quota failures",
+  "r3Qualified": false,
+  "conditionalReviewNotes": {
+    "same-line-equality": "Not adopted: scanner may enclose multi-line call or focus argument; equality would violate planned mapping. Worker output is trusted pinned Python, not a second external scanner. Full-span association remains S3 display hardening.",
+    "forged-worker-callee": "Conditional defense in depth; current pinned importer only emits bare eval/exec. No actual source-driven defect demonstrated.",
+    "missing-SHA-test": "Strengthen test with existing sample.py in next test bundle."
+  },
+  "rejectedModelClaims": [
+    "The claim ast.Constant(value=str()) matches only empty string is incorrect: str() is a Python class pattern matching string values. Existing nonempty request-key guard tests pass. No empty-key-only defect accepted."
+  ]
+}

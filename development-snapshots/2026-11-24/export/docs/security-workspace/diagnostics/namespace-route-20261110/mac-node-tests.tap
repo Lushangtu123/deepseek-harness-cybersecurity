@@ -1,0 +1,39 @@
+(node:32485) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ existing16 findings are explicitly not applicable and never launch a worker (1.800417ms)
+✔ eligible input carries exact full copy span and hash without importing source (1.91325ms)
+✔ eligible snapshot mismatch never reaches worker (0.732792ms)
+✔ eligible hash mismatch never reaches worker (0.858625ms)
+✔ eligible unbound mismatch never reaches worker (0.739375ms)
+✔ eligible label mismatch never reaches worker (0.6395ms)
+✔ changed same-size source refuses anchored request (0.8625ms)
+✔ worker failure preserves original warning and reports unavailable (0.863333ms)
+✔ cleanup uncertainty must escape to block later tasks (1.192958ms)
+✔ joint collector preserves persisted scanner warning when namespace unavailable (136.335792ms)
+✔ joint collector preserves persisted scanner warning when namespace stop-unknown (84.974917ms)
+✔ joint collector preserves persisted scanner warning when namespace shutdown-stop-unknown (88.202791ms)
+✔ real AST worker output projects only copy-bound unverified structure (37.133ms)
+✔ invalid worker output cannot become evidence: r=>r.observations[0].anchor.offset++ (35.55875ms)
+✔ invalid worker output cannot become evidence: r=>r.observations[0].sourceSha256='c'.repeat(64) (35.371417ms)
+✔ invalid worker output cannot become evidence: r=>r.observations[0].disposition='confirmed' (36.059458ms)
+✔ invalid worker output cannot become evidence: r=>r.observations.push(r.observations[0]) (40.276ms)
+✔ invalid worker output cannot become evidence: r=>r.checks=0 (38.051333ms)
+✔ a preceding assignment on the same line remains structural unverified evidence (39.064583ms)
+✔ excessive source writes remain unmatched instead of discarding valid worker output (39.108458ms)
+✔ review sandbox sends data through stdin and mounts only trusted worker (2.191042ms)
+✔ unexpected capability prevents worker startup and still cleans owned container (6.414583ms)
+✔ lost worker reply is not retried and triggers removal (0.598166ms)
+✔ daemon failure cannot be confused with container absence (0.517125ms)
+✔ already cancelled review never creates a container (0.102541ms)
+✔ short remaining budget never starts work (0.389458ms)
+✔ unknown create outcome never claims cleanup success from an empty name lookup (0.362875ms)
+✔ budget exhaustion between create and inspect cannot produce an unbounded zero timeout (0.850667ms)
+✔ an unqualified Python runtime cannot produce accepted evidence (0.881083ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 693.121541

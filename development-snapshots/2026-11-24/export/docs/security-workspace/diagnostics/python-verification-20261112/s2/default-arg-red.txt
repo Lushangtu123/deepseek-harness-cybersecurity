@@ -1,0 +1,14 @@
+F.....
+======================================================================
+FAIL: test_additional_untyped_default_parameter_cannot_support_exclusion (__main__.VerifyTest.test_additional_untyped_default_parameter_cannot_support_exclusion)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_execution_verify.test.py", line 24, in test_additional_untyped_default_parameter_cannot_support_exclusion
+    self.assertIsNone(m.exclusion_proof(source,5))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'kind': 'finite-literal-set', 'variable': 'value', 'values': ['1'], 'guardLine': 3, 'sinkLine': 5, 'domain': 'exact-str', 'scope': 'code-injection-at-this-point-only'} is not None
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.027s
+
+FAILED (failures=1)

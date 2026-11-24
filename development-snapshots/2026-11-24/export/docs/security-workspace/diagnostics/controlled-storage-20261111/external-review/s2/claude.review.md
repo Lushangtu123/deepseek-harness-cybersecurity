@@ -1,0 +1,140 @@
+# S2 只读审查结论：VM 本地协作式容量准入
+
+**结论：在所列重点范围内，没有发现安全或计账正确性方面的阻断问题。** 具体来说：不会少计容量，不会按时间释放预留，不会改写原记录，也没有扩张宿主权限。
+
+不过有几项 P1 级的健壮性和可运维问题：
+
+- **建议 S2 内修复**：F1（默认路径首跑回归）和 F2（结算异常的捕获范围过窄）。
+- **强烈建议 S4 前处理**：F3（准备失败后准入被永久阻塞）。
+
+以下全部是基于给定源码和差异的静态推演。我没有调用工具，也没有执行代码；Docker 和 VM 均未验证。
+
+## 重点核对（通过）
+
+| 重点 | 结论与依据 |
+|---|---|
+| 容量超限先于 cache/stage/engine | `execute` 的顺序是 `verify`/`inputs`（只读）→ `storage_module` → 策略 → `reserve`，都在 `_execute_verified` 的 `base.mkdir` 之前。`reserve` 抛错时还没进入 `try`，所以既没有目录也没有引擎。唯一提前发生的副作用是在 cache 旁创建 `controlRoot`，符合设计。 |
+| 预留重复与并发 | 读账本、算用量、查磁盘、`atomic` 写入，全部在 `capacity_lock`（`LOCK_EX`）内完成。id 每次都是新 uuid。重复 `reserve` 会先校验 `inputBytes`，再幂等返回已有行。已结算的 id 被 `outcomes` 拒绝。1000 条上限的检查在写入之前。 |
+| 物理余量计入已有预留 | 条件是 `free < minFree + outstanding + amount`。活跃任务已写入的字节同时也从 `free` 里扣掉了，等于双重计算，方向偏保守。 |
+| 未知任务不按 TTL 释放 | 代码里没有任何时间判断。`settle_locked` 释放前要求同时满足：拿到 EX 任务锁、`_load_attempt` 通过、`settled_job` 为真、`storageReservation.id` 一致。目录或记录缺失时返回 False 并保留预留。`controllerPid` 不参与释放判断。 |
+| 结算落盘失败不假报零 | `outcome` 和 `ledger` 两次 `atomic` 都成功后才改内存账本。如果 `replace` 成功但目录 fsync 失败，磁盘上已经删掉、内存里仍保留，报告值偏高，不会为零。 |
+| 锁顺序与异常保留 | 所有路径都是先容量锁、后任务锁。`execute` 的 settle 发生在 `operation_lock` 退出之后，`recover` 的 settle 发生在 `_recover_core` 之后。锁全部是 `LOCK_NB`，不会死锁。 |
+| 不覆盖原完成结果 | 存储代码从不写 `attempt.json`。`completion-unconfirmed` 时以磁盘上的记录为准进行结算。 |
+| 身份/策略目录 | `controlRoot` 由 `cacheRoot` 派生；`validate_policy` 做全等比较；`existing_policy` 防重定向；`state_locked` 发现策略变化就拒绝；账本每行的 `directory` 和 `policySha256` 都逐行校验。 |
+| 受信模块加载 | `execute` 传入的是已 verify 的 `manifest.storageSha256`。每次调用都会先重读、重哈希、做 AST 检查，然后才返回以 hash 为键的缓存，不会返回过期字节。bundle 内的副本只做比对。 |
+| 宿主权限 | 存储代码不调用 sudo 或 docker，不进入容器 stage，控制目录不挂载到容器。 |
+
+S1 的 N3、N4、N5 都已处理（storageSha256 字段测试、loader 负向测试和漂移测试、改名、AST import 闭包）。
+
+## 发现
+
+### F1（中，P1，功能回归）：首跑时 cache 的父目录不存在
+- **位置**：`reviewer_storage.py` 的 `capacity_lock` 调用 `private(controlRoot, create=True)`，里面的 `mkdir` 没有 `parents=True`。而 `reserve` 现在早于 `_execute_verified` 里的 `base.parent.mkdir(parents=True)`。
+- **触发**：新 VM 用户的 `~/.cache` 还不存在，且使用默认 attempts root。
+- **影响**：
+  - `run` 因 `FileNotFoundError` 以 exit 1 退出，而不是 exit 4 的 JSON。S1 能跑通的路径在 S2 里失败。
+  - `storage-reconcile` 同样失败，`disk_usage(parent)` 也会报错。
+  - 属于 fail-closed，不影响安全。
+- **是否阻断**：不构成安全阻断。但 S4 如果用全新 VM，很可能首跑就失败，建议本步修复。
+- **建议**：在 `reserve` 之前以 0o700 创建 `cacheRoot.parent`，与 S1 语义一致，并补测试。
+
+### F2（中，P1）：结算异常的捕获范围过窄，可能盖过原结果或原异常
+- **位置**：`execute` 的 `finally` 只捕获 `except (OSError, ValueError)`；`_settle_storage` 相同；`settle_locked` 内部也只捕获这两类。
+- **触发**：
+  - `attempt.json` 里的 `storageReservation` 不是 dict（`_validate_attempt` 没有校验这个字段）：`.get(...)` 抛 `AttributeError`。
+  - 已安装的 `reviewer_storage.py` 被截断或损坏时执行 `recover`：`ast.parse` 抛 `SyntaxError`，它不是 `ValueError` 的子类。
+  - `finally` 执行期间收到 SIGINT（此时信号处理器已经恢复）。
+- **影响**：
+  - `finally` 里抛出的异常会丢弃 `return` 值或 `ReviewAttemptError`。CLI 既不打印回执也不打印 attemptDirectory；遇到 `AttributeError` 时直接输出 traceback。调用方可能因此重跑分析，这违背了"原分析结果和回执不因结算失败重投"。
+  - `recover` 的情况是：恢复记录已经落盘，但输出丢失，exit 1 掩盖了实际的恢复状态。
+  - 磁盘上的记录本身不会被改写。
+- **是否阻断**：否。触发需要同 uid 篡改或安装损坏。但修复很小，建议本步完成。
+- **建议**：两处都改为 `except Exception`，在 stderr 输出 settlement-pending 提示，不改动 result；对 `storageReservation` 加 `isinstance(dict)` 校验。
+
+### F3（中高，P1，可运维）：准备失败的残留目录会让后续准入全部阻塞
+- **位置**：`execute` 的 `finally` → `cancel_preparation`；`usage_locked`。
+- **触发**：`reserve` 成功后、首个 `attempt.json` 落盘之前失败。例如写 stage 时遇到 ENOSPC，或首次 `_save` 和 guard 里的 `_save` 都失败。
+- **影响**：
+  - `cancel_preparation` 只检查 `attempt.json` 和 `cid` 不存在，就写入 `known-preparation-failure` 并释放预留。但 `review-<id>/` 目录还在，里面有部分 stage、`docker-config`，可能还有 `operation.lock`。
+  - 之后每次 `reserve`，`usage_locked` 扫到这个目录：没有锁文件时是 `FileNotFoundError`，有锁但没有记录时 `_load_attempt` 失败，两种都转成 `capacity-unavailable`，而且没有 reason 字段。
+  - `reconcile` 也处理不了它，因为它已经不在账本里。
+- **结论**：不会超额准入。但恰恰是在磁盘紧张这个目标场景里，单次失败就会让之后所有 run 永久 exit 4，只能手工删除目录。
+- **是否阻断**：否，但强烈建议 S4 前处理。
+- **建议**：
+  - `cancel_preparation` 在容量锁下先确认目录里没有记录和 cid，再用 `_private` 校验、不跟随链接地 rmtree 这个由控制器创建的目录。确认目录不存在后，才写 outcome 并释放。
+  - 删除失败时不释放预留：目录留在账本里按预留额计入，不会阻塞扫描。
+  - 给 `capacity-unavailable` 补上 reason，例如 `record-unavailable`。
+
+### F4（中，P1）：结算遇到锁忙就放弃，准入时也不自动对账
+- **位置**：`settle` / `_settle_storage` 的 `capacity_lock` 用的是 `LOCK_NB`；`usage_locked` 直接按账本里的活跃行计数。
+- **触发**：任务 A 结束结算时，任务 B 正在 `reserve`。`usage_locked` 在全局锁内逐个读取并解析最多 1000 个 `attempt.json`，每个最大 16MiB，可能持锁很久。
+- **影响**：
+  - A 的预留会一直滞留，直到有人手工执行 `storage-reconcile`。
+  - 默认 256MiB 预算、每个预留 96MiB，最多只能有 2 个并发预留。滞留 1 个就使可用并发减半，下一次 run 直接 `cache-budget-exceeded`，run 的输出里没有任何提示。
+  - 方向是保守的，不是假报零。
+- **是否阻断**：否。
+- **建议**（任选或组合）：
+  - settle 改为有界阻塞等锁，例如最多轮询 10 秒；
+  - `reserve` 计算用量前，先对账本中的行调用 `settle_locked`（任务锁是 NB 的，运行中的任务自然返回 False，是安全的）；
+  - 在 exit 4 的 details 或 stderr 中给出 `pendingReservations`。
+
+### F5（中，设计风险）：reserve 与建目录之间崩溃，预留永久滞留且没有释放路径
+- **触发**：`reserve` 落盘后、`_execute_verified` 建目录之前进程被 SIGKILL、OOM 或掉电；或者在进入 `try` 之前收到 SIGINT（这时 `_interrupts` 还没安装）。
+- **影响**：目录不存在，所以 `settle_locked` 永远返回 False，也没有经过审查的人工释放命令。默认预算下发生两次就无法再准入：2×96 + 96 > 256。
+- **是否阻断**：否，这符合"未知不释放"的设计。但 S4 之前需要明确运维路径。
+- **建议**：
+  - 在 `reserve` 的容量锁内一并创建 attempt 目录和 `operation.lock`，并把控制器的 EX 锁前移，贯穿到引擎阶段。
+  - 这样在新协议下就能做出可证明的判断：
+    - "目录存在 + 锁能拿到 + 没有记录"证明拥有者已经不在且从未进入引擎阶段，可以按 F3 的方式清理；
+    - "目录不存在"证明从未开始。
+  - 或者提供一个需要显式确认、并写入 outcome 的 `storage-release --id` 人工命令。
+
+### F6（低-中，决策项）：`--storage-policy` 首次写入即永久生效
+- **现状**：`state_locked` 在 `policy.json` 不存在时会持久化调用方传入的策略。CLI 允许 `budgetBytes` 为任意正整数，`minFreeBytes` 可以为 0。
+- **后果**：第一次带 `{"minFreeBytes":0,"budgetBytes":<很大的值>}` 的 run 会永久关闭文件系统余量检查。之后用默认参数调用，反而报 `storage-policy-changed`。
+- **评价**：同 uid 操作，不算权限扩张，但与"默认策略固定"的表述不一致。
+- **建议**：CLI 只接受默认策略，或者要求通过显式的 init 命令设置；`minFreeBytes` 设下限，`budgetBytes` 至少为 `RESERVATION_OVERHEAD_BYTES`。
+
+### F7（低-中，S2 部署风险）：升级后历史 attempt 立即参与计数，可能阻塞准入
+`usage_locked` 会把旧 cache 中不在账本里的已结算 attempt 按逻辑字节计入。由此带来几种情况：
+
+- 历史数据超过约 160MiB，就全部 `cache-budget-exceeded`，而归档功能尚未实现。
+- 任何非终态记录或旧格式记录都会导致 `capacity-unavailable`。
+- `_recover_locked` 允许对已结算的 failed/recovered 任务再次恢复。恢复期间持有 EX 锁，并发的 `reserve` 会报 `task-busy`；如果这次恢复以 `cleanup-unconfirmed` 结束，准入会重新被阻塞。
+- 反过来，`reserve` 扫描期间持有 SH 锁，并发的 `recover` 会因为 `operation_lock` 是 NB 而失败。
+
+**建议**：S4 之前做升级预检，例如让 `reconcile` 输出 `accountedBytes` 和阻塞的目录列表，并写进运维文档。
+
+### F8（低）：任务锁被替换的检查发生在写入之后
+`settle_locked` 在 `with` 块内已经写完 outcome 和 ledger 并 `return True`，`task_lock` 恢复执行后才比对 inode。即使检测到锁被替换，也只能返回 False：此时账本已经删除该行，`reconcile` 的 `settled` 列表会漏报这个 id（`reservedBytes` 仍与磁盘一致）。这个检查时机起不到保护作用。
+
+**建议**：在 `_load_attempt` 之后、写入之前做比对。
+
+### F9（低）：物理余量检查可能测错文件系统
+现在调用的是 `disk_usage(cacheRoot.parent)`。如果 `cacheRoot` 本身是一个独立挂载点，测到的就是父文件系统。
+
+**建议**：cache 存在时对 cache 本身取 `disk_usage`，并比对 `st_dev`；不一致时拒绝。
+
+### F10（低）：预留额与恢复过程中的增长
+每次 `recover` 大约新增 8 个 client 日志（stdout 上限 2MiB）；`attempt.json` 写入时临时副本最多可达 2×16MiB。多次恢复可能超出 96MiB 预留，而这部分在结算前不计入。设计上已声明不是硬配额，记录在案即可。
+
+### F11（低）：副作用与一致性
+- **新增写副作用**：对任意 attempts 父目录执行 `recover` 或 `storage-reconcile`，都会创建 `.harness-storage-*` 目录和默认 `policy.json`，legacy 目录也一样。不会污染 inventory，但这是新增的写操作。
+- **退出码不一致**：`private(cache)` 失败、账本非法等情况抛出的是普通 `ValueError`，走 exit 1 而不是 exit 4 JSON，调用方需要分两种情况处理。
+- **未使用的参数**：`read_bytes(root_cid=True)` 允许读取 uid 0 拥有的文件，目前没有调用者。建议删除，或在启用前单独审查。
+- **JSON 解析**：存储侧的 `read_json` 没有嵌套深度和非有限 float 检查。由于是同 uid 的私有文件，风险低。
+
+## 测试证据观察
+- 红/绿阶段的数量与描述一致（7→11→13→15→16→17），各阶段的失败原因与声明相符。
+- `test_admission_counts_concurrent_reservations` 实际上是顺序调用，没有多进程 flock 竞争。建议补一个双子进程同时 `reserve` 的测试。
+- 以下场景缺少测试：
+  - F1：父目录缺失；
+  - F2：非 `ValueError` 的结算异常不应盖过结果；
+  - F3：准备失败留下残留目录后，下一次 `reserve` 的行为；
+  - F4：settle 遇到锁忙；
+  - `replace` 成功但目录 fsync 失败；
+  - legacy 历史数据参与计数；
+  - 存储模块损坏时 `recover` 的输出。
+
+## 范围外 / 未确认
+归档、回收和 API 属于计划内的缺口，本次未评价。S3/S4 待办，R3 未放行。本次审查不构成 VM 验收。

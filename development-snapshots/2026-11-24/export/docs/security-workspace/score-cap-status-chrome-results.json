@@ -1,0 +1,235 @@
+{
+  "date": "2026-11-05",
+  "scope": "SCORE-MODEL-CAP-STATUS-CHROME",
+  "status": "verified-with-load-recovery",
+  "native": {
+    "candidateProgramDigest": "764760fdbf5577f6977b38142a2ea73bace1c2eb98797977412efd1662ea18e6",
+    "candidateProgramFiles": 173,
+    "candidateFilesMatchedAfterChrome": true,
+    "modelSelectionObserved": "DeepSeek-V4.1-Flash / High",
+    "configuredProvider": "deepseek-official",
+    "harnessAdapterModel": "deepseek-flash",
+    "providerRawModelFieldCaptured": false,
+    "nativeTurnsCompleted": 1,
+    "nativeToolCalls": 3,
+    "nativeToolResults": 3,
+    "allToolCallIdsMatched": true,
+    "nativeToolErrors": 0,
+    "unapprovedToolAttemptsObserved": 0,
+    "sandbox": "read-only",
+    "approval": "ask",
+    "syntheticRawRecordsAfter": 501,
+    "countedHits": 499,
+    "sharedCap": {
+      "rule": 9002,
+      "configuredCaps": [
+        10,
+        15
+      ],
+      "effectiveCap": 10
+    },
+    "disabledConfiguredCap": 7,
+    "windows": [
+      {
+        "offset": 0,
+        "returnedHits": 3,
+        "points": 8,
+        "nextOffset": 3
+      },
+      {
+        "offset": 500,
+        "returnedHits": 1,
+        "points": 1,
+        "nextOffset": null
+      }
+    ],
+    "structuredAnswerMatched": true,
+    "verifiedValues": {
+      "projectPoints": 9,
+      "windowPoints": [
+        8,
+        1
+      ],
+      "B": {
+        "status": "limited",
+        "effectiveCap": 10,
+        "counted": false
+      },
+      "C": {
+        "status": "disabled",
+        "effectiveCap": null,
+        "counted": false
+      },
+      "D": {
+        "status": "unlimited",
+        "effectiveCap": 0,
+        "counted": true
+      }
+    },
+    "nativeEvidenceSha256": "8cb1ec81b9ace3e2d5c7c6cc5faa098729276ef89b5dd32dc45ccb9bc3215255",
+    "production": {
+      "stopped": true,
+      "dailyProgramFiles": 169,
+      "dailyProgramUnchanged": true,
+      "dailyConfigurationUnchanged": true,
+      "installedSdkUnchanged": true,
+      "temporaryDirectoryRemoved": true
+    }
+  },
+  "browser": {
+    "browser": "Google Chrome native accessibility UI",
+    "modelDisplay": "DeepSeek-V4.1-Flash / High",
+    "syntheticProject": "Harness QA Scoring Caps",
+    "chatSubmittedOnce": true,
+    "noticeAcceptedWithActionTimeConsent": true,
+    "temporaryTabsClosed": true,
+    "scoreBoard": {
+      "projectPoints": 9,
+      "countedHits": 499,
+      "rule": 9002,
+      "configuredCaps": [
+        10,
+        15
+      ],
+      "effectiveCap": 10,
+      "sharedRuleUsage": "8/10",
+      "disabledRecord": "C",
+      "disabledConfiguredCap": 7,
+      "confirmedInFullWindowAfterReload": true
+    },
+    "chain": {
+      "firstPage": {
+        "start": 1,
+        "end": 500,
+        "totalHits": 501,
+        "points": 8,
+        "projectPoints": 9,
+        "previousEnabled": false,
+        "nextEnabled": true
+      },
+      "lastPage": {
+        "start": 501,
+        "end": 501,
+        "totalHits": 501,
+        "points": 1,
+        "projectPoints": 9,
+        "previousEnabled": true,
+        "nextEnabled": false
+      },
+      "previousPageRestoredFirstPage": true
+    },
+    "loadingIssues": {
+      "sidePanelScoreFirstRead": {
+        "failedVisible": true,
+        "recoveredAfterPanelRefresh": true,
+        "failingRequestCaptured": false
+      },
+      "fullWindowStylesheet": {
+        "failedVisible": true,
+        "asset": "/assets/index-BNyAYEM7.css",
+        "chromeError": "net::ERR_EMPTY_RESPONSE",
+        "paginationWorkedWithWarning": true,
+        "warningClearedAfterPageReload": true,
+        "projectPresentAfterReload": true,
+        "rootCauseConfirmed": false
+      }
+    }
+  },
+  "cssRecoveryProbe": {
+    "asset": "/assets/index-BNyAYEM7.css",
+    "directGuest": [
+      {
+        "status": 200,
+        "contentType": "text/css; charset=utf-8",
+        "bytes": 77471,
+        "sha256": "47c890e8b3898eb4e5a53933bd318e58d4cf168cd7ccef46789d48a070bba591"
+      },
+      {
+        "status": 200,
+        "contentType": "text/css; charset=utf-8",
+        "bytes": 77471,
+        "sha256": "47c890e8b3898eb4e5a53933bd318e58d4cf168cd7ccef46789d48a070bba591"
+      },
+      {
+        "status": 200,
+        "contentType": "text/css; charset=utf-8",
+        "bytes": 77471,
+        "sha256": "47c890e8b3898eb4e5a53933bd318e58d4cf168cd7ccef46789d48a070bba591"
+      }
+    ],
+    "throughRelay": [
+      {
+        "status": 200,
+        "contentType": "text/css; charset=utf-8",
+        "bytes": 77471,
+        "sha256": "47c890e8b3898eb4e5a53933bd318e58d4cf168cd7ccef46789d48a070bba591"
+      },
+      {
+        "status": 200,
+        "contentType": "text/css; charset=utf-8",
+        "bytes": 77471,
+        "sha256": "47c890e8b3898eb4e5a53933bd318e58d4cf168cd7ccef46789d48a070bba591"
+      },
+      {
+        "status": 200,
+        "contentType": "text/css; charset=utf-8",
+        "bytes": 77471,
+        "sha256": "47c890e8b3898eb4e5a53933bd318e58d4cf168cd7ccef46789d48a070bba591"
+      }
+    ],
+    "recoveryProbeAllIdentical200": true,
+    "sampledAfterBrowserReload": true,
+    "originalFailedRequestAttributed": false
+  },
+  "sourceHashes": {
+    "client.js": "371041b050c2e520e97c345ecf64b2c4499259cd999a45ca328ebfd34cfb804d",
+    "lib/redteam/client.js": "079493bf4e2e47bc49697ee2e3a9cf7da1c2ce087dbe71ef32ff56cd63a67d44",
+    "lib/redteam/score-rules.js": "5c99c9dff1d0496b94ccfd7ee90414da8bfb16e2d06ad3d0085769b06771bef4",
+    "lib/redteam/store-core.js": "ae888198936f68d0dbc9c35312dc60af393bb0afcdffb7771e9f7f8e58ce34dd",
+    "lib/redteam/tools.js": "25f221a41b3f575efc42a3a137c6d5aab6505108b5d1fcb1d60c96f8177abe83"
+  },
+  "relayShutdown": {
+    "relayToolSessionExitCode": 0,
+    "lsofNoListener": true,
+    "connectRefused": true,
+    "evidenceSha256": "076277a53fc5846e1df0b3c39433f2ca67a3df1e32f40590eea49f29a4415275"
+  },
+  "externalReview": {
+    "state": "completed-and-triaged",
+    "remainingScopedP1P2Blockers": 0,
+    "promptSha256": "ce0c42bbd060bb190a7702248357c502ae8c40bb9106dc3ed9f73c59b7cfb9c4",
+    "claudeState": "provider-safety-refusal",
+    "claudeRequestedModel": "claude-opus-5-5",
+    "claudeRefusalSha256": "62b2984c52922bb7436751812ebf085e5935f2a198dd102ddbe335b2da0e3926",
+    "reviewer": "DeepSeek V4.1 Flash",
+    "actualApiAlias": "deepseek-flash",
+    "effort": "high",
+    "finishReason": "stop",
+    "reportSha256": "206d47631aa5757f5c1e42be4986db591cf959012d926ac55f7f85c5e040435e",
+    "receiptSha256": "46e4dad5dc70ac72aca0f498f19f855b0ec96f863156fbafdddc2496d877b7d8",
+    "unchangedUserPacket": true,
+    "temporaryReviewCopyRemoved": true,
+    "triageSha256": "207d7ba39b300023a9c81e625c83b68fbabc75b683f06aa8c1e2a30152a29d25"
+  },
+  "followUp": [
+    {
+      "id": "SCORE-SIDEBAR-FIRST-READ",
+      "status": "open",
+      "observation": "recovered after panel refresh; initial request not captured"
+    },
+    {
+      "id": "DRILL-FULL-WINDOW-CSS",
+      "status": "open",
+      "observation": "Chrome ERR_EMPTY_RESPONSE on the CSS request; failed hop not attributed"
+    },
+    {
+      "id": "SCORE-MODEL-WINDOW-EXPLANATION",
+      "status": "open",
+      "observation": "correct structured answer; explanatory prose overstates what the sampled window sum establishes"
+    }
+  ],
+  "candidateProgramChanged": false,
+  "dailyDeployed": false,
+  "ordinaryR3Qualified": false,
+  "wholeProductReleaseQualified": false
+}

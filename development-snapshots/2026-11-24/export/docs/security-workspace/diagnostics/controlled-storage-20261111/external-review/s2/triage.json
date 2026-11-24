@@ -1,0 +1,19 @@
+{
+  "state": "scoped-fixes-in-review",
+  "actualModel": "claude-opus-5-5",
+  "receiptSha256": "10da4c9653652b3dd4da3005277fba6a7ce63842a97766a15394506f9068fa72",
+  "findings": {
+    "F1": "confirmed missing parent regression; red and fixed in s2-fix",
+    "F2": "confirmed non-ValueError masking result; red and fixed; malformed reservation retains",
+    "F3": "confirmed retained preparation residue blocks usage; red and fixed by preserving/counting directory identity rather than deleting",
+    "F4": "admission now reconciles terminal reservations under global lock; busy remains retryable",
+    "F5": "intentional unknown crash-gap reservation retention; no inferred automatic release; operational limitation documented",
+    "F6": "explicit immutable operator policy initialization retained; default256MiB/512MiB unchanged, no project code loading",
+    "F7": "upgrade unknown tasks retain/block by design; archive and detailed reconcile pending S3",
+    "F8": "lock identity now checked before settlement writes",
+    "F9": "reject cross-device cache; existing cache filesystem used for disk check",
+    "F10": "cooperative admission, not hard OS quota; repeated recovery log growth remains bounded per client, not total task",
+    "F11": "inventory remains read-only; reconcile is explicitly maintenance write; rootCID precise archive exception and strict plan JSON will be reviewed S3"
+  },
+  "release": "offline candidate only; no R3 qualification or daily deployment"
+}

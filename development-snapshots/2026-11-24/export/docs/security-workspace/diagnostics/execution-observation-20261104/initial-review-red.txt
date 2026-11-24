@@ -1,0 +1,138 @@
+✔ Joint source positions page same-line sites separately with copy-only unverified language (2.699ms)
+✔ A mismatched snapshot cannot replace the already validated source-position page (0.610292ms)
+✔ Unavailable source ranges keep the finding visible without invented coordinates (0.286166ms)
+✔ A source-location task needs a real snapshot digest before exposing its detail controls (0.291792ms)
+✔ Duplicate Semgrep steps are rejected rather than lending another step identity (0.114333ms)
+✔ Missing model counts stay unknown and byte-column units are explicit (0.203041ms)
+✔ Source page rejects wrong source task while retaining the valid page (0.573042ms)
+✔ Source page rejects unavailable extra coordinates while retaining the valid page (0.289709ms)
+✔ Source page rejects empty range while retaining the valid page (0.537208ms)
+✔ Source page rejects wrong line label while retaining the valid page (0.352625ms)
+✔ A page for a different parent task cannot replace existing positions (0.23425ms)
+✔ Wait cannot replace the displayed task with null (0.154875ms)
+✔ Wait cannot replace the displayed task with another task (0.0915ms)
+✔ Python evidence independently requires both a concrete step id and snapshot SHA (0.111375ms)
+✔ A pending request is not cleared by an unrelated unacknowledged task (0.091459ms)
+✔ Malformed model count is rejected: "0" (0.071875ms)
+✔ Malformed model count is rejected: -1 (0.043708ms)
+✔ Malformed model count is rejected: {} (0.046375ms)
+✔ Cancelling state is visible while stop remains unconfirmed (0.06425ms)
+✔ ordinary16 warning shows namespace reviewer not applicable without launching tools (0.146208ms)
+✔ namespace summary with impossible counts is rejected (0.063375ms)
+✔ namespace structural artifact renders unverified identities with a precise copy span (0.3505ms)
+✔ inconsistent namespace summary does not become a completed-task statement: {"state":"completed","eligible":2,"checked":2,"observations":1,"unmatched":1,"retained":1} (0.058541ms)
+✔ inconsistent namespace summary does not become a completed-task statement: {"state":"partial","eligible":1,"checked":1,"observations":1,"unmatched":0,"retained":1} (0.0525ms)
+✔ inconsistent namespace summary does not become a completed-task statement: {"state":"truncated","eligible":1,"checked":1,"observations":1,"unmatched":0,"retained":1} (0.058417ms)
+✔ inconsistent namespace summary does not become a completed-task statement: {"state":"unavailable","eligible":1,"checked":1,"observations":1,"unmatched":0,"retained":1} (0.047875ms)
+✔ inconsistent namespace summary does not become a completed-task statement: {"state":"unavailable","eligible":1,"checked":0,"observations":0,"unmatched":0,"retained":0,"cleanupVerified":false} (0.046916ms)
+✔ namespace page rejects missing summary (0.298292ms)
+✔ namespace page rejects assignment after call (0.185416ms)
+✔ namespace page rejects guard after call (0.107041ms)
+✔ fixed-set structure renders without exposing a guessable literal-set digest (0.126958ms)
+✔ execution-point observations display low confidence and unassessed risk separately from the scanner level (0.221041ms)
+✔ source page rejects forged observation facts: r=>r.observation.risk='safe' (0.190708ms)
+✔ source page rejects forged observation facts: r=>r.observation.confidence='high' (0.1345ms)
+✔ source page rejects forged observation facts: r=>r.rule='another-rule' (0.068875ms)
+✔ inconsistent observation summary is rejected: {"version":1,"total":2,"executionPoints":1,"other":2} (0.048458ms)
+✔ inconsistent observation summary is rejected: {"version":1,"total":1,"executionPoints":1,"other":0} (0.036833ms)
+✔ historical tasks do not receive an invented execution-point count (0.048417ms)
+✖ a classified exact-rule row cannot silently lose its observation label (0.369042ms)
+✖ CRLF helper sources generate a parseable client factory (47.681708ms)
+✖ missing required observation import fails before replacing the generated client (40.137875ms)
+✖ concatenation name collision fails without publishing a broken client (38.758417ms)
+ℹ tests 42
+ℹ suites 0
+ℹ pass 38
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 170.262375
+
+✖ failing tests:
+
+test at work/harness-purge-improved/tests/joint-source-client.test.mjs:91:1
+✖ a classified exact-rule row cannot silently lose its observation label (0.369042ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /命中位置.*不匹配/. Input:
+  
+  '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查等待原联合任务取消或核对停止下载联合报告 JSON任务：location-task-001 · 所选步骤已结束工具命中 2 条 · 子任务模型请求 未知 次 · 停止核对：已确认副本 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa · undefined 文件 · 排除路径 undefined · 脱敏文件 undefinedsemgrep：步骤已完成 · scan-001命中位置副本范围已关联 2/2 条 · 未关联 0 条执行点观察 1 条 · 其他待验证 1 条 · 总命中 2 条列号使用 UTF-8 字节。仅核对扫描副本的字节范围，不证明扫描来源、AST、执行或漏洞；所有命中仍待验证。查看命中位置待验证 · 副本范围已关联app.py:1:21 → 1:39字节 20–38（末端不含）扫描副本已脱敏；这些位置仅对副本有效，原文件需另行核对。副本标识SHA-256 · bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb快照 · aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa下一页命中工具命中待验证；登录、越权、业务逻辑、架构、未选工具与排除内容仍未覆盖。'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/joint-source-client.test.mjs:91:247)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查等待原联合任务取消或核对停止下载联合报告 JSON任务：location-task-001 · 所选步骤已结束工具命中 2 条 · 子任务模型请求 未知 次 · 停止核对：已确认副本 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa · undefined 文件 · 排除路径 undefined · 脱敏文件 undefinedsemgrep：步骤已完成 · scan-001命中位置副本范围已关联 2/2 条 · 未关联 0 条执行点观察 1 条 · 其他待验证 1 条 · 总命中 2 条列号使用 UTF-8 字节。仅核对扫描副本的字节范围，不证明扫描来源、AST、执行或漏洞；所有命中仍待验证。查看命中位置待验证 · 副本范围已关联app.py:1:21 → 1:39字节 20–38（末端不含）扫描副本已脱敏；这些位置仅对副本有效，原文件需另行核对。副本标识SHA-256 · bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb快照 · aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa下一页命中工具命中待验证；登录、越权、业务逻辑、架构、未选工具与排除内容仍未覆盖。',
+    expected: /命中位置.*不匹配/,
+    operator: 'match'
+  }
+
+test at work/harness-purge-improved/tests/observation-build.test.mjs:4:1
+✖ CRLF helper sources generate a parseable client factory (47.681708ms)
+  AssertionError [ERR_ASSERTION]: Got unwanted exception.
+  Actual message: "Cannot use import statement outside a module"
+      at file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/observation-build.test.mjs:4:338
+      at fixture (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/observation-build.test.mjs:3:450)
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/observation-build.test.mjs:4:68)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.start (node:internal/test_runner/test:878:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:297:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: evalmachine.<anonymous>:3689
+    import {validRuleObservation,validObservationSummary} from './personal-security-observation.mjs';
+    ^^^^^^
+    
+    SyntaxError: Cannot use import statement outside a module
+        at new Script (node:vm:117:7)
+        at file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/observation-build.test.mjs:4:355
+        at getActual (node:assert:840:5)
+        at Function.doesNotThrow (node:assert:1006:32)
+        at file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/observation-build.test.mjs:4:338
+        at fixture (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/observation-build.test.mjs:3:450)
+        at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/observation-build.test.mjs:4:68)
+        at Test.runInAsyncScope (node:async_hooks:211:14)
+        at Test.run (node:internal/test_runner/test:980:25)
+        at Test.start (node:internal/test_runner/test:878:17),
+    expected: undefined,
+    operator: 'doesNotThrow'
+  }
+
+test at work/harness-purge-improved/tests/observation-build.test.mjs:5:1
+✖ missing required observation import fails before replacing the generated client (40.137875ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/observation-build.test.mjs:5:361
+      at fixture (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/observation-build.test.mjs:3:450)
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/observation-build.test.mjs:5:92)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:297:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws'
+  }
+
+test at work/harness-purge-improved/tests/observation-build.test.mjs:6:1
+✖ concatenation name collision fails without publishing a broken client (38.758417ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/observation-build.test.mjs:6:277
+      at fixture (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/observation-build.test.mjs:3:450)
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/observation-build.test.mjs:6:82)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws'
+  }

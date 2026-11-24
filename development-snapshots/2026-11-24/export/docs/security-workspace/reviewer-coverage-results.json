@@ -1,0 +1,870 @@
+{
+  "scope": "offline receipt input membership and duplicate input receipt rejection",
+  "qualityReportVersion": 6,
+  "receiptVersion": 2,
+  "inputVersion": 2,
+  "reviewedFiles": {
+    "docs/security-workspace/review-quality.md": "cdd42ffb0847344203cf2b0597ee5f539f4db2ed3c8aa43dc11cac8281594eb0",
+    "docs/security-workspace/reviewer-coverage.md": "69a3cd56a306b12ae6a887935243959ced5c4218bcf60fbbe5128bef67442eee",
+    "scripts/review_quality_gate.mjs": "848cbbf3fe606f8f488bdc724cdf7e7373b43580209cc7bda83ed477fedd6f0d",
+    "scripts/reviewer_snapshot.py": "942b82ee1b8f4da963a896bab00326cf57c7c57a0ea141f623b7caf523f0de84",
+    "scripts/reviewer_snapshot.test.py": "ded2f8ba29ecbfd6fffd228aafadfddf132c1c493b45538d9dc9093aff5eb536",
+    "work/harness-purge-improved/tests/review-quality-gate.test.mjs": "5be1894b3b7505717a406ea4cc8029a30a059ecafbe3c023e974c2b20e253260"
+  },
+  "tests": {
+    "initialRedGate": {
+      "pass": 32,
+      "fail": 8
+    },
+    "initialRedPython": {
+      "pass": 9,
+      "fail": 1
+    },
+    "compatibilityRedGate": {
+      "pass": 41,
+      "fail": 2
+    },
+    "macQualityGate": 43,
+    "vmQualityGate": 43,
+    "macSnapshot": 10,
+    "vmSnapshot": 10,
+    "macPluginSuite": 1020,
+    "finalFailures": 0,
+    "extraBoundary": "64 source keys allowed, sixty-fifth rejected; Python-only coverage; mixed receipt diagnostics"
+  },
+  "runtime": {
+    "snapshot": {
+      "version": 1,
+      "kind": "python-evidence-reviewer",
+      "entrypoint": "eval_evidence_batch.py",
+      "files": {
+        "eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+        "eval_guard_review.py": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+        "eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843"
+      },
+      "launcherSha256": "942b82ee1b8f4da963a896bab00326cf57c7c57a0ea141f623b7caf523f0de84",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7"
+    },
+    "snapshotSha256": "ca3a3c0cc8b6825d5ad7dca131fc10906b07548ed288ee7b917cf20133a4f1fe",
+    "executionReceipt": {
+      "version": 2,
+      "state": "completed",
+      "snapshotSha256": "ca3a3c0cc8b6825d5ad7dca131fc10906b07548ed288ee7b917cf20133a4f1fe",
+      "datasetSha256": "15c249b3e5a9e2ecc39e6bfe3815224dcc224949177d9855cb08aff45795b00d",
+      "freezeSha256": "417e7f6062d72d58f919be91a460ad57c6499fcca345b5c1dd0cd9aa946ab777",
+      "inputSha256": "82b3742a95eada0271aa1de6b8f2c04c7eab5a66daf823f0bd42ed4b0574d601",
+      "inputFiles": {
+        "manifest.json": "4d7b76ea492751511e581a6294e0fdb043e3d93ae3273b33171f26b971d038ea",
+        "scan.json": "ff9be56babc328d3e65b2104dc0d1ed661c688ccc0b8a7e7306265144060546d",
+        "sources/evaluator.py": "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+        "sources/routes.py": "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+      },
+      "scanSha256": "ff9be56babc328d3e65b2104dc0d1ed661c688ccc0b8a7e7306265144060546d",
+      "reportSha256": "dad005b20e9d412a444f000e0bf79e8ef33949b95ada8d764ec9e06dad7645de",
+      "startedAt": "2026-11-11T09:16:01.636508+00:00",
+      "finishedAt": "2026-11-11T09:16:02.287346+00:00"
+    },
+    "reportJson": "{\"version\": 1, \"guardChecks\": 1, \"importChecks\": 1, \"discoveredImportChecks\": 1, \"guardEvidence\": [{\"finding\": {\"rule\": \"policy.harness.python.eval\", \"file\": \"routes.py\", \"line\": 6}, \"evidence\": {\"observation\": \"literal-identifier-guard-observed\", \"assignmentLine\": 4, \"guardLine\": 5, \"evalLine\": 6, \"literalCount\": 2, \"disposition\": \"unverified\"}}], \"importEvidence\": [{\"observation\": \"direct-import-execution-flow-observed\", \"sourceLine\": 8, \"importLine\": 2, \"callLine\": 9, \"definitionLine\": 1, \"sinkLine\": 2, \"sink\": \"exec\", \"disposition\": \"unverified\", \"callerFile\": \"routes.py\", \"calleeFile\": \"evaluator.py\"}], \"plainStringEvidence\": []}\n",
+    "inputFiles": {
+      "manifest.json": "4d7b76ea492751511e581a6294e0fdb043e3d93ae3273b33171f26b971d038ea",
+      "scan.json": "ff9be56babc328d3e65b2104dc0d1ed661c688ccc0b8a7e7306265144060546d",
+      "sources/evaluator.py": "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+      "sources/routes.py": "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+    },
+    "coverageControls": {
+      "valid": {
+        "receiptListValid": true,
+        "requiredSourceSha256": [
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredSourceSha256": [
+          "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredCaseIds": [
+          "fixture"
+        ],
+        "missingCaseIds": [],
+        "unsupportedCaseIds": [],
+        "unsupportedLanguages": [],
+        "uniqueReceiptCount": 1,
+        "invalidReceiptIndices": [],
+        "duplicateReceiptIndices": [],
+        "legacyReceiptIndices": []
+      },
+      "unrelated": {
+        "receiptListValid": true,
+        "requiredSourceSha256": [
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredSourceSha256": [
+          "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+          "9999999999999999999999999999999999999999999999999999999999999999"
+        ],
+        "coveredCaseIds": [],
+        "missingCaseIds": [
+          "fixture"
+        ],
+        "unsupportedCaseIds": [],
+        "unsupportedLanguages": [],
+        "uniqueReceiptCount": 1,
+        "invalidReceiptIndices": [],
+        "duplicateReceiptIndices": [],
+        "legacyReceiptIndices": []
+      },
+      "duplicate": {
+        "receiptListValid": true,
+        "requiredSourceSha256": [
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredSourceSha256": [
+          "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredCaseIds": [
+          "fixture"
+        ],
+        "missingCaseIds": [],
+        "unsupportedCaseIds": [],
+        "unsupportedLanguages": [],
+        "uniqueReceiptCount": 1,
+        "invalidReceiptIndices": [],
+        "duplicateReceiptIndices": [
+          1
+        ],
+        "legacyReceiptIndices": []
+      },
+      "stale": {
+        "receiptListValid": true,
+        "requiredSourceSha256": [
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredSourceSha256": [],
+        "coveredCaseIds": [],
+        "missingCaseIds": [
+          "fixture"
+        ],
+        "unsupportedCaseIds": [],
+        "unsupportedLanguages": [],
+        "uniqueReceiptCount": 0,
+        "invalidReceiptIndices": [
+          0
+        ],
+        "duplicateReceiptIndices": [],
+        "legacyReceiptIndices": []
+      },
+      "allExpectedBlockers": true
+    },
+    "guardObservations": 1,
+    "importObservations": 1,
+    "confirmedVulnerabilities": 0
+  },
+  "vmProtection": {
+    "dailyProgramFilesMatched": 169,
+    "dailyDatabasesLogicallyMatched": 42,
+    "dailyConfigPinsRuntimeMatched": true,
+    "temporaryRemoved": true
+  },
+  "artifactChecks": {
+    "protectedCurrentDigests": {
+      "work/harness-purge-improved/package-files.json": "ce47db260931cfee4c418c9dd6a2145c4791e1c33855a37e876d9a561a05d023",
+      "docs/security-workspace/review-sample-ledger.json": "62f38218bb84fd4b1ff1ef2b8133d6deaa71c7d132d03501e1cf6a732b195b7e"
+    },
+    "baselineProtectedDigests": {
+      "work/harness-purge-improved/package-files.json": "ce47db260931cfee4c418c9dd6a2145c4791e1c33855a37e876d9a561a05d023",
+      "docs/security-workspace/review-sample-ledger.json": "62f38218bb84fd4b1ff1ef2b8133d6deaa71c7d132d03501e1cf6a732b195b7e"
+    },
+    "receiptVersion": 2,
+    "sourceInputMapBound": true,
+    "scanDigestBound": true,
+    "rawReportVerified": true,
+    "runtimeCoverageChecks": {
+      "valid": {
+        "receiptListValid": true,
+        "requiredSourceSha256": [
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredSourceSha256": [
+          "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredCaseIds": [
+          "fixture"
+        ],
+        "missingCaseIds": [],
+        "unsupportedCaseIds": [],
+        "unsupportedLanguages": [],
+        "uniqueReceiptCount": 1,
+        "invalidReceiptIndices": [],
+        "duplicateReceiptIndices": [],
+        "legacyReceiptIndices": []
+      },
+      "unrelated": {
+        "receiptListValid": true,
+        "requiredSourceSha256": [
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredSourceSha256": [
+          "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+          "9999999999999999999999999999999999999999999999999999999999999999"
+        ],
+        "coveredCaseIds": [],
+        "missingCaseIds": [
+          "fixture"
+        ],
+        "unsupportedCaseIds": [],
+        "unsupportedLanguages": [],
+        "uniqueReceiptCount": 1,
+        "invalidReceiptIndices": [],
+        "duplicateReceiptIndices": [],
+        "legacyReceiptIndices": []
+      },
+      "duplicate": {
+        "receiptListValid": true,
+        "requiredSourceSha256": [
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredSourceSha256": [
+          "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredCaseIds": [
+          "fixture"
+        ],
+        "missingCaseIds": [],
+        "unsupportedCaseIds": [],
+        "unsupportedLanguages": [],
+        "uniqueReceiptCount": 1,
+        "invalidReceiptIndices": [],
+        "duplicateReceiptIndices": [
+          1
+        ],
+        "legacyReceiptIndices": []
+      },
+      "stale": {
+        "receiptListValid": true,
+        "requiredSourceSha256": [
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredSourceSha256": [],
+        "coveredCaseIds": [],
+        "missingCaseIds": [
+          "fixture"
+        ],
+        "unsupportedCaseIds": [],
+        "unsupportedLanguages": [],
+        "uniqueReceiptCount": 0,
+        "invalidReceiptIndices": [
+          0
+        ],
+        "duplicateReceiptIndices": [],
+        "legacyReceiptIndices": []
+      },
+      "allExpectedBlockers": true
+    },
+    "dailyProtection": {
+      "dailyProgramFilesMatched": 169,
+      "dailyDatabasesLogicallyMatched": 42,
+      "dailyConfigPinsRuntimeMatched": true,
+      "temporaryRemoved": true
+    },
+    "newIndependentSamples": 0
+  },
+  "historicalReplay": {
+    "afterGateSha256": "848cbbf3fe606f8f488bdc724cdf7e7373b43580209cc7bda83ed477fedd6f0d",
+    "inputFiles": {
+      "dataset.json": "73ad0135884f37d86b9a947bf9ba3e6d07f7e19ca18424ab1c211deaa30ac5cc",
+      "dataset-diagnostic.json": "21b44e78ff2645175b429d41a972a6978510b558eebfaf1da0f3005104417ede",
+      "candidate-run.json": "d4d3af165bd4d05e704bc6579be27ec0b51731a759a35bf656382e2c34cfa57f",
+      "candidate-freeze.json": "6b39a73fc1b1719725f657bce42748493cb2cd59dcaa5cc85bc17f1d430700d9",
+      "policy.json": "e9b429fc21e5d86578333e6cd4cfad9ef2455be578b7ea37336fced14c788ad1",
+      "ledger-before.json": "f9d4a3bf73c7806d6193dc96381162465402f71a917e8fc870fca04623e16f77"
+    },
+    "scope": "retrospective replay of already-used archived scan outputs, not a fresh detector run",
+    "newQualificationSamples": 0,
+    "beforeGateSha256": "c6578a4fc058e99813a22cabea5fb17546f22a1a10c1c8dd27b0a0f0f0972ec6",
+    "scenarios": [
+      {
+        "name": "original-legacy",
+        "beforeVersion": 5,
+        "afterVersion": 6,
+        "beforeQualificationCount": 0,
+        "afterQualificationCount": 0,
+        "diagnosticCount": 2,
+        "state": "blocked",
+        "newSelectionReason": "sample-selection-incomplete",
+        "priorBlockers": [
+          "reviewer-snapshot-missing-or-invalid",
+          "reviewer-execution-missing-or-mismatched",
+          "sample-selection-incomplete",
+          "python/CWE-94:insufficient-labelled-cases",
+          "python/CWE-94:raw-recall-below-threshold",
+          "python/CWE-94:reviewed-false-positive-rate-unqualified",
+          "python/CWE-94:reviewed-false-positive-bound-unqualified",
+          "python/CWE-94:false-exclusion-rate-unqualified",
+          "python/CWE-94:review-unknown-rate-unqualified",
+          "python/CWE-94:confirmed-recall-below-threshold",
+          "python/CWE-95:insufficient-labelled-cases",
+          "python/CWE-95:raw-recall-below-threshold",
+          "python/CWE-95:reviewed-false-positive-rate-unqualified",
+          "python/CWE-95:reviewed-false-positive-bound-unqualified",
+          "python/CWE-95:false-exclusion-rate-unqualified",
+          "python/CWE-95:review-unknown-rate-unqualified",
+          "python/CWE-95:confirmed-recall-below-threshold"
+        ],
+        "priorBlockersPreserved": true,
+        "allBlockers": [
+          "reviewer-snapshot-missing-or-invalid",
+          "reviewer-execution-missing-or-mismatched",
+          "reviewer-execution-inputs-missing-or-invalid",
+          "reviewer-execution-coverage-incomplete",
+          "sample-selection-incomplete",
+          "python/CWE-94:insufficient-labelled-cases",
+          "python/CWE-94:raw-recall-below-threshold",
+          "python/CWE-94:reviewed-false-positive-rate-unqualified",
+          "python/CWE-94:reviewed-false-positive-bound-unqualified",
+          "python/CWE-94:false-exclusion-rate-unqualified",
+          "python/CWE-94:review-unknown-rate-unqualified",
+          "python/CWE-94:confirmed-recall-below-threshold",
+          "python/CWE-95:insufficient-labelled-cases",
+          "python/CWE-95:raw-recall-below-threshold",
+          "python/CWE-95:reviewed-false-positive-rate-unqualified",
+          "python/CWE-95:reviewed-false-positive-bound-unqualified",
+          "python/CWE-95:false-exclusion-rate-unqualified",
+          "python/CWE-95:review-unknown-rate-unqualified",
+          "python/CWE-95:confirmed-recall-below-threshold"
+        ]
+      },
+      {
+        "name": "marked-diagnostic",
+        "beforeVersion": 5,
+        "afterVersion": 6,
+        "beforeQualificationCount": 0,
+        "afterQualificationCount": 0,
+        "diagnosticCount": 2,
+        "state": "blocked",
+        "newSelectionReason": "sample-selection-ineligible",
+        "priorBlockers": [
+          "reviewer-snapshot-missing-or-invalid",
+          "reviewer-execution-missing-or-mismatched",
+          "dataset-changed-after-freeze",
+          "run-dataset-mismatch",
+          "vulnerability-oracle-incomplete",
+          "sample-selection-ineligible",
+          "python/CWE-94:insufficient-labelled-cases",
+          "python/CWE-94:raw-recall-below-threshold",
+          "python/CWE-94:reviewed-false-positive-rate-unqualified",
+          "python/CWE-94:reviewed-false-positive-bound-unqualified",
+          "python/CWE-94:false-exclusion-rate-unqualified",
+          "python/CWE-94:review-unknown-rate-unqualified",
+          "python/CWE-94:confirmed-recall-below-threshold",
+          "python/CWE-95:insufficient-labelled-cases",
+          "python/CWE-95:raw-recall-below-threshold",
+          "python/CWE-95:reviewed-false-positive-rate-unqualified",
+          "python/CWE-95:reviewed-false-positive-bound-unqualified",
+          "python/CWE-95:false-exclusion-rate-unqualified",
+          "python/CWE-95:review-unknown-rate-unqualified",
+          "python/CWE-95:confirmed-recall-below-threshold"
+        ],
+        "priorBlockersPreserved": true,
+        "allBlockers": [
+          "reviewer-snapshot-missing-or-invalid",
+          "reviewer-execution-missing-or-mismatched",
+          "reviewer-execution-inputs-missing-or-invalid",
+          "reviewer-execution-coverage-incomplete",
+          "dataset-changed-after-freeze",
+          "run-dataset-mismatch",
+          "vulnerability-oracle-incomplete",
+          "sample-selection-ineligible",
+          "python/CWE-94:insufficient-labelled-cases",
+          "python/CWE-94:raw-recall-below-threshold",
+          "python/CWE-94:reviewed-false-positive-rate-unqualified",
+          "python/CWE-94:reviewed-false-positive-bound-unqualified",
+          "python/CWE-94:false-exclusion-rate-unqualified",
+          "python/CWE-94:review-unknown-rate-unqualified",
+          "python/CWE-94:confirmed-recall-below-threshold",
+          "python/CWE-95:insufficient-labelled-cases",
+          "python/CWE-95:raw-recall-below-threshold",
+          "python/CWE-95:reviewed-false-positive-rate-unqualified",
+          "python/CWE-95:reviewed-false-positive-bound-unqualified",
+          "python/CWE-95:false-exclusion-rate-unqualified",
+          "python/CWE-95:review-unknown-rate-unqualified",
+          "python/CWE-95:confirmed-recall-below-threshold"
+        ]
+      }
+    ]
+  },
+  "baselineWitness": {
+    "scope": "Retrospective offline synthetic schema witness; oracle/selection/human evidence are deliberate unit assertions, not real independent evidence or execution receipts",
+    "newIndependentSamples": 0,
+    "beforeGateSha256": "c6578a4fc058e99813a22cabea5fb17546f22a1a10c1c8dd27b0a0f0f0972ec6",
+    "afterGateSha256": "848cbbf3fe606f8f488bdc724cdf7e7373b43580209cc7bda83ed477fedd6f0d",
+    "input": {
+      "dataset": {
+        "version": 2,
+        "cases": [
+          {
+            "id": "p",
+            "truth": "positive",
+            "language": "python",
+            "cwe": "CWE-95",
+            "sourceSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+            "location": {
+              "line": 1,
+              "column": 1
+            },
+            "oracle": {
+              "kind": "independent-vulnerability",
+              "reference": "unit fixture assertion, not an independent oracle",
+              "positionVerified": true,
+              "conditionsVerified": true
+            },
+            "selection": {
+              "method": "unit-fixture-assertion",
+              "blind": true,
+              "qualificationEligible": true,
+              "protocolSha256": "6666666666666666666666666666666666666666666666666666666666666666"
+            }
+          },
+          {
+            "id": "n",
+            "truth": "negative",
+            "language": "python",
+            "cwe": "CWE-95",
+            "sourceSha256": "2222222222222222222222222222222222222222222222222222222222222222",
+            "location": {
+              "line": 1,
+              "column": 1
+            },
+            "oracle": {
+              "kind": "independent-vulnerability",
+              "reference": "unit fixture assertion, not an independent oracle",
+              "positionVerified": true,
+              "conditionsVerified": true
+            },
+            "selection": {
+              "method": "unit-fixture-assertion",
+              "blind": true,
+              "qualificationEligible": true,
+              "protocolSha256": "6666666666666666666666666666666666666666666666666666666666666666"
+            }
+          }
+        ]
+      },
+      "policy": {
+        "version": 2,
+        "role": "candidate-evaluation",
+        "categories": {
+          "python/CWE-95": {
+            "minimumPositive": 1,
+            "minimumNegative": 1,
+            "minimumRawRecall": 1,
+            "maximumReviewedFalsePositiveRate": 0,
+            "maximumFalseExclusionRate": 0,
+            "maximumUnknownRate": 0,
+            "minimumConfirmedRecall": 1
+          }
+        }
+      },
+      "ledger": {
+        "version": 1,
+        "sources": []
+      },
+      "freeze": {
+        "version": 2,
+        "createdAt": "2026-11-11T09:15:57.095Z",
+        "datasetSha256": "a78da5e0c75130726f3d2b8fbfddbd3b47047704b3519008dd6cda3dc8d1f031",
+        "policySha256": "77f40fd4923a6e40cff87d33f0e17534975366daa3010f0432da3188ca78f598",
+        "ledgerSha256": "2897c6523af7f59028f83d2d88fc644a2876353799b706faa3a185aa1948844d",
+        "identity": {
+          "scanner": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "rules": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "reviewer": "7cc0d84e94d9d0e7b032a16ba4909a8c0a420cb4806851ce2a687166393463ae"
+        },
+        "reviewerSnapshot": {
+          "version": 1,
+          "kind": "python-evidence-reviewer",
+          "entrypoint": "eval_evidence_batch.py",
+          "files": {
+            "eval_evidence_batch.py": "3333333333333333333333333333333333333333333333333333333333333333",
+            "eval_guard_review.py": "3333333333333333333333333333333333333333333333333333333333333333",
+            "eval_import_review.py": "3333333333333333333333333333333333333333333333333333333333333333"
+          },
+          "launcherSha256": "4444444444444444444444444444444444444444444444444444444444444444",
+          "imageId": "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+        },
+        "developmentSourceSha256": [],
+        "usageRequired": {
+          "datasetSha256": "a78da5e0c75130726f3d2b8fbfddbd3b47047704b3519008dd6cda3dc8d1f031",
+          "sourceSha256": [
+            "1111111111111111111111111111111111111111111111111111111111111111",
+            "2222222222222222222222222222222222222222222222222222222222222222"
+          ],
+          "action": "Record every acceptance attempt, including failure, in the usage ledger before any further freeze; this offline tool does not write the ledger"
+        }
+      },
+      "run": {
+        "version": 2,
+        "identity": {
+          "scanner": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "rules": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "reviewer": "7cc0d84e94d9d0e7b032a16ba4909a8c0a420cb4806851ce2a687166393463ae"
+        },
+        "startedAt": "2026-11-11T09:15:58.095Z",
+        "datasetSha256": "a78da5e0c75130726f3d2b8fbfddbd3b47047704b3519008dd6cda3dc8d1f031",
+        "freezeSha256": "ff7b4759ba5c519e2b32375c8c34e6ea8c1377c4c04798c18b3916f7890459bf",
+        "reviewerExecutions": [
+          {
+            "version": 1,
+            "state": "completed",
+            "snapshotSha256": "7cc0d84e94d9d0e7b032a16ba4909a8c0a420cb4806851ce2a687166393463ae",
+            "datasetSha256": "a78da5e0c75130726f3d2b8fbfddbd3b47047704b3519008dd6cda3dc8d1f031",
+            "freezeSha256": "ff7b4759ba5c519e2b32375c8c34e6ea8c1377c4c04798c18b3916f7890459bf",
+            "inputSha256": "e8f9595bbaacc0ff000e81055ae2b5e1d7e492fd20a03f6bb652f4b217ce72cf",
+            "inputFiles": {
+              "manifest.json": "7777777777777777777777777777777777777777777777777777777777777777",
+              "scan.json": "8888888888888888888888888888888888888888888888888888888888888888",
+              "sources/unrelated.py": "9999999999999999999999999999999999999999999999999999999999999999"
+            },
+            "scanSha256": "8888888888888888888888888888888888888888888888888888888888888888",
+            "reportSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "startedAt": "2026-11-11T09:15:58.095Z",
+            "finishedAt": "2026-11-11T09:15:58.095Z"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "p",
+            "raw": "hit",
+            "decision": "confirmed",
+            "location": {
+              "line": 1,
+              "sourceSha256": "1111111111111111111111111111111111111111111111111111111111111111"
+            },
+            "language": "python",
+            "cwe": "CWE-95",
+            "evidence": [
+              {
+                "kind": "human-review",
+                "caseId": "p",
+                "decision": "confirmed",
+                "inputSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                "artifactSha256": "3333333333333333333333333333333333333333333333333333333333333333"
+              }
+            ]
+          },
+          {
+            "id": "n",
+            "raw": "hit",
+            "decision": "excluded",
+            "location": {
+              "line": 1,
+              "sourceSha256": "2222222222222222222222222222222222222222222222222222222222222222"
+            },
+            "language": "python",
+            "cwe": "CWE-95",
+            "evidence": [
+              {
+                "kind": "human-review",
+                "caseId": "n",
+                "decision": "excluded",
+                "inputSha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                "artifactSha256": "4444444444444444444444444444444444444444444444444444444444444444"
+              }
+            ]
+          }
+        ]
+      },
+      "currentRun": {
+        "version": 2,
+        "identity": {
+          "scanner": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "rules": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "reviewer": "7cc0d84e94d9d0e7b032a16ba4909a8c0a420cb4806851ce2a687166393463ae"
+        },
+        "startedAt": "2026-11-11T09:15:58.095Z",
+        "datasetSha256": "a78da5e0c75130726f3d2b8fbfddbd3b47047704b3519008dd6cda3dc8d1f031",
+        "freezeSha256": "ff7b4759ba5c519e2b32375c8c34e6ea8c1377c4c04798c18b3916f7890459bf",
+        "reviewerExecutions": [
+          {
+            "version": 2,
+            "state": "completed",
+            "snapshotSha256": "7cc0d84e94d9d0e7b032a16ba4909a8c0a420cb4806851ce2a687166393463ae",
+            "datasetSha256": "a78da5e0c75130726f3d2b8fbfddbd3b47047704b3519008dd6cda3dc8d1f031",
+            "freezeSha256": "ff7b4759ba5c519e2b32375c8c34e6ea8c1377c4c04798c18b3916f7890459bf",
+            "inputSha256": "e8f9595bbaacc0ff000e81055ae2b5e1d7e492fd20a03f6bb652f4b217ce72cf",
+            "inputFiles": {
+              "manifest.json": "7777777777777777777777777777777777777777777777777777777777777777",
+              "scan.json": "8888888888888888888888888888888888888888888888888888888888888888",
+              "sources/unrelated.py": "9999999999999999999999999999999999999999999999999999999999999999"
+            },
+            "scanSha256": "8888888888888888888888888888888888888888888888888888888888888888",
+            "reportSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "startedAt": "2026-11-11T09:15:58.095Z",
+            "finishedAt": "2026-11-11T09:15:58.095Z"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "p",
+            "raw": "hit",
+            "decision": "confirmed",
+            "location": {
+              "line": 1,
+              "sourceSha256": "1111111111111111111111111111111111111111111111111111111111111111"
+            },
+            "language": "python",
+            "cwe": "CWE-95",
+            "evidence": [
+              {
+                "kind": "human-review",
+                "caseId": "p",
+                "decision": "confirmed",
+                "inputSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                "artifactSha256": "3333333333333333333333333333333333333333333333333333333333333333"
+              }
+            ]
+          },
+          {
+            "id": "n",
+            "raw": "hit",
+            "decision": "excluded",
+            "location": {
+              "line": 1,
+              "sourceSha256": "2222222222222222222222222222222222222222222222222222222222222222"
+            },
+            "language": "python",
+            "cwe": "CWE-95",
+            "evidence": [
+              {
+                "kind": "human-review",
+                "caseId": "n",
+                "decision": "excluded",
+                "inputSha256": "2222222222222222222222222222222222222222222222222222222222222222",
+                "artifactSha256": "4444444444444444444444444444444444444444444444444444444444444444"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "before": {
+      "version": 5,
+      "state": "eligible-for-release-review",
+      "r3Qualified": false
+    },
+    "after": {
+      "version": 6,
+      "state": "blocked",
+      "r3Qualified": false,
+      "blockers": [
+        "reviewer-execution-coverage-incomplete"
+      ],
+      "coverage": {
+        "receiptListValid": true,
+        "requiredSourceSha256": [
+          "1111111111111111111111111111111111111111111111111111111111111111",
+          "2222222222222222222222222222222222222222222222222222222222222222"
+        ],
+        "coveredSourceSha256": [
+          "9999999999999999999999999999999999999999999999999999999999999999"
+        ],
+        "coveredCaseIds": [],
+        "missingCaseIds": [
+          "p",
+          "n"
+        ],
+        "unsupportedCaseIds": [],
+        "unsupportedLanguages": [],
+        "uniqueReceiptCount": 1,
+        "invalidReceiptIndices": [],
+        "duplicateReceiptIndices": [],
+        "legacyReceiptIndices": []
+      }
+    }
+  },
+  "redCompatibilitySourceSha256": {
+    "scripts/review_quality_gate.mjs": "9af19bf4a7e102c706f24919fd8fccaae3dc52aa1876905b4680a9c4c6275c8c",
+    "work/harness-purge-improved/tests/review-quality-gate.test.mjs": "5be1894b3b7505717a406ea4cc8029a30a059ecafbe3c023e974c2b20e253260"
+  },
+  "priorReview": {
+    "reportSha256": "4c6ab1860d665c4cf463b36abbf5ac9eaad3ed54a3fa301d2537638c58272bec",
+    "receiptSha256": "1afb9949bb808c3636121186efdcc0186ef6c1d9b63729c6c83e3ef3b69623c2",
+    "triage": {
+      "confirmedBlockingFindings": 0,
+      "notes": [
+        {
+          "id": "NB1",
+          "classification": "confirmed coverage boundary, fixed in candidate revision",
+          "action": "Only Python cases can contribute coveredCaseIds. Other supported dataset languages get explicit global/per-case reviewer-language-unsupported; five-language regression failed before fix and passes after."
+        },
+        {
+          "id": "NB2",
+          "classification": "declared per-site/scan-to-output mapping gap",
+          "action": "Source membership is not per-site review. Empty or unrelated scan can still produce complete membership; original scan/result mapping remains release-review work, not claimed fixed."
+        },
+        {
+          "id": "NB3",
+          "classification": "existing attempt identity / attestation limitation",
+          "action": "No run nonce or independent time seal; cross-attempt reuse under same freeze remains a follow-up. All qualified release work still blocked."
+        },
+        {
+          "id": "NB4",
+          "classification": "semantic duplicate / attempt accounting gap",
+          "action": "Current duplicate identity is exact staged byte inventory, not normalized semantic equivalence. Whitespace or configuration changes create distinct inputs; counts remain dataset-based. Record separately for attempt/aggregation work."
+        },
+        {
+          "id": "NB5",
+          "classification": "documentation clarification",
+          "action": "Document launcher hash changes require new snapshot and quality freeze. Old records not rewritten; actual VM fixture creates fresh snapshot."
+        },
+        {
+          "id": "NB6",
+          "classification": "compatibility diagnostics improved in candidate",
+          "action": "Add explicit legacy-receipt reason and index list. New mixed v1/v2 regression failed before fix and passes after; no old receipts become qualifying."
+        },
+        {
+          "id": "NB7",
+          "classification": "documented metric boundary",
+          "action": "Definitions now state declared decisions/category metrics are not reclassified by coverage; global status, blockers and case reasons govern qualification. No count or threshold change."
+        },
+        {
+          "id": "NB8",
+          "classification": "confirmed repeated-work cost, fixed in candidate",
+          "action": "Compute full freeze digest once per evaluation and pass it through common validation/coverage; existing and new tests preserve semantics."
+        },
+        {
+          "id": "NB9",
+          "classification": "evidence disclosure corrected",
+          "action": "Include original red logs (32/8 and 9/1), exact pinned compatibility-red source (41/2) and baseline witness. Ninth boundary check was added separately after original red phase. Original initial red test source digest was not captured; no retrospective sealing claim. New witness explicitly retrospective and synthetic."
+        }
+      ]
+    }
+  },
+  "review": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "promptSha256": "f45e42c17a2563f3a3ec97bbd343a0380395165a1afb830332b10efdc9e06989",
+    "receiptSha256": "0f544745dd331edab9a187d68256bb2cc6795709cc7369569eb189056551f609",
+    "reportSha256": "a6de2798302d84e30f930898251c1f055f87f77aa76dc86b527b748fbf935b3a",
+    "confirmedBlockingFindings": 0,
+    "triage": {
+      "confirmedBlockingFindings": 0,
+      "scope": "N1 source membership, Python language boundary, legacy and exact input duplicate diagnostics; no R3 release",
+      "notes": [
+        {
+          "id": "R2-1",
+          "classification": "conditional category applicability limitation, remains open",
+          "verified": "Current candidate policy only includes python/CWE-94 and python/CWE-95. Gate accepts arbitrary allowed CWE labels and membership is byte/language based, not rule applicability. A Python CWE-89 toy row could get membership under a custom policy.",
+          "action": "Narrow documentation to current eval/exec/import reviewer role; explicitly record category support not mechanically enforced. Other-category quality not qualified. Per-category/rule applicability belongs with per-site mapping follow-up."
+        },
+        {
+          "id": "R2-2",
+          "classification": "documentation clarification",
+          "verified": "Current exact input digest duplicate check does not prevent new manifest bytes, cross-attempt reuse or scan-to-output mismatch.",
+          "action": "List empty-scan/path-mismatch, missing run nonce/time upper bound, and semantically equivalent batches as open. Counts still cannot be increased by receipt count."
+        },
+        {
+          "id": "R2-3",
+          "classification": "red-evidence provenance disclosure",
+          "verified": "Original red fixture used v1 and current code uses v2; original test bytes not preserved independently. Compatibility red file hash equals final current test hash.",
+          "action": "Preserve observed old red logs without pre-run sealing claim; state exact-current-test red evidence is 41 pass /2 fail and retrospective baseline witness is synthetic."
+        },
+        {
+          "id": "R2-4",
+          "classification": "non-blocking negative-fixture gap",
+          "verified": "Mixed v1/v2 test covers legacy and invalid indices. Pure v1 test lacks explicit legacy-index assertion and wrong-binding v1 is not a separate fixture; implementation records version before validity checks.",
+          "action": "Keep as follow-up negative tests, do not claim exhaustive branch coverage."
+        },
+        {
+          "id": "R2-5",
+          "classification": "documentation precision",
+          "verified": "Launcher verify/run compares its own file digest; Node gate only validates manifest shape and receipt bindings.",
+          "action": "Clarify old snapshot rejection occurs in launcher, not a current-launcher-version check by Node. No signed attestation claim."
+        },
+        {
+          "id": "R2-6",
+          "classification": "archival evidence supplement",
+          "verified": "Locally matched compatibility gate to first-review frozen code, raw VM script to intent digest, all base64 payloads to source checks, identity functions to prior staging source, and current inventory to inventory-change. All added supplement bytes preserved.",
+          "action": "Archive raw script, bridge, identity functions, pre-compat gate and binding JSON as unmodified archival evidence. Supplement was locally verified after review and not re-sent; no claim external reviewer inspected it. Full 1020 suite is Mac only; VM ran43+10 and real synthetic container."
+        }
+      ]
+    }
+  },
+  "archivalSupplement": {
+    "files": {
+      "vm-script.py": "97bb37b08fed6183b47ba7122b163e0facad3037bc2529a3bc7bbf45ebc130ed",
+      "identity-functions.py": "656ee2a2fe7fac234aea942e743b5db38005828d2124a49283f0489c4b3e57f3",
+      "evidence-bindings.json": "efcb35f4149c8d65474e1d8a63e0105c6676862ce0ca23feff38c4509b03258b",
+      "compatibility-gate-before.mjs": "9af19bf4a7e102c706f24919fd8fccaae3dc52aa1876905b4680a9c4c6275c8c",
+      "vm-bridge.py": "753b085609bbf3d1202b9dcb38fdbf218f8bf4847e11533ed8c838349f8994e2"
+    },
+    "binding": {
+      "scope": "Post-review archival supplement; byte/source bindings checked locally, not sent back to external reviewer; no retroactive sealing claim",
+      "reviewedCandidateInventorySha256": "2b11eeb747327b22ccef910b90acaeadd46a3fb2317249239dc9a3b426d534d3",
+      "exportVerifierSha256": "cc2dfb4519dda03ae74d3dd90a27bad8de7bed1a6c6d096089b7589bb12d0140",
+      "exportCheck": {
+        "ok": true,
+        "filesMatched": 1630,
+        "expectedFiles": 1630,
+        "programFilesMatched": 173,
+        "programExpected": 173,
+        "guestFilesMatched": 124,
+        "guestExpected": 124,
+        "textFilesChecked": 1619,
+        "upstreamImageFiles": 11,
+        "credentialPatternFindings": 0,
+        "integrityFindings": 0,
+        "unsupportedFindings": 0,
+        "issues": [],
+        "scope": "integrity, Python/JSON parse and fixed credential patterns; not a complete security audit"
+      },
+      "originalExportCheckArtifactSha256": "548705097498f7c277a6b7d24599db66c80947a268ab4712aa5f32739499d3a4",
+      "remoteScriptSha256": "97bb37b08fed6183b47ba7122b163e0facad3037bc2529a3bc7bbf45ebc130ed",
+      "payloadSourceDigests": {
+        "scripts/review_quality_gate.mjs": "848cbbf3fe606f8f488bdc724cdf7e7373b43580209cc7bda83ed477fedd6f0d",
+        "scripts/reviewer_snapshot.py": "942b82ee1b8f4da963a896bab00326cf57c7c57a0ea141f623b7caf523f0de84",
+        "scripts/reviewer_snapshot.test.py": "ded2f8ba29ecbfd6fffd228aafadfddf132c1c493b45538d9dc9093aff5eb536",
+        "scripts/eval_evidence_batch.test.py": "684293ec1ea35fa1590f729963101f78750fb6a2c8ef39053c33e3b954b51aab",
+        "work/harness-purge-improved/tests/review-quality-gate.test.mjs": "5be1894b3b7505717a406ea4cc8029a30a059ecafbe3c023e974c2b20e253260",
+        "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+        "work/harness-purge-improved/package/scripts/eval_guard_review.py": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+        "work/harness-purge-improved/package/scripts/eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843",
+        "live.py": "08b132256be1ba02116652a5c152c6942faa17450cc1e668d60eddf88ff2ef5a"
+      },
+      "allPayloadsVerified": true,
+      "identityFunctionsSha256": "656ee2a2fe7fac234aea942e743b5db38005828d2124a49283f0489c4b3e57f3",
+      "identitySourceCurrentlyMatchesPriorStageGuest": true,
+      "vmBridgeSha256": "753b085609bbf3d1202b9dcb38fdbf218f8bf4847e11533ed8c838349f8994e2",
+      "compatibilityGateBeforeSha256": "9af19bf4a7e102c706f24919fd8fccaae3dc52aa1876905b4680a9c4c6275c8c",
+      "compatibilityGateMatchesFirstReviewFrozenSource": true,
+      "testSha256AtRedAndGreen": "5be1894b3b7505717a406ea4cc8029a30a059ecafbe3c023e974c2b20e253260",
+      "initialRedSourceSealed": false
+    }
+  },
+  "boundaries": {
+    "categorySupportEnforced": false,
+    "currentPolicyCategories": [
+      "python/CWE-94",
+      "python/CWE-95"
+    ],
+    "initialRedTestSourceDigestCaptured": false,
+    "mechanicalSourceMembership": true,
+    "perSiteAnalysisProven": false,
+    "signedOrExternallySealed": false,
+    "newIndependentSamples": 0,
+    "usedLedgerChanged": false,
+    "numericThresholdsChanged": false,
+    "detectionRulesChanged": false,
+    "productionDeployment": false,
+    "githubPush": false,
+    "r3Qualified": false
+  },
+  "remaining": [
+    "Harden timeout/signal cancellation, container identity tracking, post-removal inspection and failure records; previous N2 remains open.",
+    "Align launcher/reviewer size limits and exact Python version types; validate VM UID/mount paths and add negative cases; previous N3/N4/N6/N7 remain open.",
+    "Independently verify raw artifacts, per-site review and aggregate mappings; receipt membership is self-attested. Add attempt/run identity and assess semantically equivalent batches separately.",
+    "Mechanically model supported CWE/rule applicability before qualifying other categories; current policy only covers Python CWE-94/95.",
+    "Review predeclared sample-selection protocol and collect genuinely fresh independently labelled positives and negatives."
+  ]
+}

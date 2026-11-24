@@ -1,0 +1,791 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Los_Angeles",
+  "runId": "security-trivy-20261029",
+  "feature": "Trivy package identity; asset-store dependency ordering; real-project audit and current whole-VM recovery",
+  "regression": {
+    "fullPluginPassed": 404,
+    "focusedClientPassed": 22,
+    "identityCases": 7,
+    "focusedOverlapsFull": true,
+    "controllerPassed": 126,
+    "nativeServiceOrderIntegrationPassed": true,
+    "independentReviews": "read-only; no Important/Critical findings remaining; no added test count"
+  },
+  "identity": {
+    "sideTable": "security_finding_subject",
+    "legacyRowsRewritten": false,
+    "snapshotSchema": 2,
+    "identityIncludes": [
+      "PkgName",
+      "InstalledVersion",
+      "PkgPath",
+      "PkgID",
+      "PURL"
+    ],
+    "retestFamily": [
+      "PkgName",
+      "PkgPath"
+    ],
+    "legacyTrivyComparison": "unavailable; never infer a clean result",
+    "unknownInstallPath": "conservative same-name family can remain/reopen; not proof of a clean retest"
+  },
+  "nativeTrivy": {
+    "engagement": "personal-trivy-identity-20261029",
+    "fixture": "/home/purge/workspace/security-trivy-identity-20261029",
+    "firstRunId": "40f45278-6029-4334-b2ca-34470f31e488",
+    "secondRunId": "5467d9bb-b936-4638-80c7-8018caccc32a",
+    "firstRawFindings": 18,
+    "firstUniqueComponentFindings": 18,
+    "firstStoredFindings": 18,
+    "sharedCveFileGroups": 6,
+    "sharedCveAcrossPackageNames": true,
+    "exampleSharedGroup": [
+      {
+        "rule": "CVE-2026-2950",
+        "location": "package-lock.json",
+        "name": "lodash-es",
+        "version": "4.17.15",
+        "path": ""
+      },
+      {
+        "rule": "CVE-2026-2950",
+        "location": "package-lock.json",
+        "name": "lodash",
+        "version": "4.17.20",
+        "path": ""
+      },
+      {
+        "rule": "CVE-2026-2950",
+        "location": "package-lock.json",
+        "name": "lodash",
+        "version": "4.17.15",
+        "path": ""
+      }
+    ],
+    "packageSpecificRetest": "retest-passed",
+    "comparison": {
+      "added": 0,
+      "persisting": 6,
+      "notSeen": 12,
+      "uncovered": 0
+    },
+    "finalFindingRecords": 18,
+    "pinnedScanner": "0.76.1",
+    "fixturePackagesNeverInstalled": true,
+    "modelCalls": 0,
+    "realProjectModified": false
+  },
+  "realProject": {
+    "engagement": "personal-security-real-20261029",
+    "runs": [
+      {
+        "id": "3f60e03c-5665-4edd-866e-d886606bde27",
+        "requestId": "real-project-trivy-web-20261029",
+        "tool": "trivy",
+        "state": "completed",
+        "complete": 1,
+        "coveredFiles": 5
+      },
+      {
+        "id": "e0a92964-2f0e-4513-9dd6-4616c42fae1b",
+        "requestId": "real-project-trivy-20261029",
+        "tool": "trivy",
+        "state": "interrupted",
+        "complete": 0,
+        "coveredFiles": null
+      },
+      {
+        "id": "879e95ac-72ce-4d73-a19c-c5ccd2bd6f5c",
+        "requestId": "real-project-semgrep-20261029",
+        "tool": "semgrep",
+        "state": "partial",
+        "complete": 0,
+        "coveredFiles": 146
+      }
+    ],
+    "totalFindings": 95,
+    "unverifiedByTool": {
+      "trivy": 58,
+      "semgrep": 37
+    },
+    "packageFindingCount": 58,
+    "exportComplete": true,
+    "allUnverified": true,
+    "webSessionId": "session-59cc5cf5-68d2-4af1-a339-e7fb60e64f0b",
+    "headlessInterruptionPreserved": true,
+    "trackedSourceHashesMatched": 459,
+    "gitHeadUnchanged": true,
+    "activeScannerContainers": 0,
+    "webNativeToolCalls": 8,
+    "webToolActions": [
+      "bind",
+      "status",
+      "start",
+      "status",
+      "status",
+      "status",
+      "status",
+      "report"
+    ],
+    "nativeStoredToolFramesClipped": 2,
+    "fullReportVerifiedIndependently": true,
+    "webNativeSessionArchiveSha256": "3e33d52b7b043d3796081399d21c09362ed4cc94442fe31511d8200c81b8d9d2"
+  },
+  "coverageDiagnosis": {
+    "errorCount": 1,
+    "errors": [
+      {
+        "type": [
+          "PartialParsing",
+          [
+            {
+              "path": "/src/website/static/i18n.test.mjs",
+              "start": {
+                "line": 143,
+                "col": 44,
+                "offset": 0
+              },
+              "end": {
+                "line": 143,
+                "col": 46,
+                "offset": 2
+              }
+            },
+            {
+              "path": "/src/website/static/i18n.test.mjs",
+              "start": {
+                "line": 201,
+                "col": 44,
+                "offset": 0
+              },
+              "end": {
+                "line": 201,
+                "col": 46,
+                "offset": 2
+              }
+            },
+            {
+              "path": "/src/website/static/i18n.test.mjs",
+              "start": {
+                "line": 1108,
+                "col": 29,
+                "offset": 0
+              },
+              "end": {
+                "line": 1109,
+                "col": 8,
+                "offset": 106
+              }
+            }
+          ]
+        ],
+        "level": "warn",
+        "message": "Syntax error at line /src/website/static/i18n.test.mjs:143:\n `(/` was unexpected",
+        "path": "/src/website/static/i18n.test.mjs"
+      }
+    ],
+    "scanned": 146,
+    "nodeSyntaxCheckExit": 0,
+    "nodeSyntaxCheckStderr": ""
+  },
+  "browser": {
+    "nativePackageNamesAndVersionsShown": true,
+    "sameCveThreeComponentsInDownloadedReport": true,
+    "comparisonCountsObserved": {
+      "added": 0,
+      "persisting": 6,
+      "notSeen": 12,
+      "uncovered": 0
+    },
+    "webNativeCallsVerified": 8,
+    "realProjectReportDisplayed": true,
+    "screenshot": "browser-final.png"
+  },
+  "runtime": {
+    "programFilesMatched": 123,
+    "ruleHashMatched": true,
+    "runtimeManifestMatched": true,
+    "service": "active",
+    "activeScannerContainers": 0,
+    "preflight": {
+      "ok": true,
+      "readOnly": true,
+      "automaticChanges": false,
+      "scope": "local pinned images, rules and database identity; no scanner execution, model call, network download or GitHub latest check",
+      "tools": {
+        "semgrep": {
+          "ready": true,
+          "version": "1.182.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T04:30:21.314Z",
+          "cached": false,
+          "rules": {
+            "version": "local-reviewed-2",
+            "count": 16,
+            "languages": [
+              "javascript",
+              "python",
+              "typescript"
+            ]
+          }
+        },
+        "trivy": {
+          "ready": true,
+          "version": "0.76.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T04:30:21.314Z",
+          "cached": false,
+          "database": {
+            "state": "fresh",
+            "updatedAt": "2026-10-29T19:18:50.969Z",
+            "nextUpdate": "2026-10-30T19:18:50.969Z",
+            "ageDays": 0
+          },
+          "lastUpdate": {
+            "state": "current",
+            "checkedAt": "2026-10-29T22:59:00.361501+00:00"
+          }
+        },
+        "zap": {
+          "ready": true,
+          "version": "2.17.0",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T04:30:21.314Z",
+          "cached": false
+        }
+      }
+    },
+    "hostIsolationValidated": true
+  },
+  "recovery": {
+    "point": "ready-security-validated-20261029",
+    "proof": {
+      "snapshot": "ready-security-validated-20261029",
+      "proofFiles": 2052,
+      "programFiles": 123,
+      "securityAssetProofFiles": 4,
+      "serviceStoppedBeforeHashes": true,
+      "databaseSha256": "74cc77deb945b9cc6edf9967f3840d92286c59b0fda882b369dc9eda67cb5e07",
+      "originalCapabilitiesEnabled": true
+    },
+    "cold": {
+      "proofHashesMatched": 2051,
+      "proofEntriesVerified": 2052,
+      "sessionArchiveAppend": {
+        "originalCompressedBytesPreserved": true,
+        "originalSha256": "3e33d52b7b043d3796081399d21c09362ed4cc94442fe31511d8200c81b8d9d2",
+        "originalBytes": 175058,
+        "currentBytes": 175139,
+        "originalRows": 77,
+        "appendedEvents": [
+          "session/end-seed"
+        ],
+        "byteHashMatched": false,
+        "verifiedAppendOnly": true
+      },
+      "programHashesMatched": 123,
+      "preflight": {
+        "ok": true,
+        "readOnly": true,
+        "automaticChanges": false,
+        "scope": "local pinned images, rules and database identity; no scanner execution, model call, network download or GitHub latest check",
+        "tools": {
+          "semgrep": {
+            "ready": true,
+            "version": "1.182.1",
+            "reason": null,
+            "warning": null,
+            "checkedAt": "2026-10-30T04:29:46.791Z",
+            "cached": false,
+            "rules": {
+              "version": "local-reviewed-2",
+              "count": 16,
+              "languages": [
+                "javascript",
+                "python",
+                "typescript"
+              ]
+            }
+          },
+          "trivy": {
+            "ready": true,
+            "version": "0.76.1",
+            "reason": null,
+            "warning": null,
+            "checkedAt": "2026-10-30T04:29:46.791Z",
+            "cached": false,
+            "database": {
+              "state": "fresh",
+              "updatedAt": "2026-10-29T19:18:50.969Z",
+              "nextUpdate": "2026-10-30T19:18:50.969Z",
+              "ageDays": 0
+            },
+            "lastUpdate": {
+              "state": "current",
+              "checkedAt": "2026-10-29T22:59:00.361501+00:00"
+            }
+          },
+          "zap": {
+            "ready": true,
+            "version": "2.17.0",
+            "reason": null,
+            "warning": null,
+            "checkedAt": "2026-10-30T04:29:46.791Z",
+            "cached": false
+          }
+        }
+      },
+      "service": "active",
+      "scannerContainersRunning": 0,
+      "modelRunPersisted": true,
+      "originalCapabilitiesEnabled": true,
+      "recovery": {
+        "state": "matches",
+        "name": "ready-security-validated-20261029",
+        "createdAt": "2026-10-30T04:26:20Z",
+        "scope": "improved-program-tools-config",
+        "helpersMatch": true,
+        "launchAgentsMatch": true,
+        "uncoveredFiles": [],
+        "groups": {
+          "program": {
+            "state": "matches",
+            "filesChecked": 123,
+            "uncoveredFiles": [],
+            "differentFiles": []
+          },
+          "runtime": {
+            "state": "matches",
+            "filesChecked": 13,
+            "uncoveredFiles": [],
+            "differentFiles": []
+          },
+          "tools": {
+            "state": "matches",
+            "filesChecked": 13,
+            "uncoveredFiles": [],
+            "differentFiles": []
+          },
+          "config": {
+            "state": "matches",
+            "filesChecked": 9,
+            "uncoveredFiles": [],
+            "differentFiles": []
+          },
+          "plugins": {
+            "state": "matches",
+            "filesChecked": 1320,
+            "uncoveredFiles": [],
+            "differentFiles": [],
+            "differentFileCount": 0,
+            "differenceDetailsTruncated": false
+          }
+        }
+      },
+      "hostHelpersMatched": true,
+      "hostIsolationValidated": true,
+      "vmCount": 1
+    },
+    "offlineProbe": {
+      "recoveryPoint": "ready-security-validated-20261029",
+      "copiedHelperReplaceFaultInjected": true,
+      "copiedHostHelpersRolledBack": true,
+      "copiedFaultTemporaryCleaned": true,
+      "offlineDiskRestorePassed": true,
+      "diskCheckPassed": true,
+      "hostHelpersRestored": 5,
+      "launchDefinitionsRestoredInSyntheticHost": 2,
+      "missingAndCorruptCopiedHelpersRepaired": true,
+      "primaryDiskUnmodified": true,
+      "noVmRegistered": true,
+      "copyBootTested": false,
+      "probeArchive": "/Users/LOCAL_USER/Library/Application Support/Harness Purge Original/archived-validation/restore-probe-security-validated-20261029",
+      "temporaryDiskCopyRemoved": true
+    },
+    "snapshots": {
+      "mainDiskSnapshotNames": [
+        "ready-original",
+        "ready-toolchain-20261025",
+        "ready-recovery-guard-20261029",
+        "ready-recovery-resume-20261029",
+        "ready-recovery-proof-20261029",
+        "ready-security-audit-20261029",
+        "ready-security-validated-20261029"
+      ],
+      "mainDiskSnapshotCount": 7,
+      "previousSnapshotNamesPreserved": true
+    },
+    "temporaryCopyRemoved": true,
+    "copyBootTested": false
+  },
+  "deployments": [
+    {
+      "changedGuestFiles": [
+        "tools/dsh-purge-personal-1.1.77-personal.1/PERSONAL-CHANGES.md",
+        "tools/dsh-purge-personal-1.1.77-personal.1/client.js",
+        "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-client.mjs",
+        "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-comparison.mjs",
+        "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-identity.mjs",
+        "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-report.mjs",
+        "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-workbench.mjs"
+      ],
+      "forkHashesMatched": 123,
+      "guestBackup": "/home/purge/downloads/security-trivy-20261030T035659Z",
+      "serviceRestarted": true,
+      "sqliteBackupCount": 9
+    },
+    {
+      "changedGuestFiles": [
+        "tools/dsh-purge-personal-1.1.77-personal.1/PERSONAL-CHANGES.md",
+        "tools/dsh-purge-personal-1.1.77-personal.1/cordis.patch.yml",
+        "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/tools.js"
+      ],
+      "forkHashesMatched": 123,
+      "guestBackup": "/home/purge/downloads/security-service-order-20261030T040759Z",
+      "serviceRestarted": true,
+      "sqliteBackupCount": 11
+    }
+  ],
+  "scope": {
+    "hostPermissionsExpanded": false,
+    "vmGeneralPermissionsChanged": false,
+    "ownedAuditScopesCreated": true,
+    "scannerAssetsChanged": false,
+    "realProjectCodeEdited": false,
+    "gitPush": false
+  },
+  "history": {
+    "modelFirstRun": "asset store not ready; bind/status failed, no scan rows; explicit redteam dependency fixed the startup order",
+    "semgrep": "partial parsing of i18n.test.mjs; Node --check succeeds; partial and 37 unverified findings retained",
+    "headlessTrivy": "one-shot model turn ended while scanner running; service disposal persisted interrupted and removed container; web retry used a distinct recorded request only after reconciliation",
+    "web": "two turns, eight native tool calls; Trivy completed and report obtained; no repeat Semgrep",
+    "nativeStoredToolText": "some result text is clipped in retained native event frames; full report independently checked against SQLite; not claiming all tool payload bytes were retained",
+    "firstColdCheck": "one live session archive hash changed; exact original compressed prefix and only one empty session/end-seed append verified; 2051 byte hashes plus one append check, not 2052 byte matches",
+    "testHarnessCorrections": "short request IDs, integration SDK resolution/session-binding accessor, diagnostic SQL field/JSON clipping, local launch-script generation, and shell-expanded subset corrected; original receipts retained"
+  },
+  "limits": [
+    "95 findings are unverified rule/database matches; no reachability or exploitability validation",
+    "Semgrep coverage remains partial; no ZAP or public target tested",
+    "previously collapsed legacy package evidence cannot be reconstructed",
+    "source preservation hashes cover tracked regular files, not an inventory of the untracked tree",
+    "offline-copy restore and primary cold boot do not establish copy boot"
+  ],
+  "commandReceipts": {
+    "backend-final": {
+      "scope": "backend-final",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "ff5a4abcf56994120664c80862cf38c5f66c78a92e220f34851c21e8389aef01"
+    },
+    "build-client": {
+      "scope": "build",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "fcb09d9cb5537ad759a1b0d5ab6462eaa8dda3eddd12ed373bc525e444a3f50b"
+    },
+    "cli-persistence": {
+      "scope": "model-diagnosis",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "e830506f3ea4ea2955350af5edb7d72e6c3bd3a54de93f2c562facf1fdef2eb8"
+    },
+    "client-green": {
+      "scope": "client",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "a341cdab34bbef8bf07a0898216f68c891958f347c9d990abec9164551bf91f1"
+    },
+    "client-red": {
+      "scope": "client",
+      "state": "exited",
+      "returncode": 1,
+      "sha256": "1e546c88c573d4993a6f1736e2b3f8e566b94d9ee4a3ea7ec6483829046d4fe8"
+    },
+    "cold-verify-r2": {
+      "scope": "cold-final",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "48a8e3fd9c8eee904792ed47455248e36206dc48c0bfe4c85a279a85c3553ac4"
+    },
+    "cold-verify": {
+      "scope": "cold-final",
+      "state": "exited",
+      "returncode": 1,
+      "sha256": "9aa5ee61c5d3b35f53950ab21e67dc0cf7e4a9f5b30dbd320d3adc0ea7ccc36f"
+    },
+    "comparison-text-red": {
+      "scope": "comparison-text",
+      "state": "exited",
+      "returncode": 1,
+      "sha256": "900eaf199d976147d68f0ab15e7e7ff23fe0e89aa5dec6f9ec19df167ab22160"
+    },
+    "controller-install": {
+      "scope": "controller-deployment",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "f22d294f07637809e0a1d052d2ade89a3073958ddb5a375927287a33ae28f8df"
+    },
+    "controller-tests": {
+      "scope": "controller",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "41ada9091414fcfe4e11882678e935e5cabd3d03b9677263c5fcf6f48fd630b1"
+    },
+    "coverage-diagnosis": {
+      "scope": "model-diagnosis",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "21a351f2b3590e41003ff6159b043c166f5768ab115dab77ae24d643dbd23371"
+    },
+    "deployment": {
+      "scope": "deployment",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "634626f4ba8a968f2f21ef606faceb0fe70e5ba452256f3bcc8bc95b9f585364"
+    },
+    "headless-diagnosis": {
+      "scope": "model-diagnosis",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "87f3c97b9e3d920df3602b9d78720a2ec8a47768839c93a1d8339fb855661155"
+    },
+    "identity-final": {
+      "scope": "identity-final",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "8f7e2b56db05fb33d9dd7f98da11ef6be610680b8f10aec6f752aed8c99d9e0f"
+    },
+    "identity-green": {
+      "scope": "identity-green",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "07287f94a8d6bb5a2cbfda883d0db55dc98dd316cb2b24361e5f40c140a3a54a"
+    },
+    "identity-red": {
+      "scope": "identity-red",
+      "state": "exited",
+      "returncode": 1,
+      "sha256": "ef2cb843e5c713919e901afb72e84cd14849fca5c4ac3862f9df3ba8b6280805"
+    },
+    "live-final": {
+      "scope": "runtime-final",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "771be0dd0629f2fea4fdae2356076c13f202604405de125fb937768107e92a49"
+    },
+    "live-inventory": {
+      "scope": "live-inventory",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "a4e9ff85af0fe7a1d86e3f9f239d14cabe5506ada81923883614a9d975664cdb"
+    },
+    "model-prepare": {
+      "scope": "model",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "7cc923e17d314ef451a3535614f454a1d9d5ea07d5f2378505bc421889961b71"
+    },
+    "model-reconcile-r2": {
+      "scope": "model-diagnosis",
+      "state": "exited",
+      "returncode": 1,
+      "sha256": "69de922d7531bc300262902445edffa76a30aa8b72aca9609be23162dedb97df"
+    },
+    "model-reconcile-r2b": {
+      "scope": "model-diagnosis",
+      "state": "exited",
+      "returncode": 1,
+      "sha256": "40e1816b8721682d48d26c04f66a90693fa53b4fd8334d2653be95d6da66aec2"
+    },
+    "model-reconcile-r2c": {
+      "scope": "model-diagnosis",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "d92a5bd42bb4790743fbd541c85ec8c7d749b3fe509dbc3699c8e0407e8694c8"
+    },
+    "model-reconcile-r3": {
+      "scope": "model-diagnosis",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "1e5d832e54993e64f47ba02b9195ff3a86f57df1e04874c9642d9e9795fc911b"
+    },
+    "model-reconcile": {
+      "scope": "model-diagnosis",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "f350636072b4d6c0008dd3df2daf5bceb90a990d75c9eee5e3a3599ea6b5de09"
+    },
+    "model-run-r2": {
+      "scope": "model",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "a1bcde59cab6a9dde8000bf9898cccb9fe49adc8b58854cb8b01cb6b8773f71a"
+    },
+    "model-run-r3": {
+      "scope": "model",
+      "state": "exited",
+      "returncode": 2,
+      "sha256": "d9b98e0d4c67ba75d5d8382a8d5d6d058fffda980e192e57b56abb9b341ec117"
+    },
+    "model-run-r3b": {
+      "scope": "model",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "f3ceee702c2d7ba61e75b579fba6cc9bfd68ab87d9fdeb4bac6bbf04702eed67"
+    },
+    "model-run": {
+      "scope": "model",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "1bc1f0d83defa02bee86734fe428b5fc3b54050b1331ab32e2d0dc5c586916c9"
+    },
+    "model-verified": {
+      "scope": "model-final",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "78d50be8e498b814c4ac25b76fdb7f23d9939ec0b0788be6dc582be6b43de636"
+    },
+    "native-acceptance": {
+      "scope": "native-acceptance",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "ecb75bd62064955558872b4fe6d7c206159110f0a739d1151e71716db0e207d4"
+    },
+    "package-final": {
+      "scope": "package-final",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "068fc6761c80e37aa0b7695a1d3954e58b4e7a9ed696f85c74338da3bc491986"
+    },
+    "package-order-final": {
+      "scope": "package-final",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "f7866bcc2abdafd85116c5fc395a49c41ed78c6dc961eba100521726e1578a2f"
+    },
+    "package-service-final": {
+      "scope": "package-final",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "27446fdb853a43832c655d6a4014876c484b7c7097cd5056dcd3830f7d8e1db3"
+    },
+    "recovery-create": {
+      "scope": "recovery-live",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "474ceca228977c475504b0c9b070c144e921f6d81657bd67f7e86a38bf794560"
+    },
+    "retest-green-corrected": {
+      "scope": "retest",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "6e9397291f114516149a315d3cca626d1f631c4c49e4b57baf3ee167690522ee"
+    },
+    "retest-green": {
+      "scope": "retest",
+      "state": "exited",
+      "returncode": 1,
+      "sha256": "5fcf5bd92f5019f70f34284a7f9cd9a6e3d758d1ed425c89758e54748a77df27"
+    },
+    "retest-red-corrected": {
+      "scope": "retest",
+      "state": "exited",
+      "returncode": 1,
+      "sha256": "8eee683b9289977ce7a18249d27def34bb20e188eaba97d33cab8ec7cca8e30c"
+    },
+    "retest-red": {
+      "scope": "retest",
+      "state": "exited",
+      "returncode": 1,
+      "sha256": "c6e57055d294063e8295bf1a7e7e81e4b728d88e525f365cfbc9e3062c97d02e"
+    },
+    "service-deployment": {
+      "scope": "service-deployment",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "6bcd80617c4de30b5f90068f73657f4848d0b329f02be18c3a8d1d46bda60079"
+    },
+    "service-order-green-r2": {
+      "scope": "service-order",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "727f7992f095f44252387dbb18e4f03dcd972d8462ffdb206ee2c960378c5590"
+    },
+    "service-order-green": {
+      "scope": "service-order",
+      "state": "exited",
+      "returncode": 1,
+      "sha256": "5b9df99d604ee67e86c23b498337e46e4533fcf7ba343882e9376c535df6234f"
+    },
+    "service-order-red-r2": {
+      "scope": "service-order",
+      "state": "exited",
+      "returncode": 1,
+      "sha256": "914e6d8ed509345ba49b108482b7e10d72e3ae7d01a2307e93c98d102ad70dc1"
+    },
+    "service-order-red-r3": {
+      "scope": "service-order",
+      "state": "exited",
+      "returncode": 1,
+      "sha256": "790b6aa25248cfb5c5ca6c8ffd070d385c34c5f893925f8418abad6ccd041e25"
+    },
+    "service-order-red": {
+      "scope": "service-order",
+      "state": "exited",
+      "returncode": 1,
+      "sha256": "5e0e028a0dc0181f1faca48ca7c720bdf0554d9f5d61bf74f3141eb60da7a485"
+    },
+    "session-cold-diagnosis": {
+      "scope": "recovery-diagnosis",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "edadacb02f2d5895b1ec00cafda98039046d0855b163b582d6fc79604b766e0c"
+    },
+    "snapshot-inventory": {
+      "scope": "recovery-final",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "d7b6d8ad04bba7dd4beecb535cefd5a64177d873c5c14c831ee287f977f7c575"
+    },
+    "source-export-final": {
+      "scope": "export-source",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "f6c6600c7fc7a1cf419052f17a8a84cef873458bb64932842709aee06b48682e"
+    },
+    "web-call-shapes": {
+      "scope": "web-model",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "7198aa8dc27724361e5eb9f2ce82411983337c63fdc6b0cf4fe3cdbcae00ce7b"
+    },
+    "web-event-inspection": {
+      "scope": "web-model",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "0e866a6da951433f9672e7f095eca759f94a12634afb96617dab7da797abaf51"
+    },
+    "web-result-shapes": {
+      "scope": "web-model",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "f0212450c104e40af32eb95b32120cf90c0c33ca93304f7aafdefd1b283a59f1"
+    },
+    "web-run-wait": {
+      "scope": "web-model",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "15dd398a0b59ac4bb0c82b84a83d014e85ceea36291aa63aab0d4f2e795722dc"
+    },
+    "web-verified": {
+      "scope": "model-final",
+      "state": "exited",
+      "returncode": 0,
+      "sha256": "246d7d31e32e7c99c2ce8c4d82c9a2debce56993c3b14d7e16e8addd64b578e7"
+    }
+  }
+}

@@ -1,0 +1,65 @@
+def validate_config(c):
+ if c.get('Information',{}).get('UUID')!=UUID:raise ValueError('Wrong VM identity')
+ if c.get('Network')!=[]:raise ValueError('Normal network interface is forbidden')
+ if c.get('Sharing',{}).get('ClipboardSharing') is not False or c.get('Sharing',{}).get('DirectoryShareMode')!='None':raise ValueError('Host sharing/clipboard must remain off')
+ if c.get('Input',{}).get('UsbSharing') is not False or c['Input'].get('MaximumUsbShare')!=0:raise ValueError('Host USB passthrough must remain off')
+ if c.get('QEMU',{}).get('AdditionalArguments')!=network_args():raise ValueError('Restricted network/custom devices changed; launch refused pending review')
+ drives=c.get('Drive',[])
+ if len(drives)!=1 or drives[0].get('ImageName')!='ubuntu.qcow2' or drives[0].get('ImageType')!='Disk' or drives[0].get('Interface')!='VirtIO':raise ValueError('Unexpected guest disk or host path')
+ serial=c.get('Serial',[])
+ if len(serial)!=1 or serial[0].get('Mode')!='TcpServer' or serial[0].get('TcpPort')!=49225 or serial[0].get('RemoteConnectionAllowed') is not False:raise ValueError('Serial console must remain loopback only')
+
+def validate():
+ for p in [ROOT,VM,VM/'config.plist',VM/'Data',VM/'Data/ubuntu.qcow2',VM/'Data/seed.iso',SETUP,SETUP/'guest-ed25519',SETUP/'known_hosts']:
+  if p.is_symlink():raise ValueError('Dedicated VM path cannot be a symlink')
+  if not p.exists():raise ValueError('Missing VM prerequisite: '+str(p))
+ if ROOT.stat().st_mode&0o077:raise ValueError('VM root must be owner-only')
+ if (SETUP/'known_hosts').stat().st_mode&0o077:raise ValueError('Dedicated SSH trust file must be owner-only')
+ lines=(SETUP/'known_hosts').read_text().splitlines()
+ if len(lines)!=1 or not re.fullmatch(r'\[127\.0\.0\.1\]:49223 ssh-ed25519 [A-Za-z0-9+/=]+',lines[0]):raise ValueError('Dedicated SSH trust must contain exactly this VM host key')
+ validate_config(plistlib.loads((VM/'config.plist').read_bytes()))
+
+def command(argv,**kw):return subprocess.run(argv,check=True,capture_output=True,text=True,timeout=kw.pop('timeout',30),**kw)
+
+SSH_REASONS={'queue-timeout':'SSH channel busy; request not sent','connection-refused':'Connection refused','connection-reset':'Connection reset by peer','connection-closed':'Connection closed','connection-timeout':'Connection timed out','authentication-denied':'Permission denied (publickey)','host-key-mismatch':'Host key verification failed','identity-unavailable':'Dedicated SSH identity unavailable','timeout':'SSH command deadline exceeded','remote-or-unknown-error':'SSH or remote command error; raw command and output omitted'}
+def ssh(script,timeout=15,*,input=None,phase='general'):
+ if not isinstance(phase,str) or phase not in SSH_PHASES:raise ValueError('Unknown SSH diagnostic phase')
+ if type(timeout) not in (int,float) or not math.isfinite(timeout) or timeout<=0:raise ValueError('SSH timeout must be finite and positive')
+ trace={'id':str(uuid.uuid4()),'phase':phase,'remoteException':None,'remoteLine':None,'transportStage':'unknown'}
+ argv=['/usr/bin/ssh','-F','/dev/null','-p','49223','-i',str(SETUP/'guest-ed25519'),'-o','IdentityAgent=none','-o','IdentitiesOnly=yes','-o','BatchMode=yes','-o','ConnectTimeout=3','-o','StrictHostKeyChecking=yes','-o','UserKnownHostsFile="'+str(SETUP/'known_hosts')+'"','-o','GlobalKnownHostsFile=/dev/null','purge@127.0.0.1']
+ started=time.monotonic()
+ try:
+  with ssh_channel(started+timeout):
+   # A trusted local builder samples clock inputs only after queueing.
+   prepared=script() if callable(script) else script
+   if not isinstance(prepared,str):raise ValueError('SSH command must be text')
+   remaining=started+timeout-time.monotonic()
+   if remaining<=0:raise SSHChannelWaitExpired('SSH channel wait deadline')
+   return command([*argv,prepared],timeout=remaining,**({'input':input} if input is not None else {}))
+ except SSHChannelWaitExpired:
+  trace['transportStage']='queue'
+  failure=SSHNotSent('managed SSH request',timeout);failure.trace=trace;failure.diagnosticRecorded=record_ssh_failure('queue-timeout',None,time.monotonic()-started,trace)
+  raise failure from None
+ except subprocess.CalledProcessError as error:
+  reason='remote-or-unknown-error';raw=error.stderr
+  if isinstance(raw,bytes):raw=raw.decode('utf-8','replace')
+  if error.returncode==255 and isinstance(raw,str):
+   for key,needle in [('connection-refused','connection refused'),('connection-reset','connection reset by peer'),('connection-closed','connection closed'),('connection-timeout','connection timed out'),('authentication-denied','permission denied (publickey'),('host-key-mismatch','host key verification failed'),('identity-unavailable','no such identity')]:
+    if needle in raw[:8192].lower():reason=key;break
+  failure=SSHFailure(error.returncode,error.cmd,output=error.output,stderr=error.stderr);failure.reason=reason
+  trace['transportStage']=reported_transport_stage(error.stderr,error.returncode)
+  if error.returncode!=255:trace['remoteException'],trace['remoteLine']=reported_remote_failure(error.stderr)
+  failure.trace=trace;failure.diagnosticRecorded=record_ssh_failure(reason,error.returncode,time.monotonic()-started,trace)
+  raise failure from None
+ except subprocess.TimeoutExpired as error:
+  failure=SSHDeadline(error.cmd,error.timeout,output=error.output,stderr=error.stderr);failure.trace=trace;failure.diagnosticRecorded=record_ssh_failure('timeout',None,time.monotonic()-started,trace)
+  raise failure from None
+
+SSH_JOURNAL_MARKERS={'maxStartups':'maxstartups','drop':'drop connection','penalty':'penalty','forkFailure':'fork:','outOfMemory':'cannot allocate memory','acceptedKey':'accepted publickey','preAuthClosed':'[preauth]'}
+
+def summarize_ssh_journal(raw):
+ unavailable={'state':'unavailable','rows':None,'truncated':False,'markers':None}
+ try:
+  if not isinstance(raw,str) or len(raw.encode('utf-8'))>262144:return unavailable
+  lines=raw.splitlines()
+  if len(lines)>201:return unavailable

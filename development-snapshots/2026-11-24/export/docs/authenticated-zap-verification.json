@@ -1,0 +1,176 @@
+{
+  "date": "2026-11-01",
+  "timezone": "America/Los_Angeles",
+  "runtime": {
+    "version": "1.1.77-personal.2",
+    "programFiles": 130,
+    "zap": "2.17.0",
+    "semgrep": "1.182.1",
+    "newDependencies": false
+  },
+  "authentication": {
+    "privateNamedProfiles": true,
+    "supportedHeaders": [
+      "Cookie (single session cookie)",
+      "Authorization: Bearer"
+    ],
+    "scopeStoresNameOnly": true,
+    "exactLoopbackOrigin": true,
+    "controllerAndZapBeforeAfterRequired": true,
+    "continuousAuthenticationGuaranteed": false,
+    "automaticLoginRefreshOrMfa": false,
+    "authenticatedCase": {
+      "state": "completed",
+      "senderChecks": 2,
+      "authenticatedRequests": 12,
+      "protectedReportReached": true,
+      "outOfScopeSinkRequests": 0
+    },
+    "anonymousCase": {
+      "state": "completed",
+      "authenticatedRequests": 0,
+      "outOfScopeSinkRequests": 0
+    },
+    "expiredCase": {
+      "state": "failed",
+      "targetRequests": 0
+    },
+    "midScanBearerLoss": {
+      "state": "partial",
+      "complete": 0,
+      "findingsRetained": 22,
+      "authenticationUnconfirmed": true,
+      "outOfScopeSinkRequests": 0
+    },
+    "privatePerRunCopiesRemoved": true,
+    "ownedTestProfilesRemoved": true,
+    "stdoutStatusReportModelCredentialAbsent": true,
+    "pinnedAddonsNoRuntimeDownloads": true
+  },
+  "parserSupplement": {
+    "policy": "parser-text-1",
+    "candidateAttemptLimit": 20,
+    "perFileBytes": 1000000,
+    "totalBytes": 8388608,
+    "checks": [
+      "eval text",
+      "innerHTML assignment text",
+      "Function constructor text"
+    ],
+    "sourceSnippetsIncluded": false,
+    "executesSource": false,
+    "semanticCoverageAdded": false,
+    "severity": "info",
+    "initialStatus": "unverified",
+    "rootSymlinkOrIdentityChangeRejected": true,
+    "nativeSyntheticCase": {
+      "id": "ecba5482-10c7-4fa7-bc23-6a5782afc9fe",
+      "state": "partial",
+      "complete": 0,
+      "diagnostics": {
+        "total": 1,
+        "items": [
+          {
+            "code": "PartialParsing",
+            "path": "repro.mjs",
+            "line": 5
+          }
+        ],
+        "truncated": false
+      },
+      "supplemental": {
+        "version": 1,
+        "policy": "parser-text-1",
+        "candidateFiles": 1,
+        "checkedFiles": 1,
+        "skippedFiles": 0,
+        "hints": 1,
+        "truncated": false
+      },
+      "textHints": 1,
+      "allHintsUnverified": true,
+      "allHintsInfo": true,
+      "reportRetainsParserGap": true,
+      "reportSeparatesTextChecks": true,
+      "error": null
+    }
+  },
+  "actualDailyUi": {
+    "browser": "Chrome via native computer-use fallback",
+    "scopeNameSaved": true,
+    "zapSubmissions": 1,
+    "semgrepSubmissions": 1,
+    "zapState": "completed",
+    "zapAuthentication": "verified",
+    "semgrepState": "partial",
+    "parserDiagnostic": "PartialParsing",
+    "textHints": 1,
+    "totalSyntheticFindings": 24,
+    "allFindingsUnverified": true,
+    "modelBytes": 1845,
+    "actualMarkdownDownloadObservedDone": true,
+    "downloadBytes": 12763,
+    "ownedLabClosed": true,
+    "privateSessionRemoved": true,
+    "testPortsClosed": true
+  },
+  "diagnosis": {
+    "firstNativeAuthAttemptFailed": true,
+    "pinnedLoaderOmitsFileGlobal": true,
+    "loaderRegressionReproducedRedThenGreen": true,
+    "fixedWorkingDirectoryPaths": true,
+    "originalFailedCliStderrRetained": false,
+    "javaReadOnlyHomeWarningProvenCausal": false,
+    "reviewedRootReplacementBugFixedWithRegression": true,
+    "olderWorkspace317TestsExcludedFromCurrentEvidence": true
+  },
+  "localCanonicalPredeployChecks": {
+    "pythonTests": 232,
+    "pythonFiles": 27,
+    "pluginNodeTests": 471,
+    "hostNodeTests": 129,
+    "clientRebuildMatched": true,
+    "countsNotSummedAcrossRepeatedOrCrossPlatformRuns": true
+  },
+  "finalUnifiedCI": "See the GitHub Actions run matching the final public commit; final source is checked on Mac and actual Linux VM before push.",
+  "recovery": {
+    "name": "ready-auth-zap-20261101",
+    "selectedProofFiles": 2624,
+    "programFiles": 130,
+    "snapshots": 19,
+    "previous18Preserved": true,
+    "independentCopyActuallyBooted": true,
+    "restoredModelHistory": {
+      "storedRuns": 2,
+      "storedFindings": 24,
+      "authenticationVerified": true,
+      "parserPartialPreserved": true,
+      "textHints": 1,
+      "modelBytes": 1845
+    },
+    "originalDiskReturned": true,
+    "temporaryCopyRemoved": true,
+    "hostHelpersMatched": 5,
+    "coverageState": "matches"
+  },
+  "protectedState": {
+    "trackedProjectFiles": 459,
+    "gitHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "realFindings": 95,
+    "realFindingsUnverified": 95,
+    "realProjectScansStarted": 0,
+    "modelCallsStarted": 0,
+    "macPermissionsExpanded": false,
+    "networkSharingClipboardUsbExpanded": false,
+    "newVmRegistered": false,
+    "otherThreeStoppedVmsUnchanged": true
+  },
+  "remainingLimits": [
+    "Semgrep semantic parser gap remains; text cues do not close findings.",
+    "Only imported local static sessions; real accounts, MFA and renewal require separate work.",
+    "Pre/post verification does not prove uninterrupted authentication.",
+    "QEMU internal defect behind historical SSH forwarding failures remains undetermined.",
+    "New environments still need their own account and project acceptance."
+  ]
+}

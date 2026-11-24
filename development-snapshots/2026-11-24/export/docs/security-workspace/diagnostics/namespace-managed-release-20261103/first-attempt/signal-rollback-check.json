@@ -1,0 +1,14 @@
+{
+  "actions": [
+    "rollback-started",
+    "stop",
+    "start",
+    "healthy",
+    "rolled-back"
+  ],
+  "oldRestored": true,
+  "changedCandidatePreserved": true,
+  "actualTerminationSignalHandled": true,
+  "temporaryRemoved": true,
+  "onlyTemporaryPackageTouched": true
+}

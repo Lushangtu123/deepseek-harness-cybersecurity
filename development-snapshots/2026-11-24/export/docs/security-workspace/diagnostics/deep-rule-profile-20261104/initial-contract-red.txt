@@ -1,0 +1,65 @@
+✖ deep rules are a fixed17 bundle preserving every baseline16 rule (0.637042ms)
+✖ only a matching deep workspace can select the pinned17 manifest (0.113292ms)
+✖ staging pins exact17 bytes and rejects changed base or bundle without overwriting an existing stage (0.115125ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 47.730209
+
+✖ failing tests:
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/deep-rule-profile.test.mjs:6:1
+✖ deep rules are a fixed17 bundle preserving every baseline16 rule (0.637042ms)
+  AssertionError [ERR_ASSERTION]: Missing mode-bound deep rule profile
+      at api (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/deep-rule-profile.test.mjs:5:29)
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/deep-rule-profile.test.mjs:6:97)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.start (node:internal/test_runner/test:878:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:297:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '=='
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/deep-rule-profile.test.mjs:7:1
+✖ only a matching deep workspace can select the pinned17 manifest (0.113292ms)
+  AssertionError [ERR_ASSERTION]: Missing mode-bound deep rule profile
+      at api (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/deep-rule-profile.test.mjs:5:29)
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/deep-rule-profile.test.mjs:7:96)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:297:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '=='
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/deep-rule-profile.test.mjs:8:1
+✖ staging pins exact17 bytes and rejects changed base or bundle without overwriting an existing stage (0.115125ms)
+  AssertionError [ERR_ASSERTION]: Missing mode-bound deep rule profile
+      at api (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/deep-rule-profile.test.mjs:5:29)
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/deep-rule-profile.test.mjs:8:132)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '=='
+  }

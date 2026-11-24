@@ -1,0 +1,16 @@
+{
+  "requestedModel": "claude-opus-5-5",
+  "effort": "high",
+  "state": "failed",
+  "promptSha256": "dfa639c8c449c1aed87f5c4a926ee502c203615248ec3b19b409fb57106f2c31",
+  "tools": [],
+  "startedAt": "2026-11-10T23:24:18.521264+00:00",
+  "observedModels": [],
+  "elapsedSeconds": 3.0,
+  "exitCode": 1,
+  "actualModels": [],
+  "isError": true,
+  "receiptSha256": "a0a96ee805d0755673d7b9102e5cc978090d099c4a06b5b68bd9613e5d20b847",
+  "problem": "Failed to authenticate. API Error: 401 OAuth access token has expired. Re-authenticate to continue.",
+  "finishedAt": "2026-11-10T23:24:21.550764+00:00"
+}

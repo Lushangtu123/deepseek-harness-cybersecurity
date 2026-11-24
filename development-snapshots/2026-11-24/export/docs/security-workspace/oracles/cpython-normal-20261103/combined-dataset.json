@@ -1,0 +1,81 @@
+{
+  "version": 2,
+  "cases": [
+    {
+      "id": "stdlib_ast",
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "negative",
+      "sourceSha256": "b515c23dbbc459329d3b802a3aac742cc456d7472e66f7ed6e9dc97e40596d7d",
+      "location": {
+        "line": 56,
+        "column": 1
+      },
+      "oracle": {
+        "kind": "independent-vulnerability",
+        "positionVerified": true,
+        "conditionsVerified": true,
+        "reference": "https://github.com/python/cpython/blob/e848e4b09ca4bc67c0041c9ce7526dae471d4c36/Lib/ast.py#L56",
+        "scope": "literal_eval with bounded plain strings; expression execution only, DoS excluded",
+        "artifactSha256": "5f05c44357453a33eb364bc4e7af4027015eeb5a6690f7447e5a7ce950b159df"
+      }
+    },
+    {
+      "id": "stdlib_collections",
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "negative",
+      "sourceSha256": "7fdb04dd248ab37909f46d2085bfee56b32d7e91e49ad3a2fad99c453295659b",
+      "location": {
+        "line": 441,
+        "column": 1
+      },
+      "oracle": {
+        "kind": "independent-vulnerability",
+        "positionVerified": true,
+        "conditionsVerified": true,
+        "reference": "https://github.com/python/cpython/blob/e848e4b09ca4bc67c0041c9ce7526dae471d4c36/Lib/collections/__init__.py#L441",
+        "scope": "namedtuple plain string names, rename/reject branches; no custom objects",
+        "artifactSha256": "5f05c44357453a33eb364bc4e7af4027015eeb5a6690f7447e5a7ce950b159df"
+      }
+    },
+    {
+      "id": "input_one",
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "positive",
+      "sourceSha256": "683c5916501746486c7ffd2974323e83f912fab2cf7360db6d4063583a11b6d5",
+      "location": {
+        "line": 2,
+        "column": 1
+      },
+      "oracle": {
+        "kind": "developer-control",
+        "positionVerified": true,
+        "conditionsVerified": true,
+        "reference": "Authored input/eval arity control; not independent positive",
+        "scope": "One or two eval arguments, real builtins.input from fixed StringIO; arithmetic only",
+        "artifactSha256": "5f05c44357453a33eb364bc4e7af4027015eeb5a6690f7447e5a7ce950b159df"
+      }
+    },
+    {
+      "id": "input_two",
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "positive",
+      "sourceSha256": "fd86e48da90999bf795de59e4dab86e84de2236386bd3053206eb42b5de12d82",
+      "location": {
+        "line": 2,
+        "column": 1
+      },
+      "oracle": {
+        "kind": "developer-control",
+        "positionVerified": true,
+        "conditionsVerified": true,
+        "reference": "Authored input/eval arity control; not independent positive",
+        "scope": "One or two eval arguments, real builtins.input from fixed StringIO; arithmetic only",
+        "artifactSha256": "5f05c44357453a33eb364bc4e7af4027015eeb5a6690f7447e5a7ce950b159df"
+      }
+    }
+  ]
+}

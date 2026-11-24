@@ -1,0 +1,19 @@
+.E.
+======================================================================
+ERROR: test_linked_or_external_dependency_never_enters_snapshot (__main__.SnapshotTest.test_linked_or_external_dependency_never_enters_snapshot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/verifier_snapshot.test.py", line 32, in test_linked_or_external_dependency_never_enters_snapshot
+    with self.assertRaises(ValueError):m.tree(d,{'dep.py':m.sha256(b'outside').hexdigest()})
+                                       ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/verifier_snapshot.py", line 50, in tree
+    try:walk(fd)
+        ~~~~^^^^
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/verifier_snapshot.py", line 38, in walk
+    file=os.open(name,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=fd)
+OSError: [Errno 62] Too many levels of symbolic links: 'dep.py'
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.104s
+
+FAILED (errors=1)

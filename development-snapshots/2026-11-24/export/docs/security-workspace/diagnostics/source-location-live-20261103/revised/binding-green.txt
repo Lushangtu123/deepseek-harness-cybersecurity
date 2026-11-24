@@ -1,0 +1,32 @@
+✔ Joint panel retains an uncertain startup request and recovers it with read-only status, without replay (2.926084ms)
+✔ A paid PentAGI step is available after consent but never preselected by refresh (0.37875ms)
+✔ An authorized ZAP step is visible but network checks are never preselected on refresh (0.568833ms)
+✔ Joint panel pages Python evidence and keeps it separate from scanner findings (1.698875ms)
+✔ Deep mode starts only the explicitly planned S1 steps and retains its mode (0.745125ms)
+✔ Joint source positions page same-line sites separately with copy-only unverified language (2.618292ms)
+✔ A mismatched snapshot cannot replace the already validated source-position page (0.680125ms)
+✔ Unavailable source ranges keep the finding visible without invented coordinates (0.709584ms)
+✔ A source-location task needs a real snapshot digest before exposing its detail controls (0.284709ms)
+✔ Duplicate Semgrep steps are rejected rather than lending another step identity (0.188583ms)
+✔ Missing model counts stay unknown and byte-column units are explicit (0.208208ms)
+✔ Source page rejects wrong source task while retaining the valid page (0.319542ms)
+✔ Source page rejects unavailable extra coordinates while retaining the valid page (0.251ms)
+✔ Source page rejects empty range while retaining the valid page (0.553875ms)
+✔ Source page rejects wrong line label while retaining the valid page (0.828083ms)
+✔ A page for a different parent task cannot replace existing positions (0.295875ms)
+✔ Wait cannot replace the displayed task with null (0.221958ms)
+✔ Wait cannot replace the displayed task with another task (0.119833ms)
+✔ Python evidence also requires a concrete step id and snapshot SHA (0.07575ms)
+✔ A pending request is not cleared by an unrelated unacknowledged task (0.101542ms)
+✔ Malformed model count is rejected: "0" (0.058042ms)
+✔ Malformed model count is rejected: -1 (0.041834ms)
+✔ Malformed model count is rejected: {} (0.036834ms)
+✔ Cancelling state is visible while stop remains unconfirmed (0.056958ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 58.3275

@@ -1,0 +1,35 @@
+{
+  "state": "closed-scoped-review",
+  "confirmedFixed": [
+    "null-safe binder",
+    "indexed mapping equality",
+    "missing scanner span fail-closed",
+    "positive historical point extraction required",
+    "unique historical point required"
+  ],
+  "conditionalResiduals": [
+    {
+      "finding": "zero-point control could be relabeled",
+      "assessment": "Not an observed pipeline defect: historical rows and source bytes are fixed by prepare checks; source hash/path checked by v3 freeze. Relabeling those inputs changes fixed material. Current frozen batch has one zero-point known control."
+    },
+    {
+      "finding": "matched point may lack id",
+      "assessment": "Rejected before completion by controller validate_locations; v3 freeze validates every point identity and dataset point binding before already-used rejection. Missing ID cannot complete this pipeline."
+    }
+  ],
+  "outOfScope": [
+    {
+      "finding": "missing PentAGI modelCalls coerced to zero",
+      "state": "confirmed-existing-accuracy-defect",
+      "fixed": false,
+      "file": "personal-joint-review.mjs adapterResult/view"
+    },
+    {
+      "finding": "returned ruleProfile metadata only shape validated",
+      "state": "conditional-existing-hardening",
+      "fixed": false,
+      "file": "personal-security-workbench.mjs start; executed rule SHA independently checked"
+    }
+  ],
+  "r3Qualified": false
+}

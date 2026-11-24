@@ -1,0 +1,38 @@
+{
+  "id": "801063a1-1388-4112-aa82-01ad0d24ec62",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": ""
+      },
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 69507,
+    "completion_tokens": 65536,
+    "total_tokens": 135043,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 65536
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 69507
+  },
+  "streamDone": true,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 273019,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "386fd34b27aa7bfcaa86d0277c96573144df498524d10e6d89bda439ac1c9396",
+  "promptSha256": "b67f7422cb3d2318955d19b5e1f0f8f403869a25628652d6f888556dfb039a6e"
+}

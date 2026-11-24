@@ -1,0 +1,21 @@
+(node:9931) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Semgrep parsing retains exact byte spans and rejects redacted control identities (3.063ms)
+✔ Missing, negative, oversized or contradictory spans retain warnings without fabricated precision (0.934291ms)
+✔ Managed bindings cross-check raw UTF8 and CRLF bytes with snapshot identity (2.27375ms)
+✔ Changed bytes, shifted offsets and symlinks cannot inherit exact source identity (4.291083ms)
+✔ Legacy line-only input is explicitly unavailable while retaining finding status (0.607917ms)
+✔ Missing or non-boolean redaction provenance cannot imply an unredacted copy (0.497084ms)
+✔ Later evidence callbacks cannot replace a byte binding or append invented rows (0.810209ms)
+✔ A partially invalid or duplicate snapshot manifest cannot bind an earlier valid file (0.495292ms)
+✔ Only numeric scanner coordinates enter stored source metadata (0.770708ms)
+✔ Same-line sites survive managed persistence, pagination and reload, with immutable source hashes (92.611291ms)
+✔ Redacted fixture binds copy bytes and rejects the tested out-of-range original offsets (293.197625ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 469.306459

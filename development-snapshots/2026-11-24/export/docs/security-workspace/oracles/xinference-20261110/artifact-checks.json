@@ -1,0 +1,18 @@
+{
+  "state": "passed",
+  "checkedAt": "2026-11-10T22:08:14.123356+00:00",
+  "sourceIdentities": [
+    {
+      "file": "before.py",
+      "gitBlobAndSha256Matched": true
+    },
+    {
+      "file": "fixed.py",
+      "gitBlobAndSha256Matched": true
+    }
+  ],
+  "first16RuleDefinitionsIdentical": true,
+  "outputAdapterBytesMatchOriginalSubmittedInput": true,
+  "advisoryCweMatches": "CWE-95",
+  "scope": "Local deterministic post-review checks. No scanner rerun or promotion."
+}

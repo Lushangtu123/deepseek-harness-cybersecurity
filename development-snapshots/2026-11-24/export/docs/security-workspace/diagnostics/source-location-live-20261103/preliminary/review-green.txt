@@ -1,0 +1,19 @@
+✔ Joint panel retains an uncertain startup request and recovers it with read-only status, without replay (2.89025ms)
+✔ A paid PentAGI step is available after consent but never preselected by refresh (0.310375ms)
+✔ An authorized ZAP step is visible but network checks are never preselected on refresh (0.663208ms)
+✔ Joint panel pages Python evidence and keeps it separate from scanner findings (1.659ms)
+✔ Deep mode starts only the explicitly planned S1 steps and retains its mode (0.695875ms)
+✔ Joint source positions page same-line sites separately with copy-only unverified language (2.421333ms)
+✔ A mismatched snapshot cannot replace the already validated source-position page (0.602459ms)
+✔ Unavailable source ranges keep the finding visible without invented coordinates (0.321291ms)
+✔ A source-location task needs a real snapshot digest before exposing its detail controls (0.245708ms)
+✔ Duplicate Semgrep steps are rejected rather than lending another step identity (0.131458ms)
+✔ Missing model counts stay unknown and byte-column units are explicit (0.745709ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 54.160042

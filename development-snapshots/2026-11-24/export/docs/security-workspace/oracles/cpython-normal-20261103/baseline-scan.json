@@ -1,0 +1,141 @@
+{
+  "phase": "baseline",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+  "datasetSha256": "cec2518e31be11a118c1943754b1bf51cb5638afb0c58aa8c8fc1c0e4ca24f77",
+  "caseIds": [
+    "stdlib_ast",
+    "stdlib_collections",
+    "input_one",
+    "input_two"
+  ],
+  "scannerExitCode": 0,
+  "native": {
+    "result": {
+      "version": "1.182.1",
+      "results": [
+        {
+          "check_id": "policy.harness.python.eval",
+          "path": "/src/input_one.py",
+          "start": {
+            "line": 2,
+            "col": 10,
+            "offset": 25
+          },
+          "end": {
+            "line": 2,
+            "col": 21,
+            "offset": 36
+          },
+          "extra": {
+            "message": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+            "metadata": {
+              "category": "security",
+              "cwe": [
+                "CWE-95"
+              ],
+              "confidence": "MEDIUM",
+              "source": "Harness local review heuristics",
+              "requires-manual-review": true
+            },
+            "severity": "ERROR",
+            "fingerprint": "requires login",
+            "lines": "requires login",
+            "validation_state": "NO_VALIDATOR",
+            "engine_kind": "OSS"
+          }
+        }
+      ],
+      "errors": [],
+      "paths": {
+        "scanned": [
+          "/src/input_one.py",
+          "/src/input_two.py",
+          "/src/stdlib_ast.py",
+          "/src/stdlib_collections.py"
+        ]
+      },
+      "time": {
+        "rules": [],
+        "rules_parse_time": 0.0012459754943847656,
+        "profiling_times": {
+          "config_time": 0.09943532943725586,
+          "core_time": 0.33727455139160156,
+          "ignores_time": 5.793571472167969e-05,
+          "total_time": 0.44446730613708496
+        },
+        "parsing_time": {
+          "total_time": 0.04983115196228027,
+          "per_file_time": {
+            "mean": 0.009966230392456055,
+            "std_dev": 0.00011018084736861056
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_files": []
+        },
+        "scanning_time": {
+          "total_time": 0.06290006637573242,
+          "per_file_time": {
+            "mean": 0.015725016593933105,
+            "std_dev": 0.0001654017674326269
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_files": []
+        },
+        "matching_time": {
+          "total_time": 0.007462739944458008,
+          "per_file_and_rule_time": {
+            "mean": 0.0014925479888916015,
+            "std_dev": 6.553988532687071e-07
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_rules_on_files": []
+        },
+        "tainting_time": {
+          "total_time": 0.0,
+          "per_def_and_rule_time": {
+            "mean": 0.0,
+            "std_dev": 0.0
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_rules_on_defs": []
+        },
+        "fixpoint_timeouts": [],
+        "prefiltering": {
+          "project_level_time": 0.0,
+          "file_level_time": 0.0,
+          "rules_with_project_prefilters_ratio": 0.0,
+          "rules_with_file_prefilters_ratio": 1.0,
+          "rules_selected_ratio": 0.125,
+          "rules_matched_ratio": 0.125
+        },
+        "targets": [],
+        "total_bytes": 0,
+        "max_memory_bytes": 149108992
+      },
+      "engine_requested": "OSS",
+      "skipped_rules": [],
+      "profiling_results": []
+    },
+    "authentication": null
+  },
+  "stderr": "",
+  "temporaryRemoved": true,
+  "containerAbsent": true,
+  "runtimeRulesUnchanged": true,
+  "scannerManifestUnchanged": true,
+  "startedAt": "2026-11-04T03:29:59.726726+00:00",
+  "finishedAt": "2026-11-04T03:30:01.297749+00:00"
+}

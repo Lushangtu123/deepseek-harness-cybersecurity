@@ -1,0 +1,103 @@
+{
+  "phase": "baseline",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+  "datasetSha256": "97c29329e48fcc140688f913eac392e7bedc93413e6ff621b0f739a7e5af504d",
+  "caseIds": [
+    "before",
+    "fixed"
+  ],
+  "scannerExitCode": 0,
+  "native": {
+    "result": {
+      "version": "1.182.1",
+      "results": [],
+      "errors": [],
+      "paths": {
+        "scanned": [
+          "/src/before.py",
+          "/src/fixed.py"
+        ]
+      },
+      "time": {
+        "rules": [],
+        "rules_parse_time": 0.007266044616699219,
+        "profiling_times": {
+          "config_time": 0.3966553211212158,
+          "core_time": 0.31897974014282227,
+          "ignores_time": 6.389617919921875e-05,
+          "total_time": 0.7233908176422119
+        },
+        "parsing_time": {
+          "total_time": 0.007817983627319336,
+          "per_file_time": {
+            "mean": 0.001954495906829834,
+            "std_dev": 1.001888876928092e-05
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_files": []
+        },
+        "scanning_time": {
+          "total_time": 0.010920047760009766,
+          "per_file_time": {
+            "mean": 0.005460023880004883,
+            "std_dev": 2.0583163461651566e-05
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_files": []
+        },
+        "matching_time": {
+          "total_time": 0.002231121063232422,
+          "per_file_and_rule_time": {
+            "mean": 0.0005577802658081055,
+            "std_dev": 5.737452539733567e-07
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_rules_on_files": []
+        },
+        "tainting_time": {
+          "total_time": 0.0,
+          "per_def_and_rule_time": {
+            "mean": 0.0,
+            "std_dev": 0.0
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_rules_on_defs": []
+        },
+        "fixpoint_timeouts": [],
+        "prefiltering": {
+          "project_level_time": 0.0,
+          "file_level_time": 0.0,
+          "rules_with_project_prefilters_ratio": 0.0,
+          "rules_with_file_prefilters_ratio": 1.0,
+          "rules_selected_ratio": 0.2,
+          "rules_matched_ratio": 0.2
+        },
+        "targets": [],
+        "total_bytes": 0,
+        "max_memory_bytes": 93999616
+      },
+      "engine_requested": "OSS",
+      "skipped_rules": [],
+      "profiling_results": []
+    },
+    "authentication": null
+  },
+  "stderr": "",
+  "temporaryRemoved": true,
+  "containerAbsent": true,
+  "runtimeRulesUnchanged": true,
+  "scannerManifestUnchanged": true
+}

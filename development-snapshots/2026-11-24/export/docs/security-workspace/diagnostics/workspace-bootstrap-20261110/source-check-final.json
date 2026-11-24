@@ -1,0 +1,7 @@
+{
+  "docs/basic-bootstrap.md": "d2dc698cc806bc0b72f4c7714579b3ba291df0aa575e6cb3e143369565e5dec4",
+  "guest-home/.dsh-improved/profiles/web/cordis.patch.yml": "271108a1af0d6afb565eaf2b51a8ea0dadaf1eddc10f484a543ab1783aea4727",
+  "inventory/export.json": "d77152de4e1a713abdeb13e999f38f519677ac7be12cec7f8b4169a6233f4b62",
+  "scripts/bootstrap_guest.py": "56b726485fe5a0c820135e60e0b596585479003f95468026e5da6c8a59daa34a",
+  "scripts/bootstrap_guest.test.py": "36ada74959b30b95a507f97c4b6415ffe722a8ce78e024e7cfeef991c9034e70"
+}

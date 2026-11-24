@@ -1,0 +1,201 @@
+{
+  "version": 2,
+  "state": "completed",
+  "checks": 6,
+  "ignoredHits": {
+    "different-rule": 0,
+    "unsupported-rule-prefix": 0,
+    "unpinned-path": 0
+  },
+  "observations": [
+    {
+      "file": "unicode-crlf.py",
+      "rule": "policy.harness.python.dynamic-code-namespace",
+      "sourceSha256": "5c4a179cad22a8ffa3b1f79e01232427843cdea7f085e6853e0675841b935624",
+      "version": 2,
+      "observation": "namespace-call-structure-observed",
+      "anchor": {
+        "line": 5,
+        "col": 22,
+        "endLine": 5,
+        "endCol": 40,
+        "offset": 111,
+        "endOffset": 129
+      },
+      "sink": "eval",
+      "argumentCount": 2,
+      "disposition": "unverified",
+      "callee": {
+        "staticBinding": "namespace-effects-observed",
+        "builtinIdentity": "unverified"
+      },
+      "source": {
+        "kind": "parameter-name-observed",
+        "assignmentLines": [],
+        "externalControl": "unverified"
+      },
+      "constraint": {
+        "state": "unresolved",
+        "reason": "callee-or-scope-unresolved"
+      }
+    },
+    {
+      "file": "unicode-crlf.py",
+      "rule": "policy.harness.python.dynamic-code-namespace",
+      "sourceSha256": "5c4a179cad22a8ffa3b1f79e01232427843cdea7f085e6853e0675841b935624",
+      "version": 2,
+      "observation": "namespace-call-structure-observed",
+      "anchor": {
+        "line": 5,
+        "col": 42,
+        "endLine": 5,
+        "endCol": 60,
+        "offset": 131,
+        "endOffset": 149
+      },
+      "sink": "exec",
+      "argumentCount": 2,
+      "disposition": "unverified",
+      "callee": {
+        "staticBinding": "namespace-effects-observed",
+        "builtinIdentity": "unverified"
+      },
+      "source": {
+        "kind": "parameter-name-observed",
+        "assignmentLines": [],
+        "externalControl": "unverified"
+      },
+      "constraint": {
+        "state": "unresolved",
+        "reason": "callee-or-scope-unresolved"
+      }
+    },
+    {
+      "file": "unicode-lf.py",
+      "rule": "policy.harness.python.dynamic-code-namespace",
+      "sourceSha256": "4167a19aa62542a6a8838b0c229f69fc8566ca4eb7c241a5cab7b3271c588aaa",
+      "version": 2,
+      "observation": "namespace-call-structure-observed",
+      "anchor": {
+        "line": 5,
+        "col": 22,
+        "endLine": 5,
+        "endCol": 40,
+        "offset": 107,
+        "endOffset": 125
+      },
+      "sink": "eval",
+      "argumentCount": 2,
+      "disposition": "unverified",
+      "callee": {
+        "staticBinding": "namespace-effects-observed",
+        "builtinIdentity": "unverified"
+      },
+      "source": {
+        "kind": "parameter-name-observed",
+        "assignmentLines": [],
+        "externalControl": "unverified"
+      },
+      "constraint": {
+        "state": "unresolved",
+        "reason": "callee-or-scope-unresolved"
+      }
+    },
+    {
+      "file": "unicode-lf.py",
+      "rule": "policy.harness.python.dynamic-code-namespace",
+      "sourceSha256": "4167a19aa62542a6a8838b0c229f69fc8566ca4eb7c241a5cab7b3271c588aaa",
+      "version": 2,
+      "observation": "namespace-call-structure-observed",
+      "anchor": {
+        "line": 5,
+        "col": 42,
+        "endLine": 5,
+        "endCol": 60,
+        "offset": 127,
+        "endOffset": 145
+      },
+      "sink": "exec",
+      "argumentCount": 2,
+      "disposition": "unverified",
+      "callee": {
+        "staticBinding": "namespace-effects-observed",
+        "builtinIdentity": "unverified"
+      },
+      "source": {
+        "kind": "parameter-name-observed",
+        "assignmentLines": [],
+        "externalControl": "unverified"
+      },
+      "constraint": {
+        "state": "unresolved",
+        "reason": "callee-or-scope-unresolved"
+      }
+    },
+    {
+      "file": "unicode-tabs.py",
+      "rule": "policy.harness.python.dynamic-code-namespace",
+      "sourceSha256": "a3875f708cdf3f466e6c18d93834d4d0e210fa1d2e391d4c61bc4de0fd300641",
+      "version": 2,
+      "observation": "namespace-call-structure-observed",
+      "anchor": {
+        "line": 5,
+        "col": 19,
+        "endLine": 5,
+        "endCol": 37,
+        "offset": 92,
+        "endOffset": 110
+      },
+      "sink": "eval",
+      "argumentCount": 2,
+      "disposition": "unverified",
+      "callee": {
+        "staticBinding": "namespace-effects-observed",
+        "builtinIdentity": "unverified"
+      },
+      "source": {
+        "kind": "parameter-name-observed",
+        "assignmentLines": [],
+        "externalControl": "unverified"
+      },
+      "constraint": {
+        "state": "unresolved",
+        "reason": "callee-or-scope-unresolved"
+      }
+    },
+    {
+      "file": "unicode-tabs.py",
+      "rule": "policy.harness.python.dynamic-code-namespace",
+      "sourceSha256": "a3875f708cdf3f466e6c18d93834d4d0e210fa1d2e391d4c61bc4de0fd300641",
+      "version": 2,
+      "observation": "namespace-call-structure-observed",
+      "anchor": {
+        "line": 5,
+        "col": 39,
+        "endLine": 5,
+        "endCol": 57,
+        "offset": 112,
+        "endOffset": 130
+      },
+      "sink": "exec",
+      "argumentCount": 2,
+      "disposition": "unverified",
+      "callee": {
+        "staticBinding": "namespace-effects-observed",
+        "builtinIdentity": "unverified"
+      },
+      "source": {
+        "kind": "parameter-name-observed",
+        "assignmentLines": [],
+        "externalControl": "unverified"
+      },
+      "constraint": {
+        "state": "unresolved",
+        "reason": "callee-or-scope-unresolved"
+      }
+    }
+  ],
+  "unmatchedAnchors": [],
+  "changesFindingDisposition": false,
+  "r3Qualified": false
+}

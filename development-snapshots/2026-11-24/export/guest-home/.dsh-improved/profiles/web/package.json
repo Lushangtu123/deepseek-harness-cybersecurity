@@ -1,0 +1,22 @@
+{
+  "name": "dsh-profile-web",
+  "private": true,
+  "dependencies": {
+    "dsh-purge": "file:/home/purge/tools/dsh-purge-personal-1.1.77-personal.1",
+    "dsh-context": "file:/home/purge/tools/imported-dsh-plugins-20261027T185822Z/dsh-context",
+    "dsh-whale-widget": "file:/home/purge/tools/imported-dsh-plugins-20261027T185822Z/dsh-whale-widget",
+    "dshmarket": "file:/home/purge/tools/imported-dsh-plugins-20261027T185822Z/dshmarket"
+  },
+  "dsh": {
+    "profile": {
+      "bundles": [
+        "@deepseek-ai/dsh-base",
+        "@deepseek-ai/dsh-web-app",
+        "dsh-purge",
+        "dsh-context",
+        "dshmarket",
+        "dsh-whale-widget"
+      ]
+    }
+  }
+}

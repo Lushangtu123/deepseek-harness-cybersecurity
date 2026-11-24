@@ -1,0 +1,45 @@
+# This headless VM has no XDG Documents directory. Use its project workspace.
+- id: workspace-controller
+  config:
+    documentsDirectory: /home/purge/workspace
+- id: ui-theme
+  config:
+    preference: light
+- id: ui-settings-account
+  config:
+    version: 1
+    step: done
+    usage: detailed
+    developerTools: true
+    purpose: null
+    process: standard
+    completion: api-key
+- id: ui-settings-general
+  name: '@deepseek-ai/dsh-client-ui-settings-general'
+  config:
+    welcomeNoticeVersion: 2026-09-28.1
+- id: dsh-purge
+  config:
+    executionMode: vm-autonomous
+
+# Imported host web plugins; systemd owns restarts.
+- id: dsh-market
+  config:
+    profile: web
+    allowRestart: false
+- id: web-search-deepseek
+  name: "@deepseek-ai/dsh-web-search-deepseek"
+  config:
+    apiKeyEnv: DEEPSEEK_API_KEY
+    maxUses: 10
+    baseURL: https://api.deepseek.com/v1/tools
+- id: web
+  name: "@deepseek-ai/dsh-web"
+  config:
+    searchProvider: deepseek-search-api
+    fetchProvider: deepseek-fetch-api
+- id: web-deepseek-api
+  name: "@deepseek-ai/dsh-web-deepseek-api"
+  config:
+    apiKeyEnv: DEEPSEEK_API_KEY
+    count: 50

@@ -1,0 +1,104 @@
+{
+  "date": "2026-11-01",
+  "timezone": "America/Los_Angeles",
+  "runtime": {
+    "version": "1.1.77-personal.2",
+    "programFiles": 130,
+    "newDependencies": false
+  },
+  "expiryStatus": {
+    "metadataOnly": true,
+    "targetRequestsObservedDuringActualCli": 0,
+    "statesTested": [
+      "expiring",
+      "expired",
+      "ready"
+    ],
+    "unavailableCoveredByUnitTests": true,
+    "expiringWithinSeconds": 300,
+    "strictScannerExpiryUnchanged": true,
+    "notProofOfLiveLogin": true
+  },
+  "controlledReimport": {
+    "requiresExpectedRevisionAndConfirmation": true,
+    "newNameOnly": true,
+    "originalBytesPreserved": true,
+    "newPrivateMode": "0o600",
+    "staleRevisionRejected": true,
+    "occupiedNameRejected": true,
+    "concurrentSameDestinationOneWinnerTested": true,
+    "inheritsOriginHeaderAndVerificationPolicy": true,
+    "privateValuesViaStdinOnly": true,
+    "credentialsAbsentFromCliStatusAndModel": true,
+    "automaticLoginMfaOrCookieRefresh": false,
+    "switchRequiresExplicitScopeSave": true,
+    "observedScopeRevision": 2,
+    "syntheticScansStarted": 0,
+    "ownedTestProfilesRemoved": true
+  },
+  "pageRecovery": {
+    "visibilityPageshowFocusRefresh": true,
+    "heartbeatSeconds": 30,
+    "wallGapThresholdSeconds": 60,
+    "slowAutoReadNotRepeatedlyAborted": true,
+    "oldReadAbortedAndGenerationGuarded": true,
+    "existingRequestDeadlineSeconds": 15,
+    "actualControl": "VM audit-owner SIGSTOP/SIGCONT with independent bounded watchdog",
+    "actualPauseSeconds": 40.102866,
+    "sameOwnerProcessResumed": true,
+    "actualUiTimeoutObserved": true,
+    "automaticRecoveryWithoutUiClickOrReloadObserved": true,
+    "beforeRead": "2026-11-01T18:56:47.753Z",
+    "afterRead": "2026-11-01T18:58:16.903Z",
+    "unsavedDraftPreserved": true,
+    "nineHourClockGap": "deterministic regression with injected clock; not physical overnight sleep",
+    "physicalNineHourSleepTested": false,
+    "automaticWriteReplay": false,
+    "uncertainRequestReceiptPreservationTested": true,
+    "projectSwitchBusyRegressionFixedAndTested": true,
+    "historicalUnknownQemuDefectDiagnosedByThisTest": false
+  },
+  "acceptance": {
+    "browser": "IAB via cua_repl",
+    "expiredDisplayedAndZapDisabled": true,
+    "renewedProfileSavedAndZapEnabled": true,
+    "modelStatusBytes": 1416,
+    "predeployCanonicalPythonCases": 233,
+    "predeployCanonicalPluginNodeCases": 482,
+    "predeployCanonicalHostNodeCases": 129,
+    "clientRebuildMatched": true,
+    "countsNotAddedAcrossPlatformsOrReruns": true,
+    "finalMacLinuxAndCloudCi": "Exact public commit is checked separately; see corresponding GitHub Actions run."
+  },
+  "recovery": {
+    "name": "ready-session-lifecycle-20261101",
+    "selectedProofFiles": 2627,
+    "snapshots": 20,
+    "previous19Preserved": true,
+    "restoredCopyActuallyBooted": true,
+    "originalDiskReturned": true,
+    "temporaryCopyRemoved": true,
+    "hostHelpersMatched": 5,
+    "coverageState": "matches"
+  },
+  "protectedState": {
+    "trackedRealProjectHashesMatched": 459,
+    "gitHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "realFindings": 95,
+    "realFindingsAllUnverified": true,
+    "newRealProjectScans": 0,
+    "modelCalls": 0,
+    "hostPermissionsExpanded": false,
+    "networkSharingClipboardUsbExpanded": false,
+    "newVmRegistered": false,
+    "otherThreeVmsStoppedAndUnchanged": true
+  },
+  "remainingLimits": [
+    "Static imported session values only; real login, MFA and renewal remain manual.",
+    "Expiry metadata does not prove current login and pre/post checks do not prove continuous authentication.",
+    "Browser freezes cannot show an immediate expiry reminder; scanner still rejects expired profiles.",
+    "A deterministic nine-hour clock control plus actual forty-second owner pause does not certify an actual overnight Mac sleep.",
+    "Semgrep semantic parser gap and the exact QEMU internal defect remain unresolved."
+  ]
+}

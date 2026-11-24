@@ -1,0 +1,23 @@
+{
+  "requestedModel": "claude-opus-5-5",
+  "actualModels": [
+    "claude-opus-5-5"
+  ],
+  "effort": "high",
+  "success": true,
+  "scope": "read-only deployment/evidence review; no execution",
+  "verdict": "no release blockers in supplied scope",
+  "dispositions": {
+    "serviceStates": "added independent post-start active observations for all three units; old field relabeled in results",
+    "copyDigest": "docs now say scanner-copy digest, matching UI disclosure 副本标识",
+    "unicodeConcern": "actual report-bound snapshot includes Chinese and emoji before same-line sites; byte35/50 vs codepoint28/43, explicit proof added",
+    "versionRulesAndLegacy": "added runtime pin/version/rule-count and legacy partial state evidence",
+    "downloadEquality": "method documented as parsed JSON object equality",
+    "testedArtifact": "all166 file hashes compared with actualVM778 kit; receipt added",
+    "rebuildRehearsal": "executed in this batch using established source; helpers and current receipts archived",
+    "activeStateEnum": "current parent/run insert and terminal logic use running/cancelling; pending only applies to child step and pending-stop table checked",
+    "futureDeployHelper": "rollback health and SSH interruption containment remain follow-up; current successful path does not claim fault-injection coverage"
+  },
+  "documentationClarificationsReReviewed": false,
+  "olderSKFRequestedModelClosureCompleted": false
+}

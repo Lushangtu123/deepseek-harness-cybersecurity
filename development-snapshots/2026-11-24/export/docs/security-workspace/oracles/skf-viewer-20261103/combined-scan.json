@@ -1,0 +1,166 @@
+{
+  "phase": "combined",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "rulesSha256": "c4357ddb0d52f3273525be08d8f5cdc1182523c1f9502497722bb6a44fe4ef94",
+  "datasetSha256": "5ceb5db334df5536772fb883e608e9187c0ea446b70cce57844429476d7c9f6c",
+  "caseIds": [
+    "skf-viewer-upstream",
+    "skf-viewer-authored-fix"
+  ],
+  "scannerExitCode": 0,
+  "native": {
+    "result": {
+      "version": "1.182.1",
+      "results": [
+        {
+          "check_id": "policy.harness.python.eval",
+          "path": "/src/original.py",
+          "start": {
+            "line": 37,
+            "col": 20,
+            "offset": 1296
+          },
+          "end": {
+            "line": 37,
+            "col": 51,
+            "offset": 1327
+          },
+          "extra": {
+            "message": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+            "metadata": {
+              "category": "security",
+              "cwe": [
+                "CWE-95"
+              ],
+              "confidence": "MEDIUM",
+              "source": "Harness local review heuristics",
+              "requires-manual-review": true
+            },
+            "severity": "ERROR",
+            "fingerprint": "requires login",
+            "lines": "requires login",
+            "validation_state": "NO_VALIDATOR",
+            "engine_kind": "OSS"
+          }
+        },
+        {
+          "check_id": "policy.harness.python.request-to-dynamic-code",
+          "path": "/src/original.py",
+          "start": {
+            "line": 37,
+            "col": 25,
+            "offset": 1301
+          },
+          "end": {
+            "line": 37,
+            "col": 50,
+            "offset": 1326
+          },
+          "extra": {
+            "message": "Tracked input reaches eval or exec directly or via a recognized local helper; verify binding and reachability.",
+            "metadata": {
+              "cwe": [
+                "CWE-95"
+              ],
+              "origin": "workspace-authored-candidate",
+              "status": "unverified-observation"
+            },
+            "severity": "WARNING",
+            "fingerprint": "requires login",
+            "lines": "requires login",
+            "validation_state": "NO_VALIDATOR",
+            "engine_kind": "OSS"
+          }
+        }
+      ],
+      "errors": [],
+      "paths": {
+        "scanned": [
+          "/src/fixed_control.py",
+          "/src/original.py"
+        ]
+      },
+      "time": {
+        "rules": [],
+        "rules_parse_time": 0.0030591487884521484,
+        "profiling_times": {
+          "config_time": 0.10174751281738281,
+          "core_time": 0.28574252128601074,
+          "ignores_time": 6.461143493652344e-05,
+          "total_time": 0.39530396461486816
+        },
+        "parsing_time": {
+          "total_time": 0.0067899227142333984,
+          "per_file_time": {
+            "mean": 0.0033949613571166992,
+            "std_dev": 1.152576261631566e-05
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_files": []
+        },
+        "scanning_time": {
+          "total_time": 0.01491999626159668,
+          "per_file_time": {
+            "mean": 0.00745999813079834,
+            "std_dev": 5.305731475857556e-05
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_files": []
+        },
+        "matching_time": {
+          "total_time": 0.006917238235473633,
+          "per_file_and_rule_time": {
+            "mean": 0.0034586191177368164,
+            "std_dev": 1.1273005284806459e-05
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_rules_on_files": []
+        },
+        "tainting_time": {
+          "total_time": 0.0004439353942871094,
+          "per_def_and_rule_time": {
+            "mean": 5.549192428588868e-05,
+            "std_dev": 6.4587304393626255e-09
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_rules_on_defs": []
+        },
+        "fixpoint_timeouts": [],
+        "prefiltering": {
+          "project_level_time": 0.0,
+          "file_level_time": 0.0,
+          "rules_with_project_prefilters_ratio": 0.0,
+          "rules_with_file_prefilters_ratio": 1.0,
+          "rules_selected_ratio": 0.09090909090909091,
+          "rules_matched_ratio": 0.09090909090909091
+        },
+        "targets": [],
+        "total_bytes": 0,
+        "max_memory_bytes": 96836864
+      },
+      "engine_requested": "OSS",
+      "skipped_rules": [],
+      "profiling_results": []
+    },
+    "authentication": null
+  },
+  "stderr": "",
+  "temporaryRemoved": true,
+  "containerAbsent": true,
+  "runtimeRulesUnchanged": true,
+  "scannerManifestUnchanged": true,
+  "startedAt": "2026-11-04T02:53:38.029451+00:00",
+  "finishedAt": "2026-11-04T02:53:39.505606+00:00"
+}

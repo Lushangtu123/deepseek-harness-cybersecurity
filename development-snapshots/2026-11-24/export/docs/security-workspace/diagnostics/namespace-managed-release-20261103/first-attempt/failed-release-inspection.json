@@ -1,0 +1,27 @@
+{
+  "oldProgramRestored": 166,
+  "protectedMatched": 48,
+  "services": {
+    "dsh-original.service": true,
+    "harness-security.socket": true,
+    "harness-security.service": true
+  },
+  "showWithoutAll": {
+    "dsh-original.service": {
+      "ActiveState": "active",
+      "Job": "<omitted>"
+    },
+    "harness-security.socket": {
+      "ActiveState": "active",
+      "Job": "<omitted>"
+    },
+    "harness-security.service": {
+      "ActiveState": "active",
+      "Job": "<omitted>"
+    }
+  },
+  "failureLines": [
+    "RuntimeError: Unit stop or job completion not confirmed: harness-security.socket"
+  ],
+  "hostUnchanged": true
+}

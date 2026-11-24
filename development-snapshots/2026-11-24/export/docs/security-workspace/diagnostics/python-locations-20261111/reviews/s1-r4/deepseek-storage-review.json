@@ -1,0 +1,38 @@
+{
+  "id": "6d34205e-29d9-422c-911d-bc7733b6caec",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Scoped review of the mapping delta and synthetic tests.\n\n**Mapping logic:** `map_findings` now collects all contained supported eval/exec points before applying the expected callee check. `len(candidates) != 1` returns unmatched, so a span enclosing eval+exec or nested eval/exec is no longer guessed. A single contained call with the wrong callee reaches `rule-execution-point-mismatch`. This matches the stated S1 delta. I found no safety blocker or reproducible scope regression in this mapping change.\n\n**Concrete test defect:** `test_ambiguous_nested_and_multiple_calls_are_not_guessed` asserts only `state == 'unmatched'`. It does not assert `reason == 'ambiguous-execution-points'`, nor that `pointId`/`point` are absent. A regression returning `rule-execution-point-mismatch` or `no-supported-execution-point` would still pass. This fails to lock the key delta distinction between ambiguous multi-point spans and single wrong-callee spans.\n\n**Second test gap:** `test_missing_mid_character_wrong_digest_and_rule_mismatch` bundles missing-position, mid-character, and wrong-callee cases, then asserts only unmatched. The wrong-callee case is the only coverage for `rule-execution-point-mismatch`, but the test would pass if it returned ambiguous/no-supported. Split it and assert exact reasons.\n\n**Conservative limitation:** direct eval/exec rules can bind a contained `builtins.eval`/`builtins.exec` point because only the final callee component is compared. The later guard loop skips `builtins.` points, so evidence is omitted. This is conservative given `builtinIdentity: unverified`, not a safety blocker, but it is untested in this delta.\n\n**Test coverage note:** same-line mixed and nested cases are exercised for all three rules, but only by state. Adding reason/absence assertions would convert these from smoke coverage into regression locks. `exec(exec(x))` is not covered; that is a completeness limitation, not a blocker."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 5721,
+    "completion_tokens": 4542,
+    "total_tokens": 10263,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 4104
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 5721
+  },
+  "streamDone": true,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 17812,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "730b143fac24858b6bf02e61ec821985fec94064e9dd5f88ae7a56f18ff626e1",
+  "promptSha256": "a7b1e5a875d35faf5c924f3f93b74794b726d27166a1b09440d52ba3a7e49f09"
+}

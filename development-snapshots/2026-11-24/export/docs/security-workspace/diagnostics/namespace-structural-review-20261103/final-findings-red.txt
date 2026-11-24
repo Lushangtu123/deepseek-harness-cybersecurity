@@ -1,0 +1,191 @@
+.........FFFFFFF........FFFFFFFF...
+======================================================================
+FAIL: test_definition_headers_bind_in_enclosing_scope (__main__.NamespaceReviewTests.test_definition_headers_bind_in_enclosing_scope) (prefix='def helper(x=(eval := custom)):\n    pass\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 230, in test_definition_headers_bind_in_enclosing_scope
+    row=self.unknown(prefix+source_for())
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 37, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_definition_headers_bind_in_enclosing_scope (__main__.NamespaceReviewTests.test_definition_headers_bind_in_enclosing_scope) (prefix='helper = lambda x=(eval := custom): x\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 230, in test_definition_headers_bind_in_enclosing_scope
+    row=self.unknown(prefix+source_for())
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 37, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_definition_headers_bind_in_enclosing_scope (__main__.NamespaceReviewTests.test_definition_headers_bind_in_enclosing_scope) (prefix='class Owner((eval := custom)):\n    pass\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 230, in test_definition_headers_bind_in_enclosing_scope
+    row=self.unknown(prefix+source_for())
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 37, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_definition_headers_bind_in_enclosing_scope (__main__.NamespaceReviewTests.test_definition_headers_bind_in_enclosing_scope) (prefix='def helper(x: (eval := custom)):\n    pass\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 230, in test_definition_headers_bind_in_enclosing_scope
+    row=self.unknown(prefix+source_for())
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 37, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_definition_headers_bind_in_enclosing_scope (__main__.NamespaceReviewTests.test_definition_headers_bind_in_enclosing_scope) (prefix='def helper() -> (eval := custom):\n    pass\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 230, in test_definition_headers_bind_in_enclosing_scope
+    row=self.unknown(prefix+source_for())
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 37, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_definition_headers_bind_in_enclosing_scope (__main__.NamespaceReviewTests.test_definition_headers_bind_in_enclosing_scope) (prefix='@(eval := decorate)\ndef helper():\n    pass\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 230, in test_definition_headers_bind_in_enclosing_scope
+    row=self.unknown(prefix+source_for())
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 37, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_definition_headers_bind_in_enclosing_scope (__main__.NamespaceReviewTests.test_definition_headers_bind_in_enclosing_scope)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 234, in test_definition_headers_bind_in_enclosing_scope
+    self.assertEqual(row['source']['kind'],'local-reassignment-observed')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'parameter-name-observed' != 'local-reassignment-observed'
+- parameter-name-observed
++ local-reassignment-observed
+
+
+======================================================================
+FAIL: test_non_utf8_cookies_are_unmatched_instead_of_false_guard_evidence (__main__.NamespaceReviewTests.test_non_utf8_cookies_are_unmatched_instead_of_false_guard_evidence) (cookie=['# coding: utf-7', 'def run(value):'])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 254, in test_non_utf8_cookies_are_unmatched_instead_of_false_guard_evidence
+    self.assertIsNone(self.module.review_namespace_call(candidate,anchor(candidate)))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'version': 2, 'observation': 'namespace-call-structure-observed', 'anchor': {'line': 7, 'col': 12, 'endLine': 7, 'endCol': 30, 'offset': 176, 'endOffset': 194}, 'sink': 'eval', 'argumentCount': 2, 'disposition': 'unverified', 'callee': {'staticBinding': 'no-direct-conflict-observed', 'builtinIdentity': 'unverified'}, 'source': {'kind': 'parameter-name-observed', 'assignmentLines': [], 'externalControl': 'unverified'}, 'constraint': {'state': 'fixed-set-guard-observed', 'guardLine': 3, 'literalCount': 2, 'literalSetSha256': '66f57e6242ba70e97ca3c633ae298d0bd096939c17beb77afa80ce8377514b71', 'runtimeStringSemantics': 'unverified', 'fixedValuesMayExecuteCode': True}} is not None
+
+======================================================================
+FAIL: test_non_utf8_cookies_are_unmatched_instead_of_false_guard_evidence (__main__.NamespaceReviewTests.test_non_utf8_cookies_are_unmatched_instead_of_false_guard_evidence) (cookie=['# coding: latin-1', 'def run(value):'])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 254, in test_non_utf8_cookies_are_unmatched_instead_of_false_guard_evidence
+    self.assertIsNone(self.module.review_namespace_call(candidate,anchor(candidate)))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'version': 2, 'observation': 'namespace-call-structure-observed', 'anchor': {'line': 6, 'col': 12, 'endLine': 6, 'endCol': 30, 'offset': 150, 'endOffset': 168}, 'sink': 'eval', 'argumentCount': 2, 'disposition': 'unverified', 'callee': {'staticBinding': 'no-direct-conflict-observed', 'builtinIdentity': 'unverified'}, 'source': {'kind': 'parameter-name-observed', 'assignmentLines': [], 'externalControl': 'unverified'}, 'constraint': {'state': 'fixed-set-guard-observed', 'guardLine': 3, 'literalCount': 2, 'literalSetSha256': '66f57e6242ba70e97ca3c633ae298d0bd096939c17beb77afa80ce8377514b71', 'runtimeStringSemantics': 'unverified', 'fixedValuesMayExecuteCode': True}} is not None
+
+======================================================================
+FAIL: test_non_utf8_cookies_are_unmatched_instead_of_false_guard_evidence (__main__.NamespaceReviewTests.test_non_utf8_cookies_are_unmatched_instead_of_false_guard_evidence) (cookie=['#!python', '# coding=cp1252'])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 254, in test_non_utf8_cookies_are_unmatched_instead_of_false_guard_evidence
+    self.assertIsNone(self.module.review_namespace_call(candidate,anchor(candidate)))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'version': 2, 'observation': 'namespace-call-structure-observed', 'anchor': {'line': 7, 'col': 12, 'endLine': 7, 'endCol': 30, 'offset': 157, 'endOffset': 175}, 'sink': 'eval', 'argumentCount': 2, 'disposition': 'unverified', 'callee': {'staticBinding': 'no-direct-conflict-observed', 'builtinIdentity': 'unverified'}, 'source': {'kind': 'parameter-name-observed', 'assignmentLines': [], 'externalControl': 'unverified'}, 'constraint': {'state': 'fixed-set-guard-observed', 'guardLine': 4, 'literalCount': 2, 'literalSetSha256': '66f57e6242ba70e97ca3c633ae298d0bd096939c17beb77afa80ce8377514b71', 'runtimeStringSemantics': 'unverified', 'fixedValuesMayExecuteCode': True}} is not None
+
+======================================================================
+FAIL: test_non_utf8_cookies_are_unmatched_instead_of_false_guard_evidence (__main__.NamespaceReviewTests.test_non_utf8_cookies_are_unmatched_instead_of_false_guard_evidence) (cookie=['# coding: unknown_codec', 'def run(value):'])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 254, in test_non_utf8_cookies_are_unmatched_instead_of_false_guard_evidence
+    self.assertIsNone(self.module.review_namespace_call(candidate,anchor(candidate)))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'version': 2, 'observation': 'namespace-call-structure-observed', 'anchor': {'line': 6, 'col': 12, 'endLine': 6, 'endCol': 30, 'offset': 156, 'endOffset': 174}, 'sink': 'eval', 'argumentCount': 2, 'disposition': 'unverified', 'callee': {'staticBinding': 'no-direct-conflict-observed', 'builtinIdentity': 'unverified'}, 'source': {'kind': 'parameter-name-observed', 'assignmentLines': [], 'externalControl': 'unverified'}, 'constraint': {'state': 'fixed-set-guard-observed', 'guardLine': 3, 'literalCount': 2, 'literalSetSha256': '66f57e6242ba70e97ca3c633ae298d0bd096939c17beb77afa80ce8377514b71', 'runtimeStringSemantics': 'unverified', 'fixedValuesMayExecuteCode': True}} is not None
+
+======================================================================
+FAIL: test_non_utf8_cookies_are_unmatched_instead_of_false_guard_evidence (__main__.NamespaceReviewTests.test_non_utf8_cookies_are_unmatched_instead_of_false_guard_evidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 261, in test_non_utf8_cookies_are_unmatched_instead_of_false_guard_evidence
+    self.assertEqual(report['state'],'partial');self.assertEqual(report['observations'],[])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'completed' != 'partial'
+- completed
++ partial
+
+
+======================================================================
+FAIL: test_renamed_builtins_imports_are_namespace_effects (__main__.NamespaceReviewTests.test_renamed_builtins_imports_are_namespace_effects) (prefix='import builtins as b\nb.__dict__["eval"] = custom\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 240, in test_renamed_builtins_imports_are_namespace_effects
+    row=self.unknown(prefix+source_for())
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 37, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_renamed_builtins_imports_are_namespace_effects (__main__.NamespaceReviewTests.test_renamed_builtins_imports_are_namespace_effects) (prefix='from builtins import __dict__ as d\nd["eval"] = custom\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 240, in test_renamed_builtins_imports_are_namespace_effects
+    row=self.unknown(prefix+source_for())
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 37, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_renamed_builtins_imports_are_namespace_effects (__main__.NamespaceReviewTests.test_renamed_builtins_imports_are_namespace_effects) (prefix='from builtins import eval as renamed\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 240, in test_renamed_builtins_imports_are_namespace_effects
+    row=self.unknown(prefix+source_for())
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 37, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.121s
+
+FAILED (failures=15)

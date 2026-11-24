@@ -1,0 +1,184 @@
+{
+  "date": "2026-11-02",
+  "version": "1.1.77-personal.8",
+  "programFiles": 151,
+  "scope": "VM-only source-copy/runtime association and actual DeepSeek joint workflow on owned synthetic projects",
+  "independentReview": {
+    "focusedTests": 21,
+    "remainingSubstantiatedP1P2": 0,
+    "fixed": [
+      "owner scope reader could interrupt existing scanner records",
+      "same-UID inner timeout could be paused; independent transient VM systemd deadline added",
+      "explicit stop released origin before launcher proxy closure",
+      "readiness needed actual fixed-address HTTP200"
+    ]
+  },
+  "regression": {
+    "python": 293,
+    "pluginNode": 560,
+    "hostNode": 139,
+    "extraLinuxRoot": 18
+  },
+  "native": {
+    "matched": {
+      "id": "bd93e23e-3d79-45bf-bdc3-adb008eed81a",
+      "state": "completed",
+      "proof": {
+        "state": "managed-source-copy-matched",
+        "id": "a826fb59-7c35-4b49-936b-f3df52a0b3aa",
+        "copySha256": "ca6289f6afd5628de0401c1081271c325df12ed3cc275cc60cd5016a9fd34b09",
+        "files": 2,
+        "before": true,
+        "after": true,
+        "claim": "仅核对列明副本与容器及转发入口的前后身份；依赖、构建可复现性和进程内存行为未证明。"
+      },
+      "allHttpFindingsUnverified": true
+    },
+    "changed": {
+      "id": "a8ff74e3-a418-4077-9987-70643f033c1b",
+      "state": "completed",
+      "proof": {
+        "state": "unconfirmed",
+        "before": false,
+        "after": false,
+        "claim": "仅核对列明副本与容器及转发入口的前后身份；依赖、构建可复现性和进程内存行为未证明。"
+      },
+      "sourceMutationApplied": true
+    },
+    "stop": {
+      "ok": true,
+      "id": "a826fb59-7c35-4b49-936b-f3df52a0b3aa",
+      "cleanupVerified": true
+    },
+    "independentDeadline": {
+      "launcherKilled": true,
+      "innerTimeoutStopped": true,
+      "containerRemovedByHostWatchdog": true,
+      "proofAfterLoss": "unconfirmed",
+      "cleanup": {
+        "ok": true,
+        "id": "b776dff2-cd46-4fea-b462-d5de19f45a34",
+        "cleanupVerified": true
+      }
+    }
+  },
+  "actualModel": {
+    "taskId": "25eef080-665c-4930-9f9d-e2a674c9e08f",
+    "state": "completed",
+    "selectedSteps": [
+      "semgrep",
+      "zap"
+    ],
+    "oneParentTask": true,
+    "childTasks": 2,
+    "rawHits": 21,
+    "sections": {
+      "findings": 17,
+      "files": 2,
+      "exclusions": 0,
+      "diagnostics": 0,
+      "artifacts": 1
+    },
+    "webFindings": 16,
+    "allUnverified": true,
+    "ordinaryFindings": 0,
+    "runtimeSource": {
+      "state": "managed-source-copy-matched",
+      "id": "d065fb83-9ae8-4875-8105-1d4a0d594903",
+      "copySha256": "ca6289f6afd5628de0401c1081271c325df12ed3cc275cc60cd5016a9fd34b09",
+      "files": 2,
+      "before": true,
+      "after": true,
+      "claim": "仅核对列明副本与容器及转发入口的前后身份；依赖、构建可复现性和进程内存行为未证明。"
+    },
+    "cleanup": {
+      "ok": true,
+      "id": "d065fb83-9ae8-4875-8105-1d4a0d594903",
+      "cleanupVerified": true
+    },
+    "browserTrajectoryObserved": {
+      "toolCalls": 8,
+      "providerRequestRows": 9,
+      "bind": 1,
+      "plan": 1,
+      "start": 1,
+      "wait": 1,
+      "findingsPages": 3,
+      "artifactsPages": 1,
+      "genericShellMcpOrSubagentCalls": 0,
+      "completedInSeconds": 41
+    },
+    "subtaskModelCalls": 0,
+    "mainChatRequestsNotIncludedInSubtaskCount": true
+  },
+  "browserDownload": {
+    "downloadBytes": 14003,
+    "sha256": "6079237f90051fd7051399034c1c3e5f23f56442a55c431c1c505fe790c15850",
+    "taskId": "25eef080-665c-4930-9f9d-e2a674c9e08f",
+    "allSectionsMatchBackend": true,
+    "sections": {
+      "findings": 17,
+      "files": 2,
+      "exclusions": 0,
+      "diagnostics": 0,
+      "artifacts": 1
+    },
+    "allUnverified": true,
+    "runtimeSourceState": "managed-source-copy-matched"
+  },
+  "recovery": {
+    "recoveryPoint": "ready-runtime-link-20261102",
+    "selectedProofFiles": 2820,
+    "programFiles": 151,
+    "snapshotCount": 30,
+    "previous29SnapshotsPreserved": true
+  },
+  "copyBoot": {
+    "restoredDiskActuallyBooted": true,
+    "independentInodeAndNoQcowBacking": true,
+    "originalInodeReturned": true,
+    "originalNowStarted": true,
+    "utmListUnchanged": true,
+    "newVmRegistered": false
+  },
+  "protected": {
+    "protectedProjectFilesMatched": 459,
+    "projectHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "findingsByStatus": {
+      "unverified": 95
+    },
+    "scannerManifestUnchanged": true,
+    "programHashesMatched": 151,
+    "installedToolsPresent": true,
+    "harnessActive": true,
+    "pentagiRunning": true,
+    "hostHelpersUnchanged": 5,
+    "hostLaunchDefinitionsUnchanged": true,
+    "vmConfigurationUnchanged": true,
+    "originalDiskInodeUnchanged": true,
+    "utmListUnchanged": false,
+    "utmRegistrationsUnchanged": true,
+    "observedOtherVmStateChanges": [
+      {
+        "uuid": "41D71C07-8910-45A8-841E-9CFF888690A4",
+        "name": "Kali",
+        "before": "stopped",
+        "after": "started"
+      }
+    ],
+    "stateChangeCause": "not-determined; preserved current state",
+    "allPreviousSnapshotsPreserved": true,
+    "snapshotCount": 30
+  },
+  "limitations": [
+    "managed runtime launcher supports owned self-contained standard-library Python entry only; other apps remain not-proven",
+    "association proves listed copied files and container/proxy identities before and after; dependencies, reproducible builds, memory behavior and all responses are not attested",
+    "Docker internal bridge is not isolation from VM host-gateway services; same-UID original Shell is outside this record boundary",
+    "deadline includes bounded stop/cleanup grace; forced launcher loss retains reservation/network until explicit same-origin reconciliation",
+    "model acceptance selected Semgrep+ZAP, not every six-step tool combination",
+    "authentication/authorization/business logic/architecture remain manual; all real95 findings unchanged",
+    "Semgrep parser gap and historical occasional loading/oldSSH causes still unresolved",
+    "money hard cap and off-Mac recovery not added; Mac global recovery badge still refers to old point"
+  ]
+}

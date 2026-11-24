@@ -1,0 +1,7 @@
+{
+  "work/harness-purge-improved/package/scripts/security-joint-adapter.py": "7daa08a445378a2b974a4fa10c2598f22553e1f8b2e8a85a575f58c2707647ac",
+  "work/harness-purge-improved/package/lib/redteam/personal-joint-review.mjs": "9d35e9b4943cd0d0a19bfc40c8549c2930fa6e8bf31f5eaf319eee5bdc2f8ccc",
+  "work/harness-purge-improved/package/lib/redteam/personal-security-client.mjs": "9eb4c6281739435bf7803bb57a2a3185d2e209d2faeb4d9016b06141bad50dbc",
+  "work/harness-purge-improved/tests/model-counts.test.py": "f9c82d4144c19d094cf1f3ed926f187e9d5291ddc7ac4b76051574626c684b94",
+  "work/harness-purge-improved/tests/model-counts.test.mjs": "afb8d34e6800703f1a4e650fe1651f0e0576b6b58b73096060a7c9894a6ba1ca"
+}

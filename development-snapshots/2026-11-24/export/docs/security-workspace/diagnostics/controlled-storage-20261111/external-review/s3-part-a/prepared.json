@@ -1,0 +1,34 @@
+{
+  "promptSha256": "9590edcec2b1cabaa7b125a5dee2a33eaac4f73bfc3abac7dc44f1d19da76c8a",
+  "sourceFiles": {
+    "scripts/reviewer_storage.py": "5eff031bdc9c8d1ce96751625069c66a85d868bc2dd43f5b6fdc6cf1d313b509",
+    "scripts/reviewer_snapshot.py": "28c1c0bc7140b954387f39b67a4db9222ef827dafc938b473847b2fef89447a4",
+    "scripts/reviewer_archive.test.py": "b3b20ca836a3687f7bb16578d308f750c041be0731785a85639a6282cd839a59",
+    "scripts/reviewer_storage.test.py": "5ef5fd67252169f0ed855d3c5c8c4a9420a7c847bf80adda89fc153f8a5e691d",
+    "docs/security-workspace/reviewer-controlled-storage.md": "66d12b345df44a4fc49956ff5a65418ce0cb17ef16a0eaf6f99a24e8d138c640"
+  },
+  "coveredStorageDefinitions": [
+    "ReadBudget",
+    "archive_plan",
+    "bounded_names",
+    "producer",
+    "signature",
+    "source_snapshot",
+    "validate_manifest",
+    "validate_plan"
+  ],
+  "shared": [
+    "StorageError",
+    "atomic",
+    "capacity_lock",
+    "digest",
+    "now",
+    "policy_for",
+    "private",
+    "read_bytes",
+    "read_json",
+    "task_lock",
+    "validate_policy"
+  ],
+  "bytes": 51344
+}

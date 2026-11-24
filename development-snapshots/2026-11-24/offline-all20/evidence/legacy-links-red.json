@@ -1,0 +1,49 @@
+{
+  "kind": "actual-pure-filesystem-fixture-probes",
+  "phase": "red",
+  "unitOnly": true,
+  "VMSubmissions": 0,
+  "targetExecutions": 0,
+  "managedLockValidatorReplacedForUnitOnly": true,
+  "rows": [
+    {
+      "file": "candidate/checks/run_regressions.py",
+      "function": "scenario_stage_identity",
+      "sourceSha256": "90759283e2f56a9aed8fea0c0f0c26cd5de74423c35b0b0ff6e04fad2dcf9c2d",
+      "nativeScenarioAssertion": true,
+      "stdout": "PASS stage-symlink-and-identity\n",
+      "remainingLinks": [
+        "candidate/checks/tmp/stage-identity-899d6eea/stage-link"
+      ],
+      "resourceConfirmed": false,
+      "resourceDetail": {
+        "state": "unknown",
+        "reason": "linked-directory",
+        "records": [],
+        "skipped": [],
+        "record": "candidate/checks/tmp/stage-identity-899d6eea/stage-link"
+      },
+      "scratch": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/tmp/legacy-red-4ojl6e48"
+    },
+    {
+      "file": "candidate/checks/run_rev6_checks.py",
+      "function": "test_recover_stage_link_and_identity",
+      "sourceSha256": "5554aae1413df1e2cf1bf099698e5d612b2485c0c10598e086e19e2d8371deb2",
+      "nativeScenarioAssertion": true,
+      "stdout": "PASS recover-stage-symlink-identity-change-and-absent\n",
+      "remainingLinks": [
+        "candidate/checks/tmp/rev6-stage-recover-46af7a3b/link",
+        "candidate/checks/tmp/rev6-stage-recover-46af7a3b/dangling"
+      ],
+      "resourceConfirmed": false,
+      "resourceDetail": {
+        "state": "unknown",
+        "reason": "linked-directory",
+        "records": [],
+        "skipped": [],
+        "record": "candidate/checks/tmp/rev6-stage-recover-46af7a3b/link"
+      },
+      "scratch": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/tmp/legacy-red-brjukpp1"
+    }
+  ]
+}

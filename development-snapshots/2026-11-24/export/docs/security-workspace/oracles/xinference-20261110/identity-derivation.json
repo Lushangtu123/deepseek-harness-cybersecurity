@@ -1,0 +1,9 @@
+{
+  "scannerIdentityDerivation": "SHA256 of UTF-8 fixed image ID string",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "scannerIdentity": "4730ae2853c43601f020be78cbe5fc14566f4c52d061b0244ad5f065cfa6f15c",
+  "baselineRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+  "candidateRulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+  "outputPolicySha256": "f63f62c7c76f5e981ab4c7eea1bd52dd33d5ac3105199f5a2d83ab10c4334860",
+  "nativeScannerSha256": "9b7b9eefb8f9e9b8ac36e797a6173f59b220bc7acf6e453e5046d674b073fee5"
+}

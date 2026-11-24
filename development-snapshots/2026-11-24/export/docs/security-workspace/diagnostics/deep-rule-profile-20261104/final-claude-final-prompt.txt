@@ -1,0 +1,700 @@
+Final targeted read-only review of the same explicitly authorized candidate. No tools. Focus remaining measurement/coverage claims from previous review. All code below is trusted platform code; fixtures are injected and cannot prove execution. Real VM Docker inspect is independent runtime evidence. No R3 claims, no deployment. Do not expand into unrelated redesign.
+# Closure review: mode-bound deep17 Semgrep candidate (revised)
+
+This is a read-only review of the excerpts supplied. Nothing was executed. I still could not see `buildScanPlan`, the runner between WORKBENCH:272–313, `checkWorkspace`, the client plan validator, or `package.json`.
+
+## Prior findings
+
+| # | Prior finding | Status |
+|---|---|---|
+| 1 | Client null workspace | **Retracted.** It was caused by the excerpt omitting the guard. `if(!workspace)return true` is present. |
+| 2 | Policy fails open and is not mode-gated | **Closed.** The check is now gated on `mode==='deep'&&tool==='semgrep'` and uses a strict `!==` against `baseRulesSha256` with no `undefined` escape. Tests cover deleted rules, null rules, deleted deepRules and `deepRules.ready:false`, and assert that no snapshot directory is created. |
+| 3 | Readiness ignores the bundle | **Closed.** The inspector hashes the bundle via `readDeepSemgrepBundle`, gated on semgrep being ready and the base matching. The cache key now includes the bundle's stat tuple. A test covers absent, present and modified bundles, and checks that the cache is invalidated. `fileURLToPath(import.meta.url)` is already a realpath under default Node resolution, so the realpath concern only remains if `package/scripts` is itself a symlink. |
+| 4 | Recorded before execution and never confirmed | **Partly closed.** The planned/confirmed split is correct. The receipt itself is still weak; see R1. |
+| 5 | Retest and comparison | **Closed by adjudication.** `retest-passed` requires `old.coverage_key===result.coverageKey`, and `compareScanSnapshots` rejects a coverage-key mismatch. Joint runs write no `security_finding` rows. |
+| 6 | Bundle structural validation | **Closed at runtime and in tests**, with residuals R3 and R4. |
+| 7 | In-flight tasks under the previous version | **Accepted.** Restart marks them interrupted; drain before any future release. |
+
+## Remaining actionable items
+
+**R1 (Medium): the execution receipt is an echo of the input, not a measurement.**
+- `runScanner` returns `...(ruleProfile?{ruleProfile}:{})`, which is the same object the child passed in. WORKBENCH:421 then checks `validDeepSemgrepProfile(result.ruleProfile)`, so it compares the package constant with itself.
+- The real guarantee is structural: `return` is only reachable after `stageSemgrepRules` has hash-verified the bytes and `selectSemgrepManifest` has accepted them. The receipt adds nothing beyond "the runner returned normally".
+- `coverageKey` is also unbound. A runner returning a valid profile with a forged or legacy `coverageKey` would persist the 17-rule label. The receipt tests only forge the profile, never the key with a valid profile.
+- Fix:
+  - Have `stageSemgrepRules` return `{file, sha256: hash(raw), count}` using the `raw` it actually wrote.
+  - Have `runScanner` return `executedRules:{sha256,count}`.
+  - At :421, require `executedRules.sha256===ruleProfile.rulesSha256 && count===17`.
+  - Optionally, require `coverageKey` to match `/^[a-f0-9]{64}$/`.
+  - Add a test with a valid `ruleProfile`, `executedRules.sha256` set to the base SHA, and expect failure.
+
+**R2 (Medium, test gap carried over): no golden `coverageKey` test.**
+- The closure of R5 rests on the claim that "coverageKey derives from the selected manifest". Every dispatch test injects `coverageKey:'selected17'` or `'forged'`, so `buildScanPlan` is never exercised.
+- Add a test through `buildScanPlan` or `runScanner` with a stubbed Docker:
+  - The legacy semgrep key equals the pre-change value.
+  - The deep key differs from the legacy key.
+  - The deep key changes if `rulesSha256` changes.
+
+**R3 (Low): language inheritance is only checked against the allowlist.**
+- `details.runtime.rules` keeps the base `languages`, and the test only asserts that the 17th rule's languages are in `{python,javascript,typescript}`.
+- If the base set were `{python,javascript}` and rule 17 added `typescript`, the inherited `languages` would be wrong and the test would still pass.
+- Assert `languagesOf(bundle) deepEqual languagesOf(base)`. Alternatively, derive `languages` from the bundle at :421.
+
+**R4 (Low): bundle ID validation is weaker than the base check.**
+- `readDeepSemgrepBundle` checks `typeof r.id==='string'` but not the base pattern `/^[A-Za-z0-9][A-Za-z0-9._-]{0,239}$/`.
+- The current bundle is hash-pinned, so this is not live. It matters the next time the profile is bumped. Reuse the same validator.
+
+**R5 (Low): confirmed metadata overwrites base identity fields.**
+- At :421, `version:ruleProfile.id` replaces the manifest `rulesVersion` with `'deep-namespace17'`.
+- The verified base SHA and count only survive indirectly, through `ruleProfile.baseRulesSha256`.
+- Keep the base explicit, e.g. `details.runtime.baseRules = runtime.rules`, before overwriting.
+- Also, a failed deep run persists `runtime.rules.count:16` plus `requestedRuleProfile`. Confirm the client labels these runs from `requestedRuleProfile` or `ruleProfile`, not from `rules.count`. Otherwise a failed deep run displays as "16 条".
+
+**R6 (Low): no child-side readiness re-check at :409.**
+- The child re-reads `toolStatus({force:true})` but only checks `runtime.ready`. It does not check `runtime.deepRules?.ready===true`, or that `runtime.rules?.sha256===ruleProfile.baseRulesSha256`.
+- If the bundle changes after the parent accepts the task, the failure only surfaces at `stageSemgrepRules`, after the snapshot path has been handed to the runner. This still fails closed.
+- Adding both checks at :409 is a cheap way to fail earlier.
+
+**R7 (Low, test gaps):**
+- Readiness should report `deepRules.ready===false` while `semgrep.ready===true` when `images.json` `rulesSha256` is not the profile base.
+- Readiness should report `deepRules.ready===false` when the semgrep image is missing.
+- Legacy runs do not reject a stray `result.ruleProfile`. It is harmless today because it is never persisted, but an assertion would keep it that way.
+
+## Not verifiable from the supplied material
+
+- Whether `scripts/semgrep-deep17.json` is in the package's shipped file list (`package.json` `files` or `.npmignore`).
+- Which steps array the client plan validator passes. A plan carries `availableSteps`, not `selectedSteps`. If the plan reuses `validWorkspaceRules(ws, ws.selectedSteps)`, a deep plan with `ruleProfiles` would be rejected.
+- Whether a client test covers a `workspace:null` task.
+
+## Claims to keep bounded
+
+- The VM candidate scan you reported (17 rules / 22 hits / 20 namespace observations, legacy 16 rules / 2 hits, exact-SHA read-only mounts, `network none`) is the only evidence of native execution. The unit tests show identity and option propagation, not execution.
+- The revised final scan and the full regression rerun are reported as separate runs. I have not seen their output, so I treat them as pending confirmation.
+- Nothing here supports an R3 or detection-quality claim. Your adjudication already states that.
+
+FILE personal-security-runtime.mjs
+import {deepSemgrepProfile,validDeepSemgrepProfile} from './personal-semgrep-profile.mjs';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import {constants,openSync,closeSync,readSync,writeFileSync,unlinkSync,linkSync,mkdirSync,rmdirSync,lstatSync,fstatSync,realpathSync} from 'node:fs';
+import {join,resolve,dirname} from 'node:path';
+import {execFileSync} from 'node:child_process';
+
+export const SECURITY_RUNTIME_ROOT='/home/purge/tools/security-workbench';
+const TOOLS=['semgrep','trivy','zap'];
+const HASH=/^[a-f0-9]{64}$/;
+const IMAGE=/^sha256:[a-f0-9]{64}$/;
+const RULE_ID=/^[A-Za-z0-9][A-Za-z0-9._-]{0,239}$/;
+const VERSION=/^\d+\.\d+\.\d+(?:[-+][A-Za-z0-9.-]+)?$/;
+
+function ordinary(root,name,maxBytes){
+ const file=join(root,name);
+ if(realpathSync(root)!==root||realpathSync(file)!==file)throw Error('unsafe runtime path');
+ const info=lstatSync(file);
+ if(!info.isFile()||info.isSymbolicLink()||info.size<1||info.size>maxBytes)throw Error('invalid runtime file');
+ return{file,info};
+}
+function small(root,name,maxBytes){
+ const {file}=ordinary(root,name,maxBytes),fd=openSync(file,constants.O_RDONLY|constants.O_NOFOLLOW);
+ try{
+  if(fstatSync(fd).size>maxBytes)throw Error('runtime file changed');
+  const raw=Buffer.alloc(maxBytes+1);let used=0;
+  while(used<raw.length){const count=readSync(fd,raw,used,raw.length-used,null);if(count===0)break;used+=count}
+  if(used>maxBytes)throw Error('runtime file changed');
+  return raw.subarray(0,used);
+ }finally{closeSync(fd)}
+}
+function verifiedRules(root,expected){
+ const raw=small(root,'rules.json',1024*1024);
+ if(createHash('sha256').update(raw).digest('hex')!==expected)throw Error('rules changed');
+ return raw;
+}
+
+const DEEP_RULES_ROOT=dirname(fileURLToPath(new URL('../../scripts/semgrep-deep17.json',import.meta.url)));
+export function readDeepSemgrepBundle(bundleRoot=DEEP_RULES_ROOT){
+ const raw=small(bundleRoot,'semgrep-deep17.json',1024*1024),profile=deepSemgrepProfile();
+ if(createHash('sha256').update(raw).digest('hex')!==profile.rulesSha256)throw Error('deep rules changed');
+ const rules=JSON.parse(raw).rules;
+ if(!Array.isArray(rules)||rules.length!==profile.ruleCount||new Set(rules.map(r=>r?.id)).size!==rules.length||rules.some(r=>!r||typeof r.id!=='string'||!RULE_ID.test(r.id)||!Array.isArray(r.languages)||!r.languages.length||r.languages.some(l=>!['python','javascript','typescript'].includes(l))))throw Error('invalid deep rule bundle');
+ return raw;
+}
+export function selectSemgrepManifest(manifest,mode,ruleProfile){
+ if(mode===undefined&&ruleProfile===undefined)return manifest;
+ if(mode!=='deep'||!validDeepSemgrepProfile(ruleProfile)||manifest.rulesSha256!==ruleProfile.baseRulesSha256)
+  throw Object.assign(Error('深度 Semgrep 规则、模式或基线身份未确认'),{code:'SCAN_S1_IDENTITY'});
+ return {...manifest,rulesSha256:ruleProfile.rulesSha256};
+}
+export function stageSemgrepRules(runtimeRoot,runDir,expected,ruleProfile,bundleRoot=DEEP_RULES_ROOT){
+ const file=join(runDir,'semgrep-rules.json');let fd;
+ try{
+  let raw;
+  if(ruleProfile!==undefined){
+   if(!validDeepSemgrepProfile(ruleProfile)||expected!==ruleProfile.rulesSha256)throw Error('invalid deep profile');
+   verifiedRules(runtimeRoot,ruleProfile.baseRulesSha256);
+   raw=readDeepSemgrepBundle(bundleRoot);
+  }else raw=verifiedRules(runtimeRoot,expected);
+  if(realpathSync(runDir)!==runDir||(lstatSync(runDir).mode&0o077)!==0)throw Error('unsafe run directory');
+  fd=openSync(file,constants.O_WRONLY|constants.O_CREAT|constants.O_EXCL|constants.O_NOFOLLOW,0o400);
+  try{writeFileSync(fd,raw)}finally{closeSync(fd)}
+  return{file,sha256:createHash('sha256').update(raw).digest('hex'),count:JSON.parse(raw).rules.length};
+ }catch{
+  if(fd!==undefined)try{unlinkSync(file)}catch{}
+  throw Object.assign(Error('未能固定 Semgrep 规则'),{code:'SCAN_S1_IDENTITY'});
+ }
+}
+
+export function readRuntimeManifest(root=SECURITY_RUNTIME_ROOT){
+ const value=JSON.parse(small(resolve(root),'images.json',128*1024));
+ if(value?.schemaVersion!==1||!Array.isArray(value.tools)||value.tools.length!==3)throw Error('invalid manifest');
+ if(!HASH.test(value.rulesSha256||''))throw Error('invalid rules identity');
+ for(const tool of TOOLS){
+  const rows=value.tools.filter(row=>row?.tool===tool),row=rows[0];
+  if(rows.length!==1||!IMAGE.test(row.imageId||'')||row.imageRef!=='personal-security/'+tool+'@'+row.imageId||!VERSION.test(row.version||''))throw Error('invalid pinned image');
+ }
+ return value;
+}
+function sameTrivyMetadata(observed,expected){
+ return expected&&['Version','UpdatedAt','NextUpdate'].every(key=>observed?.[key]===expected[key]);
+}
+
+function unlinkIfPresent(file){
+ try{unlinkSync(file)}catch(error){if(error.code!=='ENOENT')throw error}
+}
+
+function clearTrivyStage(dir){
+ try{lstatSync(dir)}catch(error){if(error.code==='ENOENT')return;throw error}
+ if(realpathSync(dir)!==dir||!lstatSync(dir).isDirectory())throw Error('unsafe database staging path');
+ unlinkIfPresent(join(dir,'metadata.json'));
+ unlinkIfPresent(join(dir,'trivy.db'));
+ rmdirSync(dir);
+}
+
+export function clearStaticScanInputs(runDir){
+ try{lstatSync(runDir)}catch(error){if(error.code==='ENOENT')return;throw error}
+ if(realpathSync(runDir)!==runDir||!lstatSync(runDir).isDirectory())throw Error('unsafe run directory');
+ unlinkIfPresent(join(runDir,'semgrep-rules.json'));
+ clearTrivyStage(join(runDir,'trivy-db'));
+}
+
+export function stageTrivyDatabase(runtimeRoot,runDir,expected){
+ const dir=join(runDir,'trivy-db');let created=false;
+ try{
+  if(realpathSync(runDir)!==runDir||(lstatSync(runDir).mode&0o077)!==0)throw Error('unsafe run directory');
+  const {file}=ordinary(runtimeRoot,'cache/db/trivy.db',2*1024**3);
+  const metadata=small(runtimeRoot,'cache/db/metadata.json',16384);
+  if(!sameTrivyMetadata(JSON.parse(metadata),expected?.metadata))throw Error('database metadata changed');
+  mkdirSync(dir,{mode:0o700});created=true;
+  linkSync(file,join(dir,'trivy.db'));
+  hashDatabase(dir,expected,'trivy.db',true);
+  writeFileSync(join(dir,'metadata.json'),metadata,{flag:'wx',mode:0o400});
+  return dir;
+ }catch{
+  if(created)try{clearTrivyStage(dir)}catch{}
+  throw Object.assign(Error('未能固定 Trivy 数据库'),{code:'SCAN_S1_IDENTITY'});
+ }
+}
+
+function hashDatabase(root,expected,name='cache/db/trivy.db',requireReadOnly=false){
+ if(!HASH.test(expected?.fileSha256||'')||!Number.isSafeInteger(expected.fileBytes)||expected.fileBytes<4096||expected.fileBytes>2*1024**3)throw Error('数据库完整性摘要未登记');
+ const {file,info}=ordinary(root,name,2*1024**3);
+ if(info.size!==expected.fileBytes)throw Error('漏洞数据库大小不匹配');
+ const fd=openSync(file,constants.O_RDONLY|constants.O_NOFOLLOW),hash=createHash('sha256'),buffer=Buffer.alloc(512*1024),deadline=performance.now()+8000;
+ try{
+  const before=fstatSync(fd);if(requireReadOnly&&(before.mode&0o222)!==0)throw Error('数据库不是只读文件');let bytes=0,count;
+  while((count=readSync(fd,buffer,0,buffer.length,null))>0){bytes+=count;hash.update(buffer.subarray(0,count));if(performance.now()>deadline||bytes>expected.fileBytes)throw Error('漏洞数据库校验未完成')}
+  const after=fstatSync(fd);
+  if(bytes!==expected.fileBytes||after.size!==before.size||after.mtimeMs!==before.mtimeMs||after.ctimeMs!==before.ctimeMs||hash.digest('hex')!==expected.fileSha256)throw Error('漏洞数据库摘要不匹配');
+ }finally{closeSync(fd)}
+}
+export function inspectLocalImages(refs){
+ const args=['-n','/usr/bin/docker','image','inspect','--format','{{.Id}} {{.Architecture}} {{.Os}}',...refs];let output;
+ try{output=execFileSync('/usr/bin/sudo',args,{encoding:'utf8',timeout:2500,maxBuffer:64*1024,stdio:['ignore','pipe','pipe']})}
+ catch(error){if(error.status!==1||!error.stdout)return{available:false,images:[]};output=String(error.stdout)}
+ const images=output.trim().split('\n').filter(Boolean).map(line=>{const [id,architecture,os,...extra]=line.trim().split(/\s+/);if(!IMAGE.test(id)||extra.length)throw Error('invalid Docker reply');return{id,architecture,os}});
+ return{available:true,images};
+}
+function scanDocker(args){
+ return execFileSync('/usr/bin/sudo',['-n','/usr/bin/docker',...args],
+  {encoding:'utf8',timeout:8000,killSignal:'SIGKILL',maxBuffer:65536,stdio:['ignore','pipe','pipe']});
+}
+
+export function reconcileScanContainers(docker=scanDocker){
+ const list=['ps','--all','--no-trunc','--filter','label=personal.harness.security=true','--format','{{.ID}} {{.Names}}'];
+ const observed=docker(list).trim().split('\n').filter(Boolean);
+ const ids=observed.map(line=>{
+  const match=/^([a-f0-9]{64}) dsh-sec-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.exec(line);
+  if(!match)throw Error('扫描容器归属未确认，入口未启动');
+  return match[1];
+ });
+ for(const id of ids)try{docker(['rm','--force',id])}catch{/* Auto-remove may already be in progress. */}
+ if(docker(list).trim())throw Error('扫描容器清理未确认，入口未启动');
+}
+
+export function staticScannerIdentity(manifest,tool){
+ const pin=manifest?.tools?.find(row=>row.tool===tool);
+ if(!pin||!['semgrep','trivy'].includes(tool))return null;
+ const resources=tool==='semgrep'?manifest.rulesSha256:manifest.database;
+ return createHash('sha256').update(JSON.stringify([tool,pin.imageId,pin.version,resources])).digest('hex');
+}
+
+function inspectStaticSandbox(){
+ const format='[{{json .SecurityOptions}},{{json .CgroupVersion}},{{json .MemoryLimit}},{{json .SwapLimit}},{{json .CPUCfsQuota}},{{json .PidsLimit}}]';
+ const output=execFileSync('/usr/bin/sudo',['-n','/usr/bin/docker','info','--format',format],
+  {encoding:'utf8',timeout:2500,maxBuffer:16384,stdio:['ignore','pipe','pipe']});
+ const [security,cgroup,memory,swap,cpu,pids]=JSON.parse(output);
+ return{security,cgroup,memory,swap,cpu,pids};
+}
+
+export function assertStaticAdmission(tool,manifest,acceptedIdentity,fresh,inspect=inspectStaticSandbox){
+ const identity=staticScannerIdentity(manifest,tool);
+ if(!identity||!fresh?.ready||identity!==acceptedIdentity||identity!==fresh.admissionIdentity)
+  throw Object.assign(Error('静态扫描器或资源身份未确认'),{code:'SCAN_S1_IDENTITY'});
+ let controls;try{controls=inspect()}catch{}
+ if(controls?.cgroup!=='2'||!Array.isArray(controls.security)||!controls.security.includes('name=seccomp,profile=builtin')||
+  !['memory','swap','cpu','pids'].every(key=>controls[key]===true))
+  throw Object.assign(Error('S1 隔离条件未确认'),{code:'SCAN_S1_UNAVAILABLE'});
+}
+
+function identity(root,ruleBundleRoot){
+ return ['images.json','rules.json','cache/db/trivy.db','cache/db/metadata.json','last-db-update.json'].map(name=>{
+  try{const {info}=ordinary(root,name,2*1024**3);return[name,info.ino,info.size,info.mtimeMs,info.ctimeMs]}
+  catch{return[name,'unavailable']}
+ }).concat([(()=>{try{const {info}=ordinary(ruleBundleRoot,'semgrep-deep17.json',1024*1024);return['deep-bundle',info.ino,info.size,info.mtimeMs,info.ctimeMs]}catch{return['deep-bundle','unavailable']}})()]).map(row=>row.join(':')).join('|');
+}
+function timestamp(value){
+ if(typeof value!=='string')return NaN;
+ const parts=/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d{1,9})?(Z|[+-]\d{2}:\d{2})$/.exec(value);
+ if(!parts)return NaN;
+ const [,year,month,day,hour,minute,second,zone]=parts,n=Number;
+ const calendar=new Date(0);calendar.setUTCFullYear(n(year),n(month),0);
+ if(n(month)<1||n(month)>12||n(day)<1||n(day)>calendar.getUTCDate()||n(hour)>23||n(minute)>59||n(second)>59||(zone!=='Z'&&(n(zone.slice(1,3))>23||n(zone.slice(4))>59)))return NaN;
+ return Date.parse(value);
+}
+export function createRuntimeInspector({root=SECURITY_RUNTIME_ROOT,ruleBundleRoot=DEEP_RULES_ROOT,now=Date.now,inspectImages=inspectLocalImages}={}){
+ root=resolve(root);let last;
+ return{read({force=false,maintenanceValidation=false}={}){
+  // Read this before the cache: an interrupted update must never inherit ready evidence.
+  let maintenance=false;
+  try{lstatSync(join(root,'maintenance.json'));maintenance=true}catch(error){maintenance=error.code!=='ENOENT'}
+  if(maintenance&&!maintenanceValidation){const checkedAt=new Date(now()).toISOString();return Object.fromEntries(TOOLS.map(tool=>[tool,{ready:false,version:null,reason:'漏洞库维护尚未完成，请从Mac启动器检查或恢复',warning:null,checkedAt,cached:false}]))}
+  const at=now(),key=identity(root,ruleBundleRoot);
+  if(!force&&last&&last.key===key&&at>=last.at&&at-last.at<30000)return Object.fromEntries(TOOLS.map(tool=>[tool,{...last.value[tool],cached:true}]));
+  const checkedAt=new Date(at).toISOString(),value=Object.fromEntries(TOOLS.map(tool=>[tool,{ready:false,version:null,reason:'运行清单缺失、结构无效或路径不安全',warning:null,checkedAt,cached:false}]));
+  let manifest;
+  try{manifest=readRuntimeManifest(root)}catch{return value}
+  let observed;
+  try{observed=inspectImages(manifest.tools.map(row=>row.imageId));if(!observed||!Array.isArray(observed.images))throw Error('invalid inspector reply')}
+  catch{observed={available:false,images:[]}}
+  for(const tool of TOOLS){
+   const pin=manifest.tools.find(row=>row.tool===tool),image=observed.images.find(row=>row.id===pin.imageId),entry=value[tool];entry.version=pin.version;
+   entry.ready=observed.available===true&&image?.architecture==='arm64'&&image.os==='linux';
+   entry.reason=entry.ready?null:observed.available?'本地镜像未找到、架构或摘要不匹配':'Docker状态未确认，未验证本地镜像';
+  }
+  try{
+   const raw=verifiedRules(root,manifest.rulesSha256);
+   const rules=JSON.parse(raw).rules,ids=new Set(),languages=new Set();
+   if(!Array.isArray(rules)||rules.length<1||rules.length>1000)throw Error('invalid rule list');
+   for(const rule of rules){if(!rule||typeof rule.id!=='string'||!RULE_ID.test(rule.id)||ids.has(rule.id)||!Array.isArray(rule.languages)||!rule.languages.length||rule.languages.some(language=>!['python','javascript','typescript'].includes(language)))throw Error('invalid rule identity');ids.add(rule.id);rule.languages.forEach(language=>languages.add(language))}
+   value.semgrep.rules={sha256:manifest.rulesSha256,version:typeof manifest.rulesVersion==='string'&&/^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/.test(manifest.rulesVersion)?manifest.rulesVersion:'未登记',count:rules.length,languages:[...languages].sort()};
+  }
+  catch{value.semgrep.ready=false;value.semgrep.reason='本地规则缺失、不安全或摘要不匹配'}
+  value.semgrep.deepRules={ready:false,reason:'深度规则包或基线尚未核对'};
+  if(value.semgrep.ready&&manifest.rulesSha256===deepSemgrepProfile().baseRulesSha256)try{readDeepSemgrepBundle(ruleBundleRoot);value.semgrep.deepRules={ready:true,profile:deepSemgrepProfile()}}catch{}
+  const trivy=value.trivy;trivy.database={state:'unknown',updatedAt:null,nextUpdate:null,ageDays:null};
+  try{const update=JSON.parse(small(root,'last-db-update.json',16384));if(['current','updated','rolled-back'].includes(update.state)&&Number.isFinite(timestamp(update.checkedAt)))trivy.lastUpdate={state:update.state,checkedAt:update.checkedAt}}catch{}
+  try{
+   const metadata=JSON.parse(small(root,'cache/db/metadata.json',16384)),expected=manifest.database?.metadata,updated=timestamp(metadata.UpdatedAt),next=timestamp(metadata.NextUpdate);
+   if(metadata.Version!==2||!Number.isFinite(updated)||!Number.isFinite(next)||next<=updated||updated>at+300000||!expected||['Version','UpdatedAt','NextUpdate'].some(key=>expected[key]!==metadata[key]))throw Error('漏洞库元数据无效、不一致或时间超前');
+   const ageDays=Math.floor(Math.max(0,at-updated)/86400000),state=at-updated>7*86400000?'stale':'fresh';
+   trivy.database={state,updatedAt:new Date(updated).toISOString(),nextUpdate:new Date(next).toISOString(),ageDays};
+   hashDatabase(root,manifest.database);
+   if(state==='stale')trivy.warning='漏洞库已超过7天，结果不包含之后的漏洞信息；建议更新';
+  }catch(error){trivy.ready=false;trivy.reason=/^(?:漏洞|数据库)/.test(error.message)?error.message:'漏洞数据库缺失、路径不安全或未能完成校验';trivy.database.state='unknown'}
+  for(const tool of ['semgrep','trivy'])if(value[tool].ready)value[tool].admissionIdentity=staticScannerIdentity(manifest,tool);
+  last={at,key,value};return value;
+ }};
+}
+
+
+FILE personal-semgrep-profile.mjs
+// This package profile is fixed, not fetched or chosen by project content.
+// Runtime readiness describes managed S1 execution, not R3 detection quality.
+const SEMGREP_DEEP_PROFILE={version:1,id:'deep-namespace17',mode:'deep',baseRulesSha256:'44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed',rulesSha256:'e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773',ruleCount:17,qualification:'managed-candidate-not-r3'};
+export function deepSemgrepProfile(){return {...SEMGREP_DEEP_PROFILE}}
+export function validDeepSemgrepProfile(value){return !!value&&typeof value==='object'&&!Array.isArray(value)&&Object.keys(value).length===Object.keys(SEMGREP_DEEP_PROFILE).length&&Object.entries(SEMGREP_DEEP_PROFILE).every(([key,expected])=>Object.hasOwn(value,key)&&value[key]===expected)}
+
+
+FILE personal-workspace-policy.mjs
+import {deepSemgrepProfile,validDeepSemgrepProfile} from './personal-semgrep-profile.mjs';
+import {createHash} from 'node:crypto';
+
+const VERSION='workspace-policy-p0-1';
+const RESOURCES=['cpuMillis','memoryBytes','pids','tmpBytes','outputBytes'];
+const BUDGET=['wallSeconds',...RESOURCES,'modelRequests','outputTokensPerCall'];
+const fail=()=>{throw Error('工作区策略或预算合同无效')};
+function object(value,keys){if(!value||typeof value!=='object'||Array.isArray(value)||Object.keys(value).some(key=>!keys.includes(key)))fail()}
+function integer(value,minimum=0){if(!Number.isSafeInteger(value)||value<minimum)fail();return value}
+function add(a,b){return integer(a+b)}
+function budget(value,task=false){
+ object(value,[...BUDGET,...(task?['parallelism']:[])]);
+ const normalized=Object.fromEntries([...BUDGET,...(task?['parallelism']:[])].map(key=>[key,integer(value[key],key==='memoryBytes'?16777216:['modelRequests','outputTokensPerCall'].includes(key)?0:1)]));
+ if(normalized.wallSeconds>3600||normalized.pids>512||normalized.outputBytes>8388608||task&&normalized.parallelism>32)fail();
+ return normalized;
+}
+
+export function workspaceModePolicy(mode){
+ if(!['ordinary','deep'].includes(mode))fail();
+ const ordinary=mode==='ordinary';
+ return {version:VERSION,mode,planner:ordinary?'rules':'model-assisted',minimumToolLevel:ordinary?3:2,sandboxProfiles:ordinary?['S1']:['S1','S2','S3'],presetRecommendation:ordinary?'personal-review':'personal-joint',changesCurrentPreset:false,executionEnabled:false,currencyHardLimit:false,calibration:'candidate-not-benchmark-qualified',budgetCeilings:{wallSeconds:ordinary?360:900,maxSteps:ordinary?3:6,parallelism:1,modelRequests:ordinary?0:16,outputTokensPerCall:ordinary?0:2048,outputBytes:8388608}};
+}
+
+// First scheduler integration slice. R2 describes existing managed adapters,
+// not benchmark qualification. No R3 promotion or S2/S3 fallback is implied.
+export function workspaceDispatchPolicy(mode,runtime={}){
+ const policy=workspaceModePolicy(mode),availableSteps=[],unavailableSteps=[];
+ for(const tool of ['semgrep','trivy','zap','kali','rea','pentagi']){
+  const reason=!['semgrep','trivy'].includes(tool)?'sandbox-qualification-missing'
+   :policy.minimumToolLevel>2?'r3-qualification-missing'
+   :runtime[tool]?.ready!==true?'runtime-not-ready'
+   :!/^[a-f0-9]{64}$/.test(runtime[tool]?.admissionIdentity??'')?'runtime-identity-missing'
+   :mode==='deep'&&tool==='semgrep'&&runtime[tool]?.rules?.sha256!==deepSemgrepProfile().baseRulesSha256?'deep-rule-base-mismatch'
+   :mode==='deep'&&tool==='semgrep'&&(runtime[tool]?.deepRules?.ready!==true||!validDeepSemgrepProfile(runtime[tool]?.deepRules?.profile))?'deep-rule-bundle-unavailable':null;
+  if(reason)unavailableSteps.push({tool,reason});else availableSteps.push(tool);
+ }
+ return{version:'workspace-dispatch-s1-2',mode,minimumToolLevel:policy.minimumToolLevel,
+  sandboxProfiles:['S1'],availableSteps,unavailableSteps,maxSeconds:policy.budgetCeilings.wallSeconds,
+  maxSteps:policy.budgetCeilings.maxSteps,modelRequests:0,fullWorkspaceReady:false,...(mode==='deep'&&availableSteps.includes('semgrep')?{ruleProfiles:{semgrep:deepSemgrepProfile()}}:{})};
+}
+
+export function workspaceDispatchContract(mode,steps,budgetSeconds,runtime){
+ const policy=workspaceDispatchPolicy(mode,runtime);
+ if(mode==='ordinary')throw Error('普通检查尚缺 R3 工具验收，不能启动；请等待验收完成，不自动切换模式或旧入口');
+ if(!Array.isArray(steps)||!steps.length||steps.length>policy.maxSteps||new Set(steps).size!==steps.length||steps.some(tool=>!policy.availableSteps.includes(tool)))
+  throw Error('所选步骤的 S1 适配、就绪状态或工具身份未确认；S2/S3 尚未接入，不回退到其他入口');
+ if(!Number.isSafeInteger(budgetSeconds)||budgetSeconds<30||budgetSeconds>policy.maxSeconds)throw Error('检查模式的任务时限无效');
+ return{version:policy.version,mode,sandboxProfile:'S1',selectedSteps:[...steps],
+  toolIdentities:Object.fromEntries(steps.map(tool=>[tool,runtime[tool].admissionIdentity])),
+  budgetSeconds,modelRequests:0,fullWorkspaceReady:false,...(steps.includes('semgrep')?{ruleProfiles:{semgrep:deepSemgrepProfile()}}:{})};
+}
+
+// Pure candidate validation. P1 must atomically persist reservations, account
+// retries, constrain each process and revalidate clocks/scope before dispatch.
+export function assessWorkspaceBudget(value){
+ object(value,['mode','task','steps','nowMs','scopeExpiresAtMs']);
+ const policy=workspaceModePolicy(value.mode),caps=policy.budgetCeilings,parent=budget(value.task,true);
+ const nowMs=integer(value.nowMs),scopeExpiresAtMs=integer(value.scopeExpiresAtMs);
+ if(!Array.isArray(value.steps)||!value.steps.length||value.steps.length>32)fail();
+ const reasons=[],seen=new Set(),steps=[];let needsPrice=false;
+ for(const key of ['wallSeconds','parallelism','modelRequests','outputTokensPerCall','outputBytes'])if(parent[key]>caps[key])reasons.push('task-ceiling-exceeded:'+key);
+ if(parent.parallelism>caps.parallelism)reasons.push('parallelism-exceeded');
+ if(value.steps.length>caps.maxSteps)reasons.push('step-count-exceeded');
+ const totals={wallSeconds:0,outputBytes:0,modelRequests:0,maximumOutputTokens:0};
+ for(const raw of value.steps){
+  object(raw,['id','budget','priceState']);
+  if(typeof raw.id!=='string'||!/^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}$/.test(raw.id)||!['known','unknown','not-applicable'].includes(raw.priceState))fail();
+  if(seen.has(raw.id))reasons.push('duplicate-step');seen.add(raw.id);
+  const child=budget(raw.budget);steps.push({id:raw.id,budget:child,priceState:raw.priceState});
+  for(const key of RESOURCES)if(child[key]>parent[key])reasons.push('step-resource-exceeded:'+key);
+  if(child.outputTokensPerCall>parent.outputTokensPerCall)reasons.push('step-output-token-limit');
+  if(child.modelRequests>0&&child.outputTokensPerCall===0)reasons.push('model-output-limit-missing');
+  for(const key of ['wallSeconds','outputBytes','modelRequests'])totals[key]=add(totals[key],child[key]);
+  totals.maximumOutputTokens=add(totals.maximumOutputTokens,integer(child.modelRequests*child.outputTokensPerCall));
+  if(raw.priceState==='unknown'||child.modelRequests>0&&raw.priceState!=='known'){needsPrice=true;reasons.push('price-unconfirmed:'+raw.id)}
+ }
+ const deadlineMs=Math.min(add(nowMs,integer(parent.wallSeconds*1000)),scopeExpiresAtMs),remainingSeconds=Math.max(0,Math.floor((deadlineMs-nowMs)/1000));
+ if(scopeExpiresAtMs<=nowMs)reasons.push('scope-expired');
+ if(totals.wallSeconds>remainingSeconds)reasons.push('wall-budget-exceeded');
+ if(totals.outputBytes>parent.outputBytes)reasons.push('output-budget-exceeded');
+ if(totals.modelRequests>parent.modelRequests)reasons.push('model-budget-exceeded');
+ const unique=[...new Set(reasons)],blocked=unique.some(reason=>!reason.startsWith('price-unconfirmed:'));
+ const identity=createHash('sha256').update(JSON.stringify({version:VERSION,mode:value.mode,parent,steps,nowMs,scopeExpiresAtMs})).digest('hex');
+ return {state:blocked?'unavailable':needsPrice?'needs-decision':'eligible-preview',reasons:unique,identity,deadlineMs,totals,executionEnforced:false,currencyHardLimit:false,previewOnly:true,limitation:'P0候选预算检查；持久预留、运行限额和未知结果不退额度仍须P1执行器实现。'};
+}
+
+
+FILE personal-security-comparison.mjs
+// Normalized observations only: never derive scan history from mutable finding rows.
+import {normalizeSubject,subjectKey,subjectLabel,validSubject,literalSecurityText} from './personal-security-identity.mjs';
+const LIMIT=4*1024*1024;
+const key=item=>JSON.stringify([item.rule,item.location,subjectKey(item.subject)]);
+const bad=()=>{throw Error('扫描快照缺失、结构无效或超出限制')};
+const text=(value,max)=>typeof value==='string'&&value.length<=max&&!/[\x00-\x1f]/.test(value);
+function validate(value){
+ if(!value||![1,2].includes(value.schemaVersion)||!Array.isArray(value.findings)||value.findings.length>2000||!Array.isArray(value.coverageFiles)||value.coverageFiles.length>20000)bad();
+ const keys=new Set();
+ for(const item of value.findings){if(!item||!text(item.rule,240)||!item.rule||!text(item.location,800)||!item.location||!text(item.title,400)||!text(item.severity,20)||(value.schemaVersion===2?!validSubject(item.subject):item.subject!==undefined)||keys.has(key(item)))bad();keys.add(key(item))}
+ if(value.coverageFiles.some(file=>!text(file,800)||!file))bad();return value;
+}
+export function createScanSnapshot(findings,coverageFiles){
+ if(!Array.isArray(coverageFiles)||coverageFiles.length>20000||findings.length>2000)return null;
+ const value={schemaVersion:2,findings:[...new Map(findings.map(({rule,title,severity,location,subject})=>{const item={rule,title,severity,location,subject:normalizeSubject(subject)};return[key(item),item]})).values()],coverageFiles:[...new Set(coverageFiles)]};
+ try{validate(value)}catch{return null}
+ const raw=JSON.stringify(value);return Buffer.byteLength(raw)<=LIMIT?raw:null;
+}
+export function parseScanSnapshot(raw){if(typeof raw!=='string'||Buffer.byteLength(raw)>LIMIT)bad();let value;try{value=JSON.parse(raw)}catch{bad()}return validate(value)}
+export function compareScanSnapshots(baseRun,currentRun,baseRaw,currentRaw){
+ const unavailable=reason=>({available:false,reason});
+ if(baseRun.tool!==currentRun.tool)return unavailable('两次任务的扫描器不同，不能对比');
+ if([baseRun,currentRun].some(run=>run.state!=='completed'||run.complete!==1))return unavailable('需要两次完整完成的任务；失败或覆盖不完整不能比较');
+ if(!baseRun.coverage_key||baseRun.coverage_key!==currentRun.coverage_key)return unavailable('规则、镜像、数据库或项目范围策略不同，不能比较');
+ if(baseRaw===undefined||currentRaw===undefined)return unavailable('旧任务没有完整扫描快照，无法推断历史命中集合');
+ const base=parseScanSnapshot(baseRaw),current=parseScanSnapshot(currentRaw);
+ if(baseRun.tool==='trivy'&&(base.schemaVersion!==2||current.schemaVersion!==2))return unavailable('旧Trivy快照没有依赖包身份，无法可靠比较');
+ const old=new Map(base.findings.map(item=>[key(item),item])),now=new Map(current.findings.map(item=>[key(item),item])),covered=new Set(current.coverageFiles),all={added:[],persisting:[],notSeen:[],uncovered:[]};
+ for(const [id,item] of now)(old.has(id)?all.persisting:all.added).push(item);
+ for(const [id,item] of old)if(!now.has(id)){const file=item.location.replace(/:\d+$/,'');(baseRun.tool!=='zap'&&covered.has(file)?all.notSeen:all.uncovered).push(item)}
+ const summary=Object.fromEntries(Object.entries(all).map(([name,items])=>[name,items.length])),items=Object.fromEntries(Object.entries(all).map(([name,rows])=>[name,rows.slice(0,100)])),truncated=Object.values(all).some(rows=>rows.length>100);
+ const notice='按规则、完整位置及已记录的依赖包身份精确匹配；代码移行或包版本变化可能表现为新增与未再次命中。未再次命中不等于已修复；覆盖未证实的记录保留为未知，不修改发现状态。';
+ const labels={added:'新增命中位置',persisting:'仍存在的命中位置',notSeen:'已覆盖文件中未再次命中',uncovered:'覆盖未证实'};
+ const safe=literalSecurityText;
+ const markdown=['# 扫描结果对比','',`基线：${safe(baseRun.id)} · ${safe(baseRun.tool)} · ${safe(baseRun.started_at)}`,`本次：${safe(currentRun.id)} · ${safe(currentRun.tool)} · ${safe(currentRun.started_at)}`,'',notice,'','每类最多展示100条；数量来自完整已保存快照。'+(truncated?' 本报告明细已截断。':''),'',...Object.entries(items).flatMap(([name,rows])=>[`## ${labels[name]} · ${summary[name]}`,'',...rows.map(item=>'- '+[item.rule,item.location,...(item.subject?[subjectLabel(item.subject)]:[]),item.title].map(safe).join(' · ')),''])].join('\n');
+ return{available:true,tool:baseRun.tool,summary,items,truncated,notice,markdown};
+}
+
+
+WORKBENCH complete functions
+export function buildScanPlan(tool,profile,runDir,manifest,authPolicy=null,watchdogSeconds=STATIC_WATCHDOG_SECONDS){
+ if(tool!=='zap'&&(!Number.isSafeInteger(watchdogSeconds)||watchdogSeconds<1||watchdogSeconds>STATIC_WATCHDOG_SECONDS))fail('静态扫描时限无效');
+ if(!TOOLS.includes(tool))fail('扫描器无效');
+ const installed=manifest?.tools?.find(row=>row.tool===tool);if(!/^sha256:[a-f0-9]{64}$/.test(installed?.imageId||''))fail('扫描器尚未安装或摘要未确认');
+ const args=['-n','/usr/bin/docker','run','--rm','--pull','never','--log-driver','none','--name','dsh-sec-'+runDir.split('/').pop(),'--label','personal.harness.security=true','--cpus','1','--memory',tool==='zap'?'1100m':'768m','--pids-limit','160','--cap-drop','ALL','--security-opt','no-new-privileges','--read-only','--user','1000:1000','--mount','type=bind,src='+profile.repoRoot+',dst=/src,readonly','--mount','type=bind,src='+fileURLToPath(new URL('../../scripts/security-output.sh',import.meta.url))+',dst=/policy-output.sh,readonly'];
+ if(tool==='zap')args.push('--tmpfs','/tmp:rw,nosuid,size=268435456','--mount','type=bind,src='+runDir+',dst=/input,readonly');
+ else args.push('--memory-swap','768m','--tmpfs','/tmp:rw,nosuid,nodev,noexec,size=268435456,mode=1777');
+ let command;
+ if(tool==='semgrep'){
+  args.push('--network','none','--mount','type=bind,src='+join(runDir,'semgrep-rules.json')+',dst=/policy/rules.json,readonly','--env','SEMGREP_SEND_METRICS=off','--env','SEMGREP_ENABLE_VERSION_CHECK=0','--env','HOME=/tmp');
+  command=['semgrep','scan','--config','/policy/rules.json','--json','--output','/out/result.json','--metrics=off','--disable-version-check','--jobs','1','--timeout','5','--max-target-bytes','1000000','/src'];
+ }else if(tool==='trivy'){
+  args.push('--network','none','--mount','type=bind,src='+join(runDir,'trivy-db')+',dst=/tmp/trivy/db,readonly',);
+  command=['trivy','filesystem','--cache-dir','/tmp/trivy','--cache-backend','memory','--skip-db-update','--skip-java-db-update','--skip-check-update','--offline-scan','--include-dev-deps','--scanners','vuln,misconfig,secret',...trivySkipFiles,'--format','json','--output','/out/result.json','/src'];
+ }else{
+  if(!profile.url)fail('请先配置已授权的VM本地URL');args.push('--network','host','--workdir','/zap/wrk','--tmpfs','/home/zap/.ZAP:rw,uid=1000,gid=1000,size=67108864','--env','HOME=/tmp','--env','JAVA_OPTS=-Xmx640m');
+  command=['zap-baseline.py','--autooff','--hook','/input/loopback-hook.py','-t',profile.url,'-n','/input/scope.context','-m','1','-T','3','-P','49090','-J','result.json','-z','-silent -Xmx640m -dir /tmp/zap -host 127.0.0.1 -config autoupdate.checkOnStart=false'];
+ }
+ const output=tool==='zap'?'/zap/wrk':'/out';args.push('--tmpfs',output+':rw,nosuid,nodev,noexec,size=67108864,uid=1000,gid=1000,mode=0700','--entrypoint','/bin/sh',installed.imageId,'/policy-output.sh',output,...(tool==='zap'?[]:['--deadline-seconds',String(watchdogSeconds)]),...command);return{outputQuotaBytes:67108864,executable:'/usr/bin/sudo',args,outputFile:join(runDir,'result.json'),containerName:'dsh-sec-'+runDir.split('/').pop(),version:installed.version||'未确认',coverageKey:digest([tool,installed.imageId,manifest.rulesSha256,manifest.database?.digest||null,profile.repoRoot,tool==='zap'?profile.url:null,...(tool==='semgrep'?['parser-text-1']:[]),...(tool==='trivy'?['package-identity-1',TRIVY_INPUT_POLICY,TRIVY_DEPENDENCY_SCOPE]:[]),...(tool==='zap'?['pinned-addons-1']:[]),...(tool==='zap'&&profile.authProfile?['private-session-1',profile.authProfile,authPolicy?.revision||'unverified']:[])])};
+}
+
+
+
+WORKBENCH complete functions
+async function runScanner(tool,profile,{signal,runDir,revisionRef:pinnedRevision,admissionIdentity,deadlineMonotonic,workspaceMode,ruleProfile}){
+ const rootIdentity=lstatSync(profile.repoRoot);if(!rootIdentity.isDirectory()||rootIdentity.isSymbolicLink()||realpathSync(profile.repoRoot)!==profile.repoRoot)throw Object.assign(Error('仓库目录已变化'),{code:'SCAN_SCOPE_CHANGED'});
+ const deadline=Math.min(performance.now()+240000,deadlineMonotonic??Infinity),auth=tool==='zap'&&profile.authProfile?readZapAuthProfile(profile.authProfile,profile.url):null;
+ const before=auth?await verifyZapSession(auth,{signal,timeoutMs:Math.min(3000,deadline-performance.now())}):null;
+ const baseManifest=manifestOf();
+ if(tool!=='zap')assertStaticAdmission(tool,baseManifest,admissionIdentity,installedSecurityTools({force:true})[tool]);
+ const manifest=tool==='semgrep'?selectSemgrepManifest(baseManifest,workspaceMode,ruleProfile):baseManifest;
+ signal.throwIfAborted();
+ mkdirSync(runDir,{recursive:true,mode:0o700});
+ let stagedInputs=false,stagedRules;
+ const sessionPath=join(runDir,'.session.json');let privateCopy=false;
+ let termination,launch;
+ const stopContainer=()=>termination||(termination=tool!=='zap'?removeStaticScan(launch.container):new Promise(resolveStop=>{
+  const child=spawn('/usr/bin/sudo',['-n','/usr/bin/docker','stop','--time','3',launch.container],{stdio:'ignore'});
+  const timer=setTimeout(()=>{child.kill('SIGKILL');resolveStop(false)},8000);
+  child.once('error',()=>{clearTimeout(timer);resolveStop(false)});
+  child.once('close',code=>{clearTimeout(timer);resolveStop(code===0)});
+ }));
+ let bytes=0,timedOut=false,overflow=false,exit,chunks=[],envelope;
+ try{
+  if(tool==='semgrep')stagedRules=stageSemgrepRules(ROOT,runDir,manifest.rulesSha256,ruleProfile);
+  if(tool==='trivy')stageTrivyDatabase(ROOT,runDir,manifest.database);
+  stagedInputs=tool!=='zap';
+  const watchdogSeconds=deadlineMonotonic===undefined?STATIC_WATCHDOG_SECONDS:Math.min(STATIC_WATCHDOG_SECONDS,Math.floor((deadline-performance.now()-STATIC_CREATE_TIMEOUT_MS)/1000));
+  const checkDeadline=()=>{if(performance.now()>=deadline)throw Object.assign(Error('扫描预算到期'),{code:'SCAN_TIMEOUT'})};
+  if(watchdogSeconds<1)throw Object.assign(Error('剩余预算不足以安全启动扫描'),{code:'SCAN_BUDGET_TOO_SHORT'});
+  const plan=buildScanPlan(tool,profile,runDir,manifest,auth,watchdogSeconds);
+  if(tool==='zap'){
+   writeFileSync(join(runDir,'scope.context'),buildZapContext(profile.url,auth?.excludePaths??[]),{mode:0o600});
+   writeFileSync(join(runDir,'loopback-hook.py'),buildZapHook(!!auth),{mode:0o600});
+   if(auth){
+    const {secretValues,...config}=auth,fd=openSync(sessionPath,constants.O_WRONLY|constants.O_CREAT|constants.O_EXCL|constants.O_NOFOLLOW,0o600);privateCopy=true;
+    try{writeFileSync(fd,JSON.stringify(config))}finally{closeSync(fd)}
+   }
+  }
+  signal.throwIfAborted();
+  launch=prepareScanLaunch(tool,plan);
+  if(performance.now()>=deadline){stopContainer();checkDeadline()}
+  exit=await new Promise((done,reject)=>{
+   const child=spawn(plan.executable,launch.args,{stdio:['ignore','pipe','pipe'],env:{PATH:'/usr/bin:/bin',HOME:'/home/purge',LANG:'C.UTF-8'}});
+   const terminate=()=>{stopContainer();child.kill('SIGTERM')};
+   const timer=setTimeout(()=>{timedOut=true;terminate()},Math.max(1,deadline-performance.now()));
+   const abort=()=>terminate();signal.addEventListener('abort',abort,{once:true});if(signal.aborted)abort();
+   const cleanup=()=>{clearTimeout(timer);signal.removeEventListener('abort',abort)};
+   const consume=chunk=>{bytes+=chunk.length;if(bytes>SCAN_ENVELOPE_BYTES&&!overflow){overflow=true;terminate()}};
+   child.stdout.on('data',chunk=>{consume(chunk);if(!overflow)chunks.push(chunk)});child.stderr.on('data',consume);
+   child.once('error',()=>{cleanup();if(tool!=='zap')stopContainer();reject(Object.assign(Error('扫描进程未能启动'),{code:'SCAN_SPAWN'}))});
+   child.once('close',async code=>{cleanup();if(termination&&!await termination)reject(Object.assign(Error('容器停止未确认，请先检查VM运行状态'),{code:'STOP_UNCONFIRMED'}));else done(code)});
+  });
+  if(tool!=='zap'&&exit!==0)stopContainer();
+  if(signal.aborted)throw Error('已取消');if(timedOut)throw Object.assign(Error('扫描超时'),{code:'SCAN_TIMEOUT'});if(overflow)throw Object.assign(Error('输出超出上限'),{code:'SCAN_OUTPUT_LIMIT'});
+  if(tool!=='zap'&&exit===124)throw Object.assign(Error('扫描容器达到独立时限'),{code:'SCAN_CONTAINER_TIMEOUT'});
+  if(exit===137)throw Object.assign(Error('扫描被内存上限终止'),{code:'SCAN_MEMORY_LIMIT'});
+  if(exit===73)throw Object.assign(Error('结果超出上限'),{code:'SCAN_OUTPUT_LIMIT'});
+  const output=Buffer.concat(chunks);
+  if(tool==='zap'){
+   try{envelope=JSON.parse(output.toString('utf8'))}
+   catch{throw Object.assign(Error('扫描结果未确认'),{code:'SCAN_OUTPUT_INVALID'})}
+  }else envelope=decodeStaticScanEnvelope(output);
+  const accepted=tool==='zap'?[0,1,2]:[0];if(auth&&!accepted.includes(exit)&&!envelope?.authentication?.before)throw Object.assign(Error('认证扫描未确认'),{code:'AUTH_VERIFY'});if(!accepted.includes(exit))throw Object.assign(Error('扫描未完成'),{code:exit===137?'SCAN_MEMORY_LIMIT':'SCAN_EXIT_FAILURE'});
+  if(!envelope?.result||typeof envelope.result!=='object'||Array.isArray(envelope.result)||Object.keys(envelope).sort().join(',')!=='authentication,result')throw Error('结果文件无效');
+  const raw=envelope.result,parsed=parseScanOutput(tool,raw,auth?.secretValues??[]);
+  if(tool==='semgrep'&&!parsed.complete){
+   const supplement=supplementParserGaps(profile.repoRoot,raw.errors,{signal,deadline,identity:rootIdentity});parsed.supplemental=supplement.summary;parsed.findings.push(...supplement.findings);
+   if(parsed.findings.length>2000){parsed.findings=parsed.findings.slice(0,2000);const d=parsed.diagnostics;d.total++;d.items=[{code:'finding-limit-2000',path:'',line:null},...d.items].slice(0,20);d.truncated=d.total>d.items.length}
+  }
+  if(auth){
+   let after=null;try{after=await verifyZapSession(auth,{signal,timeoutMs:Math.min(3000,deadline-performance.now())})}catch(error){if(signal.aborted)throw error}
+   const proof=envelope.authentication,matched=proof?.version===1&&proof?.revision===auth.revision;
+   parsed.authentication={version:1,profile:profile.authProfile,revision:auth.revision,before:before?.verified===true,after:after?.verified===true,scannerBefore:matched&&proof.before===true,scannerAfter:matched&&proof.after===true,checkedRequests:matched&&proof.checkedRequests===2?2:0};
+  }
+  let revisionRef=pinnedRevision??'工作区未确认';if(pinnedRevision===undefined)try{revisionRef=execFileSync('/usr/bin/git',['-C',profile.repoRoot,'rev-parse','HEAD'],{timeout:3000,encoding:'utf8'}).trim()}catch{}
+  if(deadlineMonotonic!==undefined)checkDeadline();
+  return{...parsed,coverageKey:plan.coverageKey,version:plan.version,revisionRef,...(stagedRules?{executedRules:{sha256:stagedRules.sha256,count:stagedRules.count}}:{}),...(ruleProfile?{ruleProfile}:{}),...(tool==='trivy'?{inputPolicy:TRIVY_INPUT_POLICY,dependencyScope:TRIVY_DEPENDENCY_SCOPE}:{})};
+ }finally{
+  const stopUnconfirmed=termination&&!await termination;
+  if(stagedInputs)try{clearStaticScanInputs(runDir)}catch{if(!stopUnconfirmed)throw Object.assign(Error('静态扫描输入清理未确认'),{code:'SCAN_STAGE_CLEANUP'})}
+  if(privateCopy)try{unlinkSync(sessionPath)}catch(error){if(error.code!=='ENOENT'&&!stopUnconfirmed)throw Object.assign(Error('私有会话副本清理未确认'),{code:'AUTH_CLEANUP'})}
+  if(stopUnconfirmed)throw Object.assign(Error('容器停止未确认'),{code:'STOP_UNCONFIRMED'});
+ }
+}
+
+
+
+WORKBENCH complete start/result persistence
+ start(eng,input,jointContext=null){
+  only(input,['requestId','profileRevision','tool','retestFindingId']);const db=this.db(eng),id=requestId(input.requestId),hash=digest(input),previous=db.prepare('SELECT * FROM security_run WHERE request_id=?').get(id);if(previous){if(previous.request_hash!==hash)fail('重复请求内容不同');return{id:previous.id,state:previous.state}}
+  if(this.runtimeUI.transitionBusy())fail('应用启动或停止尚未确认，请先核对原请求');if(this.disposed)fail('工作台正在关闭');if(this.blocked)fail('上次容器停止未确认，请检查VM运行状态后重启入口');if(this.active||this.joint.active&&jointContext!==this.joint.active)fail('任务正在运行，请等待或取消');const profile=this.profile(db);
+  if(!profile||profile.revision!==input.profileRevision||Date.parse(profile.expiresAt)<=Date.now()||!profile.tools.includes(input.tool))fail('项目范围未授权、已过期或已变化');
+  const runtime=this.toolStatus({force:true})[input.tool];if(!runtime?.ready)fail(runtime?.reason||'扫描器或数据库未就绪');if(realpathSync(profile.repoRoot)!==profile.repoRoot)fail('仓库路径已变化');if(input.tool==='zap'&&!profile.url)fail('请先配置VM本地URL');
+  if(input.retestFindingId){const finding=db.prepare('SELECT * FROM security_finding WHERE id=?').get(numeric(input.retestFindingId));if(!finding||finding.tool!==input.tool||finding.status!=='fixed')fail('仅可复测本项目已记录修复的同类发现')}
+  const managed=jointContext&&jointContext===this.joint.active?jointContext:null;
+  if(managed?.data.workspace&&runtime.admissionIdentity!==managed.data.workspace.toolIdentities[input.tool])fail('安全工作区子扫描工具身份与原计划不匹配');
+  const ruleProfile=managed?.data.workspace&&input.tool==='semgrep'?managed.data.workspace.ruleProfiles?.semgrep:undefined;
+  if(managed?.data.workspace&&input.tool==='semgrep'&&(managed.data.workspace.mode!=='deep'||!validDeepSemgrepProfile(ruleProfile)||runtime.deepRules?.ready!==true||!validDeepSemgrepProfile(runtime.deepRules?.profile)||runtime.rules?.sha256!==ruleProfile.baseRulesSha256))fail('安全工作区 Semgrep 规则与模式身份未确认');
+  const executionProfile=managed?{...profile,repoRoot:managed.data.snapshot.sourceRoot}:profile;
+  const runId=randomUUID(),details={profile,version:runtime.version,runtime:{checkedAt:runtime.checkedAt||null,database:runtime.database||null,rules:runtime.rules||null,warning:runtime.warning||null},retestFindingId:input.retestFindingId||null,...(managed?{joint:{id:managed.id,snapshotId:managed.data.snapshot.id,git:managed.data.snapshot.git}}:{})};
+  if(ruleProfile){details.runtime.requestedRuleProfile=ruleProfile;details.runtime.baseRules=runtime.rules}
+  if(managed&&input.tool==='trivy')details.inputRedaction={scope:'managed-copy',redactedFiles:managed.data.snapshot.redactedFiles,excludedEntries:managed.data.snapshot.excluded.total,originalSecretCoverage:'not-proven'};
+  db.prepare('INSERT INTO security_run(id,request_id,request_hash,tool,profile_revision,state,started_at,details) VALUES(?,?,?,?,?,?,?,?)').run(runId,id,hash,input.tool,profile.revision,'running',stamp(),JSON.stringify(details));
+  const controller=new AbortController();this.active={id:runId,eng,controller};
+  const promise=Promise.resolve().then(()=>{controller.signal.throwIfAborted();return this.disposed?null:this.runner(input.tool,executionProfile,{signal:controller.signal,runDir:join(this.store.dirOf(eng),'runs','security',runId),admissionIdentity:runtime.admissionIdentity,...(ruleProfile?{ruleProfile,workspaceMode:managed.data.workspace.mode}:{}),...(managed?{revisionRef:managed.data.snapshot.git.head??'未记录'}:{}),...(managed?.data.workspace?{deadlineMonotonic:managed.deadlineMonotonic}:{})})}).then(result=>{
+   if(this.disposed)return;
+   if(managed?.data.workspace&&performance.now()>=managed.deadlineMonotonic)throw Object.assign(Error('扫描预算到期'),{code:'SCAN_TIMEOUT'});
+   if(controller.signal.aborted){db.prepare("UPDATE security_run SET state='cancelled',finished_at=? WHERE id=?").run(stamp(),runId);return}
+   if(!result||!Array.isArray(result.findings)||typeof result.complete!=='boolean'||typeof result.coverageKey!=='string')fail('扫描回执无效');
+   if(!ruleProfile&&result.ruleProfile!==undefined)fail('旧入口返回了额外规则回执');
+   if(ruleProfile){if(!validDeepSemgrepProfile(result.ruleProfile)||!result.executedRules||typeof result.executedRules!=='object'||Array.isArray(result.executedRules)||Object.keys(result.executedRules).sort().join(',')!=='count,sha256'||result.executedRules.sha256!==ruleProfile.rulesSha256||result.executedRules.count!==ruleProfile.ruleCount||!/^[a-f0-9]{64}$/.test(result.coverageKey))fail('Semgrep 规则执行回执未确认');details.runtime.executedRules=result.executedRules;details.runtime.ruleProfile=result.ruleProfile;details.runtime.rules={...(runtime.rules??{}),version:ruleProfile.id,sha256:ruleProfile.rulesSha256,count:ruleProfile.ruleCount}}
+   if(managed){
+    if(input.tool==='zap'){
+     const scoped=value=>{try{const u=new URL(value);return u.origin===profile.url&&!u.username&&!u.password&&!u.hash}catch{return false}};
+     if(!profile.url||result.findings.some(f=>!scoped(f.location))||(result.coverageFiles??[]).some(f=>!scoped(f)))fail('HTTP观察超出已授权本地网址');
+     result={...result,findings:result.findings.map(f=>{const u=new URL(f.location);return{...f,location:u.origin+u.pathname}})};
+    }else{const admitted=new Set(managed.data.snapshot.files.map(f=>f.path));if(result.findings.some(f=>!admitted.has(String(f.location).replace(/:\d+$/,'')))||(result.coverageFiles??[]).some(f=>!admitted.has(f)))fail('扫描结果超出联合项目副本文件集合')}
+   }
+   if(input.tool==='zap'&&profile.authProfile){result=authenticatedResult(profile,result);details.authentication=result.authentication}
+   if(managed&&input.tool==='semgrep'){
+    const bound=bindSemgrepSourceLocations(managed.data.snapshot,result.findings);
+    result={...result,findings:bound.findings};details.sourceLocations=bound.summary;
+   }
+   if(managed?.data.workspace&&input.tool==='semgrep'){
+    try{const evidence=this.pythonEvidence(managed.data.snapshot,result.findings,managed.deadlineMonotonic);if(evidence)details.pythonEvidence=evidence}
+    catch{details.pythonEvidence={state:'unavailable',artifacts:[]}}
+   }
+   if(result.supplemental!==undefined){if(input.tool!=='semgrep'||result.complete||!validParserTextSummary(result.supplemental))fail('文本补查回执无效');details.supplemental={...result.supplemental}}
+   db.exec('SAVEPOINT security_results');try{
+    const seen=new Set(),normalized=[];let executionPoints=0;for(const raw of result.findings){const item={rule:clean(raw.rule,240),title:clean(raw.title,400),severity:clean(raw.severity,20),location:clean(raw.location,800),evidence:clean(raw.evidence),subject:normalizeSubject(raw.subject),...(managed&&input.tool==='semgrep'?{sourceLocation:raw.sourceLocation}:{})};if(!item.rule||!item.location)fail('发现记录无效');normalized.push({rule:item.rule,title:item.title,severity:item.severity,location:item.location,subject:item.subject});const fingerprint=digest([input.tool,profile.repoRoot,input.tool==='zap'?profile.url:null,item.rule,item.location,...(item.subject?['package-identity-1',item.subject.key]:[])]);seen.add(fingerprint);const old=db.prepare('SELECT * FROM security_finding WHERE fingerprint=?').get(fingerprint);
+     if(managed?.data.workspace&&input.tool==='semgrep'){const observation=ruleObservation(input.tool,item.rule);if(observation){item.observation=observation;executionPoints++}}
+     if(managed){db.prepare('INSERT INTO security_joint_finding VALUES(?,?,?)').run(runId,normalized.length,JSON.stringify({...item,tool:input.tool,status:'unverified'}));continue}
+     if(old){const status=['fixed','retest-passed'].includes(old.status)?'reopened':old.status;db.prepare('UPDATE security_finding SET title=?,severity=?,evidence=?,status=?,last_run=?,coverage_key=?,revision=revision+1 WHERE id=?').run(item.title,item.severity,item.evidence,status,runId,result.coverageKey,old.id);if(status!==old.status)this.event(db,'reopen-'+randomUUID(),'finding',old.id,{from:old.status,to:status,runId})}
+     else db.prepare('INSERT INTO security_finding(fingerprint,tool,rule,title,severity,location,evidence,status,first_run,last_run,coverage_key) VALUES(?,?,?,?,?,?,?,?,?,?,?)').run(fingerprint,input.tool,item.rule,item.title,item.severity,item.location,item.evidence,'unverified',runId,runId,result.coverageKey);
+     const storedId=old?.id??db.prepare('SELECT id FROM security_finding WHERE fingerprint=?').get(fingerprint).id;
+     db.prepare('INSERT INTO security_finding_subject(finding_id,data) VALUES(?,?) ON CONFLICT(finding_id) DO UPDATE SET data=excluded.data').run(storedId,JSON.stringify(item.subject));
+    }
+    if(managed?.data.workspace&&input.tool==='semgrep')details.observationSummary={version:1,total:normalized.length,executionPoints,other:normalized.length-executionPoints};
+    if(input.retestFindingId){
+     const rawOld=db.prepare('SELECT * FROM security_finding WHERE id=?').get(input.retestFindingId),old=rawOld&&decorateFinding(db,rawOld),fileOf=value=>value.replace(/:\d+$/,'');
+     const identified=old&&(old.tool!=='trivy'||old.identityVersion===1);
+     const present=old&&normalized.some(item=>item.rule===old.rule&&fileOf(item.location)===fileOf(old.location)&&(old.subject?item.subject?.family===old.subject.family:!item.subject));
+     const covered=old&&Array.isArray(result.coverageFiles)&&result.coverageFiles.includes(fileOf(old.location));
+     const next=old?.status==='fixed'&&identified?(present?'reopened':result.complete&&covered&&old.coverage_key===result.coverageKey?'retest-passed':null):null;
+     if(next){db.prepare('UPDATE security_finding SET status=?,revision=revision+1,last_run=? WHERE id=?').run(next,runId,old.id);this.event(db,'retest-'+randomUUID(),'finding',old.id,{from:old.status,to:next,runId})}
+     details.retestOutcome=next||(!identified?'旧Trivy记录缺少依赖包身份，不能自动推断复测结论，保留原状态':'尚未证明原位置已被完整复测，保留原状态');
+    }
+    const snapshot=result.complete?createScanSnapshot(normalized,Array.isArray(result.coverageFiles)?result.coverageFiles.map(file=>clean(file,800)):undefined):null;
+    details.comparisonSnapshot={available:snapshot!==null,reason:snapshot===null?'未提供完整、有界的扫描快照':null};
+    if(snapshot!==null)db.prepare('INSERT INTO security_run_snapshot(run_id,data) VALUES(?,?)').run(runId,snapshot);
+    if(input.tool==='trivy'&&result.inputPolicy===TRIVY_INPUT_POLICY)details.inputPolicy=TRIVY_INPUT_POLICY;
+    if(input.tool==='trivy'&&result.dependencyScope===TRIVY_DEPENDENCY_SCOPE)details.dependencyScope=TRIVY_DEPENDENCY_SCOPE;
+    details.coveredFiles=Array.isArray(result.coverageFiles)?result.coverageFiles.length:0;
+    if(input.tool==='semgrep')details.fileCoverage=semgrepFileCoverage(result.coverageFiles,managed?.data.snapshot,runtime.rules);
+    if(result.diagnostics){const d=result.diagnostics;if(!Number.isSafeInteger(d.total)||d.total<0||!Array.isArray(d.items)||d.items.length>20||d.items.length>d.total||typeof d.truncated!=='boolean'||d.items.some(v=>!v||typeof v.code!=='string'||!/^([A-Za-z][A-Za-z0-9 _-]{0,79})$/.test(v.code)||typeof v.path!=='string'||v.path.length>400||!(v.line===null||Number.isSafeInteger(v.line)&&v.line>0)))fail('扫描诊断结构无效');details.diagnostics={total:d.total,items:d.items.map(v=>({code:v.code,path:clean(v.path,400),line:v.line})),truncated:d.truncated}}
+    db.prepare('UPDATE security_run SET details=? WHERE id=?').run(JSON.stringify(details),runId);
+    db.prepare('UPDATE security_run SET state=?,finished_at=?,complete=?,coverage_key=?,revision_ref=? WHERE id=?').run(result.complete?'completed':'partial',stamp(),Number(result.complete),result.coverageKey,clean(result.revisionRef||'未记录',100),runId);db.exec('RELEASE security_results');
+   }catch(error){db.exec('ROLLBACK TO security_results;RELEASE security_results');throw error}
+  }).catch(error=>{
+   if(error?.code==='STOP_UNCONFIRMED')this.blocked=true;
+   const messages={SCAN_STAGE_CLEANUP:'静态扫描输入清理未确认；请检查 VM 任务目录',SCAN_S1_IDENTITY:'未启动扫描：扫描器、规则或数据库身份无法确认；所选范围未检查',SCAN_S1_UNAVAILABLE:'未启动扫描：S1 隔离条件不可用；所选范围未检查',SCAN_SCOPE_CHANGED:'仓库目录已变化；请重新核对项目范围',AUTH_PROFILE:'私有认证配置不可用、已过期或与本地范围不匹配',AUTH_VERIFY:'认证状态未确认，扫描未完成',AUTH_CLEANUP:'私有会话副本清理未确认，请检查VM运行目录',STOP_UNCONFIRMED:'容器停止未确认，请检查VM运行状态',SCAN_SPAWN:'扫描进程未能启动',SCAN_CREATE_UNCONFIRMED:'容器创建未确认，未发送启动命令；所选范围未检查',SCAN_BUDGET_TOO_SHORT:'剩余预算不足以安全启动静态扫描；所选范围未检查',SCAN_TIMEOUT:'扫描达到运行时限',SCAN_CONTAINER_TIMEOUT:'静态扫描容器达到独立时限；未收录该次结果',SCAN_OUTPUT_LIMIT:'扫描结果超过8MiB读取上限或输出空间限制',SCAN_PARSE_LIMIT:'扫描结果超过解析结构上限；未收录发现或覆盖结论',SCAN_OUTPUT_INVALID:'扫描结果格式无法确认；未收录发现或覆盖结论',SCAN_MEMORY_LIMIT:'扫描被内存上限终止',SCAN_EXIT_FAILURE:'扫描器返回失败，请检查VM本地运行记录'};
+   if(!this.disposed)db.prepare('UPDATE security_run SET state=?,finished_at=?,error_code=? WHERE id=?').run(controller.signal.aborted&&!this.blocked?'cancelled':'failed',stamp(),this.blocked?messages.STOP_UNCONFIRMED:controller.signal.aborted?'任务已取消':messages[error?.code]||'扫描结果未完成或格式无效',runId)
+  }).finally(()=>{if(this.active?.id===runId)this.active=null});
+  this.active.promise=promise;return{id:runId,state:'running'};
+ }
+
+CLIENT validation and plan
+ const validWorkspaceRules=(workspace,tools=[])=>{
+  if(!workspace)return true;
+  if(workspace.ruleProfiles===undefined)return !(workspace.version==='workspace-dispatch-s1-2'&&workspace.mode==='deep'&&tools.includes('semgrep'));
+  return workspace.mode==='deep'&&tools.includes('semgrep')&&workspace.ruleProfiles&&typeof workspace.ruleProfiles==='object'&&!Array.isArray(workspace.ruleProfiles)&&Object.keys(workspace.ruleProfiles).length===1&&validDeepSemgrepProfile(workspace.ruleProfiles.semgrep);
+ };
+ const validTask=(v,eng)=>v===null||v&&typeof v.id==='string'&&v.engagement===eng&&validWorkspaceRules(v.workspace,v.workspace?.selectedSteps)&&Object.hasOwn(states,v.state)&&Number.isSafeInteger(v.scopeRevision)&&Array.isArray(v.steps)&&v.steps.length<=6&&new Set(v.steps.map(s=>s?.tool)).size===v.steps.length&&v.steps.every(s=>s&&['semgrep','trivy','zap','kali','rea','pentagi'].includes(s.tool)&&Object.hasOwn(states,s.state)&&validStepCoverage(s)&&(!(s.sourceLocations||s.pythonEvidence||s.namespaceReview)||sha(v.snapshot?.id)&&typeof s.id==='string'&&!!s.id)&&(s.namespaceReview?.cleanupVerified!==false||v.cleanupVerified===false&&v.state==='unconfirmed'))&&count(v.findings)&&(v.modelCalls==null||count(v.modelCalls))&&(!v.snapshot||['files','bytes','excluded','redactedFiles'].every(k=>v.snapshot[k]===undefined||count(v.snapshot[k])))&&typeof v.cleanupVerified==='boolean';
+ const parse=(v,eng)=>{if(v?.ok!==true||v.engagement!==eng)throw Error(typeof v?.error==='string'?v.error:'联合回执未确认');return v};
+ return function JointPanel({engagement,profile}){
+  const [plan,setPlan]=React.useState(null),[task,setTask]=React.useState(null),[selected,setSelected]=React.useState([]),[busy,setBusy]=React.useState(false),[error,setError]=React.useState(''),[pending,setPending]=React.useState(false),[evidence,setEvidence]=React.useState(null),[locations,setLocations]=React.useState(null),alive=React.useRef(true),requesting=React.useRef(false);
+  React.useEffect(()=>{alive.current=true;return()=>{alive.current=false}},[]);
+  const key='dsh-joint-request-v1:'+encodeURIComponent(engagement);
+  const saved=()=>{const raw=storage().getItem(key);if(!raw)return null;const v=JSON.parse(raw);if(v?.engagement!==engagement||typeof v.requestId!=='string'||!/^[A-Za-z0-9_-]{8,100}$/.test(v.requestId))throw Error('联合恢复提示无效，请核对后台原任务');return v};
+  const accept=v=>{parse(v,engagement);if(!validTask(v.task,engagement))throw Error('联合任务回执与项目不匹配');if(alive.current)setTask(v.task);return v.task};
+  const perform=async operation=>{
+   if(requesting.current)return;requesting.current=true;if(alive.current){setBusy(true);setError('')}
+   try{await operation()}catch(e){if(alive.current)setError(String(e?.message||'联合结果未确认'))}finally{requesting.current=false;if(alive.current)setBusy(false)}
+  };
+  const refresh=(mode)=>perform(async()=>{
+   if(alive.current){setPlan(null);setSelected([])}
+   const next=parse(await api({op:'securityJoint',engagement,action:'plan',...(mode?{mode}:{})}),engagement);
+   if(!validWorkspaceRules(next.workspace,next.workspace?.availableSteps)||((next.workspace?.mode??undefined)!==mode))throw Error('联合检查模式未确认');
+   if(!Number.isSafeInteger(next.profileRevision)||!Array.isArray(next.availableSteps)||next.availableSteps.some(s=>!['semgrep','trivy','zap'].includes(s))||typeof next.kaliAllowed!=='boolean')throw Error('联合范围资料无效');
+   if(alive.current){setPlan(next);setSelected([...next.availableSteps.filter(s=>s!=='zap'),...(next.kaliAllowed?['kali']:[])])}
+   const original=saved(),result=await api({op:'securityJoint',engagement,action:'status',...(original?{requestId:original.requestId}:{})});if(original&&result?.task&&result.requestState!=='accepted')throw Error('原启动请求的受理状态未确认，恢复提示已保留');const current=accept(result);
+   if(original&&(current||result.requestState==='rejected'))storage().removeItem(key);if(alive.current){setPending(!!original&&!current&&result.requestState!=='rejected');if(result.requestState==='rejected')setError('原启动请求未受理：'+String(result.rejection??'请核对范围后重新提交'))}
+  });
+ 
+
+TEST deep-rule-profile.test.mjs
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import {createHash} from 'node:crypto';
+import * as runtimeApi from '../package/lib/redteam/personal-security-runtime.mjs';
+const {stageSemgrepRules}=runtimeApi;const selectSemgrepManifest=(...args)=>{assert.equal(typeof runtimeApi.selectSemgrepManifest,'function','Missing mode-bound manifest selection');return runtimeApi.selectSemgrepManifest(...args)};
+const profileUrl=new URL('../package/lib/redteam/personal-semgrep-profile.mjs',import.meta.url),bundleUrl=new URL('../package/scripts/semgrep-deep17.json',import.meta.url);const baseUrl=new URL('../security-rules.json',import.meta.url);const hash=v=>createHash('sha256').update(v).digest('hex');
+async function api(){assert.ok(fs.existsSync(profileUrl),'Missing mode-bound deep rule profile');return import(profileUrl)}
+test('deep rules are a fixed17 bundle preserving every baseline16 rule',async()=>{const m=await api(),p=m.deepSemgrepProfile();assert.equal(p.mode,'deep');assert.equal(p.ruleCount,17);assert.equal(p.baseRulesSha256,hash(fs.readFileSync(baseUrl)));assert.equal(p.rulesSha256,hash(fs.readFileSync(bundleUrl)));assert.equal(JSON.parse(fs.readFileSync(bundleUrl)).rules.length,17);assert.equal(new Set(JSON.parse(fs.readFileSync(bundleUrl)).rules.map(r=>r.id)).size,17);assert.deepEqual([...new Set(JSON.parse(fs.readFileSync(bundleUrl)).rules.flatMap(r=>r.languages))].sort(),[...new Set(JSON.parse(fs.readFileSync(baseUrl)).rules.flatMap(r=>r.languages))].sort());assert.ok(JSON.parse(fs.readFileSync(bundleUrl)).rules.every(r=>r.languages.every(l=>['python','javascript','typescript'].includes(l))));assert.deepEqual(JSON.parse(fs.readFileSync(bundleUrl)).rules.slice(0,16),JSON.parse(fs.readFileSync(baseUrl)).rules);assert.equal(p.qualification,'managed-candidate-not-r3');assert.ok(m.validDeepSemgrepProfile(p));for(const change of [{mode:'ordinary'},{rulesSha256:'f'.repeat(64)},{qualification:'R3'},{extra:true}])assert.equal(m.validDeepSemgrepProfile({...p,...change}),false)});
+test('only a matching deep workspace can select the pinned17 manifest',async()=>{const m=await api(),p=m.deepSemgrepProfile(),manifest={rulesSha256:p.baseRulesSha256,tools:[]};assert.deepEqual(selectSemgrepManifest(manifest,undefined,undefined),manifest);assert.equal(selectSemgrepManifest(manifest,'deep',p).rulesSha256,p.rulesSha256);for(const [mode,profile,base] of [[undefined,p,manifest],['deep',undefined,manifest],['deep',null,manifest],['ordinary',p,manifest],['deep',{...p,rulesSha256:'a'.repeat(64)},manifest],['deep',p,{...manifest,rulesSha256:'a'.repeat(64)}]])assert.throws(()=>selectSemgrepManifest(base,mode,profile),{code:'SCAN_S1_IDENTITY'})});
+test('staging pins exact17 bytes and rejects changed base or bundle without overwriting an existing stage',async()=>{const m=await api(),p=m.deepSemgrepProfile(),root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'deep-rule-stage-'))),runtime=path.join(root,'runtime'),run=path.join(root,'run'),bundle=path.join(root,'bundle');for(const dir of [runtime,run,bundle])fs.mkdirSync(dir,{mode:0o700});fs.copyFileSync(baseUrl,path.join(runtime,'rules.json'));fs.copyFileSync(bundleUrl,path.join(bundle,'semgrep-deep17.json'));try{const receipt=stageSemgrepRules(runtime,run,p.rulesSha256,p,bundle);assert.equal(receipt.sha256,p.rulesSha256);assert.equal(receipt.count,17);const staged=receipt.file;assert.equal(hash(fs.readFileSync(staged)),p.rulesSha256);assert.equal(fs.statSync(staged).mode&0o777,0o400);assert.throws(()=>stageSemgrepRules(runtime,run,p.rulesSha256,p,bundle),{code:'SCAN_S1_IDENTITY'});assert.equal(hash(fs.readFileSync(staged)),p.rulesSha256);fs.unlinkSync(staged);fs.appendFileSync(path.join(bundle,'semgrep-deep17.json'),' ');assert.throws(()=>stageSemgrepRules(runtime,run,p.rulesSha256,p,bundle),{code:'SCAN_S1_IDENTITY'});assert.equal(fs.existsSync(staged),false);fs.copyFileSync(bundleUrl,path.join(bundle,'semgrep-deep17.json'));fs.appendFileSync(path.join(runtime,'rules.json'),' ');assert.throws(()=>stageSemgrepRules(runtime,run,p.rulesSha256,p,bundle),{code:'SCAN_S1_IDENTITY'});assert.equal(fs.existsSync(staged),false)}finally{fs.rmSync(root,{recursive:true,force:true})}});
+
+test('runtime deep readiness hashes the shipped bundle before advertising it and invalidates cached evidence',async()=>{const m=await api(),p=m.deepSemgrepProfile(),root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'deep-readiness-'))),bundle=path.join(root,'bundle');fs.mkdirSync(bundle);const tools=['semgrep','trivy','zap'].map((tool,i)=>({tool,imageId:'sha256:'+String(i+1).repeat(64),imageRef:'personal-security/'+tool+'@sha256:'+String(i+1).repeat(64),version:'1.2.3'}));fs.writeFileSync(path.join(root,'images.json'),JSON.stringify({schemaVersion:1,rulesSha256:p.baseRulesSha256,tools}));fs.copyFileSync(baseUrl,path.join(root,'rules.json'));let imageMissing=false;const inspector=runtimeApi.createRuntimeInspector({root,ruleBundleRoot:bundle,inspectImages:()=>({available:true,images:tools.filter(t=>!imageMissing||t.tool!=='semgrep').map(t=>({id:t.imageId,architecture:'arm64',os:'linux'}))})});try{assert.equal(inspector.read().semgrep.deepRules?.ready,false);fs.copyFileSync(bundleUrl,path.join(bundle,'semgrep-deep17.json'));assert.equal(inspector.read().semgrep.deepRules?.ready,true);fs.appendFileSync(path.join(bundle,'semgrep-deep17.json'),' ');const stale=inspector.read();assert.equal(stale.semgrep.ready,true,'Legacy16 remains usable');assert.equal(stale.semgrep.deepRules?.ready,false);assert.equal(stale.semgrep.cached,false);fs.copyFileSync(bundleUrl,path.join(bundle,'semgrep-deep17.json'));imageMissing=true;assert.equal(inspector.read({force:true}).semgrep.deepRules.ready,false);imageMissing=false;const changed=Buffer.concat([fs.readFileSync(baseUrl),Buffer.from(' ')]);fs.writeFileSync(path.join(root,'rules.json'),changed);fs.writeFileSync(path.join(root,'images.json'),JSON.stringify({schemaVersion:1,rulesSha256:hash(changed),tools}));const alternate=inspector.read({force:true});assert.equal(alternate.semgrep.ready,true);assert.equal(alternate.semgrep.deepRules.ready,false)}finally{fs.rmSync(root,{recursive:true,force:true})}});
+
+test('the scan-plan coverage key preserves its pre-profile golden value and binds selected rule bytes',async()=>{const {buildScanPlan}=await import('../package/lib/redteam/personal-security-workbench.mjs'),p=(await api()).deepSemgrepProfile(),manifest={rulesSha256:p.baseRulesSha256,tools:[{tool:'semgrep',imageId:'sha256:'+'a'.repeat(64),version:'1.2.3'}]},key=m=>buildScanPlan('semgrep',{repoRoot:'/tmp/profile-project'},'/tmp/profile-run/00000000-0000-4000-8000-000000000001',m).coverageKey;assert.equal(key(manifest),'4dea051d3e13b552f40c4426105b03a82e23d81f1568d123f2e8e7a4cbfc2ec8');assert.notEqual(key(selectSemgrepManifest(manifest,'deep',p)),key(manifest));assert.notEqual(key({...manifest,rulesSha256:'f'.repeat(64)}),key(manifest))});
+
+
+TEST workspace-dispatch.test.mjs
+test('deep Semgrep selection binds the fixed profile to parent, child options and persisted runtime details',async()=>{const f=fixture();try{const m=await import('../package/lib/redteam/personal-semgrep-profile.mjs'),p=m.deepSemgrepProfile(),options=[];f.bench.runner=async(_tool,_root,o)=>{options.push(o);return{ruleProfile:o.ruleProfile,executedRules:o.ruleProfile&&{sha256:o.ruleProfile.rulesSha256,count:o.ruleProfile.ruleCount},complete:true,coverageKey:'c'.repeat(64),coverageFiles:['app.py'],findings:[]}};assert.deepEqual(f.bench.joint.plan(f.eng,{mode:'deep'}).workspace.ruleProfiles,{semgrep:p});const run=f.bench.joint.start(f.eng,start());assert.deepEqual(run.workspace.ruleProfiles,{semgrep:p});const done=await f.bench.joint.wait(f.eng,{id:run.id,waitSeconds:2});assert.equal(done.task.state,'completed');assert.deepEqual(options[0].ruleProfile,p);assert.equal(options[0].workspaceMode,'deep');const child=f.bench.db(f.eng).prepare('SELECT details FROM security_run WHERE id=?').get(done.task.steps[0].id);const details=JSON.parse(child.details);assert.deepEqual(details.runtime.ruleProfile,p);assert.equal(details.runtime.rules.sha256,p.rulesSha256);assert.equal(details.runtime.rules.count,17);const legacy=f.bench.start(f.eng,{requestId:'legacy-profile-0001',profileRevision:1,tool:'semgrep'});await f.bench.active.promise;assert.ok(legacy.id);assert.equal(options[1].ruleProfile,undefined);assert.equal(options[1].workspaceMode,undefined)}finally{await f.close()}});
+test('deep rule base mismatch is unavailable without silently dispatching the baseline',async()=>{const f=fixture();try{const read=f.bench.toolStatus;f.bench.toolStatus=()=>{const value=read();value.semgrep.rules={sha256:'f'.repeat(64)};return value};const plan=f.bench.joint.plan(f.eng,{mode:'deep'});assert.equal(plan.availableSteps.includes('semgrep'),false);assert.ok(plan.workspace.unavailableSteps.some(s=>s.tool==='semgrep'&&s.reason==='deep-rule-base-mismatch'));assert.throws(()=>f.bench.joint.start(f.eng,start()));assert.deepEqual(f.calls,[])}finally{await f.close()}});
+test('a deep profile changed after acceptance is rejected before handing off the source',async()=>{const f=fixture();try{const run=f.bench.joint.start(f.eng,start());assert.ok(f.bench.joint.active.data.workspace.ruleProfiles?.semgrep);f.bench.joint.active.data.workspace.ruleProfiles.semgrep.mode='ordinary';const done=await f.bench.joint.wait(f.eng,{id:run.id,waitSeconds:2});assert.equal(done.task.state,'failed');assert.equal(done.task.snapshot,null);assert.deepEqual(f.calls,[])}finally{await f.close()}});
+for(const change of [s=>delete s.rules,s=>s.rules=null,s=>s.deepRules={ready:false},s=>delete s.deepRules])test('deep preflight does not snapshot a source with missing baseline or bundle identity: '+change.toString(),async()=>{const f=fixture();try{const status=f.bench.toolStatus;f.bench.toolStatus=()=>{const v=status();change(v.semgrep);return v};assert.equal(f.bench.joint.plan(f.eng,{mode:'deep'}).availableSteps.includes('semgrep'),false);assert.throws(()=>f.bench.joint.start(f.eng,start()));assert.equal(fs.existsSync(path.join(f.store.dirOf(f.eng),'runs','joint')),false)}finally{await f.close()}});
+for(const receipt of [undefined,{mode:'ordinary'},{rulesSha256:'f'.repeat(64)}])test('unconfirmed executed rule receipt cannot persist a selected17 result: '+JSON.stringify(receipt),async()=>{const f=fixture();try{f.bench.runner=async()=>({complete:true,coverageKey:'forged',coverageFiles:['app.py'],findings:[{rule:'invented',location:'app.py:1'}],ruleProfile:receipt});const run=f.bench.joint.start(f.eng,start());const done=await f.bench.joint.wait(f.eng,{id:run.id,waitSeconds:2});assert.equal(done.task.state,'partial');assert.equal(done.task.steps[0].state,'failed');assert.equal(done.task.findings,0);assert.equal(f.bench.db(f.eng).prepare('SELECT COUNT(*) n FROM security_joint_finding').get().n,0);const d=JSON.parse(f.bench.db(f.eng).prepare('SELECT details FROM security_run WHERE id=?').get(done.task.steps[0].id).details);assert.equal(d.runtime.ruleProfile,undefined)}finally{await f.close()}});
+for(const change of [r=>r.executedRules.sha256=deepSemgrepProfile().baseRulesSha256,r=>r.executedRules.count=16,r=>delete r.executedRules,r=>r.coverageKey='legacy-key'])test('a valid planned profile cannot substitute for measured rule bytes and coverage identity: '+change.toString(),async()=>{const f=fixture();try{f.bench.runner=async(_t,_p,o)=>{const r={complete:true,coverageKey:'c'.repeat(64),coverageFiles:['app.py'],findings:[{rule:'invented',location:'app.py:1'}],ruleProfile:o.ruleProfile,executedRules:{sha256:o.ruleProfile.rulesSha256,count:17}};change(r);return r};const run=f.bench.joint.start(f.eng,start());const done=await f.bench.joint.wait(f.eng,{id:run.id,waitSeconds:2});assert.equal(done.task.state,'partial');assert.equal(done.task.steps[0].state,'failed');assert.equal(done.task.findings,0)}finally{await f.close()}});
+test('child admission rechecks deep bundle readiness after the parent check',async()=>{const f=fixture();try{let reads=0;const status=f.bench.toolStatus;f.bench.toolStatus=()=>{const r=status();if(++reads>=4)r.semgrep.deepRules.ready=false;return r};const run=f.bench.joint.start(f.eng,start());const done=await f.bench.joint.wait(f.eng,{id:run.id,waitSeconds:2});assert.equal(done.task.state,'failed');assert.deepEqual(f.calls,[]);assert.equal(f.bench.db(f.eng).prepare('SELECT COUNT(*) n FROM security_run').get().n,0)}finally{await f.close()}});
+test('legacy scan rejects an unexpected extra-rule receipt instead of recording it',async()=>{const f=fixture();try{f.bench.runner=async()=>({complete:true,coverageKey:'c'.repeat(64),coverageFiles:['app.py'],findings:[],ruleProfile:deepSemgrepProfile()});const run=f.bench.start(f.eng,{requestId:'legacy-stray-profile',profileRevision:1,tool:'semgrep'});await f.bench.active.promise;const row=f.bench.db(f.eng).prepare('SELECT state FROM security_run WHERE id=?').get(run.id);assert.equal(row.state,'failed')}finally{await f.close()}});
+
+
+PACKAGE files
+["lib", "!lib/default-prompt-inject.md", "bin", "docs", "presets", "scripts", "client.js", "cordis.patch.yml", "screenshots.json", "README.md", "README.zh-CN.md", "LICENSE", "NOTICE"]
+Changes: stage returns measured{file,sha256,count} from the actual bounded raw bytes written. Runner returns executedRules from that measurement; child validates exact fields/values and a64hex coverageKey before storing selected rules/findings. Snapshot comparison already binds key; golden actual buildScanPlan test preserves old pre-profile value and changes with selected rulesSHA. The injected runner is a test seam, not a registered external tool or untrusted plugin; signed remote execution attestation is outside scope. BaseRules explicit in details, only profile request before confirmation. Child readiness recheck added. Rule IDs share validator; inherited languages equal baseline proven. Actual final scan will run after native fulltests, prior VM actual22/2 test retained. Native UI only rule CONTRACT text, no false claim of executed counts for failed tasks. Tests include missing/changed executedSHA,wrongcount,missingreceipt,malformedkey,childreadinesschange,legacystrayreceipt,nullworkspace; npmoffline dryrun validates both new shipped files.

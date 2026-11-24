@@ -1,0 +1,9 @@
+Confirmed scoped defects:
+
+1. **Same-file wrong-line binding is accepted.** For v2, a `findingLocations` bound entry is checked only for: own file, `m.path===results[i].path`, `validPoint(m.point, files[m.path])`, and `m.pointId===m.point.id`. It never requires `m.point.call.start.line` to match `results[i].start.line`. `boundFinding()` then checks only `results[i].start.line===f.line`. So a valid execution point from another line in the same file passes. Repro: result line 1; `findingLocations[0]` bound to a valid point whose `call.start.line=99`; guard/plain finding line 1 with the same point ID. Current code completes and exposes a line-99 `executionPoint` against a line-1 finding. This bypasses the intended indexed binding for forged/malformed worker output. Given the pinned trusted worker, it is a scoped validation gap, not a live-acceptance blocker.
+
+2. **The missing-SHA test does not isolate the SHA check.** The second half of “Indexed mapping cannot bind another file or an absent source digest” deletes `sourceSha256` but also uses `path:'absent.py'`. Rejection occurs at `Object.hasOwn(files,m.path)` even if `validPoint`’s SHA requirement were removed. Use `sample.py` to actually test missing SHA on an existing source.
+
+3. **Import sink callee mismatch is untested, and the check is only leaf-qualified.** `e.sinkLocation.callee.split('.').at(-1)!==e.sink` accepts `pkg.eval` / `obj.exec` as sink `eval` / `exec`. If exact builtin callee is required, that is a false acceptance; if qualified callees are intended, the behavior should be tested. The import test mutations cover missing/invalid points and source SHA, not callee-vs-sink mismatch.
+
+Minor limitations: `plainStringEvidence` does not tie `executionLine` to `executionPoint.call.start.line`; duplicate same-file/rule/line results can cross-bind through `some()` because evidence rows carry no index. These are conservative remaining gaps, not claimed R3/live acceptance.

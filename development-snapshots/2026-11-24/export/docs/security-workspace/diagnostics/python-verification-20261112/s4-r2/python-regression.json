@@ -1,0 +1,54 @@
+[
+  {
+    "file": "scripts/reviewer_snapshot.test.py",
+    "exitCode": 0
+  },
+  {
+    "file": "scripts/reviewer_locations.test.py",
+    "exitCode": 0
+  },
+  {
+    "file": "scripts/reviewer_storage.test.py",
+    "exitCode": 0
+  },
+  {
+    "file": "scripts/reviewer_archive.test.py",
+    "exitCode": 0
+  },
+  {
+    "file": "scripts/python_execution_verify.test.py",
+    "exitCode": 0
+  },
+  {
+    "file": "scripts/verifier_snapshot.test.py",
+    "exitCode": 0
+  },
+  {
+    "file": "scripts/verify_execution_controller.test.py",
+    "exitCode": 0
+  },
+  {
+    "file": "scripts/eval_locations.test.py",
+    "exitCode": 0
+  },
+  {
+    "file": "scripts/eval_evidence_batch.test.py",
+    "exitCode": 0
+  },
+  {
+    "file": "scripts/eval_guard_review.test.py",
+    "exitCode": 0
+  },
+  {
+    "file": "scripts/eval_import_review.test.py",
+    "exitCode": 0
+  },
+  {
+    "file": "work/harness-purge-improved/tests/model-counts.test.py",
+    "exitCode": 0
+  },
+  {
+    "file": "work/harness-purge-improved/tests/joint-adapters.test.py",
+    "exitCode": 0
+  }
+]

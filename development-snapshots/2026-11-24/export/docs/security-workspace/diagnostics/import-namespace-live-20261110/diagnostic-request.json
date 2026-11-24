@@ -1,0 +1,168 @@
+{
+  "files": {
+    "case0/evaluator.py": {
+      "base64": "ZGVmIHJ1bih2YWx1ZSk6CiAgICByZXR1cm4gZXZhbCh2YWx1ZSwge30pCg==",
+      "sha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333"
+    },
+    "case1/evaluator.py": {
+      "base64": "ZGVmIHJ1bih2YWx1ZSk6CiAgICByZXR1cm4gZXZhbCh2YWx1ZSwge30sIHt9KQo=",
+      "sha256": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f"
+    },
+    "case2/evaluator.py": {
+      "base64": "ZGVmIHJ1bih2YWx1ZSk6CiAgICByZXR1cm4gZXhlYyh2YWx1ZSwge30pCg==",
+      "sha256": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8"
+    },
+    "case3/evaluator.py": {
+      "base64": "ZGVmIHJ1bih2YWx1ZSk6CiAgICByZXR1cm4gZXhlYyh2YWx1ZSwge30sIHt9KQo=",
+      "sha256": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00"
+    },
+    "case4/evaluator.py": {
+      "base64": "ZGVmIHJ1bih2YWx1ZSk6CiAgICByZXR1cm4gZXZhbCh2YWx1ZSwgc2NvcGUpCg==",
+      "sha256": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d"
+    },
+    "case5/evaluator.py": {
+      "base64": "ZGVmIHJ1bltldmFsXSh2YWx1ZSk6CiAgICByZXR1cm4gZXZhbCh2YWx1ZSwge30sIHt9KQo=",
+      "sha256": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2"
+    },
+    "case6/evaluator.py": {
+      "base64": "ZGVmIHJ1bltleGVjXSh2YWx1ZSk6CiAgICByZXR1cm4gZXhlYyh2YWx1ZSwge30pCg==",
+      "sha256": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7"
+    },
+    "case7/evaluator.py": {
+      "base64": "ZGVmIHJ1bih2YWx1ZSk6CiAgICByZXR1cm4gZXZhbCh2YWx1ZSwge30pCg==",
+      "sha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333"
+    },
+    "case8/evaluator.py": {
+      "base64": "ZGVmIHJ1bih2YWx1ZSk6CiAgICByZXR1cm4gZXZhbCh2YWx1ZSwge30pCg==",
+      "sha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333"
+    }
+  },
+  "results": [
+    {
+      "check_id": "policy.harness.python.dynamic-code-namespace",
+      "path": "case0/evaluator.py",
+      "start": {
+        "line": 2,
+        "col": 12,
+        "offset": 27
+      },
+      "end": {
+        "line": 2,
+        "col": 27,
+        "offset": 42
+      }
+    },
+    {
+      "check_id": "policy.harness.python.dynamic-code-namespace",
+      "path": "case1/evaluator.py",
+      "start": {
+        "line": 2,
+        "col": 12,
+        "offset": 27
+      },
+      "end": {
+        "line": 2,
+        "col": 31,
+        "offset": 46
+      }
+    },
+    {
+      "check_id": "policy.harness.python.dynamic-code-namespace",
+      "path": "case2/evaluator.py",
+      "start": {
+        "line": 2,
+        "col": 12,
+        "offset": 27
+      },
+      "end": {
+        "line": 2,
+        "col": 27,
+        "offset": 42
+      }
+    },
+    {
+      "check_id": "policy.harness.python.dynamic-code-namespace",
+      "path": "case3/evaluator.py",
+      "start": {
+        "line": 2,
+        "col": 12,
+        "offset": 27
+      },
+      "end": {
+        "line": 2,
+        "col": 31,
+        "offset": 46
+      }
+    },
+    {
+      "check_id": "policy.harness.python.dynamic-code-namespace",
+      "path": "case4/evaluator.py",
+      "start": {
+        "line": 2,
+        "col": 12,
+        "offset": 27
+      },
+      "end": {
+        "line": 2,
+        "col": 30,
+        "offset": 45
+      }
+    },
+    {
+      "check_id": "policy.harness.python.dynamic-code-namespace",
+      "path": "case5/evaluator.py",
+      "start": {
+        "line": 2,
+        "col": 12,
+        "offset": 33
+      },
+      "end": {
+        "line": 2,
+        "col": 31,
+        "offset": 52
+      }
+    },
+    {
+      "check_id": "policy.harness.python.dynamic-code-namespace",
+      "path": "case6/evaluator.py",
+      "start": {
+        "line": 2,
+        "col": 12,
+        "offset": 33
+      },
+      "end": {
+        "line": 2,
+        "col": 27,
+        "offset": 48
+      }
+    },
+    {
+      "check_id": "policy.harness.python.dynamic-code-namespace",
+      "path": "case7/evaluator.py",
+      "start": {
+        "line": 2,
+        "col": 12,
+        "offset": 27
+      },
+      "end": {
+        "line": 2,
+        "col": 27,
+        "offset": 42
+      }
+    },
+    {
+      "check_id": "policy.harness.python.dynamic-code-namespace",
+      "path": "case8/evaluator.py",
+      "start": {
+        "line": 2,
+        "col": 12,
+        "offset": 27
+      },
+      "end": {
+        "line": 2,
+        "col": 27,
+        "offset": 42
+      }
+    }
+  ]
+}

@@ -1,0 +1,291 @@
+FROZEN VM ACCEPTANCE SOURCE run.py
+from hashlib import sha256
+from pathlib import Path
+import ast
+import base64
+import importlib.util
+import json
+import re
+import sys
+import uuid
+
+root = Path(__file__).resolve().parent
+work = root.parents[1]
+repo = work.parent/'exports/deepseek-harness-vm'
+
+def module(path):
+    spec = importlib.util.spec_from_file_location(path.stem, path)
+    value = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(value)
+    return value
+
+
+def write(path, value):
+    path.write_text(json.dumps(value, indent=2) + '\n')
+
+
+def load(path):
+    return json.loads(path.read_bytes())
+
+
+def digest(raw):
+    return sha256(raw).hexdigest()
+
+
+def prepare():
+    data,sources,sites=module(work/'harness-r3-independent-acceptance-20261111/preflight-r2/inputs.py').build()
+    source='from flask import request\nimport builtins\ndef route():\n\tlabel="中文😀"\n\tvalue=request.args.get("value")\n\tif value in ("foo", "bar"):\n\t\teval(value)\n\texec(value); eval(value)\n\treturn (\n\t eval(\n\t  value\n\t )\n\t)\ndef nested(value):\n\treturn eval(eval(value))\ndef explicit(value):\n\treturn builtins.eval(value)\n'.replace('\n','\r\n')
+    sources['boundary.py']=source.encode()
+    files={'sources/'+n:raw for n,raw in sources.items()}
+    files['historical-dataset.json']=json.dumps(data,indent=2).encode()
+    names={'policy.json':'docs/security-workspace/review-quality-policy.candidate.json','ledger.json':'docs/security-workspace/review-sample-ledger.json','baseline-rules.json':'work/harness-purge-improved/security-rules.json','candidate-rules.json':'docs/security-workspace/ordinary-rules-combined.candidate.json','security-output.sh':'work/harness-purge-improved/package/scripts/security-output.sh'}
+    for n in ['reviewer_snapshot.py','reviewer_storage.py','review_quality_gate.mjs','eval_locations.test.py']:names['scripts/'+n]='scripts/'+n
+    for n in ['eval_evidence_batch.py','eval_guard_review.py','eval_import_review.py']:
+        names['reviewer-modules/'+n]='work/harness-purge-improved/package/scripts/'+n
+        names['work/harness-purge-improved/package/scripts/'+n]='work/harness-purge-improved/package/scripts/'+n
+    for n in ['review-locations-v3.test.mjs','review-quality-gate.test.mjs']:names['work/harness-purge-improved/tests/'+n]='work/harness-purge-improved/tests/'+n
+    names['work/harness-purge-improved/package/lib/redteam/personal-python-evidence.mjs']='work/harness-purge-improved/package/lib/redteam/personal-python-evidence.mjs'
+    files.update({n:(repo/path).read_bytes() for n,path in names.items()})
+    historical=load(repo/'docs/security-workspace/combined-rules-results.json')
+    identity={key:historical[key] for key in ['imageId','scannerVersion','candidateRulesSha256']};identity['baselineRulesSha256']=historical['baseRulesSha256']
+    identity['scannerArguments']=['--config','/policy/rules.json','--json','--output','/out/result.json','--metrics=off','--disable-version-check','--jobs','1','--timeout','5','--max-target-bytes','1000000','/src'];identity['scannerAdapterSha256']=digest(files['security-output.sh'])
+    files['scanner-identity.json']=json.dumps(identity).encode()
+    text=(work/'harness-workspace-bootstrap-20261110/stage-guest.py').read_text()
+    functions=[ast.get_source_segment(text,n) for n in ast.parse(text).body if isinstance(n,ast.FunctionDef) and n.name in {'digest','identity'}];assert len(functions)==2
+    files['identity-code.py']='\n\n'.join(functions).encode()
+    for n in ['score.mjs','managed-live.mjs']:files[n]=(root/n).read_bytes()
+    return {'checks':{n:digest(raw) for n,raw in files.items()},'files':{n:base64.b64encode(raw).decode() for n,raw in files.items()}}
+
+def launch(bridge):
+    intent = root/'vm-intent.json'
+    if intent.exists():
+        raise ValueError('Original request already exists. Query it before any retry.')
+    payload = prepare()
+    raw = json.dumps(payload)
+    worker = (root/'worker.py').read_text()
+    remote = '/home/purge/.cache/r3-independent-python-locations-'+uuid.uuid4().hex[:12]
+    write(intent, {'remoteRoot':remote,'inputSha256':digest(raw.encode()),'workerSha256':digest(worker.encode()),'files':payload['checks']})
+    (root/'vm-input.json').write_text(raw)
+    script = f'REMOTE={remote!r}\nWORKER={worker!r}\nPAYLOAD={raw!r}\n'+'''
+from pathlib import Path
+import json,os,subprocess
+os.umask(0o077)
+root=Path(REMOTE);root.mkdir(mode=0o700)
+assert root.resolve()==root and os.geteuid()==1000
+(root/'worker.py').write_text(WORKER);(root/'input.json').write_text(PAYLOAD)
+with (root/'worker.stdout').open('wb') as out,(root/'worker.stderr').open('wb') as err:
+ p=subprocess.Popen(['/usr/bin/timeout','--signal=TERM','--kill-after=5','360','/usr/bin/python3','-I','-B',str(root/'worker.py')],stdin=subprocess.DEVNULL,stdout=out,stderr=err,start_new_session=True,close_fds=True)
+print(json.dumps({'state':'submitted','pid':p.pid}))
+'''
+    answer = bridge.call(script, 20)
+    write(root/'vm-submitted.json', answer)
+    print(json.dumps(answer))
+
+
+def poll(bridge):
+    intent = load(root/'vm-intent.json')
+    remote = intent['remoteRoot']
+    assert re.fullmatch(r'/home/purge/\.cache/r3-independent-python-locations-[0-9a-f]{12}', remote)
+    script = f'REMOTE={remote!r}\n'+'''
+from pathlib import Path
+from hashlib import sha256
+import json
+root=Path(REMOTE)
+status=root/'status.json'
+value=json.loads(status.read_bytes()) if status.exists() else {'state':'not-yet-observed'}
+if value['state']=='completed':
+ raw=(root/'result.json').read_bytes()
+ assert sha256(raw).hexdigest()==value['resultSha256']
+ value['result']=raw.decode()
+print(json.dumps(value))
+'''
+    answer = bridge.call(script, 20)
+    if answer['state'] == 'completed':
+        raw = answer.pop('result').encode()
+        assert digest(raw) == answer['resultSha256']
+        result = json.loads(raw)
+        assert result['inputSha256'] == intent['inputSha256'] and result['sourcesVerified'] == intent['files']
+        (root/'vm-result.json').write_bytes(raw)
+        for name,text in result['artifacts'].items():
+            path = root/'guest-evidence'/name
+            assert path.is_relative_to(root/'guest-evidence') and '..' not in Path(name).parts
+            assert digest(text.encode()) == result['artifactSha256'][name]
+            path.parent.mkdir(parents=True,exist_ok=True)
+            path.write_text(text)
+    write(root/'vm-poll.json', answer)
+    print(json.dumps(answer))
+
+
+if __name__ == '__main__':
+    if sys.argv[1] == 'prepare':
+        print(json.dumps(prepare()['checks'], indent=2))
+    else:
+        {'launch':launch, 'poll':poll}[sys.argv[1]](module(root.parent/'vm-bridge.py'))
+
+FROZEN VM ACCEPTANCE SOURCE worker.py
+from datetime import datetime, timezone
+from hashlib import sha256
+from pathlib import Path
+import base64
+import importlib.util
+import json
+import os
+import re
+import sqlite3
+import subprocess
+import time
+import traceback
+
+root = Path(__file__).resolve().parent
+home = Path('/home/purge')
+daily = home / '.dsh-improved'
+installed = home / 'tools/dsh-purge-personal-1.1.77-personal.1'
+runtime = home / 'tools/harness-improved-runtime/node_modules'
+workbench = home / 'tools/security-workbench'
+node = str(home / '.local/node/bin/node')
+python = ['/usr/bin/python3', '-I', '-B', '-S']
+docker = ['/usr/bin/sudo', '-n', '/usr/bin/docker', '--host', 'unix:///var/run/docker.sock', '--config', str(root/'docker-config')]
+
+
+def write(name, value):
+    path = root / name
+    temp = path.with_suffix(path.suffix + '.tmp')
+    temp.write_text(json.dumps(value, indent=2) + '\n')
+    temp.replace(path)
+
+
+def load(name):
+    return json.loads((root / name).read_bytes())
+
+
+def run(argv, timeout=45, codes=(0,)):
+    output = subprocess.run(argv, cwd=root, timeout=timeout, stdin=subprocess.DEVNULL, capture_output=True)
+    if output.returncode not in codes:
+        raise ValueError(f'Command {Path(argv[0]).name} failed ({output.returncode}): {output.stderr[-2000:].decode(errors="replace")}')
+    return output
+
+
+def scan(name, rules, identity):
+    container = root.name + '-' + name
+    args = [*docker, 'run', '--rm', '--pull', 'never', '--name', container, '--network', 'none', '--read-only',
+            '--user', '1000:1000', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges', '--memory', '768m',
+            '--memory-swap', '768m', '--cpus', '1', '--pids-limit', '64', '--log-driver', 'none',
+            '--tmpfs', '/tmp:rw,nosuid,nodev,noexec,size=134217728,mode=1777',
+            '--tmpfs', '/out:rw,nosuid,nodev,noexec,size=16777216,uid=1000,gid=1000,mode=0700',
+            '--env', 'HOME=/tmp', '--env', 'SEMGREP_SEND_METRICS=off',
+            '--mount', f'type=bind,src={root / "sources"},dst=/src,readonly',
+            '--mount', f'type=bind,src={root / rules},dst=/policy/rules.json,readonly',
+            '--mount', f'type=bind,src={root / "security-output.sh"},dst=/policy-output.sh,readonly',
+            '--entrypoint', '/bin/sh', identity['imageId'], '/policy-output.sh', '/out', '--deadline-seconds', '60',
+            'semgrep', 'scan', *identity['scannerArguments']]
+    write(name+'-command.json', args)
+    try:
+        output = run(args, timeout=75)
+        (root / (name+'-stdout.json')).write_bytes(output.stdout)
+        (root / (name+'-stderr.txt')).write_bytes(output.stderr)
+    finally:
+        if run([*docker, 'ps', '-aq', '--filter', f'name=^/{container}$'], 10).stdout.strip():
+            raise ValueError('Diagnostic scanner container still present')
+    raw = json.loads(output.stdout)['result']
+    assert raw['version'] == identity['scannerVersion'] and raw['errors'] == []
+    assert set(raw['paths']['scanned']) == {'/src/'+x.name for x in (root/'sources').iterdir()}
+    write(name+'-scan.json', raw)
+
+
+def main():
+    assert os.geteuid()==1000 and root.resolve()==root
+    payload=load('input.json')
+    for name,encoded in payload['files'].items():
+        path=root/name;assert path.is_relative_to(root) and '..' not in Path(name).parts
+        path.parent.mkdir(mode=0o700,parents=True,exist_ok=True);data=base64.b64decode(encoded,validate=True)
+        assert sha256(data).hexdigest()==payload['checks'][name];path.write_bytes(data)
+    (root/'docker-config').mkdir(mode=0o700)
+    protected={};exec(compile((root/'identity-code.py').read_text(),'identity-code.py','exec'),globals(),protected)
+    identify=protected['identity'];globals()['digest']=protected['digest'];before=identify()
+    identity=load('scanner-identity.json')
+    actual=next(t for t in json.loads((workbench/'images.json').read_bytes())['tools'] if t['tool']=='semgrep')
+    assert actual['imageId']==identity['imageId']
+    assert run([*docker,'image','inspect','--format','{{.Id}}',identity['imageId']],10).stdout.decode().strip()==identity['imageId']
+    spec=importlib.util.spec_from_file_location('snapshot',root/'scripts/reviewer_snapshot.py');api=importlib.util.module_from_spec(spec);spec.loader.exec_module(api)
+    snapshot=api.freeze(root/'reviewer-modules',root/'snapshot',identity['imageId']);pin=api.digest(snapshot)
+    source_files={p.name:sha256(p.read_bytes()).hexdigest() for p in (root/'sources').iterdir()}
+    write('locations-manifest.json',{'files':source_files})
+    output=run([*python,str(root/'scripts/reviewer_snapshot.py'),'locations',str(root/'snapshot'),pin,str(root/'sources'),str(root/'locations-manifest.json'),'--attempts-root',str(root/'attempts')],90)
+    (root/'locations.json').write_bytes(output.stdout);locations=load('locations.json')
+    assert locations['reviewerExecution']['version']==3 and locations['reviewerExecution']['operation']=='locations'
+    assert locations['locationBinding']['inventory']['runtimePython']=='3.12.15'
+    record=api.status(Path(locations['attemptDirectory']));assert record['result']==locations
+    recovered=api.recover(Path(locations['attemptDirectory']));assert recovered['result']==locations and recovered['recoveryAction']=='already-completed-no-new-receipt'
+    run([node,'score.mjs','bind'])
+    for arm in ('baseline','candidate'):scan(arm,arm+'-rules.json',identity)
+    scanfile=root/'candidate-scan.json';binding=load('binding.json')
+    write('review-manifest.json',{'files':source_files,'scanSha256':sha256(scanfile.read_bytes()).hexdigest(),'discoverImports':True,'locationBinding':locations['locationBinding']})
+    write('run-start.json',{'startedAt':datetime.now(timezone.utc).isoformat()})
+    output=run([*python,str(root/'scripts/reviewer_snapshot.py'),'run',str(root/'snapshot'),pin,str(root/'sources'),str(root/'review-manifest.json'),str(scanfile),binding['datasetSha256'],binding['freezeSha256'],'--attempts-root',str(root/'attempts')],90)
+    (root/'execution.json').write_bytes(output.stdout);review=load('execution.json')
+    assert review['reviewerExecution']['operation']=='review' and review['locationBinding']==locations['locationBinding']
+    assert api.status(Path(review['attemptDirectory']))['result']==review
+    assert api.recover(Path(review['attemptDirectory']))['result']==review
+    assert review['reviewArtifact']['scanJson']==scanfile.read_bytes().decode()
+    assert review['reviewArtifact']['manifestJson']==(root/'review-manifest.json').read_bytes().decode()
+    run([node,'score.mjs','score'])
+    output=run([node,'scripts/review_quality_gate.mjs','diagnostic-dataset.json','diagnostic-run.json','diagnostic-freeze.json','policy.json','ledger.json'],codes=(2,));(root/'vm-quality-cli.json').write_bytes(output.stdout)
+    assert load('vm-quality-cli.json')==load('vm-quality.json')
+    # Run source-only synthetic mapping cases in the exact parser image, not the guest/Mac parser.
+    output=run([*docker,'run','--rm','--pull','never','--network','none','--read-only','--user','1000:1000','--cap-drop','ALL','--security-opt','no-new-privileges','--memory','256m','--memory-swap','256m','--cpus','1','--pids-limit','32','--log-driver','none','--tmpfs','/tmp:rw,nosuid,nodev,noexec,size=16m,mode=1777','--mount',f'type=bind,src={root},dst=/acceptance,readonly','--entrypoint','python3',identity['imageId'],'-I','-B','/acceptance/scripts/eval_locations.test.py'],45)
+    (root/'fixed-image-tests.txt').write_bytes(output.stdout+output.stderr)
+    output=run([node,'--test','work/harness-purge-improved/tests/review-locations-v3.test.mjs','work/harness-purge-improved/tests/review-quality-gate.test.mjs']);(root/'gate-tests.txt').write_bytes(output.stdout)
+    run([node,'managed-live.mjs'])
+    after=identify();assert before==after
+    assert all(sha256((root/n).read_bytes()).hexdigest()==h for n,h in payload['checks'].items())
+    names=['locations-manifest.json','locations.json','review-manifest.json','execution.json','binding.json','diagnostic-dataset.json','diagnostic-freeze.json','diagnostic-run.json','vm-quality.json','vm-quality-cli.json','case-evidence.json','baseline-scan.json','candidate-scan.json','snapshot/snapshot.json','fixed-image-tests.txt','gate-tests.txt','scanner-identity.json','policy.json','ledger.json','managed-live.json']
+    artifacts={n:(root/n).read_text() for n in names}
+    result={'inputSha256':sha256((root/'input.json').read_bytes()).hexdigest(),'sourcesVerified':payload['checks'],'dailyProgramFilesMatched':len(before['program']),'dailyDatabasesLogicallyMatched':len(before['databases']),'dailyProtection':{k:{'beforeSha256':sha256(json.dumps(v,sort_keys=True).encode()).hexdigest(),'afterSha256':sha256(json.dumps(after[k],sort_keys=True).encode()).hexdigest()} for k,v in before.items()},'artifacts':artifacts,'artifactSha256':{n:sha256(v.encode()).hexdigest() for n,v in artifacts.items()}}
+    write('result.json',result);write('status.json',{'state':'completed','resultSha256':sha256((root/'result.json').read_bytes()).hexdigest()})
+
+if __name__=='__main__':
+    write('status.json',{'state':'running'})
+    try:main()
+    except Exception:
+        write('status.json',{'state':'failed','trace':traceback.format_exc()[-3200:]});raise
+
+FROZEN VM ACCEPTANCE SOURCE score.mjs
+import {readFileSync,writeFileSync} from 'node:fs';import {digest,freezeReviewInputs,evaluateReviewQuality} from './scripts/review_quality_gate.mjs';
+const read=n=>JSON.parse(readFileSync(n,'utf8')),write=(n,v)=>writeFileSync(n,JSON.stringify(v,null,2)+'\n'),must=(v,m)=>{if(!v)throw Error(m)};
+const policy=read('policy.json'),ledger=read('ledger.json'),snapshot=read('snapshot/snapshot.json'),loc=read('locations.json');
+const identity={scanner:digest(read('scanner-identity.json')),rules:read('scanner-identity.json').candidateRulesSha256,reviewer:digest(snapshot)};
+if(process.argv[2]==='bind'){
+ const old=read('historical-dataset.json'),binding=loc.locationBinding;
+ const rows=old.cases.map(r=>{const file=binding.inventory.files[r.file],p=file.points.find(p=>p.call.start.line===r.location.line);must(file.points.length===0||p,'Historical point not unique');return{...r,path:r.file,pointId:p?.id??null,location:p?{line:p.call.start.line,column:p.call.start.col}:null}});
+ for(const [i,p] of binding.inventory.files['boundary.py'].points.entries())rows.push({id:'synthetic-boundary-'+i,path:'boundary.py',pointId:p.id,sourceSha256:p.sourceSha256,location:{line:p.call.start.line,column:p.call.start.col},language:'python',cwe:p.callee.endsWith('exec')?'CWE-94':'CWE-95',truth:'positive',oracle:{kind:'synthetic-location-control',reference:'byte-boundary only, no runtime truth'},selection:{method:'authored-diagnostic',blind:false,qualificationEligible:false}});
+ const dataset={version:3,cases:rows},used=[...new Set(ledger.sources.map(s=>s.sha256))].sort();
+ let rejected=false;try{freezeReviewInputs(dataset,policy,identity,ledger,snapshot,[loc])}catch(e){must(e.message==='Acceptance source already used in the sample ledger',e.message);rejected=true}must(rejected,'Used sample freeze was accepted');
+ const locations=[{reviewerExecution:loc.reviewerExecution,locationBinding:loc.locationBinding,reportJson:loc.reportJson}];
+ const freeze={version:3,diagnosticOnly:true,createdAt:new Date().toISOString(),datasetSha256:digest(dataset),policySha256:digest(policy),ledgerSha256:digest(ledger),identity,reviewerSnapshot:snapshot,developmentSourceSha256:used,locations,locationsSha256:digest(locations)};
+ write('diagnostic-dataset.json',dataset);write('diagnostic-freeze.json',freeze);write('binding.json',{identity,datasetSha256:digest(dataset),freezeSha256:digest(freeze),historicalFreezeRejected:rejected});
+}else{
+ const data=read('diagnostic-dataset.json'),freeze=read('diagnostic-freeze.json'),binding=read('binding.json'),execution=read('execution.json'),scan=read('candidate-scan.json'),maps=execution.report.findingLocations;
+ must(maps.length===scan.results.length,'Raw mapping count does not close');
+ const byCase=data.cases.map(c=>{const hits=maps.filter(m=>m.state==='bound'&&m.pointId===c.pointId&&m.path===c.path),ambiguous=maps.some(m=>m.path===c.path&&m.state==='unmatched'&&typeof m.rule==='string'&&['policy.harness.python.eval','policy.harness.python.exec','policy.harness.python.request-to-dynamic-code'].includes(m.rule));return{...c,raw:ambiguous?'unknown':hits.length?'hit':'no-hit',rawHits:hits.length}});
+ const outputs=byCase.map(c=>({id:c.id,raw:c.raw,decision:c.raw==='no-hit'?'not-required':'unknown',pointId:c.pointId,location:{...c.location,sourceSha256:c.sourceSha256},language:c.language,cwe:c.cwe,evidence:[]}));
+ const run={version:3,identity,startedAt:read('run-start.json').startedAt,datasetSha256:binding.datasetSha256,freezeSha256:binding.freezeSha256,reviewerExecutions:[execution.reviewerExecution],reviewArtifacts:[execution.reviewArtifact],outputs};
+ const quality=evaluateReviewQuality(data,run,freeze,policy,ledger);must(quality.version===7&&quality.state==='blocked'&&!quality.r3Qualified,'Diagnostic qualification changed');
+ must(!quality.blockers.some(x=>x.startsWith('reviewer-')||x.startsWith('review-artifact')||x==='frozen-locations-invalid-or-changed'||x==='execution-point-output-mismatch'),'Binding failed '+quality.blockers.join(','));
+ must(quality.reviewerCoverage.coveredCaseIds.length===data.cases.length,'Missing cases');
+ must(quality.executionPoints.every(p=>p.actual.raw===outputs.find(o=>o.id===p.id).raw),'Declared versus actual raw mismatch');
+ const historical=byCase.filter(c=>!c.id.startsWith('synthetic-'));must(historical.length===4&&historical.every(c=>c.raw!=='unknown'),'Historical mapping unknown');
+ must(byCase.some(c=>c.rawHits>1),'No actual duplicate rule mapping exercised');
+ write('diagnostic-run.json',run);write('vm-quality.json',quality);write('case-evidence.json',{byCase:byCase.map(c=>({id:c.id,path:c.path,pointId:c.pointId,raw:c.raw,rawHits:c.rawHits})),rawHits:maps.length,bound:maps.filter(m=>m.state==='bound').length,unmatched:maps.filter(m=>m.state==='unmatched').length,ignored:maps.filter(m=>m.state==='ignored').length,uniqueHitPoints:new Set(maps.filter(m=>m.state==='bound').map(m=>m.pointId)).size,priorSamplesOnly:true,newIndependentSamples:0,reviewerDecisionsConfirmed:0});
+}
+
+FROZEN VM ACCEPTANCE SOURCE managed-live.mjs
+import {readFileSync,writeFileSync} from 'node:fs';import assert from 'node:assert/strict';
+import {collectPythonEvidence,bindPythonExecutionPoints} from './work/harness-purge-improved/package/lib/redteam/personal-python-evidence.mjs';
+const loc=JSON.parse(readFileSync('locations.json')),scan=JSON.parse(readFileSync('candidate-scan.json')),execution=JSON.parse(readFileSync('execution.json'));
+const files=Object.entries(loc.locationBinding.inventory.files).map(([path,f])=>({path,sha256:f.sha256})),sourceRoot=new URL('./sources/',import.meta.url).pathname.replace(/\/$/,'');
+const rules=new Set(['policy.harness.python.eval','policy.harness.python.exec','policy.harness.python.request-to-dynamic-code']);
+const findings=scan.results.filter(r=>rules.has(r.check_id)).map(r=>({rule:r.check_id,location:r.path.slice(5)+':'+r.start.line,sourceLocation:{state:'bound',path:r.path.slice(5),sourceSha256:loc.locationBinding.inventory.files[r.path.slice(5)].sha256,start:r.start,end:r.end}}));
+const evidence=collectPythonEvidence({files,sourceRoot},findings,performance.now()+10000);assert.equal(evidence.state,'completed');assert.equal(evidence.findingLocations.length,findings.length);
+const expected=execution.report.findingLocations.filter(r=>rules.has(r.rule));assert.deepEqual(evidence.findingLocations.map(m=>({state:m.state,pointId:m.pointId})),expected.map(m=>({state:m.state,pointId:m.pointId})));
+const bound=bindPythonExecutionPoints(findings,evidence);assert.equal(bound.summary.bound,evidence.findingLocations.filter(m=>m.state==='bound').length);assert.equal(bound.summary.total,findings.length);
+writeFileSync('managed-live.json',JSON.stringify({summary:bound.summary,points:bound.findings.map(f=>({location:f.location,pointId:f.pointId,executionMapping:f.executionMapping})),artifacts:evidence.artifacts.length,guestPythonMatchesFixedImageIds:true},null,2)+'\n');

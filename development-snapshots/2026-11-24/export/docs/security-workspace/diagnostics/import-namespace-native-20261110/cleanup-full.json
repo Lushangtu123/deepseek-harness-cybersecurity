@@ -1,0 +1,1083 @@
+{
+  "summary": {
+    "namespaceChildrenStopped": true,
+    "backendAcknowledged": true,
+    "appAcknowledged": true,
+    "guestPortClosedErrno": 111,
+    "ownedScannerContainersAbsent": 1,
+    "dailyProgramFilesMatched": 169,
+    "dailyDatabaseLogicalDigestsMatched": 42,
+    "dailyConfigAndPinsMatched": true,
+    "installedRuntimeMatched": true,
+    "outsideNamespaceAndHomeInodeMatched": true,
+    "candidateStagedFilesMatched": 182,
+    "credentialCopiesRemoved": true,
+    "temporaryRootRemoved": true
+  },
+  "backendFinal": {
+    "proofs": [
+      {
+        "containerName": "dsh-sec-4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "outcome": "passed",
+        "observed": {
+          "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+          "running": true,
+          "sourceMount": {
+            "source": "/home/purge/.cache/score-native-qa-pzxp3w4l/state/engagements/native-import-namespace-20261110/runs/joint/28a46704-f3c9-40e3-a216-fd8d3068610a/source",
+            "readonly": true
+          },
+          "ruleSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+          "user": "1000:1000",
+          "network": "none",
+          "readonlyRoot": true,
+          "privileged": false,
+          "capDrop": [
+            "ALL"
+          ],
+          "securityOpt": [
+            "no-new-privileges"
+          ],
+          "memory": 805306368,
+          "memorySwap": 805306368,
+          "pids": 160,
+          "nanoCpus": 1000000000,
+          "command": [
+            "/policy-output.sh",
+            "/out",
+            "--deadline-seconds",
+            "165",
+            "semgrep",
+            "scan",
+            "--config",
+            "/policy/rules.json",
+            "--json",
+            "--output",
+            "/out/result.json",
+            "--metrics=off",
+            "--disable-version-check",
+            "--jobs",
+            "1",
+            "--timeout",
+            "5",
+            "--max-target-bytes",
+            "1000000",
+            "/src"
+          ]
+        },
+        "observerErrors": [
+          "Command failed: /usr/bin/sudo -n /usr/bin/docker inspect dsh-sec-4384b229-8eac-4c73-8d5a-ba5f9ae01267\nerror: no such object: dsh-sec-4384b229-8eac-4c73-8d5a-ba5f9ae01267\n"
+        ],
+        "tool": "semgrep",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+        "admissionIdentity": "598208862ad1449a5c64391f5bb0bef537e2ee334d89588e5b3582c900c4b608",
+        "sourceRoot": "/home/purge/.cache/score-native-qa-pzxp3w4l/state/engagements/native-import-namespace-20261110/runs/joint/28a46704-f3c9-40e3-a216-fd8d3068610a/source",
+        "expected": {
+          "sourceRoot": "/home/purge/.cache/score-native-qa-pzxp3w4l/state/engagements/native-import-namespace-20261110/runs/joint/28a46704-f3c9-40e3-a216-fd8d3068610a/source",
+          "project": "/home/purge/.cache/score-native-qa-pzxp3w4l/workspace/synthetic-project",
+          "stateRoot": "/home/purge/.cache/score-native-qa-pzxp3w4l/state",
+          "image": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+          "rules": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773"
+        },
+        "before": {
+          "case0/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "case0/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+          "case1/evaluator.py": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+          "case1/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+          "case2/evaluator.py": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+          "case2/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+          "case3/evaluator.py": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+          "case3/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+          "case4/evaluator.py": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+          "case4/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+          "case5/evaluator.py": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+          "case5/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+          "case6/evaluator.py": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+          "case6/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+          "case7/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "case7/routes.py": "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+          "case8/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "case8/routes.py": "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb"
+        },
+        "after": {
+          "case0/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "case0/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+          "case1/evaluator.py": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+          "case1/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+          "case2/evaluator.py": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+          "case2/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+          "case3/evaluator.py": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+          "case3/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+          "case4/evaluator.py": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+          "case4/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+          "case5/evaluator.py": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+          "case5/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+          "case6/evaluator.py": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+          "case6/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+          "case7/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "case7/routes.py": "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+          "case8/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "case8/routes.py": "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb"
+        },
+        "sourceHashesMatch": true,
+        "manifestHashesMatch": true,
+        "findings": 9,
+        "declaredSpans": [
+          {
+            "rule": "policy.harness.python.dynamic-code-namespace",
+            "location": "case0/evaluator.py:2",
+            "scannerSpan": {
+              "version": 1,
+              "path": "case0/evaluator.py",
+              "start": {
+                "line": 2,
+                "col": 12,
+                "offset": 27
+              },
+              "end": {
+                "line": 2,
+                "col": 27,
+                "offset": 42
+              }
+            }
+          },
+          {
+            "rule": "policy.harness.python.dynamic-code-namespace",
+            "location": "case1/evaluator.py:2",
+            "scannerSpan": {
+              "version": 1,
+              "path": "case1/evaluator.py",
+              "start": {
+                "line": 2,
+                "col": 12,
+                "offset": 27
+              },
+              "end": {
+                "line": 2,
+                "col": 31,
+                "offset": 46
+              }
+            }
+          },
+          {
+            "rule": "policy.harness.python.dynamic-code-namespace",
+            "location": "case2/evaluator.py:2",
+            "scannerSpan": {
+              "version": 1,
+              "path": "case2/evaluator.py",
+              "start": {
+                "line": 2,
+                "col": 12,
+                "offset": 27
+              },
+              "end": {
+                "line": 2,
+                "col": 27,
+                "offset": 42
+              }
+            }
+          },
+          {
+            "rule": "policy.harness.python.dynamic-code-namespace",
+            "location": "case3/evaluator.py:2",
+            "scannerSpan": {
+              "version": 1,
+              "path": "case3/evaluator.py",
+              "start": {
+                "line": 2,
+                "col": 12,
+                "offset": 27
+              },
+              "end": {
+                "line": 2,
+                "col": 31,
+                "offset": 46
+              }
+            }
+          },
+          {
+            "rule": "policy.harness.python.dynamic-code-namespace",
+            "location": "case4/evaluator.py:2",
+            "scannerSpan": {
+              "version": 1,
+              "path": "case4/evaluator.py",
+              "start": {
+                "line": 2,
+                "col": 12,
+                "offset": 27
+              },
+              "end": {
+                "line": 2,
+                "col": 30,
+                "offset": 45
+              }
+            }
+          },
+          {
+            "rule": "policy.harness.python.dynamic-code-namespace",
+            "location": "case5/evaluator.py:2",
+            "scannerSpan": {
+              "version": 1,
+              "path": "case5/evaluator.py",
+              "start": {
+                "line": 2,
+                "col": 12,
+                "offset": 33
+              },
+              "end": {
+                "line": 2,
+                "col": 31,
+                "offset": 52
+              }
+            }
+          },
+          {
+            "rule": "policy.harness.python.dynamic-code-namespace",
+            "location": "case6/evaluator.py:2",
+            "scannerSpan": {
+              "version": 1,
+              "path": "case6/evaluator.py",
+              "start": {
+                "line": 2,
+                "col": 12,
+                "offset": 33
+              },
+              "end": {
+                "line": 2,
+                "col": 27,
+                "offset": 48
+              }
+            }
+          },
+          {
+            "rule": "policy.harness.python.dynamic-code-namespace",
+            "location": "case7/evaluator.py:2",
+            "scannerSpan": {
+              "version": 1,
+              "path": "case7/evaluator.py",
+              "start": {
+                "line": 2,
+                "col": 12,
+                "offset": 27
+              },
+              "end": {
+                "line": 2,
+                "col": 27,
+                "offset": 42
+              }
+            }
+          },
+          {
+            "rule": "policy.harness.python.dynamic-code-namespace",
+            "location": "case8/evaluator.py:2",
+            "scannerSpan": {
+              "version": 1,
+              "path": "case8/evaluator.py",
+              "start": {
+                "line": 2,
+                "col": 12,
+                "offset": 27
+              },
+              "end": {
+                "line": 2,
+                "col": 27,
+                "offset": 42
+              }
+            }
+          }
+        ],
+        "complete": true,
+        "version": "1.182.1",
+        "executedRules": {
+          "sha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+          "count": 17
+        },
+        "ruleProfile": {
+          "version": 1,
+          "id": "deep-namespace17",
+          "mode": "deep",
+          "baseRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+          "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+          "ruleCount": 17,
+          "qualification": "managed-candidate-not-r3"
+        },
+        "coverageKey": "7d5a74abe63067cc043a74d2ccd6a70b8ca65602027b7a2f642c51a914ff4ff9",
+        "containerAbsent": true
+      }
+    ],
+    "cleanupErrors": [],
+    "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+    "events": [
+      {
+        "at": "2026-11-11T05:51:10.164Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "plan",
+          "mode": "deep"
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true
+      },
+      {
+        "at": "2026-11-11T05:51:13.940Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "start",
+          "requestId": "native-import-20261110-01",
+          "profileRevision": 1,
+          "mode": "deep",
+          "steps": [
+            "semgrep"
+          ],
+          "budgetSeconds": 180
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "running"
+      },
+      {
+        "at": "2026-11-11T05:51:19.734Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "wait",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "waitSeconds": 30
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed"
+      },
+      {
+        "at": "2026-11-11T05:51:24.711Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "findings",
+          "limit": 5
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "findings",
+          "count": 2,
+          "total": 9,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjoyfQ"
+        }
+      },
+      {
+        "at": "2026-11-11T05:51:26.756Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "findings",
+          "limit": 5,
+          "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjoyfQ"
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "findings",
+          "count": 2,
+          "total": 9,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo0fQ"
+        }
+      },
+      {
+        "at": "2026-11-11T05:51:28.554Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "report",
+          "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo0fQ",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "limit": 5,
+          "section": "findings"
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "findings",
+          "count": 2,
+          "total": 9,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo2fQ"
+        }
+      },
+      {
+        "at": "2026-11-11T05:51:30.464Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "report",
+          "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo2fQ",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "limit": 5,
+          "section": "findings"
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "findings",
+          "count": 2,
+          "total": 9,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo4fQ"
+        }
+      },
+      {
+        "at": "2026-11-11T05:51:32.393Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "report",
+          "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo4fQ",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "limit": 5,
+          "section": "findings"
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "findings",
+          "count": 1,
+          "total": 9,
+          "complete": true,
+          "nextCursor": null
+        }
+      },
+      {
+        "at": "2026-11-11T05:51:34.361Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "limit": 5,
+          "section": "files"
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "files",
+          "count": 5,
+          "total": 18,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjo1fQ"
+        }
+      },
+      {
+        "at": "2026-11-11T05:51:35.972Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "report",
+          "cursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjo1fQ",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "limit": 5,
+          "section": "files"
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "files",
+          "count": 5,
+          "total": 18,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjoxMH0"
+        }
+      },
+      {
+        "at": "2026-11-11T05:51:37.649Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "report",
+          "cursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjoxMH0",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "limit": 5,
+          "section": "files"
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "files",
+          "count": 5,
+          "total": 18,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjoxNX0"
+        }
+      },
+      {
+        "at": "2026-11-11T05:51:39.690Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "report",
+          "cursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjoxNX0",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "limit": 5,
+          "section": "files"
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "files",
+          "count": 3,
+          "total": 18,
+          "complete": true,
+          "nextCursor": null
+        }
+      },
+      {
+        "at": "2026-11-11T05:51:41.128Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "limit": 5,
+          "section": "exclusions"
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "exclusions",
+          "count": 0,
+          "total": 0,
+          "complete": true,
+          "nextCursor": null
+        }
+      },
+      {
+        "at": "2026-11-11T05:51:42.789Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "limit": 5,
+          "section": "diagnostics"
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "diagnostics",
+          "count": 0,
+          "total": 0,
+          "complete": true,
+          "nextCursor": null
+        }
+      },
+      {
+        "at": "2026-11-11T05:51:44.765Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "limit": 5,
+          "section": "artifacts"
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "artifacts",
+          "count": 5,
+          "total": 13,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjo1fQ"
+        }
+      },
+      {
+        "at": "2026-11-11T05:51:46.932Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "report",
+          "cursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjo1fQ",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "limit": 5,
+          "section": "artifacts"
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "artifacts",
+          "count": 3,
+          "total": 13,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjo4fQ"
+        }
+      },
+      {
+        "at": "2026-11-11T05:51:48.871Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "report",
+          "cursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjo4fQ",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "limit": 5,
+          "section": "artifacts"
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "artifacts",
+          "count": 3,
+          "total": 13,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjoxMX0"
+        }
+      },
+      {
+        "at": "2026-11-11T05:51:50.797Z",
+        "request": {
+          "op": "securityJoint",
+          "engagement": "native-import-namespace-20261110",
+          "action": "report",
+          "cursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjoxMX0",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "limit": 5,
+          "section": "artifacts"
+        },
+        "model": true,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "artifacts",
+          "count": 2,
+          "total": 13,
+          "complete": true,
+          "nextCursor": null
+        }
+      },
+      {
+        "at": "2026-11-11T05:54:49.337Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "status",
+          "requestId": "native-import-20261110-01"
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed"
+      },
+      {
+        "at": "2026-11-11T05:54:49.339Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "findings",
+          "limit": 5
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "findings",
+          "count": 2,
+          "total": 9,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjoyfQ"
+        }
+      },
+      {
+        "at": "2026-11-11T05:54:49.340Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "findings",
+          "limit": 5,
+          "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjoyfQ"
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "findings",
+          "count": 2,
+          "total": 9,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo0fQ"
+        }
+      },
+      {
+        "at": "2026-11-11T05:54:49.342Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "findings",
+          "limit": 5,
+          "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo0fQ"
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "findings",
+          "count": 2,
+          "total": 9,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo2fQ"
+        }
+      },
+      {
+        "at": "2026-11-11T05:54:49.344Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "findings",
+          "limit": 5,
+          "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo2fQ"
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "findings",
+          "count": 2,
+          "total": 9,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo4fQ"
+        }
+      },
+      {
+        "at": "2026-11-11T05:54:49.346Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "findings",
+          "limit": 5,
+          "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo4fQ"
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "findings",
+          "count": 1,
+          "total": 9,
+          "complete": true,
+          "nextCursor": null
+        }
+      },
+      {
+        "at": "2026-11-11T05:54:49.347Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "files",
+          "limit": 5
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "files",
+          "count": 5,
+          "total": 18,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjo1fQ"
+        }
+      },
+      {
+        "at": "2026-11-11T05:54:49.349Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "files",
+          "limit": 5,
+          "cursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjo1fQ"
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "files",
+          "count": 5,
+          "total": 18,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjoxMH0"
+        }
+      },
+      {
+        "at": "2026-11-11T05:54:49.350Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "files",
+          "limit": 5,
+          "cursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjoxMH0"
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "files",
+          "count": 5,
+          "total": 18,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjoxNX0"
+        }
+      },
+      {
+        "at": "2026-11-11T05:54:49.351Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "files",
+          "limit": 5,
+          "cursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjoxNX0"
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "files",
+          "count": 3,
+          "total": 18,
+          "complete": true,
+          "nextCursor": null
+        }
+      },
+      {
+        "at": "2026-11-11T05:54:49.352Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "exclusions",
+          "limit": 5
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "exclusions",
+          "count": 0,
+          "total": 0,
+          "complete": true,
+          "nextCursor": null
+        }
+      },
+      {
+        "at": "2026-11-11T05:54:49.353Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "diagnostics",
+          "limit": 5
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "diagnostics",
+          "count": 0,
+          "total": 0,
+          "complete": true,
+          "nextCursor": null
+        }
+      },
+      {
+        "at": "2026-11-11T05:54:49.354Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "artifacts",
+          "limit": 5
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "artifacts",
+          "count": 5,
+          "total": 13,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjo1fQ"
+        }
+      },
+      {
+        "at": "2026-11-11T05:54:49.355Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "artifacts",
+          "limit": 5,
+          "cursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjo1fQ"
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "artifacts",
+          "count": 3,
+          "total": 13,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjo4fQ"
+        }
+      },
+      {
+        "at": "2026-11-11T05:54:49.356Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "artifacts",
+          "limit": 5,
+          "cursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjo4fQ"
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "artifacts",
+          "count": 3,
+          "total": 13,
+          "complete": false,
+          "nextCursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjoxMX0"
+        }
+      },
+      {
+        "at": "2026-11-11T05:54:49.357Z",
+        "request": {
+          "engagement": "native-import-namespace-20261110",
+          "op": "securityJoint",
+          "action": "report",
+          "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+          "section": "artifacts",
+          "limit": 5,
+          "cursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjoxMX0"
+        },
+        "model": false,
+        "allowed": true,
+        "ok": true,
+        "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "taskState": "completed",
+        "page": {
+          "section": "artifacts",
+          "count": 2,
+          "total": 13,
+          "complete": true,
+          "nextCursor": null
+        }
+      }
+    ]
+  }
+}

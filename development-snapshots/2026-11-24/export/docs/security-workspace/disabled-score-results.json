@@ -1,0 +1,104 @@
+{
+  "date": "2026-11-04",
+  "state": "scoped final review completed and triaged; no daily deployment",
+  "scope": [
+    "INHERITED-NOCODE-DISABLED",
+    "INHERITED-DISABLED-COMPETITION"
+  ],
+  "sourceHashes": {
+    "package/lib/redteam/store-core.js": "290c894a97c9088964e6ccd6ecf5a7fdb45837ebae8c6c958b9abe1a6e587d7c",
+    "package/lib/redteam/score-rules.js": "71732b9a4c5522b56124ea2f4503dfd732714c3fba62077938f84da5f8294f49",
+    "tests/score-disabled.test.mjs": "8a0bca2854b06a0d0acafd79c5c7f9b4f051e44ad9328565407c1e6a8719442b",
+    "tests/score-consistency.test.mjs": "dca004662061d9d4999da7139d226dca49d2dddba7a7d6ee0fec97b923f72a5f",
+    "tests/report-score-provenance.test.mjs": "a3bf8da3e81a6d35d716f407e082647743d2ca6ab0586b2a0dd99fe6e064b7ac"
+  },
+  "programFiles": 173,
+  "deployed": false,
+  "pushed": false,
+  "tests": {
+    "macPluginPassed": 964,
+    "vmPluginPassed": 964,
+    "pluginTestFiles": 104,
+    "pythonFiles": 43,
+    "pythonPassed": 352,
+    "focusedPassed": 32,
+    "focusedIncludedInPluginTotals": true,
+    "initialRed": {
+      "passed": 1,
+      "expectedFailures": 9
+    },
+    "clientRebuildReproducible": true
+  },
+  "native": {
+    "exitCode": 0,
+    "testFiles": 104,
+    "sdkSmokeExitCode": 0,
+    "node": "v24.22.1",
+    "python": "3.12.3",
+    "dailyProgramUnchanged": true,
+    "dailyOverrideUnchanged": true,
+    "temporaryCopyRemoved": true
+  },
+  "externalReview": {
+    "state": "completed-and-triaged",
+    "firstModel": "claude-opus-5-5",
+    "firstModelState": "provider-safety-refusal",
+    "actualReviewer": "DeepSeek V4.1 Flash",
+    "actualModel": "deepseek-flash",
+    "effort": "high",
+    "initialFullAttempt": "length limit, zero report, not counted as completed",
+    "recovery": "two focused domains, each received unchanged complete original user packet",
+    "fullUserPacketSha256": "3e845e7301fabac6de6c98c94f5785fe8cd7caefdf44cdad0ce03a1d162ed480",
+    "freshClaudeApprovalOfRoutingSystemsClaimed": false,
+    "domains": [
+      {
+        "id": "disabled-core",
+        "finishReason": "stop",
+        "reportSha256": "e3c2593c3bc87cf27fc4f21c45743eb25ddd61458d1f82b6bf28faeacddf2b36",
+        "receiptSha256": "659093dece3223b00e17bd22216d9fdd73d3d65a86b4a134e8d969ac14a9c7db"
+      },
+      {
+        "id": "disabled-callers",
+        "finishReason": "stop",
+        "reportSha256": "1a98b521b52dfe738d12b9e6c2c024a0990cddc565755e7f79d26ef13ed93bbe",
+        "receiptSha256": "13bd07df9cfd324347c28dc892e9d9881ddeac2043bb2961b770f1ede8bfae84"
+      }
+    ],
+    "remainingScopedP1P2Blockers": 0,
+    "newRegressionConfirmed": false,
+    "scope": "disabled nullable-code counting and disabled shared-rule competition only"
+  },
+  "limitations": [
+    "Synthetic tests only; no real project scan or model-driven tool execute",
+    "Shared-rule metadata is a synthetic fixture; stock built-ins have no shared-rule pair",
+    "No migration or schema change; normal enabled0/1 API states covered",
+    "No atomic snapshot promise across independent views during cross-process writes",
+    "No chain pagination, cap label, host bridge, daily deploy or GitHub push",
+    "R3/full workspace/95 real-project findings remain open"
+  ],
+  "closedFindings": [
+    "INHERITED-NOCODE-DISABLED",
+    "INHERITED-DISABLED-COMPETITION"
+  ],
+  "globalReleaseHold": true,
+  "wholeProductReleaseQualified": false,
+  "knownOpen": [
+    "chain500/global-summary range",
+    "panel cap label wording",
+    "raw/effective appendix clarity suggestion",
+    "HOST-F1/F3",
+    "ordinary R3",
+    "full workspace",
+    "native model-chain/release acceptance",
+    "95 real project findings"
+  ],
+  "reviewScratchCleanup": {
+    "removed": true,
+    "scope": "only owned completed model-review scratch",
+    "workerStopped": true,
+    "dailyProgramFilesChecked": 169,
+    "dailyProgramUnchanged": true,
+    "credentialCopiedToHost": false,
+    "vmConfigurationChanged": false
+  }
+}

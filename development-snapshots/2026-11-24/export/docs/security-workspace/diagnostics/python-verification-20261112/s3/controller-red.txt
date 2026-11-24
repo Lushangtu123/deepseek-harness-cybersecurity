@@ -1,0 +1,23 @@
+EE
+======================================================================
+ERROR: test_unfrozen_contract_rejected_before_reservation_or_engine (__main__.ControllerTest.test_unfrozen_contract_rejected_before_reservation_or_engine)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/verify_execution_controller.test.py", line 24, in test_unfrozen_contract_rejected_before_reservation_or_engine
+    with self.assertRaises(ValueError):self.api.verify_execution(self.root/'verifier',self.api.digest(ver),root,manifest,scan,path,'d'*64,'e'*64,attempts_root=self.root/'attempts',_engine_factory=backend.factory)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'snapshot' has no attribute 'verify_execution'
+
+======================================================================
+ERROR: test_verify_uses_owned_lifecycle_policy_and_returns_original_on_recover (__main__.ControllerTest.test_verify_uses_owned_lifecycle_policy_and_returns_original_on_recover)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/verify_execution_controller.test.py", line 18, in test_verify_uses_owned_lifecycle_policy_and_returns_original_on_recover
+    backend.report=json.dumps(report).encode();value=self.api.verify_execution(self.root/'verifier',self.api.digest(ver),root,manifest,scan,path,'d'*64,'e'*64,attempts_root=self.root/'attempts',_engine_factory=backend.factory)
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'snapshot' has no attribute 'verify_execution'
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.087s
+
+FAILED (errors=2)

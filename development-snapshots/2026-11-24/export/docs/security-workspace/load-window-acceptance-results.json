@@ -1,0 +1,343 @@
+{
+  "date": "2026-11-08",
+  "scope": [
+    "DAILY-FIRST-LOAD",
+    "SCORE-MODEL-WINDOW-EXPLANATION"
+  ],
+  "dailyEntry": {
+    "mode": "GET pages and static resources only",
+    "localEntry": "http://127.0.0.1:49226/",
+    "existingEntryOwned": true,
+    "reads": [
+      {
+        "path": "/",
+        "status": 200,
+        "bytes": 45721,
+        "elapsedMs": 6
+      },
+      {
+        "path": "/assets/index-BNyAYEM7.css",
+        "status": 200,
+        "bytes": 77471,
+        "elapsedMs": 9,
+        "sha256": "47c890e8b3898eb4e5a53933bd318e58d4cf168cd7ccef46789d48a070bba591"
+      },
+      {
+        "path": "/assets/index-BXV-oxvX.js",
+        "status": 200,
+        "bytes": 941436,
+        "elapsedMs": 32,
+        "sha256": "0f3fc6b857e4f8bd4d69619ce1010240cdaaa443abf0826532a24ef8f6e32ef0"
+      },
+      {
+        "path": "/assets/vendor-DV2921Zo.css",
+        "status": 200,
+        "bytes": 27312,
+        "elapsedMs": 34,
+        "sha256": "4cea59483551208ce61ff27251da83d5f7a0893ef34cfe4b808d61be6e13ebc7"
+      },
+      {
+        "path": "/assets/vendor-DcuzkuQH.js",
+        "status": 200,
+        "bytes": 741114,
+        "elapsedMs": 36,
+        "sha256": "c14ba1089d78f48b8959a7bc42c9013b4a57aa4122e053d54f74c0a4d1d156a7"
+      },
+      {
+        "path": "/",
+        "status": 200,
+        "bytes": 45721,
+        "elapsedMs": 35
+      },
+      {
+        "path": "/assets/index-BNyAYEM7.css",
+        "status": 200,
+        "bytes": 77471,
+        "elapsedMs": 14,
+        "sha256": "47c890e8b3898eb4e5a53933bd318e58d4cf168cd7ccef46789d48a070bba591"
+      },
+      {
+        "path": "/assets/index-BXV-oxvX.js",
+        "status": 200,
+        "bytes": 941436,
+        "elapsedMs": 22,
+        "sha256": "0f3fc6b857e4f8bd4d69619ce1010240cdaaa443abf0826532a24ef8f6e32ef0"
+      },
+      {
+        "path": "/assets/vendor-DV2921Zo.css",
+        "status": 200,
+        "bytes": 27312,
+        "elapsedMs": 16,
+        "sha256": "4cea59483551208ce61ff27251da83d5f7a0893ef34cfe4b808d61be6e13ebc7"
+      },
+      {
+        "path": "/assets/vendor-DcuzkuQH.js",
+        "status": 200,
+        "bytes": 741114,
+        "elapsedMs": 23,
+        "sha256": "c14ba1089d78f48b8959a7bc42c9013b4a57aa4122e053d54f74c0a4d1d156a7"
+      },
+      {
+        "path": "/",
+        "status": 200,
+        "bytes": 45721,
+        "elapsedMs": 24
+      },
+      {
+        "path": "/assets/index-BNyAYEM7.css",
+        "status": 200,
+        "bytes": 77471,
+        "elapsedMs": 15,
+        "sha256": "47c890e8b3898eb4e5a53933bd318e58d4cf168cd7ccef46789d48a070bba591"
+      },
+      {
+        "path": "/assets/index-BXV-oxvX.js",
+        "status": 200,
+        "bytes": 941436,
+        "elapsedMs": 23,
+        "sha256": "0f3fc6b857e4f8bd4d69619ce1010240cdaaa443abf0826532a24ef8f6e32ef0"
+      },
+      {
+        "path": "/assets/vendor-DV2921Zo.css",
+        "status": 200,
+        "bytes": 27312,
+        "elapsedMs": 15,
+        "sha256": "4cea59483551208ce61ff27251da83d5f7a0893ef34cfe4b808d61be6e13ebc7"
+      },
+      {
+        "path": "/assets/vendor-DcuzkuQH.js",
+        "status": 200,
+        "bytes": 741114,
+        "elapsedMs": 19,
+        "sha256": "c14ba1089d78f48b8959a7bc42c9013b4a57aa4122e053d54f74c0a4d1d156a7"
+      }
+    ],
+    "login": {
+      "path": "/",
+      "status": 303,
+      "bytes": 0,
+      "elapsedMs": 6
+    },
+    "initialPage": {
+      "path": "/",
+      "status": 200,
+      "bytes": 45721,
+      "elapsedMs": 7
+    },
+    "pageContentType": "text/html; charset=utf-8",
+    "pageTitle": "DeepSeek Harness",
+    "assetMentions": 6,
+    "assetContexts": [
+      "indow.location.origin + '/assets/') || url.startsWith(window.location.origin + '/plugins/')) {",
+      "(window.location.origin+'/assets/')?'assets':'plugins',hash,status})})();",
+      "odule\" crossorigin src=\"./assets/index-BXV-oxvX.js\"></script>",
+      "load\" crossorigin href=\"./assets/vendor-DcuzkuQH.js\">",
+      "heet\" crossorigin href=\"./assets/vendor-DV2921Zo.css\">"
+    ],
+    "resourcesObserved": 4,
+    "allSelectedReads200": true
+  },
+  "dailyBrowser": {
+    "browser": "Google Chrome native accessibility UI",
+    "entry": "http://127.0.0.1:49226/",
+    "existingManagedStartupFlowUsed": true,
+    "loginShortcut": "existing private webloc, opened once with Chrome through Finder",
+    "firstPageRendered": true,
+    "firstRapidReloadSnapshotHadControls": false,
+    "settledReloads": [
+      {
+        "cycle": 1,
+        "entryObserved": true,
+        "newSessionControl": true,
+        "pluginControl": true,
+        "resourceWarning": false,
+        "observations": 4
+      },
+      {
+        "cycle": 2,
+        "entryObserved": true,
+        "newSessionControl": true,
+        "pluginControl": true,
+        "resourceWarning": false,
+        "observations": 1
+      },
+      {
+        "cycle": 3,
+        "entryObserved": true,
+        "newSessionControl": true,
+        "pluginControl": true,
+        "resourceWarning": false,
+        "observations": 1
+      }
+    ],
+    "createdDailyTabClosed": true,
+    "priorDailyTabPreserved": true,
+    "modelPromptsSubmittedInDailyUI": 0,
+    "projectMutationSubmittedInDailyUI": false
+  },
+  "modelWindow": {
+    "programDigest": "764760fdbf5577f6977b38142a2ea73bace1c2eb98797977412efd1662ea18e6",
+    "nativeToolCalls": 3,
+    "nativeToolResults": 3,
+    "terminal": "completed",
+    "modelConfigured": "deepseek-flash",
+    "providerConfigured": "deepseek-official",
+    "providerRawModelFieldCaptured": false,
+    "configurationSha256": "76cf917828eb28c30ed9af32f7c9e43042f191029166ebc9e584c66f7f0cb576",
+    "expected": {
+      "projectPoints": 14,
+      "windowPoints": [
+        8,
+        1
+      ],
+      "fullCoverage": false,
+      "unreadHitCount": 497,
+      "sampleSumIsProjectTotal": false
+    },
+    "structuredAnswerMatched": true,
+    "middleUnobservedPoints": 5,
+    "unreadAttackChainRows": 497,
+    "cliFinalMatchesSameSessionAssistant": true,
+    "finalAfterLastToolResult": true,
+    "rawReceiptSha256": "2a8e2a683d0f1c22f8f49ef082115f3e7045f2e6e8cf82adae0cee8b9a110d40",
+    "privateReceiptMode": "0600",
+    "temporaryDirectoryRemoved": true,
+    "dailyProgramMatched": true,
+    "checkedConfigsMatched": true,
+    "checkedSdkMatched": true,
+    "promptFixtureHashes": {
+      "native-cap-live.py": "16971fd99c8e5771327bd9063024dc23930b984bda4d53562351175c4735661e",
+      "native-cap-guest.py": "2c1f5fbe251173ba4a2cea2fdfbe25565a07fad9403cfc0ab52810915512f749",
+      "seed.mjs": "4f8a29455f5db0d4f41727f82a11697958a963e405e6ffd3b79a8a0947de7956",
+      "qa-fence.mjs": "ca0ad7cbc6e6899898b09b24ca664ddfe4be69a1f369bdc53ea2efdce1268520"
+    }
+  },
+  "sourceHashes": {
+    "work/harness-purge-improved/package/lib/redteam/store-core.js": "ae888198936f68d0dbc9c35312dc60af393bb0afcdffb7771e9f7f8e58ce34dd",
+    "work/harness-purge-improved/package/lib/redteam/tools.js": "25f221a41b3f575efc42a3a137c6d5aab6505108b5d1fcb1d60c96f8177abe83"
+  },
+  "acceptanceControls": {
+    "verificationTests": {
+      "positiveCases": 1,
+      "negativeCases": 9,
+      "allPassed": true,
+      "cases": [
+        {
+          "case": "real synthetic receipt",
+          "passed": true
+        },
+        {
+          "case": "wrong program digest",
+          "rejected": true
+        },
+        {
+          "case": "wrong executed fixture",
+          "rejected": true
+        },
+        {
+          "case": "wrong launch intent",
+          "rejected": true
+        },
+        {
+          "case": "wrong model config",
+          "rejected": true
+        },
+        {
+          "case": "duplicate event sequence",
+          "rejected": true
+        },
+        {
+          "case": "assistant text mismatch",
+          "rejected": true
+        },
+        {
+          "case": "wrong assistant turn",
+          "rejected": true
+        },
+        {
+          "case": "missing accepted call",
+          "rejected": true
+        },
+        {
+          "case": "overbroad private receipt mode",
+          "rejected": true
+        }
+      ]
+    },
+    "probeOverwriteTest": {
+      "existingOutputRejected": true,
+      "sameOutputSha256": "663fa7043480bffaf12e2eb0bed8fab8df52ed534f57f1e6c98ba4f00801a271",
+      "managerAndNetworkReached": false
+    },
+    "revisionNotesSha256": "6f1150b6cdeafa2456eef392e6d3ef6add65ef22fe30dbd9a1b17651cc374a92",
+    "historicalZeroResourceProbeUsedAsSuccess": false,
+    "structuredAnswerOnly": true,
+    "rawProviderModelCaptured": false,
+    "cliFinalUniquenessScope": "retained stdout tail only; not full stdout",
+    "hardcodedProbeSourceChangedFieldExcluded": true,
+    "sourceUnchangedEvidence": "separate canonical baseline and guest protected-file checks, not HTTP probe",
+    "attackChainUnreadScope": "two bounded row windows; score_list can expose other evidence",
+    "chromeR2Repeated": false
+  },
+  "externalReview": {
+    "state": "completed-and-triaged",
+    "remainingScopedP1P2Blockers": 0,
+    "promptSha256": "19149215f4f3f475acab9ccc9260c0b98cb89775b5b6bc833869f4c98e2748ab",
+    "claudeState": "weekly-quota-exhausted",
+    "reviewer": "DeepSeek V4.1 Flash",
+    "model": "deepseek-flash",
+    "effort": "high",
+    "finishReason": "stop",
+    "reportSha256": "52b69e8b59f9dfd5e629dad4dd01a0056f14e6e3cbb77d26ebbddb6be7242436",
+    "receiptSha256": "bbcbac7ab00ed50b169a71f50a5d92d721356aa197fdd3fcc5fde3c0dc47ed0d",
+    "unchangedUserPacket": true,
+    "temporaryReviewCopyRemoved": true,
+    "initialReviewPromptSha256": "e6f88d33557fb855c913bdd1a89910fb55d03c1e61b8f7ec4bac39025c4e7447",
+    "triageSha256": "62b40c037ec33dab58e5d4038224b2eda8a131645c76640833a91bdc295f5ba9"
+  },
+  "followUp": [
+    {
+      "id": "FULL-STDOUT-FINAL-COUNT",
+      "status": "open",
+      "scope": "non-blocking evidence hardening",
+      "detail": "Uniqueness currently checked only in retained stdout tail; full final text matches same-session assistant after tools."
+    },
+    {
+      "id": "DAILY-PROBE-SOURCE-FIELD",
+      "status": "excluded-from-claims",
+      "detail": "Hardcoded sourceChanged removed from final normalized result; not a measurement."
+    },
+    {
+      "id": "DAILY-PROBE-COVERAGE-CONTRACT",
+      "status": "open",
+      "scope": "non-blocking future-run automation",
+      "detail": "This archive asserts four resources and fifteen reads; generic probe permits any positive resource count."
+    },
+    {
+      "id": "RELAY-ADMISSION-WAIT",
+      "status": "open",
+      "scope": "non-blocking availability"
+    },
+    {
+      "id": "RELAY-LIVE-EXEC-COUNTERS",
+      "status": "pending"
+    },
+    {
+      "id": "SSH-RESET-LOWER-LAYER",
+      "status": "open",
+      "detail": "Mitigated connection reuse does not establish underlying reset cause."
+    },
+    {
+      "id": "SCORE-SIDEBAR-HISTORICAL-FAILURE",
+      "status": "open"
+    },
+    {
+      "id": "ORDINARY-R3",
+      "status": "pending",
+      "detail": "Independent positive/negative cases and per-category quality/release evidence remain insufficient."
+    }
+  ],
+  "candidateDeployed": false,
+  "ordinaryR3Qualified": false,
+  "wholeProductReleaseQualified": false
+}

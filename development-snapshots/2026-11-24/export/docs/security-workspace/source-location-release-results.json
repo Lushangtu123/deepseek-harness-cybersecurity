@@ -1,0 +1,338 @@
+{
+  "version": 1,
+  "date": "2026-11-03",
+  "timezone": "America/Los_Angeles",
+  "scope": "dedicated daily VM source-location release; formal native Harness chat, side panel, full drill view and genuine default Semgrep on synthetic files",
+  "deployed": true,
+  "runtimeVersion": "1.1.77-personal.11",
+  "deployment": {
+    "programFiles": 166,
+    "rollbackFiles": 165,
+    "servicesRestarted": {
+      "dsh-original.service": true,
+      "harness-security.socket": true,
+      "harness-security.service": true
+    },
+    "protectedFileDigestsMatched": 47,
+    "archiveSha256": "1a3dc95b1cd88ea5089f53c85913e6f4968a06b8390d6c2e6b5df66d1ee7ff3c",
+    "backup": "/home/purge/.cache/harness-source-location-release-20261103",
+    "candidateServiceActive": true,
+    "databaseProtection": "logical dump; other protected files byte digest",
+    "physicalProtectedFilesChangedAfterStop": 1,
+    "servicesRestartedFieldMeaning": "pre-stop active states for which start was issued; post-start observations recorded separately"
+  },
+  "archive": {
+    "archiveSha256": "1a3dc95b1cd88ea5089f53c85913e6f4968a06b8390d6c2e6b5df66d1ee7ff3c",
+    "archiveBytes": 2292226,
+    "files": 166,
+    "inventorySha256": "b00c7279a325f0c23d32e52f22c337d88de134f59ff71250e539cf04485eb2d4",
+    "deterministicRebuild": true
+  },
+  "rehearsal": {
+    "archiveSha256": "1a3dc95b1cd88ea5089f53c85913e6f4968a06b8390d6c2e6b5df66d1ee7ff3c",
+    "candidateFiles": 166,
+    "currentFiles": 165,
+    "candidateSyntaxChecked": true,
+    "temporarySwapAndRollbackVerified": true,
+    "deploymentUnchanged": true,
+    "dailyProcessUnchanged": true,
+    "temporaryRemoved": true,
+    "activeScannerContainersAtStart": 0,
+    "activeScannerContainersAtEnd": 0,
+    "guestFreeBytes": 8883736576,
+    "scannerPreflightExitCode": 0,
+    "scannerReadiness": {
+      "semgrep": {
+        "ready": true,
+        "reason": null
+      },
+      "trivy": {
+        "ready": true,
+        "reason": null
+      },
+      "zap": {
+        "ready": true,
+        "reason": null
+      }
+    }
+  },
+  "recovery": {
+    "recoveryPoint": "ready-template-model-parser-20261102",
+    "snapshotPresent": true,
+    "bundleVerified": true,
+    "guestProofFiles": 2832,
+    "priorIndependentBootProof": true
+  },
+  "native": {
+    "engagement": "vm-source-location-release-20261103",
+    "jointId": "11706ee9-9ec3-4385-9be0-6f2dfca8935c",
+    "scanId": "05158758-880e-4d40-bd77-735e8ed05f8d",
+    "scopeRevision": 1,
+    "mode": "deep",
+    "sandbox": "S1",
+    "selectedSteps": [
+      "semgrep"
+    ],
+    "taskState": "completed",
+    "coverageComplete": false,
+    "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf",
+    "warningCount": 7,
+    "bound": 7,
+    "unavailable": 0,
+    "allUnverified": true,
+    "reportSectionCounts": {
+      "findings": 7,
+      "files": 5,
+      "exclusions": 0,
+      "diagnostics": 0,
+      "artifacts": 0
+    },
+    "rangesIndependentlyVerified": 7,
+    "newScans": 1,
+    "parentTasks": 1,
+    "subtaskModelCalls": 0,
+    "ordinaryFindingsAdded": 0
+  },
+  "browser": {
+    "version": 1,
+    "scope": "Observed through native Chrome via cua_repl; API report independently read; no headless/CDP automation",
+    "session": "session-753da347-eb02-41cb-9c5f-ead62a857805",
+    "model": "DeepSeek-V4.1-Flash",
+    "effort": "High",
+    "mainChatRequests": 11,
+    "toolCalls": 10,
+    "toolActions": [
+      {
+        "name": "redteam_session_bind",
+        "engagement": "vm-source-location-release-20261103"
+      },
+      {
+        "name": "redteam_joint_review",
+        "action": "plan",
+        "mode": "deep"
+      },
+      {
+        "name": "redteam_joint_review",
+        "action": "start",
+        "mode": "deep",
+        "steps": [
+          "semgrep"
+        ],
+        "requestId": "source-location-native-release-20261103-001"
+      },
+      {
+        "name": "redteam_joint_review",
+        "action": "wait",
+        "id": "11706ee9-9ec3-4385-9be0-6f2dfca8935c",
+        "waitSeconds": 30
+      },
+      {
+        "name": "redteam_joint_review",
+        "action": "report",
+        "section": "findings",
+        "cursorUsed": false
+      },
+      {
+        "name": "redteam_joint_review",
+        "action": "report",
+        "section": "findings",
+        "cursorUsed": true
+      },
+      {
+        "name": "redteam_joint_review",
+        "action": "report",
+        "section": "files",
+        "cursorUsed": false
+      },
+      {
+        "name": "redteam_joint_review",
+        "action": "report",
+        "section": "exclusions",
+        "cursorUsed": false
+      },
+      {
+        "name": "redteam_joint_review",
+        "action": "report",
+        "section": "diagnostics",
+        "cursorUsed": false
+      },
+      {
+        "name": "redteam_joint_review",
+        "action": "report",
+        "section": "artifacts",
+        "cursorUsed": false
+      }
+    ],
+    "completed": true,
+    "actualMainChatStatusCalls": 0,
+    "summaryInaccuracy": "final model prose described wait/status; actual trace has wait only, no status call; counts use observed trajectory",
+    "newModelRescanRequested": false,
+    "onlyAllowedToolsObserved": true,
+    "modelReadAllReportSections": true,
+    "modelSameLineLocationsCorrect": true,
+    "modelKeptUnverified": true,
+    "modelGuessedMainChatCount": false,
+    "ordinaryFindingRows": 0,
+    "formalDrillPanelAndFullView": true,
+    "nativeSourceLocationPages": [
+      4,
+      3
+    ],
+    "sameLineLocations": [
+      "2:35-2:48",
+      "2:50-2:63"
+    ],
+    "redactionAndCopyOnlyDisclaimerVisible": true,
+    "sourceDigestAndSnapshotVisible": true,
+    "formalThemeReadableObserved": true,
+    "downloadObservedDone": true,
+    "originalBrowseProjectRestored": "phishguard-model-closure-20261102",
+    "legacyTaskReadOnlyCompatible": true,
+    "legacyTaskId": "bd86f6bf-d1b3-474c-b3df-f55172f4e956",
+    "legacyRawFindings": 56,
+    "legacyDedupFindings": 49,
+    "legacySourcePrecisionNotInvented": true,
+    "ownedChromeTabsClosed": 2
+  },
+  "download": {
+    "ok": true,
+    "exactReportMatch": true,
+    "bytes": 11513,
+    "sha256": "b080c1b7e22784909abaa2239bbee0b41be135c9ca2a22fc0bf924737f41eca2",
+    "sections": {
+      "findings": 7,
+      "files": 5,
+      "exclusions": 0,
+      "diagnostics": 0,
+      "artifacts": 0
+    },
+    "equalityMethod": "JSON parsed objects compared recursively for task and all five sections; not byte-equality to wire formatting"
+  },
+  "protected": {
+    "ok": true,
+    "existingDatabaseLogicalDigestsMatched": 40,
+    "protectedConfigDigestsMatched": 7,
+    "deployedProgramFilesMatched": 166,
+    "rollbackProgramFilesMatched": 165,
+    "realFindingsByStatus": {
+      "unverified": 95
+    },
+    "syntheticTasks": 1,
+    "syntheticScans": 1,
+    "syntheticOrdinaryFindings": 0,
+    "allSyntheticUnverified": true,
+    "scannerContainerAbsent": true,
+    "stagedRuleRemoved": true,
+    "syntheticSourcesRetained": 5,
+    "managedSnapshotRetained": true,
+    "activeProject": "phishguard-model-closure-20261102",
+    "hostManagerAndVMConfigUnchanged": true
+  },
+  "tests": {
+    "macPlugin": 778,
+    "vmPlugin": 778,
+    "newSourceUI": 19,
+    "vmFinalFocusedFromCandidate": 28,
+    "deploymentProtection": 1,
+    "newFullSuiteRerunAfterDeployment": false,
+    "basis": "exact candidate program hash matches prior live closure/VM 778 test kit; deployment helper protection regression run in this batch"
+  },
+  "limitations": [
+    "source position binding is managed-copy evidence, not verified vulnerability or runtime/builtin/external-control proof",
+    "no automatic offline namespace reviewer routing, no research rules installed",
+    "ordinary mode still not R3-qualified; full workspace stages remain unfinished",
+    "full recovery point predates this release; existing boot-proven recovery plus current165 program rollback verified, no new disk boot proof this batch",
+    "95 real findings remain unverified",
+    "model summary called wait wait/status; trace shows wait only",
+    "older SKF post-fix requested-model review remains separately unresolved"
+  ],
+  "gitCommittedOrPushed": false,
+  "deploymentStopDiagnostic": {
+    "logicalMatched": true,
+    "physicalChanged": [
+      {
+        "path": "/home/purge/.dsh-improved/redteam/engagements/vm-python-string-evidence-acceptance-20261103/assets.db",
+        "beforeSha256": "97e8d54f8a7255106f66cf1b213c4a4d7b558d21310b1c2bfedc3d0d526dddda",
+        "afterStopSha256": "c1d6cd1af9428cadf13edd47797debfcc312a0a6912d51c8e0b711fa7825b2eb"
+      }
+    ],
+    "writerOrMechanismEstablished": false
+  },
+  "runtimeObserved": {
+    "servicesActiveObserved": {
+      "dsh-original.service": "active",
+      "harness-security.socket": "active",
+      "harness-security.service": "active"
+    },
+    "semgrepPin": {
+      "tool": "semgrep",
+      "sourceRepository": "semgrep/semgrep",
+      "sourceTag": "latest",
+      "indexDigest": "sha256:451b3d875c00dac7ed5db5293e584a07de11449a409c10b3c2d2652f429630b6",
+      "manifestDigest": "sha256:5347c70f22a33b419cd515ec7fa0d3e76da7eb09f1d8cb4081d88a3bb17d87f6",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "tag": "personal-security/semgrep:8a0b4b7d02bb",
+      "architecture": "arm64",
+      "archiveSha256": "1d7d2a4d304bd20da66fb8b17972abb057b6573a56c7d05b9e11da72e17c9976",
+      "archiveBytes": 1156147200,
+      "layersVerified": 15,
+      "upstreamConfigDigest": "sha256:8a0b4b7d02bb39f11942c14397c14a9f74218e1746cd750941886e462cf06258",
+      "imageRef": "personal-security/semgrep@sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "version": "1.182.1"
+    },
+    "ruleCount": 16
+  },
+  "unicodeByteColumnProof": {
+    "ok": true,
+    "source": "actual VM report-bound snapshot bytes retained in collected.json",
+    "rows": [
+      {
+        "path": "same_line.py",
+        "sourceSha256": "0ee96b76471ee0d197ce6e75a1cacfa32932f7cc5adee4b8ef36bfd867a64263",
+        "utf8ByteColumn": 35,
+        "unicodeCodePointColumn": 28,
+        "unicodeAndEmojiBeforeCall": true
+      },
+      {
+        "path": "same_line.py",
+        "sourceSha256": "0ee96b76471ee0d197ce6e75a1cacfa32932f7cc5adee4b8ef36bfd867a64263",
+        "utf8ByteColumn": 50,
+        "unicodeCodePointColumn": 43,
+        "unicodeAndEmojiBeforeCall": true
+      }
+    ]
+  },
+  "testedArtifactLink": {
+    "ok": true,
+    "programFilesMatched": 166,
+    "all166PerFileHashesMatched": true,
+    "sourceInventorySha256": "b00c7279a325f0c23d32e52f22c337d88de134f59ff71250e539cf04485eb2d4",
+    "vm778IntentSha256": "67e47b6a9e717fa7c3fb94493afeac184fb61762aa84f38ede00429f359592a8",
+    "testKitPath": "work/harness-source-location-live-native-closure-20261103/kit/work/harness-purge-improved/package",
+    "scope": "program bytes matched; test-only reachability improvements were separately tested"
+  },
+  "legacyTaskObservedState": "partial",
+  "review": {
+    "requestedModel": "claude-opus-5-5",
+    "actualModels": [
+      "claude-opus-5-5"
+    ],
+    "effort": "high",
+    "success": true,
+    "scope": "read-only deployment/evidence review; no execution",
+    "verdict": "no release blockers in supplied scope",
+    "dispositions": {
+      "serviceStates": "added independent post-start active observations for all three units; old field relabeled in results",
+      "copyDigest": "docs now say scanner-copy digest, matching UI disclosure 副本标识",
+      "unicodeConcern": "actual report-bound snapshot includes Chinese and emoji before same-line sites; byte35/50 vs codepoint28/43, explicit proof added",
+      "versionRulesAndLegacy": "added runtime pin/version/rule-count and legacy partial state evidence",
+      "downloadEquality": "method documented as parsed JSON object equality",
+      "testedArtifact": "all166 file hashes compared with actualVM778 kit; receipt added",
+      "rebuildRehearsal": "executed in this batch using established source; helpers and current receipts archived",
+      "activeStateEnum": "current parent/run insert and terminal logic use running/cancelling; pending only applies to child step and pending-stop table checked",
+      "futureDeployHelper": "rollback health and SSH interruption containment remain follow-up; current successful path does not claim fault-injection coverage"
+    },
+    "documentationClarificationsReReviewed": false,
+    "olderSKFRequestedModelClosureCompleted": false
+  }
+}

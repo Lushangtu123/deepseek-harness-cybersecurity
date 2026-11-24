@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-10 America/Los_Angeles",
+  "state": "reviewed-isolated-queue-control-complete-research-tool-reuse-blocked",
+  "archiveBlockers": 0,
+  "confirmedResearchToolDefects": 2,
+  "researchToolReuseAllowed": false,
+  "aggregates": [
+    {
+      "mode": "unqueued",
+      "trials": 4,
+      "clients": 24,
+      "connected": 24,
+      "complete": 4,
+      "failed": 20,
+      "errors": {
+        "reply|ConnectionResetError|54": 20
+      }
+    },
+    {
+      "mode": "existing-queue",
+      "trials": 4,
+      "clients": 24,
+      "connected": 24,
+      "complete": 24,
+      "failed": 0,
+      "errors": {}
+    }
+  ],
+  "pairedBlocks": 4,
+  "independentBinomialRateClaim": false,
+  "oneTimeAcceptDelaySeconds": 0.025,
+  "requestedBacklog": 1,
+  "newVmRequests": 0,
+  "dailyProgramModified": false,
+  "hostPermissionsExpanded": false,
+  "vmConfigurationModified": false,
+  "deploymentPerformed": false,
+  "githubPushPerformed": false,
+  "preciseProductionRootCauseConfirmed": false,
+  "inputs": {
+    "plan.md": "e2c452911e4b004e7377ebddbb7740079dcb72b1a0a4c5176cc6e970896c12f0",
+    "findings.md": "0cbec092c907f382e644400806008096f39bf4dc0d02f6717e5014a22968ec0b",
+    "analysis.json": "7e668897ba8a143f7d2837bca75bf346abdc2d787781705dfe59ca61deec2977",
+    "record-analysis.py": "fd91108f4473b646ce482d2d47328c24b027f85d8b47d636e9ef8822b527916b",
+    "tooling/admission.py": "acf53d5e8cf1cdbcd09605a753765b3d88bddb77ea981d05497a2406e98485e9",
+    "tooling/analysis.test.py": "2b243024cf75f22d6aa74976bf52ee10a2abf37ba0a0f5de7c76c70cf8e285cd",
+    "inputs/manage.py": "69cc27ae32ba7be4362e6a4d94a4f253ac54d573380c98f58fa40bdb8758e401",
+    "inputs/ssh-queue.test.py": "07979ee7d2d38fd9a0796d8f53e960c8cf6680ce4569533d7bffda6aeece8e00",
+    "execution-contract.json": "36d51c60a8961127870de15f26aff172e9229ca4b3f414e8b9b52f52d0f2b33b",
+    "control-results.json": "37047ee50f8a52a7fc9e9cfcff5043a9dd8669c749d1e286fbdaadcb78560332",
+    "red.txt": "473ba9b109e1eae7c3cd78ba87be493cd623e9e55f435e1319a67b2e53c2dd1c",
+    "red-deadline.txt": "6597d3f10f59faf5cbf54856979d25bbd3bed848e8964ac442f53536a4e7ac9b",
+    "analysis-tests.txt": "489d8fec4214192d21ef621f802a943fb57007a29204410d590ff3ceb58c5003",
+    "queue-tests.txt": "d4c1f70a9cdab54164c861c9da3311e6108d8cf51a907f9942bfe5967f61be5f"
+  },
+  "executionContractSha256": "36d51c60a8961127870de15f26aff172e9229ca4b3f414e8b9b52f52d0f2b33b",
+  "rawResultSha256": "37047ee50f8a52a7fc9e9cfcff5043a9dd8669c749d1e286fbdaadcb78560332",
+  "review": {
+    "actualModels": [
+      "claude-opus-5-5"
+    ],
+    "effort": "high",
+    "elapsedSeconds": 233.6,
+    "state": "completed",
+    "stopReason": "end_turn",
+    "promptSha256": "6891a5576cd8341dce48769f55b903412fd2e67a7f764edc3cf71757d9fb2dbb",
+    "receiptSha256": "d454d7bc78d1da62e56e32890954d605632ee4c58c8d2a7fc8c851f78ff5b8e9",
+    "reportSha256": "e592c67acabb7dd1e398438cc90a7041293ebf96a2d44bede627b65dc5976496",
+    "triageSha256": "7a5a8a87f5bc57b56d106f99d96ea96738daeb3881246aad05c8e49f24a34e59"
+  },
+  "postReviewLocalBookkeeping": {
+    "baselinePostcheckSha256": "e50c18ad78475afc229d6566d1bc10c624ddcbc2b4dbd54ba63239a027bfff7b",
+    "testProvenanceSha256": "c92b7853a681ca10b3b5d5fbe687fcc6b0ffbcf4266eb6c25801f0f272143b9a",
+    "archiveGeneratorSha256": "ce552a9886835d0f9f9c2e23cddc41e0c4a5b221460c1454ae56d676d0f10d6a",
+    "aggregatesIndependentlyRecomputed": true,
+    "notModelRechecked": true
+  },
+  "tests": {
+    "existingQueue": 11,
+    "evidenceChecks": 8,
+    "initialEnvironmentFailureCount": 1,
+    "initialFailureNotCountedAsPass": true
+  },
+  "pending": [
+    "D1/D2/R1 research tool before reuse",
+    "P1 controller death and child lock lifetime",
+    "P2 actual bypass callers and shared bottleneck",
+    "ControlMaster fail-closed lifecycle if actual concurrency requires it",
+    "production13 per-flow attribution, old SYN/unknown auth/sidebar/ordinary R3"
+  ]
+}

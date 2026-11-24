@@ -1,0 +1,550 @@
+{
+  "date": "2026-11-11",
+  "scope": "offline-candidate-only",
+  "state": "preflight-complete-formal-blind-test-not-started",
+  "formalGate": "blocked-before-sampling",
+  "protocol": {
+    "protocolSha256": "501d8d2bee024a74983ba2db4e8218f8ff7be9e81eaa0dea750745b1ae67ee52",
+    "sourceFiles": {
+      "docs/security-workspace/ordinary-rules-combined.candidate.json": "c4357ddb0d52f3273525be08d8f5cdc1182523c1f9502497722bb6a44fe4ef94",
+      "work/harness-purge-improved/security-rules.json": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+      "docs/security-workspace/review-quality-policy.candidate.json": "e9b429fc21e5d86578333e6cd4cfad9ef2455be578b7ea37336fced14c788ad1",
+      "docs/security-workspace/review-sample-ledger.json": "62f38218bb84fd4b1ff1ef2b8133d6deaa71c7d132d03501e1cf6a732b195b7e",
+      "scripts/reviewer_snapshot.py": "10e152e231e5d43def8f1edace15edcffd4bae088c22f1790b92b5434385c55e",
+      "scripts/reviewer_storage.py": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202",
+      "scripts/review_quality_gate.mjs": "99aea3894238a34f17ee63b95a5c216b565a23a61aa1de0c2e8093877a55f5a0"
+    },
+    "catalogCutoffExclusive": "2026-11-11T08:00:00Z",
+    "seed": "harness-r3-python-v1",
+    "newSampleSourceSelected": false,
+    "previousProtocolSha256": "8a27f281066c1e7d9543df46437ffd66413f404dabf7e6e30dbb374d9956744c"
+  },
+  "catalogSnapshot": {
+    "scope": "source catalog preflight only; no source checkout, labelling, or sample selection",
+    "protocolSha256": "501d8d2bee024a74983ba2db4e8218f8ff7be9e81eaa0dea750745b1ae67ee52",
+    "cutoffExclusiveUtc": "2026-11-11T08:00:00+00:00",
+    "capturedAtUtc": "2026-11-12T04:43:45.298007+00:00",
+    "catalog": {
+      "python/CWE-94": {
+        "snapshotPages": [
+          {
+            "file": "github-94-page-01.json",
+            "sha256": "3bc6f6f4638e97baf617b8e92c08b9ba1e9a30e4710d4b357e1929f476f68c2f",
+            "records": 100,
+            "url": "https://api.github.com/advisories?ecosystem=pip&type=reviewed&is_withdrawn=false&cwes=94&per_page=100&sort=published&direction=asc"
+          },
+          {
+            "file": "github-94-page-02.json",
+            "sha256": "f494d34831a045eccd6eef9917ae0df5ccd0d78f6c3a3ddfc72986d7db371e6f",
+            "records": 100,
+            "url": "https://api.github.com/advisories?ecosystem=pip&type=reviewed&is_withdrawn=false&cwes=94&per_page=100&sort=published&direction=asc&after=Y3Vyc29yOnYyOpK0MjAyNC0wOC0yMlQyMTozMToyOVrOAAPuOQ%3D%3D"
+          },
+          {
+            "file": "github-94-page-03.json",
+            "sha256": "81d5d3d69aeb2052da7314288afd11946ba200c2ea02ed6b42d03a81833d73ab",
+            "records": 69,
+            "url": "https://api.github.com/advisories?ecosystem=pip&type=reviewed&is_withdrawn=false&cwes=94&per_page=100&sort=published&direction=asc&after=Y3Vyc29yOnYyOpK0MjAyNi0wNS0yMVQxNzozMDo1N1rOAAVzTA%3D%3D"
+          }
+        ],
+        "catalogRecords": 269,
+        "publishedBeforeCutoff": 269,
+        "distinctPackageNamesBeforeFamilyReview": 159
+      },
+      "python/CWE-95": {
+        "snapshotPages": [
+          {
+            "file": "github-95-page-01.json",
+            "sha256": "a2fcc946d9e3c19259a7a096e7ee5e55a0b8f6c0764567c1819ce2d669d7158e",
+            "records": 35,
+            "url": "https://api.github.com/advisories?ecosystem=pip&type=reviewed&is_withdrawn=false&cwes=95&per_page=100&sort=published&direction=asc"
+          }
+        ],
+        "catalogRecords": 35,
+        "publishedBeforeCutoff": 35,
+        "distinctPackageNamesBeforeFamilyReview": 25
+      }
+    },
+    "idsInBothCwes": 14,
+    "pypaPinnedCommit": "8e3fe64f4612dd6037f5381f8e0004d38bebc56b",
+    "pypaMetadataSha256": "b9af51b93dff65f1106d0343356f267fd8fc4328e6122f4fb325faf96f4f1a40",
+    "knownSamplesAcceptedForQualification": 0,
+    "newSourcesReadByScannerOrReviewer": 0,
+    "catalogCountIsNotQualifiedSampleCount": true
+  },
+  "preflight": {
+    "state": "preflight-completed-formal-blind-run-gated",
+    "preflightDidNotConsumeFreshSources": true,
+    "sampleLedgerSha256": "62f38218bb84fd4b1ff1ef2b8133d6deaa71c7d132d03501e1cf6a732b195b7e",
+    "catalog": {
+      "python/CWE-94": {
+        "advisoriesBeforeCutoff": 269,
+        "distinctPackageNamesBeforeFamilyReview": 159
+      },
+      "python/CWE-95": {
+        "advisoriesBeforeCutoff": 35,
+        "distinctPackageNamesBeforeFamilyReview": 25
+      }
+    },
+    "catalogOverlappingAdvisoryIds": 14,
+    "qualifiedSampleCountByCategory": {
+      "python/CWE-94": {
+        "positive": 0,
+        "negative": 0,
+        "missingPositive": 20,
+        "missingNegative": 30,
+        "reason": "new source code not selected or labelled; all four diagnostic inputs already used"
+      },
+      "python/CWE-95": {
+        "positive": 0,
+        "negative": 0,
+        "missingPositive": 20,
+        "missingNegative": 30,
+        "reason": "new source code not selected or labelled; all four diagnostic inputs already used"
+      }
+    },
+    "rawScans": {
+      "baseline": {
+        "scanned": 4,
+        "hits": 3,
+        "errors": 0
+      },
+      "candidate": {
+        "scanned": 4,
+        "hits": 4,
+        "errors": 0
+      }
+    },
+    "caseEvidence": {
+      "byCase": [
+        {
+          "id": "BenchmarkTest00074",
+          "cwe": "CWE-94",
+          "truth": "positive",
+          "sourceSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+          "location": {
+            "line": 51,
+            "column": 4
+          },
+          "baseline": {
+            "raw": "hit",
+            "hits": [
+              {
+                "rule": "policy.harness.python.exec",
+                "start": {
+                  "line": 51,
+                  "col": 4,
+                  "offset": 1759
+                },
+                "end": {
+                  "line": 51,
+                  "col": 13,
+                  "offset": 1768
+                },
+                "sink": {
+                  "sink": "exec",
+                  "line": 51,
+                  "column": 4
+                },
+                "matchMode": "same-line"
+              }
+            ]
+          },
+          "candidate": {
+            "raw": "hit",
+            "hits": [
+              {
+                "rule": "policy.harness.python.exec",
+                "start": {
+                  "line": 51,
+                  "col": 4,
+                  "offset": 1759
+                },
+                "end": {
+                  "line": 51,
+                  "col": 13,
+                  "offset": 1768
+                },
+                "sink": {
+                  "sink": "exec",
+                  "line": 51,
+                  "column": 4
+                },
+                "matchMode": "same-line"
+              }
+            ]
+          }
+        },
+        {
+          "id": "BenchmarkTest00073",
+          "cwe": "CWE-94",
+          "truth": "negative",
+          "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+          "location": {
+            "line": 54,
+            "column": 5
+          },
+          "baseline": {
+            "raw": "hit",
+            "hits": [
+              {
+                "rule": "policy.harness.python.eval",
+                "start": {
+                  "line": 53,
+                  "col": 16,
+                  "offset": 1742
+                },
+                "end": {
+                  "line": 55,
+                  "col": 5,
+                  "offset": 1762
+                },
+                "sink": {
+                  "sink": "eval",
+                  "line": 54,
+                  "column": 5
+                },
+                "matchMode": "unique-sink-within-span"
+              }
+            ]
+          },
+          "candidate": {
+            "raw": "hit",
+            "hits": [
+              {
+                "rule": "policy.harness.python.eval",
+                "start": {
+                  "line": 53,
+                  "col": 16,
+                  "offset": 1742
+                },
+                "end": {
+                  "line": 55,
+                  "col": 5,
+                  "offset": 1762
+                },
+                "sink": {
+                  "sink": "eval",
+                  "line": 54,
+                  "column": 5
+                },
+                "matchMode": "unique-sink-within-span"
+              }
+            ]
+          }
+        },
+        {
+          "id": "skf-viewer-upstream",
+          "cwe": "CWE-95",
+          "truth": "positive",
+          "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+          "location": {
+            "line": 37,
+            "column": 20
+          },
+          "baseline": {
+            "raw": "hit",
+            "hits": [
+              {
+                "rule": "policy.harness.python.eval",
+                "start": {
+                  "line": 37,
+                  "col": 20,
+                  "offset": 1296
+                },
+                "end": {
+                  "line": 37,
+                  "col": 51,
+                  "offset": 1327
+                },
+                "sink": {
+                  "sink": "eval",
+                  "line": 37,
+                  "column": 20
+                },
+                "matchMode": "same-line"
+              }
+            ]
+          },
+          "candidate": {
+            "raw": "hit",
+            "hits": [
+              {
+                "rule": "policy.harness.python.eval",
+                "start": {
+                  "line": 37,
+                  "col": 20,
+                  "offset": 1296
+                },
+                "end": {
+                  "line": 37,
+                  "col": 51,
+                  "offset": 1327
+                },
+                "sink": {
+                  "sink": "eval",
+                  "line": 37,
+                  "column": 20
+                },
+                "matchMode": "same-line"
+              }
+            ]
+          }
+        },
+        {
+          "id": "skf-viewer-authored-fix",
+          "cwe": "CWE-95",
+          "truth": "negative",
+          "sourceSha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+          "location": {
+            "line": 37,
+            "column": 20
+          },
+          "baseline": {
+            "raw": "no-hit",
+            "hits": []
+          },
+          "candidate": {
+            "raw": "no-hit",
+            "hits": []
+          }
+        }
+      ],
+      "toolEvidenceKeys": [
+        "discoveredImportChecks",
+        "guardChecks",
+        "guardEvidence",
+        "importChecks",
+        "importEvidence",
+        "plainStringEvidence",
+        "version"
+      ],
+      "positiveConclusions": 0,
+      "negativeConclusions": 0,
+      "priorSamplesOnly": true
+    },
+    "observations": {
+      "version": 1,
+      "guardChecks": 4,
+      "importChecks": 0,
+      "discoveredImportChecks": 0,
+      "guardEvidence": 0,
+      "importEvidence": 0,
+      "plainStringEvidence": 1
+    },
+    "receipt": {
+      "version": 2,
+      "state": "completed",
+      "snapshotVersion": 2,
+      "snapshotSha256": "79df0452c3132d8d4361261af24ec94f3ea23c898441337f253388c5aa8603e1",
+      "scanSha256": "037658fe472feea1fb9fadac6b7e0e05655ce505f098bf6f13f047e49ece8cc2",
+      "allDiagnosticSourceHashesCovered": true,
+      "diagnosticQualityIdenticalOnMacAndVM": true,
+      "qualitySha256": "267f5418f8a116e9a7deb4c46abadecb1eae90f267dc47a33518bf507a48fb8b"
+    },
+    "quality": {
+      "python/CWE-94": {
+        "qualified": 0,
+        "diagnostic": {
+          "total": 2,
+          "positive": 1,
+          "negative": 1,
+          "evidenceOnly": 0,
+          "raw": {
+            "positiveHit": 1,
+            "positiveMiss": 0,
+            "negativeHit": 1,
+            "negativeNoHit": 0,
+            "unknown": 0,
+            "falsePositiveRate": 1,
+            "recall": 1,
+            "unknownRate": 0
+          },
+          "reviewed": {
+            "truePositive": 0,
+            "falsePositive": 0,
+            "trueNegative": 0,
+            "falseNegative": 0,
+            "falseExclusion": 0,
+            "unknown": 2,
+            "unknownPositive": 1,
+            "unknownNegative": 1,
+            "falsePositiveRate": null,
+            "falsePositiveRateUpperBound": 1,
+            "falseNegativeRate": null,
+            "falseExclusionRate": 0,
+            "confirmedRecall": 0,
+            "unknownRate": 1,
+            "resolvedCases": 0
+          }
+        },
+        "blockers": [
+          "insufficient-labelled-cases",
+          "raw-recall-below-threshold",
+          "reviewed-false-positive-rate-unqualified",
+          "reviewed-false-positive-bound-unqualified",
+          "false-exclusion-rate-unqualified",
+          "review-unknown-rate-unqualified",
+          "confirmed-recall-below-threshold"
+        ]
+      },
+      "python/CWE-95": {
+        "qualified": 0,
+        "diagnostic": {
+          "total": 2,
+          "positive": 1,
+          "negative": 1,
+          "evidenceOnly": 0,
+          "raw": {
+            "positiveHit": 1,
+            "positiveMiss": 0,
+            "negativeHit": 0,
+            "negativeNoHit": 1,
+            "unknown": 0,
+            "falsePositiveRate": 0,
+            "recall": 1,
+            "unknownRate": 0
+          },
+          "reviewed": {
+            "truePositive": 0,
+            "falsePositive": 0,
+            "trueNegative": 1,
+            "falseNegative": 0,
+            "falseExclusion": 0,
+            "unknown": 1,
+            "unknownPositive": 1,
+            "unknownNegative": 0,
+            "falsePositiveRate": 0,
+            "falsePositiveRateUpperBound": 0,
+            "falseNegativeRate": null,
+            "falseExclusionRate": 0,
+            "confirmedRecall": 0,
+            "unknownRate": 0.5,
+            "resolvedCases": 1
+          }
+        },
+        "blockers": [
+          "insufficient-labelled-cases",
+          "raw-recall-below-threshold",
+          "reviewed-false-positive-rate-unqualified",
+          "reviewed-false-positive-bound-unqualified",
+          "false-exclusion-rate-unqualified",
+          "review-unknown-rate-unqualified",
+          "confirmed-recall-below-threshold"
+        ]
+      }
+    },
+    "qualityBlockers": [
+      "development-sample-reused",
+      "vulnerability-oracle-incomplete",
+      "sample-selection-ineligible",
+      "python/CWE-94:insufficient-labelled-cases",
+      "python/CWE-94:raw-recall-below-threshold",
+      "python/CWE-94:reviewed-false-positive-rate-unqualified",
+      "python/CWE-94:reviewed-false-positive-bound-unqualified",
+      "python/CWE-94:false-exclusion-rate-unqualified",
+      "python/CWE-94:review-unknown-rate-unqualified",
+      "python/CWE-94:confirmed-recall-below-threshold",
+      "python/CWE-95:insufficient-labelled-cases",
+      "python/CWE-95:raw-recall-below-threshold",
+      "python/CWE-95:reviewed-false-positive-rate-unqualified",
+      "python/CWE-95:reviewed-false-positive-bound-unqualified",
+      "python/CWE-95:false-exclusion-rate-unqualified",
+      "python/CWE-95:review-unknown-rate-unqualified",
+      "python/CWE-95:confirmed-recall-below-threshold"
+    ],
+    "dailyProtected": {
+      "programs": 169,
+      "projectDatabases": 42,
+      "checks": {
+        "program": true,
+        "config": true,
+        "pins": true,
+        "runtime": true,
+        "databases": true,
+        "outsideMountNamespace": true,
+        "homeInode": true
+      }
+    },
+    "ownedReviewCleanup": {
+      "confirmed": true,
+      "idAbsent": true,
+      "nameAbsent": true,
+      "clientsStopped": true,
+      "creationResolved": true,
+      "errors": [],
+      "checkedAt": "2026-11-12T04:45:14.281764+00:00",
+      "clientsInitiallyStopped": true
+    },
+    "r3Qualified": false
+  },
+  "verification": {
+    "scanArgumentsMatchExceptRuleMountAndContainerName": true,
+    "baselineRawEnvelopeMatchesDerivedScan": true,
+    "candidateRawEnvelopeMatchesDerivedScan": true,
+    "addedRuleSpanWithinExistingCall": true,
+    "structureObservationUnverified": true,
+    "protocol-r2/selection-protocol.md": "501d8d2bee024a74983ba2db4e8218f8ff7be9e81eaa0dea750745b1ae67ee52",
+    "catalog/summary.json": "38fec07cb5c6681281a48e28f1cb59d162114bcef26e9bbd96925156bd646787",
+    "preflight-r2/vm-result.json": "ceff5a85efc855a637d16a4b547af19ec0ccc9def3aa41137710ff8961e45cb1",
+    "preflight-r2/summary.json": "13fe6273fb408a4d890ce0dbea5824ae615c3e5f5e86a63ddde61262eeb94ad1"
+  },
+  "preflightReviewTriage": {
+    "receiptSha256": "f53bd550debbe4dc7cbfa666cfe33072a6db7eabc831a7b3f484154fecc3f844",
+    "disposition": {
+      "unknown-only-diagnostic-mapper": "Intentional for diagnostic runs with this pinned seven-field reviewer contract. Primary no-decision evidence is the actual raw reviewer report and source, not the diagnostic mapper counters.",
+      "exec-guard-and-span": "Verified scope limitation. Review batch skips eval-specific guard analysis for exec and begins from raw hit start. Existing string guard resolved 53 to 54 here. No general alignment claim.",
+      "position-input-freeze": "Confirmed limitation. Diagnostic map was pinned with the worker input and output artifacts but not in the independent quality freeze itself. Formal evaluation requires a mapping manifest pinned at freeze time.",
+      "raw-threshold-reason": "The report top-level qualified denominator is zero and its rate is null. The 1/1 values are separate diagnostic metrics. No inconsistency in the existing gate.",
+      "negative-hit-required": "Preflight fixture assertion only, no population accuracy inference.",
+      "extra-raw-hit": "Verified by nested byte range. Candidate-only rule span 1301–1326 is contained inside the same eval call span 1296–1327, no extra scored case."
+    },
+    "preflightDecision": "blocked-before-sampling",
+    "newSamplesConsumed": 0
+  },
+  "reviewHistory": {
+    "protocol": {
+      "requestedModel": "claude-opus-5-5",
+      "requestedEffort": "high",
+      "claudeState": "failed",
+      "claudeProblem": "You've hit your weekly limit · resets Nov 13 at 1am (America/Los_Angeles)",
+      "claudeReceiptSha256": "a55a1e1b9d99a3e223ba1047fe6e376232226108cb3d0b8e78344fc2459c466b",
+      "actualFallbackModel": "deepseek-flash",
+      "receiptSha256": "5a552687cd101d39c930a1b29cad131b2a20168a7ae99155057808eeed8bbbe1",
+      "reportSha256": "81eb36e3f1e52e02600c570c767d46f1f6eeda0a9ccf077db73ccacb49ac9d62",
+      "promptSha256": "f88eaf04d0a048927f19270369e9fe53cb8c61f14317fbde2c37b43b603feba1"
+    },
+    "protocol-r2": {
+      "requestedModel": "claude-opus-5-5",
+      "requestedEffort": "high",
+      "claudeState": "failed",
+      "claudeProblem": "You've hit your weekly limit · resets Nov 13 at 1am (America/Los_Angeles)",
+      "claudeReceiptSha256": "2dd6cb01ea6ce4252de5d33d7487aaa09018aba47d1e8492206b30c1b52ed216",
+      "actualFallbackModel": "deepseek-flash",
+      "receiptSha256": "a3029351519ae1e6000f33513cefaefcd51f3c9bc925ba3f84f188cadb8ae028",
+      "reportSha256": "b2b7d290187c0b4bcb56a3a9ffc693b5074c171e8dd50fc340d2297da4d276b5",
+      "promptSha256": "1e119d84939120c99ba67d25ecb17e069d08aa8194268f7b46e7bf900389bd69"
+    },
+    "preflight-r2": {
+      "requestedModel": "claude-opus-5-5",
+      "requestedEffort": "high",
+      "claudeState": "failed",
+      "claudeProblem": "You've hit your weekly limit · resets Nov 13 at 1am (America/Los_Angeles)",
+      "claudeReceiptSha256": "1c2b97701825e4f3328182cee6856e70492063a595a72da64181529b475d7aef",
+      "actualFallbackModel": "deepseek-flash",
+      "receiptSha256": "f53bd550debbe4dc7cbfa666cfe33072a6db7eabc831a7b3f484154fecc3f844",
+      "reportSha256": "49aa70b81a723962f2c88b3783adfe837237fda6427d3dbeffe7dcffe74c1852",
+      "promptSha256": "4f97262425988f09ae7ec23f62c249f93246caec80d4995ccca74502638d9e6b"
+    }
+  },
+  "formalMetrics": null,
+  "freshSourcesScanned": 0,
+  "newLedgerEntries": 0,
+  "r3Qualified": false,
+  "dailyDeployed": false,
+  "reportSha256": "08ff43d61277cb6121075bed70cd1bfc5d93197456b232ef0b8b9374ce8542ac",
+  "priorDraftReview": {
+    "state": "claude-quota-failure-draft-superseded",
+    "receiptSha256": "d1ee424aea698c319e401751e30da5f1559fea26877a002e57ecb2d08bb35594",
+    "draftDigestReferenceCorrected": true
+  }
+}

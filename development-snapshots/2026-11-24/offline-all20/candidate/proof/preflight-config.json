@@ -1,0 +1,93 @@
+{
+ "callOffset": 14,
+ "callerDescriptor": {
+  "codeUnits": 12,
+  "consts": [
+   {
+    "t": "none"
+   },
+   {
+    "t": "str",
+    "v": "0"
+   }
+  ],
+  "filename": "/review/preflight/preflight_selfcheck.py",
+  "firstlineno": 168,
+  "flags": 3,
+  "kind": "caller-code-object",
+  "names": [
+   {
+    "t": "str",
+    "v": "eval"
+   }
+  ],
+  "qualname": "_run",
+  "schema": "dynstruct-v1"
+ },
+ "callerPath": "/review/preflight/preflight_selfcheck.py",
+ "callerSha256": "24484cc8305b002a8fcb007e769b717cb6cd622b07e46991611b208b87ed3b65",
+ "expectedCodeSha256": "59fbf27117957f3b933508fb2670f31f9c6b2bc56f93e1b71367abb7e31df898",
+ "expectedStructure": {
+  "codeBytes": 4,
+  "codeHex": "97007900",
+  "consts": [
+   {
+    "t": "int",
+    "v": 0
+   }
+  ],
+  "filename": "<string>",
+  "firstlineno": 1,
+  "flags": 0,
+  "mode": "eval",
+  "names": [],
+  "schema": "dynstruct-v1"
+ },
+ "expectedStructureSha256": "daa75692969ee231c422d100d6e347d01b8543ab75fff5d08322ff1d8943fc5c",
+ "fixtureImported": false,
+ "intZeroTag": 1,
+ "interpreterSha256": "7d1bf26e09ba6e5824f7f7587f2d37090def82ae83fe81485e3163a70bc8f7f5",
+ "kind": "zero-target-preflight-config",
+ "layout": {
+  "frameOffsets": {
+   "frameExecutableOffset": 0,
+   "framePrevInstrOffset": 56,
+   "tstateCframeOffset": 56
+  },
+  "offsets": {
+   "codeAdaptiveOffset": 192,
+   "codeConstsOffset": 24,
+   "codeFilenameOffset": 112,
+   "codeFirstlinenoOffset": 68,
+   "codeFlagsOffset": 48,
+   "codeNamesOffset": 32,
+   "codeQualnameOffset": 128,
+   "codeSizeOffset": 16,
+   "intDigitOffset": 24,
+   "intTagOffset": 16,
+   "strDataOffset": 40,
+   "strLengthOffset": 16,
+   "strStateOffset": 32,
+   "tupleItemsOffset": 24,
+   "tupleSizeOffset": 16,
+   "typeNameOffset": 24
+  }
+ },
+ "librarySha256": "73531f4f375bbd8d97bd55cce30f48900a7d9c9f597aa298d4f08d057a95b4c5",
+ "preflightId": "c58ce185e8804901b0abae8510f8d081",
+ "profile": {
+  "bpftraceVersion": "bpftrace v0.20.2",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "interpreterPath": "/usr/bin/python3.12",
+  "interpreterSha256": "7d1bf26e09ba6e5824f7f7587f2d37090def82ae83fe81485e3163a70bc8f7f5",
+  "libraryPath": "/usr/lib/libpython3.12.so.1.0",
+  "librarySha256": "73531f4f375bbd8d97bd55cce30f48900a7d9c9f597aa298d4f08d057a95b4c5",
+  "mechanism": "bpftrace-uprobe-_PyEval_EvalFrameDefault",
+  "pythonVersion": "3.12.15"
+ },
+ "profileSha256": "be4fac9697219f047d9d631006b10f3f0791ea0acec51ddc95b623412af295e8",
+ "protocolRevision": 3,
+ "pythonVersion": "3.12.15",
+ "sourceSha256": "53e142e3ca739ae19a9b9e856b0ea9f26209e18d484ee065c54bb30708b38369",
+ "targetExecuted": false
+}

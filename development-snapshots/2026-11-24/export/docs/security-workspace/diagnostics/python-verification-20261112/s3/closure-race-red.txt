@@ -1,0 +1,17 @@
+..F
+======================================================================
+FAIL: test_returned_dependency_bytes_are_the_same_bytes_that_were_hashed (__main__.SnapshotTest.test_returned_dependency_bytes_are_the_same_bytes_that_were_hashed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/verifier_snapshot.test.py", line 27, in test_returned_dependency_bytes_are_the_same_bytes_that_were_hashed
+    self.assertEqual(m.sha256(returned['dep.py']).hexdigest(),want)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '046e6948155115dd5a7db194412c9eaafb427c00b8aaf188970c0655d40aa5ac' != '5f7730eeb4cbfa3d0e84c8c98324072c1dc903c0b6c4d85e143389c86e9872f7'
+- 046e6948155115dd5a7db194412c9eaafb427c00b8aaf188970c0655d40aa5ac
++ 5f7730eeb4cbfa3d0e84c8c98324072c1dc903c0b6c4d85e143389c86e9872f7
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.105s
+
+FAILED (failures=1)

@@ -1,0 +1,178 @@
+{
+  "state": "reviewed-bounded-daily-pilot-complete",
+  "scopeBlockers": 0,
+  "controllerInstalledForDailyTrial": true,
+  "vmApplicationReleaseChanged": false,
+  "exportControllerUpdated": false,
+  "ordinaryR3Qualified": false,
+  "historicalRootCauseConfirmed": false,
+  "githubPushed": false,
+  "installedControllerSha256": "19bd85c390e6d7482f78e77f6fe9de733258df0454d9a7921125be82b4a48bbf",
+  "previousControllerSha256": "69cc27ae32ba7be4362e6a4d94a4f253ac54d573380c98f58fa40bdb8758e401",
+  "observation": {
+    "state": "bounded-daily-pilot-complete",
+    "activity": [
+      {
+        "reference": "1fd28ccf-ae5a-4330-ab3f-0ff039aff247",
+        "category": "diagnostic-sample",
+        "waitMs": 0,
+        "lockAcquired": true,
+        "contended": false,
+        "lastObservedHolder": null,
+        "executorEntered": true,
+        "outcome": "completed",
+        "elapsedMs": 106,
+        "observedAtUnix": 1794346319.666425
+      },
+      {
+        "reference": "d3538c96-7127-4ecb-b095-c97f69c98e2c",
+        "category": "clock-read",
+        "waitMs": 0,
+        "lockAcquired": true,
+        "contended": false,
+        "lastObservedHolder": null,
+        "executorEntered": true,
+        "outcome": "completed",
+        "elapsedMs": 292,
+        "observedAtUnix": 1794346377.8191948
+      },
+      {
+        "reference": "2c4a1a40-c0a2-4094-af6a-2d0b9ed2f3e2",
+        "category": "storage-capacity",
+        "waitMs": 216,
+        "lockAcquired": true,
+        "contended": true,
+        "lastObservedHolder": {
+          "reference": "d3538c96-7127-4ecb-b095-c97f69c98e2c",
+          "category": "clock-read",
+          "seenAfterMs": 1
+        },
+        "executorEntered": true,
+        "outcome": "completed",
+        "elapsedMs": 363,
+        "observedAtUnix": 1794346377.984449
+      },
+      {
+        "reference": "3dfe0cc6-57b5-4e98-82b5-bc00a2e457e4",
+        "category": "diagnostic-sample",
+        "waitMs": 0,
+        "lockAcquired": true,
+        "contended": false,
+        "lastObservedHolder": null,
+        "executorEntered": true,
+        "outcome": "completed",
+        "elapsedMs": 139,
+        "observedAtUnix": 1794346393.645246
+      }
+    ],
+    "windowSeconds": 74.099,
+    "guestProgramFilesChecked": 169,
+    "guestProgramUnchanged": true,
+    "protectedFilesChecked": 6,
+    "protectedUnchanged": true,
+    "historicalRootCauseConfirmed": false,
+    "atUnix": 1794346393.6465878
+  },
+  "swapFixture": {
+    "state": "passed",
+    "checks": [
+      "atomic-forward",
+      "exact-rollback",
+      "executable-mode-preserved",
+      "protected-drift-refused-before-write",
+      "no-staging-file-left",
+      "temporary-fixture-removed"
+    ],
+    "vmRequests": 0
+  },
+  "activityRegressionTests": 9,
+  "r3Preparation": {
+    "state": "read-only-preparation",
+    "ordinaryR3Qualified": false,
+    "candidateThresholds": {
+      "python/CWE-94": {
+        "minimumPositive": 20,
+        "minimumNegative": 30,
+        "minimumRawRecall": 0.9,
+        "maximumReviewedFalsePositiveRate": 0.05,
+        "maximumFalseExclusionRate": 0,
+        "maximumUnknownRate": 0.2,
+        "minimumConfirmedRecall": 0.9
+      },
+      "python/CWE-95": {
+        "minimumPositive": 20,
+        "minimumNegative": 30,
+        "minimumRawRecall": 0.9,
+        "maximumReviewedFalsePositiveRate": 0.05,
+        "maximumFalseExclusionRate": 0,
+        "maximumUnknownRate": 0.2,
+        "minimumConfirmedRecall": 0.9
+      }
+    },
+    "sources": {
+      "review-quality-policy.candidate.json": "e9b429fc21e5d86578333e6cd4cfad9ef2455be578b7ea37336fced14c788ad1",
+      "review-sample-ledger.json": "f9d4a3bf73c7806d6193dc96381162465402f71a917e8fc870fca04623e16f77",
+      "review-quality-v3-results.json": "cd074d202c05380e5c11446fd5f6a6ad385e00319afded337b85a2d1db3fbaf1",
+      "independent-oracle.md": "843632c32bcae72c003a84616c63600ecc09bec029cce9c82e65941f1baaa984"
+    },
+    "existingReportState": {
+      "baseline": "blocked",
+      "combined": "blocked"
+    },
+    "nextActions": [
+      "Choose and freeze one candidate and its stated coverage before examining a fresh holdout.",
+      "Select sources not already used for development or prior acceptance and register each attempt.",
+      "Independently establish vulnerability location, applicability and normal-path truth.",
+      "Measure raw hits, reviewed outcomes and unknowns against unchanged candidate thresholds.",
+      "Review actual evidence externally before release review."
+    ],
+    "scope": "Documentation of existing gate and next work. No new sample, detector change, score or R3 grant."
+  },
+  "review": {
+    "requestedClaudeModel": "claude-opus-5-5",
+    "claudeState": "failed",
+    "claudeReceiptSha256": "007683fc2e59d2e98260214cd2073b555c472b3856d3dd7a36953f8e08b82b00",
+    "model": "DeepSeek-V4.1-Flash",
+    "effort": "high",
+    "finishReason": "stop",
+    "samePromptSha256": "5bef9923d9b23014cc355340dca3186acf240314e130fd26593fa0a2e81afdc1",
+    "promptBytes": 51317,
+    "receiptSha256": "dbe71a464aab3bd8bf5cf5633b69a06e2813b2bf84fa4e58c155e0fd20e7fe86",
+    "reportSha256": "66194aaeadd6b0b32a65acabe924cd097b71f7b6ab41dacaa36d6d115a655818",
+    "transportCalls": 4,
+    "cleanup": {
+      "removed": true,
+      "workerStopped": true,
+      "dailyProgramUnchanged": true,
+      "dailyProgramFilesChecked": 169,
+      "credentialCopiedToHost": false,
+      "scope": "only owned completed model-review scratch"
+    }
+  },
+  "triage": {
+    "scopeBlockers": 0,
+    "canArchive": true,
+    "reportSha256": "66194aaeadd6b0b32a65acabe924cd097b71f7b6ab41dacaa36d6d115a655818",
+    "disposition": "limited pass for dedicated-VM daily SSH telemetry pilot",
+    "verified": [
+      "Installed controller bytes match the reviewed R2 candidate.",
+      "A 74.099-second window contains 4 completed rows, including one naturally contended storage-capacity request.",
+      "Storage-capacity waited 216 ms and referred to the completed clock-read holder.",
+      "169 guest program hashes and 6 protected file hashes match the preflight.",
+      "Temporary swap fixture and 9 activity regression tests passed."
+    ],
+    "limits": [
+      "Original 27 queue timeouts and forwarding failures still have no confirmed historical root cause.",
+      "Daily cancellation, live timeout recovery and long-run reliability were not tested in this pilot.",
+      "The first HTTP refresh returned a pre-install cached snapshot. Later evidence is SSH activity, not rendered UI or a post-sample web response.",
+      "Installation executable mode is exercised in the temporary fixture and specified in the atomic writer. No independent post-install stat receipt was in the review packet.",
+      "Dedicated key was metadata-checked, not copied or content-hashed. Existing pinned host trust was used without separately recording host fingerprints or PID-to-UTM-bundle attribution.",
+      "The activity buffer is best effort and bounded to 64 entries. Previously loaded old controllers may not emit rows.",
+      "External reviewer statically read the supplied evidence without running it."
+    ],
+    "deferredToNextStep": [
+      "Ordinary scan R3 independent samples and location/applicability truth.",
+      "Production historical contention and forwarding failure attribution."
+    ]
+  }
+}

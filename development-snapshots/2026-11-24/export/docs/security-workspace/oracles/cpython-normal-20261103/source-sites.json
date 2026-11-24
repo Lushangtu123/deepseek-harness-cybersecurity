@@ -1,0 +1,70 @@
+{
+  "stdlib_ast": {
+    "staticCalls": [
+      {
+        "callee": "compile",
+        "line": 52,
+        "column": 12,
+        "positionalArguments": 4,
+        "keywords": [
+          "_feature_version"
+        ]
+      }
+    ],
+    "runtimeEvalSites": [],
+    "runtimeEvalEntryObservations": 0,
+    "inventoryProvenance": "Python AST of original bytes plus isolated runtime trace; not a Semgrep matcher trace",
+    "safeConditionRecognitionByScanner": "not proved"
+  },
+  "stdlib_collections": {
+    "staticCalls": [
+      {
+        "callee": "eval",
+        "line": 441,
+        "column": 15,
+        "positionalArguments": 2,
+        "keywords": []
+      }
+    ],
+    "runtimeEvalSites": [
+      441
+    ],
+    "runtimeEvalEntryObservations": 3,
+    "inventoryProvenance": "Python AST of original bytes plus isolated runtime trace; not a Semgrep matcher trace",
+    "safeConditionRecognitionByScanner": "not proved"
+  },
+  "input_one": {
+    "staticCalls": [
+      {
+        "callee": "eval",
+        "line": 2,
+        "column": 10,
+        "positionalArguments": 1,
+        "keywords": []
+      }
+    ],
+    "runtimeEvalSites": [
+      2
+    ],
+    "runtimeEvalEntryObservations": 1,
+    "inventoryProvenance": "Python AST of original bytes plus isolated runtime trace; not a Semgrep matcher trace",
+    "safeConditionRecognitionByScanner": "not proved"
+  },
+  "input_two": {
+    "staticCalls": [
+      {
+        "callee": "eval",
+        "line": 2,
+        "column": 10,
+        "positionalArguments": 2,
+        "keywords": []
+      }
+    ],
+    "runtimeEvalSites": [
+      2
+    ],
+    "runtimeEvalEntryObservations": 1,
+    "inventoryProvenance": "Python AST of original bytes plus isolated runtime trace; not a Semgrep matcher trace",
+    "safeConditionRecognitionByScanner": "not proved"
+  }
+}

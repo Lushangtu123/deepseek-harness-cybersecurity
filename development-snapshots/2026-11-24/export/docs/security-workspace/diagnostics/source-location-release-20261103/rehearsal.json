@@ -1,0 +1,28 @@
+{
+  "archiveSha256": "1a3dc95b1cd88ea5089f53c85913e6f4968a06b8390d6c2e6b5df66d1ee7ff3c",
+  "candidateFiles": 166,
+  "currentFiles": 165,
+  "candidateSyntaxChecked": true,
+  "temporarySwapAndRollbackVerified": true,
+  "deploymentUnchanged": true,
+  "dailyProcessUnchanged": true,
+  "temporaryRemoved": true,
+  "activeScannerContainersAtStart": 0,
+  "activeScannerContainersAtEnd": 0,
+  "guestFreeBytes": 8883736576,
+  "scannerPreflightExitCode": 0,
+  "scannerReadiness": {
+    "semgrep": {
+      "ready": true,
+      "reason": null
+    },
+    "trivy": {
+      "ready": true,
+      "reason": null
+    },
+    "zap": {
+      "ready": true,
+      "reason": null
+    }
+  }
+}

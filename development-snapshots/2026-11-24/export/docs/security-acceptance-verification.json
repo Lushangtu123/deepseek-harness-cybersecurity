@@ -1,0 +1,251 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Los_Angeles",
+  "runId": "security-acceptance-20261029",
+  "currentRecovery": "ready-security-audit-20261029",
+  "recoveryCreatedAtUtc": "2026-10-30T01:38:24Z",
+  "mainDiskSnapshots": [
+    "ready-original",
+    "ready-toolchain-20261025",
+    "ready-recovery-guard-20261029",
+    "ready-recovery-resume-20261029",
+    "ready-recovery-proof-20261029",
+    "ready-security-audit-20261029"
+  ],
+  "previousSnapshotsPreserved": true,
+  "proofFilesMatched": 1568,
+  "programFilesMatched": 120,
+  "controllerRegressions": 126,
+  "review": {
+    "importantFindings": 0,
+    "isolatedRecoveryTestsRepeated": 12,
+    "filesEditedByReviewer": 0
+  },
+  "sourceChanges": [
+    "current recovery name with all earlier reviewed names preserved",
+    "fixed allowlist: images.json, rules.json, cache/db/metadata.json"
+  ],
+  "offlineProbe": {
+    "recoveryPoint": "ready-security-audit-20261029",
+    "copiedHelperReplaceFaultInjected": true,
+    "copiedHostHelpersRolledBack": true,
+    "copiedFaultTemporaryCleaned": true,
+    "offlineDiskRestorePassed": true,
+    "diskCheckPassed": true,
+    "hostHelpersRestored": 5,
+    "launchDefinitionsRestoredInSyntheticHost": 2,
+    "missingAndCorruptCopiedHelpersRepaired": true,
+    "primaryDiskUnmodified": true,
+    "noVmRegistered": true,
+    "copyBootTested": false,
+    "probeArchive": "/Users/LOCAL_USER/Library/Application Support/Harness Purge Original/archived-validation/restore-probe-security-audit-20261029"
+  },
+  "coldStart": {
+    "proofHashesMatched": 1568,
+    "programHashesMatched": 120,
+    "preflight": {
+      "ok": true,
+      "readOnly": true,
+      "automaticChanges": false,
+      "scope": "local pinned images, rules and database identity; no scanner execution, model call, network download or GitHub latest check",
+      "tools": {
+        "semgrep": {
+          "ready": true,
+          "version": "1.182.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T01:38:59.481Z",
+          "cached": false
+        },
+        "trivy": {
+          "ready": true,
+          "version": "0.76.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T01:38:59.481Z",
+          "cached": false,
+          "database": {
+            "state": "fresh",
+            "updatedAt": "2026-10-29T19:18:50.969Z",
+            "nextUpdate": "2026-10-30T19:18:50.969Z",
+            "ageDays": 0
+          },
+          "lastUpdate": {
+            "state": "current",
+            "checkedAt": "2026-10-29T22:59:00.361501+00:00"
+          }
+        },
+        "zap": {
+          "ready": true,
+          "version": "2.17.0",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T01:38:59.481Z",
+          "cached": false
+        }
+      }
+    },
+    "service": "active",
+    "scannerContainersRunning": 0,
+    "modelRunPersisted": true,
+    "originalCapabilitiesEnabled": true,
+    "recovery": {
+      "state": "matches",
+      "name": "ready-security-audit-20261029",
+      "createdAt": "2026-10-30T01:38:24Z",
+      "scope": "improved-program-tools-config",
+      "helpersMatch": true,
+      "launchAgentsMatch": true,
+      "uncoveredFiles": [],
+      "groups": {
+        "program": {
+          "state": "matches",
+          "filesChecked": 120,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "runtime": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "tools": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "config": {
+          "state": "matches",
+          "filesChecked": 9,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "plugins": {
+          "state": "matches",
+          "filesChecked": 1320,
+          "uncoveredFiles": [],
+          "differentFiles": [],
+          "differentFileCount": 0,
+          "differenceDetailsTruncated": false
+        }
+      }
+    },
+    "hostHelpersMatched": true,
+    "hostIsolationValidated": true,
+    "vmCount": 1
+  },
+  "realModel": {
+    "runner": "installed native Harness headless CLI, existing DeepSeek route and restricted egress",
+    "sessionId": "session-ad4dd5bc-62ef-41f5-9483-d0c306f6656e",
+    "actions": [
+      "bind",
+      "status",
+      "start",
+      "status",
+      "report"
+    ],
+    "toolCalls": 5,
+    "run": {
+      "id": "00b5ba93-e595-4120-92c5-e9c6fb385e0c",
+      "request_id": "real-model-semgrep-20261029",
+      "request_hash": "4884f09771ba6e5f66d0f797767845ea64cc2499f1b503f76344e123719885e8",
+      "tool": "semgrep",
+      "profile_revision": 1,
+      "state": "completed",
+      "started_at": "2026-10-30T01:25:29.203Z",
+      "finished_at": "2026-10-30T01:25:31.454Z",
+      "complete": 1,
+      "coverage_key": "3a2b00fab1d865be3ca5ae38dc90967bd818d54ba0455d14035b670b75f62b09",
+      "revision_ref": "工作区未确认",
+      "error_code": null,
+      "details": {
+        "profile": {
+          "repoRoot": "/home/purge/workspace/security-model-acceptance-20261029",
+          "tools": [
+            "semgrep"
+          ],
+          "url": null,
+          "expiresAt": "2026-10-31T01:19:41.888Z",
+          "revision": 1
+        },
+        "version": "1.182.1",
+        "runtime": {
+          "checkedAt": "2026-10-30T01:25:28.317Z",
+          "database": null,
+          "warning": null
+        },
+        "retestFindingId": null,
+        "coveredFiles": 1
+      }
+    },
+    "findings": [
+      {
+        "id": 1,
+        "fingerprint": "da5e10bafa0ec1850c6042ebd70b04b1e275c10caac5ecf204aa5085482ec5b4",
+        "tool": "semgrep",
+        "rule": "policy.harness.python.eval",
+        "title": "动态 eval 需要验证输入可信度",
+        "severity": "high",
+        "location": "app.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "status": "unverified",
+        "revision": 1,
+        "first_run": "00b5ba93-e595-4120-92c5-e9c6fb385e0c",
+        "last_run": "00b5ba93-e595-4120-92c5-e9c6fb385e0c",
+        "coverage_key": "3a2b00fab1d865be3ca5ae38dc90967bd818d54ba0455d14035b670b75f62b09",
+        "note": ""
+      }
+    ],
+    "exportComplete": true,
+    "durableSqliteMatched": true,
+    "fixtureBytesUnchanged": true,
+    "attempts": [
+      {
+        "attempt": 1,
+        "outcome": "transport failure before tool calls",
+        "cause": "test command omitted existing restricted proxy environment"
+      },
+      {
+        "attempt": 2,
+        "outcome": "supervisor interrupted at first bind call; no scan run recorded",
+        "cause": "test supervisor expected name/arguments instead of observed tool/input JSON fields"
+      },
+      {
+        "attempt": 3,
+        "outcome": "completed; 5 calls and one completed scan; durable state verified"
+      }
+    ],
+    "publicTargetsScanned": false,
+    "realProjectFilesEdited": false,
+    "headlessPresetWarnings": "agentPresets unavailable: personal-redteam and personal-daily preset entries pending; security tools active and actual calls verified",
+    "usageCostMeasured": false
+  },
+  "browser": {
+    "syntheticProjectLoaded": true,
+    "oneCompletedRunVisible": true,
+    "oneUnverifiedFindingVisible": true,
+    "recoveryCoverageMatchesVisible": true,
+    "webChatSubmissionTested": false
+  },
+  "hostHelpersSha256": {
+    "manage.py": "a47ce612b399e846a80eb4fde125bb9bc413f81e6a982ac52d6edd12bfdf7fe9",
+    "egress_proxy.py": "7dc87aba4bce8c6ede77e1944538e080429da01d67e4c61f69b60adfa3204af3",
+    "qemu-image.py": "9035d7e44bc5d6c110769fc32c3379d5a49aacf94a00c5277616ba8b1b0bf153",
+    "web-entry.mjs": "87a9896f4c2f346fef6bb2b479f916e21f18bdb7005681690c4ac4665e0c4074",
+    "web-health.mjs": "519cac7664c44e8618ce3f66821b5d05d7f3ccc2b1eb6229627d11b635fa0e55"
+  },
+  "hostFullAccessGranted": false,
+  "vmEgressExpanded": false,
+  "newVmRegistered": false,
+  "gitPushed": false,
+  "limitations": [
+    "Offline disk copy was restored and checked, but not booted; daily primary VM cold start verified separately",
+    "Full primary VM was not rolled back during acceptance",
+    "Docker runtime assets and private VM data remain excluded from Git",
+    "Real-model acceptance covered one synthetic Semgrep task, not all tools or public target security",
+    "No dollar/currency cost derived from desktop balance or unrelated background usage",
+    "Older historical occasional pagination failure root cause remains unproven"
+  ]
+}

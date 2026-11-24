@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-10 America/Los_Angeles",
+  "state": "reviewed-synthetic-repair-closed-full-control-pending",
+  "scopeBlockers": 0,
+  "testMethods": 45,
+  "sourceHashes": {
+    "tooling/admission.py": "4e8b5de2c8fea925e42d669590f442a655c7f20f2ed52dac559cdde4a35a9b77",
+    "record-analysis.py": "45c262be5d053f473dda1f5a599cb3f69df50b5ceda88edf070f078eae12843a",
+    "tooling/regression.test.py": "65acb73f9be3bc6bb06b107d7435c0bae53aa86a3f6e7656828f2a32ae641d62",
+    "tooling/analysis.test.py": "487b85b32d492870ea9695bf97be427e82b1ede453a932949cb8eab7a581827d",
+    "inputs/manage.py": "69cc27ae32ba7be4362e6a4d94a4f253ac54d573380c98f58fa40bdb8758e401",
+    "inputs/ssh-queue.test.py": "07979ee7d2d38fd9a0796d8f53e960c8cf6680ce4569533d7bffda6aeece8e00",
+    "tooling/r2.test.py": "a2b66523eb281e2a6255597718721c66b9fc38a334ee04a0400ee9baff2ffe1c"
+  },
+  "checksSha256": "3c66e8cfcd3749df0eead87fb98ea446a4c142aabf55b3fa7b86be498dd3fd7b",
+  "triageSha256": "dbbef9a8f9771f191ffa24c4799d73e83e9a2682c4c2ab92e8b54fb67d1a4010",
+  "reviewReports": [
+    {
+      "id": "admission-d1",
+      "model": "deepseek-flash",
+      "officialModelName": "DeepSeek-V4.1-Flash",
+      "effort": "high",
+      "elapsedSeconds": 58.0,
+      "finishReason": "stop",
+      "reportBytes": 1717,
+      "reportSha256": "f71f60ec3c95aec2d87ac504f1571c6da8de539a831cc5b224f0fc66a72447ea",
+      "receiptSha256": "f514c0b6e2c582f33a43a9d212f7c1a1aafeaa4132b529281b8153cd817604c0",
+      "promptSha256": "c66421b7177853c5f9b54d87e3abde8b35101a82edbfcd5f1239782bc039632d"
+    },
+    {
+      "id": "admission-d2",
+      "model": "deepseek-flash",
+      "officialModelName": "DeepSeek-V4.1-Flash",
+      "effort": "high",
+      "elapsedSeconds": 76.1,
+      "finishReason": "stop",
+      "reportBytes": 1810,
+      "reportSha256": "5524e4ba02d86b9afd6cf9cf20ccff6ee9a5b06a1dad274282e1338e7fac9068",
+      "receiptSha256": "7753265201e0e8e0860b4f8eedb83889d10e67da822d6aa2e14a3674a90862a2",
+      "promptSha256": "c05741e008ef2cb3f0094af664b18ffe9ad7149c4faa5f2b58bda0463b92a0f6"
+    },
+    {
+      "id": "admission-r1",
+      "model": "deepseek-flash",
+      "officialModelName": "DeepSeek-V4.1-Flash",
+      "effort": "high",
+      "elapsedSeconds": 123.2,
+      "finishReason": "stop",
+      "reportBytes": 1783,
+      "reportSha256": "0c4b68d4b1f46962a2464b2a93cda435cfedb69f34a82efc62774f37c017b025",
+      "receiptSha256": "e57cef01fe84b2038875c25fa9788f42a5079c37002e3749ccb37b882a60d581",
+      "promptSha256": "b7865ba0e7ba83731f74ddedbe6a3300cf114f1cfc35c6224da9c34976e72991"
+    }
+  ],
+  "claudeAttempt": {
+    "state": "quota-failed-not-reviewed",
+    "requestedModel": "claude-opus-5-5",
+    "receiptSha256": "23d9ccefb87db6a500815f6aa6a917409cb749a4e2db0feae134e7f8ffe26151"
+  },
+  "priorAttempts": {
+    "claudeQuotaFailures": 1,
+    "deepseekFullReview": {
+      "state": "length-truncated-no-report-not-passed",
+      "receiptSha256": "af11b4c8fe4eeb4dd2fb9041f32c3c7b4a06f52657e29aef69ab2cd443bba810"
+    },
+    "splitReview": "D1 passed; D2/R1 blockers drove current revision; original reports preserved"
+  },
+  "reviewTransport": [
+    {
+      "directory": "work/harness-ssh-admission-fix-20261110/external-review",
+      "successfulSshCalls": 9,
+      "cleanup": {
+        "removed": true,
+        "workerStopped": true,
+        "dailyProgramUnchanged": true,
+        "dailyProgramFilesChecked": 169,
+        "credentialCopiedToHost": false,
+        "scope": "only owned completed model-review scratch"
+      }
+    },
+    {
+      "directory": "work/harness-ssh-admission-fix-20261110/external-review-split",
+      "successfulSshCalls": 5,
+      "cleanup": {
+        "removed": true,
+        "workerStopped": true,
+        "dailyProgramUnchanged": true,
+        "dailyProgramFilesChecked": 169,
+        "credentialCopiedToHost": false,
+        "scope": "only owned completed model-review scratch"
+      }
+    },
+    {
+      "directory": "work/harness-ssh-admission-fix-r2-20261110/external-review",
+      "successfulSshCalls": 5,
+      "cleanup": {
+        "removed": true,
+        "workerStopped": true,
+        "dailyProgramUnchanged": true,
+        "dailyProgramFilesChecked": 169,
+        "credentialCopiedToHost": false,
+        "scope": "only owned completed model-review scratch"
+      }
+    }
+  ],
+  "successfulReviewTransportSshCalls": 19,
+  "credentialsCopiedToHost": false,
+  "newVmDiagnosticRequests": 0,
+  "newControlRunsAtArchive": 0,
+  "full8Trial48ClientIntegrationCompleted": false,
+  "blanketReuseApproved": false,
+  "preciseProductionRootCauseConfirmed": false,
+  "dailyProgramDeployed": false,
+  "hostPersistentConfigurationModified": false,
+  "vmConfigurationModified": false,
+  "githubPushPerformed": false,
+  "artifactScope": "reviewed research candidate and evidence archive only; not daily program update"
+}

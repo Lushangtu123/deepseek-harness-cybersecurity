@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "acceptedRun": "v3-final",
+  "nativeLauncherSha256": "ac190f73059418e5551675eb25105c3eded59d88bef8d2ea1e27813640c5c364",
+  "nativeProtocolSha256": "6bc45084d649240cc70e8da8cb6ce2287f8b6dd0d6055bad8034283c1851abc5",
+  "scanSandboxReferenceSha256": "9b7b9eefb8f9e9b8ac36e797a6173f59b220bc7acf6e453e5046d674b073fee5",
+  "managerSha256": "12dcfa4c93f06ef482145ab3691819ea01ca261faed0dcfff7122613acca643c",
+  "scope": "Existing fixed guest SSH manager validation; reference code digests, not signed launcher attestation embedded in scanner receipts. No host permission/settings change requested.",
+  "projectSourceHandling": "Only read, hash, parse; unit fixture compile() creates code objects without execution.",
+  "deadline": "Container timeout15s plus VM subprocess22s and final forced removal",
+  "reviewerStandalone": true,
+  "newThirdPartyDependencies": 0
+}

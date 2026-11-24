@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "personalVersion": "1.1.77-personal.2",
+  "upstreamBackportCommit": "0c933dc7d3252698f3f0f9756932dcc88355f532",
+  "regression": {
+    "pluginJavascript": 338,
+    "hostJavascript": 98,
+    "pythonTests": 112,
+    "total": 548,
+    "menuTestsIncluded": 19,
+    "failures": 0
+  },
+  "native": {
+    "fixture": {
+      "ok": true,
+      "linuxZipDirectories": true,
+      "linuxSkillOverlapRejected": true,
+      "linuxPnpmPreviewRepairBackupAndIdempotence": true,
+      "presetCleanup": true,
+      "privateAndExecutableModesPreserved": true,
+      "modelRequests": 0
+    },
+    "liveProfilePreview": {
+      "ok": true,
+      "profile": "web",
+      "changed": false,
+      "wrote": false,
+      "dryRun": true,
+      "beforeSha256": null,
+      "afterSha256": null,
+      "reason": "missing"
+    },
+    "liveProfileExplicitRepair": {
+      "ok": true,
+      "profile": "web",
+      "changed": false,
+      "wrote": false,
+      "dryRun": false,
+      "beforeSha256": null,
+      "afterSha256": null,
+      "reason": "missing"
+    }
+  },
+  "nativeModes": {
+    "reports": [
+      {
+        "label": "stability-original",
+        "enabled": true,
+        "ok": true
+      },
+      {
+        "label": "stability-daily",
+        "enabled": false,
+        "ok": true
+      }
+    ],
+    "restoredOriginalCapabilities": true,
+    "modelRequests": 0
+  },
+  "deployment": {
+    "mode": "improved",
+    "originalCapabilities": true,
+    "recovery": "ready-merged-stability-20261029",
+    "groups": {
+      "program": {
+        "state": "matches"
+      },
+      "runtime": {
+        "state": "matches"
+      },
+      "tools": {
+        "state": "matches"
+      },
+      "config": {
+        "state": "matches"
+      },
+      "plugins": {
+        "state": "matches"
+      }
+    },
+    "programFiles": 116,
+    "guestFiles": 94,
+    "hostHelpersMatched": 5,
+    "vmIsolationValidated": true
+  },
+  "recovery": {
+    "name": "ready-merged-stability-20261029",
+    "originalFiles": 98,
+    "importedPluginFiles": 1320,
+    "programFiles": 116,
+    "proofFiles": 1560,
+    "oldRecoveryPointsPreserved": true,
+    "offlineCopyRestorePassed": true
+  },
+  "originalInstallationPreserved": true,
+  "originalCapabilitiesDefaultStillOptIn": true,
+  "originalCapabilitiesPreservedFromUserChoice": true,
+  "newModelRequests": 0,
+  "installationPreflight": {
+    "ok": true,
+    "readOnly": true,
+    "checks": 234,
+    "issues": []
+  },
+  "singleLauncherStillProvided": true
+}

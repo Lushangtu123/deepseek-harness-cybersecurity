@@ -1,0 +1,12 @@
+{
+  "at": "2026-11-11T05:59:15.116262+00:00",
+  "port": 57861,
+  "connectErrno": 61,
+  "meaning": "ECONNREFUSED",
+  "execSessionId": 23222,
+  "execExitCode": 0,
+  "muxLifecycleStopped": true,
+  "masterStopped": true,
+  "remainingPids": [],
+  "controlDirectoryRemoved": true
+}

@@ -1,0 +1,173 @@
+{
+  "date": "2026-11-09",
+  "scope": "Fixed local VM SSH diagnostic observation; not root-cause repair or product acceptance",
+  "state": "partial-observation-reviewed-and-archived",
+  "observations": {
+    "probeCount": 96,
+    "byMode": {
+      "direct": 48,
+      "fdpass": 48
+    },
+    "markerSuccesses": 84,
+    "noMarkerFailures": 12,
+    "noMarkerByMode": {
+      "direct": 3,
+      "fdpass": 9
+    },
+    "expectedPostMarkerTerminationCount": 41,
+    "postMarkerAbruptExitCodeCounts": {
+      "255": 41
+    },
+    "fdSuccessPortMatches": 39,
+    "successPortsWithGuestSyn": 84,
+    "failedUnknownPortCount": 4,
+    "packetCount": 344,
+    "kernelDrops": 0,
+    "captureWallDurationSeconds": 45.06235647201538,
+    "captureMonoDurationSeconds": 45.06235668799491
+  },
+  "failedKnownPortsAbsentCount": 8,
+  "additionalFDObservationProbes": 24,
+  "conclusion": "Within the fixed original guest TCP/22 SYN/FIN/RST capture window, no matching packets were observed for eight failed connections with known host ephemeral ports. Exact host forwarding component and historical sidebar cause remain unconfirmed.",
+  "fixedSnapshotOnly": true,
+  "genericCrossClockCoverageImplemented": false,
+  "allOriginalInputSha256": {
+    "capture-intent.json": "61c8ba573cac54d410a92b3e02a8ffecc03d4198b761d6023d902867bac200dc",
+    "capture-ready.json": "ed6d62759f8327443cfb27a2c94a859a4d087b1dd18810d4e839935a1acbb1f4",
+    "capture-result.json": "f6e5a276095d64396ba1cafe6b89e1563455aa2c08ca37a87323bd646d7df487",
+    "probes.private.json": "51d045cfc4ec5e0745862030d7c9b61588da3bed18c64994fe1784e04ebce52c",
+    "packet-metadata.private.txt": "429324286b07edb1086772976ecda1d31e2de8f2b90d9a265540bf6a5949cca4",
+    "preflight.json": "c0b1748e4e595cdd28befe45bd503bf0b59ebc8ae4af6e3b3e283c52415bcc22",
+    "historical-evidence.json": "f7ebe3e87b83982e4b6c53c7fc647f615ec4ef11280b0bf8a9a2af021b759906",
+    "postcheck.json": "b22057ad7d1072a1209e2f55ed3e426c8230691fa82270174fd54f68bc9cef92",
+    "boot-normalization.json": "f2302a746fb8049743c8cbc3a70f2441394253f5ea778c8dbd7055856be19cf2",
+    "fd-pressure.json": "87daf59dbeb40783e2b2f6fc6c0c3ee341b710720648d9c10c4713ca47535fad",
+    "fd-pressure-probes.private.json": "8dee5ce2015f8f61fb22a016573f6ee569470cf7a29f106ab6788120bd4b8000",
+    "fd-passive-observation.json": "bc1a8e7b1da651c292e4385dfb5ed61ae7ccbf8f1eed44dd98b535fedfb609d7",
+    "host-forward-targeted-read.json": "30a5ece4722f40aff82887b1ba3c850acffe90434baef202e28ee48d1cde63a0",
+    "versions-and-listener.json": "1b7b5231deb3be3593b8b4970c390f06a78edb324d07a5c7336114b51e3abab2"
+  },
+  "diagnosticSourceSha256": {
+    "analyze.py": "9b086cf4a2097ecd5dd816936e8ca265cb01c8144c389c4eb2c7c4efb8e997a3",
+    "analysis-r2-test.py": "bd79e4712d63eb4596b1d0ef58245e46df978cde4371a83b8946f455817c73a6",
+    "metadata-test.py": "c9a06e1c36c04cbf7174c0a8dde1d334e70b7f87f3681396767993a06a607544",
+    "cleanup-postcheck.py": "f12e76751762cbf183fd308c20f379590547ae9dbe68154ac8e9e958ca01b946",
+    "reproduce-r1.py": "3a54140a98ba87ea36918890b9090cde7a4a7fb647982d3e55f6ea1d823a16fb",
+    "vm.py": "faec66df0a33a91449883e19c79bc5e695319a83dceafd3a7c786f5086813abe",
+    "preflight.py": "23e1b54828ec2219ef3a604f5c7b20758656b2c026154dfb61305a0f9984b0e9",
+    "postcheck.py": "ed32ca3c72bdf9a309bfae52d237eb6dcd5ecc145914caa426e674498cb76df2",
+    "boot-normalization.py": "4d4309087a87b9ff693728cfd53f359f373a256340a23a0b22eedd51f903ff57",
+    "run-capture.py": "3714accc4e65b7d5b4d7651d502ee5fffad870fbc7509e49f4ee97ce7df6b9fa",
+    "guest-capture.py": "03a50708aa7a93aecfe69c09a31e04f6d1e3d140eb8eacb6e0dd31b288c94fd4",
+    "probes.py": "8bf697b3139011e759501b66957598ef41a655fb032d6266712fa1dec11f8cd7"
+  },
+  "localTests": 17,
+  "testSuiteSha256": {
+    "fdpass-test.py": "538f8a22e8a0bf3b275afa3d5467b66800e0120013c39d8be079e3dd4cd41dc7",
+    "stream-test.py": "c25d7dd1104dbd4ce634117a5221d0693d6ed80d9673c1f979a0c10948311281",
+    "analyze-test.py": "c1c1643e45d2790094dc24543596f7b0ce48a73a6dd70035cc0ddba9d3f400eb",
+    "analysis-r2-test.py": "bd79e4712d63eb4596b1d0ef58245e46df978cde4371a83b8946f455817c73a6",
+    "metadata-test.py": "c9a06e1c36c04cbf7174c0a8dde1d334e70b7f87f3681396767993a06a607544"
+  },
+  "syntheticReproductionSha256": "df9fe83d8b40771b3e18f61bdf0bf57478e53876eb5a80566a5b9bc252f91f4a",
+  "externalReview": {
+    "state": "completed-and-triaged",
+    "scopedBlockers": 0,
+    "rounds": [
+      {
+        "folder": "external-review",
+        "state": "completed-and-triaged",
+        "reviewer": "DeepSeek V4.1 Flash",
+        "actualModel": "deepseek-flash",
+        "effort": "high",
+        "finishReason": "stop",
+        "elapsedSeconds": 235.4,
+        "reportChars": 6544,
+        "promptSha256": "6297d88211ecb030bce0ac0f98f384e5c4090c777425be1bc1e3a419a578a29e",
+        "reportSha256": "3da2cc5bd1317aa35102dc114d183de749a449b82d772d7c22042bbfcc6dc2d3",
+        "receiptSha256": "f8457badf48ed0402b741039f9d7546534ada9e23d23a207c0c74ea9260c9c6e",
+        "requestedClaudeModel": "claude-opus-5-5",
+        "claudeState": "oauth-expired-401",
+        "claudeReceiptSha256": "379588a87c017c69717e9ccc42cdd6bb51b0b6339b2329a7450e1166c6f0a4f7",
+        "reviewScratchRemoved": true
+      },
+      {
+        "folder": "external-review-r2",
+        "state": "completed-and-triaged",
+        "reviewer": "DeepSeek V4.1 Flash",
+        "actualModel": "deepseek-flash",
+        "effort": "high",
+        "finishReason": "stop",
+        "elapsedSeconds": 137.4,
+        "reportChars": 6603,
+        "promptSha256": "1d0ce36c888243c807478412c3cdb0a1505f31ae057661f5ed97d6c63b3ca1e4",
+        "reportSha256": "8ffa3ac4c3ffb2126ca18eb45bfedf86b227438d467be31966c43bfa45a5b43f",
+        "receiptSha256": "a2649bb12963691aa83faff4166372d783a18f705cc23320f5ec887ec4cc0c86",
+        "requestedClaudeModel": "claude-opus-5-5",
+        "claudeState": "oauth-expired-401",
+        "claudeReceiptSha256": "0a47fddc1b81947fd5db77612b8f367838c81151bec4b734135a4c3f73571585",
+        "reviewScratchRemoved": true
+      }
+    ],
+    "triageSha256": "9475b2e0f4a48ead51a987eb2d492a6855e1e82dda8ec0fdcc0e00fe2cba038a",
+    "limitations": [
+      "All auxiliary input hashes frozen and checked; five critical raw experiment inputs are hard-pinned in analyzer",
+      "Generic cross-clock coverage unsupported, new captures refused",
+      "Captured/received equality applies only to this fixed run",
+      "Normalized boot identity is in boot-normalization.json, not raw hash equality",
+      "Cleanup observation applies only at check time",
+      "FD process limit and transient exhaustion unknown"
+    ]
+  },
+  "cleanup": {
+    "guest": {
+      "ownedProcessesStillPresent": [],
+      "unreadableProcessCount": 0,
+      "scanScope": "exact synthetic probe UUIDs and capture UUID/signature only; no unrelated command lines retained"
+    },
+    "host": {
+      "ownedProcessesStillPresent": [],
+      "unreadableCandidateCount": 0
+    },
+    "checkedAtHostUnix": 1794249401.9775622
+  },
+  "dailyProgramFilesChecked": 169,
+  "candidateProgramFilesChecked": 173,
+  "guestFilesChecked": 124,
+  "underlyingSSHRootCauseConfirmed": false,
+  "historicalSidebarRootCauseConfirmed": false,
+  "fdExhaustionConfirmed": false,
+  "fdProcessLimitMeasured": false,
+  "listenerQueueZeroConfirmed": false,
+  "ordinaryR3Passed": false,
+  "globalReleaseHold": true,
+  "candidatePluginDeployed": false,
+  "githubPushed": false,
+  "hostConfigurationModified": false,
+  "vmConfigurationModified": false,
+  "realProjectFindingsTouched": false,
+  "followUp": [
+    "Exact host forwarding component/cause",
+    "Historical sidebar first-read cause",
+    "Generic future capture timing/coverage and PID birth identity if new diagnostics are built",
+    "Ordinary R3 independent samples and quality thresholds"
+  ],
+  "supplementalClaudeReview": {
+    "state": "completed-and-triaged",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "scopedBlockers": 0,
+    "promptSha256": "2ee23a4867092195c5e081ca5e89cd43c97cf565cc72ea2e1db126d3a86b3d39",
+    "receiptSha256": "c8aaacdd95c97a95c823353bfa8aa5e7c28e5127b01612a74d1f8da43141ab05",
+    "reportSha256": "7fa47d10adc617126eb327ff69878ca4d83bd77f4edec1bed5be85e0e3ea82be",
+    "elapsedSeconds": 344.0
+  },
+  "pathInferenceAssumesFailedConnectionsPreserveSourcePort": true,
+  "exportFileCountClarification": {
+    "beforeManifest": 1321,
+    "beforeIncludingManifestFile": 1322,
+    "afterManifest": 1323,
+    "afterIncludingManifestFile": 1324,
+    "newDocumentationFiles": 2
+  }
+}

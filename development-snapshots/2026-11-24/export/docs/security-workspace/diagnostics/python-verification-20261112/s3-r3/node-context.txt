@@ -1,0 +1,21 @@
+Current gate SHA 9650842cadb0cec7e8d2f63f2dcdec9b5c987b629aa7a52e82e6c7685d38874b
+function observedDecision(report,request){
+ const point=request.point,callee=point.callee.split('.').at(-1),probes=probeValues(request.challenge),calls=[];
+ if(report.pointId!==point.id||report.sourceSha256!==point.sourceSha256||digest(report.point)!==digest(point)||report.contractSha256!==digest(request.contract)||report.challengeSha256!==bytesHash(request.challenge)||report.runtimePython!=='3.12.15'||report.probePolicySha256!==digest({policy:verifierPolicy,probes:probeTemplates})||!Array.isArray(report.runs)||report.runs.length!==4)return'unknown';
+ let triggered=false;
+ for(const [i,r] of report.runs.entries()){
+  if(r.inputIndex!==i||r.probeSha256!==bytesHash(probes[i])||r.trace?.state!=='observed'||!Array.isArray(r.trace.calls)||!Array.isArray(r.trace.returns)||r.trace.calls.length>16||r.trace.returns.length>16)return'unknown';
+  for(const c of r.trace.calls){if(c.pointId!==point.id||c.callee!==callee||c.exactStr!==true||typeof c.argument!=='string'||c.argumentSha256!==bytesHash(c.argument))return'unknown';calls.push(c)}
+  if(r.trace.returns.some(v=>v.pointId!==point.id))return'unknown';
+  const exact=r.trace.calls.some(c=>c.argument===probes[i]||(i===1&&c.argument.startsWith(probes[i])));
+  const witnessed=r.trace.returns.some(v=>callee==='eval'?v.evalWitness===true&&v.returnValue===request.challenge:v.execWitness===true&&v.markerValue===request.challenge);
+  if(((callee==='eval'&&i===1)||(callee==='exec'&&i===2))&&exact&&witnessed)triggered=true;
+ }
+ if(triggered)return'confirmed';
+ const proof=report.proof,e=request.contract.entry;
+ if(!calls.length||!record(proof)||proof.domain!=='exact-str'||proof.sinkLine!==point.call.start.line||!Number.isSafeInteger(proof.guardLine)||proof.guardLine>=proof.sinkLine||!(e.kind==='function'&&proof.function===e.name&&digest(proof.parameters)===digest([e.parameter])||e.kind==='flask'&&digest(proof.parameters)===digest([])))return'unknown';
+ if(proof.kind==='single-quoted-string'&&calls.every(c=>c.argument.startsWith("'")&&c.argument.endsWith("'")&&!c.argument.slice(1,-1).includes("'")))return'excluded';
+ const literal=t=>typeof t==='string'&&t.length<=256&&/^(?:None|True|False|\d+(?:\.\d+)?|'[^'\n\r]*'|"[^"\n\r]*")$/.test(t);
+ if(proof.kind==='finite-literal-set'&&Array.isArray(proof.values)&&proof.values.length>0&&proof.values.length<=16&&proof.values.every(literal)&&calls.every(c=>proof.values.includes(c.argument)))return'excluded';
+ return'unknown';
+}

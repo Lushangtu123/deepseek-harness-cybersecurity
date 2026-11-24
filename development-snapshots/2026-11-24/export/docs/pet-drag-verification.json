@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-30",
+  "timezone": "America/Los_Angeles",
+  "scope": "host pet drag completion; original 0.4.2 plugin preserved",
+  "rootCause": "finishDrag always selected free after a native drag; free placement then avoided controls/footer and moved artwork away from corner",
+  "fix": {
+    "commitOnDragEndOnly": true,
+    "cornerThresholdCssPixels": 32,
+    "dockInsetCssPixels": 12,
+    "stableUnscaledStartMeasurement": true,
+    "nonCornerDropsRemainFree": true,
+    "nativeAcceptedPrimaryMovedGesturesOnly": true,
+    "cancelAndSmallMovementPreserved": true
+  },
+  "localChecks": {
+    "focusedPetCases": 37,
+    "completeHostCases": 127,
+    "expectedRedAndFailedAttemptsPreserved": true
+  },
+  "chrome": {
+    "input": "synthetic PointerEvents with held buttons through real original plugin handlers in Chrome",
+    "oldCornerDropChangedToFree": true,
+    "allFourCornersAcceptedAndStored": true,
+    "fourCornerInsetsMatched": 12,
+    "postColdRead": true,
+    "balanceBubbleVisible": true,
+    "refreshRestoredCorner": true,
+    "physicalDragToolLimitation": "native CUA drag emitted buttons=0 on first move; not counted as held physical drag",
+    "physicalMouseConfirmation": "user explicitly confirmed 已能停在角落 after installed fix"
+  },
+  "recovery": {
+    "point": "ready-pet-corner-20261030",
+    "selectedProofFiles": 2616,
+    "programFiles": 127,
+    "snapshots": 15,
+    "previousSnapshotsPreserved": true,
+    "independentCopyActuallyBooted": true,
+    "originalInodeReturned": true,
+    "originalRunning": true,
+    "temporaryCopyRemoved": true,
+    "coverage": {
+      "state": "matches",
+      "name": "ready-pet-corner-20261030",
+      "createdAt": "2026-10-31T05:44:36Z",
+      "scope": "improved-program-tools-config",
+      "helpersMatch": true,
+      "launchAgentsMatch": true,
+      "uncoveredFiles": [],
+      "groups": {
+        "program": {
+          "state": "matches",
+          "filesChecked": 127,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "runtime": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "tools": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "config": {
+          "state": "matches",
+          "filesChecked": 11,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "plugins": {
+          "state": "matches",
+          "filesChecked": 1320,
+          "uncoveredFiles": [],
+          "differentFiles": [],
+          "differentFileCount": 0,
+          "differenceDetailsTruncated": false
+        }
+      }
+    }
+  },
+  "boundaries": {
+    "guestProgramsChanged": false,
+    "originalWhalePluginChanged": false,
+    "runtimeOverridesChanged": false,
+    "hostFullAccessGranted": false,
+    "networkOrSharingExpanded": false,
+    "newModelOrScannerCalls": 0,
+    "realTrackedFilesUnchanged": 459,
+    "realProjectHeadAndSixTablesUnchanged": true,
+    "realFindings": 95,
+    "realFindingsRemainUnverified": true
+  },
+  "cloudCiAtPackaging": {
+    "state": "not-observed-before-first-push",
+    "workflow": "https://github.com/Lushangtu123/deepseek-harness-vm/actions/workflows/verify.yml"
+  }
+}

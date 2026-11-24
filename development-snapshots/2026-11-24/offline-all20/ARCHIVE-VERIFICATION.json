@@ -1,0 +1,20 @@
+{
+  "kind": "all20-gap-archive-readback",
+  "archive": "harness-all20-fixture-lifecycle-20261124-gap.zip",
+  "sha256": "d4dadd398cb36e4c16f9ad1654d9360e63ae2f8bf1e284cf77dd5cb1c3695ea8",
+  "archiveBytes": 9646351,
+  "uncompressedBytes": 39041178,
+  "members": 957,
+  "fixedSourceInputs": 348,
+  "allReadBackByteExact": true,
+  "pointInTimeSnapshot": true,
+  "afterArchiveMutable": [
+    "progress.md"
+  ],
+  "notCompleteVMArchive": true,
+  "VMSubmissions": 1,
+  "completedNativeGroups": 9,
+  "nativePassed": 168,
+  "full20Passed": false,
+  "r3": "blocked"
+}

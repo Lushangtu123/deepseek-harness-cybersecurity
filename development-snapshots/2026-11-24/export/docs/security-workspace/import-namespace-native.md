@@ -1,0 +1,30 @@
+# 173项候选的完整 Harness 原生受管链验收
+
+本轮使用完整Harness/Cordis网页、原生联合安全审查预设、原工具定义与固定路径RPC客户端，验证173项未部署候选。不是独立组件回放或直接API循环代替聊天。只在专用VM的私有挂载/PID命名空间启动临时实例：逻辑DSH_HOME仍为原受管值，账户、数据库、socket与候选目录分别覆盖到本轮私有目录；外部日常实例保持169项。运行时统一采用已安装0.2.1-rc.3。主聊天只复制已有DeepSeek配置到VM临时目录，未向Mac复制密钥。
+
+前置修订均为验收脚本：临时前后端采用同一运行时；profile链接到候选物理路径；后台store与Docker挂载的受管副本/worker采用临时物理路径，避免Docker守护进程位于挂载命名空间外时读取日常程序；worker0644、父目录0700。候选产品源码没有改动。后台测试激活器使用真实库与socket合同，但不运行生产服务的VM全局Docker恢复清理。附加围栏仅允许本项目3种原生受管工具，另限制唯一start请求和原任务读取，不宣称生产已具备这些额外测试限制。6项合同测试先5失败/1通过，最小实现后6项通过。
+
+Chrome首次Usernotice在本次取得用户明确同意后确认。默认工作区自动创建出现失败提示；通过原生目录选择器选择本轮已存在的合成目录后正常进入。该自动创建提示的根因未定位，不算已修复。页面选择联合安全审查和DeepSeek-V4.1-Flash1017/High后，仅提交一次合成验收消息。
+
+原生模型完成20次受管工具调用：绑定1次、信息1次、joint计划1次、start1次、wait1次，以及报告15次。唯一requestId为native-import-20261110-01，唯一父任务为28a46704-f3c9-40e3-a216-fd8d3068610a。报告按真实nextCursor完整读完：findings5页/9项、files4页/18项、exclusions1页/0项、diagnostics1页/0项、artifacts4页/13项。未调用Shell或其他工具，工具错误与原生RPC拒绝均0。模型turn终态completed，Chrome显示57秒/21steps。
+
+llm/stream实际记录21次主聊天调度，均deepseek-official、deepseek-flash、high；另1次非主循环辅助调度，effortoff。22条流均正常finish/关闭，adapter replay model均deepseek-flash。这是SDK调度和adapter元数据，并非SDK未暴露的原始provider响应model字段。不能把子任务modelCalls0或模型摘要中的未知聊天次数当成聊天请求数；实际计数来自独立流事件。
+
+所选Semgrep步骤只运行1次，版本1.182.1，固定17规则，18/18文件、无未覆盖或解析诊断。9条未验证warning，各有完整字节范围；4条import路径仅来自case0..3，9条namespace结构仍保持内建身份和外部控制未验证。source snapshot为9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2。Docker运行观察确认固定镜像、实际17规则SHA、只读物理副本与禁网/UID/资源限制。结构worker为默认受限沙箱，Python3.12.15。独立读回5节报告并核对18个文件摘要、9个实际字节范围和1run/1joint/0普通finding行。模型只读取报告字段；原文摘要的哈希核验措辞不代表模型另行计算过文件摘要。
+
+全部合成源码均已在295来源台账登记，无新增独立准入样本，不执行项目源码、不确认漏洞、不放行R3。原生前端、preset、工具和RPC链是本次通过范围；全部工具与权限模式、生产服务启动恢复和全产品准入不在范围中。额外围栏/测试后台不等于原封不动的生产服务启动。
+
+Chrome拥有的标签页关闭；已复核中继master/clients停止、控制socket删除、宿主原端口明确ECONNREFUSED。VM前后端都有停止回执，私有namespace进程和扫描容器结束、guest端口关闭，临时目录及账号副本删除。日常169程序、42项目库逻辑摘要、账号/配置/运行清单、SDK文件、外部挂载namespace及home inode前后匹配。逻辑摘要不代表SQLite物理文件零写入。
+
+本步骤先请求Claude Opus5.5 high，实际因五小时额度用尽失败；按用户持续回退授权，同一固定材料由DeepSeek官方V4.1 Flash high完整复审，实际响应deepseek-flash、finish_reason=stop，本轮受管链有限通过，无确认硬阻断。外审只做静态阅读，不代替实际执行。未部署或推送；下一步仍需独立质量准入及有范围的日常发布决策。
+
+
+复审边界记录：173是候选程序包逐文件身份校验数，18才是被扫合成文件数；一次所选Semgrep扫描之外，还有独立的受限namespaceworker容器执行。额外Gate允许同一启动键的幂等重试，本轮实际只有一次start；不把它宣传为生产全局严格一次执行。21/1是llmstream调度次数，不声称是含内部网络重试的HTTP线级总请求数。
+
+namespaceworker使用既有内部Docker配置核对与清理回执，本轮没有第二份与scanner同等级的独立live观察。原app-stopped内容在临时目录删除前未另行复制，现存证据是清理脚本的存在性断言、后端停止记录、进程/端口消失与整体清理回执。凭证副本随临时树删除，不表示安全擦除或磁盘取证。observerErrors中保留未找到容器的采样错误，最终Running证明完整；缺少逐poll时间，不把“创建前竞态”当作已独立定位事实。
+
+来源台账本体未提供给模型；归档时独立复核18文件摘要均在295条已用来源中，并补充台账SHA与逐文件成员回执。补充回执未再交给本次模型，原始审查意见和冻结材料不改写。默认workspace自动创建提示仍为待定位现象，不因手选目录成功而冒称已修复。
+
+[结构化结果](import-namespace-native-results.json) · [证据清单](diagnostics/import-namespace-native-20261110/manifest.json)
+
+后续已定位该默认工作区问题，并在隔离 VM 和 Chrome 验证候选修复。[默认工作区修复记录](workspace-bootstrap.md)

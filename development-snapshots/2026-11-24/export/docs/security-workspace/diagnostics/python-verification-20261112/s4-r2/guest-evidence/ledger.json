@@ -1,0 +1,1816 @@
+{
+  "version": 1,
+  "scope": "known sources used by recorded development and external regression runs",
+  "limitation": "Exact source hashes identify byte reuse; semantic clones and unrecorded use need independent review.",
+  "sources": [
+    {
+      "sha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "443f71145aac0d9feb700ad02210f3bf27a874190dcdda8ba82232c4654f455e",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "ea16ae72984b3afe3bd69b60f2189975866a72e9ecd3763059b46517a31a062a",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "1f2497bd5c7d50330acdc6f1d0bf3cec86b4627e761d8c8f0fb9b78600dd98fc",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "bf310860a3a6716d6de2c12740eec2dbd8a2792f15086c4840a60466c74034ca",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "dc303f7723cb57dbf3339e08a8beac977064def27d99dcbdb48d6231836994b5",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "a0a5b629d6c62d373f5adedccab68738844d97a4c6f696603fda0b93c096bad0",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "5b7fff85449c25547a5beea20039187be606733bbbfef06d0ef431d896395a8b",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "27b39b04367f4348b9950c042427ad1e212d32f236d3ebf6bbe49c76e4f62e6c",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "dc76498b69bf71d97b63e4fd586c1d69c43f63bb86a41be57e5bb69f6cd35f6b",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "8f6788c7952296b80e61f5bbd43bbc8f839b1b2ea81b7cd5844eb640e785ab3f",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "37e211f44b3b847bd05358b6ee5cc8d29480db8e0cb277f302038abb83c929e3",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "1c6ed47f97f360e6c3acff24b898e7e2110996bd5918355f4728cd7aaf6e165e",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "ce3006b28c03e5f892f9f388d10e95088a5153b3a5f1d6e2055c39b244748c5f",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "306827934eb6796baef118c3fb5860f4d48eac8594a9b77d51374f81aea749d6",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "e8bea0d882d6c2cb82e3f0639a02647622d2eeb96b673f12a62288da93db278f",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "3942c43bb5176713ced8faf7777a09dc3c014dff814c84cefebce09b517241ff",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "6a8797e90985961e51aa93d9a46ea646a52635285a9deb9558629b59fa657b31",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "e16bed57525e8e1b27cd724cedac15deb040dca744d702b92b109192ba2b9a5c",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "8244ce76291f95097d98225a1ddf12e7ba445da09aff9532c555e4d5445f23c7",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "80c8864eb65a9b446ffe9f80e25d7aaf11d2746bdcd0ce8cec1c8ac5c336aaf3",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "badca856232d750d871edc374e1f86f4a9a3c7bb783944bec295f48d081880a6",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "ad6a8e062b226c80882e82f29a128699297e5999db7ba3c6f6bbd4d02419f9e4",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "23d572933a63dbafc9565acb6b6ccb16d79703cb9c6fa17c1abb4912771f8ae0",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "fb969cc8da38a1d92352aa0e8ff5abb90f502d2a26117fdb3f023b09ed4ed16c",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "d3e8adc582ab3d6e032b763789379091a3e3d6ca63fd9158e18ad55290173d94",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "1252055c6d5eb366d70c6f17f50d3db4e5c614374d6eedb2be55e9d6801ee8d4",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "bbbdbf0094156cf6dadda45a1fddf8fabdc0d05b4b5bdace3775f37e3df21040",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "8307a4b47f229b4a689167dce0b96940281ae2077eca9dac30c6d35423dde51a",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "705f6c48c2f30ab1070fa187440064c1676a71dae4377535599d38a0fe0f6923",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "4948a056205fd1c832ad194aa94c7b04c93ea998b68e28f2959715c50696d13f",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "24243ddb5ce663fb8725714ed4a751db76967b5fa0158af3a37a7b9c6dc38a09",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "2126b277ce092a36f30dd8a2305a60e803be717071ab417d1e6b29c2b132d2f2",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "03e86c5de51c8f0e9a01331571f53852b6d80405e23fccfbfd48ccb727650ee6",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "45c84b5a7c93aa0361edb4288b3e3e3a38968eb0ca95787369b3241756eeb8a3",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "d69929fb437c36029622d36cfd096c8e3735787bb1c9680c16bd5d80f4460959",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "39ed9366e976ad5f4ae1ec8d8bd725693f5b0487a3a5a620a858e5c976ff4393",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "a7e3644b617d6ffe34562526741ddcb7bad97478e710fa66b9e40b2a8043f539",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "d09f6d15ed5aae76476f4d6377a34aeb7a51edcf9d3e49a8431cfef9215e477b",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "62875d49da9f3427e58592e6bb2a71d8e121054d45b47393e3fb21a74b36f172",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "48654673286abcb6e3704251980dd8a661dd776258140387dd8e436fe4bf4562",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "bf12aec2e97161286417d8b438a9b8996ddc3798197e53b85c9fe3d9c91ff63b",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "7b3163863c4162d4481f54061c2823e0d3c90a787c4b6c7dbfa94dd20867bc4b",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "742d44414c81a7dbac0cd99ec96ec14c26905f7e41a10bb0d7a2097da71aafa2",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "efe375ca877668c453bb63596f0dbf031dd3730f2e9eb90b350640fdfcb902b4",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "f0a0255dc84a1f0ef10c4c25668e48a89ee7eab4453726482fe419a10c2067ff",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "a0918b418a76604ce2b296ed3710c6459f6005a7017ddf54bc51539178912272",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "d07b1423cdf636bbba29c05ad79cfe7eecdb33023a5e2a9e9e13d4a74332447c",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "22c315e7b4d6e41444eb36a28db4593c23ab48cf52dcc7fe2de566d2738ecefd",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "3e80a4c66d6a6c69de1e21818026fdbe43b9ff0634d02bd047d8e4e6c64cb391",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "b02d24512c10d3165effaa48336cb808e1884f86782d8ce6a295b236708dcf6a",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "982d445efadff613e947398496e77bcd17e94a48a50949772463f005906fa949",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "329b8775056a5ccf05e614177f4ec67d42fa20ba49455a6dce74d1d60e88a1ed",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "10f0812126acdfca570084dd63c21e00abaf2ab3b55b6e7af5a98e0238b81842",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "a265eb5bd7c750e1c5d91d3f1c4e8aa22689a1da59dc361703d50d30bf632c6c",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "ad2b76c4856a00c9e661f6d418c361c775e42d7ca2a9ce0106e2708cbb365084",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "5c4bff19dfe0db675668b29f09ece0bd6455a2f992d75fd2a9fc03195f3d7711",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "739299f6ecdb5408d695056e6896faa8ee67a0d8240502d3062571533d238848",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "674c2ff4809f6b023505b5c1e98c632c91ddbf513f25f47191e8acab0ef9c5f5",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "854caa6040400b73bac9950245a9afa341778cd21819c3738f0ca752bd898f5c",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "1c429e7cfae377dd162f89d3c0dba20e1a8f3bdee5f25cdd5d0186b2aef65dc9",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "3fe843b370d96239c76f13a126dfb7741e86143d1eebf28910204fe9c75eca28",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "0edb83ba2e6fe98e03d3a9f8271cea77a85da1ef74c40e5595fb673f4f58df90",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "898c3e88897675c984b4d54c6d46a7bc1cc5f10cddb3d5fb7a9db5b7816efa9a",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "342de17f506a963a614cf1ad8e1611f3f0a6a0eac3b7f4f4fb1cee17e46db1fd",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "67941e4055e61c2165649e3c509797c8144460cd43e97cb609f3c7d4d6741b9e",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "ddf35d65f5ef6dbcf674669694bfda010d5907bc66a2cff7d6d6cbd049d4d267",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "5f9584119b72013a6f7ba1db867eb4b28c8118e26eea254fa50e835a1a7e0cd6",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "1b3d2473cdbd02eae684caea33a789b3a37e42ee7197cfde06bf0ec6b36f2bee",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "2511b37bd3807f94ded9af7bf9ac431a480d5d35a94120b79f638543ec570cf7",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "178401f4aa680dff4a92e64eb216c4ec74f5c831c053421cd61fea73dcea5e73",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "488ab9acf03a9e6cb822d7e628999516aafe4c7ed1a2f7216c9a4ddff63b7ea8",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "d003a33c12828f62b3e63c1772258dca2cc9ed9ea9dbb549735f96c92b9da6d1",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "5322f08933b279aab2f864eb37b55c139cbc02db662e54ad5ed739caf804bf4b",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "c072bdf8bf34f4d5fb24e0708d6330dc295a3410ba4f90857cfae1978351040c",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "1f7865e5af5f4e91cef89ef61edc2550ade1d6b64f36a051d487b055b5922bf8",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "a48c386e12a2aea33cb933405852f614a5ba714382f061db367f7422d035aab8",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "f47ee0fd05fe5653a7d06ea4ddd9b51c9ec09de5626352ad8ff1626e71f9e19b",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "a758f7179f81f693cd20d3478f257b6000f8b50c97a0cbd613f30985653b601e",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "566e6eabf410493012ba2f2a60974a604e46dd73f92d072b5013420102716c1c",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "5ff04542a3c992e43c21d0d9904717dc28f46832f05b7514e90380ec40de94ff",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "9a1130fed94ddd155906d86c5d64ea7c357d953b33869f60f8b3febe3f74040b",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "562dfe5eeffcd4e0a0ce9474ef851d90ad8d1fb8b06dae346dffabe87b22084d",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "f8aace6e812e5edf4da1d1fd196226388701a9a8c91ce8997d32848603dbddad",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "915276868b1cdfe0baae59cf00070757a12752ec1ac68584aa29a1e65ee5c8bc",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "72aa8c170499ed802ac0a8cfa5c70553a2d754133ca170b770f7c4dea05cdf9a",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "0c7f56ebe763ce9eb5a9369e8976471130f586a37b3fb3cb8998117148ada4f9",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "cd71961bf0c9584d76a7766b9b9d782b2f084ef46d4f6ad358fe677b9942755a",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "940138becdb6dd0cd3613124a7658c29ba06ea2aa9f9a4a622062f2d7696efd9",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "0bd0efb4fc8056a8de22a04b11b5c27bb2516f38ebc1c565276956acbe2f3f43",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "8e1f41c09a33e4d64167cc50de506d84f15410f3859376d5fa82f38ec8151a8b",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "0e41bda7b75686c67bf21f5d06be03b5f22657016c2bda86f65587cbb4be19eb",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "46a3e8bc849dc8f61feaf0834290174377b488904bb5701a1a6d9276e0f3fd7f",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "bafd34c387d315fb6d09edc88a664696ed71bb8919a5c5b24f842f3a7fa0b64c",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "e9cd1c231dfa935e3c10ddfb94415e7e515bd6bf6d205574d54b3cdd120050a9",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "58c93ced6694b53b2c9b14d329d75c673ea55f115c90ac7c779e1b4ac797a070",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "1e15b3ccb927e08575e7d8ab57b8567263917553985689cafd6f1c5d7e018041",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "5293df1fc218fbbb5a7b4d6bbda02425e03785235c5fe1207f078ea8b0e84dce",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "a83a3354b7086adc29e9d080260cd9d474aea95fe42e3f8b07438cb0ae48d582",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "3bccf3f2a047d298b8da45638690358bc8b755f27df4f1ac544ffa78365a7ca6",
+      "role": "prior-development"
+    },
+    {
+      "sha256": "504296d837fc9ebf60dff4b0c13a8e13266608e62fbfdebcc41e4f256b88d5f4",
+      "role": "used-external-regression",
+      "reference": "https://github.com/semgrep/semgrep-rules/blob/16b9e6d45f10649f6a531ec4838ed9924372c3bc/python/django/security/injection/code/user-eval.py"
+    },
+    {
+      "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+      "role": "synthetic-browser-acceptance-development",
+      "reference": "VM string evidence acceptance 20261103/routes.py"
+    },
+    {
+      "sha256": "b891922fcd65c306a006f4591b0bceba51d7ddb2a77feac95a50eccecbc6e664",
+      "role": "synthetic-browser-acceptance-development",
+      "reference": "VM string evidence acceptance 20261103/evaluator.py"
+    },
+    {
+      "sha256": "5b872f0ecbcd19790d01b2d2191409df28774fb70e8d282ff088abfc1dcf13e0",
+      "role": "synthetic-browser-acceptance-development",
+      "reference": "VM string evidence acceptance 20261103/string_guard.py"
+    },
+    {
+      "sha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+      "role": "used-external-upstream-oracle",
+      "reference": "SKF 35199b6f49658b75f860530c0f09b91e985198aa /viewer; candidate comparison completed; not eligible for future unseen reuse"
+    },
+    {
+      "sha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+      "role": "authored-fixed-oracle-control",
+      "reference": "SKF 35199b6f49658b75f860530c0f09b91e985198aa /viewer; candidate comparison completed; not eligible for future unseen reuse"
+    },
+    {
+      "sha256": "b515c23dbbc459329d3b802a3aac742cc456d7472e66f7ed6e9dc97e40596d7d",
+      "role": "used-independent-source-normal-path",
+      "reference": "CPython v3.12.15 e848e4b09ca4bc67c0041c9ce7526dae471d4c36 frozen comparison; used, no future unseen qualification"
+    },
+    {
+      "sha256": "7fdb04dd248ab37909f46d2085bfee56b32d7e91e49ad3a2fad99c453295659b",
+      "role": "used-independent-source-normal-path",
+      "reference": "CPython v3.12.15 e848e4b09ca4bc67c0041c9ce7526dae471d4c36 frozen comparison; used, no future unseen qualification"
+    },
+    {
+      "sha256": "683c5916501746486c7ffd2974323e83f912fab2cf7360db6d4063583a11b6d5",
+      "role": "authored-arity-positive-control",
+      "reference": "CPython v3.12.15 e848e4b09ca4bc67c0041c9ce7526dae471d4c36 frozen comparison; used, no future unseen qualification"
+    },
+    {
+      "sha256": "fd86e48da90999bf795de59e4dab86e84de2236386bd3053206eb42b5de12d82",
+      "role": "authored-arity-positive-control",
+      "reference": "CPython v3.12.15 e848e4b09ca4bc67c0041c9ce7526dae471d4c36 frozen comparison; used, no future unseen qualification"
+    },
+    {
+      "sha256": "9838ecce20b5dcc303735f8fd8dfe1695e2a42b816fb38663f4d2fe3b97633ae",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/plain-eval-1; used development control, not independent qualification"
+    },
+    {
+      "sha256": "a6524a3e038e30149cce84ae23d8d569971a48d9e7f7edbe2acb11275ad9da6b",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/plain-eval-2; used development control, not independent qualification"
+    },
+    {
+      "sha256": "ed34bf506c0262d7010400d0c21dc0fbbd79d0e57e0e82e7a63b9959d52ec934",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/plain-eval-3; used development control, not independent qualification"
+    },
+    {
+      "sha256": "ca21ccb7d9f0d1578bcdcd7f1f2867b2d60f7a657691c1e50d547a3249f2644b",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/guard-complete-eval; used development control, not independent qualification"
+    },
+    {
+      "sha256": "5f000d210e1133ff59102cb813af055a28252a681bf8b7e09b7afcc27a4237af",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/guard-conditional-eval; used development control, not independent qualification"
+    },
+    {
+      "sha256": "64818360c9db8695fe4de41ddbfea1a0c359a0461ea0cfbf04ba93405cc8cd2a",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/guard-overwrite-eval; used development control, not independent qualification"
+    },
+    {
+      "sha256": "0c7ff334b1d7051385b36f8fd21d5496ebab3ca88ddd419c534cd06cc540cd39",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/guard-append-eval; used development control, not independent qualification"
+    },
+    {
+      "sha256": "0a9b42a779a21740ba89813f6d6b9c33beba4787f5368c217600d1204a7793b0",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/mapping-eval; used development control, not independent qualification"
+    },
+    {
+      "sha256": "96d40a4decc712ea14308dcedfdec48f362c80319af6aed722edba33ce809eab",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/literal-eval; used development control, not independent qualification"
+    },
+    {
+      "sha256": "b69101e618dd161ce0ef01d0f3536afb6d4f9ff80055280d443a13c600e05196",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/shadow-eval; used development control, not independent qualification"
+    },
+    {
+      "sha256": "0a766258e6b1b544f92b6886707ee93afdd0b2aa08e4af20b1d5b90e3efa464c",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/qualified-eval; used development control, not independent qualification"
+    },
+    {
+      "sha256": "6f2dceb17bd74070ea5335910f548f39b1c6e4a18a26d59a6bc091f63b79cac0",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/alias-eval; used development control, not independent qualification"
+    },
+    {
+      "sha256": "0fc75c5986c3324c740129812a4d0bc17a4c9db9e70703a1222afa460a7724e4",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/plain-exec-1; used development control, not independent qualification"
+    },
+    {
+      "sha256": "aed712cec5eabbe4c032a72993ad303cc79bba9418c6d622734327b45ef67c45",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/plain-exec-2; used development control, not independent qualification"
+    },
+    {
+      "sha256": "830a03cdefa903756ebfa7610b50b98b6d94deb8d5f000e0f06ab20520396515",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/plain-exec-3; used development control, not independent qualification"
+    },
+    {
+      "sha256": "89d1f5c2705920402a02196b0fb0e908da32233baa66cdae732f7ffbea61659c",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/guard-complete-exec; used development control, not independent qualification"
+    },
+    {
+      "sha256": "87e3cab73b358ec41a2ca0d5c57360abd1a275b6b30832e48873d9ebc173a079",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/guard-conditional-exec; used development control, not independent qualification"
+    },
+    {
+      "sha256": "8f92178588aea81dd789cc723239e8fcbe54393f0ffc1c01806b85b0ee27de3d",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/guard-overwrite-exec; used development control, not independent qualification"
+    },
+    {
+      "sha256": "6148aa251e946f5f1a6d9a7dd21ddaf8a446cce46b452a3ae26b5a87896be31c",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/guard-append-exec; used development control, not independent qualification"
+    },
+    {
+      "sha256": "ea0a90b33740db1ce012721c082c75048ca5d3d79906d590d0056f03e72b3089",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/mapping-exec; used development control, not independent qualification"
+    },
+    {
+      "sha256": "6313434fcc3c32466e602c412ff529d7b6be8dfa15541e6946e445f11efe89ab",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/literal-exec; used development control, not independent qualification"
+    },
+    {
+      "sha256": "2afb108f06f87ffafa566b3cde29997f4d1e15e5aecdd4c8a28562889c1efba8",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/shadow-exec; used development control, not independent qualification"
+    },
+    {
+      "sha256": "1ef0f0ea665475fd32882a83c4d0d4dd92c9d72de54196bce7c9ed18ab5df4f5",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/qualified-exec; used development control, not independent qualification"
+    },
+    {
+      "sha256": "92699ed5dbbcfbb0484afabed5474086544060e22dfd5de898a07ee563be06b2",
+      "role": "authored-namespace-arity-diagnostic",
+      "reference": "namespace-arity-20261103/alias-exec; used development control, not independent qualification"
+    },
+    {
+      "sha256": "00d4a33ae7ae50f6f4f9c82fbd18ef38552a4b7853bc92333ee60825a7ce3802",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "02e3e3983bdb8373b1ca32c0a6d51a74c7a79c2ae8d638fd3120caf3cdee0707",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "090e859fd2bddb04db053ce51a0268f1cdc0e9a44041762893696d523f73327d",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "10399bfae0db5c5674cd8c1368dbf740a3d41d790a47323861c306c2cd0f7834",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "147f61c2ba6689eb20e39d2e092ce0280283c16e6e868508ac541cbf6c23ae4e",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "1a6f38e3c192aa48e8faa60436ad2f7c82939c0f2ad5c2ba9f67b235ad896cfe",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "1b0bb013b1dbc0576e68a26f9c4aa6413723c70e29e5e6908f570625fc22bd27",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "1b953b1387d20773e43a5ca22ed85603c2ca62a0ca6acd9a0a6974edad066bff",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "1ea48e0cf78ee6fa492e58201177c476d6b3c121905365d8158e48863e9e2281",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "256da389139a3fc701205b3ca564a55b33405b817f0da32b733e9d6ff60d8137",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "26bc1784f2c20ad475660b3b6a36a5fe9b97ebe8f870a95f230127b98f651d01",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "28a25af863f19fca85159825f858a1c5f96f6ba61ade240ecaf9717de1fcf161",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "2a423df41273b21e9548c92abf429429bdea390c2ed2e532fad64f0da95fdc9b",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "2b415df21a7e41b8eb712992d2c2510937a3035b2a9472caed3da706fefde7be",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "2cdd8de707e8b842249d572102d9ab0dff64dd769fa878bcce97e640a98bbd87",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "30bebe2a0814d32fd777a6ad83e24ba0d9f2c715695d77f57b9527de85054ba0",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "343d79637e867e18831a0cbf71c907f98638eafe6f61e3b62b7c0fc592293184",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "3dc4d3a483261e960f1f1bcf1c21dfe6536949dc89e5076f80cab84fbd8ccd0a",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "3e98ff88b62b84a61b2f08dcf84b51fef3b1ac4a10be2075b6720511795b4b8a",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "40e8de734585c3bab8a9f266a7ca5a457d8ea23f66114071a3e15acbf1919216",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "4167a19aa62542a6a8838b0c229f69fc8566ca4eb7c241a5cab7b3271c588aaa",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "475b5e925f835e38866d73ebf985a1d45a107b192fbde826914d1681d6dfc4ed",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "5036a2ed3cdae7b69535086779c0e9c0f0a76a7e7904f7d70ab02fc969b47349",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "5695b7810a11870c5a2bc0227c2ca28f6ba47b0200b924990fc15cc7afb370ab",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "5c4a179cad22a8ffa3b1f79e01232427843cdea7f085e6853e0675841b935624",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "68bf6991d7be8b0e4d80239a5ad2e6780c338486e97cde456a99d4b10549547f",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "6a26146b978de8e68fd0fe2fd7c3e43e045edeb32bfeb1cd0156782b739d89cb",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "6c4e85a450211be145ee0c51652dca5909bf21eaa095e49dcf8c94151959d68f",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "6ddeda2b36ff08d35b6a3eaf9f5c3cfe8b7f319ba7f20d7a757704545269355a",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "767947d78f5ce60a512e81a41119b02509f510746627cb875e35426fad30883d",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "850c81846a7618e60786235390d30b8e724a28e30a8ebff528fa9a88f8043ac6",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "885a8712b3c6e46cde12035b7c8343bfe9a6d7f03aab4bc162ab8e461a6ca654",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "94a9812dfc1d2eaa285f6ad65d4c7d53ae206459ccab4625920acdf60844d7b3",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "a3875f708cdf3f466e6c18d93834d4d0e210fa1d2e391d4c61bc4de0fd300641",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "a3c38949c6441c162c8e2ceca4bd039f13c8d8ff2f56ef0900df0a7c678defde",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "a6f86292d52a83588018c2b1242a9a5b5c27fdc2333e7e6c16605850b3fd9cd8",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "a7a46fdc290c52781bb73470251fcacd7e1486c7aeb7951862c8109f1dcb6108",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "acc414da9e49d2b10e539cab4a6349ccc5e5a4ede19e91b447bad0f176e81784",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "b674e16a79b195611bb967ba3e5e1ef6956cfc7522d39a8935795714700b7528",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "b7e1e62cdc625e2182cefbb87b5223e1ecf78ce35d954c9542939656d0ed8571",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "c32765a668920ab082f8850b38b49425fc11d5551d31a7880d3efb79eef37a92",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "c89810d403f76dd527d9b7d728118841c6057d2894a027ae72199db6b8890a4b",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "cb753b2700871bd102dd5ae8b4c3022587d259e4b4a17a9a53e97fd43e4d6116",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "ce27d675a3f61b37abbc0b18892cf03bf0582007462575336948e8b7c55a2620",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "d468abbb1d906df41b03f02346545099e51931017c1d06913691e6454019076c",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "dd016c1c334bcabccb9100d4b5feddbd73f11646ae37f0918f92c2ac8c5d4ce9",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "e141aa340572b727bf16bc7666c72a14e381465ec30f34214ece52605117b4e9",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "e40ee5e988705295bc201819ca95b9169515455e046b4ab917457bcda4945f6f",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "e4d0cd9b083fc774bc4fac7d394a2735933ed2583b7602bc8ee2733899faf978",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "e593e5842b49c365ae64acac8abcac588e0ed08595ee9b364deaaf78b612f8b9",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "ef3aba9514702ca6c647e923a0101cb164ecad7dc8102f2f8f37a3bdbe1b457e",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "f4ac50e8085644265c818f9809c1af5b9ea898b05b4f973402db7f506bc57682",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "fd5b692038540823d0f1a61c7f2daefa72c01b575bb52b6c688f47a27cfc0de5",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "233ac6e36843010cc4bf4ffac71d6c4b95b7dae9b67af379a7c1a8f902765270",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "236273a9596b7d066b4d98341bcff04e49c9a62b17e542f3635222789e3953f8",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "2c334de84a8150504a721b5467aa5a5e848d29ac3cd78d56cf35b5a632fef40b",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "5be801d904785a1850cc9c3118641df752b5881375bba3750b83be8464ecb3c8",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "5f88aca356c64efb3a6aed56571af1054122fa932e921489a807890549d4362e",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "6a1a71f1f755a242ab23030110ebb5c587bf86babcf85fc3e564e736fc623297",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "7070414f9fa3476b23a0dca41202aff260a15ab45b518f83c8d713a2f9e4bf29",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "75e64d716720fa9a24ae2a34df817277a9c80fd1a4bc300d51632df9630509e4",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "a61c924959958a852b41e96be63ead156fb2a2a862c0a0a8917da8657c90670f",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "a6351943438b2c1640e93be3391d8ef65ba000a525636dbca486953530e816d8",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "b344f61743a289b41bb16690bb75838fbdf836d0949ed6b5d2b146a8211bbe20",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "b80f28aaf1857c3dcd4ea4b06cdda41bf17a859578c1bbb31036a4988674341c",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "c14ee1b7d6c0ca41e941be8dba7df592d1d27c852105a46e11223440b1c5d748",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "c470ec64b8552b86c6d17cc66378979466bf833269ea87bd64640451179c1267",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "d1cc620ba9d391acb18b618bcaf670d90d5b1b9f2f32d907da165e692db0f6e6",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "e57e06b8db9189031cfa49277d1be73c7400edfb8ccb85a726a0401c3bdc0203",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "f4de384ca1da73100e362a38e7ace652e46fa0b90f9df14833d34ecc38fd14fb",
+      "role": "authored-namespace-evidence-development-control",
+      "reference": "namespace-structural-review-20261103 authored-controls.json; used, not independent qualification"
+    },
+    {
+      "sha256": "ea2eb8cfdc972e9eeeb1ae6e96df9345443bfc51659ae8ffc70f5ae03df7e114",
+      "role": "authored-source-location-metadata-regression",
+      "reference": "source-locations-20261103 authored-controls.json; development only, not independent qualification"
+    },
+    {
+      "sha256": "9090e56e30c6904d4e079104dcf9b6c0fae806ef2da2275c838793e46356aef9",
+      "role": "authored-source-location-metadata-regression",
+      "reference": "source-locations-20261103 authored-controls.json; development only, not independent qualification"
+    },
+    {
+      "sha256": "dd72b55448670f2354fa080b5ad7e206013f3e8a301eebcea4884642e7bb9f03",
+      "role": "authored-source-location-metadata-regression",
+      "reference": "source-locations-20261103 authored-controls.json; development only, not independent qualification"
+    },
+    {
+      "sha256": "4c5a7a4e263d4077b09105dd7bf7b2d9351521a1f837af2c5f90578a6c6c8edd",
+      "role": "authored-source-location-metadata-regression",
+      "reference": "source-locations-20261103 authored-controls.json; development only, not independent qualification"
+    },
+    {
+      "sha256": "614441302ea23719365696e3381077f6af65de6dac95467058fefb22a76bcfe2",
+      "role": "authored-source-location-metadata-regression",
+      "reference": "source-locations-20261103 authored-controls.json; development only, not independent qualification"
+    },
+    {
+      "sha256": "735424f69481b30fae7c7df1610f60c2dca7d9cf5add924a78b4febc45960d41",
+      "role": "authored-source-location-metadata-regression",
+      "reference": "source-locations-20261103 authored-controls.json; development only, not independent qualification"
+    },
+    {
+      "sha256": "ac41ce884032ba383e26862bb1c9a49151dfb209d4956f29a72b64aa6b2b16be",
+      "role": "authored-source-location-metadata-regression",
+      "reference": "source-locations-20261103 authored-controls.json; development only, not independent qualification"
+    },
+    {
+      "sha256": "4da1826770f674fbc69fe6488d99e0c20060ceac989067d92a473f82a409d5c8",
+      "role": "authored-source-location-metadata-regression",
+      "reference": "source-locations-20261103 authored-controls.json; development only, not independent qualification"
+    },
+    {
+      "sha256": "dd8385fc2fa1c4b759701278b59b11d8fc96d835d57738a07a7f13f6d390f5ab",
+      "role": "prior-development",
+      "batch": "source-location-live-20261103"
+    },
+    {
+      "sha256": "08902773687c1a201e7773c169f13282e6a2d32ab3338dcd1365f6fee706e670",
+      "role": "prior-development",
+      "batch": "source-location-live-20261103"
+    },
+    {
+      "sha256": "fb5312c0db81d10a450cef43e4ea85d4cdb497b2945557b0f809d4e2ac3508ac",
+      "role": "prior-development",
+      "batch": "source-location-live-20261103"
+    },
+    {
+      "sha256": "ba237186b266baf4cbef611988fbce51fc7d268a0dbf3f915e9dad5e30ed2e6f",
+      "role": "prior-development",
+      "batch": "source-location-live-20261103"
+    },
+    {
+      "sha256": "aeba733972e95453dd49b86a7fbf0705abee78394fb9f8d1284b4831bb2a6ec7",
+      "role": "prior-development",
+      "batch": "source-location-live-20261103"
+    },
+    {
+      "sha256": "7257aa6e74cd48d192b7e817104521763c597fb09a030bed340fd68506e56581",
+      "role": "prior-development",
+      "batch": "source-location-live-20261103"
+    },
+    {
+      "sha256": "0ee96b76471ee0d197ce6e75a1cacfa32932f7cc5adee4b8ef36bfd867a64263",
+      "role": "prior-development",
+      "batch": "source-location-live-20261103"
+    },
+    {
+      "sha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+      "role": "prior-development",
+      "batch": "namespace-managed-20261103"
+    },
+    {
+      "sha256": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+      "role": "prior-development",
+      "batch": "namespace-managed-20261103"
+    },
+    {
+      "sha256": "bca1197d58fa408510dd9d4880f33c06e07a4bb68374da695807fae96cfe3955",
+      "role": "prior-development",
+      "batch": "namespace-managed-20261103"
+    },
+    {
+      "sha256": "27b561e88b5059dc318f480285023b44869d5bccd6c503ceaabdc3b747568a22",
+      "role": "prior-development",
+      "batch": "namespace-managed-20261103"
+    },
+    {
+      "sha256": "1d6e3288f71673f3edaf480378e7f51d39e9d2a44dc189261adfe8af67cfa062",
+      "role": "prior-development",
+      "batch": "namespace-managed-20261103"
+    },
+    {
+      "sha256": "762652b9524828a9600bd1f836b930d5cebaab6e477c5e495a07318a0d34f99f",
+      "role": "prior-development",
+      "batch": "namespace-managed-20261103"
+    },
+    {
+      "sha256": "ded311d424f66ea11047d9abc377f66552048b9673711d5a5ab517f272927503",
+      "role": "prior-development",
+      "batch": "namespace-managed-20261103"
+    },
+    {
+      "sha256": "97001081edfea081b211bc58650abb271ce7fb2f035f7ff17c1354062775a95f",
+      "role": "prior-development",
+      "batch": "cve-pymatgen-20261103-attempted-diagnostic"
+    },
+    {
+      "sha256": "84d5f4320e6888ee96b1d63f7895ad63efe31e49edddb7633ea1b13935da3926",
+      "role": "prior-development",
+      "batch": "cve-pymatgen-20261103-attempted-diagnostic"
+    },
+    {
+      "sha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+      "role": "prior-external-advisory-diagnostic",
+      "batch": "r3-xinference-20261110",
+      "reference": "https://github.com/xorbitsai/inference/blob/4cefcaa1e63d7e29d26bcd4be96cb267da113871/xinference/model/llm/tool_parsers/llama3_tool_parser.py",
+      "sourceRelation": "same CVE-2026-61539 vulnerable/fixed parser pair",
+      "attempts": [
+        "two-fixed-rule-scans-completed",
+        "initial-method-witness-failed-ast-digest",
+        "failed-witness-reproduced-once",
+        "witness-only-byte-identity-retry-passed"
+      ],
+      "reusableAsFreshHoldout": false,
+      "additionalUses": [
+        {
+          "batch": "namespace-route-20261110",
+          "role": "reused-diagnostic-scanner-replay",
+          "qualificationCasesAdded": 0,
+          "attempts": [
+            "unstarted-submission-failed",
+            "invalid-receipt-fixture-rejected",
+            "corrected-route-passed"
+          ]
+        }
+      ]
+    },
+    {
+      "sha256": "4e09cd7602e0e8186c47b92f1562a97b44a3a9325fab718ec64cf5c2f5ea2d6a",
+      "role": "prior-external-advisory-diagnostic",
+      "batch": "r3-xinference-20261110",
+      "reference": "https://github.com/xorbitsai/inference/blob/1b3d220f342ce68d34cec4586d9409d457dadc42/xinference/model/llm/tool_parsers/llama3_tool_parser.py",
+      "sourceRelation": "same CVE-2026-61539 vulnerable/fixed parser pair",
+      "attempts": [
+        "two-fixed-rule-scans-completed",
+        "initial-method-witness-failed-ast-digest",
+        "failed-witness-reproduced-once",
+        "witness-only-byte-identity-retry-passed"
+      ],
+      "reusableAsFreshHoldout": false,
+      "additionalUses": [
+        {
+          "batch": "namespace-route-20261110",
+          "role": "reused-diagnostic-scanner-replay",
+          "qualificationCasesAdded": 0,
+          "attempts": [
+            "unstarted-submission-failed",
+            "invalid-receipt-fixture-rejected",
+            "corrected-route-passed"
+          ]
+        }
+      ]
+    },
+    {
+      "sha256": "0d66f7e9813ee8a8c16e96d562e742ae742316ebda4d0fd2cc6c7705f6bf891d",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "20fc55b4536185abada383ac0195bfb8c29670de18e6ff3b4dbe1e6e4cb73a2c",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "26550a8e5565c28003f6b7f76be60b6dc64dce035e2ed8f4b02aa87037c293b1",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "2f7147990d9d6ead6cadd22e8abea119912564b66d12b95b587222deb444f054",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "3c44c66412535e2292b45973066476046626ec58e12cb8e49f86db7f7f2495ce",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "43f60f6b07c48458e7f6176e5f17f8cddf70e1e290c1d3cba53d655be1ab4cce",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "54217858f16139e1db4aae37ab46ac562b190dc4a4e8119bb83d0f3c4e4fb803",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "8331e762bd83516e8d71211c73e8d8660bb292134f2af3c92ddcfd639c51ae73",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "8cfc60e399dade202dbb73b620cf4c050a3213b2967533f73848d3c7734e53f7",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "90dbb86a4ae50bb59e1df665fef191206f2e4e36c61274426ec1f98422527909",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "913dba152959dfe0e52f6f80daf9b00fca6ffd9d525d05b1dc0e3c165d101ba1",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "9da2c32239dd0d750f9a4f542292d96d177f6fc8ad2305a3f7981ab4a3295fe2",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "b306e7610d8e0c1f33ba80a99fd48855b53c2a6d68d822430cd6de537e40ab23",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "c8a0b8789b22f8285380d2597f450f655d928f4650a92707cd4b330b6f797063",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "c980be807eee197d3630f29b650d057e25b4891cbd2fab563003aeb3dad8aa61",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "d4673d84ec4420fc9f9769f0a9a11d0dbdca5958fa6be6097b0e47a7e58fbaee",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "e48fbf323fcbfffe46638f2bea008e4bb247b8ccde95312a64e776b7d0f0e597",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "e675ebb836aa5e27200b921314b0af8deef1d77eafccc7fd87cae671d55a3811",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "e7d01a0e88e2c6bdf8a3d044e13dfa6123e6cd1a9a23adaa6fe3133553528401",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "f735d2f6745d3063a9bf57e4b2961442dfe571bb93d272d1b9c3d44035dac8ed",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "ff63fad229d33aaff89baead6ff7b64acb9dacb6508967bc35b132f834ee793b",
+      "role": "authored-method-parameter-development-control",
+      "batch": "method-parameter-20261110",
+      "reference": "Authored class/try lexical-source regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "01eb34f274051a8d3310c20c0b6477f73dadf39e77dea03cad26aceb6f9b57ca",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "0ce272186b3be3be195998ad5b629faf5726d089c149a4819e632c25ea31a18e",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "19345c6db63321269741dd63dafeabfac9d5eb1c07e583ea7911e21bea66839d",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "26d8bba8bdaf375770f2e8977856f31c5225a5d9623444b2b574e20b1c69de09",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "2ddcb4cfe028d9dc9f46e37a1e8d4f7cfcb721955123d3ac2026e41c57cf0656",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "3627a101700da45b4e852f2b39f4ddfd398547553cad126e1b4460e4261d6dd9",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "3fe82b0a870532e4c8cad267a5716edf0a5c5629d312a25c95bf5603d08e9d82",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "433956f25164c7f5d19cf5a171ffd7f45b30687f97e057f4a7350e8c895e9bf7",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "4351963bb884deeb92b513c147a9af0bb4616ae5aa1c91821d3cb536118bff38",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "44c0ed4ba76e97e5bf774d3007a114e55092f9110eb381d0dde3dfa0028b513f",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "529a0e06a330cdbd6a6292cd4a33f9dae3b82491d6435daccc9618d5df662b29",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "63c6edf506e70791a26d126f0bdcdd29af57c06e1e5627b50f245dac31f37b82",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "6a24cf221bc5fdfaf01d8a6cb61bd92f2e82deb18e45b076ea9fe839729c9c25",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "6f440ff86c70b591b0330e2a0d6b4ff2384f03b17a4d5fa1d93d02c0c40dc0a6",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "7208f4122e1b1b3a3b0a6c7ccd67dc602ce5c5ac039d59308e89f1cb0a866602",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "723475445977153045e5b36cbc4474beada9d4c56091c69c210cee8b6ff24fbf",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "758e9c085007c79ef23947d4649489fb4e3a0ecbbbed16a2ab6d88c8080a5a0e",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "7ab524a5196c099b311f659c89f791cd03fef6a553702723c38375d6cd6a384a",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "906ccf3a49cfd4d1fb79f93983e18fb246a927f1ee1ca5f9b750a3221bb3e934",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "93ef2032eee4382b794047d1538fbb6f268c1f28dc3c3eb41e2853803330761c",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "9e88dfba32f6e9b5de84caaa1d13316f23e36f7b6ee9036bec8111477b9f471d",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "aed2b46cf0697628f83355d5398e2cd6b8d777a8e76eb371d0614ab1afcd9318",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "b376e861b087a30988d79829eceaa8142dcf3b65b5d4475522c7d2251974fdda",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "c7da659ac6c9f56863effcf41f5c1758b317219cb93bb25765ee2782362fd0e0",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "d2702f160a7aa68f8133cad757bb3f84a164c6907ff9159dfc520257acdf16b2",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "d328dc6dc38c01946c97d19929a42e6c0e891e8f2ed854d6bae0bc8e0ebb34c3",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "d5f6253d7e19fafc04b31a2fa57a3ce179a0444a23fdf23e89f44e75bbf96756",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "d909a81bb966952305c3feb767cc61e3d65d1cb8a06e3ddd2829be2f9d9bce7f",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "de1f10e955652e862083dfbd2fb43f403ff4fce84f3ec384db5b3d95c7c31f59",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "e11980e8a560a9956bee29c07d955350074d65dfbb03580d16a3f03ed237eab0",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "e2ef45c450849a8e2840eafa7f016f313179772e61674a87f367d1a478f39688",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "e39eae0fda449645f95ae49330af3eeea8b74254d57a6a58b1a905fc80b5e0cf",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "ec18f2a43e76b40105bd1ee6aeab9012b61817ce4c4055b54a2720b01fe1fba9",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "eef3f66d77c39b20a233163b711a9ced3df2b748f9d5b401ee7e7fe4a45118cc",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "fa962e7cace89cd6b02fc8ceda805ec8b3948f4ec2e8d8dcf229e06adaafcd1f",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+      "role": "authored-import-namespace-development-control",
+      "batch": "import-namespace-20261110",
+      "reference": "Authored import/namespace, try fixed-set and generic binding regressions",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "role": "authored-python-location-boundary-control",
+      "batch": "python-locations-20261111",
+      "reference": "CRLF, tabs, Chinese/emoji, multiple/nested calls; location diagnostics only",
+      "qualificationEligible": false
+    },
+    {
+      "sha256": "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834",
+      "role": "prior-development",
+      "firstRecordedUse": "python-verification-20261112-s2-1"
+    },
+    {
+      "sha256": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+      "role": "prior-development",
+      "firstRecordedUse": "python-verification-20261112-s2-1"
+    },
+    {
+      "sha256": "24fc6dd4d4950f94667f76c65522fad9c4290c54aac06405aa8c10c48fc55ddd",
+      "role": "prior-development",
+      "firstRecordedUse": "python-verification-20261112-s4"
+    },
+    {
+      "sha256": "2f46af997cf895d92cdaba043476c89b34d791f5aa71bd266619f6689822fdd1",
+      "role": "prior-development",
+      "firstRecordedUse": "python-verification-20261112-s4"
+    },
+    {
+      "sha256": "b1b09f210af818cbea5fc76f8efbb66b01e52806403da6a775e441e1cdb0826b",
+      "role": "prior-development",
+      "firstRecordedUse": "python-verification-20261112-s4"
+    },
+    {
+      "sha256": "672479b6daa0d76d85d9180ab78137a2c8d4a473ba7feddbbe405e92d6e2d403",
+      "role": "prior-development",
+      "firstRecordedUse": "python-verification-20261112-s4"
+    },
+    {
+      "sha256": "1abe614d55c961574ecd71f15fc0f7aae390cb7ff12f8d115d82b9b3d79af196",
+      "role": "prior-development",
+      "firstRecordedUse": "python-verification-20261112-s4"
+    },
+    {
+      "sha256": "c830feb07881234b41302b6ef2d20ba2d3b1e014318d592b1a744198539e15b8",
+      "role": "prior-development",
+      "firstRecordedUse": "python-verification-20261112-s4"
+    },
+    {
+      "sha256": "625c10da52a8fab03dc66955526bb2442483d2df2be743c47052e09b0e564946",
+      "role": "prior-development",
+      "firstRecordedUse": "python-verification-20261112-s4"
+    },
+    {
+      "sha256": "1c1729f357c8204429f97addfd0726389b1049eeca7f4da3f030e0acd7091fa0",
+      "role": "prior-development",
+      "firstRecordedUse": "python-verification-20261112-s4"
+    },
+    {
+      "sha256": "49a314d3a89b45fedb2a18824da2933732a403ba7a08818d594f64a0e7581364",
+      "role": "prior-development",
+      "firstRecordedUse": "python-verification-20261112-s4"
+    },
+    {
+      "sha256": "799c6574c50826c6b2ab5eeed16e6f7978da457ef1e3f0f719d4fd6a47128f9b",
+      "role": "prior-development",
+      "firstRecordedUse": "python-verification-20261112-s4"
+    },
+    {
+      "sha256": "6b84b56c5d35958e61d04454994a7a6a74de9b6dd0017a31cdb4f2b4b5df8d83",
+      "role": "prior-development",
+      "firstRecordedUse": "python-verification-20261112-s4"
+    },
+    {
+      "sha256": "db96e553e8f66be5e6cd8e5872234962d96425acff027649c382c679dace10b0",
+      "role": "prior-development",
+      "firstRecordedUse": "python-verification-20261112-s4"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "python-locations-20261111-vm-1",
+      "kind": "previously-used-and-authored-location-diagnostic",
+      "state": "completed",
+      "sourceSha256": [
+        "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+        "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+        "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+        "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+        "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+      ],
+      "freezeSha256": "82230cf4d3be932e23c01e6b2aab27fee53a56dd7dcb4b23f7a2639b32bd92f4",
+      "vmResultSha256": "bbfc1f9cc1ff913453e1b2283bdef783933f0f48cf2874923d639812ff1c341f",
+      "newIndependentSamples": 0
+    },
+    {
+      "id": "python-locations-20261111-vm-2",
+      "kind": "previously-used-and-authored-location-diagnostic",
+      "state": "completed",
+      "sourceSha256": [
+        "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+        "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+        "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+        "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+        "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+      ],
+      "freezeSha256": "9c5d905f5b92fe0303c23d817e0e1feaf98c01fe2986cebd6c53077824665de6",
+      "vmResultSha256": "5190cae50c2dd23ff847bf3763aa2ed4915f0c42181bcddf62b2dfe5ad3e3edd",
+      "newIndependentSamples": 0
+    },
+    {
+      "id": "python-locations-20261111-vm-3",
+      "kind": "previously-used-and-authored-location-diagnostic",
+      "state": "completed",
+      "sourceSha256": [
+        "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+        "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+        "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+        "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+        "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+      ],
+      "freezeSha256": "2faf22ada9c9bd2d2ca580c239dd58b7c4c05794b00c69f55c3b3a83cb1fcb1f",
+      "vmResultSha256": "67aef5a24e5fbf71711c50a74f34ef4bd9fbca5d793f268a6cf9511cce2f326e",
+      "newIndependentSamples": 0
+    },
+    {
+      "id": "python-locations-20261111-vm-4",
+      "kind": "previously-used-and-authored-location-diagnostic",
+      "state": "completed",
+      "sourceSha256": [
+        "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+        "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+        "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+        "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+        "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+      ],
+      "freezeSha256": "b7a7b0e38e853761635aa24b633d988aab4ac90fa5a1c45c1abe00a241e28c35",
+      "vmResultSha256": "e71ca5a371d81889d885d93e14a799bc56a559555981d7d15b402fd1456d31c3",
+      "newIndependentSamples": 0
+    },
+    {
+      "id": "python-verification-20261112-s2-1",
+      "kind": "reviewed-source-verification-preflight-or-authored-boundary",
+      "state": "completed",
+      "sourceSha256": [
+        "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+        "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+        "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+        "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834",
+        "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+        "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+      ],
+      "vmResultSha256": "10b15aa9f1219ddc9d343a7649008b4ffa5076b254261e130404879e3fd0239a",
+      "evidence": "docs/security-workspace/diagnostics/python-verification-20261112/s2/live-result.json",
+      "newIndependentSamples": 0
+    },
+    {
+      "id": "python-verification-20261112-s2-2",
+      "kind": "reviewed-source-verification-preflight-or-authored-boundary",
+      "state": "completed",
+      "sourceSha256": [
+        "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+        "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+        "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+        "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834",
+        "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+        "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+      ],
+      "vmResultSha256": "41c1129bb37f0c1032c5a7cf6d3ecdfa5d958bfa530d1183e43d24e2e649c731",
+      "evidence": "docs/security-workspace/diagnostics/python-verification-20261112/s2/live-result-r2.json",
+      "newIndependentSamples": 0
+    },
+    {
+      "id": "python-verification-20261112-s2-3",
+      "kind": "reviewed-source-verification-preflight-or-authored-boundary",
+      "state": "completed",
+      "sourceSha256": [
+        "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+        "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+        "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+        "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834",
+        "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+        "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+      ],
+      "vmResultSha256": "bb6ddaf8af57b1dd2471ea64a6dc8df9b3edee70f45f6cbd8c57ecb4bca2bc24",
+      "evidence": "docs/security-workspace/diagnostics/python-verification-20261112/s2/live-result-r3.json",
+      "newIndependentSamples": 0
+    },
+    {
+      "id": "python-verification-20261112-s2-4",
+      "kind": "reviewed-source-verification-preflight-or-authored-boundary",
+      "state": "completed",
+      "sourceSha256": [
+        "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+        "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+        "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+        "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834",
+        "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+        "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+      ],
+      "vmResultSha256": "08e7ab685ffc52d04684ac3b597db1676b524ead5d54ab78afa5199efec43235",
+      "evidence": "docs/security-workspace/diagnostics/python-verification-20261112/s2/live-result-r4.json",
+      "newIndependentSamples": 0
+    },
+    {
+      "id": "python-verification-20261112-s3",
+      "kind": "reviewed-source-verification-preflight-or-authored-boundary",
+      "state": "failed",
+      "sourceSha256": [
+        "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+        "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+        "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+        "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834",
+        "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+        "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+      ],
+      "vmResultSha256": "b769941bacb70453d38454d1f12df628f73e9683c7feb508858a1c3dcd90e405",
+      "evidence": "docs/security-workspace/diagnostics/python-verification-20261112/s3/vm-poll.json",
+      "newIndependentSamples": 0
+    },
+    {
+      "id": "python-verification-20261112-s3-vm2",
+      "kind": "reviewed-source-verification-preflight-or-authored-boundary",
+      "state": "completed",
+      "sourceSha256": [
+        "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+        "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+        "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+        "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834",
+        "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+        "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+      ],
+      "vmResultSha256": "336bbc4270dd5e028a3b3e47a3d780c177eb4b2e68c3332c368e08016aec5006",
+      "evidence": "docs/security-workspace/diagnostics/python-verification-20261112/s3-vm2/vm-result.json",
+      "newIndependentSamples": 0,
+      "freezeSha256": "bcc0ab96a5fc75cb3da70a84aaa072ea2ca58c1f53bd519db835a018c901d5da"
+    },
+    {
+      "id": "python-verification-20261112-s4",
+      "kind": "reviewed-source-verification-preflight-or-authored-boundary",
+      "state": "completed",
+      "sourceSha256": [
+        "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+        "1abe614d55c961574ecd71f15fc0f7aae390cb7ff12f8d115d82b9b3d79af196",
+        "1c1729f357c8204429f97addfd0726389b1049eeca7f4da3f030e0acd7091fa0",
+        "24fc6dd4d4950f94667f76c65522fad9c4290c54aac06405aa8c10c48fc55ddd",
+        "2f46af997cf895d92cdaba043476c89b34d791f5aa71bd266619f6689822fdd1",
+        "49a314d3a89b45fedb2a18824da2933732a403ba7a08818d594f64a0e7581364",
+        "625c10da52a8fab03dc66955526bb2442483d2df2be743c47052e09b0e564946",
+        "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+        "672479b6daa0d76d85d9180ab78137a2c8d4a473ba7feddbbe405e92d6e2d403",
+        "6b84b56c5d35958e61d04454994a7a6a74de9b6dd0017a31cdb4f2b4b5df8d83",
+        "799c6574c50826c6b2ab5eeed16e6f7978da457ef1e3f0f719d4fd6a47128f9b",
+        "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+        "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834",
+        "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+        "b1b09f210af818cbea5fc76f8efbb66b01e52806403da6a775e441e1cdb0826b",
+        "c830feb07881234b41302b6ef2d20ba2d3b1e014318d592b1a744198539e15b8",
+        "db96e553e8f66be5e6cd8e5872234962d96425acff027649c382c679dace10b0",
+        "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+      ],
+      "vmResultSha256": "39fda77801a6f1c6e7f9343b50444a36fe5081a9618ccf8b5d4a1499be691da7",
+      "evidence": "docs/security-workspace/diagnostics/python-verification-20261112/s4/vm-result.json",
+      "newIndependentSamples": 0,
+      "freezeSha256": "3f020cb73a26add7fb3d927152e77bc1fa72720e01fc99acd7475588c25d9c05"
+    }
+  ]
+}

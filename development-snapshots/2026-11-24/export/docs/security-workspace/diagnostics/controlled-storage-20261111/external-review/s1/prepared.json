@@ -1,0 +1,17 @@
+{
+  "promptSha256": "f82789a72e34d5fbb95cf25bcdfdb6d63b5404fb2a92bff97a12a3438cfb0882",
+  "files": {
+    "source/scripts/reviewer_snapshot.py": "7f9074708d0934df68a3b4fc7979e1f92cf019e134518b68e2474067c3a0013c",
+    "source/scripts/reviewer_storage.py": "c4e7a5190c6c67569713fc1e37d990f98343cdf8578e8f2d1143b190c3be5108",
+    "source/scripts/reviewer_snapshot.test.py": "9c166b82c5d51e6d613aaa858014d6bc103cac0c4018374db1573d737d17808f",
+    "source/scripts/review_quality_gate.mjs": "99aea3894238a34f17ee63b95a5c216b565a23a61aa1de0c2e8093877a55f5a0",
+    "source/work/harness-purge-improved/tests/review-quality-gate.test.mjs": "b0f40505ae288baee5807cd4c24b31ba9ee538ded8bddd399ef3ef8039ecf8ce",
+    "evidence/source-manifest.json": "3556bfcf723b97ee90292f8e6e272c94cadbf20ae0462ed00299f01195e47682",
+    "evidence/diff.patch": "ebbc57b39864e3014e1f5ade50b49164a58ed05cbb555840fccd9ec6e449bdd7",
+    "evidence/python-green.txt": "24183878da680d866e6ecddf89675c983f63e8e7d0fcb54c55f89a41f90d9220",
+    "evidence/gate-green.txt": "387b08c614b0fceffcc350beefd90a8d925c30a3a41691f28be0ecce10c2ee37",
+    "evidence/python-red.txt": "e1ec5937833d8375fedc1d81974eb8a9c2daecced7d975d9d9a11164e431d158",
+    "evidence/gate-red.txt": "d659fbc11094095e8a4b259a10db40e1a5025071218070f45beb85776b90c846",
+    "evidence/legacy-red.txt": "cf44e7d3a4b9996e6b10d288b64e22a675543daa7d3b3840b68d32d3bf3eb834"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "sourceEvidenceStatesChecked": true,
+  "jointControlCount": 9,
+  "allFindingsAndArtifacts": "unverified",
+  "vmTestModules": 4,
+  "vmTests": 67,
+  "dailyProgramFilesChecked": 169,
+  "dailyUnchanged": true,
+  "acceptanceScratchRemoved": true,
+  "ordinaryR3Qualified": false
+}

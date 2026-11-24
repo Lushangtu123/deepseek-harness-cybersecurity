@@ -1,0 +1,29 @@
+PASS B1-selector-filename-plan-id
+PASS B1-query-update-selector-binding
+PASS B1-plan-id-immutable
+PASS B1-stage-root-link-traversal-nul
+PASS B1-role-attempt-name-tag-image-path-identity
+PASS B2-missing-plan-no-fallback
+PASS B2-unreadable-io-json-invalid-no-fallback
+PASS B2-ownership-contradiction-blocked78
+PASS B2-identity-journal-validated
+PASS B2-lockbusy-and-cli-ambiguity
+{"cleanup": {"checkedAt": "2026-11-24T16:39:10.320977+00:00", "clientState": {"proof": "not-started", "state": "exited"}, "clientStop": {"forced": false, "proof": "not-started", "state": "exited", "stopped": true}, "confirmed": true, "container": {"queries": {"name": {"state": "absent"}, "tag": {"state": "absent"}}, "removed": true, "state": "never-created"}, "finalStageCheck": "after-resources", "observerState": {"proof": "not-applicable", "state": "exited"}, "observerStop": {"proof": "not-applicable", "state": "exited", "stopped": true}, "resourceCreationPhase": null, "stage": {"lstatAfter": "absent", "removed": true, "state": "removed"}, "state": "confirmed"}, "cleanupConfirmed": true, "operationRole": "compile-0001-44444444", "prepareId": "171d44b492a3643f5a89f07ebc69ac6e", "replayed": false}
+PASS B3-standalone-compile-recovery
+{"cleanup": {"checkedAt": "2026-11-24T16:39:10.326950+00:00", "clientState": {"proof": "not-started", "state": "exited"}, "clientStop": {"forced": false, "proof": "not-started", "state": "exited", "stopped": true}, "confirmed": true, "container": {"queries": {"name": {"state": "absent"}, "tag": {"state": "absent"}}, "removed": true, "state": "never-created"}, "finalStageCheck": "after-resources", "observerState": {"proof": "not-applicable", "state": "exited"}, "observerStop": {"proof": "not-applicable", "state": "exited", "stopped": true}, "resourceCreationPhase": null, "stage": {"lstatAfter": "absent", "removed": true, "state": "removed"}, "state": "confirmed"}, "cleanupConfirmed": true, "operationRole": "bind-55555555", "prepareId": "de9787fda2a27d29072d808dd1c7d0ba", "replayed": false}
+PASS B3-standalone-bind-recovery
+{"cleanup": {"checkedAt": "2026-11-24T16:39:10.337398+00:00", "clientState": {"proof": "not-started", "state": "exited"}, "clientStop": {"forced": false, "proof": "not-started", "state": "exited", "stopped": true}, "confirmed": true, "container": {"queries": {"name": {"state": "absent"}, "tag": {"state": "absent"}}, "removed": true, "state": "never-created"}, "finalStageCheck": "after-resources", "observerState": {"proof": "not-applicable", "state": "exited"}, "observerStop": {"proof": "not-applicable", "state": "exited", "stopped": true}, "resourceCreationPhase": null, "stage": {"lstatAfter": "absent", "removed": true, "state": "removed"}, "state": "confirmed"}, "cleanupConfirmed": true, "operationRole": "compile-0001-77777777", "prepareId": "cec9530ba706e6cbb000b36be714b7fa", "replayed": false}
+PASS B3-associated-compile-not-target
+{"attempt": 1, "cleanupConfirmed": true, "executionState": "not-started", "prepareId": "0f21d0da7b9f846c4d434191afb0a5be", "replayed": false, "targetExecutions": 0}
+PASS B3-run-role-link-and-mismatch
+PASS B3-unknown-role-rejected
+PASS B4-reserve-not-created-proof
+PASS B4-pre-plan-reserve-failure
+PASS B4-association-before-stage
+PASS B4-association-failure-no-resources
+PASS B4-associated-prep-unknown-holds-parent
+PASS B4-old-empty-process-record-held
+PASS B4-orphan-record-held
+PASS B4-final-log-fsync-failure
+PASS B4-resource-phase-monotonic
+{"failed": [], "passed": 24, "total": 24}

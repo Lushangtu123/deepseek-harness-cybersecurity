@@ -1,0 +1,38 @@
+{
+  "id": "346fc1dc-ad21-45f8-8033-0a1fdb7ae199",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Read-only review; no tools/execution. No R3 or live acceptance.\n\n**Confirmed blockers (robustness/contract/coverage, not false-acceptance safety)**\n\n1. **Unhashable `check_id` crashes `map_findings`.**  \n   `rule = hit.get('check_id')` is used in `if rule not in GUARD_RULES` before type validation. A JSON hit such as `{\"check_id\": [], \"path\": \"sample.py\", \"start\": {...}}` raises `TypeError: unhashable type: 'list'` instead of being retained as `invalid-finding`. The CLI catches only `OSError, ValueError, RecursionError`, so this escapes; managed Node degrades to `unavailable`. This contradicts per-rawhit unmatched retention.\n\n2. **The supplied `snapshot-green.txt` is not green.**  \n   It reports 87 tests with **4 failures**, all `assertEqual(json.loads(run.stdout)['version'], 1)` receiving `2`. The code emits `version: 2` in `review_batch`; the reviewer snapshot tests still freeze version 1. This is a reproducible test/launcher-contract regression, not a runtime safety issue. It must be resolved before claiming the 87 launcher/source-position checks are green.\n\n3. **Managed Node output-buffer regression.**  \n   `personal-python-evidence.mjs` sets `maxBuffer: 128*1024`, while the Python batch permits `MAX_FILES=64`, `MAX_CHECKS=64` per file, and up to 2000 hits. The report includes full `locations` and `findingLocations`, each bound point carrying hashes/spans. A valid report with only a few files × 64 points will exceed 128 KiB; `execFileSync` throws `ENOBUFS` and the catch returns `{state:'unavailable'}`. This is a reproducible coverage/availability blocker, not a false-positive safety flaw.\n\n**Conservative limitations / false negatives**\n\n- `request_assignment` matches only `request.args.get('')` exactly: `ast.Constant(value=str())` is the empty string. Normal non-empty query keys never produce eval-guard evidence. This is a coverage limitation, not false acceptance.\n- `review_eval_guard` only scans top-level synchronous `FunctionDef` bodies; async/nested/module-level guards are missed.\n- `review_plain_string_guard` requires the exact guard AST and only inspects the first statement of a following `Try` body; other valid shapes are missed.\n- `unique_dynamic_execution` rejects any overlapping dynamic call, including unrelated `compile`/attribute calls; this is conservative.\n- Name resolution does not model `global`/`nonlocal`. I did **not** confirm a static false-positive path from this alone because actual `Store`/`Del`/arg/def/alias/`except`/`match` bindings are rejected; dynamic `globals()`/`setattr` remains out of syntactic scope.\n\n**Safety assessment**\n\nI did not confirm a static false-acceptance path in the reviewed guard association: `canonical_flask_request` plus `has_unambiguous_bindings` reject ordinary rebinding forms, `builtins.*` guard evidence is skipped, and precise guard checks pass the call span into both `review_eval_guard` and `review_plain_string_guard`, preventing line-level borrowing. Legacy hits remain unmapped and unbound as intended.\n\nOne additional defense-in-depth gap: managed import artifacts attach `callerLocation`/`sinkLocation` without the `sourceSha256`/`pointId` cross-check that `locationFields` applies to guard/plain artifacts. Since the worker output is local/trusted this is not a confirmed false-evidence path, but it is weaker validation than the other artifact families.\n\nThe blockers above are concrete and scoped; none support an R3/live-acceptance claim."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 12664,
+    "completion_tokens": 53801,
+    "total_tokens": 66465,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 52961
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 12664
+  },
+  "streamDone": true,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 214572,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "53ac915a6b575f87c83816843ba30fc1ff6c7f668c3df8ac0a056be964713733",
+  "promptSha256": "ea4352bb0e81143c146cc2e2142248d1b3ce9b7901ba4fb9d89c81c72e515fdc"
+}

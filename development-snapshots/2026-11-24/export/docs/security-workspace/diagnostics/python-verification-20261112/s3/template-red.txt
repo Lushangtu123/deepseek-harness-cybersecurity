@@ -1,0 +1,14 @@
+....F........
+======================================================================
+FAIL: test_fixture_templates_are_fixed_data_not_arbitrary_setup (__main__.VerifyTest.test_fixture_templates_are_fixed_data_not_arbitrary_setup)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_execution_verify.test.py", line 52, in test_fixture_templates_are_fixed_data_not_arbitrary_setup
+    with self.assertRaises(ValueError):m.validate_contract(c)
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.054s
+
+FAILED (failures=1)

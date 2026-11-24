@@ -1,0 +1,20 @@
+{
+  "kind": "independent-red-before-image-binding",
+  "baselineFreezeSha256": "da9d36c63f21996678838da3abc4f35033c600d5ad387a594b80dea0caa64c24",
+  "rows": [
+    {
+      "path": "candidate/checks/run_regressions.py",
+      "beforeSha256": "90759283e2f56a9aed8fea0c0f0c26cd5de74423c35b0b0ff6e04fad2dcf9c2d",
+      "baselineSource": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-fixture-return-20261124/candidate/checks/run_regressions.py",
+      "matchesRedProbe": true
+    },
+    {
+      "path": "candidate/checks/run_rev6_checks.py",
+      "beforeSha256": "5554aae1413df1e2cf1bf099698e5d612b2485c0c10598e086e19e2d8371deb2",
+      "baselineSource": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-fixture-return-20261124/candidate/checks/run_rev6_checks.py",
+      "matchesRedProbe": true
+    }
+  ],
+  "not87BaselineCopy": true,
+  "sourceChanged": false
+}

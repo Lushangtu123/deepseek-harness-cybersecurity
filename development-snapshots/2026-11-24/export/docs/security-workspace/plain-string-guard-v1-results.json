@@ -1,0 +1,559 @@
+{
+  "version": 1,
+  "sourceCommit": "f1291485808b66e20ddb6b01b10dc71b3df8c8ba",
+  "labelsSha256": "6396f37c97cfd0c018db3d8750095ce6c678a083f83620cfb3e88fe27a46bb0c",
+  "workerSha256": "1db6c81fa975f4e41eff25793ac6d314fafb3955c1192cce11707104c5856eb3",
+  "scope": "string-shape evidence on existing unverified scanner hits; no suppression",
+  "positiveWithEvidence": 0,
+  "negativeWithEvidence": 22,
+  "positiveTotal": 20,
+  "negativeTotal": 33,
+  "r3Qualified": false,
+  "deployed": false,
+  "candidateSourceChanges": {
+    "client.js": {
+      "deployedSha256": "05018f69fdffda8ec057b7f3c06365ce990228e9a877968bc55f9128319e4268",
+      "candidateSha256": "2fa975d02a03af99431bc76a72ae30a3dcafa5fabe7a84a69d94c9c5959ab778"
+    },
+    "scripts/eval_evidence_batch.py": {
+      "deployedSha256": "779db3a05d83fd317c71bdee383a296780dda8a2c8dafe79b4cd72294f7788a0",
+      "candidateSha256": "e7f45613d04b85cccac82c581c8828a9f41b489e6da67b81e3e475baf58f4f2f"
+    },
+    "scripts/eval_guard_review.py": {
+      "deployedSha256": "e7103f3f2984849c91fae4b18925e3da3a6018e2e8cb9eae51de06abac5ac60f",
+      "candidateSha256": "1db6c81fa975f4e41eff25793ac6d314fafb3955c1192cce11707104c5856eb3"
+    },
+    "lib/redteam/personal-security-client.mjs": {
+      "deployedSha256": "8dd4c93c0b6933d91c026db773fdef1189f8e2e021a6895e51664b75bf6d9074",
+      "candidateSha256": "6e2fd4a7eb7042707f40e6868c2b593ff1a5d020ae78faf83c9d34cc0ee32129"
+    },
+    "lib/redteam/personal-python-evidence.mjs": {
+      "deployedSha256": "6cac4b9c4f0161abd67aae53b5c5a7f3cb291d21789bd012cfcfe01d39f68e59",
+      "candidateSha256": "09128a8bdc88a779d93094af82a01c4b87ea0475cf1e15743962e661bfb62bb4"
+    },
+    "lib/redteam/personal-joint-review.mjs": {
+      "deployedSha256": "cfbf7bf11e391831957f330590b8158c2e82f1fa9e3c843a2f9370f8699f886e",
+      "candidateSha256": "821eeca9ab462e37a3332c62682c2de4411a21d1dea5792bf8adae70202c5222"
+    }
+  },
+  "nativeAcceptance": {
+    "ok": true,
+    "scannedCases": 53,
+    "negativeCasesWithEvidence": 22,
+    "positiveCasesWithEvidence": 0,
+    "rawFindingsRetained": 53,
+    "projectionState": "truncated",
+    "retainedArtifactCount": 20,
+    "projectionSeconds": 0.093,
+    "temporaryRemoved": true,
+    "scannerManifestUnchanged": true,
+    "modelCalls": 0
+  },
+  "pythonTests": 20,
+  "pluginTests": 725,
+  "cases": [
+    {
+      "id": "BenchmarkTest00073",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 53,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 46,
+        "executionLine": 54,
+        "sink": "eval",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00074",
+      "positive": true,
+      "rule": "policy.harness.python.exec",
+      "line": 51,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00075",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 53,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 46,
+        "executionLine": 53,
+        "sink": "exec",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00156",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 43,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00157",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 49,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00158",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 55,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 48,
+        "executionLine": 56,
+        "sink": "eval",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00159",
+      "positive": true,
+      "rule": "policy.harness.python.exec",
+      "line": 45,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00160",
+      "positive": true,
+      "rule": "policy.harness.python.exec",
+      "line": 49,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00161",
+      "positive": true,
+      "rule": "policy.harness.python.exec",
+      "line": 40,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00162",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 55,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 48,
+        "executionLine": 55,
+        "sink": "exec",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00163",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 47,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 40,
+        "executionLine": 47,
+        "sink": "exec",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00263",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 50,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00264",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 44,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00342",
+      "positive": true,
+      "rule": "policy.harness.python.eval",
+      "line": 48,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00343",
+      "positive": true,
+      "rule": "policy.harness.python.eval",
+      "line": 44,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00344",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 43,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00345",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 53,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 46,
+        "executionLine": 54,
+        "sink": "eval",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00346",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 48,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00347",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 47,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00422",
+      "positive": true,
+      "rule": "policy.harness.python.eval",
+      "line": 43,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00423",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 53,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 46,
+        "executionLine": 54,
+        "sink": "eval",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00424",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 47,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00425",
+      "positive": true,
+      "rule": "policy.harness.python.exec",
+      "line": 43,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00426",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 57,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 50,
+        "executionLine": 57,
+        "sink": "exec",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00503",
+      "positive": true,
+      "rule": "policy.harness.python.eval",
+      "line": 40,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00504",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 47,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 40,
+        "executionLine": 48,
+        "sink": "eval",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00599",
+      "positive": true,
+      "rule": "policy.harness.python.eval",
+      "line": 47,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00600",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 51,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00601",
+      "positive": true,
+      "rule": "policy.harness.python.eval",
+      "line": 43,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00602",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 47,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00603",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 53,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 46,
+        "executionLine": 53,
+        "sink": "exec",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00728",
+      "positive": true,
+      "rule": "policy.harness.python.eval",
+      "line": 49,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00729",
+      "positive": true,
+      "rule": "policy.harness.python.exec",
+      "line": 41,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00730",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 48,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 41,
+        "executionLine": 48,
+        "sink": "exec",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00818",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 48,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 41,
+        "executionLine": 49,
+        "sink": "eval",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00819",
+      "positive": true,
+      "rule": "policy.harness.python.exec",
+      "line": 39,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00820",
+      "positive": true,
+      "rule": "policy.harness.python.exec",
+      "line": 41,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00821",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 49,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 42,
+        "executionLine": 49,
+        "sink": "exec",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00822",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 47,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 40,
+        "executionLine": 47,
+        "sink": "exec",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00890",
+      "positive": true,
+      "rule": "policy.harness.python.eval",
+      "line": 41,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00891",
+      "positive": true,
+      "rule": "policy.harness.python.eval",
+      "line": 48,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00892",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 51,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 44,
+        "executionLine": 52,
+        "sink": "eval",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00893",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 54,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 47,
+        "executionLine": 55,
+        "sink": "eval",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00894",
+      "positive": true,
+      "rule": "policy.harness.python.exec",
+      "line": 43,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00986",
+      "positive": true,
+      "rule": "policy.harness.python.eval",
+      "line": 54,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest00987",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 60,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 53,
+        "executionLine": 61,
+        "sink": "eval",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00988",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 64,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 57,
+        "executionLine": 64,
+        "sink": "exec",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest00989",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 56,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 49,
+        "executionLine": 56,
+        "sink": "exec",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest01164",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 42,
+      "evidence": null
+    },
+    {
+      "id": "BenchmarkTest01165",
+      "positive": false,
+      "rule": "policy.harness.python.eval",
+      "line": 55,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 48,
+        "executionLine": 56,
+        "sink": "eval",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest01166",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 46,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 39,
+        "executionLine": 46,
+        "sink": "exec",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest01167",
+      "positive": false,
+      "rule": "policy.harness.python.exec",
+      "line": 47,
+      "evidence": {
+        "observation": "plain-string-guard-observed",
+        "guardLine": 40,
+        "executionLine": 47,
+        "sink": "exec",
+        "disposition": "unverified"
+      }
+    },
+    {
+      "id": "BenchmarkTest01188",
+      "positive": true,
+      "rule": "policy.harness.python.exec",
+      "line": 38,
+      "evidence": null
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "at": "2026-11-11T02:42:01.301643+00:00",
+  "authorization": "Standing VM-project user authorization: AGENTS.md item 3, plus prior explicit fallback approvals for Claude unavailability; same fixed scope and materials.",
+  "claudeOutcome": "Failed to authenticate. API Error: 401 OAuth access token has expired. Re-authenticate to continue.",
+  "promptSha256": "dfa639c8c449c1aed87f5c4a926ee502c203615248ec3b19b409fb57106f2c31",
+  "destination": "DeepSeek official API",
+  "requestedModel": "deepseek-flash",
+  "effort": "high",
+  "exclusions": [
+    "credentials",
+    "chat records",
+    "VM disks",
+    "unrelated private project data"
+  ],
+  "tools": []
+}

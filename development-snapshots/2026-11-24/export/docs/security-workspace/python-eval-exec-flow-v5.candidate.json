@@ -1,0 +1,197 @@
+{
+  "rules": [
+    {
+      "id": "harness.python.request-to-dynamic-code",
+      "languages": [
+        "python"
+      ],
+      "severity": "WARNING",
+      "message": "Tracked input reaches eval or exec directly or via a recognized local helper; verify binding and reachability.",
+      "metadata": {
+        "cwe": [
+          "CWE-95"
+        ],
+        "origin": "workspace-authored-candidate",
+        "status": "unverified-observation"
+      },
+      "mode": "taint",
+      "pattern-sources": [
+        {
+          "pattern": "flask.request.args",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.form",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.values",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.cookies",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.headers",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.json",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.data",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.query_string",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.get_json(...)",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.get_data(...)",
+          "exact": true
+        },
+        {
+          "pattern": "input(...)",
+          "exact": true
+        },
+        {
+          "patterns": [
+            {
+              "pattern-inside": "$APP = flask.Flask(...)\n...\n@$APP.route(...)\ndef $HANDLER(...):\n    ...\n"
+            },
+            {
+              "pattern-regex": "(?m)^(\\h*)@\\w+\\.route\\(\\h*(['\"])[^<>'\"\\r\\n]*<(?:(?:string|path):)?([A-Za-z_]\\w*)>[^<>'\"\\r\\n]*\\2[^\\r\\n]*\\)\\h*\\r?\\n\\1def\\h+[A-Za-z_]\\w*\\(\\h*(?:[A-Za-z_]\\w*\\h*,\\h*)*(?P<ROUTE_ARG>\\3)(?=\\h*[,):=])"
+            },
+            {
+              "focus-metavariable": "$ROUTE_ARG"
+            }
+          ],
+          "exact": true
+        },
+        {
+          "patterns": [
+            {
+              "pattern-inside": "$APP = flask.Flask(...)\n...\ndef $READ():\n    return flask.request.$FIELD.get(...)\n...\n@$APP.route(...)\ndef $HANDLER():\n    ...\n"
+            },
+            {
+              "metavariable-regex": {
+                "metavariable": "$FIELD",
+                "regex": "^(args|form|values|cookies|headers)$"
+              }
+            },
+            {
+              "pattern-not-inside": "def $HANDLER():\n    ...\n    $READ = ...\n    ...\n"
+            },
+            {
+              "pattern-not-inside": "def $READ():\n    ...\n...\n$READ = ...\n...\n@$APP.route(...)\ndef $HANDLER():\n    ...\n"
+            },
+            {
+              "pattern": "$READ()"
+            }
+          ],
+          "exact": true
+        },
+        {
+          "patterns": [
+            {
+              "pattern-inside": "$APP = flask.Flask(...)\n...\ndef $READ():\n    return flask.request.$FIELD.get(...)\n...\ndef $BRIDGE():\n    return $READ()\n...\n@$APP.route(...)\ndef $HANDLER():\n    ...\n"
+            },
+            {
+              "metavariable-regex": {
+                "metavariable": "$FIELD",
+                "regex": "^(args|form|values|cookies|headers)$"
+              }
+            },
+            {
+              "pattern-not-inside": "def $HANDLER():\n    ...\n    $BRIDGE = ...\n    ...\n"
+            },
+            {
+              "pattern-not-inside": "def $READ(...):\n    ...\n...\n$READ = ...\n...\n@$APP.route(...)\ndef $HANDLER():\n    ...\n"
+            },
+            {
+              "pattern-not-inside": "def $READ(...):\n    ...\n...\ndef $READ(...):\n    ...\n...\n@$APP.route(...)\ndef $HANDLER():\n    ...\n"
+            },
+            {
+              "pattern-not-inside": "def $BRIDGE(...):\n    ...\n...\n$BRIDGE = ...\n...\n@$APP.route(...)\ndef $HANDLER():\n    ...\n"
+            },
+            {
+              "pattern-not-inside": "def $BRIDGE(...):\n    ...\n...\ndef $BRIDGE(...):\n    ...\n...\n@$APP.route(...)\ndef $HANDLER():\n    ...\n"
+            },
+            {
+              "pattern": "$BRIDGE()"
+            }
+          ],
+          "exact": true
+        }
+      ],
+      "pattern-sinks": [
+        {
+          "patterns": [
+            {
+              "pattern-either": [
+                {
+                  "pattern": "eval($CODE, ...)"
+                },
+                {
+                  "pattern": "exec($CODE, ...)"
+                },
+                {
+                  "pattern": "builtins.eval($CODE, ...)"
+                },
+                {
+                  "pattern": "builtins.exec($CODE, ...)"
+                }
+              ]
+            },
+            {
+              "focus-metavariable": "$CODE"
+            }
+          ],
+          "exact": true
+        },
+        {
+          "patterns": [
+            {
+              "pattern-either": [
+                {
+                  "pattern-inside": "$APP = flask.Flask(...)\n...\ndef $EXECUTE($PARAM):\n    return eval($PARAM)\n...\n@$APP.route(...)\ndef $HANDLER():\n    ...\n"
+                },
+                {
+                  "pattern-inside": "$APP = flask.Flask(...)\n...\ndef $EXECUTE($PARAM):\n    return builtins.eval($PARAM)\n...\n@$APP.route(...)\ndef $HANDLER():\n    ...\n"
+                },
+                {
+                  "pattern-inside": "$APP = flask.Flask(...)\n...\ndef $EXECUTE($PARAM):\n    exec($PARAM)\n...\n@$APP.route(...)\ndef $HANDLER():\n    ...\n"
+                },
+                {
+                  "pattern-inside": "$APP = flask.Flask(...)\n...\ndef $EXECUTE($PARAM):\n    builtins.exec($PARAM)\n...\n@$APP.route(...)\ndef $HANDLER():\n    ...\n"
+                }
+              ]
+            },
+            {
+              "pattern-not-inside": "def $HANDLER():\n    ...\n    $EXECUTE = ...\n    ...\n"
+            },
+            {
+              "pattern-not-inside": "def $EXECUTE(...):\n    ...\n...\n$EXECUTE = ...\n...\n@$APP.route(...)\ndef $HANDLER():\n    ...\n"
+            },
+            {
+              "pattern-not-inside": "def $EXECUTE(...):\n    ...\n...\ndef $EXECUTE(...):\n    ...\n...\n@$APP.route(...)\ndef $HANDLER():\n    ...\n"
+            },
+            {
+              "pattern": "$EXECUTE($CODE)"
+            },
+            {
+              "focus-metavariable": "$CODE"
+            }
+          ],
+          "exact": true
+        }
+      ]
+    }
+  ]
+}

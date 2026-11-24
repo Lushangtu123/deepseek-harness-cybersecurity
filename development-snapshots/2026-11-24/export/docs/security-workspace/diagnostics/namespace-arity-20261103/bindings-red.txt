@@ -1,0 +1,75 @@
+F..FFFF
+======================================================================
+FAIL: test_failed_old_scan_cannot_be_preservation_reference (__main__.BindingTests.test_failed_old_scan_cannot_be_preservation_reference)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-namespace-arity-20261103/analyze.test.py", line 56, in test_failed_old_scan_cannot_be_preservation_reference
+    self.check()
+    ~~~~~~~~~~^^
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-namespace-arity-20261103/analyze.test.py", line 34, in check
+    self.assertEqual(p.returncode==0,valid,p.stdout+'\n'+p.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True != False : {"ok": true, "coveredRequiredArityCases": 6, "normalPathWarnings": "9/10 diagnostic controls", "regression": {"arity17": {"oldRuleHitsPreserved": 68, "currentRawRuleHits": 68, "sourceCases": 101, "actuallyScanned": 85, "notScannedPhpCases": 16, "newHoldout": false}, "combined20": {"oldRuleHitsPreserved": 100, "currentRawRuleHits": 100, "sourceCases": 101, "actuallyScanned": 101, "notScannedPhpCases": 0, "newHoldout": false}}, "runtimeObservations": 34, "r3Qualified": false}
+
+
+
+======================================================================
+FAIL: test_runtime_result_must_match_protocol (__main__.BindingTests.test_runtime_result_must_match_protocol)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-namespace-arity-20261103/analyze.test.py", line 53, in test_runtime_result_must_match_protocol
+    self.check()
+    ~~~~~~~~~~^^
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-namespace-arity-20261103/analyze.test.py", line 34, in check
+    self.assertEqual(p.returncode==0,valid,p.stdout+'\n'+p.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True != False : {"ok": true, "coveredRequiredArityCases": 6, "normalPathWarnings": "9/10 diagnostic controls", "regression": {"arity17": {"oldRuleHitsPreserved": 68, "currentRawRuleHits": 68, "sourceCases": 101, "actuallyScanned": 85, "notScannedPhpCases": 16, "newHoldout": false}, "combined20": {"oldRuleHitsPreserved": 100, "currentRawRuleHits": 100, "sourceCases": 101, "actuallyScanned": 101, "notScannedPhpCases": 0, "newHoldout": false}}, "runtimeObservations": 34, "r3Qualified": false}
+
+
+
+======================================================================
+FAIL: test_runtime_source_hash_cannot_differ_from_scan (__main__.BindingTests.test_runtime_source_hash_cannot_differ_from_scan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-namespace-arity-20261103/analyze.test.py", line 50, in test_runtime_source_hash_cannot_differ_from_scan
+    self.check()
+    ~~~~~~~~~~^^
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-namespace-arity-20261103/analyze.test.py", line 34, in check
+    self.assertEqual(p.returncode==0,valid,p.stdout+'\n'+p.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True != False : {"ok": true, "coveredRequiredArityCases": 6, "normalPathWarnings": "9/10 diagnostic controls", "regression": {"arity17": {"oldRuleHitsPreserved": 68, "currentRawRuleHits": 68, "sourceCases": 101, "actuallyScanned": 85, "notScannedPhpCases": 16, "newHoldout": false}, "combined20": {"oldRuleHitsPreserved": 100, "currentRawRuleHits": 100, "sourceCases": 101, "actuallyScanned": 101, "notScannedPhpCases": 0, "newHoldout": false}}, "runtimeObservations": 34, "r3Qualified": false}
+
+
+
+======================================================================
+FAIL: test_shifted_added_column_same_count_and_line_fails (__main__.BindingTests.test_shifted_added_column_same_count_and_line_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-namespace-arity-20261103/analyze.test.py", line 43, in test_shifted_added_column_same_count_and_line_fails
+    self.check()
+    ~~~~~~~~~~^^
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-namespace-arity-20261103/analyze.test.py", line 34, in check
+    self.assertEqual(p.returncode==0,valid,p.stdout+'\n'+p.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True != False : {"ok": true, "coveredRequiredArityCases": 6, "normalPathWarnings": "9/10 diagnostic controls", "regression": {"arity17": {"oldRuleHitsPreserved": 68, "currentRawRuleHits": 68, "sourceCases": 101, "actuallyScanned": 85, "notScannedPhpCases": 16, "newHoldout": false}, "combined20": {"oldRuleHitsPreserved": 100, "currentRawRuleHits": 100, "sourceCases": 101, "actuallyScanned": 101, "notScannedPhpCases": 0, "newHoldout": false}}, "runtimeObservations": 34, "r3Qualified": false}
+
+
+
+======================================================================
+FAIL: test_wrong_added_rule_same_count_and_file_fails (__main__.BindingTests.test_wrong_added_rule_same_count_and_file_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-namespace-arity-20261103/analyze.test.py", line 40, in test_wrong_added_rule_same_count_and_file_fails
+    self.check()
+    ~~~~~~~~~~^^
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-namespace-arity-20261103/analyze.test.py", line 34, in check
+    self.assertEqual(p.returncode==0,valid,p.stdout+'\n'+p.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True != False : {"ok": true, "coveredRequiredArityCases": 6, "normalPathWarnings": "9/10 diagnostic controls", "regression": {"arity17": {"oldRuleHitsPreserved": 68, "currentRawRuleHits": 68, "sourceCases": 101, "actuallyScanned": 85, "notScannedPhpCases": 16, "newHoldout": false}, "combined20": {"oldRuleHitsPreserved": 100, "currentRawRuleHits": 100, "sourceCases": 101, "actuallyScanned": 101, "notScannedPhpCases": 0, "newHoldout": false}}, "runtimeObservations": 34, "r3Qualified": false}
+
+
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.292s
+
+FAILED (failures=5)

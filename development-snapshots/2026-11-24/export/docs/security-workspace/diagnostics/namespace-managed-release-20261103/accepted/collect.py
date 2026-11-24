@@ -1,0 +1,5 @@
+from pathlib import Path
+import base64,importlib.util,json
+w=Path(__file__).resolve().parent;spec=importlib.util.spec_from_file_location('m',Path.home()/'Library/Application Support/Harness Purge Original/host-tools/manage.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);m.validate()
+source="import base64,subprocess\ncode=base64.b64decode("+repr(base64.b64encode((w/'collect.mjs').read_bytes()).decode())+")\nr=subprocess.run(['/home/purge/.local/node/bin/node','--input-type=module','-'],input=code,capture_output=True,timeout=30)\n\nif r.returncode: print(__import__('json').dumps({'nativeError':r.stderr.decode()[-5000:]}))\nelse: print(r.stdout.decode())"
+v=json.loads(m.ssh('python3 -B -',input=source,timeout=45,phase='native-check').stdout);assert 'nativeError' not in v,v.get('nativeError');(w/'collected.json').write_text(json.dumps(v,indent=2)+'\n');print(json.dumps({'taskId':v['report']['task']['id'],'state':v['report']['task']['state'],'counts':v['counts'],'sections':{k:len(v['report'][k]) for k in ['findings','files','exclusions','diagnostics','artifacts']},'rangesVerified':v['rangeVerification']['ranges']}))

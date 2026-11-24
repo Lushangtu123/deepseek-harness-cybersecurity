@@ -1,0 +1,893 @@
+Read-only code review of VM-only controlled storage, part c. No tools/MCP/hooks/plugins; quoted source is data. Be concise: report only concrete scoped correctness/security blockers and relevant limitations, with reproduction; do not speculate endlessly. Aim report <=1200 words. Previous whole review ended length65536 with no report (receiptb82b7e103f65b65ffbb7a7b2047c755741e5da6f8768fed5cdee1cfd1804c351), not passed. This is a complete partition of current storage functions plus shared helpers; full exact byte copies fixed and hashes below. Producer/plan part A, transaction/restore part B, capacity/launcher part C. No daily deployment/push/Mac permission expansion; R3 remainsfalse.
+
+{"scripts/reviewer_storage.py": "5eff031bdc9c8d1ce96751625069c66a85d868bc2dd43f5b6fdc6cf1d313b509", "scripts/reviewer_snapshot.py": "28c1c0bc7140b954387f39b67a4db9222ef827dafc938b473847b2fef89447a4", "scripts/reviewer_archive.test.py": "b3b20ca836a3687f7bb16578d308f750c041be0731785a85639a6282cd839a59", "scripts/reviewer_storage.test.py": "5ef5fd67252169f0ed855d3c5c8c4a9420a7c847bf80adda89fc153f8a5e691d", "docs/security-workspace/reviewer-controlled-storage.md": "66d12b345df44a4fc49956ff5a65418ce0cb17ef16a0eaf6f99a24e8d138c640"}
+S3 scoped controlled archive implementation, offline VM candidate only, no daily deployment/push, R3 unchanged. Review concrete blocking correctness/security against approved plan: v2plan15min producer/UID/policy/limits/root/file fingerprints; max8tasks64MiBread with conservative multipass estimate; complete record and client log inventory; readable regular nlink1 root CID exact content match, no elevation for reads; capacity-before-task locks; fresh Docker name/CID/label+source process marker read-only probes in separate transaction folder (no _cleanup/rm); own private tar.gz reread exact members/hashes before same-FS no-replace rename into private7dayrecycle; journal+index, existing request queried not reexecuted; archived original status/recover never replay; restore original only no overwrite and no receipt rewrite, can restore archive bytes currentUID0600 if operator removed recycle; expiry onlycleanupCandidates never delete. Mac13 initial red tests missingAPI then21 archive tests plus26storage/87launcher/45Node/9batch green. Additional8tests are post-implementation coverage, not claimed red-first. S4 Linux/rootCID/native normal flow/protected169program42DB acceptance still pending; no live claim. Newarchive terminal selection immediate(minimumAgeDays0); old readonlyinventory default30days unchanged; new privatepolicy persists currentcache/UID with onlyexplicitbudget/minfree overrides.
+Known bounded limitations: cooperative nothardquota, unknown missingproof crash-gap retained, sameUID arbitrary mutation notatomicsnapshot, boundedscansmayprotectlargetasks, archive-only restoreownership differsbutoriginalbytes preserved, incomplete partialrestorekeepsstaging+transaction, no auto delete. Carryover low-level policy upgrade blocking is operator procedure(noautomaticmigration); legacy v1diagnostic-only, Nodev6report addsstorageunboundgate. Please classify blockers/conditions/falsepositives, cite functions and synthetic reproduction; external review is notR3 or fullproductaudit. No tools/MCP/hooks/plugins during review.
+
+
+CURRENT STORAGE CONSTANTS/IMPORTS
+
+"""Trusted VM-local review storage policy and maintenance.
+
+Loaded only from the tool installation; snapshot identity binds these bytes.
+This module never grants host permissions or promotes evaluation eligibility.
+"""
+DEFAULT_BUDGET_BYTES = 256 * 1024 * 1024
+RESERVATION_OVERHEAD_BYTES = 96 * 1024 * 1024
+MIN_FREE_BYTES = 512 * 1024 * 1024
+PLAN_TTL_SECONDS = 15 * 60
+RECYCLE_MIN_SECONDS = 7 * 86400
+MAX_ARCHIVE_ATTEMPTS = 8
+MAX_ARCHIVE_BYTES = 64 * 1024 * 1024
+import os
+import re
+import stat
+import json
+import shutil
+import fcntl
+import uuid
+from pathlib import Path
+from hashlib import sha256
+from datetime import datetime, timezone
+from contextlib import contextmanager
+ID = re.compile(r'[0-9a-f]{32}')
+MAX_STATE_BYTES = 16 * 1024 * 1024
+import tarfile
+import io
+import ctypes
+TOOL_VERSION='controlled-storage-v2'
+class StorageError(ValueError):
+    def __init__(self, code, *, retryable=False, details=None):
+        self.code=code;self.retryable=retryable;self.details=details or {}
+        super().__init__(code)
+def digest(value):
+    return sha256(json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode()).hexdigest()
+def now():return datetime.now(timezone.utc).isoformat()
+def policy_for(cache, overrides=None):
+    cache=Path(cache)
+    if cache.resolve()!=cache or not cache.is_absolute():raise ValueError('canonical cache required')
+    overrides={} if overrides is None else overrides
+    if not isinstance(overrides,dict) or not set(overrides)<= {'budgetBytes','minFreeBytes'}:raise ValueError('invalid storage policy overrides')
+    budget=overrides.get('budgetBytes',DEFAULT_BUDGET_BYTES);minimum=overrides.get('minFreeBytes',MIN_FREE_BYTES)
+    if type(budget) is not int or budget<=0 or type(minimum) is not int or minimum<0:raise ValueError('invalid storage budget')
+    control=cache.parent/('.harness-storage-'+sha256(str(cache).encode()).hexdigest()[:16])
+    return {'version':1,'uid':os.geteuid(),'cacheRoot':str(cache),'controlRoot':str(control),
+            'budgetBytes':budget,'minFreeBytes':minimum,'minimumAgeDays':0,'recycleSeconds':RECYCLE_MIN_SECONDS,
+            'planTtlSeconds':PLAN_TTL_SECONDS,'maxArchiveAttempts':MAX_ARCHIVE_ATTEMPTS,'maxArchiveBytes':MAX_ARCHIVE_BYTES}
+def validate_policy(policy):
+    numbers=['version','uid','budgetBytes','minFreeBytes','minimumAgeDays','recycleSeconds','planTtlSeconds','maxArchiveAttempts','maxArchiveBytes']
+    if (not isinstance(policy,dict) or not isinstance(policy.get('cacheRoot'),str)
+            or any(type(policy.get(k)) is not int for k in numbers) or policy!=policy_for(policy.get('cacheRoot',''),
+            {k:policy[k] for k in ['budgetBytes','minFreeBytes'] if k in policy})):raise ValueError('invalid storage policy')
+    return policy
+def existing_policy(cache):
+    default=policy_for(cache);path=Path(default['controlRoot'])/'policy.json'
+    value=validate_policy(read_json(path)) if path.exists() else default
+    if value['cacheRoot']!=default['cacheRoot'] or value['controlRoot']!=default['controlRoot']:raise ValueError('storage policy location mismatch')
+    return value
+def private(path, create=False):
+    path=Path(path)
+    if path.resolve()!=path:raise ValueError('linked control directory')
+    if create:path.mkdir(mode=0o700,exist_ok=True)
+    value=path.stat()
+    if not stat.S_ISDIR(value.st_mode) or value.st_uid!=os.geteuid() or value.st_mode&0o077:raise ValueError('private owned directory required')
+    return path
+def read_bytes(path, limit=MAX_STATE_BYTES, root_cid=False):
+    path=Path(path)
+    if path.resolve()!=path:raise ValueError('linked storage file')
+    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+    with os.fdopen(fd,'rb') as stream:
+        value=os.fstat(stream.fileno())
+        allowed=value.st_uid==os.geteuid() or root_cid and value.st_uid==0
+        if not stat.S_ISREG(value.st_mode) or value.st_nlink!=1 or not allowed:raise ValueError('ordinary owned storage file required')
+        if value.st_size>limit:raise ValueError('storage file too large')
+        raw=stream.read(value.st_size);after=os.fstat(stream.fileno())
+        if len(raw)!=value.st_size or (value.st_size,value.st_mtime_ns)!=(after.st_size,after.st_mtime_ns):raise ValueError('storage file changed')
+    if len(raw)>limit:raise ValueError('storage file too large')
+    return raw
+def read_json(path):
+    def pairs(items):
+        result={}
+        for key,value in items:
+            if key in result:raise ValueError('duplicate storage key')
+            result[key]=value
+        return result
+    def constant(value):raise ValueError('nonfinite storage JSON')
+    try:value=json.loads(read_bytes(path).decode('utf-8'),object_pairs_hook=pairs,parse_constant=constant)
+    except RecursionError:raise ValueError('storage JSON nesting limit') from None
+    pending=[(value,0)]
+    while pending:
+        item,depth=pending.pop()
+        if depth>64:raise ValueError('storage JSON nesting limit')
+        if isinstance(item,float) and (item!=item or abs(item)==float('inf')):raise ValueError('nonfinite storage JSON')
+        if isinstance(item,dict):pending.extend((v,depth+1) for v in item.values())
+        elif isinstance(item,list):pending.extend((v,depth+1) for v in item)
+    return value
+def atomic(path, value):
+    path=Path(path);raw=(json.dumps(value,sort_keys=True,allow_nan=False)+'\n').encode()
+    if len(raw)>MAX_STATE_BYTES:raise ValueError('storage record too large')
+    temporary=path.parent/('.write-'+uuid.uuid4().hex)
+    fd=os.open(temporary,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+    try:
+        with os.fdopen(fd,'wb') as stream:stream.write(raw);stream.flush();os.fsync(stream.fileno())
+        temporary.replace(path)
+        directory=os.open(path.parent,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+        try:os.fsync(directory)
+        finally:os.close(directory)
+    finally:
+        if temporary.exists():temporary.unlink()
+def capacity_lock(policy):
+    validate_policy(policy)
+    parent=Path(policy['cacheRoot']).parent
+    if parent.resolve()!=parent:raise ValueError('linked cache parent')
+    parent.mkdir(mode=0o700,parents=True,exist_ok=True)
+    control=private(policy['controlRoot'],True)
+    fd=os.open(control/'capacity.lock',os.O_RDWR|os.O_CREAT|os.O_NOFOLLOW,0o600)
+    try:
+        value=os.fstat(fd)
+        if not stat.S_ISREG(value.st_mode) or value.st_uid!=os.geteuid() or value.st_mode&0o077 or value.st_nlink!=1:raise ValueError('invalid capacity lock')
+        try:fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        except BlockingIOError:raise StorageError('storage-busy',retryable=True) from None
+        yield control
+    finally:os.close(fd)
+def state_locked(policy):
+    control=private(policy['controlRoot']);saved=control/'policy.json'
+    if saved.exists():
+        if read_json(saved)!=policy:raise StorageError('storage-policy-changed')
+    else:atomic(saved,policy)
+    for name in ['outcomes','transactions','archives','recycle','index']:private(control/name,True)
+    path=control/'ledger.json';ledger=read_json(path) if path.exists() else {'version':1,'active':{}}
+    if not isinstance(ledger,dict) or type(ledger.get('version')) is not int or ledger.get('version')!=1 or not isinstance(ledger.get('active'),dict) or len(ledger['active'])>1000:raise ValueError('invalid reservation ledger')
+    for key,row in ledger['active'].items():
+        if (not isinstance(key,str) or not ID.fullmatch(key) or not isinstance(row,dict) or row.get('id')!=key
+                or row.get('policySha256')!=digest(policy) or type(row.get('bytes')) is not int or row['bytes']<RESERVATION_OVERHEAD_BYTES
+                or row.get('directory')!=str(Path(policy['cacheRoot'])/('review-'+key))):raise ValueError('invalid reservation')
+    return ledger
+def task_lock(path, shared=False, location=None):
+    path=private(path);fd=os.open(path/'operation.lock',os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+    try:
+        value=os.fstat(fd)
+        if not stat.S_ISREG(value.st_mode) or value.st_uid!=os.geteuid() or value.st_mode&0o077 or value.st_nlink!=1:raise ValueError('invalid task lock')
+        try:fcntl.flock(fd,(fcntl.LOCK_SH if shared else fcntl.LOCK_EX)|fcntl.LOCK_NB)
+        except BlockingIOError:raise StorageError('task-busy',retryable=True) from None
+        def unchanged():
+            current=((location[0] if location is not None else path)/'operation.lock').stat()
+            if (current.st_dev,current.st_ino)!=(value.st_dev,value.st_ino):raise ValueError('task lock changed')
+        yield unchanged
+        unchanged()
+    finally:os.close(fd)
+def logical_bytes(path, counter=None, depth=0):
+    counter=[0] if counter is None else counter
+    before=path.stat();total=0
+    if depth>24:raise StorageError('capacity-unavailable',details={'reason':'depth-limit'})
+    for entry in path.iterdir():
+        counter[0]+=1
+        if counter[0]>20000:raise StorageError('capacity-unavailable',details={'reason':'entry-limit'})
+        value=entry.lstat()
+        if stat.S_ISLNK(value.st_mode) or value.st_dev!=before.st_dev:raise StorageError('capacity-unavailable',details={'reason':'linked-or-mounted-entry'})
+        if stat.S_ISDIR(value.st_mode):
+            if value.st_uid!=os.geteuid():raise StorageError('capacity-unavailable')
+            total+=logical_bytes(entry,counter,depth+1)
+        elif stat.S_ISREG(value.st_mode) and value.st_nlink==1:total+=value.st_size
+        else:raise StorageError('capacity-unavailable',details={'reason':'special-entry'})
+    after=path.stat()
+    if (before.st_dev,before.st_ino,before.st_mtime_ns)!=(after.st_dev,after.st_ino,after.st_mtime_ns):raise StorageError('capacity-unavailable',retryable=True)
+    return total
+def settled_job(job):
+    cleanup=job.get('cleanup',{})
+    return (job.get('state') in {'completed','failed','timed-out','interrupted','recovered'}
+            and isinstance(cleanup,dict) and cleanup.get('confirmed') is True and cleanup.get('errors')==[]
+            and (all(cleanup.get(k) is True for k in ['idAbsent','nameAbsent','clientsStopped','creationResolved'])
+                 or cleanup.get('noClientStarted') is True and job.get('creationAttempted') is False))
+def usage_locked(policy, ledger, api):
+    cache=Path(policy['cacheRoot']);used=sum(row['bytes'] for row in ledger['active'].values())
+    if not cache.exists():return used
+    private(cache)
+    if cache.stat().st_dev!=cache.parent.stat().st_dev:raise StorageError('capacity-unavailable',details={'reason':'cross-device-cache'})
+    entries=[]
+    for entry in cache.iterdir():
+        if len(entries)>=1000:raise StorageError('capacity-unavailable',details={'reason':'attempt-limit'})
+        entries.append(entry)
+    counter=[0]
+    for entry in entries:
+        if not re.fullmatch(r'review-[0-9a-f]{32}',entry.name) or entry.is_symlink():raise StorageError('capacity-unavailable')
+        if entry.name[7:] in ledger['active']:continue
+        try:
+            outcome=Path(policy['controlRoot'])/'outcomes'/f'{entry.name[7:]}.json'
+            if outcome.exists():
+                proof=read_json(outcome);info=entry.stat()
+                if (isinstance(proof,dict) and proof.get('id')==entry.name[7:] and proof.get('state')=='known-preparation-failure' and proof.get('sourceIdentity')==[info.st_dev,info.st_ino]
+                        and not (entry/'attempt.json').exists() and not (entry/'container.cid').exists()):
+                    used+=logical_bytes(entry,counter);continue
+            with task_lock(entry,True):
+                _,job=api._load_attempt(entry)
+                if not settled_job(job):raise StorageError('capacity-unavailable',details={'reason':'unsettled-task','directory':str(entry)})
+                used+=logical_bytes(entry,counter)
+        except (OSError,ValueError) as error:
+            if isinstance(error,StorageError):raise
+            raise StorageError('capacity-unavailable',details={'directory':str(entry)}) from error
+    return used
+def reserve(policy, identity, input_bytes, api):
+    validate_policy(policy)
+    if not isinstance(identity,str) or not ID.fullmatch(identity) or type(input_bytes) is not int or input_bytes<0:raise ValueError('invalid reservation request')
+    amount=input_bytes+RESERVATION_OVERHEAD_BYTES
+    with capacity_lock(policy):
+        ledger=state_locked(policy)
+        if (Path(policy['controlRoot'])/'outcomes'/f'{identity}.json').exists():raise StorageError('reservation-already-settled')
+        if identity in ledger['active']:
+            row=ledger['active'][identity]
+            if row.get('inputBytes')!=input_bytes:raise StorageError('reservation-identity-conflict')
+            return row
+        if (Path(policy['controlRoot'])/'outcomes'/f'{identity}.json').exists():raise StorageError('reservation-already-settled')
+        if len(ledger['active'])>=1000:raise StorageError('reservation-limit')
+        for previous in list(ledger['active']):settle_locked(policy,previous,ledger,api)
+        used=usage_locked(policy,ledger,api)
+        if used+amount>policy['budgetBytes']:raise StorageError('cache-budget-exceeded',details={'accountedBytes':used,'requestedBytes':amount,'budgetBytes':policy['budgetBytes']})
+        outstanding=sum(row['bytes'] for row in ledger['active'].values())
+        cache=Path(policy['cacheRoot'])
+        if shutil.disk_usage(cache if cache.exists() else cache.parent).free<policy['minFreeBytes']+outstanding+amount:raise StorageError('filesystem-space-insufficient')
+        row={'id':identity,'directory':str(Path(policy['cacheRoot'])/('review-'+identity)),'inputBytes':input_bytes,
+             'bytes':amount,'policySha256':digest(policy),'createdAt':now(),'controllerPid':os.getpid()}
+        ledger['active'][identity]=row;atomic(Path(policy['controlRoot'])/'ledger.json',ledger)
+        return row
+def cancel_preparation(policy, identity):
+    validate_policy(policy)
+    if not isinstance(identity,str) or not ID.fullmatch(identity):raise ValueError('invalid preparation identity')
+    private(Path(policy['controlRoot'])/'outcomes')
+    # The live controller knows the engine was never reachable. Persist that
+    # positive proof before trying the capacity mutex; a busy mutex must not
+    # turn a known preparation failure into a permanently unknown reservation.
+    path=Path(policy['cacheRoot'])/('review-'+identity)
+    if path.is_symlink() or any((path/name).exists() or (path/name).is_symlink() for name in ['attempt.json','container.cid']):raise StorageError('preparation-state-unconfirmed')
+    source=None
+    if path.exists():
+        private(path);logical_bytes(path);info=path.stat();source=[info.st_dev,info.st_ino]
+    atomic(Path(policy['controlRoot'])/'outcomes'/f'{identity}.json',{'id':identity,'state':'known-preparation-failure','sourceIdentity':source,'finishedAt':now()})
+    with capacity_lock(policy):
+        ledger=state_locked(policy);row=ledger['active'].get(identity)
+        if row is None:return
+        del ledger['active'][identity];atomic(Path(policy['controlRoot'])/'ledger.json',ledger)
+def settle_locked(policy, identity, ledger, api):
+    row=ledger['active'].get(identity)
+    if row is None:return True
+    path=Path(row['directory'])
+    try:
+        if not (path/'attempt.json').exists():
+            proof=read_json(Path(policy['controlRoot'])/'outcomes'/f'{identity}.json')
+            if not isinstance(proof,dict) or proof.get('state')!='known-preparation-failure' or proof.get('id')!=identity:return False
+            if (path/'attempt.json').is_symlink() or (path/'container.cid').exists() or (path/'container.cid').is_symlink():return False
+            source=None
+            if path.exists():
+                private(path);logical_bytes(path);info=path.stat();source=[info.st_dev,info.st_ino]
+            if proof.get('sourceIdentity')!=source:return False
+            updated={'version':1,'active':{key:value for key,value in ledger['active'].items() if key!=identity}}
+            atomic(Path(policy['controlRoot'])/'ledger.json',updated);ledger.clear();ledger.update(updated)
+            return True
+        with task_lock(path) as unchanged:
+            _,job=api._load_attempt(path)
+            reservation=job.get('storageReservation')
+            if not settled_job(job) or not isinstance(reservation,dict) or reservation.get('id')!=identity:return False
+            record_sha=sha256(read_bytes(path/'attempt.json')).hexdigest()
+            unchanged()
+            atomic(Path(policy['controlRoot'])/'outcomes'/f'{identity}.json',{'id':identity,'state':'settled','recordSha256':record_sha,'finishedAt':now()})
+            updated={'version':1,'active':{key:value for key,value in ledger['active'].items() if key!=identity}}
+            atomic(Path(policy['controlRoot'])/'ledger.json',updated)
+            ledger.clear();ledger.update(updated)
+            return True
+    except (OSError,ValueError):return False
+def settle(policy, identity, api):
+    with capacity_lock(policy):return settle_locked(policy,identity,state_locked(policy),api)
+def reconcile(policy, api, *,clock=None):
+    with capacity_lock(policy):
+        ledger=state_locked(policy);settled=[]
+        for identity in list(ledger['active']):
+            if settle_locked(policy,identity,ledger,api):settled.append(identity)
+        report={'version':1,'settled':settled,'retained':list(ledger['active'].values()),
+                'reservedBytes':sum(row['bytes'] for row in ledger['active'].values()),'noExpiryRelease':True,
+                'cleanupCandidates':cleanup_inventory(policy,clock),'deleteEnabled':False}
+        try:report['accountedBytes']=usage_locked(policy,ledger,api);report['capacityState']='known'
+        except (OSError,ValueError) as error:report['capacityState']='unknown';report['capacityReason']=str(error)
+        return report
+
+CURRENT LAUNCHER SELECTED FUNCTIONS
+
+def recover(directory, *, _engine_factory=None):
+    if not Path(directory).exists():return _archived_status(directory)
+    value=_recover_core(directory,_engine_factory=_engine_factory)
+    _settle_storage(Path(directory))
+    return value
+def _settle_storage(directory):
+    try:
+        storage=storage_module(sha256(read(Path(__file__).resolve().with_name(STORAGE_FILE))).hexdigest())
+        storage.settle(storage.existing_policy(directory.parent),directory.name.removeprefix('review-'),_api_view())
+    except (Exception,KeyboardInterrupt):
+        # The analysis record is authoritative. A retained reservation is
+        # conservative and can be reconciled later; never replay analysis here.
+        print('storage-settlement-pending; query status and storage-reconcile before retrying',file=sys.stderr)
+def _api_view():
+    return types.SimpleNamespace(__file__=__file__,_load_attempt=_load_attempt,_validate_attempt=_validate_attempt,
+                                 load_json=load_json,archive_probe=_archive_probe)
+def _recover_core(directory, *, _engine_factory=None):
+    root, _ = _load_attempt(directory)
+    cancel = {}
+    with operation_lock(root), _interrupts(cancel):
+        _, job = _load_attempt(root)
+        holder={}
+        with _failure_guard(root,job,holder,True):
+            return _recover_locked(root,job,cancel,holder,_engine_factory)
+def execute(bundle, expected, root, manifest_path, scan_path, dataset_sha, freeze_sha, *,
+            attempts_root=None, timeout=30, _engine_factory=None, storage_policy=None):
+    if _engine_factory is None and sys.platform != 'linux':
+        raise ValueError('VM execution requires Linux; no Mac Docker invocation')
+    if os.geteuid() == 0 or isinstance(timeout, bool) or not isinstance(timeout, (float,int)) or not .1 <= timeout <= 30:
+        raise ValueError('non-root controller and bounded timeout required')
+    if not all(isinstance(value, str) and HASH.fullmatch(value) for value in [dataset_sha, freeze_sha]):
+        raise ValueError('dataset and quality freeze digests required')
+    base = Path(attempts_root) if attempts_root is not None else Path.home()/'.cache/harness-review-attempts'
+    if base.resolve() != base or not re.fullmatch(r'[A-Za-z0-9/_.-]+', str(base)):
+        raise ValueError('canonical mount-safe attempts directory required')
+    manifest, files = verify(bundle, expected)
+    payload, input_sha = inputs(root, manifest_path, scan_path)
+    storage=storage_module(manifest['storageSha256'])
+    policy=storage.existing_policy(base) if storage_policy is None else storage.validate_policy(storage_policy)
+    if policy['cacheRoot']!=str(base):raise ValueError('storage policy cache mismatch')
+    attempt_id=uuid.uuid4().hex
+    reservation=storage.reserve(policy,attempt_id,sum(map(len,files.values()))+sum(map(len,payload.values())),_api_view())
+    phase={'enginePossible':False}
+    try:
+        return _execute_verified(base,attempt_id,manifest,files,payload,input_sha,expected,dataset_sha,freeze_sha,timeout,_engine_factory,reservation,phase)
+    finally:
+        try:
+            directory=base/('review-'+attempt_id)
+            if not phase['enginePossible'] and not (directory/'attempt.json').exists() and not (directory/'container.cid').exists():
+                storage.cancel_preparation(policy,attempt_id)
+            else:storage.settle(policy,attempt_id,_api_view())
+        except (Exception,KeyboardInterrupt):
+            print('storage-settlement-pending; query status and storage-reconcile before retrying',file=sys.stderr)
+def _execute_verified(base,attempt_id,manifest,files,payload,input_sha,expected,dataset_sha,freeze_sha,timeout,_engine_factory,reservation,phase):
+    base.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+    base.mkdir(mode=0o700, exist_ok=True)
+    _private(base)
+    attempt = base/('review-'+attempt_id)
+    attempt.mkdir(mode=0o700)
+    (attempt/'docker-config').mkdir(mode=0o700)
+    stage = attempt/'stage'
+    stage.mkdir(mode=0o700)
+    for relative, raw in {**{'code/'+key:value for key,value in files.items()}, **payload}.items():
+        path = stage/relative
+        path.parent.mkdir(mode=0o755, parents=True, exist_ok=True)
+        path.write_bytes(raw);path.chmod(0o444)
+    job = {'version':1, 'directory':str(attempt), 'id':attempt_id, 'name':'harness-review-'+attempt_id, 'state':'prepared',
+           'snapshotSha256':expected, 'inputSha256':input_sha, 'imageId':manifest['imageId'],
+           'datasetSha256':dataset_sha, 'freezeSha256':freeze_sha, 'startedAt':_now(),
+           'creationAttempted':False, 'createSucceeded':False, 'containerObserved':False, 'containerId':None,
+           'creationJournalVersion':1,'storageReservation':reservation}
+    failure = None
+    cancel = {}
+    holder={}
+    with operation_lock(attempt), _interrupts(cancel), _failure_guard(attempt,job,holder):
+        _save(attempt, job)
+        phase['enginePossible']=True
+        engine = holder['engine'] = (_engine_factory or DockerEngine)(attempt, job, lambda:_save(attempt,job), cancel)
+        command = ['create','--pull','never','--name',job['name'],'--cidfile',str(attempt/'container.cid')]
+        for key,value in _labels(job).items():
+            command += ['--label',key+'='+value]
+        command += ['--network','none','--read-only','--user',f'{os.geteuid()}:{os.getegid()}',
+                    '--cap-drop','ALL','--security-opt','no-new-privileges','--memory','256m',
+                    '--memory-swap','256m','--cpus','1','--pids-limit','32','--log-driver','none',
+                    '--no-healthcheck','--workdir','/','--tmpfs','/tmp:rw,nosuid,nodev,noexec,size=16m,mode=1777',
+                    '--mount',f'type=bind,src={stage},dst=/review,readonly','--entrypoint','python3',
+                    manifest['imageId'],'-I','-B','-S','-c',_CONTAINER_WATCHDOG,str(timeout),'/review/code/'+FILES[0],
+                    '/review/sources','/review/manifest.json','/review/scan.json']
+        try:
+            if cancel:
+                raise _Failure('interrupted', signal=cancel['signal'])
+            job.update(state='creating', creationAttempted=True)
+            _save(attempt, job)
+            created = engine.invoke(command, timeout, 'create')
+            if cancel:
+                raise _Failure('interrupted', signal=cancel['signal'])
+            if created['exitCode']:
+                raise _Failure('timed-out' if created['deadlineExceeded'] else 'create-failed', exitCode=created['exitCode'])
+            cid = created['stdout'].decode('ascii').strip()
+            if not HASH.fullmatch(cid):
+                raise _Failure('container-identity')
+            job.update(containerId=cid, createSucceeded=True)
+            _owned(engine, job, cid)
+            if cancel:raise _Failure('interrupted',signal=cancel['signal'])
+            job['state'] = 'waiting'
+            _save(attempt, job)
+            if cancel:raise _Failure('interrupted',signal=cancel['signal'])
+            run = engine.invoke(['start','--attach',cid], timeout, 'start')
+            if cancel:
+                raise _Failure('interrupted', signal=cancel['signal'])
+            if run['exitCode']:
+                raise _Failure('timed-out' if run['deadlineExceeded'] else 'reviewer-failed', exitCode=run['exitCode'])
+            raw = run['stdout']
+            try:
+                report = load_json(raw)
+                if not isinstance(report, dict) or type(report.get('version')) is not int or report['version'] != 1:
+                    raise ValueError('invalid report')
+            except (ValueError, UnicodeError):
+                raise _Failure('report-invalid') from None
+        except BaseException as error:
+            failure = error.details if isinstance(error,_Failure) else {'kind':'controller-error','type':type(error).__name__}
+            _restore_create_evidence(attempt,job)
+        job['state'] = 'cleaning'
+        if failure is not None:
+            job['failure'] = failure
+        _save(attempt, job)
+        job['cleanup'] = _cleanup(engine, job)
+        if cancel and failure is None:
+            failure = job['failure'] = {'kind':'interrupted','signal':cancel['signal']}
+        if not job['cleanup']['confirmed'] and failure is None:
+            failure = job['failure'] = {'kind':'cleanup-failed'}
+        if failure is None:
+            try:
+                job['stageRemoved'] = _discard_stage(attempt)
+            except (OSError,ValueError) as error:
+                failure = job['failure'] = {'kind':'stage-cleanup-failed','type':type(error).__name__}
+                job['cleanup']['confirmed'] = False
+                job['cleanup']['errors'].append('stage-removal-failed')
+        if cancel and failure is None:
+            failure = job['failure'] = {'kind':'interrupted','signal':cancel['signal']}
+        if failure is not None:
+            job['state'] = ('interrupted' if failure['kind']=='interrupted' else 'timed-out' if failure['kind']=='timed-out' else 'failed') if job['cleanup']['confirmed'] else 'cleanup-unconfirmed'
+            job['finishedAt'] = _now()
+            _save(attempt, job)
+        else:
+            input_files = {name:sha256(value).hexdigest() for name,value in payload.items()}
+            receipt = {'version':2,'state':'completed','snapshotSha256':expected,'datasetSha256':dataset_sha,
+                       'freezeSha256':freeze_sha,'inputSha256':input_sha,'inputFiles':dict(input_files),
+                       'scanSha256':input_files['scan.json'],'reportSha256':sha256(raw).hexdigest(),
+                       'startedAt':job['startedAt'],'finishedAt':_now()}
+            result = {'reviewerSnapshot':manifest,'reviewerExecution':receipt,'report':report,'reportJson':raw.decode('utf-8'),
+                      'inputFiles':input_files,'temporaryRemoved':job['stageRemoved'],'cleanup':job['cleanup'],
+                      'attemptDirectory':str(attempt)}
+            # State and original result commit in one atomic record, not two files.
+            job.update(state='completed', finishedAt=receipt['finishedAt'], resultSha256=digest(result), result=result)
+            try:
+                _save(attempt, job, cancel)
+            except _Failure as error:
+                job.pop('result',None);job.pop('resultSha256',None)
+                failure=job['failure']=error.details
+                job.update(state='interrupted',finishedAt=_now())
+                _save(attempt,job)
+            except ValueError as error:
+                # Encoding/size is checked before opening a temporary record.
+                job.pop('result',None);job.pop('resultSha256',None)
+                failure=job['failure']={'kind':'completion-record-invalid','type':type(error).__name__}
+                job.update(state='failed',finishedAt=_now())
+                _save(attempt,job)
+            except OSError as error:
+                # Rename may already have committed. Query the original record;
+                # never overwrite it as failed or replay this analysis blindly.
+                job=dict(job);job.pop('result',None);job.pop('resultSha256',None)
+                failure=job['failure']={'kind':'completion-commit-unconfirmed','type':type(error).__name__}
+                job['state']='completion-unconfirmed'
+    if failure is not None:
+        raise ReviewAttemptError(attempt, job)
+    return result
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    commands = parser.add_subparsers(dest='action', required=True)
+    creator = commands.add_parser('freeze')
+    creator.add_argument('sources', type=Path)
+    creator.add_argument('destination', type=Path)
+    creator.add_argument('image_id')
+    verifier = commands.add_parser('verify')
+    runner = commands.add_parser('run')
+    for command in [verifier, runner]:
+        command.add_argument('bundle', type=Path)
+        command.add_argument('expected')
+    for name in ['root', 'manifest_path', 'scan_path']:
+        runner.add_argument(name, type=Path)
+    runner.add_argument('dataset_sha')
+    runner.add_argument('freeze_sha')
+    runner.add_argument('--attempts-root', type=Path)
+    runner.add_argument('--timeout', type=float, default=30)
+    runner.add_argument('--storage-policy',type=Path)
+    for name in ['status','recover']:
+        commands.add_parser(name).add_argument('directory', type=Path)
+    inventory=commands.add_parser('retention-inventory')
+    inventory.add_argument('directory',type=Path,nargs='?')
+    inventory.add_argument('--budget-mib',type=int,default=256)
+    inventory.add_argument('--minimum-age-days',type=int,default=30)
+    commands.add_parser('storage-reconcile').add_argument('directory',type=Path,nargs='?')
+    planner=commands.add_parser('archive-plan');planner.add_argument('directory',type=Path);planner.add_argument('--attempt-id',action='append',dest='attempt_ids')
+    apply=commands.add_parser('archive-apply');apply.add_argument('directory',type=Path);apply.add_argument('plan_path',type=Path)
+    for name in ['archive-status','archive-restore']:
+        command=commands.add_parser(name);command.add_argument('directory',type=Path);command.add_argument('transaction_id')
+    args = vars(parser.parse_args())
+    action = args.pop('action')
+    try:
+        if action=='retention-inventory':
+            args['budget_bytes']=args.pop('budget_mib')*1024*1024
+            value=retention_inventory(**args)
+        elif action=='storage-reconcile' or action.startswith('archive-'):
+            storage=storage_module(sha256(read(Path(__file__).resolve().with_name(STORAGE_FILE))).hexdigest())
+            directory=args['directory'] or Path.home()/'.cache/harness-review-attempts'
+            policy=storage.existing_policy(directory)
+            if action=='storage-reconcile':value=storage.reconcile(policy,_api_view())
+            elif action=='archive-plan':value=storage.archive_plan(policy,_api_view(),attempt_ids=args.get('attempt_ids'))
+            elif action=='archive-apply':value=storage.archive_apply(policy,load_json(read(args['plan_path'],ATTEMPT_LIMIT)),_api_view())
+            elif action=='archive-status':value=storage.archive_status(policy,args['transaction_id'],_api_view())
+            else:value=storage.archive_restore(policy,args['transaction_id'],_api_view())
+        else:
+            if action=='run' and args.get('storage_policy') is not None:args['storage_policy']=load_json(read(args['storage_policy']))
+            value = freeze(**args) if action == 'freeze' else verify(**args)[0] if action == 'verify' else status(**args) if action == 'status' else recover(**args) if action == 'recover' else execute(**args)
+        print(json.dumps(value, indent=2))
+        if action=='recover' and value.get('state')!='completed' and not value.get('cleanup',{}).get('confirmed'):
+            parser.exit(2)
+    except ReviewAttemptError as error:
+        print(json.dumps({'attemptDirectory':error.attempt_directory,'status':error.status,'nextOperation':'status'},indent=2))
+        state=error.status['state'];failure=error.status['failure']
+        parser.exit(3 if state=='completion-unconfirmed' else 2 if state=='cleanup-unconfirmed' else 128+failure.get('signal',2) if failure['kind']=='interrupted' else 124 if failure['kind']=='timed-out' else 1)
+    except (OSError, ValueError, SyntaxError, subprocess.SubprocessError) as error:
+        if isinstance(getattr(error,'code',None),str):
+            print(json.dumps({'state':'storage-blocked','reason':error.code,'retryable':getattr(error,'retryable',False),'details':getattr(error,'details',{})}))
+            parser.exit(4)
+        parser.exit(1, f'Reviewer snapshot rejected: {error}\n')
+
+ACTUAL TESTS scripts/reviewer_storage.test.py
+"""Synthetic private-cache storage tests. No VM daemon, network or host permission changes."""
+import importlib.util,json,os
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from hashlib import sha256
+import unittest
+from unittest.mock import patch
+
+HERE=Path(__file__).resolve().parent
+
+class CapacityTest(unittest.TestCase):
+    def setUp(self):
+        spec=importlib.util.spec_from_file_location('snapshot',HERE/'reviewer_snapshot.py');self.api=importlib.util.module_from_spec(spec);spec.loader.exec_module(self.api)
+        self.storage=self.api.storage_module(sha256((HERE/'reviewer_storage.py').read_bytes()).hexdigest())
+        self.assertTrue(callable(getattr(self.storage,'policy_for',None)),'Storage capacity API missing')
+        tmp=TemporaryDirectory();self.addCleanup(tmp.cleanup);self.root=Path(tmp.name).resolve();self.cache=self.root/'attempts'
+        self.policy=self.storage.policy_for(self.cache,{'minFreeBytes':0})
+
+    def test_reservation_precedes_cache_creation_and_duplicate_is_idempotent(self):
+        one=self.storage.reserve(self.policy,'a'*32,123,self.api)
+        two=self.storage.reserve(self.policy,'a'*32,123,self.api)
+        self.assertEqual(one,two);self.assertFalse(self.cache.exists())
+        self.assertEqual(one['bytes'],123+96*1024*1024)
+        self.assertNotIn(Path(self.policy['controlRoot']),list(self.cache.parents))
+        state=self.storage.reconcile(self.policy,self.api)
+        self.assertEqual(state['reservedBytes'],one['bytes']);self.assertEqual(len(state['retained']),1)
+
+    def test_admission_counts_concurrent_reservations(self):
+        self.storage.reserve(self.policy,'a'*32,0,self.api);self.storage.reserve(self.policy,'b'*32,0,self.api)
+        with self.assertRaises(self.storage.StorageError) as caught:self.storage.reserve(self.policy,'c'*32,0,self.api)
+        self.assertEqual(caught.exception.code,'cache-budget-exceeded');self.assertFalse(self.cache.exists())
+        self.assertEqual(len(self.storage.reconcile(self.policy,self.api)['retained']),2)
+
+    def test_disk_safety_denies_without_creating_task(self):
+        policy=self.storage.policy_for(self.cache,{'minFreeBytes':512*1024*1024})
+        with patch.object(self.storage.shutil,'disk_usage',return_value=type('Usage',(),{'free':1000})()):
+            with self.assertRaises(self.storage.StorageError) as caught:self.storage.reserve(policy,'a'*32,0,self.api)
+        self.assertEqual(caught.exception.code,'filesystem-space-insufficient');self.assertFalse(self.cache.exists())
+
+    def test_unknown_reservation_is_not_expired_by_age(self):
+        reservation=self.storage.reserve(self.policy,'a'*32,0,self.api)
+        path=Path(self.policy['controlRoot'])/'ledger.json';ledger=self.storage.read_json(path)
+        ledger['active']['a'*32]['createdAt']='2000-01-01T00:00:00+00:00';self.storage.atomic(path,ledger)
+        state=self.storage.reconcile(self.policy,self.api)
+        self.assertEqual(state['reservedBytes'],reservation['bytes']);self.assertEqual(state['retained'][0]['id'],'a'*32)
+        self.assertFalse(self.storage.settle(self.policy,'a'*32,self.api))
+
+    def test_cancel_known_preparation_failure_releases_without_forging_job(self):
+        self.storage.reserve(self.policy,'a'*32,0,self.api)
+        self.storage.cancel_preparation(self.policy,'a'*32)
+        state=self.storage.reconcile(self.policy,self.api)
+        self.assertEqual(state['reservedBytes'],0);self.assertFalse(self.cache.exists())
+
+    def test_policy_is_private_fixed_and_rejects_bad_shapes(self):
+        for bad in [{'budgetBytes':True},{'minFreeBytes':-1},{'unknown':1}]:
+            with self.assertRaises(ValueError):self.storage.policy_for(self.cache,bad)
+        self.storage.reserve(self.policy,'a'*32,0,self.api)
+        control=Path(self.policy['controlRoot']);self.assertEqual(control.stat().st_mode&0o777,0o700)
+        for p in control.rglob('*'):
+            if p.is_file():self.assertEqual(p.stat().st_mode&0o777,0o600)
+        different=self.storage.policy_for(self.cache,{'minFreeBytes':1})
+        with self.assertRaises(self.storage.StorageError):self.storage.reserve(different,'b'*32,0,self.api)
+
+    def test_active_capacity_lock_returns_retryable_busy(self):
+        with self.storage.capacity_lock(self.policy):
+            with self.assertRaises(self.storage.StorageError) as caught:self.storage.reserve(self.policy,'a'*32,0,self.api)
+        self.assertEqual(caught.exception.code,'storage-busy');self.assertTrue(caught.exception.retryable)
+
+    def test_disk_check_accounts_for_other_outstanding_reservations(self):
+        with patch.object(self.storage.shutil,'disk_usage',return_value=type('Usage',(),{'free':150*1024*1024})()):
+            self.storage.reserve(self.policy,'a'*32,0,self.api)
+            with self.assertRaises(self.storage.StorageError) as caught:self.storage.reserve(self.policy,'b'*32,0,self.api)
+        self.assertEqual(caught.exception.code,'filesystem-space-insufficient')
+
+    def fixture(self):
+        import shutil
+        spec=importlib.util.spec_from_file_location('fixtures',HERE/'reviewer_snapshot.test.py');fixtures=importlib.util.module_from_spec(spec);spec.loader.exec_module(fixtures)
+        source=HERE.parent/'work/harness-purge-improved/package/scripts';bundle=self.root/'bundle'
+        snapshot=self.api.freeze(source,bundle,'sha256:'+'a'*64)
+        project=self.root/'project';project.mkdir();(project/'safe.py').write_text('value=7\n')
+        scan=self.root/'scan.json';scan.write_text('{"results":[]}');manifest=self.root/'manifest.json'
+        manifest.write_text(json.dumps({'files':{'safe.py':sha256((project/'safe.py').read_bytes()).hexdigest()},'scanSha256':sha256(scan.read_bytes()).hexdigest()}))
+        return (bundle,self.api.digest(snapshot),project,manifest,scan,'d'*64,'e'*64),fixtures.Backend
+
+    def test_execute_refuses_budget_before_cache_and_engine(self):
+        args,backend_class=self.fixture();backend=backend_class();policy=self.storage.policy_for(self.cache,{'budgetBytes':1,'minFreeBytes':0})
+        try:
+            with self.assertRaises(self.storage.StorageError) as caught:self.api.execute(*args,attempts_root=self.cache,storage_policy=policy,_engine_factory=backend.factory)
+        except TypeError:self.fail('Capacity admission is not integrated with execute')
+        self.assertEqual(caught.exception.code,'cache-budget-exceeded');self.assertEqual(backend.calls,[]);self.assertFalse(self.cache.exists())
+
+    def test_execute_settles_only_confirmed_attempt_without_changing_result(self):
+        args,backend_class=self.fixture();backend=backend_class()
+        try:result=self.api.execute(*args,attempts_root=self.cache,storage_policy=self.policy,_engine_factory=backend.factory)
+        except TypeError:self.fail('Capacity admission is not integrated with execute')
+        record=self.api.status(result['attemptDirectory'])
+        self.assertEqual(record['result'],result);self.assertIn('storageReservation',record)
+        self.assertEqual(self.storage.reconcile(self.policy,self.api)['reservedBytes'],0)
+
+    def test_unknown_execute_retains_then_successful_recovery_settles(self):
+        args,backend_class=self.fixture();backend=backend_class('create-unknown')
+        try:
+            with self.assertRaises(self.api.ReviewAttemptError) as caught:self.api.execute(*args,attempts_root=self.cache,storage_policy=self.policy,_engine_factory=backend.factory)
+        except TypeError:self.fail('Capacity admission is not integrated with execute')
+        self.assertGreater(self.storage.reconcile(self.policy,self.api)['reservedBytes'],0)
+        backend.complete_create();record=self.api.recover(caught.exception.attempt_directory,_engine_factory=backend.factory)
+        self.assertEqual(record['state'],'recovered');self.assertNotIn('result',record)
+        self.assertEqual(self.storage.reconcile(self.policy,self.api)['reservedBytes'],0)
+
+    def test_cli_storage_block_explains_reason_without_attempt(self):
+        import io,contextlib
+        out=io.StringIO();error=self.storage.StorageError('cache-budget-exceeded',details={'budgetBytes':1})
+        argv=['snapshot','run','/bundle','a'*64,'/project','/manifest','/scan','d'*64,'e'*64]
+        with patch.object(self.api.sys,'argv',argv),patch.object(self.api,'execute',side_effect=error),contextlib.redirect_stdout(out),contextlib.redirect_stderr(io.StringIO()):
+            with self.assertRaises(SystemExit) as stopped:self.api.main()
+        self.assertEqual(stopped.exception.code,4)
+        self.assertEqual(json.loads(out.getvalue())['reason'],'cache-budget-exceeded')
+
+    def test_cli_reconcile_reports_original_pending_reservation(self):
+        import io,contextlib
+        self.storage.reserve(self.policy,'a'*32,0,self.api);out=io.StringIO()
+        with patch.object(self.api.sys,'argv',['snapshot','storage-reconcile',str(self.cache)]),contextlib.redirect_stdout(out),contextlib.redirect_stderr(io.StringIO()):
+            try:self.api.main()
+            except SystemExit:self.fail('storage-reconcile CLI missing')
+        self.assertEqual(json.loads(out.getvalue())['retained'][0]['id'],'a'*32)
+
+    def test_reservation_limit_cannot_write_an_unreadable_ledger(self):
+        policy=self.storage.policy_for(self.cache,{'minFreeBytes':0,'budgetBytes':200*1024**3})
+        with self.storage.capacity_lock(policy):
+            ledger=self.storage.state_locked(policy)
+            for i in range(1000):
+                identity=f'{i:032x}';ledger['active'][identity]={'id':identity,'inputBytes':0,'bytes':96*1024**2,
+                    'directory':str(self.cache/('review-'+identity)),'policySha256':self.storage.digest(policy)}
+            self.storage.atomic(Path(policy['controlRoot'])/'ledger.json',ledger)
+        with patch.object(self.storage.shutil,'disk_usage',return_value=type('Usage',(),{'free':2**60})()):
+            with self.assertRaises(self.storage.StorageError) as caught:self.storage.reserve(policy,'f'*32,0,self.api)
+        self.assertEqual(caught.exception.code,'reservation-limit')
+
+    def test_persisted_versions_and_policy_numbers_require_integers(self):
+        for mutate in [{'version':True},{'minimumAgeDays':30.0},{'cacheRoot':[]}]:
+            with self.assertRaises(ValueError):self.storage.validate_policy({**self.policy,**mutate})
+        with self.storage.capacity_lock(self.policy):self.storage.state_locked(self.policy)
+        for version in [True,1.0]:
+            self.storage.atomic(Path(self.policy['controlRoot'])/'ledger.json',{'version':version,'active':{}})
+            with self.storage.capacity_lock(self.policy):
+                with self.assertRaises(ValueError):self.storage.state_locked(self.policy)
+
+    def test_existing_policy_cannot_redirect_to_another_cache(self):
+        self.storage.reserve(self.policy,'a'*32,0,self.api)
+        other=self.storage.policy_for(self.root/'another-cache',{'minFreeBytes':0})
+        self.storage.atomic(Path(self.policy['controlRoot'])/'policy.json',other)
+        with self.assertRaises(ValueError):self.storage.existing_policy(self.cache)
+
+    def test_failed_settlement_save_keeps_pending_in_reconcile_response(self):
+        args,backend_class=self.fixture()
+        with patch.object(self.storage,'settle',return_value=False):
+            result=self.api.execute(*args,attempts_root=self.cache,storage_policy=self.policy,_engine_factory=backend_class().factory)
+        record=self.api.status(result['attemptDirectory']);identity=record['storageReservation']['id'];original=self.storage.atomic
+        def full(path,value):
+            if Path(path).name=='ledger.json':raise OSError('synthetic settlement save failure')
+            return original(path,value)
+        with patch.object(self.storage,'atomic',full):state=self.storage.reconcile(self.policy,self.api)
+        self.assertGreater(state['reservedBytes'],0);self.assertEqual(state['retained'][0]['id'],identity)
+        self.assertIn(identity,self.storage.read_json(Path(self.policy['controlRoot'])/'ledger.json')['active'])
+        self.assertEqual(self.storage.reconcile(self.policy,self.api)['reservedBytes'],0)
+        self.assertEqual(self.api.status(result['attemptDirectory'])['result'],result)
+
+    def test_first_run_creates_missing_cache_parents_without_task(self):
+        cache=self.root/'new-user'/'cache'/'attempts';policy=self.storage.policy_for(cache,{'minFreeBytes':0})
+        self.storage.reserve(policy,'a'*32,0,self.api)
+        self.assertFalse(cache.exists());self.assertTrue(cache.parent.exists())
+
+    def test_non_value_settlement_error_keeps_original_result(self):
+        args,backend_class=self.fixture()
+        with patch.object(self.storage,'settle',side_effect=AttributeError('synthetic')):
+            result=self.api.execute(*args,attempts_root=self.cache,storage_policy=self.policy,_engine_factory=backend_class().factory)
+        self.assertEqual(self.api.status(result['attemptDirectory'])['result'],result)
+
+    def test_proven_preparation_residue_is_retained_and_counted(self):
+        identity='a'*32;self.storage.reserve(self.policy,identity,0,self.api)
+        path=self.cache/('review-'+identity);path.mkdir(mode=0o700,parents=True);self.cache.chmod(0o700)
+        (path/'stage').mkdir(mode=0o700);(path/'stage'/'part').write_bytes(b'partial')
+        self.storage.cancel_preparation(self.policy,identity)
+        self.storage.reserve(self.policy,'b'*32,0,self.api)
+        self.assertTrue((path/'stage'/'part').exists())
+
+    def test_malformed_reservation_keeps_original_pending(self):
+        args,backend_class=self.fixture()
+        with patch.object(self.storage,'settle',return_value=False):
+            result=self.api.execute(*args,attempts_root=self.cache,storage_policy=self.policy,_engine_factory=backend_class().factory)
+        path=Path(result['attemptDirectory'])/'attempt.json';job=self.storage.read_json(path);job['storageReservation']=[];self.storage.atomic(path,job)
+        state=self.storage.reconcile(self.policy,self.api);self.assertGreater(state['reservedBytes'],0)
+
+    def test_three_processes_cannot_over_reserve(self):
+        import subprocess,sys
+        script='''import importlib.util,sys,time,json
+from pathlib import Path
+p=Path(sys.argv[1]);spec=importlib.util.spec_from_file_location('storage',p);s=importlib.util.module_from_spec(spec);spec.loader.exec_module(s)
+policy=s.policy_for(Path(sys.argv[2]),{'minFreeBytes':0});deadline=time.monotonic()+10
+while not Path(sys.argv[3]).exists():
+ if time.monotonic()>deadline:raise RuntimeError('barrier timeout')
+ time.sleep(.01)
+while True:
+ try:s.reserve(policy,sys.argv[4],0,None);print('reserved');break
+ except s.StorageError as e:
+  if e.retryable and time.monotonic()<deadline:time.sleep(.01);continue
+  print(e.code);break
+'''
+        start=self.root/'start';children=[]
+        for identity in ['a'*32,'b'*32,'c'*32]:
+            children.append(subprocess.Popen([sys.executable,'-I','-B','-c',script,str(HERE/'reviewer_storage.py'),str(self.cache),str(start),identity],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True))
+        start.touch();out=[]
+        for child in children:
+            stdout,stderr=child.communicate(timeout=15);self.assertEqual(child.returncode,0,stderr);out.append(stdout.strip())
+        self.assertEqual(sorted(out),['cache-budget-exceeded','reserved','reserved'])
+        self.assertEqual(len(self.storage.reconcile(self.policy,self.api)['retained']),2)
+
+    def test_busy_preparation_release_can_be_reconciled_without_retrying_analysis(self):
+        identity='a'*32;self.storage.reserve(self.policy,identity,0,self.api)
+        with self.storage.capacity_lock(self.policy):
+            with self.assertRaises(self.storage.StorageError):self.storage.cancel_preparation(self.policy,identity)
+        self.assertEqual(self.storage.reconcile(self.policy,self.api)['reservedBytes'],0)
+
+    def test_missing_record_reconciliation_never_competes_for_initial_task_lock(self):
+        identity='a'*32;self.storage.reserve(self.policy,identity,0,self.api)
+        path=self.cache/('review-'+identity);path.mkdir(mode=0o700,parents=True);self.cache.chmod(0o700)
+        with patch.object(self.storage,'task_lock',side_effect=AssertionError('must not acquire initial lock')):
+            self.assertGreater(self.storage.reconcile(self.policy,self.api)['reservedBytes'],0)
+
+    def test_preparation_proof_fences_duplicate_reservation(self):
+        identity='a'*32;self.storage.reserve(self.policy,identity,0,self.api)
+        with self.storage.capacity_lock(self.policy):
+            with self.assertRaises(self.storage.StorageError):self.storage.cancel_preparation(self.policy,identity)
+        with self.assertRaises(self.storage.StorageError):self.storage.reserve(self.policy,identity,0,self.api)
+
+    def test_cancel_rejects_traversal_identity_before_any_write(self):
+        self.storage.reserve(self.policy,'a'*32,0,self.api)
+        ledger=Path(self.policy['controlRoot'])/'ledger.json';original=ledger.read_bytes()
+        with self.assertRaises(ValueError):self.storage.cancel_preparation(self.policy,'../ledger')
+        self.assertEqual(ledger.read_bytes(),original)
+
+if __name__=='__main__':unittest.main()
+
+archive-green.txt
+.......................
+----------------------------------------------------------------------
+Ran 23 tests in 0.887s
+
+OK
+
+storage-green.txt
+................storage-settlement-pending; query status and storage-reconcile before retrying
+..........
+----------------------------------------------------------------------
+Ran 26 tests in 1.206s
+
+OK
+
+python-green.txt
+.......................................................................................
+----------------------------------------------------------------------
+Ran 87 tests in 4.034s
+
+OK
+
+gate-green.txt
+✔ Unrelated reviewer inputs cannot satisfy dataset source coverage (7.222709ms)
+✔ Coverage unions distinct batches and includes negative and diagnostic sources (1.468333ms)
+✔ Manifest and scan digests never count as reviewed source files (0.444291ms)
+✔ Input inventories require bound digests and the supported bounded source paths (3.987666ms)
+✔ A batch supports exactly 64 source files and blocks the sixty-fifth (0.78825ms)
+✔ Duplicate input receipts are rejected even with reordered keys or changed timestamps (0.546208ms)
+✔ Failed or globally mismatched receipts cannot contribute source coverage (1.094ms)
+✔ Legacy receipt versions stay diagnostic without inventing source coverage (0.280875ms)
+✔ Python reviewer cannot credit unsupported languages even when source bytes match (1.943541ms)
+✔ Legacy receipts mixed with valid current receipts retain a specific compatibility blocker (0.486833ms)
+✔ Independent overlapping batches may share sources without inflating case coverage (0.455791ms)
+✔ Entry-only reviewer identities cannot qualify without dependency snapshot and execution receipt (0.243583ms)
+✔ New freezes reject a reviewer identity that disagrees with the dependency manifest (0.332333ms)
+✔ Every reviewer dependency and runtime image is bound to the frozen identity (1.333125ms)
+✔ Completed execution must bind current snapshot, inputs, freeze and chronological run (1.802959ms)
+✔ Snapshot-aware freezes retain complete manifest and reject missing dependencies (1.034458ms)
+✔ Raw and reviewed metrics use explicit denominators and never promote R3 (0.268416ms)
+✔ Unverified guard evidence and hidden findings stay unknown, not true negatives (0.475667ms)
+✔ Wrong exclusions, raw misses and false confirmations are measured separately (0.2885ms)
+✔ Model assertions and stale evidence cannot supply a verified decision (0.238709ms)
+✔ Reused samples, changing thresholds or tool identities block independent acceptance (0.846917ms)
+✔ Static rule annotations, unknown coverage and missing results block qualification (0.423125ms)
+✔ Malformed labels, duplicate outputs and impossible decisions are rejected (0.386416ms)
+✔ Freeze binds policy and candidate and rejects sources already in the usage ledger (0.394916ms)
+✔ CLI emits a blocked report with exit 2 and bounds ordinary JSON inputs (79.356583ms)
+✔ Unknown negatives cannot improve eligibility through the resolved-only denominator (0.48275ms)
+✔ Duplicated or contradictory source locations cannot inflate labelled counts (0.244375ms)
+✔ Evidence must bind the individual case and decision (0.26525ms)
+✔ Run replay and ledger substitution cannot qualify a frozen evaluation (1.135541ms)
+✔ Timezone-free timestamps and non-array evidence are invalid (0.245209ms)
+✔ Explicit-offset Python microsecond timestamps are accepted consistently (0.220542ms)
+✔ Decision artifacts cannot be recycled across different inputs or decisions (0.257916ms)
+✔ Line-only scan hits cannot be credited to another labelled site (0.478375ms)
+✔ Freeze and reports declare every attempt must consume the listed sources (0.320334ms)
+✔ Scan anchors bind the source digest, language and category, not only line (0.613708ms)
+✔ Missing anchors report the specific case and shared decision bindings are checked (0.781042ms)
+✔ Authored positive controls cannot contribute qualification recall or minimum cases (0.259083ms)
+✔ Unqualified oracles stay diagnostic and cannot dilute independent unknown metrics (0.619583ms)
+✔ Easy authored negatives cannot dilute qualification false-positive denominators (0.594125ms)
+✔ Known vulnerability pairs remain diagnostic even when their oracle is independently verified (0.273667ms)
+✔ Missing or incomplete selection provenance cannot supply admission metrics (2.057208ms)
+✔ Explicit selection exclusions cannot be overridden by the other selection fields (0.702625ms)
+✔ Selection declarations are frozen and every diagnostic source still consumes the attempt (0.271709ms)
+✔ Storage closure is mandatory for new freezes and legacy snapshots stay diagnostic (0.369708ms)
+✔ Valid v2 storage closure with another reviewer identity cannot freeze (0.131666ms)
+ℹ tests 45
+ℹ suites 0
+ℹ pass 45
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 171.121667
+
+batch-green.txt
+.........
+----------------------------------------------------------------------
+Ran 9 tests in 0.017s
+
+OK
+
+limits-red.txt
+...F.................F.
+======================================================================
+FAIL: test_archive_budget_is_checked_before_opening_archive (__main__.ArchiveTest.test_archive_budget_is_checked_before_opening_archive)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/reviewer_archive.test.py", line 174, in test_archive_budget_is_checked_before_opening_archive
+    with self.assertRaises(self.s.StorageError):self.s.verify_archive(row,self.s.ReadBudget(1))
+                                                ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/reviewer_storage.py", line 540, in verify_archive
+    raw=read_bytes(Path(row['archive']),MAX_ARCHIVE_BYTES);budget.charge(len(raw))
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 1167, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 1171, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 1226, in _execute_mock_call
+    raise effect
+AssertionError: must reject before read
+
+======================================================================
+FAIL: test_transaction_manifest_rejects_path_escape_even_with_rehashed_metadata (__main__.ArchiveTest.test_transaction_manifest_rejects_path_escape_even_with_rehashed_metadata)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/reviewer_archive.test.py", line 179, in test_transaction_manifest_rejects_path_escape_even_with_rehashed_metadata
+    with self.assertRaises(ValueError):self.s.load_transaction(self.policy,tx['id'])
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.843s
+
+FAILED (failures=2)

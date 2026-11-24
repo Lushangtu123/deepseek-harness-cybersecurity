@@ -1,0 +1,10 @@
+{
+  "scope": "fixed GitHub source/patch and primary GHSA/PyPI metadata",
+  "sourceUsedAsDataOnly": true,
+  "agentDirectedInstructionsDetected": 0,
+  "untrustedCodeExecutedOnlyInDiagnosticVMContainer": true,
+  "retrievedSourceFilesModified": false,
+  "upstreamCommentsAreNotOperatorInstructions": true,
+  "rawDependencyArchivesNotInstalledOnHost": true,
+  "limitation": "manual instruction/data separation; not a prompt-injection detector accuracy claim"
+}

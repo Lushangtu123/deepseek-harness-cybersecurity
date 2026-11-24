@@ -1,0 +1,182 @@
+{
+  "date": "2026-11-02",
+  "scope": "VM-only improved Harness",
+  "version": "1.1.77-personal.4",
+  "programFiles": 148,
+  "testCounts": {
+    "python": 293,
+    "pluginNode": 533,
+    "hostNode": 139,
+    "linuxRecoveryRoot": 18
+  },
+  "linuxCommandsExit": [
+    0,
+    0
+  ],
+  "pipeline": {
+    "steps": [
+      {
+        "tool": "semgrep",
+        "state": "completed",
+        "coverageScope": "scanner-reported-files",
+        "cleanupVerified": null,
+        "modelCalls": 0
+      },
+      {
+        "tool": "trivy",
+        "state": "completed",
+        "coverageScope": "scanner-reported-files",
+        "cleanupVerified": null,
+        "modelCalls": 0
+      },
+      {
+        "tool": "kali",
+        "state": "completed",
+        "coverageScope": "handed-off-python-files",
+        "cleanupVerified": true,
+        "modelCalls": 0
+      },
+      {
+        "tool": "rea",
+        "state": "completed",
+        "coverageScope": "handed-off-javascript-static-graph",
+        "cleanupVerified": true,
+        "modelCalls": 0
+      },
+      {
+        "tool": "pentagi",
+        "state": "completed",
+        "coverageScope": "model-review-coverage-unknown",
+        "cleanupVerified": true,
+        "modelCalls": 13
+      }
+    ],
+    "state": "completed",
+    "cleanupVerified": true,
+    "modelRequestReservations": 13,
+    "reports": {
+      "findings": 7,
+      "files": 4,
+      "exclusions": 1,
+      "diagnostics": 0,
+      "artifacts": 3
+    },
+    "ordinaryFindings": 0,
+    "pendingChildren": 0,
+    "sourceInjectionExecuted": false,
+    "requestDeduplicated": true,
+    "pagesWithin6000Bytes": true
+  },
+  "standalonePentagi": {
+    "state": "completed",
+    "modelRequestReservations": 14,
+    "cleanupVerified": true,
+    "isolationVerified": true,
+    "completionBasis": "finished-subtask-results; controller finalized the private flow"
+  },
+  "faults": {
+    "cancelAndTimeout": [
+      {
+        "case": "cancel",
+        "deduplicationMatched": true,
+        "faultFired": true,
+        "state": "interrupted",
+        "cleanupVerified": true,
+        "remainingContainers": 0
+      },
+      {
+        "case": "timeout",
+        "deduplicationMatched": true,
+        "faultFired": true,
+        "state": "timed-out",
+        "cleanupVerified": true,
+        "remainingContainers": 0
+      }
+    ],
+    "controllerExit": [
+      {
+        "tool": "rea",
+        "faultFired": true,
+        "interruptedBeforeExplicitCancel": true,
+        "originalIdNotReplayed": true,
+        "cleanupVerified": true,
+        "newDockerBrokersRemaining": 0
+      },
+      {
+        "tool": "pentagi",
+        "faultFired": true,
+        "interruptedBeforeExplicitCancel": true,
+        "originalIdNotReplayed": true,
+        "cleanupVerified": true,
+        "newDockerBrokersRemaining": 0
+      }
+    ]
+  },
+  "browser": {
+    "downloadedBytes": 14414,
+    "sha256": "03ed1ce76fff646523d23f4923af16ea08dc69a561e659a5eb50b611f5bd4464",
+    "downloadMatchesBackendTaskAndCounts": true,
+    "sections": {
+      "findings": 7,
+      "files": 4,
+      "exclusions": 1,
+      "diagnostics": 0,
+      "artifacts": 3
+    },
+    "scope": "Native Chrome download plus independent artifact verification"
+  },
+  "protected": {
+    "protectedProjectFilesMatched": 459,
+    "projectHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "findingsByStatus": {
+      "unverified": 95
+    },
+    "scannerManifestUnchanged": true,
+    "programHashesMatched": 148,
+    "installedToolsPresent": true,
+    "harnessActive": true,
+    "pentagiRunning": true,
+    "harnessVmConfigurationUnchanged": true,
+    "otherThreeHostHelpersUnchanged": true,
+    "proxyMatchesReviewedSource": true,
+    "hostResourceLimitsUnchanged": true,
+    "snapshotCount": 26,
+    "currentRecoveryCoversKaliBridge": true
+  },
+  "checkpoint": {
+    "name": "ready-joint-review-20261102",
+    "snapshotCount": 26,
+    "previous25Preserved": true,
+    "programFilesAtCheckpoint": 146,
+    "covers": "pre-update .3 and Kali Bandit1.9.4",
+    "copyBoot": {
+      "harness": true,
+      "kali": true,
+      "initialFinalListAssertion": "failed: Kali QA shortcut removed during Harness test",
+      "subsequentFinalReconciliation": "passed"
+    },
+    "hostManagerCodeUnchanged": true,
+    "installedGlobalCurrentLabelStillPrevious": true,
+    "newPointRequiresExplicitPrivateRestoreEntry": true
+  },
+  "limitations": [
+    "REA managed lane is static JavaScript graph, not general binary/Ghidra routing",
+    "PentAGI model conclusions unverified; request/token caps are not monetary hard cap",
+    "manual security checks and95 real findings remain unreviewed",
+    "Semgrep parser gap retained",
+    "independent reviewer tool failed usage limit; no independent assessment obtained"
+  ],
+  "modelReadOnlyAcceptance": {
+    "nativeChromeTrajectoryCalls": 5,
+    "sequence": [
+      "redteam_session_bind",
+      "redteam_joint_review.plan",
+      "redteam_joint_review.status",
+      "redteam_joint_review.report.artifacts",
+      "redteam_joint_review.report.artifacts.cursor"
+    ],
+    "startedNewReview": false,
+    "resultObserved": "Completed; correctly distinguished static graph from unverified model review and kept coverage false"
+  }
+}

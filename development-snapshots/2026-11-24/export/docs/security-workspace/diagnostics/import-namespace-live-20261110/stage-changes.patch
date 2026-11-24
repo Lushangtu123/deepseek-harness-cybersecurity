@@ -1,0 +1,10 @@
+--- initial-executed-stage.py
++++ corrected-executed-stage.py
+@@ -23,6 +23,7 @@
+  rel=PurePosixPath(name);assert not rel.is_absolute() and '..' not in rel.parts
+  raw=base64.b64decode(encoded);assert sha256(raw).hexdigest()==payload['intent']['files'][name]
+  p=root/rel;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(raw)
++ if name=='package/scripts/python_namespace_review.py':p.chmod(0o644)
+ assert len([n for n in payload['files'] if n.startswith('package/')])==173
+ assert all(sha256((root/n).read_bytes()).hexdigest()==v for n,v in payload['intent']['files'].items())
+ (root/'protected-before.json').write_text(json.dumps(before));(root/'stage-intent.json').write_text(json.dumps(payload['intent']))

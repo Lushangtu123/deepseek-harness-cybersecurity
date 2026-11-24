@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "taskId": "0271811e-1368-40e8-a419-7bc1123cb26a",
+  "bytes": 11501,
+  "sha256": "caf11f46424e21ee800f17311177210614d87fb472dc99df1c8e1f615331b90b",
+  "exactReportMatch": true,
+  "sections": {
+    "findings": 7,
+    "files": 5,
+    "exclusions": 0,
+    "diagnostics": 0,
+    "artifacts": 0
+  }
+}

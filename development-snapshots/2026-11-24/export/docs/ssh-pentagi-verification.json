@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "timezone": "America/Los_Angeles",
+  "scope": "Managed SSH concurrency mitigation and one bounded local synthetic PentAGI end-to-end acceptance",
+  "ssh": {
+    "initialSerial": {
+      "attempts": 8,
+      "successes": 8
+    },
+    "initialConcurrent": {
+      "attempts": 24,
+      "maxParallel": 3,
+      "successes": 20
+    },
+    "repeatedSerial": {
+      "attempts": 8,
+      "successes": 8
+    },
+    "repeatedConcurrent": {
+      "attempts": 24,
+      "maxParallel": 3,
+      "successes": 21
+    },
+    "guestLoopbackBannerControl": {
+      "attempts": 36,
+      "successes": 36,
+      "failures": []
+    },
+    "hostForwardBannerControl": {
+      "attempts": 36,
+      "successes": 18,
+      "failureCount": 18
+    },
+    "guestTcpCounterDelta": {
+      "PassiveOpens": 30,
+      "AttemptFails": 0,
+      "EstabResets": 1,
+      "InErrs": 0,
+      "OutRsts": 0,
+      "InCsumErrors": 0
+    },
+    "forwardOriginResetPacketsObserved": 2,
+    "failureBeforeServerIdentificationOrAuthentication": true,
+    "boundedEvidenceSupportsFaultLayer": "host-forward transport under concurrent handshakes",
+    "sshdMaxStartupsRefusalNotObserved": true,
+    "exactQemuOrLibslirpSourceDefectDetermined": false,
+    "oldUncapturedFailuresProvenSameCause": false,
+    "mitigation": "single cross-process managed SSH channel; queue plus execution share deadline; no command replay",
+    "queuedDeadlineReportedAsNotSent": true,
+    "remoteTimeoutStillUnconfirmed": true,
+    "clockInputsSampledAfterChannelAcquisition": true,
+    "defaultMainThreadSigtermUnwindsAndReapsLocalChild": true,
+    "sigkillOrHostCrashCleanupGuaranteed": false,
+    "nativePostDeployment": {
+      "attempts": 24,
+      "successes": 24,
+      "parallelRequests": 3,
+      "independentProcesses": true,
+      "eachRequestSubmittedOnce": true,
+      "failures": [],
+      "clockOffsetSeconds": -0.504906415939331,
+      "policyChanged": false
+    },
+    "unmanagedDirectSshNotCovered": true,
+    "networkOrSshdPolicyChanged": false
+  },
+  "pentagi": {
+    "run": "qa-20261031-cda735dc9f3d",
+    "modelTaskPostedOnce": true,
+    "deadlineSeconds": 300,
+    "workerArtifactVerified": true,
+    "flowFinished": true,
+    "workerRunningAfter": false,
+    "flow": 5,
+    "artifact": {
+      "artifact": {
+        "digest": "081ae56ad7f0ce9ef5b6c7c7f82cc6dd6f98e2b91f5d5ae48429dddd06183153",
+        "run": "qa-20261031-cda735dc9f3d",
+        "total": 42
+      },
+      "sha256": "4eb555bb9ffdb10f5529554d8c2a66b7acb5b2835bdfefe0a30e2aac122c6f3e",
+      "bytes": 127
+    },
+    "finishedTools": {
+      "report_result": 1,
+      "subtask_patch": 1,
+      "done": 1,
+      "maintenance_result": 1,
+      "terminal": 1
+    },
+    "workerImage": "sha256:2a077741b88d6421e68ae45f0309bb149edc52a363fa596427a292cae12b1b1e",
+    "model": "deepseek-v4-pro",
+    "terminalCalls": 1,
+    "naturalTaskReportSucceeded": true,
+    "oldFlowsUnchanged": true,
+    "newFlowIds": [
+      5
+    ],
+    "elapsedSeconds": 77.76
+  },
+  "checks": {
+    "pythonCases": 230,
+    "pythonFiles": 26,
+    "hostNodeCases": 129,
+    "targetedCases": 11,
+    "targetedNotAddedAgainToTotal": true,
+    "staticReview": "Two Important findings reproduced and corrected; final static re-review has no Important or Critical findings",
+    "capturedFailedAttemptsPreservedPrivately": true,
+    "newPluginOrClientChanges": false,
+    "freshUnifiedCi": {
+      "ci-all-final": {
+        "pythonCases": 230,
+        "pluginNodeCases": 447,
+        "hostNodeCases": 129,
+        "clientRebuildMatched": true,
+        "receiptSha256": "6b45c464027bb471f7d6dbad45c8c873c2fc1ade86635d49467bd56ad02c3c8f"
+      },
+      "linux-ci-all-final": {
+        "pythonCases": 230,
+        "pluginNodeCases": 447,
+        "hostNodeCases": 129,
+        "clientRebuildMatched": true,
+        "receiptSha256": "5aebc8e91b85416d3aafc889948c3e5f7a7ae20ed70246108041a3a2ab3b1fc8"
+      }
+    }
+  },
+  "recovery": {
+    "point": "ready-ssh-channel-20261031",
+    "selectedProofEntries": 2616,
+    "programFiles": 127,
+    "hostHelpers": 5,
+    "snapshotCount": 18,
+    "previousSnapshotsPreserved": true,
+    "independentCopyActuallyBooted": true,
+    "originalDiskReturnedRunning": true,
+    "temporaryCopyRemoved": true,
+    "coverage": {
+      "state": "matches",
+      "name": "ready-ssh-channel-20261031",
+      "createdAt": "2026-11-01T06:27:40Z",
+      "scope": "improved-program-tools-config",
+      "helpersMatch": true,
+      "launchAgentsMatch": true,
+      "uncoveredFiles": [],
+      "groups": {
+        "program": {
+          "state": "matches",
+          "filesChecked": 127,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "runtime": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "tools": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "config": {
+          "state": "matches",
+          "filesChecked": 11,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "plugins": {
+          "state": "matches",
+          "filesChecked": 1320,
+          "uncoveredFiles": [],
+          "differentFiles": [],
+          "differentFileCount": 0,
+          "differenceDetailsTruncated": false
+        }
+      }
+    }
+  },
+  "boundaries": {
+    "hostPermissionsExpanded": false,
+    "vmNetworkSharingClipboardUsbUnchanged": true,
+    "newVmRegistered": false,
+    "realTrackedFilesMatched": 459,
+    "realProjectHeadAndSixAuditTablesUnchanged": true,
+    "findingsStillUnverified": 95,
+    "securityScansStarted": 0,
+    "newModelTasks": 1
+  },
+  "remaining": [
+    "Exact QEMU/libslirp internal defect and cause of historical uncaptured SSH failures remain unproven",
+    "Unmanaged SSH clients bypass the channel; this is not a QEMU repair",
+    "Existing Semgrep partial parsing remains",
+    "Authenticated ZAP has not been configured",
+    "Future clean installations still need their own model accounts and end-to-end verification"
+  ],
+  "cloudCiAtPackaging": {
+    "state": "not-observed-before-push",
+    "workflow": "https://github.com/Lushangtu123/deepseek-harness-vm/actions/workflows/verify.yml"
+  }
+}

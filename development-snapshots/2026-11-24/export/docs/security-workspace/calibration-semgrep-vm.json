@@ -1,0 +1,138 @@
+{
+  "scope": "small synthetic contrast set; no production or R3 qualification",
+  "tool": "semgrep",
+  "version": "1.182.1",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+  "casesSha256": "f2517d1b6125cab759de6c5ae55e80c6167b22090cf4f5d13f56e713e2bb4b03",
+  "configuredLanguages": [
+    "javascript",
+    "python",
+    "typescript"
+  ],
+  "legacyParseComplete": true,
+  "cleanupVerified": true,
+  "results": [
+    {
+      "file": "python-direct.py",
+      "language": "python",
+      "label": "vulnerable",
+      "reportedScanned": true,
+      "configured": true,
+      "outcome": "true-positive",
+      "findings": [
+        {
+          "rule": "policy.harness.python.eval",
+          "location": "python-direct.py:2",
+          "severity": "high"
+        }
+      ],
+      "priority": "soon",
+      "provisional": true,
+      "exposureFact": "unknown",
+      "assessmentState": "pending"
+    },
+    {
+      "file": "python-safe.py",
+      "language": "python",
+      "label": "safe",
+      "reportedScanned": true,
+      "configured": true,
+      "outcome": "true-negative",
+      "findings": []
+    },
+    {
+      "file": "python-indirect.py",
+      "language": "python",
+      "label": "vulnerable",
+      "reportedScanned": true,
+      "configured": true,
+      "outcome": "false-negative",
+      "findings": []
+    },
+    {
+      "file": "javascript-direct.js",
+      "language": "javascript",
+      "label": "vulnerable",
+      "reportedScanned": true,
+      "configured": true,
+      "outcome": "true-positive",
+      "findings": [
+        {
+          "rule": "policy.harness.javascript.dom-innerhtml",
+          "location": "javascript-direct.js:2",
+          "severity": "medium"
+        }
+      ],
+      "priority": "soon",
+      "provisional": true,
+      "exposureFact": "unknown",
+      "assessmentState": "pending"
+    },
+    {
+      "file": "javascript-safe.js",
+      "language": "javascript",
+      "label": "safe",
+      "reportedScanned": true,
+      "configured": true,
+      "outcome": "true-negative",
+      "findings": []
+    },
+    {
+      "file": "javascript-trusted.js",
+      "language": "javascript",
+      "label": "safe",
+      "reportedScanned": true,
+      "configured": true,
+      "outcome": "false-positive",
+      "findings": [
+        {
+          "rule": "policy.harness.javascript.dom-innerhtml",
+          "location": "javascript-trusted.js:3",
+          "severity": "medium"
+        }
+      ],
+      "priority": "soon",
+      "provisional": true,
+      "exposureFact": "unknown",
+      "assessmentState": "pending"
+    },
+    {
+      "file": "typescript-direct.ts",
+      "language": "typescript",
+      "label": "vulnerable",
+      "reportedScanned": true,
+      "configured": true,
+      "outcome": "true-positive",
+      "findings": [
+        {
+          "rule": "policy.harness.javascript.dom-innerhtml",
+          "location": "typescript-direct.ts:2",
+          "severity": "medium"
+        }
+      ],
+      "priority": "soon",
+      "provisional": true,
+      "exposureFact": "unknown",
+      "assessmentState": "pending"
+    },
+    {
+      "file": "php-direct.php",
+      "language": "php",
+      "label": "vulnerable",
+      "reportedScanned": false,
+      "configured": false,
+      "outcome": "no-language-rule",
+      "findings": []
+    },
+    {
+      "file": "php-safe.php",
+      "language": "php",
+      "label": "safe",
+      "reportedScanned": false,
+      "configured": false,
+      "outcome": "no-language-rule",
+      "findings": []
+    }
+  ]
+}

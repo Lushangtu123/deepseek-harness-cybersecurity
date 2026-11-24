@@ -1,0 +1,12 @@
+{
+  "promptSha256": "239c3a5a4123d79efffead59328db7b8415f2063400727d2acf904ce10e9afc1",
+  "sourceFiles": {
+    "scripts/reviewer_snapshot.py": "f9706edeba2279aca7a4b78d1a36d54e87a39e19359a585a50184493c47a662d",
+    "scripts/verifier_snapshot.py": "8575c2650a6309cd1473283e62a904d8293a089128d3733240bdb65c2933b06d",
+    "scripts/review_quality_gate.mjs": "9650842cadb0cec7e8d2f63f2dcdec9b5c987b629aa7a52e82e6c7685d38874b",
+    "scripts/verify_execution_controller.test.py": "1a4fa5914d9121cb33ebbe5932830223b7388e9d958bbb3280e26dc01ce7242b",
+    "work/harness-purge-improved/tests/review-verification-v4.test.mjs": "7cd66df9022d961b052cc7c9cbfd0c45edf70e6d00ae09440457a99bd3a3e165",
+    "work/harness-purge-improved/tests/verification-artifacts.test.mjs": "7b3d5d02d7d104f2648c97875d933348ddb819e7d359dfebde85268fc250f38c"
+  },
+  "bytes": 154106
+}

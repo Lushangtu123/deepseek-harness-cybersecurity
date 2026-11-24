@@ -1,0 +1,302 @@
+--- before/work/harness-purge-improved/package/scripts/eval_evidence_batch.py
++++ current/work/harness-purge-improved/package/scripts/eval_evidence_batch.py
+@@ -1,5 +1,6 @@
+ """Associate Python review evidence with a fixed source inventory and scan export."""
+ import argparse
++import ast
+ from hashlib import sha256
+ import json
+ import os
+@@ -58,6 +59,133 @@
+     return sources
+ 
+ 
++MAPPING_PROTOCOL = 'python-sink-locations-1'
++
++
++def location_digest(value):
++    raw = json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=True).encode()
++    return sha256(raw).hexdigest()
++
++
++def node_span(source, node):
++    raw = source.encode('utf-8')
++    offsets = [0]
++    offsets.extend(index + 1 for index, byte in enumerate(raw) if byte == 10)
++    def position(line, column):
++        return {'line': line, 'col': column + 1, 'offset': offsets[line - 1] + column}
++    return {'start': position(node.lineno, node.col_offset),
++            'end': position(node.end_lineno, node.end_col_offset)}
++
++
++def call_name(node):
++    if isinstance(node.func, ast.Name):
++        return node.func.id
++    if (isinstance(node.func, ast.Attribute) and isinstance(node.func.value, ast.Name)
++            and node.func.value.id == 'builtins' and node.func.attr in {'eval', 'exec'}):
++        return 'builtins.' + node.func.attr
++    return None
++
++
++def call_location(source, node, name):
++    source_sha = sha256(source.encode('utf-8')).hexdigest()
++    span = node_span(source, node)
++    identity = {'sourceSha256': source_sha, 'callee': name, 'call': span}
++    return {**identity, 'id': location_digest(identity), 'builtinIdentity': 'unverified',
++            'argument': node_span(source, node.args[0]) if node.args and not isinstance(node.args[0], ast.Starred) else None}
++
++
++def location_inventory(sources):
++    if not isinstance(sources, dict) or not 1 <= len(sources) <= MAX_FILES:
++        raise ValueError('invalid location sources')
++    files = {}
++    total = 0
++    for name, source in sorted(sources.items()):
++        if not RELATIVE_PY.fullmatch(name) or not isinstance(source, str):
++            raise ValueError('invalid location source')
++        raw = source.encode('utf-8')
++        total += len(raw)
++        if len(raw) > MAX_BYTES or total > MAX_TOTAL_BYTES:
++            raise ValueError('location source limit')
++        entry = {'sha256': sha256(raw).hexdigest(), 'bytes': len(raw), 'state': 'completed', 'points': []}
++        files[name] = entry
++        try:
++            if any(byte == 13 and raw[index:index+2] != b'\r\n' for index, byte in enumerate(raw)):
++                raise ValueError('unsupported line ending')
++            tree = ast.parse(source)
++            points = [call_location(source, node, call_name(node)) for node in ast.walk(tree)
++                      if isinstance(node, ast.Call) and call_name(node) in {'eval', 'exec', 'builtins.eval', 'builtins.exec'}]
++            if len(points) > MAX_CHECKS:
++                entry.update(state='unavailable', reason='point-limit')
++            else:
++                entry['points'] = sorted(points, key=lambda point: point['call']['start']['offset'])
++        except (SyntaxError, ValueError, RecursionError):
++            entry.update(state='unavailable', reason='source-parse-unavailable')
++    return {'version': 1, 'protocol': MAPPING_PROTOCOL, 'runtimePython': sys.version.split()[0], 'files': files}
++
++
++def valid_source_span(source, start, end):
++    raw = source.encode('utf-8')
++    def valid(point):
++        if not isinstance(point, dict) or set(point) != {'line', 'col', 'offset'}:
++            return False
++        if any(type(value) is not int for value in point.values()):
++            return False
++        offset = point['offset']
++        if not 0 <= offset <= len(raw) or offset < len(raw) and raw[offset] & 0xc0 == 0x80:
++            return False
++        line = raw[:offset].count(b'\n') + 1
++        column = offset - (raw.rfind(b'\n', 0, offset) + 1) + 1
++        return (point['line'], point['col']) == (line, column)
++    return valid(start) and valid(end) and start['offset'] < end['offset']
++
++
++def map_findings(sources, inventory, hits):
++    if inventory != location_inventory(sources):
++        raise ValueError('location inventory changed')
++    if not isinstance(hits, list) or len(hits) > 2000:
++        raise ValueError('location finding limit')
++    mappings = []
++    for index, hit in enumerate(hits):
++        row = {'index': index, 'state': 'unmatched', 'reason': 'invalid-finding'}
++        mappings.append(row)
++        if not isinstance(hit, dict):
++            continue
++        name = hit.get('path', '').removeprefix('/src/') if isinstance(hit.get('path'), str) else ''
++        rule = hit.get('check_id')
++        row.update(path=name, rule=rule, scannerSpan={'start': hit.get('start'), 'end': hit.get('end')})
++        if rule not in GUARD_RULES:
++            row.update(state='ignored', reason='unsupported-rule')
++            continue
++        if name not in sources:
++            row['reason'] = 'source-not-in-inventory'
++            continue
++        start, end = hit.get('start'), hit.get('end')
++        if not valid_source_span(sources[name], start, end):
++            row['reason'] = 'missing-or-invalid-span'
++            continue
++        entry = inventory['files'][name]
++        if entry['state'] != 'completed':
++            row['reason'] = entry['reason']
++            continue
++        expected = {'policy.harness.python.eval': 'eval', 'policy.harness.python.exec': 'exec'}.get(rule)
++        points = [point for point in entry['points'] if expected is None or point['callee'].split('.')[-1] == expected]
++        candidates = []
++        for point in points:
++            call = point['call']
++            contained = start['offset'] <= call['start']['offset'] and call['end']['offset'] <= end['offset']
++            argument = point['argument']
++            focused = expected is None and argument is not None and argument == {'start': start, 'end': end}
++            if contained or focused:
++                candidates.append((point, 'argument' if focused else 'call'))
++        if len(candidates) != 1:
++            row['reason'] = 'ambiguous-execution-points' if candidates else 'no-supported-execution-point'
++            continue
++        point, match = candidates[0]
++        row.pop('reason')
++        row.update(state='bound', pointId=point['id'], match=match, point=point)
++    return mappings
++
++
+ def discovered_requests(sources):
+     siblings = {}
+     for name in sources:
+@@ -80,6 +208,10 @@
+     hits = scan.get('results')
+     if not isinstance(requests, list) or len(requests) > MAX_CHECKS or not isinstance(hits, list) or len(hits) > 2000:
+         raise ValueError('invalid scan results or import requests')
++    inventory = location_inventory(sources)
++    if 'locations' in manifest and manifest['locations'] != inventory:
++        raise ValueError('frozen locations changed')
++    mappings = map_findings(sources, inventory, hits)
+     import_evidence, guard_evidence, plain_string_evidence = [], [], []
+     seen = set()
+     for request in requests:
+@@ -105,10 +237,15 @@
+     for caller, callee, line in sorted(seen):
+         evidence = review_import_flow(sources[caller], PurePosixPath(callee).stem, sources[callee], line)
+         if evidence:
+-            import_evidence.append({**evidence, 'callerFile': caller, 'calleeFile': callee})
++            caller_calls = [node for node in ast.walk(ast.parse(sources[caller])) if isinstance(node, ast.Call) and node.lineno == evidence['callLine']]
++            sink_points = [point for point in inventory['files'][callee]['points'] if point['call']['start']['line'] == evidence['sinkLine']]
++            if len(caller_calls) == len(sink_points) == 1:
++                import_evidence.append({**evidence, 'callerFile': caller, 'calleeFile': callee,
++                    'callerLocation': call_location(sources[caller], caller_calls[0], call_name(caller_calls[0]) or 'unresolved'),
++                    'sinkLocation': sink_points[0]})
+     import_count = len(seen)
+     seen = set()
+-    for hit in hits:
++    for hit, mapping in zip(hits, mappings):
+         if not isinstance(hit, dict) or not isinstance(hit.get('path'), str) or not isinstance(hit.get('check_id'), str):
+             raise ValueError('invalid scan finding')
+         name, rule, start = hit['path'].removeprefix('/src/'), hit['check_id'], hit.get('start')
+@@ -117,20 +254,32 @@
+         line = start.get('line') if isinstance(start, dict) else None
+         if type(line) is not int or line < 1:
+             raise ValueError('invalid scan finding location')
+-        key = (name, rule, line)
++        precise = mapping['state'] == 'bound'
++        legacy = 'end' not in hit and set(start) == {'line'}
++        if not precise and not legacy:
++            continue
++        key = (name, rule, mapping['pointId'] if precise else line)
+         if key in seen:
+             continue
+         seen.add(key)
+         if len(seen) > MAX_CHECKS:
+             raise ValueError('guard check limit exceeded')
++        point = mapping['point'] if precise else None
++        if point is not None and point['callee'].startswith('builtins.'):
++            continue
+         expected_sink = {'policy.harness.python.eval': 'eval', 'policy.harness.python.exec': 'exec'}.get(rule)
+-        evidence = review_eval_guard(sources[name], line) if expected_sink != 'exec' else None
++        sink_line = point['call']['start']['line'] if precise else line
++        span = point['call'] if precise else None
++        finding = {'rule': rule, 'file': name, 'line': line}
++        if precise:
++            finding.update(pointId=point['id'], executionPoint=point, scannerSpan=mapping['scannerSpan'])
++        evidence = review_eval_guard(sources[name], sink_line, call_span=span) if expected_sink != 'exec' else None
+         if evidence:
+-            guard_evidence.append({'finding': {'rule': rule, 'file': name, 'line': line}, 'evidence': evidence})
+-        evidence = review_plain_string_guard(sources[name],line)
++            guard_evidence.append({'finding': finding, 'evidence': evidence})
++        evidence = review_plain_string_guard(sources[name],sink_line,call_span=span)
+         if evidence and (expected_sink is None or evidence['sink'] == expected_sink):
+-            plain_string_evidence.append({'finding':{'rule':rule,'file':name,'line':line},'evidence':evidence})
+-    return {'version': 1, 'guardChecks': len(seen), 'importChecks': import_count,
++            plain_string_evidence.append({'finding':finding,'evidence':evidence})
++    return {'version': 2, 'locations': inventory, 'findingLocations': mappings, 'guardChecks': len(seen), 'importChecks': import_count,
+             'discoveredImportChecks': len(discovered),
+             'guardEvidence': guard_evidence, 'importEvidence': import_evidence,
+             'plainStringEvidence': plain_string_evidence}
+--- before/work/harness-purge-improved/package/scripts/eval_guard_review.py
++++ current/work/harness-purge-improved/package/scripts/eval_guard_review.py
+@@ -96,7 +96,12 @@
+     return len(calls) == 1 and calls[0] is call
+ 
+ 
+-def review_eval_guard(source, line):
++def matches_call_span(call, span):
++    return ((call.lineno, call.col_offset + 1, call.end_lineno, call.end_col_offset + 1)
++            == (span['start']['line'], span['start']['col'], span['end']['line'], span['end']['col']))
++
++
++def review_eval_guard(source, line, *, call_span=None):
+     """Return conditional syntactic evidence. Findings retain their disposition."""
+     if type(line) is not int or line < 1 or len(source.encode('utf-8')) > MAX_BYTES:
+         return None
+@@ -109,6 +114,7 @@
+     calls_at_line = [
+         node for node in ast.walk(tree) if isinstance(node, ast.Call)
+         and node.lineno == line and name_is(node.func, 'eval')
++        and (call_span is None or matches_call_span(node, call_span))
+     ]
+     if len(calls_at_line) != 1:
+         return None
+@@ -156,7 +162,7 @@
+             return False
+ 
+ 
+-def review_plain_string_guard(source, line):
++def review_plain_string_guard(source, line, *, call_span=None):
+     """Record a terminating string-shape check. Runtime string semantics remain unverified."""
+     if type(line) is not int or line < 1 or len(source.encode('utf-8')) > MAX_BYTES:
+         return None
+@@ -184,6 +190,8 @@
+                     pass
+                 case _:
+                     continue
++            if call_span is not None and not matches_call_span(call, call_span):
++                continue
+             if line not in {statement.lineno,call.lineno}:
+                 continue
+             if not unique_dynamic_execution(tree, statement, call):
+--- before/work/harness-purge-improved/package/lib/redteam/personal-python-evidence.mjs
++++ current/work/harness-purge-improved/package/lib/redteam/personal-python-evidence.mjs
+@@ -15,7 +15,9 @@
+  const results=findings.flatMap(f=>{
+   if(!rules.has(f.rule))return[];
+   const match=/^(.+):(\d+)$/.exec(f.location);
+-  return match&&Object.hasOwn(files,match[1])?[{check_id:f.rule,path:match[1],start:{line:Number(match[2])}}]:[];
++  if(!match||!Object.hasOwn(files,match[1]))return[];
++  const bound=f.sourceLocation?.state==='bound'?f.sourceLocation:null;
++  return [{check_id:f.rule,path:match[1],start:bound?{...bound.start}:{line:Number(match[2])},...(bound?{end:{...bound.end}}:{})}];
+  });
+  try{
+   const output=execFileSync('/usr/bin/python3',['-B','-I',worker,'--managed',snapshot.sourceRoot],{
+@@ -23,13 +25,15 @@
+    stdio:['pipe','pipe','pipe'],env:{PATH:'/usr/bin:/bin',LANG:'C.UTF-8'}
+   });
+   const report=JSON.parse(output),artifacts=[];
+-  if(report.version!==1||!Array.isArray(report.guardEvidence)||!Array.isArray(report.importEvidence)||!Array.isArray(report.plainStringEvidence))return unavailable();
++  const locationFields=f=>f.executionPoint&&f.pointId===f.executionPoint.id&&/^[a-f0-9]{64}$/.test(f.pointId)&&f.executionPoint.sourceSha256===files[f.file]
++   ?{pointId:f.pointId,executionPoint:f.executionPoint,scannerSpan:f.scannerSpan}:{};
++  if(![1,2].includes(report.version)||!Array.isArray(report.guardEvidence)||!Array.isArray(report.importEvidence)||!Array.isArray(report.plainStringEvidence))return unavailable();
+   for(const {finding:f,evidence:e} of report.guardEvidence){
+    if(!results.some(r=>r.check_id===f.rule&&r.path===f.file&&r.start.line===f.line)||
+-     f.rule==='policy.harness.python.exec'||e.observation!=='literal-identifier-guard-observed'||e.evalLine!==f.line||
++     f.rule==='policy.harness.python.exec'||e.observation!=='literal-identifier-guard-observed'||e.evalLine!==(f.executionPoint?.call.start.line??f.line)||
+      ![e.assignmentLine,e.guardLine,e.literalCount].every(line))return unavailable();
+    artifacts.push({tool:'semgrep',evidenceKind:'python-eval-guard',path:f.file,line:f.line,rule:f.rule,status:'unverified',
+-    assignmentLine:e.assignmentLine,guardLine:e.guardLine,literalCount:e.literalCount});
++    assignmentLine:e.assignmentLine,guardLine:e.guardLine,literalCount:e.literalCount,...locationFields(f)});
+   }
+   for(const {finding:f,evidence:e} of report.plainStringEvidence){
+    if(!results.some(r=>r.check_id===f.rule&&r.path===f.file&&r.start.line===f.line)||
+@@ -37,14 +41,14 @@
+      (f.rule==='policy.harness.python.eval'&&e.sink!=='eval')||(f.rule==='policy.harness.python.exec'&&e.sink!=='exec')||
+      ![e.guardLine,e.executionLine].every(line))return unavailable();
+    artifacts.push({tool:'semgrep',evidenceKind:'python-string-guard',path:f.file,line:f.line,rule:f.rule,status:'unverified',
+-    guardLine:e.guardLine,executionLine:e.executionLine,sink:e.sink});
++    guardLine:e.guardLine,executionLine:e.executionLine,sink:e.sink,...locationFields(f)});
+   }
+   for(const e of report.importEvidence){
+    if(e.observation!=='direct-import-execution-flow-observed'||!Object.hasOwn(files,e.callerFile)||
+      !Object.hasOwn(files,e.calleeFile)||!['eval','exec'].includes(e.sink)||
+      ![e.sourceLine,e.importLine,e.callLine,e.definitionLine,e.sinkLine].every(line))return unavailable();
+    artifacts.push({tool:'semgrep',evidenceKind:'python-import-flow',path:e.callerFile,line:e.callLine,status:'unverified',
+-    calleeFile:e.calleeFile,sourceLine:e.sourceLine,importLine:e.importLine,definitionLine:e.definitionLine,sinkLine:e.sinkLine,sink:e.sink});
++    calleeFile:e.calleeFile,sourceLine:e.sourceLine,importLine:e.importLine,definitionLine:e.definitionLine,sinkLine:e.sinkLine,sink:e.sink,...(e.callerLocation&&e.sinkLocation?{callerLocation:e.callerLocation,sinkLocation:e.sinkLocation}:{})});
+   }
+   return {state:artifacts.length>20?'truncated':'completed',artifacts:artifacts.slice(0,20)};
+  }catch{return unavailable()}

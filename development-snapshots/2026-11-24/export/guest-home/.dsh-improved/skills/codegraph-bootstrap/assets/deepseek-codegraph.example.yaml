@@ -1,0 +1,12 @@
+- id: mcp-codegraph
+  name: '@deepseek-ai/dsh-mcp-client'
+  config:
+    serverName: codegraph
+    transport: stdio
+    command: /ABSOLUTE/PATH/TO/codegraph
+    args: [serve, --mcp]
+    cwd: /ABSOLUTE/PATH/TO/PROJECT
+    env:
+      DO_NOT_TRACK: '1'
+      CODEGRAPH_TELEMETRY: '0'
+      CODEGRAPH_NO_UPDATE_CHECK: '1'

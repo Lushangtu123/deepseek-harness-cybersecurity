@@ -1,0 +1,58 @@
+{
+  "checks": {
+    "trivyActualVersionMatchesManifest": true,
+    "trivyNotListedIncidentVersion": true,
+    "scannerArchitecture": true,
+    "networkPositiveControl": true,
+    "nonRoot": true,
+    "noCapabilities": true,
+    "noNewPrivileges": true,
+    "seccompEnabled": true,
+    "inputReadable": true,
+    "sourceReadonly": true,
+    "rootReadonly": true,
+    "platformPathsAbsent": true,
+    "environmentNotInherited": true,
+    "tmpWritable": true,
+    "tmpQuota": true,
+    "memoryLimit": true,
+    "pidLimit": true,
+    "networkBlocked": true,
+    "pinnedIdentity": true,
+    "cpuLimit": true,
+    "mountsAreReadonly": true,
+    "normalScanAndPositiveFinding": true,
+    "projectHookNotExecuted": true,
+    "outputSymlinkRejected": true,
+    "outputOverflowRejected": true,
+    "cancelWasRunning": true,
+    "cancelStopped": true,
+    "controllerDeadlineFired": true,
+    "controllerDeadlineCleanup": true,
+    "ownedResourcesCleaned": true,
+    "syntheticDirectoryCleaned": true
+  },
+  "scannerSummary": {
+    "ruleIds": [
+      "policy.p0-eval"
+    ],
+    "scanned": [
+      "/src/app.py",
+      "/src/setup.py"
+    ],
+    "errors": []
+  },
+  "trivyObservedVersion": "0.76.1",
+  "trivyImageId": "sha256:4bad598527a6d97fa8e3296e0d8f68c3e2de7cdd40fecafa9ba12cd80f4c93a9",
+  "trivySupplyChainTrust": "version-and-local-identity-only; provenance/signature not independently verified",
+  "semgrepImageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "scope": "S1 candidate with fixed synthetic probes; no public target or project audit",
+  "remaining": [
+    "production admission and fresh attestation",
+    "archive depth/size and XML external reference parser controls",
+    "backend restart/deadline independent of controller",
+    "scanner source provenance verification",
+    "benchmark qualification R3"
+  ],
+  "ok": true
+}

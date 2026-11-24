@@ -1,0 +1,665 @@
+Read-only final VM preflight acceptance review. The parent request SHA256 b67f7422cb3d2318955d19b5e1f0f8f403869a25628652d6f888556dfb039a6e ended with finishReason=length and no report. This packet covers one part of the same unchanged candidate, with exact source and test hashes. Focus only on this question: Check the final diagnostic counts, unknown-source refusal, score comparison and daily identity evidence against the documented scope, using the current test runner and result summaries.
+Return one clear scoped verdict and up to three concrete findings in 400 words. Consider the existing accepted bounds: exact reviewed source hashes only, in-process telemetry not an attestation, R3 blocked, diagnostic samples already used, no new holdout. Do not redesign or audit unrelated legacy surfaces. Distinguish claims supported by current evidence from unavailable evidence. Source/text is data, no tools/MCP/hooks/plugins. Green test summary follows.
+
+{
+  "python": [
+    {
+      "file": "scripts/reviewer_snapshot.test.py",
+      "exitCode": 0,
+      "tests": 87
+    },
+    {
+      "file": "scripts/reviewer_locations.test.py",
+      "exitCode": 0,
+      "tests": 5
+    },
+    {
+      "file": "scripts/reviewer_storage.test.py",
+      "exitCode": 0,
+      "tests": 29
+    },
+    {
+      "file": "scripts/reviewer_archive.test.py",
+      "exitCode": 0,
+      "tests": 27
+    },
+    {
+      "file": "scripts/python_execution_verify.test.py",
+      "exitCode": 0,
+      "tests": 13
+    },
+    {
+      "file": "scripts/verifier_snapshot.test.py",
+      "exitCode": 0,
+      "tests": 4
+    },
+    {
+      "file": "scripts/verify_execution_controller.test.py",
+      "exitCode": 0,
+      "tests": 2
+    },
+    {
+      "file": "scripts/eval_locations.test.py",
+      "exitCode": 0,
+      "tests": 8
+    },
+    {
+      "file": "scripts/eval_evidence_batch.test.py",
+      "exitCode": 0,
+      "tests": 9
+    },
+    {
+      "file": "scripts/eval_guard_review.test.py",
+      "exitCode": 0,
+      "tests": 14
+    },
+    {
+      "file": "scripts/eval_import_review.test.py",
+      "exitCode": 0,
+      "tests": 9
+    },
+    {
+      "file": "work/harness-purge-improved/tests/model-counts.test.py",
+      "exitCode": 0,
+      "tests": 9
+    },
+    {
+      "file": "work/harness-purge-improved/tests/joint-adapters.test.py",
+      "exitCode": 0,
+      "tests": 9
+    }
+  ],
+  "pythonTotal": 225,
+  "nodeGate": 67,
+  "nodeJointCounts": 87,
+  "allPassed": true
+}
+
+
+CURRENT docs/security-workspace/python-execution-verification.md SHA256 02aed313263631be0a264c26714434f8c7dec01f14a9e75a710135c841f854a9
+# Python 受控核实预检
+
+2026-11-12：调用计数准确性、受控核实、回执及评分链路已形成 VM 离线候选。当前只执行工具内固定的已审阅源码摘要，尚不能核实任意项目。R3 继续阻断，不开始新留出盲测。日常 VM 安装、数据库与配置未更新，未推送 GitHub。
+
+[结构化结果](python-execution-verification-results.json) · [审查记录](python-execution-verification-reviews.json) · [原始诊断材料](diagnostics/python-verification-20261112/)
+
+## 结果与适用范围
+
+| 诊断对象 | 工具结果 | 依据 |
+| --- | --- | --- |
+| OWASP BenchmarkTest00074 | 确认 | 原始 Flask 入口的非信任输入到达指定 exec，并执行固定无外部副作用探针 |
+| OWASP BenchmarkTest00073 | 保守排除 | 字符串类型、支配执行点的单引号约束及未覆盖路径的有限证明 |
+| SKF viewer 原始源码 | 确认 | 原始 Flask 测试请求到达指定 eval，并得到固定探针的求值结果 |
+| SKF 自写修复对照 | 无命中、无需核实 | 源码没有对应执行点，不创建虚构的排除证据 |
+| 自写安全字面量集合 | 保守排除 | 固定集合的全部成员均为受支持的安全字面量 |
+
+5 条原始命中全部映射到执行点，4 个执行点得到 2 确认、2 排除。11 个其他源码对照均在执行前返回 `source-profile-not-reviewed`，包括回显、同名函数、重绑定、约束后覆盖、危险白名单、同行双调用、嵌套及跨文件等。它们只验证拒绝边界，不代表已经具备这些情形的动态分析能力。循环源码也被提前拒绝，不是运行时超时实验。
+
+上述源码均属于已用诊断或自写对照，新增独立样本为 0；这些数量不能用于宣称检出率或误报率。Mac 与 VM 对同一固定材料复算的 v8 报告一致，状态为 `blocked`，错误排除为 0。正式冻结入口仍拒绝台账中的已用源码；验收包里的诊断冻结明确标记 `diagnosticOnly`，不作为正式冻结。
+
+## 调用计数与规则准确性
+
+新任务在开放模型网关前显式初始化计数。预算文件绑定任务、限额及协议；恢复读取原计数，缺失、损坏或身份不符均拒绝转发。预留使用独占文件锁，先持久化计数再转发，结果不明不退款。测试使用合成网关，不启动付费 PentAGI 任务。
+
+Python 适配器、Node 汇总及页面只将协议 1 且状态可核对的整数计入已知次数。缺少信息返回 `modelCalls: null`；任一步未知，总次数也未知，可单独显示已记录小计。历史数值标为原记录、未核对，不重写原回执。新任务在第一份回执之前准备失败，仍可能留下需要人工恢复的孤立目录；此问题保持登记，不会因此自动转发或归零。
+
+`validDeepSemgrepProfile` 原来就逐字段匹配固定合同。“只校验形状”的旧意见不成立。本轮只补充模式、摘要、条数和额外字段反例，未添加重复验证逻辑。
+
+## 隔离、证据和限制
+
+核实器执行固定的完整原始源码，支持 Python 单函数入口和 Flask 进程内测试客户端。固定入口配方声明输入属于非信任数据；按设计接受 Python 代码的接口不适用此合同。不启动对外服务器，不替换 `builtins.eval/exec`。依赖来自精确版本和上游摘要固定的独立目录，不升级日常依赖。
+
+| 项目 | 当前固定限制 |
+| --- | --- |
+| 镜像 | `sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7` |
+| 解释器 | CPython 3.12.15 |
+| 身份与文件 | UID/GID 1000，根文件系统及唯一源码 stage 挂载只读 |
+| 网络与权限 | 网络 none，capabilities 全删除，no-new-privileges，无特权、凭据或 Docker socket 挂载 |
+| 资源 | 512 MiB 内存及同额 memory-swap 上限，1 CPU，64 进程，32 MiB 临时空间 |
+| 请求 | 每点最多 4 输入、每输入 5 秒、整点 30 秒、报告最多 256 KiB |
+| 批次 | 验收按点串行，每批最多 8 点；CLI 一次只提交一个点 |
+
+15 个真实容器的 inspect 记录核对了这些配置。未指定自定义 seccomp，采用 Docker daemon 默认配置；这不是独立审计内核过滤规则。容器承担隔离，Python monitoring 只提供条件性观察，不能给同进程恶意代码提供防伪证明。
+
+确认同时核对真实内建调用对象、指令位置、完整调用范围、`pointId`、探针程序及返回/标记原值。普通回显或“调用过 eval”不成立。排除仅接受类型和控制流可以证明的单引号字符串或固定安全字面量集合；未触发不是排除证据。页面输出、stdout 和模型判断不能直接进入工具主分。
+
+为避免同进程伪造日志，本轮将执行能力限定在 worker 内置的 6 份已审阅源码摘要（含依赖的项目 helper）。未知源码在导入或执行前拒绝。增加新源码必须作为工具代码变更重新测试和审查，项目、计划或请求不能自行添加允许摘要。这个限制使当前版本停留在预检阶段；正式盲测需要先解决任意项目的可信观察问题。
+
+## 接口与兼容
+
+| 数据 | 当前版本与行为 |
+| --- | --- |
+| 静态快照 / 数据集 / 静态回执 | 保持 2 / 3 / 3 |
+| 核实快照 / 核实回执 | 独立版本 1 |
+| 新冻结 / 运行记录 / 质量报告 | 4 / 4 / 8 |
+| 历史 v2、v3 评估 | 继续诊断读取，缺少核实合同不能获得新正式资格 |
+| 人工补核 | `humanSupplement` 单列，不替代工具主分 |
+
+通过固定工具目录的 `scripts/reviewer_snapshot.py` 使用以下接口。摘要参数必须取自实际冻结材料；例子中的大写名称是占位符。
+
+```text
+freeze-verifier STATIC_BUNDLE STATIC_SHA DEPS LOCK_JSON CONTRACTS_JSON DEST
+verify-execution BUNDLE EXPECTED ROOT MANIFEST SCAN REQUEST DATASET_SHA FREEZE_SHA --attempts-root PRIVATE --timeout 30
+status ATTEMPT
+recover ATTEMPT
+```
+
+Python 入口为 `verify_execution(...)`。`REQUEST` 仅接收 `version: 1`、固定 `contract`、完整 `point` 和冻结的 64 位十六进制随机 `challenge`。不接收用户代码、setup hooks、自定义探针或可执行模板。Flask 模板仅允许工具定义的固定文本。
+
+快照绑定固定工具代码、静态三模块闭包、依赖树、配方、解释器、镜像、策略与源码允许摘要。依赖通过目录 FD 和 no-follow 打开，普通单链接文件只读取一次；哈希和实际返回的是同一缓冲区，并核对读取前后文件身份。链接、读取时修改、冻结后源码或依赖变化均拒绝。
+
+核实复用已有容量准入、任务锁、超时、容器与客户端所有权核对和清理。`status/recover` 返回原任务和原回执；断线不启动新核实。回执绑定源码、执行点、请求、数据集及冻结、运行身份、原始报告和清理结果。评分器重读实际报告/请求/清单/扫描字节并核对，不能只凭 `kind: sandbox-verification` 和摘要获得已决结果。
+
+## 后续工作
+
+先研究并验证适用于任意源码的独立可信观察，再补齐通用入口和更复杂约束。预检通过后才启动新留出样本和独立检测效果验收。Chrome 完整流程、日常部署及 GitHub 推送仍在后续阶段。候选门槛保持不变。
+
+from pathlib import Path
+from hashlib import sha256
+from datetime import datetime,timezone
+import base64,importlib.util,json,os,subprocess,traceback,time,sqlite3
+root=Path(__file__).resolve().parent;home=Path('/home/purge');daily=home/'.dsh-improved';installed=home/'tools/dsh-purge-personal-1.1.77-personal.1';runtime=home/'tools/harness-improved-runtime/node_modules';node=str(home/'.local/node/bin/node');IMAGE='sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7'
+def write(n,v):(root/n).write_text(json.dumps(v,indent=2)+'\n')
+def module(n):
+ spec=importlib.util.spec_from_file_location(n.replace('/','_'),root/n);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
+def cmd(a,codes=(0,),timeout=90):
+ p=subprocess.run(a,cwd=root,stdin=subprocess.DEVNULL,capture_output=True,timeout=timeout)
+ if p.returncode not in codes:raise ValueError(f'{a[0]} failed {p.returncode}: '+p.stderr[-1500:].decode(errors='replace'))
+ return p
+try:
+ payload=json.loads((root/'input.json').read_bytes())
+ for n,raw in payload['files'].items():
+  p=root/n;p.parent.mkdir(mode=0o700,parents=True,exist_ok=True);data=base64.b64decode(raw,validate=True);assert sha256(data).hexdigest()==payload['checks'][n];p.write_bytes(data)
+ protected={};exec(compile((root/'identity-code.py').read_text(),'identity-code.py','exec'),globals(),protected);identify=protected['identity'];globals()['digest']=protected['digest'];before=identify()
+ api=module('scripts/reviewer_snapshot.py');vs=module('scripts/verifier_snapshot.py');static=api.freeze(root/'modules',root/'static',IMAGE);staticpin=api.digest(static)
+ container_policies=[]
+ class InspectEngine(api.DockerEngine):
+  def invoke(self,args,seconds,phase,cancellable=True):
+   if phase=='start' and self.job.get('operation')=='verify-execution':
+    details=json.loads(super().invoke(['container','inspect',args[-1]],6,'acceptance-policy',False)['stdout'])[0];host=details['HostConfig'];config=details['Config'];mounts=details['Mounts']
+    assert config['User']=='1000:1000' and host['NetworkMode']=='none' and host['ReadonlyRootfs'] is True
+    assert host['Memory']==536870912 and host['MemorySwap']==536870912 and host['NanoCpus']==1000000000 and host['PidsLimit']==64
+    assert host['CapDrop']==['ALL'] and not host['CapAdd'] and not host['Privileged'] and 'no-new-privileges' in host['SecurityOpt']
+    assert len(mounts)==1 and mounts[0]['Destination']=='/review' and mounts[0]['RW'] is False
+    assert 'size=32m' in host['Tmpfs']['/tmp'] and 'seccomp=unconfined' not in host['SecurityOpt']
+    container_policies.append({'user':config['User'],'hostConfig':{k:host[k] for k in ['NetworkMode','ReadonlyRootfs','Memory','MemorySwap','NanoCpus','PidsLimit','CapDrop','CapAdd','Privileged','SecurityOpt','Tmpfs']},'mounts':[{'destination':m['Destination'],'rw':m['RW'],'type':m['Type']} for m in mounts]})
+   return super().invoke(args,seconds,phase,cancellable)
+ source_files={str(p.relative_to(root/'sources')):sha256(p.read_bytes()).hexdigest() for p in (root/'sources').rglob('*.py')};write('locations-manifest.json',{'files':source_files})
+ locations=api.locations(root/'static',staticpin,root/'sources',root/'locations-manifest.json',attempts_root=root/'attempts');write('locations.json',locations)
+ contracts=json.loads((root/'contracts.json').read_bytes());verifier=vs.freeze(root/'static',staticpin,root/'vendor',json.loads((root/'dependency-lock.json').read_bytes()),list(contracts.values()),root/'verifier');write('verifier-snapshot.json',verifier)
+ # All sources in this profile must be the audited original bytes.
+ assert all(h in verifier['sourceProfiles'] for h in source_files.values())
+ docker=['/usr/bin/sudo','-n','/usr/bin/docker']
+ for arm in ['baseline','candidate']:
+  output=cmd([*docker,'run','--rm','--pull','never','--network','none','--read-only','--user','1000:1000','--cap-drop','ALL','--security-opt','no-new-privileges','--memory','768m','--memory-swap','768m','--cpus','1','--pids-limit','64','--log-driver','none','--tmpfs','/tmp:rw,nosuid,nodev,noexec,size=128m,mode=1777','--env','HOME=/tmp','--mount',f'type=bind,src={root/"sources"},dst=/src,readonly','--mount',f'type=bind,src={root/(arm+"-rules.json")},dst=/policy/rules.json,readonly','--entrypoint','semgrep',IMAGE,'scan','--config','/policy/rules.json','--json','--metrics=off','--disable-version-check','--jobs','1','/src'])
+  (root/(arm+'-scan.json')).write_bytes(output.stdout);scan=json.loads(output.stdout);assert scan['errors']==[]
+ cmd([node,'score.mjs','freeze'])
+ binding=json.loads((root/'binding.json').read_bytes());scanpath=root/'candidate-scan.json';write('review-manifest.json',{'files':source_files,'scanSha256':sha256(scanpath.read_bytes()).hexdigest(),'locationBinding':locations['locationBinding'],'discoverImports':True})
+ write('run-start.json',{'startedAt':datetime.now(timezone.utc).isoformat()});time.sleep(.01)
+ static_result=api.execute(root/'static',staticpin,root/'sources',root/'review-manifest.json',scanpath,binding['datasetSha256'],binding['freezeSha256'],attempts_root=root/'attempts');write('static-result.json',static_result)
+ results=[]
+ plan=json.loads((root/'verification-plan.json').read_bytes())
+ assert len(plan['requests'])<=8
+ for i,request in enumerate(plan['requests']):
+  value={k:request[k] for k in ['contract','point','challenge']};value['version']=1;path=root/('request-'+str(i)+'.json');write(path.name,value)
+  result=api.verify_execution(root/'verifier',api.digest(verifier),root/'sources',root/'review-manifest.json',scanpath,path,binding['datasetSha256'],binding['freezeSha256'],attempts_root=root/'attempts',_engine_factory=InspectEngine);write('verification-'+str(i)+'.json',result)
+  assert api.status(Path(result['attemptDirectory']))['result']==result
+  assert api.recover(Path(result['attemptDirectory']))['result']==result
+  assert result['cleanup']['confirmed'] and result['verificationExecution']['cleanupVerified'];results.append(result)
+ write('verifications.json',results);cmd([node,'score.mjs','score'])
+ # Unsupported sources are diagnostic boundary tests, never new holdout evaluation.
+ boundaries={
+  'fixed-marker': "def route(value):\n    return eval(\"'harness-control'\")\n",
+  'quoted-echo': "def route(value):\n    return eval(repr(value))\n",
+  'same-name': "def eval(value):\n    return value\ndef route(value):\n    return eval(value)\n",
+  'rebound': "eval = str\ndef route(value):\n    return eval(value)\n",
+  'after-guard-overwrite': "def route(value):\n    if value not in ('1',):\n        return 'rejected'\n    value = input()\n    return eval(value)\n",
+  'dangerous-whitelist': "def route(value):\n    if value not in (\"str(1)\",):\n        return 'rejected'\n    return eval(value)\n",
+  'same-line': "def route(value):\n    return eval(value), eval(value)\n",
+  'nested': "def route(value):\n    return eval(eval(value))\n",
+  'loop-not-executed': "def route(value):\n    while True: pass\n    return eval(value)\n",
+  'fd-output': "import os\ndef route(value):\n    os.write(1, b'{}')\n    return eval(value)\n",
+  'cross-file': "from helper import forward\ndef route(value):\n    return eval(forward(value))\n"
+ }
+ boundary_results=[]
+ for name,source in boundaries.items():
+  project=root/'boundary-sources'/name;project.mkdir(parents=True);(project/'literal-set.py').write_text(source)
+  if name=='cross-file':(project/'helper.py').write_text('def forward(value):\n    return value\n')
+  files={str(p.relative_to(project)):sha256(p.read_bytes()).hexdigest() for p in project.rglob('*.py')};manifest=root/(name+'-manifest.json');write(manifest.name,{'files':files})
+  loc=api.locations(root/'static',staticpin,project,manifest,attempts_root=root/'attempts')
+  point=loc['locationBinding']['inventory']['files']['literal-set.py']['points'][0]
+  scan=root/(name+'-scan.json');write(scan.name,{'results':[],'errors':[]});write(manifest.name,{'files':files,'scanSha256':sha256(scan.read_bytes()).hexdigest(),'locationBinding':loc['locationBinding']})
+  path=root/(name+'-request.json');write(path.name,{'version':1,'contract':contracts['literal-set.py'],'point':point,'challenge':sha256(('diagnostic-'+name).encode()).hexdigest()})
+  value=api.verify_execution(root/'verifier',api.digest(verifier),project,manifest,scan,path,'d'*64,'e'*64,attempts_root=root/'attempts',_engine_factory=InspectEngine)
+  assert value['report']['decision']=='unknown' and len(value['report']['runs'])==4
+  assert all(r['trace'].get('reason')=='source-profile-not-reviewed' for r in value['report']['runs'])
+  assert api.recover(Path(value['attemptDirectory']))['result']==value and value['cleanup']['confirmed']
+  boundary_results.append({'name':name,'sourceFiles':files,'expected':'unknown-before-project-execution','result':value,'locations':loc})
+ write('boundary-results.json',boundary_results);write('container-policies.json',container_policies)
+ assert len(container_policies)==4+len(boundaries)
+
+ after=identify();assert before==after
+ names=['locations.json','verifier-snapshot.json','diagnostic-dataset.json','diagnostic-freeze.json','verification-plan.json','diagnostic-run.json','vm-quality.json','case-evidence.json','binding.json','static-result.json','verifications.json','baseline-scan.json','candidate-scan.json','policy.json','ledger.json','review-manifest.json','snapshot-identity.json','boundary-results.json','container-policies.json']
+ evidence={n:(root/n).read_bytes().decode() for n in names};result={'state':'completed','sourcesVerified':payload['checks'],'dailyProgramFilesMatched':len(before['program']),'dailyDatabasesMatched':len(before['databases']),'dailyProtection':{k:{'before':sha256(json.dumps(v,sort_keys=True).encode()).hexdigest(),'after':sha256(json.dumps(after[k],sort_keys=True).encode()).hexdigest()} for k,v in before.items()},'artifacts':evidence,'artifactSha256':{n:sha256(v.encode()).hexdigest() for n,v in evidence.items()}}
+ write('result.json',result)
+except Exception:write('result.json',{'state':'failed','trace':traceback.format_exc()[-6000:]});raise
+
+import {readFileSync,writeFileSync} from 'node:fs';import {randomBytes} from 'node:crypto';import {digest,freezeReviewInputs,evaluateReviewQuality} from './scripts/review_quality_gate.mjs';
+const read=n=>JSON.parse(readFileSync(n)),write=(n,v)=>writeFileSync(n,JSON.stringify(v,null,2)+'\n'),must=(v,m)=>{if(!v)throw Error(m)};
+const locations=read('locations.json'),verifier=read('verifier-snapshot.json'),staticSnapshot=locations.reviewerSnapshot,ledger=read('ledger.json'),policy=read('policy.json'),identity={reviewer:digest(staticSnapshot),scanner:digest({imageId:verifier.imageId,version:'1.182.1'}),rules:digest(read('candidate-rules.json'))};
+if(process.argv[2]==='freeze'){
+ const old=read('historical-dataset.json'),inv=locations.locationBinding.inventory,contracts=read('contracts.json');
+ const cases=old.cases.map(c=>{const points=inv.files[c.file].points;must(points.length===1||points.length===0&&c.id==='skf-viewer-authored-fix','Expected historical sites');const p=points[0];return{...c,path:c.file,pointId:p?.id??null,location:p?{line:p.call.start.line,column:p.call.start.col}:null}});
+ const p=inv.files['literal-set.py'].points[0];cases.push({id:'literal-set-control',path:'literal-set.py',pointId:p.id,sourceSha256:p.sourceSha256,location:{line:p.call.start.line,column:p.call.start.col},language:'python',cwe:'CWE-95',truth:'negative',oracle:{kind:'authored-control',reference:'finite literal set diagnostic'},selection:{method:'authored-diagnostic',blind:false,qualificationEligible:false}});
+ const dataset={version:3,cases},requests=cases.filter(c=>c.pointId!==null).map(c=>({caseId:c.id,point:inv.files[c.path].points.find(p=>p.id===c.pointId),contract:contracts[c.path],challenge:randomBytes(32).toString('hex')})),plan={version:1,snapshot:verifier,requests};
+ let rejected=false;try{freezeReviewInputs(dataset,policy,identity,ledger,staticSnapshot,[locations],plan)}catch(e){must(e.message==='Acceptance source already used in the sample ledger',e.message);rejected=true}must(rejected,'Used sample freeze accepted');
+ const frozenLocations=[{reviewerExecution:locations.reviewerExecution,locationBinding:locations.locationBinding,reportJson:locations.reportJson}];
+ const freeze={version:4,diagnosticOnly:true,createdAt:new Date().toISOString(),identity,reviewerSnapshot:staticSnapshot,datasetSha256:digest(dataset),policySha256:digest(policy),ledgerSha256:digest(ledger),developmentSourceSha256:[...new Set(ledger.sources.map(x=>x.sha256))].sort(),locations:frozenLocations,locationsSha256:digest(frozenLocations),verificationPlan:plan,verificationPlanSha256:digest(plan)};
+ write('diagnostic-dataset.json',dataset);write('diagnostic-freeze.json',freeze);write('verification-plan.json',plan);write('binding.json',{datasetSha256:digest(dataset),freezeSha256:digest(freeze),historicalFreezeRejected:rejected});write('snapshot-identity.json',identity);
+}else{
+ const data=read('diagnostic-dataset.json'),freeze=read('diagnostic-freeze.json'),staticResult=read('static-result.json'),verified=read('verifications.json'),maps=staticResult.report.findingLocations;
+ const outputs=data.cases.map(c=>{const hits=maps.filter(m=>m.state==='bound'&&m.pointId===c.pointId),v=verified.find(v=>v.report.pointId===c.pointId),raw=hits.length?'hit':'no-hit',decision=raw==='no-hit'?'not-required':v?.report.decision??'unknown';return{id:c.id,raw,decision,pointId:c.pointId,location:{...c.location,sourceSha256:c.sourceSha256},language:c.language,cwe:c.cwe,evidence:['confirmed','excluded'].includes(decision)?[{kind:'sandbox-verification',caseId:c.id,decision,pointId:c.pointId,inputSha256:c.sourceSha256,artifactSha256:v.verificationExecution.reportSha256}]:[]}});
+ const run={version:4,identity,startedAt:read('run-start.json').startedAt,datasetSha256:digest(data),freezeSha256:digest(freeze),reviewerExecutions:[staticResult.reviewerExecution],reviewArtifacts:[staticResult.reviewArtifact],verifierExecutions:verified.map(v=>v.verificationExecution),verificationArtifacts:verified.map(v=>v.verificationArtifact),outputs,humanSupplement:[]};
+ const quality=evaluateReviewQuality(data,run,freeze,policy,ledger);must(quality.version===8&&quality.r3Qualified===false&&quality.state==='blocked','Unexpected qualification');must(!quality.blockers.some(b=>b.startsWith('verification-')||b.startsWith('reviewer-')||b.startsWith('review-artifact')),'Runtime artifact binding failed '+quality.blockers.join(','));
+ for(const o of outputs)must(o.decision===(o.id==='BenchmarkTest00074'||o.id==='skf-viewer-upstream'?'confirmed':o.id==='skf-viewer-authored-fix'?'not-required':'excluded'),'Unexpected case decision '+JSON.stringify(o));
+ write('diagnostic-run.json',run);write('vm-quality.json',quality);write('case-evidence.json',{outputs,rawFindings:maps.length,mapped:maps.filter(m=>m.state==='bound').length,pointsReviewed:verified.length,confirmed:outputs.filter(o=>o.decision==='confirmed').length,excluded:outputs.filter(o=>o.decision==='excluded').length,incorrectExclusions:outputs.filter(o=>o.decision==='excluded'&&data.cases.find(c=>c.id===o.id).truth==='positive').length,priorCasesAndSyntheticOnly:true,newIndependentSamples:0});
+}
+
+{
+  "version": 1,
+  "scope": "python-reviewed-source-profile-verification-preflight",
+  "state": "preflight-completed-capability-gap-retained",
+  "dailyDeployed": false,
+  "githubPushed": false,
+  "r3Qualified": false,
+  "newIndependentSamples": 0,
+  "sourceFiles": {
+    "scripts/python_execution_verify.py": "f9fcc7e6e57986bc4771c1b1677df1b6bfc9a6c1cba3e071e95d71c7ad734acb",
+    "scripts/verifier_snapshot.py": "59ba75f82903f03757f4af1c21f50dd3c45a4d45fcd80a19451dc972dc8468f7",
+    "scripts/reviewer_snapshot.py": "f9706edeba2279aca7a4b78d1a36d54e87a39e19359a585a50184493c47a662d",
+    "scripts/reviewer_storage.py": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202",
+    "scripts/review_quality_gate.mjs": "9650842cadb0cec7e8d2f63f2dcdec9b5c987b629aa7a52e82e6c7685d38874b",
+    "work/harness-purge-improved/package/scripts/security-joint-adapter.py": "7daa08a445378a2b974a4fa10c2598f22553e1f8b2e8a85a575f58c2707647ac",
+    "work/harness-purge-improved/package/lib/redteam/personal-joint-adapter.mjs": "3e28380a8a6f51d4b1867f6746aaf52cb29eab4a5f6682ab4fe55fdb0a4d65ab",
+    "work/harness-purge-improved/package/lib/redteam/personal-joint-review.mjs": "78331e76fd90f3d01fa9fd2526715deeefdebff61643641080d7daf82ee971aa",
+    "work/harness-purge-improved/package/lib/redteam/personal-security-client.mjs": "2a3d14aa689e9298dc89569ec1159fb88ccbda45434e68bec1dcf61f98e1bb70"
+  },
+  "schemas": {
+    "staticSnapshot": 2,
+    "dataset": 3,
+    "staticReceipt": 3,
+    "verifierSnapshot": 1,
+    "verificationReceipt": 1,
+    "freeze": 4,
+    "run": 4,
+    "qualityReport": 8
+  },
+  "caseEvidence": {
+    "outputs": [
+      {
+        "id": "BenchmarkTest00074",
+        "raw": "hit",
+        "decision": "confirmed",
+        "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+        "location": {
+          "line": 51,
+          "column": 4,
+          "sourceSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e"
+        },
+        "language": "python",
+        "cwe": "CWE-94",
+        "evidence": [
+          {
+            "kind": "sandbox-verification",
+            "caseId": "BenchmarkTest00074",
+            "decision": "confirmed",
+            "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+            "inputSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+            "artifactSha256": "7094de1c02ec2e127865fea1b34f7712768477774d2027a084db62adc739514e"
+          }
+        ]
+      },
+      {
+        "id": "BenchmarkTest00073",
+        "raw": "hit",
+        "decision": "excluded",
+        "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+        "location": {
+          "line": 54,
+          "column": 5,
+          "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122"
+        },
+        "language": "python",
+        "cwe": "CWE-94",
+        "evidence": [
+          {
+            "kind": "sandbox-verification",
+            "caseId": "BenchmarkTest00073",
+            "decision": "excluded",
+            "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+            "inputSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+            "artifactSha256": "5f8f78d9e5effdd89b302ff2055674905fb8c7b24ab1dd3d521f46e666fe4fe2"
+          }
+        ]
+      },
+      {
+        "id": "skf-viewer-upstream",
+        "raw": "hit",
+        "decision": "confirmed",
+        "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+        "location": {
+          "line": 37,
+          "column": 20,
+          "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+        },
+        "language": "python",
+        "cwe": "CWE-95",
+        "evidence": [
+          {
+            "kind": "sandbox-verification",
+            "caseId": "skf-viewer-upstream",
+            "decision": "confirmed",
+            "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+            "inputSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+            "artifactSha256": "95a086a712f6dd44c5bef7fd047f4e9fa6811d3c3cbd996c5bea6a1579ef8fc2"
+          }
+        ]
+      },
+      {
+        "id": "skf-viewer-authored-fix",
+        "raw": "no-hit",
+        "decision": "not-required",
+        "pointId": null,
+        "location": {
+          "sourceSha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134"
+        },
+        "language": "python",
+        "cwe": "CWE-95",
+        "evidence": []
+      },
+      {
+        "id": "literal-set-control",
+        "raw": "hit",
+        "decision": "excluded",
+        "pointId": "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b",
+        "location": {
+          "line": 4,
+          "column": 12,
+          "sourceSha256": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b"
+        },
+        "language": "python",
+        "cwe": "CWE-95",
+        "evidence": [
+          {
+            "kind": "sandbox-verification",
+            "caseId": "literal-set-control",
+            "decision": "excluded",
+            "pointId": "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b",
+            "inputSha256": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+            "artifactSha256": "433105fa7386ce81724ee5c39d0a776c0c8604348d0dea2b72e187adc605951c"
+          }
+        ]
+      }
+    ],
+    "rawFindings": 5,
+    "mapped": 5,
+    "pointsReviewed": 4,
+    "confirmed": 2,
+    "excluded": 2,
+    "incorrectExclusions": 0,
+    "priorCasesAndSyntheticOnly": true,
+    "newIndependentSamples": 0
+  },
+  "boundaries": [
+    {
+      "name": "fixed-marker",
+      "sourceFiles": {
+        "literal-set.py": "24fc6dd4d4950f94667f76c65522fad9c4290c54aac06405aa8c10c48fc55ddd"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "quoted-echo",
+      "sourceFiles": {
+        "literal-set.py": "2f46af997cf895d92cdaba043476c89b34d791f5aa71bd266619f6689822fdd1"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "same-name",
+      "sourceFiles": {
+        "literal-set.py": "b1b09f210af818cbea5fc76f8efbb66b01e52806403da6a775e441e1cdb0826b"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "rebound",
+      "sourceFiles": {
+        "literal-set.py": "672479b6daa0d76d85d9180ab78137a2c8d4a473ba7feddbbe405e92d6e2d403"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "after-guard-overwrite",
+      "sourceFiles": {
+        "literal-set.py": "1abe614d55c961574ecd71f15fc0f7aae390cb7ff12f8d115d82b9b3d79af196"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "dangerous-whitelist",
+      "sourceFiles": {
+        "literal-set.py": "c830feb07881234b41302b6ef2d20ba2d3b1e014318d592b1a744198539e15b8"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "same-line",
+      "sourceFiles": {
+        "literal-set.py": "625c10da52a8fab03dc66955526bb2442483d2df2be743c47052e09b0e564946"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "nested",
+      "sourceFiles": {
+        "literal-set.py": "1c1729f357c8204429f97addfd0726389b1049eeca7f4da3f030e0acd7091fa0"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "loop-not-executed",
+      "sourceFiles": {
+        "literal-set.py": "49a314d3a89b45fedb2a18824da2933732a403ba7a08818d594f64a0e7581364"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "fd-output",
+      "sourceFiles": {
+        "literal-set.py": "799c6574c50826c6b2ab5eeed16e6f7978da457ef1e3f0f719d4fd6a47128f9b"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "cross-file",
+      "sourceFiles": {
+        "literal-set.py": "6b84b56c5d35958e61d04454994a7a6a74de9b6dd0017a31cdb4f2b4b5df8d83",
+        "helper.py": "db96e553e8f66be5e6cd8e5872234962d96425acff027649c382c679dace10b0"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    }
+  ],
+  "actualContainerInspections": 15,
+  "containerPolicy": {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  "macVmScoresIdentical": true,
+  "dailyProtection": {
+    "program": {
+      "before": "a828d84ddae6c35a9ae8a0e07ddc2b202425ba428caa54caafdf2ad22d2d0012",
+      "after": "a828d84ddae6c35a9ae8a0e07ddc2b202425ba428caa54caafdf2ad22d2d0012"
+    },
+    "config": {
+      "before": "41efaf964f0c953baa16f6402c2fc10e0031a39516c627e0c68f89731cae10ad",
+      "after": "41efaf964f0c953baa16f6402c2fc10e0031a39516c627e0c68f89731cae10ad"
+    },
+    "pins": {
+      "before": "55f91235119dbfcce21e0b46ebe37df156cbe1ae151d1947c090882e2a010ed5",
+      "after": "55f91235119dbfcce21e0b46ebe37df156cbe1ae151d1947c090882e2a010ed5"
+    },
+    "runtime": {
+      "before": "b7f53d039e78551831e1d584303d45d7e9f8a7a4f8a977bf8ec7eed5c4b82e93",
+      "after": "b7f53d039e78551831e1d584303d45d7e9f8a7a4f8a977bf8ec7eed5c4b82e93"
+    },
+    "databases": {
+      "before": "9289bda7b2d4737bd6c467323657e6b625780e11bd9aff5c8bdd77cd542bf0c0",
+      "after": "9289bda7b2d4737bd6c467323657e6b625780e11bd9aff5c8bdd77cd542bf0c0"
+    },
+    "outsideMountNamespace": {
+      "before": "46004dd150ea680763df4716a838d4901c13dd63b4cb4aff27fe2cbf94b60c81",
+      "after": "46004dd150ea680763df4716a838d4901c13dd63b4cb4aff27fe2cbf94b60c81"
+    },
+    "homeInode": {
+      "before": "bfa1bda4c41fcaf7b148dfaa9fc6d59f1ea9412072efe68b557f13d76c5135d7",
+      "after": "bfa1bda4c41fcaf7b148dfaa9fc6d59f1ea9412072efe68b557f13d76c5135d7"
+    }
+  },
+  "dailyProgramFilesMatched": 169,
+  "dailyDatabasesMatched": 42,
+  "testSummary": {
+    "python": [
+      {
+        "file": "scripts/reviewer_snapshot.test.py",
+        "exitCode": 0,
+        "tests": 87
+      },
+      {
+        "file": "scripts/reviewer_locations.test.py",
+        "exitCode": 0,
+        "tests": 5
+      },
+      {
+        "file": "scripts/reviewer_storage.test.py",
+        "exitCode": 0,
+        "tests": 29
+      },
+      {
+        "file": "scripts/reviewer_archive.test.py",
+        "exitCode": 0,
+        "tests": 27
+      },
+      {
+        "file": "scripts/python_execution_verify.test.py",
+        "exitCode": 0,
+        "tests": 13
+      },
+      {
+        "file": "scripts/verifier_snapshot.test.py",
+        "exitCode": 0,
+        "tests": 4
+      },
+      {
+        "file": "scripts/verify_execution_controller.test.py",
+        "exitCode": 0,
+        "tests": 2
+      },
+      {
+        "file": "scripts/eval_locations.test.py",
+        "exitCode": 0,
+        "tests": 8
+      },
+      {
+        "file": "scripts/eval_evidence_batch.test.py",
+        "exitCode": 0,
+        "tests": 9
+      },
+      {
+        "file": "scripts/eval_guard_review.test.py",
+        "exitCode": 0,
+        "tests": 14
+      },
+      {
+        "file": "scripts/eval_import_review.test.py",
+        "exitCode": 0,
+        "tests": 9
+      },
+      {
+        "file": "work/harness-purge-improved/tests/model-counts.test.py",
+        "exitCode": 0,
+        "tests": 9
+      },
+      {
+        "file": "work/harness-purge-improved/tests/joint-adapters.test.py",
+        "exitCode": 0,
+        "tests": 9
+      }
+    ],
+    "pythonTotal": 225,
+    "nodeGate": 67,
+    "nodeJointCounts": 87,
+    "allPassed": true
+  },
+  "limitations": [
+    "Only exact reviewed source profiles execute; generic projects and fresh holdout remain unsupported.",
+    "In-process Python events are conditional observations, not tamper-proof attestation.",
+    "Unknown profiles are refused before execution; loop boundary test is not a runtime timeout exercise.",
+    "Diagnostic counts are not detection-rate or false-positive-rate estimates.",
+    "Adapter preparation before first receipt may leave a fail-closed orphan requiring manual recovery."
+  ],
+  "next": [
+    "Design independent trustworthy observation for arbitrary source, then preflight with new reviewed controls.",
+    "Only after capability preflight passes, freeze selection protocol and start new independent holdout evaluation.",
+    "Chrome full workflow and daily delivery remain subsequent stages."
+  ]
+}
+
+S4 final scoped acceptance. Current source bytes in this packet are the actual dirty working tree, SHA-fixed; no Git HEAD substitute. Production files were reviewed in S1/S2/S3 (including latest dependency FD-read fix), unchanged during S4. Final isolated VM rebuilt static v2 and independent verifier v1 from these current bytes and ran original historical sources using fixed deps; location dataset3, freeze/run4, quality8. Actual Semgrep 16 vs19 profiles at original /policy/rules.json; 5 raw/5 mapped/4 points;2 confirmed/2 excluded/no-sink no-hit. Mac/VM scores identical blocked, zero incorrect exclusions, no independent samples.11 unreviewed boundary variants refuse before project exec (not a claim they were dynamically analyzed).15 actual container inspections: nonroot1000,none network,read-only,capdrop ALL,no extra caps/privileged,nnp,512MiB+swap cap,1CPU,64pids,tmp32MiB,single read-only stage mount; no custom seccomp specified, uses daemon default. Original status/recover query returns original result with cleanup, no replay. Daily169 programs42DB/config identity unchanged. No R3/no deployment/no GitHub/no Chrome. Only reviewed source hashes execute: general project verification remains explicitly unsupported; hostile-source telemetry cannot be treated as tamper-proof. Loop refusal test is not a forced native runtime timeout; existing lifecycle regression covers timeout paths. Source read helper now one FD read+fstat and same returned bytes; tests latest4 passed. All current regression logs green; historical red logs not in this packet. Fixed fixture updated to final VM evidence. Inspect concrete scope regressions; do not reinterpret this as general detector qualification. Prior pre-receipt adapter preparation orphan gap recorded separately and fail-closed, not claimed fixed. No tools, hooks, plugins or MCP. Review both actual final source and test/evidence bindings; documentation reports conservative limitations.

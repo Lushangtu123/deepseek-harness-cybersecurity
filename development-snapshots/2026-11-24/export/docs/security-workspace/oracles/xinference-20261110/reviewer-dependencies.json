@@ -1,0 +1,10 @@
+{
+  "capturedAt": "2026-11-10T22:01:25.185964+00:00",
+  "timing": "Post-run disclosure, not a retroactive pre-run freeze. Original reviewer identity bound only entrypoint.",
+  "files": {
+    "scripts/eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+    "scripts/eval_guard_review.py": "2dfd384c175692b7972917832b545c7058ae968cad68be34e718c021ec06e49f",
+    "scripts/eval_import_review.py": "6cb262c8dac7f10b9962784f8d379a68f1ee2a78eb17bd1a6e96fd5db79f4075"
+  },
+  "newRuleCoverage": "GUARD_RULES excludes policy.harness.python.dynamic-code-namespace; zero checks are expected for this rule, not a semantic safety decision."
+}

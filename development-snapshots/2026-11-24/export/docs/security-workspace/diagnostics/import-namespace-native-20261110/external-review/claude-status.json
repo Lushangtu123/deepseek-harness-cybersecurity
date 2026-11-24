@@ -1,0 +1,16 @@
+{
+  "requestedModel": "claude-opus-5-5",
+  "effort": "high",
+  "state": "failed",
+  "promptSha256": "ce0f0415b5d3128086a99393307b839e7e599f8261373dbb291128c3307f35eb",
+  "tools": [],
+  "startedAt": "2026-11-11T06:00:50.177386+00:00",
+  "observedModels": [],
+  "elapsedSeconds": 6.1,
+  "exitCode": 1,
+  "actualModels": [],
+  "isError": true,
+  "receiptSha256": "9fbf4c0a4c4c057ed4a1c95a0591f5474ac116cccf9a6aa6e458a0a1d5440659",
+  "problem": "You've hit your 5-hour limit · resets 11:50pm (America/Los_Angeles)",
+  "finishedAt": "2026-11-11T06:00:56.280241+00:00"
+}

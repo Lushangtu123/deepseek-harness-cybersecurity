@@ -1,0 +1,10 @@
+{
+  "encodedBytes": 3951668,
+  "jobTokenOccurrencesInData": 11,
+  "compileProblem": {
+    "type": "SyntaxError",
+    "line": 6,
+    "message": "unexpected character after line continuation character"
+  },
+  "reconstructionScope": "Current kit; gzip timestamp may differ from original. Archive body and replacement algorithm retained."
+}

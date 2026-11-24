@@ -1,0 +1,526 @@
+{
+  "version": 7,
+  "legacyDiagnosticOnly": false,
+  "state": "blocked",
+  "r3Qualified": false,
+  "executionEnabled": false,
+  "reviewerCoverage": {
+    "receiptListValid": true,
+    "requiredSourceSha256": [
+      "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+      "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+      "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+      "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+    ],
+    "coveredSourceSha256": [
+      "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+      "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+      "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+      "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+    ],
+    "coveredCaseIds": [
+      "BenchmarkTest00074",
+      "BenchmarkTest00073",
+      "skf-viewer-upstream",
+      "skf-viewer-authored-fix",
+      "synthetic-boundary-0",
+      "synthetic-boundary-1",
+      "synthetic-boundary-2",
+      "synthetic-boundary-3",
+      "synthetic-boundary-4",
+      "synthetic-boundary-5",
+      "synthetic-boundary-6"
+    ],
+    "missingCaseIds": [],
+    "unsupportedCaseIds": [],
+    "unsupportedLanguages": [],
+    "uniqueReceiptCount": 1,
+    "invalidReceiptIndices": [],
+    "duplicateReceiptIndices": [],
+    "legacyReceiptIndices": []
+  },
+  "executionPoints": [
+    {
+      "id": "BenchmarkTest00074",
+      "path": "BenchmarkTest00074.py",
+      "sourceSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+      "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+      "location": {
+        "line": 51,
+        "column": 4
+      },
+      "actual": {
+        "raw": "hit",
+        "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+        "rawHits": 1
+      }
+    },
+    {
+      "id": "BenchmarkTest00073",
+      "path": "BenchmarkTest00073.py",
+      "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+      "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+      "location": {
+        "line": 54,
+        "column": 5
+      },
+      "actual": {
+        "raw": "hit",
+        "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+        "rawHits": 1
+      }
+    },
+    {
+      "id": "skf-viewer-upstream",
+      "path": "skf-upstream.py",
+      "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+      "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+      "location": {
+        "line": 37,
+        "column": 20
+      },
+      "actual": {
+        "raw": "hit",
+        "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+        "rawHits": 2
+      }
+    },
+    {
+      "id": "skf-viewer-authored-fix",
+      "path": "skf-fixed-control.py",
+      "sourceSha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+      "pointId": null,
+      "location": null,
+      "actual": {
+        "raw": "no-hit",
+        "pointId": null,
+        "rawHits": 0
+      }
+    },
+    {
+      "id": "synthetic-boundary-0",
+      "path": "boundary.py",
+      "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "pointId": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+      "location": {
+        "line": 7,
+        "column": 3
+      },
+      "actual": {
+        "raw": "unknown",
+        "pointId": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+        "rawHits": 2
+      }
+    },
+    {
+      "id": "synthetic-boundary-1",
+      "path": "boundary.py",
+      "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "pointId": "30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0",
+      "location": {
+        "line": 8,
+        "column": 2
+      },
+      "actual": {
+        "raw": "unknown",
+        "pointId": "30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0",
+        "rawHits": 2
+      }
+    },
+    {
+      "id": "synthetic-boundary-2",
+      "path": "boundary.py",
+      "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "pointId": "8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450",
+      "location": {
+        "line": 8,
+        "column": 15
+      },
+      "actual": {
+        "raw": "unknown",
+        "pointId": "8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450",
+        "rawHits": 2
+      }
+    },
+    {
+      "id": "synthetic-boundary-3",
+      "path": "boundary.py",
+      "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "pointId": "6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b",
+      "location": {
+        "line": 10,
+        "column": 3
+      },
+      "actual": {
+        "raw": "unknown",
+        "pointId": "6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b",
+        "rawHits": 2
+      }
+    },
+    {
+      "id": "synthetic-boundary-4",
+      "path": "boundary.py",
+      "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "pointId": "bb9b0f0d843ba3baa5f9d1a1e8d7e31ef6a1eff47f137a31b174e7c9ab54c10b",
+      "location": {
+        "line": 15,
+        "column": 9
+      },
+      "actual": {
+        "raw": "unknown",
+        "pointId": "bb9b0f0d843ba3baa5f9d1a1e8d7e31ef6a1eff47f137a31b174e7c9ab54c10b",
+        "rawHits": 0
+      }
+    },
+    {
+      "id": "synthetic-boundary-5",
+      "path": "boundary.py",
+      "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "pointId": "ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63",
+      "location": {
+        "line": 15,
+        "column": 14
+      },
+      "actual": {
+        "raw": "unknown",
+        "pointId": "ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63",
+        "rawHits": 1
+      }
+    },
+    {
+      "id": "synthetic-boundary-6",
+      "path": "boundary.py",
+      "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "pointId": "f7fce12a3eebae79df2b300396a6f6fa6adf4a939e737ce9f32d521e5cbe4cbc",
+      "location": {
+        "line": 17,
+        "column": 9
+      },
+      "actual": {
+        "raw": "unknown",
+        "pointId": "f7fce12a3eebae79df2b300396a6f6fa6adf4a939e737ce9f32d521e5cbe4cbc",
+        "rawHits": 0
+      }
+    }
+  ],
+  "categories": {
+    "python/CWE-94": {
+      "total": 0,
+      "positive": 0,
+      "negative": 0,
+      "evidenceOnly": 0,
+      "raw": {
+        "positiveHit": 0,
+        "positiveMiss": 0,
+        "negativeHit": 0,
+        "negativeNoHit": 0,
+        "unknown": 0,
+        "falsePositiveRate": null,
+        "recall": null,
+        "unknownRate": null
+      },
+      "reviewed": {
+        "truePositive": 0,
+        "falsePositive": 0,
+        "trueNegative": 0,
+        "falseNegative": 0,
+        "falseExclusion": 0,
+        "unknown": 0,
+        "unknownPositive": 0,
+        "unknownNegative": 0,
+        "falsePositiveRate": null,
+        "falsePositiveRateUpperBound": null,
+        "falseNegativeRate": null,
+        "falseExclusionRate": null,
+        "confirmedRecall": null,
+        "unknownRate": null,
+        "resolvedCases": 0
+      },
+      "diagnostic": {
+        "total": 3,
+        "positive": 2,
+        "negative": 1,
+        "evidenceOnly": 0,
+        "raw": {
+          "positiveHit": 1,
+          "positiveMiss": 0,
+          "negativeHit": 1,
+          "negativeNoHit": 0,
+          "unknown": 1,
+          "falsePositiveRate": 1,
+          "recall": 0.5,
+          "unknownRate": 0.3333333333333333
+        },
+        "reviewed": {
+          "truePositive": 0,
+          "falsePositive": 0,
+          "trueNegative": 0,
+          "falseNegative": 0,
+          "falseExclusion": 0,
+          "unknown": 3,
+          "unknownPositive": 2,
+          "unknownNegative": 1,
+          "falsePositiveRate": null,
+          "falsePositiveRateUpperBound": 1,
+          "falseNegativeRate": null,
+          "falseExclusionRate": 0,
+          "confirmedRecall": 0,
+          "unknownRate": 1,
+          "resolvedCases": 0
+        }
+      },
+      "excludedFromQualification": [
+        "BenchmarkTest00074",
+        "BenchmarkTest00073",
+        "synthetic-boundary-1"
+      ],
+      "thresholds": {
+        "minimumPositive": 20,
+        "minimumNegative": 30,
+        "minimumRawRecall": 0.9,
+        "maximumReviewedFalsePositiveRate": 0.05,
+        "maximumFalseExclusionRate": 0,
+        "maximumUnknownRate": 0.2,
+        "minimumConfirmedRecall": 0.9
+      },
+      "blockers": [
+        "insufficient-labelled-cases",
+        "raw-recall-below-threshold",
+        "reviewed-false-positive-rate-unqualified",
+        "reviewed-false-positive-bound-unqualified",
+        "false-exclusion-rate-unqualified",
+        "review-unknown-rate-unqualified",
+        "confirmed-recall-below-threshold"
+      ]
+    },
+    "python/CWE-95": {
+      "total": 0,
+      "positive": 0,
+      "negative": 0,
+      "evidenceOnly": 0,
+      "raw": {
+        "positiveHit": 0,
+        "positiveMiss": 0,
+        "negativeHit": 0,
+        "negativeNoHit": 0,
+        "unknown": 0,
+        "falsePositiveRate": null,
+        "recall": null,
+        "unknownRate": null
+      },
+      "reviewed": {
+        "truePositive": 0,
+        "falsePositive": 0,
+        "trueNegative": 0,
+        "falseNegative": 0,
+        "falseExclusion": 0,
+        "unknown": 0,
+        "unknownPositive": 0,
+        "unknownNegative": 0,
+        "falsePositiveRate": null,
+        "falsePositiveRateUpperBound": null,
+        "falseNegativeRate": null,
+        "falseExclusionRate": null,
+        "confirmedRecall": null,
+        "unknownRate": null,
+        "resolvedCases": 0
+      },
+      "diagnostic": {
+        "total": 8,
+        "positive": 7,
+        "negative": 1,
+        "evidenceOnly": 0,
+        "raw": {
+          "positiveHit": 1,
+          "positiveMiss": 0,
+          "negativeHit": 0,
+          "negativeNoHit": 1,
+          "unknown": 6,
+          "falsePositiveRate": 0,
+          "recall": 0.14285714285714285,
+          "unknownRate": 0.75
+        },
+        "reviewed": {
+          "truePositive": 0,
+          "falsePositive": 0,
+          "trueNegative": 1,
+          "falseNegative": 0,
+          "falseExclusion": 0,
+          "unknown": 7,
+          "unknownPositive": 7,
+          "unknownNegative": 0,
+          "falsePositiveRate": 0,
+          "falsePositiveRateUpperBound": 0,
+          "falseNegativeRate": null,
+          "falseExclusionRate": 0,
+          "confirmedRecall": 0,
+          "unknownRate": 0.875,
+          "resolvedCases": 1
+        }
+      },
+      "excludedFromQualification": [
+        "skf-viewer-upstream",
+        "skf-viewer-authored-fix",
+        "synthetic-boundary-0",
+        "synthetic-boundary-2",
+        "synthetic-boundary-3",
+        "synthetic-boundary-4",
+        "synthetic-boundary-5",
+        "synthetic-boundary-6"
+      ],
+      "thresholds": {
+        "minimumPositive": 20,
+        "minimumNegative": 30,
+        "minimumRawRecall": 0.9,
+        "maximumReviewedFalsePositiveRate": 0.05,
+        "maximumFalseExclusionRate": 0,
+        "maximumUnknownRate": 0.2,
+        "minimumConfirmedRecall": 0.9
+      },
+      "blockers": [
+        "insufficient-labelled-cases",
+        "raw-recall-below-threshold",
+        "reviewed-false-positive-rate-unqualified",
+        "reviewed-false-positive-bound-unqualified",
+        "false-exclusion-rate-unqualified",
+        "review-unknown-rate-unqualified",
+        "confirmed-recall-below-threshold"
+      ]
+    }
+  },
+  "blockers": [
+    "development-sample-reused",
+    "vulnerability-oracle-incomplete",
+    "sample-selection-ineligible",
+    "python/CWE-94:insufficient-labelled-cases",
+    "python/CWE-94:raw-recall-below-threshold",
+    "python/CWE-94:reviewed-false-positive-rate-unqualified",
+    "python/CWE-94:reviewed-false-positive-bound-unqualified",
+    "python/CWE-94:false-exclusion-rate-unqualified",
+    "python/CWE-94:review-unknown-rate-unqualified",
+    "python/CWE-94:confirmed-recall-below-threshold",
+    "python/CWE-95:insufficient-labelled-cases",
+    "python/CWE-95:raw-recall-below-threshold",
+    "python/CWE-95:reviewed-false-positive-rate-unqualified",
+    "python/CWE-95:reviewed-false-positive-bound-unqualified",
+    "python/CWE-95:false-exclusion-rate-unqualified",
+    "python/CWE-95:review-unknown-rate-unqualified",
+    "python/CWE-95:confirmed-recall-below-threshold"
+  ],
+  "caseBlockers": [
+    {
+      "id": "BenchmarkTest00074",
+      "reasons": [
+        "vulnerability-oracle-incomplete",
+        "sample-selection-ineligible"
+      ]
+    },
+    {
+      "id": "BenchmarkTest00073",
+      "reasons": [
+        "vulnerability-oracle-incomplete",
+        "sample-selection-ineligible"
+      ]
+    },
+    {
+      "id": "skf-viewer-upstream",
+      "reasons": [
+        "vulnerability-oracle-incomplete",
+        "sample-selection-ineligible"
+      ]
+    },
+    {
+      "id": "skf-viewer-authored-fix",
+      "reasons": [
+        "vulnerability-oracle-incomplete",
+        "sample-selection-ineligible"
+      ]
+    },
+    {
+      "id": "synthetic-boundary-0",
+      "reasons": [
+        "vulnerability-oracle-incomplete",
+        "sample-selection-ineligible"
+      ]
+    },
+    {
+      "id": "synthetic-boundary-1",
+      "reasons": [
+        "vulnerability-oracle-incomplete",
+        "sample-selection-ineligible"
+      ]
+    },
+    {
+      "id": "synthetic-boundary-2",
+      "reasons": [
+        "vulnerability-oracle-incomplete",
+        "sample-selection-ineligible"
+      ]
+    },
+    {
+      "id": "synthetic-boundary-3",
+      "reasons": [
+        "vulnerability-oracle-incomplete",
+        "sample-selection-ineligible"
+      ]
+    },
+    {
+      "id": "synthetic-boundary-4",
+      "reasons": [
+        "vulnerability-oracle-incomplete",
+        "sample-selection-ineligible"
+      ]
+    },
+    {
+      "id": "synthetic-boundary-5",
+      "reasons": [
+        "vulnerability-oracle-incomplete",
+        "sample-selection-ineligible"
+      ]
+    },
+    {
+      "id": "synthetic-boundary-6",
+      "reasons": [
+        "vulnerability-oracle-incomplete",
+        "sample-selection-ineligible"
+      ]
+    }
+  ],
+  "developmentOverlap": [
+    "BenchmarkTest00074",
+    "BenchmarkTest00073",
+    "skf-viewer-upstream",
+    "skf-viewer-authored-fix"
+  ],
+  "usageRequired": {
+    "datasetSha256": "bf62ff09beb0632dbe03ffe7e4f8c42f9e070886098e24a9c386aa4cfc68e2e0",
+    "sourceSha256": [
+      "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+      "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+      "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+      "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+    ],
+    "action": "Record every acceptance attempt, including failure, in the usage ledger before any further freeze; this offline tool does not write the ledger"
+  },
+  "freezeTrust": "self-attested; digest and attempt-consumption ledger need an independent release-review check",
+  "artifactReuse": [],
+  "definitions": {
+    "qualificationScope": "category metrics and thresholds require a verified independent-vulnerability oracle and a complete eligible blind-selection declaration bound to a protocol digest; other cases remain diagnostic and block qualification",
+    "selectionValidation": "selection fields and protocol digest format are self-attested; selection protocol content, timing, representativeness and independence require release review",
+    "reviewerValidation": "supported three-module closure, launcher and immutable runtime image bind reviewer identity; execution receipts are self-attested and their original input/output artifacts, aggregation and external sealing require release review; Docker and VM kernel remain trusted",
+    "reviewerCoverage": "version 2 receipts bind a bounded ASCII input-file digest map and scan digest; only completed matching unique input batches cover supported Python source cases, including diagnostic cases; other languages are explicitly unsupported; membership is not proof of per-site review, original artifact authenticity or aggregation correctness",
+    "coverageMetrics": "source coverage and unsupported-language blockers do not reclassify declared decisions or category metrics; global state, blockers and per-case reasons must be checked before any qualification claim",
+    "diagnosticScope": "all declared cases, including authored controls; these counts never satisfy qualification thresholds",
+    "rawFalsePositiveRate": "negative hits / observed negative cases",
+    "reviewedFalsePositiveRate": "negative confirmations / resolved negative cases",
+    "reviewedFalsePositiveRateUpperBound": "negative confirmations plus unknown negatives / all labelled negatives; finite-sample worst-case accounting, not a population confidence interval",
+    "reviewedFalseNegativeRate": "missed or wrongly excluded positives / resolved positive cases",
+    "confirmedRecall": "confirmed positives / all labelled positives",
+    "unknownRate": "unresolved cases / all labelled cases",
+    "evidenceOnly": "unknown decisions carrying evidence references; not verified exclusions",
+    "evidenceValidation": "declared evidence kind, input binding and artifact digest structure; evidence meaning requires independent review"
+  }
+}

@@ -1,0 +1,158 @@
+✔ deep rules are a fixed17 bundle preserving every baseline16 rule (2.710833ms)
+✔ only a matching deep workspace can select the pinned17 manifest (0.385542ms)
+✖ staging pins exact17 bytes and rejects changed base or bundle without overwriting an existing stage (2.708375ms)
+✔ runtime deep readiness hashes the shipped bundle before advertising it and invalidates cached evidence (4.942375ms)
+(node:32658) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the scan-plan coverage key preserves its pre-profile golden value and binds selected rule bytes (20.07975ms)
+(node:32659) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Ordinary plan reports missing R3 qualification without handing off files or starting tools (28.192083ms)
+✔ Deep S1 dispatch persists the original mode and identities and launches only selected steps (164.7625ms)
+✔ Mode dispatch rejects unqualified adapters, invalid modes and over-budget work before creating a task (17.980042ms)
+✔ A pinned runtime identity change after acceptance prevents dispatch of the original step (16.747458ms)
+✔ Child admission cannot swap the pinned identity after the parent pre-dispatch check (78.859583ms)
+✔ Mode admission requires a current runtime identity instead of trusting a ready flag (18.20125ms)
+✔ Mode contract survives reopening the existing database and old joint tasks retain a null mode (221.856ms)
+✔ Native service mode requests share one ledger and protect mode metadata against redaction (168.32025ms)
+✔ Ordinary submission binds the current preview, exact steps and bounded budget before R3 (22.65425ms)
+✔ A late S1 scanner result does not persist findings after the monotonic deadline (79.0225ms)
+✔ Managed Semgrep persists Python review evidence separately from findings (143.06625ms)
+✔ deep Semgrep selection binds the fixed profile to parent, child options and persisted runtime details (158.984042ms)
+✔ deep rule base mismatch is unavailable without silently dispatching the baseline (16.358333ms)
+✔ a deep profile changed after acceptance is rejected before handing off the source (15.500209ms)
+✔ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>delete s.rules (15.230167ms)
+✔ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>s.rules=null (17.301083ms)
+✔ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>s.deepRules={ready:false} (15.336583ms)
+✔ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>delete s.deepRules (15.585542ms)
+✔ unconfirmed executed rule receipt cannot persist a selected17 result: undefined (78.079625ms)
+✔ unconfirmed executed rule receipt cannot persist a selected17 result: {"mode":"ordinary"} (77.94275ms)
+✔ unconfirmed executed rule receipt cannot persist a selected17 result: {"rulesSha256":"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"} (78.156417ms)
+✖ a valid planned profile cannot substitute for measured rule bytes and coverage identity: r=>r.executedRules.sha256=deepSemgrepProfile().baseRulesSha256 (157.356958ms)
+✖ a valid planned profile cannot substitute for measured rule bytes and coverage identity: r=>r.executedRules.count=16 (159.56475ms)
+✖ a valid planned profile cannot substitute for measured rule bytes and coverage identity: r=>delete r.executedRules (159.083417ms)
+✖ a valid planned profile cannot substitute for measured rule bytes and coverage identity: r=>r.coverageKey='legacy-key' (157.265416ms)
+✖ child admission rechecks deep bundle readiness after the parent check (157.2935ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 25
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2314.089167
+
+✖ failing tests:
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/deep-rule-profile.test.mjs:8:1
+✖ staging pins exact17 bytes and rejects changed base or bundle without overwriting an existing stage (2.708375ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/deep-rule-profile.test.mjs:8:607)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773',
+    operator: 'strictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:201:170
+✖ a valid planned profile cannot substitute for measured rule bytes and coverage identity: r=>r.executedRules.sha256=deepSemgrepProfile().baseRulesSha256 (157.356958ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'completed'
+  - 'partial'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:201:699)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'completed',
+    expected: 'partial',
+    operator: 'strictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:201:170
+✖ a valid planned profile cannot substitute for measured rule bytes and coverage identity: r=>r.executedRules.count=16 (159.56475ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'completed'
+  - 'partial'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:201:699)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'completed',
+    expected: 'partial',
+    operator: 'strictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:201:170
+✖ a valid planned profile cannot substitute for measured rule bytes and coverage identity: r=>delete r.executedRules (159.083417ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'completed'
+  - 'partial'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:201:699)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'completed',
+    expected: 'partial',
+    operator: 'strictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:201:170
+✖ a valid planned profile cannot substitute for measured rule bytes and coverage identity: r=>r.coverageKey='legacy-key' (157.265416ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'completed'
+  - 'partial'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:201:699)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'completed',
+    expected: 'partial',
+    operator: 'strictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:202:1
+✖ child admission rechecks deep bundle readiness after the parent check (157.2935ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'completed'
+  - 'failed'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:202:372)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'completed',
+    expected: 'failed',
+    operator: 'strictEqual'
+  }

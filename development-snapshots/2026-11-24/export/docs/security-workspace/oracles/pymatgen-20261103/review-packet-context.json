@@ -1,0 +1,11 @@
+{
+  "actualProtocolHasCandidateProgram": true,
+  "candidateProgramEntries": 169,
+  "previousPromptOmittedFieldOnlyForBrevity": true,
+  "previousReviewNonexistentKeyFindingIsPacketMisreading": true,
+  "allReferencedEvidenceFilesExist": true,
+  "checkerRunReceipt": "consistency.json",
+  "builtinsFlagMeaning": "measured source eval globals, not OS sandbox enforcement",
+  "sandboxEvidence": "independent UID/capabilities/seccomp/mount/resource checks plus read-only failure observations",
+  "OSCommandExecutionObserved": false
+}

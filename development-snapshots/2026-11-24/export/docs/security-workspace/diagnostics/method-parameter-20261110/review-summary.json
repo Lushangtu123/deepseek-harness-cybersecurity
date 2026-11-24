@@ -1,0 +1,43 @@
+{
+  "model": "DeepSeek-V4.1-Flash",
+  "effort": "high",
+  "samePromptSha256": "ad1b2f5d2338a367b54f7b5e584e896c53093560e6a582f022b3067291db4aab",
+  "claudeState": "failed-401-authentication-expired",
+  "claudeReceiptSha256": "259eb967a3d0518ac4896e1a6907c2212af4c9789fab5e5fda6a2e47811bcaaf",
+  "receiptSha256": "009c670582c46bc8d1842a36cd95eb02ee406e72320b7e44b0895b073a215492",
+  "reportSha256": "92f494e906b22566a006e87c355163be507586b412e6344c2a103a478b6e5272",
+  "cleanup": {
+    "removed": true,
+    "workerStopped": true,
+    "dailyProgramUnchanged": true,
+    "dailyProgramFilesChecked": 169,
+    "credentialCopiedToHost": false,
+    "scope": "only owned completed model-review scratch"
+  },
+  "triage": {
+    "scopeBlockers": 0,
+    "canArchive": true,
+    "reportSha256": "92f494e906b22566a006e87c355163be507586b412e6344c2a103a478b6e5272",
+    "disposition": "Limited pass for lexical parameter observations and boundary-test revision. No R3 or daily deployment.",
+    "verified": [
+      "Owner restricted to module-level synchronous functions or direct methods of top-level classes.",
+      "Protected try prefix limited to eight levels; ninth remains unresolved, explicitly tested on Mac and VM.",
+      "Method constraints remain unresolved; all builtin identities, external control and finding dispositions remain unverified.",
+      "Before/after source hash and sandbox worker pin match; production bytes unchanged after first review.",
+      "Mac plugin1000/Node30, final Mac and VM structural34/protocol4 passed. VM real default sandbox on used scanner replay produced one anchored parameter observation."
+    ],
+    "remaining": [
+      "The module-function try control lacks a fixed-set guard; that exact combination is supported by code reasoning, not direct regression evidence. The test name must not be read as direct coverage of every guard combination.",
+      "Method constraint reason reuses callee-or-scope-unresolved.",
+      "Earlier try handlers/else writes in lexical prefix can conservatively lower source classification.",
+      "External input reachability, runtime callee identity, full data flow and R3 gate remain incomplete.",
+      "Candidate173 scratch acceptance does not stand for deployment, daily169 full execution, fresh scanning, native model or Chrome acceptance.",
+      "Reused kit manifest retains the previous createdAt; step baseline, attempts and job records provide this step timing, while recomputed hashes prove the observed source identities."
+    ],
+    "reviewRoute": {
+      "claude": "Each round failed with401 expired authentication; failures retained, no refusal or completion claimed.",
+      "deepseek": "Same user prompt per round, standing VM-project source/test/evidence transmission authorization, official V4.1 Flash high identity/complete stop receipts verified.",
+      "limits": "Review was static and did not execute tests."
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "existingDatabaseLogicalDigestsMatched": 40,
+  "protectedConfigDigestsMatched": 7,
+  "deployedProgramFilesMatched": 166,
+  "rollbackProgramFilesMatched": 165,
+  "realFindingsByStatus": {
+    "unverified": 95
+  },
+  "syntheticTasks": 1,
+  "syntheticScans": 1,
+  "syntheticOrdinaryFindings": 0,
+  "allSyntheticUnverified": true,
+  "scannerContainerAbsent": true,
+  "stagedRuleRemoved": true,
+  "syntheticSourcesRetained": 5,
+  "managedSnapshotRetained": true,
+  "activeProject": "phishguard-model-closure-20261102",
+  "hostManagerAndVMConfigUnchanged": true
+}

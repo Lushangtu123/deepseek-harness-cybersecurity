@@ -1,0 +1,12 @@
+{
+  "state": "addressed-in-s4-r2",
+  "confirmed": [
+    "Dependency file hash closure was not compared to an independent tool lock. Added shipped lock equality checks in Python freeze/verify and Node."
+  ],
+  "conditionallyAddressed": [
+    "The source-root bypass requires extra files in the stage. The actual controller creates a new private directory and writes only payload. Final native test inspected the actual stage and confirmed an intentionally unlisted file stayed out of the mount."
+  ],
+  "conservative": [
+    "Finite guards only exclude the explicitly supported safe Python literal grammar. Other domains stay unknown."
+  ]
+}

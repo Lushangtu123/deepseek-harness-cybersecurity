@@ -1,0 +1,43 @@
+{
+  "model": "DeepSeek-V4.1-Flash",
+  "effort": "high",
+  "samePromptSha256": "63fa23e2e52daefbd9cc44d01047b23e13bdd8f61238daa0a2151cf064727334",
+  "claudeState": "failed",
+  "claudeFailureKind": "401 expired authentication",
+  "claudeReceiptSha256": "337e116bced312da30033d85fec15abffc8ef7f92c612b73cec17d7975d387ad",
+  "receiptSha256": "8dd4e6624f1532ee80abab137f2e9844ad4bd6a602bb5a08ad03ccbd8d84a642",
+  "reportSha256": "92e8ca62a62b5b73d32eebfb75d3bcbae7d22fe4de937020be9b757e66a4558b",
+  "cleanup": {
+    "removed": true,
+    "workerStopped": true,
+    "dailyProgramUnchanged": true,
+    "dailyProgramFilesChecked": 169,
+    "credentialCopiedToHost": false,
+    "scope": "only owned completed model-review scratch"
+  },
+  "triage": {
+    "scopeBlockers": 0,
+    "canArchive": true,
+    "reportSha256": "92e8ca62a62b5b73d32eebfb75d3bcbae7d22fe4de937020be9b757e66a4558b",
+    "disposition": "Limited pass for existing namespace route controlled acceptance. No production code change or R3 admission.",
+    "verified": [
+      "Old guard-batch zero checks do not describe the separate joint namespace route.",
+      "Candidate173 orchestration reused real default collector and sandbox on a recorded scanner output.",
+      "One source-bound structural observation remains unverified; patched subset is not applicable.",
+      "All173 application files checked before dynamic imports and again after; 169 daily files and runtime config unchanged.",
+      "58 focused Mac tests passed; submission and fixture failures were preserved and owned scratch removed."
+    ],
+    "limits": [
+      "Readiness and scanner receipts are fixtures. No new scanner, business model or independent acceptance sample.",
+      "Class/try scope, external input reachability, runtime builtin identity and full data flow remain unknown.",
+      "Daily169 route was source-checked only. Its joint module differs from the executed candidate173.",
+      "No Chrome, native model or full API acceptance.",
+      "External reviewer read supplied evidence without executing it."
+    ],
+    "modelRouting": {
+      "claude": "failed:401 expired authentication, retained and not counted as refusal/completion",
+      "fallback": "Standing AGENTS.md item3 authorization for necessary material transmission to both named review services; identical user prompt retained",
+      "deepseek": "Official V4.1 Flash identity and completed response verified"
+    }
+  }
+}

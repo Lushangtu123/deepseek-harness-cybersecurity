@@ -1,0 +1,11 @@
+[
+  {"file":"python-direct.py","language":"python","label":"vulnerable","source":"def parse(raw):\n    return eval(raw)\n","rule":"harness.python.eval","line":2,"expectedSeverity":"high"},
+  {"file":"python-safe.py","language":"python","label":"safe","source":"import json\ndef parse(raw):\n    return json.loads(raw)\n","rule":"harness.python.eval","line":3},
+  {"file":"python-indirect.py","language":"python","label":"vulnerable","source":"def parse(raw):\n    return getattr(__import__('builtins'), 'eval')(raw)\n","rule":"harness.python.eval","line":2},
+  {"file":"javascript-direct.js","language":"javascript","label":"vulnerable","source":"function render(element, userInput) {\n  element.innerHTML = userInput;\n}\n","rule":"harness.javascript.dom-innerhtml","line":2,"expectedSeverity":"medium"},
+  {"file":"javascript-safe.js","language":"javascript","label":"safe","source":"function render(element, userInput) {\n  element.textContent = userInput;\n}\n","rule":"harness.javascript.dom-innerhtml","line":2},
+  {"file":"javascript-trusted.js","language":"javascript","label":"safe","source":"function trustedMarkup() { return '<strong>Fixed text</strong>'; }\nfunction render(element) {\n  element.innerHTML = trustedMarkup();\n}\n","rule":"harness.javascript.dom-innerhtml","line":3},
+  {"file":"typescript-direct.ts","language":"typescript","label":"vulnerable","source":"function render(element: HTMLElement, userInput: string) {\n  element.innerHTML = userInput;\n}\n","rule":"harness.javascript.dom-innerhtml","line":2,"expectedSeverity":"medium"},
+  {"file":"php-direct.php","language":"php","label":"vulnerable","source":"<?php\nfunction parse($raw) { return eval($raw); }\n","line":2},
+  {"file":"php-safe.php","language":"php","label":"safe","source":"<?php\nfunction parse($raw) { return json_decode($raw, true); }\n","line":2}
+]

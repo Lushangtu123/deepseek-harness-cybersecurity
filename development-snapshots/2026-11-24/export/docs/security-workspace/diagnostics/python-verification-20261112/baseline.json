@@ -1,0 +1,14 @@
+{
+  "work/harness-purge-improved/package/scripts/security-joint-adapter.py": "d58acc137986fe2c416a8eba248181e31b7f2ae9eaa097de101f07541e4e7de5",
+  "work/harness-purge-improved/package/lib/redteam/personal-joint-review.mjs": "787ea11b49a5e2870711632cc06eeaee93ef6a6f9a7b7459db9cf5724115731f",
+  "work/harness-purge-improved/package/lib/redteam/personal-security-client.mjs": "f56c46c86e9e38b3b91d2a1779797718f75219aab435c419f98584ed3659d346",
+  "work/harness-purge-improved/package/lib/redteam/personal-joint-adapter.mjs": "f6a32170b1581bb66d4b4ee00985f8a8ce0daf21bd24bf4bc1b00ee5153c5b93",
+  "work/harness-purge-improved/tests/joint-adapters.test.py": "592ca20af89e57bf44a8545e4a8600c1cd13cd33d02f19ed928b74abead445ec",
+  "work/harness-purge-improved/tests/joint-adapters.test.mjs": "06c3a9447b352757c11a705f44ba726a4b7818c95eaceb42e8f996d7eeb70dfb",
+  "work/harness-purge-improved/tests/joint-client.test.mjs": "80a96ba92e3ecb4dc8b67b34217c50f1805041a7cf758f9391c288f0f5387af8",
+  "work/harness-purge-improved/package-files.json": "5ec3006b2e6905febb6f11d0d6c2b18f977c488610b19a75b74e55b52bd94b2d",
+  "scripts/reviewer_snapshot.py": "3e5915824420c4d6f7cd19580135348df050f89659869c21f92023a0ebad533b",
+  "scripts/reviewer_storage.py": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202",
+  "scripts/review_quality_gate.mjs": "86c441bb86f1d15da9cac71800685a24169d1cc666c16eb0267eb3af7e1bcce1",
+  "docs/security-workspace/review-sample-ledger.json": "8f15a832bb942f9b272ed22287e0a104e894067f04b53785f6a613220636f404"
+}

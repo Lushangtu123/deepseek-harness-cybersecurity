@@ -1,0 +1,702 @@
+Read-only review; no tools. Review mode-bound17 Semgrep rules candidate. Daily VM169/16rules untouched, source172 candidate not deployed. Task: require selected deep S1 contract to carry exact profile, recheck before child and runner, verify base16 plus shipped17 bytes, stage readonly copy, actual coverageKey uses selected SHA. Legacy scan16 unchanged; ordinaryR3 blocked. Known broad rule is low-confidence sink inventory; do not claim vulnerabilities or quality qualification. R2 means managed execution, not R3. Identify concrete actionable issues, especially bypass, missing mode checks, cache/profile identity and backwards compatibility.
+
+FILE lib/redteam/personal-semgrep-profile.mjs
+// This package profile is fixed, not fetched or chosen by project content.
+// Runtime readiness describes managed S1 execution, not R3 detection quality.
+const SEMGREP_DEEP_PROFILE={version:1,id:'deep-namespace17',mode:'deep',baseRulesSha256:'44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed',rulesSha256:'e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773',ruleCount:17,qualification:'managed-candidate-not-r3'};
+export function deepSemgrepProfile(){return {...SEMGREP_DEEP_PROFILE}}
+export function validDeepSemgrepProfile(value){return !!value&&typeof value==='object'&&!Array.isArray(value)&&Object.keys(value).length===Object.keys(SEMGREP_DEEP_PROFILE).length&&Object.entries(SEMGREP_DEEP_PROFILE).every(([key,expected])=>Object.hasOwn(value,key)&&value[key]===expected)}
+
+
+FILE lib/redteam/personal-workspace-policy.mjs
+import {deepSemgrepProfile} from './personal-semgrep-profile.mjs';
+import {createHash} from 'node:crypto';
+
+const VERSION='workspace-policy-p0-1';
+const RESOURCES=['cpuMillis','memoryBytes','pids','tmpBytes','outputBytes'];
+const BUDGET=['wallSeconds',...RESOURCES,'modelRequests','outputTokensPerCall'];
+const fail=()=>{throw Error('工作区策略或预算合同无效')};
+function object(value,keys){if(!value||typeof value!=='object'||Array.isArray(value)||Object.keys(value).some(key=>!keys.includes(key)))fail()}
+function integer(value,minimum=0){if(!Number.isSafeInteger(value)||value<minimum)fail();return value}
+function add(a,b){return integer(a+b)}
+function budget(value,task=false){
+ object(value,[...BUDGET,...(task?['parallelism']:[])]);
+ const normalized=Object.fromEntries([...BUDGET,...(task?['parallelism']:[])].map(key=>[key,integer(value[key],key==='memoryBytes'?16777216:['modelRequests','outputTokensPerCall'].includes(key)?0:1)]));
+ if(normalized.wallSeconds>3600||normalized.pids>512||normalized.outputBytes>8388608||task&&normalized.parallelism>32)fail();
+ return normalized;
+}
+
+export function workspaceModePolicy(mode){
+ if(!['ordinary','deep'].includes(mode))fail();
+ const ordinary=mode==='ordinary';
+ return {version:VERSION,mode,planner:ordinary?'rules':'model-assisted',minimumToolLevel:ordinary?3:2,sandboxProfiles:ordinary?['S1']:['S1','S2','S3'],presetRecommendation:ordinary?'personal-review':'personal-joint',changesCurrentPreset:false,executionEnabled:false,currencyHardLimit:false,calibration:'candidate-not-benchmark-qualified',budgetCeilings:{wallSeconds:ordinary?360:900,maxSteps:ordinary?3:6,parallelism:1,modelRequests:ordinary?0:16,outputTokensPerCall:ordinary?0:2048,outputBytes:8388608}};
+}
+
+// First scheduler integration slice. R2 describes existing managed adapters,
+// not benchmark qualification. No R3 promotion or S2/S3 fallback is implied.
+export function workspaceDispatchPolicy(mode,runtime={}){
+ const policy=workspaceModePolicy(mode),availableSteps=[],unavailableSteps=[];
+ for(const tool of ['semgrep','trivy','zap','kali','rea','pentagi']){
+  const reason=!['semgrep','trivy'].includes(tool)?'sandbox-qualification-missing'
+   :policy.minimumToolLevel>2?'r3-qualification-missing'
+   :runtime[tool]?.ready!==true?'runtime-not-ready'
+   :!/^[a-f0-9]{64}$/.test(runtime[tool]?.admissionIdentity??'')?'runtime-identity-missing'
+   :tool==='semgrep'&&runtime[tool]?.rules?.sha256!==undefined&&runtime[tool].rules.sha256!==deepSemgrepProfile().baseRulesSha256?'deep-rule-base-mismatch':null;
+  if(reason)unavailableSteps.push({tool,reason});else availableSteps.push(tool);
+ }
+ return{version:'workspace-dispatch-s1-2',mode,minimumToolLevel:policy.minimumToolLevel,
+  sandboxProfiles:['S1'],availableSteps,unavailableSteps,maxSeconds:policy.budgetCeilings.wallSeconds,
+  maxSteps:policy.budgetCeilings.maxSteps,modelRequests:0,fullWorkspaceReady:false,...(mode==='deep'&&availableSteps.includes('semgrep')?{ruleProfiles:{semgrep:deepSemgrepProfile()}}:{})};
+}
+
+export function workspaceDispatchContract(mode,steps,budgetSeconds,runtime){
+ const policy=workspaceDispatchPolicy(mode,runtime);
+ if(mode==='ordinary')throw Error('普通检查尚缺 R3 工具验收，不能启动；请等待验收完成，不自动切换模式或旧入口');
+ if(!Array.isArray(steps)||!steps.length||steps.length>policy.maxSteps||new Set(steps).size!==steps.length||steps.some(tool=>!policy.availableSteps.includes(tool)))
+  throw Error('所选步骤的 S1 适配、就绪状态或工具身份未确认；S2/S3 尚未接入，不回退到其他入口');
+ if(!Number.isSafeInteger(budgetSeconds)||budgetSeconds<30||budgetSeconds>policy.maxSeconds)throw Error('检查模式的任务时限无效');
+ return{version:policy.version,mode,sandboxProfile:'S1',selectedSteps:[...steps],
+  toolIdentities:Object.fromEntries(steps.map(tool=>[tool,runtime[tool].admissionIdentity])),
+  budgetSeconds,modelRequests:0,fullWorkspaceReady:false,...(steps.includes('semgrep')?{ruleProfiles:{semgrep:deepSemgrepProfile()}}:{})};
+}
+
+// Pure candidate validation. P1 must atomically persist reservations, account
+// retries, constrain each process and revalidate clocks/scope before dispatch.
+export function assessWorkspaceBudget(value){
+ object(value,['mode','task','steps','nowMs','scopeExpiresAtMs']);
+ const policy=workspaceModePolicy(value.mode),caps=policy.budgetCeilings,parent=budget(value.task,true);
+ const nowMs=integer(value.nowMs),scopeExpiresAtMs=integer(value.scopeExpiresAtMs);
+ if(!Array.isArray(value.steps)||!value.steps.length||value.steps.length>32)fail();
+ const reasons=[],seen=new Set(),steps=[];let needsPrice=false;
+ for(const key of ['wallSeconds','parallelism','modelRequests','outputTokensPerCall','outputBytes'])if(parent[key]>caps[key])reasons.push('task-ceiling-exceeded:'+key);
+ if(parent.parallelism>caps.parallelism)reasons.push('parallelism-exceeded');
+ if(value.steps.length>caps.maxSteps)reasons.push('step-count-exceeded');
+ const totals={wallSeconds:0,outputBytes:0,modelRequests:0,maximumOutputTokens:0};
+ for(const raw of value.steps){
+  object(raw,['id','budget','priceState']);
+  if(typeof raw.id!=='string'||!/^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}$/.test(raw.id)||!['known','unknown','not-applicable'].includes(raw.priceState))fail();
+  if(seen.has(raw.id))reasons.push('duplicate-step');seen.add(raw.id);
+  const child=budget(raw.budget);steps.push({id:raw.id,budget:child,priceState:raw.priceState});
+  for(const key of RESOURCES)if(child[key]>parent[key])reasons.push('step-resource-exceeded:'+key);
+  if(child.outputTokensPerCall>parent.outputTokensPerCall)reasons.push('step-output-token-limit');
+  if(child.modelRequests>0&&child.outputTokensPerCall===0)reasons.push('model-output-limit-missing');
+  for(const key of ['wallSeconds','outputBytes','modelRequests'])totals[key]=add(totals[key],child[key]);
+  totals.maximumOutputTokens=add(totals.maximumOutputTokens,integer(child.modelRequests*child.outputTokensPerCall));
+  if(raw.priceState==='unknown'||child.modelRequests>0&&raw.priceState!=='known'){needsPrice=true;reasons.push('price-unconfirmed:'+raw.id)}
+ }
+ const deadlineMs=Math.min(add(nowMs,integer(parent.wallSeconds*1000)),scopeExpiresAtMs),remainingSeconds=Math.max(0,Math.floor((deadlineMs-nowMs)/1000));
+ if(scopeExpiresAtMs<=nowMs)reasons.push('scope-expired');
+ if(totals.wallSeconds>remainingSeconds)reasons.push('wall-budget-exceeded');
+ if(totals.outputBytes>parent.outputBytes)reasons.push('output-budget-exceeded');
+ if(totals.modelRequests>parent.modelRequests)reasons.push('model-budget-exceeded');
+ const unique=[...new Set(reasons)],blocked=unique.some(reason=>!reason.startsWith('price-unconfirmed:'));
+ const identity=createHash('sha256').update(JSON.stringify({version:VERSION,mode:value.mode,parent,steps,nowMs,scopeExpiresAtMs})).digest('hex');
+ return {state:blocked?'unavailable':needsPrice?'needs-decision':'eligible-preview',reasons:unique,identity,deadlineMs,totals,executionEnforced:false,currencyHardLimit:false,previewOnly:true,limitation:'P0候选预算检查；持久预留、运行限额和未知结果不退额度仍须P1执行器实现。'};
+}
+
+
+FILE lib/redteam/personal-security-runtime.mjs
+import {validDeepSemgrepProfile} from './personal-semgrep-profile.mjs';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import {constants,openSync,closeSync,readSync,writeFileSync,unlinkSync,linkSync,mkdirSync,rmdirSync,lstatSync,fstatSync,realpathSync} from 'node:fs';
+import {join,resolve,dirname} from 'node:path';
+import {execFileSync} from 'node:child_process';
+
+export const SECURITY_RUNTIME_ROOT='/home/purge/tools/security-workbench';
+const TOOLS=['semgrep','trivy','zap'];
+const HASH=/^[a-f0-9]{64}$/;
+const IMAGE=/^sha256:[a-f0-9]{64}$/;
+const VERSION=/^\d+\.\d+\.\d+(?:[-+][A-Za-z0-9.-]+)?$/;
+
+function ordinary(root,name,maxBytes){
+ const file=join(root,name);
+ if(realpathSync(root)!==root||realpathSync(file)!==file)throw Error('unsafe runtime path');
+ const info=lstatSync(file);
+ if(!info.isFile()||info.isSymbolicLink()||info.size<1||info.size>maxBytes)throw Error('invalid runtime file');
+ return{file,info};
+}
+function small(root,name,maxBytes){
+ const {file}=ordinary(root,name,maxBytes),fd=openSync(file,constants.O_RDONLY|constants.O_NOFOLLOW);
+ try{
+  if(fstatSync(fd).size>maxBytes)throw Error('runtime file changed');
+  const raw=Buffer.alloc(maxBytes+1);let used=0;
+  while(used<raw.length){const count=readSync(fd,raw,used,raw.length-used,null);if(count===0)break;used+=count}
+  if(used>maxBytes)throw Error('runtime file changed');
+  return raw.subarray(0,used);
+ }finally{closeSync(fd)}
+}
+function verifiedRules(root,expected){
+ const raw=small(root,'rules.json',1024*1024);
+ if(createHash('sha256').update(raw).digest('hex')!==expected)throw Error('rules changed');
+ return raw;
+}
+
+const DEEP_RULES_ROOT=dirname(fileURLToPath(new URL('../../scripts/semgrep-deep17.json',import.meta.url)));
+export function selectSemgrepManifest(manifest,mode,ruleProfile){
+ if(mode===undefined&&ruleProfile===undefined)return manifest;
+ if(mode!=='deep'||!validDeepSemgrepProfile(ruleProfile)||manifest.rulesSha256!==ruleProfile.baseRulesSha256)
+  throw Object.assign(Error('深度 Semgrep 规则、模式或基线身份未确认'),{code:'SCAN_S1_IDENTITY'});
+ return {...manifest,rulesSha256:ruleProfile.rulesSha256};
+}
+export function stageSemgrepRules(runtimeRoot,runDir,expected,ruleProfile,bundleRoot=DEEP_RULES_ROOT){
+ const file=join(runDir,'semgrep-rules.json');let fd;
+ try{
+  let raw;
+  if(ruleProfile!==undefined){
+   if(!validDeepSemgrepProfile(ruleProfile)||expected!==ruleProfile.rulesSha256)throw Error('invalid deep profile');
+   verifiedRules(runtimeRoot,ruleProfile.baseRulesSha256);
+   raw=small(bundleRoot,'semgrep-deep17.json',1024*1024);
+   if(createHash('sha256').update(raw).digest('hex')!==expected)throw Error('deep rules changed');
+  }else raw=verifiedRules(runtimeRoot,expected);
+  if(realpathSync(runDir)!==runDir||(lstatSync(runDir).mode&0o077)!==0)throw Error('unsafe run directory');
+  fd=openSync(file,constants.O_WRONLY|constants.O_CREAT|constants.O_EXCL|constants.O_NOFOLLOW,0o400);
+  try{writeFileSync(fd,raw)}finally{closeSync(fd)}
+  return file;
+ }catch{
+  if(fd!==undefined)try{unlinkSync(file)}catch{}
+  throw Object.assign(Error('未能固定 Semgrep 规则'),{code:'SCAN_S1_IDENTITY'});
+ }
+}
+
+export function readRuntimeManifest(root=SECURITY_RUNTIME_ROOT){
+ const value=JSON.parse(small(resolve(root),'images.json',128*1024));
+ if(value?.schemaVersion!==1||!Array.isArray(value.tools)||value.tools.length!==3)throw Error('invalid manifest');
+ if(!HASH.test(value.rulesSha256||''))throw Error('invalid rules identity');
+ for(const tool of TOOLS){
+  const rows=value.tools.filter(row=>row?.tool===tool),row=rows[0];
+  if(rows.length!==1||!IMAGE.test(row.imageId||'')||row.imageRef!=='personal-security/'+tool+'@'+row.imageId||!VERSION.test(row.version||''))throw Error('invalid pinned image');
+ }
+ return value;
+}
+function sameTrivyMetadata(observed,expected){
+ return expected&&['Version','UpdatedAt','NextUpdate'].every(key=>observed?.[key]===expected[key]);
+}
+
+function unlinkIfPresent(file){
+ try{unlinkSync(file)}catch(error){if(error.code!=='ENOENT')throw error}
+}
+
+function clearTrivyStage(dir){
+ try{lstatSync(dir)}catch(error){if(error.code==='ENOENT')return;throw error}
+ if(realpathSync(dir)!==dir||!lstatSync(dir).isDirectory())throw Error('unsafe database staging path');
+ unlinkIfPresent(join(dir,'metadata.json'));
+ unlinkIfPresent(join(dir,'trivy.db'));
+ rmdirSync(dir);
+}
+
+export function clearStaticScanInputs(runDir){
+ try{lstatSync(runDir)}catch(error){if(error.code==='ENOENT')return;throw error}
+ if(realpathSync(runDir)!==runDir||!lstatSync(runDir).isDirectory())throw Error('unsafe run directory');
+ unlinkIfPresent(join(runDir,'semgrep-rules.json'));
+ clearTrivyStage(join(runDir,'trivy-db'));
+}
+
+export function stageTrivyDatabase(runtimeRoot,runDir,expected){
+ const dir=join(runDir,'trivy-db');let created=false;
+ try{
+  if(realpathSync(runDir)!==runDir||(lstatSync(runDir).mode&0o077)!==0)throw Error('unsafe run directory');
+  const {file}=ordinary(runtimeRoot,'cache/db/trivy.db',2*1024**3);
+  const metadata=small(runtimeRoot,'cache/db/metadata.json',16384);
+  if(!sameTrivyMetadata(JSON.parse(metadata),expected?.metadata))throw Error('database metadata changed');
+  mkdirSync(dir,{mode:0o700});created=true;
+  linkSync(file,join(dir,'trivy.db'));
+  hashDatabase(dir,expected,'trivy.db',true);
+  writeFileSync(join(dir,'metadata.json'),metadata,{flag:'wx',mode:0o400});
+  return dir;
+ }catch{
+  if(created)try{clearTrivyStage(dir)}catch{}
+  throw Object.assign(Error('未能固定 Trivy 数据库'),{code:'SCAN_S1_IDENTITY'});
+ }
+}
+
+function hashDatabase(root,expected,name='cache/db/trivy.db',requireReadOnly=false){
+ if(!HASH.test(expected?.fileSha256||'')||!Number.isSafeInteger(expected.fileBytes)||expected.fileBytes<4096||expected.fileBytes>2*1024**3)throw Error('数据库完整性摘要未登记');
+ const {file,info}=ordinary(root,name,2*1024**3);
+ if(info.size!==expected.fileBytes)throw Error('漏洞数据库大小不匹配');
+ const fd=openSync(file,constants.O_RDONLY|constants.O_NOFOLLOW),hash=createHash('sha256'),buffer=Buffer.alloc(512*1024),deadline=performance.now()+8000;
+ try{
+  const before=fstatSync(fd);if(requireReadOnly&&(before.mode&0o222)!==0)throw Error('数据库不是只读文件');let bytes=0,count;
+  while((count=readSync(fd,buffer,0,buffer.length,null))>0){bytes+=count;hash.update(buffer.subarray(0,count));if(performance.now()>deadline||bytes>expected.fileBytes)throw Error('漏洞数据库校验未完成')}
+  const after=fstatSync(fd);
+  if(bytes!==expected.fileBytes||after.size!==before.size||after.mtimeMs!==before.mtimeMs||after.ctimeMs!==before.ctimeMs||hash.digest('hex')!==expected.fileSha256)throw Error('漏洞数据库摘要不匹配');
+ }finally{closeSync(fd)}
+}
+export function inspectLocalImages(refs){
+ const args=['-n','/usr/bin/docker','image','inspect','--format','{{.Id}} {{.Architecture}} {{.Os}}',...refs];let output;
+ try{output=execFileSync('/usr/bin/sudo',args,{encoding:'utf8',timeout:2500,maxBuffer:64*1024,stdio:['ignore','pipe','pipe']})}
+ catch(error){if(error.status!==1||!error.stdout)return{available:false,images:[]};output=String(error.stdout)}
+ const images=output.trim().split('\n').filter(Boolean).map(line=>{const [id,architecture,os,...extra]=line.trim().split(/\s+/);if(!IMAGE.test(id)||extra.length)throw Error('invalid Docker reply');return{id,architecture,os}});
+ return{available:true,images};
+}
+function scanDocker(args){
+ return execFileSync('/usr/bin/sudo',['-n','/usr/bin/docker',...args],
+  {encoding:'utf8',timeout:8000,killSignal:'SIGKILL',maxBuffer:65536,stdio:['ignore','pipe','pipe']});
+}
+
+export function reconcileScanContainers(docker=scanDocker){
+ const list=['ps','--all','--no-trunc','--filter','label=personal.harness.security=true','--format','{{.ID}} {{.Names}}'];
+ const observed=docker(list).trim().split('\n').filter(Boolean);
+ const ids=observed.map(line=>{
+  const match=/^([a-f0-9]{64}) dsh-sec-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.exec(line);
+  if(!match)throw Error('扫描容器归属未确认，入口未启动');
+  return match[1];
+ });
+ for(const id of ids)try{docker(['rm','--force',id])}catch{/* Auto-remove may already be in progress. */}
+ if(docker(list).trim())throw Error('扫描容器清理未确认，入口未启动');
+}
+
+export function staticScannerIdentity(manifest,tool){
+ const pin=manifest?.tools?.find(row=>row.tool===tool);
+ if(!pin||!['semgrep','trivy'].includes(tool))return null;
+ const resources=tool==='semgrep'?manifest.rulesSha256:manifest.database;
+ return createHash('sha256').update(JSON.stringify([tool,pin.imageId,pin.version,resources])).digest('hex');
+}
+
+function inspectStaticSandbox(){
+ const format='[{{json .SecurityOptions}},{{json .CgroupVersion}},{{json .MemoryLimit}},{{json .SwapLimit}},{{json .CPUCfsQuota}},{{json .PidsLimit}}]';
+ const output=execFileSync('/usr/bin/sudo',['-n','/usr/bin/docker','info','--format',format],
+  {encoding:'utf8',timeout:2500,maxBuffer:16384,stdio:['ignore','pipe','pipe']});
+ const [security,cgroup,memory,swap,cpu,pids]=JSON.parse(output);
+ return{security,cgroup,memory,swap,cpu,pids};
+}
+
+export function assertStaticAdmission(tool,manifest,acceptedIdentity,fresh,inspect=inspectStaticSandbox){
+ const identity=staticScannerIdentity(manifest,tool);
+ if(!identity||!fresh?.ready||identity!==acceptedIdentity||identity!==fresh.admissionIdentity)
+  throw Object.assign(Error('静态扫描器或资源身份未确认'),{code:'SCAN_S1_IDENTITY'});
+ let controls;try{controls=inspect()}catch{}
+ if(controls?.cgroup!=='2'||!Array.isArray(controls.security)||!controls.security.includes('name=seccomp,profile=builtin')||
+  !['memory','swap','cpu','pids'].every(key=>controls[key]===true))
+  throw Object.assign(Error('S1 隔离条件未确认'),{code:'SCAN_S1_UNAVAILABLE'});
+}
+
+function identity(root){
+ return ['images.json','rules.json','cache/db/trivy.db','cache/db/metadata.json','last-db-update.json'].map(name=>{
+  try{const {info}=ordinary(root,name,2*1024**3);return[name,info.ino,info.size,info.mtimeMs,info.ctimeMs]}
+  catch{return[name,'unavailable']}
+ }).map(row=>row.join(':')).join('|');
+}
+function timestamp(value){
+ if(typeof value!=='string')return NaN;
+ const parts=/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d{1,9})?(Z|[+-]\d{2}:\d{2})$/.exec(value);
+ if(!parts)return NaN;
+ const [,year,month,day,hour,minute,second,zone]=parts,n=Number;
+ const calendar=new Date(0);calendar.setUTCFullYear(n(year),n(month),0);
+ if(n(month)<1||n(month)>12||n(day)<1||n(day)>calendar.getUTCDate()||n(hour)>23||n(minute)>59||n(second)>59||(zone!=='Z'&&(n(zone.slice(1,3))>23||n(zone.slice(4))>59)))return NaN;
+ return Date.parse(value);
+}
+export function createRuntimeInspector({root=SECURITY_RUNTIME_ROOT,now=Date.now,inspectImages=inspectLocalImages}={}){
+ root=resolve(root);let last;
+ return{read({force=false,maintenanceValidation=false}={}){
+  // Read this before the cache: an interrupted update must never inherit ready evidence.
+  let maintenance=false;
+  try{lstatSync(join(root,'maintenance.json'));maintenance=true}catch(error){maintenance=error.code!=='ENOENT'}
+  if(maintenance&&!maintenanceValidation){const checkedAt=new Date(now()).toISOString();return Object.fromEntries(TOOLS.map(tool=>[tool,{ready:false,version:null,reason:'漏洞库维护尚未完成，请从Mac启动器检查或恢复',warning:null,checkedAt,cached:false}]))}
+  const at=now(),key=identity(root);
+  if(!force&&last&&last.key===key&&at>=last.at&&at-last.at<30000)return Object.fromEntries(TOOLS.map(tool=>[tool,{...last.value[tool],cached:true}]));
+  const checkedAt=new Date(at).toISOString(),value=Object.fromEntries(TOOLS.map(tool=>[tool,{ready:false,version:null,reason:'运行清单缺失、结构无效或路径不安全',warning:null,checkedAt,cached:false}]));
+  let manifest;
+  try{manifest=readRuntimeManifest(root)}catch{return value}
+  let observed;
+  try{observed=inspectImages(manifest.tools.map(row=>row.imageId));if(!observed||!Array.isArray(observed.images))throw Error('invalid inspector reply')}
+  catch{observed={available:false,images:[]}}
+  for(const tool of TOOLS){
+   const pin=manifest.tools.find(row=>row.tool===tool),image=observed.images.find(row=>row.id===pin.imageId),entry=value[tool];entry.version=pin.version;
+   entry.ready=observed.available===true&&image?.architecture==='arm64'&&image.os==='linux';
+   entry.reason=entry.ready?null:observed.available?'本地镜像未找到、架构或摘要不匹配':'Docker状态未确认，未验证本地镜像';
+  }
+  try{
+   const raw=verifiedRules(root,manifest.rulesSha256);
+   const rules=JSON.parse(raw).rules,ids=new Set(),languages=new Set();
+   if(!Array.isArray(rules)||rules.length<1||rules.length>1000)throw Error('invalid rule list');
+   for(const rule of rules){if(!rule||typeof rule.id!=='string'||!/^[A-Za-z0-9][A-Za-z0-9._-]{0,239}$/.test(rule.id)||ids.has(rule.id)||!Array.isArray(rule.languages)||!rule.languages.length||rule.languages.some(language=>!['python','javascript','typescript'].includes(language)))throw Error('invalid rule identity');ids.add(rule.id);rule.languages.forEach(language=>languages.add(language))}
+   value.semgrep.rules={sha256:manifest.rulesSha256,version:typeof manifest.rulesVersion==='string'&&/^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/.test(manifest.rulesVersion)?manifest.rulesVersion:'未登记',count:rules.length,languages:[...languages].sort()};
+  }
+  catch{value.semgrep.ready=false;value.semgrep.reason='本地规则缺失、不安全或摘要不匹配'}
+  const trivy=value.trivy;trivy.database={state:'unknown',updatedAt:null,nextUpdate:null,ageDays:null};
+  try{const update=JSON.parse(small(root,'last-db-update.json',16384));if(['current','updated','rolled-back'].includes(update.state)&&Number.isFinite(timestamp(update.checkedAt)))trivy.lastUpdate={state:update.state,checkedAt:update.checkedAt}}catch{}
+  try{
+   const metadata=JSON.parse(small(root,'cache/db/metadata.json',16384)),expected=manifest.database?.metadata,updated=timestamp(metadata.UpdatedAt),next=timestamp(metadata.NextUpdate);
+   if(metadata.Version!==2||!Number.isFinite(updated)||!Number.isFinite(next)||next<=updated||updated>at+300000||!expected||['Version','UpdatedAt','NextUpdate'].some(key=>expected[key]!==metadata[key]))throw Error('漏洞库元数据无效、不一致或时间超前');
+   const ageDays=Math.floor(Math.max(0,at-updated)/86400000),state=at-updated>7*86400000?'stale':'fresh';
+   trivy.database={state,updatedAt:new Date(updated).toISOString(),nextUpdate:new Date(next).toISOString(),ageDays};
+   hashDatabase(root,manifest.database);
+   if(state==='stale')trivy.warning='漏洞库已超过7天，结果不包含之后的漏洞信息；建议更新';
+  }catch(error){trivy.ready=false;trivy.reason=/^(?:漏洞|数据库)/.test(error.message)?error.message:'漏洞数据库缺失、路径不安全或未能完成校验';trivy.database.state='unknown'}
+  for(const tool of ['semgrep','trivy'])if(value[tool].ready)value[tool].admissionIdentity=staticScannerIdentity(manifest,tool);
+  last={at,key,value};return value;
+ }};
+}
+
+
+WORKBENCH 1-22
+1: import {validDeepSemgrepProfile} from './personal-semgrep-profile.mjs';
+2: import {buildReviewPreflight,reviewScopePathReady,readReviewSource,runKaliReviewCheck} from './personal-security-review.mjs';
+3: import {RuntimeWorkbench} from './personal-runtime-ui.mjs';
+4: import {JointReview,jointModelWire} from './personal-joint-review.mjs';
+5: import {createHash,randomUUID} from 'node:crypto';
+6: import {existsSync,readFileSync,realpathSync,mkdirSync,writeFileSync,lstatSync,openSync,closeSync,constants,unlinkSync} from 'node:fs';
+7: import {join,resolve,relative,sep} from 'node:path';
+8: import {spawn,execFile,execFileSync} from 'node:child_process';
+9: import {promisify} from 'node:util';
+10: import {homedir} from 'node:os';
+11: import {fileURLToPath} from 'node:url';
+12: import {createScanSnapshot,compareScanSnapshots} from './personal-security-comparison.mjs';
+13: import {modelSecurityResult} from './personal-security-model.mjs';
+14: import {securityReportSummary,formatSecurityReport} from './personal-security-report.mjs';
+15: import {packageSubject,normalizeSubject,decorateFinding} from './personal-security-identity.mjs';
+16: import {redactDisplay,redactText} from './personal-evidence-redaction.mjs';
+17: import {assertStaticAdmission,clearStaticScanInputs,createRuntimeInspector,readRuntimeManifest,selectSemgrepManifest,stageSemgrepRules,stageTrivyDatabase} from './personal-security-runtime.mjs';
+18: import {requestSecurityService} from './personal-security-service.mjs';
+19: import {readSecurityPages} from './personal-security-pages.mjs';
+20: import {collectPythonEvidence} from './personal-python-evidence.mjs';
+21: import {ruleObservation} from './personal-security-observation.mjs';
+22: import {collectNamespaceEvidence} from './personal-namespace-evidence.mjs';
+
+WORKBENCH 120-141
+120: export function buildScanPlan(tool,profile,runDir,manifest,authPolicy=null,watchdogSeconds=STATIC_WATCHDOG_SECONDS){
+121:  if(tool!=='zap'&&(!Number.isSafeInteger(watchdogSeconds)||watchdogSeconds<1||watchdogSeconds>STATIC_WATCHDOG_SECONDS))fail('静态扫描时限无效');
+122:  if(!TOOLS.includes(tool))fail('扫描器无效');
+123:  const installed=manifest?.tools?.find(row=>row.tool===tool);if(!/^sha256:[a-f0-9]{64}$/.test(installed?.imageId||''))fail('扫描器尚未安装或摘要未确认');
+124:  const args=['-n','/usr/bin/docker','run','--rm','--pull','never','--log-driver','none','--name','dsh-sec-'+runDir.split('/').pop(),'--label','personal.harness.security=true','--cpus','1','--memory',tool==='zap'?'1100m':'768m','--pids-limit','160','--cap-drop','ALL','--security-opt','no-new-privileges','--read-only','--user','1000:1000','--mount','type=bind,src='+profile.repoRoot+',dst=/src,readonly','--mount','type=bind,src='+fileURLToPath(new URL('../../scripts/security-output.sh',import.meta.url))+',dst=/policy-output.sh,readonly'];
+125:  if(tool==='zap')args.push('--tmpfs','/tmp:rw,nosuid,size=268435456','--mount','type=bind,src='+runDir+',dst=/input,readonly');
+126:  else args.push('--memory-swap','768m','--tmpfs','/tmp:rw,nosuid,nodev,noexec,size=268435456,mode=1777');
+127:  let command;
+128:  if(tool==='semgrep'){
+129:   args.push('--network','none','--mount','type=bind,src='+join(runDir,'semgrep-rules.json')+',dst=/policy/rules.json,readonly','--env','SEMGREP_SEND_METRICS=off','--env','SEMGREP_ENABLE_VERSION_CHECK=0','--env','HOME=/tmp');
+130:   command=['semgrep','scan','--config','/policy/rules.json','--json','--output','/out/result.json','--metrics=off','--disable-version-check','--jobs','1','--timeout','5','--max-target-bytes','1000000','/src'];
+131:  }else if(tool==='trivy'){
+132:   args.push('--network','none','--mount','type=bind,src='+join(runDir,'trivy-db')+',dst=/tmp/trivy/db,readonly',);
+133:   command=['trivy','filesystem','--cache-dir','/tmp/trivy','--cache-backend','memory','--skip-db-update','--skip-java-db-update','--skip-check-update','--offline-scan','--include-dev-deps','--scanners','vuln,misconfig,secret',...trivySkipFiles,'--format','json','--output','/out/result.json','/src'];
+134:  }else{
+135:   if(!profile.url)fail('请先配置已授权的VM本地URL');args.push('--network','host','--workdir','/zap/wrk','--tmpfs','/home/zap/.ZAP:rw,uid=1000,gid=1000,size=67108864','--env','HOME=/tmp','--env','JAVA_OPTS=-Xmx640m');
+136:   command=['zap-baseline.py','--autooff','--hook','/input/loopback-hook.py','-t',profile.url,'-n','/input/scope.context','-m','1','-T','3','-P','49090','-J','result.json','-z','-silent -Xmx640m -dir /tmp/zap -host 127.0.0.1 -config autoupdate.checkOnStart=false'];
+137:  }
+138:  const output=tool==='zap'?'/zap/wrk':'/out';args.push('--tmpfs',output+':rw,nosuid,nodev,noexec,size=67108864,uid=1000,gid=1000,mode=0700','--entrypoint','/bin/sh',installed.imageId,'/policy-output.sh',output,...(tool==='zap'?[]:['--deadline-seconds',String(watchdogSeconds)]),...command);return{outputQuotaBytes:67108864,executable:'/usr/bin/sudo',args,outputFile:join(runDir,'result.json'),containerName:'dsh-sec-'+runDir.split('/').pop(),version:installed.version||'未确认',coverageKey:digest([tool,installed.imageId,manifest.rulesSha256,manifest.database?.digest||null,profile.repoRoot,tool==='zap'?profile.url:null,...(tool==='semgrep'?['parser-text-1']:[]),...(tool==='trivy'?['package-identity-1',TRIVY_INPUT_POLICY,TRIVY_DEPENDENCY_SCOPE]:[]),...(tool==='zap'?['pinned-addons-1']:[]),...(tool==='zap'&&profile.authProfile?['private-session-1',profile.authProfile,authPolicy?.revision||'unverified']:[])])};
+139: }
+140: 
+141: export function prepareScanLaunch(tool,plan,create=execFileSync){
+
+WORKBENCH 248-284
+248: async function runScanner(tool,profile,{signal,runDir,revisionRef:pinnedRevision,admissionIdentity,deadlineMonotonic,workspaceMode,ruleProfile}){
+249:  const rootIdentity=lstatSync(profile.repoRoot);if(!rootIdentity.isDirectory()||rootIdentity.isSymbolicLink()||realpathSync(profile.repoRoot)!==profile.repoRoot)throw Object.assign(Error('仓库目录已变化'),{code:'SCAN_SCOPE_CHANGED'});
+250:  const deadline=Math.min(performance.now()+240000,deadlineMonotonic??Infinity),auth=tool==='zap'&&profile.authProfile?readZapAuthProfile(profile.authProfile,profile.url):null;
+251:  const before=auth?await verifyZapSession(auth,{signal,timeoutMs:Math.min(3000,deadline-performance.now())}):null;
+252:  const baseManifest=manifestOf();
+253:  if(tool!=='zap')assertStaticAdmission(tool,baseManifest,admissionIdentity,installedSecurityTools({force:true})[tool]);
+254:  const manifest=tool==='semgrep'?selectSemgrepManifest(baseManifest,workspaceMode,ruleProfile):baseManifest;
+255:  signal.throwIfAborted();
+256:  mkdirSync(runDir,{recursive:true,mode:0o700});
+257:  let stagedInputs=false;
+258:  const sessionPath=join(runDir,'.session.json');let privateCopy=false;
+259:  let termination,launch;
+260:  const stopContainer=()=>termination||(termination=tool!=='zap'?removeStaticScan(launch.container):new Promise(resolveStop=>{
+261:   const child=spawn('/usr/bin/sudo',['-n','/usr/bin/docker','stop','--time','3',launch.container],{stdio:'ignore'});
+262:   const timer=setTimeout(()=>{child.kill('SIGKILL');resolveStop(false)},8000);
+263:   child.once('error',()=>{clearTimeout(timer);resolveStop(false)});
+264:   child.once('close',code=>{clearTimeout(timer);resolveStop(code===0)});
+265:  }));
+266:  let bytes=0,timedOut=false,overflow=false,exit,chunks=[],envelope;
+267:  try{
+268:   if(tool==='semgrep')stageSemgrepRules(ROOT,runDir,manifest.rulesSha256,ruleProfile);
+269:   if(tool==='trivy')stageTrivyDatabase(ROOT,runDir,manifest.database);
+270:   stagedInputs=tool!=='zap';
+271:   const watchdogSeconds=deadlineMonotonic===undefined?STATIC_WATCHDOG_SECONDS:Math.min(STATIC_WATCHDOG_SECONDS,Math.floor((deadline-performance.now()-STATIC_CREATE_TIMEOUT_MS)/1000));
+272:   const checkDeadline=()=>{if(performance.now()>=deadline)throw Object.assign(Error('扫描预算到期'),{code:'SCAN_TIMEOUT'})};
+273:   if(watchdogSeconds<1)throw Object.assign(Error('剩余预算不足以安全启动扫描'),{code:'SCAN_BUDGET_TOO_SHORT'});
+274:   const plan=buildScanPlan(tool,profile,runDir,manifest,auth,watchdogSeconds);
+275:   if(tool==='zap'){
+276:    writeFileSync(join(runDir,'scope.context'),buildZapContext(profile.url,auth?.excludePaths??[]),{mode:0o600});
+277:    writeFileSync(join(runDir,'loopback-hook.py'),buildZapHook(!!auth),{mode:0o600});
+278:    if(auth){
+279:     const {secretValues,...config}=auth,fd=openSync(sessionPath,constants.O_WRONLY|constants.O_CREAT|constants.O_EXCL|constants.O_NOFOLLOW,0o600);privateCopy=true;
+280:     try{writeFileSync(fd,JSON.stringify(config))}finally{closeSync(fd)}
+281:    }
+282:   }
+283:   signal.throwIfAborted();
+284:   launch=prepareScanLaunch(tool,plan);
+
+WORKBENCH 315-332
+315:    let after=null;try{after=await verifyZapSession(auth,{signal,timeoutMs:Math.min(3000,deadline-performance.now())})}catch(error){if(signal.aborted)throw error}
+316:    const proof=envelope.authentication,matched=proof?.version===1&&proof?.revision===auth.revision;
+317:    parsed.authentication={version:1,profile:profile.authProfile,revision:auth.revision,before:before?.verified===true,after:after?.verified===true,scannerBefore:matched&&proof.before===true,scannerAfter:matched&&proof.after===true,checkedRequests:matched&&proof.checkedRequests===2?2:0};
+318:   }
+319:   let revisionRef=pinnedRevision??'工作区未确认';if(pinnedRevision===undefined)try{revisionRef=execFileSync('/usr/bin/git',['-C',profile.repoRoot,'rev-parse','HEAD'],{timeout:3000,encoding:'utf8'}).trim()}catch{}
+320:   if(deadlineMonotonic!==undefined)checkDeadline();
+321:   return{...parsed,coverageKey:plan.coverageKey,version:plan.version,revisionRef,...(tool==='trivy'?{inputPolicy:TRIVY_INPUT_POLICY,dependencyScope:TRIVY_DEPENDENCY_SCOPE}:{})};
+322:  }finally{
+323:   const stopUnconfirmed=termination&&!await termination;
+324:   if(stagedInputs)try{clearStaticScanInputs(runDir)}catch{if(!stopUnconfirmed)throw Object.assign(Error('静态扫描输入清理未确认'),{code:'SCAN_STAGE_CLEANUP'})}
+325:   if(privateCopy)try{unlinkSync(sessionPath)}catch(error){if(error.code!=='ENOENT'&&!stopUnconfirmed)throw Object.assign(Error('私有会话副本清理未确认'),{code:'AUTH_CLEANUP'})}
+326:   if(stopUnconfirmed)throw Object.assign(Error('容器停止未确认'),{code:'STOP_UNCONFIRMED'});
+327:  }
+328: }
+329: 
+330: function semgrepFileCoverage(reportedFiles,snapshot,rules){
+331:  const scanned=new Set(reportedFiles??[]);
+332:  if(!snapshot)return{scope:'scanner-reported',scanned:scanned.size,total:null,uncovered:null,withoutLanguageRule:null};
+
+WORKBENCH 405-436
+405:   if(input.retestFindingId){const finding=db.prepare('SELECT * FROM security_finding WHERE id=?').get(numeric(input.retestFindingId));if(!finding||finding.tool!==input.tool||finding.status!=='fixed')fail('仅可复测本项目已记录修复的同类发现')}
+406:   const managed=jointContext&&jointContext===this.joint.active?jointContext:null;
+407:   if(managed?.data.workspace&&runtime.admissionIdentity!==managed.data.workspace.toolIdentities[input.tool])fail('安全工作区子扫描工具身份与原计划不匹配');
+408:   const ruleProfile=managed?.data.workspace&&input.tool==='semgrep'?managed.data.workspace.ruleProfiles?.semgrep:undefined;
+409:   if(managed?.data.workspace&&input.tool==='semgrep'&&(managed.data.workspace.mode!=='deep'||!validDeepSemgrepProfile(ruleProfile)))fail('安全工作区 Semgrep 规则与模式身份未确认');
+410:   const executionProfile=managed?{...profile,repoRoot:managed.data.snapshot.sourceRoot}:profile;
+411:   const runId=randomUUID(),details={profile,version:runtime.version,runtime:{checkedAt:runtime.checkedAt||null,database:runtime.database||null,rules:runtime.rules||null,warning:runtime.warning||null},retestFindingId:input.retestFindingId||null,...(managed?{joint:{id:managed.id,snapshotId:managed.data.snapshot.id,git:managed.data.snapshot.git}}:{})};
+412:   if(ruleProfile){details.runtime.ruleProfile=ruleProfile;details.runtime.rules={...(runtime.rules??{}),version:ruleProfile.id,sha256:ruleProfile.rulesSha256,count:ruleProfile.ruleCount}};
+413:   if(managed&&input.tool==='trivy')details.inputRedaction={scope:'managed-copy',redactedFiles:managed.data.snapshot.redactedFiles,excludedEntries:managed.data.snapshot.excluded.total,originalSecretCoverage:'not-proven'};
+414:   db.prepare('INSERT INTO security_run(id,request_id,request_hash,tool,profile_revision,state,started_at,details) VALUES(?,?,?,?,?,?,?,?)').run(runId,id,hash,input.tool,profile.revision,'running',stamp(),JSON.stringify(details));
+415:   const controller=new AbortController();this.active={id:runId,eng,controller};
+416:   const promise=Promise.resolve().then(()=>{controller.signal.throwIfAborted();return this.disposed?null:this.runner(input.tool,executionProfile,{signal:controller.signal,runDir:join(this.store.dirOf(eng),'runs','security',runId),admissionIdentity:runtime.admissionIdentity,...(ruleProfile?{ruleProfile,workspaceMode:managed.data.workspace.mode}:{}),...(managed?{revisionRef:managed.data.snapshot.git.head??'未记录'}:{}),...(managed?.data.workspace?{deadlineMonotonic:managed.deadlineMonotonic}:{})})}).then(result=>{
+417:    if(this.disposed)return;
+418:    if(managed?.data.workspace&&performance.now()>=managed.deadlineMonotonic)throw Object.assign(Error('扫描预算到期'),{code:'SCAN_TIMEOUT'});
+419:    if(controller.signal.aborted){db.prepare("UPDATE security_run SET state='cancelled',finished_at=? WHERE id=?").run(stamp(),runId);return}
+420:    if(!result||!Array.isArray(result.findings)||typeof result.complete!=='boolean'||typeof result.coverageKey!=='string')fail('扫描回执无效');
+421:    if(managed){
+422:     if(input.tool==='zap'){
+423:      const scoped=value=>{try{const u=new URL(value);return u.origin===profile.url&&!u.username&&!u.password&&!u.hash}catch{return false}};
+424:      if(!profile.url||result.findings.some(f=>!scoped(f.location))||(result.coverageFiles??[]).some(f=>!scoped(f)))fail('HTTP观察超出已授权本地网址');
+425:      result={...result,findings:result.findings.map(f=>{const u=new URL(f.location);return{...f,location:u.origin+u.pathname}})};
+426:     }else{const admitted=new Set(managed.data.snapshot.files.map(f=>f.path));if(result.findings.some(f=>!admitted.has(String(f.location).replace(/:\d+$/,'')))||(result.coverageFiles??[]).some(f=>!admitted.has(f)))fail('扫描结果超出联合项目副本文件集合')}
+427:    }
+428:    if(input.tool==='zap'&&profile.authProfile){result=authenticatedResult(profile,result);details.authentication=result.authentication}
+429:    if(managed&&input.tool==='semgrep'){
+430:     const bound=bindSemgrepSourceLocations(managed.data.snapshot,result.findings);
+431:     result={...result,findings:bound.findings};details.sourceLocations=bound.summary;
+432:    }
+433:    if(managed?.data.workspace&&input.tool==='semgrep'){
+434:     try{const evidence=this.pythonEvidence(managed.data.snapshot,result.findings,managed.deadlineMonotonic);if(evidence)details.pythonEvidence=evidence}
+435:     catch{details.pythonEvidence={state:'unavailable',artifacts:[]}}
+436:    }
+
+JOINT CHECKS
+import {workspaceDispatchPolicy,workspaceDispatchContract} from './personal-workspace-policy.mjs';
+export function jointModelWire(original,safe){
+  const workspace=input.mode===undefined?null:workspaceDispatchContract(input.mode,steps,budget,runtime);
+  const checkWorkspace=()=>{if(data.workspace){const current=workspaceDispatchContract(data.workspace.mode,data.steps.map(s=>s.tool),data.budgetSeconds,this.bench.toolStatus({force:true}));if(hash(current)!==hash(data.workspace))throw Error('安全工作区工具身份或模式合同已变化，原任务不再启动步骤')}};
+   timer=setTimeout(()=>{active.expired=true;controller.abort()},Math.max(1,active.deadlineMonotonic-performance.now()));check();checkWorkspace();
+    check();verifyReviewSnapshot(data.snapshot);checkWorkspace();step.state='running';this.save(eng,data);
+
+CLIENT EXCERPTS
+import {validDeepSemgrepProfile} from './personal-semgrep-profile.mjs';
+ const validWorkspaceRules=(workspace,tools=[])=>{
+  if(workspace.ruleProfiles===undefined)return !(workspace.version==='workspace-dispatch-s1-2'&&workspace.mode==='deep'&&tools.includes('semgrep'));
+  return workspace.mode==='deep'&&tools.includes('semgrep')&&workspace.ruleProfiles&&typeof workspace.ruleProfiles==='object'&&!Array.isArray(workspace.ruleProfiles)&&Object.keys(workspace.ruleProfiles).length===1&&validDeepSemgrepProfile(workspace.ruleProfiles.semgrep);
+ const validTask=(v,eng)=>v===null||v&&typeof v.id==='string'&&v.engagement===eng&&validWorkspaceRules(v.workspace,v.workspace?.selectedSteps)&&Object.hasOwn(states,v.state)&&Number.isSafeInteger(v.scopeRevision)&&Array.isArray(v.steps)&&v.steps.length<=6&&new Set(v.steps.map(s=>s?.tool)).size===v.steps.length&&v.steps.every(s=>s&&['semgrep','trivy','zap','kali','rea','pentagi'].includes(s.tool)&&Object.hasOwn(states,s.state)&&validStepCoverage(s)&&(!(s.sourceLocations||s.pythonEvidence||s.namespaceReview)||sha(v.snapshot?.id)&&typeof s.id==='string'&&!!s.id)&&(s.namespaceReview?.cleanupVerified!==false||v.cleanupVerified===false&&v.state==='unconfirmed'))&&count(v.findings)&&(v.modelCalls==null||count(v.modelCalls))&&(!v.snapshot||['files','bytes','excluded','redactedFiles'].every(k=>v.snapshot[k]===undefined||count(v.snapshot[k])))&&typeof v.cleanupVerified==='boolean';
+   if(!validWorkspaceRules(next.workspace,next.workspace?.availableSteps)||((next.workspace?.mode??undefined)!==mode))throw Error('联合检查模式未确认');
+   task?.workspace?.ruleProfiles?.semgrep&&h('p',{className:'rts-meta'},'本任务规则合同：17 条 · 深度执行点观察；普通检查R3尚未通过。SHA256 '+task.workspace.ruleProfiles.semgrep.rulesSha256),
+
+TEST deep-rule-profile.test.mjs
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import {createHash} from 'node:crypto';
+import * as runtimeApi from '../package/lib/redteam/personal-security-runtime.mjs';
+const {stageSemgrepRules}=runtimeApi;const selectSemgrepManifest=(...args)=>{assert.equal(typeof runtimeApi.selectSemgrepManifest,'function','Missing mode-bound manifest selection');return runtimeApi.selectSemgrepManifest(...args)};
+const profileUrl=new URL('../package/lib/redteam/personal-semgrep-profile.mjs',import.meta.url),bundleUrl=new URL('../package/scripts/semgrep-deep17.json',import.meta.url);const baseUrl=new URL('../security-rules.json',import.meta.url);const hash=v=>createHash('sha256').update(v).digest('hex');
+async function api(){assert.ok(fs.existsSync(profileUrl),'Missing mode-bound deep rule profile');return import(profileUrl)}
+test('deep rules are a fixed17 bundle preserving every baseline16 rule',async()=>{const m=await api(),p=m.deepSemgrepProfile();assert.equal(p.mode,'deep');assert.equal(p.ruleCount,17);assert.equal(p.baseRulesSha256,hash(fs.readFileSync(baseUrl)));assert.equal(p.rulesSha256,hash(fs.readFileSync(bundleUrl)));assert.deepEqual(JSON.parse(fs.readFileSync(bundleUrl)).rules.slice(0,16),JSON.parse(fs.readFileSync(baseUrl)).rules);assert.equal(p.qualification,'managed-candidate-not-r3');assert.ok(m.validDeepSemgrepProfile(p));for(const change of [{mode:'ordinary'},{rulesSha256:'f'.repeat(64)},{qualification:'R3'},{extra:true}])assert.equal(m.validDeepSemgrepProfile({...p,...change}),false)});
+test('only a matching deep workspace can select the pinned17 manifest',async()=>{const m=await api(),p=m.deepSemgrepProfile(),manifest={rulesSha256:p.baseRulesSha256,tools:[]};assert.deepEqual(selectSemgrepManifest(manifest,undefined,undefined),manifest);assert.equal(selectSemgrepManifest(manifest,'deep',p).rulesSha256,p.rulesSha256);for(const [mode,profile,base] of [[undefined,p,manifest],['ordinary',p,manifest],['deep',{...p,rulesSha256:'a'.repeat(64)},manifest],['deep',p,{...manifest,rulesSha256:'a'.repeat(64)}]])assert.throws(()=>selectSemgrepManifest(base,mode,profile),{code:'SCAN_S1_IDENTITY'})});
+test('staging pins exact17 bytes and rejects changed base or bundle without overwriting an existing stage',async()=>{const m=await api(),p=m.deepSemgrepProfile(),root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'deep-rule-stage-'))),runtime=path.join(root,'runtime'),run=path.join(root,'run'),bundle=path.join(root,'bundle');for(const dir of [runtime,run,bundle])fs.mkdirSync(dir,{mode:0o700});fs.copyFileSync(baseUrl,path.join(runtime,'rules.json'));fs.copyFileSync(bundleUrl,path.join(bundle,'semgrep-deep17.json'));try{const staged=stageSemgrepRules(runtime,run,p.rulesSha256,p,bundle);assert.equal(hash(fs.readFileSync(staged)),p.rulesSha256);assert.equal(fs.statSync(staged).mode&0o777,0o400);assert.throws(()=>stageSemgrepRules(runtime,run,p.rulesSha256,p,bundle),{code:'SCAN_S1_IDENTITY'});assert.equal(hash(fs.readFileSync(staged)),p.rulesSha256);fs.unlinkSync(staged);fs.appendFileSync(path.join(bundle,'semgrep-deep17.json'),' ');assert.throws(()=>stageSemgrepRules(runtime,run,p.rulesSha256,p,bundle),{code:'SCAN_S1_IDENTITY'});assert.equal(fs.existsSync(staged),false);fs.copyFileSync(bundleUrl,path.join(bundle,'semgrep-deep17.json'));fs.appendFileSync(path.join(runtime,'rules.json'),' ');assert.throws(()=>stageSemgrepRules(runtime,run,p.rulesSha256,p,bundle),{code:'SCAN_S1_IDENTITY'});assert.equal(fs.existsSync(staged),false)}finally{fs.rmSync(root,{recursive:true,force:true})}});
+
+
+TEST workspace-dispatch.test.mjs
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {RedteamStore} from '../package/lib/redteam/store-core.js';
+import {SecurityWorkbench,executeSecurityOp,securityFor} from '../package/lib/redteam/personal-security-workbench.mjs';
+import {createSecurityServer,requestSecurityService} from '../package/lib/redteam/personal-security-service.mjs';
+import {jointModelWire} from '../package/lib/redteam/personal-joint-review.mjs';
+
+const identities={semgrep:'a'.repeat(64),trivy:'b'.repeat(64)};
+function fixture(){
+ const base=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'workspace-dispatch-'))),root=path.join(base,'repo');
+ fs.mkdirSync(root);fs.writeFileSync(path.join(root,'app.py'),'eval(input())\n');
+ const store=new RedteamStore(path.join(base,'store')),eng=store.openEngagement('Mode fixture').id,bench=securityFor(store),calls=[];
+ bench.workspaceRoot=base;
+ bench.toolStatus=()=>Object.fromEntries(Object.entries(identities).map(([tool,admissionIdentity])=>[tool,{ready:true,version:'fixture',admissionIdentity}]));
+ bench.runner=async(tool)=>{calls.push(tool);return{complete:true,coverageKey:'fixture',coverageFiles:['app.py'],findings:[]}};
+ bench.saveScope(eng,{requestId:'mode-scope-0001',revision:0,repoRoot:root,tools:['semgrep','trivy'],expiresAt:new Date(Date.now()+60000).toISOString(),confirm:true});
+ return{base,root,store,eng,bench,calls,async close(){await bench.dispose();await store.close();fs.rmSync(base,{recursive:true,force:true})}};
+}
+const start=(changes={})=>({mode:'deep',requestId:'mode-start-0001',profileRevision:1,steps:['semgrep'],budgetSeconds:30,...changes});
+
+test('Ordinary plan reports missing R3 qualification without handing off files or starting tools',async()=>{
+ const f=fixture();try{
+  const result=f.bench.joint.plan(f.eng,{mode:'ordinary'});
+  assert.equal(result.workspace.mode,'ordinary');assert.equal(result.workspace.minimumToolLevel,3);
+  assert.deepEqual(result.availableSteps,[]);assert.equal(result.workspace.fullWorkspaceReady,false);
+  assert.ok(result.workspace.unavailableSteps.some(row=>row.tool==='semgrep'&&row.reason==='r3-qualification-missing'));
+  assert.equal(result.kaliAllowed,false);assert.equal(f.calls.length,0);
+  assert.equal(fs.existsSync(path.join(f.store.dirOf(f.eng),'runs','joint')),false);
+  assert.throws(()=>f.bench.joint.start(f.eng,start({mode:'ordinary',steps:['semgrep','trivy'],budgetSeconds:360,planIdentity:result.ordinaryPlan.planIdentity})),/R3/);
+  assert.equal(f.bench.joint.status(f.eng,{requestId:'mode-start-0001'}).requestState,'rejected');
+  assert.equal(f.bench.db(f.eng).prepare('SELECT COUNT(*) AS n FROM security_joint').get().n,0);
+ }finally{await f.close()}
+});
+
+test('Deep S1 dispatch persists the original mode and identities and launches only selected steps',async()=>{
+ const f=fixture();try{
+  const plan=f.bench.joint.plan(f.eng,{mode:'deep'});
+  assert.deepEqual(plan.availableSteps,['semgrep','trivy']);assert.equal(plan.workspace.minimumToolLevel,2);
+  assert.deepEqual(plan.workspace.sandboxProfiles,['S1']);assert.equal(plan.workspace.modelRequests,0);
+  const input=start(),run=f.bench.joint.start(f.eng,input);
+  assert.equal(run.workspace.mode,'deep');assert.deepEqual(run.workspace.selectedSteps,['semgrep']);
+  assert.deepEqual(run.workspace.toolIdentities,{semgrep:identities.semgrep});
+  assert.equal(f.bench.joint.start(f.eng,input).id,run.id);
+  const ordinary=f.bench.joint.plan(f.eng,{mode:'ordinary'});assert.equal(ordinary.workspace.mode,'ordinary');
+  const result=await f.bench.joint.wait(f.eng,{id:run.id,waitSeconds:2});
+  assert.equal(result.task.state,'completed');assert.equal(result.task.workspace.mode,'deep');
+  assert.deepEqual(f.calls,['semgrep']);
+  const saved=JSON.parse(f.bench.db(f.eng).prepare('SELECT data FROM security_joint WHERE id=?').get(run.id).data);
+  assert.deepEqual(saved.workspace,result.task.workspace);
+  assert.throws(()=>f.bench.joint.start(f.eng,{...input,mode:'ordinary'}),/重复请求内容不同/);
+ }finally{await f.close()}
+});
+
+test('Mode dispatch rejects unqualified adapters, invalid modes and over-budget work before creating a task',async()=>{
+ const f=fixture();try{
+  for(const [index,change] of [{steps:['kali']},{steps:['rea']},{steps:['pentagi']},{steps:['zap']},{budgetSeconds:901},{mode:'full-access'}].entries()){
+   assert.throws(()=>f.bench.joint.start(f.eng,start({...change,requestId:'mode-reject-'+index})));
+  }
+  assert.equal(f.bench.db(f.eng).prepare('SELECT COUNT(*) AS n FROM security_joint').get().n,0);
+  assert.equal(f.calls.length,0);assert.equal(fs.existsSync(path.join(f.store.dirOf(f.eng),'runs','joint')),false);
+ }finally{await f.close()}
+});
+
+test('A pinned runtime identity change after acceptance prevents dispatch of the original step',async()=>{
+ const f=fixture();try{
+  const run=f.bench.joint.start(f.eng,start());
+  f.bench.toolStatus=()=>({semgrep:{ready:true,version:'fixture',admissionIdentity:'c'.repeat(64)}});
+  const result=await f.bench.joint.wait(f.eng,{id:run.id,waitSeconds:2});
+  assert.equal(result.task.state,'failed');assert.match(result.task.problem,/身份/);
+  assert.deepEqual(f.calls,[]);assert.equal(result.task.steps[0].state,'not-run');
+ }finally{await f.close()}
+});
+
+test('Child admission cannot swap the pinned identity after the parent pre-dispatch check',async()=>{
+ const f=fixture();try{
+  const read=f.bench.toolStatus;let reads=0;
+  // submission, pre-snapshot, pre-step, then child admission
+  f.bench.toolStatus=(...args)=>{const value=read(...args);if(++reads>=4)value.semgrep.admissionIdentity='c'.repeat(64);return value};
+  const run=f.bench.joint.start(f.eng,start());
+  const result=await f.bench.joint.wait(f.eng,{id:run.id,waitSeconds:2});
+  assert.equal(result.task.state,'failed');assert.match(result.task.problem,/身份/);
+  assert.deepEqual(f.calls,[]);assert.equal(f.bench.db(f.eng).prepare('SELECT COUNT(*) AS n FROM security_run').get().n,0);
+  assert.equal(result.task.steps[0].state,'not-run','Rejected child admission is not a running scanner');
+ }finally{await f.close()}
+});
+
+test('Mode admission requires a current runtime identity instead of trusting a ready flag',async()=>{
+ const f=fixture();try{
+  f.bench.toolStatus=()=>({semgrep:{ready:true,version:'fixture'}});
+  const plan=f.bench.joint.plan(f.eng,{mode:'deep'});assert.deepEqual(plan.availableSteps,[]);
+  assert.throws(()=>f.bench.joint.start(f.eng,start()),/身份|就绪/);assert.equal(f.calls.length,0);
+ }finally{await f.close()}
+});
+
+test('Mode contract survives reopening the existing database and old joint tasks retain a null mode',async()=>{
+ const f=fixture();try{
+  const deep=f.bench.joint.start(f.eng,start());await f.bench.joint.wait(f.eng,{id:deep.id,waitSeconds:2});
+  const legacyInput=start({requestId:'legacy-start-001'});delete legacyInput.mode;
+  const legacy=f.bench.joint.start(f.eng,legacyInput);await f.bench.joint.wait(f.eng,{id:legacy.id,waitSeconds:2});
+  assert.equal(legacy.workspace,null);
+  const reopened=new SecurityWorkbench(f.store,{workspaceRoot:f.base,toolStatus:f.bench.toolStatus});
+  try{assert.equal(reopened.joint.status(f.eng,{id:deep.id}).task.workspace.mode,'deep');assert.equal(reopened.joint.status(f.eng,{id:legacy.id}).task.workspace,null)}finally{await reopened.dispose()}
+ }finally{await f.close()}
+});
+
+test('Native service mode requests share one ledger and protect mode metadata against redaction',async()=>{
+ const f=fixture(),socket=path.join(f.base,'rpc.sock'),server=createSecurityServer({dispatch:(request,options)=>executeSecurityOp(f.store,request,options)});
+ try{
+  await new Promise(resolve=>server.listen(socket,resolve));fs.chmodSync(socket,0o600);
+  const rpc=(args,model=false)=>requestSecurityService({op:'securityJoint',engagement:f.eng,...args},{model,socketPath:socket});
+  const first=await rpc({action:'start',...start()},true);assert.equal(first.ok,true);assert.equal(first.task.workspace.mode,'deep');
+  const again=await rpc({action:'start',...start()});assert.equal(again.task.id,first.task.id);
+  const report=await rpc({action:'wait',id:first.task.id,waitSeconds:2});assert.equal(report.task.state,'completed');assert.deepEqual(f.calls,['semgrep']);
+  const changed=structuredClone(report);changed.task.workspace.mode='ordinary';assert.equal(JSON.parse(jointModelWire(report,changed)).ok,false);
+  const plan=await rpc({action:'plan',mode:'deep'}),badPlan=structuredClone(plan);badPlan.workspace.mode='ordinary';assert.equal(JSON.parse(jointModelWire(plan,badPlan)).ok,false);
+  const ordinary=await rpc({action:'plan',mode:'ordinary',budgetSeconds:30},true);
+  assert.equal(ordinary.ok,true);
+  const input={action:'start',...start({mode:'ordinary',requestId:'ordinary-rpc-001',steps:['semgrep','trivy'],planIdentity:ordinary.ordinaryPlan.planIdentity})};
+  const rejected=await rpc(input,true);
+  assert.equal(rejected.ok,false);assert.match(rejected.error,/R3/);
+  const replay=await rpc(input);assert.equal(replay.ok,false);assert.match(replay.error,/R3/);
+  assert.equal((await rpc({action:'status',requestId:input.requestId})).requestState,'rejected');
+  assert.deepEqual(f.calls,['semgrep']);
+
+ }finally{await server.shutdown();await f.close()}
+});
+
+test('Ordinary submission binds the current preview, exact steps and bounded budget before R3',async()=>{
+ const f=fixture();try{
+  const preview=()=>f.bench.joint.plan(f.eng,{mode:'ordinary',budgetSeconds:30}).ordinaryPlan;
+  const plan=preview();
+  assert.equal(plan.budgetSeconds,30);
+  assert.equal(plan.executable,false);
+  const input=start({mode:'ordinary',steps:['semgrep','trivy'],planIdentity:plan.planIdentity});
+  const reject=(id,patch,error)=>assert.throws(()=>f.bench.joint.start(f.eng,{...input,requestId:id,...patch}),error);
+  reject('missing-plan', {planIdentity:undefined}, /计划摘要/);
+  reject('extra-step', {steps:['semgrep','trivy','kali']}, /计划步骤/);
+  reject('reordered-step', {steps:['trivy','semgrep']}, /计划步骤/);
+  reject('changed-budget', {budgetSeconds:31}, /计划已变化/);
+  reject('excess-budget', {budgetSeconds:361}, /时限/);
+  assert.throws(()=>f.bench.joint.plan(f.eng,{mode:'ordinary',budgetSeconds:29}),/时限/);
+  reject('different-mode', {mode:'deep'}, /计划摘要/);
+  fs.writeFileSync(path.join(f.root,'app.py'),'print(1)\n');
+  reject('changed-input', {}, /计划已变化/);
+  const current=preview();
+  const status=f.bench.toolStatus;
+  f.bench.toolStatus=(...args)=>{const tools=status(...args);tools.semgrep.admissionIdentity='c'.repeat(64);return tools};
+  reject('changed-tool', {planIdentity:current.planIdentity}, /计划已变化/);
+  reject('current-plan', {planIdentity:preview().planIdentity}, /R3/);
+  assert.equal(f.bench.joint.status(f.eng,{requestId:'current-plan'}).requestState,'rejected');
+  assert.equal(f.bench.db(f.eng).prepare('SELECT COUNT(*) AS n FROM security_joint').get().n,0);
+  assert.equal(fs.existsSync(path.join(f.store.dirOf(f.eng),'runs','joint')),false);
+  assert.deepEqual(f.calls,[]);
+ }finally{await f.close()}
+});
+
+test('A late S1 scanner result does not persist findings after the monotonic deadline',async()=>{
+ const f=fixture();try{
+  f.bench.runner=async(_tool,_profile,options)=>{
+   assert.ok(options.deadlineMonotonic>performance.now());
+   f.bench.joint.active.deadlineMonotonic=performance.now()-1;
+   return{complete:true,coverageKey:'fixture',coverageFiles:['app.py'],findings:[{rule:'fixture',location:'app.py:1'}]};
+  };
+  const run=f.bench.joint.start(f.eng,start());
+  const result=await f.bench.joint.wait(f.eng,{id:run.id,waitSeconds:2});
+  assert.equal(result.task.state,'timed-out');
+  assert.equal(f.bench.db(f.eng).prepare('SELECT COUNT(*) AS n FROM security_joint_finding').get().n,0);
+ }finally{await f.close()}
+});
+
+test('Managed Semgrep persists Python review evidence separately from findings',async()=>{
+ const f=fixture();try{
+  const evidence={tool:'semgrep',evidenceKind:'python-string-guard',path:'app.py',line:1,rule:'policy.harness.python.eval',status:'unverified',executionLine:1,guardLine:1,sink:'eval'};
+  f.bench.pythonEvidence=(snapshot,findings)=>{assert.equal(snapshot.files[0].path,'app.py');assert.equal(findings[0].location,'app.py:1');return {state:'completed',artifacts:[evidence]}};
+  f.bench.runner=async()=>({complete:true,coverageKey:'fixture',coverageFiles:['app.py'],findings:[{rule:'policy.harness.python.eval',location:'app.py:1'}]});
+  const run=f.bench.joint.start(f.eng,start());
+  await f.bench.joint.wait(f.eng,{id:run.id,waitSeconds:2});
+  const report=f.bench.joint.report(f.eng,{id:run.id,section:'artifacts'});
+  assert.equal(report.task.steps[0].pythonEvidence,'completed');
+  assert.deepEqual(report.page.items.map(({sourceTask,snapshotId,...item})=>item),[evidence]);
+  const changed=structuredClone(report);changed.page.items[0].guardLine=2;
+  assert.equal(JSON.parse(jointModelWire(report,changed)).ok,false);
+  assert.equal(f.bench.joint.report(f.eng,{id:run.id}).page.items[0].status,'unverified');
+  f.bench.pythonEvidence=()=>{throw Error('synthetic failure')};
+  const next=f.bench.joint.start(f.eng,start({requestId:'evidence-failure-1'}));
+  const done=await f.bench.joint.wait(f.eng,{id:next.id,waitSeconds:2});
+  assert.equal(done.task.steps[0].pythonEvidence,'unavailable');
+  assert.equal(done.task.findings,1);
+ }finally{await f.close()}
+});
+
+test('deep Semgrep selection binds the fixed profile to parent, child options and persisted runtime details',async()=>{const f=fixture();try{const m=await import('../package/lib/redteam/personal-semgrep-profile.mjs'),p=m.deepSemgrepProfile(),options=[];f.bench.runner=async(_tool,_root,o)=>{options.push(o);return{complete:true,coverageKey:'selected17',coverageFiles:['app.py'],findings:[]}};assert.deepEqual(f.bench.joint.plan(f.eng,{mode:'deep'}).workspace.ruleProfiles,{semgrep:p});const run=f.bench.joint.start(f.eng,start());assert.deepEqual(run.workspace.ruleProfiles,{semgrep:p});const done=await f.bench.joint.wait(f.eng,{id:run.id,waitSeconds:2});assert.equal(done.task.state,'completed');assert.deepEqual(options[0].ruleProfile,p);assert.equal(options[0].workspaceMode,'deep');const child=f.bench.db(f.eng).prepare('SELECT details FROM security_run WHERE id=?').get(done.task.steps[0].id);const details=JSON.parse(child.details);assert.deepEqual(details.runtime.ruleProfile,p);assert.equal(details.runtime.rules.sha256,p.rulesSha256);assert.equal(details.runtime.rules.count,17);const legacy=f.bench.start(f.eng,{requestId:'legacy-profile-0001',profileRevision:1,tool:'semgrep'});await f.bench.active.promise;assert.ok(legacy.id);assert.equal(options[1].ruleProfile,undefined);assert.equal(options[1].workspaceMode,undefined)}finally{await f.close()}});
+test('deep rule base mismatch is unavailable without silently dispatching the baseline',async()=>{const f=fixture();try{const read=f.bench.toolStatus;f.bench.toolStatus=()=>{const value=read();value.semgrep.rules={sha256:'f'.repeat(64)};return value};const plan=f.bench.joint.plan(f.eng,{mode:'deep'});assert.equal(plan.availableSteps.includes('semgrep'),false);assert.ok(plan.workspace.unavailableSteps.some(s=>s.tool==='semgrep'&&s.reason==='deep-rule-base-mismatch'));assert.throws(()=>f.bench.joint.start(f.eng,start()));assert.deepEqual(f.calls,[])}finally{await f.close()}});
+test('a deep profile changed after acceptance is rejected before handing off the source',async()=>{const f=fixture();try{const run=f.bench.joint.start(f.eng,start());assert.ok(f.bench.joint.active.data.workspace.ruleProfiles?.semgrep);f.bench.joint.active.data.workspace.ruleProfiles.semgrep.mode='ordinary';const done=await f.bench.joint.wait(f.eng,{id:run.id,waitSeconds:2});assert.equal(done.task.state,'failed');assert.equal(done.task.snapshot,null);assert.deepEqual(f.calls,[])}finally{await f.close()}});
+
+
+Nuance:toolIdentities remains original runtime/base admission identity; ruleProfiles separately pins selected17 resources inside hashed parent contract. Runner asserts base admission+Docker controls, then verifies selection mode and expected base SHA, stages profile bytes by fixed SHA. Client labels this a rule CONTRACT not proof of tool execution. Test runner injection does not represent native scans; actual VM candidate scan pending. No new permissions, network, dependencies or payload execution.

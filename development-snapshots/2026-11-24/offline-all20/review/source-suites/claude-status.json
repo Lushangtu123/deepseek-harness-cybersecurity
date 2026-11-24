@@ -1,0 +1,19 @@
+{
+  "requestedModel": "claude-opus-5-5",
+  "effort": "high",
+  "state": "completed",
+  "promptSha256": "c80e7bf5c0e38fc5734351f1bd8caa8d426b879ee516bc9bf8a89e088998cd86",
+  "tools": [],
+  "startedAt": "2026-11-24T16:31:04.381058+00:00",
+  "observedModels": [
+    "claude-opus-5-5"
+  ],
+  "elapsedSeconds": 214.9,
+  "exitCode": 0,
+  "actualModels": [
+    "claude-opus-5-5"
+  ],
+  "isError": false,
+  "receiptSha256": "8b7761535502a991775b513482c83119ecde1f9a3c257ac50b50db312e291813",
+  "finishedAt": "2026-11-24T16:34:39.310057+00:00"
+}

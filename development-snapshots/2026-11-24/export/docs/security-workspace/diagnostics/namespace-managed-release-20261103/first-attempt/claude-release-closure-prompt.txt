@@ -1,0 +1,307 @@
+Focused closure after prior five deployment defects, Claude Opus5.5 high, tools disabled. <=500 words. NoVMdeploymentyet. Candidate169 bytes frozen to819-testkit. Fixes: quarantine changed candidate then restore166, rollback-started/failed states and protected/service/auth checks; frozen OLD166 NEW169 watched48 and prior services; hostpostcheck; bounded stop timeout checks actual ActiveState inactive/failed and Job0 before rename. Main risk resolved by systemd user transient Typeexec detached parent, RuntimeMax600s, TimeoutStop300s, KillModemixed. SSH only launches then polls durable result/failure, never relaunch on uncertainty. SIGTERM/HUP triggers rollback, ignored during rollback to let bounded cleanup finish. Independent native supervisor test running; temporary positive/rollback rehearsal already passed. Two focusedWAL/change-candidate regression tests pass. Review actualcode for remaining concrete blockers or false completion. No model tests run by reviewer.
+
+---deploy.py---
+from pathlib import Path
+from hashlib import sha256
+import base64,gzip,importlib.util,json,time
+w=Path(__file__).resolve().parent;repo=w.parents[1]/'exports/deepseek-harness-vm'
+expected=json.loads((w/'archive.json').read_text());old=json.loads((w/'baseline.json').read_text())['program'];new=json.loads((w/'candidate-program.json').read_text());baseline=json.loads((w/'baseline.json').read_text())
+assert new==json.loads((repo/'work/harness-purge-improved/package-files.json').read_text())
+assert sha256((w/'harness-vm-candidate.tar.gz').read_bytes()).hexdigest()==expected['archiveSha256']
+archive=base64.b64encode((w/'harness-vm-candidate.tar.gz').read_bytes()).decode()
+source=f'ARCHIVE={archive!r}\nEXPECTED={expected!r}\nOLD={old!r}\nNEW={new!r}\nBASELINE={baseline!r}\n'+(w/'deploy-remote.py').read_text()
+# This supervisor belongs to the VM user manager, independently of any SSH connection.
+bootstrap="""
+from pathlib import Path
+import json
+operation=Path('/home/purge/.cache/harness-namespace-managed-release-20261103.operation')
+def outcome(name,value):
+ p=operation/(name+'.tmp');p.write_text(json.dumps(value));p.chmod(0o600);p.replace(operation/(name+'.json'))
+try:
+ exec(compile(SOURCE,'namespace-release','exec'),globals())
+ outcome('result',result)
+except BaseException as error:
+ p=Path('/home/purge/.cache/harness-namespace-managed-release-20261103/state.json')
+ outcome('failure',{'errorType':type(error).__name__,'state':json.loads(p.read_text()) if p.is_file() else None})
+ raise
+"""
+payload=base64.b64encode(gzip.compress(('SOURCE='+repr(source)+'\n'+bootstrap).encode())).decode()
+launch='PAYLOAD='+repr(payload)+'\n'+r'''
+from pathlib import Path
+import base64,gzip,json,os,subprocess
+op=Path('/home/purge/.cache/harness-namespace-managed-release-20261103.operation');assert not op.exists();op.mkdir(mode=0o700)
+p=op/'run.py';p.write_bytes(gzip.decompress(base64.b64decode(PAYLOAD)));p.chmod(0o600)
+env={**os.environ,'XDG_RUNTIME_DIR':'/run/user/1000'}
+r=subprocess.run(['systemd-run','--user','--collect','--unit=harness-namespace-managed-release-20261103','--property=Type=exec','--property=RuntimeMaxSec=600','--property=TimeoutStopSec=300','--property=KillMode=mixed','--','/usr/bin/python3','-B',str(p)],env=env,capture_output=True,text=True,timeout=20)
+assert r.returncode==0,r.stderr
+print(json.dumps({'supervisor':'systemd-user-transient-service','operation':str(op),'detachedFromSSH':True}))
+'''
+query=r'''
+from pathlib import Path
+import json
+op=Path('/home/purge/.cache/harness-namespace-managed-release-20261103.operation');backup=Path('/home/purge/.cache/harness-namespace-managed-release-20261103')
+print(json.dumps({n:json.loads(p.read_text()) if (p:=op/(n+'.json')).is_file() else None for n in ['result','failure']}|{'state':json.loads(p.read_text()) if (p:=backup/'state.json').is_file() else None}))
+'''
+spec=importlib.util.spec_from_file_location('manager',Path.home()/'Library/Application Support/Harness Purge Original/host-tools/manage.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);m.validate()
+try:
+ with m.vm_operation('switch'):
+  receipt=json.loads(m.ssh('python3 -B -',input=launch,timeout=45,phase='program-update').stdout);(w/'deploy-launch.json').write_text(json.dumps(receipt,indent=2)+'\n')
+  until=time.monotonic()+660
+  while True:
+   observation=json.loads(m.ssh('python3 -B -',input=query,timeout=15,phase='program-update').stdout);(w/'deploy-observation.json').write_text(json.dumps(observation,indent=2)+'\n')
+   if observation['failure']:raise RuntimeError('VM release failed; inspect recorded rollback state')
+   if observation['result']:value=observation['result'];break
+   if time.monotonic()>=until:raise RuntimeError('VM release outcome unknown; inspect original operation, do not relaunch')
+   time.sleep(1)
+except BaseException as e:
+ data={'errorType':type(e).__name__,'vmOutcome':'unknown unless deploy-observation or VM state proves otherwise','inspectOperation':'/home/purge/.cache/harness-namespace-managed-release-20261103.operation','relaunchAllowed':False}
+ (w/'deploy-controller-failure.json').write_text(json.dumps(data,indent=2)+'\n');raise
+(w/'deploy.json').write_text(json.dumps(value,indent=2)+'\n')
+host=json.loads((w/'host-baseline.json').read_text());assert all(sha256(Path(n).read_bytes()).hexdigest()==h for n,h in host.items());value['hostManagerAndVMConfigUnchanged']=True
+(w/'deploy.json').write_text(json.dumps(value,indent=2)+'\n');print(json.dumps(value))
+
+---deploy-remote.py---
+
+from pathlib import Path, PurePosixPath
+import base64,hashlib,http.client,io,json,os,re,sqlite3,subprocess,tarfile,time,signal,stat
+from http.cookies import SimpleCookie
+
+home=Path('/home/purge')
+assert Path.home()==home and os.getuid()==1000
+package=home/'tools/dsh-purge-personal-1.1.77-personal.1'
+backup=home/'.cache/harness-namespace-managed-release-20261103'
+assert not backup.exists() and package.resolve()==package
+def digest(raw):return hashlib.sha256(raw).hexdigest()
+def inventory(root):
+    return {str(p.relative_to(root)):digest(p.read_bytes()) for p in root.rglob('*')
+            if p.is_file() and '__pycache__' not in p.parts}
+def system(action,unit,check=True):
+    return subprocess.run(['systemctl','--user',action,unit],env={**os.environ,'XDG_RUNTIME_DIR':'/run/user/1000'},
+                          capture_output=True,text=True,check=check,timeout=30)
+def active(unit):return system('is-active',unit,False).returncode==0
+def docker(*args):
+    return subprocess.check_output(['/usr/bin/sudo','-n','/usr/bin/docker',*args],text=True,timeout=10).splitlines()
+def assert_idle():
+    for file in (home/'.dsh-improved/redteam/engagements').glob('*/assets.db'):
+        with sqlite3.connect(file.as_uri()+'?mode=ro',uri=True,timeout=3) as db:
+            tables={r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+            for table in ('security_run','security_joint'):
+                if table in tables:
+                    assert db.execute("SELECT COUNT(*) FROM "+table+" WHERE state IN ('running','cancelling')").fetchone()[0]==0
+            if 'security_joint_pending' in tables:assert db.execute('SELECT COUNT(*) FROM security_joint_pending').fetchone()[0]==0
+    for label in ('personal.harness.security=true','personal.harness.joint','personal.harness.runtime'):
+        assert not docker('ps','-aq','--filter','label='+label)
+    assert not docker('network','ls','-q','--filter','label=personal.harness.runtime')
+    assert not any(n.startswith('pentagi-terminal-') for n in docker('ps','--format','{{.Names}}'))
+    assert not list((home/'.dsh-improved/security-runtime-links').glob('*.json'))
+def watched_raw():
+    files=sorted((home/'.dsh-improved/redteam/engagements').glob('*/assets.db'))
+    files += [home/name for name in ['.dsh-improved/cordis.patch.yml','.dsh-improved/.credentials.yaml','tools/security-workbench/images.json','tools/security-workbench/rules.json','.dsh-improved/profiles/web/cordis.patch.yml','.config/systemd/user/harness-security.service','.config/systemd/user/harness-security.socket'] if (home/name).is_file()]
+    result={}
+    for path in files:
+        with path.open('rb') as stream:result[str(path)]=hashlib.file_digest(stream,'sha256').hexdigest()
+    return result
+def watched():
+    files=sorted((home/'.dsh-improved/redteam/engagements').glob('*/assets.db'))
+    result={}
+    for path in files:
+        digest=hashlib.sha256()
+        db=sqlite3.connect(path.as_uri()+'?mode=ro',uri=True,timeout=3)
+        try:
+            for statement in db.iterdump():digest.update((statement+'\n').encode())
+        finally:db.close()
+        result[str(path)]=digest.hexdigest()
+    for path in [home/name for name in ['.dsh-improved/cordis.patch.yml','.dsh-improved/.credentials.yaml','tools/security-workbench/images.json','tools/security-workbench/rules.json','.dsh-improved/profiles/web/cordis.patch.yml','.config/systemd/user/harness-security.service','.config/systemd/user/harness-security.socket'] if (home/name).is_file()]:
+        result[str(path)]=hashlib.sha256(path.read_bytes()).hexdigest()
+    return result
+units=['dsh-original.service','harness-security.socket','harness-security.service']
+assert inventory(package)==OLD
+assert len(OLD)==166 and len(NEW)==169 and len(BASELINE['watched'])==48
+before_watched=watched();assert before_watched==BASELINE['watched']
+raw_before=watched_raw()
+assert_idle()
+was={unit:active(unit) for unit in units}
+assert was==BASELINE['services'] and was[units[0]]
+raw=base64.b64decode(ARCHIVE);assert digest(raw)==EXPECTED['archiveSha256']
+backup.mkdir(mode=0o700);assert backup.stat().st_dev==package.stat().st_dev
+(backup/'protected-before.json').write_text(json.dumps({'logical':before_watched,'raw':raw_before}))
+stage=backup/'candidate';stage.mkdir(mode=stat.S_IMODE(package.stat().st_mode));stage.chmod(stat.S_IMODE(package.stat().st_mode))
+previous=backup/'previous'
+with tarfile.open(fileobj=io.BytesIO(raw),mode='r:gz') as archive:
+    seen=set()
+    for member in archive:
+        name=member.name; rel=PurePosixPath(name)
+        assert member.isfile() and name in NEW and name not in seen and not rel.is_absolute() and '..' not in rel.parts
+        path=stage/rel;path.parent.mkdir(parents=True,exist_ok=True)
+        data=archive.extractfile(member).read();assert digest(data)==NEW[name]
+        path.write_bytes(data);path.chmod(member.mode & 0o755);seen.add(name)
+assert inventory(stage)==NEW
+node=home/'.local/node/bin/node'
+subprocess.run([node,'--check',stage/'client.js'],timeout=12,check=True)
+def record(phase):
+    temporary=backup/'state.tmp'
+    temporary.write_text(json.dumps({'phase':phase,'archiveSha256':EXPECTED['archiveSha256'],'servicesWereActive':was}))
+    temporary.chmod(0o600);temporary.replace(backup/'state.json')
+def stop():
+    for unit in (units[1],units[2],units[0]):
+        try:system('stop',unit)
+        except subprocess.TimeoutExpired:pass
+        deadline=time.monotonic()+10
+        while True:
+            result=system('show',unit)
+            values=dict(line.split('=',1) for line in result.stdout.splitlines() if '=' in line)
+            if values.get('ActiveState') in ('inactive','failed') and values.get('Job')=='0':break
+            if time.monotonic()>=deadline:raise RuntimeError('Unit stop or job completion not confirmed: '+unit)
+            time.sleep(0.2)
+def start():
+    for unit in units:
+        if was[unit]:system('start',unit)
+    assert active(units[0])
+def healthy():
+    pid=system('show','dsh-original.service')
+    current=re.search(r'^MainPID=([1-9][0-9]*)$',pid.stdout,re.M)
+    if not current:return False
+    logs=subprocess.run(['journalctl','--user','-u','dsh-original','_PID='+current[1],'-n','45','--no-pager','-o','cat'],
+        env={**os.environ,'XDG_RUNTIME_DIR':'/run/user/1000'},capture_output=True,text=True,timeout=4,check=True).stdout
+    keys=re.findall(r'http://127\.0\.0\.1:49224/\?token=([A-Za-z0-9_-]+)',logs)
+    if not keys:return False
+    connection=http.client.HTTPConnection('10.0.2.15',3080,timeout=3)
+    try:
+        connection.request('GET','/?token='+keys[-1],headers={'Host':'127.0.0.1:49224'})
+        response=connection.getresponse()
+        cookies=SimpleCookie()
+        for name,value in response.getheaders():
+            if name.lower()=='set-cookie':cookies.load(value)
+        response.read(2*1024*1024)
+        if not cookies:return False
+        connection.request('GET','/dsh-purge/status',headers={'Host':'127.0.0.1:49224',
+            'Cookie':'; '.join(name+'='+value.value for name,value in cookies.items())})
+        response=connection.getresponse()
+        value=json.loads(response.read(1024*1024))
+        return response.status==200 and value.get('ok') is True and value.get('ready') is True
+    finally:connection.close()
+def wait_healthy():
+    deadline=time.monotonic()+30
+    while time.monotonic()<deadline:
+        try:
+            if healthy():return
+        except Exception:pass
+        time.sleep(0.5)
+    raise RuntimeError('Authenticated candidate health check failed')
+def restore_previous():
+    if previous.exists():
+        if package.exists():
+            failed=backup/'candidate-failed'
+            assert not failed.exists() and not package.is_symlink()
+            package.rename(failed)
+        previous.rename(package)
+    assert inventory(package)==OLD
+def terminated(_signal,_frame):raise RuntimeError('Deployment service asked to stop')
+signal.signal(signal.SIGTERM,terminated)
+signal.signal(signal.SIGHUP,terminated)
+record('prepared')
+try:
+    stop()
+    assert_idle()
+    raw_stopped=watched_raw()
+    (backup/'protected-stopped.json').write_text(json.dumps({'logical':watched(),'raw':raw_stopped}))
+    assert inventory(package)==OLD and watched()==before_watched
+    package.rename(previous)
+    record('previous-retained')
+    stage.rename(package)
+    record('candidate-in-place')
+    assert inventory(package)==NEW
+    start()
+    wait_healthy()
+    assert watched()==before_watched
+    assert all(active(unit) for unit in units if was[unit])
+    record('candidate-service-active')
+except BaseException:
+    record('rollback-started')
+    signal.signal(signal.SIGTERM,signal.SIG_IGN)
+    signal.signal(signal.SIGHUP,signal.SIG_IGN)
+    try:
+        stop()
+        restore_previous()
+        start()
+        wait_healthy()
+        assert all(active(unit) for unit in units if was[unit]) and watched()==before_watched
+        record('rolled-back')
+    except BaseException:
+        record('rollback-failed')
+        raise
+    raise
+result={'programFiles':len(NEW),'rollbackFiles':len(OLD),'servicesRestarted':was,
+                  'protectedFileDigestsMatched':len(before_watched),'archiveSha256':EXPECTED['archiveSha256'],
+                  'backup':str(backup),'candidateServiceActive':True,'databaseProtection':'logical dump; other protected files byte digest','physicalProtectedFilesChangedAfterStop':sum(raw_stopped.get(k)!=v for k,v in raw_before.items()),'physicalChangeMeaning':'informational only; logical database equality is the protection criterion'}
+
+---deployment-protection.test.py---
+from pathlib import Path
+from tempfile import TemporaryDirectory
+import ast,hashlib,sqlite3,unittest
+
+class DeploymentProtection(unittest.TestCase):
+ def test_checkpoint_preserves_logical_protection_but_changes_raw_file(self):
+  remote=ast.parse(Path(__file__).with_name('deploy-remote.py').read_text());watched=next(n for n in remote.body if isinstance(n,ast.FunctionDef) and n.name=='watched')
+  with TemporaryDirectory() as directory:
+   home=Path(directory);dbfile=home/'.dsh-improved/redteam/engagements/test/assets.db';dbfile.parent.mkdir(parents=True)
+   for name in ('.dsh-improved/cordis.patch.yml','tools/security-workbench/images.json'):
+    p=home/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_text('unchanged')
+   context={'home':home,'hashlib':hashlib,'sqlite3':sqlite3};exec(compile(ast.Module(body=[watched],type_ignores=[]),'watched','exec'),context)
+   db=sqlite3.connect(dbfile)
+   try:
+    db.execute('PRAGMA journal_mode=WAL');db.execute('PRAGMA wal_autocheckpoint=0')
+    db.execute('CREATE TABLE sample(value TEXT)');db.execute('INSERT INTO sample VALUES (?)',('synthetic',));db.commit()
+    before=context['watched']();raw=hashlib.sha256(dbfile.read_bytes()).hexdigest()
+    db.execute('PRAGMA wal_checkpoint(FULL)').fetchall()
+    self.assertNotEqual(raw,hashlib.sha256(dbfile.read_bytes()).hexdigest())
+    self.assertEqual(before,context['watched']())
+    db.execute('INSERT INTO sample VALUES (?)',('changed',));db.commit()
+    self.assertNotEqual(before,context['watched']())
+   finally:db.close()
+
+
+class RollbackQuarantine(unittest.TestCase):
+ def test_changed_candidate_is_preserved_and_cannot_block_old_program_restore(self):
+  tree=ast.parse(Path(__file__).with_name('deploy-remote.py').read_text())
+  restore=next((n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='restore_previous'),None)
+  self.assertIsNotNone(restore,'Rollback must not require the failed candidate to be unchanged')
+  inventory=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='inventory')
+  with TemporaryDirectory() as directory:
+   root=Path(directory);backup=root/'backup';backup.mkdir();previous=backup/'previous';previous.mkdir();(previous/'app.py').write_text('old')
+   package=root/'package';package.mkdir();(package/'app.py').write_text('new');(package/'unexpected-runtime-file').write_text('preserve me')
+   context={'previous':previous,'backup':backup,'package':package,'OLD':{'app.py':hashlib.sha256(b'old').hexdigest()},'digest':lambda raw:hashlib.sha256(raw).hexdigest()}
+   exec(compile(ast.Module(body=[inventory,restore],type_ignores=[]),'rollback','exec'),context);context['restore_previous']()
+   self.assertEqual((package/'app.py').read_text(),'old');self.assertEqual((backup/'candidate-failed'/'unexpected-runtime-file').read_text(),'preserve me')
+
+if __name__=='__main__':unittest.main()
+
+---check-supervisor.py---
+from pathlib import Path
+import importlib.util,json,time
+w=Path(__file__).resolve().parent
+spec=importlib.util.spec_from_file_location('m',Path.home()/'Library/Application Support/Harness Purge Original/host-tools/manage.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);m.validate()
+source=r'''
+from pathlib import Path
+from tempfile import mkdtemp
+import json,os,subprocess
+p=Path(mkdtemp(prefix='namespace-release-supervisor-',dir='/home/purge/.cache'));env={**os.environ,'XDG_RUNTIME_DIR':'/run/user/1000'}
+checks={}
+for u in ['dsh-original.service','harness-security.socket','harness-security.service']:
+ r=subprocess.check_output(['systemctl','--user','show',u,'-p','Job','-p','ActiveState'],env=env,text=True,timeout=8)
+ checks[u]=dict(line.split('=',1) for line in r.splitlines());assert checks[u]=={'Job':'0','ActiveState':'active'} or checks[u]=={'ActiveState':'active','Job':'0'}
+code="from pathlib import Path;import json,os,time;time.sleep(2);Path("+repr(str(p/'result.json'))+").write_text(json.dumps({'parent':Path('/proc/'+str(os.getppid())+'/comm').read_text().strip()}))"
+r=subprocess.run(['systemd-run','--user','--collect','--unit=harness-namespace-release-supervisor-check','--property=Type=exec','--property=RuntimeMaxSec=15','--property=TimeoutStopSec=5','--property=KillMode=mixed','--','/usr/bin/python3','-B','-c',code],env=env,capture_output=True,text=True,timeout=10);assert r.returncode==0,r.stderr
+print(json.dumps({'directory':str(p),'serviceState':checks,'markerExistedAtSSHReturn':(p/'result.json').exists()}))
+'''
+started=json.loads(m.ssh('python3 -B -',input=source,timeout=20,phase='native-check').stdout);assert not started['markerExistedAtSSHReturn'];path=started['directory']
+query='DIRECTORY='+repr(path)+'\n'+r'''
+from pathlib import Path
+import json,shutil,time
+p=Path(DIRECTORY);assert p.parent==Path('/home/purge/.cache') and p.name.startswith('namespace-release-supervisor-')
+for _ in range(30):
+ if (p/'result.json').is_file():break
+ time.sleep(0.1)
+v=json.loads((p/'result.json').read_text());assert v['parent']=='systemd';shutil.rmtree(p);print(json.dumps({'markerWrittenAfterSSHReturned':True,'parent':v['parent'],'ownedTemporaryRemoved':not p.exists()}))
+'''
+ended=json.loads(m.ssh('python3 -B -',input=query,timeout=8,phase='native-check').stdout);receipt={**started,**ended};(w/'supervisor-check.json').write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(receipt))

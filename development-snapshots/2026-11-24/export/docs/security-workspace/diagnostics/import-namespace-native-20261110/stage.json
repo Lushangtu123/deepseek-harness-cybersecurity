@@ -1,0 +1,40 @@
+{
+  "root": "/home/purge/.cache/score-native-qa-pzxp3w4l",
+  "port": 42963,
+  "engagement": "native-import-namespace-20261110",
+  "fixture": {
+    "engagement": "native-import-namespace-20261110",
+    "profile": {
+      "repoRoot": "/home/purge/.cache/score-native-qa-pzxp3w4l/workspace/synthetic-project",
+      "tools": [
+        "semgrep"
+      ],
+      "url": null,
+      "expiresAt": "2026-11-11T06:06:59.886Z",
+      "revision": 1
+    },
+    "fixtureFiles": 18,
+    "newScannerCalls": 0
+  },
+  "programFiles": 173,
+  "programDigest": "ce47db260931cfee4c418c9dd6a2145c4791e1c33855a37e876d9a561a05d023",
+  "outsideMountNamespace": "mnt:[4026531841]",
+  "workerMode": "0o644",
+  "profilePackagePhysicalPath": "/home/purge/.cache/score-native-qa-pzxp3w4l/package",
+  "runtimeTree": "/home/purge/tools/harness-improved-runtime/node_modules",
+  "supervisorPID": 3007205,
+  "ready": true,
+  "productionUnchanged": true,
+  "fence": {
+    "guardInstalled": true,
+    "storeMatches": true,
+    "allowed": [
+      "redteam_session_bind",
+      "redteam_session_info",
+      "redteam_joint_review"
+    ],
+    "modelObserver": true,
+    "maxTools": 48,
+    "maxModelDispatches": 40
+  }
+}

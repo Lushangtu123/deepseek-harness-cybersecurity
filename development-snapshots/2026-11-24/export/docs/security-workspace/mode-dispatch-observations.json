@@ -1,0 +1,146 @@
+{
+  "ok": true,
+  "ordinary": {
+    "requestState": "rejected",
+    "availableSteps": [],
+    "spawnedScanners": 0
+  },
+  "selected": {
+    "id": "2b20c6b9-c551-441b-a49f-1743eec1c4f8",
+    "state": "completed",
+    "steps": [
+      "semgrep"
+    ],
+    "duplicateSameTask": true,
+    "modePreserved": true
+  },
+  "deep": {
+    "id": "73c24152-8d34-4a2f-a51d-2a9e7833e60a",
+    "state": "completed",
+    "workspace": {
+      "version": "workspace-dispatch-s1-1",
+      "mode": "deep",
+      "sandboxProfile": "S1",
+      "selectedSteps": [
+        "semgrep",
+        "trivy"
+      ],
+      "toolIdentities": {
+        "semgrep": "598208862ad1449a5c64391f5bb0bef537e2ee334d89588e5b3582c900c4b608",
+        "trivy": "67102d46834501e610bed2188e42390d1e3932aecb5ecd00014fa05e0e87d297"
+      },
+      "budgetSeconds": 180,
+      "modelRequests": 0,
+      "fullWorkspaceReady": false
+    },
+    "steps": [
+      {
+        "tool": "semgrep",
+        "id": "bf797bb1-10a3-40fc-84e8-6aa7f5e27647",
+        "state": "completed",
+        "complete": true,
+        "coverageScope": "scanner-reported-files",
+        "eligibleFiles": null,
+        "cleanupVerified": null,
+        "version": "1.182.1",
+        "checkedFiles": 7,
+        "problem": null,
+        "fileCoverage": {
+          "scope": "managed-copy",
+          "scanned": 7,
+          "total": 10,
+          "uncovered": 3,
+          "withoutLanguageRule": 2
+        },
+        "coverageNotes": [
+          "缺少语言规则的 2 个文件仅指已核对的 PHP 缺口；其他未覆盖文件的原因未记录。"
+        ],
+        "diagnostics": {
+          "total": 0,
+          "retained": 0,
+          "truncated": false
+        },
+        "modelCalls": 0,
+        "artifacts": 0
+      },
+      {
+        "tool": "trivy",
+        "id": "ce0fba68-56f8-4760-a0d4-4578fb351400",
+        "state": "completed",
+        "complete": true,
+        "coverageScope": "scanner-reported-files",
+        "eligibleFiles": null,
+        "cleanupVerified": null,
+        "version": "0.76.1",
+        "checkedFiles": 1,
+        "problem": null,
+        "inputPolicy": "archive-xml-exclusions-1",
+        "coverageNotes": [
+          "本次 Trivy 未覆盖 JAR、WAR、PAR、EAR、ZIP、XML 和 POM 文件。"
+        ],
+        "diagnostics": {
+          "total": 0,
+          "retained": 0,
+          "truncated": false
+        },
+        "modelCalls": 0,
+        "artifacts": 0
+      }
+    ],
+    "snapshotFiles": 10,
+    "findings": 47,
+    "pages": 11,
+    "maxWireBytes": 5990,
+    "coverageComplete": false
+  },
+  "scannerRows": [
+    {
+      "id": "6d199ce7-4165-4ce5-ab0b-4196b746d5f5",
+      "tool": "semgrep",
+      "state": "completed"
+    },
+    {
+      "id": "bf797bb1-10a3-40fc-84e8-6aa7f5e27647",
+      "tool": "semgrep",
+      "state": "completed"
+    },
+    {
+      "id": "ce0fba68-56f8-4760-a0d4-4578fb351400",
+      "tool": "trivy",
+      "state": "completed"
+    }
+  ],
+  "cleanup": [
+    {
+      "id": "6d199ce7-4165-4ce5-ab0b-4196b746d5f5",
+      "containerAbsent": true,
+      "rulesRemoved": true,
+      "databaseRemoved": true
+    },
+    {
+      "id": "bf797bb1-10a3-40fc-84e8-6aa7f5e27647",
+      "containerAbsent": true,
+      "rulesRemoved": true,
+      "databaseRemoved": true
+    },
+    {
+      "id": "ce0fba68-56f8-4760-a0d4-4578fb351400",
+      "containerAbsent": true,
+      "rulesRemoved": true,
+      "databaseRemoved": true
+    }
+  ],
+  "processExitCode": 0,
+  "tempRemoved": true,
+  "deployedStateUnchanged": true,
+  "deployedBaseline": {
+    "programFiles": 157,
+    "programDigest": "28709ff69c47956d313012c6b827ced25429d4fb2deae59dbabe4710a7e74818",
+    "scannerManifestSha256": "6a3a04e4f0f81aaa77e4f312eb6cb90a28ebc75c6e0b1ee06b214dc48195c36c"
+  },
+  "candidateSourceSha256": "b7d7c7f5569d415be9af5048c7c7a91798ac411367780bfbded1efb40254b985",
+  "serviceObservedEvents": 2,
+  "observationNormalization": "Original rpcCalls field represented selective service observer events, not all RPC calls; renamed here without changing the original receipt.",
+  "scope": "Dedicated VM temporary synthetic mode-dispatch integration; no actual model/Chrome mode acceptance or deployment",
+  "sourceReceipt": "work/harness-workspace-dispatch-20261103/evidence/native-after-vm-start.json (outside product export)"
+}

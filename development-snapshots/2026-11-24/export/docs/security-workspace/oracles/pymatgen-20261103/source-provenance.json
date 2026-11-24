@@ -1,0 +1,16 @@
+{
+  "vulnerable": {
+    "commit": "12ab947261cda104ac87548429c69ce5014bbf02",
+    "gitBlobSha1": "a0d3050984ffd4fb21ce201814771ab72bb50e95",
+    "sha256": "97001081edfea081b211bc58650abb271ce7fb2f035f7ff17c1354062775a95f"
+  },
+  "patched": {
+    "commit": "c231cbd3d5147ee920a37b6ee9dd236b376bcf5a",
+    "gitBlobSha1": "87d4fde6f35d5208c196bf0a301aff5978a9994b",
+    "sha256": "84d5f4320e6888ee96b1d63f7895ad63efe31e49edddb7633ea1b13935da3926"
+  },
+  "licenseGitBlobSha1": "5533d21a204942bc370fab54a4472e121820dc37",
+  "repository": "materialsproject/pymatgen",
+  "path": "pymatgen/symmetry/settings.py",
+  "retrievedWith": "connected GitHub file/commit APIs; local Git blob hashes will be verified"
+}

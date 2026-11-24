@@ -1,0 +1,289 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Los_Angeles",
+  "runId": "security-report-20261029",
+  "feature": "full-database report counts, explicit current and recorded historical scope, recorded runtime context and literal redacted Markdown",
+  "regression": {
+    "fullPluginPassed": 389,
+    "failed": 0,
+    "newCases": 5,
+    "initialFourCasesFailedBeforeImplementation": true,
+    "legacyUrlCaseFailedBeforeRefinement": true,
+    "independentReviewImportantOrCriticalFindings": 0,
+    "reviewTestsExecuted": false,
+    "firstFullRevisionPassed": 388
+  },
+  "cases": [
+    "20001 finding records counted despite 20000 detail cap",
+    "current scope changes cannot replace recorded scope/tool metadata",
+    "empty/legacy/incomplete/unknown records retain uncertainty",
+    "Markdown metacharacters and secret-like values protected without editing stored records",
+    "missing URL stays unknown, explicit null means unconfigured"
+  ],
+  "reportContract": {
+    "summaryPopulation": "all persisted security_finding/security_run records in same project",
+    "summaryRead": "same SQLite read savepoint as totals and detail lists",
+    "detailLimitPerKind": 20000,
+    "severityIncludesAllFindingStates": true,
+    "fullTaskCondition": "state=completed AND complete=1",
+    "historyFilledFromCurrentResources": false,
+    "changedFindingState": false,
+    "missingHistoricalField": "未记录",
+    "explicitNullUrl": "未配置",
+    "schemaChanges": false,
+    "additiveResponseFields": [
+      "summary",
+      "generatedAt"
+    ]
+  },
+  "httpAcceptance": {
+    "authenticatedReport": 200,
+    "project": "personal-security-compare-20261029",
+    "summary": {
+      "findings": {
+        "total": 3,
+        "byStatus": {
+          "unverified": 3,
+          "confirmed": 0,
+          "false-positive": 0,
+          "fixed": 0,
+          "retest-passed": 0,
+          "reopened": 0,
+          "other": 0
+        },
+        "bySeverity": {
+          "critical": 0,
+          "high": 1,
+          "medium": 2,
+          "low": 0,
+          "info": 0,
+          "other": 0
+        }
+      },
+      "runs": {
+        "total": 2,
+        "byState": {
+          "running": 0,
+          "completed": 2,
+          "partial": 0,
+          "failed": 0,
+          "cancelled": 0,
+          "interrupted": 0,
+          "other": 0
+        },
+        "notComplete": 0
+      }
+    },
+    "exportComplete": true,
+    "recordedVersionsMatched": true,
+    "allFindingsStillUnverified": true,
+    "unauthenticatedStatus": 401,
+    "foreignOriginStatus": 403,
+    "modelCalls": 0,
+    "newScans": 0
+  },
+  "browserAcceptance": {
+    "browser": "IAB",
+    "project": "personal-security-compare-20261029",
+    "downloadProjectMatched": true,
+    "downloadMatchesAuthenticatedApiExceptGenerationTime": true,
+    "findingRecords": 3,
+    "unverified": 3,
+    "completedTasks": 2,
+    "recordedToolVersionsMatched": true,
+    "currentAndHistoricalScopePresent": true,
+    "downloadSha256": "27d9a36249f71922030b3281c2d86ccd9661b9b95ab23888e58f484e7d92a3cf",
+    "screenshot": "report-export-final.jpg",
+    "browserConnection": "prior handle unavailable; fresh IAB tab connected",
+    "scope": "normal authenticated download; report fault and limit cases use component/SQLite tests",
+    "modelCalls": 0,
+    "newScans": 0
+  },
+  "live": {
+    "programFilesMatched": 122,
+    "ruleHashMatched": true,
+    "runtimeManifestMatched": true,
+    "service": "active",
+    "activeScannerContainers": 0,
+    "preflight": {
+      "ok": true,
+      "readOnly": true,
+      "automaticChanges": false,
+      "scope": "local pinned images, rules and database identity; no scanner execution, model call, network download or GitHub latest check",
+      "tools": {
+        "semgrep": {
+          "ready": true,
+          "version": "1.182.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T02:48:40.720Z",
+          "cached": false,
+          "rules": {
+            "version": "local-reviewed-2",
+            "count": 16,
+            "languages": [
+              "javascript",
+              "python",
+              "typescript"
+            ]
+          }
+        },
+        "trivy": {
+          "ready": true,
+          "version": "0.76.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T02:48:40.720Z",
+          "cached": false,
+          "database": {
+            "state": "fresh",
+            "updatedAt": "2026-10-29T19:18:50.969Z",
+            "nextUpdate": "2026-10-30T19:18:50.969Z",
+            "ageDays": 0
+          },
+          "lastUpdate": {
+            "state": "current",
+            "checkedAt": "2026-10-29T22:59:00.361501+00:00"
+          }
+        },
+        "zap": {
+          "ready": true,
+          "version": "2.17.0",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T02:48:40.720Z",
+          "cached": false
+        }
+      }
+    },
+    "hostIsolationValidated": true
+  },
+  "deployment": {
+    "changedGuestFiles": [
+      "tools/dsh-purge-personal-1.1.77-personal.1/PERSONAL-CHANGES.md",
+      "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-report.mjs",
+      "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-workbench.mjs"
+    ],
+    "forkHashesMatched": 122,
+    "guestBackup": "/home/purge/downloads/security-report-20261030T024230Z",
+    "serviceRestarted": true
+  },
+  "legacyUrlRefinementDeployment": {
+    "changedGuestFiles": [
+      "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-report.mjs"
+    ],
+    "forkHashesMatched": 122,
+    "guestBackup": "/home/purge/downloads/security-report-legacy-20261030T024743Z",
+    "serviceRestarted": true
+  },
+  "history": {
+    "firstHttpAttempt": "SSH exited255 while fetching authenticated entry, before HTTP request; readonly SSH succeeded and both subsequent HTTP receipts passed; cause undetermined",
+    "browser": "prior handle unavailable; fresh same-browser tab connected",
+    "failedReceiptsRetained": true,
+    "initialTestFixtureRefinement": "second RED uses hyphenated version canaries and narrows a fixture assertion; target features still absent and tests failed"
+  },
+  "scope": {
+    "newScans": 0,
+    "modelCalls": 0,
+    "permissionsChanged": false,
+    "scannerAssetsChanged": false,
+    "backendReportOnly": true,
+    "frontendBundleChanged": false,
+    "gitPush": false
+  },
+  "recovery": {
+    "point": "ready-security-audit-20261029",
+    "updateIncluded": false,
+    "newSnapshot": false,
+    "sourceBackup": "/home/purge/downloads/security-report-20261030T024230Z",
+    "refinementBackup": "/home/purge/downloads/security-report-legacy-20261030T024743Z",
+    "existingFilesChangedFromStart": 2,
+    "newModule": "lib/redteam/personal-security-report.mjs",
+    "wholeFeatureRollback": "restore original workbench/changelog from first backup, remove added report module; retain database"
+  },
+  "limits": [
+    "counts describe saved finding records, not verified unique vulnerabilities",
+    "no zero-findings or complete-task safe verdict",
+    "historical metadata can be absent and is not reconstructed",
+    "recorded Git commit does not freeze uncommitted working tree",
+    "text escaping and existing redaction do not constitute complete secret detection",
+    "real browser verified normal download; cap and malformed-history cases use local tests"
+  ],
+  "commandReceipts": {
+    "report-red": {
+      "scope": "report-red",
+      "returncode": 1,
+      "sha256": "24a54483cb080b4d506a899a70ee1da335d59f7d183f52858625f05a14fb8ad8"
+    },
+    "report-red-2": {
+      "scope": "report-red",
+      "returncode": 1,
+      "sha256": "aa9e09ee2be90c66f5c13bb98718e9f81124ca7af6f66a404d57d4f5069cfc69"
+    },
+    "report-green": {
+      "scope": "report-green",
+      "returncode": 0,
+      "sha256": "71bf7a3279acbc2539be34d6876e03061328cd7a7ad7cd9a240af4e0a77b0071"
+    },
+    "package-final": {
+      "scope": "package-final",
+      "returncode": 0,
+      "sha256": "aef8b9874fa1965442242710b32d9e69cae4355059143338cf774106994889ad"
+    },
+    "legacy-url-red": {
+      "scope": "legacy-url",
+      "returncode": 1,
+      "sha256": "c8bb26e1e8dfda43cf4e4d292ec8ea318dbc96a314126280845bf583429feca9"
+    },
+    "package-final-2": {
+      "scope": "package-final",
+      "returncode": 0,
+      "sha256": "0133c2e22997a9b2a762bce6ccd3e75bd005e1fef826d6a16ea59e52a7d3d134"
+    },
+    "deployment": {
+      "scope": "deployment",
+      "returncode": 0,
+      "sha256": "4992adbf308b242a13a741b9f2228e7daeecf1444851e99dc6ee59fe5d61b2db"
+    },
+    "deployment-legacy": {
+      "scope": "deployment",
+      "returncode": 0,
+      "sha256": "40a2f8043dde447a017dbeb8c3d4271b3d94d756586e83cb28168847ceff2216"
+    },
+    "live-final": {
+      "scope": "deployment",
+      "returncode": 0,
+      "sha256": "644e68f9a894de638ff3e8891159a74d41453c0d49c1da4855c73fccb336ffea"
+    },
+    "live-final-2": {
+      "scope": "deployment",
+      "returncode": 0,
+      "sha256": "1af13ce2c0db84c69d9f905ed8182ac0a6e7deb7fb51efa1714fa38ec05e38bd"
+    },
+    "http-final": {
+      "scope": "http-final",
+      "returncode": 1,
+      "sha256": "2493a1d67ddafff61c4a8cd0e745949a06e2cba44d10ced5999a0ae4d1b3a5c7"
+    },
+    "http-final-2": {
+      "scope": "http-final",
+      "returncode": 0,
+      "sha256": "d1899f2943d39a0e6d5776bf4fbfe00947793d1ef8c341ddc43e95832d85e3a3"
+    },
+    "http-final-3": {
+      "scope": "http-final",
+      "returncode": 0,
+      "sha256": "75620f5264fdbb9793b9f005cc4a4177bd6bbff2b794c00c66d54497897d84c1"
+    },
+    "browser-artifact": {
+      "scope": "browser-artifact",
+      "returncode": 0,
+      "sha256": "d48cd33b7fbdd20b4e4e2a9488199db70e1b66e4c99b0081492665b54751a619"
+    },
+    "browser-artifact-final": {
+      "scope": "browser-artifact",
+      "returncode": 0,
+      "sha256": "c40b2f82c106840f6ee7804b0c33b22d3654c8033b3a2b4344ce25bbd6069d10"
+    }
+  }
+}

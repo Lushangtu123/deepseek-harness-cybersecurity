@@ -1,0 +1,139 @@
+{
+  "hits": [
+    {
+      "rule": "harness.python.eval",
+      "path": "/src/BenchmarkTest00073.py"
+    },
+    {
+      "rule": "harness.python.exec",
+      "path": "/src/BenchmarkTest00074.py"
+    },
+    {
+      "rule": "harness.python.eval",
+      "path": "/src/literal-set.py"
+    },
+    {
+      "rule": "harness.python.eval",
+      "path": "/src/skf-upstream.py"
+    },
+    {
+      "rule": "harness.python.request-to-dynamic-code",
+      "path": "/src/skf-upstream.py"
+    }
+  ],
+  "mapping": [
+    {
+      "index": 0,
+      "state": "ignored",
+      "reason": "unsupported-rule",
+      "path": "BenchmarkTest00073.py",
+      "rule": "harness.python.eval",
+      "scannerSpan": {
+        "start": {
+          "line": 53,
+          "col": 16,
+          "offset": 1742
+        },
+        "end": {
+          "line": 55,
+          "col": 5,
+          "offset": 1762
+        }
+      }
+    },
+    {
+      "index": 1,
+      "state": "ignored",
+      "reason": "unsupported-rule",
+      "path": "BenchmarkTest00074.py",
+      "rule": "harness.python.exec",
+      "scannerSpan": {
+        "start": {
+          "line": 51,
+          "col": 4,
+          "offset": 1759
+        },
+        "end": {
+          "line": 51,
+          "col": 13,
+          "offset": 1768
+        }
+      }
+    },
+    {
+      "index": 2,
+      "state": "ignored",
+      "reason": "unsupported-rule",
+      "path": "literal-set.py",
+      "rule": "harness.python.eval",
+      "scannerSpan": {
+        "start": {
+          "line": 4,
+          "col": 12,
+          "offset": 105
+        },
+        "end": {
+          "line": 4,
+          "col": 23,
+          "offset": 116
+        }
+      }
+    },
+    {
+      "index": 3,
+      "state": "ignored",
+      "reason": "unsupported-rule",
+      "path": "skf-upstream.py",
+      "rule": "harness.python.eval",
+      "scannerSpan": {
+        "start": {
+          "line": 37,
+          "col": 20,
+          "offset": 1296
+        },
+        "end": {
+          "line": 37,
+          "col": 51,
+          "offset": 1327
+        }
+      }
+    },
+    {
+      "index": 4,
+      "state": "ignored",
+      "reason": "unsupported-rule",
+      "path": "skf-upstream.py",
+      "rule": "harness.python.request-to-dynamic-code",
+      "scannerSpan": {
+        "start": {
+          "line": 37,
+          "col": 25,
+          "offset": 1301
+        },
+        "end": {
+          "line": 37,
+          "col": 50,
+          "offset": 1326
+        }
+      }
+    }
+  ],
+  "verifications": [
+    {
+      "point": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+      "decision": "confirmed"
+    },
+    {
+      "point": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+      "decision": "excluded"
+    },
+    {
+      "point": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+      "decision": "confirmed"
+    },
+    {
+      "point": "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b",
+      "decision": "excluded"
+    }
+  ]
+}

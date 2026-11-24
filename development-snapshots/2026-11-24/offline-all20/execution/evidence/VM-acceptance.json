@@ -1,0 +1,12 @@
+{
+  "allPassed": false,
+  "errorType": "ValueError",
+  "formalTargets": "0/16",
+  "kind": "VM-full20-acceptance-rejected",
+  "noAutomaticReplay": true,
+  "originalAttemptRetained": true,
+  "r3": "blocked",
+  "reason": "full20:delivery-incomplete",
+  "sshAttempted": true,
+  "transportReturned": true
+}

@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "startedAt": "2026-11-04T02:53:36.276149+00:00",
+  "identity": {
+    "scanner": "9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+    "rules": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+    "reviewer": "0f7bbe35237c9e09e156f3b261541b4d3d9bed7c39eb25b1818f82c95f278b24"
+  },
+  "datasetSha256": "5ceb5db334df5536772fb883e608e9187c0ea446b70cce57844429476d7c9f6c",
+  "freezeSha256": "4dd2941da8f44417c17577d3eb601551f3fbef3c2940a13acca5bc3affd2cfa6",
+  "outputs": [
+    {
+      "id": "skf-viewer-upstream",
+      "raw": "hit",
+      "decision": "unknown",
+      "evidence": [],
+      "location": {
+        "line": 37,
+        "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+      },
+      "language": "python",
+      "cwe": "CWE-95"
+    },
+    {
+      "id": "skf-viewer-authored-fix",
+      "raw": "no-hit",
+      "decision": "not-required",
+      "evidence": [],
+      "location": {
+        "line": 37,
+        "sourceSha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134"
+      },
+      "language": "python",
+      "cwe": "CWE-95"
+    }
+  ]
+}

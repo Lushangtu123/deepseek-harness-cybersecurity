@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "exactReportMatch": true,
+  "bytes": 11501,
+  "sections": {
+    "findings": 7,
+    "files": 5,
+    "exclusions": 0,
+    "diagnostics": 0,
+    "artifacts": 0
+  },
+  "taskId": "cf632ae0-610c-4223-a936-d19e766a92ae",
+  "modelCalls": 0
+}

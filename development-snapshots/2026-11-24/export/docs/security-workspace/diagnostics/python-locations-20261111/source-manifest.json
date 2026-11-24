@@ -1,0 +1,12 @@
+{
+  "scripts/reviewer_snapshot.py": "3e5915824420c4d6f7cd19580135348df050f89659869c21f92023a0ebad533b",
+  "scripts/review_quality_gate.mjs": "86c441bb86f1d15da9cac71800685a24169d1cc666c16eb0267eb3af7e1bcce1",
+  "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": "9897972ad669a3c33dfe648703afbfd176325164776917f602ecfcbf206a5f42",
+  "work/harness-purge-improved/package/scripts/eval_guard_review.py": "d285565a42bfd91e13386aca6d3e56e6e0387d336a95abdf7ade4683c2889b04",
+  "work/harness-purge-improved/package/scripts/eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843",
+  "work/harness-purge-improved/package/lib/redteam/personal-python-evidence.mjs": "fb0c199197f573716f2a4b07e98312750127d7994191c7ac4509e44b95c034e5",
+  "work/harness-purge-improved/package/lib/redteam/personal-security-workbench.mjs": "19fc0d2fc89d28615869248150d23b5981f241f3c59abb71af0d254017c528ab",
+  "work/harness-purge-improved/package/lib/redteam/personal-security-client.mjs": "f56c46c86e9e38b3b91d2a1779797718f75219aab435c419f98584ed3659d346",
+  "work/harness-purge-improved/package/lib/redteam/personal-joint-review.mjs": "787ea11b49a5e2870711632cc06eeaee93ef6a6f9a7b7459db9cf5724115731f",
+  "scripts/reviewer_storage.py": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202"
+}

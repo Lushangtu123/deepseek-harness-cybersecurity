@@ -1,0 +1,19 @@
+{
+  "state": "closed",
+  "review": "S1 and S1-r2 DeepSeek Flash high completed after Claude quota failures",
+  "fixed": [
+    "missing/corrupt budget never resets",
+    "flock+fsync reservations",
+    "protocol-bound verified totals",
+    "unknown UI count and legacy labeling"
+  ],
+  "rejectedFinding": "deep profile validator already exact; regression added, no product duplicate",
+  "conditionalNotes": [
+    "modelCallsRecorded on unknown is not rendered; helper ignores legacy when unknown",
+    "receipt verified lacking protocol stays unverified legacy for compatibility; cannot become known total",
+    "local adapter is trusted; recorded historical number is never verified budget"
+  ],
+  "outOfScope": [
+    "pre-receipt preparation orphan may need manual recovery; no forwarding and no initialized count lost"
+  ]
+}

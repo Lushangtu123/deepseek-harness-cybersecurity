@@ -1,0 +1,48 @@
+from pathlib import Path
+from hashlib import sha256
+from datetime import datetime,timezone
+import json,sqlite3,subprocess
+root=Path(ROOT);stage=json.loads((root/'stage.json').read_text());want=MANIFEST
+for name,h in want.items():assert sha256((root/'package'/name).read_bytes()).hexdigest()==h
+original=[json.loads(l) for l in (root/'rpc-events.jsonl').read_text().splitlines()]
+events=[json.loads(l) for l in (root/'native-events.jsonl').read_text().splitlines()]
+turns=[e for e in events if e.get('type')=='turn/end'];assert len(turns)==1 and turns[0]['reasonKind']=='completed'
+main=[e for e in events if e.get('kind')=='model-dispatch' and e['main']]
+aux=[e for e in events if e.get('kind')=='model-dispatch' and not e['main']]
+assert len(main)==21 and len(aux)==1
+assert all(e['provider']=='deepseek-official' and e['model']=='deepseek-flash' and e['reasoningEffort']=='high' for e in main)
+finishes={e['id']:e for e in events if e.get('kind')=='model-finish'};assert len(finishes)==22
+assert all(e['adapterReplayModel']=='deepseek-flash' and e['reasonKind'] in ['stop','tool-calls'] for e in finishes.values())
+assert not [e for e in events if e.get('type')=='tool/result' and e.get('isError')]
+calls=[e for e in events if e.get('kind')=='accepted-tool'];assert len(calls)==20
+assert all(e['name'] in ['redteam_session_bind','redteam_session_info','redteam_joint_review'] for e in calls)
+starts=[e for e in original if e['request'].get('action')=='start'];assert len(starts)==1 and starts[0]['model'] and starts[0]['ok']
+assert all(e['allowed'] and e.get('ok') is True for e in original)
+pageGroups={}
+for e in original:
+ if e.get('model') and e.get('page'):pageGroups.setdefault(e['page']['section'],[]).append(e['page'])
+for section,total in {'findings':9,'files':18,'exclusions':0,'diagnostics':0,'artifacts':13}.items():
+ pages=pageGroups[section];assert sum(p['count'] for p in pages)==total and pages[-1]['complete'] and not pages[-1]['nextCursor']
+ assert all(not p['complete'] and p['nextCursor'] for p in pages[:-1])
+result=subprocess.run(['/home/purge/.local/node/bin/node','--input-type=module','-'],cwd=root,input=NODE,capture_output=True,text=True,timeout=30)
+assert result.returncode==0,result.stderr[-1500:]
+collected=json.loads(result.stdout);report=collected['report'];assert report['task']['state']=='completed' and report['task']['cleanupVerified']
+assert report['task']['snapshot']['id']=='9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2'
+assert len(report['findings'])==9 and len(report['artifacts'])==13
+assert all(f['status']=='unverified' for f in report['findings']+report['artifacts'])
+assert sum(f.get('evidenceKind')=='python-import-flow' for f in report['artifacts'])==4
+assert sum(f.get('evidenceKind')=='python-namespace-structure' for f in report['artifacts'])==9
+copies={}
+for row in report['files']:
+ p=root/'workspace/synthetic-project'/row['path'];raw=p.read_bytes();assert sha256(raw).hexdigest()==row['sha256'];copies[row['path']]=raw
+for f in report['findings']:
+ l=f['sourceLocation'];raw=copies[l['path']];assert sha256(raw).hexdigest()==l['sourceSha256']
+ for k in ['start','end']:
+  a=l[k];prefix=raw[:a['offset']];assert prefix.count(b'\n')+1==a['line'] and len(prefix)-prefix.rfind(b'\n')==a['col']
+ assert raw[l['start']['offset']:l['end']['offset']].startswith((b'eval(',b'exec('))
+dbfile=root/'state/engagements'/stage['engagement']/'assets.db'
+with sqlite3.connect(dbfile.as_uri()+'?mode=ro',uri=True) as db:
+ counts={t:db.execute('SELECT COUNT(*) FROM '+t).fetchone()[0] for t in ['security_joint','security_run','security_finding']}
+assert counts=={'security_joint':1,'security_run':1,'security_finding':0}
+proofs=json.loads((root/'scanner-proofs.json').read_text());assert len(proofs)==1 and proofs[0]['outcome']=='passed'
+print(json.dumps({'checkedAt':datetime.now(timezone.utc).isoformat(),'nativeEvents':events,'nativeRpcBeforeIndependentRead':original,'report':report,'independentPages':collected['pages'],'scannerProofs':proofs,'counts':counts,'summary':{'nativeTurnCompleted':True,'mainModelDispatches':21,'auxiliaryModelDispatches':1,'mainReasoningEffort':'high','adapterModel':'deepseek-flash','provider':'deepseek-official','rawProviderResponseModelNotExposed':True,'nativeTools':20,'nativeToolErrors':0,'nativeRpcErrors':0,'startRequests':1,'scannerCalls':1,'fileHashesMatched':18,'rangesMatched':9,'findings':9,'importArtifacts':4,'namespaceArtifacts':9,'nativeReportPages':{s:len(p) for s,p in pageGroups.items()},'nativeSectionTotals':{s:sum(v['count'] for v in p) for s,p in pageGroups.items()},'candidateFilesMatched':173,'ordinaryFindingRows':0,'noProjectSourceExecuted':True,'ordinaryR3Qualified':False,'deployed':False}}))

@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-03",
+  "scope": "VM disposable synthetic project; real DeepSeek API with candidate registered tools and private RPC transport substitution",
+  "model": "deepseek-flash",
+  "nativeHarnessChat": false,
+  "deployed": false,
+  "initialPreparation": {
+    "outcome": "test package could not resolve existing dsh-tools dependency",
+    "modelRequests": 0,
+    "tempRemoved": true,
+    "ownedContainersAbsent": 3
+  },
+  "beforeNotes": {
+    "modelRequests": 6,
+    "toolCalls": 7,
+    "modelClaimedToolCalls": 6,
+    "reportItemsRead": 10,
+    "reportTotal": 47,
+    "trivyExclusionsExplained": false
+  },
+  "afterNotes": {
+    "modelRequests": 5,
+    "toolCalls": 7,
+    "modelClaimedToolCalls": 6,
+    "maximumToolResultBytes": 5640,
+    "reportPages": 2,
+    "reportItemsRead": 10,
+    "reportTotal": 47,
+    "reportComplete": false,
+    "ordinaryRunHistoryComplete": true,
+    "trivyExclusionsExplained": true,
+    "phpRuleGapExplained": true,
+    "otherUncoveredReasonKeptUnknown": true,
+    "newScansDuringModel": 0,
+    "findingsRemainUnverified": true,
+    "mutationDenied": true,
+    "wrongProjectDenied": true,
+    "tempRemoved": true,
+    "ownedContainersAbsent": 3,
+    "deployedStateUnchanged": true
+  },
+  "finalRedactionRepair": {
+    "actualModelRepeatedAfterRepair": false,
+    "retainedResultsReplayedInVM": 6,
+    "redactedJointResults": 4,
+    "normalResultsUnchanged": true,
+    "controlIdentityMutationRejected": true,
+    "oversizeRejected": true,
+    "newModelRequests": 0,
+    "tempRemoved": true,
+    "focusedTestsPassed": 29,
+    "fullPluginNodeRegressionPassed": true,
+    "independentReviewOpenFindings": 0
+  },
+  "modelNarrativeFullyAccurate": false,
+  "runtimeCountsAuthority": "captured execution events, not model self-report",
+  "clientBuildMatchesCurrentSources": true,
+  "realProjectAccessed": false,
+  "limitations": [
+    "Only 10 of 47 joint findings read by the model",
+    "API loop with test transport is not the native Harness/Cordis chat and permission flow",
+    "Tool-count hallucination persists in both original answers",
+    "Final redaction guard repair verified by retained-result replay, without another model invocation",
+    "Source-only candidate; formal shell integration and deployment remain pending"
+  ]
+}

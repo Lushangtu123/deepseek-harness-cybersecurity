@@ -1,0 +1,307 @@
+{
+  "date": "2026-11-01",
+  "timezone": "America/Los_Angeles",
+  "outcome": "Parser defect remains; reusable offline synthetic self-check added. No scanner engine fix is claimed.",
+  "runtime": {
+    "programFiles": 131,
+    "semgrepInstalled": "1.182.1",
+    "newDependencies": false,
+    "scannerImageChanged": false
+  },
+  "diagnosis": {
+    "validNodeSyntaxConfirmed": [
+      "repro.mjs",
+      "escaped.mjs",
+      "benign.mjs",
+      "full-original.mjs"
+    ],
+    "invalidSyntaxControlRejectedByNode": true,
+    "fullOriginalCopiedBytes": 71236,
+    "fullOriginalUnchanged": true,
+    "parserDifferential": [
+      {
+        "mode": "default",
+        "file": "repro.mjs",
+        "processedFiles": 1,
+        "errorFiles": 1,
+        "errorLines": 6
+      },
+      {
+        "mode": "default",
+        "file": "escaped.mjs",
+        "processedFiles": 1,
+        "errorFiles": 0,
+        "errorLines": 0
+      },
+      {
+        "mode": "default",
+        "file": "benign.mjs",
+        "processedFiles": 1,
+        "errorFiles": 0,
+        "errorLines": 0
+      },
+      {
+        "mode": "default",
+        "file": "invalid.mjs",
+        "processedFiles": 1,
+        "errorFiles": 1,
+        "errorLines": 1
+      },
+      {
+        "mode": "default",
+        "file": "full-original.mjs",
+        "processedFiles": 1,
+        "errorFiles": 1,
+        "errorLines": 4
+      },
+      {
+        "mode": "tree-sitter",
+        "file": "repro.mjs",
+        "processedFiles": 1,
+        "errorFiles": 1,
+        "errorLines": 6
+      },
+      {
+        "mode": "tree-sitter",
+        "file": "escaped.mjs",
+        "processedFiles": 1,
+        "errorFiles": 0,
+        "errorLines": 0
+      },
+      {
+        "mode": "tree-sitter",
+        "file": "benign.mjs",
+        "processedFiles": 1,
+        "errorFiles": 0,
+        "errorLines": 0
+      },
+      {
+        "mode": "tree-sitter",
+        "file": "invalid.mjs",
+        "processedFiles": 1,
+        "errorFiles": 1,
+        "errorLines": 1
+      },
+      {
+        "mode": "tree-sitter",
+        "file": "full-original.mjs",
+        "processedFiles": 1,
+        "errorFiles": 1,
+        "errorLines": 4
+      },
+      {
+        "mode": "pfff",
+        "file": "repro.mjs",
+        "processedFiles": 1,
+        "errorFiles": 1,
+        "errorLines": 11
+      },
+      {
+        "mode": "pfff",
+        "file": "escaped.mjs",
+        "processedFiles": 1,
+        "errorFiles": 1,
+        "errorLines": 11
+      },
+      {
+        "mode": "pfff",
+        "file": "benign.mjs",
+        "processedFiles": 1,
+        "errorFiles": 0,
+        "errorLines": 0
+      },
+      {
+        "mode": "pfff",
+        "file": "invalid.mjs",
+        "processedFiles": 1,
+        "errorFiles": 1,
+        "errorLines": 1
+      },
+      {
+        "mode": "pfff",
+        "file": "full-original.mjs",
+        "processedFiles": 1,
+        "errorFiles": 1,
+        "errorLines": 1169
+      },
+      {
+        "mode": "typescript",
+        "file": "repro.ts",
+        "processedFiles": 1,
+        "errorFiles": 1,
+        "errorLines": 6
+      },
+      {
+        "mode": "typescript",
+        "file": "escaped.ts",
+        "processedFiles": 1,
+        "errorFiles": 0,
+        "errorLines": 0
+      },
+      {
+        "mode": "typescript",
+        "file": "benign.ts",
+        "processedFiles": 1,
+        "errorFiles": 0,
+        "errorLines": 0
+      },
+      {
+        "mode": "typescript",
+        "file": "invalid.ts",
+        "processedFiles": 1,
+        "errorFiles": 1,
+        "errorLines": 1
+      },
+      {
+        "mode": "typescript",
+        "file": "full-original.ts",
+        "processedFiles": 1,
+        "errorFiles": 1,
+        "errorLines": 4
+      }
+    ],
+    "parserSelectionSource": "Adjacent officialv1.182.0 usesTSXwithPFFFfallback; installed1.182.1 actualflags/behavior independently tested.",
+    "pfffFallbackFailsAt": "synthetic repro.mjs:1:57 import in import.meta.url",
+    "exactUpstreamLexerOrGrammarPatchIdentified": false,
+    "typescriptMjsAttemptProcessedZeroFilesExcluded": true,
+    "byteIdenticalTsCopiesActuallyProcessed": true,
+    "sourceExecuted": false,
+    "officialLatestAtCheck": "v1.183.0",
+    "officialPublished": "2026-10-29T21:29:24Z",
+    "candidateImageDownloadedOrAdopted": false,
+    "prior1830FailureNotRerun": true,
+    "exact1821GitHubTagReadable": false,
+    "referenceSource": "v1.182.0"
+  },
+  "selfCheck": {
+    "version": 1,
+    "executionOk": true,
+    "controlsPassed": true,
+    "parserReady": false,
+    "exitCode": 2,
+    "fixtureCount": 5,
+    "cases": {
+      "repro.mjs": {
+        "scanned": true,
+        "errors": [
+          "PartialParsing"
+        ],
+        "expressionMatches": 43,
+        "evalMatches": 0
+      },
+      "escaped.mjs": {
+        "scanned": true,
+        "errors": [],
+        "expressionMatches": 55,
+        "evalMatches": 0
+      },
+      "benign.mjs": {
+        "scanned": true,
+        "errors": [],
+        "expressionMatches": 7,
+        "evalMatches": 0
+      },
+      "positive.mjs": {
+        "scanned": true,
+        "errors": [],
+        "expressionMatches": 3,
+        "evalMatches": 1
+      },
+      "invalid.mjs": {
+        "scanned": true,
+        "errors": [
+          "PartialParsing"
+        ],
+        "expressionMatches": 0,
+        "evalMatches": 0
+      }
+    },
+    "limits": "Synthetic parser and rule controls only; no proof of complete project coverage or exploitability.",
+    "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+    "network": "none",
+    "sourceExecuted": false,
+    "realProjectScanned": false,
+    "automaticChanges": false,
+    "installedManifestUnchanged": true,
+    "temporaryFilesRemoved": true,
+    "containerRemoved": true,
+    "fixturesSha256": {
+      "repro.mjs": "b5c40ba3b7320068498617cde4fa8900446fd464243589a2cde3926cacadcdba",
+      "escaped.mjs": "a2bdf1507b092f4b81dddb522eb4e0701a6cbea38be4bf525d69f3f43c43a56b",
+      "benign.mjs": "4ef84d08dd077bb4857e88987931e62d5d9612e832093ecb28efe4fd0b106b7f",
+      "positive.mjs": "5ec19c725c72d42cf92c8b2db5ba3a7246bae7896f1ed1cffb1a0000ea8c0a6c",
+      "invalid.mjs": "ff6e2a6cf56e91d01d1729815c725fba4cd1c75c59fd4097f22f8498f9cde32b"
+    },
+    "nativeCliCases": [
+      {
+        "kind": "default",
+        "exitCode": 2,
+        "controlsPassed": true,
+        "parserReady": false
+      },
+      {
+        "kind": "explicit-local-candidate",
+        "exitCode": 2,
+        "controlsPassed": true,
+        "parserReady": false
+      },
+      {
+        "kind": "invalid-argument",
+        "exitCode": 2,
+        "accepted": false
+      },
+      {
+        "kind": "missing-local-image",
+        "exitCode": 1,
+        "accepted": false
+      }
+    ],
+    "manualCandidateGateOnly": true,
+    "noAutomaticInstallHook": true,
+    "fixedImageUnchanged": true,
+    "noOwnedTemporaryFilesOrContainersRemain": true
+  },
+  "regression": {
+    "pythonCases": 241,
+    "pluginNodeCases": 482,
+    "hostNodeCases": 129,
+    "newProbePythonCases": 8,
+    "timeoutCannotSatisfySyntaxControl": true,
+    "clientRebuildMatched": true,
+    "countsNotSummedAcrossPlatformsOrReruns": true
+  },
+  "recovery": {
+    "name": "ready-parser-probe-20261101",
+    "selectedProofFiles": 2629,
+    "programFiles": 131,
+    "snapshots": 21,
+    "previous20Preserved": true,
+    "copyActuallyBooted": true,
+    "originalDiskReturned": true,
+    "temporaryCopyRemoved": true,
+    "hostHelpersMatched": 5,
+    "coverageState": "matches"
+  },
+  "protectedState": {
+    "trackedFiles": 459,
+    "gitHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "realFindings": 95,
+    "allUnverified": true,
+    "newRealProjectScans": 0,
+    "modelCalls": 0,
+    "hostPermissionsExpanded": false,
+    "networkSharingClipboardUsbExpanded": false,
+    "newVmRegistered": false,
+    "otherThreeVmsStoppedUnchanged": true,
+    "ownedComparisonSourceCopiesRemoved": true
+  },
+  "remainingLimits": [
+    "Actual parser error unresolved; existing partial history and text supplement remain.",
+    "Five synthetic parser/rule controls do not certify all syntax, languages, project coverage or exploitability.",
+    "Manual candidate acceptance command; no automatic hook controlling all installation entry points.",
+    "Result reading bounded; writable output mount has no disk quota.",
+    "Physical overnight sleep acceptance explicitly deferred by user; not tested this round.",
+    "Real login/MFA acceptance and95unverifiedfindings remain separate."
+  ]
+}

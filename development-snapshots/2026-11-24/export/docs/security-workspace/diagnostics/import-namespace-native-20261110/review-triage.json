@@ -1,0 +1,67 @@
+{
+  "at": "2026-11-11T06:07:12.981616+00:00",
+  "scopeBlockers": 0,
+  "canArchive": true,
+  "reportSha256": "3f676c50a41530b731cf1d18bc20c009101e206f01cec9e564b455f11c8948e3",
+  "actualModel": "DeepSeek-V4.1-Flash",
+  "effort": "high",
+  "completion": "stop",
+  "reviewIsStatic": true,
+  "verdict": "limited-pass-native-three-tool-chain",
+  "items": [
+    {
+      "id": "native-chain",
+      "classification": "verified-bounded-acceptance",
+      "basis": "FullHarnessUI→unchangedjointpreset/tools→fixedpathRPCclient→candidatebackend→defaultscanner→native15 reportpages;21main+1auxdispatch,20tools,1start/1scan,all5sectionscomplete."
+    },
+    {
+      "id": "namespace-docker-path",
+      "classification": "verified-staging-path",
+      "basis": "Physicaltemp package/store/worker paths used while native logical home/socket contract is privatelymounted; running scanner sourceMount is physicaltempstate. Outside169/42/config/pins/runtime/mnt/inode matched."
+    },
+    {
+      "id": "idempotency",
+      "classification": "record-clarification",
+      "basis": "NativeGate allows retry of identical requestId and arguments but rejects a different start. Actual native trace has one start. Not a universal/production exactly-once guarantee."
+    },
+    {
+      "id": "counts",
+      "classification": "record-clarification",
+      "basis": "173 is candidatepackage identity matches;18 is scanned syntheticfiles;1scan does not mean1totalcontainer: separate namespaceworker executes in its own restricted container."
+    },
+    {
+      "id": "model-proof",
+      "classification": "retained-evidence-limit",
+      "basis": "Requestedprovider/alias/high and adapter replay model are observed; raw providerresponse model not exposed, physical HTTP retry count not measured.21/1 are llm/stream dispatch counts, not guaranteedwire request counts."
+    },
+    {
+      "id": "workspace-bootstrap",
+      "classification": "observed-unresolved-nonblocking-this-chain",
+      "basis": "Defaultworkspacecreation UI failure was shown. Exactownedexisting folder manuallyselected and chainworked; rootcause and applicabilityoutside temporaryprofile not established. Musttrack beforegeneral UXreadiness."
+    },
+    {
+      "id": "ledger-body",
+      "classification": "review-material-omission-supplemented",
+      "basis": "Reviewer did not receive295-rowledgerbody. Independent membership check now confirmsall18 source hashes already present; appended receipt givesledgerSHA andperfilemembership,not a new model-reviewed claim.",
+      "supplement": "ledger-membership.json"
+    },
+    {
+      "id": "cleanup-proof-level",
+      "classification": "retained-evidence-limit",
+      "basis": "app-stopped original file was checked forexistence but not copied beforewholetempdir removal. Namespaceworker uses candidateinternalDockerinspect/cleanup, no secondindependent live observer. Credentialcopy deletion confirmed viaownedtree absence,not secureerase orforensics."
+    },
+    {
+      "id": "observer-errors",
+      "classification": "retained-diagnostic",
+      "basis": "RunningDockerobservation succeeded after no-such-object errors. Perpolltimestamps unavailable; pre-create race is plausible,inferred ratherthan independentlytimed."
+    },
+    {
+      "id": "scope-not-production",
+      "classification": "outside-step-unresolved",
+      "basis": "Testactivation intentionally skips VM-globalstartup reconciliation andaddsextrafences. Other tools/modes,productionstartuprecovery,independentR3,vulnerability confirmation and dailydeployment notpassed."
+    }
+  ],
+  "productSourceChanged": false,
+  "ordinaryR3Qualified": false,
+  "deployed": false
+}

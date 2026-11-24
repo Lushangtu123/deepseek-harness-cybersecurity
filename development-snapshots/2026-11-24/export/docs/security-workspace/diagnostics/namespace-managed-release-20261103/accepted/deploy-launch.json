@@ -1,0 +1,7 @@
+{
+  "supervisor": "systemd-user-transient-service",
+  "operation": "/home/purge/.cache/harness-namespace-managed-release-retry1-20261103.operation",
+  "detachedFromSSH": true,
+  "linger": "yes",
+  "isolatedPython": true
+}

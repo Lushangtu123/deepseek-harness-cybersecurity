@@ -1,0 +1,76 @@
+- id: session-log-deepseek
+  config:
+    enabled: false
+- id: session-telemetry-otel
+  disabled: true
+- id: product-analytics
+  config:
+    enabled: false
+- id: sandbox-policy
+  config:
+    mode: danger-full-access
+- id: approval
+  config:
+    policy: never
+- id: permission
+  config:
+    defaultPreset: danger-full-access
+    presets: !!js '({''read-only'':{sandbox:''read-only'',approval:''ask'',name:''改进版
+      · 只读 · 人工审批''},''workspace-write'':{sandbox:''workspace-write'',approval:''ask'',name:''改进版
+      · 工作区写入 · 人工审批''},''danger-full-access'':{sandbox:''danger-full-access'',approval:''never'',name:''改进版
+      · VM 完全访问 · 自动执行''}})'
+- id: agent
+  config:
+    provider: deepseek-official
+    model: deepseek-flash
+- insert:
+  - id: rea-mcp
+    name: '@deepseek-ai/dsh-mcp-client'
+    config:
+      serverName: rea
+      transport: stdio
+      command: /home/purge/.local/bin/rea
+      args:
+      - mcp
+      env:
+        GHIDRA_INSTALL_DIR: /home/purge/tools/ghidra_12.1.4_PUBLIC
+        JAVA_HOME: /usr/lib/jvm/java-21-openjdk-arm64
+        REA_ANALYSIS_PROVIDER: ghidra
+
+- insert:
+    - id: personal-toolchain-versions
+      name: /home/purge/.dsh-improved/tooling/toolchain-version-checker/index.mjs
+
+# CodeGraph 1.6.2 — managed setup 2026-10-26; keep unrelated entries above.
+- insert:
+    - id: mcp-codegraph
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: codegraph
+        transport: stdio
+        command: /home/purge/.local/bin/codegraph
+        args: [serve, --mcp]
+        cwd: /home/purge/workspace
+        env:
+          DO_NOT_TRACK: '1'
+          CODEGRAPH_TELEMETRY: '0'
+          CODEGRAPH_NO_UPDATE_CHECK: '1'
+          CODEGRAPH_NO_DOWNLOAD: '1'
+
+# v11: new sessions may use the lean native composition.
+- id: agent-preset-registry
+  config:
+    default: personal-daily
+- insert:
+    - id: personal-daily
+      name: dsh-purge/personal-daily
+
+# Optional per-agent restricted audit preset; does not change the default mode.
+- insert:
+    - id: personal-review
+      name: dsh-purge/personal-review
+
+# VM-only optional managed joint workflow; existing presets stay available.
+- insert:
+    - id: personal-joint
+      name: dsh-purge/personal-joint

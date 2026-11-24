@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Los_Angeles",
+  "completedAtUTC": "2026-10-29T19:38:56.839585+00:00",
+  "scope": "Dedicated Harness VM storage only",
+  "currentRecovery": "ready-recovery-proof-20261029",
+  "keptSnapshots": [
+    "ready-original",
+    "ready-recovery-guard-20261029",
+    "ready-recovery-proof-20261029",
+    "ready-recovery-resume-20261029",
+    "ready-toolchain-20261025"
+  ],
+  "keptOfflineImages": 1,
+  "oldQcowImagesRemoved": 43,
+  "oldSeedIsosRemoved": 2,
+  "primarySnapshotsRemoved": 39,
+  "retainedCopySnapshotsRemoved": 41,
+  "currentOfflineImageChecked": true,
+  "runtimeRecoveryState": "matches",
+  "originalCapabilitiesEnabled": true,
+  "hostFilesUnchanged": true,
+  "isolationConfigUnchanged": true,
+  "registeredVMsUnchanged": true,
+  "mainSeedIsoRetained": true,
+  "guestPreflightChecks": 234,
+  "observedFreeBytesChange": 2383704064,
+  "freeBytesBefore": 339370065920,
+  "freeBytesAfter": 341753769984,
+  "historicalSmallVerificationBundlesRetained": true,
+  "history": {
+    "firstDeleteById": "snapshot not found; restored guard copies and restarted VM; 44 snapshots and 45 candidates reconciled before retry",
+    "copiedImageNameControl": "delete by name succeeded on isolated disposable clone",
+    "finalMethod": "snapshot deletion by fixed names; old image unlink only after offline checks and original VM restart succeeded"
+  },
+  "limitations": [
+    "APFS clones share blocks; logical image sizes are not additive reclaimed space",
+    "Deleted historical snapshots cannot be restored merely from retained proof metadata",
+    "Available-space change is a before/after observation and can include concurrent filesystem activity"
+  ]
+}

@@ -1,0 +1,504 @@
+{
+  "observedOn": "2026-11-03",
+  "scope": "discovery at recorded locations; publisher authentication remains unverified for these artifacts",
+  "decisions": [
+    {
+      "artifact": "semgrep",
+      "versions": [
+        "1.182.1",
+        "1.183.0"
+      ],
+      "publisherAdmission": "unverified",
+      "contentBoundBuildStatements": true,
+      "verifiedPublisherIdentity": false,
+      "releaseCandidate": "1.183.0",
+      "replacementEligible": false,
+      "additionalParserGapEvidence": "../security-workflow-recovery-verification.json"
+    },
+    {
+      "artifact": "trivy-db",
+      "installedDigest": "sha256:2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60",
+      "observedCandidate": {
+        "manifestDigest": "sha256:2fd489b1ad2269b3d61b12bf24a91bdd0aec776f715cb77537e05d3124637ddc",
+        "layerDigest": "sha256:1fb7137d250cb10353d06ddedda8a5df0a4021b6bdd00651f6833e99e0d6dc80",
+        "installed": false
+      },
+      "publisherAdmission": "unverified",
+      "verifiedPublisherIdentity": false,
+      "replacementEligible": false
+    }
+  ],
+  "registryLookups": [
+    {
+      "artifact": "semgrep-installed",
+      "registry": "registry-1.docker.io/semgrep/semgrep",
+      "records": [
+        {
+          "requested": "sha256:451b3d875c00dac7ed5db5293e584a07de11449a409c10b3c2d2652f429630b6",
+          "kind": "manifests",
+          "state": "received",
+          "status": 200,
+          "sha256": "451b3d875c00dac7ed5db5293e584a07de11449a409c10b3c2d2652f429630b6",
+          "manifestDigest": "sha256:451b3d875c00dac7ed5db5293e584a07de11449a409c10b3c2d2652f429630b6",
+          "embeddedAttestations": [
+            "sha256:01e4278466e70f40457ef37ed2e15dfa3e182a05d142db8af0c17c39104c6b8e",
+            "sha256:ec054cea57ff259725257feeda0b6f31b2ea57f5cf96d1e9aeef5a2224835171"
+          ]
+        },
+        {
+          "requested": "sha256:451b3d875c00dac7ed5db5293e584a07de11449a409c10b3c2d2652f429630b6",
+          "kind": "referrers",
+          "state": "received",
+          "status": 200,
+          "sha256": "3d60eec733f106e03a571223c6adb85a3dabd53590ae0d8339e8ea2de2d32c56",
+          "descriptors": 0,
+          "artifactTypes": []
+        },
+        {
+          "requested": "sha256-451b3d875c00dac7ed5db5293e584a07de11449a409c10b3c2d2652f429630b6.sig",
+          "kind": "manifests",
+          "state": "http-error",
+          "status": 404
+        },
+        {
+          "requested": "sha256-451b3d875c00dac7ed5db5293e584a07de11449a409c10b3c2d2652f429630b6.att",
+          "kind": "manifests",
+          "state": "http-error",
+          "status": 404
+        },
+        {
+          "requested": "sha256:5347c70f22a33b419cd515ec7fa0d3e76da7eb09f1d8cb4081d88a3bb17d87f6",
+          "kind": "manifests",
+          "state": "received",
+          "status": 200,
+          "sha256": "5347c70f22a33b419cd515ec7fa0d3e76da7eb09f1d8cb4081d88a3bb17d87f6",
+          "manifestDigest": "sha256:5347c70f22a33b419cd515ec7fa0d3e76da7eb09f1d8cb4081d88a3bb17d87f6",
+          "embeddedAttestations": []
+        },
+        {
+          "requested": "sha256:5347c70f22a33b419cd515ec7fa0d3e76da7eb09f1d8cb4081d88a3bb17d87f6",
+          "kind": "referrers",
+          "state": "received",
+          "status": 200,
+          "sha256": "3d60eec733f106e03a571223c6adb85a3dabd53590ae0d8339e8ea2de2d32c56",
+          "descriptors": 0,
+          "artifactTypes": []
+        },
+        {
+          "requested": "sha256-5347c70f22a33b419cd515ec7fa0d3e76da7eb09f1d8cb4081d88a3bb17d87f6.sig",
+          "kind": "manifests",
+          "state": "http-error",
+          "status": 404
+        },
+        {
+          "requested": "sha256-5347c70f22a33b419cd515ec7fa0d3e76da7eb09f1d8cb4081d88a3bb17d87f6.att",
+          "kind": "manifests",
+          "state": "http-error",
+          "status": 404
+        }
+      ],
+      "publisherCryptographyVerified": false
+    },
+    {
+      "artifact": "semgrep-candidate-1.183.0",
+      "registry": "registry-1.docker.io/semgrep/semgrep",
+      "records": [
+        {
+          "requested": "sha256:2e45517a85e13a9cca14a2a00df6bb48affd66b8ebfae1b0991cd57578362fb0",
+          "kind": "manifests",
+          "state": "received",
+          "status": 200,
+          "sha256": "2e45517a85e13a9cca14a2a00df6bb48affd66b8ebfae1b0991cd57578362fb0",
+          "manifestDigest": "sha256:2e45517a85e13a9cca14a2a00df6bb48affd66b8ebfae1b0991cd57578362fb0",
+          "embeddedAttestations": [
+            "sha256:a2f73068961153195469b77805c1d04ece32cf02d6c71c84a6d6d4188cdca78c",
+            "sha256:a284305767ef959e70392ad565845b7d3ce084b3c74378d7cefeb22aa9a4b464"
+          ]
+        },
+        {
+          "requested": "sha256:2e45517a85e13a9cca14a2a00df6bb48affd66b8ebfae1b0991cd57578362fb0",
+          "kind": "referrers",
+          "state": "received",
+          "status": 200,
+          "sha256": "3d60eec733f106e03a571223c6adb85a3dabd53590ae0d8339e8ea2de2d32c56",
+          "descriptors": 0,
+          "artifactTypes": []
+        },
+        {
+          "requested": "sha256-2e45517a85e13a9cca14a2a00df6bb48affd66b8ebfae1b0991cd57578362fb0.sig",
+          "kind": "manifests",
+          "state": "http-error",
+          "status": 404
+        },
+        {
+          "requested": "sha256-2e45517a85e13a9cca14a2a00df6bb48affd66b8ebfae1b0991cd57578362fb0.att",
+          "kind": "manifests",
+          "state": "http-error",
+          "status": 404
+        },
+        {
+          "requested": "sha256:791879c2ad46d3ad9411b13a1d982f10be839532ba790e883d3784109df24ac5",
+          "kind": "manifests",
+          "state": "received",
+          "status": 200,
+          "sha256": "791879c2ad46d3ad9411b13a1d982f10be839532ba790e883d3784109df24ac5",
+          "manifestDigest": "sha256:791879c2ad46d3ad9411b13a1d982f10be839532ba790e883d3784109df24ac5",
+          "embeddedAttestations": []
+        },
+        {
+          "requested": "sha256:791879c2ad46d3ad9411b13a1d982f10be839532ba790e883d3784109df24ac5",
+          "kind": "referrers",
+          "state": "received",
+          "status": 200,
+          "sha256": "3d60eec733f106e03a571223c6adb85a3dabd53590ae0d8339e8ea2de2d32c56",
+          "descriptors": 0,
+          "artifactTypes": []
+        },
+        {
+          "requested": "sha256-791879c2ad46d3ad9411b13a1d982f10be839532ba790e883d3784109df24ac5.sig",
+          "kind": "manifests",
+          "state": "http-error",
+          "status": 404
+        },
+        {
+          "requested": "sha256-791879c2ad46d3ad9411b13a1d982f10be839532ba790e883d3784109df24ac5.att",
+          "kind": "manifests",
+          "state": "http-error",
+          "status": 404
+        }
+      ],
+      "publisherCryptographyVerified": false
+    },
+    {
+      "artifact": "semgrep-ghcr",
+      "registry": "ghcr.io/semgrep/semgrep",
+      "records": [
+        {
+          "requested": "1.183.0",
+          "kind": "manifests",
+          "state": "http-error",
+          "status": 404
+        },
+        {
+          "requested": "sha256:2e45517a85e13a9cca14a2a00df6bb48affd66b8ebfae1b0991cd57578362fb0",
+          "kind": "manifests",
+          "state": "http-error",
+          "status": 404
+        }
+      ],
+      "publisherCryptographyVerified": false
+    },
+    {
+      "artifact": "trivy-db-ghcr",
+      "registry": "ghcr.io/aquasecurity/trivy-db",
+      "records": [
+        {
+          "requested": "sha256:2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60",
+          "kind": "manifests",
+          "state": "received",
+          "status": 200,
+          "sha256": "2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60",
+          "manifestDigest": "sha256:2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60",
+          "embeddedAttestations": []
+        },
+        {
+          "requested": "sha256:2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60",
+          "kind": "referrers",
+          "state": "http-error",
+          "status": 404
+        },
+        {
+          "requested": "sha256-2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60.sig",
+          "kind": "manifests",
+          "state": "http-error",
+          "status": 404
+        },
+        {
+          "requested": "sha256-2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60.att",
+          "kind": "manifests",
+          "state": "http-error",
+          "status": 404
+        },
+        {
+          "requested": "2",
+          "kind": "manifests",
+          "state": "received",
+          "status": 200,
+          "sha256": "2fd489b1ad2269b3d61b12bf24a91bdd0aec776f715cb77537e05d3124637ddc",
+          "manifestDigest": "sha256:2fd489b1ad2269b3d61b12bf24a91bdd0aec776f715cb77537e05d3124637ddc",
+          "embeddedAttestations": [],
+          "publisherLookups": [
+            {
+              "kind": "referrers",
+              "state": "http-error",
+              "status": 404
+            },
+            {
+              "kind": "signature-tag",
+              "state": "http-error",
+              "status": 404
+            },
+            {
+              "kind": "attestation-tag",
+              "state": "http-error",
+              "status": 404
+            }
+          ]
+        }
+      ],
+      "publisherCryptographyVerified": false
+    },
+    {
+      "artifact": "trivy-db-dockerhub",
+      "registry": "registry-1.docker.io/aquasec/trivy-db",
+      "records": [
+        {
+          "requested": "sha256:2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60",
+          "kind": "manifests",
+          "state": "http-error",
+          "status": 404
+        },
+        {
+          "requested": "sha256:2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60",
+          "kind": "referrers",
+          "state": "received",
+          "status": 200,
+          "sha256": "3d60eec733f106e03a571223c6adb85a3dabd53590ae0d8339e8ea2de2d32c56",
+          "descriptors": 0,
+          "artifactTypes": []
+        },
+        {
+          "requested": "sha256-2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60.sig",
+          "kind": "manifests",
+          "state": "http-error",
+          "status": 404
+        },
+        {
+          "requested": "sha256-2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60.att",
+          "kind": "manifests",
+          "state": "http-error",
+          "status": 404
+        },
+        {
+          "requested": "2",
+          "kind": "manifests",
+          "state": "received",
+          "status": 200,
+          "sha256": "a511cb78815db96f9679388653844c8a017746f8c00e899a1781eaa7f42b7b66",
+          "manifestDigest": "sha256:a511cb78815db96f9679388653844c8a017746f8c00e899a1781eaa7f42b7b66",
+          "embeddedAttestations": [],
+          "publisherLookups": [
+            {
+              "kind": "referrers",
+              "state": "received",
+              "status": 200,
+              "descriptors": 0
+            },
+            {
+              "kind": "signature-tag",
+              "state": "http-error",
+              "status": 404
+            },
+            {
+              "kind": "attestation-tag",
+              "state": "http-error",
+              "status": 404
+            }
+          ]
+        }
+      ],
+      "publisherCryptographyVerified": false
+    }
+  ],
+  "githubLookups": [
+    {
+      "url": "https://api.github.com/repos/semgrep/semgrep/attestations/sha256:2e45517a85e13a9cca14a2a00df6bb48affd66b8ebfae1b0991cd57578362fb0",
+      "state": "http-error",
+      "status": 404
+    },
+    {
+      "url": "https://api.github.com/repos/semgrep/semgrep/attestations/sha256:791879c2ad46d3ad9411b13a1d982f10be839532ba790e883d3784109df24ac5",
+      "state": "http-error",
+      "status": 404
+    },
+    {
+      "url": "https://api.github.com/repos/aquasecurity/trivy-db/attestations/sha256:2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60",
+      "state": "http-error",
+      "status": 404
+    },
+    {
+      "url": "https://api.github.com/repos/aquasecurity/trivy-db/attestations/sha256:c38dd4d9def7e5cf8254d4a06392dedb2987b12a5a034467e4f6596761a80a77",
+      "state": "http-error",
+      "status": 404
+    },
+    {
+      "url": "https://api.github.com/orgs/semgrep/attestations/sha256:2e45517a85e13a9cca14a2a00df6bb48affd66b8ebfae1b0991cd57578362fb0",
+      "state": "http-error",
+      "status": 401
+    },
+    {
+      "url": "https://api.github.com/orgs/semgrep/attestations/sha256:791879c2ad46d3ad9411b13a1d982f10be839532ba790e883d3784109df24ac5",
+      "state": "http-error",
+      "status": 401
+    },
+    {
+      "url": "https://api.github.com/orgs/aquasecurity/attestations/sha256:2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60",
+      "state": "http-error",
+      "status": 401
+    },
+    {
+      "url": "https://api.github.com/orgs/aquasecurity/attestations/sha256:c38dd4d9def7e5cf8254d4a06392dedb2987b12a5a034467e4f6596761a80a77",
+      "state": "http-error",
+      "status": 401
+    },
+    {
+      "url": "https://api.github.com/orgs/aquasecurity/attestations/sha256:2fd489b1ad2269b3d61b12bf24a91bdd0aec776f715cb77537e05d3124637ddc",
+      "state": "http-error",
+      "status": 401
+    },
+    {
+      "url": "https://api.github.com/orgs/aquasecurity/attestations/sha256:1fb7137d250cb10353d06ddedda8a5df0a4021b6bdd00651f6833e99e0d6dc80",
+      "state": "http-error",
+      "status": 401
+    },
+    {
+      "url": "https://api.github.com/repos/aquasecurity/trivy-db/attestations/sha256:2fd489b1ad2269b3d61b12bf24a91bdd0aec776f715cb77537e05d3124637ddc",
+      "state": "http-error",
+      "status": 404
+    },
+    {
+      "url": "https://api.github.com/repos/aquasecurity/trivy-db/attestations/sha256:1fb7137d250cb10353d06ddedda8a5df0a4021b6bdd00651f6833e99e0d6dc80",
+      "state": "http-error",
+      "status": 404
+    },
+    {
+      "url": "https://api.github.com/orgs/semgrep/attestations/sha256:2e45517a85e13a9cca14a2a00df6bb48affd66b8ebfae1b0991cd57578362fb0",
+      "method": "authenticated-gh-api",
+      "exitCode": 1,
+      "status": 404
+    },
+    {
+      "url": "https://api.github.com/orgs/semgrep/attestations/sha256:791879c2ad46d3ad9411b13a1d982f10be839532ba790e883d3784109df24ac5",
+      "method": "authenticated-gh-api",
+      "exitCode": 1,
+      "status": 404
+    },
+    {
+      "url": "https://api.github.com/orgs/aquasecurity/attestations/sha256:2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60",
+      "method": "authenticated-gh-api",
+      "exitCode": 1,
+      "status": 404
+    },
+    {
+      "url": "https://api.github.com/orgs/aquasecurity/attestations/sha256:c38dd4d9def7e5cf8254d4a06392dedb2987b12a5a034467e4f6596761a80a77",
+      "method": "authenticated-gh-api",
+      "exitCode": 1,
+      "status": 404
+    },
+    {
+      "url": "https://api.github.com/orgs/aquasecurity/attestations/sha256:2fd489b1ad2269b3d61b12bf24a91bdd0aec776f715cb77537e05d3124637ddc",
+      "method": "authenticated-gh-api",
+      "exitCode": 1,
+      "status": 404
+    },
+    {
+      "url": "https://api.github.com/orgs/aquasecurity/attestations/sha256:1fb7137d250cb10353d06ddedda8a5df0a4021b6bdd00651f6833e99e0d6dc80",
+      "method": "authenticated-gh-api",
+      "exitCode": 1,
+      "status": 404
+    },
+    {
+      "url": "https://api.github.com/repos/aquasecurity/trivy-db/attestations/sha256:2fd489b1ad2269b3d61b12bf24a91bdd0aec776f715cb77537e05d3124637ddc",
+      "method": "authenticated-gh-api",
+      "exitCode": 1,
+      "status": 404
+    },
+    {
+      "url": "https://api.github.com/repos/aquasecurity/trivy-db/attestations/sha256:1fb7137d250cb10353d06ddedda8a5df0a4021b6bdd00651f6833e99e0d6dc80",
+      "method": "authenticated-gh-api",
+      "exitCode": 1,
+      "status": 404
+    }
+  ],
+  "buildStatements": [
+    {
+      "version": "1.182.1",
+      "indexDigest": "sha256:451b3d875c00dac7ed5db5293e584a07de11449a409c10b3c2d2652f429630b6",
+      "platformDigest": "sha256:5347c70f22a33b419cd515ec7fa0d3e76da7eb09f1d8cb4081d88a3bb17d87f6",
+      "attestationManifestDigest": "sha256:01e4278466e70f40457ef37ed2e15dfa3e182a05d142db8af0c17c39104c6b8e",
+      "statements": [
+        {
+          "blobDigest": "sha256:7102160f9ce3126a9cc293e67149754c74596d2f634d0817950a7802a8e3ab76",
+          "statementType": "https://in-toto.io/Statement/v0.1",
+          "predicateType": "https://slsa.dev/provenance/v0.2",
+          "subjectMatchesPlatformManifest": true,
+          "topLevelFields": [
+            "_type",
+            "predicate",
+            "predicateType",
+            "subject"
+          ],
+          "signaturesEmbedded": false,
+          "sigstoreVerificationMaterialEmbedded": false
+        }
+      ],
+      "publisherIdentityVerified": false
+    },
+    {
+      "version": "1.183.0",
+      "indexDigest": "sha256:2e45517a85e13a9cca14a2a00df6bb48affd66b8ebfae1b0991cd57578362fb0",
+      "platformDigest": "sha256:791879c2ad46d3ad9411b13a1d982f10be839532ba790e883d3784109df24ac5",
+      "attestationManifestDigest": "sha256:a284305767ef959e70392ad565845b7d3ce084b3c74378d7cefeb22aa9a4b464",
+      "statements": [
+        {
+          "blobDigest": "sha256:059692a34c195e46a751cc46e761ef05617e70e7f426289d7e09c6921a11db3d",
+          "statementType": "https://in-toto.io/Statement/v0.1",
+          "predicateType": "https://slsa.dev/provenance/v0.2",
+          "subjectMatchesPlatformManifest": true,
+          "topLevelFields": [
+            "_type",
+            "predicate",
+            "predicateType",
+            "subject"
+          ],
+          "signaturesEmbedded": false,
+          "sigstoreVerificationMaterialEmbedded": false
+        }
+      ],
+      "publisherIdentityVerified": false
+    }
+  ],
+  "publicWorkflowObservations": [
+    {
+      "repository": "semgrep/semgrep",
+      "observedRef": "v1.183.0",
+      "commit": "4fe07d805dd2a4b64fed486e95136923f08648d0",
+      "workflowPath": ".github/workflows/build-test-docker.yml",
+      "workflowSha256": "7e048fe7f798a86bb930fb580d5366001d4e889647d589b384e7149b76a46605",
+      "workflowUrl": "https://github.com/semgrep/semgrep/blob/4fe07d805dd2a4b64fed486e95136923f08648d0/.github/workflows/build-test-docker.yml",
+      "signingOrAttestationStepTokensFound": false,
+      "pushDisabledInInspectedWorkflow": true,
+      "publishesDatabaseUsingOras": false,
+      "scope": "only the named public workflow was inspected; private or other publishers may exist"
+    },
+    {
+      "repository": "aquasecurity/trivy-db",
+      "observedRef": "main",
+      "commit": "4baa24d2b7c41f704d93f7658416dc239f9345c1",
+      "workflowPath": ".github/workflows/cron.yml",
+      "workflowSha256": "76f5eac37a9c952a853235638d51dbf2c842d691a42acbe4f563809b9bdd3fc0",
+      "workflowUrl": "https://github.com/aquasecurity/trivy-db/blob/4baa24d2b7c41f704d93f7658416dc239f9345c1/.github/workflows/cron.yml",
+      "signingOrAttestationStepTokensFound": false,
+      "pushDisabledInInspectedWorkflow": false,
+      "publishesDatabaseUsingOras": true,
+      "scope": "only the named public workflow was inspected; private or other publishers may exist"
+    }
+  ],
+  "interpretation": [
+    "Attestation statements bind their subject to a platform digest; no certificate, issuer or transparency proof was verified for these statements.",
+    "HTTP 401 is an authentication gap; authenticated follow-up lookups returned 404 at the recorded organization routes.",
+    "HTTP 404 or empty referrers do not establish global absence of signatures.",
+    "The inspected public workflows are scoped observations; private and other publishing workflows were not inspected.",
+    "The verified Trivy executable signature is recorded separately and does not authorize a database update."
+  ]
+}

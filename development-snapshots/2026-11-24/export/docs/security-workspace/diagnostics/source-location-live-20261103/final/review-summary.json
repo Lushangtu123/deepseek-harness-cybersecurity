@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "attempts": [
+    {
+      "stage": "preliminary",
+      "requestedModel": "claude-opus-5-5",
+      "effort": "high",
+      "actualModels": [
+        "claude-opus-5-5"
+      ],
+      "success": true,
+      "scope": "static source/material review, no tool execution",
+      "closure": false
+    },
+    {
+      "stage": "revised",
+      "requestedModel": "claude-opus-5-5",
+      "effort": "high",
+      "actualModels": [
+        "claude-opus-5-5"
+      ],
+      "success": true,
+      "scope": "static source/material review, no tool execution",
+      "closure": false
+    },
+    {
+      "stage": "closure",
+      "requestedModel": "claude-opus-5-5",
+      "effort": "high",
+      "actualModels": [
+        "claude-opus-5-5"
+      ],
+      "success": true,
+      "scope": "static source/material review, no tool execution",
+      "closure": true
+    }
+  ],
+  "finalVerdict": "no scoped false-pass release blockers; positive runtime prerequisites confirmed in final live receipt",
+  "olderSKFRequestedModelClosureCompleted": false,
+  "cleanupParserCorrection": "case-insensitive exact object-ID negative result check; two tests and actual Docker error replay, no new live scanner run"
+}

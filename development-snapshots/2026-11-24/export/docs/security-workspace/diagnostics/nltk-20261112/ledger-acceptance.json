@@ -1,0 +1,77 @@
+{
+  "guestEvidenceDirectory": "/home/purge/workspace/harness-acceptance/nltk-case-20261112/evidence/runs",
+  "sources": {
+    "3.9.2": "cce3a7dbce4c4533d75f72b1530c1b70c273574a8659b8c09f43de71e6ef1d67",
+    "3.9.3": "15fee48bc253a3d986a2d8e28c954f2897e3f90f4025821fb6f87889f9beca0d"
+  },
+  "latestRunId": "20261112T203256Z-975f7197",
+  "runs": [
+    {
+      "runId": "20261112T203218Z-00d85dfb",
+      "manifestSha256": "e2f1584da8e03083ac78d8362449b1460a38e81d0358a38e5033d1ba95fadf39",
+      "verificationSha256": "8ed2174f905f0155cfef9bbcc4cadea4602fc0f9f2a3aec1bb3805bf56193ba2",
+      "manifestEntryCount": 67,
+      "matchedEntries": 64,
+      "mismatches": [
+        {
+          "file": "harness/verify.py",
+          "expectedSha256": "9a8f26a2ae62f99228c7b42668b2cbfb132e6673677f3fbaf69dcae0c8918a93",
+          "observedSha256": "bb6ea19e63e36667b7576c50cb3bc006d03a5efa6a81b51848c85942a4ade315"
+        },
+        {
+          "file": "project-ledger.json",
+          "expectedSha256": "7542ec17df7bd1c9b199444a9326f3203842839d4826e907aa703ade096d2381",
+          "observedSha256": "8db0a4a5d66138117062dc917636516bbe0c55285bc7cab0497476fb723de420"
+        },
+        {
+          "file": "verification.json",
+          "expectedSha256": "6558e01c9e051826a64389acea6cf51204ac1b3109ad623ebfcc9d32ee6c8a90",
+          "observedSha256": "8ed2174f905f0155cfef9bbcc4cadea4602fc0f9f2a3aec1bb3805bf56193ba2"
+        }
+      ],
+      "functionality": "pass",
+      "trustworthiness": "unknown",
+      "fixedVersion": "unknown (non-trigger observed)"
+    },
+    {
+      "runId": "20261112T203256Z-975f7197",
+      "manifestSha256": "d30fd6f25a9d4a475ee19e4c0120177e78ebf41af3e1af4a5d086133c67047ac",
+      "verificationSha256": "589920729e5dfea34c64b9d7b25d8b8f035e2f82babc6c6628f73a82883f1c5a",
+      "manifestEntryCount": 67,
+      "matchedEntries": 67,
+      "mismatches": [],
+      "functionality": "pass",
+      "trustworthiness": "unknown",
+      "fixedVersion": "unknown (non-trigger observed)"
+    }
+  ],
+  "r3": "blocked",
+  "newIndependentSamples": 0,
+  "caseId": "nltk-collocations-eval-20261112",
+  "olderEvidenceStatus": "digest-mismatches-recorded",
+  "freeze": {
+    "entry": "scripts/review_quality_gate.mjs --freeze",
+    "datasetVersion": 2,
+    "ledgerSha256": "1c977aeca9bac72691c74bb785a5bf99bab5287dae74f5f6084eed9e004563c0",
+    "checks": {
+      "nltk-3.9.2": {
+        "sourceSha256": "cce3a7dbce4c4533d75f72b1530c1b70c273574a8659b8c09f43de71e6ef1d67",
+        "exitCode": 1,
+        "ledgerCheck": "rejected-already-used",
+        "stderr": "Acceptance source already used in the sample ledger"
+      },
+      "nltk-3.9.3": {
+        "sourceSha256": "15fee48bc253a3d986a2d8e28c954f2897e3f90f4025821fb6f87889f9beca0d",
+        "exitCode": 1,
+        "ledgerCheck": "rejected-already-used",
+        "stderr": "Acceptance source already used in the sample ledger"
+      },
+      "synthetic-control": {
+        "sourceSha256": "89a31458c4a64381600cfd8117445fa015d3c2656450adc7623a0e8cf1d63d76",
+        "exitCode": 0,
+        "ledgerCheck": "passed",
+        "stderr": ""
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "batchLock": {
+    "released": false,
+    "state": "unknown"
+  },
+  "controller": {
+    "state": "unknown"
+  },
+  "errors": [
+    {
+      "detail": "row-coverage",
+      "reason": "outer"
+    }
+  ],
+  "filesWritten": false,
+  "formalTargets": "0/16",
+  "guestRoot": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1",
+  "idleConfirmed": false,
+  "inner": [],
+  "kind": "guest-readonly-status",
+  "nonzeroSignalsSent": 0,
+  "outerGroup": {
+    "allAbsent": false,
+    "count": 0,
+    "groups": [],
+    "state": "unknown"
+  },
+  "outerGroups": {
+    "allAbsent": false,
+    "attemptedSuites": [
+      "consumer-12",
+      "evidence-gate",
+      "record-validation-15",
+      "unified-recovery-27",
+      "association-recovery-21",
+      "recovery-close-24",
+      "formal-admission-15",
+      "original-28",
+      "end-lf-13",
+      "rev6-24"
+    ],
+    "count": 0,
+    "groups": [],
+    "reason": "row-coverage",
+    "state": "unknown"
+  },
+  "r3": "blocked"
+}

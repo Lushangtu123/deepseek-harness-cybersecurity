@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-namespace-arity-20261103/assert-coverage.py", line 14, in <module>
+    assert not missing, 'Missing dynamic-code sites: '+', '.join(missing)
+           ^^^^^^^^^^^
+AssertionError: Missing dynamic-code sites: plain-eval-2, plain-eval-3, plain-exec-2, plain-exec-3

@@ -1,0 +1,19 @@
+[Unit]
+Description=Harness persistent scoped security audit owner
+Requires=harness-security.socket
+After=harness-security.socket
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+Type=simple
+Environment=DSH_HOME=/home/purge/.dsh-improved
+Environment=PATH=/home/purge/.local/node/bin:/usr/bin:/bin
+WorkingDirectory=/home/purge/.dsh-improved
+ExecStart=/home/purge/.local/node/bin/node /home/purge/tools/dsh-purge-personal-1.1.77-personal.1/scripts/security-service.mjs
+UMask=0077
+TimeoutStopSec=20
+Restart=on-failure
+RestartSec=3
+MemoryMax=512M
+TasksMax=64

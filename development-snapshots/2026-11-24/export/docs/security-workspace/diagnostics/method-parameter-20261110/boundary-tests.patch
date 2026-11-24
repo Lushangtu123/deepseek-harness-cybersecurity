@@ -1,0 +1,33 @@
+--- r1-tests/scripts/python_namespace_review.test.py
++++ final-tests/scripts/python_namespace_review.test.py
+@@ -131,6 +131,30 @@
+         self.assertEqual(row['source']['kind'], 'parameter-name-observed')
+         self.assertEqual(row['constraint']['state'], 'unresolved')
+         self.assertEqual(row['disposition'], 'unverified')
++
++    def test_try_path_budget_accepts_eight_levels_and_declines_nine(self):
++        for depth in [8, 9]:
++            with self.subTest(depth=depth):
++                lines = ['class Parser:', '    def parse(self, value):']
++                for level in range(depth):
++                    lines.append(' ' * (8 + level * 4) + 'try:')
++                lines.append(' ' * (8 + depth * 4) + 'return eval(value, {})')
++                for level in reversed(range(depth)):
++                    lines.append(' ' * (8 + level * 4) + 'except Exception:')
++                    lines.append(' ' * (12 + level * 4) + 'return None')
++                row = self.review('\n'.join(lines) + '\n')
++                expected = 'parameter-name-observed' if depth == 8 else 'expression-unresolved'
++                self.assertEqual(row['source']['kind'], expected)
++                self.assertEqual(row['constraint']['state'], 'unresolved')
++                self.assertEqual(row['disposition'], 'unverified')
++
++    def test_module_function_try_observations_do_not_gain_guard_proof(self):
++        source = ('def parse(value):\n    try:\n        return eval(value, {})\n'
++                  '    except Exception:\n        return None\n')
++        row = self.review(source)
++        self.assertEqual(row['source']['kind'], 'parameter-name-observed')
++        self.assertEqual(row['constraint']['state'], 'unresolved')
++        self.assertEqual(row['source']['externalControl'], 'unverified')
+ 
+     def test_fixed_set_guard_two_and_three_arguments_is_only_conditional_evidence(self):
+         for op in ['eval','exec']:

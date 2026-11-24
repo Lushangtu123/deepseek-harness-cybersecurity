@@ -1,0 +1,10 @@
+{
+  "ready": true,
+  "scope": "fixed approved all20 test-fixture-owned-link lifecycle and fail-closed file/dangling-link scanning",
+  "oneVmBatch": true,
+  "oneReviewRevision": true,
+  "noTargetExecution": true,
+  "guestRoot": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1",
+  "formalTargets": "0/16",
+  "r3": "blocked"
+}

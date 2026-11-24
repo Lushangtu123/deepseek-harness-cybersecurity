@@ -1,0 +1,32 @@
+{
+  "authenticatedStatusReady": true,
+  "servicesActive": {
+    "dsh-original.service": true,
+    "harness-security.socket": true,
+    "harness-security.service": true
+  },
+  "installedWorkerSha256": "9ec513ddb83d94c0c2f63629b7f218b1971704b4ff25d21169f30ad6e0ea9a51",
+  "ruleCount": 16,
+  "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+  "semgrepImageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "dockerEventWindowContainsScanner": false,
+  "securityContainerCreatesSinceTaskStart": 0,
+  "scannerCreateMatchedSameTask": 0,
+  "namespaceReviewerCreatesSinceTaskStart": 0,
+  "ownedResourceIdle": true,
+  "activeBrowseProject": "phishguard-model-closure-20261102",
+  "physicalDatabaseChangesAfterStop": [
+    {
+      "attempt": "harness-namespace-managed-release-20261103",
+      "stoppedReceipt": "not reached; first stop gate failed",
+      "physicalDeltaRecorded": false
+    },
+    {
+      "attempt": "harness-namespace-managed-release-retry1-20261103",
+      "changedPaths": [
+        "/home/purge/.dsh-improved/redteam/engagements/vm-source-location-release-20261103/assets.db"
+      ],
+      "logicalMatched": true
+    }
+  ]
+}

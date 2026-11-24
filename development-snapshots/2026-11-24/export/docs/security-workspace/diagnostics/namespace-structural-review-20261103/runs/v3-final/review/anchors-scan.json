@@ -1,0 +1,296 @@
+{
+  "version": "1.182.1",
+  "results": [
+    {
+      "check_id": "policy.harness.python.dynamic-code-namespace",
+      "path": "/src/unicode-crlf.py",
+      "start": {
+        "line": 5,
+        "col": 22,
+        "offset": 111
+      },
+      "end": {
+        "line": 5,
+        "col": 40,
+        "offset": 129
+      },
+      "extra": {
+        "message": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+        "metadata": {
+          "category": "security",
+          "cwe": [
+            "CWE-95"
+          ],
+          "confidence": "LOW",
+          "source": "Harness local sink-inventory research candidate",
+          "requires-manual-review": true,
+          "evidence-level": "sink-only",
+          "qualification": "unverified",
+          "no-automatic-suppression": true,
+          "scope": "two or three positional arguments; no callee identity or input-source proof"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.dynamic-code-namespace",
+      "path": "/src/unicode-crlf.py",
+      "start": {
+        "line": 5,
+        "col": 42,
+        "offset": 131
+      },
+      "end": {
+        "line": 5,
+        "col": 60,
+        "offset": 149
+      },
+      "extra": {
+        "message": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+        "metadata": {
+          "category": "security",
+          "cwe": [
+            "CWE-95"
+          ],
+          "confidence": "LOW",
+          "source": "Harness local sink-inventory research candidate",
+          "requires-manual-review": true,
+          "evidence-level": "sink-only",
+          "qualification": "unverified",
+          "no-automatic-suppression": true,
+          "scope": "two or three positional arguments; no callee identity or input-source proof"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.dynamic-code-namespace",
+      "path": "/src/unicode-lf.py",
+      "start": {
+        "line": 5,
+        "col": 22,
+        "offset": 107
+      },
+      "end": {
+        "line": 5,
+        "col": 40,
+        "offset": 125
+      },
+      "extra": {
+        "message": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+        "metadata": {
+          "category": "security",
+          "cwe": [
+            "CWE-95"
+          ],
+          "confidence": "LOW",
+          "source": "Harness local sink-inventory research candidate",
+          "requires-manual-review": true,
+          "evidence-level": "sink-only",
+          "qualification": "unverified",
+          "no-automatic-suppression": true,
+          "scope": "two or three positional arguments; no callee identity or input-source proof"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.dynamic-code-namespace",
+      "path": "/src/unicode-lf.py",
+      "start": {
+        "line": 5,
+        "col": 42,
+        "offset": 127
+      },
+      "end": {
+        "line": 5,
+        "col": 60,
+        "offset": 145
+      },
+      "extra": {
+        "message": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+        "metadata": {
+          "category": "security",
+          "cwe": [
+            "CWE-95"
+          ],
+          "confidence": "LOW",
+          "source": "Harness local sink-inventory research candidate",
+          "requires-manual-review": true,
+          "evidence-level": "sink-only",
+          "qualification": "unverified",
+          "no-automatic-suppression": true,
+          "scope": "two or three positional arguments; no callee identity or input-source proof"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.dynamic-code-namespace",
+      "path": "/src/unicode-tabs.py",
+      "start": {
+        "line": 5,
+        "col": 19,
+        "offset": 92
+      },
+      "end": {
+        "line": 5,
+        "col": 37,
+        "offset": 110
+      },
+      "extra": {
+        "message": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+        "metadata": {
+          "category": "security",
+          "cwe": [
+            "CWE-95"
+          ],
+          "confidence": "LOW",
+          "source": "Harness local sink-inventory research candidate",
+          "requires-manual-review": true,
+          "evidence-level": "sink-only",
+          "qualification": "unverified",
+          "no-automatic-suppression": true,
+          "scope": "two or three positional arguments; no callee identity or input-source proof"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.dynamic-code-namespace",
+      "path": "/src/unicode-tabs.py",
+      "start": {
+        "line": 5,
+        "col": 39,
+        "offset": 112
+      },
+      "end": {
+        "line": 5,
+        "col": 57,
+        "offset": 130
+      },
+      "extra": {
+        "message": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+        "metadata": {
+          "category": "security",
+          "cwe": [
+            "CWE-95"
+          ],
+          "confidence": "LOW",
+          "source": "Harness local sink-inventory research candidate",
+          "requires-manual-review": true,
+          "evidence-level": "sink-only",
+          "qualification": "unverified",
+          "no-automatic-suppression": true,
+          "scope": "two or three positional arguments; no callee identity or input-source proof"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    }
+  ],
+  "errors": [],
+  "paths": {
+    "scanned": [
+      "/src/unicode-crlf.py",
+      "/src/unicode-lf.py",
+      "/src/unicode-tabs.py"
+    ]
+  },
+  "time": {
+    "rules": [],
+    "rules_parse_time": 0.0013360977172851562,
+    "profiling_times": {
+      "config_time": 0.09803366661071777,
+      "core_time": 0.28566956520080566,
+      "ignores_time": 6.985664367675781e-05,
+      "total_time": 0.39158129692077637
+    },
+    "parsing_time": {
+      "total_time": 0.0042781829833984375,
+      "per_file_time": {
+        "mean": 0.0004753536648220487,
+        "std_dev": 1.5828641756870863e-06
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_files": []
+    },
+    "scanning_time": {
+      "total_time": 0.006482839584350586,
+      "per_file_time": {
+        "mean": 0.002160946528116862,
+        "std_dev": 7.384982697860526e-06
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_files": []
+    },
+    "matching_time": {
+      "total_time": 0.0019290447235107422,
+      "per_file_and_rule_time": {
+        "mean": 0.00021433830261230471,
+        "std_dev": 3.235640835757497e-07
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_rules_on_files": []
+    },
+    "tainting_time": {
+      "total_time": 0.0,
+      "per_def_and_rule_time": {
+        "mean": 0.0,
+        "std_dev": 0.0
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_rules_on_defs": []
+    },
+    "fixpoint_timeouts": [],
+    "prefiltering": {
+      "project_level_time": 0.0,
+      "file_level_time": 0.0,
+      "rules_with_project_prefilters_ratio": 0.0,
+      "rules_with_file_prefilters_ratio": 1.0,
+      "rules_selected_ratio": 0.2727272727272727,
+      "rules_matched_ratio": 0.2727272727272727
+    },
+    "targets": [],
+    "total_bytes": 0,
+    "max_memory_bytes": 88255296
+  },
+  "engine_requested": "OSS",
+  "skipped_rules": [],
+  "profiling_results": []
+}

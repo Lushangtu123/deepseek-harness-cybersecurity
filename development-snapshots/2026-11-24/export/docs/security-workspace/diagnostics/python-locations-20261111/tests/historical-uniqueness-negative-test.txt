@@ -1,0 +1,1 @@
+PASS: duplicate historical candidates and positive-with-no-points both reject before freeze. Authored mutation; source s3-vm4/score.mjs.

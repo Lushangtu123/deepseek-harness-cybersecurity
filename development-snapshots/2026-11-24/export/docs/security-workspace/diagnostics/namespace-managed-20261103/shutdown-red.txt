@@ -1,0 +1,48 @@
+(node:17180) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ existing16 findings are explicitly not applicable and never launch a worker (1.829292ms)
+✔ eligible input carries exact full copy span and hash without importing source (6.445583ms)
+✔ eligible snapshot mismatch never reaches worker (2.279542ms)
+✔ eligible hash mismatch never reaches worker (2.275125ms)
+✔ eligible unbound mismatch never reaches worker (0.778625ms)
+✔ eligible label mismatch never reaches worker (0.542625ms)
+✔ changed same-size source refuses anchored request (2.372958ms)
+✔ worker failure preserves original warning and reports unavailable (3.01475ms)
+✔ cleanup uncertainty must escape to block later tasks (3.350459ms)
+✔ joint collector preserves persisted scanner warning when namespace unavailable (119.838375ms)
+✔ joint collector preserves persisted scanner warning when namespace stop-unknown (89.16125ms)
+✖ joint collector preserves persisted scanner warning when namespace shutdown-stop-unknown (88.218ms)
+✔ real AST worker output projects only copy-bound unverified structure (41.619083ms)
+✔ invalid worker output cannot become evidence: r=>r.observations[0].anchor.offset++ (42.025083ms)
+✔ invalid worker output cannot become evidence: r=>r.observations[0].sourceSha256='c'.repeat(64) (39.849125ms)
+✔ invalid worker output cannot become evidence: r=>r.observations[0].disposition='confirmed' (40.153583ms)
+✔ invalid worker output cannot become evidence: r=>r.observations.push(r.observations[0]) (41.520833ms)
+✔ invalid worker output cannot become evidence: r=>r.checks=0 (40.915084ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 17
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 645.020334
+
+✖ failing tests:
+
+test at work/harness-purge-improved/tests/namespace-managed.test.mjs:14:77
+✖ joint collector preserves persisted scanner warning when namespace shutdown-stop-unknown (88.218ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'interrupted'
+  - 'unconfirmed'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/namespace-managed.test.mjs:18:590)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'interrupted',
+    expected: 'unconfirmed',
+    operator: 'strictEqual'
+  }

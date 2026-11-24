@@ -1,0 +1,236 @@
+{
+ "admissionIssued": false,
+ "failed": [],
+ "fixturesImported": 0,
+ "formalTargets": "0/16",
+ "kind": "stdlib-cli-record-validation-focused-checks",
+ "passed": 15,
+ "preflightExecuted": false,
+ "protocolRevision": 3,
+ "r3": "blocked",
+ "realBpftrace": 0,
+ "realContainers": 0,
+ "results": [
+  {
+   "description": "missing/null legacy fields and empty valid dictionaries/lists remain accepted",
+   "detail": {
+    "cleanup-missing": "legacy",
+    "cleanup-null": "legacy",
+    "cleanupCheck-missing": "legacy",
+    "cleanupCheck-null": "legacy",
+    "cleanupReceipts-missing": "legacy",
+    "cleanupReceipts-null": "legacy",
+    "empty-controls": "valid",
+    "resourceIntent-missing": "legacy",
+    "resourceIntent-null": "legacy"
+   },
+   "id": "legacy-missing-null-and-empty-controls",
+   "passed": true,
+   "test": "legacy-missing-null-and-empty-controls"
+  },
+  {
+   "description": "B11 list/string/empty-list intents are invalid before resource calls",
+   "detail": {
+    "empty-list": {
+     "calls": 0,
+     "childHeld": true,
+     "exit": 3
+    },
+    "nonempty-list": {
+     "calls": 0,
+     "childHeld": true,
+     "exit": 3
+    },
+    "string": {
+     "calls": 0,
+     "childHeld": true,
+     "exit": 3
+    }
+   },
+   "id": "invalid-intent-shapes-preserve-parent-and-hold-valid-child",
+   "passed": true,
+   "test": "invalid-intent-shapes-preserve-parent-and-hold-valid-child"
+  },
+  {
+   "description": "B12 parent/child history variants are not converted to empty lists",
+   "detail": {
+    "child:list-member": {
+     "exit": 3,
+     "preserved": true
+    },
+    "child:object": {
+     "exit": 3,
+     "preserved": true
+    },
+    "child:string": {
+     "exit": 3,
+     "preserved": true
+    },
+    "parent:list-member": {
+     "exit": 3,
+     "preserved": true
+    },
+    "parent:object": {
+     "exit": 3,
+     "preserved": true
+    },
+    "parent:string": {
+     "exit": 3,
+     "preserved": true
+    }
+   },
+   "id": "malformed-history-parent-and-child-preserved",
+   "passed": true,
+   "test": "malformed-history-parent-and-child-preserved"
+  },
+  {
+   "description": "cleanup/cleanupCheck dicts reject wrong recognized types before writes",
+   "detail": {
+    "check-count": "invalid",
+    "check-protocol": "invalid",
+    "check-state": "invalid",
+    "check-string": "invalid",
+    "cleanup-confirmed-string": "invalid",
+    "cleanup-state-value": "invalid",
+    "cleanup-string": "invalid"
+   },
+   "id": "recognized-cleanup-field-types-are-validated",
+   "passed": true,
+   "test": "recognized-cleanup-field-types-are-validated"
+  },
+  {
+   "description": "a damaged child is untouched while a readable sibling is held",
+   "detail": {
+    "calls": 0,
+    "damagedPreserved": true,
+    "exit": 3,
+    "siblingHeld": true
+   },
+   "id": "valid-parent-invalid-child-holds-valid-sibling",
+   "passed": true,
+   "test": "valid-parent-invalid-child-holds-valid-sibling"
+  },
+  {
+   "description": "D2 reads the whole scope before 78 and holds a valid readable sibling",
+   "detail": {
+    "calls": 0,
+    "contradictoryPreserved": true,
+    "exit": 78,
+    "validSiblingHeld": true
+   },
+   "id": "multiple-children-one-contradiction-holds-read-sibling",
+   "passed": true,
+   "test": "multiple-children-one-contradiction-holds-read-sibling"
+  },
+  {
+   "description": "unreadable/partial plan discovery still holds a directly readable known child",
+   "detail": {
+    "childHeld": true,
+    "exit": 3,
+    "readState": "unreadable"
+   },
+   "id": "read-error-and-partial-enumeration-hold-known-child",
+   "passed": true,
+   "test": "read-error-and-partial-enumeration-hold-known-child"
+  },
+  {
+   "description": "a hold-write failure is reported and damaged bytes remain exact",
+   "detail": {
+    "exit": 3,
+    "falseDurableClaim": false,
+    "stderr": "runner: record-invalid:attempt=1:issues=resourceIntent:not-object:held=False:holdFailures={\"475379d83302f29dc309be228b11c9a1\": {\"detail\": \"OSError:simulated-log-failure\", \"held\": false, \"state\": \"unconfirmed\"}}\n"
+   },
+   "id": "write-failure-cannot-claim-durable-hold",
+   "passed": true,
+   "test": "write-failure-cannot-claim-durable-hold"
+  },
+  {
+   "description": "query/status expose raw success separately from effective unknown hold",
+   "detail": {
+    "effectiveConfirmed": false,
+    "effectiveHeld": true,
+    "rawConfirmed": true,
+    "readOnly": true
+   },
+   "id": "raw-success-is-not-effective-success",
+   "passed": true,
+   "test": "raw-success-is-not-effective-success"
+  },
+  {
+   "description": "new reservation and settlement consume shared effective validation",
+   "detail": {
+    "bytesPreserved": true,
+    "counterUnchanged": true,
+    "reservationExit": 3,
+    "settlement": "unknown"
+   },
+   "id": "reservation-and-settlement-refuse-damaged-record",
+   "passed": true,
+   "test": "reservation-and-settlement-refuse-damaged-record"
+  },
+  {
+   "description": "valid cleanup works and a repeated recovery does not replay or refund",
+   "detail": {
+    "counterUnchanged": true,
+    "first": 0,
+    "second": 0,
+    "targetExecutions": 0
+   },
+   "id": "normal-cleanup-and-repeat-recovery-are-not-replayed",
+   "passed": true,
+   "test": "normal-cleanup-and-repeat-recovery-are-not-replayed"
+  },
+  {
+   "description": "after an external fixture correction, recovery completes without replay",
+   "detail": {
+    "broken": 3,
+    "restored": 0,
+    "settled": true
+   },
+   "id": "restored-correct-fixture-can-finish-normally",
+   "passed": true,
+   "test": "restored-correct-fixture-can-finish-normally"
+  },
+  {
+   "description": "a malformed parent list is not guessed; an explicit reverse link is still held",
+   "detail": {
+    "calls": 0,
+    "exit": 3,
+    "parentPreserved": true,
+    "reverseLinkHeld": true
+   },
+   "id": "broken-relationship-is-not-guessed",
+   "passed": true,
+   "test": "broken-relationship-is-not-guessed"
+  },
+  {
+   "description": "receipt history rejects strings/objects and preserves compatible rows",
+   "detail": {
+    "rows": 2,
+    "unknownKeysPreserved": true
+   },
+   "id": "receipt-append-never-coerces-or-overwrites-damage",
+   "passed": true,
+   "test": "receipt-append-never-coerces-or-overwrites-damage"
+  },
+  {
+   "description": "recordState values and recordIssues reason strings are explicit",
+   "detail": {
+    "states": [
+     "valid",
+     "legacy",
+     "invalid",
+     "unreadable"
+    ]
+   },
+   "id": "record-state-and-issues-contract",
+   "passed": true,
+   "test": "record-state-and-issues-contract"
+  }
+ ],
+ "simulated": true,
+ "state": "pending-codex-review",
+ "targetExecutions": 0,
+ "total": 15,
+ "version": 1
+}

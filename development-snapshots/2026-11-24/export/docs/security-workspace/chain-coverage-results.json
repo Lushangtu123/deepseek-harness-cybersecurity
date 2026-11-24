@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-04",
+  "scope": [
+    "CHAIN-PAGE-COVERAGE",
+    "CHAIN-GLOBAL-QUALIFICATION",
+    "SCORE-EXCLUSION-LABELS"
+  ],
+  "tests": {
+    "localPluginPassed": 976,
+    "vmPluginPassed": 976,
+    "pluginFiles": 105,
+    "focusedPassed": 52,
+    "pythonPassed": 352,
+    "pythonFiles": 43,
+    "pythonFirstAttempt": "outdated candidate manifest before refresh",
+    "pythonIntermediateAttempts": "shell compound invocation denied killpg for synthetic SSH subprocess, final direct CI passed",
+    "clientReproducible": true,
+    "initialBackendFailures": 9,
+    "coverageAndModelProjection": "inert fixtures",
+    "browser": "component harness only"
+  },
+  "native": {
+    "exitCode": 0,
+    "testFiles": 105,
+    "sdkSmokeExitCode": 0,
+    "node": "v24.22.1",
+    "python": "3.12.3",
+    "dailyProgramUnchanged": true,
+    "dailyOverrideUnchanged": true,
+    "temporaryCopyRemoved": true
+  },
+  "sourceHashes": {
+    "work/harness-purge-improved/package/lib/redteam/store-core.js": "9aaf1cd76adff9a13ea7e2858dd53c938fed201c6629b34cc1bd1a72655c598d",
+    "work/harness-purge-improved/package/lib/redteam/client.js": "abb4b2ccc72d90a2dd55fe6c4b0207ce26a398701bc8fee6788d5d2a212570a0",
+    "work/harness-purge-improved/package/lib/redteam/tools.js": "d9663a0a23100b0d3f4dc2746d798a20cd384b9e8cc0262f37e4af5af8f9f7f6",
+    "work/harness-purge-improved/tests/chain-coverage.test.mjs": "77cb564e07116ad03077ac9c55f7d77016c44889e583839f6d8bfa744943c39b",
+    "work/harness-purge-improved/tests/chain-project.test.mjs": "7cc88524fb95b870bf1f090560d42bd4772c8595d2b315ef4dcec11d63a7ba8b",
+    "work/harness-purge-improved/package/client.js": "21d5c03d8190226dd8f68e6432564d51dc1f99ec744df9bd81929ccaad7b8a22"
+  },
+  "externalReview": {
+    "state": "completed-and-triaged",
+    "promptSha256": "a48c9e50655949a1358762c31ee7b27e4fbd1b1f74c81118b1431092f6369f7b",
+    "claude": "provider-safety-refusal",
+    "claudeRequestedModel": "claude-opus-5-5",
+    "actualReviewer": "DeepSeek V4.1 Flash",
+    "actualApiAlias": "deepseek-flash",
+    "effort": "high",
+    "unchangedUserPacket": true,
+    "domains": [
+      {
+        "domain": "chain-core",
+        "state": "completed",
+        "finishReason": "stop",
+        "actualModel": "deepseek-flash",
+        "reportSha256": "d33fc414c0c444679d2ef309cd4b6f383745038563387ed836ec329e79cf442e",
+        "receiptSha256": "bae623a7e9611cdbfc0b4c9990a85238993d0efdd2483698601828ef0e62b211"
+      },
+      {
+        "domain": "chain-callers",
+        "state": "completed",
+        "finishReason": "stop",
+        "actualModel": "deepseek-flash",
+        "reportSha256": "8790c1d0b4e551a358fa5a1ff92efc4855da010a3f03790425a7ca8bbf44f859",
+        "receiptSha256": "dad01e6a5cd8f858556381e3a24b25ae38b4f9db6b6ba8a7c06219cccf0abec8"
+      }
+    ],
+    "remainingScopedP1P2Blockers": 0,
+    "temporaryReviewCopyRemoved": true
+  },
+  "inheritedConfirmed": [
+    "CHAIN-UNDEFINED-TOTAL-POINTS",
+    "CHAIN-SELF-DISABLED-REASON-UI-AND-TOOL",
+    "SCORE-DEDUP-SCOPE-EXPLANATION"
+  ],
+  "inheritedFixtureEvidence": {
+    "baseline": {
+      "undefinedTotalPointsOmittedFromJson": true,
+      "rawDisabledExplicit": true,
+      "rawSelfCreatedExplicit": true,
+      "toolDisabledReasonMissing": true,
+      "toolSelfCreatedReasonMissing": true,
+      "serviceDedupTextUsesTarget": true
+    },
+    "candidate": {
+      "undefinedTotalPointsOmittedFromJson": true,
+      "rawDisabledExplicit": true,
+      "rawSelfCreatedExplicit": true,
+      "toolDisabledReasonMissing": true,
+      "toolSelfCreatedReasonMissing": true,
+      "serviceDedupTextUsesTarget": true
+    }
+  },
+  "acceptance": {
+    "candidateProgramFiles": 173,
+    "dailyProgramFiles": 169,
+    "deployed": false,
+    "chromeEndToEnd": false,
+    "nativeModelToolCall": false,
+    "ordinaryR3Qualified": false,
+    "wholeProductReleaseQualified": false,
+    "realFindingsStillUnverified": 95
+  }
+}

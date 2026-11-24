@@ -1,0 +1,15 @@
+{
+  "downloadFile": "joint-review-f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b.json",
+  "bytes": 34544,
+  "sha256": "f6e545b742215d68d61d2369a45e5f0992848b6bb7478fe3a1102a8e107450cd",
+  "allFiveSectionsExactlyMatched": true,
+  "taskMatched": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+  "snapshotMatched": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+  "counts": {
+    "findings": 9,
+    "files": 18,
+    "exclusions": 0,
+    "diagnostics": 0,
+    "artifacts": 13
+  }
+}

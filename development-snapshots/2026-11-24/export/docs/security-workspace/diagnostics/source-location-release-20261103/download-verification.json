@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "exactReportMatch": true,
+  "bytes": 11513,
+  "sha256": "b080c1b7e22784909abaa2239bbee0b41be135c9ca2a22fc0bf924737f41eca2",
+  "sections": {
+    "findings": 7,
+    "files": 5,
+    "exclusions": 0,
+    "diagnostics": 0,
+    "artifacts": 0
+  }
+}

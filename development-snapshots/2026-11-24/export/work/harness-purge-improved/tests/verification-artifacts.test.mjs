@@ -1,0 +1,48 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
+import {evaluateReviewQuality,digest} from '../../../scripts/review_quality_gate.mjs';
+const url=new URL('../../../docs/security-workspace/diagnostics/python-verification-20261112/v4-fixture.json',import.meta.url),fixture=()=>JSON.parse(readFileSync(url)),score=f=>evaluateReviewQuality(f.dataset,f.run,f.freeze,f.policy,f.ledger),hash=s=>createHash('sha256').update(s).digest('hex');
+function editReport(f,fn,index=0){const a=f.run.verificationArtifacts[index],r=JSON.parse(a.reportJson);fn(r,JSON.parse(a.requestJson));a.reportJson=JSON.stringify(r);const receipt=f.run.verifierExecutions[index];receipt.reportSha256=hash(a.reportJson);f.run.outputs.find(o=>o.pointId===r.pointId)?.evidence.forEach(e=>e.artifactSha256=receipt.reportSha256)}
+test('Actual reviewed-profile VM v4 artifacts verify while used samples remain blocked',()=>{const f=fixture(),v=score(f);assert.equal(v.version,8);assert.deepEqual(v.verificationCoverage.issues,[]);assert.equal(v.verificationCoverage.supportedCases.length,4);assert.equal(v.r3Qualified,false);assert.equal(v.state,'blocked');assert.ok(v.blockers.includes('development-sample-reused'));assert.equal(v.categories['python/CWE-94'].diagnostic.reviewed.truePositive,1);assert.equal(v.categories['python/CWE-95'].diagnostic.reviewed.truePositive,1)});
+test('Point mismatch cannot be made valid by updating report digest',()=>{const f=fixture();editReport(f,r=>r.pointId='f'.repeat(64));assert.ok(score(f).verificationCoverage.issues.length)});
+test('Quoted challenge echo is not arbitrary code-probe execution even with recomputed hashes',()=>{const f=fixture(),index=2;editReport(f,(r,q)=>{for(const run of r.runs)for(const c of run.trace.calls){c.argument=JSON.stringify(q.challenge);c.argumentSha256=hash(c.argument)}},index);assert.ok(score(f).verificationCoverage.issues.length)});
+test('No raw witness cannot support a claimed confirmation',()=>{const f=fixture();editReport(f,r=>{for(const run of r.runs)for(const v of run.trace.returns)v.markerValue=null});assert.ok(score(f).verificationCoverage.issues.length)});
+test('Non-dominating or dangerous finite-set proof cannot exclude',()=>{for(const mutate of [r=>r.proof.guardLine=r.proof.sinkLine+1,r=>r.proof.values=['len([])']]){const f=fixture();editReport(f,mutate,3);const r=score(f);assert.ok(r.verificationCoverage.issues.length)}});
+test('Source, dependency, challenge, cleanup or verifier identity changes cannot inherit a decision',()=>{for(const mutate of [f=>f.run.verifierExecutions[0].cleanupVerified=false,f=>f.run.verifierExecutions[0].verifierSha256='f'.repeat(64),f=>{f.run.verificationArtifacts[0].requestJson+=' '},f=>{const r=f.run.verifierExecutions[0];delete r.inputFiles[Object.keys(r.inputFiles).find(k=>k.startsWith('dependencies/'))];r.inputSha256=digest(r.inputFiles)},f=>{f.freeze.verificationPlan.requests[0].challenge='f'.repeat(64)}]){const f=fixture();mutate(f);assert.ok(score(f).blockers.some(x=>x.startsWith('verification-')))}});
+test('Human evidence is supplementary and cannot supply tool main-score confirmation',()=>{const f=fixture();f.run.outputs[0].evidence[0].kind='human-review';f.run.humanSupplement=[{caseId:f.dataset.cases[0].id,decision:'confirmed'}];const v=score(f);assert.ok(v.blockers.includes('verification-evidence-unavailable-or-mismatched'));assert.equal(v.categories['python/CWE-94'].diagnostic.reviewed.truePositive,0);assert.equal(v.humanSupplement.length,1)});
+
+test('A consistently rehashed freeze cannot substitute shipped verifier code or its dependency lock', () => {
+ for (const replace of [
+  snapshot => { snapshot.code['python_execution_verify.py'] = 'f'.repeat(64) },
+  snapshot => { snapshot.verifierControllerSha256 = 'f'.repeat(64) },
+  snapshot => { snapshot.dependencyPackages[0].version = 'changed' },
+  snapshot => { snapshot.dependencies[Object.keys(snapshot.dependencies)[0]] = 'f'.repeat(64) },
+ ]) {
+  const input = fixture();
+  const { freeze, run } = input;
+  replace(freeze.verificationPlan.snapshot);
+  freeze.verificationPlanSha256 = digest(freeze.verificationPlan);
+  run.freezeSha256 = digest(freeze);
+  for (const receipt of [...run.reviewerExecutions, ...run.verifierExecutions]) {
+   receipt.freezeSha256 = run.freezeSha256;
+  }
+  for (const receipt of run.verifierExecutions) {
+   receipt.verifierSha256 = digest(freeze.verificationPlan.snapshot);
+  }
+  const result = score(input);
+  assert.deepEqual(result.verificationCoverage.supportedCases, []);
+  assert.ok(result.blockers.includes('verification-plan-missing-or-changed'));
+ }
+});
+
+test('Omitting a planned verifier receipt is an explicit coverage blocker', () => {
+ const input = fixture();
+ const request = input.freeze.verificationPlan.requests.at(-1);
+ input.run.verifierExecutions.pop();
+ input.run.verificationArtifacts.pop();
+ const output = input.run.outputs.find(item => item.id === request.caseId);
+ output.decision = 'unknown';
+ output.evidence = [];
+ const result = score(input);
+ assert.ok(result.blockers.includes('verification-request-unobserved:' + request.caseId));
+ assert.equal(result.verificationCoverage.supportedCases.length, 3);
+});

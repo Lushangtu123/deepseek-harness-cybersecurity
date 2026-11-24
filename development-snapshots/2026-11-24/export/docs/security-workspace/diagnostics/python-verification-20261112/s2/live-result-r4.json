@@ -1,0 +1,688 @@
+{
+  "state": "completed",
+  "inventory": {
+    "version": 1,
+    "protocol": "python-sink-locations-1",
+    "runtimePython": "3.12.15",
+    "files": {
+      "BenchmarkTest00073.py": {
+        "sha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+        "bytes": 1877,
+        "state": "completed",
+        "points": [
+          {
+            "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+            "callee": "eval",
+            "call": {
+              "start": {
+                "line": 54,
+                "col": 5,
+                "offset": 1748
+              },
+              "end": {
+                "line": 54,
+                "col": 14,
+                "offset": 1757
+              }
+            },
+            "id": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+            "builtinIdentity": "unverified",
+            "argument": {
+              "start": {
+                "line": 54,
+                "col": 10,
+                "offset": 1753
+              },
+              "end": {
+                "line": 54,
+                "col": 13,
+                "offset": 1756
+              }
+            }
+          }
+        ]
+      },
+      "BenchmarkTest00074.py": {
+        "sha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+        "bytes": 1881,
+        "state": "completed",
+        "points": [
+          {
+            "sourceSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+            "callee": "exec",
+            "call": {
+              "start": {
+                "line": 51,
+                "col": 4,
+                "offset": 1759
+              },
+              "end": {
+                "line": 51,
+                "col": 13,
+                "offset": 1768
+              }
+            },
+            "id": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+            "builtinIdentity": "unverified",
+            "argument": {
+              "start": {
+                "line": 51,
+                "col": 9,
+                "offset": 1764
+              },
+              "end": {
+                "line": 51,
+                "col": 12,
+                "offset": 1767
+              }
+            }
+          }
+        ]
+      },
+      "helpers/utils.py": {
+        "sha256": "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834",
+        "bytes": 2280,
+        "state": "completed",
+        "points": []
+      },
+      "literal-set.py": {
+        "sha256": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+        "bytes": 117,
+        "state": "completed",
+        "points": [
+          {
+            "sourceSha256": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+            "callee": "eval",
+            "call": {
+              "start": {
+                "line": 4,
+                "col": 12,
+                "offset": 105
+              },
+              "end": {
+                "line": 4,
+                "col": 23,
+                "offset": 116
+              }
+            },
+            "id": "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b",
+            "builtinIdentity": "unverified",
+            "argument": {
+              "start": {
+                "line": 4,
+                "col": 17,
+                "offset": 110
+              },
+              "end": {
+                "line": 4,
+                "col": 22,
+                "offset": 115
+              }
+            }
+          }
+        ]
+      },
+      "skf-fixed-control.py": {
+        "sha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+        "bytes": 1652,
+        "state": "completed",
+        "points": []
+      },
+      "skf-upstream.py": {
+        "sha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+        "bytes": 1585,
+        "state": "completed",
+        "points": [
+          {
+            "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+            "callee": "eval",
+            "call": {
+              "start": {
+                "line": 37,
+                "col": 20,
+                "offset": 1296
+              },
+              "end": {
+                "line": 37,
+                "col": 51,
+                "offset": 1327
+              }
+            },
+            "id": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+            "builtinIdentity": "unverified",
+            "argument": {
+              "start": {
+                "line": 37,
+                "col": 25,
+                "offset": 1301
+              },
+              "end": {
+                "line": 37,
+                "col": 50,
+                "offset": 1326
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "results": {
+    "BenchmarkTest00074.py": {
+      "version": 1,
+      "operation": "verify-execution",
+      "decision": "confirmed",
+      "reason": "untrusted-data-executed-at-point",
+      "sourceSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+      "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+      "point": {
+        "sourceSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+        "callee": "exec",
+        "call": {
+          "start": {
+            "line": 51,
+            "col": 4,
+            "offset": 1759
+          },
+          "end": {
+            "line": 51,
+            "col": 13,
+            "offset": 1768
+          }
+        },
+        "id": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+        "builtinIdentity": "unverified",
+        "argument": {
+          "start": {
+            "line": 51,
+            "col": 9,
+            "offset": 1764
+          },
+          "end": {
+            "line": 51,
+            "col": 12,
+            "offset": 1767
+          }
+        }
+      },
+      "contractSha256": "58a8fde463eeaca01434ab98179a9bffcc23bbb42407e8b56749d0da7a783ae8",
+      "runs": [
+        {
+          "probeSha256": "00d7d921ffa61269f2ef06b2fdb23f832e006fd9c729d933d879a2520d2f4174",
+          "inputIndex": 0,
+          "trace": {
+            "state": "observed",
+            "reason": null,
+            "calls": [
+              {
+                "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+                "callee": "exec",
+                "exactStr": true,
+                "argumentSha256": "00d7d921ffa61269f2ef06b2fdb23f832e006fd9c729d933d879a2520d2f4174",
+                "containsProbe": true,
+                "argument": "'harness-control'"
+              }
+            ],
+            "returns": [
+              {
+                "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+                "evalWitness": false,
+                "execWitness": false
+              }
+            ]
+          }
+        },
+        {
+          "probeSha256": "dc78b4d29762285436a998e3f826c4d817e8073bb7aa3eaecb053d6056295d51",
+          "inputIndex": 1,
+          "trace": {
+            "state": "observed",
+            "reason": null,
+            "calls": [
+              {
+                "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+                "callee": "exec",
+                "exactStr": true,
+                "argumentSha256": "dc78b4d29762285436a998e3f826c4d817e8073bb7aa3eaecb053d6056295d51",
+                "containsProbe": true,
+                "argument": "str('294159e8ec08fffb348af110bcee56940dd8f85a74627803f630a49cae746e69')#"
+              }
+            ],
+            "returns": [
+              {
+                "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+                "evalWitness": false,
+                "execWitness": false
+              }
+            ]
+          }
+        },
+        {
+          "probeSha256": "db42676ad6815c0e75141ef9167e2b9456cd99a35b147e5a13516431d052460c",
+          "inputIndex": 2,
+          "trace": {
+            "state": "observed",
+            "reason": null,
+            "calls": [
+              {
+                "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+                "callee": "exec",
+                "exactStr": true,
+                "argumentSha256": "db42676ad6815c0e75141ef9167e2b9456cd99a35b147e5a13516431d052460c",
+                "containsProbe": true,
+                "argument": "__harness_probe__='294159e8ec08fffb348af110bcee56940dd8f85a74627803f630a49cae746e69'"
+              }
+            ],
+            "returns": [
+              {
+                "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+                "evalWitness": false,
+                "execWitness": true
+              }
+            ]
+          }
+        },
+        {
+          "probeSha256": "265fda17a34611b1533d8a281ff680dc5791b0ce0a11c25b35e11c8e75685509",
+          "inputIndex": 3,
+          "trace": {
+            "state": "observed",
+            "reason": null,
+            "calls": [
+              {
+                "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+                "callee": "exec",
+                "exactStr": true,
+                "argumentSha256": "265fda17a34611b1533d8a281ff680dc5791b0ce0a11c25b35e11c8e75685509",
+                "containsProbe": false,
+                "argument": "'"
+              }
+            ],
+            "returns": []
+          }
+        }
+      ],
+      "proof": null,
+      "runtimePython": "3.12.15",
+      "challengeSha256": "55e0e841d1328ee9a7101874c85633c13010757e5012630663c48e2e73a57a84",
+      "probePolicySha256": "9b3e37da44b664a584221dc9c59344c7671e0d2c36ac66f1ab9ccb58cb50b99e",
+      "scope": "conditional code-injection proof at frozen point; no whole-project safety or anti-tamper attestation"
+    },
+    "BenchmarkTest00073.py": {
+      "version": 1,
+      "operation": "verify-execution",
+      "decision": "excluded",
+      "reason": "supported-complete-string-constraint",
+      "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+      "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+      "point": {
+        "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+        "callee": "eval",
+        "call": {
+          "start": {
+            "line": 54,
+            "col": 5,
+            "offset": 1748
+          },
+          "end": {
+            "line": 54,
+            "col": 14,
+            "offset": 1757
+          }
+        },
+        "id": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+        "builtinIdentity": "unverified",
+        "argument": {
+          "start": {
+            "line": 54,
+            "col": 10,
+            "offset": 1753
+          },
+          "end": {
+            "line": 54,
+            "col": 13,
+            "offset": 1756
+          }
+        }
+      },
+      "contractSha256": "43afee9d4bd43bde22f35ec088a81808db5c3fc488f024ea70b8838fed34bce0",
+      "runs": [
+        {
+          "probeSha256": "00d7d921ffa61269f2ef06b2fdb23f832e006fd9c729d933d879a2520d2f4174",
+          "inputIndex": 0,
+          "trace": {
+            "state": "observed",
+            "reason": null,
+            "calls": [
+              {
+                "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+                "callee": "eval",
+                "exactStr": true,
+                "argumentSha256": "00d7d921ffa61269f2ef06b2fdb23f832e006fd9c729d933d879a2520d2f4174",
+                "containsProbe": true,
+                "argument": "'harness-control'"
+              }
+            ],
+            "returns": [
+              {
+                "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+                "evalWitness": false,
+                "execWitness": false
+              }
+            ]
+          }
+        },
+        {
+          "probeSha256": "175a06f1cae443af373b3079baa9ae5569d2f47caa3e5b3e8e55cdb83b0c3785",
+          "inputIndex": 1,
+          "trace": {
+            "state": "observed",
+            "reason": null,
+            "calls": [],
+            "returns": []
+          }
+        },
+        {
+          "probeSha256": "c6b0379fb042e0df6c671b8f1b9920f3961fd6826a2035b5824631b0f2190323",
+          "inputIndex": 2,
+          "trace": {
+            "state": "observed",
+            "reason": null,
+            "calls": [],
+            "returns": []
+          }
+        },
+        {
+          "probeSha256": "265fda17a34611b1533d8a281ff680dc5791b0ce0a11c25b35e11c8e75685509",
+          "inputIndex": 3,
+          "trace": {
+            "state": "observed",
+            "reason": null,
+            "calls": [
+              {
+                "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+                "callee": "eval",
+                "exactStr": true,
+                "argumentSha256": "265fda17a34611b1533d8a281ff680dc5791b0ce0a11c25b35e11c8e75685509",
+                "containsProbe": false,
+                "argument": "'"
+              }
+            ],
+            "returns": []
+          }
+        }
+      ],
+      "proof": {
+        "kind": "single-quoted-string",
+        "variable": "bar",
+        "guardLine": 46,
+        "sinkLine": 54,
+        "domain": "exact-str",
+        "function": "BenchmarkTest00073_post",
+        "parameters": [],
+        "scope": "code-injection-at-this-point-only"
+      },
+      "runtimePython": "3.12.15",
+      "challengeSha256": "f7aa78c617b17311f9b40aeee9a250d20d8d62d3dd6a82e291c7aeff71975634",
+      "probePolicySha256": "9b3e37da44b664a584221dc9c59344c7671e0d2c36ac66f1ab9ccb58cb50b99e",
+      "scope": "conditional code-injection proof at frozen point; no whole-project safety or anti-tamper attestation"
+    },
+    "skf-upstream.py": {
+      "version": 1,
+      "operation": "verify-execution",
+      "decision": "confirmed",
+      "reason": "untrusted-data-executed-at-point",
+      "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+      "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+      "point": {
+        "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+        "callee": "eval",
+        "call": {
+          "start": {
+            "line": 37,
+            "col": 20,
+            "offset": 1296
+          },
+          "end": {
+            "line": 37,
+            "col": 51,
+            "offset": 1327
+          }
+        },
+        "id": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+        "builtinIdentity": "unverified",
+        "argument": {
+          "start": {
+            "line": 37,
+            "col": 25,
+            "offset": 1301
+          },
+          "end": {
+            "line": 37,
+            "col": 50,
+            "offset": 1326
+          }
+        }
+      },
+      "contractSha256": "e4305ed74c32f5bab74ba34608bf8c5c5ec684a50023530b5995f2e06d0b956a",
+      "runs": [
+        {
+          "probeSha256": "00d7d921ffa61269f2ef06b2fdb23f832e006fd9c729d933d879a2520d2f4174",
+          "inputIndex": 0,
+          "trace": {
+            "state": "observed",
+            "reason": "SyntaxError",
+            "calls": [
+              {
+                "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+                "callee": "eval",
+                "exactStr": true,
+                "argumentSha256": "556c6f5530f15cfedb442a674416167a98837885cd61e982b4e8a8fcb43640ee",
+                "containsProbe": false,
+                "argument": "'harness-control'_lines(line)"
+              }
+            ],
+            "returns": []
+          }
+        },
+        {
+          "probeSha256": "aa15690457b3562689a90c9e8ab37e3f17ac9801befc44e96dfca2b9932e5999",
+          "inputIndex": 1,
+          "trace": {
+            "state": "observed",
+            "reason": null,
+            "calls": [
+              {
+                "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+                "callee": "eval",
+                "exactStr": true,
+                "argumentSha256": "d25e40ab9f8551bb2f7c4db461e388330fd0d0e0b74ec357bd06daf4963acec5",
+                "containsProbe": true,
+                "argument": "str('7492fcffe2ab45fbbd568b46cd17e8881b20ff6fce5de3dcae7a6c31dab7c2e9')#_lines(line)"
+              },
+              {
+                "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+                "callee": "eval",
+                "exactStr": true,
+                "argumentSha256": "d25e40ab9f8551bb2f7c4db461e388330fd0d0e0b74ec357bd06daf4963acec5",
+                "containsProbe": true,
+                "argument": "str('7492fcffe2ab45fbbd568b46cd17e8881b20ff6fce5de3dcae7a6c31dab7c2e9')#_lines(line)"
+              }
+            ],
+            "returns": [
+              {
+                "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+                "evalWitness": true,
+                "execWitness": false
+              },
+              {
+                "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+                "evalWitness": true,
+                "execWitness": false
+              }
+            ]
+          }
+        },
+        {
+          "probeSha256": "419c481defc75adac454b6fda99246576b45a5a6ba1112852b74bb5c70919690",
+          "inputIndex": 2,
+          "trace": {
+            "state": "observed",
+            "reason": "SyntaxError",
+            "calls": [
+              {
+                "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+                "callee": "eval",
+                "exactStr": true,
+                "argumentSha256": "ca3f4f99f9e08b70ef3b64d4a1626b04353afe74a3ddf7a9e939ce3124daca4f",
+                "containsProbe": false,
+                "argument": "__harness_probe__='7492fcffe2ab45fbbd568b46cd17e8881b20ff6fce5de3dcae7a6c31dab7c2e9'_lines(line)"
+              }
+            ],
+            "returns": []
+          }
+        },
+        {
+          "probeSha256": "265fda17a34611b1533d8a281ff680dc5791b0ce0a11c25b35e11c8e75685509",
+          "inputIndex": 3,
+          "trace": {
+            "state": "observed",
+            "reason": "SyntaxError",
+            "calls": [
+              {
+                "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+                "callee": "eval",
+                "exactStr": true,
+                "argumentSha256": "2999cf1ef6943d2cc88561121d78684e5a1bca44d55eac4bfdd6246f9612701b",
+                "containsProbe": false,
+                "argument": "'_lines(line)"
+              }
+            ],
+            "returns": []
+          }
+        }
+      ],
+      "proof": null,
+      "runtimePython": "3.12.15",
+      "challengeSha256": "8a803304bfb1d6ba8035838ddcbb652ceb781b9290f414974a4a4d29e2bef9cf",
+      "probePolicySha256": "9b3e37da44b664a584221dc9c59344c7671e0d2c36ac66f1ab9ccb58cb50b99e",
+      "scope": "conditional code-injection proof at frozen point; no whole-project safety or anti-tamper attestation"
+    },
+    "literal-set.py": {
+      "version": 1,
+      "operation": "verify-execution",
+      "decision": "excluded",
+      "reason": "supported-complete-finite-constraint",
+      "sourceSha256": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+      "pointId": "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b",
+      "point": {
+        "sourceSha256": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+        "callee": "eval",
+        "call": {
+          "start": {
+            "line": 4,
+            "col": 12,
+            "offset": 105
+          },
+          "end": {
+            "line": 4,
+            "col": 23,
+            "offset": 116
+          }
+        },
+        "id": "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b",
+        "builtinIdentity": "unverified",
+        "argument": {
+          "start": {
+            "line": 4,
+            "col": 17,
+            "offset": 110
+          },
+          "end": {
+            "line": 4,
+            "col": 22,
+            "offset": 115
+          }
+        }
+      },
+      "contractSha256": "78b5d62b193d1214e874a8145a515c1ee4d2f02cc51ae2761f233678cf04f331",
+      "runs": [
+        {
+          "probeSha256": "00d7d921ffa61269f2ef06b2fdb23f832e006fd9c729d933d879a2520d2f4174",
+          "inputIndex": 0,
+          "trace": {
+            "state": "observed",
+            "reason": null,
+            "calls": [
+              {
+                "pointId": "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b",
+                "callee": "eval",
+                "exactStr": true,
+                "argumentSha256": "00d7d921ffa61269f2ef06b2fdb23f832e006fd9c729d933d879a2520d2f4174",
+                "containsProbe": true,
+                "argument": "'harness-control'"
+              }
+            ],
+            "returns": [
+              {
+                "pointId": "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b",
+                "evalWitness": false,
+                "execWitness": false
+              }
+            ]
+          }
+        },
+        {
+          "probeSha256": "588c8485de6d1c9c8e65e87288bdca93559dbe51007fbb4ffbd63ab7cf5f9205",
+          "inputIndex": 1,
+          "trace": {
+            "state": "observed",
+            "reason": null,
+            "calls": [],
+            "returns": []
+          }
+        },
+        {
+          "probeSha256": "c15432f298a13f048940a0c1c4060962c44605580c12b3284e763b1edfb421f7",
+          "inputIndex": 2,
+          "trace": {
+            "state": "observed",
+            "reason": null,
+            "calls": [],
+            "returns": []
+          }
+        },
+        {
+          "probeSha256": "265fda17a34611b1533d8a281ff680dc5791b0ce0a11c25b35e11c8e75685509",
+          "inputIndex": 3,
+          "trace": {
+            "state": "observed",
+            "reason": null,
+            "calls": [],
+            "returns": []
+          }
+        }
+      ],
+      "proof": {
+        "kind": "finite-literal-set",
+        "variable": "value",
+        "values": [
+          "1",
+          "'harness-control'"
+        ],
+        "guardLine": 2,
+        "sinkLine": 4,
+        "domain": "exact-str",
+        "function": "route",
+        "parameters": [
+          "value"
+        ],
+        "scope": "code-injection-at-this-point-only"
+      },
+      "runtimePython": "3.12.15",
+      "challengeSha256": "f8181ad6402e1fdf90518e71c86042c2eec066c4828ab3768b045f8f2c993853",
+      "probePolicySha256": "9b3e37da44b664a584221dc9c59344c7671e0d2c36ac66f1ab9ccb58cb50b99e",
+      "scope": "conditional code-injection proof at frozen point; no whole-project safety or anti-tamper attestation"
+    }
+  }
+}

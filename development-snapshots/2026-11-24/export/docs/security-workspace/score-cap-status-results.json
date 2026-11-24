@@ -1,0 +1,139 @@
+{
+  "date": "2026-11-05",
+  "scope": [
+    "SCORE-MODEL-CAP-STATUS"
+  ],
+  "tests": {
+    "localPluginPassed": 999,
+    "vmPluginPassed": 999,
+    "pluginFiles": 107,
+    "pythonPassed": 352,
+    "pythonFiles": 43,
+    "focusedPassed": 79,
+    "initialExpectedFailures": 2,
+    "clientReproducible": true,
+    "nativeModelToolCall": true,
+    "nativeModelAnswerMatched": true,
+    "newChromeRun": false
+  },
+  "vm": {
+    "exitCode": 0,
+    "testFiles": 107,
+    "sdkSmokeExitCode": 0,
+    "node": "v24.22.1",
+    "python": "3.12.3",
+    "dailyProgramUnchanged": true,
+    "dailyOverrideUnchanged": true,
+    "temporaryCopyRemoved": true
+  },
+  "nativeModel": {
+    "candidateProgramDigest": "764760fdbf5577f6977b38142a2ea73bace1c2eb98797977412efd1662ea18e6",
+    "scriptHashes": {
+      "seed.mjs": "2facfaf5ab609d79535a4f626978473ad6228725bc43a185a23ccccee75fe34b",
+      "qa-fence.mjs": "ca0ad7cbc6e6899898b09b24ca664ddfe4be69a1f369bdc53ea2efdce1268520"
+    },
+    "providerConfigured": "deepseek-official",
+    "modelConfigured": "deepseek-flash",
+    "rawProviderResponseModelFieldCaptured": false,
+    "nativeToolCalls": 2,
+    "matchedToolResults": 2,
+    "terminal": "completed",
+    "mode": "read-only / ask",
+    "projectPoints": 9,
+    "verifiedToolStates": {
+      "limitedTier": {
+        "status": "limited",
+        "effectiveCap": 10
+      },
+      "disabledTier": {
+        "status": "disabled",
+        "effectiveCap": null
+      },
+      "unlimitedTier": {
+        "status": "unlimited",
+        "effectiveCap": 0
+      }
+    },
+    "modelAnswerMatched": true,
+    "temporaryDirectoryRemoved": true,
+    "dailyProgramMatched": true,
+    "checkedConfigsMatched": true,
+    "checkedSdkMatched": true,
+    "reviewInputContainsChatTranscript": false
+  },
+  "neutralNativeModel": {
+    "candidateProgramDigest": "764760fdbf5577f6977b38142a2ea73bace1c2eb98797977412efd1662ea18e6",
+    "scriptHashes": {
+      "seed.mjs": "baab33aab9bbb1ffdfe17687422d68fe595d9505419a63154ff79475c32ace0f",
+      "qa-fence.mjs": "ca0ad7cbc6e6899898b09b24ca664ddfe4be69a1f369bdc53ea2efdce1268520"
+    },
+    "providerConfigured": "deepseek-official",
+    "modelConfigured": "deepseek-flash",
+    "rawProviderResponseModelFieldCaptured": false,
+    "nativeToolCalls": 2,
+    "matchedToolResults": 2,
+    "terminal": "completed",
+    "mode": "read-only / ask",
+    "projectPoints": 9,
+    "verifiedToolStates": {
+      "B": {
+        "status": "limited",
+        "effectiveCap": 10,
+        "counted": false
+      },
+      "C": {
+        "status": "disabled",
+        "effectiveCap": null,
+        "counted": false
+      },
+      "D": {
+        "status": "unlimited",
+        "effectiveCap": 0,
+        "counted": true
+      }
+    },
+    "modelAnswerMatched": true,
+    "answerSource": "single CLI final event",
+    "progressTextPresent": true,
+    "temporaryDirectoryRemoved": true,
+    "dailyProgramMatched": true,
+    "checkedConfigsMatched": true,
+    "checkedSdkMatched": true,
+    "reviewInputContainsChatTranscript": false,
+    "neutralFixtureAndPromptLabels": true
+  },
+  "sourceHashes": {
+    "work/harness-purge-improved/package/lib/redteam/store-core.js": "ae888198936f68d0dbc9c35312dc60af393bb0afcdffb7771e9f7f8e58ce34dd",
+    "work/harness-purge-improved/package/lib/redteam/tools.js": "25f221a41b3f575efc42a3a137c6d5aab6505108b5d1fcb1d60c96f8177abe83",
+    "work/harness-purge-improved/tests/score-cap-conflicts.test.mjs": "333d3e136c342424a9ea989ddfb30a2c7100e2d063bf8869de2057ccf8e9ab23",
+    "work/harness-purge-improved/tests/chain-coverage.test.mjs": "06ead343b1881821d9c2d1cc5811c42bee9c7c5175778abbcf752bc48b46ed3d"
+  },
+  "externalReview": {
+    "state": "completed-and-triaged",
+    "remainingScopedP1P2Blockers": 0,
+    "promptSha256": "bbbd92a471764068e6676071f75ba948226910a5ab68ede591b26cce6e7fbdef",
+    "claude": "provider-safety-refusal",
+    "claudeRequestedModel": "claude-opus-5-5",
+    "claudeReceiptSha256": "32c0dfe0ddb3f4de4010139424832f7bd18758fc16683c56d800d1edbc79d5c7",
+    "actualReviewer": "DeepSeek V4.1 Flash",
+    "actualApiAlias": "deepseek-flash",
+    "effort": "high",
+    "finishReason": "stop",
+    "reportSha256": "314ec1086030af63b2b6866ac4d5ba24a710dab4fdcacd0bd9203f017020b512",
+    "receiptSha256": "a592be4360a49119f42700db611f15056545cd516cc0b660af37fe34261795cd",
+    "unchangedUserPacket": true,
+    "temporaryReviewCopyRemoved": true,
+    "normalizationProbeCasesPassed": 8,
+    "nullEnabledCapFinding": "not reachable through normalized score metadata",
+    "triageSha256": "3d9104931f9bf2f59452d7c9f29a690bb63a1079e394dff372f40a92e1723a32"
+  },
+  "acceptance": {
+    "candidateProgramFiles": 173,
+    "dailyProgramFiles": 169,
+    "deployed": false,
+    "newChromeRun": false,
+    "ordinaryR3Qualified": false,
+    "wholeProductReleaseQualified": false,
+    "realFindingsStillUnverified": 95
+  }
+}

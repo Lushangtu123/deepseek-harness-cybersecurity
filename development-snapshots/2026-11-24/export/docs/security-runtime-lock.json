@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "tools": [
+    {
+      "tool": "semgrep",
+      "sourceRepository": "semgrep/semgrep",
+      "sourceTag": "latest",
+      "indexDigest": "sha256:451b3d875c00dac7ed5db5293e584a07de11449a409c10b3c2d2652f429630b6",
+      "manifestDigest": "sha256:5347c70f22a33b419cd515ec7fa0d3e76da7eb09f1d8cb4081d88a3bb17d87f6",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "tag": "personal-security/semgrep:8a0b4b7d02bb",
+      "architecture": "arm64",
+      "archiveSha256": "1d7d2a4d304bd20da66fb8b17972abb057b6573a56c7d05b9e11da72e17c9976",
+      "archiveBytes": 1156147200,
+      "layersVerified": 15,
+      "upstreamConfigDigest": "sha256:8a0b4b7d02bb39f11942c14397c14a9f74218e1746cd750941886e462cf06258",
+      "imageRef": "personal-security/semgrep@sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "version": "1.182.1"
+    },
+    {
+      "tool": "trivy",
+      "sourceRepository": "aquasec/trivy",
+      "sourceTag": "latest",
+      "indexDigest": "sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c",
+      "manifestDigest": "sha256:fc223b6f033406fd0c5efe59b566295e90cff76ccd2af696bd0d66d53ad83a2d",
+      "imageId": "sha256:4bad598527a6d97fa8e3296e0d8f68c3e2de7cdd40fecafa9ba12cd80f4c93a9",
+      "tag": "personal-security/trivy:c334fc962191",
+      "architecture": "arm64",
+      "archiveSha256": "65ef72868e8a7e779a1c8831321f642b1528795ec1229f4513b44e3bf2623031",
+      "archiveBytes": 186490880,
+      "layersVerified": 4,
+      "upstreamConfigDigest": "sha256:c334fc962191ef6c7ec3d1643c70be2ed2faa5fb84ce8df6cacaf670699eb903",
+      "imageRef": "personal-security/trivy@sha256:4bad598527a6d97fa8e3296e0d8f68c3e2de7cdd40fecafa9ba12cd80f4c93a9",
+      "version": "0.76.1"
+    },
+    {
+      "tool": "zap",
+      "sourceRepository": "zaproxy/zap-stable",
+      "sourceTag": "latest",
+      "indexDigest": "sha256:030d3df57735dacbb83464854758e674dd9ad01d79d12a129a8e58b1fd384238",
+      "manifestDigest": "sha256:a71a4a957f648ead2cad75639251d5305c54b6f4df197048c5ee1f69c7038204",
+      "imageId": "sha256:422ac34a621bd46d5149f4e5032c660f0006c1c19085f9af61d2dc30eb531f04",
+      "tag": "personal-security/zap:403324289a6f",
+      "architecture": "arm64",
+      "archiveSha256": "888f2323cd38ffa55cfc26a1f831f6472bc3d55f1599597e5024b44ad93dbb77",
+      "archiveBytes": 2382233600,
+      "layersVerified": 19,
+      "upstreamConfigDigest": "sha256:403324289a6f141dcc1207474de612a8cf137e5f2792df622fa925481840ee66",
+      "imageRef": "personal-security/zap@sha256:422ac34a621bd46d5149f4e5032c660f0006c1c19085f9af61d2dc30eb531f04",
+      "version": "2.17.0"
+    }
+  ],
+  "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+  "rulesVersion": "local-reviewed-2",
+  "database": {
+    "digest": "sha256:2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60",
+    "layerDigest": "sha256:c38dd4d9def7e5cf8254d4a06392dedb2987b12a5a034467e4f6596761a80a77",
+    "archiveSha256": "c38dd4d9def7e5cf8254d4a06392dedb2987b12a5a034467e4f6596761a80a77",
+    "metadata": {
+      "Version": 2,
+      "NextUpdate": "2026-10-30T19:18:50.969126577Z",
+      "UpdatedAt": "2026-10-29T19:18:50.96912695Z",
+      "DownloadedAt": "0001-01-01T00:00:00Z"
+    },
+    "ready": true,
+    "fileSha256": "74cc77deb945b9cc6edf9967f3840d92286c59b0fda882b369dc9eda67cb5e07",
+    "fileBytes": 1656156160
+  },
+  "recordedAt": "2026-10-29",
+  "provisioning": "official ARM64 layers verified on Mac as data, Docker archive imported in dedicated VM"
+}

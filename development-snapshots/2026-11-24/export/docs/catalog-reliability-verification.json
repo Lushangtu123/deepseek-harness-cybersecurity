@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Los_Angeles",
+  "baselineCommit": "a1116010528a3fde041058fe32d62ee366e27293",
+  "changes": [
+    "reject malformed required list shapes and mark filtered/capped records incomplete",
+    "bounded sanitized recovery request correlation in existing diagnostics",
+    "independent snapshot/image continuation with backward compatible initial all read",
+    "group actual/unknown snapshot records separately from confirmed absent historical records",
+    "update restore documentation"
+  ],
+  "regression": {
+    "nodeTests": 122,
+    "pythonTests": 89,
+    "total": 211,
+    "allPassed": true,
+    "pythonScope": "eight recovery/controller/transport test files; not the entire guest application suite"
+  },
+  "browser": {
+    "fixtureFailurePreservedRowsAndCursor": true,
+    "retrySameCursorSucceeded": true,
+    "failureIdMatchesHealthHistory": true,
+    "production": {
+      "actualRows": 5,
+      "error": "",
+      "historyCount": "37",
+      "historyRows": 37,
+      "imageCount": "1",
+      "moreHidden": true,
+      "snapshotCount": "5",
+      "status": "快照核对：2026/10/29 14:06:38 · 归档核对：2026/10/29 14:07:15 · 读取时的恢复入口：ready-recovery-proof-20261029 · 本轮快照批次已读取完 · 已显示 42 项快照记录 · 本轮归档批次已读取完 · 归档条目读取 40 次"
+    }
+  },
+  "live": {
+    "hostSourcesMatch": true,
+    "isolationValidated": true,
+    "vmStatus": "started",
+    "snapshotCount": 5,
+    "historicalCount": 37,
+    "imageCount": 1,
+    "archivePages": 3,
+    "separateListResponses": true,
+    "diagnosticRequestIdsPresent": true,
+    "currentRecovery": "ready-recovery-proof-20261029",
+    "newRecoveryPointCreated": false,
+    "guestWrites": 0,
+    "hostSha256": {
+      "manage.py": "24f7578e4b21da2790950929359de523ed90b380630577c150b10e101cb40779",
+      "web-entry.mjs": "87a9896f4c2f346fef6bb2b479f916e21f18bdb7005681690c4ac4665e0c4074",
+      "web-health.mjs": "519cac7664c44e8618ce3f66821b5d05d7f3ccc2b1eb6229627d11b635fa0e55"
+    }
+  },
+  "review": {
+    "independentReadOnlyReview": true,
+    "snapshotTruncationFindingFixedAndRechecked": true
+  },
+  "boundaries": {
+    "guestWrites": 0,
+    "newVmSnapshots": 0,
+    "newVmImages": 0,
+    "recoveryPointUnchanged": true,
+    "hostFullAccessGranted": false,
+    "modelCalls": 0
+  },
+  "limitations": [
+    "Historical intermittent trigger remains unestablished",
+    "Diagnostics retain only 100 process-local events and reset at entry restart",
+    "Existing VM recovery point predates these host tool changes; restoring it reverts them",
+    "Controller termination does not distinguish timeout from every external signal",
+    "Not a blank-machine restore or whole-application acceptance"
+  ]
+}

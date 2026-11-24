@@ -1,0 +1,8 @@
+{
+  "python": "3.12.15",
+  "libc": [
+    "",
+    ""
+  ],
+  "osRelease": "NAME=\"Alpine Linux\"\nID=alpine\nVERSION_ID=3.23.7\nPRETTY_NAME=\"Alpine Linux v3.23\"\nHOME_URL=\"https://alpinelinux.org/\"\nBUG_REPORT_URL=\"https://gitlab.alpinelinux.org/alpine/aports/-/issues\"\n"
+}

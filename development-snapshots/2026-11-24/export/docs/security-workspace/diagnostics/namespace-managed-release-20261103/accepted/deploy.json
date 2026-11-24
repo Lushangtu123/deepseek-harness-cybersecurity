@@ -1,0 +1,17 @@
+{
+  "programFiles": 169,
+  "rollbackFiles": 166,
+  "servicesRestarted": {
+    "dsh-original.service": true,
+    "harness-security.socket": true,
+    "harness-security.service": true
+  },
+  "protectedFileDigestsMatched": 48,
+  "archiveSha256": "f083b7a2723fdf1f50fdb2b662a02e7e6ad9bea22ef6c459b74f1f555153b0f3",
+  "backup": "/home/purge/.cache/harness-namespace-managed-release-retry1-20261103",
+  "candidateServiceActive": true,
+  "databaseProtection": "logical dump; other protected files byte digest",
+  "physicalProtectedFilesChangedAfterStop": 1,
+  "physicalChangeMeaning": "informational only; logical database equality is the protection criterion",
+  "hostManagerAndVMConfigUnchanged": true
+}

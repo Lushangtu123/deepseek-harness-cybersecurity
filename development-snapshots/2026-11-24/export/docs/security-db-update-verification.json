@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Los_Angeles",
+  "runId": "security-db-update-20261029",
+  "programFilesMatched": 120,
+  "guestSourceHashesMatched": 94,
+  "packageRegressions": 366,
+  "launcherRegressions": 22,
+  "databasePythonRegressions": 13,
+  "nativeFixtureRegressionsRepeatedInVm": 13,
+  "officialCheck": {
+    "checkedAt": "2026-10-29T22:54:35.065163+00:00",
+    "installedDigest": "sha256:2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60",
+    "registryDigest": "sha256:2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60",
+    "sameRevision": true,
+    "localReady": true
+  },
+  "actualMaintenance": {
+    "changed": false,
+    "checkedAt": "2026-10-29T22:59:00.361501+00:00",
+    "digest": "sha256:2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60",
+    "updatedAt": "2026-10-29T19:18:50.96912695Z"
+  },
+  "productionDatabaseReplaced": false,
+  "scannerImagesChanged": false,
+  "vmNetworkAccessExpanded": false,
+  "hostFullAccessGranted": false,
+  "newVmSnapshotOrImage": false,
+  "workingTreePublished": false,
+  "processLossRecoveryFixture": {
+    "exitCodeAtInjectedLoss": 77,
+    "oldDatabaseAndExactManifestRestored": true,
+    "updateReplayed": false
+  },
+  "reviewFindingsFixed": [
+    "recovery refuses active managed scanners before stop and rechecks after stop",
+    "PAX/GNU extension headers rejected before hidden payload allocation",
+    "180-second signal deadline interrupts blocking registry reads"
+  ],
+  "nativeTransportVerified": true,
+  "officialPreviouslyDownloadedBundleVerifiedWithNewParser": true,
+  "browser": {
+    "updateGuideVisible": true,
+    "macLauncherOption9Visible": true,
+    "lastOfficialCheckVisible": true,
+    "scansStarted": 0,
+    "scopeModified": false
+  },
+  "runtimePreflight": {
+    "ok": true,
+    "readOnly": true,
+    "automaticChanges": false,
+    "scope": "local pinned images, rules and database identity; no scanner execution, model call, network download or GitHub latest check",
+    "tools": {
+      "semgrep": {
+        "ready": true,
+        "version": "1.182.1",
+        "reason": null,
+        "warning": null,
+        "checkedAt": "2026-10-29T22:59:50.241Z",
+        "cached": false
+      },
+      "trivy": {
+        "ready": true,
+        "version": "0.76.1",
+        "reason": null,
+        "warning": null,
+        "checkedAt": "2026-10-29T22:59:50.241Z",
+        "cached": false,
+        "database": {
+          "state": "fresh",
+          "updatedAt": "2026-10-29T19:18:50.969Z",
+          "nextUpdate": "2026-10-30T19:18:50.969Z",
+          "ageDays": 0
+        },
+        "lastUpdate": {
+          "state": "current",
+          "checkedAt": "2026-10-29T22:59:00.361501+00:00"
+        }
+      },
+      "zap": {
+        "ready": true,
+        "version": "2.17.0",
+        "reason": null,
+        "warning": null,
+        "checkedAt": "2026-10-29T22:59:50.241Z",
+        "cached": false
+      }
+    }
+  },
+  "service": "active",
+  "maintenanceMarkerPresent": false,
+  "deploymentBackup": "/home/purge/downloads/security-db-update-20261029T225823Z",
+  "limitations": [
+    "actual official revision was already current; no newer production DB replacement performed",
+    "swap, validation failure and process loss recovery exercised with owned synthetic fixtures",
+    "process interruption recovery does not claim power-loss atomicity",
+    "managed scan scope does not cover arbitrary full-access VM processes",
+    "old recovery point does not include these updates; no new whole-VM snapshot created",
+    "raw databases, Docker layers, run data and private credentials remain excluded from Git"
+  ]
+}

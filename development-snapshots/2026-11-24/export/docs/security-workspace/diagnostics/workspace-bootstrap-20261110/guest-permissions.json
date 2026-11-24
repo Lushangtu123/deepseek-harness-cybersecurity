@@ -1,0 +1,59 @@
+{
+  "ubuntuGuestEffectiveUid": 1000,
+  "sourceSha256": {
+    "before": "5e8acb20ec08c8dca48ee1cb4076c161a79fb053044f6e7366dc454c58ba3909",
+    "after": "56b726485fe5a0c820135e60e0b596585479003f95468026e5da6c8a59daa34a"
+  },
+  "cases": [
+    {
+      "case": "absent",
+      "ownerUid": null,
+      "mode": null,
+      "writableByInstaller": false,
+      "before": true,
+      "after": true
+    },
+    {
+      "case": "owned-writable",
+      "ownerUid": 1000,
+      "mode": "0o700",
+      "writableByInstaller": true,
+      "before": true,
+      "after": true
+    },
+    {
+      "case": "owned-read-only",
+      "ownerUid": 1000,
+      "mode": "0o500",
+      "writableByInstaller": false,
+      "before": true,
+      "after": false
+    },
+    {
+      "case": "owned-no-access",
+      "ownerUid": 1000,
+      "mode": "0o0",
+      "writableByInstaller": false,
+      "before": "PermissionError",
+      "after": false
+    },
+    {
+      "case": "foreign-read-only",
+      "ownerUid": 0,
+      "mode": "0o755",
+      "writableByInstaller": false,
+      "before": true,
+      "after": false
+    },
+    {
+      "case": "foreign-writable",
+      "ownerUid": 0,
+      "mode": "0o777",
+      "writableByInstaller": true,
+      "before": true,
+      "after": false
+    }
+  ],
+  "temporaryRemoved": true,
+  "installerRun": false
+}

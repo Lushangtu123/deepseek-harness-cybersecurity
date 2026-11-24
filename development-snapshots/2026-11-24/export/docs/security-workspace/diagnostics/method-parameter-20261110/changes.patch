@@ -1,0 +1,207 @@
+--- before/work/harness-purge-improved/package/scripts/python_namespace_review.py
++++ candidate/work/harness-purge-improved/package/scripts/python_namespace_review.py
+@@ -149,6 +149,21 @@
+     if isinstance(statement,(ast.Return,ast.Expr)): return statement.value is call
+     return (isinstance(statement,ast.Assign) and len(statement.targets)==1
+             and isinstance(statement.targets[0],ast.Name) and statement.value is call)
++
++def execution_prefix(owner,call,parents):
++    """Collect lexical predecessors through protected try bodies only."""
++    statement = parents.get(call)
++    if owner is None or not direct_statement(statement,call): return None
++    prefix = []
++    for _ in range(9):
++        container = parents.get(statement)
++        if container is owner:
++            if statement not in owner.body: return None
++            return owner.body[:owner.body.index(statement)] + prefix
++        if not isinstance(container,ast.Try) or statement not in container.body: return None
++        prefix = container.body[:container.body.index(statement)] + prefix
++        statement = container
++    return None
+ 
+ def constraint_hint(owner,statement,call,binding):
+     unknown = lambda reason:{'state':'unresolved','reason':reason}
+@@ -210,23 +225,28 @@
+             current = parents[current]
+         owner = parents.get(current)
+         statement = current
+-        if not isinstance(owner,ast.FunctionDef) or owner not in tree.body or statement not in owner.body:
++        containing_class = parents.get(owner)
++        method = isinstance(containing_class,ast.ClassDef) and containing_class in tree.body
++        if (not isinstance(owner,ast.FunctionDef) or statement not in owner.body
++                or owner not in tree.body and not method):
+             owner = None
+         binding = binding_hint(tree,owner,call)
+         argument = call.args[0]
+         kind = 'expression-unresolved'
+         writes = []
++        prefix = execution_prefix(owner,call,parents)
+         if isinstance(argument,ast.Constant): kind = 'literal-expression-observed'
+-        elif isinstance(argument,ast.Name) and owner is not None and direct_statement(statement,call):
++        elif isinstance(argument,ast.Name) and prefix is not None:
+             parameters = [*owner.args.posonlyargs,*owner.args.args,*owner.args.kwonlyargs]
+             kind = 'parameter-name-observed' if any(a.arg==argument.id for a in parameters) else 'local-name-unresolved'
+-            prefix = ast.Module(body=owner.body[:owner.body.index(statement)],type_ignores=[])
++            prefix = ast.Module(body=prefix,type_ignores=[])
+             writes = sorted({n.lineno for n in scope_nodes(prefix) if isinstance(n,ast.Name)
+                              and isinstance(n.ctx,(ast.Store,ast.Del)) and n.id==argument.id})
+             if len(writes)>64:return None
+             if writes: kind = 'local-reassignment-observed'
+             elif binds(scope_nodes(prefix),argument.id):kind='local-binding-observed'
+-        constraint = constraint_hint(owner,statement,call,binding)
++        # Class construction, descriptors and decorators are not guard proofs.
++        constraint = constraint_hint(None if method else owner,statement,call,binding)
+         return {'version':2,'observation':'namespace-call-structure-observed','anchor':dict(anchor),
+                 'sink':call.func.id,'argumentCount':len(call.args),'disposition':'unverified',
+                 'callee':{'staticBinding':binding,'builtinIdentity':'unverified'},
+--- before/work/harness-purge-improved/package/lib/redteam/personal-namespace-sandbox.mjs
++++ candidate/work/harness-purge-improved/package/lib/redteam/personal-namespace-sandbox.mjs
+@@ -6,7 +6,7 @@
+ import {readRuntimeManifest} from './personal-security-runtime.mjs';
+ 
+ const worker=fileURLToPath(new URL('../../scripts/python_namespace_review.py',import.meta.url));
+-export const NAMESPACE_WORKER_SHA256='9ec513ddb83d94c0c2f63629b7f218b1971704b4ff25d21169f30ad6e0ea9a51';
++export const NAMESPACE_WORKER_SHA256='6c8c7446b99a777e5f496c008c9eeebecebc15134a5aedb6c7be4a14144a6705';
+ const digest=v=>createHash('sha256').update(v).digest('hex');
+ const idPattern=/^dsh-sec-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/;
+ function docker(args,{input='',signal,timeout=2000,maxBuffer=131072}={}){
+--- before/scripts/python_namespace_review.test.py
++++ candidate/scripts/python_namespace_review.test.py
+@@ -44,6 +44,93 @@
+         row=self.module.review_namespace_call(source,anchor(source))
+         self.assertEqual(row['callee']['staticBinding'],'unsupported-scope')
+         self.assertEqual(row['constraint']['state'],'unresolved')
++
++    def test_class_method_parameter_is_observed_through_protected_try_body(self):
++        source = ('class Parser:\n'
++                  '    def parse(self, model_output: str):\n'
++                  '        try:\n'
++                  '            data = eval(model_output, {}, {})\n'
++                  '            return data\n'
++                  '        except Exception as model_output:\n'
++                  '            return None\n')
++        row = self.review(source)
++        self.assertEqual(row['source']['kind'], 'parameter-name-observed')
++        self.assertEqual(row['source']['assignmentLines'], [])
++        self.assertEqual(row['callee']['staticBinding'], 'no-direct-conflict-observed')
++        self.assertEqual(row['source']['externalControl'], 'unverified')
++        self.assertEqual(row['constraint']['state'], 'unresolved')
++
++    def test_method_prefix_assignments_and_bindings_are_not_parameter_origin(self):
++        variants = [
++            ('        value = replacement\n', 'local-reassignment-observed', [3]),
++            ('        import replacement as value\n', 'local-binding-observed', []),
++            ('        try:\n            pass\n        except Exception as value:\n            pass\n',
++             'local-binding-observed', []),
++        ]
++        for prefix, expected, lines in variants:
++            with self.subTest(prefix=prefix):
++                source = ('class Parser:\n    def parse(self, value):\n' + prefix
++                          + '        try:\n            return eval(value, {})\n'
++                          + '        except Exception:\n            return None\n')
++                row = self.review(source)
++                self.assertEqual(row['source']['kind'], expected)
++                self.assertEqual(row['source']['assignmentLines'], lines)
++                self.assertEqual(row['constraint']['state'], 'unresolved')
++
++    def test_class_attribute_does_not_bind_the_method_bare_eval_name(self):
++        source = ('class Parser:\n    eval = custom\n'
++                  '    def parse(self, value):\n        return eval(value, {})\n')
++        row = self.review(source)
++        self.assertEqual(row['callee']['staticBinding'], 'no-direct-conflict-observed')
++        self.assertEqual(row['source']['kind'], 'parameter-name-observed')
++        self.assertEqual(row['constraint']['state'], 'unresolved')
++        shadowed = source.replace('def parse(self, value)', 'def parse(self, value, eval)')
++        self.assertEqual(self.review(shadowed)['callee']['staticBinding'], 'local-binding-conflict-observed')
++
++    def test_try_branch_handlers_loops_and_nested_methods_stay_unresolved(self):
++        bodies = [
++            '        if flag:\n            return eval(value, {})\n',
++            '        for value in items:\n            return eval(value, {})\n',
++            '        try:\n            pass\n        except Exception as value:\n            return eval(value, {})\n',
++            '        try:\n            pass\n        finally:\n            return eval(value, {})\n',
++            '        def inner(value):\n            return eval(value, {})\n',
++        ]
++        for body in bodies:
++            with self.subTest(body=body):
++                row = self.review('class Parser:\n    def parse(self, value):\n' + body)
++                self.assertEqual(row['source']['kind'], 'expression-unresolved')
++                self.assertEqual(row['constraint']['state'], 'unresolved')
++
++    def test_method_headers_and_nested_classes_do_not_gain_body_parameter_evidence(self):
++        sources = [
++            'class Parser:\n    def parse(self, value=eval(raw, {})):\n        return value\n',
++            'def outer():\n    class Parser:\n        def parse(self, value):\n            return eval(value, {})\n',
++            'class Outer:\n    class Parser:\n        def parse(self, value):\n            return eval(value, {})\n',
++            'class Parser:\n    async def parse(self, value):\n        return eval(value, {})\n',
++        ]
++        for source in sources:
++            with self.subTest(source=source):
++                row = self.review(source)
++                self.assertEqual(row['source']['kind'], 'expression-unresolved')
++                self.assertEqual(row['callee']['staticBinding'], 'unsupported-scope')
++
++    def test_nested_try_prefix_and_same_line_write_are_accounted_before_call(self):
++        source = ('class Parser:\n    def parse(self, value):\n'
++                  '        try:\n            value = replacement\n'
++                  '            try:\n                data = value; return eval(data, {})\n'
++                  '            except Exception:\n                return None\n'
++                  '        except Exception:\n            return None\n')
++        row = self.review(source)
++        self.assertEqual(row['source']['kind'], 'local-reassignment-observed')
++        self.assertEqual(row['source']['assignmentLines'], [6])
++        self.assertEqual(row['source']['externalControl'], 'unverified')
++
++    def test_method_fixed_set_guard_does_not_become_a_validated_constraint(self):
++        source = 'class Parser:\n' + ''.join('    ' + line + '\n' for line in source_for().splitlines())
++        row = self.review(source)
++        self.assertEqual(row['source']['kind'], 'parameter-name-observed')
++        self.assertEqual(row['constraint']['state'], 'unresolved')
++        self.assertEqual(row['disposition'], 'unverified')
+ 
+     def test_fixed_set_guard_two_and_three_arguments_is_only_conditional_evidence(self):
+         for op in ['eval','exec']:
+--- before/scripts/namespace_managed_worker.test.py
++++ candidate/scripts/namespace_managed_worker.test.py
+@@ -15,4 +15,13 @@
+    p=payload('eval("6*7", {})\n');mutate(p);self.assertNotEqual(self.runworker(p).returncode,0)
+  def test_unmatched_full_anchor_remains_partial(self):
+   p=payload('eval("6*7", {})\n');p['results'][0]['start']['offset']+=1;r=self.runworker(p);self.assertEqual(r.returncode,0,r.stderr);v=json.loads(r.stdout);self.assertEqual(v['state'],'partial');self.assertEqual(len(v['unmatchedAnchors']),1)
++ def test_class_method_parameter_in_try_is_only_an_unverified_observation(self):
++  source=('raise RuntimeError("source must not run")\nclass Parser:\n'
++          '    def parse(self, value):\n        try:\n            return eval(value, {}, {})\n'
++          '        except Exception:\n            return None\n')
++  p=payload(source);r=self.runworker(p);self.assertEqual(r.returncode,0,r.stderr);v=json.loads(r.stdout)
++  row,=v['observations'];self.assertEqual(row['source']['kind'],'parameter-name-observed')
++  self.assertEqual(row['argumentCount'],3);self.assertEqual(row['source']['externalControl'],'unverified')
++  self.assertEqual(row['constraint']['state'],'unresolved');self.assertEqual(row['disposition'],'unverified')
++  self.assertFalse(v['r3Qualified']);self.assertFalse(v['changesFindingDisposition'])
+ if __name__=='__main__':unittest.main()
+--- before/work/harness-purge-improved/tests/namespace-managed.test.mjs
++++ candidate/work/harness-purge-improved/tests/namespace-managed.test.mjs
+@@ -27,4 +27,24 @@
+ 
+ test('a preceding assignment on the same line remains structural unverified evidence',async()=>{const m=await api();await fixture(async(s,f)=>{const r=await m.collectNamespaceEvidence(s,[f],{deadline:performance.now()+10000,run:realWorker});assert.equal(r.summary.state,'completed');assert.deepEqual(r.artifacts[0].assignmentLines,[2]);assert.equal(r.artifacts[0].status,'unverified')},'def run(value):\n    data=value; return eval(data, {})\n')});
+ 
++test('class method parameter observation reaches the existing artifact contract without confirming external input',async()=>{
++ const m=await api();
++ await fixture(async(snapshot,finding)=>{
++  const original=JSON.stringify(finding);
++  const result=await m.collectNamespaceEvidence(snapshot,[finding],{deadline:performance.now()+10000,run:realWorker});
++  assert.equal(result.summary.state,'completed');
++  assert.equal(result.summary.checked,1);
++  const [artifact]=result.artifacts;
++  assert.equal(artifact.argumentCount,3);
++  assert.equal(artifact.sourceKind,'parameter-name-observed');
++  assert.equal(artifact.bindingHint,'no-direct-conflict-observed');
++  assert.equal(artifact.externalControl,'unverified');
++  assert.equal(artifact.builtinIdentity,'unverified');
++  assert.equal(artifact.constraintState,'unresolved');
++  assert.equal(artifact.status,'unverified');
++  assert.deepEqual(artifact.sourceLocation,finding.sourceLocation);
++  assert.equal(JSON.stringify(finding),original);
++ },'class Parser:\n    def parse(self, value):\n        try:\n            return eval(value, {}, {})\n        except Exception:\n            return None\n');
++});
++
+ test('excessive source writes remain unmatched instead of discarding valid worker output',async()=>{const m=await api();await fixture(async(s,f)=>{const r=await m.collectNamespaceEvidence(s,[f],{deadline:performance.now()+10000,run:realWorker});assert.equal(r.summary.state,'partial');assert.equal(r.summary.checked,1);assert.equal(r.summary.unmatched,1);assert.equal(r.summary.observations,0);assert.deepEqual(r.artifacts,[])},'def run(value):\n'+'    value = value\n'.repeat(65)+'    return eval(value, {})\n')});

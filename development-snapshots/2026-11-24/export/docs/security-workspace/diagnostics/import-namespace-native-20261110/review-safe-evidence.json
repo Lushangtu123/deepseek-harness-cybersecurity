@@ -1,0 +1,2692 @@
+{
+  "checkedAt": "2026-11-11T05:54:49.363278+00:00",
+  "nativeRpcBeforeIndependentRead": [
+    {
+      "at": "2026-11-11T05:51:10.164Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "plan",
+        "mode": "deep"
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true
+    },
+    {
+      "at": "2026-11-11T05:51:13.940Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "start",
+        "requestId": "native-import-20261110-01",
+        "profileRevision": 1,
+        "mode": "deep",
+        "steps": [
+          "semgrep"
+        ],
+        "budgetSeconds": 180
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "running"
+    },
+    {
+      "at": "2026-11-11T05:51:19.734Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "wait",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "waitSeconds": 30
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed"
+    },
+    {
+      "at": "2026-11-11T05:51:24.711Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "report",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "section": "findings",
+        "limit": 5
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed",
+      "page": {
+        "section": "findings",
+        "count": 2,
+        "total": 9,
+        "complete": false,
+        "nextCursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjoyfQ"
+      }
+    },
+    {
+      "at": "2026-11-11T05:51:26.756Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "report",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "section": "findings",
+        "limit": 5,
+        "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjoyfQ"
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed",
+      "page": {
+        "section": "findings",
+        "count": 2,
+        "total": 9,
+        "complete": false,
+        "nextCursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo0fQ"
+      }
+    },
+    {
+      "at": "2026-11-11T05:51:28.554Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo0fQ",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "findings"
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed",
+      "page": {
+        "section": "findings",
+        "count": 2,
+        "total": 9,
+        "complete": false,
+        "nextCursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo2fQ"
+      }
+    },
+    {
+      "at": "2026-11-11T05:51:30.464Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo2fQ",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "findings"
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed",
+      "page": {
+        "section": "findings",
+        "count": 2,
+        "total": 9,
+        "complete": false,
+        "nextCursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo4fQ"
+      }
+    },
+    {
+      "at": "2026-11-11T05:51:32.393Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo4fQ",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "findings"
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed",
+      "page": {
+        "section": "findings",
+        "count": 1,
+        "total": 9,
+        "complete": true,
+        "nextCursor": null
+      }
+    },
+    {
+      "at": "2026-11-11T05:51:34.361Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "report",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "files"
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed",
+      "page": {
+        "section": "files",
+        "count": 5,
+        "total": 18,
+        "complete": false,
+        "nextCursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjo1fQ"
+      }
+    },
+    {
+      "at": "2026-11-11T05:51:35.972Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjo1fQ",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "files"
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed",
+      "page": {
+        "section": "files",
+        "count": 5,
+        "total": 18,
+        "complete": false,
+        "nextCursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjoxMH0"
+      }
+    },
+    {
+      "at": "2026-11-11T05:51:37.649Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjoxMH0",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "files"
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed",
+      "page": {
+        "section": "files",
+        "count": 5,
+        "total": 18,
+        "complete": false,
+        "nextCursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjoxNX0"
+      }
+    },
+    {
+      "at": "2026-11-11T05:51:39.690Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjoxNX0",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "files"
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed",
+      "page": {
+        "section": "files",
+        "count": 3,
+        "total": 18,
+        "complete": true,
+        "nextCursor": null
+      }
+    },
+    {
+      "at": "2026-11-11T05:51:41.128Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "report",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "exclusions"
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed",
+      "page": {
+        "section": "exclusions",
+        "count": 0,
+        "total": 0,
+        "complete": true,
+        "nextCursor": null
+      }
+    },
+    {
+      "at": "2026-11-11T05:51:42.789Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "report",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "diagnostics"
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed",
+      "page": {
+        "section": "diagnostics",
+        "count": 0,
+        "total": 0,
+        "complete": true,
+        "nextCursor": null
+      }
+    },
+    {
+      "at": "2026-11-11T05:51:44.765Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "report",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "artifacts"
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed",
+      "page": {
+        "section": "artifacts",
+        "count": 5,
+        "total": 13,
+        "complete": false,
+        "nextCursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjo1fQ"
+      }
+    },
+    {
+      "at": "2026-11-11T05:51:46.932Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjo1fQ",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "artifacts"
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed",
+      "page": {
+        "section": "artifacts",
+        "count": 3,
+        "total": 13,
+        "complete": false,
+        "nextCursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjo4fQ"
+      }
+    },
+    {
+      "at": "2026-11-11T05:51:48.871Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjo4fQ",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "artifacts"
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed",
+      "page": {
+        "section": "artifacts",
+        "count": 3,
+        "total": 13,
+        "complete": false,
+        "nextCursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjoxMX0"
+      }
+    },
+    {
+      "at": "2026-11-11T05:51:50.797Z",
+      "request": {
+        "op": "securityJoint",
+        "engagement": "native-import-namespace-20261110",
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjoxMX0",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "artifacts"
+      },
+      "model": true,
+      "allowed": true,
+      "ok": true,
+      "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "taskState": "completed",
+      "page": {
+        "section": "artifacts",
+        "count": 2,
+        "total": 13,
+        "complete": true,
+        "nextCursor": null
+      }
+    }
+  ],
+  "report": {
+    "version": 1,
+    "engagement": "native-import-namespace-20261110",
+    "task": {
+      "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+      "engagement": "native-import-namespace-20261110",
+      "state": "completed",
+      "scopeRevision": 1,
+      "workspace": {
+        "version": "workspace-dispatch-s1-2",
+        "mode": "deep",
+        "sandboxProfile": "S1",
+        "selectedSteps": [
+          "semgrep"
+        ],
+        "toolIdentities": {
+          "semgrep": "598208862ad1449a5c64391f5bb0bef537e2ee334d89588e5b3582c900c4b608"
+        },
+        "budgetSeconds": 180,
+        "modelRequests": 0,
+        "fullWorkspaceReady": false,
+        "ruleProfiles": {
+          "semgrep": {
+            "version": 1,
+            "id": "deep-namespace17",
+            "mode": "deep",
+            "baseRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+            "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+            "ruleCount": 17,
+            "qualification": "managed-candidate-not-r3"
+          }
+        }
+      },
+      "startedAt": "2026-11-11T05:51:15.024Z",
+      "finishedAt": "2026-11-11T05:51:21.999Z",
+      "deadline": "2026-11-11T05:54:15.024Z",
+      "budgetSeconds": 180,
+      "modelCalls": 0,
+      "cleanupVerified": true,
+      "problem": null,
+      "webTarget": null,
+      "snapshot": {
+        "id": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+        "files": 18,
+        "bytes": 1665,
+        "git": {
+          "head": null,
+          "dirty": null,
+          "statusHash": null
+        },
+        "excluded": 0,
+        "exclusionsRetained": 0,
+        "exclusionsTruncated": false,
+        "redactedFiles": 0
+      },
+      "steps": [
+        {
+          "tool": "semgrep",
+          "id": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+          "state": "completed",
+          "complete": true,
+          "coverageScope": "scanner-reported-files",
+          "eligibleFiles": null,
+          "cleanupVerified": null,
+          "version": "1.182.1",
+          "checkedFiles": 18,
+          "problem": null,
+          "fileCoverage": {
+            "scope": "managed-copy",
+            "scanned": 18,
+            "total": 18,
+            "uncovered": 0,
+            "withoutLanguageRule": 0
+          },
+          "coverageNotes": [],
+          "diagnostics": {
+            "total": 0,
+            "retained": 0,
+            "truncated": false
+          },
+          "pythonEvidence": "completed",
+          "sourceLocations": {
+            "version": 1,
+            "state": "completed",
+            "total": 9,
+            "bound": 9,
+            "unavailable": 0
+          },
+          "observationSummary": {
+            "version": 1,
+            "total": 9,
+            "executionPoints": 9,
+            "other": 0
+          },
+          "namespaceReview": {
+            "version": 1,
+            "state": "completed",
+            "eligible": 9,
+            "checked": 9,
+            "observations": 9,
+            "unmatched": 0,
+            "retained": 9,
+            "cleanupVerified": true,
+            "execution": {
+              "profile": "namespace-ast-1",
+              "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+              "workerSha256": "6c8c7446b99a777e5f496c008c9eeebecebc15134a5aedb6c7be4a14144a6705",
+              "pythonVersion": "3.12.15",
+              "cleanupVerified": true
+            }
+          },
+          "modelCalls": 0,
+          "artifacts": 13
+        }
+      ],
+      "findings": 9,
+      "coverageComplete": false,
+      "manualChecks": [
+        "authentication",
+        "authorization",
+        "business-logic",
+        "architecture"
+      ],
+      "notice": "完成表示已选步骤结束；命中保持待验证。Git未提交状态未探测，按逐文件哈希固定实际内容。脱敏/排除文件、手工项与未选工具仍未覆盖；REA仅静态JavaScript图；PentAGI输出是未验证模型结论，调用次数预算不等同货币金额上限。"
+    },
+    "findings": [
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case0/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case0/evaluator.py",
+          "sourceSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case1/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case1/evaluator.py",
+          "sourceSha256": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+          "byteLength": 47,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 31,
+            "offset": 46
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case2/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case2/evaluator.py",
+          "sourceSha256": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case3/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case3/evaluator.py",
+          "sourceSha256": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+          "byteLength": 47,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 31,
+            "offset": 46
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case4/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case4/evaluator.py",
+          "sourceSha256": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+          "byteLength": 46,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 30,
+            "offset": 45
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case5/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case5/evaluator.py",
+          "sourceSha256": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+          "byteLength": 53,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 33
+          },
+          "end": {
+            "line": 2,
+            "col": 31,
+            "offset": 52
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case6/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case6/evaluator.py",
+          "sourceSha256": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+          "byteLength": 49,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 33
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 48
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case7/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case7/evaluator.py",
+          "sourceSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case8/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case8/evaluator.py",
+          "sourceSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      }
+    ],
+    "files": [
+      {
+        "path": "case0/evaluator.py",
+        "sha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "originalSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "bytes": 43,
+        "redacted": false
+      },
+      {
+        "path": "case0/routes.py",
+        "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "originalSha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "bytes": 137,
+        "redacted": false
+      },
+      {
+        "path": "case1/evaluator.py",
+        "sha256": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+        "originalSha256": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+        "bytes": 47,
+        "redacted": false
+      },
+      {
+        "path": "case1/routes.py",
+        "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "originalSha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "bytes": 137,
+        "redacted": false
+      },
+      {
+        "path": "case2/evaluator.py",
+        "sha256": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+        "originalSha256": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+        "bytes": 43,
+        "redacted": false
+      },
+      {
+        "path": "case2/routes.py",
+        "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "originalSha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "bytes": 137,
+        "redacted": false
+      },
+      {
+        "path": "case3/evaluator.py",
+        "sha256": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+        "originalSha256": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+        "bytes": 47,
+        "redacted": false
+      },
+      {
+        "path": "case3/routes.py",
+        "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "originalSha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "bytes": 137,
+        "redacted": false
+      },
+      {
+        "path": "case4/evaluator.py",
+        "sha256": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+        "originalSha256": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+        "bytes": 46,
+        "redacted": false
+      },
+      {
+        "path": "case4/routes.py",
+        "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "originalSha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "bytes": 137,
+        "redacted": false
+      },
+      {
+        "path": "case5/evaluator.py",
+        "sha256": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+        "originalSha256": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+        "bytes": 53,
+        "redacted": false
+      },
+      {
+        "path": "case5/routes.py",
+        "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "originalSha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "bytes": 137,
+        "redacted": false
+      },
+      {
+        "path": "case6/evaluator.py",
+        "sha256": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+        "originalSha256": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+        "bytes": 49,
+        "redacted": false
+      },
+      {
+        "path": "case6/routes.py",
+        "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "originalSha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "bytes": 137,
+        "redacted": false
+      },
+      {
+        "path": "case7/evaluator.py",
+        "sha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "originalSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "bytes": 43,
+        "redacted": false
+      },
+      {
+        "path": "case7/routes.py",
+        "sha256": "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+        "originalSha256": "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+        "bytes": 146,
+        "redacted": false
+      },
+      {
+        "path": "case8/evaluator.py",
+        "sha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "originalSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "bytes": 43,
+        "redacted": false
+      },
+      {
+        "path": "case8/routes.py",
+        "sha256": "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb",
+        "originalSha256": "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb",
+        "bytes": 146,
+        "redacted": false
+      }
+    ],
+    "exclusions": [],
+    "diagnostics": [],
+    "artifacts": [
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-import-flow",
+        "path": "case0/routes.py",
+        "line": 5,
+        "status": "unverified",
+        "calleeFile": "case0/evaluator.py",
+        "sourceLine": 4,
+        "importLine": 2,
+        "definitionLine": 1,
+        "sinkLine": 2,
+        "sink": "eval",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-import-flow",
+        "path": "case1/routes.py",
+        "line": 5,
+        "status": "unverified",
+        "calleeFile": "case1/evaluator.py",
+        "sourceLine": 4,
+        "importLine": 2,
+        "definitionLine": 1,
+        "sinkLine": 2,
+        "sink": "eval",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-import-flow",
+        "path": "case2/routes.py",
+        "line": 5,
+        "status": "unverified",
+        "calleeFile": "case2/evaluator.py",
+        "sourceLine": 4,
+        "importLine": 2,
+        "definitionLine": 1,
+        "sinkLine": 2,
+        "sink": "exec",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-import-flow",
+        "path": "case3/routes.py",
+        "line": 5,
+        "status": "unverified",
+        "calleeFile": "case3/evaluator.py",
+        "sourceLine": 4,
+        "importLine": 2,
+        "definitionLine": 1,
+        "sinkLine": 2,
+        "sink": "exec",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case0/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case0/evaluator.py",
+          "sourceSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "sink": "eval",
+        "argumentCount": 2,
+        "bindingHint": "no-direct-conflict-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case1/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case1/evaluator.py",
+          "sourceSha256": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+          "byteLength": 47,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 31,
+            "offset": 46
+          }
+        },
+        "sink": "eval",
+        "argumentCount": 3,
+        "bindingHint": "no-direct-conflict-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case2/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case2/evaluator.py",
+          "sourceSha256": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "sink": "exec",
+        "argumentCount": 2,
+        "bindingHint": "no-direct-conflict-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case3/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case3/evaluator.py",
+          "sourceSha256": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+          "byteLength": 47,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 31,
+            "offset": 46
+          }
+        },
+        "sink": "exec",
+        "argumentCount": 3,
+        "bindingHint": "no-direct-conflict-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case4/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case4/evaluator.py",
+          "sourceSha256": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+          "byteLength": 46,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 30,
+            "offset": 45
+          }
+        },
+        "sink": "eval",
+        "argumentCount": 2,
+        "bindingHint": "no-direct-conflict-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case5/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case5/evaluator.py",
+          "sourceSha256": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+          "byteLength": 53,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 33
+          },
+          "end": {
+            "line": 2,
+            "col": 31,
+            "offset": 52
+          }
+        },
+        "sink": "eval",
+        "argumentCount": 3,
+        "bindingHint": "namespace-effects-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case6/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case6/evaluator.py",
+          "sourceSha256": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+          "byteLength": 49,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 33
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 48
+          }
+        },
+        "sink": "exec",
+        "argumentCount": 2,
+        "bindingHint": "namespace-effects-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case7/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case7/evaluator.py",
+          "sourceSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "sink": "eval",
+        "argumentCount": 2,
+        "bindingHint": "no-direct-conflict-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case8/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case8/evaluator.py",
+          "sourceSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "sink": "eval",
+        "argumentCount": 2,
+        "bindingHint": "no-direct-conflict-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      }
+    ]
+  },
+  "independentPages": [
+    {
+      "section": "findings",
+      "count": 2,
+      "total": 9,
+      "complete": false
+    },
+    {
+      "section": "findings",
+      "count": 2,
+      "total": 9,
+      "complete": false
+    },
+    {
+      "section": "findings",
+      "count": 2,
+      "total": 9,
+      "complete": false
+    },
+    {
+      "section": "findings",
+      "count": 2,
+      "total": 9,
+      "complete": false
+    },
+    {
+      "section": "findings",
+      "count": 1,
+      "total": 9,
+      "complete": true
+    },
+    {
+      "section": "files",
+      "count": 5,
+      "total": 18,
+      "complete": false
+    },
+    {
+      "section": "files",
+      "count": 5,
+      "total": 18,
+      "complete": false
+    },
+    {
+      "section": "files",
+      "count": 5,
+      "total": 18,
+      "complete": false
+    },
+    {
+      "section": "files",
+      "count": 3,
+      "total": 18,
+      "complete": true
+    },
+    {
+      "section": "exclusions",
+      "count": 0,
+      "total": 0,
+      "complete": true
+    },
+    {
+      "section": "diagnostics",
+      "count": 0,
+      "total": 0,
+      "complete": true
+    },
+    {
+      "section": "artifacts",
+      "count": 5,
+      "total": 13,
+      "complete": false
+    },
+    {
+      "section": "artifacts",
+      "count": 3,
+      "total": 13,
+      "complete": false
+    },
+    {
+      "section": "artifacts",
+      "count": 3,
+      "total": 13,
+      "complete": false
+    },
+    {
+      "section": "artifacts",
+      "count": 2,
+      "total": 13,
+      "complete": true
+    }
+  ],
+  "scannerProofs": [
+    {
+      "containerName": "dsh-sec-4384b229-8eac-4c73-8d5a-ba5f9ae01267",
+      "outcome": "passed",
+      "observed": {
+        "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+        "running": true,
+        "sourceMount": {
+          "source": "/home/purge/.cache/score-native-qa-pzxp3w4l/state/engagements/native-import-namespace-20261110/runs/joint/28a46704-f3c9-40e3-a216-fd8d3068610a/source",
+          "readonly": true
+        },
+        "ruleSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+        "user": "1000:1000",
+        "network": "none",
+        "readonlyRoot": true,
+        "privileged": false,
+        "capDrop": [
+          "ALL"
+        ],
+        "securityOpt": [
+          "no-new-privileges"
+        ],
+        "memory": 805306368,
+        "memorySwap": 805306368,
+        "pids": 160,
+        "nanoCpus": 1000000000,
+        "command": [
+          "/policy-output.sh",
+          "/out",
+          "--deadline-seconds",
+          "165",
+          "semgrep",
+          "scan",
+          "--config",
+          "/policy/rules.json",
+          "--json",
+          "--output",
+          "/out/result.json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--jobs",
+          "1",
+          "--timeout",
+          "5",
+          "--max-target-bytes",
+          "1000000",
+          "/src"
+        ]
+      },
+      "observerErrors": [
+        "Command failed: /usr/bin/sudo -n /usr/bin/docker inspect dsh-sec-4384b229-8eac-4c73-8d5a-ba5f9ae01267\nerror: no such object: dsh-sec-4384b229-8eac-4c73-8d5a-ba5f9ae01267\n"
+      ],
+      "tool": "semgrep",
+      "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+      "admissionIdentity": "598208862ad1449a5c64391f5bb0bef537e2ee334d89588e5b3582c900c4b608",
+      "sourceRoot": "/home/purge/.cache/score-native-qa-pzxp3w4l/state/engagements/native-import-namespace-20261110/runs/joint/28a46704-f3c9-40e3-a216-fd8d3068610a/source",
+      "expected": {
+        "sourceRoot": "/home/purge/.cache/score-native-qa-pzxp3w4l/state/engagements/native-import-namespace-20261110/runs/joint/28a46704-f3c9-40e3-a216-fd8d3068610a/source",
+        "project": "/home/purge/.cache/score-native-qa-pzxp3w4l/workspace/synthetic-project",
+        "stateRoot": "/home/purge/.cache/score-native-qa-pzxp3w4l/state",
+        "image": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+        "rules": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773"
+      },
+      "before": {
+        "case0/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "case0/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case1/evaluator.py": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+        "case1/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case2/evaluator.py": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+        "case2/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case3/evaluator.py": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+        "case3/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case4/evaluator.py": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+        "case4/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case5/evaluator.py": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+        "case5/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case6/evaluator.py": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+        "case6/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case7/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "case7/routes.py": "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+        "case8/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "case8/routes.py": "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb"
+      },
+      "after": {
+        "case0/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "case0/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case1/evaluator.py": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+        "case1/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case2/evaluator.py": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+        "case2/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case3/evaluator.py": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+        "case3/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case4/evaluator.py": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+        "case4/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case5/evaluator.py": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+        "case5/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case6/evaluator.py": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+        "case6/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case7/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "case7/routes.py": "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+        "case8/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "case8/routes.py": "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb"
+      },
+      "sourceHashesMatch": true,
+      "manifestHashesMatch": true,
+      "findings": 9,
+      "declaredSpans": [
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case0/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case0/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 27
+            },
+            "end": {
+              "line": 2,
+              "col": 27,
+              "offset": 42
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case1/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case1/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 27
+            },
+            "end": {
+              "line": 2,
+              "col": 31,
+              "offset": 46
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case2/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case2/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 27
+            },
+            "end": {
+              "line": 2,
+              "col": 27,
+              "offset": 42
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case3/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case3/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 27
+            },
+            "end": {
+              "line": 2,
+              "col": 31,
+              "offset": 46
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case4/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case4/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 27
+            },
+            "end": {
+              "line": 2,
+              "col": 30,
+              "offset": 45
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case5/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case5/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 33
+            },
+            "end": {
+              "line": 2,
+              "col": 31,
+              "offset": 52
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case6/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case6/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 33
+            },
+            "end": {
+              "line": 2,
+              "col": 27,
+              "offset": 48
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case7/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case7/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 27
+            },
+            "end": {
+              "line": 2,
+              "col": 27,
+              "offset": 42
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case8/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case8/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 27
+            },
+            "end": {
+              "line": 2,
+              "col": 27,
+              "offset": 42
+            }
+          }
+        }
+      ],
+      "complete": true,
+      "version": "1.182.1",
+      "executedRules": {
+        "sha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+        "count": 17
+      },
+      "ruleProfile": {
+        "version": 1,
+        "id": "deep-namespace17",
+        "mode": "deep",
+        "baseRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+        "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+        "ruleCount": 17,
+        "qualification": "managed-candidate-not-r3"
+      },
+      "coverageKey": "7d5a74abe63067cc043a74d2ccd6a70b8ca65602027b7a2f642c51a914ff4ff9"
+    }
+  ],
+  "counts": {
+    "security_joint": 1,
+    "security_run": 1,
+    "security_finding": 0
+  },
+  "summary": {
+    "nativeTurnCompleted": true,
+    "mainModelDispatches": 21,
+    "auxiliaryModelDispatches": 1,
+    "mainReasoningEffort": "high",
+    "adapterModel": "deepseek-flash",
+    "provider": "deepseek-official",
+    "rawProviderResponseModelNotExposed": true,
+    "nativeTools": 20,
+    "nativeToolErrors": 0,
+    "nativeRpcErrors": 0,
+    "startRequests": 1,
+    "scannerCalls": 1,
+    "fileHashesMatched": 18,
+    "rangesMatched": 9,
+    "findings": 9,
+    "importArtifacts": 4,
+    "namespaceArtifacts": 9,
+    "nativeReportPages": {
+      "findings": 5,
+      "files": 4,
+      "exclusions": 1,
+      "diagnostics": 1,
+      "artifacts": 4
+    },
+    "nativeSectionTotals": {
+      "findings": 9,
+      "files": 18,
+      "exclusions": 0,
+      "diagnostics": 0,
+      "artifacts": 13
+    },
+    "candidateFilesMatched": 173,
+    "ordinaryFindingRows": 0,
+    "noProjectSourceExecuted": true,
+    "ordinaryR3Qualified": false,
+    "deployed": false
+  },
+  "modelEvents": [
+    {
+      "at": "2026-11-11T05:51:05.886Z",
+      "kind": "model-dispatch",
+      "id": 1,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:05.889Z",
+      "kind": "model-dispatch",
+      "id": 2,
+      "main": false,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "off"
+    },
+    {
+      "at": "2026-11-11T05:51:07.135Z",
+      "kind": "model-finish",
+      "id": 2,
+      "reasonKind": "stop",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:07.144Z",
+      "kind": "model-stream-closed",
+      "id": 2
+    },
+    {
+      "at": "2026-11-11T05:51:07.611Z",
+      "kind": "model-finish",
+      "id": 1,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:07.612Z",
+      "kind": "model-stream-closed",
+      "id": 1
+    },
+    {
+      "at": "2026-11-11T05:51:07.687Z",
+      "kind": "model-dispatch",
+      "id": 3,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:08.930Z",
+      "kind": "model-finish",
+      "id": 3,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:08.931Z",
+      "kind": "model-stream-closed",
+      "id": 3
+    },
+    {
+      "at": "2026-11-11T05:51:08.975Z",
+      "kind": "model-dispatch",
+      "id": 4,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:10.133Z",
+      "kind": "model-finish",
+      "id": 4,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:10.134Z",
+      "kind": "model-stream-closed",
+      "id": 4
+    },
+    {
+      "at": "2026-11-11T05:51:11.443Z",
+      "kind": "model-dispatch",
+      "id": 5,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:13.917Z",
+      "kind": "model-finish",
+      "id": 5,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:13.918Z",
+      "kind": "model-stream-closed",
+      "id": 5
+    },
+    {
+      "at": "2026-11-11T05:51:16.326Z",
+      "kind": "model-dispatch",
+      "id": 6,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:18.344Z",
+      "kind": "model-finish",
+      "id": 6,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:18.344Z",
+      "kind": "model-stream-closed",
+      "id": 6
+    },
+    {
+      "at": "2026-11-11T05:51:22.022Z",
+      "kind": "model-dispatch",
+      "id": 7,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:24.698Z",
+      "kind": "model-finish",
+      "id": 7,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:24.698Z",
+      "kind": "model-stream-closed",
+      "id": 7
+    },
+    {
+      "at": "2026-11-11T05:51:24.733Z",
+      "kind": "model-dispatch",
+      "id": 8,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:26.741Z",
+      "kind": "model-finish",
+      "id": 8,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:26.742Z",
+      "kind": "model-stream-closed",
+      "id": 8
+    },
+    {
+      "at": "2026-11-11T05:51:26.779Z",
+      "kind": "model-dispatch",
+      "id": 9,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:28.533Z",
+      "kind": "model-finish",
+      "id": 9,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:28.533Z",
+      "kind": "model-stream-closed",
+      "id": 9
+    },
+    {
+      "at": "2026-11-11T05:51:28.586Z",
+      "kind": "model-dispatch",
+      "id": 10,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:30.443Z",
+      "kind": "model-finish",
+      "id": 10,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:30.444Z",
+      "kind": "model-stream-closed",
+      "id": 10
+    },
+    {
+      "at": "2026-11-11T05:51:30.492Z",
+      "kind": "model-dispatch",
+      "id": 11,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:32.372Z",
+      "kind": "model-finish",
+      "id": 11,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:32.373Z",
+      "kind": "model-stream-closed",
+      "id": 11
+    },
+    {
+      "at": "2026-11-11T05:51:32.421Z",
+      "kind": "model-dispatch",
+      "id": 12,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:34.341Z",
+      "kind": "model-finish",
+      "id": 12,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:34.342Z",
+      "kind": "model-stream-closed",
+      "id": 12
+    },
+    {
+      "at": "2026-11-11T05:51:34.387Z",
+      "kind": "model-dispatch",
+      "id": 13,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:35.949Z",
+      "kind": "model-finish",
+      "id": 13,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:35.949Z",
+      "kind": "model-stream-closed",
+      "id": 13
+    },
+    {
+      "at": "2026-11-11T05:51:35.994Z",
+      "kind": "model-dispatch",
+      "id": 14,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:37.623Z",
+      "kind": "model-finish",
+      "id": 14,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:37.624Z",
+      "kind": "model-stream-closed",
+      "id": 14
+    },
+    {
+      "at": "2026-11-11T05:51:37.668Z",
+      "kind": "model-dispatch",
+      "id": 15,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:39.669Z",
+      "kind": "model-finish",
+      "id": 15,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:39.673Z",
+      "kind": "model-stream-closed",
+      "id": 15
+    },
+    {
+      "at": "2026-11-11T05:51:39.719Z",
+      "kind": "model-dispatch",
+      "id": 16,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:41.108Z",
+      "kind": "model-finish",
+      "id": 16,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:41.109Z",
+      "kind": "model-stream-closed",
+      "id": 16
+    },
+    {
+      "at": "2026-11-11T05:51:41.152Z",
+      "kind": "model-dispatch",
+      "id": 17,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:42.763Z",
+      "kind": "model-finish",
+      "id": 17,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:42.768Z",
+      "kind": "model-stream-closed",
+      "id": 17
+    },
+    {
+      "at": "2026-11-11T05:51:42.812Z",
+      "kind": "model-dispatch",
+      "id": 18,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:44.733Z",
+      "kind": "model-finish",
+      "id": 18,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:44.734Z",
+      "kind": "model-stream-closed",
+      "id": 18
+    },
+    {
+      "at": "2026-11-11T05:51:44.798Z",
+      "kind": "model-dispatch",
+      "id": 19,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:46.909Z",
+      "kind": "model-finish",
+      "id": 19,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:46.910Z",
+      "kind": "model-stream-closed",
+      "id": 19
+    },
+    {
+      "at": "2026-11-11T05:51:46.958Z",
+      "kind": "model-dispatch",
+      "id": 20,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:48.854Z",
+      "kind": "model-finish",
+      "id": 20,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:48.855Z",
+      "kind": "model-stream-closed",
+      "id": 20
+    },
+    {
+      "at": "2026-11-11T05:51:48.897Z",
+      "kind": "model-dispatch",
+      "id": 21,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:51:50.778Z",
+      "kind": "model-finish",
+      "id": 21,
+      "reasonKind": "tool-calls",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:51:50.779Z",
+      "kind": "model-stream-closed",
+      "id": 21
+    },
+    {
+      "at": "2026-11-11T05:51:50.825Z",
+      "kind": "model-dispatch",
+      "id": 22,
+      "main": true,
+      "provider": "deepseek-official",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high"
+    },
+    {
+      "at": "2026-11-11T05:52:02.933Z",
+      "kind": "model-finish",
+      "id": 22,
+      "reasonKind": "stop",
+      "adapterReplayModel": "deepseek-flash"
+    },
+    {
+      "at": "2026-11-11T05:52:02.934Z",
+      "kind": "model-stream-closed",
+      "id": 22
+    }
+  ],
+  "acceptedTools": [
+    {
+      "at": "2026-11-11T05:51:07.644Z",
+      "kind": "accepted-tool",
+      "name": "redteam_session_bind",
+      "arguments": {
+        "engagement": "native-import-namespace-20261110"
+      },
+      "callId": "call_00_xMfAqShPuwK4COb7s0M07041"
+    },
+    {
+      "at": "2026-11-11T05:51:08.943Z",
+      "kind": "accepted-tool",
+      "name": "redteam_session_info",
+      "arguments": {},
+      "callId": "call_00_KBNn4kB2fMnGZCUZZXXy5301"
+    },
+    {
+      "at": "2026-11-11T05:51:10.148Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "plan",
+        "mode": "deep"
+      },
+      "callId": "call_00_ET_BWEgxY6nqv0nNfVyjLe58185"
+    },
+    {
+      "at": "2026-11-11T05:51:13.931Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "start",
+        "engagement": "native-import-namespace-20261110",
+        "requestId": "native-import-20261110-01",
+        "profileRevision": 1,
+        "mode": "deep",
+        "steps": [
+          "semgrep"
+        ],
+        "budgetSeconds": 180
+      },
+      "callId": "call_00_HEFuowzc8NoKrlonZn9K7507"
+    },
+    {
+      "at": "2026-11-11T05:51:18.352Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "wait",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "waitSeconds": 30
+      },
+      "callId": "call_00_hgz0mqOoFZ7rcy9AOp3H4249"
+    },
+    {
+      "at": "2026-11-11T05:51:24.707Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "report",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "section": "findings",
+        "limit": 5
+      },
+      "callId": "call_00_C0rnnB8XMoXCyENx2qgT1543"
+    },
+    {
+      "at": "2026-11-11T05:51:26.752Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "report",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "section": "findings",
+        "limit": 5,
+        "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjoyfQ"
+      },
+      "callId": "call_00_tij0jqRc9ILYL06KLitW0470"
+    },
+    {
+      "at": "2026-11-11T05:51:28.548Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo0fQ",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "findings"
+      },
+      "callId": "call_00_uhPhUz1VfjQdNxsZ0WYT2025"
+    },
+    {
+      "at": "2026-11-11T05:51:30.456Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo2fQ",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "findings"
+      },
+      "callId": "call_00_ET_0eK3O43IPTDxPSSiqhpP4210"
+    },
+    {
+      "at": "2026-11-11T05:51:32.386Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiYTQ1NjEzMGRkZWE1OTcwM2EwMjI3NGY4ZTRkNTI2MDFmNTgxNjZlNDBhYWEwMjFlYTc3MDc4MzQyNTdmMWFmNSIsImFmdGVyIjo4fQ",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "findings"
+      },
+      "callId": "call_00_ET_8yjHzbczwvwY2HgTtL089180"
+    },
+    {
+      "at": "2026-11-11T05:51:34.352Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "report",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "files"
+      },
+      "callId": "call_00_z7KZhD9Ze1xsjTi5mW6U3151"
+    },
+    {
+      "at": "2026-11-11T05:51:35.965Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjo1fQ",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "files"
+      },
+      "callId": "call_00_ET_rGx4Ty5geK9XEgksHTvm8830"
+    },
+    {
+      "at": "2026-11-11T05:51:37.643Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjoxMH0",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "files"
+      },
+      "callId": "call_00_ET_fm2TlD7z7DZ47qwiZT7W0257"
+    },
+    {
+      "at": "2026-11-11T05:51:39.684Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiYjU3MTE4NThlZDcyMDFjMGFhNzljYzdlYWYzZTc2ZTU3NTAyODM3ZDFlODc1MGY3NjVjNmFlOTA3MWM1OGIxOSIsImFmdGVyIjoxNX0",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "files"
+      },
+      "callId": "call_00_ET_zJlM6Sbt3V3D1lWfeK4l8518"
+    },
+    {
+      "at": "2026-11-11T05:51:41.121Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "report",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "exclusions"
+      },
+      "callId": "call_00_mCkoFyiLmIgOpVSlPX7r4605"
+    },
+    {
+      "at": "2026-11-11T05:51:42.783Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "report",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "diagnostics"
+      },
+      "callId": "call_00_ET_EIfw2x5NCkzBHYxKa5As9279"
+    },
+    {
+      "at": "2026-11-11T05:51:44.759Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "report",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "artifacts"
+      },
+      "callId": "call_00_fNNMwjfsMF2jYe3HTmCF8907"
+    },
+    {
+      "at": "2026-11-11T05:51:46.925Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjo1fQ",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "artifacts"
+      },
+      "callId": "call_00_ET_f9WQ9Wm9TzjlCjtFc3vU9672"
+    },
+    {
+      "at": "2026-11-11T05:51:48.865Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjo4fQ",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "artifacts"
+      },
+      "callId": "call_00_ET_57RzwmAOPyfJPouxsfd09658"
+    },
+    {
+      "at": "2026-11-11T05:51:50.791Z",
+      "kind": "accepted-tool",
+      "name": "redteam_joint_review",
+      "arguments": {
+        "action": "report",
+        "cursor": "eyJ2ZXJzaW9uIjoiZTZjYzZiYjcxMzA4YmYxMmExNjQ0Njc4NDg5ZTBlYTVjNDgzZDIyYzhhZTEzNTlhYjI0ODIyZGI0Y2JhM2FiNCIsImFmdGVyIjoxMX0",
+        "id": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+        "limit": 5,
+        "section": "artifacts"
+      },
+      "callId": "call_00_ET_b9txPW3kJwZrXrrnvWXs6159"
+    }
+  ],
+  "turnCompletion": [
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 118,
+      "reasonKind": "completed"
+    }
+  ],
+  "toolResultMetadata": [
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 18,
+      "isError": false,
+      "resultSha256": "9a8b1d68223394606ae26c4744bb652b824fe6733be2885ea7b5b5eb46bd0f65"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 23,
+      "isError": false,
+      "resultSha256": "1bfc36772eee7fa53534554fb57f472a6649da87194966d64bb39360ad69b110"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 28,
+      "isError": false,
+      "resultSha256": "839832623933e5c5945a43f9241562d1af97a9d08c1116a67f33c9e768dd9be5"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 33,
+      "isError": false,
+      "resultSha256": "fba50cb5f373f2d95ec5e367608b4555446589d3e21c44caa140170fcca0782c"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 38,
+      "isError": false,
+      "resultSha256": "9acc53b9ae32828b365269062e1fd7aef304ef7aa35997e430ea7ae2a30a7f1b"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 43,
+      "isError": false,
+      "resultSha256": "4d3fca7ce6c7e2d5eea70d5cb3620f8c5144a856b1b8aa08d7362b2df6666a93"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 48,
+      "isError": false,
+      "resultSha256": "b0bbf2a9478a096b7e9456320924355d8a29a1ca03b6f94745ab5c72ed0102a1"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 53,
+      "isError": false,
+      "resultSha256": "52f3bf4948e81d1ba68af1f9118bfde480b440e4f44e62adf01206705861f44d"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 58,
+      "isError": false,
+      "resultSha256": "a6dcf85c841a5e77318470d307128f6e2405494e67504137da0fce36417d3a36"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 63,
+      "isError": false,
+      "resultSha256": "6b225e7178430f5076aca7363e7e8dfda2750d5cbbbf4046572c2aaad0a9a1ab"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 68,
+      "isError": false,
+      "resultSha256": "ff632c0c4f999dfd9cd6a3cfc6319607c696487a2fe9066c131c92103d6ee26b"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 73,
+      "isError": false,
+      "resultSha256": "ca8854b975b9eecf8642e8ce9b066ab576a7fa878386413f4a130194ddf18dec"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 78,
+      "isError": false,
+      "resultSha256": "2beebe16a8d68e83beeb08cca677faeb5088f3fbc90a5657a692bef1f552b83a"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 83,
+      "isError": false,
+      "resultSha256": "9f4ba35caea7d9c520c046d2fa8b64f0d8449fd8c5b533139c79eeb1ddc45e1d"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 88,
+      "isError": false,
+      "resultSha256": "a9d3f31a5043301631646d642bbb766b33dcc686e5060eb28de1f91eb26fcbc6"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 93,
+      "isError": false,
+      "resultSha256": "2ecebf47324ff090812e0b7cd03993a89627e2e2c59d545fed9fd0d67660061f"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 98,
+      "isError": false,
+      "resultSha256": "cd19bf2cbc53cbe77e353f25eabeb38990f360eb5bcf0f6ad555d179c82c301b"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 103,
+      "isError": false,
+      "resultSha256": "bce97171f366103b4afcabcec3ebad1f0b6491f9adbbc4843deb843ffdec1080"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 108,
+      "isError": false,
+      "resultSha256": "69ad0f6e11953ac7caf55d1a013d03f7f3a90648b5484caeccd09ec5efb70ac8"
+    },
+    {
+      "sessionId": "session-04e2ab3b-d533-4feb-bf18-2d8ece243583",
+      "seq": 113,
+      "isError": false,
+      "resultSha256": "5d029d6f2b7807a8f793ae83d42a0b5786d4025ae068ec9add8702442637cf48"
+    }
+  ],
+  "messageBodiesIncluded": false
+}

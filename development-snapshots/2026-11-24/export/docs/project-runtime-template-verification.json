@@ -1,0 +1,214 @@
+{
+  "date": "2026-11-02",
+  "timezone": "America/Los_Angeles",
+  "version": "1.1.77-personal.10",
+  "programFiles": 157,
+  "scope": "VM improved fixed offline PhishGuard runtime template only; original project read/copy only; separate QA scope",
+  "dependencyLock": {
+    "packages": 41,
+    "ordinaryFiles": 7283,
+    "bytes": 284535188,
+    "treeSha256": "83f09657a42907fc98f0592831d049ad3afc7775d7846b11025b73fc197d8452",
+    "baseImageId": "sha256:2a077741b88d6421e68ae45f0309bb149edc52a363fa596427a292cae12b1b1e",
+    "imageId": "sha256:7bc9ee244410e35c8d3fdae3d20f9af4a486593be143756a97362c155f7be86b",
+    "restoredActualImports": {
+      "imports": 6,
+      "python": "3.12.3"
+    }
+  },
+  "snapshot": {
+    "auditedTextFiles": 381,
+    "runtimeAssets": 38,
+    "runtimeAssetBytes": 19391122,
+    "copySha256": "2cb8f4dcca7bdc32dac6a6acdc766ca47219468d73881c9fa82cf1ad9c6ebd0c",
+    "pythonPreflightFiles": 212
+  },
+  "native": {
+    "rootHealthAndSyntheticPostHTTP200": true,
+    "modelAndExternalVerificationDisabled": true,
+    "faviconAndWasmCopyHashesMatched": true,
+    "containment": {
+      "network": "none",
+      "memory": 536870912,
+      "cpu": 1000000000,
+      "pids": 64,
+      "init": true,
+      "readOnly": true,
+      "user": "1000:1000"
+    },
+    "network": {
+      "positiveVmListener": true,
+      "vmGatewayBlocked": 101,
+      "testNetBlocked": 101,
+      "listenerHits": 1
+    },
+    "joint": {
+      "state": "partial",
+      "steps": [
+        {
+          "tool": "semgrep",
+          "id": "8cbfed3b-850f-4963-848f-fadfa4a5608b",
+          "state": "partial",
+          "complete": false,
+          "coverageScope": "scanner-reported-files",
+          "eligibleFiles": null,
+          "cleanupVerified": null,
+          "version": "1.182.1",
+          "checkedFiles": 146,
+          "problem": null,
+          "diagnostics": {
+            "total": 4,
+            "retained": 4,
+            "truncated": false
+          },
+          "modelCalls": 0,
+          "artifacts": 0
+        },
+        {
+          "tool": "zap",
+          "id": "290a68b4-90be-4dec-9102-ec003a91f8f0",
+          "state": "completed",
+          "complete": true,
+          "coverageScope": "live-loopback-http-responses",
+          "eligibleFiles": null,
+          "cleanupVerified": null,
+          "version": "2.17.0",
+          "checkedFiles": 0,
+          "problem": null,
+          "diagnostics": {
+            "total": 0,
+            "retained": 0,
+            "truncated": false
+          },
+          "modelCalls": 0,
+          "artifacts": 1
+        }
+      ],
+      "findings": 55,
+      "findingsStatus": "unverified",
+      "storedInSeparateQAEngagement": true,
+      "runtimeSource": {
+        "state": "managed-source-copy-matched",
+        "id": "7ff8ebcf-54ee-430a-9ffe-811bb2165054",
+        "copySha256": "2cb8f4dcca7bdc32dac6a6acdc766ca47219468d73881c9fa82cf1ad9c6ebd0c",
+        "files": 381,
+        "template": "phishguard-fastapi-v1",
+        "runtimeAssets": 38,
+        "dependencyTreeSha256": "83f09657a42907fc98f0592831d049ad3afc7775d7846b11025b73fc197d8452",
+        "before": true,
+        "after": true,
+        "claim": "仅核对列明副本与容器及转发入口的前后身份；依赖、构建可复现性和进程内存行为未证明。"
+      }
+    },
+    "assetMutation": {
+      "faultApplied": true,
+      "unconfirmedObserved": true,
+      "restoredPrivateCopy": true
+    },
+    "resourceMutation": {
+      "cpuFaultApplied": true,
+      "unconfirmedObserved": true,
+      "restored": true
+    },
+    "pausedRelay": {
+      "innerRelayStopped": true,
+      "hostDeadlineFired": true,
+      "hostClientReaped": true,
+      "elapsedMs": 6516
+    },
+    "stop": {
+      "phase": "closed",
+      "cleanupVerified": true,
+      "containerNetworkIndexAndLoopbackClosed": true
+    },
+    "ttl": {
+      "phase": "closed",
+      "cleanupVerified": true
+    }
+  },
+  "chrome": {
+    "nativeChromeUsed": true,
+    "previewConfirmed": true,
+    "fixedEntryAndNetworkNoticeVisible": true,
+    "explicitStartAndReadyObserved": true,
+    "refreshKeptOriginalRequest": true,
+    "newRuntimeDidNotInheritOldAssociation": true,
+    "explicitStopAndCleanupObserved": true,
+    "oneRuntimeForOriginalRequest": 1,
+    "noManagedContainersNetworksOrOriginIndex": true
+  },
+  "independentReview": {
+    "focusedDesignAndImplementationRechecks": "passed",
+    "latestPythonFocusedTests": 18,
+    "latestSourceAndTransportFocusedTests": 13,
+    "finalWholeTaskRereview": "not returned: reviewer usage limit; do not infer full final approval"
+  },
+  "regression": {
+    "python": 295,
+    "pluginNode": 601,
+    "hostNode": 139,
+    "extraLinuxRoot": 18
+  },
+  "recovery": {
+    "recoveryPoint": "ready-project-runtime-20261102",
+    "selectedProofFiles": 2830,
+    "programFiles": 157,
+    "snapshotCount": 32,
+    "previous31SnapshotsPreserved": true,
+    "selectedKaliBridgeCovered": true,
+    "linkedKaliArchive": "kali-recoveries/ready-joint-review-20261102/Kali.utm",
+    "harnessDiskIncludesPrivateConnectionMaterial": true,
+    "publicSecretExported": false,
+    "originalVmResumed": true
+  },
+  "copyBoot": {
+    "recoveryPoint": "ready-project-runtime-20261102",
+    "restoredDiskActuallyBooted": true,
+    "independentInodeAndNoQcowBacking": true,
+    "existingVirtualHardwareReused": true,
+    "originalInodeReturned": true,
+    "originalUnchangedWhileCopyBooted": true,
+    "originalNowStarted": true,
+    "newCrashFixturePreservedOnOriginal": true,
+    "utmListUnchanged": true,
+    "newVmRegistered": false,
+    "isolationValidated": true,
+    "phase": "original-running"
+  },
+  "protected": {
+    "protectedProjectFilesMatched": 459,
+    "projectHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "findingsByStatus": {
+      "unverified": 95
+    },
+    "scannerManifestUnchanged": true,
+    "programHashesMatched": 157,
+    "installedToolsPresent": true,
+    "harnessActive": true,
+    "pentagiRunning": true,
+    "hostHelpersUnchanged": 5,
+    "hostLaunchDefinitionsUnchanged": true,
+    "vmConfigurationUnchanged": true,
+    "originalDiskInodeUnchanged": true,
+    "utmListUnchanged": true,
+    "allPreviousSnapshotsPreserved": true,
+    "snapshotCount": 32,
+    "qaJointState": "partial",
+    "qaFindings": 55,
+    "qaAllUnverified": true,
+    "qaJointCleanupVerified": true,
+    "noRuntimeContainersNetworksOrOriginIndex": true
+  },
+  "limitations": [
+    "Frozen installed dependency tree and image identity are not dependency security or source-to-wheel reproducibility. Private image/archive required for another VM.",
+    "Server network none does not restrict browser navigation or external account links. No direct Mac app forwarding added.",
+    "ML/private pickle, real accounts and external verification disabled; offline core only.",
+    "Same audit/runtime Python and JSON redaction may change application values; unsafe forms reject, no project code is imported during static redaction.",
+    "Semgrep reported 4 diagnostics over 146 checked files; joint task remains partial and all 55 QA hits unverified. Real 95 findings unchanged.",
+    "Only Semgrep and local ZAP selected this round; no all-tools or main-chat model campaign, monetary hard cap or manual security judgment.",
+    "Same-UID authorized original Shell remains outside private-record trust boundary.",
+    "Final whole-task independent rereview did not return due reviewer usage limit; focused component reviews passed.",
+    "Mac permissions/helpers/launch/configuration and Kali unchanged. Local recovery is not off-Mac disaster recovery; global Mac recovery label remains old."
+  ]
+}

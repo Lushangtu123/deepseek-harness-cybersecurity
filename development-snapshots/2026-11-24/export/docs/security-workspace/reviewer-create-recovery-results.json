@@ -1,0 +1,332 @@
+{
+  "scope": "offline VM original-attempt recovery for proven not-started create clients",
+  "tests": {
+    "macSnapshot": 62,
+    "vmSnapshot": 62,
+    "macBatch": 9,
+    "vmBatch": 9,
+    "macQualityGate": 43,
+    "vmQualityGate": 43,
+    "finalFailures": 0,
+    "redPhases": [
+      {
+        "tests": 59,
+        "failures": 6
+      },
+      {
+        "tests": 60,
+        "failures": 7
+      },
+      {
+        "tests": 61,
+        "failures": 1
+      },
+      {
+        "tests": 62,
+        "failures": 2,
+        "scope": "malformed list/dict reason from first review"
+      }
+    ]
+  },
+  "nativeCreationControls": {
+    "state": "passed",
+    "controls": [
+      {
+        "case": "creating-save-failure",
+        "initialState": "failed",
+        "finalState": "recovered",
+        "failure": {
+          "kind": "controller-error",
+          "type": "OSError"
+        },
+        "creationNotStarted": {
+          "basis": "no-durable-create-event",
+          "checkedAt": "2026-11-11T17:29:54.887078+00:00"
+        },
+        "recordedCreateEvents": 0,
+        "dockerCreateExecuted": false,
+        "startCount": 0,
+        "completedResult": false,
+        "cleanup": {
+          "confirmed": true,
+          "idAbsent": true,
+          "nameAbsent": true,
+          "clientsStopped": true,
+          "creationResolved": true,
+          "errors": [],
+          "checkedAt": "2026-11-11T17:29:54.960092+00:00",
+          "clientsInitiallyStopped": true
+        },
+        "stageRemoved": true
+      },
+      {
+        "case": "popen-exec-failure",
+        "initialState": "failed",
+        "finalState": "recovered",
+        "failure": {
+          "errorType": "FileNotFoundError",
+          "kind": "client-spawn-failed",
+          "notStarted": true,
+          "phase": "create"
+        },
+        "creationNotStarted": {
+          "basis": "explicit-unstarted-create-event",
+          "checkedAt": "2026-11-11T17:29:55.042599+00:00"
+        },
+        "recordedCreateEvents": 1,
+        "dockerCreateExecuted": false,
+        "startCount": 0,
+        "completedResult": false,
+        "cleanup": {
+          "confirmed": true,
+          "idAbsent": true,
+          "nameAbsent": true,
+          "clientsStopped": true,
+          "creationResolved": true,
+          "errors": [],
+          "checkedAt": "2026-11-11T17:29:55.115453+00:00",
+          "clientsInitiallyStopped": true
+        },
+        "stageRemoved": true
+      }
+    ],
+    "newIndependentSamples": 0,
+    "scope": "Fault injection only; successful production byte-bound path tested separately.",
+    "evidenceBasis": "dockerCreateExecuted false is by construction of the pre-client save failure/missing-exec injection; start/result absence is asserted. Not an independent daemon execution counter."
+  },
+  "settledAttempts": [
+    {
+      "id": "46d70ec21fc54746924be94424dd1892",
+      "state": "completed",
+      "failure": null,
+      "creationJournalVersion": 1,
+      "creationNotStarted": null,
+      "cleanup": {
+        "checkedAt": "2026-11-11T17:29:54.686979+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "5d064789f2c4806a56819f86d76c7cf1985ee60739b488a2cded53841f7b967d",
+      "originalResultDigestValid": true,
+      "laterContainerQueriesAbsent": true,
+      "sameSourceClientProbeEmpty": true
+    },
+    {
+      "id": "97b62ac813bf43409e5effa8142325b5",
+      "state": "recovered",
+      "failure": {
+        "kind": "controller-error",
+        "type": "OSError"
+      },
+      "creationJournalVersion": 1,
+      "creationNotStarted": {
+        "basis": "no-durable-create-event",
+        "checkedAt": "2026-11-11T17:29:54.887078+00:00"
+      },
+      "cleanup": {
+        "checkedAt": "2026-11-11T17:29:54.960092+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "04b7f2adae5a9664aafae456373d52f8ccb29c8a14f154936ea4bdaaadbea625",
+      "originalResultDigestValid": null,
+      "laterContainerQueriesAbsent": true,
+      "sameSourceClientProbeEmpty": true
+    },
+    {
+      "id": "af85e68af6fa4b32868f75635e4ac448",
+      "state": "recovered",
+      "failure": {
+        "errorType": "FileNotFoundError",
+        "kind": "client-spawn-failed",
+        "notStarted": true,
+        "phase": "create"
+      },
+      "creationJournalVersion": 1,
+      "creationNotStarted": {
+        "basis": "explicit-unstarted-create-event",
+        "checkedAt": "2026-11-11T17:29:55.042599+00:00"
+      },
+      "cleanup": {
+        "checkedAt": "2026-11-11T17:29:55.115453+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "595f8df291fec0a4e899524836116975b2c39f36118c4b3a1f7dd3ead583115e",
+      "originalResultDigestValid": null,
+      "laterContainerQueriesAbsent": true,
+      "sameSourceClientProbeEmpty": true
+    }
+  ],
+  "vmProtection": {
+    "dailyProgramFilesMatched": 169,
+    "dailyDatabasesLogicallyMatched": 42,
+    "dailyConfigPinsRuntimeMatched": true
+  },
+  "protectedUnchanged": {
+    "scripts/review_quality_gate.mjs": "848cbbf3fe606f8f488bdc724cdf7e7373b43580209cc7bda83ed477fedd6f0d",
+    "work/harness-purge-improved/package-files.json": "ce47db260931cfee4c418c9dd6a2145c4791e1c33855a37e876d9a561a05d023",
+    "docs/security-workspace/review-sample-ledger.json": "62f38218bb84fd4b1ff1ef2b8133d6deaa71c7d132d03501e1cf6a732b195b7e",
+    "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+    "work/harness-purge-improved/package/scripts/eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843"
+  },
+  "boundaries": {
+    "productionDeployment": false,
+    "githubPush": false,
+    "macPermissionsExpanded": false,
+    "newIndependentSamples": 0,
+    "r3Qualified": false,
+    "fullProductAudit": false,
+    "automaticRetentionDeletion": false,
+    "totalStorageBounded": false,
+    "faultControlsUseExplicitMemoryPatch": true,
+    "normalReceiptUsesUnmodifiedCandidate": true
+  },
+  "reviewedFiles": {
+    "scripts/reviewer_snapshot.py": "4acac75a3cc54c042cdfa74e5e5c2a356abccf568285a7e1c5ed37e20bc84a1f",
+    "scripts/reviewer_snapshot.test.py": "8c5c46fd3bd6a141c020a698a99efc09ee22a439c2bf2681110aa6f80221fef9",
+    "docs/security-workspace/reviewer-create-recovery.md": "f60205f1bf6def390e82063aa78de06400cfe12140460c97ac9c8e6c9b38041d"
+  },
+  "review": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "promptSha256": "38ea811561c22d90ea7ce0e7375cbee5ed37a6fd647ab2549e68d59738f3a63e",
+    "receiptSha256": "5be0b7e6891cbe2d8234287259cce1ab3c18cf6fd9a87ead83f481794d047f9f",
+    "reportSha256": "fec7c2f85cd64654c2e5643b11f41be6232690a41b34f9405e9875171d83f4c9",
+    "confirmedBlockingFindings": 0,
+    "triage": {
+      "confirmedBlockingFindings": 0,
+      "scope": "proven never-started creation recovery and F1 fix; offline candidate only",
+      "actualModel": "claude-opus-5-5",
+      "effort": "high",
+      "notes": [
+        {
+          "id": "F1",
+          "classification": "closed by tested revision and specified-model re-review",
+          "action": "Require string before reason set membership. Two original list/dict failures reproduced, current62 tests pass Mac/VM; malformed reason keeps original failure, creationAttempted true, no result. Final normal byte-bound run and two fault controls pass."
+        },
+        {
+          "id": "R2-N1",
+          "classification": "future exception shielding retained",
+          "action": "No reachable exception identified after F1 fix; restore helper inside failure guard remains unwrapped and must be maintained carefully. Additional restoreError protection remains future hardening."
+        },
+        {
+          "id": "R2-N2",
+          "classification": "evidence scope disclosed",
+          "action": "R2 external prompt includes Mac62 original output; Mac9batch/43gate originals are retained in root and R1 prompt, not copied into R2. Those unchanged tests/targets were not rerun Mac after one-line F1 repair; VM reran62/9/43."
+        },
+        {
+          "id": "R2-N3",
+          "classification": "raw field provenance retained",
+          "action": "Raw dockerCreateExecuted false remains a literal derived from fault construction. Always cite with summary evidenceBasis and stage/result absence assertions, not as an independent daemon counter."
+        },
+        {
+          "id": "R2-N4",
+          "classification": "known private-record type refinement retained",
+          "action": "Successful-create restoration still allows numeric-equal exitCode false/0.0; producer emits int. Private metadata type tightening remains forensic/schema follow-up, not new execution capability."
+        },
+        {
+          "id": "R2-N5",
+          "classification": "separate earlier evidence retained",
+          "action": "R1 cleanup of3 tasks is in R1 complete prompt and local originals, not R2 bundle. Final candidate acceptance uses current3; cumulative6 is bookkeeping, no mixed-byte claim."
+        },
+        {
+          "id": "F2-F8",
+          "classification": "original nonblocking boundaries retained",
+          "action": "Strict/log-failure branches, additional active-create/CID-conflict tests, audit semantics, private factory protocol contract, future version rejection and genuinely unknown executed-create cases retain first-review classifications. No automatic retention deletion or R3 approval."
+        }
+      ]
+    }
+  },
+  "remaining": [
+    "Readonly retention inventory and cross-task storage policy are planned but not implemented; no automatic deletion.",
+    "Unknown/legacy creation without sufficient proof remains unconfirmed.",
+    "Pre-record orphan stages, final persistence/exit-code alignment, non-atomic cancellation window and recovery forensic-field separation remain open.",
+    "Prior input/JSON extra controls, per-file parse and per-site mapping/nonce/independent evidence and new-sample admission remain required."
+  ],
+  "firstReview": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "reportSha256": "0350bf573caa27c73c73ff9544d6b6abc29c38deb6ec8ce5e68790445b56f88a",
+    "receiptSha256": "a63a3cfb03e1347a3ba07f6afac024e3244f67351256d0be642b9a784dfea398",
+    "triage": {
+      "confirmedBlockingFindings": 0,
+      "status": "F1 fix requires revision2 external review",
+      "notes": [
+        {
+          "id": "F1",
+          "classification": "confirmed low-risk malformed-record bug, fixed for revision2",
+          "action": "List/dict reason reproduced two failures in62-test suite; require string before set membership. Current62 passed; malformed reason remains cleanup-unconfirmed, original cause retained, no result. Re-review required."
+        },
+        {
+          "id": "F2",
+          "classification": "conservative behavior and missing controls retained",
+          "action": "Strict create event save/log errors keep io_failed; original cleanup-unconfirmed and CLI2 until healthy recover. End-to-end strict/log persistence branches not claimed tested."
+        },
+        {
+          "id": "F3",
+          "classification": "additional controls retained",
+          "action": "Already-running create error metadata, explicit event/history conflicts, broken CID symlink/stat errors and cancel-after-create-success remain additional tests; existing negative controls preserved."
+        },
+        {
+          "id": "F4",
+          "classification": "known forensic semantics retained",
+          "action": "startedAt is event preparation; creationAttempted is resource-resolution flag. Save error classification and creationNotStarted schema remain future audit-field work."
+        },
+        {
+          "id": "F5",
+          "classification": "private engine-hook trust boundary documented",
+          "action": "Only production DockerEngine or conforming private fixtures support creationJournalVersion1; arbitrary factory violation voids inference. CLI does not expose this hook."
+        },
+        {
+          "id": "F6",
+          "classification": "intentional unsupported-protocol rejection documented",
+          "action": "Present future/invalid version rejects entire load/status; missing legacy version readable but cannot infer absent event."
+        },
+        {
+          "id": "F7",
+          "classification": "evidence wording clarified; unused test assignment removed",
+          "action": "Native no-create field is by construction, with start/result absence asserted, not an independent daemon create counter. Remove overwritten invalid image assignment from R2 control; preserve R1 exact source."
+        },
+        {
+          "id": "F8",
+          "classification": "out-of-scope genuine unknown creation retained",
+          "action": "Executed nonzero/timedout CLI may have in-flight daemon request; absent resources do not prove no creation. Keep unknown; no abandon or auto-delete."
+        }
+      ]
+    },
+    "followup": "F1 reproduced and fixed, closed by final review; first triage preserves its original pending status."
+  },
+  "archivedEvidenceBindings": {
+    "scope": "local archive links, not new external execution or retrospective preseal",
+    "files": {
+      "batch-green.txt": "88050142d098c1bb48c7c4bb4a4bee25438c30ee6aa52dc08919f658ca7e522a",
+      "gate-green.txt": "abe95d76d39d8c41fc11f8daa768b50930fd2724c87f6ee3e6d03dc08f404f7a",
+      "vm-result.json": "5a2ae7a9a8c2b94706e6a8d3d9c15e91069d9b2818c27dd0cae2a3de2042c2a2",
+      "vm-cleanup.json": "f41f664b6404b6406b079cebcfc10960f41dcbd9624da87a7d9b1830dc71dcad",
+      "vm-result-r2.json": "57a98712e1f82a467c1b0a25a86e7a5815edd49cf4e75be8f4937dbf93078eac",
+      "vm-cleanup-r2.json": "38194309e6d066398d06010cf21bea261c125d913c3348b390603798c087c22b"
+    },
+    "initialNativeAttempts": 3,
+    "finalNativeAttempts": 3,
+    "cumulativeNativeAttempts": 6,
+    "macBatchGateOutputsOrigin": "original stage run; provided in R1, omitted in R2",
+    "finalReceiptOnlyUsesCurrentCandidate": true
+  }
+}

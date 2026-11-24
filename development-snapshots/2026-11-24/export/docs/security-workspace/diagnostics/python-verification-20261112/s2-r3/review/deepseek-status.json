@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "provider": "https://api.deepseek.com",
+  "requestedModel": "deepseek-flash",
+  "effort": "high",
+  "tools": [],
+  "jobs": [
+    {
+      "id": "storage-review",
+      "bodySha256": "6db6892e1329ad6f1302dcf21f634b13e27c786a9d847d35b6a4f76ba00968d3",
+      "promptSha256": "feaeb32ce7cc021ea5fc8dd77fd17698eb1089e8e101ed680979a46b380c5bfd",
+      "state": "completed",
+      "startedAt": "2026-11-12T17:23:02.368432+00:00",
+      "elapsedSeconds": 135.5,
+      "observedModels": [
+        "deepseek-flash"
+      ],
+      "reportChars": 0,
+      "reasoningCharsReceived": 94361,
+      "wireBytes": 7015089,
+      "lastEventAt": "2026-11-12T17:25:13.422128+00:00",
+      "receipt": "storage-review.json",
+      "receiptSha256": "e022880b0acfea4d19b0fb04264df0acbd898debb069508dee7de28e87900668",
+      "actualModels": [
+        "deepseek-flash"
+      ],
+      "finishReason": "stop",
+      "usage": {
+        "prompt_tokens": 7683,
+        "completion_tokens": 23256,
+        "total_tokens": 30939,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 22695
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 7683
+      },
+      "report": "storage-review.review.md",
+      "reportSha256": "937db255230987f927be859188ff2cf1e46e42d9a84a78759d4d04fe0288a9bd",
+      "finishedAt": "2026-11-12T17:25:17.850238+00:00"
+    }
+  ],
+  "done": true,
+  "stopRequested": false,
+  "updatedAt": "2026-11-12T17:25:17.851896+00:00"
+}

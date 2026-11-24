@@ -1,0 +1,247 @@
+{
+  "rules": [
+    {
+      "id": "harness.python.eval",
+      "languages": [
+        "python"
+      ],
+      "severity": "ERROR",
+      "message": "Dynamic Python evaluation; validate input and context independently.",
+      "metadata": {
+        "origin": "workspace-authored-candidate",
+        "status": "unverified-observation"
+      },
+      "patterns": [
+        {
+          "pattern-either": [
+            {
+              "pattern": "eval($X)"
+            },
+            {
+              "pattern": "builtins.eval($X)"
+            },
+            {
+              "pattern": "getattr(__import__('builtins'), 'eval')($X)"
+            }
+          ]
+        },
+        {
+          "pattern-not": "eval(\"...\")"
+        },
+        {
+          "pattern-not": "builtins.eval(\"...\")"
+        },
+        {
+          "pattern-not": "getattr(__import__('builtins'), 'eval')('...')"
+        }
+      ]
+    },
+    {
+      "id": "harness.python.unsafe-yaml",
+      "languages": [
+        "python"
+      ],
+      "severity": "ERROR",
+      "message": "YAML loader with object construction capability; input trust remains to be verified.",
+      "metadata": {
+        "origin": "workspace-authored-candidate",
+        "status": "unverified-observation"
+      },
+      "pattern-either": [
+        {
+          "pattern": "yaml.load($X)"
+        },
+        {
+          "pattern": "yaml.load($X, Loader=yaml.Loader)"
+        },
+        {
+          "pattern": "yaml.load($X, Loader=yaml.UnsafeLoader)"
+        },
+        {
+          "pattern": "yaml.load($X, Loader=yaml.CLoader)"
+        },
+        {
+          "pattern": "yaml.load($X, Loader=yaml.CUnsafeLoader)"
+        }
+      ]
+    },
+    {
+      "id": "harness.javascript.dom-innerhtml",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "severity": "WARNING",
+      "message": "A function argument or URL fragment reaches innerHTML; verify trust boundary and sanitization.",
+      "metadata": {
+        "origin": "workspace-authored-candidate",
+        "status": "unverified-observation"
+      },
+      "mode": "taint",
+      "pattern-sources": [
+        {
+          "patterns": [
+            {
+              "pattern-inside": "function $F(..., $ARG, ...) { ... }"
+            },
+            {
+              "focus-metavariable": "$ARG"
+            }
+          ]
+        },
+        {
+          "patterns": [
+            {
+              "pattern-inside": "(..., $ARG, ...) => { ... }"
+            },
+            {
+              "focus-metavariable": "$ARG"
+            }
+          ]
+        },
+        {
+          "pattern-either": [
+            {
+              "pattern": "location.hash"
+            },
+            {
+              "pattern": "location.search"
+            },
+            {
+              "pattern": "document.location.hash"
+            },
+            {
+              "pattern": "document.location.search"
+            }
+          ]
+        }
+      ],
+      "pattern-sinks": [
+        {
+          "patterns": [
+            {
+              "pattern": "$E.innerHTML = $VALUE"
+            },
+            {
+              "focus-metavariable": "$VALUE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "harness.javascript.dynamic-eval",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "severity": "ERROR",
+      "message": "A function argument or URL fragment reaches eval; verify input control.",
+      "metadata": {
+        "origin": "workspace-authored-candidate",
+        "status": "unverified-observation"
+      },
+      "mode": "taint",
+      "pattern-sources": [
+        {
+          "patterns": [
+            {
+              "pattern-inside": "function $F(..., $ARG, ...) { ... }"
+            },
+            {
+              "focus-metavariable": "$ARG"
+            }
+          ]
+        },
+        {
+          "patterns": [
+            {
+              "pattern-inside": "(..., $ARG, ...) => { ... }"
+            },
+            {
+              "focus-metavariable": "$ARG"
+            }
+          ]
+        },
+        {
+          "pattern-either": [
+            {
+              "pattern": "location.hash"
+            },
+            {
+              "pattern": "location.search"
+            },
+            {
+              "pattern": "document.location.hash"
+            },
+            {
+              "pattern": "document.location.search"
+            }
+          ]
+        }
+      ],
+      "pattern-sinks": [
+        {
+          "pattern-either": [
+            {
+              "pattern": "eval($VALUE)"
+            },
+            {
+              "pattern": "globalThis.eval($VALUE)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "harness.php.dynamic-eval",
+      "languages": [
+        "php"
+      ],
+      "severity": "ERROR",
+      "message": "Dynamic PHP eval; this observation is not proof of reachability.",
+      "metadata": {
+        "origin": "workspace-authored-candidate",
+        "status": "unverified-observation"
+      },
+      "patterns": [
+        {
+          "pattern": "eval($X)"
+        },
+        {
+          "pattern-not": "eval(\"...\")"
+        }
+      ]
+    },
+    {
+      "id": "harness.php.unsafe-unserialize",
+      "languages": [
+        "php"
+      ],
+      "severity": "ERROR",
+      "message": "PHP object deserialization without an explicit class prohibition; verify source trust.",
+      "metadata": {
+        "origin": "workspace-authored-candidate",
+        "status": "unverified-observation"
+      },
+      "patterns": [
+        {
+          "pattern-either": [
+            {
+              "pattern": "unserialize($X)"
+            },
+            {
+              "pattern": "unserialize($X, $OPTIONS)"
+            }
+          ]
+        },
+        {
+          "pattern-not": "unserialize(\"...\")"
+        },
+        {
+          "pattern-not": "unserialize($X, ['allowed_classes' => false])"
+        }
+      ]
+    }
+  ]
+}

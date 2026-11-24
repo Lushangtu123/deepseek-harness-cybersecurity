@@ -1,0 +1,754 @@
+{
+  "ok": true,
+  "engagement": "isolated-source-location-live",
+  "jointId": "34060bbc-0511-46ae-8605-0737b793e7e0",
+  "startRequest": "58d8cc09-cd95-4381-aade-a4b5f27a49cb",
+  "events": [
+    {
+      "action": "plan",
+      "section": null,
+      "requestId": null,
+      "id": null,
+      "cursorUsed": false,
+      "ok": true
+    },
+    {
+      "action": "status",
+      "section": null,
+      "requestId": null,
+      "id": null,
+      "cursorUsed": false,
+      "ok": true
+    },
+    {
+      "action": "start",
+      "section": null,
+      "requestId": "58d8cc09-cd95-4381-aade-a4b5f27a49cb",
+      "id": null,
+      "cursorUsed": false,
+      "ok": true
+    },
+    {
+      "action": "wait",
+      "section": null,
+      "requestId": null,
+      "id": "34060bbc-0511-46ae-8605-0737b793e7e0",
+      "cursorUsed": false,
+      "ok": true
+    },
+    {
+      "action": "report",
+      "section": "findings",
+      "requestId": null,
+      "id": "34060bbc-0511-46ae-8605-0737b793e7e0",
+      "cursorUsed": false,
+      "ok": true
+    },
+    {
+      "action": "report",
+      "section": "findings",
+      "requestId": null,
+      "id": "34060bbc-0511-46ae-8605-0737b793e7e0",
+      "cursorUsed": true,
+      "ok": true
+    },
+    {
+      "action": "report",
+      "section": "findings",
+      "requestId": null,
+      "id": "34060bbc-0511-46ae-8605-0737b793e7e0",
+      "cursorUsed": false,
+      "ok": true
+    },
+    {
+      "action": "report",
+      "section": "findings",
+      "requestId": null,
+      "id": "34060bbc-0511-46ae-8605-0737b793e7e0",
+      "cursorUsed": true,
+      "ok": true
+    },
+    {
+      "action": "report",
+      "section": "files",
+      "requestId": null,
+      "id": "34060bbc-0511-46ae-8605-0737b793e7e0",
+      "cursorUsed": false,
+      "ok": true
+    },
+    {
+      "action": "report",
+      "section": "exclusions",
+      "requestId": null,
+      "id": "34060bbc-0511-46ae-8605-0737b793e7e0",
+      "cursorUsed": false,
+      "ok": true
+    },
+    {
+      "action": "report",
+      "section": "diagnostics",
+      "requestId": null,
+      "id": "34060bbc-0511-46ae-8605-0737b793e7e0",
+      "cursorUsed": false,
+      "ok": true
+    },
+    {
+      "action": "report",
+      "section": "artifacts",
+      "requestId": null,
+      "id": "34060bbc-0511-46ae-8605-0737b793e7e0",
+      "cursorUsed": false,
+      "ok": true
+    }
+  ],
+  "proofs": [
+    {
+      "tool": "semgrep",
+      "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9",
+      "containerName": "dsh-sec-8a562a65-d098-4395-96c6-606fa16c9f9e",
+      "admissionIdentity": "598208862ad1449a5c64391f5bb0bef537e2ee334d89588e5b3582c900c4b608",
+      "sourceRoot": "/home/purge/.cache/source-location-live-wk_r3rqa/state/engagements/isolated-source-location-live/runs/joint/34060bbc-0511-46ae-8605-0737b793e7e0/source",
+      "before": {
+        "constant.py": "ba237186b266baf4cbef611988fbce51fc7d268a0dbf3f915e9dad5e30ed2e6f",
+        "crlf_tabs.py": "08902773687c1a201e7773c169f13282e6a2d32ab3338dcd1365f6fee706e670",
+        "extra.py": "fb5312c0db81d10a450cef43e4ea85d4cdb497b2945557b0f809d4e2ac3508ac",
+        "helper.py": "b891922fcd65c306a006f4591b0bceba51d7ddb2a77feac95a50eccecbc6e664",
+        "same_line.py": "aeba733972e95453dd49b86a7fbf0705abee78394fb9f8d1284b4831bb2a6ec7"
+      },
+      "after": {
+        "constant.py": "ba237186b266baf4cbef611988fbce51fc7d268a0dbf3f915e9dad5e30ed2e6f",
+        "crlf_tabs.py": "08902773687c1a201e7773c169f13282e6a2d32ab3338dcd1365f6fee706e670",
+        "extra.py": "fb5312c0db81d10a450cef43e4ea85d4cdb497b2945557b0f809d4e2ac3508ac",
+        "helper.py": "b891922fcd65c306a006f4591b0bceba51d7ddb2a77feac95a50eccecbc6e664",
+        "same_line.py": "aeba733972e95453dd49b86a7fbf0705abee78394fb9f8d1284b4831bb2a6ec7"
+      },
+      "sourceHashesMatch": true,
+      "manifestHashesMatch": true,
+      "observed": {
+        "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+        "running": true,
+        "sourceMount": {
+          "source": "/home/purge/.cache/source-location-live-wk_r3rqa/state/engagements/isolated-source-location-live/runs/joint/34060bbc-0511-46ae-8605-0737b793e7e0/source",
+          "readonly": true
+        },
+        "ruleSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+        "user": "1000:1000",
+        "network": "none",
+        "readonlyRoot": true,
+        "privileged": false,
+        "capDrop": [
+          "ALL"
+        ],
+        "securityOpt": [
+          "no-new-privileges"
+        ],
+        "memory": 805306368,
+        "memorySwap": 805306368,
+        "pids": 160,
+        "nanoCpus": 1000000000,
+        "command": [
+          "/policy-output.sh",
+          "/out",
+          "--deadline-seconds",
+          "229",
+          "semgrep",
+          "scan",
+          "--config",
+          "/policy/rules.json",
+          "--json",
+          "--output",
+          "/out/result.json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--jobs",
+          "1",
+          "--timeout",
+          "5",
+          "--max-target-bytes",
+          "1000000",
+          "/src"
+        ]
+      },
+      "findings": 7,
+      "declaredSpans": [
+        {
+          "rule": "policy.harness.python.eval",
+          "location": "crlf_tabs.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "crlf_tabs.py",
+            "start": {
+              "line": 2,
+              "col": 2,
+              "offset": 18
+            },
+            "end": {
+              "line": 2,
+              "col": 13,
+              "offset": 29
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.exec",
+          "location": "crlf_tabs.py:3",
+          "scannerSpan": {
+            "version": 1,
+            "path": "crlf_tabs.py",
+            "start": {
+              "line": 3,
+              "col": 2,
+              "offset": 32
+            },
+            "end": {
+              "line": 3,
+              "col": 13,
+              "offset": 43
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.eval",
+          "location": "extra.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "extra.py",
+            "start": {
+              "line": 2,
+              "col": 5,
+              "offset": 20
+            },
+            "end": {
+              "line": 2,
+              "col": 16,
+              "offset": 31
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.exec",
+          "location": "extra.py:3",
+          "scannerSpan": {
+            "version": 1,
+            "path": "extra.py",
+            "start": {
+              "line": 3,
+              "col": 5,
+              "offset": 36
+            },
+            "end": {
+              "line": 3,
+              "col": 16,
+              "offset": 47
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.eval",
+          "location": "helper.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "helper.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 27
+            },
+            "end": {
+              "line": 2,
+              "col": 23,
+              "offset": 38
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.eval",
+          "location": "same_line.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "same_line.py",
+            "start": {
+              "line": 2,
+              "col": 21,
+              "offset": 45
+            },
+            "end": {
+              "line": 2,
+              "col": 34,
+              "offset": 58
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.eval",
+          "location": "same_line.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "same_line.py",
+            "start": {
+              "line": 2,
+              "col": 36,
+              "offset": 60
+            },
+            "end": {
+              "line": 2,
+              "col": 49,
+              "offset": 73
+            }
+          }
+        }
+      ],
+      "complete": true,
+      "version": "1.182.1",
+      "scope": "one actual default runScanner call; observer records live Docker input configuration"
+    }
+  ],
+  "report": {
+    "version": 1,
+    "engagement": "isolated-source-location-live",
+    "task": {
+      "id": "34060bbc-0511-46ae-8605-0737b793e7e0",
+      "engagement": "isolated-source-location-live",
+      "state": "completed",
+      "scopeRevision": 1,
+      "workspace": {
+        "version": "workspace-dispatch-s1-1",
+        "mode": "deep",
+        "sandboxProfile": "S1",
+        "selectedSteps": [
+          "semgrep"
+        ],
+        "toolIdentities": {
+          "semgrep": "598208862ad1449a5c64391f5bb0bef537e2ee334d89588e5b3582c900c4b608"
+        },
+        "budgetSeconds": 360,
+        "modelRequests": 0,
+        "fullWorkspaceReady": false
+      },
+      "startedAt": "2026-11-04T05:33:28.241Z",
+      "finishedAt": "2026-11-04T05:33:33.606Z",
+      "deadline": "2026-11-04T05:39:28.241Z",
+      "budgetSeconds": 360,
+      "modelCalls": 0,
+      "cleanupVerified": true,
+      "problem": null,
+      "webTarget": null,
+      "snapshot": {
+        "id": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9",
+        "files": 5,
+        "bytes": 242,
+        "git": {
+          "head": null,
+          "dirty": null,
+          "statusHash": null
+        },
+        "excluded": 0,
+        "exclusionsRetained": 0,
+        "exclusionsTruncated": false,
+        "redactedFiles": 1
+      },
+      "steps": [
+        {
+          "tool": "semgrep",
+          "id": "8a562a65-d098-4395-96c6-606fa16c9f9e",
+          "state": "completed",
+          "complete": true,
+          "coverageScope": "scanner-reported-files",
+          "eligibleFiles": null,
+          "cleanupVerified": null,
+          "version": "1.182.1",
+          "checkedFiles": 5,
+          "problem": null,
+          "fileCoverage": {
+            "scope": "managed-copy",
+            "scanned": 5,
+            "total": 5,
+            "uncovered": 0,
+            "withoutLanguageRule": 0
+          },
+          "coverageNotes": [],
+          "diagnostics": {
+            "total": 0,
+            "retained": 0,
+            "truncated": false
+          },
+          "pythonEvidence": "completed",
+          "sourceLocations": {
+            "version": 1,
+            "state": "completed",
+            "total": 7,
+            "bound": 7,
+            "unavailable": 0
+          },
+          "modelCalls": 0,
+          "artifacts": 0
+        }
+      ],
+      "findings": 7,
+      "coverageComplete": false,
+      "manualChecks": [
+        "authentication",
+        "authorization",
+        "business-logic",
+        "architecture"
+      ],
+      "notice": "\u5b8c\u6210\u8868\u793a\u5df2\u9009\u6b65\u9aa4\u7ed3\u675f\uff1b\u547d\u4e2d\u4fdd\u6301\u5f85\u9a8c\u8bc1\u3002Git\u672a\u63d0\u4ea4\u72b6\u6001\u672a\u63a2\u6d4b\uff0c\u6309\u9010\u6587\u4ef6\u54c8\u5e0c\u56fa\u5b9a\u5b9e\u9645\u5185\u5bb9\u3002\u8131\u654f/\u6392\u9664\u6587\u4ef6\u3001\u624b\u5de5\u9879\u4e0e\u672a\u9009\u5de5\u5177\u4ecd\u672a\u8986\u76d6\uff1bREA\u4ec5\u9759\u6001JavaScript\u56fe\uff1bPentAGI\u8f93\u51fa\u662f\u672a\u9a8c\u8bc1\u6a21\u578b\u7ed3\u8bba\uff0c\u8c03\u7528\u6b21\u6570\u9884\u7b97\u4e0d\u7b49\u540c\u8d27\u5e01\u91d1\u989d\u4e0a\u9650\u3002"
+    },
+    "findings": [
+      {
+        "rule": "policy.harness.python.eval",
+        "title": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+        "severity": "high",
+        "location": "crlf_tabs.py:2",
+        "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9",
+          "path": "crlf_tabs.py",
+          "sourceSha256": "08902773687c1a201e7773c169f13282e6a2d32ab3338dcd1365f6fee706e670",
+          "byteLength": 45,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 2,
+            "offset": 18
+          },
+          "end": {
+            "line": 2,
+            "col": 13,
+            "offset": 29
+          }
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "8a562a65-d098-4395-96c6-606fa16c9f9e",
+        "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9"
+      },
+      {
+        "rule": "policy.harness.python.exec",
+        "title": "\u52a8\u6001 exec\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u907f\u514d\u8fd0\u884c\u4e0d\u53ef\u4fe1\u4ee3\u7801",
+        "severity": "high",
+        "location": "crlf_tabs.py:3",
+        "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9",
+          "path": "crlf_tabs.py",
+          "sourceSha256": "08902773687c1a201e7773c169f13282e6a2d32ab3338dcd1365f6fee706e670",
+          "byteLength": 45,
+          "copyRedacted": false,
+          "start": {
+            "line": 3,
+            "col": 2,
+            "offset": 32
+          },
+          "end": {
+            "line": 3,
+            "col": 13,
+            "offset": 43
+          }
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "8a562a65-d098-4395-96c6-606fa16c9f9e",
+        "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9"
+      },
+      {
+        "rule": "policy.harness.python.eval",
+        "title": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+        "severity": "high",
+        "location": "extra.py:2",
+        "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9",
+          "path": "extra.py",
+          "sourceSha256": "fb5312c0db81d10a450cef43e4ea85d4cdb497b2945557b0f809d4e2ac3508ac",
+          "byteLength": 48,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 5,
+            "offset": 20
+          },
+          "end": {
+            "line": 2,
+            "col": 16,
+            "offset": 31
+          }
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "8a562a65-d098-4395-96c6-606fa16c9f9e",
+        "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9"
+      },
+      {
+        "rule": "policy.harness.python.exec",
+        "title": "\u52a8\u6001 exec\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u907f\u514d\u8fd0\u884c\u4e0d\u53ef\u4fe1\u4ee3\u7801",
+        "severity": "high",
+        "location": "extra.py:3",
+        "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9",
+          "path": "extra.py",
+          "sourceSha256": "fb5312c0db81d10a450cef43e4ea85d4cdb497b2945557b0f809d4e2ac3508ac",
+          "byteLength": 48,
+          "copyRedacted": false,
+          "start": {
+            "line": 3,
+            "col": 5,
+            "offset": 36
+          },
+          "end": {
+            "line": 3,
+            "col": 16,
+            "offset": 47
+          }
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "8a562a65-d098-4395-96c6-606fa16c9f9e",
+        "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9"
+      },
+      {
+        "rule": "policy.harness.python.eval",
+        "title": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+        "severity": "high",
+        "location": "helper.py:2",
+        "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9",
+          "path": "helper.py",
+          "sourceSha256": "b891922fcd65c306a006f4591b0bceba51d7ddb2a77feac95a50eccecbc6e664",
+          "byteLength": 39,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 23,
+            "offset": 38
+          }
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "8a562a65-d098-4395-96c6-606fa16c9f9e",
+        "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9"
+      },
+      {
+        "rule": "policy.harness.python.eval",
+        "title": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+        "severity": "high",
+        "location": "same_line.py:2",
+        "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9",
+          "path": "same_line.py",
+          "sourceSha256": "aeba733972e95453dd49b86a7fbf0705abee78394fb9f8d1284b4831bb2a6ec7",
+          "byteLength": 74,
+          "copyRedacted": true,
+          "start": {
+            "line": 2,
+            "col": 21,
+            "offset": 45
+          },
+          "end": {
+            "line": 2,
+            "col": 34,
+            "offset": 58
+          }
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "8a562a65-d098-4395-96c6-606fa16c9f9e",
+        "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9"
+      },
+      {
+        "rule": "policy.harness.python.eval",
+        "title": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+        "severity": "high",
+        "location": "same_line.py:2",
+        "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9",
+          "path": "same_line.py",
+          "sourceSha256": "aeba733972e95453dd49b86a7fbf0705abee78394fb9f8d1284b4831bb2a6ec7",
+          "byteLength": 74,
+          "copyRedacted": true,
+          "start": {
+            "line": 2,
+            "col": 36,
+            "offset": 60
+          },
+          "end": {
+            "line": 2,
+            "col": 49,
+            "offset": 73
+          }
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "8a562a65-d098-4395-96c6-606fa16c9f9e",
+        "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9"
+      }
+    ],
+    "files": [
+      {
+        "path": "constant.py",
+        "sha256": "ba237186b266baf4cbef611988fbce51fc7d268a0dbf3f915e9dad5e30ed2e6f",
+        "originalSha256": "ba237186b266baf4cbef611988fbce51fc7d268a0dbf3f915e9dad5e30ed2e6f",
+        "bytes": 36,
+        "redacted": false
+      },
+      {
+        "path": "crlf_tabs.py",
+        "sha256": "08902773687c1a201e7773c169f13282e6a2d32ab3338dcd1365f6fee706e670",
+        "originalSha256": "08902773687c1a201e7773c169f13282e6a2d32ab3338dcd1365f6fee706e670",
+        "bytes": 45,
+        "redacted": false
+      },
+      {
+        "path": "extra.py",
+        "sha256": "fb5312c0db81d10a450cef43e4ea85d4cdb497b2945557b0f809d4e2ac3508ac",
+        "originalSha256": "fb5312c0db81d10a450cef43e4ea85d4cdb497b2945557b0f809d4e2ac3508ac",
+        "bytes": 48,
+        "redacted": false
+      },
+      {
+        "path": "helper.py",
+        "sha256": "b891922fcd65c306a006f4591b0bceba51d7ddb2a77feac95a50eccecbc6e664",
+        "originalSha256": "b891922fcd65c306a006f4591b0bceba51d7ddb2a77feac95a50eccecbc6e664",
+        "bytes": 39,
+        "redacted": false
+      },
+      {
+        "path": "same_line.py",
+        "sha256": "aeba733972e95453dd49b86a7fbf0705abee78394fb9f8d1284b4831bb2a6ec7",
+        "originalSha256": "dd8385fc2fa1c4b759701278b59b11d8fc96d835d57738a07a7f13f6d390f5ab",
+        "bytes": 74,
+        "redacted": true
+      }
+    ],
+    "exclusions": [],
+    "diagnostics": [],
+    "artifacts": []
+  },
+  "runs": [
+    {
+      "id": "8a562a65-d098-4395-96c6-606fa16c9f9e",
+      "request_id": "joint-34060bbc-0511-46ae-8605-0737b793e7e0-semgrep",
+      "request_hash": "42d957dddab715568d3458dac999f433222bd36461bf189f98ae664ec3eddc7e",
+      "tool": "semgrep",
+      "profile_revision": 1,
+      "state": "completed",
+      "started_at": "2026-11-04T05:33:30.831Z",
+      "finished_at": "2026-11-04T05:33:33.602Z",
+      "complete": 1,
+      "coverage_key": "adfdd62d84566fd52968b09ae428ac76d7db92b968f781168c1ffdf62f2891af",
+      "revision_ref": "\u672a\u8bb0\u5f55",
+      "error_code": null,
+      "details": {
+        "profile": {
+          "repoRoot": "/home/purge/.cache/source-location-live-wk_r3rqa/workspace/synthetic",
+          "tools": [
+            "semgrep"
+          ],
+          "url": null,
+          "expiresAt": "2026-11-04T05:52:02.957Z",
+          "revision": 1
+        },
+        "version": "1.182.1",
+        "runtime": {
+          "checkedAt": "2026-11-04T05:33:30.000Z",
+          "database": null,
+          "rules": {
+            "version": "local-reviewed-2",
+            "count": 16,
+            "languages": [
+              "javascript",
+              "python",
+              "typescript"
+            ]
+          },
+          "warning": null
+        },
+        "retestFindingId": null,
+        "joint": {
+          "id": "34060bbc-0511-46ae-8605-0737b793e7e0",
+          "snapshotId": "3017b4af928597879737e5224f26c1579c860e479e1278608f74c6a3e76020d9",
+          "git": {
+            "head": null,
+            "dirty": null,
+            "statusHash": null
+          }
+        },
+        "sourceLocations": {
+          "version": 1,
+          "state": "completed",
+          "total": 7,
+          "bound": 7,
+          "unavailable": 0
+        },
+        "pythonEvidence": {
+          "state": "completed",
+          "artifacts": []
+        },
+        "comparisonSnapshot": {
+          "available": true,
+          "reason": null
+        },
+        "coveredFiles": 5,
+        "fileCoverage": {
+          "scope": "managed-copy",
+          "scanned": 5,
+          "total": 5,
+          "uncovered": 0,
+          "withoutLanguageRule": 0
+        },
+        "diagnostics": {
+          "total": 0,
+          "items": [],
+          "truncated": false
+        }
+      }
+    }
+  ],
+  "ordinaryFindingRows": 0,
+  "fixtureSourceHashes": {
+    "same_line.py": "dd8385fc2fa1c4b759701278b59b11d8fc96d835d57738a07a7f13f6d390f5ab",
+    "crlf_tabs.py": "08902773687c1a201e7773c169f13282e6a2d32ab3338dcd1365f6fee706e670",
+    "extra.py": "fb5312c0db81d10a450cef43e4ea85d4cdb497b2945557b0f809d4e2ac3508ac",
+    "helper.py": "b891922fcd65c306a006f4591b0bceba51d7ddb2a77feac95a50eccecbc6e664",
+    "constant.py": "ba237186b266baf4cbef611988fbce51fc7d268a0dbf3f915e9dad5e30ed2e6f"
+  },
+  "newScannerCalls": 1,
+  "modelCalls": 0
+}

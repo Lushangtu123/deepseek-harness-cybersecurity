@@ -1,0 +1,367 @@
+{
+  "version": 1,
+  "date": "2026-11-03",
+  "timezone": "America/Los_Angeles",
+  "scope": "daily dedicated VM namespace-review release and genuine native Chrome/DeepSeek one-scan acceptance; current16 rules not applicable to namespace review",
+  "deployed": true,
+  "runtimeVersion": "1.1.77-personal.11",
+  "deployment": {
+    "programFiles": 169,
+    "rollbackFiles": 166,
+    "servicesRestarted": {
+      "dsh-original.service": true,
+      "harness-security.socket": true,
+      "harness-security.service": true
+    },
+    "protectedFileDigestsMatched": 48,
+    "archiveSha256": "f083b7a2723fdf1f50fdb2b662a02e7e6ad9bea22ef6c459b74f1f555153b0f3",
+    "backup": "/home/purge/.cache/harness-namespace-managed-release-retry1-20261103",
+    "candidateServiceActive": true,
+    "databaseProtection": "logical dump; other protected files byte digest",
+    "physicalProtectedFilesChangedAfterStop": 1,
+    "physicalChangeMeaning": "informational only; logical database equality is the protection criterion",
+    "hostManagerAndVMConfigUnchanged": true
+  },
+  "candidateValidation": "namespace-managed-results.json",
+  "candidateProgramBytesUnchanged": true,
+  "artifactLink": {
+    "programFiles": 169,
+    "allPerFileHashesMatched": true,
+    "native819IntentSha256": "b02c1ac3648ec48462c5f41cc6aeec06dc32c85ebd96bda2fce726494ccd6c43",
+    "nativeReceiptSha256": "4c63fbe64dcd82c9905b5efe7d5796c9f574342292f7ebcd3691d1a91f9998d7",
+    "candidateSourceMatches": true
+  },
+  "tests": {
+    "candidateMacPlugin": 819,
+    "candidateVmPlugin": 819,
+    "candidatePythonMacAndVmEach": 25,
+    "candidateManagedProtocolMacAndVmEach": 3,
+    "deploymentProtection": 4,
+    "nativeTemporarySwapAndRollback": true,
+    "nativeSupervisorContinuesAfterSSH": true,
+    "actualSIGTERMTemporaryRollback": true
+  },
+  "firstAttempt": {
+    "outcome": "rolled-back and authenticated166 restored; not accepted",
+    "stateReceipt": "diagnostics/namespace-managed-release-20261103/first-attempt/deploy-observation.json",
+    "cause": "systemctl show omits empty Job unless --all; strict stop guard rejected completed stop",
+    "protected48MatchedAfterRollback": true,
+    "candidateProgramNeverSwapped": true,
+    "correctedBy": "show --all on state reads; exact VM check plus4 regression tests; retry uses unique operation ID",
+    "historyRetained": true
+  },
+  "nativeAcceptance": {
+    "browser": {
+      "version": 1,
+      "scope": "Native Google Chrome via CUA on deployed daily169; backend report independently read",
+      "session": "session-e9ccbc33-c9a7-4645-a212-80b720569173",
+      "engagement": "vm-namespace-managed-release-20261103",
+      "task": "115eee6b-7718-4f52-9a9d-d887da3476a1",
+      "model": "DeepSeek-V4.1-Flash",
+      "reasoningEffort": "High",
+      "mainChatRequestsObserved": 7,
+      "acceptedToolCallsObserved": 10,
+      "toolActions": [
+        {
+          "name": "redteam_session_bind"
+        },
+        {
+          "name": "redteam_joint_review",
+          "action": "plan",
+          "mode": "deep"
+        },
+        {
+          "name": "redteam_joint_review",
+          "action": "start",
+          "mode": "deep",
+          "steps": [
+            "semgrep"
+          ],
+          "requestId": "namespace-managed-native-release-20261103-001"
+        },
+        {
+          "name": "redteam_joint_review",
+          "action": "wait",
+          "id": "115eee6b-7718-4f52-9a9d-d887da3476a1",
+          "waitSeconds": 30
+        },
+        {
+          "name": "redteam_joint_review",
+          "action": "report",
+          "section": "findings",
+          "limit": 5,
+          "cursorUsed": false
+        },
+        {
+          "name": "redteam_joint_review",
+          "action": "report",
+          "section": "files",
+          "limit": 5,
+          "cursorUsed": false
+        },
+        {
+          "name": "redteam_joint_review",
+          "action": "report",
+          "section": "exclusions",
+          "limit": 5,
+          "cursorUsed": false
+        },
+        {
+          "name": "redteam_joint_review",
+          "action": "report",
+          "section": "diagnostics",
+          "limit": 5,
+          "cursorUsed": false
+        },
+        {
+          "name": "redteam_joint_review",
+          "action": "report",
+          "section": "artifacts",
+          "limit": 5,
+          "cursorUsed": false
+        },
+        {
+          "name": "redteam_joint_review",
+          "action": "report",
+          "section": "findings",
+          "limit": 5,
+          "cursorUsed": true
+        }
+      ],
+      "modelReadFiveSections": true,
+      "singleStartAndScan": true,
+      "namespaceNotApplicableAllZeroObserved": true,
+      "allFindingsRemainUnverified": true,
+      "sourceRangesMatched": [
+        [
+          2,
+          35,
+          59,
+          2,
+          48,
+          72
+        ],
+        [
+          2,
+          50,
+          74,
+          2,
+          63,
+          87
+        ]
+      ],
+      "mainChatCountKeptUnknownByModel": true,
+      "subtaskModelCalls": 0,
+      "formalSidebarAndFullViewPassed": true,
+      "sourcePositionPages": [
+        4,
+        3
+      ],
+      "copyOnlyByteColumnsAndRedactionDisclaimer": true,
+      "downloadObservedDone": true,
+      "fullViewSameTaskRecovered": true,
+      "oldTaskId": "bd86f6bf-d1b3-474c-b3df-f55172f4e956",
+      "oldTaskRawFindingsObserved": 56,
+      "oldTaskRemainsPartial": true,
+      "oldTaskPrecisionAndNamespaceStateNotInvented": true,
+      "originalBrowseProjectRestored": "phishguard-model-closure-20261102",
+      "ownedChromeTabsClosed": 2,
+      "previousUserNewTabRestored": true,
+      "observedUIQuirks": [
+        "selecting/adding workspace reset new-task preset; explicitly reselected joint preset before send",
+        "initial Mac lock required user unlock",
+        "full view opened a second tab; global browse restored in both tabs before closing"
+      ],
+      "modelSummaryInaccuracies": [
+        "The prose described offset73 as a single-byte gap; end offsets are exclusive, so bytes72 and73 separate59..72 and74..87. Exact coordinates were correct.",
+        "The broad phrase about16 policy.harness.python rules is imprecise: installed set also includes JS/TS; actual not-applicable state and counts came from task receipt."
+      ],
+      "limitation": "positive namespace19 observations were proven by previous candidate default-worker replay with research rule receipts; this daily native scan proves not-applicable/zero extra reviewer, not research-rule qualification"
+    },
+    "taskId": "115eee6b-7718-4f52-9a9d-d887da3476a1",
+    "scanId": "953b80ad-1661-4369-93f1-8123b85a892a",
+    "snapshot": {
+      "id": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf",
+      "files": 5,
+      "bytes": 256,
+      "git": {
+        "head": null,
+        "dirty": null,
+        "statusHash": null
+      },
+      "excluded": 0,
+      "exclusionsRetained": 0,
+      "exclusionsTruncated": false,
+      "redactedFiles": 1
+    },
+    "counts": {
+      "security_run": 1,
+      "security_joint": 1,
+      "security_finding": 0,
+      "security_joint_pending": 0
+    },
+    "sections": {
+      "findings": 7,
+      "files": 5,
+      "exclusions": 0,
+      "diagnostics": 0,
+      "artifacts": 0
+    },
+    "namespaceReview": {
+      "version": 1,
+      "state": "not-applicable",
+      "eligible": 0,
+      "checked": 0,
+      "observations": 0,
+      "unmatched": 0,
+      "retained": 0,
+      "cleanupVerified": true
+    },
+    "completeSourceRangeVerification": true,
+    "download": {
+      "downloadBytes": 11781,
+      "sha256": "bd01ba25d59e286e299294caa2bb5053ecd9b4a71c114e2fbf2d231fa67df266",
+      "exactJSONMatchesModelWireReport": true,
+      "sections": {
+        "findings": 7,
+        "files": 5,
+        "exclusions": 0,
+        "diagnostics": 0,
+        "artifacts": 0
+      },
+      "namespaceReview": {
+        "version": 1,
+        "state": "not-applicable",
+        "eligible": 0,
+        "checked": 0,
+        "observations": 0,
+        "unmatched": 0,
+        "retained": 0,
+        "cleanupVerified": true
+      }
+    }
+  },
+  "postcheck": {
+    "ok": true,
+    "existingDatabaseLogicalDigestsMatched": 41,
+    "protectedConfigDigestsMatched": 7,
+    "deployedProgramFilesMatched": 169,
+    "rollbackProgramFilesMatched": 166,
+    "realFindingsByStatus": {
+      "unverified": 95
+    },
+    "syntheticTasks": 1,
+    "syntheticScans": 1,
+    "syntheticOrdinaryFindings": 0,
+    "allSyntheticUnverified": true,
+    "scannerContainerAbsent": true,
+    "stagedRuleRemoved": true,
+    "syntheticSourcesRetained": 5,
+    "managedSnapshotRetained": true,
+    "activeProject": "phishguard-model-closure-20261102",
+    "hostManagerAndVMConfigUnchanged": true
+  },
+  "runtimePostcheck": {
+    "authenticatedStatusReady": true,
+    "servicesActive": {
+      "dsh-original.service": true,
+      "harness-security.socket": true,
+      "harness-security.service": true
+    },
+    "installedWorkerSha256": "9ec513ddb83d94c0c2f63629b7f218b1971704b4ff25d21169f30ad6e0ea9a51",
+    "ruleCount": 16,
+    "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+    "semgrepImageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+    "dockerEventWindowContainsScanner": false,
+    "securityContainerCreatesSinceTaskStart": 0,
+    "scannerCreateMatchedSameTask": 0,
+    "namespaceReviewerCreatesSinceTaskStart": 0,
+    "ownedResourceIdle": true,
+    "activeBrowseProject": "phishguard-model-closure-20261102",
+    "physicalDatabaseChangesAfterStop": [
+      {
+        "attempt": "harness-namespace-managed-release-20261103",
+        "stoppedReceipt": "not reached; first stop gate failed",
+        "physicalDeltaRecorded": false
+      },
+      {
+        "attempt": "harness-namespace-managed-release-retry1-20261103",
+        "changedPaths": [
+          "/home/purge/.dsh-improved/redteam/engagements/vm-source-location-release-20261103/assets.db"
+        ],
+        "logicalMatched": true
+      }
+    ]
+  },
+  "review": {
+    "actualRequestedModelReviews": [
+      {
+        "receipt": "first-attempt/claude-release.json",
+        "models": [
+          "claude-opus-5-5"
+        ],
+        "effort": "high",
+        "toolsEnabled": false,
+        "scope": "static deployment controller/rollback excerpts",
+        "result": "fixes requested and subsequently addressed"
+      },
+      {
+        "receipt": "first-attempt/claude-release-closure.json",
+        "models": [
+          "claude-opus-5-5"
+        ],
+        "effort": "high",
+        "toolsEnabled": false,
+        "scope": "static deployment controller/rollback excerpts",
+        "result": "fixes requested and subsequently addressed"
+      },
+      {
+        "receipt": "first-attempt/claude-release-final.json",
+        "models": [
+          "claude-opus-5-5"
+        ],
+        "effort": "high",
+        "toolsEnabled": false,
+        "scope": "static deployment controller/rollback excerpts",
+        "result": "no remaining code blockers; linger and no-optimize guards added before run"
+      }
+    ],
+    "finalReviewerScope": "before first deployment; final change show --all had actual VM check+four regressions, no extra model review",
+    "fourProtectionTests": true,
+    "detachedSupervisorNativeTest": true,
+    "realSIGTERMTemporaryRollbackTest": true,
+    "firstAttemptRollbackVerified": true,
+    "firstFailureRootCause": "systemctl show omitted empty Job property; --all retains it",
+    "retry": {
+      "sameCandidateBytes": true,
+      "uniqueOperationAndBackup": true,
+      "showAllNativeCheckPassed": true
+    },
+    "notIndependentSecurityAudit": true
+  },
+  "researchRulesInstalled": false,
+  "independentQualificationCasesAdded": 0,
+  "r3Qualified": false,
+  "fullWorkspaceReady": false,
+  "recovery": {
+    "programRollbackFiles": 166,
+    "path": "/home/purge/.cache/harness-namespace-managed-release-retry1-20261103/previous",
+    "newFullVMRecoveryPointCreated": false,
+    "existingEarlierRecoveryChecked": {
+      "recoveryPoint": "ready-template-model-parser-20261102",
+      "snapshotPresent": true,
+      "bundleVerified": true,
+      "guestProofFiles": 2832,
+      "priorIndependentBootProof": true
+    },
+    "limitation": "earlier independently booted recovery point predates latest releases; program backup does not replace full disk recovery"
+  },
+  "knownLimits": [
+    "current16 rules do not trigger namespace reviewer;19 positive observations remain prior scanner-replay/real-default-worker candidate proof, not production research-rule acceptance",
+    "Docker post-hoc filtered event window did not retain even the known scanner create; zero returned namespace events is not independent proof of zero starts; current not-applicable gate, regression and original task records supply that evidence",
+    "one SQLite physical file digest changed across service stop; logical41project digests matched, exact writer/mechanism not proven",
+    "reported semgrep partial parsing gaps in old project remain; no new scan or remediation of95existing findings",
+    "no broader independent positives/negatives, runtime builtin identity/external control proof, complex propagation qualification or R3 completion",
+    "older SKF fix requested-model closure remains separate and unfinished"
+  ]
+}

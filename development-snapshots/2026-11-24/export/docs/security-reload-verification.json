@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-30",
+  "timezone": "America/Los_Angeles",
+  "changes": [
+    "bounded browser-origin pending audit requests survive full reload and tab reopen",
+    "explicit fixed read-only SSH correlation sampling and launcher option 10"
+  ],
+  "localChecks": {
+    "python": {
+      "cases": 196,
+      "files": 23,
+      "controllerSubset": {
+        "cases": 155,
+        "files": 19
+      }
+    },
+    "pluginNodeCases": 443,
+    "hostNodeCases": 124,
+    "reproducibleClient": true,
+    "deploymentFaultCases": 7,
+    "countsAreSeparateSuites": true
+  },
+  "nativeBrowser": {
+    "fault": "upstream accepted scope save; proxy returned malformed JSON",
+    "backendScopeRevision": 2,
+    "distinctScopeRequests": 2,
+    "eventsPerRequest": 1,
+    "forwardedWritesBeforeExplicitRetry": 1,
+    "forwardedWritesAfterExplicitRetry": 2,
+    "fullReloadRetainedExactRequest": true,
+    "closedAndReopenedTabRetainedExactRequest": true,
+    "noPageAutomaticReplay": true,
+    "explicitRetryReusedRequestId": true,
+    "confirmationRemovedMatchingReceipt": true,
+    "separateTcpResetCausedBrowserTransportReplay": true,
+    "transportReplayUsedSameId": true,
+    "noSyntheticRunsOrFindings": true,
+    "loopbackFaultProxyStopped": true,
+    "postColdStableOriginRead": true,
+    "recoveryBadgeCovered": true
+  },
+  "sshSample": {
+    "controlledFailureStage": "remote",
+    "controlledRemoteException": "AssertionError",
+    "separateSampleState": "read",
+    "journalState": "read",
+    "windowJournalRows": 8,
+    "correlationState": "time-window-only",
+    "exactConnectionIdentified": false,
+    "nativeLauncherOption10Passed": true,
+    "privateLatestRecord0600": true,
+    "rawCommandsSourceMessagesPersisted": false,
+    "historicalRootCause": "unattributed",
+    "oldTransportFailureReproduced": false,
+    "serverPolicyChanged": false
+  },
+  "recovery": {
+    "point": "ready-security-reload-20261030",
+    "selectedProofFiles": 2614,
+    "programFiles": 127,
+    "independentDiskActuallyBooted": true,
+    "noQcowBacking": true,
+    "originalInodeReturned": true,
+    "originalNowRunning": true,
+    "temporaryCopiedDiskRemoved": true,
+    "snapshots": 13,
+    "previousSnapshotsPreserved": true,
+    "coverage": {
+      "state": "matches",
+      "name": "ready-security-reload-20261030",
+      "createdAt": "2026-10-31T04:09:41Z",
+      "scope": "improved-program-tools-config",
+      "helpersMatch": true,
+      "launchAgentsMatch": true,
+      "uncoveredFiles": [],
+      "groups": {
+        "program": {
+          "state": "matches",
+          "filesChecked": 127,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "runtime": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "tools": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "config": {
+          "state": "matches",
+          "filesChecked": 11,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "plugins": {
+          "state": "matches",
+          "filesChecked": 1320,
+          "uncoveredFiles": [],
+          "differentFiles": [],
+          "differentFileCount": 0,
+          "differenceDetailsTruncated": false
+        }
+      }
+    },
+    "restoredReloadScopeRevision": 2,
+    "restoredReloadScopeEvents": 2
+  },
+  "finalOriginalVm": {
+    "programHashesMatched": 127,
+    "trackedRealProjectHashesMatched": 459,
+    "realProjectGitHeadUnchanged": true,
+    "realProjectSixAuditTablesUnchanged": true,
+    "realProjectFindings": 95,
+    "realProjectAllUnverified": true,
+    "service": "active",
+    "auditOwnerActive": true,
+    "privateSocket0600": true,
+    "crashInterruptedRowPersisted": true,
+    "scannerContainersRunning": 0,
+    "noRunningAuditRows": true,
+    "runtimePreflight": {
+      "ok": true,
+      "readOnly": true,
+      "automaticChanges": false,
+      "scope": "local pinned images, rules and database identity; no scanner execution, model call, network download or GitHub latest check",
+      "tools": {
+        "semgrep": {
+          "ready": true,
+          "version": "1.182.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-31T04:11:50.308Z",
+          "cached": false,
+          "rules": {
+            "version": "local-reviewed-2",
+            "count": 16,
+            "languages": [
+              "javascript",
+              "python",
+              "typescript"
+            ]
+          }
+        },
+        "trivy": {
+          "ready": true,
+          "version": "0.76.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-31T04:11:50.308Z",
+          "cached": false,
+          "database": {
+            "state": "fresh",
+            "updatedAt": "2026-10-29T19:18:50.969Z",
+            "nextUpdate": "2026-10-30T19:18:50.969Z",
+            "ageDays": 1
+          },
+          "lastUpdate": {
+            "state": "current",
+            "checkedAt": "2026-10-29T22:59:00.361501+00:00"
+          }
+        },
+        "zap": {
+          "ready": true,
+          "version": "2.17.0",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-31T04:11:50.308Z",
+          "cached": false
+        }
+      }
+    },
+    "hostIsolationValidated": true,
+    "wholeVmRecovery": "ready-security-reload-20261030",
+    "newWholeVmSnapshot": false,
+    "clockOffsetSeconds": -0.484515905380249,
+    "postMaintenanceSshRead": "restored-read-ok"
+  },
+  "cloudCiAtPackaging": {
+    "state": "not-observed-before-first-push",
+    "workflow": "https://github.com/Lushangtu123/deepseek-harness-vm/actions/workflows/verify.yml",
+    "sourceChecksDoNotReplaceNativeVmAcceptance": true
+  },
+  "boundaries": {
+    "hostFullAccessGranted": false,
+    "networkOrVmSharingExpanded": false,
+    "realProjectFindings": 95,
+    "realProjectAllUnverified": true,
+    "realProjectTrackedFilesUnchanged": 459,
+    "realProjectGitHeadAndSixTablesUnchanged": true,
+    "newRealScansOrModelCalls": 0,
+    "semgrepPartialParsingRemains": true,
+    "otherThreeVmsStoppedAndUntouched": true,
+    "freshVmProvisioningTestedThisPhase": false,
+    "authenticatedZapImplemented": false,
+    "browserStorageNotAuthorizationOrCrossTabGlobalLock": true,
+    "sameBrowserOriginRequired": true
+  },
+  "evidencePolicy": "Summary from successful captured commands and actual browser observations; expected RED and transient failures retained locally. Selected hashes are not a whole-disk count. Export excludes raw credentials, pending browser receipts, project databases, chat archives and VM disks.",
+  "linuxCacheFixture": {
+    "initialFullSuiteFailed": true,
+    "cause": "same-size rapid rewrites retained identical Linux inode/size/mtime/ctime including nanosecond values; metadata cache reused",
+    "probeIterations": 100,
+    "sameMetadataStaleCases": 62,
+    "allForcedReadsRejectedChangedHash": true,
+    "fix": "test explicitly advances fixture mtime and asserts uncached validation; production runtime unchanged",
+    "productionCacheLimitSeconds": 30,
+    "scanStartForcesValidation": true
+  }
+}

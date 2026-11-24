@@ -1,0 +1,215 @@
+{
+  "scope": "candidate clean installation, professional assets, and offline synthetic tool smoke",
+  "os": {
+    "name": "Ubuntu",
+    "version": "24.04",
+    "architecture": "aarch64",
+    "userUid": 1000
+  },
+  "source": {
+    "exportInventorySha256": "e38db34dbff38c8f4cab66397251fc6bea760b74c304700488682594968f45f9",
+    "filesVerifiedInGuest": 1621,
+    "programFiles": 173,
+    "guestFiles": 124,
+    "changedSource": {
+      "scripts/professional_guest.py": "e22e5820f45ca9c370b7d4055121ccd9b6a0f6f9d3e0d3a1e89e8991b2315247",
+      "scripts/professional_guest.test.py": "8b66cd2024bed124cffa3ac27ebc90a9d99ad9e566135c12a33d7a794d8e46e7"
+    }
+  },
+  "base": {
+    "installCompleted": true,
+    "webResponding": true,
+    "pristineHandoff": true,
+    "fixedFileCount": 9,
+    "replacedFileBackupHashesMatched": 6,
+    "generatedCredentialDigestOmittedFromReview": true,
+    "workspaceInitializationCheckedByInstaller": false
+  },
+  "professional": {
+    "installCompleted": true,
+    "assetManifestSha256": "b9a1e88354bda9494020b52f262c8369a5930e5d8baef8ac554202d1b6b3d913",
+    "imageCount": 6,
+    "readiness": {
+      "versions": {
+        "@deepseek-ai/dsh": "0.2.1-rc.3",
+        "rea-agents": "6.8.0",
+        "@colbymchenry/codegraph": "1.6.2",
+        "dsh-context": "0.75.1",
+        "dsh-whale-widget": "0.4.2",
+        "dshmarket": "1.70.2"
+      },
+      "reaCommandVersionMatched": true,
+      "originalRuntimeFilesVerified": 62988,
+      "scannerRuntimeReady": true,
+      "scannerVersions": {
+        "semgrep": "1.182.1",
+        "trivy": "0.76.1",
+        "zap": "2.17.0"
+      },
+      "webResponding": true,
+      "webAndSocketActive": true,
+      "credentialsOrModelValidityTested": false,
+      "modelOrScanStarted": false
+    },
+    "installedWorkspaceDirectory": "/home/purge/workspace",
+    "configuredAccountRefs": 0
+  },
+  "tools": {
+    "phase": "installed-tools-rechecked",
+    "state": "completed",
+    "reaMcpTools": 229,
+    "expectedToolsPresent": true,
+    "binarySessionRead": true,
+    "localSyntheticJavascriptAnalyzed": true,
+    "ghidraSyntheticBinaryOpened": true,
+    "syntheticArithmeticDecompiled": true,
+    "provider": "ghidra",
+    "modelCallsOrSecurityScans": 0,
+    "reverseRouterHelpPassed": true,
+    "codegraphVersionMatched": true,
+    "offlineWorkerArithmetic": 42,
+    "reinstallRefused": true,
+    "installedReceiptsAndProfilePreserved": true,
+    "reaFixtureSha256": "3c24e3120771f18cb6627c260ee36aa744ccef8dfe6c7bb304aae0614367246c",
+    "temporaryFixtureRemoved": true
+  },
+  "review": {
+    "profileFix": {
+      "scope": "professional Web profile generation and regression",
+      "confirmedBlockingFindings": 0,
+      "priorClaudeOutcome": "five-hour limit",
+      "actualModel": "deepseek-flash",
+      "effort": "high",
+      "reportSha256": "a12e28d3941befbd0d8342df02da4cf75b0fd3ce30c769960886dd756740f17a",
+      "receiptSha256": "9a339c352db1171daa898e98891c8f893c3198b079cb387981ecc3f6f106b671",
+      "notes": [
+        "Applied the same workspace-controller override in the generated professional patch without copying the saved production Web profile.",
+        "The generator regression is direct and shows red/green. Final VM integration and imported state checks require the actual clean install."
+      ]
+    },
+    "initialInstallReview": {
+      "model": [
+        "deepseek-flash"
+      ],
+      "reportSha256": "ca67aa7ba2f486222aa78f0fb596026b3540f86e270e23a577ae7230575f6edf",
+      "receiptSha256": "5968988fcc6663b8065c3c1c65690423f6fba330bbd057fa97ed5ae282fcf76c",
+      "verdict": "additional evidence requested"
+    },
+    "installRecheck": {
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "receiptSha256": "c507bc880f46057bf65b1494888d02e3180f0d2d46fb59a22f8367cdcd340ddc",
+      "reportSha256": "2d87027e84083f2b3355c8501c94923f663e4ec7e20f2ade5a1474d8fe687893",
+      "confirmedBlockingFindings": 0,
+      "evidenceConditionsClosed": [
+        "credential-digest redaction annotation",
+        "actual REA fixture hash recorded before and after execution",
+        "asset manifest and source archive inventory binding retained"
+      ]
+    }
+  },
+  "browser": {
+    "state": "passed",
+    "browser": "Google Chrome on macOS, native Computer Use controls",
+    "scope": "fresh professional VM first open, plugin status, reload, and cleanup",
+    "authorization": {
+      "qaSessionLoginExplicitlyApproved": true,
+      "firstInstallDshPurgeNoticeExplicitlyApproved": true,
+      "noProviderAccountEntered": true
+    },
+    "workspaceCountBeforeFirstOpen": 0,
+    "workspaceCountAfterFirstOpen": 1,
+    "workspaceCountAfterReload": 1,
+    "workspaceIdMatchedAfterReload": true,
+    "defaultDirectory": "/home/purge/workspace/deepseek-harness/default-workspace",
+    "directoryOwnerUid": 1000,
+    "manualWorkspaceSelection": false,
+    "firstOpen": {
+      "pageTitle": "DeepSeek Harness",
+      "workspaceRows": [
+        "Default workspace"
+      ],
+      "selectedSession": "New Session",
+      "composerAvailable": true,
+      "manualWorkspaceSelection": false
+    },
+    "plugins": {
+      "enabled": [
+        "dsh-context",
+        "dshmarket",
+        "dsh-purge",
+        "dsh-whale-widget"
+      ],
+      "dshPurgeDisplayedVersion": "1.1.77-personal.11",
+      "dshPurgeRunningComponents": [
+        "dsh-purge",
+        "dsh-purge/redteam/store",
+        "dsh-purge/redteam/ui",
+        "dsh-purge/redteam/tools",
+        "dsh-purge/personal-redteam"
+      ]
+    },
+    "reload": {
+      "workspaceRows": [
+        "Default workspace"
+      ],
+      "selectedSession": "New Session",
+      "composerAvailable": true,
+      "sameEnabledPlugins": true,
+      "getStartedAccountPromptReappearedAndWasDismissed": true
+    },
+    "observedQaBanner": "VM · 版本状态暂时不可用 · 存储：读取失败",
+    "qaBannerScope": "The loopback test adapter deliberately stubs production environment, recovery, capability and storage management handlers. This run does not validate production banner telemetry.",
+    "modelMessagesSent": 0,
+    "scanActionsTaken": 0,
+    "cleanup": {
+      "vmStopped": true,
+      "registrationRemoved": true,
+      "allQaPortsClosed": true,
+      "temporaryDiskAndKeysRemoved": true,
+      "originalVmRunning": true,
+      "originalConfigMatched": true,
+      "preexistingVmStatesMatched": true
+    },
+    "review": {
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "receiptSha256": "2b8b997df0384eb6d66084898bbba6d123f7e3759088738f1739063ef24d1127",
+      "reportSha256": "fb95a656d167cb5b7a04f3e85fdd3588d43b26209ed98faabef7a63a55c7557b",
+      "confirmedBlockingFindings": 0
+    },
+    "evidenceLimits": [
+      "The installed program identity is supported by the retained guest 173-file check and matching staged inventory, with no installation or update during the UI run. No additional full re-hash was captured during Chrome.",
+      "The QA relay import resolves to the candidate file and matched the recorded digest at evidence collection. An import-time digest was not captured.",
+      "UI excerpts are curated native Chrome observations. Workspace identity is independently compared in the guest registry after first open and reload. A session-ID comparison is not claimed.",
+      "The SDK local grant record existed before Chrome. Its creation by this login is not claimed. No provider account refs were configured.",
+      "The test relay omits production version, storage and capability management data. Production telemetry and daily deployment are outside this acceptance."
+    ]
+  },
+  "dailyVmDeployed": false,
+  "r3Qualified": false,
+  "restart": {
+    "newGuestBootTimeWithinHostStartToReadinessWindow": true,
+    "programFilesVerified": 173,
+    "servicesActive": [
+      "dsh-original",
+      "harness-security.socket",
+      "docker"
+    ],
+    "unauthenticatedHttpStatus": 401,
+    "workspaceCount": 0,
+    "professionalDefaultWorkspaceSetting": "/home/purge/workspace",
+    "guestSourceSha256": {
+      "scripts/bootstrap_guest.py": "56b726485fe5a0c820135e60e0b596585479003f95468026e5da6c8a59daa34a",
+      "scripts/professional_guest.py": "e22e5820f45ca9c370b7d4055121ccd9b6a0f6f9d3e0d3a1e89e8991b2315247",
+      "work/harness-purge-improved/package-files.json": "ce47db260931cfee4c418c9dd6a2145c4791e1c33855a37e876d9a561a05d023"
+    },
+    "review": {
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "receiptSha256": "4f1192c168b999542f02ac756c4d9ba0635beaf94fbbcd24cbb82f7bd6c2fc23",
+      "confirmedBlockingFindings": 0
+    },
+    "testVmStoppedForResume": true
+  }
+}

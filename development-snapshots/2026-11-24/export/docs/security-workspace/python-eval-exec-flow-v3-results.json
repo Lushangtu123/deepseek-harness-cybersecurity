@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "ruleSha256": "5d07f9a7bb48bbf48daa92e8b45e5fb1d25d672f604f3bb136dc70ca302320c7",
+  "scannerImage": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "scannerVersion": "1.182.1",
+  "r3Qualified": false,
+  "deployed": false,
+  "localRoutes": {
+    "sha256": "d760c60a479e36cceb314b353dc7477493dc1ddc729f6b7c760dcb2436ceeef0",
+    "oldHits": [
+      10,
+      53
+    ],
+    "newHits": [
+      10,
+      23,
+      53
+    ],
+    "negativeLines": [
+      14,
+      19,
+      37,
+      49,
+      63,
+      72
+    ],
+    "uncoveredCrossFunctionLines": [
+      26,
+      44
+    ]
+  },
+  "owaspDevelopment": {
+    "sourceCommit": "f1291485808b66e20ddb6b01b10dc71b3df8c8ba",
+    "scanned": 53,
+    "positiveHit": 9,
+    "negativeHit": 15,
+    "positiveMiss": 11,
+    "negativeNoHit": 18
+  },
+  "semgrepExternalRegression": {
+    "sourceCommit": "16b9e6d45f10649f6a531ec4838ed9924372c3bc",
+    "sha256": "3bccf3f2a047d298b8da45638690358bc8b755f27df4f1ac544ffa78365a7ca6",
+    "positiveHits": 8,
+    "negativeHits": 0,
+    "negatives": 2
+  },
+  "codeqlExternalRegression": {
+    "sourceCommit": "79ef8bc530388ae8426c1eee89de63cd418679f0",
+    "sha256": "a83a3354b7086adc29e9d080260cd9d474aea95fe42e3f8b07438cb0ae48d582",
+    "expectedOutputSha256": "9573155bd44be21671345e29bfc027195b437d075adb613fd22f6b7dea8eacd3",
+    "positiveHitLines": [
+      7,
+      8,
+      10
+    ],
+    "knownSpuriousHitLines": [
+      21
+    ]
+  }
+}

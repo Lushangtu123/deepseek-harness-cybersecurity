@@ -1,0 +1,22 @@
+[Unit]
+Description=DeepSeek Harness original Purge - isolated VM only
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/purge/workspace
+Environment=PATH=/home/purge/.local/node/bin:/home/purge/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=DSH_HOME=/home/purge/.dsh
+Environment=NODE_USE_ENV_PROXY=1
+Environment=HTTP_PROXY=http://10.0.2.100:3128
+Environment=HTTPS_PROXY=http://10.0.2.100:3128
+Environment=http_proxy=http://10.0.2.100:3128
+Environment=https_proxy=http://10.0.2.100:3128
+Environment=NO_PROXY=localhost,127.0.0.1,::1,10.0.2.15
+Environment=no_proxy=localhost,127.0.0.1,::1,10.0.2.15
+ExecStart=/home/purge/.local/node/bin/node /home/purge/.local/lib/node_modules/@deepseek-ai/dsh/lib/bin.js --profile web --host 10.0.2.15 --port 3080 --public-url http://127.0.0.1:49224 --trusted-host 127.0.0.1:49224 --no-open
+Restart=no
+TimeoutStopSec=30
+
+[Install]
+WantedBy=default.target

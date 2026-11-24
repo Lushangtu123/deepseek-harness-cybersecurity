@@ -1,0 +1,298 @@
+{
+  "version": 1,
+  "createdAt": "2026-11-04T04:14:49.763709+00:00",
+  "scope": "offline research candidate; no runtime installation or finding-state change",
+  "comparisons": {
+    "baseline": {
+      "sourceCases": 26,
+      "scannedCases": 26,
+      "rawRuleHits": 2,
+      "alertSites": 2,
+      "requiredArityCases": 6,
+      "coveredRequiredArityCases": 2,
+      "missingRequiredArityCases": [
+        "plain-eval-2",
+        "plain-eval-3",
+        "plain-exec-2",
+        "plain-exec-3"
+      ],
+      "roleCounts": {
+        "authored-unconstrained-argument": {
+          "sourceCases": 6,
+          "casesWithWarnings": 2
+        },
+        "authored-complete-constraint": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        },
+        "authored-conditional-bypass": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        },
+        "authored-after-check-overwrite": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        },
+        "authored-after-check-mutation": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        },
+        "authored-fixed-selection": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        },
+        "authored-fixed-literal": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        },
+        "authored-shadowed-non-builtin": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        },
+        "authored-import-resolution-observation": {
+          "sourceCases": 4,
+          "casesWithWarnings": 0
+        },
+        "reused-upstream-normal-source": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        }
+      },
+      "importResolutionControlsWithNoWarning": [
+        "qualified-eval",
+        "alias-eval",
+        "qualified-exec",
+        "alias-exec"
+      ]
+    },
+    "combined19": {
+      "sourceCases": 26,
+      "scannedCases": 26,
+      "rawRuleHits": 2,
+      "alertSites": 2,
+      "requiredArityCases": 6,
+      "coveredRequiredArityCases": 2,
+      "missingRequiredArityCases": [
+        "plain-eval-2",
+        "plain-eval-3",
+        "plain-exec-2",
+        "plain-exec-3"
+      ],
+      "roleCounts": {
+        "authored-unconstrained-argument": {
+          "sourceCases": 6,
+          "casesWithWarnings": 2
+        },
+        "authored-complete-constraint": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        },
+        "authored-conditional-bypass": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        },
+        "authored-after-check-overwrite": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        },
+        "authored-after-check-mutation": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        },
+        "authored-fixed-selection": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        },
+        "authored-fixed-literal": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        },
+        "authored-shadowed-non-builtin": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        },
+        "authored-import-resolution-observation": {
+          "sourceCases": 4,
+          "casesWithWarnings": 0
+        },
+        "reused-upstream-normal-source": {
+          "sourceCases": 2,
+          "casesWithWarnings": 0
+        }
+      },
+      "importResolutionControlsWithNoWarning": [
+        "qualified-eval",
+        "alias-eval",
+        "qualified-exec",
+        "alias-exec"
+      ]
+    },
+    "arity17": {
+      "sourceCases": 26,
+      "scannedCases": 26,
+      "rawRuleHits": 21,
+      "alertSites": 21,
+      "requiredArityCases": 6,
+      "coveredRequiredArityCases": 6,
+      "missingRequiredArityCases": [],
+      "roleCounts": {
+        "authored-unconstrained-argument": {
+          "sourceCases": 6,
+          "casesWithWarnings": 6
+        },
+        "authored-complete-constraint": {
+          "sourceCases": 2,
+          "casesWithWarnings": 2
+        },
+        "authored-conditional-bypass": {
+          "sourceCases": 2,
+          "casesWithWarnings": 2
+        },
+        "authored-after-check-overwrite": {
+          "sourceCases": 2,
+          "casesWithWarnings": 2
+        },
+        "authored-after-check-mutation": {
+          "sourceCases": 2,
+          "casesWithWarnings": 2
+        },
+        "authored-fixed-selection": {
+          "sourceCases": 2,
+          "casesWithWarnings": 2
+        },
+        "authored-fixed-literal": {
+          "sourceCases": 2,
+          "casesWithWarnings": 2
+        },
+        "authored-shadowed-non-builtin": {
+          "sourceCases": 2,
+          "casesWithWarnings": 2
+        },
+        "authored-import-resolution-observation": {
+          "sourceCases": 4,
+          "casesWithWarnings": 0
+        },
+        "reused-upstream-normal-source": {
+          "sourceCases": 2,
+          "casesWithWarnings": 1
+        }
+      },
+      "importResolutionControlsWithNoWarning": [
+        "qualified-eval",
+        "alias-eval",
+        "qualified-exec",
+        "alias-exec"
+      ]
+    },
+    "combined20": {
+      "sourceCases": 26,
+      "scannedCases": 26,
+      "rawRuleHits": 21,
+      "alertSites": 21,
+      "requiredArityCases": 6,
+      "coveredRequiredArityCases": 6,
+      "missingRequiredArityCases": [],
+      "roleCounts": {
+        "authored-unconstrained-argument": {
+          "sourceCases": 6,
+          "casesWithWarnings": 6
+        },
+        "authored-complete-constraint": {
+          "sourceCases": 2,
+          "casesWithWarnings": 2
+        },
+        "authored-conditional-bypass": {
+          "sourceCases": 2,
+          "casesWithWarnings": 2
+        },
+        "authored-after-check-overwrite": {
+          "sourceCases": 2,
+          "casesWithWarnings": 2
+        },
+        "authored-after-check-mutation": {
+          "sourceCases": 2,
+          "casesWithWarnings": 2
+        },
+        "authored-fixed-selection": {
+          "sourceCases": 2,
+          "casesWithWarnings": 2
+        },
+        "authored-fixed-literal": {
+          "sourceCases": 2,
+          "casesWithWarnings": 2
+        },
+        "authored-shadowed-non-builtin": {
+          "sourceCases": 2,
+          "casesWithWarnings": 2
+        },
+        "authored-import-resolution-observation": {
+          "sourceCases": 4,
+          "casesWithWarnings": 0
+        },
+        "reused-upstream-normal-source": {
+          "sourceCases": 2,
+          "casesWithWarnings": 1
+        }
+      },
+      "importResolutionControlsWithNoWarning": [
+        "qualified-eval",
+        "alias-eval",
+        "qualified-exec",
+        "alias-exec"
+      ]
+    }
+  },
+  "regression": {
+    "arity17": {
+      "oldRuleHitsPreserved": 68,
+      "currentRawRuleHits": 68,
+      "sourceCases": 101,
+      "actuallyScanned": 85,
+      "notScannedPhpCases": 16,
+      "newHoldout": false
+    },
+    "combined20": {
+      "oldRuleHitsPreserved": 100,
+      "currentRawRuleHits": 100,
+      "sourceCases": 101,
+      "actuallyScanned": 101,
+      "notScannedPhpCases": 0,
+      "newHoldout": false
+    }
+  },
+  "newRuleEvidence": {
+    "authoredMatchedSites": 18,
+    "reusedUpstreamMatchedSites": 1,
+    "exactNewHitIdentityChecked": true,
+    "normalControlsDesignedToMatchSyntax": true
+  },
+  "runtime": {
+    "authoredSourceCases": 24,
+    "observations": 34,
+    "independentCases": 0,
+    "completeConstraintRejectedMarker": 2,
+    "conditionalOrPostCheckBypassWitnesses": 6,
+    "programFilesMatchedDuringProbe": 165,
+    "databaseLogicalDigestsMatchedDuringProbe": 40
+  },
+  "normalControlWarningObservations": {
+    "cases": 10,
+    "arity17CasesWithWarnings": 9,
+    "meaning": "Selected syntactic controls designed to match; not a cost estimate, population false-positive rate or R3 metric"
+  },
+  "limitations": [
+    "sink-only; no source/callee/guard proof",
+    "4 explicit builtins/import-alias controls still missed",
+    "keywords, star-arguments, dynamic binding, object semantics not covered",
+    "exec closure keyword, Python3.13 keyword namespaces, getattr and __builtins__ forms not evaluated",
+    "combined dataflow/sink duplicates and metadata consumers not evaluated; no-automatic-suppression is descriptive metadata only",
+    "host/VM timestamps are execution logs, not trusted preregistration",
+    "exec one-argument locals observation is pinned to Python3.12 behavior",
+    "all new controls authored; upstream normal files and 101 regression cases reused",
+    "bounded arithmetic witness is not an HTTP or impact demonstration"
+  ],
+  "rulesDeployed": false,
+  "ordinaryModeReleased": false,
+  "r3Qualified": false,
+  "independentQualificationCasesAdded": 0
+}

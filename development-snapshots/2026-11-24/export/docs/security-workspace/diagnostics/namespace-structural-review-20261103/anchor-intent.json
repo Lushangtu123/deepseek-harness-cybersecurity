@@ -1,0 +1,12 @@
+{
+  "createdAt": "2026-11-04T04:35:26.534226+00:00",
+  "caseHashes": {
+    "unicode-lf.py": "4167a19aa62542a6a8838b0c229f69fc8566ca4eb7c241a5cab7b3271c588aaa",
+    "unicode-crlf.py": "5c4a179cad22a8ffa3b1f79e01232427843cdea7f085e6853e0675841b935624",
+    "unicode-tabs.py": "a3875f708cdf3f466e6c18d93834d4d0e210fa1d2e391d4c61bc4de0fd300641"
+  },
+  "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+  "datasetSha256": "7beb8955eadf1ef0e0f19008767435cbe5176c8a3b556ea6ac98db774323c9cd",
+  "independentQualificationCases": 0,
+  "claim": "real scanner byte/column binding diagnostics only"
+}

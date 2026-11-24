@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "stage": "controlled-archive-and-capacity-admission",
+  "date": "2026-11-11",
+  "state": "offline-candidate-and-isolated-acceptance-complete",
+  "scope": "VM offline candidate and isolated synthetic acceptance only",
+  "commands": [
+    "archive-plan",
+    "archive-apply",
+    "archive-status",
+    "archive-restore",
+    "storage-reconcile"
+  ],
+  "snapshotVersion": 2,
+  "archivePlanVersion": 2,
+  "defaults": {
+    "cacheBudgetMiB": 256,
+    "reservationOverheadMiB": 96,
+    "filesystemSafetyMiB": 512,
+    "planTtlMinutes": 15,
+    "batchTasks": 8,
+    "readLimitMiB": 64,
+    "recycleMinimumDays": 7,
+    "automaticDelete": false
+  },
+  "tests": {
+    "Mac": {
+      "launcher": 87,
+      "storage": 29,
+      "archive": 27,
+      "nodeGate": 45,
+      "batch": 9,
+      "total": 197
+    },
+    "isolatedVM": {
+      "launcher": 87,
+      "storage": 29,
+      "archive": 27,
+      "nodeGate": 45,
+      "batch": 9,
+      "total": 197
+    }
+  },
+  "vmResultSha256": "86d88d72656b8b22853678b64811307bd29ad7ee7b4ecfb3e546260fcb7ebed5",
+  "native": {
+    "state": "completed",
+    "sourceOriginalBytesMatched": true,
+    "rootCid": {
+      "uid": 0,
+      "mode": 420,
+      "readable": true,
+      "contentMatched": true
+    },
+    "sameTransactionId": true,
+    "sameControlArtifacts": true,
+    "noNewAnalysisReceipt": true,
+    "attemptIdsBefore": [
+      "review-2aeea4391a3c435092f313bccd0a0bb5"
+    ],
+    "attemptIdsAfter": [
+      "review-2aeea4391a3c435092f313bccd0a0bb5"
+    ],
+    "newIndependentSamples": 0,
+    "r3Qualified": false
+  },
+  "dailyProtection": {
+    "programFiles": 169,
+    "logicalProjectDatabases": 42,
+    "configPinsRuntime": true,
+    "categoryHashes": {
+      "program": {
+        "beforeSha256": "a828d84ddae6c35a9ae8a0e07ddc2b202425ba428caa54caafdf2ad22d2d0012",
+        "afterSha256": "a828d84ddae6c35a9ae8a0e07ddc2b202425ba428caa54caafdf2ad22d2d0012",
+        "matched": true
+      },
+      "config": {
+        "beforeSha256": "41efaf964f0c953baa16f6402c2fc10e0031a39516c627e0c68f89731cae10ad",
+        "afterSha256": "41efaf964f0c953baa16f6402c2fc10e0031a39516c627e0c68f89731cae10ad",
+        "matched": true
+      },
+      "pins": {
+        "beforeSha256": "55f91235119dbfcce21e0b46ebe37df156cbe1ae151d1947c090882e2a010ed5",
+        "afterSha256": "55f91235119dbfcce21e0b46ebe37df156cbe1ae151d1947c090882e2a010ed5",
+        "matched": true
+      },
+      "runtime": {
+        "beforeSha256": "b7f53d039e78551831e1d584303d45d7e9f8a7a4f8a977bf8ec7eed5c4b82e93",
+        "afterSha256": "b7f53d039e78551831e1d584303d45d7e9f8a7a4f8a977bf8ec7eed5c4b82e93",
+        "matched": true
+      },
+      "databases": {
+        "beforeSha256": "9289bda7b2d4737bd6c467323657e6b625780e11bd9aff5c8bdd77cd542bf0c0",
+        "afterSha256": "9289bda7b2d4737bd6c467323657e6b625780e11bd9aff5c8bdd77cd542bf0c0",
+        "matched": true
+      },
+      "outsideMountNamespace": {
+        "beforeSha256": "46004dd150ea680763df4716a838d4901c13dd63b4cb4aff27fe2cbf94b60c81",
+        "afterSha256": "46004dd150ea680763df4716a838d4901c13dd63b4cb4aff27fe2cbf94b60c81",
+        "matched": true
+      },
+      "homeInode": {
+        "beforeSha256": "bfa1bda4c41fcaf7b148dfaa9fc6d59f1ea9412072efe68b557f13d76c5135d7",
+        "afterSha256": "bfa1bda4c41fcaf7b148dfaa9fc6d59f1ea9412072efe68b557f13d76c5135d7",
+        "matched": true
+      }
+    },
+    "identityCodeSha256": "2dcc9b6b6068f2d0b5db8d18d99be775fa8524dfe1ec7026975924699d673d13"
+  },
+  "protectedSource": {
+    "work/harness-purge-improved/package-files.json": {
+      "sha256": "ce47db260931cfee4c418c9dd6a2145c4791e1c33855a37e876d9a561a05d023",
+      "unchanged": true
+    },
+    "docs/security-workspace/review-sample-ledger.json": {
+      "sha256": "62f38218bb84fd4b1ff1ef2b8133d6deaa71c7d132d03501e1cf6a732b195b7e",
+      "unchanged": true
+    },
+    "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": {
+      "sha256": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+      "unchanged": true
+    },
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": {
+      "sha256": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+      "unchanged": true
+    },
+    "work/harness-purge-improved/package/scripts/eval_import_review.py": {
+      "sha256": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843",
+      "unchanged": true
+    }
+  },
+  "productSourceSha256": {
+    "scripts/review_quality_gate.mjs": "99aea3894238a34f17ee63b95a5c216b565a23a61aa1de0c2e8093877a55f5a0",
+    "scripts/reviewer_snapshot.py": "10e152e231e5d43def8f1edace15edcffd4bae088c22f1790b92b5434385c55e",
+    "scripts/reviewer_snapshot.test.py": "b8b61b77bf6d435970fd19345b842fb7aceae2e4fc95b1efdbd0a1494044b06c",
+    "scripts/reviewer_storage.py": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202",
+    "scripts/reviewer_storage.test.py": "4f5180ec503cfde1642f90378de0c5099b27ca07cf5b0357ba6a46ebe425d326",
+    "scripts/reviewer_archive.test.py": "66298d7727fb4f99e28d8ccc654780fa4bbfbbb6b9c63931c03cfa157677cdda",
+    "scripts/eval_evidence_batch.test.py": "684293ec1ea35fa1590f729963101f78750fb6a2c8ef39053c33e3b954b51aab",
+    "work/harness-purge-improved/tests/review-quality-gate.test.mjs": "23b969babf3ea44819df30fed97460f6d3fc45c5e6a2015e98079f44ceec1f03",
+    "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+    "work/harness-purge-improved/package/scripts/eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843"
+  },
+  "resourceReconcile": {
+    "noOwnedContainersOrClients": true,
+    "syntheticScratchRetained": true,
+    "directoryCount": 3,
+    "automaticCleanup": false
+  },
+  "limits": [
+    "cooperative admission, not OS hardquota",
+    "logical file bytes and separate filesystem margin",
+    "unknown reservations never released by age",
+    "truncated or uncheckable client history retained",
+    "same-UID/privileged arbitrary mutation not atomic snapshot guarantee",
+    "noncanonical control directory may block maintenance failclosed",
+    "no physical-power-loss certification",
+    "independent effect and Chrome delivery acceptance remain later",
+    "noNewAnalysisReceipt is scoped to managed-cache workflow",
+    "runtime protection covers pinned dsh-tools entry, not entire runtime tree",
+    "single-use retention acceptance helper is not an idempotent public API"
+  ],
+  "dailyDeployed": false,
+  "githubPushed": false,
+  "hostPermissionsExpanded": false,
+  "r3Qualified": false,
+  "newIndependentSamples": 0,
+  "finalExternalReview": {
+    "state": "completed-no-confirmed-scoped-blocker",
+    "requestedClaude": "claude-opus-5-5",
+    "claudeOutcome": "weekly-quota-failure-preserved",
+    "actualFallbackModel": "deepseek-flash",
+    "effort": "high",
+    "evidenceReviewReceiptSha256": "733c06d805f3e91e4672e85e08c4efe1aaa36d100b1509d19e6ba21d371f00bc",
+    "digestFollowupReceiptSha256": "742185d785f51c98a4f4735feb06bb05bdb2f1070adb1b96887ce6169b488477",
+    "tools": []
+  },
+  "laterResourceReconcileSha256": "ce859a25c4e00552750c38876a52a79bd8142cb844da82cbce99bb562f23a3f0"
+}

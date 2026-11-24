@@ -1,0 +1,211 @@
+{
+  "kind": "source-link-creation-inventory",
+  "sourceOnly": true,
+  "sites": [
+    {
+      "path": "candidate/baseline/checks/run_recovery_close_checks.py",
+      "line": 389,
+      "sourceSha256": "f19b07fa5f29c71891381ae100d5939f7ac8fbb747fd0d8c185a2f7768b64913",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly"
+    },
+    {
+      "path": "candidate/baseline/checks/run_recovery_close_checks.py",
+      "line": 610,
+      "sourceSha256": "f19b07fa5f29c71891381ae100d5939f7ac8fbb747fd0d8c185a2f7768b64913",
+      "operation": "identity_path.symlink_to(target)",
+      "classification": "historical-readonly"
+    },
+    {
+      "path": "candidate/baseline/checks/run_regressions.py",
+      "line": 291,
+      "sourceSha256": "90759283e2f56a9aed8fea0c0f0c26cd5de74423c35b0b0ff6e04fad2dcf9c2d",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly"
+    },
+    {
+      "path": "candidate/baseline/checks/run_rev6_checks.py",
+      "line": 663,
+      "sourceSha256": "3f193e9a0852be55429e95e87d88eb80828a3344aac43c05ef6563bacbeb6c6b",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly"
+    },
+    {
+      "path": "candidate/baseline/checks/run_rev6_checks.py",
+      "line": 666,
+      "sourceSha256": "3f193e9a0852be55429e95e87d88eb80828a3344aac43c05ef6563bacbeb6c6b",
+      "operation": "dangling.symlink_to(base / \"does-not-exist\", target_is_directory=True)",
+      "classification": "historical-readonly"
+    },
+    {
+      "path": "candidate/baseline/checks/run_rev8_checks.py",
+      "line": 217,
+      "sourceSha256": "d950abef29bd9c89e661d4621c568c2a28d9a5fca7fbf838142c83404b28a010",
+      "operation": "box.stage.symlink_to(target, target_is_directory=True)",
+      "classification": "historical-readonly"
+    },
+    {
+      "path": "candidate/baseline/checks/run_rev8_checks.py",
+      "line": 307,
+      "sourceSha256": "d950abef29bd9c89e661d4621c568c2a28d9a5fca7fbf838142c83404b28a010",
+      "operation": "(root / \"preflight\").symlink_to(outside, target_is_directory=True)",
+      "classification": "historical-readonly"
+    },
+    {
+      "path": "candidate/baseline/checks/run_unified_recovery_checks.py",
+      "line": 608,
+      "sourceSha256": "d1ab033418c6d76ca39ac7ae12e9bde8d46b9ba42e21327dcc7f7ac4a69e24fc",
+      "operation": "(workspace.prepare / \"plans\").symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly"
+    },
+    {
+      "path": "candidate/checks/run_consumer_closure_checks.py",
+      "line": 126,
+      "sourceSha256": "fed11bd9ca1ec825ff4022af2ba85cc88df78f0c10c00db1785835438175de97",
+      "operation": "os.symlink(str(path) + \".missing-target\", path)",
+      "classification": "active-source-needs-lifecycle-check"
+    },
+    {
+      "path": "candidate/checks/run_evidence_gate_checks.py",
+      "line": 733,
+      "sourceSha256": "36296ba2a5e2cbd26472a0ba892ccedf52eec477a2df27f28531fb4707a6b531",
+      "operation": "os.symlink(outside, result_path)",
+      "classification": "active-source-needs-lifecycle-check"
+    },
+    {
+      "path": "candidate/checks/run_recovery_close_checks.py",
+      "line": 391,
+      "sourceSha256": "fe39779d1e2c037127a5e087186d7395895a54b590fa17e64a5142f4ace2a618",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "classification": "active-source-needs-lifecycle-check"
+    },
+    {
+      "path": "candidate/checks/run_recovery_close_checks.py",
+      "line": 612,
+      "sourceSha256": "fe39779d1e2c037127a5e087186d7395895a54b590fa17e64a5142f4ace2a618",
+      "operation": "identity_path.symlink_to(target)",
+      "classification": "active-source-needs-lifecycle-check"
+    },
+    {
+      "path": "candidate/checks/run_regressions.py",
+      "line": 291,
+      "sourceSha256": "90759283e2f56a9aed8fea0c0f0c26cd5de74423c35b0b0ff6e04fad2dcf9c2d",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "classification": "active-source-needs-lifecycle-check"
+    },
+    {
+      "path": "candidate/checks/run_rev6_checks.py",
+      "line": 663,
+      "sourceSha256": "5554aae1413df1e2cf1bf099698e5d612b2485c0c10598e086e19e2d8371deb2",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "classification": "active-source-needs-lifecycle-check"
+    },
+    {
+      "path": "candidate/checks/run_rev6_checks.py",
+      "line": 666,
+      "sourceSha256": "5554aae1413df1e2cf1bf099698e5d612b2485c0c10598e086e19e2d8371deb2",
+      "operation": "dangling.symlink_to(base / \"does-not-exist\", target_is_directory=True)",
+      "classification": "active-source-needs-lifecycle-check"
+    },
+    {
+      "path": "candidate/checks/run_rev8_checks.py",
+      "line": 218,
+      "sourceSha256": "130f78f705d786a40c42221ad7d460ac82dcb33df14741b575bb941a478e9144",
+      "operation": "box.stage.symlink_to(target, target_is_directory=True)",
+      "classification": "active-source-needs-lifecycle-check"
+    },
+    {
+      "path": "candidate/checks/run_rev8_checks.py",
+      "line": 308,
+      "sourceSha256": "130f78f705d786a40c42221ad7d460ac82dcb33df14741b575bb941a478e9144",
+      "operation": "(root / \"preflight\").symlink_to(outside, target_is_directory=True)",
+      "classification": "active-source-needs-lifecycle-check"
+    },
+    {
+      "path": "candidate/checks/run_unified_recovery_checks.py",
+      "line": 742,
+      "sourceSha256": "f9238ee2b7ac943fcb8aa83f8d364f2aa7fe1530153ec52c12dcbec8c4c3b989",
+      "operation": "plans_link.symlink_to(real, target_is_directory=True)",
+      "classification": "active-source-needs-lifecycle-check"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_recovery_close_checks.py",
+      "line": 389,
+      "sourceSha256": "f19b07fa5f29c71891381ae100d5939f7ac8fbb747fd0d8c185a2f7768b64913",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_recovery_close_checks.py",
+      "line": 610,
+      "sourceSha256": "f19b07fa5f29c71891381ae100d5939f7ac8fbb747fd0d8c185a2f7768b64913",
+      "operation": "identity_path.symlink_to(target)",
+      "classification": "historical-readonly"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_regressions.py",
+      "line": 291,
+      "sourceSha256": "90759283e2f56a9aed8fea0c0f0c26cd5de74423c35b0b0ff6e04fad2dcf9c2d",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_rev6_checks.py",
+      "line": 663,
+      "sourceSha256": "3f193e9a0852be55429e95e87d88eb80828a3344aac43c05ef6563bacbeb6c6b",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_rev6_checks.py",
+      "line": 666,
+      "sourceSha256": "3f193e9a0852be55429e95e87d88eb80828a3344aac43c05ef6563bacbeb6c6b",
+      "operation": "dangling.symlink_to(base / \"does-not-exist\", target_is_directory=True)",
+      "classification": "historical-readonly"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_rev8_checks.py",
+      "line": 217,
+      "sourceSha256": "d950abef29bd9c89e661d4621c568c2a28d9a5fca7fbf838142c83404b28a010",
+      "operation": "box.stage.symlink_to(target, target_is_directory=True)",
+      "classification": "historical-readonly"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_rev8_checks.py",
+      "line": 307,
+      "sourceSha256": "d950abef29bd9c89e661d4621c568c2a28d9a5fca7fbf838142c83404b28a010",
+      "operation": "(root / \"preflight\").symlink_to(outside, target_is_directory=True)",
+      "classification": "historical-readonly"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_unified_recovery_checks.py",
+      "line": 608,
+      "sourceSha256": "d1ab033418c6d76ca39ac7ae12e9bde8d46b9ba42e21327dcc7f7ac4a69e24fc",
+      "operation": "(workspace.prepare / \"plans\").symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly"
+    }
+  ],
+  "suiteOrder": [
+    "consumer-12",
+    "evidence-gate",
+    "record-validation-15",
+    "unified-recovery-27",
+    "association-recovery-21",
+    "recovery-close-24",
+    "formal-admission-15",
+    "original-28",
+    "end-lf-13",
+    "rev6-24",
+    "rev7-12",
+    "rev8-13",
+    "diagnostics-20",
+    "repair-11",
+    "buffer-preflight-29",
+    "pure-compile",
+    "buffer-red-6",
+    "baseline-verify",
+    "independent-116",
+    "static"
+  ],
+  "VMSubmissions": 0
+}

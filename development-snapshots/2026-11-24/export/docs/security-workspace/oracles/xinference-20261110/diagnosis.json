@@ -1,0 +1,19 @@
+{
+  "exitCode": 1,
+  "stderr": "Traceback (most recent call last):\n  File \"/witness.py\", line 38, in <module>\n    raise ValueError('Original method changed')\nValueError: Original method changed\n",
+  "stdout": "",
+  "guestPython": "3.12.3",
+  "astIdentities": [
+    {
+      "file": "before.py",
+      "expectedAstSha256": "bd2328077cb9fac0acc3fab36bab2f80d35d6d89992b83e49580a074f1663719",
+      "guestAstSha256": "4d143def13f75669bcfdf6add6319f8197e8624d87b8615db740661777049863"
+    },
+    {
+      "file": "fixed.py",
+      "expectedAstSha256": "81863e0b019e46cb963413718089f06690f985917f36d3de8a0e98051333edbd",
+      "guestAstSha256": "ba2de19bba057574ea00fb734ddc8fbb1c6ed534dce5ef38c6f59ce34d3da739"
+    }
+  ],
+  "temporaryRemoved": true
+}

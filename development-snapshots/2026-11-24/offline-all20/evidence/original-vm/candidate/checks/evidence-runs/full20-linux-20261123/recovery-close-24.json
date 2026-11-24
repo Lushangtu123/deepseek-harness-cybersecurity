@@ -1,0 +1,822 @@
+{
+ "failed": [],
+ "guardSha256": "704b9ce6f6f7c12085555d87bda3148d9e3224ea6d0397b9e92161e50687c828",
+ "kind": "recovery-close-b1-b4-checks",
+ "passed": 24,
+ "realBpftrace": 0,
+ "realContainers": 0,
+ "results": [
+  {
+   "description": "recover --prepare-id B never operates plan A / copy B",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "kind": "exit",
+    "ownedReservationHeld": true,
+    "requestedReservationHeld": true,
+    "stageExists": true,
+    "value": 78
+   },
+   "error": null,
+   "id": "B1-selector-filename-plan-id",
+   "passed": true
+  },
+  {
+   "description": "query/update use the same exact selector guard",
+   "detail": {
+    "fileUnchanged": true,
+    "query": [
+     "exit",
+     78
+    ],
+    "update": [
+     "exit",
+     78
+    ]
+   },
+   "error": null,
+   "id": "B1-query-update-selector-binding",
+   "passed": true
+  },
+  {
+   "description": "update fields cannot change prepareId",
+   "detail": {
+    "kind": "exit",
+    "unchanged": true,
+    "value": 78
+   },
+   "error": null,
+   "id": "B1-plan-id-immutable",
+   "passed": true
+  },
+  {
+   "description": "stage path roots/links/traversal/NUL rejected before deletion",
+   "detail": {
+    "nul": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "stageExists": true,
+     "value": 78
+    },
+    "prepare-root": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "rootExists": true,
+     "value": 78
+    },
+    "role-path": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "stageExists": true,
+     "value": 78
+    },
+    "runs-root": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "rootExists": true,
+     "value": 78
+    },
+    "symlink": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "linkExists": true,
+     "realExists": true,
+     "value": 78
+    },
+    "traversal": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "stageExists": true,
+     "value": 78
+    }
+   },
+   "error": null,
+   "id": "B1-stage-root-link-traversal-nul",
+   "passed": true
+  },
+  {
+   "description": "plan identity contradictions rejected before resource calls",
+   "detail": {
+    "attempt-role": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "value": 78
+    },
+    "image": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "value": 78
+    },
+    "internal-role": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "value": 78
+    },
+    "name": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "value": 78
+    },
+    "stage-identity-malformed": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "value": 78
+    },
+    "stage-relation": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "value": 78
+    },
+    "tag": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "value": 78
+    }
+   },
+   "error": null,
+   "id": "B1-role-attempt-name-tag-image-path-identity",
+   "passed": true
+  },
+  {
+   "description": "missing plan keeps intent/files/reservation and never deletes via intent",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "cli": [
+     "return",
+     3
+    ],
+    "confirmed": false,
+    "intentPreserved": true,
+    "raised": null,
+    "reservationHeld": true,
+    "stageExists": true
+   },
+   "error": null,
+   "id": "B2-missing-plan-no-fallback",
+   "passed": true
+  },
+  {
+   "description": "PermissionError/IO/JSON/shape plans are incomplete, never fallback",
+   "detail": {
+    "io": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "confirmed": false,
+     "intentPreserved": true,
+     "raised": null,
+     "reservationHeld": true
+    },
+    "json": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "confirmed": false,
+     "intentPreserved": true,
+     "raised": null,
+     "reservationHeld": true
+    },
+    "permission": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "confirmed": false,
+     "intentPreserved": true,
+     "raised": null,
+     "reservationHeld": true
+    },
+    "shape": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "confirmed": false,
+     "intentPreserved": true,
+     "raised": null,
+     "reservationHeld": true
+    }
+   },
+   "error": null,
+   "id": "B2-unreadable-io-json-invalid-no-fallback",
+   "passed": true
+  },
+  {
+   "description": "invalid identity plan is 78 and never falls through to deletion",
+   "detail": {
+    "image": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "value": 78
+    },
+    "selector": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "value": 78
+    },
+    "unknown-role": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "value": 78
+    }
+   },
+   "error": null,
+   "id": "B2-ownership-contradiction-blocked78",
+   "passed": true
+  },
+  {
+   "description": "existing identity journals are read and bound before destruction",
+   "detail": {
+    "contradiction": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "reservationHeld": true,
+     "value": 78
+    },
+    "json": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "return",
+     "reservationHeld": true,
+     "value": false
+    },
+    "symlink": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "reservationHeld": true,
+     "value": 78
+    }
+   },
+   "error": null,
+   "id": "B2-identity-journal-validated",
+   "passed": true
+  },
+  {
+   "description": "lock busy is 79 and argparse ambiguity stays 2",
+   "detail": {
+    "both": [
+     "exit",
+     2
+    ],
+    "bothCleanup": [
+     "exit",
+     2
+    ],
+    "neither": [
+     "exit",
+     2
+    ],
+    "neitherRecover": [
+     "exit",
+     2
+    ],
+    "subprocessReturn": 79,
+    "subprocessTail": "runner: batch-locked\n"
+   },
+   "error": null,
+   "id": "B2-lockbusy-and-cli-ambiguity",
+   "passed": true
+  },
+  {
+   "description": "compile preparation recovers with no target attempt record",
+   "detail": {
+    "attemptRecordCreated": false,
+    "calls": {
+     "docker": 0,
+     "lookup": 1,
+     "remove": 0,
+     "stage": 1,
+     "stop": 0,
+     "tagLookup": 1
+    },
+    "kind": "return",
+    "reservationHeld": false,
+    "stageExists": false,
+    "value": 0
+   },
+   "error": null,
+   "id": "B3-standalone-compile-recovery",
+   "passed": true
+  },
+  {
+   "description": "bind preparation recovers without a target record",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 1,
+     "remove": 0,
+     "stage": 1,
+     "stop": 0,
+     "tagLookup": 1
+    },
+    "kind": "return",
+    "reservationHeld": false,
+    "stageExists": false,
+    "value": 0
+   },
+   "error": null,
+   "id": "B3-standalone-bind-recovery",
+   "passed": true
+  },
+  {
+   "description": "compile selector never routes into the parent target cleanup",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 1,
+     "remove": 0,
+     "stage": 1,
+     "stop": 0,
+     "tagLookup": 1
+    },
+    "compileReservationHeld": false,
+    "compileStageExists": false,
+    "kind": "return",
+    "targetReservationHeld": true,
+    "targetStageExists": true,
+    "value": 0
+   },
+   "error": null,
+   "id": "B3-associated-compile-not-target",
+   "passed": true
+  },
+  {
+   "description": "run role routes only with selector==plan==record and attempt match",
+   "detail": {
+    "attempt-mismatch": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "value": 78
+    },
+    "correct": {
+     "calls": {
+      "docker": 0,
+      "lookup": 1,
+      "remove": 0,
+      "stage": 1,
+      "stop": 0,
+      "tagLookup": 1
+     },
+     "kind": "return",
+     "reservationHeld": false,
+     "value": 0
+    },
+    "prepare-link-mismatch": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "kind": "exit",
+     "value": 78
+    }
+   },
+   "error": null,
+   "id": "B3-run-role-link-and-mismatch",
+   "passed": true
+  },
+  {
+   "description": "unknown operation role is rejected before resource calls",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "kind": "exit",
+    "stageExists": true,
+    "value": 78
+   },
+   "error": null,
+   "id": "B3-unknown-role-rejected",
+   "passed": true
+  },
+  {
+   "description": "reserve-only target settles reservation, keeps slot spent, never claims success",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "codes": [
+     [
+      "return",
+      0
+     ],
+     [
+      "return",
+      0
+     ]
+    ],
+    "counter": {
+     "max": 16,
+     "used": [
+      1
+     ],
+     "version": 1
+    },
+    "reservationHeld": false,
+    "resourceProof": {
+     "notCreated": {
+      "client": true,
+      "container": true,
+      "observer": true,
+      "stage": true
+     },
+     "phase": "reserved",
+     "protocol": "resource-phase-v1",
+     "sequence": [
+      {
+       "at": "2026-11-24T16:39:10.366415+00:00",
+       "phase": "reserved"
+      }
+     ],
+     "targetAttempt": 1
+    },
+    "settled": true,
+    "state": "aborted",
+    "targetExecutions": 0
+   },
+   "error": null,
+   "id": "B4-reserve-not-created-proof",
+   "passed": true
+  },
+  {
+   "description": "reserve crash after counter write consumes slot and creates no resources",
+   "detail": {
+    "attemptExists": false,
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "counter": {
+     "max": 16,
+     "used": [
+      1
+     ],
+     "version": 1
+    },
+    "planCount": 0,
+    "raised": "OSError:simulated-reserve-record-failure"
+   },
+   "error": null,
+   "id": "B4-pre-plan-reserve-failure",
+   "passed": true
+  },
+  {
+   "description": "compile plan is durably linked to the parent before stage creation",
+   "detail": {
+    "associated": [
+     "16630c480c38fc398d6d87ba3bf5ca27"
+    ],
+    "linkedPlans": [
+     "16630c480c38fc398d6d87ba3bf5ca27"
+    ],
+    "planRoles": [
+     "compile-0001-38c70539"
+    ],
+    "stageAtStop": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/b4-assoc-q9jy8k2k/prepare/stage-compile-0001-38c705399f675237/tools"
+   },
+   "error": null,
+   "id": "B4-association-before-stage",
+   "passed": true
+  },
+  {
+   "description": "failure between plan creation and parent link creates no stage/process",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "planStates": [
+     "not-created"
+    ],
+    "raised": "OSError:simulated-association-failure",
+    "stageDirs": [],
+    "toolCalls": 0
+   },
+   "error": null,
+   "id": "B4-association-failure-no-resources",
+   "passed": true
+  },
+  {
+   "description": "unresolved associated preparation keeps the target reservation held",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 2,
+     "remove": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 2
+    },
+    "compileStageExists": true,
+    "kind": "return",
+    "reservationHeld": true,
+    "targetStageExists": true,
+    "value": false
+   },
+   "error": null,
+   "id": "B4-associated-prep-unknown-holds-parent",
+   "passed": true
+  },
+  {
+   "description": "legacy empty-process record with no proof is not promoted to success",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "kind": "return",
+    "reservationHeld": true,
+    "value": false
+   },
+   "error": null,
+   "id": "B4-old-empty-process-record-held",
+   "passed": true
+  },
+  {
+   "description": "orphan prepareId record with no plan is conservatively held",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "kind": "return",
+    "reservationHeld": true,
+    "value": false
+   },
+   "error": null,
+   "id": "B4-orphan-record-held",
+   "passed": true
+  },
+  {
+   "description": "plan/attempt journal failure is incomplete, never success",
+   "detail": {
+    "attempt": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "confirmed": null,
+     "raised": "OSError:simulated-final-attempt-journal-failure",
+     "reservationHeld": true
+    },
+    "plan": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "confirmed": null,
+     "raised": "OSError:simulated-final-plan-journal-failure",
+     "reservationHeld": true
+    }
+   },
+   "error": null,
+   "id": "B4-final-log-fsync-failure",
+   "passed": true
+  },
+  {
+   "description": "new reservations persist explicit not-started records and a monotonic proof",
+   "detail": {
+    "processes": {
+     "client": {
+      "spawnState": "not-started"
+     },
+     "observer": {
+      "spawnState": "not-started"
+     }
+    },
+    "resourceProof": {
+     "notCreated": {
+      "client": true,
+      "container": true,
+      "observer": true,
+      "stage": true
+     },
+     "phase": "reserved",
+     "protocol": "resource-phase-v1",
+     "sequence": [
+      {
+       "at": "2026-11-24T16:39:10.428263+00:00",
+       "phase": "reserved"
+      }
+     ],
+     "targetAttempt": 1
+    }
+   },
+   "error": null,
+   "id": "B4-resource-phase-monotonic",
+   "passed": true
+  }
+ ],
+ "runnerSha256": "b1c4a1f1e4248f3d279e953989b1b9b3ddec8d7f29b222910818594416a9e5bc",
+ "simulated": true,
+ "sourceTools": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/tools",
+ "targetExecutions": 0,
+ "total": 24
+}

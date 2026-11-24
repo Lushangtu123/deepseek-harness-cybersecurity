@@ -1,0 +1,29 @@
+.F...F.......
+======================================================================
+FAIL: test_assignment_target_is_written_after_the_execution_not_before_it (__main__.NamespaceReviewTests.test_assignment_target_is_written_after_the_execution_not_before_it)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 109, in test_assignment_target_is_written_after_the_execution_not_before_it
+    self.assertEqual(row['source']['kind'],'function-parameter-observed')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'local-reassignment-observed' != 'function-parameter-observed'
+- local-reassignment-observed
++ function-parameter-observed
+
+
+======================================================================
+FAIL: test_default_argument_call_is_not_in_the_functions_local_body (__main__.NamespaceReviewTests.test_default_argument_call_is_not_in_the_functions_local_body)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 114, in test_default_argument_call_is_not_in_the_functions_local_body
+    self.assertEqual(row['callee']['staticBinding'],'unsupported-scope')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'local-binding-conflict-observed' != 'unsupported-scope'
+- local-binding-conflict-observed
++ unsupported-scope
+
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.037s
+
+FAILED (failures=2)

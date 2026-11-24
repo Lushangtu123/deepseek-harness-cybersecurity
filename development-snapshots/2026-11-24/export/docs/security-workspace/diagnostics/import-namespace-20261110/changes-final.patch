@@ -1,0 +1,191 @@
+--- before/work/harness-purge-improved/package/scripts/eval_import_review.py
++++ candidate/work/harness-purge-improved/package/scripts/eval_import_review.py
+@@ -10,11 +10,15 @@
+ )
+ 
+ 
+-def direct_call(statement, line=None):
++def direct_call(statement, line=None, *, namespace_sink=False):
+     match statement:
+         case ast.Return(value=call) | ast.Expr(value=call) | ast.Assign(targets=[ast.Name()], value=call):
+             match call:
+-                case ast.Call(func=ast.Name(id=function), args=[ast.Name(id=argument)], keywords=[]):
++                case ast.Call(func=ast.Name(id=function), args=[ast.Name(id=argument), *namespaces], keywords=[]):
++                    if namespaces and (not namespace_sink or function not in {'eval', 'exec'}
++                            or len(namespaces) > 2
++                            or any(not isinstance(node, ast.Dict) or node.keys for node in namespaces)):
++                        return None
+                     if line is None or call.lineno == line:
+                         return function, argument
+     return None
+@@ -28,7 +32,7 @@
+                 return None
+             if args.args[0].annotation is not None or tree.body[0].returns is not None:
+                 return None
+-            direct = direct_call(statement, statement.lineno)
++            direct = direct_call(statement, statement.lineno, namespace_sink=True)
+             if direct and direct[0] in {'eval', 'exec'} and direct[1] == args.args[0].arg:
+                 if has_unambiguous_bindings(tree, {direct[0]}, []):
+                     return tree.body[0].lineno, statement.lineno, direct[0]
+--- before/scripts/eval_import_review.test.py
++++ candidate/scripts/eval_import_review.test.py
+@@ -20,6 +20,55 @@
+ 
+ 
+ class ImportFlowTest(unittest.TestCase):
++    @unittest.skipUnless(sys.version_info >= (3, 12), 'Python generic syntax requires 3.12')
++    def test_generic_type_parameters_do_not_become_builtin_or_import_identity(self):
++        for suffix in ['', ', {}', ', {}, {}']:
++            with self.subTest(suffix=suffix):
++                callee = 'def run[eval](value):\n    return eval(value' + suffix + ')\n'
++                self.assertIsNone(review_import_flow(CALLER, 'evaluator', callee, 6))
++
++    @unittest.skipUnless(sys.version_info >= (3, 12), 'Python generic syntax requires 3.12')
++    def test_generic_caller_bindings_do_not_become_flask_query_identity(self):
++        callee = 'def run(value):\n    return eval(value, {})\n'
++        for name in ['request', 'execute', 'eval']:
++            with self.subTest(type_parameter=name):
++                caller = CALLER.replace('def route():', 'def route[' + name + ']():')
++                self.assertIsNone(review_import_flow(caller, 'evaluator', callee, 6))
++
++    def test_empty_literal_namespaces_preserve_conditional_import_flow(self):
++        for sink in ['eval', 'exec']:
++            for namespaces in [', {}', ', {}, {}']:
++                with self.subTest(sink=sink, namespaces=namespaces):
++                    statement = 'return ' if sink == 'eval' else ''
++                    callee = 'def run(value):\n    ' + statement + sink + '(value' + namespaces + ')\n'
++                    row = review_import_flow(CALLER, 'evaluator', callee, 6)
++                    self.assertIsNotNone(row)
++                    self.assertEqual(row['sourceLine'], 5)
++                    self.assertEqual(row['callLine'], 6)
++                    self.assertEqual(row['definitionLine'], 1)
++                    self.assertEqual(row['sinkLine'], 2)
++                    self.assertEqual(row['sink'], sink)
++                    self.assertEqual(row['disposition'], 'unverified')
++
++    def test_namespace_forms_outside_the_explicit_contract_stay_unknown(self):
++        for call in ['eval(value, scope)', 'eval(value, factory())',
++                     'eval(value, {"__builtins__": {}})', 'eval(value, {}, {}, {})',
++                     'eval(value, globals={})', 'eval(value, *scopes)',
++                     'eval(transform(value), {})', 'execute(value, {})']:
++            with self.subTest(call=call):
++                callee = 'def run(value):\n    return ' + call + '\n'
++                self.assertIsNone(review_import_flow(CALLER, 'evaluator', callee, 6))
++
++    def test_namespace_sink_support_does_not_relax_the_imported_call_site(self):
++        callee = 'def run(value):\n    return eval(value, {}, {})\n'
++        for caller in [CALLER.replace('execute(code)', 'execute(code, {})'),
++                       CALLER.replace('execute(code)', 'execute(code=code)'),
++                       CALLER.replace('execute(code)', 'execute(*code)'),
++                       CALLER.replace('execute(code)', 'execute("constant")'),
++                       CALLER.replace('request.args.get', 'custom.args.get')]:
++            with self.subTest(caller=caller):
++                self.assertIsNone(review_import_flow(caller, 'evaluator', callee, 6))
++
+     def test_explicit_import_and_both_execution_points(self):
+         for callee, sink in [(CALLEE, 'eval'), (CALLEE.replace('return eval', 'exec'), 'exec')]:
+             with self.subTest(sink=sink):
+--- before/scripts/eval_evidence_batch.test.py
++++ candidate/scripts/eval_evidence_batch.test.py
+@@ -59,6 +59,29 @@
+         self.assertEqual(report['importChecks'], 0)
+         self.assertEqual(report['importEvidence'], [])
+ 
++    def test_auto_discovery_records_namespace_sink_without_fabricating_a_scanner_hit(self):
++        import json
++        for sink in ['eval', 'exec']:
++            for namespaces in [', {}', ', {}, {}']:
++                with self.subTest(sink=sink, namespaces=namespaces):
++                    callee = 'def run(value):\n    return ' + sink + '(value' + namespaces + ')\n'
++                    (self.root / 'evaluator.py').write_text(callee)
++                    self.manifest['files']['evaluator.py'] = sha256(callee.encode()).hexdigest()
++                    self.manifest['discoverImports'] = True
++                    scan = {'results': []}
++                    before = json.dumps(scan, sort_keys=True)
++                    report = review_batch(self.root, self.manifest, scan)
++                    self.assertEqual(report['discoveredImportChecks'], 1)
++                    self.assertEqual(report['importChecks'], 1)
++                    evidence, = report['importEvidence']
++                    self.assertEqual(evidence['sourceLine'], 8)
++                    self.assertEqual(evidence['callLine'], 9)
++                    self.assertEqual(evidence['sinkLine'], 2)
++                    self.assertEqual(evidence['sink'], sink)
++                    self.assertEqual(evidence['disposition'], 'unverified')
++                    self.assertEqual(report['guardEvidence'], [])
++                    self.assertEqual(json.dumps(scan, sort_keys=True), before)
++
+     def test_auto_discovery_rejects_invalid_option_and_excess_candidates(self):
+         self.manifest['discoverImports'] = 'true'
+         with self.assertRaisesRegex(ValueError, 'discovery'):
+--- before/scripts/python_namespace_review.test.py
++++ candidate/scripts/python_namespace_review.test.py
+@@ -155,6 +155,23 @@
+         self.assertEqual(row['source']['kind'], 'parameter-name-observed')
+         self.assertEqual(row['constraint']['state'], 'unresolved')
+         self.assertEqual(row['source']['externalControl'], 'unverified')
++
++    def test_fixed_set_guard_inside_try_stays_unresolved_in_functions_and_methods(self):
++        for sink in ['eval', 'exec']:
++            statement = 'return ' if sink == 'eval' else ''
++            source = ('def run(value):\n    try:\n'
++                      '        if value not in ("6*7", "7*8"):\n            return None\n'
++                      '        ' + statement + sink + '(value, {})\n'
++                      '    except Exception:\n        return None\n')
++            method = 'class Parser:\n' + ''.join('    ' + line + '\n' for line in source.splitlines())
++            for text in [source, method]:
++                with self.subTest(sink=sink, method=text is method):
++                    row = self.review(text)
++                    self.assertEqual(row['source']['kind'], 'parameter-name-observed')
++                    self.assertEqual(row['constraint']['state'], 'unresolved')
++                    self.assertEqual(row['source']['externalControl'], 'unverified')
++                    self.assertEqual(row['callee']['builtinIdentity'], 'unverified')
++                    self.assertEqual(row['disposition'], 'unverified')
+ 
+     def test_fixed_set_guard_two_and_three_arguments_is_only_conditional_evidence(self):
+         for op in ['eval','exec']:
+--- before/work/harness-purge-improved/package/scripts/eval_guard_review.py
++++ candidate/work/harness-purge-improved/package/scripts/eval_guard_review.py
+@@ -27,6 +27,9 @@
+ 
+ def has_unambiguous_bindings(tree, protected, imports):
+     for node in ast.walk(tree):
++        # Generic annotation scopes need separate name-resolution modelling.
++        if getattr(node, 'type_params', None):
++            return False
+         if isinstance(node, ast.alias) and not any(node is allowed for allowed in imports):
+             if (node.asname or node.name.split('.')[0]) in protected | {'*'}:
+                 return False
+--- before/scripts/eval_guard_review.test.py
++++ candidate/scripts/eval_guard_review.test.py
+@@ -30,6 +30,15 @@
+                     'assignmentLine': 3, 'guardLine': 4, 'evalLine': 5, 'literalCount': 2,
+                     'disposition': 'unverified',
+                 })
++
++    @unittest.skipUnless(sys.version_info >= (3, 12), 'Python generic syntax requires 3.12')
++    def test_generic_annotation_scopes_leave_literal_guard_unknown(self):
++        for name in ['request', 'eval', 'T']:
++            with self.subTest(type_parameter=name):
++                source = ('from flask import request\ndef route[' + name + ']():\n'
++                          '    value = request.args.get("expr")\n'
++                          '    if value == "foo":\n        return eval(value)\n')
++                self.assertIsNone(review_eval_guard(source, 5))
+ 
+     def test_widened_guards_and_unsupported_literals_are_not_evidence(self):
+         for guard in ('value == "foo" or allowed()', 'value in dynamic',
+@@ -83,6 +92,15 @@
+                 'observation':'plain-string-guard-observed', 'guardLine':4,
+                 'executionLine':7, 'sink':sink, 'disposition':'unverified',
+             })
++
++    @unittest.skipUnless(sys.version_info >= (3, 12), 'Python generic syntax requires 3.12')
++    def test_generic_annotation_scopes_leave_string_guard_unknown(self):
++        for name in ['request', 'eval', 'exec', 'T']:
++            for sink in ['eval', 'exec']:
++                with self.subTest(type_parameter=name, sink=sink):
++                    source = self.SOURCE.replace('def route():', 'def route[' + name + ']():')
++                    source = source.replace('eval(value)', sink + '(value)')
++                    self.assertIsNone(review_plain_string_guard(source, 7))
+ 
+     def test_changed_values_weak_checks_and_wrong_branches_are_unknown(self):
+         for source in (

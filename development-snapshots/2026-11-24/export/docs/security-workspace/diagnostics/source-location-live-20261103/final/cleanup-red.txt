@@ -1,0 +1,30 @@
+✖ Docker absent-object messages accept ASCII case variants with exact identity (0.718875ms)
+✔ Daemon, permission, wrong identity and successful inspect are not absence (0.0925ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 46.9285
+
+✖ failing tests:
+
+test at work/harness-source-location-live-closure-20261103/container-absence.test.mjs:3:1
+✖ Docker absent-object messages accept ASCII case variants with exact identity (0.718875ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-source-location-live-closure-20261103/container-absence.test.mjs:3:187)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.start (node:internal/test_runner/test:878:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:297:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual'
+  }

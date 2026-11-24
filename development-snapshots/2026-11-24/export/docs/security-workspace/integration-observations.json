@@ -1,0 +1,99 @@
+{
+  "observedOn": "2026-11-03",
+  "environment": "dedicated VM; staged source, synthetic project, private test socket and isolated SQLite state",
+  "scanTools": "installed pinned Semgrep 1.182.1 and Trivy 0.76.1 with existing offline database",
+  "observations": {
+    "ok": true,
+    "ordinary": {
+      "state": "completed",
+      "findings": 4,
+      "fileCoverage": {
+        "scope": "scanner-reported",
+        "scanned": 7,
+        "total": null,
+        "uncovered": null,
+        "withoutLanguageRule": null
+      },
+      "duplicateRequestSameId": true
+    },
+    "joint": {
+      "state": "completed",
+      "steps": [
+        {
+          "tool": "semgrep",
+          "id": "f8921080-3e0d-436c-81c9-2191718e3459",
+          "state": "completed",
+          "complete": true,
+          "coverageScope": "scanner-reported-files",
+          "eligibleFiles": null,
+          "cleanupVerified": null,
+          "version": "1.182.1",
+          "checkedFiles": 7,
+          "problem": null,
+          "fileCoverage": {
+            "scope": "managed-copy",
+            "scanned": 7,
+            "total": 10,
+            "uncovered": 3,
+            "withoutLanguageRule": 2
+          },
+          "diagnostics": {
+            "total": 0,
+            "retained": 0,
+            "truncated": false
+          },
+          "modelCalls": 0,
+          "artifacts": 0
+        },
+        {
+          "tool": "trivy",
+          "id": "f75baba5-2830-425a-9c91-3d250ca28e23",
+          "state": "completed",
+          "complete": true,
+          "coverageScope": "scanner-reported-files",
+          "eligibleFiles": null,
+          "cleanupVerified": null,
+          "version": "0.76.1",
+          "checkedFiles": 1,
+          "problem": null,
+          "inputPolicy": "archive-xml-exclusions-1",
+          "diagnostics": {
+            "total": 0,
+            "retained": 0,
+            "truncated": false
+          },
+          "modelCalls": 0,
+          "artifacts": 0
+        }
+      ],
+      "snapshotFiles": 10,
+      "coverageComplete": false,
+      "findings": 47,
+      "pages": 10,
+      "modelCalls": 0
+    },
+    "cleanedRuns": 3,
+    "modelViewsPreserveCoverage": true,
+    "modelViewsChecked": [
+      "wait",
+      "status",
+      "run-report-pages"
+    ],
+    "processExitCode": 0,
+    "tempRemoved": true,
+    "deployedStateUnchanged": true,
+    "deployedBaseline": {
+      "programFiles": 157,
+      "programDigest": "28709ff69c47956d313012c6b827ced25429d4fb2deae59dbabe4710a7e74818",
+      "scannerManifestSha256": "6a3a04e4f0f81aaa77e4f312eb6cb90a28ebc75c6e0b1ee06b214dc48195c36c"
+    },
+    "candidateSourceSha256": "35bc8eaabfb7cedbe0fa0be77d4ad223333396398404427e1dc1e7c4a553eec4"
+  },
+  "limitations": [
+    "No production deployment or production service restart was exercised.",
+    "No actual DeepSeek model request was made; model-facing RPC projections were exercised.",
+    "No native browser interaction was exercised in this batch.",
+    "The 47 joint observations are unverified tool hits from a synthetic dependency fixture.",
+    "Publisher admission for Semgrep and Trivy DB remains unverified."
+  ]
+}

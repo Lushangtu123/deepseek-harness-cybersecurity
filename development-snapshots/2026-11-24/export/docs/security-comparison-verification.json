@@ -1,0 +1,287 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Los_Angeles",
+  "runId": "security-compare-20261029",
+  "feature": "immutable normalized scan observations and readonly same-project exact rule/location comparison",
+  "pluginRegression": {
+    "passed": 380,
+    "failed": 0,
+    "independentFocusedReviewPassed": 18,
+    "focusedReviewOverlapsFullSuite": true,
+    "reviewImportantFindings": 0
+  },
+  "newBackendCases": [
+    "immutable observations independent of mutable findings",
+    "legacy snapshot unavailable",
+    "policy/tool/completeness/cross-project guards",
+    "snapshot insert failure rolls back result",
+    "separate-store persistence and malformed snapshot rejection",
+    "ZAP unknown coverage and 100-item display limit",
+    "over-budget snapshot skips comparison without losing completed scan"
+  ],
+  "nativeAcceptance": {
+    "engagement": "personal-security-compare-20261029",
+    "firstRunId": "f52037f9-802c-474f-a87d-2ed6957e132b",
+    "secondRunId": "9710184d-d604-49e2-8940-eac81c5bf55d",
+    "comparison": {
+      "ok": true,
+      "engagement": "personal-security-compare-20261029",
+      "baseRunId": "f52037f9-802c-474f-a87d-2ed6957e132b",
+      "currentRunId": "9710184d-d604-49e2-8940-eac81c5bf55d",
+      "available": true,
+      "tool": "semgrep",
+      "summary": {
+        "added": 1,
+        "persisting": 1,
+        "notSeen": 1,
+        "uncovered": 0
+      },
+      "items": {
+        "added": [
+          {
+            "rule": "policy.harness.python.os-system",
+            "title": "动态 os.system：请核对命令来源，优先无 Shell 的参数数组",
+            "severity": "medium",
+            "location": "app.py:3"
+          }
+        ],
+        "persisting": [
+          {
+            "rule": "policy.harness.python.pickle",
+            "title": "pickle 反序列化：请验证数据可信度，勿直接接受外部输入",
+            "severity": "medium",
+            "location": "app.py:4"
+          }
+        ],
+        "notSeen": [
+          {
+            "rule": "policy.harness.python.eval",
+            "title": "动态 eval：请核对输入来源，优先使用受限解析器",
+            "severity": "high",
+            "location": "app.py:3"
+          }
+        ],
+        "uncovered": []
+      },
+      "truncated": false,
+      "notice": "按规则与完整位置精确匹配；代码移行可能表现为新增与未再次命中。未再次命中不等于已修复；覆盖未证实的记录保留为未知，不修改发现状态。",
+      "markdown": "# 扫描结果对比\n\n基线：f52037f9-802c-474f-a87d-2ed6957e132b · semgrep · 2026-10-30T02:11:09.887Z\n本次：9710184d-d604-49e2-8940-eac81c5bf55d · semgrep · 2026-10-30T02:11:12.438Z\n\n按规则与完整位置精确匹配；代码移行可能表现为新增与未再次命中。未再次命中不等于已修复；覆盖未证实的记录保留为未知，不修改发现状态。\n\n每类最多展示100条；数量来自完整已保存快照。\n\n## 新增命中位置 · 1\n\n- policy.harness.python.os-system · app.py:3 · 动态 os.system：请核对命令来源，优先无 Shell 的参数数组\n\n## 仍存在的命中位置 · 1\n\n- policy.harness.python.pickle · app.py:4 · pickle 反序列化：请验证数据可信度，勿直接接受外部输入\n\n## 已覆盖文件中未再次命中 · 1\n\n- policy.harness.python.eval · app.py:3 · 动态 eval：请核对输入来源，优先使用受限解析器\n\n## 覆盖未证实 · 0\n\n"
+    },
+    "allFindingsStillUnverified": true,
+    "ownedFixtureOnly": true,
+    "modelCalls": 0
+  },
+  "httpAcceptance": {
+    "authenticatedComparison": 200,
+    "summary": {
+      "added": 1,
+      "persisting": 1,
+      "notSeen": 1,
+      "uncovered": 0
+    },
+    "unauthenticatedStatus": 401,
+    "foreignOriginStatus": 403,
+    "crossProjectDenied": true,
+    "invalidIdDenied": true,
+    "legacyUnavailable": true,
+    "legacyReason": "旧任务没有完整扫描快照，无法推断历史命中集合",
+    "freshWebProcessReadPersistedSnapshots": true
+  },
+  "browserAcceptance": {
+    "browser": "IAB",
+    "baseUrl": "http://127.0.0.1:49226/",
+    "project": "personal-security-compare-20261029",
+    "selectedBaseline": "f52037f9-802c-474f-a87d-2ed6957e132b",
+    "selectedCurrent": "9710184d-d604-49e2-8940-eac81c5bf55d",
+    "visibleSummary": {
+      "added": 1,
+      "persisting": 1,
+      "notSeen": 1,
+      "uncovered": 0
+    },
+    "noticeVisible": true,
+    "downloadSucceeded": true,
+    "downloadExactNativeReportMatch": true,
+    "downloadSha256": "8080d3100129d87043772913c201640bec5ccac64c9cdbcba54516b57e3b098e",
+    "screenshot": "scan-comparison.jpg",
+    "modelCalls": 0,
+    "scope": "comparison button, visible counts and notice, actual Markdown download; no other UI flows retested"
+  },
+  "live": {
+    "programFilesMatched": 121,
+    "ruleHashMatched": true,
+    "runtimeManifestMatched": true,
+    "service": "active",
+    "activeScannerContainers": 0,
+    "preflight": {
+      "ok": true,
+      "readOnly": true,
+      "automaticChanges": false,
+      "scope": "local pinned images, rules and database identity; no scanner execution, model call, network download or GitHub latest check",
+      "tools": {
+        "semgrep": {
+          "ready": true,
+          "version": "1.182.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T02:17:21.510Z",
+          "cached": false,
+          "rules": {
+            "version": "local-reviewed-2",
+            "count": 16,
+            "languages": [
+              "javascript",
+              "python",
+              "typescript"
+            ]
+          }
+        },
+        "trivy": {
+          "ready": true,
+          "version": "0.76.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T02:17:21.510Z",
+          "cached": false,
+          "database": {
+            "state": "fresh",
+            "updatedAt": "2026-10-29T19:18:50.969Z",
+            "nextUpdate": "2026-10-30T19:18:50.969Z",
+            "ageDays": 0
+          },
+          "lastUpdate": {
+            "state": "current",
+            "checkedAt": "2026-10-29T22:59:00.361501+00:00"
+          }
+        },
+        "zap": {
+          "ready": true,
+          "version": "2.17.0",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T02:17:21.510Z",
+          "cached": false
+        }
+      }
+    },
+    "hostIsolationValidated": true
+  },
+  "deployment": {
+    "changedGuestFiles": [
+      "tools/dsh-purge-personal-1.1.77-personal.1/PERSONAL-CHANGES.md",
+      "tools/dsh-purge-personal-1.1.77-personal.1/client.js",
+      "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-client.mjs",
+      "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-comparison.mjs",
+      "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-workbench.mjs",
+      "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/tools.js"
+    ],
+    "forkHashesMatched": 121,
+    "guestBackup": "/home/purge/downloads/security-compare-20261030T021036Z",
+    "serviceRestarted": true
+  },
+  "snapshotStorage": {
+    "table": "security_run_snapshot",
+    "schemaVersion": 1,
+    "privateDatabaseExported": false,
+    "findingsLimit": 2000,
+    "coverageFilesLimit": 20000,
+    "jsonBytesLimit": 4194304,
+    "transaction": "same SAVEPOINT as findings and completed state",
+    "backfillLegacy": false,
+    "sourceRollback": "retain private database/table; restore five existing source files and remove added comparison module"
+  },
+  "comparisonLimits": {
+    "identity": "exact rule ID and complete location including line",
+    "sameToolAndCoverageKeyRequired": true,
+    "oldRunInference": false,
+    "missingObservationMeansFixed": false,
+    "changesFindingState": false,
+    "displayAndMarkdownPerCategory": 100,
+    "uiRecentTaskWindow": 30,
+    "zapAbsentObservations": "coverage unconfirmed"
+  },
+  "unchanged": [
+    "scanner images",
+    "16 local-reviewed-2 rules",
+    "Trivy database",
+    "host isolation and restricted VM egress"
+  ],
+  "recovery": {
+    "point": "ready-security-audit-20261029",
+    "currentUpdateIncluded": false,
+    "newWholeVmSnapshot": false,
+    "sourceBackup": "/home/purge/downloads/security-compare-20261030T021036Z",
+    "oldPointRules": 6,
+    "oldPointProgramFiles": 120
+  },
+  "scope": {
+    "modelCalls": 0,
+    "syntheticSemgrepRuns": 2,
+    "realProjectScans": 0,
+    "publicTargetScans": 0,
+    "gitPush": false
+  },
+  "commandReceipts": {
+    "compare-red": {
+      "scope": "compare-red",
+      "returncode": 1,
+      "sha256": "be7603386cec0b79937432b500d4bb8ef2bda6fdd91c408b86998627ddef980d"
+    },
+    "compare-green": {
+      "scope": "compare-green",
+      "returncode": 0,
+      "sha256": "3408100fda0cef8ac423d6a6a37ccd0a055f036509a247e1dc74d4b8c4b1bcb8"
+    },
+    "ui-red": {
+      "scope": "ui-red",
+      "returncode": 1,
+      "sha256": "50c55a329f0da53daf01c8f9875ff9a431ab3a29b45298fec11fb30ca1757ce4"
+    },
+    "ui-green": {
+      "scope": "ui-green",
+      "returncode": 1,
+      "sha256": "7998da91d25a51f0bfa688e272fd5f1850a5ae444b62fec695200cedb270bd61"
+    },
+    "ui-green-2": {
+      "scope": "ui-green",
+      "returncode": 0,
+      "sha256": "a5099cc179c83f54a28e661101c702bb86823bbf3df4e095d0ff2c7d208152d1"
+    },
+    "focused-final": {
+      "scope": "focused-final",
+      "returncode": 0,
+      "sha256": "72e941ba6dfc16b1e09ffbf98208cfcbf28990439813c366815461dd6b847180"
+    },
+    "build-client": {
+      "scope": "build",
+      "returncode": 0,
+      "sha256": "4fe8adad53db383345ded2f2a722d7f522fb589c02e30c0d12fdf24567b0e197"
+    },
+    "package-final": {
+      "scope": "package-final",
+      "returncode": 0,
+      "sha256": "d8e49d86bc94425cf96c419187b75e804f2ef2b12e8a0116996b41a065381cd2"
+    },
+    "deployment": {
+      "scope": "deployment",
+      "returncode": 0,
+      "sha256": "a00ade65ca42354645e0f19105d9ec2933baeac6e6d1c5cd1e58861233bceac3"
+    },
+    "native-acceptance": {
+      "scope": "native-acceptance",
+      "returncode": 0,
+      "sha256": "e4df2455274229780e26657f5de387ca6c470fdd8f1708a77676b00e7b080a10"
+    },
+    "http-final": {
+      "scope": "http-final",
+      "returncode": 0,
+      "sha256": "d022def7dd665f547476c27e056c18e70a8a0377e6861a8793db5281fa3522c9"
+    },
+    "live-final": {
+      "scope": "deployment",
+      "returncode": 0,
+      "sha256": "a7fa625eadb35c268476269dce587616c6a1337e26b731935f636d4e83834bf1"
+    }
+  },
+  "history": "Missing-method and missing-UI red tests retained. Initial UI green had a syntax error; corrected ui-green-2 and final 380-test suite passed. No final success erases earlier failures."
+}

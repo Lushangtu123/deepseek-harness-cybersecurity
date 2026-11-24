@@ -1,0 +1,121 @@
+{
+  "state": "reviewed-candidate-archived-live-validation-pending",
+  "scopeBlockers": 0,
+  "evidence": {
+    "installedBeforeSha256": "69cc27ae32ba7be4362e6a4d94a4f253ac54d573380c98f58fa40bdb8758e401",
+    "exportBeforeSha256": "12dcfa4c93f06ef482145ab3691819ea01ca261faed0dcfff7122613acca643c",
+    "installedCandidateSha256": "19bd85c390e6d7482f78e77f6fe9de733258df0454d9a7921125be82b4a48bbf",
+    "exportCandidateSha256": "bd4aa2c4beb32ec7cba8b5bebec531b23aae3983a26a6ae47babb4b1813a044c",
+    "variantDifference": "storage_capacity only",
+    "testSuites": [
+      {
+        "log": "ssh-queue-activity.green.txt",
+        "source": "candidate/ssh-queue-activity.test.py",
+        "tests": 8,
+        "logSha256": "3432a73038cc385370a50e32e22984cb61d78f62eb3b7c6b7cfdcc7908977ee7",
+        "sourceSha256": "8417a2cdd5d55c57960cc2d919a05c023c3e9e2435bd59a97f2c10056c8e5d43",
+        "candidateSha256": "89509a43089b36444c909e48a91c3f31c3800143a19c939651ba1dcff1803ffa"
+      },
+      {
+        "log": "ssh-diagnostics.green.txt",
+        "source": "candidate/ssh-diagnostics.test.py",
+        "tests": 13,
+        "logSha256": "81f865a029963a277223db227dbffebb1ae22c4a64a5c017c3adc569ba25781a",
+        "sourceSha256": "a2d300edb81af41d3a738bb756d504b3d19c72153f44a426e6a23527c80dd5ed",
+        "candidateSha256": "89509a43089b36444c909e48a91c3f31c3800143a19c939651ba1dcff1803ffa"
+      },
+      {
+        "log": "clock-maintenance.green.txt",
+        "source": "candidate/clock-maintenance.test.py",
+        "tests": 4,
+        "logSha256": "d094b1bd2c8318c96097f80c50da282add5b2972970a77046de8db6c8935f6ca",
+        "sourceSha256": "2a91898a5c38cbcacf5a282cf1f49673e9b5b967884778a817730db0ab20fc10",
+        "candidateSha256": "89509a43089b36444c909e48a91c3f31c3800143a19c939651ba1dcff1803ffa"
+      },
+      {
+        "log": "lifecycle-lock.green.txt",
+        "source": "candidate/lifecycle-lock.test.py",
+        "tests": 8,
+        "logSha256": "28d20fe247ac7afb8faa3676a245a65578ff0dce2ced1217a43ea40b44470334",
+        "sourceSha256": "4936869600108b8b2ea22adc97194a9dfb91653e8f0e77f1e2c6d5cec5eec2be",
+        "candidateSha256": "89509a43089b36444c909e48a91c3f31c3800143a19c939651ba1dcff1803ffa"
+      },
+      {
+        "log": "ssh-queue.scoped-green.txt",
+        "source": "candidate/ssh-queue.test.py",
+        "tests": 11,
+        "logSha256": "a7814938f7fa1821d6ff4b44b53eed5ff2fe2eaa4d580030e93ff5a605c49fb0",
+        "sourceSha256": "07979ee7d2d38fd9a0796d8f53e960c8cf6680ce4569533d7bffda6aeece8e00",
+        "candidateSha256": "89509a43089b36444c909e48a91c3f31c3800143a19c939651ba1dcff1803ffa"
+      },
+      {
+        "log": "ssh-correlation.scoped-green.txt",
+        "source": "candidate/ssh-correlation.test.py",
+        "tests": 9,
+        "logSha256": "4de57a209922d20b0c6e3f76f6d9a8647c9550bece96ea431ce789b95256936b",
+        "sourceSha256": "f095297f0f5f9aafc448fe8553677350857422e0516821d161ecee7e435ea310",
+        "candidateSha256": "89509a43089b36444c909e48a91c3f31c3800143a19c939651ba1dcff1803ffa"
+      },
+      {
+        "log": "export-capacity.green.txt",
+        "source": "export-candidate/storage-capacity.test.py",
+        "tests": 3,
+        "logSha256": "199ba496f288116d36c62f29346d4fbf0bd75745a1c893abfcbdaa4c6d5b1033",
+        "sourceSha256": "30f5d2e83beeddefec2158c8cd33ece935b544a5f2f92ee6d81742e0410d4928",
+        "candidateSha256": "f4efdc3b846d66234858a94bbf73c4e57dd186c7e76541a48f71cf1f55d8f36a"
+      }
+    ],
+    "testsPassed": 56,
+    "newVmDiagnosticRequests": 0,
+    "sourceMatchesOriginalBeforeArchive": true,
+    "priorSandboxTestFailure": "ssh-correlation used ps for test-owned descendants and was rerun with scoped execution",
+    "r1InstalledCandidateSha256": "89509a43089b36444c909e48a91c3f31c3800143a19c939651ba1dcff1803ffa",
+    "r1ExportCandidateSha256": "f4efdc3b846d66234858a94bbf73c4e57dd186c7e76541a48f71cf1f55d8f36a",
+    "firstReviewReceiptSha256": "d2f77fb654cb49476b85bda60f50b649d4c19e58ebf96f9e861d471a1717d143",
+    "firstReviewReportSha256": "453315014c577701c15e27def9a6c1cf1763fa7408c45ea592aafa02ac60ad15",
+    "r2TargetedTestsPassed": 9,
+    "r2TargetedTestSourceSha256": "c7ccf866b0c9ea52330fd6f5afa4f52e0b7df8a3cfa7c276766c09cde1d3f37d",
+    "r2TargetedTestLogSha256": "d4f7252748cb152dae1a1fbd3ce79b70a959cb54c561998e15636b2d0fc4a7ba",
+    "r2RedLogSha256": "d367b6eb86b8319a13c3cfbe906b1cfcfab41892e3e97c3d363ab37d4a5c4796",
+    "r2CodeChange": "observedAtUnix integer/float range check in the two variants only"
+  },
+  "triage": {
+    "scopeBlockers": 0,
+    "canArchive": true,
+    "reportSha256": "92bee1b3953eddde2c6c48567a1301ddfc8b0fc9c44b02c9e152e6ba986a3fb3",
+    "disposition": "R1 and R2 scoped review complete; controlled runtime validation pending",
+    "closed": [
+      "D1 oversized timestamp raises a bounded format error instead of OverflowError"
+    ],
+    "clarifications": [
+      "waitMs on a real queue path is frozen before legacy failure log I/O",
+      "elapsedMs may include legacy failure log I/O",
+      "new journal is best-effort and keeps old SSH failure history separate"
+    ],
+    "retainedGaps": [
+      "Live sampling and cancellation behavior on the deployed entry",
+      "Historical holder attribution",
+      "Direct Trivy upload and acceptance relay outside the queue journal"
+    ]
+  },
+  "review": {
+    "model": "DeepSeek-V4.1-Flash",
+    "apiAlias": "deepseek-flash",
+    "effort": "high",
+    "samePromptSha256": "316f3618bcf4e65b9aa7ce3bfe8a0ce44e3231cca28b632276238251057a5efe",
+    "claudeQuotaReceiptSha256": "8ac54f1a2bde23227dbdf1980ecc02541455dfbcaa0af7a60389bcd6eac77eaa",
+    "receiptSha256": "95ceb1e7da33d3a992f59ae121b61433da54ac5e2744cfd987151d5fa4510678",
+    "reportSha256": "92bee1b3953eddde2c6c48567a1301ddfc8b0fc9c44b02c9e152e6ba986a3fb3",
+    "reviewTransportCleanup": {
+      "removed": true,
+      "workerStopped": true,
+      "dailyProgramUnchanged": true,
+      "dailyProgramFilesChecked": 169,
+      "credentialCopiedToHost": false,
+      "scope": "only owned completed model-review scratch"
+    }
+  },
+  "candidateDeployed": false,
+  "productionRootCauseConfirmed": false,
+  "published": false
+}

@@ -1,0 +1,196 @@
+✔ deep rules are a fixed17 bundle preserving every baseline16 rule (1.616458ms)
+✔ only a matching deep workspace can select the pinned17 manifest (0.34625ms)
+✔ staging pins exact17 bytes and rejects changed base or bundle without overwriting an existing stage (3.881ms)
+✖ runtime deep readiness hashes the shipped bundle before advertising it and invalidates cached evidence (3.021791ms)
+(node:31791) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Ordinary plan reports missing R3 qualification without handing off files or starting tools (27.357333ms)
+✔ Deep S1 dispatch persists the original mode and identities and launches only selected steps (176.236042ms)
+✔ Mode dispatch rejects unqualified adapters, invalid modes and over-budget work before creating a task (19.4545ms)
+✔ A pinned runtime identity change after acceptance prevents dispatch of the original step (16.835791ms)
+✔ Child admission cannot swap the pinned identity after the parent pre-dispatch check (80.68875ms)
+✔ Mode admission requires a current runtime identity instead of trusting a ready flag (18.190416ms)
+✔ Mode contract survives reopening the existing database and old joint tasks retain a null mode (232.151042ms)
+✔ Native service mode requests share one ledger and protect mode metadata against redaction (176.318084ms)
+✔ Ordinary submission binds the current preview, exact steps and bounded budget before R3 (24.032333ms)
+✔ A late S1 scanner result does not persist findings after the monotonic deadline (84.737459ms)
+✔ Managed Semgrep persists Python review evidence separately from findings (151.860792ms)
+✔ deep Semgrep selection binds the fixed profile to parent, child options and persisted runtime details (164.659834ms)
+✔ deep rule base mismatch is unavailable without silently dispatching the baseline (16.609583ms)
+✔ a deep profile changed after acceptance is rejected before handing off the source (15.733209ms)
+✖ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>delete s.rules (15.8285ms)
+✖ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>s.rules=null (14.943083ms)
+✖ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>s.deepRules={ready:false} (15.123917ms)
+✖ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>delete s.deepRules (15.379208ms)
+✖ unconfirmed executed rule receipt cannot persist a selected17 result: undefined (163.877083ms)
+✖ unconfirmed executed rule receipt cannot persist a selected17 result: {"mode":"ordinary"} (162.2875ms)
+✖ unconfirmed executed rule receipt cannot persist a selected17 result: {"rulesSha256":"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"} (164.987167ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 17
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1833.323917
+
+✖ failing tests:
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/deep-rule-profile.test.mjs:10:1
+✖ runtime deep readiness hashes the shipped bundle before advertising it and invalidates cached evidence (3.021791ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - false
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/deep-rule-profile.test.mjs:10:856)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: false,
+    operator: 'strictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:198:108
+✖ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>delete s.rules (15.8285ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:198:358)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:198:108
+✖ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>s.rules=null (14.943083ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:198:358)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:198:108
+✖ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>s.deepRules={ready:false} (15.123917ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:198:358)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:198:108
+✖ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>delete s.deepRules (15.379208ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:198:358)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:199:81
+✖ unconfirmed executed rule receipt cannot persist a selected17 result: undefined (163.877083ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'completed'
+  - 'failed'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:199:493)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'completed',
+    expected: 'failed',
+    operator: 'strictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:199:81
+✖ unconfirmed executed rule receipt cannot persist a selected17 result: {"mode":"ordinary"} (162.2875ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'completed'
+  - 'failed'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:199:493)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'completed',
+    expected: 'failed',
+    operator: 'strictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:199:81
+✖ unconfirmed executed rule receipt cannot persist a selected17 result: {"rulesSha256":"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"} (164.987167ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'completed'
+  - 'failed'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:199:493)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'completed',
+    expected: 'failed',
+    operator: 'strictEqual'
+  }

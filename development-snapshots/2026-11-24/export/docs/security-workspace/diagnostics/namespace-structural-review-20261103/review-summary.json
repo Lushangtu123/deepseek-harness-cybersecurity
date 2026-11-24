@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "reviews": [
+    {
+      "receipt": "claude-review.json",
+      "scope": "initial offline reviewer: H1/H2/M1-M3 required corrections",
+      "requestedModel": "claude-opus-5-5",
+      "requestedEffort": "high",
+      "actualOutputModels": [
+        "claude-opus-5-5"
+      ],
+      "acceptedAsRequestedModel": true,
+      "receiptSha256": "822a2e8e39fee9c95730d209aa9ae581cc12ab0ff87960bd9025c0e7f430c0cc",
+      "method": "Read-only quoted-code review; tools/MCP disabled; no native test execution or independent vulnerability truth"
+    },
+    {
+      "receipt": "claude-fix.json",
+      "scope": "first fixes: new B1/B2/B3 blockers, not accepted",
+      "requestedModel": "claude-opus-5-5",
+      "requestedEffort": "high",
+      "actualOutputModels": [
+        "claude-opus-5-5"
+      ],
+      "acceptedAsRequestedModel": true,
+      "receiptSha256": "8ec7a8685b5c523ba0a9a46d5741afd4b85c13f93064aaf8abeb3c75e410e139",
+      "method": "Read-only quoted-code review; tools/MCP disabled; no native test execution or independent vulnerability truth"
+    },
+    {
+      "receipt": "claude-final.json",
+      "scope": "three blocker fixes: prose accepted; mixed model accounting rejected for requested-model closure",
+      "requestedModel": "claude-opus-5-5",
+      "requestedEffort": "high",
+      "actualOutputModels": [
+        "claude-opus-5-5",
+        "claude-opus-4-8"
+      ],
+      "acceptedAsRequestedModel": false,
+      "receiptSha256": "a337545c7179387a7b3e8df261d5742fbd46abbcd48e23179e1c16e2b3208ddd",
+      "method": "Read-only quoted-code review; tools/MCP disabled; no native test execution or independent vulnerability truth"
+    },
+    {
+      "receipt": "claude-focused.json",
+      "scope": "focused B1/B2/B3 and direct regressions: actual requested model, scoped lexical acceptance",
+      "requestedModel": "claude-opus-5-5",
+      "requestedEffort": "high",
+      "actualOutputModels": [
+        "claude-opus-5-5"
+      ],
+      "acceptedAsRequestedModel": true,
+      "receiptSha256": "d58795e5549164d901f643c241a489862bd24fcea1aeb305eefca5cfbb565e50",
+      "method": "Read-only quoted-code review; tools/MCP disabled; no native test execution or independent vulnerability truth"
+    }
+  ],
+  "finalOutcome": "Three final fixes accepted as offline lexical/structural observations only; not deployment, R3, identity or vulnerability truth",
+  "initialFindingsClosed": [
+    "Real scanner UTF8/CRLF/tab byte-range fixture plus absolute offset check",
+    "Conservative type parameters, namespace effects and dynamic references",
+    "Parameter-name label and evaluation order; prefix bindings; default evaluation scope",
+    "Ignored reasons counted and partial status for unrecognized applicable results",
+    "Standalone stdlib reader and isolated CLI"
+  ],
+  "lastFindingsClosed": [
+    "Definition headers traversed for enclosing bindings; nested source-name stores retained",
+    "Runtime encoding cookie checked before UTF8 AST observations; nonUTF8/BOM unmatched",
+    "All direct or renamed builtins imports conservative unknown"
+  ],
+  "finalReviewerSourceSha256": "881b629bca41c8288c522a6a0a7a625d94a0356ee08e74df9fcec8a0d00c88eb",
+  "finalTestsSha256": "ac31c9ed01e4a62ee3ee388cd8c84178afe1c605cec8a1972ca32ac79aec93ef",
+  "focusedPromptSha256": "270ff8e0f3c7fb0d2b07ed2113f1e472386c27acd4f06b0c0919d5819449b772",
+  "sourceOrTestsChangedAfterFocusedReview": false,
+  "macVmTestsPassed": 23,
+  "independentQualificationCasesAdded": 0,
+  "reviewerDeployed": false,
+  "r3Qualified": false,
+  "rejectedModelClosure": "claude-final.json contains output by both5.5and4.8, so its self-described acceptance does not count as requested-model closure. One focused retry returned5.5only.",
+  "retainedLimits": [
+    "Fixed-set syntax is conditional; string semantics and fixed-code safety unknown",
+    "Builtin identity and external control remain unverified; indirect namespace/import effects not excluded",
+    "Header/lambda/comprehension traversal and whole-file policy can over-report conflicts",
+    "No independent holdout or population FPR/recall evidence",
+    "Final model acceptance was targeted to three fixes; not a fresh full security audit or native rerun",
+    "Unsigned source/scan/protocol records provide internal consistency, not cryptographic origin proof"
+  ],
+  "previousSKFRequestedModelClosureComplete": false
+}

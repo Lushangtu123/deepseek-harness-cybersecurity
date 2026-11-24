@@ -1,0 +1,437 @@
+[
+  {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  {
+    "user": "1000:1000",
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  }
+]

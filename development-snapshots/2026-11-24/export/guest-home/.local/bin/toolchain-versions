@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /usr/bin/python3 /home/purge/.dsh-improved/tooling/toolchain-version-checker/check_versions.py "$@"

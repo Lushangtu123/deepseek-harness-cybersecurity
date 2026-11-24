@@ -1,0 +1,14 @@
+...F.
+======================================================================
+FAIL: test_project_defined_dependency_lock_cannot_authorize_code (__main__.SnapshotTest.test_project_defined_dependency_lock_cannot_authorize_code)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/verifier_snapshot.test.py", line 24, in test_project_defined_dependency_lock_cannot_authorize_code
+    with self.assertRaisesRegex(ValueError,'Untrusted verifier dependency lock'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.153s
+
+FAILED (failures=1)

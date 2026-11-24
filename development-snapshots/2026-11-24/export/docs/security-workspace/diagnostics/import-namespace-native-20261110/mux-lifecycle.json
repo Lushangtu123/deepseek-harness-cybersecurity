@@ -1,0 +1,1 @@
+{"authenticatedMaster": true, "masterPID": 50691, "clientFallbackDisabled": true, "maxConcurrentExecChannels": 8, "maxConnectionHandlers": 16, "peakExecClients": 8, "admissionTimeoutSeconds": 5.0, "maxQueuedBytesPerConnection": 65536, "masterStopped": true, "remainingPids": [], "stopped": true, "controlDirectoryRemoved": true}

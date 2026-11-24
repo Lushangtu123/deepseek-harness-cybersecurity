@@ -1,0 +1,14 @@
+F
+======================================================================
+FAIL: test_independent_snapshot_binds_code_dependencies_recipes_and_policy (__main__.SnapshotTest.test_independent_snapshot_binds_code_dependencies_recipes_and_policy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/verifier_snapshot.test.py", line 6, in test_independent_snapshot_binds_code_dependencies_recipes_and_policy
+    script=HERE/'verifier_snapshot.py';self.assertTrue(script.exists(),'Verifier snapshot missing');s=importlib.util.spec_from_file_location('verifier_snapshot',script);m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+                                       ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Verifier snapshot missing
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)

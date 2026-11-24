@@ -1,0 +1,18 @@
+{
+  "dailyProgramFilesMatched": 169,
+  "servicesActive": {
+    "dsh-original.service": true,
+    "harness-security.socket": true,
+    "harness-security.service": true
+  },
+  "ruleCount": 16,
+  "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+  "realFindingStates": {
+    "unverified": 95
+  },
+  "diagnosticContainersAbsent": true,
+  "diagnosticDirectoriesAbsent": true,
+  "namespaceWorkersAbsent": true,
+  "browseProject": "phishguard-model-closure-20261102",
+  "hostManagerUnchanged": true
+}

@@ -1,0 +1,15 @@
+{
+  "programFiles": 166,
+  "rollbackFiles": 165,
+  "servicesRestarted": {
+    "dsh-original.service": true,
+    "harness-security.socket": true,
+    "harness-security.service": true
+  },
+  "protectedFileDigestsMatched": 47,
+  "archiveSha256": "1a3dc95b1cd88ea5089f53c85913e6f4968a06b8390d6c2e6b5df66d1ee7ff3c",
+  "backup": "/home/purge/.cache/harness-source-location-release-20261103",
+  "candidateServiceActive": true,
+  "databaseProtection": "logical dump; other protected files byte digest",
+  "physicalProtectedFilesChangedAfterStop": 1
+}

@@ -1,0 +1,38 @@
+{
+  "id": "ab620399-7dab-4095-8a9a-608195f52d3a",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Scoped verdict: **conditional yes only for diagnostic structural binding; no for acceptance/attestation.** The Node path supports the current v4 fixture’s used-sample decisions only when report, receipt, evidence artifact, source, dependency, challenge, cleanup, and verifier-receipt hashes remain bound. The supplied tests support rejection of label-only/human-review main-score confirmation and the tested changed point/source/dependency/challenge/witness/verifier-receipt mutations. They also confirm the samples remain `blocked` with `r3Qualified:false`. Not supported by current evidence: independent provenance, original artifact authenticity, proof correctness, or any R3/live claim.\n\n1. **Safety blocker: verifier code is not pinned to reviewed bytes.** `validVerificationPlan` checks `v.code` keys/hash format and compares only `reviewerFiles` to `staticSnapshot.files`. `python_execution_verify.py` and `verifierControllerSha256` are only checked with `hashPattern`; neither is bound to a reviewed source hash. A self-consistent freeze/run could carry a substituted verifier code hash and still pass this Node binding. The current fixture cannot prove otherwise, and the tests do not mutate this plan field with recomputed freeze/run hashes.\n\n2. **Safety blocker: verification-plan completeness is not enforced.** `verificationArtifacts` does not require every frozen request to be consumed. Empty or partial equal-length `verifierExecutions`/`verificationArtifacts` arrays can yield no `verification-*` issue; missing planned artifacts only downgrade outputs that claim `confirmed`/`excluded` to `unknown`. A v4 run can therefore have incomplete verifier coverage without a coverage blocker if thresholds tolerate unknowns. No partial-plan test is supplied.\n\n3. **Conservative limitation: exclusion proofs remain self-attested.** `observedDecision` accepts an `excluded` result from a reported `proof.guardLine < proof.sinkLine`, function/parameter identity, and observed literal calls; it does not inspect source guard dominance or prove the guard covers the sink. A recomputed report with a nominal proof can be accepted. This is not label-only if calls/proof are present, but it requires independent proof review beyond the Node gate.\n\nCurrent support is therefore scoped to exact-hash structural rejection of the tested mutations, not independent verification of the reported decisions."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 16040,
+    "completion_tokens": 10361,
+    "total_tokens": 26401,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 9859
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 16040
+  },
+  "streamDone": true,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 46342,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "a46c94e085e9816234e67864d12336d67511ba13e592103ae6513c0ab0731cdb",
+  "promptSha256": "46724af9f2b52bd67b1db02c5118100cbc36c75f081b13146a5336d88fda490d"
+}

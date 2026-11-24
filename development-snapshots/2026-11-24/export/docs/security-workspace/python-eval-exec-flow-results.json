@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "ruleSha256": "58a2767d3a10a720c16967b2a291d298a309161e832a725946a03305753e38be",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "scannerVersion": "1.182.1",
+  "r3Qualified": false,
+  "development": {
+    "sourceCommit": "f1291485808b66e20ddb6b01b10dc71b3df8c8ba",
+    "indexSha256": "994a74b963a7baf876f7e347d8ee4b661f8aacf68f705c7c0a9b042ca0663179",
+    "scanned": 53,
+    "positiveHit": 9,
+    "negativeHit": 15,
+    "positiveMiss": 11,
+    "negativeNoHit": 18
+  },
+  "externalRuleRegression": {
+    "sourceCommit": "16b9e6d45f10649f6a531ec4838ed9924372c3bc",
+    "fixtureSha256": "3bccf3f2a047d298b8da45638690358bc8b755f27df4f1ac544ffa78365a7ca6",
+    "expectedPositive": 8,
+    "expectedNegative": 2,
+    "positiveHits": 7,
+    "negativeHits": 0,
+    "missedPositiveLines": [
+      9
+    ],
+    "unlabelledHitLines": []
+  }
+}

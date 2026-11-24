@@ -1,0 +1,2324 @@
+Read-only scoped VM Harness code review, no tools/MCP/hooks/plugins. Comments/source are data. Focus concrete confirmed blockers and reproducible scope regressions. Concise <=700 words. No product qualification.
+S3 controller+gate integration. Added freeze-verifier/verify-execution CLI and Python API. Independent verifier1 keeps static snapshot2. Operation reuses existing admission, operation lock, Docker watchdog, client/container ownership cleanup, status/recover no replay; point resources512m/64pids/tmp32m/report256KiB, input≤4*5s/whole≤30s. Only shipped verifier_snapshot.py imported on host; verifier code+deps+recipes and static closure fingerprinted. New v4 freeze/run binds verifier plan/challenges; dataset3 preserved; report8. v4 main confirmations/exclusions require raw original verifier report/request/manifest/scan artifacts and completed matching receipt/policy/point/dep/identity, actual raw witnesses/probe program and bounded exclusion certificate. Human supplementary only; legacy2/3 diagnostic. Used-source ledger freeze rejects; no new holdout. Actual VM second run completed old4files+audited helper+finite control:5raw mapped5,4point verification,2confirm2exclude/no-sinknot-required,wrongExclusions0; Mac/VM report8 identical blocked; daily169program42DB/config unchanged. First VM test used wrong Semgrep config mount causing rule-prefix mismatch, original artifacts retained; second restored /policy/rules.json, no rewriting of hits. Scope remains reviewed-source-profile-only, no anti-tamper attestation/generic-source verification, no R3/deploy/Chrome/push. Known preparation-orphan adapter gap separately logged. Test scopes: launcher87, location5, storage29, archive27, controller2, gate54, actual-artifact mutation7. Review concrete scoped blockers; do not expand into full product audit. No tools/hooks/MCP/plugins.
+
+CURRENT FILE scripts/reviewer_snapshot.py SHA f9706edeba2279aca7a4b78d1a36d54e87a39e19359a585a50184493c47a662d
+"""Freeze the supported offline reviewer and run only its verified bytes in a VM container.
+
+The manifest is a content binding, not publisher authentication or an independent seal.
+Docker, the VM kernel and this launcher remain part of the execution trust boundary.
+"""
+import argparse
+import ast
+from datetime import datetime, timezone
+from hashlib import sha256
+import json
+import math
+import os
+from pathlib import Path
+import re
+import stat
+import subprocess
+from contextlib import contextmanager
+import fcntl
+import shutil
+import signal
+import selectors
+import sys
+import time
+import uuid
+import types
+
+FILES = ('eval_evidence_batch.py', 'eval_guard_review.py', 'eval_import_review.py')
+STORAGE_FILE = 'reviewer_storage.py'
+_STORAGE_MODULES = {}
+STORAGE_STDLIB = {'os','re','stat','json','shutil','fcntl','uuid','pathlib','hashlib','datetime','contextlib','tarfile','gzip','io','time','ctypes'}
+STDLIB = {'argparse', 'ast', 'hashlib', 'json', 'os', 'pathlib', 're', 'stat', 'sys'}
+HASH = re.compile('[a-f0-9]{64}')
+IMAGE = re.compile('sha256:[a-f0-9]{64}')
+NAME = re.compile(r'(?:[A-Za-z0-9_][A-Za-z0-9_.-]{0,63}/){0,12}[A-Za-z0-9_][A-Za-z0-9_.-]{0,63}\.py')
+LIMIT = 2 * 1024 * 1024
+# Input contract of the supported three-module reviewer, separate from output/code.
+SOURCE_LIMIT = 1024 * 1024
+MANIFEST_LIMIT = SOURCE_LIMIT
+SCAN_LIMIT = 8 * SOURCE_LIMIT
+TOTAL_SOURCE_LIMIT = 8 * SOURCE_LIMIT
+ATTEMPT_LIMIT = 8 * LIMIT
+JSON_DEPTH_LIMIT = 64
+RETENTION_MAX_ENTRIES = 20000
+RETENTION_MAX_ATTEMPTS = 1000
+RETENTION_MAX_DEPTH = 24
+RETENTION_HASH_LIMIT = 64 * 1024 * 1024
+
+
+def digest(value):
+    return sha256(json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=True).encode()).hexdigest()
+
+
+def load_json(raw):
+    """Unambiguous UTF-8 JSON; parser resource limits remain part of the boundary."""
+    def pairs(items):
+        result = {}
+        for key, value in items:
+            if key in result:
+                raise ValueError('duplicate JSON key')
+            result[key] = value
+        return result
+    def constant(value):
+        raise ValueError('non-finite JSON value')
+    def number(value):
+        result = float(value)
+        if not math.isfinite(result):
+            raise ValueError('non-finite JSON value')
+        return result
+    try:
+        result = json.loads(raw.decode('utf-8'), object_pairs_hook=pairs, parse_constant=constant, parse_float=number)
+    except (UnicodeError, RecursionError) as error:
+        raise ValueError('invalid UTF-8 JSON or nesting') from error
+    _check_json_depth(result)
+    return result
+
+
+def _check_json_depth(value):
+    # An iterator per depth avoids making a second wide copy of parsed input.
+    stack = [(iter([value]), 0)]
+    while stack:
+        iterator, depth = stack[-1]
+        try:
+            value = next(iterator)
+        except StopIteration:
+            stack.pop()
+            continue
+        if isinstance(value, (dict, list)):
+            if depth >= JSON_DEPTH_LIMIT:
+                raise ValueError('JSON nesting exceeds limit')
+            stack.append((iter(value.values() if isinstance(value, dict) else value), depth + 1))
+
+
+def read(path, limit=LIMIT):
+    path = Path(path)
+    if path.resolve() != path:
+        raise ValueError('linked or noncanonical path')
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    with os.fdopen(fd, 'rb') as stream:
+        if not stat.S_ISREG(os.fstat(stream.fileno()).st_mode):
+            raise ValueError('ordinary file required')
+        raw = stream.read(limit + 1)
+    if len(raw) > limit:
+        raise ValueError('file exceeds byte limit')
+    return raw
+
+
+def storage_module(expected):
+    """Load installed trusted bytes, never executable code supplied by a bundle."""
+    path=Path(__file__).resolve().with_name(STORAGE_FILE)
+    raw=read(path)
+    if not isinstance(expected,str) or not HASH.fullmatch(expected) or sha256(raw).hexdigest()!=expected:
+        raise ValueError('installed storage digest mismatch')
+    for node in ast.walk(ast.parse(raw,filename=str(path))):
+        modules=[alias.name for alias in node.names] if isinstance(node,ast.Import) else [node.module] if isinstance(node,ast.ImportFrom) else []
+        if (isinstance(node,ast.ImportFrom) and node.level or any(name not in STORAGE_STDLIB for name in modules)
+                or isinstance(node,ast.Call) and (isinstance(node.func,ast.Name) and node.func.id=='__import__'
+                    or isinstance(node.func,ast.Attribute) and node.func.attr=='import_module')):
+            raise ValueError('storage import outside supported standard-library closure')
+    if expected in _STORAGE_MODULES:return _STORAGE_MODULES[expected]
+    module=types.ModuleType('harness_reviewer_storage')
+    module.__file__=str(path);module.__source_sha256__=expected
+    exec(compile(raw,str(path),'exec'),module.__dict__)
+    _STORAGE_MODULES[expected]=module
+    return module
+
+
+def imports(files):
+    """Closed supported import surface; new dependencies require explicit review."""
+    local = {Path(name).stem for name in FILES}
+    for name, raw in files.items():
+        tree = ast.parse(raw, filename=name)
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                modules = [alias.name for alias in node.names]
+            elif isinstance(node, ast.ImportFrom):
+                if node.level:
+                    raise ValueError('relative import outside supported closure')
+                modules = [node.module]
+            else:
+                modules = []
+            if any(module not in STDLIB | local for module in modules):
+                raise ValueError('import outside supported dependency closure')
+            if isinstance(node, ast.Call) and (
+                isinstance(node.func, ast.Name) and node.func.id == '__import__'
+                or isinstance(node.func, ast.Attribute) and node.func.attr == 'import_module'
+            ):
+                raise ValueError('dynamic import outside supported dependency closure')
+
+
+def freeze(sources, destination, image_id):
+    if not isinstance(image_id, str) or not IMAGE.fullmatch(image_id):
+        raise ValueError('immutable local image ID required')
+    sources, destination = Path(sources), Path(destination)
+    if sources.resolve() != sources or not sources.is_dir() or destination.parent.resolve() != destination.parent:
+        raise ValueError('canonical directories required')
+    files = {name: read(sources / name) for name in FILES}
+    imports(files)
+    storage=read(Path(__file__).resolve().with_name(STORAGE_FILE))
+    manifest = {'version': 2, 'kind': 'python-evidence-reviewer', 'entrypoint': FILES[0],
+                'files': {name: sha256(raw).hexdigest() for name, raw in files.items()},
+                'storageSha256':sha256(storage).hexdigest(),
+                'launcherSha256': sha256(read(Path(__file__).resolve())).hexdigest(), 'imageId': image_id}
+    destination.mkdir(mode=0o700, exist_ok=False)
+    for name, raw in files.items():
+        (destination / name).write_bytes(raw)
+        (destination / name).chmod(0o600)
+    (destination/STORAGE_FILE).write_bytes(storage)
+    (destination/STORAGE_FILE).chmod(0o600)
+    (destination / 'snapshot.json').write_text(json.dumps(manifest, indent=2) + '\n')
+    (destination / 'snapshot.json').chmod(0o600)
+    return manifest
+
+
+def verify(bundle, expected):
+    bundle = Path(bundle)
+    if bundle.resolve() != bundle or not bundle.is_dir():
+        raise ValueError('canonical snapshot directory required')
+    contents={p.name for p in bundle.iterdir()}
+    if contents==set(FILES)|{'snapshot.json'}:
+        legacy=load_json(read(bundle/'snapshot.json'))
+        if isinstance(legacy,dict) and type(legacy.get('version')) is int and legacy['version']==1:
+            raise ValueError('legacy snapshot is diagnostic-only; recreate version 2')
+    if contents != set(FILES) | {'snapshot.json',STORAGE_FILE}:
+        raise ValueError('unexpected snapshot contents')
+    manifest = load_json(read(bundle / 'snapshot.json'))
+    if not isinstance(manifest, dict) or not isinstance(expected, str) or not HASH.fullmatch(expected) or digest(manifest) != expected:
+        raise ValueError('snapshot digest mismatch')
+    if (set(manifest) != {'version', 'kind', 'entrypoint', 'files', 'launcherSha256', 'storageSha256','imageId'}
+            or type(manifest['version']) is not int or manifest['version'] != 2 or manifest['kind'] != 'python-evidence-reviewer'
+            or manifest['entrypoint'] != FILES[0] or not isinstance(manifest['files'], dict)
+            or set(manifest['files']) != set(FILES) or not isinstance(manifest['imageId'], str)
+            or not IMAGE.fullmatch(manifest['imageId'])):
+        raise ValueError('invalid snapshot manifest')
+    if manifest['launcherSha256'] != sha256(read(Path(__file__).resolve())).hexdigest():
+        raise ValueError('launcher digest mismatch')
+    installed_storage=read(Path(__file__).resolve().with_name(STORAGE_FILE))
+    if (not isinstance(manifest['storageSha256'],str) or not HASH.fullmatch(manifest['storageSha256'])
+            or sha256(installed_storage).hexdigest()!=manifest['storageSha256']
+            or read(bundle/STORAGE_FILE)!=installed_storage):
+        raise ValueError('storage dependency digest mismatch')
+    files = {name: read(bundle / name) for name in FILES}
+    if any(sha256(raw).hexdigest() != manifest['files'][name] for name, raw in files.items()):
+        raise ValueError('reviewer dependency digest mismatch')
+    imports(files)
+    return manifest, files
+
+
+def inputs(root, manifest_path, scan_path):
+    root = Path(root)
+    if root.resolve() != root or not root.is_dir():
+        raise ValueError('canonical project directory required')
+    manifest_raw = read(manifest_path, MANIFEST_LIMIT)
+    manifest = load_json(manifest_raw)
+    scan_raw = b'{"results":[]}' if scan_path is None else read(scan_path, SCAN_LIMIT)
+    if scan_path is None and isinstance(manifest,dict):
+        manifest={'files':manifest.get('files'),'scanSha256':sha256(scan_raw).hexdigest(),**({'locationBinding':manifest['locationBinding']} if 'locationBinding' in manifest else {})}
+        manifest_raw=json.dumps(manifest,separators=(',',':')).encode()
+    if not isinstance(load_json(scan_raw), dict):
+        raise ValueError('invalid scan export')
+    if (not isinstance(manifest, dict) or not isinstance(manifest.get('files'), dict)
+            or not 1 <= len(manifest['files']) <= 64
+            or manifest.get('scanSha256') != sha256(scan_raw).hexdigest()):
+        raise ValueError('invalid input manifest or scan digest')
+    payload = {'manifest.json': manifest_raw, 'scan.json': scan_raw}
+    remaining = TOTAL_SOURCE_LIMIT
+    for name, expected in manifest['files'].items():
+        if not NAME.fullmatch(name) or not isinstance(expected, str) or not HASH.fullmatch(expected):
+            raise ValueError('invalid source name or digest')
+        raw = read(root / name, min(SOURCE_LIMIT, remaining))
+        if sha256(raw).hexdigest() != expected:
+            raise ValueError('source digest mismatch')
+        raw.decode('utf-8')
+        remaining -= len(raw)
+        payload['sources/' + name] = raw
+    return payload, digest({name: sha256(raw).hexdigest() for name, raw in payload.items()})
+
+
+def validate_locations(inventory,payload):
+    expected={name.removeprefix('sources/'):raw for name,raw in payload.items() if name.startswith('sources/')}
+    if (not isinstance(inventory,dict) or type(inventory.get('version')) is not int or inventory['version']!=1
+            or inventory.get('protocol')!='python-sink-locations-1' or not isinstance(inventory.get('runtimePython'),str)
+            or not re.fullmatch(r'3\.\d{1,3}\.\d{1,3}',inventory['runtimePython'])
+            or not isinstance(inventory.get('files'),dict) or set(inventory['files'])!=set(expected)):
+        raise ValueError('invalid location inventory')
+    for name,raw in expected.items():
+        row=inventory['files'][name];source_sha=sha256(raw).hexdigest()
+        if (not isinstance(row,dict) or row.get('sha256')!=source_sha or type(row.get('bytes')) is not int or row['bytes']!=len(raw)
+                or row.get('state') not in {'completed','unavailable'} or not isinstance(row.get('points'),list) or len(row['points'])>64
+                or row['state']=='unavailable' and (row['points'] or row.get('reason') not in {'source-parse-unavailable','point-limit'})):
+            raise ValueError('invalid location source row')
+        def position(value):
+            if not isinstance(value,dict) or set(value)!={'line','col','offset'} or any(type(v) is not int for v in value.values()):return False
+            offset=value['offset']
+            return (0<=offset<=len(raw) and (offset==len(raw) or raw[offset]&0xc0!=0x80)
+                    and value['line']==raw[:offset].count(b'\n')+1 and value['col']==offset-raw.rfind(b'\n',0,offset))
+        def span(value):
+            return isinstance(value,dict) and set(value)=={'start','end'} and position(value['start']) and position(value['end']) and value['end']['offset']>value['start']['offset']
+        ids=set();previous=-1
+        for point in row['points']:
+            if (not isinstance(point,dict) or point.get('sourceSha256')!=source_sha or point.get('callee') not in {'eval','exec','builtins.eval','builtins.exec'}
+                    or point.get('builtinIdentity')!='unverified' or not span(point.get('call'))
+                    or point.get('argument') is not None and (not span(point['argument']) or point['argument']['start']['offset']<point['call']['start']['offset'] or point['argument']['end']['offset']>point['call']['end']['offset'])
+                    or point.get('id')!=digest({k:point[k] for k in ('sourceSha256','callee','call')}) or point['id'] in ids
+                    or point['call']['start']['offset']<previous):
+                raise ValueError('invalid execution point')
+            ids.add(point['id']);previous=point['call']['start']['offset']
+    return inventory
+
+
+class ReviewAttemptError(RuntimeError):
+    """No completed receipt; inspect/recover this exact private attempt."""
+    def __init__(self, directory, state):
+        self.attempt_directory = str(directory)
+        self.status = json.loads(json.dumps(state))
+        super().__init__('Review not completed; inspect attempt ' + str(directory))
+
+
+class ReviewTaskBusy(ValueError):
+    code='task-busy'
+    retryable=True
+    def __init__(self, root):
+        self.details={'directory':str(root)}
+        super().__init__('attempt still has an active operation')
+
+
+class _Failure(Exception):
+    def __init__(self, kind, **details):
+        self.details = {'kind': kind, **details}
+        super().__init__(kind)
+
+
+def _now():
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _private(path):
+    path = Path(path)
+    value = path.stat()
+    if path.resolve() != path or not stat.S_ISDIR(value.st_mode) or value.st_uid != os.geteuid() or value.st_mode & 0o077:
+        raise ValueError('private canonical owned directory required')
+    return path
+
+
+def _save(root, job, cancel=None):
+    _check_json_depth(job)
+    encoded = (json.dumps(job, sort_keys=True, allow_nan=False) + '\n').encode('utf-8')
+    if len(encoded) > ATTEMPT_LIMIT:
+        raise ValueError('attempt record exceeds byte limit')
+    temporary = root / ('.attempt-' + uuid.uuid4().hex + '.json')
+    try:
+        with temporary.open('xb') as stream:
+            temporary.chmod(0o600)
+            stream.write(encoded)
+            stream.flush()
+            os.fsync(stream.fileno())
+        if cancel and cancel.get('signal'):
+            raise _Failure('interrupted', signal=cancel['signal'])
+        temporary.replace(root / 'attempt.json')
+        if sys.platform == 'linux':
+            fd = os.open(root, os.O_RDONLY | os.O_DIRECTORY)
+            try:
+                os.fsync(fd)
+            finally:
+                os.close(fd)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
+
+
+@contextmanager
+def operation_lock(root):
+    root = _private(root)
+    fd = os.open(root / 'operation.lock', os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600)
+    try:
+        value = os.fstat(fd)
+        if not stat.S_ISREG(value.st_mode) or value.st_uid != os.geteuid() or value.st_mode & 0o077 or value.st_nlink != 1:
+            raise ValueError('invalid operation lock')
+        try:
+            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise ReviewTaskBusy(root) from None
+        yield
+    finally:
+        os.close(fd)
+
+
+@contextmanager
+def _interrupts(cancel):
+    previous = {}
+    def requested(signum, frame):
+        cancel['signal'] = int(signum)
+    try:
+        for signum in [signal.SIGINT, signal.SIGTERM, signal.SIGHUP, signal.SIGQUIT]:
+            previous[signum] = signal.signal(signum, requested)
+        yield
+    finally:
+        for signum, handler in previous.items():
+            signal.signal(signum, handler)
+
+
+# Read only process identity. Never print command lines or signal unrelated PIDs.
+_CLIENT_PROBE = r'''import json,os
+from pathlib import Path
+import sys
+marker=sys.argv[1].encode();excluded=set();pid=os.getpid()
+while pid>0 and pid not in excluded:
+ excluded.add(pid)
+ try:pid=int(Path('/proc',str(pid),'stat').read_text().rsplit(')',1)[1].split()[1])
+ except FileNotFoundError:break
+active=[];errors=0
+for folder in Path('/proc').glob('[0-9]*'):
+ try:
+  if int(folder.name) in excluded:continue
+  raw=(folder/'cmdline').read_bytes()
+  if not raw or marker not in raw:continue
+  active.append(int(folder.name))
+ except (FileNotFoundError,ProcessLookupError):pass
+ except OSError:errors+=1
+print(json.dumps({'active':active,'readErrors':errors}))
+'''
+
+
+class DockerEngine:
+    """Fixed local VM commands; root GNU timeout bounds privileged CLI descendants."""
+    def __init__(self, root, job, save, cancel):
+        if sys.platform != 'linux' or os.geteuid() == 0:
+            raise ValueError('non-root Linux VM controller required')
+        self.root, self.job, self.save, self.cancel = root, job, save, cancel
+        self.io_failed=False
+        self.env = {'PATH': '/usr/bin:/bin', 'LANG': 'C.UTF-8'}
+        self.prefix = ['/usr/bin/docker', '--host', 'unix:///var/run/docker.sock', '--config', str(root/'docker-config')]
+
+    def _persist(self, phase, strict=False):
+        try:
+            self.save()
+        except (OSError, ValueError) as error:
+            self.io_failed = True
+            errors = self.job.setdefault('journalErrors', [])
+            errors.append({'phase':phase,'type':type(error).__name__})
+            self.job['journalErrorCount'] = self.job.get('journalErrorCount',0)+1
+            self.job['journalErrors'] = errors[-32:]
+            if strict:
+                raise _Failure('journal-write-failed',phase=phase,notStarted=True) from None
+
+    def _client(self, command, seconds, phase, cancellable):
+        if cancellable and self.cancel.get('signal'):
+            raise _Failure('interrupted',signal=self.cancel['signal'],phase=phase,notStarted=True)
+        if cancellable and self.io_failed:
+            raise _Failure('journal-write-failed',phase=phase,notStarted=True)
+        counter = self.job.get('clientCounter', 0)+1
+        self.job['clientCounter'] = counter
+        event = {'index':counter,'phase':phase,'startedAt':_now(),'deadlineSeconds':seconds}
+        history = self.job.setdefault('clients',[])
+        history.append(event)
+        if len(history)>128:
+            self.job['clientHistoryTruncated']=True
+            self.job['clients']=history[-128:]
+        if phase=='create':
+            self.job['createClient']=event
+        paths=[self.root/f'client-{counter}.stdout',self.root/f'client-{counter}.stderr']
+        logs=[]
+        try:
+            self._persist(phase,cancellable)
+            for path in paths:
+                try:
+                    log=path.open('xb');path.chmod(0o600);logs.append(log)
+                except OSError as error:
+                    self.io_failed=True;logs.append(None)
+                    if cancellable:
+                        raise _Failure('client-log-failed',phase=phase,notStarted=True) from error
+            argv=['/usr/bin/sudo','-n','/usr/bin/timeout','--signal=TERM','--kill-after=2',str(seconds),*command]
+            if cancellable and self.cancel.get('signal'):
+                raise _Failure('interrupted',signal=self.cancel['signal'],phase=phase,notStarted=True)
+            started=time.monotonic()
+            try:
+                child=subprocess.Popen(argv,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,
+                                       env=self.env,start_new_session=True,close_fds=True)
+            except OSError as error:
+                raise _Failure('client-spawn-failed',phase=phase,notStarted=True,errorType=type(error).__name__) from error
+            event['pid']=child.pid
+            self._persist(phase)
+            buffers=[bytearray(),bytearray()];limits=[LIMIT,65536];sent=False;overflow=False
+            with selectors.DefaultSelector() as selector:
+                for index,pipe in enumerate([child.stdout,child.stderr]):
+                    os.set_blocking(pipe.fileno(),False);selector.register(pipe,selectors.EVENT_READ,index)
+                try:
+                    while selector.get_map():
+                        stop=(cancellable and self.cancel.get('signal')) or overflow or (cancellable and self.io_failed)
+                        if stop and not sent:
+                            sent=True
+                            try:child.send_signal(signal.SIGTERM)
+                            except (PermissionError,ProcessLookupError):pass
+                        for key,_ in selector.select(.1):
+                            chunk=os.read(key.fileobj.fileno(),65536)
+                            if not chunk:
+                                selector.unregister(key.fileobj);continue
+                            index=key.data;remaining=limits[index]-len(buffers[index]);kept=chunk[:remaining]
+                            buffers[index].extend(kept)
+                            if len(chunk)>remaining:
+                                overflow=True;event['outputLimitExceeded']=True
+                            if logs[index] is not None:
+                                try:logs[index].write(kept)
+                                except OSError:
+                                    self.io_failed=True
+                                    try:logs[index].close()
+                                    except OSError:pass
+                                    logs[index]=None
+                        if time.monotonic()-started>seconds+5:
+                            event['clientExitUnconfirmed']=True
+                            self._persist(phase)
+                            raise _Failure('client-unconfirmed',phase=phase)
+                finally:
+                    child.stdout.close();child.stderr.close()
+            try:code=child.wait(timeout=2)
+            except subprocess.TimeoutExpired:raise _Failure('client-unconfirmed',phase=phase) from None
+            # A saved successful create event must have durable CID stdout.
+            for log in logs:
+                if log is not None:
+                    try:log.flush();os.fsync(log.fileno())
+                    except OSError:self.io_failed=True
+            elapsed=time.monotonic()-started
+            event.update(exitCode=code,finishedAt=_now(),elapsedSeconds=round(elapsed,3))
+            self._persist(phase)
+            if overflow:
+                raise _Failure('client-output-limit',phase=phase)
+            if cancellable and self.io_failed:
+                raise _Failure('journal-write-failed',phase=phase)
+            return {'exitCode':code,'stdout':bytes(buffers[0]),'deadlineExceeded':code in [124,137,-9] and elapsed>=seconds}
+        except _Failure as error:
+            if error.details.get('notStarted'):
+                event.update(notStarted=True,notStartedReason=error.details['kind'])
+                self._persist(phase)
+            raise
+        finally:
+            for log in logs:
+                if log is not None:
+                    try:log.close()
+                    except OSError:self.io_failed=True
+
+    def invoke(self, args, seconds, phase, cancellable=True):
+        return self._client([*self.prefix, *args], seconds, phase, cancellable)
+
+    def clients_stopped(self):
+        result = self._client(['/usr/bin/python3', '-I', '-B', '-S', '-c', _CLIENT_PROBE,
+                               str(self.root/'docker-config')], 5, 'client-probe', False)
+        if result['exitCode']:
+            raise ValueError('client probe failed')
+        data = json.loads(result['stdout'])
+        if not isinstance(data, dict) or data.get('readErrors') != 0 or not isinstance(data.get('active'), list):
+            raise ValueError('client probe unconfirmed')
+        return not data['active']
+
+
+_CONTAINER_WATCHDOG = r'''import os,signal,subprocess,sys
+class Stopped(Exception):pass
+def stop(sig,frame):raise Stopped(sig)
+for sig in [signal.SIGINT,signal.SIGTERM,signal.SIGHUP,signal.SIGQUIT]:signal.signal(sig,stop)
+child=None;code=1
+try:
+ child=subprocess.Popen([sys.executable,'-I','-B','-S',*sys.argv[2:]],stdin=subprocess.DEVNULL,start_new_session=True)
+ code=child.wait(timeout=float(sys.argv[1]))
+except subprocess.TimeoutExpired:code=124
+except Stopped as error:code=128+error.args[0]
+finally:
+ for sig in [signal.SIGINT,signal.SIGTERM,signal.SIGHUP,signal.SIGQUIT]:signal.signal(sig,signal.SIG_IGN)
+ if child is not None:
+  try:os.killpg(child.pid,signal.SIGKILL)
+  except ProcessLookupError:pass
+  try:child.wait(timeout=2)
+  except subprocess.TimeoutExpired:pass
+os._exit(code if code>=0 else 128-code)
+'''
+
+_LABEL = 'io.deepseek.harness.review.'
+
+
+def _labels(job):
+    return {_LABEL+'attempt': job['id'], _LABEL+'snapshot': job['snapshotSha256'], _LABEL+'input': job['inputSha256']}
+
+
+def _find(engine, job, cid=None):
+    token = 'id='+cid if cid else 'name=^/'+job['name']+'$'
+    result = engine.invoke(['container','ls','--all','--quiet','--no-trunc','--filter',token], 6, 'lookup', False)
+    if result['exitCode']:
+        raise ValueError('container lookup failed')
+    rows = result['stdout'].decode('ascii').splitlines()
+    if not rows:
+        return None
+    if len(rows) != 1 or not HASH.fullmatch(rows[0]) or cid and rows[0] != cid:
+        raise ValueError('container lookup ambiguous')
+    return rows[0]
+
+
+def _owned(engine, job, cid):
+    result = engine.invoke(['container','inspect',cid], 6, 'inspect', False)
+    if result['exitCode']:
+        raise _Failure('container-identity')
+    data = json.loads(result['stdout'])
+    if not isinstance(data, list) or len(data) != 1 or not isinstance(data[0], dict):
+        raise _Failure('container-identity')
+    value = data[0]
+    labels = value.get('Config', {}).get('Labels') or {}
+    if (value.get('Id') != cid or value.get('Name') != '/'+job['name'] or value.get('Image') != job['imageId']
+            or any(labels.get(key) != expected for key, expected in _labels(job).items())
+            or job.get('containerId') is not None and job['containerId'] != cid):
+        raise _Failure('container-identity')
+    job['containerId'] = cid
+    job['containerObserved'] = True
+    return value
+
+
+def _cleanup(engine, job):
+    result = {'confirmed':False, 'idAbsent':False, 'nameAbsent':False, 'clientsStopped':False,
+              'creationResolved':False, 'errors':[], 'checkedAt':_now()}
+    try:
+        result['clientsInitiallyStopped'] = engine.clients_stopped()
+        cid = _find(engine, job)
+        if cid is None and job.get('containerId'):
+            cid = _find(engine, job, job['containerId'])
+        if cid is not None:
+            _owned(engine, job, cid)
+            removed = engine.invoke(['rm','-f',cid], 8, 'remove', False)
+            if removed['exitCode']:
+                result['errors'].append('remove-client-failed')
+        cid = job.get('containerId')
+        result['idAbsent'] = cid is None or _find(engine, job, cid) is None
+        result['nameAbsent'] = _find(engine, job) is None
+        result['clientsStopped'] = engine.clients_stopped()
+        result['creationResolved'] = bool(job.get('createSucceeded') or job.get('containerObserved') or not job['creationAttempted'])
+    except Exception as error:
+        result['errors'].append(error.details['kind'] if isinstance(error, _Failure) else type(error).__name__)
+    if getattr(engine,'io_failed',False):result['errors'].append('journal-or-log-write-failed')
+    result['confirmed'] = all(result[key] for key in ['idAbsent','nameAbsent','clientsStopped','creationResolved']) and not result['errors']
+    return result
+
+
+@contextmanager
+def _failure_guard(root,job,holder,recovery=False):
+    try:
+        yield
+    except ReviewAttemptError:
+        raise
+    except Exception as error:
+        if job.get('state')=='completed':
+            memory=dict(job);memory.pop('result',None);memory.pop('resultSha256',None)
+            memory.update(state='completion-unconfirmed',failure={'kind':'completion-commit-unconfirmed','type':type(error).__name__})
+            raise ReviewAttemptError(root,memory) from error
+        job.setdefault('failure',{'kind':'journal-write-failed' if isinstance(error,OSError) else 'controller-error','type':type(error).__name__})
+        _restore_create_evidence(root,job)
+        engine=holder.get('engine')
+        job['cleanup']=_cleanup(engine,job) if engine is not None else {'confirmed':not job['creationAttempted'],'errors':[],'noClientStarted':True}
+        job['state']='cleanup-unconfirmed' if recovery or not job['cleanup']['confirmed'] else 'failed'
+        job['finishedAt']=_now()
+        try:_save(root,job)
+        except (OSError,ValueError):job['lastJournalSaveFailed']=True
+        raise ReviewAttemptError(root,job) from error
+
+
+def _restore_create_evidence(root,job):
+    event=job.get('createClient')
+    try:
+        cid_file_absent=not (root/'container.cid').exists() and not (root/'container.cid').is_symlink()
+    except OSError:
+        cid_file_absent=False
+    if (job.get('creationJournalVersion')==1 and type(job.get('creationJournalVersion')) is int
+            and job['creationAttempted'] and not job['createSucceeded']
+            and not job['containerObserved'] and job.get('containerId') is None and cid_file_absent):
+        history=job.get('clients',[])
+        basis=None
+        if isinstance(history,list) and all(isinstance(row,dict) for row in history):
+            creates=[row for row in history if row.get('phase')=='create']
+            if 'createClient' not in job and not creates:
+                basis='no-durable-create-event'
+            elif (isinstance(event,dict) and event.get('phase')=='create'
+                    and type(event.get('index')) is int and event['index']>0
+                    and event.get('notStarted') is True and 'pid' not in event and 'exitCode' not in event
+                    and isinstance(event.get('notStartedReason'),str)
+                    and event.get('notStartedReason') in {'client-spawn-failed','client-log-failed','journal-write-failed','interrupted'}
+                    and all(row==event for row in creates)):
+                basis='explicit-unstarted-create-event'
+        if basis:
+            job['creationAttempted']=False
+            job.setdefault('creationNotStarted',{'basis':basis,'checkedAt':_now()})
+    if job['createSucceeded'] or not isinstance(event,dict) or event.get('exitCode')!=0:return
+    index=event.get('index')
+    if type(index) is not int or index<1:return
+    try:cid=read(root/f'client-{index}.stdout',256).decode('ascii').strip()
+    except (OSError,ValueError):return
+    if HASH.fullmatch(cid) and job.get('containerId') in [None,cid]:
+        job.update(containerId=cid,createSucceeded=True,createEvidenceRestored=True)
+
+
+def _load_attempt(directory):
+    root = _private(directory)
+    job = load_json(read(root/'attempt.json', ATTEMPT_LIMIT))
+    _validate_attempt(root, job)
+    _private(root/'docker-config')
+    return root, job
+
+
+def _validate_attempt(root, job):
+    if (not re.fullmatch(r'review-[0-9a-f]{32}', root.name) or not isinstance(job, dict)
+            or type(job.get('version')) is not int or job['version'] != 1 or job.get('id') != root.name.removeprefix('review-')
+            or job.get('directory')!=str(root)
+            or job.get('state') not in {'prepared','creating','waiting','cleaning','completed','failed','timed-out','interrupted','cleanup-unconfirmed','recovering','recovered'}
+            or job.get('name') != 'harness-review-'+job['id'] or not isinstance(job.get('imageId'),str) or not IMAGE.fullmatch(job['imageId'])
+            or any(not isinstance(job.get(key), str) or not HASH.fullmatch(job[key]) for key in
+                   ['snapshotSha256','inputSha256','datasetSha256','freezeSha256'])
+            or job.get('containerId') is not None and (not isinstance(job['containerId'],str) or not HASH.fullmatch(job['containerId']))
+            or 'creationJournalVersion' in job and (type(job['creationJournalVersion']) is not int or job['creationJournalVersion']!=1)
+            or any(type(job.get(key)) is not bool for key in ['creationAttempted','createSucceeded','containerObserved'])):
+        raise ValueError('invalid owned attempt record')
+    if job.get('state') == 'completed':
+        result = job.get('result')
+        if (not isinstance(result,dict) or digest(result)!=job.get('resultSha256')
+                or result.get('attemptDirectory')!=str(root)
+                or not isinstance(result.get('reviewerExecution'),dict) or result['reviewerExecution'].get('state')!='completed'):
+            raise ValueError('committed result integrity mismatch')
+
+
+def status(directory):
+    if not Path(directory).exists():return _archived_status(directory)
+    _, job = _load_attempt(directory)
+    return {**job, 'recordedOnly':True}
+
+
+def _archived_status(directory):
+    directory=Path(directory)
+    if directory.resolve()!=directory:raise ValueError('canonical attempt path required')
+    storage=storage_module(sha256(read(Path(__file__).resolve().with_name(STORAGE_FILE))).hexdigest())
+    return storage.archived_lookup(storage.existing_policy(directory.parent),directory)
+
+
+def _retention_names(fd, maximum):
+    names=[]
+    with os.scandir(fd) as iterator:
+        for entry in iterator:
+            if len(names)>=maximum:return sorted(names),True
+            names.append(entry.name)
+    return sorted(names),False
+
+
+def _retention_signature(value):
+    return (value.st_dev,value.st_ino,value.st_mode,value.st_uid,value.st_nlink,value.st_size,value.st_mtime_ns)
+
+
+def _retention_tree(fd, context, files, raw_records, reasons, hashing, prefix='', depth=0):
+    """Metadata-only traversal except bounded known artifacts; no linked descent."""
+    before=os.fstat(fd)
+    names,truncated=_retention_names(fd,max(0,RETENTION_MAX_ENTRIES-context['entries']))
+    context['entries']+=len(names)
+    if truncated:
+        context['complete']=False;reasons.add('enumeration-limit')
+    for name in names:
+        relative=prefix+name
+        try:
+            value=os.stat(name,dir_fd=fd,follow_symlinks=False)
+            item={'bytes':value.st_size,'mode':stat.S_IMODE(value.st_mode),'uid':value.st_uid,
+                  'device':value.st_dev,'inode':value.st_ino,'mtimeNs':value.st_mtime_ns}
+            files[relative]=item
+            if stat.S_ISDIR(value.st_mode):
+                item['type']='directory'
+                if value.st_uid!=os.geteuid() or value.st_dev!=before.st_dev:
+                    context['complete']=False;reasons.add('unsafe-entry');continue
+                if relative not in {'docker-config','stage'} and not relative.startswith('stage/'):
+                    reasons.add('unsafe-entry')
+                if depth>=RETENTION_MAX_DEPTH:
+                    context['complete']=False;reasons.add('enumeration-limit');continue
+                child=os.open(name,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=fd)
+                try:
+                    if _retention_signature(os.fstat(child))!=_retention_signature(value):
+                        context['complete']=False;reasons.add('changed-entry');continue
+                    _retention_tree(child,context,files,raw_records,reasons,hashing,relative+'/',depth+1)
+                finally:os.close(child)
+            elif stat.S_ISREG(value.st_mode):
+                item['type']='file';context['bytes']+=value.st_size
+                known=(relative in {'attempt.json','operation.lock','container.cid'}
+                       or re.fullmatch(r'client-[1-9][0-9]*\.(stdout|stderr)',relative))
+                if not known and not relative.startswith('stage/'):
+                    reasons.add('unsafe-entry')
+                if value.st_nlink!=1 or value.st_uid!=os.geteuid():
+                    reasons.add('unsafe-entry');continue
+                if not hashing or not known:continue
+                if value.st_mode&0o077:
+                    reasons.add('unsafe-entry');continue
+                limit=ATTEMPT_LIMIT if relative=='attempt.json' else LIMIT if relative.endswith('.stdout') else 65536 if relative.endswith('.stderr') else 256
+                if value.st_size>limit:
+                    reasons.add('oversized-file');continue
+                if value.st_size>RETENTION_HASH_LIMIT-context['hashed']:
+                    reasons.add('hash-budget');continue
+                leaf=os.open(name,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=fd)
+                try:
+                    start=os.fstat(leaf)
+                    if not stat.S_ISREG(start.st_mode) or _retention_signature(start)!=_retention_signature(value):
+                        context['complete']=False;reasons.add('changed-entry');continue
+                    chunks=[];hasher=sha256();length=0
+                    while length<value.st_size:
+                        chunk=os.read(leaf,min(65536,value.st_size-length))
+                        if not chunk:break
+                        length+=len(chunk);context['hashed']+=len(chunk);hasher.update(chunk)
+                        if relative=='attempt.json':chunks.append(chunk)
+                    if length!=value.st_size or _retention_signature(os.fstat(leaf))!=_retention_signature(start):
+                        context['complete']=False;reasons.add('changed-entry');continue
+                    item['sha256']=hasher.hexdigest()
+                    if relative=='attempt.json':raw_records['attempt.json']=b''.join(chunks)
+                finally:os.close(leaf)
+            else:
+                item['type']='link' if stat.S_ISLNK(value.st_mode) else 'special'
+                context['complete']=False;reasons.add('unsafe-entry')
+        except OSError:
+            context['complete']=False;reasons.add('unreadable-entry')
+    after_names,extra=_retention_names(fd,len(names)+1)
+    if extra or names!=after_names or _retention_signature(os.fstat(fd))!=_retention_signature(before):
+        context['complete']=False;reasons.add('changed-entry')
+
+
+def _retention_entry(parent_fd, name, base, context, now, minimum_age_days):
+    row={'directory':str(base/name),'classification':'retain','safeToDelete':False,
+         'requires':['fresh-resource-check','archive-verification'],'files':{}}
+    reasons=set();fd=None;lock=None
+    try:
+        if not re.fullmatch(r'review-[0-9a-f]{32}',name):
+            reasons.add('unexpected-entry');context['complete']=False;return row
+        fd=os.open(name,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=parent_fd)
+        value=os.fstat(fd)
+        if value.st_uid!=os.geteuid() or value.st_mode&0o077 or value.st_dev!=os.fstat(parent_fd).st_dev:
+            reasons.add('unsafe-entry');context['complete']=False;return row
+        hashing=False
+        try:
+            # A first execution creates its record only after taking EX. Avoid
+            # competing with that initial lock acquisition while no record exists.
+            record_info=os.stat('attempt.json',dir_fd=fd,follow_symlinks=False)
+            if not stat.S_ISREG(record_info.st_mode):raise FileNotFoundError('ordinary record not available')
+            lock=os.open('operation.lock',os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=fd)
+            info=os.fstat(lock)
+            if not stat.S_ISREG(info.st_mode) or info.st_uid!=os.geteuid() or info.st_mode&0o077 or info.st_nlink!=1:
+                reasons.add('unsafe-entry')
+            else:
+                fcntl.flock(lock,fcntl.LOCK_SH|fcntl.LOCK_NB);hashing=True
+        except FileNotFoundError:
+            try:available=os.stat('attempt.json',dir_fd=fd,follow_symlinks=False)
+            except FileNotFoundError:reasons.add('record-unavailable')
+            else:reasons.add('missing-lock' if stat.S_ISREG(available.st_mode) else 'record-unavailable')
+        except BlockingIOError:reasons.add('active-operation');context['complete']=False
+        except OSError:reasons.add('unsafe-entry')
+        raw_records={}
+        _retention_tree(fd,context,row['files'],raw_records,reasons,hashing)
+        if hashing:
+            lock_now=row['files'].get('operation.lock',{})
+            if (_retention_signature(os.fstat(lock))!=_retention_signature(info)
+                    or (lock_now.get('device'),lock_now.get('inode'))!=(info.st_dev,info.st_ino)):
+                context['complete']=False;reasons.add('changed-lock')
+        if 'stage' in row['files']:reasons.add('stage-present')
+        config=row['files'].get('docker-config',{})
+        if config.get('type')!='directory' or config.get('uid')!=os.geteuid() or config.get('mode',0o777)&0o077:
+            reasons.add('unsafe-entry')
+        raw=raw_records.get('attempt.json')
+        if raw is None:
+            reasons.add('record-unavailable')
+        else:
+            row['recordSha256']=sha256(raw).hexdigest()
+            try:
+                job=load_json(raw);_validate_attempt(base/name,job);row['state']=job['state']
+                if job['state'] not in {'completed','recovered'}:reasons.add('nonterminal-record')
+                if job['state']=='recovered' and ('result' in job or 'resultSha256' in job):reasons.add('invalid-record')
+                cleanup=job.get('cleanup',{})
+                if (not isinstance(cleanup,dict) or any(cleanup.get(k) is not True for k in
+                      ['confirmed','idAbsent','nameAbsent','clientsStopped','creationResolved']) or cleanup.get('errors')!=[]
+                      or job.get('stageRemoved') is not True):reasons.add('unconfirmed-cleanup')
+                try:
+                    finished=datetime.fromisoformat(job['finishedAt'])
+                    if finished.tzinfo is None or finished>now:raise ValueError('invalid completion time')
+                    if (now-finished).total_seconds()<minimum_age_days*86400:reasons.add('minimum-age')
+                    row['finishedAt']=job['finishedAt']
+                except (KeyError,TypeError,ValueError):reasons.add('invalid-time')
+            except (ValueError,TypeError,KeyError):reasons.add('invalid-record')
+        current=os.stat(name,dir_fd=parent_fd,follow_symlinks=False)
+        if (current.st_dev,current.st_ino)!=(value.st_dev,value.st_ino):
+            context['complete']=False;reasons.add('changed-entry')
+        if not reasons:row['classification']='archive-candidate'
+        return row
+    except OSError:
+        context['complete']=False;reasons.add('unreadable-entry');return row
+    finally:
+        row['reasons']=sorted(reasons)
+        if lock is not None:os.close(lock)
+        if fd is not None:os.close(fd)
+
+
+def retention_inventory(directory=None, *, budget_bytes=256*1024*1024, minimum_age_days=30, now=None):
+    """Read-only archive preview, never a live resource check or deletion permit."""
+    if type(budget_bytes) is not int or budget_bytes<=0 or type(minimum_age_days) is not int or not 0<=minimum_age_days<=3650:
+        raise ValueError('invalid retention policy')
+    now=datetime.now(timezone.utc) if now is None else now
+    if not isinstance(now,datetime) or now.tzinfo is None:raise ValueError('timezone-aware inventory time required')
+    base=Path(directory) if directory is not None else Path.home()/'.cache/harness-review-attempts'
+    if base.resolve()!=base:raise ValueError('canonical retention directory required')
+    context={'entries':0,'bytes':0,'hashed':0,'complete':True};rows=[];exists=False
+    try:fd=os.open(base,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW|os.O_NONBLOCK)
+    except FileNotFoundError:fd=None
+    if fd is not None:
+        exists=True
+        try:
+            before=os.fstat(fd)
+            if before.st_uid!=os.geteuid() or before.st_mode&0o077:raise ValueError('private owned retention directory required')
+            names,truncated=_retention_names(fd,min(RETENTION_MAX_ATTEMPTS,RETENTION_MAX_ENTRIES));context['entries']+=len(names)
+            if truncated:context['complete']=False
+            for name in names:rows.append(_retention_entry(fd,name,base,context,now,minimum_age_days))
+            after_names,extra=_retention_names(fd,len(names)+1)
+            try:visible=os.stat(base,follow_symlinks=False)
+            except OSError:visible=None
+            if (extra or after_names!=names or _retention_signature(os.fstat(fd))!=_retention_signature(before)
+                    or visible is None or (visible.st_dev,visible.st_ino)!=(before.st_dev,before.st_ino)):
+                context['complete']=False
+        finally:os.close(fd)
+    if not context['complete']:
+        for row in rows:
+            row['classification']='retain';row['reasons']=sorted(set(row['reasons'])|{'inventory-incomplete'})
+    result={'version':1,'directory':str(base),'directoryExists':exists,'generatedAt':now.isoformat(),
+            'readOnly':True,'deleteEnabled':False,'resourceVerification':'recorded-only',
+            'policy':{'minimumAgeDays':minimum_age_days,'budgetBytes':budget_bytes},
+            'capacity':{'knownLogicalBytes':context['bytes'],'complete':context['complete'],'budgetBytes':budget_bytes,
+                        'state':'exceeded' if context['bytes']>budget_bytes else 'within' if context['complete'] else 'unknown'},
+            'hashedBytes':context['hashed'],'entries':rows}
+    return {**result,'planSha256':digest(result)}
+
+
+def _discard_stage(root):
+    stage = root/'stage'
+    if stage.exists() or stage.is_symlink():
+        _private(stage)
+        shutil.rmtree(stage)
+    return not stage.exists()
+
+
+def recover(directory, *, _engine_factory=None):
+    if not Path(directory).exists():return _archived_status(directory)
+    value=_recover_core(directory,_engine_factory=_engine_factory)
+    _settle_storage(Path(directory))
+    return value
+
+
+def _settle_storage(directory):
+    try:
+        storage=storage_module(sha256(read(Path(__file__).resolve().with_name(STORAGE_FILE))).hexdigest())
+        if not storage.settle(storage.existing_policy(directory.parent),directory.name.removeprefix('review-'),_api_view()):
+            print('storage-settlement-pending; query status and storage-reconcile before retrying',file=sys.stderr)
+    except (Exception,KeyboardInterrupt):
+        # The analysis record is authoritative. A retained reservation is
+        # conservative and can be reconciled later; never replay analysis here.
+        print('storage-settlement-pending; query status and storage-reconcile before retrying',file=sys.stderr)
+
+
+def _api_view():
+    return types.SimpleNamespace(__file__=__file__,_load_attempt=_load_attempt,_validate_attempt=_validate_attempt,
+                                 load_json=load_json,archive_probe=_archive_probe)
+
+
+def _archive_probe(transaction,source,job):
+    """Fresh read-only VM queries. No cleanup or source journal mutation."""
+    _private(transaction);(transaction/'docker-config').mkdir(mode=0o700)
+    query={'clientCounter':0,'clients':[]}
+    engine=DockerEngine(transaction,query,lambda:_save(transaction,query),{})
+    def absent(args):
+        result=engine.invoke(['container','ls','--all','--quiet','--no-trunc','--filter',args],6,'archive-lookup',False)
+        return result['exitCode']==0 and result['stdout']==b''
+    container_absent=absent('name=^/'+job['name']+'$')
+    if job.get('containerId'):container_absent=absent('id='+job['containerId']) and container_absent
+    container_absent=absent('label='+_LABEL+'attempt='+job['id']) and container_absent
+    result=engine._client(['/usr/bin/python3','-I','-B','-S','-c',_CLIENT_PROBE,str(source/'docker-config')],5,'archive-client-probe',False)
+    clients=load_json(result['stdout']) if result['exitCode']==0 else {}
+    stopped=isinstance(clients,dict) and clients.get('readErrors')==0 and clients.get('active')==[]
+    confirmed=container_absent and stopped and not engine.io_failed
+    return {'confirmed':confirmed,'readOnly':True,'containerAbsent':container_absent,'clientsStopped':stopped,
+            'checkedAt':_now(),'queryDirectory':str(transaction),'logSha256':{p.name:sha256(read(p)).hexdigest() for p in transaction.iterdir() if p.is_file()}}
+
+
+def _recover_core(directory, *, _engine_factory=None):
+    root, _ = _load_attempt(directory)
+    cancel = {}
+    with operation_lock(root), _interrupts(cancel):
+        _, job = _load_attempt(root)
+        holder={}
+        with _failure_guard(root,job,holder,True):
+            return _recover_locked(root,job,cancel,holder,_engine_factory)
+
+
+def _recover_locked(root,job,cancel,holder,_engine_factory):
+        if job.get('state') == 'completed':
+            return {**job, 'recordedOnly':True, 'recoveryAction':'already-completed-no-new-receipt'}
+        _restore_create_evidence(root,job)
+        engine = holder['engine'] = (_engine_factory or DockerEngine)(root, job, lambda:_save(root,job), cancel)
+        job.setdefault('originalState', job['state'])
+        job['state'] = 'recovering'
+        _save(root, job)
+        job['cleanup'] = _cleanup(engine, job)
+        if job['cleanup']['confirmed']:
+            try:
+                job['stageRemoved'] = _discard_stage(root)
+                job['state'] = 'recovered'
+            except (OSError,ValueError) as error:
+                job['cleanup']['confirmed'] = False
+                job['cleanup']['errors'].append('stage-removal-'+type(error).__name__)
+                job['state'] = 'cleanup-unconfirmed'
+        else:
+            job['state'] = 'cleanup-unconfirmed'
+        job['finishedAt'] = _now()
+        if cancel:
+            job['recoverySignal'] = cancel['signal']
+        _save(root, job)
+        return job
+
+
+def verifier_module():
+    # Fixed shipped tool module only; bundle/project never selects executable host code.
+    import importlib.util
+    path=Path(__file__).resolve().with_name('verifier_snapshot.py')
+    spec=importlib.util.spec_from_file_location('trusted_verifier_snapshot',path)
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module
+
+def verify_execution(bundle,expected,root,manifest_path,scan_path,request_path,dataset_sha,freeze_sha,**kwargs):
+    return execute(bundle,expected,root,manifest_path,scan_path,dataset_sha,freeze_sha,_operation='verify-execution',_request_path=request_path,**kwargs)
+
+
+def execute(bundle, expected, root, manifest_path, scan_path, dataset_sha, freeze_sha, *,
+            attempts_root=None, timeout=30, _engine_factory=None, storage_policy=None, _operation='review', _request_path=None):
+    if _operation not in {'review','locations','verify-execution'}:raise ValueError('unsupported operation')
+    if _operation in {'review','verify-execution'} and scan_path is None:raise ValueError('review requires original scan file')
+    if _engine_factory is None and sys.platform != 'linux':
+        raise ValueError('VM execution requires Linux; no Mac Docker invocation')
+    if os.geteuid() == 0 or isinstance(timeout, bool) or not isinstance(timeout, (float,int)) or not .1 <= timeout <= 30:
+        raise ValueError('non-root controller and bounded timeout required')
+    if not all(isinstance(value, str) and HASH.fullmatch(value) for value in [dataset_sha, freeze_sha]):
+        raise ValueError('dataset and quality freeze digests required')
+    base = Path(attempts_root) if attempts_root is not None else Path.home()/'.cache/harness-review-attempts'
+    if base.resolve() != base or not re.fullmatch(r'[A-Za-z0-9/_.-]+', str(base)):
+        raise ValueError('canonical mount-safe attempts directory required')
+    if _operation=='verify-execution':
+        vm=verifier_module();manifest,verifier_files=vm.verify(bundle,expected)
+        files={n.removeprefix('code/'):v for n,v in verifier_files.items() if n.startswith('code/')}
+    else:manifest,files=verify(bundle,expected)
+    payload,input_sha=inputs(root,manifest_path,scan_path)
+    if _operation=='verify-execution':
+        raw=read(_request_path,262144);request=load_json(raw);source_manifest=load_json(payload['manifest.json'])
+        if not isinstance(request,dict) or set(request)!={'version','contract','point','challenge'} or request['version']!=1 or not isinstance(request['challenge'],str) or not HASH.fullmatch(request['challenge']):raise ValueError('Invalid verification request')
+        vm.contract(request['contract'])
+        if digest(request['contract']) not in manifest['recipes'] or manifest['recipes'][digest(request['contract'])]!=request['contract']:raise ValueError('Unfrozen verification recipe')
+        binding=source_manifest.get('locationBinding')
+        if not isinstance(binding,dict) or binding.get('snapshotSha256')!=manifest['staticSha256'] or binding.get('imageId')!=manifest['imageId'] or binding.get('uid')!=os.geteuid():raise ValueError('Location runtime mismatch')
+        validate_locations(binding.get('inventory'),payload)
+        row=binding['inventory']['files'].get(request['contract']['path'])
+        if row is None or request['point'] not in row['points']:raise ValueError('Unknown frozen point')
+        payload.update({n:v for n,v in verifier_files.items() if n.startswith('dependencies/')})
+        payload['verification-request.json']=raw
+        payload['verification.json']=json.dumps({**request,'manifest':source_manifest},separators=(',',':')).encode()
+        input_sha=digest({n:sha256(v).hexdigest() for n,v in payload.items()})
+    storage=storage_module(manifest['storageSha256'])
+    policy=storage.existing_policy(base) if storage_policy is None else storage.validate_policy(storage_policy)
+    if policy['cacheRoot']!=str(base):raise ValueError('storage policy cache mismatch')
+    attempt_id=uuid.uuid4().hex
+    reservation=storage.reserve(policy,attempt_id,sum(map(len,files.values()))+sum(map(len,payload.values())),_api_view())
+    phase={'enginePossible':False}
+    try:
+        return _execute_verified(base,attempt_id,manifest,files,payload,input_sha,expected,dataset_sha,freeze_sha,timeout,_engine_factory,reservation,phase,_operation)
+    finally:
+        try:
+            directory=base/('review-'+attempt_id)
+            if not phase['enginePossible'] and not (directory/'attempt.json').exists() and not (directory/'container.cid').exists():
+                storage.cancel_preparation(policy,attempt_id)
+            elif not storage.settle(policy,attempt_id,_api_view()):
+                print('storage-settlement-pending; query status and storage-reconcile before retrying',file=sys.stderr)
+        except (Exception,KeyboardInterrupt):
+            print('storage-settlement-pending; query status and storage-reconcile before retrying',file=sys.stderr)
+
+
+def _execute_verified(base,attempt_id,manifest,files,payload,input_sha,expected,dataset_sha,freeze_sha,timeout,_engine_factory,reservation,phase,operation):
+    base.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+    base.mkdir(mode=0o700, exist_ok=True)
+    _private(base)
+    attempt = base/('review-'+attempt_id)
+    attempt.mkdir(mode=0o700)
+    (attempt/'docker-config').mkdir(mode=0o700)
+    stage = attempt/'stage'
+    stage.mkdir(mode=0o700)
+    for relative, raw in {**{'code/'+key:value for key,value in files.items()}, **payload}.items():
+        path = stage/relative
+        path.parent.mkdir(mode=0o755, parents=True, exist_ok=True)
+        path.write_bytes(raw);path.chmod(0o444)
+    job = {'version':1, 'directory':str(attempt), 'id':attempt_id, 'name':'harness-review-'+attempt_id, 'state':'prepared',
+           'snapshotSha256':expected, 'inputSha256':input_sha, 'imageId':manifest['imageId'],
+           'datasetSha256':dataset_sha, 'freezeSha256':freeze_sha, 'startedAt':_now(),
+           'creationAttempted':False, 'createSucceeded':False, 'containerObserved':False, 'containerId':None,
+           'creationJournalVersion':1,'storageReservation':reservation,'operation':operation}
+    failure = None
+    cancel = {}
+    holder={}
+    with operation_lock(attempt), _interrupts(cancel), _failure_guard(attempt,job,holder):
+        _save(attempt, job)
+        phase['enginePossible']=True
+        engine = holder['engine'] = (_engine_factory or DockerEngine)(attempt, job, lambda:_save(attempt,job), cancel)
+        command = ['create','--pull','never','--name',job['name'],'--cidfile',str(attempt/'container.cid')]
+        for key,value in _labels(job).items():
+            command += ['--label',key+'='+value]
+        command += ['--network','none','--read-only','--user',f'{os.geteuid()}:{os.getegid()}',
+                    '--cap-drop','ALL','--security-opt','no-new-privileges','--memory','256m',
+                    '--memory-swap','256m','--cpus','1','--pids-limit','32','--log-driver','none',
+                    '--no-healthcheck','--workdir','/','--tmpfs','/tmp:rw,nosuid,nodev,noexec,size=16m,mode=1777',
+                    '--mount',f'type=bind,src={stage},dst=/review,readonly','--entrypoint','python3',
+                    manifest['imageId'],'-I','-B','-S','-c',_CONTAINER_WATCHDOG,str(timeout),'/review/code/'+FILES[0],
+                    *(['--locations'] if operation=='locations' else []),'/review/sources','/review/manifest.json','/review/scan.json']
+        if operation=='verify-execution':
+            for flag,value in [('--memory','512m'),('--memory-swap','512m'),('--pids-limit','64'),('--tmpfs','/tmp:rw,nosuid,nodev,noexec,size=32m,mode=1777')]:command[command.index(flag)+1]=value
+            marker=command.index('/review/code/'+FILES[0]);command[marker:]=['/review/code/python_execution_verify.py','/review']
+        try:
+            if cancel:
+                raise _Failure('interrupted', signal=cancel['signal'])
+            job.update(state='creating', creationAttempted=True)
+            _save(attempt, job)
+            created = engine.invoke(command, timeout, 'create')
+            if cancel:
+                raise _Failure('interrupted', signal=cancel['signal'])
+            if created['exitCode']:
+                raise _Failure('timed-out' if created['deadlineExceeded'] else 'create-failed', exitCode=created['exitCode'])
+            cid = created['stdout'].decode('ascii').strip()
+            if not HASH.fullmatch(cid):
+                raise _Failure('container-identity')
+            job.update(containerId=cid, createSucceeded=True)
+            _owned(engine, job, cid)
+            if cancel:raise _Failure('interrupted',signal=cancel['signal'])
+            job['state'] = 'waiting'
+            _save(attempt, job)
+            if cancel:raise _Failure('interrupted',signal=cancel['signal'])
+            run = engine.invoke(['start','--attach',cid], timeout, 'start')
+            if cancel:
+                raise _Failure('interrupted', signal=cancel['signal'])
+            if run['exitCode']:
+                raise _Failure('timed-out' if run['deadlineExceeded'] else 'reviewer-failed', exitCode=run['exitCode'])
+            raw = run['stdout']
+            try:
+                report = load_json(raw)
+                if not isinstance(report, dict) or type(report.get('version')) is not int or report['version'] not in [1,2]:
+                    raise ValueError('invalid report')
+                location_binding=None
+                if operation=='verify-execution':
+                    request=load_json(payload['verification-request.json'])
+                    if (len(raw)>262144 or report['version']!=1 or report.get('operation')!='verify-execution'
+                        or report.get('decision') not in {'confirmed','excluded','unknown'} or report.get('pointId')!=request['point']['id']
+                        or report.get('sourceSha256')!=request['point']['sourceSha256'] or report.get('point')!=request['point']
+                        or report.get('contractSha256')!=digest(request['contract']) or report.get('runtimePython')!=manifest['pythonVersion']
+                        or report.get('challengeSha256')!=sha256(request['challenge'].encode()).hexdigest() or not isinstance(report.get('runs'),list) or len(report['runs'])>4):raise ValueError('Invalid verification report')
+                elif report['version']==2:
+                    inventory=report.get('locations')
+                    validate_locations(inventory,payload)
+                    if report.get('operation','review')!=operation:raise ValueError('operation mismatch')
+                    location_binding={'version':1,'snapshotSha256':expected,'imageId':manifest['imageId'],'uid':os.geteuid(),'inventory':inventory}
+                    frozen_binding=load_json(payload['manifest.json']).get('locationBinding')
+                    if frozen_binding is not None and frozen_binding!=location_binding:
+                        raise _Failure('location-binding-changed',nextOperation='refreeze')
+                elif operation=='locations':raise ValueError('location report required')
+            except (ValueError, UnicodeError):
+                raise _Failure('report-invalid') from None
+        except BaseException as error:
+            failure = error.details if isinstance(error,_Failure) else {'kind':'controller-error','type':type(error).__name__}
+            _restore_create_evidence(attempt,job)
+        job['state'] = 'cleaning'
+        if failure is not None:
+            job['failure'] = failure
+        _save(attempt, job)
+        job['cleanup'] = _cleanup(engine, job)
+        if cancel and failure is None:
+            failure = job['failure'] = {'kind':'interrupted','signal':cancel['signal']}
+        if not job['cleanup']['confirmed'] and failure is None:
+            failure = job['failure'] = {'kind':'cleanup-failed'}
+        if failure is None:
+            try:
+                job['stageRemoved'] = _discard_stage(attempt)
+            except (OSError,ValueError) as error:
+                failure = job['failure'] = {'kind':'stage-cleanup-failed','type':type(error).__name__}
+                job['cleanup']['confirmed'] = False
+                job['cleanup']['errors'].append('stage-removal-failed')
+        if cancel and failure is None:
+            failure = job['failure'] = {'kind':'interrupted','signal':cancel['signal']}
+        if failure is not None:
+            job['state'] = ('interrupted' if failure['kind']=='interrupted' else 'timed-out' if failure['kind']=='timed-out' else 'failed') if job['cleanup']['confirmed'] else 'cleanup-unconfirmed'
+            job['finishedAt'] = _now()
+            _save(attempt, job)
+        else:
+            input_files = {name:sha256(value).hexdigest() for name,value in payload.items()}
+            receipt = {'version':2,'state':'completed','snapshotSha256':expected,'datasetSha256':dataset_sha,
+                       'freezeSha256':freeze_sha,'inputSha256':input_sha,'inputFiles':dict(input_files),
+                       'scanSha256':input_files['scan.json'],'reportSha256':sha256(raw).hexdigest(),
+                       'startedAt':job['startedAt'],'finishedAt':_now()}
+            if location_binding is not None:
+                receipt.update(version=3,operation=operation,locationBindingSha256=digest(location_binding))
+            result = {'reviewerSnapshot':manifest,'reviewerExecution':receipt,'report':report,'reportJson':raw.decode('utf-8'),
+                      'inputFiles':input_files,'temporaryRemoved':job['stageRemoved'],'cleanup':job['cleanup'],
+                      'attemptDirectory':str(attempt),**({'locationBinding':location_binding} if location_binding is not None else {})}
+            if location_binding is not None and operation=='review':
+                result['reviewArtifact']={'locationBinding':location_binding,'reportJson':raw.decode('utf-8'),
+                    'scanJson':payload['scan.json'].decode('utf-8'),'manifestJson':payload['manifest.json'].decode('utf-8')}
+            if operation=='verify-execution':
+                receipt.update(version=1,operation=operation,verifierSha256=expected,requestSha256=input_files['verification-request.json'],policySha256=digest(manifest['policy']),uid=os.geteuid(),cleanupVerified=True)
+                result['verificationExecution']=dict(receipt)
+                result['verificationArtifact']={'reportJson':raw.decode(),'requestJson':payload['verification-request.json'].decode(),'manifestJson':payload['manifest.json'].decode(),'scanJson':payload['scan.json'].decode()}
+            # State and original result commit in one atomic record, not two files.
+            job.update(state='completed', finishedAt=receipt['finishedAt'], resultSha256=digest(result), result=result)
+            try:
+                _save(attempt, job, cancel)
+            except _Failure as error:
+                job.pop('result',None);job.pop('resultSha256',None)
+                failure=job['failure']=error.details
+                job.update(state='interrupted',finishedAt=_now())
+                _save(attempt,job)
+            except ValueError as error:
+                # Encoding/size is checked before opening a temporary record.
+                job.pop('result',None);job.pop('resultSha256',None)
+                failure=job['failure']={'kind':'completion-record-invalid','type':type(error).__name__}
+                job.update(state='failed',finishedAt=_now())
+                _save(attempt,job)
+            except OSError as error:
+                # Rename may already have committed. Query the original record;
+                # never overwrite it as failed or replay this analysis blindly.
+                job=dict(job);job.pop('result',None);job.pop('resultSha256',None)
+                failure=job['failure']={'kind':'completion-commit-unconfirmed','type':type(error).__name__}
+                job['state']='completion-unconfirmed'
+    if failure is not None:
+        raise ReviewAttemptError(attempt, job)
+    return result
+
+
+
+def locations(bundle,expected,root,manifest_path,**kwargs):
+    return execute(bundle,expected,root,manifest_path,None,'0'*64,'0'*64,_operation='locations',**kwargs)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    commands = parser.add_subparsers(dest='action', required=True)
+    creator = commands.add_parser('freeze')
+    creator.add_argument('sources', type=Path)
+    creator.add_argument('destination', type=Path)
+    creator.add_argument('image_id')
+    freezer=commands.add_parser('freeze-verifier')
+    for name in ['static_bundle','static_sha','dependencies','lock_path','contracts_path','destination']:freezer.add_argument(name)
+    verifier = commands.add_parser('verify')
+    runner = commands.add_parser('run')
+    executor=commands.add_parser('verify-execution')
+    for name in ['bundle','expected','root','manifest_path','scan_path','request_path','dataset_sha','freeze_sha']:executor.add_argument(name)
+    executor.add_argument('--attempts-root',type=Path);executor.add_argument('--timeout',type=float,default=30)
+    locator = commands.add_parser('locations')
+    for command in [verifier, runner, locator]:
+        command.add_argument('bundle', type=Path)
+        command.add_argument('expected')
+    for name in ['root', 'manifest_path', 'scan_path']:
+        runner.add_argument(name, type=Path)
+    locator.add_argument('root',type=Path)
+    locator.add_argument('manifest_path',type=Path)
+    locator.add_argument('--attempts-root',type=Path)
+    locator.add_argument('--timeout',type=float,default=30)
+    locator.add_argument('--storage-policy',type=Path)
+    runner.add_argument('dataset_sha')
+    runner.add_argument('freeze_sha')
+    runner.add_argument('--attempts-root', type=Path)
+    runner.add_argument('--timeout', type=float, default=30)
+    runner.add_argument('--storage-policy',type=Path)
+    for name in ['status','recover']:
+        commands.add_parser(name).add_argument('directory', type=Path)
+    inventory=commands.add_parser('retention-inventory')
+    inventory.add_argument('directory',type=Path,nargs='?')
+    inventory.add_argument('--budget-mib',type=int,default=256)
+    inventory.add_argument('--minimum-age-days',type=int,default=30)
+    commands.add_parser('storage-reconcile').add_argument('directory',type=Path,nargs='?')
+    planner=commands.add_parser('archive-plan');planner.add_argument('directory',type=Path);planner.add_argument('--attempt-id',action='append',dest='attempt_ids')
+    apply=commands.add_parser('archive-apply');apply.add_argument('directory',type=Path);apply.add_argument('plan_path',type=Path)
+    for name in ['archive-status','archive-restore']:
+        command=commands.add_parser(name);command.add_argument('directory',type=Path);command.add_argument('transaction_id')
+    args = vars(parser.parse_args())
+    action = args.pop('action')
+    try:
+        if action=='freeze-verifier':
+            args['lock']=load_json(read(args.pop('lock_path')));args['contracts']=load_json(read(args.pop('contracts_path')))
+            value=verifier_module().freeze(**args)
+        elif action=='verify-execution':value=verify_execution(**args)
+        elif action=='retention-inventory':
+            args['budget_bytes']=args.pop('budget_mib')*1024*1024
+            value=retention_inventory(**args)
+        elif action=='storage-reconcile' or action.startswith('archive-'):
+            storage=storage_module(sha256(read(Path(__file__).resolve().with_name(STORAGE_FILE))).hexdigest())
+            directory=args['directory'] or Path.home()/'.cache/harness-review-attempts'
+            policy=storage.existing_policy(directory)
+            if action=='storage-reconcile':value=storage.reconcile(policy,_api_view())
+            elif action=='archive-plan':value=storage.archive_plan(policy,_api_view(),attempt_ids=args.get('attempt_ids'))
+            elif action=='archive-apply':value=storage.archive_apply(policy,load_json(read(args['plan_path'],ATTEMPT_LIMIT)),_api_view())
+            elif action=='archive-status':value=storage.archive_status(policy,args['transaction_id'],_api_view())
+            else:value=storage.archive_restore(policy,args['transaction_id'],_api_view())
+        else:
+            if action in {'run','locations'} and args.get('storage_policy') is not None:args['storage_policy']=load_json(read(args['storage_policy']))
+            value = freeze(**args) if action == 'freeze' else verify(**args)[0] if action == 'verify' else status(**args) if action == 'status' else recover(**args) if action == 'recover' else locations(**args) if action=='locations' else execute(**args)
+        print(json.dumps(value, indent=2))
+        if action=='recover' and value.get('state')!='completed' and not value.get('cleanup',{}).get('confirmed'):
+            parser.exit(2)
+    except ReviewAttemptError as error:
+        print(json.dumps({'attemptDirectory':error.attempt_directory,'status':error.status,'nextOperation':'status'},indent=2))
+        state=error.status['state'];failure=error.status['failure']
+        parser.exit(3 if state=='completion-unconfirmed' else 2 if state=='cleanup-unconfirmed' else 128+failure.get('signal',2) if failure['kind']=='interrupted' else 124 if failure['kind']=='timed-out' else 1)
+    except (OSError, ValueError, SyntaxError, subprocess.SubprocessError) as error:
+        if isinstance(getattr(error,'code',None),str):
+            print(json.dumps({'state':'storage-blocked','reason':error.code,'retryable':getattr(error,'retryable',False),'details':getattr(error,'details',{})}))
+            parser.exit(4)
+        parser.exit(1, f'Reviewer snapshot rejected: {error}\n')
+
+
+if __name__ == '__main__':
+    main()
+
+
+CURRENT FILE scripts/verifier_snapshot.py SHA 8575c2650a6309cd1473283e62a904d8293a089128d3733240bdb65c2933b06d
+"""Independent v1 verifier closure: trusted shipped code, offline dependencies and data-only recipes."""
+from pathlib import Path
+from hashlib import sha256
+import importlib.util
+import json
+import os
+import re
+import shutil
+import stat
+
+HERE=Path(__file__).resolve().parent
+CODE=('eval_evidence_batch.py','eval_guard_review.py','eval_import_review.py','python_execution_verify.py')
+POLICY={'version':1,'maxInputs':4,'inputSeconds':5,'pointSeconds':30,'memoryMiB':512,'cpus':1,'pids':64,'tmpMiB':32,'outputBytes':262144,'network':'none','proof':'python-narrow-literal-1'}
+PROBES=["control-literal-v1","expression-with-frozen-random-challenge-v1","statement-with-frozen-random-challenge-v1","syntax-error-v1"]
+def digest(v):return sha256(json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=True).encode()).hexdigest()
+def launcher():
+ spec=importlib.util.spec_from_file_location('verifier_controller',HERE/'reviewer_snapshot.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
+
+def safe(n):return isinstance(n,str) and len(n)<=240 and re.fullmatch(r'[A-Za-z0-9_][A-Za-z0-9_./+~-]*',n) and all(p not in {'','..','.'} for p in n.split('/'))
+def tree(root,expected):
+ root=Path(root)
+ if root.resolve()!=root or not root.is_dir() or not isinstance(expected,dict) or len(expected)>1000:raise ValueError('Invalid dependency root')
+ actual={};total=0
+ for p in root.rglob('*'):
+  if p.is_symlink():raise ValueError('Linked dependency')
+  if not p.is_file():continue
+  name=str(p.relative_to(root));st=p.stat()
+  if not safe(name) or st.st_nlink!=1 or st.st_size>4*1024*1024:raise ValueError('Invalid dependency file')
+  total+=st.st_size
+  if total>16*1024*1024:raise ValueError('Dependency limit')
+  raw=p.read_bytes();actual[name]=sha256(raw).hexdigest()
+ if actual!=expected:raise ValueError('Dependency digest mismatch')
+ return {n:(root/n).read_bytes() for n in actual}
+
+def contract(v):
+ # Shipped worker is trusted tool code; never import a module selected by project/recipe.
+ path=HERE/'python_execution_verify.py';spec=importlib.util.spec_from_file_location('trusted_verifier_contract',path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m.validate_contract(v)
+def approved_sources():
+ path=HERE/'python_execution_verify.py';spec=importlib.util.spec_from_file_location('trusted_verifier_profiles',path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m.APPROVED_SOURCES
+
+def freeze(static_bundle,static_sha,dependencies,lock,contracts,destination):
+ api=launcher();snapshot,verified=api.verify(Path(static_bundle),static_sha);code={n:verified[n] for n in CODE[:3]}
+ if not isinstance(lock,dict) or lock.get('version')!=1 or not isinstance(lock.get('packages'),list):raise ValueError('Invalid dependency lock')
+ deps=tree(dependencies,lock.get('files'))
+ if not isinstance(contracts,list) or not 1<=len(contracts)<=64:raise ValueError('Recipe limit')
+ recipes={digest(contract(v)):v for v in contracts}
+ if len(recipes)!=len(contracts):raise ValueError('Duplicate recipe')
+ raw=(HERE/'python_execution_verify.py').read_bytes();code['python_execution_verify.py']=raw
+ value={'version':1,'kind':'python-execution-verifier','code':{n:sha256(v).hexdigest() for n,v in code.items()},'staticSnapshot':snapshot,'staticSha256':static_sha,'imageId':snapshot['imageId'],'pythonVersion':'3.12.15','sourceProfiles':approved_sources(),'dependencies':lock['files'],'dependencyPackages':lock['packages'],'recipes':recipes,'policy':POLICY,'probes':PROBES,'controllerSha256':sha256((HERE/'reviewer_snapshot.py').read_bytes()).hexdigest(),'verifierControllerSha256':sha256(Path(__file__).read_bytes()).hexdigest(),'storageSha256':snapshot['storageSha256']}
+ dest=Path(destination)
+ if dest.resolve()!=dest:raise ValueError('Canonical destination required')
+ dest.mkdir(mode=0o700,parents=False,exist_ok=False)
+ (dest/'dependencies').mkdir(mode=0o755)
+ for n,data in {**{'code/'+k:v for k,v in code.items()},**{'dependencies/'+k:v for k,v in deps.items()}}.items():
+  path=dest/n;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(data);path.chmod(0o444)
+ (dest/'verifier.json').write_text(json.dumps(value,indent=2)+'\n');return value
+
+def verify(bundle,expected):
+ api=launcher();bundle=Path(bundle)
+ if bundle.resolve()!=bundle:raise ValueError('Canonical verifier required')
+ value=api.load_json(api.read(bundle/'verifier.json'))
+ if (not isinstance(value,dict) or value.get('version')!=1 or value.get('kind')!='python-execution-verifier' or digest(value)!=expected
+     or set(value.get('code',{}))!=set(CODE) or value.get('policy')!=POLICY or value.get('probes')!=PROBES
+     or value.get('staticSha256')!=digest(value.get('staticSnapshot')) or value.get('imageId')!=value['staticSnapshot'].get('imageId')
+     or value.get('controllerSha256')!=sha256((HERE/'reviewer_snapshot.py').read_bytes()).hexdigest()
+     or value.get('verifierControllerSha256')!=sha256(Path(__file__).read_bytes()).hexdigest()
+     or value.get('storageSha256')!=sha256((HERE/'reviewer_storage.py').read_bytes()).hexdigest()):raise ValueError('Verifier identity mismatch')
+ if value.get('sourceProfiles')!=approved_sources():raise ValueError('Source profile mismatch')
+ if value['pythonVersion']!='3.12.15' or value['staticSnapshot'].get('version')!=2:raise ValueError('Verifier runtime mismatch')
+ code=tree(bundle/'code',value['code']);deps=tree(bundle/'dependencies',value['dependencies'])
+ for n in CODE[:3]:
+  if value['code'][n]!=value['staticSnapshot']['files'].get(n):raise ValueError('Static closure mismatch')
+ if value['code']['python_execution_verify.py']!=sha256((HERE/'python_execution_verify.py').read_bytes()).hexdigest():raise ValueError('Untrusted verifier worker')
+ if not isinstance(value.get('recipes'),dict) or not 1<=len(value['recipes'])<=64 or any(digest(contract(v))!=k for k,v in value['recipes'].items()):raise ValueError('Invalid frozen recipes')
+ return value,{**{'code/'+n:raw for n,raw in code.items()},**{'dependencies/'+n:raw for n,raw in deps.items()}}
+
+
+CURRENT FILE scripts/review_quality_gate.mjs SHA 9650842cadb0cec7e8d2f63f2dcdec9b5c987b629aa7a52e82e6c7685d38874b
+// Offline candidate measurement. This module cannot authorize scans or promote R3.
+import {createHash} from 'node:crypto';
+import {openSync,readSync,closeSync,fstatSync,constants} from 'node:fs';
+import {pathToFileURL} from 'node:url';
+
+const hashPattern=/^[a-f0-9]{64}$/;
+const record=value=>value!==null&&typeof value==='object'&&!Array.isArray(value);
+const invalid=()=>{throw Error('Invalid layered review evaluation input')};
+function requireValue(condition){if(!condition)invalid()}
+function canonical(value){
+ if(Array.isArray(value))return value.map(canonical);
+ if(record(value))return Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])]));
+ return value;
+}
+export const digest=value=>createHash('sha256').update(JSON.stringify(canonical(value))).digest('hex');
+const rate=(numerator,denominator)=>denominator?numerator/denominator:null;
+const timestamp=value=>typeof value==='string'&&/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,9})?(?:Z|[+-]\d{2}:\d{2})$/.test(value)&&Number.isFinite(Date.parse(value));
+const identityValid=value=>record(value)&&Object.keys(value).sort().join(',')==='reviewer,rules,scanner'&&
+ Object.values(value).every(value=>typeof value==='string'&&hashPattern.test(value));
+const reviewerFiles=['eval_evidence_batch.py','eval_guard_review.py','eval_import_review.py'];
+function snapshotValid(value){
+ return record(value)&&[1,2].includes(value.version)&&Object.keys(value).sort().join(',')===(value.version===2?'entrypoint,files,imageId,kind,launcherSha256,storageSha256,version':'entrypoint,files,imageId,kind,launcherSha256,version')&&
+  (value.version!==2||typeof value.storageSha256==='string'&&hashPattern.test(value.storageSha256))&&
+  value.kind==='python-evidence-reviewer'&&value.entrypoint===reviewerFiles[0]&&
+  record(value.files)&&Object.keys(value.files).sort().join(',')===reviewerFiles.join(',')&&
+  Object.values(value.files).every(hash=>typeof hash==='string'&&hashPattern.test(hash))&&
+  typeof value.launcherSha256==='string'&&hashPattern.test(value.launcherSha256)&&
+  typeof value.imageId==='string'&&/^sha256:[a-f0-9]{64}$/.test(value.imageId);
+}
+function executionValid(row,run,frozenSha256){
+ return record(row)&&[1,2,3].includes(row.version)&&row.state==='completed'&&
+   (run.version<3||row.version===3&&row.operation==='review')&&row.snapshotSha256===run.identity.reviewer&&row.datasetSha256===run.datasetSha256&&row.freezeSha256===frozenSha256&&
+   ['inputSha256','reportSha256'].every(key=>typeof row[key]==='string'&&hashPattern.test(row[key]))&&
+   timestamp(row.startedAt)&&timestamp(row.finishedAt)&&Date.parse(row.startedAt)>=Date.parse(run.startedAt)&&
+   Date.parse(row.finishedAt)>=Date.parse(row.startedAt);
+}
+function executionsValid(run,frozenSha256){
+ return Array.isArray(run.reviewerExecutions)&&run.reviewerExecutions.length>0&&run.reviewerExecutions.length<=1000&&
+  run.reviewerExecutions.every(row=>executionValid(row,run,frozenSha256));
+}
+const sourceInputPattern=/^sources\/(?:[A-Za-z0-9_][A-Za-z0-9_.-]{0,63}\/){0,12}[A-Za-z0-9_][A-Za-z0-9_.-]{0,63}\.py$/;
+const sourceInputName=name=>name.endsWith('.py')&&sourceInputPattern.test(name);
+function receiptInputsValid(row){
+ if(![2,3].includes(row.version)||!record(row.inputFiles))return false;
+ const names=Object.keys(row.inputFiles);
+ return names.length>=3&&names.length<=66&&names.includes('manifest.json')&&names.includes('scan.json')&&
+  names.every(name=>['manifest.json','scan.json'].includes(name)||sourceInputName(name))&&
+  Object.values(row.inputFiles).every(value=>typeof value==='string'&&value.length===64&&hashPattern.test(value))&&
+  row.scanSha256===row.inputFiles['scan.json']&&digest(row.inputFiles)===row.inputSha256;
+}
+function reviewerCoverage(dataset,run,frozenSha256){
+ const receipts=Array.isArray(run.reviewerExecutions)?run.reviewerExecutions.slice(0,1000):[];
+ const seen=new Set(),covered=new Set(),invalidReceiptIndices=[],duplicateReceiptIndices=[],legacyReceiptIndices=[];
+ for(const [index,row] of receipts.entries()){
+  if(record(row)&&(row.version===1||run.version>=3&&row.version!==3))legacyReceiptIndices.push(index);
+  if(!executionValid(row,run,frozenSha256)||!receiptInputsValid(row)){invalidReceiptIndices.push(index);continue}
+  if(seen.has(row.inputSha256)){duplicateReceiptIndices.push(index);continue}
+  seen.add(row.inputSha256);
+  for(const [name,hash] of Object.entries(row.inputFiles))if(sourceInputName(name))covered.add(hash);
+ }
+ return{receiptListValid:Array.isArray(run.reviewerExecutions)&&run.reviewerExecutions.length>0&&run.reviewerExecutions.length<=1000,
+  requiredSourceSha256:[...new Set(dataset.cases.filter(row=>row.language==='python').map(row=>row.sourceSha256))].sort(),
+  coveredSourceSha256:[...covered].sort(),coveredCaseIds:dataset.cases.filter(row=>row.language==='python'&&covered.has(row.sourceSha256)).map(row=>row.id),
+  missingCaseIds:dataset.cases.filter(row=>row.language==='python'&&!covered.has(row.sourceSha256)).map(row=>row.id),
+  unsupportedCaseIds:dataset.cases.filter(row=>row.language!=='python').map(row=>row.id),
+  unsupportedLanguages:[...new Set(dataset.cases.filter(row=>row.language!=='python').map(row=>row.language))].sort(),
+  uniqueReceiptCount:seen.size,invalidReceiptIndices,duplicateReceiptIndices,legacyReceiptIndices};
+}
+const categoryOf=row=>row.language+'/'+row.cwe;
+const qualifyingOracle=row=>row.oracle.kind==='independent-vulnerability'&&row.oracle.positionVerified===true&&row.oracle.conditionsVerified===true;
+function selectionIssue(row){
+ const selection=row.selection;
+ if(record(selection)&&(selection.qualificationEligible===false||selection.blind===false||
+    selection.method==='curated-known-vulnerability-pair'))return 'sample-selection-ineligible';
+ if(!record(selection)||typeof selection.method!=='string'||!selection.method.trim()||selection.method.length>120||
+    selection.blind!==true||selection.qualificationEligible!==true||
+    typeof selection.protocolSha256!=='string'||!hashPattern.test(selection.protocolSha256))return 'sample-selection-incomplete';
+ return null;
+}
+const qualifyingSample=row=>qualifyingOracle(row)&&selectionIssue(row)===null;
+const rateKeys=['minimumRawRecall','maximumReviewedFalsePositiveRate','maximumFalseExclusionRate','maximumUnknownRate','minimumConfirmedRecall'];
+function validatePolicy(policy){
+ requireValue(policy?.version===2&&policy.role==='candidate-evaluation'&&record(policy.categories));
+ requireValue(Object.keys(policy.categories).length>0&&Object.keys(policy.categories).length<=50);
+ for(const [category,limits] of Object.entries(policy.categories)){
+  requireValue(/^(python|php|javascript|typescript|java|cpp)\/CWE-[1-9][0-9]{0,5}$/.test(category));
+  requireValue(record(limits)&&Object.keys(limits).length===7);
+  for(const key of ['minimumPositive','minimumNegative'])requireValue(Number.isSafeInteger(limits[key])&&limits[key]>=1&&limits[key]<=1000);
+  for(const key of rateKeys)requireValue(typeof limits[key]==='number'&&Number.isFinite(limits[key])&&limits[key]>=0&&limits[key]<=1);
+ }
+}
+function validateDataset(dataset){
+ requireValue([2,3].includes(dataset?.version)&&Array.isArray(dataset.cases)&&dataset.cases.length>0&&dataset.cases.length<=1000);
+ const ids=new Set(),locations=new Set();
+ for(const row of dataset.cases){
+  requireValue(record(row)&&typeof row.id==='string'&&/^[A-Za-z0-9][A-Za-z0-9._-]{0,119}$/.test(row.id)&&!ids.has(row.id));
+  ids.add(row.id);
+  requireValue(['python','php','javascript','typescript','java','cpp'].includes(row.language)&&/^CWE-[1-9][0-9]{0,5}$/.test(row.cwe));
+  requireValue(['positive','negative'].includes(row.truth)&&hashPattern.test(row.sourceSha256??''));
+  if(dataset.version===2||row.pointId!==null)requireValue(record(row.location)&&['line','column'].every(key=>Number.isSafeInteger(row.location[key])&&row.location[key]>=1&&row.location[key]<=1000000));
+  if(dataset.version===3)requireValue(row.language==='python'&&sourceInputName('sources/'+row.path)&&(row.pointId===null?row.truth==='negative'&&row.location===null:hashPattern.test(row.pointId??'')));
+  const location=dataset.version===3?(row.pointId??'file:'+row.sourceSha256):[row.sourceSha256,row.language,row.cwe,row.location.line].join(':');
+  requireValue(!locations.has(location));locations.add(location);
+  requireValue(record(row.oracle)&&typeof row.oracle.reference==='string'&&row.oracle.reference.length>0&&row.oracle.reference.length<=1200);
+ }
+}
+function validDecisionEvidence(row,output){
+ return Array.isArray(output.evidence)&&output.evidence.length>0&&output.evidence.length<=20&&output.evidence.every(item=>
+  record(item)&&['human-review','sandbox-verification'].includes(item.kind)&&
+  (row.pointId===undefined||item.pointId===row.pointId)&&item.caseId===row.id&&item.decision===output.decision&&item.inputSha256===row.sourceSha256&&hashPattern.test(item.artifactSha256??''));
+}
+function countsFor(rows){
+ const raw={positiveHit:0,positiveMiss:0,negativeHit:0,negativeNoHit:0,unknown:0};
+ const reviewed={truePositive:0,falsePositive:0,trueNegative:0,falseNegative:0,falseExclusion:0,unknown:0,unknownPositive:0,unknownNegative:0};
+ let positive=0,negative=0,evidenceOnly=0;
+ for(const {row,output,decision} of rows){
+  const isPositive=row.truth==='positive';
+  if(isPositive)positive++;else negative++;
+  if(output.raw==='unknown')raw.unknown++;
+  else if(isPositive)raw[output.raw==='hit'?'positiveHit':'positiveMiss']++;
+  else raw[output.raw==='hit'?'negativeHit':'negativeNoHit']++;
+  if(output.raw==='unknown'||output.raw==='hit'&&decision==='unknown'){
+   reviewed.unknown++;reviewed[isPositive?'unknownPositive':'unknownNegative']++;
+  }
+  else if(output.raw==='no-hit')reviewed[isPositive?'falseNegative':'trueNegative']++;
+  else if(decision==='confirmed')reviewed[isPositive?'truePositive':'falsePositive']++;
+  else{
+   reviewed[isPositive?'falseNegative':'trueNegative']++;
+   if(isPositive)reviewed.falseExclusion++;
+  }
+  if(decision==='unknown'&&output.evidence?.length)evidenceOnly++;
+ }
+ const total=rows.length;
+ return{
+  total,positive,negative,evidenceOnly,
+  raw:{...raw,falsePositiveRate:rate(raw.negativeHit,raw.negativeHit+raw.negativeNoHit),
+   recall:rate(raw.positiveHit,positive),unknownRate:rate(raw.unknown,total)},
+  reviewed:{...reviewed,falsePositiveRate:rate(reviewed.falsePositive,reviewed.falsePositive+reviewed.trueNegative),
+   falsePositiveRateUpperBound:rate(reviewed.falsePositive+reviewed.unknownNegative,negative),
+   falseNegativeRate:rate(reviewed.falseNegative,reviewed.truePositive+reviewed.falseNegative),
+   falseExclusionRate:rate(reviewed.falseExclusion,positive),confirmedRecall:rate(reviewed.truePositive,positive),
+   unknownRate:rate(reviewed.unknown,total),resolvedCases:total-reviewed.unknown},
+ };
+}
+
+function validateLedger(ledger){
+ requireValue(ledger?.version===1&&Array.isArray(ledger.sources)&&ledger.sources.length<=20000);
+ requireValue(ledger.sources.every(row=>record(row)&&typeof row.sha256==='string'&&hashPattern.test(row.sha256)));
+ return [...new Set(ledger.sources.map(row=>row.sha256))].sort();
+}
+const usageRequired=dataset=>({datasetSha256:digest(dataset),sourceSha256:[...new Set(dataset.cases.map(row=>row.sourceSha256))].sort(),
+ action:'Record every acceptance attempt, including failure, in the usage ledger before any further freeze; this offline tool does not write the ledger'});
+
+export function freezeReviewInputs(dataset,policy,identity,ledger,reviewerSnapshot,locationExecutions,verificationPlan){
+ validateDataset(dataset);
+ validatePolicy(policy);
+ requireValue(identityValid(identity));
+ if(reviewerSnapshot!==undefined)requireValue(snapshotValid(reviewerSnapshot)&&reviewerSnapshot.version===2&&digest(reviewerSnapshot)===identity.reviewer);
+ const locations=dataset.version===3?freezeLocations(dataset,identity,reviewerSnapshot,locationExecutions):undefined;
+ if(verificationPlan!==undefined)requireValue(dataset.version===3&&validVerificationPlan(verificationPlan,dataset,reviewerSnapshot));
+ const used=validateLedger(ledger);
+ const usedSet=new Set(used);
+ if(dataset.cases.some(row=>usedSet.has(row.sourceSha256)))throw Error('Acceptance source already used in the sample ledger');
+ return{version:verificationPlan===undefined?dataset.version:4,...(verificationPlan===undefined?{}:{verificationPlan:structuredClone(verificationPlan),verificationPlanSha256:digest(verificationPlan)}), ...(locations?{locations,locationsSha256:digest(locations)}:{}),createdAt:new Date().toISOString(),datasetSha256:digest(dataset),policySha256:digest(policy),ledgerSha256:digest(ledger),
+  identity:{...identity},...(reviewerSnapshot===undefined?{}:{reviewerSnapshot:structuredClone(reviewerSnapshot)}),
+  developmentSourceSha256:used,usageRequired:usageRequired(dataset)};
+}
+
+export function evaluateReviewQuality(dataset,run,freeze,policy,ledger){
+ validateDataset(dataset);
+ validatePolicy(policy);
+ const used=validateLedger(ledger);
+ requireValue([2,3,4].includes(run?.version)&&identityValid(run.identity)&&timestamp(run.startedAt)&&hashPattern.test(run.datasetSha256??'')&&hashPattern.test(run.freezeSha256??''));
+ requireValue([2,3,4].includes(freeze?.version)&&identityValid(freeze.identity)&&timestamp(freeze.createdAt));
+ requireValue(Array.isArray(freeze.developmentSourceSha256)&&freeze.developmentSourceSha256.length<=20000&&
+  freeze.developmentSourceSha256.every(value=>typeof value==='string'&&hashPattern.test(value)));
+ requireValue(Array.isArray(run.outputs)&&run.outputs.length<=dataset.cases.length);
+ const blockers=new Set(),overlap=[],records=new Map(),caseBlockers=[],artifactCases=new Map(),decisionBindings=new Map();
+ const precise=dataset.version===3;
+ if(run.version!==freeze.version||(dataset.version!==3&&run.version!==2)||(dataset.version===3&&run.version<3))blockers.add('location-schema-mismatch');
+ const actual=precise?preciseArtifacts(dataset,run,freeze):null;
+ if(actual)for(const issue of actual.issues)blockers.add(issue);
+ const verified=run.version===4?verificationArtifacts(dataset,run,freeze):null;
+ if(verified)for(const issue of verified.issues)blockers.add(issue);
+ const ids=new Set(dataset.cases.map(row=>row.id));
+ for(const output of run.outputs){
+  requireValue(record(output)&&ids.has(output.id)&&!records.has(output.id)&&['hit','no-hit','unknown'].includes(output.raw)&&
+   ['confirmed','excluded','unknown','not-required'].includes(output.decision));
+  requireValue(output.raw==='hit'?output.decision!=='not-required':output.raw==='no-hit'?output.decision==='not-required':output.decision==='unknown');
+  requireValue(Array.isArray(output.evidence)&&output.evidence.length<=20&&output.evidence.every(item=>record(item)&&typeof item.kind==='string'&&item.kind.length>0&&item.kind.length<=80));
+  for(const item of output.evidence)if(hashPattern.test(item.artifactSha256??'')){
+   const cases=artifactCases.get(item.artifactSha256)??new Set();cases.add(output.id);artifactCases.set(item.artifactSha256,cases);
+  }
+  records.set(output.id,output);
+ }
+ for(const row of dataset.cases){
+  const output=records.get(row.id);
+  if(!output||!['confirmed','excluded'].includes(output.decision)||!validDecisionEvidence(row,output))continue;
+  for(const item of output.evidence){
+   const bindings=decisionBindings.get(item.artifactSha256)??new Set();
+   bindings.add(row.sourceSha256+':'+output.decision);decisionBindings.set(item.artifactSha256,bindings);
+  }
+ }
+ const conflicts=new Set([...decisionBindings].filter(([,bindings])=>bindings.size>1).map(([hash])=>hash));
+ if(!snapshotValid(freeze.reviewerSnapshot))blockers.add('reviewer-snapshot-missing-or-invalid');
+ else {
+  if(freeze.reviewerSnapshot.version===1)blockers.add('reviewer-snapshot-legacy-storage-unbound');
+  if(digest(freeze.reviewerSnapshot)!==freeze.identity.reviewer)blockers.add('reviewer-snapshot-identity-mismatch');
+ }
+ const frozenSha256=digest(freeze);
+ if(!executionsValid(run,frozenSha256))blockers.add('reviewer-execution-missing-or-mismatched');
+ const coverage=reviewerCoverage(dataset,run,frozenSha256),uncovered=new Set(coverage.missingCaseIds),unsupported=new Set(coverage.unsupportedCaseIds);
+ if(!coverage.receiptListValid||coverage.invalidReceiptIndices.length)blockers.add('reviewer-execution-inputs-missing-or-invalid');
+ if(coverage.missingCaseIds.length)blockers.add('reviewer-execution-coverage-incomplete');
+ if(coverage.duplicateReceiptIndices.length)blockers.add('reviewer-execution-duplicate');
+ if(coverage.legacyReceiptIndices.length)blockers.add('reviewer-execution-legacy-receipt');
+ if(coverage.unsupportedCaseIds.length)blockers.add('reviewer-language-unsupported');
+ if(freeze.datasetSha256!==digest(dataset))blockers.add('dataset-changed-after-freeze');
+ if(freeze.policySha256!==digest(policy))blockers.add('thresholds-changed-after-freeze');
+ if(digest(freeze.identity)!==digest(run.identity))blockers.add('candidate-identity-changed');
+ if(run.datasetSha256!==digest(dataset))blockers.add('run-dataset-mismatch');
+ if(run.freezeSha256!==frozenSha256)blockers.add('run-freeze-mismatch');
+ if(freeze.ledgerSha256!==digest(ledger)||digest([...new Set(freeze.developmentSourceSha256)].sort())!==digest(used))blockers.add('ledger-history-mismatch');
+ if(Date.parse(freeze.createdAt)>=Date.parse(run.startedAt))blockers.add('freeze-not-before-run');
+ const development=new Set([...used,...freeze.developmentSourceSha256]);
+ const groups=new Map();
+ for(const row of dataset.cases){
+  const reasons=[];
+  if(uncovered.has(row.id))reasons.push('reviewer-execution-source-uncovered');
+  if(unsupported.has(row.id))reasons.push('reviewer-language-unsupported');
+  if(development.has(row.sourceSha256)){overlap.push(row.id);blockers.add('development-sample-reused')}
+  if(!qualifyingOracle(row))
+   {blockers.add('vulnerability-oracle-incomplete');reasons.push('vulnerability-oracle-incomplete')}
+  const selection=selectionIssue(row);
+  if(selection){blockers.add(selection);reasons.push(selection)}
+  let output=records.get(row.id)??{id:row.id,raw:'unknown',decision:'unknown',evidence:[]};
+  if(precise){
+   const source=actual.cases.get(row.id);
+   if(!source||source.raw!==output.raw||output.pointId!==row.pointId||output.location?.sourceSha256!==row.sourceSha256){
+    output={...output,raw:'unknown',decision:'unknown'};blockers.add('execution-point-output-mismatch');reasons.push('execution-point-output-mismatch');
+   }
+  }
+  if(output.raw==='hit'&&(output.location?.line!==row.location.line||output.location?.sourceSha256!==row.sourceSha256||
+     output.language!==row.language||output.cwe!==row.cwe)){
+   output={...output,raw:'unknown',decision:'unknown'};blockers.add('scan-location-mismatch');reasons.push('scan-location-mismatch');
+  }
+  let decision=output.decision;
+  if(run.version===4&&['confirmed','excluded'].includes(decision)){
+   const actualVerification=verified.cases.get(row.id);
+   if(!actualVerification||actualVerification.decision!==decision||!output.evidence.every(e=>e.kind==='sandbox-verification'&&e.artifactSha256===actualVerification.artifactSha256)){
+    decision='unknown';blockers.add('verification-evidence-unavailable-or-mismatched');reasons.push('verification-evidence-unavailable-or-mismatched');
+   }
+  }
+  if(['confirmed','excluded'].includes(decision)&&output.evidence.some(item=>conflicts.has(item.artifactSha256))){
+   decision='unknown';blockers.add('artifact-binding-conflict');reasons.push('artifact-binding-conflict');
+  }
+  if(['confirmed','excluded'].includes(decision)&&!validDecisionEvidence(row,output)){
+   decision='unknown';blockers.add('unsupported-review-evidence');reasons.push('unsupported-review-evidence');
+  }
+  if(reasons.length)caseBlockers.push({id:row.id,reasons});
+  const category=categoryOf(row),group=groups.get(category)??[];
+  group.push({row,output,decision});groups.set(category,group);
+ }
+ const categories={};
+ for(const category of new Set([...Object.keys(policy.categories),...groups.keys()])){
+  const rows=groups.get(category)??[],summary=countsFor(rows.filter(item=>qualifyingSample(item.row))),limits=policy.categories[category],reasons=[];
+  if(!limits)reasons.push('category-thresholds-missing');
+  else{
+   if(summary.positive<limits.minimumPositive||summary.negative<limits.minimumNegative)reasons.push('insufficient-labelled-cases');
+   if(summary.raw.unknown>0)reasons.push('scanner-coverage-unknown');
+   if(summary.raw.recall===null||summary.raw.recall<limits.minimumRawRecall)reasons.push('raw-recall-below-threshold');
+   if(summary.reviewed.falsePositiveRate===null||summary.reviewed.falsePositiveRate>limits.maximumReviewedFalsePositiveRate)
+    reasons.push('reviewed-false-positive-rate-unqualified');
+   if(summary.reviewed.falsePositiveRateUpperBound===null||summary.reviewed.falsePositiveRateUpperBound>limits.maximumReviewedFalsePositiveRate)
+    reasons.push('reviewed-false-positive-bound-unqualified');
+   if(summary.reviewed.falseExclusionRate===null||summary.reviewed.falseExclusionRate>limits.maximumFalseExclusionRate)
+    reasons.push('false-exclusion-rate-unqualified');
+   if(summary.reviewed.unknownRate===null||summary.reviewed.unknownRate>limits.maximumUnknownRate)reasons.push('review-unknown-rate-unqualified');
+   if(summary.reviewed.confirmedRecall===null||summary.reviewed.confirmedRecall<limits.minimumConfirmedRecall)
+    reasons.push('confirmed-recall-below-threshold');
+  }
+  for(const reason of reasons)blockers.add(category+':'+reason);
+  categories[category]={...summary,diagnostic:countsFor(rows),excludedFromQualification:rows.filter(item=>!qualifyingSample(item.row)).map(item=>item.row.id),thresholds:limits??null,blockers:reasons};
+ }
+ return{version:8,legacyDiagnosticOnly:run.version!==4,state:blockers.size?'blocked':run.version===4?'eligible-for-release-review':'diagnostic-only',r3Qualified:false,executionEnabled:false,
+  ...(verified?{verificationCoverage:{supportedCases:[...verified.cases.keys()],issues:verified.issues},humanSupplement:Array.isArray(run.humanSupplement)?run.humanSupplement.slice(0,1000):[]}:{}),reviewerCoverage:coverage,...(actual?{executionPoints:dataset.cases.map(row=>({id:row.id,path:row.path,sourceSha256:row.sourceSha256,pointId:row.pointId,location:row.location,actual:actual.cases.get(row.id)??{raw:'unknown'}}))}:{}),
+  categories,blockers:[...blockers],caseBlockers,developmentOverlap:overlap,usageRequired:usageRequired(dataset),freezeTrust:'self-attested; digest and attempt-consumption ledger need an independent release-review check',
+  artifactReuse:[...artifactCases].filter(([,cases])=>cases.size>1).map(([sha256,cases])=>({sha256,caseIds:[...cases]})),
+  definitions:{
+   qualificationScope:'category metrics and thresholds require a verified independent-vulnerability oracle and a complete eligible blind-selection declaration bound to a protocol digest; other cases remain diagnostic and block qualification',
+   selectionValidation:'selection fields and protocol digest format are self-attested; selection protocol content, timing, representativeness and independence require release review',
+   reviewerValidation:'supported three-module closure, launcher and immutable runtime image bind reviewer identity; execution receipts are self-attested and their original input/output artifacts, aggregation and external sealing require release review; Docker and VM kernel remain trusted',
+   reviewerCoverage:'version 2 receipts bind a bounded ASCII input-file digest map and scan digest; only completed matching unique input batches cover supported Python source cases, including diagnostic cases; other languages are explicitly unsupported; membership is not proof of per-site review, original artifact authenticity or aggregation correctness',
+   coverageMetrics:'source coverage and unsupported-language blockers do not reclassify declared decisions or category metrics; global state, blockers and per-case reasons must be checked before any qualification claim',
+   diagnosticScope:'all declared cases, including authored controls; these counts never satisfy qualification thresholds',
+   rawFalsePositiveRate:'negative hits / observed negative cases',
+   reviewedFalsePositiveRate:'negative confirmations / resolved negative cases',
+   reviewedFalsePositiveRateUpperBound:'negative confirmations plus unknown negatives / all labelled negatives; finite-sample worst-case accounting, not a population confidence interval',
+   reviewedFalseNegativeRate:'missed or wrongly excluded positives / resolved positive cases',
+   confirmedRecall:'confirmed positives / all labelled positives',
+   unknownRate:'unresolved cases / all labelled cases',
+   evidenceOnly:'unknown decisions carrying evidence references; not verified exclusions',
+   evidenceValidation:'declared evidence kind, input binding and artifact digest structure; evidence meaning requires independent review',
+  }};
+}
+
+
+// v3 point identities and frozen inventories bind actual scanner/reviewer artifacts.
+const supportedRules=new Set(['policy.harness.python.eval','policy.harness.python.exec','policy.harness.python.request-to-dynamic-code']);
+const position=p=>record(p)&&Object.keys(p).sort().join(',')==='col,line,offset'&&Number.isSafeInteger(p.line)&&p.line>=1&&Number.isSafeInteger(p.col)&&p.col>=1&&Number.isSafeInteger(p.offset)&&p.offset>=0&&p.offset<=1048576;
+function pointValid(p,hash){
+ return record(p)&&p.sourceSha256===hash&&hashPattern.test(hash??'')&&['eval','exec','builtins.eval','builtins.exec'].includes(p.callee)&&
+ record(p.call)&&position(p.call.start)&&position(p.call.end)&&p.call.end.offset>p.call.start.offset&&
+ (p.call.end.line>p.call.start.line||p.call.end.line===p.call.start.line&&p.call.end.col>p.call.start.col)&&
+ p.id===digest({sourceSha256:p.sourceSha256,callee:p.callee,call:p.call})&&p.builtinIdentity==='unverified'&&
+ (p.argument===null||record(p.argument)&&position(p.argument.start)&&position(p.argument.end)&&p.argument.start.offset>=p.call.start.offset&&p.argument.end.offset<=p.call.end.offset&&p.argument.end.offset>p.argument.start.offset);
+}
+function bindingValid(binding,snapshot,identity){
+ if(!record(binding)||binding.version!==1||binding.snapshotSha256!==identity.reviewer||binding.imageId!==snapshot?.imageId||!Number.isSafeInteger(binding.uid)||binding.uid<=0)return false;
+ const inv=binding.inventory;
+ if(!record(inv)||inv.version!==1||inv.protocol!=='python-sink-locations-1'||!/^3\.\d+\.\d+$/.test(inv.runtimePython)||!record(inv.files))return false;
+ const files=Object.entries(inv.files);if(files.length<1||files.length>64)return false;
+ return files.every(([path,f])=>sourceInputName('sources/'+path)&&record(f)&&hashPattern.test(f.sha256??'')&&Number.isSafeInteger(f.bytes)&&f.bytes>=0&&f.bytes<=1048576&&
+ ['completed','unavailable'].includes(f.state)&&Array.isArray(f.points)&&f.points.length<=64&&new Set(f.points.map(p=>p.id)).size===f.points.length&&
+ f.points.every(p=>pointValid(p,f.sha256)&&p.call.end.offset<=f.bytes)&&(f.state!=='unavailable'||f.points.length===0));
+}
+function artifactBinding(value,snapshot,identity,operation){
+ try{
+  const r=value.reviewerExecution,b=value.locationBinding,report=JSON.parse(value.reportJson);
+  if(!bindingValid(b,snapshot,identity)||r?.version!==3||r.state!=='completed'||r.operation!==operation||r.snapshotSha256!==identity.reviewer||
+   r.locationBindingSha256!==digest(b)||createHash('sha256').update(value.reportJson).digest('hex')!==r.reportSha256||!receiptInputsValid(r)||
+   report.version!==2||(report.operation??'review')!==operation||digest(report.locations)!==digest(b.inventory)||
+   !timestamp(r.startedAt)||!timestamp(r.finishedAt)||Date.parse(r.finishedAt)<Date.parse(r.startedAt))return null;
+  const files=Object.fromEntries(Object.entries(r.inputFiles).filter(([n])=>sourceInputName(n)).map(([n,h])=>[n.slice(8),h]));
+  if(digest(files)!==digest(Object.fromEntries(Object.entries(b.inventory.files).map(([n,f])=>[n,f.sha256]))))return null;
+  return{binding:b,receipt:r,report};
+ }catch{return null}
+}
+function rowBound(row,bindings){
+ const matches=bindings.flatMap(b=>{const f=b.inventory.files[row.path];return f&&f.sha256===row.sourceSha256?[f]:[]});
+ if(matches.length!==1||matches[0].state!=='completed')return false;
+ if(row.pointId===null)return matches[0].points.length===0;
+ const points=matches[0].points.filter(p=>p.id===row.pointId);
+ return points.length===1&&row.location.line===points[0].call.start.line&&row.location.column===points[0].call.start.col;
+}
+function freezeLocations(dataset,identity,snapshot,values){
+ requireValue(snapshotValid(snapshot)&&Array.isArray(values)&&values.length>0&&values.length<=1000);
+ const rows=values.map(v=>artifactBinding(v,snapshot,identity,'locations'));requireValue(rows.every(Boolean));
+ const locations=values.map(v=>({reviewerExecution:structuredClone(v.reviewerExecution),locationBinding:structuredClone(v.locationBinding),reportJson:v.reportJson}));
+ requireValue(dataset.cases.every(row=>rowBound(row,rows.map(r=>r.binding))));
+ requireValue(rows.every(r=>Date.parse(r.receipt.finishedAt)<=Date.now()));
+ return locations;
+}
+function preciseArtifacts(dataset,run,freeze){
+ const issues=[],cases=new Map();let frozen;
+ try{
+  requireValue(Array.isArray(freeze.locations)&&freeze.locations.length>0&&freeze.locations.length<=1000&&digest(freeze.locations)===freeze.locationsSha256);
+  frozen=freeze.locations.map(v=>artifactBinding(v,freeze.reviewerSnapshot,freeze.identity,'locations'));
+  requireValue(frozen.every(r=>r&&Date.parse(r.receipt.finishedAt)<=Date.parse(freeze.createdAt)));
+  requireValue(dataset.cases.every(row=>rowBound(row,frozen.map(r=>r.binding))));
+ }catch{return{issues:['frozen-locations-invalid-or-changed'],cases}}
+ if(!Array.isArray(run.reviewArtifacts)||run.reviewArtifacts.length!==run.reviewerExecutions?.length||run.reviewArtifacts.length>1000)return{issues:['review-artifacts-missing'],cases};
+ const batches=[];
+ for(const [i,value] of run.reviewArtifacts.entries()){
+  try{
+   const r=run.reviewerExecutions[i],a=artifactBinding({...value,reviewerExecution:r},freeze.reviewerSnapshot,run.identity,'review');
+   requireValue(a&&frozen.some(f=>digest(f.binding)===digest(a.binding)));
+   requireValue(createHash('sha256').update(value.scanJson).digest('hex')===r.scanSha256&&createHash('sha256').update(value.manifestJson).digest('hex')===r.inputFiles['manifest.json']);
+   const manifest=JSON.parse(value.manifestJson),scan=JSON.parse(value.scanJson),maps=a.report.findingLocations;
+   requireValue(digest(manifest.locationBinding)===digest(a.binding)&&manifest.scanSha256===r.scanSha256&&digest(manifest.files)===digest(Object.fromEntries(Object.entries(a.binding.inventory.files).map(([n,f])=>[n,f.sha256]))));
+   requireValue(Array.isArray(scan.results)&&scan.results.length<=2000&&Array.isArray(maps)&&maps.length===scan.results.length);
+   for(const [j,m] of maps.entries()){
+    const hit=scan.results[j];requireValue(record(m)&&m.index===j&&['bound','unmatched','ignored'].includes(m.state));
+    const path=typeof hit?.path==='string'?hit.path.replace(/^\/src\//,''):null,file=a.binding.inventory.files[path];
+    const span={start:hit?.start,end:hit?.end},rangeValid=position(span.start)&&position(span.end)&&span.end.offset>span.start.offset&&span.end.offset<=(file?.bytes??-1);
+    const expected={'policy.harness.python.eval':'eval','policy.harness.python.exec':'exec'}[hit?.check_id];
+    const candidates=rangeValid&&file?.state==='completed'&&supportedRules.has(hit?.check_id)?file.points.filter(p=>span.start.offset<=p.call.start.offset&&p.call.end.offset<=span.end.offset||!expected&&p.argument!==null&&digest(p.argument)===digest(span)):[];
+    const unique=candidates.length===1&&(!expected||candidates[0].callee.split('.').at(-1)===expected)?candidates[0]:null;
+    if(m.state==='bound')requireValue(unique&&m.path===path&&m.rule===hit.check_id&&m.pointId===unique.id&&digest(m.point)===digest(unique)&&digest(m.scannerSpan)===digest(span));
+    else requireValue(!unique);
+   }
+   batches.push({...a,scan,maps});
+  }catch{issues.push('review-artifact-binding-invalid:'+i)}
+ }
+ for(const row of dataset.cases){
+  const matches=batches.filter(b=>b.binding.inventory.files[row.path]?.sha256===row.sourceSha256);
+  if(matches.length!==1)continue;
+  const b=matches[0],scanned=b.scan.paths?.scanned;
+  const covered=Array.isArray(b.scan.errors)&&b.scan.errors.length===0&&Array.isArray(scanned)&&scanned.includes('/src/'+row.path);
+  const uncertain=b.maps.some(m=>m.path===row.path&&m.state==='unmatched'&&supportedRules.has(m.rule));
+  const hits=b.maps.filter(m=>m.state==='bound'&&m.pointId===row.pointId);
+  cases.set(row.id,{raw:!covered||uncertain?'unknown':hits.length?'hit':'no-hit',pointId:row.pointId,rawHits:hits.length});
+ }
+ return{issues,cases};
+}
+
+const verifierPolicy={version:1,maxInputs:4,inputSeconds:5,pointSeconds:30,memoryMiB:512,cpus:1,pids:64,tmpMiB:32,outputBytes:262144,network:'none',proof:'python-narrow-literal-1'};
+const probeTemplates=['control-literal-v1','expression-with-frozen-random-challenge-v1','statement-with-frozen-random-challenge-v1','syntax-error-v1'];
+const probeValues=c=>["'harness-control'",`str('${c}')#`,`__harness_probe__='${c}'`,"'"];
+const bytesHash=s=>typeof s==='string'?createHash('sha256').update(s).digest('hex'):null;
+function validVerificationPlan(plan,dataset,staticSnapshot){
+ try{
+  const v=plan.snapshot;requireValue(plan.version===1&&record(v)&&v.version===1&&v.kind==='python-execution-verifier'&&v.pythonVersion==='3.12.15'&&v.imageId===staticSnapshot.imageId&&v.staticSha256===digest(staticSnapshot)&&digest(v.staticSnapshot)===digest(staticSnapshot));
+  requireValue(digest(v.policy)===digest(verifierPolicy)&&digest(v.probes)===digest(probeTemplates)&&record(v.code)&&Object.keys(v.code).sort().join(',')==='eval_evidence_batch.py,eval_guard_review.py,eval_import_review.py,python_execution_verify.py'&&Object.values(v.code).every(h=>hashPattern.test(h)));
+  requireValue(v.controllerSha256===staticSnapshot.launcherSha256&&v.storageSha256===staticSnapshot.storageSha256&&hashPattern.test(v.verifierControllerSha256??'')&&record(v.dependencies)&&Object.keys(v.dependencies).length<=1000&&Object.values(v.dependencies).every(h=>hashPattern.test(h)));
+  requireValue(Array.isArray(v.sourceProfiles)&&v.sourceProfiles.length>0&&v.sourceProfiles.every(h=>hashPattern.test(h))&&record(v.recipes)&&Object.entries(v.recipes).every(([h,c])=>h===digest(c)&&c.version===1&&c.inputContract==='untrusted-data-only'));
+  for(const n of reviewerFiles)requireValue(v.code[n]===staticSnapshot.files[n]);
+  requireValue(Array.isArray(plan.requests)&&plan.requests.length===dataset.cases.filter(r=>r.pointId!==null).length&&plan.requests.length<=1000);
+  const seen=new Set(),challenges=new Set();
+  for(const r of plan.requests){
+   const c=dataset.cases.find(c=>c.id===r.caseId);requireValue(c&&c.pointId!==null&&!seen.has(c.id)&&r.point.id===c.pointId&&r.point.sourceSha256===c.sourceSha256&&r.contract.path===c.path&&pointValid(r.point,c.sourceSha256)&&v.sourceProfiles.includes(c.sourceSha256)&&v.recipes[digest(r.contract)]&&digest(v.recipes[digest(r.contract)])===digest(r.contract)&&hashPattern.test(r.challenge??'')&&!challenges.has(r.challenge));
+   seen.add(c.id);challenges.add(r.challenge);
+  }
+  return true;
+ }catch{return false}
+}
+function observedDecision(report,request){
+ const point=request.point,callee=point.callee.split('.').at(-1),probes=probeValues(request.challenge),calls=[];
+ if(report.pointId!==point.id||report.sourceSha256!==point.sourceSha256||digest(report.point)!==digest(point)||report.contractSha256!==digest(request.contract)||report.challengeSha256!==bytesHash(request.challenge)||report.runtimePython!=='3.12.15'||report.probePolicySha256!==digest({policy:verifierPolicy,probes:probeTemplates})||!Array.isArray(report.runs)||report.runs.length!==4)return'unknown';
+ let triggered=false;
+ for(const [i,r] of report.runs.entries()){
+  if(r.inputIndex!==i||r.probeSha256!==bytesHash(probes[i])||r.trace?.state!=='observed'||!Array.isArray(r.trace.calls)||!Array.isArray(r.trace.returns)||r.trace.calls.length>16||r.trace.returns.length>16)return'unknown';
+  for(const c of r.trace.calls){if(c.pointId!==point.id||c.callee!==callee||c.exactStr!==true||typeof c.argument!=='string'||c.argumentSha256!==bytesHash(c.argument))return'unknown';calls.push(c)}
+  if(r.trace.returns.some(v=>v.pointId!==point.id))return'unknown';
+  const exact=r.trace.calls.some(c=>c.argument===probes[i]||(i===1&&c.argument.startsWith(probes[i])));
+  const witnessed=r.trace.returns.some(v=>callee==='eval'?v.evalWitness===true&&v.returnValue===request.challenge:v.execWitness===true&&v.markerValue===request.challenge);
+  if(((callee==='eval'&&i===1)||(callee==='exec'&&i===2))&&exact&&witnessed)triggered=true;
+ }
+ if(triggered)return'confirmed';
+ const proof=report.proof,e=request.contract.entry;
+ if(!calls.length||!record(proof)||proof.domain!=='exact-str'||proof.sinkLine!==point.call.start.line||!Number.isSafeInteger(proof.guardLine)||proof.guardLine>=proof.sinkLine||!(e.kind==='function'&&proof.function===e.name&&digest(proof.parameters)===digest([e.parameter])||e.kind==='flask'&&digest(proof.parameters)===digest([])))return'unknown';
+ if(proof.kind==='single-quoted-string'&&calls.every(c=>c.argument.startsWith("'")&&c.argument.endsWith("'")&&!c.argument.slice(1,-1).includes("'")))return'excluded';
+ const literal=t=>typeof t==='string'&&t.length<=256&&/^(?:None|True|False|\d+(?:\.\d+)?|'[^'\n\r]*'|"[^"\n\r]*")$/.test(t);
+ if(proof.kind==='finite-literal-set'&&Array.isArray(proof.values)&&proof.values.length>0&&proof.values.length<=16&&proof.values.every(literal)&&calls.every(c=>proof.values.includes(c.argument)))return'excluded';
+ return'unknown';
+}
+function verificationArtifacts(dataset,run,freeze){
+ const cases=new Map(),issues=[];
+ if(!validVerificationPlan(freeze.verificationPlan,dataset,freeze.reviewerSnapshot)||digest(freeze.verificationPlan)!==freeze.verificationPlanSha256)return{cases,issues:['verification-plan-missing-or-changed']};
+ if(!Array.isArray(run.verifierExecutions)||!Array.isArray(run.verificationArtifacts)||run.verifierExecutions.length!==run.verificationArtifacts.length||run.verifierExecutions.length>1000)return{cases,issues:['verification-artifacts-missing']};
+ const pin=digest(freeze.verificationPlan.snapshot),seen=new Set();
+ for(const [i,r] of run.verifierExecutions.entries()){
+  try{
+   const a=run.verificationArtifacts[i],request=JSON.parse(a.requestJson),report=JSON.parse(a.reportJson),manifest=JSON.parse(a.manifestJson),planned=freeze.verificationPlan.requests.find(p=>p.point.id===request.point.id&&p.contract.path===request.contract.path);
+   requireValue(planned&&!seen.has(planned.caseId)&&digest({version:1,point:planned.point,contract:planned.contract,challenge:planned.challenge})===digest(request));
+   requireValue(r.version===1&&r.operation==='verify-execution'&&r.state==='completed'&&r.cleanupVerified===true&&r.verifierSha256===pin&&r.datasetSha256===run.datasetSha256&&r.freezeSha256===digest(freeze)&&r.policySha256===digest(verifierPolicy)&&Number.isSafeInteger(r.uid)&&r.uid>0&&timestamp(r.startedAt)&&timestamp(r.finishedAt)&&Date.parse(r.startedAt)>=Date.parse(run.startedAt)&&Date.parse(r.finishedAt)>=Date.parse(r.startedAt));
+   requireValue(record(r.inputFiles)&&Object.keys(r.inputFiles).length<=1100&&digest(r.inputFiles)===r.inputSha256&&r.reportSha256===bytesHash(a.reportJson)&&r.requestSha256===bytesHash(a.requestJson)&&r.inputFiles['verification-request.json']===r.requestSha256&&r.inputFiles['manifest.json']===bytesHash(a.manifestJson)&&r.inputFiles['scan.json']===bytesHash(a.scanJson));
+   requireValue(manifest.locationBinding?.snapshotSha256===run.identity.reviewer&&manifest.locationBinding.imageId===freeze.reviewerSnapshot.imageId&&manifest.locationBinding.uid===r.uid&&r.inputFiles['sources/'+planned.contract.path]===planned.point.sourceSha256);
+   requireValue(Object.entries(manifest.files).every(([n,h])=>r.inputFiles['sources/'+n]===h&&freeze.verificationPlan.snapshot.sourceProfiles.includes(h)));
+   requireValue(Object.entries(freeze.verificationPlan.snapshot.dependencies).every(([n,h])=>r.inputFiles['dependencies/'+n]===h));
+   const decision=observedDecision(report,request);requireValue(report.decision===decision||report.decision==='unknown');
+   seen.add(planned.caseId);cases.set(planned.caseId,{decision:report.decision==='unknown'?'unknown':decision,artifactSha256:r.reportSha256});
+  }catch{issues.push('verification-artifact-invalid:'+i)}
+ }
+ return{cases,issues};
+}
+
+function readInput(path){
+ const limit=2*1024*1024,fd=openSync(path,constants.O_RDONLY|constants.O_NOFOLLOW|constants.O_NONBLOCK);
+ try{
+  if(!fstatSync(fd).isFile())throw Error('Evaluation input must be an ordinary file');
+  const buffer=Buffer.alloc(limit+1);
+  let used=0;
+  while(used<buffer.length){
+   const count=readSync(fd,buffer,used,buffer.length-used,null);
+   if(count===0)break;
+   used+=count;
+  }
+  if(used>limit)throw Error('Evaluation file exceeds 2 MiB');
+  return JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(buffer.subarray(0,used)));
+ }finally{closeSync(fd)}
+}
+
+if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
+ try{
+  if(process.argv[2]==='--freeze'){
+   if(![7,8,9,10].includes(process.argv.length))throw Error('Usage: review_quality_gate.mjs --freeze DATASET POLICY IDENTITY LEDGER [REVIEWER_SNAPSHOT [LOCATION_EXECUTIONS [VERIFICATION_PLAN]]]');
+   console.log(JSON.stringify(freezeReviewInputs(...process.argv.slice(3).map(readInput)),null,2));
+  }else{
+   if(process.argv.length!==7)throw Error('Usage: review_quality_gate.mjs DATASET RUN FREEZE POLICY LEDGER');
+   const result=evaluateReviewQuality(...process.argv.slice(2).map(readInput));
+   console.log(JSON.stringify(result,null,2));
+   if(result.state==='blocked')process.exitCode=2;
+  }
+ }catch(error){console.error(error.message);process.exitCode=1}
+}
+
+
+CURRENT FILE scripts/verify_execution_controller.test.py SHA 1a4fa5914d9121cb33ebbe5932830223b7388e9d958bbb3280e26dc01ce7242b
+"""Controller lifecycle checks use synthetic backend, never Mac Docker."""
+from pathlib import Path
+import importlib.util,json,sys,unittest
+HERE=Path(__file__).resolve().parent
+s=importlib.util.spec_from_file_location('oldtests',HERE/'reviewer_snapshot.test.py');old=importlib.util.module_from_spec(s);s.loader.exec_module(old)
+sys.path.insert(0,str(HERE.parent/'work/harness-purge-improved/package/scripts'));import eval_evidence_batch as batch
+class ControllerTest(old.SnapshotTest):
+ def fixture(self):
+  snap,root,manifest,scan=self.execution_fixture();(root/'safe.py').write_text('eval(value)\n');raw=(root/'safe.py').read_bytes();inv=batch.location_inventory({'safe.py':raw.decode()});inv['runtimePython']='3.12.15'
+  location={'version':1,'snapshotSha256':self.api.digest(snap),'imageId':old.IMAGE,'uid':self.api.os.geteuid(),'inventory':inv}
+  manifest.write_text(json.dumps({'files':{'safe.py':batch.sha256(raw).hexdigest()},'scanSha256':batch.sha256(scan.read_bytes()).hexdigest(),'locationBinding':location}))
+  spec=importlib.util.spec_from_file_location('vs',HERE/'verifier_snapshot.py');vs=importlib.util.module_from_spec(spec);spec.loader.exec_module(vs)
+  deps=self.root/'deps';deps.mkdir();contract={'version':1,'path':'safe.py','entry':{'kind':'function','name':'route','parameter':'value'},'inputContract':'untrusted-data-only'}
+  ver=vs.freeze(self.bundle,self.api.digest(snap),deps,{'version':1,'packages':[],'files':{}},[contract],self.root/'verifier')
+  request={'version':1,'contract':contract,'point':inv['files']['safe.py']['points'][0],'challenge':'c'*64};path=self.root/'request.json';path.write_text(json.dumps(request));return ver,root,manifest,scan,path,request
+ def test_verify_uses_owned_lifecycle_policy_and_returns_original_on_recover(self):
+  ver,root,manifest,scan,path,request=self.fixture();backend=old.Backend();report={'version':1,'operation':'verify-execution','decision':'unknown','reason':'synthetic-not-a-runtime-proof','pointId':request['point']['id'],'sourceSha256':request['point']['sourceSha256'],'point':request['point'],'contractSha256':self.api.digest(request['contract']),'runtimePython':'3.12.15','challengeSha256':self.api.sha256(request['challenge'].encode()).hexdigest(),'runs':[],'proof':None}
+  backend.report=json.dumps(report).encode();value=self.api.verify_execution(self.root/'verifier',self.api.digest(ver),root,manifest,scan,path,'d'*64,'e'*64,attempts_root=self.root/'attempts',_engine_factory=backend.factory)
+  receipt=value['verificationExecution'];self.assertEqual((receipt['version'],receipt['operation']),(1,'verify-execution'));self.assertEqual(receipt['verifierSha256'],self.api.digest(ver));self.assertEqual(value['verificationArtifact']['requestJson'],path.read_bytes().decode())
+  for x in ['512m','64','python_execution_verify.py']:self.assertTrue(any(x in v for v in backend.create_args))
+  self.assertEqual(self.api.recover(Path(value['attemptDirectory']))['result'],value)
+ def test_unfrozen_contract_rejected_before_reservation_or_engine(self):
+  ver,root,manifest,scan,path,request=self.fixture();request['contract']['entry']['name']='changed';path.write_text(json.dumps(request));backend=old.Backend()
+  with self.assertRaises(ValueError):self.api.verify_execution(self.root/'verifier',self.api.digest(ver),root,manifest,scan,path,'d'*64,'e'*64,attempts_root=self.root/'attempts',_engine_factory=backend.factory)
+  self.assertEqual(backend.calls,[]);self.assertFalse((self.root/'attempts').exists())
+for n in list(old.SnapshotTest.__dict__):
+ if n.startswith('test_'):setattr(ControllerTest,n,None)
+if __name__=='__main__':unittest.main()
+
+
+CURRENT FILE work/harness-purge-improved/tests/review-verification-v4.test.mjs SHA 7cd66df9022d961b052cc7c9cbfd0c45edf70e6d00ae09440457a99bd3a3e165
+import test from 'node:test';import assert from 'node:assert/strict';
+import {fixture} from './review-locations-v3.test.mjs';import {evaluateReviewQuality,freezeReviewInputs,digest} from '../../../scripts/review_quality_gate.mjs';
+test('v4 cannot accept a sandbox-verification label without actual verifier artifacts',()=>{const f=fixture();f.freeze.version=4;f.run.version=4;f.run.freezeSha256=digest(f.freeze);for(const r of f.run.reviewerExecutions)r.freezeSha256=f.run.freezeSha256;f.run.outputs[0].evidence[0].kind='sandbox-verification';const v=evaluateReviewQuality(f.dataset,f.run,f.freeze,f.policy,f.ledger);assert.equal(v.version,8);assert.equal(v.state,'blocked');assert.equal(v.categories['python/CWE-95'].reviewed.truePositive,0)});
+test('legacy precise input is diagnostic until a v4 verifier-bound freeze exists',()=>{const f=fixture();const v=evaluateReviewQuality(f.dataset,f.run,f.freeze,f.policy,f.ledger);assert.notEqual(v.state,'eligible-for-release-review');assert.equal(v.version,8)});
+test('v4 freeze rejects a declared verifier plan with mismatched identity',()=>{const f=fixture();assert.throws(()=>freezeReviewInputs(f.dataset,f.policy,f.identity,f.ledger,f.snapshot,[f.loc],{version:1,snapshot:{version:1},requests:[]}))});
+
+
+CURRENT FILE work/harness-purge-improved/tests/verification-artifacts.test.mjs SHA 7b3d5d02d7d104f2648c97875d933348ddb819e7d359dfebde85268fc250f38c
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
+import {evaluateReviewQuality,digest} from '../../../scripts/review_quality_gate.mjs';
+const url=new URL('../../../docs/security-workspace/diagnostics/python-verification-20261112/v4-fixture.json',import.meta.url),fixture=()=>JSON.parse(readFileSync(url)),score=f=>evaluateReviewQuality(f.dataset,f.run,f.freeze,f.policy,f.ledger),hash=s=>createHash('sha256').update(s).digest('hex');
+function editReport(f,fn,index=0){const a=f.run.verificationArtifacts[index],r=JSON.parse(a.reportJson);fn(r,JSON.parse(a.requestJson));a.reportJson=JSON.stringify(r);const receipt=f.run.verifierExecutions[index];receipt.reportSha256=hash(a.reportJson);f.run.outputs.find(o=>o.pointId===r.pointId)?.evidence.forEach(e=>e.artifactSha256=receipt.reportSha256)}
+test('Actual reviewed-profile VM v4 artifacts verify while used samples remain blocked',()=>{const f=fixture(),v=score(f);assert.equal(v.version,8);assert.deepEqual(v.verificationCoverage.issues,[]);assert.equal(v.verificationCoverage.supportedCases.length,4);assert.equal(v.r3Qualified,false);assert.equal(v.state,'blocked');assert.ok(v.blockers.includes('development-sample-reused'));assert.equal(v.categories['python/CWE-94'].diagnostic.reviewed.truePositive,1);assert.equal(v.categories['python/CWE-95'].diagnostic.reviewed.truePositive,1)});
+test('Point mismatch cannot be made valid by updating report digest',()=>{const f=fixture();editReport(f,r=>r.pointId='f'.repeat(64));assert.ok(score(f).verificationCoverage.issues.length)});
+test('Quoted challenge echo is not arbitrary code-probe execution even with recomputed hashes',()=>{const f=fixture(),index=2;editReport(f,(r,q)=>{for(const run of r.runs)for(const c of run.trace.calls){c.argument=JSON.stringify(q.challenge);c.argumentSha256=hash(c.argument)}},index);assert.ok(score(f).verificationCoverage.issues.length)});
+test('No raw witness cannot support a claimed confirmation',()=>{const f=fixture();editReport(f,r=>{for(const run of r.runs)for(const v of run.trace.returns)v.markerValue=null});assert.ok(score(f).verificationCoverage.issues.length)});
+test('Non-dominating or dangerous finite-set proof cannot exclude',()=>{for(const mutate of [r=>r.proof.guardLine=r.proof.sinkLine+1,r=>r.proof.values=['len([])']]){const f=fixture();editReport(f,mutate,3);const r=score(f);assert.ok(r.verificationCoverage.issues.length)}});
+test('Source, dependency, challenge, cleanup or verifier identity changes cannot inherit a decision',()=>{for(const mutate of [f=>f.run.verifierExecutions[0].cleanupVerified=false,f=>f.run.verifierExecutions[0].verifierSha256='f'.repeat(64),f=>{f.run.verificationArtifacts[0].requestJson+=' '},f=>{const r=f.run.verifierExecutions[0];delete r.inputFiles[Object.keys(r.inputFiles).find(k=>k.startsWith('dependencies/'))];r.inputSha256=digest(r.inputFiles)},f=>{f.freeze.verificationPlan.requests[0].challenge='f'.repeat(64)}]){const f=fixture();mutate(f);assert.ok(score(f).blockers.some(x=>x.startsWith('verification-')))}});
+test('Human evidence is supplementary and cannot supply tool main-score confirmation',()=>{const f=fixture();f.run.outputs[0].evidence[0].kind='human-review';f.run.humanSupplement=[{caseId:f.dataset.cases[0].id,decision:'confirmed'}];const v=score(f);assert.ok(v.blockers.includes('verification-evidence-unavailable-or-mismatched'));assert.equal(v.categories['python/CWE-94'].diagnostic.reviewed.truePositive,0);assert.equal(v.humanSupplement.length,1)});
+
+
+TEST gate-green.txt
+✔ Unrelated reviewer inputs cannot satisfy dataset source coverage (7.3685ms)
+✔ Coverage unions distinct batches and includes negative and diagnostic sources (1.581208ms)
+✔ Manifest and scan digests never count as reviewed source files (0.540583ms)
+✔ Input inventories require bound digests and the supported bounded source paths (4.139042ms)
+✔ A batch supports exactly 64 source files and blocks the sixty-fifth (0.662334ms)
+✔ Duplicate input receipts are rejected even with reordered keys or changed timestamps (0.533666ms)
+✔ Failed or globally mismatched receipts cannot contribute source coverage (0.787ms)
+✔ Legacy receipt versions stay diagnostic without inventing source coverage (0.249375ms)
+✔ Python reviewer cannot credit unsupported languages even when source bytes match (1.92675ms)
+✔ Legacy receipts mixed with valid current receipts retain a specific compatibility blocker (0.5225ms)
+✔ Independent overlapping batches may share sources without inflating case coverage (0.3675ms)
+✔ Entry-only reviewer identities cannot qualify without dependency snapshot and execution receipt (0.209792ms)
+✔ New freezes reject a reviewer identity that disagrees with the dependency manifest (0.318709ms)
+✔ Every reviewer dependency and runtime image is bound to the frozen identity (1.228709ms)
+✔ Completed execution must bind current snapshot, inputs, freeze and chronological run (1.863875ms)
+✔ Snapshot-aware freezes retain complete manifest and reject missing dependencies (0.952ms)
+✔ Raw and reviewed metrics use explicit denominators and never promote R3 (0.270583ms)
+✔ Unverified guard evidence and hidden findings stay unknown, not true negatives (0.425959ms)
+✔ Wrong exclusions, raw misses and false confirmations are measured separately (0.278291ms)
+✔ Model assertions and stale evidence cannot supply a verified decision (0.252792ms)
+✔ Reused samples, changing thresholds or tool identities block independent acceptance (0.834208ms)
+✔ Static rule annotations, unknown coverage and missing results block qualification (0.407708ms)
+✔ Malformed labels, duplicate outputs and impossible decisions are rejected (0.389ms)
+✔ Freeze binds policy and candidate and rejects sources already in the usage ledger (0.326125ms)
+✔ CLI emits a blocked report with exit 2 and bounds ordinary JSON inputs (71.116292ms)
+✔ Unknown negatives cannot improve eligibility through the resolved-only denominator (0.376125ms)
+✔ Duplicated or contradictory source locations cannot inflate labelled counts (0.216ms)
+✔ Evidence must bind the individual case and decision (0.2345ms)
+✔ Run replay and ledger substitution cannot qualify a frozen evaluation (0.973291ms)
+✔ Timezone-free timestamps and non-array evidence are invalid (0.232125ms)
+✔ Explicit-offset Python microsecond timestamps are accepted consistently (0.192041ms)
+✔ Decision artifacts cannot be recycled across different inputs or decisions (0.229541ms)
+✔ Line-only scan hits cannot be credited to another labelled site (0.572959ms)
+✔ Freeze and reports declare every attempt must consume the listed sources (0.38ms)
+✔ Scan anchors bind the source digest, language and category, not only line (0.696ms)
+✔ Missing anchors report the specific case and shared decision bindings are checked (0.851292ms)
+✔ Authored positive controls cannot contribute qualification recall or minimum cases (0.276833ms)
+✔ Unqualified oracles stay diagnostic and cannot dilute independent unknown metrics (0.652208ms)
+✔ Easy authored negatives cannot dilute qualification false-positive denominators (0.647459ms)
+✔ Known vulnerability pairs remain diagnostic even when their oracle is independently verified (0.361ms)
+✔ Missing or incomplete selection provenance cannot supply admission metrics (2.196625ms)
+✔ Explicit selection exclusions cannot be overridden by the other selection fields (0.739625ms)
+✔ Selection declarations are frozen and every diagnostic source still consumes the attempt (0.281334ms)
+✔ Storage closure is mandatory for new freezes and legacy snapshots stay diagnostic (0.357333ms)
+✔ Valid v2 storage closure with another reviewer identity cannot freeze (0.125209ms)
+✔ v3 same-line points are distinct, duplicate raw rule hits count once (4.869625ms)
+✔ v3 freeze requires exact source point inventory and location receipt (2.11875ms)
+✔ changed mapping/parser/freeze/report/scan/manifest bindings block precise scoring (4.695958ms)
+✔ v3 cannot borrow same-line point evidence or accept missing artifacts (2.225417ms)
+✔ same point repeated in dataset is rejected across rules and categories (0.498459ms)
+✔ Declared mapping cannot redirect an unchanged raw scan to another same-line point (0.68975ms)
+✔ v4 cannot accept a sandbox-verification label without actual verifier artifacts (1.286625ms)
+✔ legacy precise input is diagnostic until a v4 verifier-bound freeze exists (0.674792ms)
+✔ v4 freeze rejects a declared verifier plan with mismatched identity (0.8ms)
+ℹ tests 54
+ℹ suites 0
+ℹ pass 54
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 159.090583
+
+
+TEST storage-regression.txt
+............storage-settlement-pending; query status and storage-reconcile before retrying
+...storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+...storage-settlement-pending; query status and storage-reconcile before retrying
+.......storage-settlement-pending; query status and storage-reconcile before retrying
+..
+----------------------------------------------------------------------
+Ran 29 tests in 1.420s
+
+OK
+
+
+TEST controller-green.txt
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.162s
+
+OK
+
+
+TEST launcher-regression.txt
+..storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+............storage-settlement-pending; query status and storage-reconcile before retrying
+.....storage-settlement-pending; query status and storage-reconcile before retrying
+.......storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+....storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+...storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+....................................
+----------------------------------------------------------------------
+Ran 87 tests in 5.120s
+
+OK
+
+
+TEST locations-regression.txt
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.368s
+
+OK
+
+
+TEST runtime-summary.txt
+{
+  "dailyProgramFilesMatched": 169,
+  "dailyDatabasesMatched": 42,
+  "dailyProtection": {
+    "program": {
+      "before": "a828d84ddae6c35a9ae8a0e07ddc2b202425ba428caa54caafdf2ad22d2d0012",
+      "after": "a828d84ddae6c35a9ae8a0e07ddc2b202425ba428caa54caafdf2ad22d2d0012"
+    },
+    "config": {
+      "before": "41efaf964f0c953baa16f6402c2fc10e0031a39516c627e0c68f89731cae10ad",
+      "after": "41efaf964f0c953baa16f6402c2fc10e0031a39516c627e0c68f89731cae10ad"
+    },
+    "pins": {
+      "before": "55f91235119dbfcce21e0b46ebe37df156cbe1ae151d1947c090882e2a010ed5",
+      "after": "55f91235119dbfcce21e0b46ebe37df156cbe1ae151d1947c090882e2a010ed5"
+    },
+    "runtime": {
+      "before": "b7f53d039e78551831e1d584303d45d7e9f8a7a4f8a977bf8ec7eed5c4b82e93",
+      "after": "b7f53d039e78551831e1d584303d45d7e9f8a7a4f8a977bf8ec7eed5c4b82e93"
+    },
+    "databases": {
+      "before": "9289bda7b2d4737bd6c467323657e6b625780e11bd9aff5c8bdd77cd542bf0c0",
+      "after": "9289bda7b2d4737bd6c467323657e6b625780e11bd9aff5c8bdd77cd542bf0c0"
+    },
+    "outsideMountNamespace": {
+      "before": "46004dd150ea680763df4716a838d4901c13dd63b4cb4aff27fe2cbf94b60c81",
+      "after": "46004dd150ea680763df4716a838d4901c13dd63b4cb4aff27fe2cbf94b60c81"
+    },
+    "homeInode": {
+      "before": "bfa1bda4c41fcaf7b148dfaa9fc6d59f1ea9412072efe68b557f13d76c5135d7",
+      "after": "bfa1bda4c41fcaf7b148dfaa9fc6d59f1ea9412072efe68b557f13d76c5135d7"
+    }
+  },
+  "caseEvidence": {
+    "outputs": [
+      {
+        "id": "BenchmarkTest00074",
+        "raw": "hit",
+        "decision": "confirmed",
+        "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+        "location": {
+          "line": 51,
+          "column": 4,
+          "sourceSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e"
+        },
+        "language": "python",
+        "cwe": "CWE-94",
+        "evidence": [
+          {
+            "kind": "sandbox-verification",
+            "caseId": "BenchmarkTest00074",
+            "decision": "confirmed",
+            "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+            "inputSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+            "artifactSha256": "badb9fd26cd590489adc40e56acccd986aefb2185fc958fcee1b9c1989e5a3b1"
+          }
+        ]
+      },
+      {
+        "id": "BenchmarkTest00073",
+        "raw": "hit",
+        "decision": "excluded",
+        "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+        "location": {
+          "line": 54,
+          "column": 5,
+          "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122"
+        },
+        "language": "python",
+        "cwe": "CWE-94",
+        "evidence": [
+          {
+            "kind": "sandbox-verification",
+            "caseId": "BenchmarkTest00073",
+            "decision": "excluded",
+            "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+            "inputSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+            "artifactSha256": "c4775cdc8d92a901458b2f2ace3587e978ac1b1b8fa38fea2bcf6b90309d9ba6"
+          }
+        ]
+      },
+      {
+        "id": "skf-viewer-upstream",
+        "raw": "hit",
+        "decision": "confirmed",
+        "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+        "location": {
+          "line": 37,
+          "column": 20,
+          "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+        },
+        "language": "python",
+        "cwe": "CWE-95",
+        "evidence": [
+          {
+            "kind": "sandbox-verification",
+            "caseId": "skf-viewer-upstream",
+            "decision": "confirmed",
+            "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+            "inputSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+            "artifactSha256": "fe9bead7f7b980d1c2397c23a8c87e8c90482da6a2055bcbdb8676356ba43da8"
+          }
+        ]
+      },
+      {
+        "id": "skf-viewer-authored-fix",
+        "raw": "no-hit",
+        "decision": "not-required",
+        "pointId": null,
+        "location": {
+          "sourceSha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134"
+        },
+        "language": "python",
+        "cwe": "CWE-95",
+        "evidence": []
+      },
+      {
+        "id": "literal-set-control",
+        "raw": "hit",
+        "decision": "excluded",
+        "pointId": "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b",
+        "location": {
+          "line": 4,
+          "column": 12,
+          "sourceSha256": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b"
+        },
+        "language": "python",
+        "cwe": "CWE-95",
+        "evidence": [
+          {
+            "kind": "sandbox-verification",
+            "caseId": "literal-set-control",
+            "decision": "excluded",
+            "pointId": "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b",
+            "inputSha256": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+            "artifactSha256": "2270a04e02d7e45f57017cf03acdf58abebe0c1f4e14f32d3af2561368262068"
+          }
+        ]
+      }
+    ],
+    "rawFindings": 5,
+    "mapped": 5,
+    "pointsReviewed": 4,
+    "confirmed": 2,
+    "excluded": 2,
+    "incorrectExclusions": 0,
+    "priorCasesAndSyntheticOnly": true,
+    "newIndependentSamples": 0
+  },
+  "rawArtifactSha256": {
+    "locations.json": "3c69b7db1419515f67f98eee4089fc260dd0f082dd8ec677dacffef929fb2704",
+    "verifier-snapshot.json": "b97accb9a19db31ba436f9793fcb03c76279bc0b8347c27d5033552c0119e3cf",
+    "diagnostic-dataset.json": "d35bba63ac9e51426b46876e1db4c6b11c5ba2c71c06dc8f09a7b18bbae1c217",
+    "diagnostic-freeze.json": "e2668813c2ddfe38cd655383d37d991c497cdee5a8fe3ca4ec72106c25564f5a",
+    "verification-plan.json": "b748aed692e3b182d877821b087c17ae87b2814c7b908c564f6cb6632ba953b2",
+    "diagnostic-run.json": "e310e762ccf7ddb2f7dbd61bb97b0f694e0fe0657414231d948e24436af4fb3b",
+    "vm-quality.json": "7c4c835c17a63a7853c2aa9ff251878c44286e033e3eb75576acec28a45f9d17",
+    "case-evidence.json": "fc816e91583cbf1324881eba36db61ab1547a7e266d2a322923348688c3db66d",
+    "binding.json": "a70e5529c65c6f2e1b59cb04fa4dc26f84ee28df7d50024a113b3020616e89af",
+    "static-result.json": "5c65db53edf3db9c5e7cf291e9e4440245063b5c279fd390a9d06df687cea38b",
+    "verifications.json": "c679e5c276f2ddaf2124b596261db182f56b6baf97d46a77f28531be8df97302",
+    "baseline-scan.json": "8b2dc182cff88fc4aec4adb1a1df9204b7109b44f3ee082f173c4d37c2080a34",
+    "candidate-scan.json": "b514ed1f8aca98fe6d26af8c41505b6ae64aba1c7f5c040dba4c6e664f46ab62",
+    "policy.json": "e9b429fc21e5d86578333e6cd4cfad9ef2455be578b7ea37336fced14c788ad1",
+    "ledger.json": "8f15a832bb942f9b272ed22287e0a104e894067f04b53785f6a613220636f404",
+    "review-manifest.json": "472a606bdbb9967b51b369fda19705727c57cb7b5def7ebf6b738532e7f7447e",
+    "snapshot-identity.json": "5883336dd933fe345f6d4a0a88756f23ab8f31748434c91080369f7b17476cd3"
+  },
+  "macVmMatch": true
+}
+
+
+TEST artifacts-green.txt
+✔ Actual reviewed-profile VM v4 artifacts verify while used samples remain blocked (9.451666ms)
+✔ Point mismatch cannot be made valid by updating report digest (6.303416ms)
+✔ Quoted challenge echo is not arbitrary code-probe execution even with recomputed hashes (5.290708ms)
+✔ No raw witness cannot support a claimed confirmation (5.087875ms)
+✔ Non-dominating or dangerous finite-set proof cannot exclude (9.124166ms)
+✔ Source, dependency, challenge, cleanup or verifier identity changes cannot inherit a decision (18.964708ms)
+✔ Human evidence is supplementary and cannot supply tool main-score confirmation (4.356791ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 108.819875
+
+
+TEST controller-red.txt
+EE
+======================================================================
+ERROR: test_unfrozen_contract_rejected_before_reservation_or_engine (__main__.ControllerTest.test_unfrozen_contract_rejected_before_reservation_or_engine)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/verify_execution_controller.test.py", line 24, in test_unfrozen_contract_rejected_before_reservation_or_engine
+    with self.assertRaises(ValueError):self.api.verify_execution(self.root/'verifier',self.api.digest(ver),root,manifest,scan,path,'d'*64,'e'*64,attempts_root=self.root/'attempts',_engine_factory=backend.factory)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'snapshot' has no attribute 'verify_execution'
+
+======================================================================
+ERROR: test_verify_uses_owned_lifecycle_policy_and_returns_original_on_recover (__main__.ControllerTest.test_verify_uses_owned_lifecycle_policy_and_returns_original_on_recover)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/verify_execution_controller.test.py", line 18, in test_verify_uses_owned_lifecycle_policy_and_returns_original_on_recover
+    backend.report=json.dumps(report).encode();value=self.api.verify_execution(self.root/'verifier',self.api.digest(ver),root,manifest,scan,path,'d'*64,'e'*64,attempts_root=self.root/'attempts',_engine_factory=backend.factory)
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'snapshot' has no attribute 'verify_execution'
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.087s
+
+FAILED (errors=2)
+
+
+TEST archive-regression.txt
+...........................
+----------------------------------------------------------------------
+Ran 27 tests in 1.065s
+
+OK
+
+
+TEST gate-red.txt
+✔ v3 same-line points are distinct, duplicate raw rule hits count once (4.422375ms)
+✔ v3 freeze requires exact source point inventory and location receipt (1.895792ms)
+✔ changed mapping/parser/freeze/report/scan/manifest bindings block precise scoring (4.551875ms)
+✔ v3 cannot borrow same-line point evidence or accept missing artifacts (2.42875ms)
+✔ same point repeated in dataset is rejected across rules and categories (0.423959ms)
+✔ Declared mapping cannot redirect an unchanged raw scan to another same-line point (0.674667ms)
+✖ v4 cannot accept a sandbox-verification label without actual verifier artifacts (0.399167ms)
+✖ legacy precise input is diagnostic until a v4 verifier-bound freeze exists (0.945916ms)
+✖ v4 freeze rejects a declared verifier plan with mismatched identity (0.67975ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 6
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 63.000708
+
+✖ failing tests:
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/review-verification-v4.test.mjs:3:1
+✖ v4 cannot accept a sandbox-verification label without actual verifier artifacts (0.399167ms)
+  Error: Invalid layered review evaluation input
+      at invalid (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/review_quality_gate.mjs:8:26)
+      at requireValue (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/review_quality_gate.mjs:9:48)
+      at evaluateReviewQuality (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/review_quality_gate.mjs:172:2)
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/review-verification-v4.test.mjs:3:321)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7)
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/review-verification-v4.test.mjs:4:1
+✖ legacy precise input is diagnostic until a v4 verifier-bound freeze exists (0.945916ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to:
+  
+  'eligible-for-release-review'
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/review-verification-v4.test.mjs:4:187)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'eligible-for-release-review',
+    expected: 'eligible-for-release-review',
+    operator: 'notStrictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/review-verification-v4.test.mjs:5:1
+✖ v4 freeze rejects a declared verifier plan with mismatched identity (0.67975ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/review-verification-v4.test.mjs:5:106)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws'
+  }

@@ -1,0 +1,10 @@
+{
+  "createdAt": "2026-11-04T04:03:08.078044+00:00",
+  "datasetSha256": "ac6ca5a3d44c3318c0c67b1e902f6a905eb6e2792facc7542b626f151abce23e",
+  "alreadyUsedDevelopmentCases": 101,
+  "independentQualificationCases": 0,
+  "rules": {
+    "arity17": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+    "combined20": "b1be84af0a007baa2f40891adf985cf81c2f84ff16aa70f927731621ff3e7328"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "version": 2,
+  "startedAt": "2026-11-04T03:30:01.422404+00:00",
+  "datasetSha256": "cec2518e31be11a118c1943754b1bf51cb5638afb0c58aa8c8fc1c0e4ca24f77",
+  "freezeSha256": "c2e76b6f80d0a762b9f0c55a2f4317e2ed50b20b011b9d389a5a7ccdd0e3466d",
+  "identity": {
+    "scanner": "9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+    "rules": "c4357ddb0d52f3273525be08d8f5cdc1182523c1f9502497722bb6a44fe4ef94",
+    "reviewer": "e483fc19641240fc75cd6445fba184ce9ee395b8dae23a517a745b95a2586a53"
+  },
+  "outputs": [
+    {
+      "id": "stdlib_ast",
+      "raw": "no-hit",
+      "decision": "not-required",
+      "evidence": [],
+      "location": {
+        "sourceSha256": "b515c23dbbc459329d3b802a3aac742cc456d7472e66f7ed6e9dc97e40596d7d",
+        "line": 56
+      },
+      "language": "python",
+      "cwe": "CWE-95"
+    },
+    {
+      "id": "stdlib_collections",
+      "raw": "no-hit",
+      "decision": "not-required",
+      "evidence": [],
+      "location": {
+        "sourceSha256": "7fdb04dd248ab37909f46d2085bfee56b32d7e91e49ad3a2fad99c453295659b",
+        "line": 441
+      },
+      "language": "python",
+      "cwe": "CWE-95"
+    },
+    {
+      "id": "input_one",
+      "raw": "hit",
+      "decision": "unknown",
+      "evidence": [],
+      "location": {
+        "sourceSha256": "683c5916501746486c7ffd2974323e83f912fab2cf7360db6d4063583a11b6d5",
+        "line": 2
+      },
+      "language": "python",
+      "cwe": "CWE-95"
+    },
+    {
+      "id": "input_two",
+      "raw": "hit",
+      "decision": "unknown",
+      "evidence": [],
+      "location": {
+        "sourceSha256": "fd86e48da90999bf795de59e4dab86e84de2236386bd3053206eb42b5de12d82",
+        "line": 2
+      },
+      "language": "python",
+      "cwe": "CWE-95"
+    }
+  ]
+}

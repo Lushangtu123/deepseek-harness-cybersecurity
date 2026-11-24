@@ -1,0 +1,271 @@
+{
+  "version": 1,
+  "date": "2026-11-04",
+  "scope": "VM source candidate: server-owned execution-point observation classification; no daily deployment or new scanning rule",
+  "candidate": {
+    "programFiles": 170,
+    "frozenProgramHashesMatched": true,
+    "deployed": false
+  },
+  "daily": {
+    "programFiles": 169,
+    "rules": 16,
+    "programHashesMatched": 169,
+    "databasesLogicalHashesMatched": 42,
+    "runtimePinsMatched": true,
+    "programRollbackFiles": 166
+  },
+  "tests": {
+    "macNode": {
+      "passed": 838,
+      "failed": 0
+    },
+    "vmNode": {
+      "passed": 838,
+      "failed": 0
+    },
+    "pythonStructural": 25,
+    "pythonManagedWorker": 3,
+    "focused": 50,
+    "buildParseBeforeWrite": true,
+    "duplicateRawCountVersusDedup": true,
+    "rawFindingLimit2000": true,
+    "artifactClassificationInteraction": true
+  },
+  "replays": {
+    "arity17": {
+      "fixtureRunnerCalls": 1,
+      "newScannerInvocations": 0,
+      "rawWarnings": 21,
+      "persistedFindings": 21,
+      "pagedFindings": 21,
+      "bound": 21,
+      "observationSummary": {
+        "version": 1,
+        "total": 21,
+        "executionPoints": 19,
+        "other": 2
+      },
+      "offlineObservations": 19,
+      "conditionalGuards": 2,
+      "unresolved": 17,
+      "fullRangeAndSourceHashesMatched": true,
+      "legacyFindingTableRows": 0,
+      "sourceLocations": {
+        "version": 1,
+        "state": "completed",
+        "total": 21,
+        "bound": 21,
+        "unavailable": 0
+      },
+      "scope": "candidate replay of prior real scanner bytes; fixture admission, not live tool or R3 acceptance"
+    },
+    "combined20": {
+      "fixtureRunnerCalls": 1,
+      "newScannerInvocations": 0,
+      "rawWarnings": 21,
+      "persistedFindings": 21,
+      "pagedFindings": 21,
+      "bound": 21,
+      "observationSummary": {
+        "version": 1,
+        "total": 21,
+        "executionPoints": 19,
+        "other": 2
+      },
+      "offlineObservations": 19,
+      "conditionalGuards": 2,
+      "unresolved": 17,
+      "fullRangeAndSourceHashesMatched": true,
+      "legacyFindingTableRows": 0,
+      "sourceLocations": {
+        "version": 1,
+        "state": "completed",
+        "total": 21,
+        "bound": 21,
+        "unavailable": 0
+      },
+      "scope": "candidate replay of prior real scanner bytes; fixture admission, not live tool or R3 acceptance"
+    },
+    "anchors": {
+      "fixtureRunnerCalls": 1,
+      "newScannerInvocations": 0,
+      "rawWarnings": 6,
+      "persistedFindings": 6,
+      "pagedFindings": 6,
+      "bound": 6,
+      "observationSummary": {
+        "version": 1,
+        "total": 6,
+        "executionPoints": 6,
+        "other": 0
+      },
+      "offlineObservations": 6,
+      "conditionalGuards": 0,
+      "unresolved": 6,
+      "fullRangeAndSourceHashesMatched": true,
+      "legacyFindingTableRows": 0,
+      "sourceLocations": {
+        "version": 1,
+        "state": "completed",
+        "total": 6,
+        "bound": 6,
+        "unavailable": 0
+      },
+      "scope": "candidate replay of prior real scanner bytes; fixture admission, not live tool or R3 acceptance"
+    },
+    "pymatgen": {
+      "fixtureRunnerCalls": 1,
+      "newScannerInvocations": 0,
+      "rawWarnings": 1,
+      "persistedFindings": 1,
+      "pagedFindings": 1,
+      "bound": 1,
+      "observationSummary": {
+        "version": 1,
+        "total": 1,
+        "executionPoints": 1,
+        "other": 0
+      },
+      "offlineObservations": 1,
+      "conditionalGuards": 0,
+      "unresolved": 1,
+      "fullRangeAndSourceHashesMatched": true,
+      "legacyFindingTableRows": 0,
+      "sourceLocations": {
+        "version": 1,
+        "state": "completed",
+        "total": 1,
+        "bound": 1,
+        "unavailable": 0
+      },
+      "scope": "candidate replay of prior real scanner bytes; fixture admission, not live tool or R3 acceptance"
+    }
+  },
+  "liveWorker": {
+    "scope": "real default restricted worker over replayed genuine scanner output, temporary candidate joint task",
+    "rawWarnings": 21,
+    "summary": {
+      "version": 1,
+      "state": "completed",
+      "eligible": 19,
+      "checked": 19,
+      "observations": 19,
+      "unmatched": 0,
+      "retained": 19,
+      "cleanupVerified": true,
+      "execution": {
+        "profile": "namespace-ast-1",
+        "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+        "workerSha256": "9ec513ddb83d94c0c2f63629b7f218b1971704b4ff25d21169f30ad6e0ea9a51",
+        "pythonVersion": "3.12.15",
+        "cleanupVerified": true
+      }
+    },
+    "automaticJointSummary": {
+      "version": 1,
+      "total": 21,
+      "executionPoints": 19,
+      "other": 2
+    },
+    "observedContainerCreates": 3,
+    "candidateTemporaryRemoved": true
+  },
+  "reviews": [
+    {
+      "receipt": "initial-claude-review.json",
+      "requestedModel": "claude-opus-5-5",
+      "effort": "high",
+      "actualModels": [
+        "claude-opus-5-5"
+      ],
+      "toolsEnabled": false
+    },
+    {
+      "receipt": "superseded-claude-closure.json",
+      "requestedModel": "claude-opus-5-5",
+      "effort": "high",
+      "actualModels": [
+        "claude-opus-5-5"
+      ],
+      "toolsEnabled": false
+    },
+    {
+      "receipt": "final-claude-closure.json",
+      "requestedModel": "claude-opus-5-5",
+      "effort": "high",
+      "actualModels": [
+        "claude-opus-5-5"
+      ],
+      "toolsEnabled": false
+    }
+  ],
+  "reviewClosure": "actual Opus5.5 high targeted closure; no remaining actionable defects in excerpts; model did not execute tests",
+  "reviewAdjudication": "Final reviewer non-blocking note assumed current16-rule scanner inputs. Actual temporary final worker used prior research17 scan receipts, producing19 artifacts. Daily still16; Chrome replay uses these genuine persisted candidate artifacts.",
+  "browser": {
+    "state": "passed",
+    "observedAt": "2026-11-04T17:30:28.440300+00:00",
+    "browser": "Google Chrome native UI through cua_repl",
+    "scope": "read-only formal-component replay of final actual VM candidate joint task, not deployed Harness/model acceptance",
+    "taskId": "2f2945ba-d2b0-4a45-9fb2-cfe387a19d5e",
+    "sourceTaskId": "ccd8864e-9f93-4d08-8f0f-4bbda351b737",
+    "snapshotId": "dced8f922f9b02cbb333535ce68cca13b020cefa9bd2da9b817a54c7ed5a9a60",
+    "summary": {
+      "total": 21,
+      "executionPoints": 19,
+      "other": 2
+    },
+    "findingPagesObserved": 7,
+    "findingRowsObserved": 21,
+    "evidencePagesObserved": 7,
+    "evidenceRowsObserved": 19,
+    "lowConfidenceAndUnassessedRiskExplicit": true,
+    "toolGradeMediumSeparateFromConfirmedRisk": true,
+    "ordinaryWarningsRetained": true,
+    "classifiedFindingsAndEvidenceCoexist": true,
+    "fixedSetEvalAndExecStillUnverified": true,
+    "conditionalAndReassignedInputsRemainUnknown": true,
+    "shadowedCalleeRemainsUnverified": true,
+    "normalCpythonNamedtupleCallStillObservation": true,
+    "lastPageNextButtonsAbsent": true,
+    "noMismatchAfterDeepRefresh": true,
+    "initialFixtureMismatch": {
+      "action": "legacy generic refresh against deep-only plan fixture",
+      "message": "联合检查模式未确认",
+      "resolution": "used 核对深度检查范围; no production fix needed"
+    },
+    "newScans": 0,
+    "newModelCalls": 0,
+    "ownedTabsCreated": 1,
+    "ownedTabsClosed": 1,
+    "previousUserTabRestored": "New Tab",
+    "clipboardRestoredByAppPaste": true,
+    "replayServiceStopped": true,
+    "candidateDeployed": false
+  },
+  "sampleUse": {
+    "ledgerSources": 229,
+    "newIndependentQualificationCases": 0,
+    "reusedInputs": true,
+    "cveClass": "official CWE-77; not independently qualified CWE-95"
+  },
+  "r3Qualified": false,
+  "rulesInstalled": false,
+  "newScannerInvocations": 0,
+  "candidateModelInvocations": 0,
+  "realProjectFindingsStillUnverified": 95,
+  "unchangedBoundaries": [
+    "Mac access permissions",
+    "VM isolation/network",
+    "Kali",
+    "model accounts",
+    "daily project finding dispositions"
+  ],
+  "limitations": [
+    "broader rules17/20 still research candidates",
+    "complex cross-function/cross-file and alias handling unfinished",
+    "raw counts differ from deduplicated report page total",
+    "current full-VM recovery checkpoint not created",
+    "historical SKF/pymatgen specified-model closure not superseded by this review"
+  ]
+}

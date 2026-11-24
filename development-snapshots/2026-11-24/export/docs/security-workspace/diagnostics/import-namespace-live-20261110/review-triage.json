@@ -1,0 +1,61 @@
+{
+  "at": "2026-11-11T04:02:24.866667+00:00",
+  "scopeBlockers": 0,
+  "canArchive": true,
+  "reportSha256": "c34e6a533f758e226c2e0efa438867bc027f3c9a8a0398315c7fbe18990d4122",
+  "actualModel": "DeepSeek-V4.1-Flash",
+  "effort": "high",
+  "finishReason": "stop",
+  "reviewIsStatic": true,
+  "verdict": "limited-step-pass-with-record-clarifications",
+  "items": [
+    {
+      "id": "staging-permissions",
+      "classification": "confirmed-acceptance-scaffold-defect-closed",
+      "basis": "600→644 mode-only correction, same content SHA and9 inputs; direct sandbox9/9 success followed by fresh numbered actual scanner/Chrome run. Product source unchanged."
+    },
+    {
+      "id": "host-relay-close-record",
+      "classification": "review-material-omission-supplemented",
+      "basis": "Original pack omitted direct host relay proof. Supplemental socket probes record ECONNREFUSED61 on both exact owned ports; both original exec sessions returned exit0. OS PIDs were not captured.",
+      "supplement": "host-relay-cleanup.json",
+      "modelSawSupplement": false
+    },
+    {
+      "id": "raw-download-and-final-evidence",
+      "classification": "review-material-omission-supplemented",
+      "basis": "Raw34544-byte downloaded report is archived with same hash as reviewed download summary and exact object equality to actual backend report. Both final guest evidence objects are recoverable from original cleanup-full responses; derived JSON is logical recovery, not original guest-byte hash.",
+      "supplement": "supplemental-materials.json",
+      "modelSawSupplement": false
+    },
+    {
+      "id": "wording-boundaries",
+      "classification": "record-clarification-applied",
+      "basis": "Final report limits completion to selected Semgrep over18 fixed files and states ordinary finding table0 rows alongside9 unverified scanner warnings. Full Harness chat/model chain and R3 remain untested/unqualified."
+    },
+    {
+      "id": "browser-raw-trace",
+      "classification": "retained-evidence-limit",
+      "basis": "5/4 page boundaries are native CUA observations summarized in browser-observations, supported by backend RPC events and full report. Raw screenshots/AX trees not retained for independent re-evaluation; unrelated browser content is excluded."
+    },
+    {
+      "id": "observer-errors",
+      "classification": "retained-diagnostic",
+      "basis": "No-such-object inspect errors remain in proofs. Later running Docker observation passed controls and source checks. Pre-create race is plausible but per-error timestamps were not retained; exact timing not proven."
+    },
+    {
+      "id": "scope",
+      "classification": "outside-step-unresolved",
+      "items": [
+        "full Harness chat/plugin/model chain acceptance",
+        "candidate deployment",
+        "independent R3 admission",
+        "runtime request/import/builtin identity",
+        "remaining language and data-flow coverage"
+      ]
+    }
+  ],
+  "noProductPatchNeeded": true,
+  "ordinaryR3Qualified": false,
+  "deployed": false
+}

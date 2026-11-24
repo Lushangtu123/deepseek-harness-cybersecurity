@@ -1,0 +1,33 @@
+{
+  "state": "closed",
+  "scope": "VM diagnostic preflight",
+  "confirmedBlockersRemaining": [],
+  "closed": [
+    "Shipped verifier worker and controller hash binding",
+    "Explicit missing receipt coverage blockers",
+    "Tool-owned dependency lock checks in Python and Node",
+    "Observed exact staged source closure including intentionally unlisted file",
+    "Current raw maps, score digests and test source digests recorded"
+  ],
+  "rawFindingReconciliation": {
+    "rawHits": 5,
+    "uniquePoints": 4,
+    "hitCountsByPoint": {
+      "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762": 1,
+      "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec": 1,
+      "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b": 1,
+      "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041": 2
+    },
+    "duplicateRuleHitsAt": "skf-upstream.py"
+  },
+  "scoreReconciliation": {
+    "equalBytes": true,
+    "sha256": "328f062bda856f86e7563ea57f056fceff85a53354fdd512a1c5adfa06092c29"
+  },
+  "residualLimits": [
+    "Host and receipt provenance are operational records, not independent attestation.",
+    "The static reviewer launcher trust boundary is inherited from snapshot v2; the VM checks shipped launcher bytes during freeze/execute.",
+    "Exclusions are narrow proof results from approved profiles, not arbitrary source analysis.",
+    "Generic verification, new blind holdout and R3 remain blocked."
+  ]
+}

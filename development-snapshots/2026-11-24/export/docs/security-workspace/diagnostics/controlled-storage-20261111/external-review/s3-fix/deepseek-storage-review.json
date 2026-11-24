@@ -1,0 +1,38 @@
+{
+  "id": "e2265cbb-fe83-4ad2-88c0-c1784585d65a",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "No R3/live acceptance claimed. Within the supplied excerpts I find one code-backed validation defect and one conditional fail-closed reconciliation gap; the rest of the remaining issues are same-UID/cooperative limitations, not new cross-user safety blockers.\n\n**1. Confirmed: `validate_plan` parses `generatedAt` before type-checking it**\n- In `validate_plan`:\n  `generated=datetime.fromisoformat(plan['generatedAt'])`\n  occurs before the later\n  `not isinstance(plan['generatedAt'],str)` check.\n- A plan with `generatedAt=None` (or any non-string, non-`ValueError`-compatible value) raises `TypeError`, not `ValueError`. The red archive test `test_ancillary_plan_shapes_are_validated_before_action` is code-backed here.\n- Impact is fail-closed: no archive is applied, but the validation contract is wrong and A2/A3 “strict ancillary types” is not fully confirmed for non-string `generatedAt`. The green archive run cannot cover this exact line as shown.\n- Fix: check `isinstance(plan.get('generatedAt'),str)` before `fromisoformat`; keep the aware-timestamp and `expiresAt` type checks before timestamp arithmetic. Catch `TypeError`/`ValueError` uniformly at the validation boundary.\n\n**2. Scoped fail-closed gap in reconciliation (conditional on B4 scope)**\n- `cleanup_inventory` catches `OSError`/`ValueError` only around `load_transaction`, and reports those as `transactionUnknown`. That fixes the missing/corrupt `transaction.json` case.\n- But before that try block it does:\n  `if not ID.fullmatch(path.name): raise ValueError('unknown transaction directory')`\n  so a transaction directory with a noncanonical name aborts the whole reconciliation rather than being retained in `transactionUnknown`.\n- If B4 is intended to cover any corrupt/noncanonical transaction directory, this remains a scoped availability defect. It is fail-closed, not a safety bypass. If B4 covers only valid-ID directories with missing/corrupt `transaction.json`, the shown handling is sufficient.\n\n**Conditional same-UID limitations — not counted as general blockers**\nThese are real but require same-UID mutation or a broken cooperative process model:\n- `capacity_lock` validates the lock file on open but does not revalidate its inode after acquisition. A same-UID process can unlink/recreate `capacity.lock` and break mutual exclusion.\n- `private` does post-`mkdir` `lstat`/`resolve` checks, which closes the deterministic symlink insertion test, but does not bind the checked inode across a same-UID swap after `lstat` or between `resolve` and later use.\n- In archive apply/restore, `task_lock`’s final `unchanged()` check occurs after rename and after the transaction state is saved. A same-UID swap in that window can leave a committed/restored record while the wrong object was moved. This is the stated arbitrary-same-UID limitation, not a new guardrail failure.\n\n**Cooperative budget limitation**\n- `archive_restore` checks cache budget with `used + row['manifest']['bytes']`, while the filesystem-free check adds `len(row['manifest']['files'])*4096`. So restore can exceed `budgetBytes` by per-member directory overhead unless `usage_locked` already accounts for it. It remains guarded by `minFreeBytes`, so this is cooperative accounting, not a safety blocker. Archive apply’s free-space estimate does include the per-member 4096.\n\n**Evidence note**\n- The three red storage failures do not match the shown source paths: the ledger exact `inputBytes+overhead` check, post-settlement re-read, and post-`mkdir` `lstat` rejection are present. I would not count those red storage failures against this source without a matching execution.\n- The red archive ancillary failure does match the shown `generatedAt` ordering. The green archive `OK` is not sufficient evidence for that specific non-string case.\n\nNo other scoped safety blocker is confirmed from the supplied excerpts. B3 remains process-crash, not physical-power-loss certification; B5/B6/B7 remain intentional fail-closed behavior."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 15185,
+    "completion_tokens": 33488,
+    "total_tokens": 48673,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 32571
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 15185
+  },
+  "streamDone": true,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 137864,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "b2b55cc119734e6b920f267af883a8e68a4611d74203e933fb0fa93e7cc56608",
+  "promptSha256": "0bf1ea9e06bf6a6e3e88f4884fdc13d7ceb522323636c62d1dda43807d923a7e"
+}

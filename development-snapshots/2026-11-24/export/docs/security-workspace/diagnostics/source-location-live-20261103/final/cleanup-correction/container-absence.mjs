@@ -1,0 +1,1 @@
+export const absenceReply=(error,id)=>/^[a-f0-9]{64}$/.test(id)&&error.status===1&&String(error.stdout??'').trim()==='[]'&&String(error.stderr??'').trim().toLowerCase()==='error: no such object: '+id;

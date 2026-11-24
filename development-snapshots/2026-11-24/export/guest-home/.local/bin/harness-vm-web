@@ -1,0 +1,30 @@
+#!/bin/sh
+set -eu
+mode_file=/home/purge/.config/harness-vm-mode
+test ! -L "$mode_file"
+mode=$(cat "$mode_file")
+case "$mode" in
+  original)
+    export DSH_HOME=/home/purge/.dsh
+    entry=/home/purge/.local/lib/node_modules/@deepseek-ai/dsh/lib/bin.js
+    ;;
+  improved)
+    export DSH_HOME=/home/purge/.dsh-improved
+    entry=/home/purge/tools/harness-improved-runtime/node_modules/@deepseek-ai/dsh/lib/bin.js
+    original_mode=/home/purge/.config/harness-original-capabilities
+    test ! -L "$original_mode"
+    if test -f "$original_mode"; then
+      case "$(cat "$original_mode")" in
+        on)
+          export DSH_PERSONAL_ORIGINAL=enabled
+          export DSH_BASE=/home/purge/tools/harness-original-capabilities/node_modules/@deepseek-ai
+          entry=/home/purge/tools/harness-original-capabilities/lib/bin.js
+          ;;
+        off) ;;
+        *) printf 'Invalid original capability mode; refusing startup.\n' >&2; exit 1 ;;
+      esac
+    fi
+    ;;
+  *) printf 'Unknown VM Harness mode; refusing startup.\n' >&2; exit 1 ;;
+esac
+exec /home/purge/.local/node/bin/node "$entry" --profile web --host 10.0.2.15 --port 3080 --public-url http://127.0.0.1:49224 --trusted-host 127.0.0.1:49224 --no-open

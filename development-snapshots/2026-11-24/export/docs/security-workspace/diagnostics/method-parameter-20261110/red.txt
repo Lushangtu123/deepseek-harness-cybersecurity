@@ -1,0 +1,89 @@
+......FF............F.FFF..F......
+======================================================================
+FAIL: test_class_attribute_does_not_bind_the_method_bare_eval_name (__main__.NamespaceReviewTests.test_class_attribute_does_not_bind_the_method_bare_eval_name)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 84, in test_class_attribute_does_not_bind_the_method_bare_eval_name
+    self.assertEqual(row['callee']['staticBinding'], 'no-direct-conflict-observed')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'unsupported-scope' != 'no-direct-conflict-observed'
+- unsupported-scope
++ no-direct-conflict-observed
+
+
+======================================================================
+FAIL: test_class_method_parameter_is_observed_through_protected_try_body (__main__.NamespaceReviewTests.test_class_method_parameter_is_observed_through_protected_try_body)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 57, in test_class_method_parameter_is_observed_through_protected_try_body
+    self.assertEqual(row['source']['kind'], 'parameter-name-observed')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'expression-unresolved' != 'parameter-name-observed'
+- expression-unresolved
++ parameter-name-observed
+
+
+======================================================================
+FAIL: test_method_fixed_set_guard_does_not_become_a_validated_constraint (__main__.NamespaceReviewTests.test_method_fixed_set_guard_does_not_become_a_validated_constraint)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 131, in test_method_fixed_set_guard_does_not_become_a_validated_constraint
+    self.assertEqual(row['source']['kind'], 'parameter-name-observed')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'expression-unresolved' != 'parameter-name-observed'
+- expression-unresolved
++ parameter-name-observed
+
+
+======================================================================
+FAIL: test_method_prefix_assignments_and_bindings_are_not_parameter_origin (__main__.NamespaceReviewTests.test_method_prefix_assignments_and_bindings_are_not_parameter_origin) (prefix='        value = replacement\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 76, in test_method_prefix_assignments_and_bindings_are_not_parameter_origin
+    self.assertEqual(row['source']['kind'], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'expression-unresolved' != 'local-reassignment-observed'
+- expression-unresolved
++ local-reassignment-observed
+
+
+======================================================================
+FAIL: test_method_prefix_assignments_and_bindings_are_not_parameter_origin (__main__.NamespaceReviewTests.test_method_prefix_assignments_and_bindings_are_not_parameter_origin) (prefix='        import replacement as value\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 76, in test_method_prefix_assignments_and_bindings_are_not_parameter_origin
+    self.assertEqual(row['source']['kind'], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'expression-unresolved' != 'local-binding-observed'
+- expression-unresolved
++ local-binding-observed
+
+
+======================================================================
+FAIL: test_method_prefix_assignments_and_bindings_are_not_parameter_origin (__main__.NamespaceReviewTests.test_method_prefix_assignments_and_bindings_are_not_parameter_origin) (prefix='        try:\n            pass\n        except Exception as value:\n            pass\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 76, in test_method_prefix_assignments_and_bindings_are_not_parameter_origin
+    self.assertEqual(row['source']['kind'], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'expression-unresolved' != 'local-binding-observed'
+- expression-unresolved
++ local-binding-observed
+
+
+======================================================================
+FAIL: test_nested_try_prefix_and_same_line_write_are_accounted_before_call (__main__.NamespaceReviewTests.test_nested_try_prefix_and_same_line_write_are_accounted_before_call)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 124, in test_nested_try_prefix_and_same_line_write_are_accounted_before_call
+    self.assertEqual(row['source']['kind'], 'local-reassignment-observed')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'expression-unresolved' != 'local-reassignment-observed'
+- expression-unresolved
++ local-reassignment-observed
+
+
+----------------------------------------------------------------------
+Ran 32 tests in 0.167s
+
+FAILED (failures=7)

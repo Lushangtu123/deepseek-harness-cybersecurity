@@ -1,0 +1,338 @@
+{
+  "recoveryPoint": "ready-security-diagnostics-20261029",
+  "controllerTests": 135,
+  "controllerTestFiles": 17,
+  "independentStaticReview": "two Important recorder issues reproduced and repaired, re-review no Important/Critical; reviewer ran no commands",
+  "clock": {
+    "hostControllerBeforeSha256": "cf7c1a6da6c5a7f33af0444336e37c148b2defdad0be3ee821fa1ffc5b7383ef",
+    "idle": {
+      "idleAuditRuns": true,
+      "runningScannerContainers": 0,
+      "guestEpoch": 1793338852.3903332
+    },
+    "hostMinusGuestBeforeSeconds": 1058.9921905994415,
+    "calibration": {
+      "adjusted": true,
+      "offsetSeconds": -0.034282
+    },
+    "hostMinusGuestAfterSeconds": 0.04203033447265625,
+    "existingClockFunctionReused": true,
+    "hostClockChanged": false,
+    "networkChanged": false,
+    "continuousNtpConfigured": false
+  },
+  "postColdClockOffsetSeconds": -0.4750051498413086,
+  "clockSyncMode": "existing startup plus explicit clock-sync; not continuous NTP",
+  "sshControl": {
+    "controlledFault": "dedicated VM stopped for snapshot",
+    "exitCode": 255,
+    "reason": "connection-refused",
+    "diagnosticRecorded": true,
+    "noAutoRetry": true,
+    "entry": {
+      "observedAtUnix": 1793341145.5439382,
+      "elapsedMs": 19,
+      "exitCode": 255,
+      "reason": "connection-refused",
+      "detail": "Connection refused"
+    }
+  },
+  "postMaintenanceSshRead": "restored-read-ok",
+  "sshRecording": {
+    "ownerOnlyMode": "0600",
+    "maxRecords": 50,
+    "rawCommandsOutputAndStderrPersisted": false,
+    "nonblockingBestEffort": true,
+    "noNewAutomaticRetry": true
+  },
+  "parser": {
+    "testedPinnedVersion": "1.182.1",
+    "pinnedImageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+    "originalLines": 1169,
+    "reducedLines": 11,
+    "oneLineRemovalMinimal": true,
+    "globalMinimalClaim": false,
+    "reproSha256": "b5c40ba3b7320068498617cde4fa8900446fd464243589a2cde3926cacadcdba",
+    "escapedSha256": "a2bdf1507b092f4b81dddb522eb4e0701a6cbea38be4bf525d69f3f43c43a56b",
+    "finalDifferential": {
+      "reduced": {
+        "nodeSyntaxExit": 0,
+        "partialParsing": true,
+        "errors": [
+          {
+            "type": [
+              "PartialParsing",
+              [
+                {
+                  "path": "/src/reduced.mjs",
+                  "start": {
+                    "line": 5,
+                    "col": 45,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 46,
+                    "offset": 1
+                  }
+                },
+                {
+                  "path": "/src/reduced.mjs",
+                  "start": {
+                    "line": 6,
+                    "col": 3,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 9,
+                    "col": 4,
+                    "offset": 146
+                  }
+                }
+              ]
+            ],
+            "message": "Syntax error at line /src/reduced.mjs:5:\n `/` was unexpected"
+          }
+        ]
+      },
+      "escaped": {
+        "nodeSyntaxExit": 0,
+        "partialParsing": false,
+        "errors": []
+      },
+      "benign": {
+        "nodeSyntaxExit": 0,
+        "partialParsing": false,
+        "errors": []
+      }
+    },
+    "syntheticRegexEquivalence": {
+      "syntheticSamples": 12,
+      "replaceOutputsEqual": true,
+      "matchedTextsEqual": true,
+      "originalProjectExecuted": false
+    },
+    "trackedRealSourceUnchanged": true,
+    "activeImageManifestUnchanged": true,
+    "upstreamParserPatched": false,
+    "realSourceWorkaroundApplied": false
+  },
+  "recovery": {
+    "stableHashMatches": 2580,
+    "stableHashEntries": 2580,
+    "programMatches": 124,
+    "snapshotCount": 9,
+    "previousSnapshotsPreserved": 8,
+    "offlineCopyRestore": {
+      "recoveryPoint": "ready-security-diagnostics-20261029",
+      "copiedHelperReplaceFaultInjected": true,
+      "copiedHostHelpersRolledBack": true,
+      "copiedFaultTemporaryCleaned": true,
+      "offlineDiskRestorePassed": true,
+      "diskCheckPassed": true,
+      "hostHelpersRestored": 5,
+      "launchDefinitionsRestoredInSyntheticHost": 2,
+      "missingAndCorruptCopiedHelpersRepaired": true,
+      "primaryDiskUnmodified": true,
+      "noVmRegistered": true,
+      "copyBootTested": false,
+      "probeArchive": "/Users/LOCAL_USER/Library/Application Support/Harness Purge Original/archived-validation/restore-probe-security-diagnostics-20261029",
+      "temporaryDiskCopyRemoved": true
+    },
+    "registeredVMsObserved": 4,
+    "managedHarnessVMsObserved": 1,
+    "volatileChatByteComparisonsExcluded": 1
+  },
+  "realProject": {
+    "trackedRealProjectHashesMatched": 459,
+    "realProjectGitHeadUnchanged": true,
+    "realProjectSixAuditTablesUnchanged": true,
+    "realProjectFindings": 95,
+    "realProjectAllUnverified": true
+  },
+  "history": {
+    "sshRed": "original failure reason was absent from displayed exception, no history API; new tests failed",
+    "reviewRed": "blocking recorder lock and malformed prior JSON could mask/delay failures, both reproduced before repair",
+    "observerFirstAttempt": "read-only acceptance script accidentally referenced host variable m in guest, NameError exit1; corrected observer rerun passed, not a product defect",
+    "oldSsh255": "original client stderr unavailable, historical root cause remains unknown"
+  },
+  "permissionsExpanded": false,
+  "gitPush": false,
+  "commandReceipts": [
+    {
+      "id": "clock-calibration",
+      "scope": "live-update",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "b5c93f1718ad8a5c2c7f89cdf642c6bb6bc2d525176484627979353338aaadd8"
+    },
+    {
+      "id": "clock-cli",
+      "scope": "live-update",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "9be2262e2a258e0e8230948cfa9f3dd2bf176b64f94f74cceb1095a62a101eac"
+    },
+    {
+      "id": "cold-verify",
+      "scope": "final-runtime",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "95a801e1d4646d1308a934f38d60297543845fb89658dafd604e4f3ece40b97a"
+    },
+    {
+      "id": "controller-final",
+      "scope": "controller",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "11433a0633ce5c4c03fcc6fe630a9bac0c5f448a156d3eba4321b2bb7feeeba2"
+    },
+    {
+      "id": "controller-install",
+      "scope": "deployment",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "59c51eceb9705db55962e1da026b385ce4f35adc9bc521cd7135b156d7a8619f"
+    },
+    {
+      "id": "controller-newpoint",
+      "scope": "controller",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "0e6fb727bacd0d854e014dfebc1cc99286b1c37284d36b5e4aae19c02c80b1db"
+    },
+    {
+      "id": "final-live-r2",
+      "scope": "final-runtime",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "9e32749278eb064afb5497c0778e8572aae438ea4de2d17bb9dd967b4c15d007"
+    },
+    {
+      "id": "final-live",
+      "scope": "final-runtime",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "ad40dd734d3502f09005d8bd7cc3ce4947a83e25a2a66327a4dc831376302d8e"
+    },
+    {
+      "id": "parser-context",
+      "scope": "parser-investigation",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "5687debc657d44b3242adc5693a7946dbcc0741fb070cf17ccbfe8682a60481f"
+    },
+    {
+      "id": "parser-final",
+      "scope": "parser-investigation",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "26a781af2caef75e880f04ccb1cc4280fd5607e447b67a0e53ef3978bf659a12"
+    },
+    {
+      "id": "parser-lines",
+      "scope": "parser-investigation",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "3967b28142e6e00ea3d1fbd38989a72ae7325fd418c4b7a1f351eed4e90be4db"
+    },
+    {
+      "id": "parser-minimal",
+      "scope": "parser-investigation",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "a237b46eab431a75161fd92b58347f41f9644a13f4ea5cca4681d9199a7ff5e3"
+    },
+    {
+      "id": "parser-reduce",
+      "scope": "parser-investigation",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "96be9e305579476a4075c1b9f6c64efe579f21596c5e312c35d45531eb67a165"
+    },
+    {
+      "id": "parser-round2",
+      "scope": "parser-investigation",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "10ff272ce098585d122ed59c92fa62273b26bd43ec1fafc92e22ec26e36b63fa"
+    },
+    {
+      "id": "parser-round3",
+      "scope": "parser-investigation",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "cf82fd93d000b4593a88242cc947ebdbbf0eac9297521c0da3409cf936a44a08"
+    },
+    {
+      "id": "parser-round4",
+      "scope": "parser-investigation",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "f1f53221fba8cf04b87e2d3023326bbe973e73a7cfd25b20999223df4d947507"
+    },
+    {
+      "id": "parser-round5",
+      "scope": "parser-investigation",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "b6523bd142e81c3a4e4c260293b50cb5975cccd2009067caec10aa80d8ee26ce"
+    },
+    {
+      "id": "recovery-create",
+      "scope": "recovery",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "3450266b8c727f866c1e3676f26f93ab082b85d43f73324e94165bd96645b09e"
+    },
+    {
+      "id": "regex-equivalence",
+      "scope": "parser-investigation",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "085a70b7a3f7f5456e8076cd6228a0a40f405166d9ab73ff2aea3c3e11822146"
+    },
+    {
+      "id": "snapshot-inventory",
+      "scope": "recovery",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "7439bb01781115d29cc36dfc9c570b27515183929d75632f65d0a3240e8d87b3"
+    },
+    {
+      "id": "ssh-final",
+      "scope": "controller",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "a17e23963b362c64ef389630735b48aaa1a6b7832cbe00af8c16debcfe47c75f"
+    },
+    {
+      "id": "ssh-green",
+      "scope": "controller",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "19b5d637c674375ad237b100a26ace9f99d699d1d39e85d9ffcf24c18b781d1b"
+    },
+    {
+      "id": "ssh-history-cli",
+      "scope": "live-update",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "0def55db7db0841d0725fdc708bb3c12aa0f47d1a478d239a8b77148a1bf38e5"
+    },
+    {
+      "id": "ssh-red",
+      "scope": "controller",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "6539dab58973820c188e1fdf16d87939657205e2cc76d434660ccc8770153f17"
+    },
+    {
+      "id": "ssh-review-red",
+      "scope": "controller",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "f94fde988b0e7e8aaf2cbf33ee641d1307d51e465503766118dd64826c6ab714"
+    }
+  ]
+}

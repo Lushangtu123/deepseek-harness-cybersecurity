@@ -1,0 +1,14 @@
+PASS proof-306-original-bytes-complete-with-three-trailing-blank-lines
+PASS golden-extra-lf-0-1-3-8-accepted-and-9-overflow
+PASS end-normal-lf-is-required-and-separate-from-extra-padding
+PASS blank-lines-before-begin-marker-event-and-end-rejected
+PASS tail-whitespace-cr-record-and-duplicate-end-rejected
+PASS strict-payload-mixed-count-identity-and-bad-policy-still-rejected
+PASS collector-explicit-policy-missing-unknown-and-legacy-v1-unchanged
+PASS preflight-license-claim-completed-capture-receipt-bind-exact-policy
+PASS producer-and-verifier-reparse-raw-and-compare-policy-and-trailer
+PASS synthetic-receipt-policy-padding-digest-observer-freeze-mutations-rejected
+PASS preflight-rejects-missing-or-wrong-policy-before-any-resource
+PASS legacy-v1-fixed-originals-and-unchanged-surface-bytes
+PASS end-lf-contract-and-manifest-bind-changed-trusted-code
+{"failed": [], "passed": 13, "total": 13}

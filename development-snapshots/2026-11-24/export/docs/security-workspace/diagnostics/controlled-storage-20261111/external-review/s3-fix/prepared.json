@@ -1,0 +1,46 @@
+{
+  "promptSha256": "0bf1ea9e06bf6a6e3e88f4884fdc13d7ceb522323636c62d1dda43807d923a7e",
+  "sourceFiles": {
+    "scripts/reviewer_storage.py": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202",
+    "scripts/reviewer_snapshot.py": "82041ef6c683e54e3f947219eb6037da25ee0aa2fd5d0ebe3eced64a8991b0c6",
+    "scripts/reviewer_storage.test.py": "4f5180ec503cfde1642f90378de0c5099b27ca07cf5b0357ba6a46ebe425d326",
+    "scripts/reviewer_archive.test.py": "e43c9c5de838c7d463c1f4b6c4cf3d3f0e5b3efc9f7a66c8ee4d398bd1eaff5a"
+  },
+  "selectedDefinitions": {
+    "scripts/reviewer_storage.py": [
+      "policy_for",
+      "validate_policy",
+      "private",
+      "read_bytes",
+      "capacity_lock",
+      "state_locked",
+      "task_lock",
+      "reserve",
+      "settle_locked",
+      "reconcile",
+      "source_snapshot",
+      "validate_plan",
+      "validate_manifest",
+      "create_archive",
+      "sync_directory",
+      "archive_apply",
+      "archive_restore",
+      "cleanup_inventory"
+    ],
+    "scripts/reviewer_snapshot.py": [
+      "_settle_storage",
+      "execute"
+    ],
+    "scripts/reviewer_storage.test.py": [
+      "test_ledger_requires_exact_input_plus_overhead",
+      "test_private_create_rejects_link_inserted_during_mkdir",
+      "test_post_commit_error_never_resurrects_settled_row_on_admission"
+    ],
+    "scripts/reviewer_archive.test.py": [
+      "test_missing_duplicate_and_truncated_client_records_are_retained",
+      "test_ancillary_plan_shapes_are_validated_before_action",
+      "test_incomplete_transaction_is_reported_as_unknown_without_blocking_reconcile"
+    ]
+  },
+  "bytes": 56648
+}

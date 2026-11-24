@@ -1,0 +1,6 @@
+{
+  "state": "passed",
+  "legacyCollisionReproduced": true,
+  "repairedScriptCompiles": true,
+  "hostExecutionOfPayload": false
+}

@@ -1,0 +1,216 @@
+Read-only focused closure, Claude Opus5.5 high, no tools. <=350words. Prior review all original blockers closed; R1 assignmentline equality and R2 >64 write lines noted. R1 now permits assignment <=callline in projection/UI (guard still <callline). Added real-worker semicolon fixture. R2 worker returns None when >64 distinct write lines, so only that anchor is unmatched, report partial with other observations retained. 25 Python and adapter20 tests passed. Worker SHA repinned. DeadlineMonotonic assertion added at joint injection seam; native real cancel during start already passed, last native818/image3.12.15 run cleaned3containers, daily166/41DB/pins unchanged. Final source after R2 will rerun819 plugin tests+25/3 Python+real default sandbox. Review actual edits below for remaining blockers/regressions, no expansion. OnlyVM candidate; no production claim, no R3qualification. Previous regression fix evidence included; no reasoning from deployment.
+
+
+---work/harness-purge-improved/package/lib/redteam/personal-namespace-evidence.mjs---
+import {createHash} from 'node:crypto';
+import {join} from 'node:path';
+import {isDeepStrictEqual} from 'node:util';
+import {bindSemgrepSourceLocations} from './personal-security-source-location.mjs';
+import {readReviewFile} from './personal-review-snapshot.mjs';
+import {runNamespaceSandbox} from './personal-namespace-sandbox.mjs';
+
+const RULE='policy.harness.python.dynamic-code-namespace';
+const hash=v=>createHash('sha256').update(v).digest('hex');
+const key=(path,a)=>JSON.stringify([path,a.line,a.col,a.endLine,a.endCol,a.offset,a.endOffset]);
+const anchor=l=>({line:l.start.line,col:l.start.col,endLine:l.end.line,endCol:l.end.col,offset:l.start.offset,endOffset:l.end.offset});
+const summary=(state,eligible,extra={})=>({version:1,state,eligible,checked:0,observations:0,unmatched:0,retained:0,cleanupVerified:true,...extra});
+
+export function buildNamespaceInput(snapshot,findings){
+ if(!Array.isArray(findings)||findings.length>2000)return{state:'unavailable',eligible:0};
+ const hits=findings.filter(f=>f?.rule===RULE),eligible=hits.length;
+ if(!eligible)return{state:'not-applicable',eligible};
+ try{
+  const rebound=bindSemgrepSourceLocations(snapshot,hits.map(f=>({...f,scannerSpan:f.sourceLocation}))).findings;
+  if(rebound.some((f,i)=>f.sourceLocation.state!=='bound'||!isDeepStrictEqual(f.sourceLocation,hits[i].sourceLocation)))throw Error();
+  const files={},results=[],locations=new Map();let bytes=0;
+  for(const f of hits){
+   const l=f.sourceLocation;if(!l.path.endsWith('.py'))throw Error();
+   if(!Object.hasOwn(files,l.path)){
+    const raw=readReviewFile(join(snapshot.sourceRoot,l.path),l.byteLength);bytes+=raw.length;
+    if(raw.length!==l.byteLength||hash(raw)!==l.sourceSha256||bytes>8388608||Object.keys(files).length>=64)throw Error();
+    files[l.path]={base64:raw.toString('base64'),sha256:l.sourceSha256};
+   }
+   const a=anchor(l),k=key(l.path,a);if(locations.has(k))continue;
+   if(results.length>=64)throw Error();locations.set(k,l);
+   results.push({check_id:RULE,path:l.path,start:{...l.start},end:{...l.end}});
+  }
+  return{state:'ready',eligible,request:{files,results},locations};
+ }catch{return{state:'unavailable',eligible}}
+}
+
+function projectReport(report,input){
+ const execution=report?.execution;if(execution?.profile!=='namespace-ast-1'||execution.cleanupVerified!==true||!/^sha256:[a-f0-9]{64}$/.test(execution.imageId)||!/^[a-f0-9]{64}$/.test(execution.workerSha256))throw Error('Missing sandbox execution identity');
+ if(report?.version!==2||!['completed','partial'].includes(report.state)||report.changesFindingDisposition!==false||report.r3Qualified!==false||
+  report.checks!==input.locations.size||!Array.isArray(report.observations)||!Array.isArray(report.unmatchedAnchors)||report.observations.length+report.unmatchedAnchors.length!==report.checks)throw Error('Invalid structural report');
+ if(!report.ignoredHits||Object.values(report.ignoredHits).some(v=>v!==0))throw Error('Unexpected ignored inputs');
+ const seen=new Set(),artifacts=[];
+ for(const [unmatched,rows] of [[false,report.observations],[true,report.unmatchedAnchors]])for(const row of rows){
+  const k=key(row.file,row.anchor),l=input.locations.get(k);
+  if(!l||seen.has(k)||row.rule!==RULE||row.sourceSha256!==l.sourceSha256)throw Error('Structural identity mismatch');seen.add(k);
+  if(unmatched){if(row.reason!=='no-exact-supported-call')throw Error('Unknown unmatched reason');continue}
+  if(row.version!==2||row.observation!=='namespace-call-structure-observed'||row.disposition!=='unverified'||!['eval','exec'].includes(row.sink)||![2,3].includes(row.argumentCount)||
+   !['no-direct-conflict-observed','namespace-effects-observed','scope-effects-unresolved','local-binding-conflict-observed','module-binding-conflict-observed','unsupported-scope'].includes(row.callee?.staticBinding)||row.callee.builtinIdentity!=='unverified'||row.source?.externalControl!=='unverified'||
+   !['expression-unresolved','literal-expression-observed','parameter-name-observed','local-name-unresolved','local-reassignment-observed','local-binding-observed'].includes(row.source.kind)||!Array.isArray(row.source.assignmentLines)||row.source.assignmentLines.length>64||row.source.assignmentLines.some(n=>!Number.isSafeInteger(n)||n<1||n>row.anchor.line))throw Error('Invalid structural observation');
+  const c=row.constraint;if(!['unresolved','fixed-set-guard-observed'].includes(c?.state))throw Error('Invalid constraint');
+  const fixed=c.state==='fixed-set-guard-observed';
+  if(fixed&&(!Number.isSafeInteger(c.guardLine)||c.guardLine<1||c.guardLine>=row.anchor.line||!Number.isSafeInteger(c.literalCount)||c.literalCount<1||c.literalCount>16||!/^[a-f0-9]{64}$/.test(c.literalSetSha256)||c.runtimeStringSemantics!=='unverified'||c.fixedValuesMayExecuteCode!==true))throw Error('Invalid guard');
+  artifacts.push({tool:'semgrep',evidenceKind:'python-namespace-structure',path:l.path,line:l.start.line,rule:RULE,status:'unverified',sourceLocation:l,
+   sink:row.sink,argumentCount:row.argumentCount,bindingHint:row.callee.staticBinding,builtinIdentity:'unverified',sourceKind:row.source.kind,externalControl:'unverified',assignmentLines:[...row.source.assignmentLines],
+   constraintState:c.state,...(fixed?{guardLine:c.guardLine,literalCount:c.literalCount,runtimeStringSemantics:'unverified',fixedValuesMayExecuteCode:true}:{})});
+ }
+ if(seen.size!==input.locations.size||report.state!==(report.unmatchedAnchors.length?'partial':'completed'))throw Error('Incomplete structural accounting');
+ return{summary:summary(artifacts.length>20?'truncated':report.state,input.eligible,{checked:report.checks,observations:artifacts.length,unmatched:report.unmatchedAnchors.length,retained:Math.min(20,artifacts.length),execution:{profile:execution.profile,imageId:execution.imageId,workerSha256:execution.workerSha256,...(execution.pythonVersion?{pythonVersion:execution.pythonVersion}:{}),cleanupVerified:true}}),artifacts:artifacts.slice(0,20)};
+}
+
+export async function collectNamespaceEvidence(snapshot,findings,{deadline,signal,run=runNamespaceSandbox}={}){
+ const input=buildNamespaceInput(snapshot,findings);
+ if(input.state!=='ready')return{summary:summary(input.state,input.eligible),artifacts:[]};
+ if(signal?.aborted||!Number.isFinite(deadline)||deadline-performance.now()<7000)return{summary:summary('unavailable',input.eligible),artifacts:[]};
+ try{
+  const report=await run(input.request,{deadline,signal});
+  const repeated=buildNamespaceInput(snapshot,findings);
+  if(repeated.state!=='ready'||!isDeepStrictEqual(input.request,repeated.request))throw Error('Snapshot changed during review');
+  return projectReport(report,input);
+ }catch(error){if(error.code==='STOP_UNCONFIRMED')throw error;return{summary:summary('unavailable',input.eligible),artifacts:[]}}
+}
+
+
+---work/harness-purge-improved/tests/namespace-managed.test.mjs---
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import {createHash} from 'node:crypto';
+const modulePath=new URL('../package/lib/redteam/personal-namespace-evidence.mjs',import.meta.url);
+const hash=b=>createHash('sha256').update(b).digest('hex'),RULE='policy.harness.python.dynamic-code-namespace';
+async function fixture(fn,source='def run(value):\n    return eval(value, {})\n'){const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'namespace-managed-')));try{const raw=Buffer.from(source);fs.writeFileSync(path.join(root,'app.py'),raw);const start=raw.indexOf('eval('),end=raw.indexOf(')',start)+1,prefix=raw.subarray(0,start),line=1+[...prefix].filter(b=>b===10).length,col=start-prefix.lastIndexOf(10);const snapshot={id:'a'.repeat(64),sourceRoot:root,files:[{path:'app.py',sha256:hash(raw),bytes:raw.length,redacted:false}]};const row={rule:RULE,location:'app.py:'+line,sourceLocation:{version:1,state:'bound',scope:'managed-source-copy',snapshotId:snapshot.id,path:'app.py',sourceSha256:hash(raw),byteLength:raw.length,copyRedacted:false,start:{line,col,offset:start},end:{line,col:col+end-start,offset:end}}};await fn(snapshot,row,root)}finally{fs.rmSync(root,{recursive:true,force:true})}}
+async function api(){assert.equal(fs.existsSync(modulePath),true,'Missing managed namespace adapter');return import(modulePath)}
+test('existing16 findings are explicitly not applicable and never launch a worker',async()=>{const m=await api();await fixture(async(s,f)=>{f.rule='policy.harness.python.eval';let calls=0;const r=await m.collectNamespaceEvidence(s,[f],{deadline:performance.now()+10000,run:async()=>{calls++}});assert.equal(r.summary.state,'not-applicable');assert.equal(calls,0);assert.deepEqual(r.artifacts,[])})});
+test('eligible input carries exact full copy span and hash without importing source',async()=>{const m=await api();await fixture(async(s,f)=>{const r=m.buildNamespaceInput(s,[f]);assert.equal(r.state,'ready');assert.equal(r.request.results.length,1);assert.deepEqual(r.request.results[0].start,f.sourceLocation.start);assert.deepEqual(r.request.results[0].end,f.sourceLocation.end);assert.equal(r.request.files['app.py'].sha256,f.sourceLocation.sourceSha256)})});
+for(const [label,change]of [['snapshot',f=>f.sourceLocation.snapshotId='b'.repeat(64)],['hash',f=>f.sourceLocation.sourceSha256='c'.repeat(64)],['unbound',f=>f.sourceLocation={version:1,state:'unavailable',reason:'source-unavailable'}],['label',f=>f.location='app.py:1']])test('eligible '+label+' mismatch never reaches worker',async()=>{const m=await api();await fixture(async(s,f)=>{change(f);let calls=0;const r=await m.collectNamespaceEvidence(s,[f],{deadline:performance.now()+10000,run:async()=>{calls++}});assert.equal(r.summary.state,'unavailable');assert.equal(calls,0);assert.equal(r.summary.eligible,1)})});
+test('changed same-size source refuses anchored request',async()=>{const m=await api();await fixture(async(s,f,root)=>{fs.writeFileSync(path.join(root,'app.py'),fs.readFileSync(path.join(root,'app.py'),'utf8').replace('eval','exec'));assert.equal(m.buildNamespaceInput(s,[f]).state,'unavailable')})});
+test('worker failure preserves original warning and reports unavailable',async()=>{const m=await api();await fixture(async(s,f)=>{const before=JSON.stringify(f);const r=await m.collectNamespaceEvidence(s,[f],{deadline:performance.now()+10000,run:async()=>{throw Error('worker failed')}});assert.equal(r.summary.state,'unavailable');assert.equal(JSON.stringify(f),before)})});
+test('cleanup uncertainty must escape to block later tasks',async()=>{const m=await api();await fixture(async(s,f)=>{await assert.rejects(m.collectNamespaceEvidence(s,[f],{deadline:performance.now()+10000,run:async()=>{throw Object.assign(Error('stop unknown'),{code:'STOP_UNCONFIRMED'})}}),e=>e.code==='STOP_UNCONFIRMED')})});
+
+import {RedteamStore} from '../package/lib/redteam/store-core.js';import {SecurityWorkbench,parseScanOutput} from '../package/lib/redteam/personal-security-workbench.mjs';
+for(const outcome of ['unavailable','stop-unknown','shutdown-stop-unknown'])test('joint collector preserves persisted scanner warning when namespace '+outcome,async()=>{
+ const base=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'namespace-joint-'))),project=path.join(base,'repo');fs.mkdirSync(project);const source='def run(value):\n    return eval(value, {})\n';fs.writeFileSync(path.join(project,'app.py'),source);const store=new RedteamStore(path.join(base,'state')),eng=store.openEngagement('namespace integration').id;const b=new SecurityWorkbench(store,{workspaceRoot:base,toolStatus:()=>({semgrep:{ready:true,version:'fixture',admissionIdentity:'b'.repeat(64)}})});let calls=0;
+ b.pythonEvidence=()=>null;b.namespaceEvidence=async(s,rows,options)=>{assert.ok(options.deadline-performance.now()>20000&&options.deadline-performance.now()<=30000);calls++;assert.equal(rows.length,1);assert.equal(rows[0].sourceLocation.state,'bound');assert.equal(b.db(eng).prepare('SELECT COUNT(*) n FROM security_joint_finding').get().n,1);if(outcome==='shutdown-stop-unknown')b.joint.active.shutdown=true;if(outcome!=='unavailable')throw Object.assign(Error('uncertain'),{code:'STOP_UNCONFIRMED'});return{summary:{version:1,state:'unavailable',eligible:1,checked:0,observations:0,unmatched:0,retained:0,cleanupVerified:true},artifacts:[]}};
+ b.runner=async()=>({...parseScanOutput('semgrep',{results:[{check_id:RULE,path:'/src/app.py',start:{line:2,col:12,offset:27},end:{line:2,col:27,offset:42},extra:{severity:'WARNING',message:'synthetic'}}],errors:[],paths:{scanned:['/src/app.py']}}),coverageKey:'fixture'});
+ try{b.saveScope(eng,{requestId:'namespace-scope-001',revision:0,repoRoot:project,tools:['semgrep'],expiresAt:new Date(Date.now()+60000).toISOString(),confirm:true});const run=b.joint.start(eng,{requestId:'namespace-start-001',profileRevision:1,mode:'deep',steps:['semgrep'],budgetSeconds:30});await b.joint.wait(eng,{id:run.id,waitSeconds:2});assert.equal(calls,1);const page=b.joint.report(eng,{id:run.id,section:'findings'});assert.equal(page.page.total,1);assert.equal(page.page.items[0].status,'unverified');assert.equal(page.task.steps[0].namespaceReview.state,'unavailable');assert.equal(page.task.state,outcome==='unavailable'?'completed':'unconfirmed');assert.equal(b.db(eng).prepare('SELECT COUNT(*) n FROM security_finding').get().n,0);if(outcome!=='unavailable')assert.equal(b.blocked,true)}finally{await b.dispose();await store.close();fs.rmSync(base,{recursive:true,force:true})}
+});
+
+import {execFileSync} from 'node:child_process';
+const worker=new URL('../package/scripts/python_namespace_review.py',import.meta.url);
+const realWorker=async request=>({...JSON.parse(execFileSync('python3',['-I','-B',worker.pathname,'--managed'],{input:JSON.stringify(request),encoding:'utf8'})),execution:{profile:'namespace-ast-1',imageId:'sha256:'+('d'.repeat(64)),workerSha256:hash(fs.readFileSync(worker)),cleanupVerified:true}});
+test('real AST worker output projects only copy-bound unverified structure',async()=>{const m=await api();await fixture(async(s,f)=>{const before=JSON.stringify(f),r=await m.collectNamespaceEvidence(s,[f],{deadline:performance.now()+10000,run:realWorker});assert.equal(r.summary.state,'completed');assert.equal(r.summary.checked,1);assert.equal(r.summary.execution.profile,'namespace-ast-1');assert.equal(r.artifacts.length,1);const a=r.artifacts[0];assert.equal(a.argumentCount,2);assert.equal(a.builtinIdentity,'unverified');assert.equal(a.externalControl,'unverified');assert.equal(a.constraintState,'unresolved');assert.deepEqual(a.sourceLocation,f.sourceLocation);assert.equal(JSON.stringify(f),before)})});
+for(const mutate of [r=>r.observations[0].anchor.offset++,r=>r.observations[0].sourceSha256='c'.repeat(64),r=>r.observations[0].disposition='confirmed',r=>r.observations.push(r.observations[0]),r=>r.checks=0])test('invalid worker output cannot become evidence: '+mutate.toString(),async()=>{const m=await api();await fixture(async(s,f)=>{const r=await m.collectNamespaceEvidence(s,[f],{deadline:performance.now()+10000,run:async q=>{const report=await realWorker(q);mutate(report);return report}});assert.equal(r.summary.state,'unavailable');assert.deepEqual(r.artifacts,[])})});
+
+test('a preceding assignment on the same line remains structural unverified evidence',async()=>{const m=await api();await fixture(async(s,f)=>{const r=await m.collectNamespaceEvidence(s,[f],{deadline:performance.now()+10000,run:realWorker});assert.equal(r.summary.state,'completed');assert.deepEqual(r.artifacts[0].assignmentLines,[2]);assert.equal(r.artifacts[0].status,'unverified')},'def run(value):\n    data=value; return eval(data, {})\n')});
+
+test('excessive source writes remain unmatched instead of discarding valid worker output',async()=>{const m=await api();await fixture(async(s,f)=>{const r=await m.collectNamespaceEvidence(s,[f],{deadline:performance.now()+10000,run:realWorker});assert.equal(r.summary.state,'partial');assert.equal(r.summary.checked,1);assert.equal(r.summary.unmatched,1);assert.equal(r.summary.observations,0);assert.deepEqual(r.artifacts,[])},'def run(value):\n'+'    value = value\n'.repeat(65)+'    return eval(value, {})\n')});
+
+
+---worker call---
+def review_namespace_call(source,anchor):
+    if not isinstance(source,str) or not valid_anchor(anchor): return None
+    try:
+        raw=source.encode('utf-8')
+        if len(raw)>MAX_BYTES or re.search(rb'\r(?!\n)',raw): return None
+        encoding,_=tokenize.detect_encoding(io.BytesIO(raw).readline)
+        if codecs.lookup(encoding).name!='utf-8':return None
+        line_offsets=[0]+[i+1 for i,b in enumerate(raw) if b==10]
+        tree = ast.parse(source)
+        nodes = list(ast.walk(tree))
+        if len(nodes)>50000: return None
+        matches = [n for n in nodes if isinstance(n,ast.Call) and position(n,line_offsets)==anchor
+                   and isinstance(n.func,ast.Name) and n.func.id in {'eval','exec'}
+                   and len(n.args) in {2,3} and not n.keywords and not any(isinstance(a,ast.Starred) for a in n.args)]
+        if len(matches)!=1: return None
+        call = matches[0]
+        parents = {child:parent for parent in nodes for child in ast.iter_child_nodes(parent)}
+        current = call
+        while current in parents and not isinstance(parents[current],(ast.FunctionDef,ast.AsyncFunctionDef,ast.ClassDef,ast.Lambda)):
+            current = parents[current]
+        owner = parents.get(current)
+        statement = current
+        if not isinstance(owner,ast.FunctionDef) or owner not in tree.body or statement not in owner.body:
+            owner = None
+        binding = binding_hint(tree,owner,call)
+        argument = call.args[0]
+        kind = 'expression-unresolved'
+        writes = []
+        if isinstance(argument,ast.Constant): kind = 'literal-expression-observed'
+        elif isinstance(argument,ast.Name) and owner is not None and direct_statement(statement,call):
+            parameters = [*owner.args.posonlyargs,*owner.args.args,*owner.args.kwonlyargs]
+            kind = 'parameter-name-observed' if any(a.arg==argument.id for a in parameters) else 'local-name-unresolved'
+            prefix = ast.Module(body=owner.body[:owner.body.index(statement)],type_ignores=[])
+            writes = sorted({n.lineno for n in scope_nodes(prefix) if isinstance(n,ast.Name)
+                             and isinstance(n.ctx,(ast.Store,ast.Del)) and n.id==argument.id})
+            if len(writes)>64:return None
+            if writes: kind = 'local-reassignment-observed'
+            elif binds(scope_nodes(prefix),argument.id):kind='local-binding-observed'
+        constraint = constraint_hint(owner,statement,call,binding)
+        return {'version':2,'observation':'namespace-call-structure-observed','anchor':dict(anchor),
+                'sink':call.func.id,'argumentCount':len(call.args),'disposition':'unverified',
+                'callee':{'staticBinding':binding,'builtinIdentity':'unverified'},
+                'source':{'kind':kind,'assignmentLines':writes,'externalControl':'unverified'},
+                'constraint':constraint}
+    except (SyntaxError,ValueError,RecursionError,UnicodeError,LookupError):
+        return None
+
+def review_namespace_batch(root,manifest,scan):
+    if not isinstance(manifest,dict) or not isinstance(scan,dict): raise ValueError('invalid input objects')
+    return review_namespace_sources(pinned_sources(root,manifest.get('files')),manifest,scan)
+
+def review_namespace_sources(sources,manifest,scan):
+    hits = scan.get('results')
+    if not isinstance(hits,list) or len(hits)>2000: raise ValueError('invalid findings')
+    seen = set();observations = [];unmatched = []
+    ignored={'different-rule':0,'unsupported-rule-prefix':0,'unpinned-path':0}
+    for hit in hits:
+        if not isinstance(hit,dict): raise ValueError('invalid finding')
+        if hit.get('check_id')!=RULE:
+            rule=hit.get('check_id')
+            ignored['unsupported-rule-prefix' if isinstance(rule,str) and rule.endswith('harness.python.dynamic-code-namespace') else 'different-rule']+=1
+            continue
+        path = hit.get('path')
+        if not isinstance(path,str): raise ValueError('invalid finding path')
+        path = path.removeprefix('/src/')
+        if path not in sources:ignored['unpinned-path']+=1;continue
+        start,end = hit.get('start'),hit.get('end')
+        if not isinstance(start,dict) or not isinstance(end,dict): raise ValueError('missing full anchor')
+        anchor = {'line':start.get('line'),'col':start.get('col'),'endLine':end.get('line'),'endCol':end.get('col'),
+                  'offset':start.get('offset'),'endOffset':end.get('offset')}
+        if not valid_anchor(anchor): raise ValueError('invalid full anchor')
+        key = (path,*[anchor[k] for k in ['line','col','endLine','endCol','offset','endOffset']])
+        if key in seen: continue
+        seen.add(key)
+        if len(seen)>MAX_CHECKS: raise ValueError('namespace check limit')
+        row = review_namespace_call(sources[path],anchor)
+        metadata = {'file':path,'rule':RULE,'sourceSha256':manifest['files'][path]}
+        if row: observations.append({**metadata,**row})
+        else: unmatched.append({**metadata,'anchor':anchor,'reason':'no-exact-supported-call'})
+    partial=bool(unmatched or ignored['unsupported-rule-prefix'] or ignored['unpinned-path'] or hits and not seen)
+    return {'version':2,'state':'partial' if partial else 'completed','checks':len(seen),'ignoredHits':ignored,
+            'observations':observations,'unmatchedAnchors':unmatched,
+            'changesFindingDisposition':False,'r3Qualified':False}
+
+
+
+---UI---
+ const validNamespaceArtifact=(row,step,snapshot)=>row.rule==='policy.harness.python.dynamic-code-namespace'&&[2,3].includes(row.argumentCount)&&['eval','exec'].includes(row.sink)&&row.builtinIdentity==='unverified'&&row.externalControl==='unverified'&&row.path===row.sourceLocation?.path&&row.line===row.sourceLocation?.start?.line&&
+  validSourceRow({...row,location:row.path+':'+row.line},step,snapshot)&&row.sourceLocation.state==='bound'&&
+  ['no-direct-conflict-observed','namespace-effects-observed','scope-effects-unresolved','local-binding-conflict-observed','module-binding-conflict-observed','unsupported-scope'].includes(row.bindingHint)&&
+  ['expression-unresolved','literal-expression-observed','parameter-name-observed','local-name-unresolved','local-reassignment-observed','local-binding-observed'].includes(row.sourceKind)&&Array.isArray(row.assignmentLines)&&row.assignmentLines.length<=64&&row.assignmentLines.every(n=>positive(n)&&n<=row.line)&&
+  (row.constraintState==='unresolved'||row.constraintState==='fixed-set-guard-observed'&&positive(row.guardLine)&&row.guardLine<row.line&&positive(row.literalCount)&&row.literalCount<=16&&row.runtimeStringSemantics==='unverified'&&row.fixedValuesMayExecuteCode===true);
+ const validNamespaceSummary=n=>{
+  if(!n||n.version!==1||!Object.hasOwn(namespaceLabels,n.state)||!['eligible','checked','observations','unmatched','retained'].every(k=>count(n[k]))||n.eligible>2000||n.checked>64||n.checked>n.eligible||n.observations+n.unmatched!==n.checked||typeof n.cleanupVerified!=='boolean')return false;
+  if(n.state==='unavailable')return n.checked===0&&n.retained===0;
+  if(!n.cleanupVerified)return false;
+  if(n.state==='not-applicable')return n.eligible===0&&n.checked===0&&n.retained===0;
+  if(n.checked===0||n.retained!==Math.min(20,n.observations))return false;
+  return n.state==='truncated'?n.observations>20:n.observations<=20&&(n.state==='partial'?n.unmatched>0:n.unmatched===0);
+ };
+
+
+---Python R2 test---
+_leave_only_this_anchor_unmatched(self):
+        source='def run(value):\n'+''.join('    value = value\n' for _ in range(65))+'    return eval(value, {})\n'
+        self.assertIsNone(self.review(source))

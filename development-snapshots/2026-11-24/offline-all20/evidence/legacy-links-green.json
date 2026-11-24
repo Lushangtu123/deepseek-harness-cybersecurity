@@ -1,0 +1,40 @@
+{
+  "kind": "actual-pure-filesystem-fixture-probes",
+  "phase": "green",
+  "unitOnly": true,
+  "VMSubmissions": 0,
+  "targetExecutions": 0,
+  "managedLockValidatorReplacedForUnitOnly": true,
+  "rows": [
+    {
+      "file": "candidate/checks/run_regressions.py",
+      "function": "scenario_stage_identity",
+      "sourceSha256": "5be3cb6bf83a56f757e52e47968016c87197b45cb358b2ef825844719f849ca6",
+      "nativeScenarioAssertion": true,
+      "stdout": "PASS stage-symlink-and-identity\n",
+      "remainingLinks": [],
+      "resourceConfirmed": true,
+      "resourceDetail": {
+        "state": "quiescent",
+        "records": [],
+        "skipped": []
+      },
+      "scratch": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/tmp/legacy-green-fkj4qyng"
+    },
+    {
+      "file": "candidate/checks/run_rev6_checks.py",
+      "function": "test_recover_stage_link_and_identity",
+      "sourceSha256": "92eff5801e7f8d295a8713352e8e625e434683ea4ce4a2b45b63475fb82b1287",
+      "nativeScenarioAssertion": true,
+      "stdout": "PASS recover-stage-symlink-identity-change-and-absent\n",
+      "remainingLinks": [],
+      "resourceConfirmed": true,
+      "resourceDetail": {
+        "state": "quiescent",
+        "records": [],
+        "skipped": []
+      },
+      "scratch": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/tmp/legacy-green-a24my1ge"
+    }
+  ]
+}

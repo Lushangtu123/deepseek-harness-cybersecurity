@@ -1,0 +1,160 @@
+--- reviewed-before/scripts/verifier_snapshot.py
++++ current/scripts/verifier_snapshot.py
+@@ -59,9 +59,12 @@
+ def approved_sources():
+  path=HERE/'python_execution_verify.py';spec=importlib.util.spec_from_file_location('trusted_verifier_profiles',path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m.APPROVED_SOURCES
+ 
++def trusted_dependency_lock():
++ return json.loads((HERE/'verifier-dependencies.lock.json').read_bytes())
++
+ def freeze(static_bundle,static_sha,dependencies,lock,contracts,destination):
+  api=launcher();snapshot,verified=api.verify(Path(static_bundle),static_sha);code={n:verified[n] for n in CODE[:3]}
+- if not isinstance(lock,dict) or lock.get('version')!=1 or not isinstance(lock.get('packages'),list):raise ValueError('Invalid dependency lock')
++ if lock!=trusted_dependency_lock():raise ValueError('Untrusted verifier dependency lock')
+  deps=tree(dependencies,lock.get('files'))
+  if not isinstance(contracts,list) or not 1<=len(contracts)<=64:raise ValueError('Recipe limit')
+  recipes={digest(contract(v)):v for v in contracts}
+@@ -88,6 +91,8 @@
+      or value.get('storageSha256')!=sha256((HERE/'reviewer_storage.py').read_bytes()).hexdigest()):raise ValueError('Verifier identity mismatch')
+  if value.get('sourceProfiles')!=approved_sources():raise ValueError('Source profile mismatch')
+  if value['pythonVersion']!='3.12.15' or value['staticSnapshot'].get('version')!=2:raise ValueError('Verifier runtime mismatch')
++ lock=trusted_dependency_lock()
++ if value.get('dependencies')!=lock['files'] or value.get('dependencyPackages')!=lock['packages']:raise ValueError('Untrusted verifier dependency lock')
+  code=tree(bundle/'code',value['code']);deps=tree(bundle/'dependencies',value['dependencies'])
+  for n in CODE[:3]:
+   if value['code'][n]!=value['staticSnapshot']['files'].get(n):raise ValueError('Static closure mismatch')
+--- reviewed-before/scripts/review_quality_gate.mjs
++++ current/scripts/review_quality_gate.mjs
+@@ -1,6 +1,6 @@
+ // Offline candidate measurement. This module cannot authorize scans or promote R3.
+ import {createHash} from 'node:crypto';
+-import {openSync,readSync,closeSync,fstatSync,constants} from 'node:fs';
++import {openSync,readSync,closeSync,fstatSync,constants,readFileSync} from 'node:fs';
+ import {pathToFileURL} from 'node:url';
+ 
+ const hashPattern=/^[a-f0-9]{64}$/;
+@@ -398,11 +398,19 @@
+ const probeTemplates=['control-literal-v1','expression-with-frozen-random-challenge-v1','statement-with-frozen-random-challenge-v1','syntax-error-v1'];
+ const probeValues=c=>["'harness-control'",`str('${c}')#`,`__harness_probe__='${c}'`,"'"];
+ const bytesHash=s=>typeof s==='string'?createHash('sha256').update(s).digest('hex'):null;
++function shippedVerifierHash(filename){
++ const bytes=readFileSync(new URL(filename,import.meta.url));
++ return createHash('sha256').update(bytes).digest('hex');
++}
+ function validVerificationPlan(plan,dataset,staticSnapshot){
+  try{
+   const v=plan.snapshot;requireValue(plan.version===1&&record(v)&&v.version===1&&v.kind==='python-execution-verifier'&&v.pythonVersion==='3.12.15'&&v.imageId===staticSnapshot.imageId&&v.staticSha256===digest(staticSnapshot)&&digest(v.staticSnapshot)===digest(staticSnapshot));
+   requireValue(digest(v.policy)===digest(verifierPolicy)&&digest(v.probes)===digest(probeTemplates)&&record(v.code)&&Object.keys(v.code).sort().join(',')==='eval_evidence_batch.py,eval_guard_review.py,eval_import_review.py,python_execution_verify.py'&&Object.values(v.code).every(h=>hashPattern.test(h)));
+   requireValue(v.controllerSha256===staticSnapshot.launcherSha256&&v.storageSha256===staticSnapshot.storageSha256&&hashPattern.test(v.verifierControllerSha256??'')&&record(v.dependencies)&&Object.keys(v.dependencies).length<=1000&&Object.values(v.dependencies).every(h=>hashPattern.test(h)));
++  requireValue(v.code['python_execution_verify.py']===shippedVerifierHash('./python_execution_verify.py')&&
++   v.verifierControllerSha256===shippedVerifierHash('./verifier_snapshot.py'));
++  const lock=JSON.parse(readFileSync(new URL('./verifier-dependencies.lock.json',import.meta.url),'utf8'));
++  requireValue(digest(v.dependencies)===digest(lock.files)&&digest(v.dependencyPackages)===digest(lock.packages));
+   requireValue(Array.isArray(v.sourceProfiles)&&v.sourceProfiles.length>0&&v.sourceProfiles.every(h=>hashPattern.test(h))&&record(v.recipes)&&Object.entries(v.recipes).every(([h,c])=>h===digest(c)&&c.version===1&&c.inputContract==='untrusted-data-only'));
+   for(const n of reviewerFiles)requireValue(v.code[n]===staticSnapshot.files[n]);
+   requireValue(Array.isArray(plan.requests)&&plan.requests.length===dataset.cases.filter(r=>r.pointId!==null).length&&plan.requests.length<=1000);
+@@ -452,6 +460,9 @@
+    seen.add(planned.caseId);cases.set(planned.caseId,{decision:report.decision==='unknown'?'unknown':decision,artifactSha256:r.reportSha256});
+   }catch{issues.push('verification-artifact-invalid:'+i)}
+  }
++ for(const request of freeze.verificationPlan.requests){
++  if(!seen.has(request.caseId))issues.push('verification-request-unobserved:'+request.caseId);
++ }
+  return{cases,issues};
+ }
+ 
+--- reviewed-before/scripts/verifier_snapshot.test.py
++++ current/scripts/verifier_snapshot.test.py
+@@ -8,12 +8,23 @@
+    root=Path(directory).resolve();deps=root/'deps';deps.mkdir();(deps/'example.py').write_text('# no execution\n')
+    api=m.launcher();modules=HERE.parent/'work/harness-purge-improved/package/scripts';static=api.freeze(modules,root/'static','sha256:'+'a'*64);pin=api.digest(static)
+    lock={'version':1,'files':{'example.py':api.sha256((deps/'example.py').read_bytes()).hexdigest()},'packages':[]}
++   m.trusted_dependency_lock=lambda:lock  # Substitute only the trusted fixture in this unit test.
+    contract={'version':1,'path':'app.py','entry':{'kind':'function','name':'route','parameter':'value'},'inputContract':'untrusted-data-only'}
+    value=m.freeze(root/'static',pin,deps,lock,[contract],root/'verifier');self.assertEqual(value['version'],1);self.assertEqual(len(value['code']),4)
+    self.assertEqual(m.verify(root/'verifier',m.digest(value))[0],value)
+    (root/'verifier/dependencies/example.py').chmod(0o600)
+    (root/'verifier/dependencies/example.py').write_text('# changed\n')
+    with self.assertRaises(ValueError):m.verify(root/'verifier',m.digest(value))
++ def test_project_defined_dependency_lock_cannot_authorize_code(self):
++  s=importlib.util.spec_from_file_location('vs_pinned_lock',HERE/'verifier_snapshot.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
++  with tempfile.TemporaryDirectory() as directory:
++   root=Path(directory).resolve();deps=root/'deps';deps.mkdir();raw=b'# project supplied module\n';(deps/'flask.py').write_bytes(raw)
++   api=m.launcher();modules=HERE.parent/'work/harness-purge-improved/package/scripts';static=api.freeze(modules,root/'static','sha256:'+'a'*64)
++   lock={'version':1,'files':{'flask.py':m.sha256(raw).hexdigest()},'packages':[]}
++   contract={'version':1,'path':'app.py','entry':{'kind':'function','name':'route','parameter':'value'},'inputContract':'untrusted-data-only'}
++   with self.assertRaisesRegex(ValueError,'Untrusted verifier dependency lock'):
++    m.freeze(root/'static',api.digest(static),deps,lock,[contract],root/'verifier')
++   self.assertFalse((root/'verifier').exists())
+  def test_returned_dependency_bytes_are_the_same_bytes_that_were_hashed(self):
+   from unittest.mock import patch
+   s=importlib.util.spec_from_file_location('vs_read_once',HERE/'verifier_snapshot.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+--- reviewed-before/work/harness-purge-improved/tests/verification-artifacts.test.mjs
++++ current/work/harness-purge-improved/tests/verification-artifacts.test.mjs
+@@ -9,3 +9,40 @@
+ test('Non-dominating or dangerous finite-set proof cannot exclude',()=>{for(const mutate of [r=>r.proof.guardLine=r.proof.sinkLine+1,r=>r.proof.values=['len([])']]){const f=fixture();editReport(f,mutate,3);const r=score(f);assert.ok(r.verificationCoverage.issues.length)}});
+ test('Source, dependency, challenge, cleanup or verifier identity changes cannot inherit a decision',()=>{for(const mutate of [f=>f.run.verifierExecutions[0].cleanupVerified=false,f=>f.run.verifierExecutions[0].verifierSha256='f'.repeat(64),f=>{f.run.verificationArtifacts[0].requestJson+=' '},f=>{const r=f.run.verifierExecutions[0];delete r.inputFiles[Object.keys(r.inputFiles).find(k=>k.startsWith('dependencies/'))];r.inputSha256=digest(r.inputFiles)},f=>{f.freeze.verificationPlan.requests[0].challenge='f'.repeat(64)}]){const f=fixture();mutate(f);assert.ok(score(f).blockers.some(x=>x.startsWith('verification-')))}});
+ test('Human evidence is supplementary and cannot supply tool main-score confirmation',()=>{const f=fixture();f.run.outputs[0].evidence[0].kind='human-review';f.run.humanSupplement=[{caseId:f.dataset.cases[0].id,decision:'confirmed'}];const v=score(f);assert.ok(v.blockers.includes('verification-evidence-unavailable-or-mismatched'));assert.equal(v.categories['python/CWE-94'].diagnostic.reviewed.truePositive,0);assert.equal(v.humanSupplement.length,1)});
++
++test('A consistently rehashed freeze cannot substitute shipped verifier code or its dependency lock', () => {
++ for (const replace of [
++  snapshot => { snapshot.code['python_execution_verify.py'] = 'f'.repeat(64) },
++  snapshot => { snapshot.verifierControllerSha256 = 'f'.repeat(64) },
++  snapshot => { snapshot.dependencyPackages[0].version = 'changed' },
++  snapshot => { snapshot.dependencies[Object.keys(snapshot.dependencies)[0]] = 'f'.repeat(64) },
++ ]) {
++  const input = fixture();
++  const { freeze, run } = input;
++  replace(freeze.verificationPlan.snapshot);
++  freeze.verificationPlanSha256 = digest(freeze.verificationPlan);
++  run.freezeSha256 = digest(freeze);
++  for (const receipt of [...run.reviewerExecutions, ...run.verifierExecutions]) {
++   receipt.freezeSha256 = run.freezeSha256;
++  }
++  for (const receipt of run.verifierExecutions) {
++   receipt.verifierSha256 = digest(freeze.verificationPlan.snapshot);
++  }
++  const result = score(input);
++  assert.deepEqual(result.verificationCoverage.supportedCases, []);
++  assert.ok(result.blockers.includes('verification-plan-missing-or-changed'));
++ }
++});
++
++test('Omitting a planned verifier receipt is an explicit coverage blocker', () => {
++ const input = fixture();
++ const request = input.freeze.verificationPlan.requests.at(-1);
++ input.run.verifierExecutions.pop();
++ input.run.verificationArtifacts.pop();
++ const output = input.run.outputs.find(item => item.id === request.caseId);
++ output.decision = 'unknown';
++ output.evidence = [];
++ const result = score(input);
++ assert.ok(result.blockers.includes('verification-request-unobserved:' + request.caseId));
++ assert.equal(result.verificationCoverage.supportedCases.length, 3);
++});
+--- reviewed-before/docs/security-workspace/python-execution-verification.md
++++ current/docs/security-workspace/python-execution-verification.md
+@@ -38,9 +38,9 @@
+ | 网络与权限 | 网络 none，capabilities 全删除，no-new-privileges，无特权、凭据或 Docker socket 挂载 |
+ | 资源 | 512 MiB 内存及同额 memory-swap 上限，1 CPU，64 进程，32 MiB 临时空间 |
+ | 请求 | 每点最多 4 输入、每输入 5 秒、整点 30 秒、报告最多 256 KiB |
+-| 批次 | 验收按点串行，每批最多 8 点；CLI 一次只提交一个点 |
++| 批次 | 主诊断批次串行且最多 8 点，拒绝边界对照逐个提交，CLI 一次只提交一个点 |
+ 
+-15 个真实容器的 inspect 记录核对了这些配置。未指定自定义 seccomp，采用 Docker daemon 默认配置；这不是独立审计内核过滤规则。容器承担隔离，Python monitoring 只提供条件性观察，不能给同进程恶意代码提供防伪证明。
++15 个真实容器的 inspect 记录核对了这些配置。验收还核对了私有 stage 中的源码与清单逐个一致，并确认清单外的合成源码没有进入挂载。容器采用 Docker daemon 默认 seccomp。Python monitoring 提供条件性观察，同进程代码的防伪仍是能力缺口。
+ 
+ 确认同时核对真实内建调用对象、指令位置、完整调用范围、`pointId`、探针程序及返回/标记原值。普通回显或“调用过 eval”不成立。排除仅接受类型和控制流可以证明的单引号字符串或固定安全字面量集合；未触发不是排除证据。页面输出、stdout 和模型判断不能直接进入工具主分。
+ 
+@@ -67,9 +67,9 @@
+ 
+ Python 入口为 `verify_execution(...)`。`REQUEST` 仅接收 `version: 1`、固定 `contract`、完整 `point` 和冻结的 64 位十六进制随机 `challenge`。不接收用户代码、setup hooks、自定义探针或可执行模板。Flask 模板仅允许工具定义的固定文本。
+ 
+-快照绑定固定工具代码、静态三模块闭包、依赖树、配方、解释器、镜像、策略与源码允许摘要。依赖通过目录 FD 和 no-follow 打开，普通单链接文件只读取一次；哈希和实际返回的是同一缓冲区，并核对读取前后文件身份。链接、读取时修改、冻结后源码或依赖变化均拒绝。
++快照绑定固定工具代码、静态三模块闭包、依赖树、配方、解释器、镜像、策略与源码允许摘要。依赖锁须与工具附带的 [固定版本与摘要](../../scripts/verifier-dependencies.lock.json) 一致。依赖通过目录 FD 和 no-follow 打开，普通单链接文件只读取一次，哈希和实际返回的是同一缓冲区，并核对读取前后文件身份。链接、读取时修改、冻结后源码或依赖变化均拒绝。
+ 
+-核实复用已有容量准入、任务锁、超时、容器与客户端所有权核对和清理。`status/recover` 返回原任务和原回执；断线不启动新核实。回执绑定源码、执行点、请求、数据集及冻结、运行身份、原始报告和清理结果。评分器重读实际报告/请求/清单/扫描字节并核对，不能只凭 `kind: sandbox-verification` 和摘要获得已决结果。
++核实复用已有容量准入、任务锁、超时、容器与客户端所有权核对和清理。`status/recover` 查询原任务及回执。回执绑定源码、执行点、请求、数据集及冻结、运行身份、原始报告和清理结果。评分器核对实际报告、请求、清单及扫描字节，并与当前工具附带的核实器和依赖锁比对。缺失计划回执会产生明确的覆盖阻断。早期冻结与当前核实器不一致时，可用对应的历史工具诊断。
+ 
+ ## 后续工作
+ 

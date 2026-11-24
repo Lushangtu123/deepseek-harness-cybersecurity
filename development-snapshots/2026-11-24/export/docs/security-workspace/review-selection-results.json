@@ -1,0 +1,160 @@
+{
+  "scope": "offline candidate quality evaluator, sample selection provenance",
+  "inputVersion": 2,
+  "reportVersion": 4,
+  "changedSources": {
+    "scripts/review_quality_gate.mjs": "c1bcf811c2d59d96c29cbb95f6286c03d7ef8fc5a5318523c62c059c460c4952",
+    "work/harness-purge-improved/tests/review-quality-gate.test.mjs": "598b3453d78cf96d5dabcb66f4116b47864a6fd53d98a7dfc15132d756478491",
+    "docs/security-workspace/review-quality.md": "314c248265f5380121bde38d31fe2cb6abdd183afbe8bd178ee1ba9de02c8c97"
+  },
+  "regression": {
+    "red": {
+      "pass": 23,
+      "fail": 4
+    },
+    "macGate": {
+      "pass": 27,
+      "fail": 0
+    },
+    "vmGate": {
+      "pass": 27,
+      "fail": 0
+    },
+    "macPluginSuite": {
+      "pass": 1004,
+      "fail": 0
+    }
+  },
+  "replay": {
+    "scope": "retrospective replay of already-used archived scan outputs, not a fresh detector run",
+    "newQualificationSamples": 0,
+    "beforeGateSha256": "10ca0c62a27431774699d3fdc8bb692cdcb00313151a81cae7d7bcbdfa308da2",
+    "scenarios": [
+      {
+        "name": "original-legacy",
+        "beforeVersion": 3,
+        "afterVersion": 4,
+        "beforeQualificationCount": 2,
+        "afterQualificationCount": 0,
+        "diagnosticCount": 2,
+        "state": "blocked",
+        "newSelectionReason": "sample-selection-incomplete",
+        "priorBlockers": [
+          "python/CWE-94:insufficient-labelled-cases",
+          "python/CWE-94:raw-recall-below-threshold",
+          "python/CWE-94:reviewed-false-positive-rate-unqualified",
+          "python/CWE-94:reviewed-false-positive-bound-unqualified",
+          "python/CWE-94:false-exclusion-rate-unqualified",
+          "python/CWE-94:review-unknown-rate-unqualified",
+          "python/CWE-94:confirmed-recall-below-threshold",
+          "python/CWE-95:insufficient-labelled-cases",
+          "python/CWE-95:review-unknown-rate-unqualified",
+          "python/CWE-95:confirmed-recall-below-threshold"
+        ],
+        "priorBlockersPreserved": true,
+        "allBlockers": [
+          "sample-selection-incomplete",
+          "python/CWE-94:insufficient-labelled-cases",
+          "python/CWE-94:raw-recall-below-threshold",
+          "python/CWE-94:reviewed-false-positive-rate-unqualified",
+          "python/CWE-94:reviewed-false-positive-bound-unqualified",
+          "python/CWE-94:false-exclusion-rate-unqualified",
+          "python/CWE-94:review-unknown-rate-unqualified",
+          "python/CWE-94:confirmed-recall-below-threshold",
+          "python/CWE-95:insufficient-labelled-cases",
+          "python/CWE-95:raw-recall-below-threshold",
+          "python/CWE-95:reviewed-false-positive-rate-unqualified",
+          "python/CWE-95:reviewed-false-positive-bound-unqualified",
+          "python/CWE-95:false-exclusion-rate-unqualified",
+          "python/CWE-95:review-unknown-rate-unqualified",
+          "python/CWE-95:confirmed-recall-below-threshold"
+        ]
+      },
+      {
+        "name": "marked-diagnostic",
+        "beforeVersion": 3,
+        "afterVersion": 4,
+        "beforeQualificationCount": 0,
+        "afterQualificationCount": 0,
+        "diagnosticCount": 2,
+        "state": "blocked",
+        "newSelectionReason": "sample-selection-ineligible",
+        "priorBlockers": [
+          "dataset-changed-after-freeze",
+          "run-dataset-mismatch",
+          "vulnerability-oracle-incomplete",
+          "python/CWE-94:insufficient-labelled-cases",
+          "python/CWE-94:raw-recall-below-threshold",
+          "python/CWE-94:reviewed-false-positive-rate-unqualified",
+          "python/CWE-94:reviewed-false-positive-bound-unqualified",
+          "python/CWE-94:false-exclusion-rate-unqualified",
+          "python/CWE-94:review-unknown-rate-unqualified",
+          "python/CWE-94:confirmed-recall-below-threshold",
+          "python/CWE-95:insufficient-labelled-cases",
+          "python/CWE-95:raw-recall-below-threshold",
+          "python/CWE-95:reviewed-false-positive-rate-unqualified",
+          "python/CWE-95:reviewed-false-positive-bound-unqualified",
+          "python/CWE-95:false-exclusion-rate-unqualified",
+          "python/CWE-95:review-unknown-rate-unqualified",
+          "python/CWE-95:confirmed-recall-below-threshold"
+        ],
+        "priorBlockersPreserved": true,
+        "allBlockers": [
+          "dataset-changed-after-freeze",
+          "run-dataset-mismatch",
+          "vulnerability-oracle-incomplete",
+          "sample-selection-ineligible",
+          "python/CWE-94:insufficient-labelled-cases",
+          "python/CWE-94:raw-recall-below-threshold",
+          "python/CWE-94:reviewed-false-positive-rate-unqualified",
+          "python/CWE-94:reviewed-false-positive-bound-unqualified",
+          "python/CWE-94:false-exclusion-rate-unqualified",
+          "python/CWE-94:review-unknown-rate-unqualified",
+          "python/CWE-94:confirmed-recall-below-threshold",
+          "python/CWE-95:insufficient-labelled-cases",
+          "python/CWE-95:raw-recall-below-threshold",
+          "python/CWE-95:reviewed-false-positive-rate-unqualified",
+          "python/CWE-95:reviewed-false-positive-bound-unqualified",
+          "python/CWE-95:false-exclusion-rate-unqualified",
+          "python/CWE-95:review-unknown-rate-unqualified",
+          "python/CWE-95:confirmed-recall-below-threshold"
+        ]
+      }
+    ]
+  },
+  "protectedVm": {
+    "dailyProgramFilesMatched": 169,
+    "dailyDatabasesLogicallyMatched": 42,
+    "dailyConfigPinsRuntimeMatched": true,
+    "temporaryRemoved": true
+  },
+  "review": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "promptSha256": "0b873611ce6276026081a7f708937a3582c6abc43e5574d9f553492e2d3b75fa",
+    "receiptSha256": "0ddb6537009dc6d47927459c563246644fc377c841c059a78fce5a5c505a6e07",
+    "reportSha256": "5d62794500cd84acbec6ead49b86d08947d16a3096a3c07d57a6870db3d5e9dd",
+    "confirmedBlockingFindings": 0,
+    "triage": [
+      "The exact reviewed evaluator bytes match the VM regression payload and final identity check. The 1004-test full plugin suite passed on Mac.",
+      "Both archived replays verify the before snapshot digest and preserve every prior blocker. The detailed diagnostic equality assertion covers python/CWE-95, the only populated replay category.",
+      "Report version 4 changes metrics for legacy inputs without selection. Historical archives are preserved; re-running scripts importing the live evaluator will use the current semantics.",
+      "Only the exact known curated method name is excluded semantically. Other bounded method strings and flags remain self-attested; protocol contents and actual independence need release review.",
+      "The before-module hash is checked after static import loading, so the replay is a local retrospective consistency check. No tamper-proof execution claim is made.",
+      "This step adds zero independently qualifying samples and leaves reviewer dependency closure and the formal holdout protocol pending."
+    ]
+  },
+  "boundaries": {
+    "newIndependentSamples": 0,
+    "detectionRulesChanged": false,
+    "numericThresholdsChanged": false,
+    "usedSourceLedgerChanged": false,
+    "r3Qualified": false,
+    "productionDeployment": false
+  },
+  "remaining": [
+    "Freeze the full reviewer dependency closure before detector runs.",
+    "Review a predeclared representative selection protocol and collect genuinely fresh independently labelled positive and negative cases.",
+    "Selection fields and protocol digest formats do not prove real independence, sealing time or correctness of an oracle."
+  ]
+}

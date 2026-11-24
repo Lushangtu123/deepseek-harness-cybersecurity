@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "cases": [
+    {
+      "id": "xinference-before",
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "positive",
+      "sourceSha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+      "location": {
+        "line": 46,
+        "column": 20
+      },
+      "oracle": {
+        "kind": "independent-vulnerability",
+        "positionVerified": true,
+        "conditionsVerified": true,
+        "reference": "https://github.com/xorbitsai/inference/blob/4cefcaa1e63d7e29d26bcd4be96cb267da113871/xinference/model/llm/tool_parsers/llama3_tool_parser.py#L46",
+        "scope": "Published maintainer advisory and original/fixed method under plain small string inputs. Full API deployment not reproduced. Paired same-CVE sample, not representative population."
+      }
+    },
+    {
+      "id": "xinference-fixed",
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "negative",
+      "sourceSha256": "4e09cd7602e0e8186c47b92f1562a97b44a3a9325fab718ec64cf5c2f5ea2d6a",
+      "location": {
+        "line": 49,
+        "column": 20
+      },
+      "oracle": {
+        "kind": "independent-vulnerability",
+        "positionVerified": true,
+        "conditionsVerified": true,
+        "reference": "https://github.com/xorbitsai/inference/blob/1b3d220f342ce68d34cec4586d9409d457dadc42/xinference/model/llm/tool_parsers/llama3_tool_parser.py#L49",
+        "scope": "Published maintainer advisory and original/fixed method under plain small string inputs. Full API deployment not reproduced. Paired same-CVE sample, not representative population."
+      }
+    }
+  ]
+}

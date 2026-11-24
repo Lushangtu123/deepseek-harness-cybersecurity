@@ -1,0 +1,3 @@
+#!/bin/sh
+printf '%s\n' 'resource-call:bpftrace' >> "$HARNESS_BLOCKLOG"
+exit 97

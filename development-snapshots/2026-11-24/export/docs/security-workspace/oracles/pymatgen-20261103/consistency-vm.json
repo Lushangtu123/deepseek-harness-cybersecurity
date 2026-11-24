@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "MacAndVMResultsIdentical": true,
+  "dailyProgramFilesMatched": 169,
+  "temporaryRemoved": true,
+  "sourceExecutionDuringConsistencyCheck": false,
+  "result": {
+    "ok": true,
+    "advisoryFamilies": 1,
+    "officialCwe": "CWE-77",
+    "CWE95QualificationCasesAdded": 0,
+    "independentNegativeCasesAdded": 0,
+    "componentVectors": 12,
+    "normalEquivalenceVectors": 4,
+    "benignBuiltinEscapeVectors": 2,
+    "baseline16Hits": 0,
+    "research20Hits": 1,
+    "runtimeProofAndStructuralUnknownKeptSeparate": true,
+    "fullPymatgenOrCIFPathTested": false,
+    "r3Qualified": false
+  }
+}

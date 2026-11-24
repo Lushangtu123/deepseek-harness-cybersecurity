@@ -1,0 +1,358 @@
+{
+  "version": 1,
+  "engagement": "isolated-source-location-live",
+  "task": {
+    "id": "0271811e-1368-40e8-a419-7bc1123cb26a",
+    "engagement": "isolated-source-location-live",
+    "state": "completed",
+    "scopeRevision": 1,
+    "workspace": {
+      "version": "workspace-dispatch-s1-1",
+      "mode": "deep",
+      "sandboxProfile": "S1",
+      "selectedSteps": [
+        "semgrep"
+      ],
+      "toolIdentities": {
+        "semgrep": "598208862ad1449a5c64391f5bb0bef537e2ee334d89588e5b3582c900c4b608"
+      },
+      "budgetSeconds": 360,
+      "modelRequests": 0,
+      "fullWorkspaceReady": false
+    },
+    "startedAt": "2026-11-04T05:58:29.365Z",
+    "finishedAt": "2026-11-04T05:58:34.623Z",
+    "deadline": "2026-11-04T06:04:29.365Z",
+    "budgetSeconds": 360,
+    "modelCalls": 0,
+    "cleanupVerified": true,
+    "problem": null,
+    "webTarget": null,
+    "snapshot": {
+      "id": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf",
+      "files": 5,
+      "bytes": 256,
+      "git": {
+        "head": null,
+        "dirty": null,
+        "statusHash": null
+      },
+      "excluded": 0,
+      "exclusionsRetained": 0,
+      "exclusionsTruncated": false,
+      "redactedFiles": 1
+    },
+    "steps": [
+      {
+        "tool": "semgrep",
+        "id": "cb7620df-9f2e-4c2c-9f1d-5e54824b7284",
+        "state": "completed",
+        "complete": true,
+        "coverageScope": "scanner-reported-files",
+        "eligibleFiles": null,
+        "cleanupVerified": null,
+        "version": "1.182.1",
+        "checkedFiles": 5,
+        "problem": null,
+        "fileCoverage": {
+          "scope": "managed-copy",
+          "scanned": 5,
+          "total": 5,
+          "uncovered": 0,
+          "withoutLanguageRule": 0
+        },
+        "coverageNotes": [],
+        "diagnostics": {
+          "total": 0,
+          "retained": 0,
+          "truncated": false
+        },
+        "pythonEvidence": "completed",
+        "sourceLocations": {
+          "version": 1,
+          "state": "completed",
+          "total": 7,
+          "bound": 7,
+          "unavailable": 0
+        },
+        "modelCalls": 0,
+        "artifacts": 0
+      }
+    ],
+    "findings": 7,
+    "coverageComplete": false,
+    "manualChecks": [
+      "authentication",
+      "authorization",
+      "business-logic",
+      "architecture"
+    ],
+    "notice": "完成表示已选步骤结束；命中保持待验证。Git未提交状态未探测，按逐文件哈希固定实际内容。脱敏/排除文件、手工项与未选工具仍未覆盖；REA仅静态JavaScript图；PentAGI输出是未验证模型结论，调用次数预算不等同货币金额上限。"
+  },
+  "findings": [
+    {
+      "rule": "policy.harness.python.eval",
+      "title": "动态 eval：请核对输入来源，优先使用受限解析器",
+      "severity": "high",
+      "location": "crlf_tabs.py:2",
+      "evidence": "规则命中；源码片段未收录",
+      "subject": null,
+      "sourceLocation": {
+        "version": 1,
+        "state": "bound",
+        "scope": "managed-source-copy",
+        "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf",
+        "path": "crlf_tabs.py",
+        "sourceSha256": "08902773687c1a201e7773c169f13282e6a2d32ab3338dcd1365f6fee706e670",
+        "byteLength": 45,
+        "copyRedacted": false,
+        "start": {
+          "line": 2,
+          "col": 2,
+          "offset": 18
+        },
+        "end": {
+          "line": 2,
+          "col": 13,
+          "offset": 29
+        }
+      },
+      "tool": "semgrep",
+      "status": "unverified",
+      "sourceTask": "cb7620df-9f2e-4c2c-9f1d-5e54824b7284",
+      "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf"
+    },
+    {
+      "rule": "policy.harness.python.exec",
+      "title": "动态 exec：请核对输入来源，避免运行不可信代码",
+      "severity": "high",
+      "location": "crlf_tabs.py:3",
+      "evidence": "规则命中；源码片段未收录",
+      "subject": null,
+      "sourceLocation": {
+        "version": 1,
+        "state": "bound",
+        "scope": "managed-source-copy",
+        "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf",
+        "path": "crlf_tabs.py",
+        "sourceSha256": "08902773687c1a201e7773c169f13282e6a2d32ab3338dcd1365f6fee706e670",
+        "byteLength": 45,
+        "copyRedacted": false,
+        "start": {
+          "line": 3,
+          "col": 2,
+          "offset": 32
+        },
+        "end": {
+          "line": 3,
+          "col": 13,
+          "offset": 43
+        }
+      },
+      "tool": "semgrep",
+      "status": "unverified",
+      "sourceTask": "cb7620df-9f2e-4c2c-9f1d-5e54824b7284",
+      "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf"
+    },
+    {
+      "rule": "policy.harness.python.eval",
+      "title": "动态 eval：请核对输入来源，优先使用受限解析器",
+      "severity": "high",
+      "location": "extra.py:2",
+      "evidence": "规则命中；源码片段未收录",
+      "subject": null,
+      "sourceLocation": {
+        "version": 1,
+        "state": "bound",
+        "scope": "managed-source-copy",
+        "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf",
+        "path": "extra.py",
+        "sourceSha256": "fb5312c0db81d10a450cef43e4ea85d4cdb497b2945557b0f809d4e2ac3508ac",
+        "byteLength": 48,
+        "copyRedacted": false,
+        "start": {
+          "line": 2,
+          "col": 5,
+          "offset": 20
+        },
+        "end": {
+          "line": 2,
+          "col": 16,
+          "offset": 31
+        }
+      },
+      "tool": "semgrep",
+      "status": "unverified",
+      "sourceTask": "cb7620df-9f2e-4c2c-9f1d-5e54824b7284",
+      "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf"
+    },
+    {
+      "rule": "policy.harness.python.exec",
+      "title": "动态 exec：请核对输入来源，避免运行不可信代码",
+      "severity": "high",
+      "location": "extra.py:3",
+      "evidence": "规则命中；源码片段未收录",
+      "subject": null,
+      "sourceLocation": {
+        "version": 1,
+        "state": "bound",
+        "scope": "managed-source-copy",
+        "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf",
+        "path": "extra.py",
+        "sourceSha256": "fb5312c0db81d10a450cef43e4ea85d4cdb497b2945557b0f809d4e2ac3508ac",
+        "byteLength": 48,
+        "copyRedacted": false,
+        "start": {
+          "line": 3,
+          "col": 5,
+          "offset": 36
+        },
+        "end": {
+          "line": 3,
+          "col": 16,
+          "offset": 47
+        }
+      },
+      "tool": "semgrep",
+      "status": "unverified",
+      "sourceTask": "cb7620df-9f2e-4c2c-9f1d-5e54824b7284",
+      "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf"
+    },
+    {
+      "rule": "policy.harness.python.eval",
+      "title": "动态 eval：请核对输入来源，优先使用受限解析器",
+      "severity": "high",
+      "location": "helper.py:2",
+      "evidence": "规则命中；源码片段未收录",
+      "subject": null,
+      "sourceLocation": {
+        "version": 1,
+        "state": "bound",
+        "scope": "managed-source-copy",
+        "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf",
+        "path": "helper.py",
+        "sourceSha256": "b891922fcd65c306a006f4591b0bceba51d7ddb2a77feac95a50eccecbc6e664",
+        "byteLength": 39,
+        "copyRedacted": false,
+        "start": {
+          "line": 2,
+          "col": 12,
+          "offset": 27
+        },
+        "end": {
+          "line": 2,
+          "col": 23,
+          "offset": 38
+        }
+      },
+      "tool": "semgrep",
+      "status": "unverified",
+      "sourceTask": "cb7620df-9f2e-4c2c-9f1d-5e54824b7284",
+      "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf"
+    },
+    {
+      "rule": "policy.harness.python.eval",
+      "title": "动态 eval：请核对输入来源，优先使用受限解析器",
+      "severity": "high",
+      "location": "same_line.py:2",
+      "evidence": "规则命中；源码片段未收录",
+      "subject": null,
+      "sourceLocation": {
+        "version": 1,
+        "state": "bound",
+        "scope": "managed-source-copy",
+        "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf",
+        "path": "same_line.py",
+        "sourceSha256": "0ee96b76471ee0d197ce6e75a1cacfa32932f7cc5adee4b8ef36bfd867a64263",
+        "byteLength": 88,
+        "copyRedacted": true,
+        "start": {
+          "line": 2,
+          "col": 35,
+          "offset": 59
+        },
+        "end": {
+          "line": 2,
+          "col": 48,
+          "offset": 72
+        }
+      },
+      "tool": "semgrep",
+      "status": "unverified",
+      "sourceTask": "cb7620df-9f2e-4c2c-9f1d-5e54824b7284",
+      "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf"
+    },
+    {
+      "rule": "policy.harness.python.eval",
+      "title": "动态 eval：请核对输入来源，优先使用受限解析器",
+      "severity": "high",
+      "location": "same_line.py:2",
+      "evidence": "规则命中；源码片段未收录",
+      "subject": null,
+      "sourceLocation": {
+        "version": 1,
+        "state": "bound",
+        "scope": "managed-source-copy",
+        "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf",
+        "path": "same_line.py",
+        "sourceSha256": "0ee96b76471ee0d197ce6e75a1cacfa32932f7cc5adee4b8ef36bfd867a64263",
+        "byteLength": 88,
+        "copyRedacted": true,
+        "start": {
+          "line": 2,
+          "col": 50,
+          "offset": 74
+        },
+        "end": {
+          "line": 2,
+          "col": 63,
+          "offset": 87
+        }
+      },
+      "tool": "semgrep",
+      "status": "unverified",
+      "sourceTask": "cb7620df-9f2e-4c2c-9f1d-5e54824b7284",
+      "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf"
+    }
+  ],
+  "files": [
+    {
+      "path": "constant.py",
+      "sha256": "ba237186b266baf4cbef611988fbce51fc7d268a0dbf3f915e9dad5e30ed2e6f",
+      "originalSha256": "ba237186b266baf4cbef611988fbce51fc7d268a0dbf3f915e9dad5e30ed2e6f",
+      "bytes": 36,
+      "redacted": false
+    },
+    {
+      "path": "crlf_tabs.py",
+      "sha256": "08902773687c1a201e7773c169f13282e6a2d32ab3338dcd1365f6fee706e670",
+      "originalSha256": "08902773687c1a201e7773c169f13282e6a2d32ab3338dcd1365f6fee706e670",
+      "bytes": 45,
+      "redacted": false
+    },
+    {
+      "path": "extra.py",
+      "sha256": "fb5312c0db81d10a450cef43e4ea85d4cdb497b2945557b0f809d4e2ac3508ac",
+      "originalSha256": "fb5312c0db81d10a450cef43e4ea85d4cdb497b2945557b0f809d4e2ac3508ac",
+      "bytes": 48,
+      "redacted": false
+    },
+    {
+      "path": "helper.py",
+      "sha256": "b891922fcd65c306a006f4591b0bceba51d7ddb2a77feac95a50eccecbc6e664",
+      "originalSha256": "b891922fcd65c306a006f4591b0bceba51d7ddb2a77feac95a50eccecbc6e664",
+      "bytes": 39,
+      "redacted": false
+    },
+    {
+      "path": "same_line.py",
+      "sha256": "0ee96b76471ee0d197ce6e75a1cacfa32932f7cc5adee4b8ef36bfd867a64263",
+      "originalSha256": "7257aa6e74cd48d192b7e817104521763c597fb09a030bed340fd68506e56581",
+      "bytes": 88,
+      "redacted": true
+    }
+  ],
+  "exclusions": [],
+  "diagnostics": [],
+  "artifacts": []
+}

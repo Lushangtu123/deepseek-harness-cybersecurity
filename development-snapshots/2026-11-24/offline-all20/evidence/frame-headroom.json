@@ -1,0 +1,13 @@
+{
+  "unitOnly": true,
+  "fabricatedFull20Evidence": true,
+  "actualVMResult": false,
+  "headerBytes": 1612639,
+  "capBytes": 2097152,
+  "headroomBytes": 484513,
+  "archiveBytes": 2684152,
+  "frozenSourceManifestSha256": "affef050148f527c0a21dfb7c989eded6cd9c07f30f945ba9eb1048395d27f63",
+  "payloadSha256": "cba4eb15d04d2bd41adf62b0b0096cb6e79974094a988b83d89ddcae87a8754c",
+  "emitterSha256": "b0b64e2c1592545cc95dd8469ff8ae847abc47d54f63f4dc275d0d3a447818c1",
+  "scope": "Measured this exact fabricated contract only; real metadata can differ and over-cap still fails closed."
+}

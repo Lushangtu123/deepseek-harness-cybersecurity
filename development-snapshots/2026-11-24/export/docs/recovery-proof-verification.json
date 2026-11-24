@@ -1,0 +1,180 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Los_Angeles",
+  "baselineCommit": "89b6001549b5157078c33947b28ccc2872e2fbd7",
+  "recoveryPoint": "ready-recovery-proof-20261029",
+  "changes": [
+    "freeze validated proof bytes before creating a recovery point",
+    "validate archived guest identity/mode/name and digest inventory",
+    "treat malformed explicit snapshot metadata as unavailable",
+    "separate initial/loading/failure/partial/complete UI states"
+  ],
+  "regression": {
+    "nodeTests": 111,
+    "pythonTests": 113,
+    "total": 224,
+    "allPassed": true
+  },
+  "compatibility": {
+    "oldBundlesChecked": 39,
+    "legacyException": "Only ready-improved-20261026 may omit recoveryName; VM identity/mode/inventory still required"
+  },
+  "browserFixture": {
+    "scope": "real product HTML with synthetic metadata/transport, no VM calls",
+    "initialFailure": {
+      "error": "快照读取失败，尚未取得清单，请重试。 归档读取失败，尚未取得清单，请重试。",
+      "imageCount": "待核对",
+      "snapshotCount": "待核对",
+      "status": "快照核对：时间未确认 · 归档核对：时间未确认 · 读取时的恢复入口：未确认 · 快照本次读取失败，尚未取得清单 · 归档本次读取失败，尚未取得清单"
+    },
+    "unknownAndGap": {
+      "error": "",
+      "imageCount": "1",
+      "snapshotCount": "未确认",
+      "status": "快照核对：2026/10/29 12:00:00 · 归档核对：2026/10/29 12:00:00 · 读取时的恢复入口：ready-recovery-proof-20261029 · 快照读取未确认 · 已显示 1 项快照记录 · 归档当前批次读取结束，清单仍有缺口 · 归档条目读取 1 次 · 清单仍有缺口：部分目录不可读。 · 磁盘快照元数据暂不可读，不能据此判断快照不存在。"
+    },
+    "refreshFailure": {
+      "error": "快照读取失败，保留上次结果，请重试。 归档读取失败，保留上次结果，请重试。",
+      "imageCount": "1",
+      "rows": 1,
+      "status": "快照核对：2026/10/29 12:00:00 · 归档核对：2026/10/29 12:00:00 · 读取时的恢复入口：ready-recovery-proof-20261029 · 快照本次读取失败，保留上次结果 · 已显示 1 项快照记录 · 归档本次读取失败，保留上次结果 · 归档条目读取 1 次 · 清单仍有缺口：部分目录不可读。 · 磁盘快照元数据暂不可读，不能据此判断快照不存在。"
+    },
+    "retrySuccess": {
+      "error": "",
+      "imageCount": "1",
+      "snapshotCount": "1",
+      "status": "快照核对：2026/10/29 12:00:00 · 归档核对：2026/10/29 12:00:00 · 读取时的恢复入口：ready-recovery-proof-20261029 · 本轮快照批次已读取完 · 已显示 1 项快照记录 · 本轮归档批次已读取完 · 归档条目读取 1 次"
+    }
+  },
+  "review": {
+    "independentReview": "not run; previous review agent unavailable due to usage limit",
+    "supplement": "focused manual review and original/variant/benign regression controls"
+  },
+  "preflight": {
+    "ok": true,
+    "checks": 234,
+    "readOnly": true
+  },
+  "limitations": [
+    "Not a blank-machine restore",
+    "No whole-process atomicity under hostile host changes",
+    "Offline copy not registered or booted",
+    "No active target scans or model prompts",
+    "Snapshot field may be omitted by valid qemu metadata"
+  ],
+  "recovery": {
+    "registeredHarnessVms": 1,
+    "preservedOlderRecoveryPoints": 39,
+    "snapshotCount": 44,
+    "archiveImageCount": 44,
+    "readOnlyCatalogMatches": true,
+    "hostSourcesMatch": true,
+    "vmIsolationConfigValidated": true,
+    "guest": {
+      "guestProofMatched": 1560,
+      "originalCapabilitiesPreserved": true
+    },
+    "groups": {
+      "program": {
+        "state": "matches",
+        "filesChecked": 116
+      },
+      "runtime": {
+        "state": "matches",
+        "filesChecked": 13
+      },
+      "tools": {
+        "state": "matches",
+        "filesChecked": 10
+      },
+      "config": {
+        "state": "matches",
+        "filesChecked": 9
+      },
+      "plugins": {
+        "state": "matches",
+        "filesChecked": 1320
+      }
+    },
+    "offlineCopy": {
+      "recoveryPoint": "ready-recovery-proof-20261029",
+      "copiedHelperReplaceFaultInjected": true,
+      "copiedHostHelpersRolledBack": true,
+      "copiedFaultTemporaryCleaned": true,
+      "offlineDiskRestorePassed": true,
+      "diskCheckPassed": true,
+      "hostHelpersRestored": 5,
+      "launchDefinitionsRestoredInSyntheticHost": 2,
+      "missingAndCorruptCopiedHelpersRepaired": true,
+      "primaryDiskUnmodified": true,
+      "noVmRegistered": true,
+      "copyBootTested": false
+    }
+  },
+  "hostSha256": {
+    "manage.py": "08246c482f753cbe85a0d0a907a410c1f3fa0c07149f2547c300fbb805691d47",
+    "web-entry.mjs": "2feb4d67fc89958cc2e2310ec91b55e8c0d1806ab05bf8fca3e3dcc3cd27810c",
+    "web-health.mjs": "253ea18a560a8a34655930d7e7090a2be2721cd07656e836519dd95eafcba591"
+  },
+  "liveReadFailure": {
+    "observation": {
+      "error": "归档读取失败，保留上次结果，请重试。",
+      "imageCount": "20",
+      "more": true,
+      "status": "快照核对：2026/10/29 12:20:22 · 归档核对：2026/10/29 12:20:22 · 读取时的恢复入口：ready-recovery-proof-20261029 · 本轮快照批次已读取完 · 已显示 44 项快照记录 · 归档本次读取失败，保留上次结果 · 归档条目读取 16 次"
+    },
+    "followupControllerRead": {
+      "observations": [
+        {
+          "page": 1,
+          "seconds": 0.318,
+          "exitCode": 0,
+          "stdoutBytes": 12112,
+          "stderrBytes": 0,
+          "images": 20,
+          "snapshotState": "observed",
+          "truncated": false,
+          "nextCursor": "restore-probe-workbench-v15-20261027"
+        },
+        {
+          "page": 2,
+          "seconds": 0.235,
+          "exitCode": 0,
+          "stdoutBytes": 11333,
+          "stderrBytes": 0,
+          "images": 16,
+          "snapshotState": "observed",
+          "truncated": false,
+          "nextCursor": "restore-probe-workbench-v29b-20261028"
+        },
+        {
+          "page": 3,
+          "seconds": 0.214,
+          "exitCode": 0,
+          "stdoutBytes": 9967,
+          "stderrBytes": 0,
+          "images": 8,
+          "snapshotState": "observed",
+          "truncated": false,
+          "nextCursor": null
+        }
+      ],
+      "readOnly": true
+    },
+    "cause": "not reproduced or identified",
+    "retry": "same retained archive cursor succeeded; final 44 unique images and 44 snapshots"
+  },
+  "liveBrowser": {
+    "url": "http://127.0.0.1:49226/__harness/recovery",
+    "result": {
+      "archiveComplete": true,
+      "currentRow": "ready-recovery-proof-20261029 · 读取时的恢复入口快照已存在 / 归档摘要匹配建议保留2026/10/29 12:19:41",
+      "error": "",
+      "imageCount": "44",
+      "snapshotComplete": true,
+      "snapshotCount": "44",
+      "status": "快照核对：2026/10/29 12:20:22 · 归档核对：2026/10/29 12:23:23 · 读取时的恢复入口：ready-recovery-proof-20261029 · 本轮快照批次已读取完 · 已显示 44 项快照记录 · 本轮归档批次已读取完 · 归档条目读取 40 次",
+      "uniqueImages": 44
+    }
+  }
+}

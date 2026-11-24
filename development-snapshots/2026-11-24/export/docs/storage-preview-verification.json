@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-01",
+  "timezone": "America/Los_Angeles",
+  "runtime": {
+    "version": "1.1.77-personal.2",
+    "programFiles": 134,
+    "newDependencies": false,
+    "scannerImagesChanged": false
+  },
+  "entry": {
+    "macLauncherOption": 12,
+    "hostCli": "scripts/storage_preview.py",
+    "guestCli": "package/scripts/security-storage-preview.py",
+    "onDemandOnly": true,
+    "backgroundAutomationAdded": false,
+    "stoppedVmNeverStartedByPreview": true,
+    "deletionOrApplyModeAvailable": false
+  },
+  "monitor": {
+    "warningFreeGiB": 10,
+    "criticalFreeGiB": 5,
+    "warningFreePercent": 15,
+    "criticalFreePercent": 5,
+    "warningInodeFreePercent": 15,
+    "criticalInodeFreePercent": 5,
+    "hostVolumeAndGuestFilesystemObserved": true,
+    "guestFilesystemStateAtAcceptance": "warning",
+    "guestGroups": 7,
+    "incompleteGuestGroupsAtAcceptance": 3,
+    "dockerState": "observed",
+    "fileContentReading": "No regular-file open/read in monitor; code review and private-content fixtures cover metadata-only behavior",
+    "regularFileHardlinkDedupWithinObject": true,
+    "boundedEntriesPerObject": 30000,
+    "secondsPerObject": 2,
+    "maxDepth": 32,
+    "unknownAndPartialNeverZeroOrComplete": true
+  },
+  "preview": {
+    "projectPrivateRuntimeAuditBackupsRetained": true,
+    "primaryDiskAndCurrentProtectedRecoveryRetained": true,
+    "downloadCandidatesMax": 20,
+    "directoryEntryListingLimit": 512,
+    "candidateReadBudgetSeconds": 0.15,
+    "reviewDoesNotGrantDeletion": true,
+    "reclaimableSnapshotAndCowBytesUnknown": true,
+    "overlappingCategoriesNotSummed": true,
+    "catalogPaginationAndReasonsPreserved": true,
+    "privateDetailedUsageReportExported": false,
+    "existingDataCleanupExecuted": false
+  },
+  "reviewRepair": {
+    "ancestorSymlinkSwapReproduced": true,
+    "faultControlFiredForMeasureAndChildren": true,
+    "fixedAllPathComponentsOpenedNoFollowViaPinnedDescriptors": true,
+    "filesystemCountersReadViaPinnedDescriptor": true,
+    "endIdentityChecks": true,
+    "portableScriptsOnlyHostCheck": true,
+    "independentReviewAfterFixNoAdditionalBlockers": true
+  },
+  "actualAcceptance": {
+    "linuxGuestCli": true,
+    "macCombinedPreview": true,
+    "realLauncherOption12": true,
+    "readOnly": true,
+    "deletionAvailable": false,
+    "lowCapacityAndInodeWarnings": "deterministic synthetic counter tests; no actual disk filling this round",
+    "predeployPython": 264,
+    "predeployPluginNode": 483,
+    "predeployHostNode": 129,
+    "clientRebuildMatched": true,
+    "finalCrossPlatformCi": "Final Mac, actual Linux VM and exact public commit Actions are verified separately; counts are not summed."
+  },
+  "recovery": {
+    "name": "ready-storage-preview-20261101",
+    "selectedProofFiles": 2634,
+    "programFiles": 134,
+    "snapshotCount": 23,
+    "previous22Preserved": true,
+    "restoredCopyActuallyBooted": true,
+    "restoredStorageCliObserved": {
+      "readOnly": true,
+      "deletionAvailable": false,
+      "guestGroups": 7
+    },
+    "originalDiskReturned": true,
+    "temporaryTestCopyRemoved": true,
+    "hostHelpersMatched": 5,
+    "coverageState": "matches"
+  },
+  "protectedState": {
+    "trackedFiles": 459,
+    "gitHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "realFindings": 95,
+    "allUnverified": true,
+    "realProjectScansStarted": 0,
+    "modelCallsStarted": 0,
+    "hostPermissionsExpanded": false,
+    "networkSharingClipboardUsbExpanded": false,
+    "newVmRegistered": false,
+    "otherThreeVmsStoppedUnchanged": true
+  },
+  "remainingLimits": [
+    "On-demand preview only; no scheduled notifications, automatic retention policy, delete endpoint or global VM disk quota.",
+    "Bounded live metadata inspection is not a complete or atomic filesystem inventory; partial sizes are lower bounds.",
+    "Only known categories and one recovery page are shown; Docker/COW/overlapping sizes are not a guaranteed reclaim estimate.",
+    "Actual cleanup still requires fresh object identity/reference/dependency checks and explicit object-specific authorization.",
+    "Semgrep parser gap, complex login/MFA, historical QEMU defect and physical overnight sleep remain outside this change;95findings remain unverified."
+  ]
+}

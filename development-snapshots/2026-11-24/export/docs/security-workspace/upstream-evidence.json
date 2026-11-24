@@ -1,0 +1,112 @@
+{
+  "observedOn": "2026-11-03",
+  "scope": "registry and local content correspondence; publisher signature verified only for upstream Trivy image index",
+  "checks": [
+    {
+      "artifact": "semgrep",
+      "version": "1.182.1",
+      "registry": "docker.io/semgrep/semgrep",
+      "indexDigest": "sha256:451b3d875c00dac7ed5db5293e584a07de11449a409c10b3c2d2652f429630b6",
+      "arm64ManifestDigest": "sha256:5347c70f22a33b419cd515ec7fa0d3e76da7eb09f1d8cb4081d88a3bb17d87f6",
+      "upstreamConfigDigest": "sha256:8a0b4b7d02bb39f11942c14397c14a9f74218e1746cd750941886e462cf06258",
+      "localImageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "matchingRootfsLayers": 15,
+      "executionConfigFieldsMatch": {
+        "Entrypoint": true,
+        "Cmd": true,
+        "Env": true,
+        "User": true,
+        "WorkingDir": true,
+        "Shell": true,
+        "StopSignal": true,
+        "Healthcheck": true,
+        "OnBuild": true
+      },
+      "signatureDescriptorLookup": {
+        "referrers": {
+          "status": "present",
+          "descriptors": 0,
+          "artifactTypes": []
+        },
+        "manifests": {
+          "status": "http-404"
+        }
+      },
+      "publisherSignature": "not-verified",
+      "localConfigIdentical": false
+    },
+    {
+      "artifact": "trivy",
+      "version": "0.76.1",
+      "registry": "docker.io/aquasec/trivy",
+      "indexDigest": "sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c",
+      "arm64ManifestDigest": "sha256:fc223b6f033406fd0c5efe59b566295e90cff76ccd2af696bd0d66d53ad83a2d",
+      "upstreamConfigDigest": "sha256:c334fc962191ef6c7ec3d1643c70be2ed2faa5fb84ce8df6cacaf670699eb903",
+      "localImageId": "sha256:4bad598527a6d97fa8e3296e0d8f68c3e2de7cdd40fecafa9ba12cd80f4c93a9",
+      "matchingRootfsLayers": 4,
+      "executionConfigFieldsMatch": {
+        "Entrypoint": true,
+        "Cmd": true,
+        "Env": true,
+        "User": true,
+        "WorkingDir": true,
+        "Shell": true,
+        "StopSignal": true,
+        "Healthcheck": true,
+        "OnBuild": true
+      },
+      "signatureDescriptorLookup": {
+        "referrers": {
+          "status": "present",
+          "descriptors": 2,
+          "artifactTypes": [
+            "application/vnd.dev.sigstore.bundle.v0.3+json"
+          ]
+        },
+        "manifests": {
+          "status": "http-404"
+        }
+      },
+      "publisherSignature": "verified-upstream-index",
+      "localConfigIdentical": false,
+      "signatureVerification": {
+        "verifiedOn": "2026-11-03",
+        "reference": "index.docker.io/aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c",
+        "certificateIdentity": "https://github.com/aquasecurity/trivy/.github/workflows/reusable-release.yaml@refs/tags/v0.76.1",
+        "oidcIssuer": "https://token.actions.githubusercontent.com",
+        "verifiedClaims": 2,
+        "certificateChainVerified": true,
+        "transparencyLogVerified": true,
+        "wrongReleaseIdentityRejected": true,
+        "verifierVersion": "3.1.4",
+        "verifierAssetSha256": "9f9b8cd557cf2e5b3df3373a00baa005a86b02391e3e06dd0ce37b3a1533d3a4",
+        "verificationEnvironment": "temporary macOS ARM64 verifier; guest DNS unavailable",
+        "verifierRemoved": true
+      }
+    },
+    {
+      "artifact": "trivy-db",
+      "registry": "ghcr.io/aquasecurity/trivy-db",
+      "manifestDigest": "sha256:2be5d0d3f03c6609c1741fc01d0c5b9a4eb084c935967d78bd1e7c8309293b60",
+      "archiveLayerDigest": "sha256:c38dd4d9def7e5cf8254d4a06392dedb2987b12a5a034467e4f6596761a80a77",
+      "updatedAt": "2026-10-29T19:18:50.96912695Z",
+      "publisherSignature": "not-verified",
+      "signatureDescriptorLookup": {
+        "referrers": {
+          "status": "http-404"
+        },
+        "manifests": {
+          "status": "http-404"
+        }
+      },
+      "upstreamLayerRedownloaded": false,
+      "localFileDigestVerified": true
+    }
+  ],
+  "databaseArchive": {
+    "cachedLayerDigest": "sha256:c38dd4d9def7e5cf8254d4a06392dedb2987b12a5a034467e4f6596761a80a77",
+    "databaseFileSha256": "74cc77deb945b9cc6edf9967f3840d92286c59b0fda882b369dc9eda67cb5e07",
+    "databaseFileBytes": 1656156160,
+    "metadataMatches": true
+  }
+}

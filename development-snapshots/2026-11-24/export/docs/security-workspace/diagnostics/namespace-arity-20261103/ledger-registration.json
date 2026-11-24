@@ -1,0 +1,31 @@
+{
+  "addedAuthoredSources": 24,
+  "sourceIds": [
+    "plain-eval-1",
+    "plain-eval-2",
+    "plain-eval-3",
+    "guard-complete-eval",
+    "guard-conditional-eval",
+    "guard-overwrite-eval",
+    "guard-append-eval",
+    "mapping-eval",
+    "literal-eval",
+    "shadow-eval",
+    "qualified-eval",
+    "alias-eval",
+    "plain-exec-1",
+    "plain-exec-2",
+    "plain-exec-3",
+    "guard-complete-exec",
+    "guard-conditional-exec",
+    "guard-overwrite-exec",
+    "guard-append-exec",
+    "mapping-exec",
+    "literal-exec",
+    "shadow-exec",
+    "qualified-exec",
+    "alias-exec"
+  ],
+  "currentSourceCount": 135,
+  "independentQualificationCasesAdded": 0
+}

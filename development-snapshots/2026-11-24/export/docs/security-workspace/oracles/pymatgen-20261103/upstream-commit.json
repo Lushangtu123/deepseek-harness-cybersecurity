@@ -1,0 +1,14 @@
+{
+  "fixCommit": "c231cbd3d5147ee920a37b6ee9dd236b376bcf5a",
+  "parent": "12ab947261cda104ac87548429c69ce5014bbf02",
+  "changedFiles": [
+    {
+      "filename": "pymatgen/symmetry/settings.py",
+      "sha": "87d4fde6f35d5208c196bf0a301aff5978a9994b",
+      "status": "modified"
+    }
+  ],
+  "githubReportsVerification": true,
+  "localSignatureVerification": false,
+  "patch": "@@ -6,6 +6,8 @@\n from fractions import Fraction\n \n import numpy as np\n+from sympy import Matrix\n+from sympy.parsing.sympy_parser import parse_expr\n \n from pymatgen.core.lattice import Lattice\n from pymatgen.core.operations import MagSymmOp, SymmOp\n@@ -99,21 +101,29 @@ def parse_transformation_string(\n             b_change, o_shift = transformation_string.split(\";\")\n             basis_change = b_change.split(\",\")\n             origin_shift = o_shift.split(\",\")\n+\n             # add implicit multiplication symbols\n             basis_change = [\n                 re.sub(r\"(?<=\\w|\\))(?=\\() | (?<=\\))(?=\\w) | (?<=(\\d|a|b|c))(?=([abc]))\", r\"*\", string, flags=re.X)\n                 for string in basis_change\n             ]\n-            # should be fine to use eval here but be mindful for security\n-            # reasons\n-            # see http://lybniz2.sourceforge.net/safeeval.html\n-            # could replace with regex? or sympy expression?\n-            P = np.array([eval(x, {\"__builtins__\": None}, {\"a\": a, \"b\": b, \"c\": c}) for x in basis_change])\n-            P = P.transpose()  # by convention\n+\n+            # basic input sanitation\n+            allowed_chars = \"0123456789+-*/.abc()\"\n+            basis_change = [\"\".join([c for c in string if c in allowed_chars]) for string in basis_change]\n+\n+            # requires round-trip to sympy to evaluate\n+            # (alternatively, `numexpr` looks like a nice solution but requires an additional dependency)\n+            basis_change = [\n+                parse_expr(string).subs({\"a\": Matrix(a), \"b\": Matrix(b), \"c\": Matrix(c)}) for string in basis_change\n+            ]\n+            # convert back to numpy, perform transpose by convention\n+            P = np.array(basis_change, dtype=float).T[0]\n+\n             p = [float(Fraction(x)) for x in origin_shift]\n             return P, p\n-        except Exception:\n-            raise ValueError(\"Failed to parse transformation string.\")\n+        except Exception as exc:\n+            raise ValueError(f\"Failed to parse transformation string: {exc}\")\n \n     @property\n     def P(self) -> list[list[float]]:"
+}

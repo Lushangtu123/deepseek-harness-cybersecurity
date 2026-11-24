@@ -1,0 +1,37 @@
+{
+  "surface": "Google Chrome native CUA, full isolated Harness web runtime",
+  "url": "http://127.0.0.1:57861/",
+  "observed": [
+    "Native Harness homepage loaded",
+    "Joint security review preset selected by default",
+    "First-install User notice shown; explicit action-time consent obtained from user",
+    "Notice checkbox and continue clicked after consent",
+    "Workspace selection required; no model prompt sent yet",
+    "Exact18-file synthetic-project selected in native VM picker",
+    "New native session ready with联合安全审查, DeepSeek-V4.1-Flash1017 andHigh visible",
+    "Full access display belongs only to this private VM namespace; managed3-tool fence is installed",
+    "Prompt submitted once in native chat, not via direct model API",
+    "Native session displayedCompleted in57s and21 steps",
+    "Native final report displayedall5 complete sections and9/4/9 counts; preservedunverified andnotR3",
+    "Owned temporaryHarness tab closed after completion"
+  ],
+  "noticeConsent": {
+    "at": "2026-11-11T05:49:32.513128+00:00",
+    "scope": "This VM synthetic18-file acceptance only"
+  },
+  "privateUnrelatedBrowserContentRetained": false,
+  "mainModelDisplay": "DeepSeek-V4.1-Flash1017 / High",
+  "ownedTabClosed": true,
+  "pageReadCounts": {
+    "findings": 5,
+    "files": 4,
+    "exclusions": 1,
+    "diagnostics": 1,
+    "artifacts": 4
+  },
+  "limitations": [
+    "Defaultworkspace creation initially reportedfailure; exact existing temporaryfolder selected successfully through nativeUI. Cause ofdefaultbootstrap message not diagnosed.",
+    "Model summary comparedreportedhash metadata; actual18 bytehashes independently checked by operator, notby an LLMinvokingahash tool.",
+    "Rawprivatebrowser/assistantchatcontent notarchived or sent for externalreview."
+  ]
+}

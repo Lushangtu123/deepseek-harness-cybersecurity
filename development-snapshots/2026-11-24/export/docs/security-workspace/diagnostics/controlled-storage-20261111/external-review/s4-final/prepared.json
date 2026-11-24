@@ -1,0 +1,15 @@
+{
+  "promptSha256": "8140a87486ac6b9af09af79afebe63e6663948626112f7772a2c62a889a936c1",
+  "sourceFiles": {
+    "scripts/reviewer_storage.py": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202",
+    "scripts/reviewer_snapshot.py": "10e152e231e5d43def8f1edace15edcffd4bae088c22f1790b92b5434385c55e",
+    "scripts/reviewer_archive.test.py": "66298d7727fb4f99e28d8ccc654780fa4bbfbbb6b9c63931c03cfa157677cdda",
+    "scripts/reviewer_storage.test.py": "4f5180ec503cfde1642f90378de0c5099b27ca07cf5b0357ba6a46ebe425d326",
+    "scripts/reviewer_snapshot.test.py": "b8b61b77bf6d435970fd19345b842fb7aceae2e4fc95b1efdbd0a1494044b06c",
+    "scripts/review_quality_gate.mjs": "99aea3894238a34f17ee63b95a5c216b565a23a61aa1de0c2e8093877a55f5a0",
+    "work/harness-purge-improved/tests/review-quality-gate.test.mjs": "23b969babf3ea44819df30fed97460f6d3fc45c5e6a2015e98079f44ceec1f03",
+    "docs/security-workspace/reviewer-controlled-storage.md": "6f7f0476ecffb52c32e9130ca860a07858be6e16cbf7cbc0654b422e99833c85"
+  },
+  "vmResultSha256": "f78c63d1ef245d358e5254c0dff6295cd7a5e44c6d506432f8ca68f2ba673d3d",
+  "bytes": 80985
+}

@@ -1,0 +1,783 @@
+{
+ "failed": [],
+ "fixturesImported": 0,
+ "formalTargets": "0/16",
+ "kind": "consumer-closure-evidence-and-archive-gate-checks",
+ "passed": 13,
+ "r3": "blocked",
+ "realBpftrace": 0,
+ "realContainers": 0,
+ "realTargets": 0,
+ "results": [
+  {
+   "description": "the capture helper records every declared baseline file hash",
+   "detail": {
+    "checks": {
+     "afterCount87": true,
+     "afterEqualBefore": true,
+     "beforeCount87": true,
+     "closureOk": true,
+     "commandRaw": true,
+     "entriesEqualManifest": true,
+     "exit0": true,
+     "exitCodeRecorded": true
+    }
+   },
+   "error": null,
+   "id": "capture-full-baseline-87-map",
+   "passed": true
+  },
+  {
+   "description": "a missing declared UNIFIED/RECORD document is an explicit rejection",
+   "detail": {
+    "checks": {
+     "closureNotOk": true,
+     "countStillDeclared": true,
+     "missingRecorded": true,
+     "nonzero": true,
+     "reasonMissing": true
+    },
+    "problems": [
+     {
+      "path": "UNIFIED-RECOVERY-CONTRACT.md",
+      "reason": "missing"
+     }
+    ]
+   },
+   "error": null,
+   "id": "capture-rejects-missing-declared-document",
+   "passed": true
+  },
+  {
+   "description": "same file count with a changed byte is rejected by the declared hash",
+   "detail": {
+    "checks": {
+     "closureNotOk": true,
+     "hashExplicit": true,
+     "mismatchRecorded": true,
+     "nonzero": true,
+     "sameDeclaredCount": true
+    },
+    "problems": [
+     {
+      "actual": "2332228495898e9f17fa1f2907af9bfbd37c9082bea819c206d607fcb997ae4f",
+      "expected": "3ca271877d4123daa86cba81d3ee195af0a697ae05bc2b3cba3731f3e874de63",
+      "path": "tools/buffer_protocol.py",
+      "reason": "digest-mismatch"
+     }
+    ]
+   },
+   "error": null,
+   "id": "capture-rejects-same-count-swap-and-mutation",
+   "passed": true
+  },
+  {
+   "description": "TASK and extra metadata are listed separately, never counted as source",
+   "detail": {
+    "checks": {
+     "exit0": true,
+     "extraNotSource": true,
+     "metadataManifest": true,
+     "metadataTask": true,
+     "sourceCountUnchanged": true,
+     "taskNotSource": true
+    },
+    "metadata": [
+     "TASK.md",
+     "protocol-manifest.json"
+    ]
+   },
+   "error": null,
+   "id": "capture-metadata-separate-not-source-counted",
+   "passed": true
+  },
+  {
+   "description": "a missing target command is retained as a checked launch failure",
+   "detail": {
+    "checks": {
+     "closureOk": true,
+     "launchRecorded": true,
+     "launchTraceback": true,
+     "nonzero": true,
+     "runJsonPresent": true,
+     "stderrPresent": true
+    },
+    "exception": {
+     "message": "[Errno 2] No such file or directory: '/nonexistent/consumer-closure-target'",
+     "traceback": "Traceback (most recent call last):\n  File \"/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/evidence_capture.py\", line 309, in main\n    process = subprocess.run(\n              ^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/subprocess.py\", line 548, in run\n    with Popen(*popenargs, **kwargs) as process:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/subprocess.py\", line 1026, in __init__\n    self._execute_child(args, executable, preexec_fn, close_fds,\n  File \"/usr/lib/python3.12/subprocess.py\", line 1955, in _execute_child\n    raise child_exception_type(errno_num, err_msg, err_filename)\nFileNotFoundError: [Errno 2] No such file or directory: '/nonexistent/consumer-closure-target'\n",
+     "type": "FileNotFoundError"
+    }
+   },
+   "error": null,
+   "id": "capture-target-launch-failure-retained",
+   "passed": true
+  },
+  {
+   "description": "a report generator exception prevents proof, sealing and archive",
+   "detail": {
+    "checks": {
+     "archiveCalls0": true,
+     "failed": true,
+     "noManifest": true,
+     "stageReport": true
+    },
+    "result": {
+     "archiveCalls": 0,
+     "detail": "RuntimeError:synthetic-report-failure",
+     "failedStage": "report",
+     "formalTargets": "0/16",
+     "kind": "consumer-closure-report-archive-gate",
+     "r3": "blocked",
+     "realBpftrace": 0,
+     "realContainers": 0,
+     "stages": [
+      {
+       "checkedAt": "2026-11-24T16:39:07Z",
+       "detail": "RuntimeError:synthetic-report-failure",
+       "ok": false,
+       "stage": "report"
+      }
+     ],
+     "state": "failed",
+     "targetExecutions": 0,
+     "version": 1
+    }
+   },
+   "error": null,
+   "id": "gate-report-failure-prevents-archive",
+   "passed": true
+  },
+  {
+   "description": "proof verification failure prevents sealing and archive",
+   "detail": {
+    "checks": {
+     "archiveCalls0": true,
+     "failed": true,
+     "noManifest": true,
+     "stageProof": true
+    },
+    "result": {
+     "archiveCalls": 0,
+     "detail": "{'ok': False, 'reason': 'synthetic-proof-mismatch'}",
+     "failedStage": "proof",
+     "formalTargets": "0/16",
+     "kind": "consumer-closure-report-archive-gate",
+     "r3": "blocked",
+     "realBpftrace": 0,
+     "realContainers": 0,
+     "report": {
+      "bytes": 678,
+      "path": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-proof-fail-xtn49_d4/REPORT.md",
+      "sha256": "07d830b6d4be30d14e436048d5c50749915c0e2ea9cb7eb61a0cb4406eaa298f"
+     },
+     "stages": [
+      {
+       "checkedAt": "2026-11-24T16:39:07Z",
+       "ok": true,
+       "sha256": "07d830b6d4be30d14e436048d5c50749915c0e2ea9cb7eb61a0cb4406eaa298f",
+       "stage": "report"
+      },
+      {
+       "checkedAt": "2026-11-24T16:39:07Z",
+       "detail": "{'ok': False, 'reason': 'synthetic-proof-mismatch'}",
+       "ok": false,
+       "stage": "proof"
+      }
+     ],
+     "state": "failed",
+     "targetExecutions": 0,
+     "version": 1
+    }
+   },
+   "error": null,
+   "id": "gate-proof-failure-prevents-archive",
+   "passed": true
+  },
+  {
+   "description": "a missing or changed closure member is refused before archive",
+   "detail": {
+    "variants": {
+     "mismatch": {
+      "checks": {
+       "archiveCalls0": true,
+       "failed": true,
+       "memberDiagnostic": true,
+       "stageManifest": true
+      },
+      "result": {
+       "archiveCalls": 0,
+       "detail": "ValueError:proof:source:digest:docs/b.md",
+       "failedStage": "manifest",
+       "formalTargets": "0/16",
+       "kind": "consumer-closure-report-archive-gate",
+       "proof": {
+        "decision": "pass",
+        "entryCount": 1,
+        "evidenceIndexSha256": "e3834923ac31721a13e7f6b206a724eae8120e8af8a8710f3aae7f10c2c76a5f",
+        "ok": true,
+        "passed": 2,
+        "proofSha256": "3b5173cb593773b3fa7a07cacabfba78cb7202db8c734af4bcc7249dadd255f5",
+        "sourceFileCount": 3,
+        "sourceManifestSha256": "b4a88be6f76807407a82a6a69b39e84d95141e30e7252fd624eb9041b31b522a",
+        "total": 2,
+        "validatedArtifacts": [
+         {
+          "bytes": 2386,
+          "identity": [
+           64769,
+           3935969
+          ],
+          "relativePath": "raw/consumer/run.json",
+          "role": "capture",
+          "sha256": "bfc956176355d75af54d2d4919dc783d66f801670bbb1ba6cfea80f6f32849f2",
+          "sourcePath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-member-mismatch-r5dq616e/raw/consumer/run.json",
+          "suite": "consumer"
+         },
+         {
+          "bytes": 278,
+          "identity": [
+           64769,
+           3935968
+          ],
+          "relativePath": "raw/consumer/results.json",
+          "role": "result",
+          "sha256": "6faf162a701be91b3bb43a1b385270787a83d5d2cf1777187a4578570187d2b7",
+          "sourcePath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-member-mismatch-r5dq616e/raw/consumer/results.json",
+          "suite": "consumer"
+         },
+         {
+          "bytes": 17,
+          "identity": [
+           64769,
+           3935965
+          ],
+          "relativePath": "raw/consumer/stdout.bin",
+          "role": "stdout",
+          "sha256": "d6a213f9c98a071c53b2600e9093f930c35549997ab83df3942de07d495e703c",
+          "sourcePath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-member-mismatch-r5dq616e/raw/consumer/stdout.bin",
+          "suite": "consumer"
+         },
+         {
+          "bytes": 0,
+          "identity": [
+           64769,
+           3935966
+          ],
+          "relativePath": "raw/consumer/stderr.bin",
+          "role": "stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "sourcePath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-member-mismatch-r5dq616e/raw/consumer/stderr.bin",
+          "suite": "consumer"
+         },
+         {
+          "bytes": 2,
+          "identity": [
+           64769,
+           3935967
+          ],
+          "relativePath": "raw/consumer/returncode.txt",
+          "role": "returncode",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "sourcePath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-member-mismatch-r5dq616e/raw/consumer/returncode.txt",
+          "suite": "consumer"
+         }
+        ]
+       },
+       "r3": "blocked",
+       "realBpftrace": 0,
+       "realContainers": 0,
+       "report": {
+        "bytes": 683,
+        "path": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-member-mismatch-r5dq616e/REPORT.md",
+        "sha256": "0a7db0281d104df778f6ff29fd8aa551e8f637153424a8a611eecfcc19eef180"
+       },
+       "stages": [
+        {
+         "checkedAt": "2026-11-24T16:39:07Z",
+         "ok": true,
+         "sha256": "0a7db0281d104df778f6ff29fd8aa551e8f637153424a8a611eecfcc19eef180",
+         "stage": "report"
+        },
+        {
+         "checkedAt": "2026-11-24T16:39:07Z",
+         "decision": "pass",
+         "ok": true,
+         "stage": "proof"
+        },
+        {
+         "checkedAt": "2026-11-24T16:39:07Z",
+         "detail": "ValueError:proof:source:digest:docs/b.md",
+         "ok": false,
+         "stage": "manifest"
+        }
+       ],
+       "state": "failed",
+       "targetExecutions": 0,
+       "version": 1
+      }
+     },
+     "missing": {
+      "checks": {
+       "archiveCalls0": true,
+       "failed": true,
+       "memberDiagnostic": true,
+       "stageManifest": true
+      },
+      "result": {
+       "archiveCalls": 0,
+       "detail": "ValueError:proof:source:missing:docs/b.md",
+       "failedStage": "manifest",
+       "formalTargets": "0/16",
+       "kind": "consumer-closure-report-archive-gate",
+       "proof": {
+        "decision": "pass",
+        "entryCount": 1,
+        "evidenceIndexSha256": "2a01d75c18ece2f5835ca5f73d3437f4d36dbfba9cd2dae798530e32f25ddafb",
+        "ok": true,
+        "passed": 2,
+        "proofSha256": "35714214772fc6793c460035bdecfb4a8960cb7956c43146f313949da1d9eb7d",
+        "sourceFileCount": 3,
+        "sourceManifestSha256": "b4a88be6f76807407a82a6a69b39e84d95141e30e7252fd624eb9041b31b522a",
+        "total": 2,
+        "validatedArtifacts": [
+         {
+          "bytes": 2383,
+          "identity": [
+           64769,
+           3935969
+          ],
+          "relativePath": "raw/consumer/run.json",
+          "role": "capture",
+          "sha256": "c3301b332df6d6688e3ca9d8f1d20af7635b1d08d4a05195ee9017bb7617f7f8",
+          "sourcePath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-member-missing-fz64isil/raw/consumer/run.json",
+          "suite": "consumer"
+         },
+         {
+          "bytes": 278,
+          "identity": [
+           64769,
+           3935968
+          ],
+          "relativePath": "raw/consumer/results.json",
+          "role": "result",
+          "sha256": "6faf162a701be91b3bb43a1b385270787a83d5d2cf1777187a4578570187d2b7",
+          "sourcePath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-member-missing-fz64isil/raw/consumer/results.json",
+          "suite": "consumer"
+         },
+         {
+          "bytes": 17,
+          "identity": [
+           64769,
+           3935965
+          ],
+          "relativePath": "raw/consumer/stdout.bin",
+          "role": "stdout",
+          "sha256": "d6a213f9c98a071c53b2600e9093f930c35549997ab83df3942de07d495e703c",
+          "sourcePath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-member-missing-fz64isil/raw/consumer/stdout.bin",
+          "suite": "consumer"
+         },
+         {
+          "bytes": 0,
+          "identity": [
+           64769,
+           3935966
+          ],
+          "relativePath": "raw/consumer/stderr.bin",
+          "role": "stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "sourcePath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-member-missing-fz64isil/raw/consumer/stderr.bin",
+          "suite": "consumer"
+         },
+         {
+          "bytes": 2,
+          "identity": [
+           64769,
+           3935967
+          ],
+          "relativePath": "raw/consumer/returncode.txt",
+          "role": "returncode",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "sourcePath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-member-missing-fz64isil/raw/consumer/returncode.txt",
+          "suite": "consumer"
+         }
+        ]
+       },
+       "r3": "blocked",
+       "realBpftrace": 0,
+       "realContainers": 0,
+       "report": {
+        "bytes": 682,
+        "path": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-member-missing-fz64isil/REPORT.md",
+        "sha256": "9c8fdc2b2f5b9e48c96596ef569d2d1288644dce38b65c4871067c668db2b8c4"
+       },
+       "stages": [
+        {
+         "checkedAt": "2026-11-24T16:39:07Z",
+         "ok": true,
+         "sha256": "9c8fdc2b2f5b9e48c96596ef569d2d1288644dce38b65c4871067c668db2b8c4",
+         "stage": "report"
+        },
+        {
+         "checkedAt": "2026-11-24T16:39:07Z",
+         "decision": "pass",
+         "ok": true,
+         "stage": "proof"
+        },
+        {
+         "checkedAt": "2026-11-24T16:39:07Z",
+         "detail": "ValueError:proof:source:missing:docs/b.md",
+         "ok": false,
+         "stage": "manifest"
+        }
+       ],
+       "state": "failed",
+       "targetExecutions": 0,
+       "version": 1
+      }
+     }
+    }
+   },
+   "error": null,
+   "id": "gate-missing-and-mismatched-member-prevents-archive",
+   "passed": true
+  },
+  {
+   "description": "normal path seals every member, includes REPORT/phase/evidence and archives once",
+   "detail": {
+    "checks": {
+     "allMembersRead": true,
+     "allReadback": true,
+     "archiveCalls1": true,
+     "completed": true,
+     "evidencePresent": true,
+     "indexDoesNotReferenceProof": true,
+     "manifestMembers": true,
+     "noToolResource": true,
+     "phasePresent": true,
+     "proofBound": true,
+     "proofDoesNotBindClosure": true,
+     "reportPresent": true,
+     "reportSha": true
+    },
+    "files": [
+     "REPORT.md",
+     "checks-evidence-index.json",
+     "evidence/consumer/capture.json",
+     "evidence/consumer/result.json",
+     "evidence/consumer/returncode.txt",
+     "evidence/consumer/stderr.bin",
+     "evidence/consumer/stdout.bin",
+     "phase-result.json",
+     "proof.json",
+     "source/a.txt",
+     "source/docs/b.md",
+     "source/protocol-manifest.json",
+     "source/tools/closure-suite-plan.json"
+    ],
+    "result": {
+     "archive": {
+      "result": null,
+      "state": "called"
+     },
+     "archiveCalls": 1,
+     "closureManifest": {
+      "fileCount": 13,
+      "members": [
+       "REPORT.md",
+       "checks-evidence-index.json",
+       "evidence/consumer/capture.json",
+       "evidence/consumer/result.json",
+       "evidence/consumer/returncode.txt",
+       "evidence/consumer/stderr.bin",
+       "evidence/consumer/stdout.bin",
+       "phase-result.json",
+       "proof.json",
+       "source/a.txt",
+       "source/docs/b.md",
+       "source/protocol-manifest.json",
+       "source/tools/closure-suite-plan.json"
+      ],
+      "ok": true,
+      "path": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-normal-9_zi0ith/closure-input-manifest.json",
+      "sha256": "0b389d2b04582f33cf2bbb1082b819cdc71dd0c01394aa868c4bc82e9ecd84eb"
+     },
+     "detail": null,
+     "failedStage": null,
+     "formalTargets": "0/16",
+     "kind": "consumer-closure-report-archive-gate",
+     "proof": {
+      "decision": "pass",
+      "entryCount": 1,
+      "evidenceIndexSha256": "7515f3fcea2a43004e4d0a7a3b2970f0fc103466fb68409e35220b5fd45e24f4",
+      "ok": true,
+      "passed": 2,
+      "proofSha256": "9327db1722301e159094ea234c1475464f4d4dcb2e394e49440c111d56461056",
+      "sourceFileCount": 3,
+      "sourceManifestSha256": "b4a88be6f76807407a82a6a69b39e84d95141e30e7252fd624eb9041b31b522a",
+      "total": 2,
+      "validatedArtifacts": [
+       {
+        "bytes": 2359,
+        "identity": [
+         64769,
+         3935969
+        ],
+        "relativePath": "raw/consumer/run.json",
+        "role": "capture",
+        "sha256": "63d129310d9820b196760ebd1e546c107b9edafcb07c063ba52e880cf64ba562",
+        "sourcePath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-normal-9_zi0ith/raw/consumer/run.json",
+        "suite": "consumer"
+       },
+       {
+        "bytes": 278,
+        "identity": [
+         64769,
+         3935968
+        ],
+        "relativePath": "raw/consumer/results.json",
+        "role": "result",
+        "sha256": "6faf162a701be91b3bb43a1b385270787a83d5d2cf1777187a4578570187d2b7",
+        "sourcePath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-normal-9_zi0ith/raw/consumer/results.json",
+        "suite": "consumer"
+       },
+       {
+        "bytes": 17,
+        "identity": [
+         64769,
+         3935965
+        ],
+        "relativePath": "raw/consumer/stdout.bin",
+        "role": "stdout",
+        "sha256": "d6a213f9c98a071c53b2600e9093f930c35549997ab83df3942de07d495e703c",
+        "sourcePath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-normal-9_zi0ith/raw/consumer/stdout.bin",
+        "suite": "consumer"
+       },
+       {
+        "bytes": 0,
+        "identity": [
+         64769,
+         3935966
+        ],
+        "relativePath": "raw/consumer/stderr.bin",
+        "role": "stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sourcePath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-normal-9_zi0ith/raw/consumer/stderr.bin",
+        "suite": "consumer"
+       },
+       {
+        "bytes": 2,
+        "identity": [
+         64769,
+         3935967
+        ],
+        "relativePath": "raw/consumer/returncode.txt",
+        "role": "returncode",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "sourcePath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-normal-9_zi0ith/raw/consumer/returncode.txt",
+        "suite": "consumer"
+       }
+      ]
+     },
+     "r3": "blocked",
+     "readback": {
+      "fileCount": 13,
+      "members": [
+       "REPORT.md",
+       "checks-evidence-index.json",
+       "evidence/consumer/capture.json",
+       "evidence/consumer/result.json",
+       "evidence/consumer/returncode.txt",
+       "evidence/consumer/stderr.bin",
+       "evidence/consumer/stdout.bin",
+       "phase-result.json",
+       "proof.json",
+       "source/a.txt",
+       "source/docs/b.md",
+       "source/protocol-manifest.json",
+       "source/tools/closure-suite-plan.json"
+      ],
+      "ok": true
+     },
+     "realBpftrace": 0,
+     "realContainers": 0,
+     "report": {
+      "bytes": 674,
+      "path": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-normal-9_zi0ith/REPORT.md",
+      "sha256": "185ab728d9b5e0dd536f5fa2261bfa3e2d90975f2e56ef1f30a4a608186f4b8f"
+     },
+     "stages": [
+      {
+       "checkedAt": "2026-11-24T16:39:07Z",
+       "ok": true,
+       "sha256": "185ab728d9b5e0dd536f5fa2261bfa3e2d90975f2e56ef1f30a4a608186f4b8f",
+       "stage": "report"
+      },
+      {
+       "checkedAt": "2026-11-24T16:39:07Z",
+       "decision": "pass",
+       "ok": true,
+       "stage": "proof"
+      },
+      {
+       "checkedAt": "2026-11-24T16:39:07Z",
+       "fileCount": 13,
+       "ok": true,
+       "sha256": "0b389d2b04582f33cf2bbb1082b819cdc71dd0c01394aa868c4bc82e9ecd84eb",
+       "stage": "manifest"
+      },
+      {
+       "checkedAt": "2026-11-24T16:39:07Z",
+       "ok": true,
+       "stage": "archive"
+      }
+     ],
+     "state": "completed",
+     "targetExecutions": 0,
+     "version": 1
+    }
+   },
+   "error": null,
+   "id": "gate-normal-closure-readback-and-report",
+   "passed": true
+  },
+  {
+   "description": "proof must bind the source manifest and evidence index, not self-claims",
+   "detail": {
+    "checks": {
+     "stateOnlyRejected": true,
+     "unboundRejected": true,
+     "validAccepted": true,
+     "validDecision": true,
+     "wrongDecision": true,
+     "wrongIndexDigest": true,
+     "wrongSourceDigest": true,
+     "wrongSourceRoot": true
+    },
+    "variants": {
+     "state-only": {
+      "ok": false,
+      "reason": "proof:kind"
+     },
+     "unbound": {
+      "ok": false,
+      "reason": "proof:evidence-index-digest"
+     },
+     "wrong-decision": {
+      "ok": false,
+      "reason": "proof:decision"
+     },
+     "wrong-index": {
+      "ok": false,
+      "reason": "proof:evidence-index-digest"
+     },
+     "wrong-root": {
+      "ok": false,
+      "reason": "proof:source-root"
+     },
+     "wrong-source": {
+      "ok": false,
+      "reason": "proof:source-manifest-digest"
+     }
+    }
+   },
+   "error": null,
+   "id": "proof-contract-rejects-state-only-unbound-and-wrong-digests",
+   "passed": true
+  },
+  {
+   "description": "verification parses actual results/source maps instead of trusting summaries",
+   "detail": {
+    "variants": {
+     "forged-summary": {
+      "ok": false,
+      "reason": "result:failed"
+     },
+     "stale-index": {
+      "ok": false,
+      "reason": "index:source-entries"
+     }
+    }
+   },
+   "error": null,
+   "id": "proof-contract-rejects-forged-summary-and-stale-index",
+   "passed": true
+  },
+  {
+   "description": "listed raw members are rehashed and unsafe paths are refused",
+   "detail": {
+    "variants": {
+     "missing-member": {
+      "ok": false,
+      "reason": "member:missing:raw/consumer/results.json"
+     },
+     "path-escape": {
+      "ok": false,
+      "reason": "member:path-escape:../outside.json"
+     },
+     "symlink-member": {
+      "ok": false,
+      "reason": "member:symlink:raw/consumer/results.json"
+     },
+     "wrong-member-digest": {
+      "ok": false,
+      "reason": "member:digest:raw/consumer/results.json"
+     }
+    }
+   },
+   "error": null,
+   "id": "proof-contract-rejects-member-digest-missing-symlink-and-escape",
+   "passed": true
+  },
+  {
+   "description": "a self-claimed proof with no bound evidence stops before sealing/archive",
+   "detail": {
+    "checks": {
+     "archiveCalls0": true,
+     "failed": true,
+     "noManifest": true,
+     "stageProof": true
+    },
+    "result": {
+     "archiveCalls": 0,
+     "detail": "{'ok': False, 'reason': 'proof:version'}",
+     "failedStage": "proof",
+     "formalTargets": "0/16",
+     "kind": "consumer-closure-report-archive-gate",
+     "r3": "blocked",
+     "realBpftrace": 0,
+     "realContainers": 0,
+     "report": {
+      "bytes": 680,
+      "path": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/gate-forged-proof-9cl57dxz/REPORT.md",
+      "sha256": "207fd836573859692136ebce4e88c1b609a5f453f728158600ef4673ae467dd0"
+     },
+     "stages": [
+      {
+       "checkedAt": "2026-11-24T16:39:07Z",
+       "ok": true,
+       "sha256": "207fd836573859692136ebce4e88c1b609a5f453f728158600ef4673ae467dd0",
+       "stage": "report"
+      },
+      {
+       "checkedAt": "2026-11-24T16:39:07Z",
+       "detail": "{'ok': False, 'reason': 'proof:version'}",
+       "ok": false,
+       "stage": "proof"
+      }
+     ],
+     "state": "failed",
+     "targetExecutions": 0,
+     "version": 1
+    }
+   },
+   "error": null,
+   "id": "gate-forged-proof-prevents-archive",
+   "passed": true
+  }
+ ],
+ "selfcheckExecutions": 0,
+ "simulated": true,
+ "sourceTools": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/tools",
+ "targetExecutions": 0,
+ "total": 13
+}

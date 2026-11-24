@@ -1,0 +1,512 @@
+{
+  "version": "1.182.1",
+  "results": [
+    {
+      "check_id": "policy.harness.python.eval",
+      "path": "/src/BenchmarkTest00073.py",
+      "start": {
+        "line": 53,
+        "col": 16,
+        "offset": 1742
+      },
+      "end": {
+        "line": 55,
+        "col": 5,
+        "offset": 1762
+      },
+      "extra": {
+        "message": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+        "metadata": {
+          "category": "security",
+          "cwe": [
+            "CWE-95"
+          ],
+          "confidence": "MEDIUM",
+          "source": "Harness local review heuristics",
+          "requires-manual-review": true
+        },
+        "severity": "ERROR",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.exec",
+      "path": "/src/BenchmarkTest00074.py",
+      "start": {
+        "line": 51,
+        "col": 4,
+        "offset": 1759
+      },
+      "end": {
+        "line": 51,
+        "col": 13,
+        "offset": 1768
+      },
+      "extra": {
+        "message": "\u52a8\u6001 exec\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u907f\u514d\u8fd0\u884c\u4e0d\u53ef\u4fe1\u4ee3\u7801",
+        "metadata": {
+          "category": "security",
+          "cwe": [
+            "CWE-95"
+          ],
+          "confidence": "MEDIUM",
+          "source": "Harness local review heuristics",
+          "requires-manual-review": true
+        },
+        "severity": "ERROR",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.eval",
+      "path": "/src/boundary.py",
+      "start": {
+        "line": 7,
+        "col": 3,
+        "offset": 145
+      },
+      "end": {
+        "line": 7,
+        "col": 14,
+        "offset": 156
+      },
+      "extra": {
+        "message": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+        "metadata": {
+          "category": "security",
+          "cwe": [
+            "CWE-95"
+          ],
+          "confidence": "MEDIUM",
+          "source": "Harness local review heuristics",
+          "requires-manual-review": true
+        },
+        "severity": "ERROR",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.request-to-dynamic-code",
+      "path": "/src/boundary.py",
+      "start": {
+        "line": 7,
+        "col": 8,
+        "offset": 150
+      },
+      "end": {
+        "line": 7,
+        "col": 13,
+        "offset": 155
+      },
+      "extra": {
+        "message": "Tracked input reaches eval or exec directly or via a recognized local helper; verify binding and reachability.",
+        "metadata": {
+          "cwe": [
+            "CWE-95"
+          ],
+          "origin": "workspace-authored-candidate",
+          "status": "unverified-observation"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.exec",
+      "path": "/src/boundary.py",
+      "start": {
+        "line": 8,
+        "col": 2,
+        "offset": 159
+      },
+      "end": {
+        "line": 8,
+        "col": 13,
+        "offset": 170
+      },
+      "extra": {
+        "message": "\u52a8\u6001 exec\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u907f\u514d\u8fd0\u884c\u4e0d\u53ef\u4fe1\u4ee3\u7801",
+        "metadata": {
+          "category": "security",
+          "cwe": [
+            "CWE-95"
+          ],
+          "confidence": "MEDIUM",
+          "source": "Harness local review heuristics",
+          "requires-manual-review": true
+        },
+        "severity": "ERROR",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.request-to-dynamic-code",
+      "path": "/src/boundary.py",
+      "start": {
+        "line": 8,
+        "col": 7,
+        "offset": 164
+      },
+      "end": {
+        "line": 8,
+        "col": 12,
+        "offset": 169
+      },
+      "extra": {
+        "message": "Tracked input reaches eval or exec directly or via a recognized local helper; verify binding and reachability.",
+        "metadata": {
+          "cwe": [
+            "CWE-95"
+          ],
+          "origin": "workspace-authored-candidate",
+          "status": "unverified-observation"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.eval",
+      "path": "/src/boundary.py",
+      "start": {
+        "line": 8,
+        "col": 15,
+        "offset": 172
+      },
+      "end": {
+        "line": 8,
+        "col": 26,
+        "offset": 183
+      },
+      "extra": {
+        "message": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+        "metadata": {
+          "category": "security",
+          "cwe": [
+            "CWE-95"
+          ],
+          "confidence": "MEDIUM",
+          "source": "Harness local review heuristics",
+          "requires-manual-review": true
+        },
+        "severity": "ERROR",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.request-to-dynamic-code",
+      "path": "/src/boundary.py",
+      "start": {
+        "line": 8,
+        "col": 20,
+        "offset": 177
+      },
+      "end": {
+        "line": 8,
+        "col": 25,
+        "offset": 182
+      },
+      "extra": {
+        "message": "Tracked input reaches eval or exec directly or via a recognized local helper; verify binding and reachability.",
+        "metadata": {
+          "cwe": [
+            "CWE-95"
+          ],
+          "origin": "workspace-authored-candidate",
+          "status": "unverified-observation"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.eval",
+      "path": "/src/boundary.py",
+      "start": {
+        "line": 9,
+        "col": 9,
+        "offset": 193
+      },
+      "end": {
+        "line": 13,
+        "col": 3,
+        "offset": 222
+      },
+      "extra": {
+        "message": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+        "metadata": {
+          "category": "security",
+          "cwe": [
+            "CWE-95"
+          ],
+          "confidence": "MEDIUM",
+          "source": "Harness local review heuristics",
+          "requires-manual-review": true
+        },
+        "severity": "ERROR",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.request-to-dynamic-code",
+      "path": "/src/boundary.py",
+      "start": {
+        "line": 11,
+        "col": 4,
+        "offset": 208
+      },
+      "end": {
+        "line": 11,
+        "col": 9,
+        "offset": 213
+      },
+      "extra": {
+        "message": "Tracked input reaches eval or exec directly or via a recognized local helper; verify binding and reachability.",
+        "metadata": {
+          "cwe": [
+            "CWE-95"
+          ],
+          "origin": "workspace-authored-candidate",
+          "status": "unverified-observation"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.eval",
+      "path": "/src/boundary.py",
+      "start": {
+        "line": 15,
+        "col": 9,
+        "offset": 252
+      },
+      "end": {
+        "line": 15,
+        "col": 26,
+        "offset": 269
+      },
+      "extra": {
+        "message": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+        "metadata": {
+          "category": "security",
+          "cwe": [
+            "CWE-95"
+          ],
+          "confidence": "MEDIUM",
+          "source": "Harness local review heuristics",
+          "requires-manual-review": true
+        },
+        "severity": "ERROR",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.eval",
+      "path": "/src/boundary.py",
+      "start": {
+        "line": 15,
+        "col": 14,
+        "offset": 257
+      },
+      "end": {
+        "line": 15,
+        "col": 25,
+        "offset": 268
+      },
+      "extra": {
+        "message": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+        "metadata": {
+          "category": "security",
+          "cwe": [
+            "CWE-95"
+          ],
+          "confidence": "MEDIUM",
+          "source": "Harness local review heuristics",
+          "requires-manual-review": true
+        },
+        "severity": "ERROR",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.eval",
+      "path": "/src/skf-upstream.py",
+      "start": {
+        "line": 37,
+        "col": 20,
+        "offset": 1296
+      },
+      "end": {
+        "line": 37,
+        "col": 51,
+        "offset": 1327
+      },
+      "extra": {
+        "message": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+        "metadata": {
+          "category": "security",
+          "cwe": [
+            "CWE-95"
+          ],
+          "confidence": "MEDIUM",
+          "source": "Harness local review heuristics",
+          "requires-manual-review": true
+        },
+        "severity": "ERROR",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "policy.harness.python.request-to-dynamic-code",
+      "path": "/src/skf-upstream.py",
+      "start": {
+        "line": 37,
+        "col": 25,
+        "offset": 1301
+      },
+      "end": {
+        "line": 37,
+        "col": 50,
+        "offset": 1326
+      },
+      "extra": {
+        "message": "Tracked input reaches eval or exec directly or via a recognized local helper; verify binding and reachability.",
+        "metadata": {
+          "cwe": [
+            "CWE-95"
+          ],
+          "origin": "workspace-authored-candidate",
+          "status": "unverified-observation"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    }
+  ],
+  "errors": [],
+  "paths": {
+    "scanned": [
+      "/src/BenchmarkTest00073.py",
+      "/src/BenchmarkTest00074.py",
+      "/src/boundary.py",
+      "/src/skf-fixed-control.py",
+      "/src/skf-upstream.py"
+    ]
+  },
+  "time": {
+    "rules": [],
+    "rules_parse_time": 0.003053903579711914,
+    "profiling_times": {
+      "config_time": 0.10544228553771973,
+      "core_time": 0.3098442554473877,
+      "ignores_time": 5.2928924560546875e-05,
+      "total_time": 0.42308688163757324
+    },
+    "parsing_time": {
+      "total_time": 0.008466005325317383,
+      "per_file_time": {
+        "mean": 0.0009406672583685982,
+        "std_dev": 3.3841138640217436e-06
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_files": []
+    },
+    "scanning_time": {
+      "total_time": 0.02164006233215332,
+      "per_file_time": {
+        "mean": 0.004328012466430664,
+        "std_dev": 1.3943354201728652e-05
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_files": []
+    },
+    "matching_time": {
+      "total_time": 0.010078907012939453,
+      "per_file_and_rule_time": {
+        "mean": 0.0011198785569932726,
+        "std_dev": 1.7861235043968873e-06
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_rules_on_files": []
+    },
+    "tainting_time": {
+      "total_time": 0.0017826557159423828,
+      "per_def_and_rule_time": {
+        "mean": 8.913278579711915e-05,
+        "std_dev": 3.4718171235681443e-08
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_rules_on_defs": []
+    },
+    "fixpoint_timeouts": [],
+    "prefiltering": {
+      "project_level_time": 0.0,
+      "file_level_time": 0.0,
+      "rules_with_project_prefilters_ratio": 0.0,
+      "rules_with_file_prefilters_ratio": 1.0,
+      "rules_selected_ratio": 0.16363636363636364,
+      "rules_matched_ratio": 0.16363636363636364
+    },
+    "targets": [],
+    "total_bytes": 0,
+    "max_memory_bytes": 96626816
+  },
+  "engine_requested": "OSS",
+  "skipped_rules": [],
+  "profiling_results": []
+}

@@ -1,0 +1,13 @@
+{
+  "at": "2026-11-11T06:01:37.553456+00:00",
+  "source": "User standing instruction to use DeepSeek when Claude quota is not restored; AGENTS.md item3 sustained related-project review transmission authorization.",
+  "claudeState": "failed-quota",
+  "claudeProblem": "You've hit your 5-hour limit \u00b7 resets 11:50pm (America/Los_Angeles)",
+  "promptSha256": "ce0f0415b5d3128086a99393307b839e7e599f8261373dbb291128c3307f35eb",
+  "destination": "https://api.deepseek.com",
+  "model": "deepseek-flash",
+  "effort": "high",
+  "sameUserPrompt": true,
+  "messageBodiesIncluded": false,
+  "tools": []
+}

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "createdAt": "2026-11-10T21:41:29.605776+00:00",
+  "repo": "xorbitsai/inference",
+  "sourcePath": "xinference/model/llm/tool_parsers/llama3_tool_parser.py",
+  "beforeCommit": "4cefcaa1e63d7e29d26bcd4be96cb267da113871",
+  "fixedCommit": "1b3d220f342ce68d34cec4586d9409d457dadc42",
+  "advisory": "https://github.com/xorbitsai/inference/security/advisories/GHSA-x2rj-828p-hx9m",
+  "cve": "CVE-2026-61539",
+  "cwe": "CWE-95",
+  "candidateFiles": {
+    "scripts/review_quality_gate.mjs": "10ca0c62a27431774699d3fdc8bb692cdcb00313151a81cae7d7bcbdfa308da2",
+    "docs/security-workspace/review-quality-policy.candidate.json": "e9b429fc21e5d86578333e6cd4cfad9ef2455be578b7ea37336fced14c788ad1",
+    "docs/security-workspace/review-sample-ledger.json": "f9d4a3bf73c7806d6193dc96381162465402f71a917e8fc870fca04623e16f77",
+    "work/harness-purge-improved/package/scripts/semgrep-deep17.json": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": "2dfd384c175692b7972917832b545c7058ae968cad68be34e718c021ec06e49f",
+    "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+    "work/harness-purge-improved/package/lib/redteam/personal-semgrep-profile.mjs": "93e406e08f5660cb6941a838879579be885e4dabf55f32b0e9f970e7a89f43ed"
+  },
+  "baselineRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+  "scannerImageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "candidateRuleCount": 17,
+  "selectionDisclosure": "Curated public vulnerability and its upstream patch selected after reading advisory and commit metadata; no detector scores seen and no rules tuned on this slice. This is not a representative blind holdout.",
+  "scope": "Read-only source analysis, fixed-rule scan and benign parser-method witness in an owned isolated VM container. No project or full API deployment."
+}

@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "provider": "https://api.deepseek.com",
+  "requestedModel": "deepseek-flash",
+  "effort": "high",
+  "tools": [],
+  "jobs": [
+    {
+      "id": "storage-review",
+      "bodySha256": "ef91e23393c703c93fc5ab6ec221d021d15518642da404bb9b78855d02924928",
+      "promptSha256": "e30aa0bf30b3a4c2ac89c71f7eb2d6a54c60500f993e48b880742b2285281a08",
+      "state": "partial",
+      "startedAt": "2026-11-12T04:08:28.094598+00:00",
+      "elapsedSeconds": 89.4,
+      "observedModels": [
+        "deepseek-flash"
+      ],
+      "reportChars": 0,
+      "reasoningCharsReceived": 61352,
+      "wireBytes": 4429422,
+      "lastEventAt": "2026-11-12T04:09:54.688613+00:00",
+      "receipt": "storage-review.json",
+      "receiptSha256": "5f3b322e3fb0172a129e331d9bd987f83c833d41d2eb007ffbcd73922a57dc5b",
+      "actualModels": [
+        "deepseek-flash"
+      ],
+      "finishReason": null,
+      "usage": null,
+      "problem": "incomplete response, output limit, or missing usage",
+      "finishedAt": "2026-11-12T04:09:57.545231+00:00"
+    }
+  ],
+  "done": true,
+  "stopRequested": false,
+  "updatedAt": "2026-11-12T04:09:57.547790+00:00"
+}

@@ -1,0 +1,72 @@
+name: harness-pentagi
+services:
+  pgvector:
+    image: vxcontrol/pgvector@sha256:841d51ebcf46f4e98e15affc466f37be5492592863f04b6b4f479619938eb07a
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: pentagi
+      POSTGRES_PASSWORD: ${PENTAGI_POSTGRES_PASSWORD}
+      POSTGRES_DB: pentagi
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U pentagi -d pentagi"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+    mem_limit: 512m
+    pids_limit: 256
+  pentagi:
+    image: sha256:dabcf08d64b8145ffd3f8b1cefe1fdcac365848c33eb2be6b3443cd3617136c4
+    restart: unless-stopped
+    depends_on:
+      pgvector:
+        condition: service_healthy
+    user: root:root
+    ports: ["127.0.0.1:18443:8080"]
+    environment:
+      DEBUG: "false"
+      DATA_DIR: /opt/pentagi/data
+      SERVER_HOST: 0.0.0.0
+      SERVER_PORT: "8080"
+      SERVER_USE_SSL: "false"
+      COOKIE_SIGNING_SALT: ${COOKIE_SIGNING_SALT}
+      DATABASE_URL: postgres://pentagi:${PENTAGI_POSTGRES_PASSWORD}@pgvector:5432/pentagi?sslmode=disable
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY}
+      DEEPSEEK_SERVER_URL: https://api.deepseek.com
+      DEEPSEEK_PROVIDER: ""
+      EMBEDDING_PROVIDER: none
+      SCRAPER_PRIVATE_URL: ""
+      SCRAPER_PUBLIC_URL: ""
+      DUCKDUCKGO_ENABLED: "false"
+      SPLOITUS_ENABLED: "false"
+      WEB_SEARCH_INTERNAL_ENABLED: "false"
+      GRAPHITI_ENABLED: "false"
+      UPDATE_CHECK_INTERVAL: 0s
+      DOCKER_HOST: unix:///var/run/docker.sock
+      DOCKER_INSIDE: "false"
+      DOCKER_NET_ADMIN: "false"
+      DOCKER_PUBLIC_IP: 127.0.0.1
+      DOCKER_IMAGE_SELECTION_MODE: fixed
+      DOCKER_DEFAULT_IMAGE: harness-pentagi-worker:20261025
+      DOCKER_DEFAULT_IMAGE_FOR_PENTEST: harness-pentagi-worker:20261025
+      DOCKER_DEFAULT_IMAGE_FOR_TEST: harness-pentagi-worker:20261025
+      DOCKER_ALLOWED_IMAGES: harness-pentagi-worker:20261025
+      TERMINAL_TOOL_TIMEOUT: "60"
+      HTTP_PROXY: http://10.0.2.100:3128
+      HTTPS_PROXY: http://10.0.2.100:3128
+      PROXY_URL: http://10.0.2.100:3128
+      NO_PROXY: localhost,127.0.0.1,::1,pgvector,10.0.2.15
+    volumes:
+      - pentagi-data:/opt/pentagi/data
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./deepseek-vm.provider.yml:/opt/pentagi/conf/deepseek-vm.provider.yml:ro
+    mem_limit: 1g
+    pids_limit: 512
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+volumes:
+  postgres-data:
+  pentagi-data:

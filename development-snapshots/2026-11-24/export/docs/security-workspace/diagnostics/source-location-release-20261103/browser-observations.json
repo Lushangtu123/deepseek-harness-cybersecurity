@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "scope": "Observed through native Chrome via cua_repl; API report independently read; no headless/CDP automation",
+  "session": "session-753da347-eb02-41cb-9c5f-ead62a857805",
+  "model": "DeepSeek-V4.1-Flash",
+  "effort": "High",
+  "mainChatRequests": 11,
+  "toolCalls": 10,
+  "toolActions": [
+    {
+      "name": "redteam_session_bind",
+      "engagement": "vm-source-location-release-20261103"
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "plan",
+      "mode": "deep"
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "start",
+      "mode": "deep",
+      "steps": [
+        "semgrep"
+      ],
+      "requestId": "source-location-native-release-20261103-001"
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "wait",
+      "id": "11706ee9-9ec3-4385-9be0-6f2dfca8935c",
+      "waitSeconds": 30
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "report",
+      "section": "findings",
+      "cursorUsed": false
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "report",
+      "section": "findings",
+      "cursorUsed": true
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "report",
+      "section": "files",
+      "cursorUsed": false
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "report",
+      "section": "exclusions",
+      "cursorUsed": false
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "report",
+      "section": "diagnostics",
+      "cursorUsed": false
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "report",
+      "section": "artifacts",
+      "cursorUsed": false
+    }
+  ],
+  "completed": true,
+  "actualMainChatStatusCalls": 0,
+  "summaryInaccuracy": "final model prose described wait/status; actual trace has wait only, no status call; counts use observed trajectory",
+  "newModelRescanRequested": false,
+  "onlyAllowedToolsObserved": true,
+  "modelReadAllReportSections": true,
+  "modelSameLineLocationsCorrect": true,
+  "modelKeptUnverified": true,
+  "modelGuessedMainChatCount": false,
+  "ordinaryFindingRows": 0,
+  "formalDrillPanelAndFullView": true,
+  "nativeSourceLocationPages": [
+    4,
+    3
+  ],
+  "sameLineLocations": [
+    "2:35-2:48",
+    "2:50-2:63"
+  ],
+  "redactionAndCopyOnlyDisclaimerVisible": true,
+  "sourceDigestAndSnapshotVisible": true,
+  "formalThemeReadableObserved": true,
+  "downloadObservedDone": true,
+  "originalBrowseProjectRestored": "phishguard-model-closure-20261102",
+  "legacyTaskReadOnlyCompatible": true,
+  "legacyTaskId": "bd86f6bf-d1b3-474c-b3df-f55172f4e956",
+  "legacyRawFindings": 56,
+  "legacyDedupFindings": 49,
+  "legacySourcePrecisionNotInvented": true,
+  "ownedChromeTabsClosed": 2
+}

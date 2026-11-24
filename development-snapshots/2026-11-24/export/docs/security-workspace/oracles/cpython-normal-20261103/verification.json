@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "independentSourceNormalCases": 2,
+  "hardNegativeScannerRecognitionProved": 0,
+  "authoredPositiveControls": 2,
+  "runtimeObservations": 16,
+  "sourceAndProbeIdentityMatched": true,
+  "allFilesActuallyScanned": true,
+  "qualificationPositiveCount": 0,
+  "diagnosticPositiveCount": 2,
+  "codeMethodologyCorrectionAfterObservation": true,
+  "gateTestsMac": 23,
+  "gateTestsVM": 23,
+  "pluginTests": 748,
+  "reportsAgree": true,
+  "r3Qualified": false,
+  "requestedModelReviewsAcceptedThisBatch": 2,
+  "previousSKFRequestedReviewStillOpen": true
+}

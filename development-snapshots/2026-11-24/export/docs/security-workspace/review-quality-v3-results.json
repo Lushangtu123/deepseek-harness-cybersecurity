@@ -1,0 +1,489 @@
+{
+  "version": 3,
+  "scope": "offline role-separated qualification metrics; retrospective methodology correction, not a new independent acceptance run",
+  "evaluatorSha256": "10ca0c62a27431774699d3fdc8bb692cdcb00313151a81cae7d7bcbdfa308da2",
+  "originalEvaluatorSha256": "1dc6d416bcd483aef67b797d754185e25982689ce2a432d49e667464f58d29ec",
+  "inputSchemasVersion": 2,
+  "numericalPolicyUnchanged": true,
+  "originalScansPreserved": true,
+  "r3Qualified": false,
+  "executionEnabled": false,
+  "tests": {
+    "macFocused": 23,
+    "vmFocused": 23,
+    "pluginRegression": 748
+  },
+  "reportsAgree": true,
+  "results": {
+    "baseline": {
+      "version": 3,
+      "state": "blocked",
+      "r3Qualified": false,
+      "executionEnabled": false,
+      "categories": {
+        "python/CWE-94": {
+          "total": 0,
+          "positive": 0,
+          "negative": 0,
+          "evidenceOnly": 0,
+          "raw": {
+            "positiveHit": 0,
+            "positiveMiss": 0,
+            "negativeHit": 0,
+            "negativeNoHit": 0,
+            "unknown": 0,
+            "falsePositiveRate": null,
+            "recall": null,
+            "unknownRate": null
+          },
+          "reviewed": {
+            "truePositive": 0,
+            "falsePositive": 0,
+            "trueNegative": 0,
+            "falseNegative": 0,
+            "falseExclusion": 0,
+            "unknown": 0,
+            "unknownPositive": 0,
+            "unknownNegative": 0,
+            "falsePositiveRate": null,
+            "falsePositiveRateUpperBound": null,
+            "falseNegativeRate": null,
+            "falseExclusionRate": null,
+            "confirmedRecall": null,
+            "unknownRate": null,
+            "resolvedCases": 0
+          },
+          "diagnostic": {
+            "total": 0,
+            "positive": 0,
+            "negative": 0,
+            "evidenceOnly": 0,
+            "raw": {
+              "positiveHit": 0,
+              "positiveMiss": 0,
+              "negativeHit": 0,
+              "negativeNoHit": 0,
+              "unknown": 0,
+              "falsePositiveRate": null,
+              "recall": null,
+              "unknownRate": null
+            },
+            "reviewed": {
+              "truePositive": 0,
+              "falsePositive": 0,
+              "trueNegative": 0,
+              "falseNegative": 0,
+              "falseExclusion": 0,
+              "unknown": 0,
+              "unknownPositive": 0,
+              "unknownNegative": 0,
+              "falsePositiveRate": null,
+              "falsePositiveRateUpperBound": null,
+              "falseNegativeRate": null,
+              "falseExclusionRate": null,
+              "confirmedRecall": null,
+              "unknownRate": null,
+              "resolvedCases": 0
+            }
+          },
+          "excludedFromQualification": [],
+          "thresholds": {
+            "minimumPositive": 20,
+            "minimumNegative": 30,
+            "minimumRawRecall": 0.9,
+            "maximumReviewedFalsePositiveRate": 0.05,
+            "maximumFalseExclusionRate": 0,
+            "maximumUnknownRate": 0.2,
+            "minimumConfirmedRecall": 0.9
+          },
+          "blockers": [
+            "insufficient-labelled-cases",
+            "raw-recall-below-threshold",
+            "reviewed-false-positive-rate-unqualified",
+            "reviewed-false-positive-bound-unqualified",
+            "false-exclusion-rate-unqualified",
+            "review-unknown-rate-unqualified",
+            "confirmed-recall-below-threshold"
+          ]
+        },
+        "python/CWE-95": {
+          "total": 2,
+          "positive": 0,
+          "negative": 2,
+          "evidenceOnly": 0,
+          "raw": {
+            "positiveHit": 0,
+            "positiveMiss": 0,
+            "negativeHit": 0,
+            "negativeNoHit": 2,
+            "unknown": 0,
+            "falsePositiveRate": 0,
+            "recall": null,
+            "unknownRate": 0
+          },
+          "reviewed": {
+            "truePositive": 0,
+            "falsePositive": 0,
+            "trueNegative": 2,
+            "falseNegative": 0,
+            "falseExclusion": 0,
+            "unknown": 0,
+            "unknownPositive": 0,
+            "unknownNegative": 0,
+            "falsePositiveRate": 0,
+            "falsePositiveRateUpperBound": 0,
+            "falseNegativeRate": null,
+            "falseExclusionRate": null,
+            "confirmedRecall": null,
+            "unknownRate": 0,
+            "resolvedCases": 2
+          },
+          "diagnostic": {
+            "total": 4,
+            "positive": 2,
+            "negative": 2,
+            "evidenceOnly": 0,
+            "raw": {
+              "positiveHit": 1,
+              "positiveMiss": 1,
+              "negativeHit": 0,
+              "negativeNoHit": 2,
+              "unknown": 0,
+              "falsePositiveRate": 0,
+              "recall": 0.5,
+              "unknownRate": 0
+            },
+            "reviewed": {
+              "truePositive": 0,
+              "falsePositive": 0,
+              "trueNegative": 2,
+              "falseNegative": 1,
+              "falseExclusion": 0,
+              "unknown": 1,
+              "unknownPositive": 1,
+              "unknownNegative": 0,
+              "falsePositiveRate": 0,
+              "falsePositiveRateUpperBound": 0,
+              "falseNegativeRate": 1,
+              "falseExclusionRate": 0,
+              "confirmedRecall": 0,
+              "unknownRate": 0.25,
+              "resolvedCases": 3
+            }
+          },
+          "excludedFromQualification": [
+            "input_one",
+            "input_two"
+          ],
+          "thresholds": {
+            "minimumPositive": 20,
+            "minimumNegative": 30,
+            "minimumRawRecall": 0.9,
+            "maximumReviewedFalsePositiveRate": 0.05,
+            "maximumFalseExclusionRate": 0,
+            "maximumUnknownRate": 0.2,
+            "minimumConfirmedRecall": 0.9
+          },
+          "blockers": [
+            "insufficient-labelled-cases",
+            "raw-recall-below-threshold",
+            "false-exclusion-rate-unqualified",
+            "confirmed-recall-below-threshold"
+          ]
+        }
+      },
+      "blockers": [
+        "vulnerability-oracle-incomplete",
+        "python/CWE-94:insufficient-labelled-cases",
+        "python/CWE-94:raw-recall-below-threshold",
+        "python/CWE-94:reviewed-false-positive-rate-unqualified",
+        "python/CWE-94:reviewed-false-positive-bound-unqualified",
+        "python/CWE-94:false-exclusion-rate-unqualified",
+        "python/CWE-94:review-unknown-rate-unqualified",
+        "python/CWE-94:confirmed-recall-below-threshold",
+        "python/CWE-95:insufficient-labelled-cases",
+        "python/CWE-95:raw-recall-below-threshold",
+        "python/CWE-95:false-exclusion-rate-unqualified",
+        "python/CWE-95:confirmed-recall-below-threshold"
+      ],
+      "caseBlockers": [
+        {
+          "id": "input_one",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "input_two",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        }
+      ],
+      "developmentOverlap": [],
+      "usageRequired": {
+        "datasetSha256": "cec2518e31be11a118c1943754b1bf51cb5638afb0c58aa8c8fc1c0e4ca24f77",
+        "sourceSha256": [
+          "683c5916501746486c7ffd2974323e83f912fab2cf7360db6d4063583a11b6d5",
+          "7fdb04dd248ab37909f46d2085bfee56b32d7e91e49ad3a2fad99c453295659b",
+          "b515c23dbbc459329d3b802a3aac742cc456d7472e66f7ed6e9dc97e40596d7d",
+          "fd86e48da90999bf795de59e4dab86e84de2236386bd3053206eb42b5de12d82"
+        ],
+        "action": "Record every acceptance attempt, including failure, in the usage ledger before any further freeze; this offline tool does not write the ledger"
+      },
+      "freezeTrust": "self-attested; digest and attempt-consumption ledger need an independent release-review check",
+      "artifactReuse": [],
+      "definitions": {
+        "qualificationScope": "category metrics and thresholds use only independent-vulnerability oracles with verified position and conditions; other cases remain diagnostic and block incomplete-oracle qualification",
+        "diagnosticScope": "all declared cases, including authored controls; these counts never satisfy qualification thresholds",
+        "rawFalsePositiveRate": "negative hits / observed negative cases",
+        "reviewedFalsePositiveRate": "negative confirmations / resolved negative cases",
+        "reviewedFalsePositiveRateUpperBound": "negative confirmations plus unknown negatives / all labelled negatives; finite-sample worst-case accounting, not a population confidence interval",
+        "reviewedFalseNegativeRate": "missed or wrongly excluded positives / resolved positive cases",
+        "confirmedRecall": "confirmed positives / all labelled positives",
+        "unknownRate": "unresolved cases / all labelled cases",
+        "evidenceOnly": "unknown decisions carrying evidence references; not verified exclusions",
+        "evidenceValidation": "declared evidence kind, input binding and artifact digest structure; evidence meaning requires independent review"
+      }
+    },
+    "combined": {
+      "version": 3,
+      "state": "blocked",
+      "r3Qualified": false,
+      "executionEnabled": false,
+      "categories": {
+        "python/CWE-94": {
+          "total": 0,
+          "positive": 0,
+          "negative": 0,
+          "evidenceOnly": 0,
+          "raw": {
+            "positiveHit": 0,
+            "positiveMiss": 0,
+            "negativeHit": 0,
+            "negativeNoHit": 0,
+            "unknown": 0,
+            "falsePositiveRate": null,
+            "recall": null,
+            "unknownRate": null
+          },
+          "reviewed": {
+            "truePositive": 0,
+            "falsePositive": 0,
+            "trueNegative": 0,
+            "falseNegative": 0,
+            "falseExclusion": 0,
+            "unknown": 0,
+            "unknownPositive": 0,
+            "unknownNegative": 0,
+            "falsePositiveRate": null,
+            "falsePositiveRateUpperBound": null,
+            "falseNegativeRate": null,
+            "falseExclusionRate": null,
+            "confirmedRecall": null,
+            "unknownRate": null,
+            "resolvedCases": 0
+          },
+          "diagnostic": {
+            "total": 0,
+            "positive": 0,
+            "negative": 0,
+            "evidenceOnly": 0,
+            "raw": {
+              "positiveHit": 0,
+              "positiveMiss": 0,
+              "negativeHit": 0,
+              "negativeNoHit": 0,
+              "unknown": 0,
+              "falsePositiveRate": null,
+              "recall": null,
+              "unknownRate": null
+            },
+            "reviewed": {
+              "truePositive": 0,
+              "falsePositive": 0,
+              "trueNegative": 0,
+              "falseNegative": 0,
+              "falseExclusion": 0,
+              "unknown": 0,
+              "unknownPositive": 0,
+              "unknownNegative": 0,
+              "falsePositiveRate": null,
+              "falsePositiveRateUpperBound": null,
+              "falseNegativeRate": null,
+              "falseExclusionRate": null,
+              "confirmedRecall": null,
+              "unknownRate": null,
+              "resolvedCases": 0
+            }
+          },
+          "excludedFromQualification": [],
+          "thresholds": {
+            "minimumPositive": 20,
+            "minimumNegative": 30,
+            "minimumRawRecall": 0.9,
+            "maximumReviewedFalsePositiveRate": 0.05,
+            "maximumFalseExclusionRate": 0,
+            "maximumUnknownRate": 0.2,
+            "minimumConfirmedRecall": 0.9
+          },
+          "blockers": [
+            "insufficient-labelled-cases",
+            "raw-recall-below-threshold",
+            "reviewed-false-positive-rate-unqualified",
+            "reviewed-false-positive-bound-unqualified",
+            "false-exclusion-rate-unqualified",
+            "review-unknown-rate-unqualified",
+            "confirmed-recall-below-threshold"
+          ]
+        },
+        "python/CWE-95": {
+          "total": 2,
+          "positive": 0,
+          "negative": 2,
+          "evidenceOnly": 0,
+          "raw": {
+            "positiveHit": 0,
+            "positiveMiss": 0,
+            "negativeHit": 0,
+            "negativeNoHit": 2,
+            "unknown": 0,
+            "falsePositiveRate": 0,
+            "recall": null,
+            "unknownRate": 0
+          },
+          "reviewed": {
+            "truePositive": 0,
+            "falsePositive": 0,
+            "trueNegative": 2,
+            "falseNegative": 0,
+            "falseExclusion": 0,
+            "unknown": 0,
+            "unknownPositive": 0,
+            "unknownNegative": 0,
+            "falsePositiveRate": 0,
+            "falsePositiveRateUpperBound": 0,
+            "falseNegativeRate": null,
+            "falseExclusionRate": null,
+            "confirmedRecall": null,
+            "unknownRate": 0,
+            "resolvedCases": 2
+          },
+          "diagnostic": {
+            "total": 4,
+            "positive": 2,
+            "negative": 2,
+            "evidenceOnly": 0,
+            "raw": {
+              "positiveHit": 2,
+              "positiveMiss": 0,
+              "negativeHit": 0,
+              "negativeNoHit": 2,
+              "unknown": 0,
+              "falsePositiveRate": 0,
+              "recall": 1,
+              "unknownRate": 0
+            },
+            "reviewed": {
+              "truePositive": 0,
+              "falsePositive": 0,
+              "trueNegative": 2,
+              "falseNegative": 0,
+              "falseExclusion": 0,
+              "unknown": 2,
+              "unknownPositive": 2,
+              "unknownNegative": 0,
+              "falsePositiveRate": 0,
+              "falsePositiveRateUpperBound": 0,
+              "falseNegativeRate": null,
+              "falseExclusionRate": 0,
+              "confirmedRecall": 0,
+              "unknownRate": 0.5,
+              "resolvedCases": 2
+            }
+          },
+          "excludedFromQualification": [
+            "input_one",
+            "input_two"
+          ],
+          "thresholds": {
+            "minimumPositive": 20,
+            "minimumNegative": 30,
+            "minimumRawRecall": 0.9,
+            "maximumReviewedFalsePositiveRate": 0.05,
+            "maximumFalseExclusionRate": 0,
+            "maximumUnknownRate": 0.2,
+            "minimumConfirmedRecall": 0.9
+          },
+          "blockers": [
+            "insufficient-labelled-cases",
+            "raw-recall-below-threshold",
+            "false-exclusion-rate-unqualified",
+            "confirmed-recall-below-threshold"
+          ]
+        }
+      },
+      "blockers": [
+        "vulnerability-oracle-incomplete",
+        "python/CWE-94:insufficient-labelled-cases",
+        "python/CWE-94:raw-recall-below-threshold",
+        "python/CWE-94:reviewed-false-positive-rate-unqualified",
+        "python/CWE-94:reviewed-false-positive-bound-unqualified",
+        "python/CWE-94:false-exclusion-rate-unqualified",
+        "python/CWE-94:review-unknown-rate-unqualified",
+        "python/CWE-94:confirmed-recall-below-threshold",
+        "python/CWE-95:insufficient-labelled-cases",
+        "python/CWE-95:raw-recall-below-threshold",
+        "python/CWE-95:false-exclusion-rate-unqualified",
+        "python/CWE-95:confirmed-recall-below-threshold"
+      ],
+      "caseBlockers": [
+        {
+          "id": "input_one",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "input_two",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        }
+      ],
+      "developmentOverlap": [],
+      "usageRequired": {
+        "datasetSha256": "cec2518e31be11a118c1943754b1bf51cb5638afb0c58aa8c8fc1c0e4ca24f77",
+        "sourceSha256": [
+          "683c5916501746486c7ffd2974323e83f912fab2cf7360db6d4063583a11b6d5",
+          "7fdb04dd248ab37909f46d2085bfee56b32d7e91e49ad3a2fad99c453295659b",
+          "b515c23dbbc459329d3b802a3aac742cc456d7472e66f7ed6e9dc97e40596d7d",
+          "fd86e48da90999bf795de59e4dab86e84de2236386bd3053206eb42b5de12d82"
+        ],
+        "action": "Record every acceptance attempt, including failure, in the usage ledger before any further freeze; this offline tool does not write the ledger"
+      },
+      "freezeTrust": "self-attested; digest and attempt-consumption ledger need an independent release-review check",
+      "artifactReuse": [],
+      "definitions": {
+        "qualificationScope": "category metrics and thresholds use only independent-vulnerability oracles with verified position and conditions; other cases remain diagnostic and block incomplete-oracle qualification",
+        "diagnosticScope": "all declared cases, including authored controls; these counts never satisfy qualification thresholds",
+        "rawFalsePositiveRate": "negative hits / observed negative cases",
+        "reviewedFalsePositiveRate": "negative confirmations / resolved negative cases",
+        "reviewedFalsePositiveRateUpperBound": "negative confirmations plus unknown negatives / all labelled negatives; finite-sample worst-case accounting, not a population confidence interval",
+        "reviewedFalseNegativeRate": "missed or wrongly excluded positives / resolved positive cases",
+        "confirmedRecall": "confirmed positives / all labelled positives",
+        "unknownRate": "unresolved cases / all labelled cases",
+        "evidenceOnly": "unknown decisions carrying evidence references; not verified exclusions",
+        "evidenceValidation": "declared evidence kind, input binding and artifact digest structure; evidence meaning requires independent review"
+      }
+    }
+  },
+  "sourceReview": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "actualOutputModelVerified": true,
+    "blockingRegressionFound": false,
+    "codeUnchangedAfterReview": true,
+    "lastChange": "negative-denominator regression test only, rerun Mac/VM"
+  }
+}

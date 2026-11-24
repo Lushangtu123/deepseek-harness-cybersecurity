@@ -1,0 +1,1131 @@
+{
+  "scope": "offline VM reviewer bounded lifecycle, durable failure and original-attempt recovery",
+  "reviewedFiles": {
+    "docs/security-workspace/reviewer-cleanup.md": "a7109fb3b9eecdf675397bce3e65164b78b7b923fc65e5502b2c14038c521dbe",
+    "scripts/reviewer_snapshot.py": "280c212e6cc2cb14692d95294d01fc2243fceffa2f04e67645ffe40399c617f2",
+    "scripts/reviewer_snapshot.test.py": "0077ab048e9ec935ce130e45a1f076c98f41aa9af3a461ea954701882eedbc29"
+  },
+  "receiptVersion": 2,
+  "qualityReportVersion": 6,
+  "tests": {
+    "macPython": 41,
+    "vmPython": 41,
+    "vmQualityGate": 43,
+    "macPluginSuite": 1020,
+    "finalFailures": 0,
+    "redPhases": [
+      {
+        "tests": 23,
+        "failures": 14
+      },
+      {
+        "tests": 26,
+        "failures": 3
+      },
+      {
+        "tests": 29,
+        "failures": 3
+      },
+      {
+        "tests": 38,
+        "failures": 7
+      },
+      {
+        "tests": 41,
+        "failures": 1
+      }
+    ]
+  },
+  "normal": {
+    "snapshot": {
+      "version": 1,
+      "kind": "python-evidence-reviewer",
+      "entrypoint": "eval_evidence_batch.py",
+      "files": {
+        "eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+        "eval_guard_review.py": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+        "eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843"
+      },
+      "launcherSha256": "280c212e6cc2cb14692d95294d01fc2243fceffa2f04e67645ffe40399c617f2",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7"
+    },
+    "snapshotSha256": "a45e88215fc3f4c7f00607243c1d53cdd8810fe9c1c066118f1946c79aef743b",
+    "execution": {
+      "reviewerSnapshot": {
+        "version": 1,
+        "kind": "python-evidence-reviewer",
+        "entrypoint": "eval_evidence_batch.py",
+        "files": {
+          "eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+          "eval_guard_review.py": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+          "eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843"
+        },
+        "launcherSha256": "280c212e6cc2cb14692d95294d01fc2243fceffa2f04e67645ffe40399c617f2",
+        "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7"
+      },
+      "reviewerExecution": {
+        "version": 2,
+        "state": "completed",
+        "snapshotSha256": "a45e88215fc3f4c7f00607243c1d53cdd8810fe9c1c066118f1946c79aef743b",
+        "datasetSha256": "15c249b3e5a9e2ecc39e6bfe3815224dcc224949177d9855cb08aff45795b00d",
+        "freezeSha256": "546b0cda6d280caa273a15197fc81115910639495d641fe2a9c85d6c25fae194",
+        "inputSha256": "82b3742a95eada0271aa1de6b8f2c04c7eab5a66daf823f0bd42ed4b0574d601",
+        "inputFiles": {
+          "manifest.json": "4d7b76ea492751511e581a6294e0fdb043e3d93ae3273b33171f26b971d038ea",
+          "scan.json": "ff9be56babc328d3e65b2104dc0d1ed661c688ccc0b8a7e7306265144060546d",
+          "sources/evaluator.py": "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+          "sources/routes.py": "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        },
+        "scanSha256": "ff9be56babc328d3e65b2104dc0d1ed661c688ccc0b8a7e7306265144060546d",
+        "reportSha256": "dad005b20e9d412a444f000e0bf79e8ef33949b95ada8d764ec9e06dad7645de",
+        "startedAt": "2026-11-11T10:46:00.318533+00:00",
+        "finishedAt": "2026-11-11T10:46:00.667865+00:00"
+      },
+      "report": {
+        "version": 1,
+        "guardChecks": 1,
+        "importChecks": 1,
+        "discoveredImportChecks": 1,
+        "guardEvidence": [
+          {
+            "finding": {
+              "rule": "policy.harness.python.eval",
+              "file": "routes.py",
+              "line": 6
+            },
+            "evidence": {
+              "observation": "literal-identifier-guard-observed",
+              "assignmentLine": 4,
+              "guardLine": 5,
+              "evalLine": 6,
+              "literalCount": 2,
+              "disposition": "unverified"
+            }
+          }
+        ],
+        "importEvidence": [
+          {
+            "observation": "direct-import-execution-flow-observed",
+            "sourceLine": 8,
+            "importLine": 2,
+            "callLine": 9,
+            "definitionLine": 1,
+            "sinkLine": 2,
+            "sink": "exec",
+            "disposition": "unverified",
+            "callerFile": "routes.py",
+            "calleeFile": "evaluator.py"
+          }
+        ],
+        "plainStringEvidence": []
+      },
+      "reportJson": "{\"version\": 1, \"guardChecks\": 1, \"importChecks\": 1, \"discoveredImportChecks\": 1, \"guardEvidence\": [{\"finding\": {\"rule\": \"policy.harness.python.eval\", \"file\": \"routes.py\", \"line\": 6}, \"evidence\": {\"observation\": \"literal-identifier-guard-observed\", \"assignmentLine\": 4, \"guardLine\": 5, \"evalLine\": 6, \"literalCount\": 2, \"disposition\": \"unverified\"}}], \"importEvidence\": [{\"observation\": \"direct-import-execution-flow-observed\", \"sourceLine\": 8, \"importLine\": 2, \"callLine\": 9, \"definitionLine\": 1, \"sinkLine\": 2, \"sink\": \"exec\", \"disposition\": \"unverified\", \"callerFile\": \"routes.py\", \"calleeFile\": \"evaluator.py\"}], \"plainStringEvidence\": []}\n",
+      "inputFiles": {
+        "manifest.json": "4d7b76ea492751511e581a6294e0fdb043e3d93ae3273b33171f26b971d038ea",
+        "scan.json": "ff9be56babc328d3e65b2104dc0d1ed661c688ccc0b8a7e7306265144060546d",
+        "sources/evaluator.py": "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+        "sources/routes.py": "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+      },
+      "temporaryRemoved": true,
+      "cleanup": {
+        "confirmed": true,
+        "idAbsent": true,
+        "nameAbsent": true,
+        "clientsStopped": true,
+        "creationResolved": true,
+        "errors": [],
+        "checkedAt": "2026-11-11T10:46:00.548915+00:00",
+        "clientsInitiallyStopped": true
+      },
+      "attemptDirectory": "/home/purge/.cache/r3-cleanup-r4-c46da07e6036/normal-attempts/review-b3060c7043a24acbb78b4191b3e2302d"
+    },
+    "quality": {
+      "version": 6,
+      "state": "blocked",
+      "r3Qualified": false,
+      "executionEnabled": false,
+      "reviewerCoverage": {
+        "receiptListValid": true,
+        "requiredSourceSha256": [
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredSourceSha256": [
+          "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredCaseIds": [
+          "fixture"
+        ],
+        "missingCaseIds": [],
+        "unsupportedCaseIds": [],
+        "unsupportedLanguages": [],
+        "uniqueReceiptCount": 1,
+        "invalidReceiptIndices": [],
+        "duplicateReceiptIndices": [],
+        "legacyReceiptIndices": []
+      },
+      "categories": {
+        "python/CWE-95": {
+          "total": 0,
+          "positive": 0,
+          "negative": 0,
+          "evidenceOnly": 0,
+          "raw": {
+            "positiveHit": 0,
+            "positiveMiss": 0,
+            "negativeHit": 0,
+            "negativeNoHit": 0,
+            "unknown": 0,
+            "falsePositiveRate": null,
+            "recall": null,
+            "unknownRate": null
+          },
+          "reviewed": {
+            "truePositive": 0,
+            "falsePositive": 0,
+            "trueNegative": 0,
+            "falseNegative": 0,
+            "falseExclusion": 0,
+            "unknown": 0,
+            "unknownPositive": 0,
+            "unknownNegative": 0,
+            "falsePositiveRate": null,
+            "falsePositiveRateUpperBound": null,
+            "falseNegativeRate": null,
+            "falseExclusionRate": null,
+            "confirmedRecall": null,
+            "unknownRate": null,
+            "resolvedCases": 0
+          },
+          "diagnostic": {
+            "total": 1,
+            "positive": 1,
+            "negative": 0,
+            "evidenceOnly": 0,
+            "raw": {
+              "positiveHit": 1,
+              "positiveMiss": 0,
+              "negativeHit": 0,
+              "negativeNoHit": 0,
+              "unknown": 0,
+              "falsePositiveRate": null,
+              "recall": 1,
+              "unknownRate": 0
+            },
+            "reviewed": {
+              "truePositive": 0,
+              "falsePositive": 0,
+              "trueNegative": 0,
+              "falseNegative": 0,
+              "falseExclusion": 0,
+              "unknown": 1,
+              "unknownPositive": 1,
+              "unknownNegative": 0,
+              "falsePositiveRate": null,
+              "falsePositiveRateUpperBound": null,
+              "falseNegativeRate": null,
+              "falseExclusionRate": 0,
+              "confirmedRecall": 0,
+              "unknownRate": 1,
+              "resolvedCases": 0
+            }
+          },
+          "excludedFromQualification": [
+            "fixture"
+          ],
+          "thresholds": {
+            "minimumPositive": 1,
+            "minimumNegative": 1,
+            "minimumRawRecall": 1,
+            "maximumReviewedFalsePositiveRate": 0,
+            "maximumFalseExclusionRate": 0,
+            "maximumUnknownRate": 0,
+            "minimumConfirmedRecall": 1
+          },
+          "blockers": [
+            "insufficient-labelled-cases",
+            "raw-recall-below-threshold",
+            "reviewed-false-positive-rate-unqualified",
+            "reviewed-false-positive-bound-unqualified",
+            "false-exclusion-rate-unqualified",
+            "review-unknown-rate-unqualified",
+            "confirmed-recall-below-threshold"
+          ]
+        }
+      },
+      "blockers": [
+        "vulnerability-oracle-incomplete",
+        "sample-selection-ineligible",
+        "python/CWE-95:insufficient-labelled-cases",
+        "python/CWE-95:raw-recall-below-threshold",
+        "python/CWE-95:reviewed-false-positive-rate-unqualified",
+        "python/CWE-95:reviewed-false-positive-bound-unqualified",
+        "python/CWE-95:false-exclusion-rate-unqualified",
+        "python/CWE-95:review-unknown-rate-unqualified",
+        "python/CWE-95:confirmed-recall-below-threshold"
+      ],
+      "caseBlockers": [
+        {
+          "id": "fixture",
+          "reasons": [
+            "vulnerability-oracle-incomplete",
+            "sample-selection-ineligible"
+          ]
+        }
+      ],
+      "developmentOverlap": [],
+      "usageRequired": {
+        "datasetSha256": "15c249b3e5a9e2ecc39e6bfe3815224dcc224949177d9855cb08aff45795b00d",
+        "sourceSha256": [
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "action": "Record every acceptance attempt, including failure, in the usage ledger before any further freeze; this offline tool does not write the ledger"
+      },
+      "freezeTrust": "self-attested; digest and attempt-consumption ledger need an independent release-review check",
+      "artifactReuse": [],
+      "definitions": {
+        "qualificationScope": "category metrics and thresholds require a verified independent-vulnerability oracle and a complete eligible blind-selection declaration bound to a protocol digest; other cases remain diagnostic and block qualification",
+        "selectionValidation": "selection fields and protocol digest format are self-attested; selection protocol content, timing, representativeness and independence require release review",
+        "reviewerValidation": "supported three-module closure, launcher and immutable runtime image bind reviewer identity; execution receipts are self-attested and their original input/output artifacts, aggregation and external sealing require release review; Docker and VM kernel remain trusted",
+        "reviewerCoverage": "version 2 receipts bind a bounded ASCII input-file digest map and scan digest; only completed matching unique input batches cover supported Python source cases, including diagnostic cases; other languages are explicitly unsupported; membership is not proof of per-site review, original artifact authenticity or aggregation correctness",
+        "coverageMetrics": "source coverage and unsupported-language blockers do not reclassify declared decisions or category metrics; global state, blockers and per-case reasons must be checked before any qualification claim",
+        "diagnosticScope": "all declared cases, including authored controls; these counts never satisfy qualification thresholds",
+        "rawFalsePositiveRate": "negative hits / observed negative cases",
+        "reviewedFalsePositiveRate": "negative confirmations / resolved negative cases",
+        "reviewedFalsePositiveRateUpperBound": "negative confirmations plus unknown negatives / all labelled negatives; finite-sample worst-case accounting, not a population confidence interval",
+        "reviewedFalseNegativeRate": "missed or wrongly excluded positives / resolved positive cases",
+        "confirmedRecall": "confirmed positives / all labelled positives",
+        "unknownRate": "unresolved cases / all labelled cases",
+        "evidenceOnly": "unknown decisions carrying evidence references; not verified exclusions",
+        "evidenceValidation": "declared evidence kind, input binding and artifact digest structure; evidence meaning requires independent review"
+      }
+    },
+    "dependencyMutationRejected": true,
+    "coverageChecks": {
+      "valid": {
+        "receiptListValid": true,
+        "requiredSourceSha256": [
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredSourceSha256": [
+          "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredCaseIds": [
+          "fixture"
+        ],
+        "missingCaseIds": [],
+        "unsupportedCaseIds": [],
+        "unsupportedLanguages": [],
+        "uniqueReceiptCount": 1,
+        "invalidReceiptIndices": [],
+        "duplicateReceiptIndices": [],
+        "legacyReceiptIndices": []
+      },
+      "unrelated": {
+        "receiptListValid": true,
+        "requiredSourceSha256": [
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredSourceSha256": [
+          "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+          "9999999999999999999999999999999999999999999999999999999999999999"
+        ],
+        "coveredCaseIds": [],
+        "missingCaseIds": [
+          "fixture"
+        ],
+        "unsupportedCaseIds": [],
+        "unsupportedLanguages": [],
+        "uniqueReceiptCount": 1,
+        "invalidReceiptIndices": [],
+        "duplicateReceiptIndices": [],
+        "legacyReceiptIndices": []
+      },
+      "duplicate": {
+        "receiptListValid": true,
+        "requiredSourceSha256": [
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredSourceSha256": [
+          "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredCaseIds": [
+          "fixture"
+        ],
+        "missingCaseIds": [],
+        "unsupportedCaseIds": [],
+        "unsupportedLanguages": [],
+        "uniqueReceiptCount": 1,
+        "invalidReceiptIndices": [],
+        "duplicateReceiptIndices": [
+          1
+        ],
+        "legacyReceiptIndices": []
+      },
+      "stale": {
+        "receiptListValid": true,
+        "requiredSourceSha256": [
+          "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+        ],
+        "coveredSourceSha256": [],
+        "coveredCaseIds": [],
+        "missingCaseIds": [
+          "fixture"
+        ],
+        "unsupportedCaseIds": [],
+        "unsupportedLanguages": [],
+        "uniqueReceiptCount": 0,
+        "invalidReceiptIndices": [
+          0
+        ],
+        "duplicateReceiptIndices": [],
+        "legacyReceiptIndices": []
+      },
+      "allExpectedBlockers": true
+    },
+    "newIndependentSamples": 0,
+    "runtimeImageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7"
+  },
+  "faultControls": {
+    "aliasProbeDetected": true,
+    "state": "passed",
+    "newIndependentSamples": 0,
+    "scope": "frozen CPU-loop test reviewer in network-none read-only resource-bounded containers, not vulnerability verification",
+    "controls": [
+      {
+        "abandonedContainerStoppedBeforeRecover": false,
+        "maxStdoutBytes": 10973,
+        "maxStderrBytes": 0,
+        "scenario": "timeout",
+        "controllerExitCode": 1,
+        "observedRunning": true,
+        "initialState": "timed-out",
+        "initialFailure": {
+          "exitCode": 124,
+          "kind": "timed-out"
+        },
+        "beforeRecovery": {
+          "checkedAt": "2026-11-11T10:46:01.817646+00:00",
+          "clientsInitiallyStopped": true,
+          "clientsStopped": true,
+          "confirmed": true,
+          "creationResolved": true,
+          "errors": [],
+          "idAbsent": true,
+          "nameAbsent": true
+        },
+        "finalState": "recovered",
+        "cleanup": {
+          "confirmed": true,
+          "idAbsent": true,
+          "nameAbsent": true,
+          "clientsStopped": true,
+          "creationResolved": true,
+          "errors": [],
+          "checkedAt": "2026-11-11T10:46:02.018219+00:00",
+          "clientsInitiallyStopped": true
+        },
+        "createCount": 1,
+        "startCount": 1,
+        "journalSha256": "c2df59aee0545e04ea9fbb94268b19165a4bd727caa4c3afef3e518068cd199d"
+      },
+      {
+        "abandonedContainerStoppedBeforeRecover": false,
+        "maxStdoutBytes": 10973,
+        "maxStderrBytes": 0,
+        "scenario": "sigterm",
+        "controllerExitCode": 1,
+        "observedRunning": true,
+        "initialState": "interrupted",
+        "initialFailure": {
+          "kind": "interrupted",
+          "signal": 15
+        },
+        "beforeRecovery": {
+          "checkedAt": "2026-11-11T10:46:02.326018+00:00",
+          "clientsInitiallyStopped": true,
+          "clientsStopped": true,
+          "confirmed": true,
+          "creationResolved": true,
+          "errors": [],
+          "idAbsent": true,
+          "nameAbsent": true
+        },
+        "finalState": "recovered",
+        "cleanup": {
+          "confirmed": true,
+          "idAbsent": true,
+          "nameAbsent": true,
+          "clientsStopped": true,
+          "creationResolved": true,
+          "errors": [],
+          "checkedAt": "2026-11-11T10:46:02.493505+00:00",
+          "clientsInitiallyStopped": true
+        },
+        "createCount": 1,
+        "startCount": 1,
+        "journalSha256": "b88dcd771b7aa932f15c4294b599199ed787c25211afe3a7f35e780d6d1fe523"
+      },
+      {
+        "abandonedContainerStoppedBeforeRecover": false,
+        "maxStdoutBytes": 10970,
+        "maxStderrBytes": 0,
+        "scenario": "sighup",
+        "controllerExitCode": 1,
+        "observedRunning": true,
+        "initialState": "interrupted",
+        "initialFailure": {
+          "kind": "interrupted",
+          "signal": 1
+        },
+        "beforeRecovery": {
+          "checkedAt": "2026-11-11T10:46:02.800475+00:00",
+          "clientsInitiallyStopped": true,
+          "clientsStopped": true,
+          "confirmed": true,
+          "creationResolved": true,
+          "errors": [],
+          "idAbsent": true,
+          "nameAbsent": true
+        },
+        "finalState": "recovered",
+        "cleanup": {
+          "confirmed": true,
+          "idAbsent": true,
+          "nameAbsent": true,
+          "clientsStopped": true,
+          "creationResolved": true,
+          "errors": [],
+          "checkedAt": "2026-11-11T10:46:02.980271+00:00",
+          "clientsInitiallyStopped": true
+        },
+        "createCount": 1,
+        "startCount": 1,
+        "journalSha256": "9255955a6926b6cd18aeaf634e9c1ba488cf2dd6d69d36e926824c46b1ad6ffe"
+      },
+      {
+        "abandonedContainerStoppedBeforeRecover": true,
+        "maxStdoutBytes": 10973,
+        "maxStderrBytes": 0,
+        "scenario": "sigkill",
+        "controllerExitCode": -9,
+        "observedRunning": true,
+        "initialState": "waiting",
+        "initialFailure": null,
+        "beforeRecovery": null,
+        "finalState": "recovered",
+        "cleanup": {
+          "confirmed": true,
+          "idAbsent": true,
+          "nameAbsent": true,
+          "clientsStopped": true,
+          "creationResolved": true,
+          "errors": [],
+          "checkedAt": "2026-11-11T10:46:06.238982+00:00",
+          "clientsInitiallyStopped": true
+        },
+        "createCount": 1,
+        "startCount": 1,
+        "journalSha256": "11c36d7f4b712d988eb822e6cf37600cabac0e732cc75a29178039218c2b44ef"
+      },
+      {
+        "abandonedContainerStoppedBeforeRecover": false,
+        "maxStdoutBytes": 2097152,
+        "maxStderrBytes": 0,
+        "scenario": "output-limit",
+        "controllerExitCode": 1,
+        "observedRunning": true,
+        "initialState": "failed",
+        "initialFailure": {
+          "kind": "client-output-limit",
+          "phase": "start"
+        },
+        "beforeRecovery": {
+          "checkedAt": "2026-11-11T10:46:06.575631+00:00",
+          "clientsInitiallyStopped": true,
+          "clientsStopped": true,
+          "confirmed": true,
+          "creationResolved": true,
+          "errors": [],
+          "idAbsent": true,
+          "nameAbsent": true
+        },
+        "finalState": "recovered",
+        "cleanup": {
+          "confirmed": true,
+          "idAbsent": true,
+          "nameAbsent": true,
+          "clientsStopped": true,
+          "creationResolved": true,
+          "errors": [],
+          "checkedAt": "2026-11-11T10:46:06.755605+00:00",
+          "clientsInitiallyStopped": true
+        },
+        "createCount": 1,
+        "startCount": 1,
+        "journalSha256": "072eacdf5317d9482e5e014f3cd5e314ba7fee4862ac0d97b4011effc529bb8d"
+      },
+      {
+        "abandonedContainerStoppedBeforeRecover": false,
+        "maxStdoutBytes": 10997,
+        "maxStderrBytes": 0,
+        "scenario": "journal-failure",
+        "controllerExitCode": 1,
+        "observedRunning": true,
+        "initialState": "cleanup-unconfirmed",
+        "initialFailure": {
+          "exitCode": 124,
+          "kind": "timed-out"
+        },
+        "beforeRecovery": {
+          "checkedAt": "2026-11-11T10:46:07.961067+00:00",
+          "clientsInitiallyStopped": true,
+          "clientsStopped": true,
+          "confirmed": false,
+          "creationResolved": true,
+          "errors": [
+            "journal-or-log-write-failed"
+          ],
+          "idAbsent": true,
+          "nameAbsent": true
+        },
+        "finalState": "recovered",
+        "cleanup": {
+          "confirmed": true,
+          "idAbsent": true,
+          "nameAbsent": true,
+          "clientsStopped": true,
+          "creationResolved": true,
+          "errors": [],
+          "checkedAt": "2026-11-11T10:46:08.152569+00:00",
+          "clientsInitiallyStopped": true
+        },
+        "createCount": 1,
+        "startCount": 1,
+        "journalSha256": "624df5f2288b1533461f258965b39623a87c579d716018222e0ca776f7843aef"
+      }
+    ]
+  },
+  "settledAttempts": [
+    {
+      "id": "351695489438477ba428d1f6515f7f34",
+      "state": "recovered",
+      "originalState": "interrupted",
+      "failure": {
+        "kind": "interrupted",
+        "signal": 1
+      },
+      "cleanup": {
+        "checkedAt": "2026-11-11T10:46:02.980271+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "9255955a6926b6cd18aeaf634e9c1ba488cf2dd6d69d36e926824c46b1ad6ffe"
+    },
+    {
+      "id": "753faa8da55e430fb11d2c08758b2016",
+      "state": "recovered",
+      "originalState": "timed-out",
+      "failure": {
+        "exitCode": 124,
+        "kind": "timed-out"
+      },
+      "cleanup": {
+        "checkedAt": "2026-11-11T10:46:02.018219+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "c2df59aee0545e04ea9fbb94268b19165a4bd727caa4c3afef3e518068cd199d"
+    },
+    {
+      "id": "7621159303474ab79096033cbb1917a3",
+      "state": "recovered",
+      "originalState": "interrupted",
+      "failure": {
+        "kind": "interrupted",
+        "signal": 15
+      },
+      "cleanup": {
+        "checkedAt": "2026-11-11T10:46:02.493505+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "b88dcd771b7aa932f15c4294b599199ed787c25211afe3a7f35e780d6d1fe523"
+    },
+    {
+      "id": "b8e5509b81a7440381f0d3fb7f88da6f",
+      "state": "recovered",
+      "originalState": "failed",
+      "failure": {
+        "kind": "client-output-limit",
+        "phase": "start"
+      },
+      "cleanup": {
+        "checkedAt": "2026-11-11T10:46:06.755605+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "072eacdf5317d9482e5e014f3cd5e314ba7fee4862ac0d97b4011effc529bb8d"
+    },
+    {
+      "id": "f45d64bfdc7247fca4a0ab14bb90f909",
+      "state": "recovered",
+      "originalState": "cleanup-unconfirmed",
+      "failure": {
+        "exitCode": 124,
+        "kind": "timed-out"
+      },
+      "cleanup": {
+        "checkedAt": "2026-11-11T10:46:08.152569+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "624df5f2288b1533461f258965b39623a87c579d716018222e0ca776f7843aef"
+    },
+    {
+      "id": "b3060c7043a24acbb78b4191b3e2302d",
+      "state": "completed",
+      "originalState": null,
+      "failure": null,
+      "cleanup": {
+        "checkedAt": "2026-11-11T10:46:00.548915+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "0e34b4a96ea19e81104fcf68551f0059b99891742a9a90b89b6c282dc4733ca1"
+    },
+    {
+      "id": "63414fa966b64568ab655ff98bc44fc6",
+      "state": "recovered",
+      "originalState": "waiting",
+      "failure": null,
+      "cleanup": {
+        "checkedAt": "2026-11-11T10:46:06.238982+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "11c36d7f4b712d988eb822e6cf37600cabac0e732cc75a29178039218c2b44ef"
+    }
+  ],
+  "vmProtection": {
+    "dailyProgramFilesMatched": 169,
+    "dailyDatabasesLogicallyMatched": 42,
+    "dailyConfigPinsRuntimeMatched": true
+  },
+  "artifactChecks": {
+    "currentSourceMatchesVm": true,
+    "finalSourceDigests": {
+      "scripts/reviewer_snapshot.py": "280c212e6cc2cb14692d95294d01fc2243fceffa2f04e67645ffe40399c617f2",
+      "scripts/reviewer_snapshot.test.py": "0077ab048e9ec935ce130e45a1f076c98f41aa9af3a461ea954701882eedbc29"
+    },
+    "protectedCurrentDigests": {
+      "work/harness-purge-improved/package-files.json": "ce47db260931cfee4c418c9dd6a2145c4791e1c33855a37e876d9a561a05d023",
+      "docs/security-workspace/review-sample-ledger.json": "62f38218bb84fd4b1ff1ef2b8133d6deaa71c7d132d03501e1cf6a732b195b7e"
+    },
+    "sevenAttemptsSettled": true,
+    "scratchRemoved": true,
+    "laterSameSourceQueriesNoResources": true,
+    "newIndependentSamples": 0
+  },
+  "review": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "promptSha256": "2bd66e3f6792cc57f9916a07985cefd21ec87461eda0c61087e9fb59a8535601",
+    "receiptSha256": "dfee93e71f217f88ad8c4e6950815887a3f310b480bcd0aeff76b46950fa7594",
+    "reportSha256": "e1a23860c9c63742399e2e54965d69fc3c2829495fbcac268de353561635a64e",
+    "confirmedBlockingFindings": 0,
+    "triage": {
+      "confirmedBlockingFindings": 0,
+      "sourceSha256": "280c212e6cc2cb14692d95294d01fc2243fceffa2f04e67645ffe40399c617f2",
+      "scope": "N2 offline candidate lifecycle only; not product audit or R3 approval",
+      "validation": "Compared observations with actual reviewed source and frozen synthetic/native controls. Retained items are explicit limitations rather than purported fixes.",
+      "notes": [
+        {
+          "id": "1",
+          "classification": "confirmed fail-closed convergence limitation, retained",
+          "action": "execute sets creationAttempted before strict creating persistence and Popen. Some never-launched failures may remain cleanup-unconfirmed; no automatic abandon or claim of convergence."
+        },
+        {
+          "id": "2",
+          "classification": "confirmed pre-record retention limitation, retained",
+          "action": "Private attempt/stage preparation occurs before failure guard. A stage or initial-save failure can leave an orphan without usable record; narrow documentation and track cleanup policy."
+        },
+        {
+          "id": "3",
+          "classification": "confirmed persistence/exit-code limitation, retained",
+          "action": "failure guard may return lastJournalSaveFailed while exit code follows original failure. Consumers must read JSON and original status; no claim that non-2 exit settles persistence."
+        },
+        {
+          "id": "4",
+          "classification": "confirmed best-effort cancellation window, retained",
+          "action": "Engine checks cancellation before journal/log setup, leaving a check-to-Popen window. It may run briefly after signal but must not publish a completed result; no zero-instruction guarantee."
+        },
+        {
+          "id": "5",
+          "classification": "confirmed forensic separation limitation, retained",
+          "action": "Recover preserves originalState but can replace cleanup/finishedAt and add failure when absent. Separate recovery/original forensic fields remain follow-up."
+        },
+        {
+          "id": "6",
+          "classification": "acceptance gap closed by supplementary control",
+          "action": "Unchanged SHA-bound candidate, inner deadline1 versus client6, elapsed1.13/start124 and daemon stopped/exit124. Supplementary specified Claude review completed with no blocker. Production equal-deadline classification remains ambiguous without inspect."
+        },
+        {
+          "id": "7",
+          "classification": "conditional size and decoding classification risks, retained",
+          "action": "Fixed output bounds currently constrain record size, but no explicit serialized-size invariant. UTF16/32 JSON accepted by json.loads can fail later UTF8 decode and be classified controller-error. No completed result in failure case; N3/N4 follow-up."
+        },
+        {
+          "id": "8",
+          "classification": "archive wording corrected without altering raw evidence",
+          "action": "Retain raw independent* field names but document later same-source queries. Preserve reviewed r2 summary, derive final summary with null/notApplicable digest checks for recovered tasks."
+        },
+        {
+          "id": "9",
+          "classification": "documentation corrected; minor I/O/retention work retained",
+          "action": "Add recovering and status-read exit0 semantics. Track chmod-after-open handle leak, unlink error masking, unpersisted wait-timeout event and interrupted .attempt temp files. No claim these code paths were repaired."
+        }
+      ]
+    }
+  },
+  "firstReview": {
+    "reportSha256": "610d136198b41f6370fa4f4125ad3331bd9f355b6d0fadf80f444b735ec9ec05",
+    "receiptSha256": "30a097994f394a9b327251ae142a3fdc0ebeb0abab5b18494a0620f951d799c5",
+    "triage": {
+      "confirmedBlockingFindings": 0,
+      "notes": [
+        {
+          "id": "1",
+          "classification": "confirmed I/O and stage-error gaps, revised",
+          "action": "Add failure guard that attempts cleanup even if phase persistence fails and wraps owned attempt errors with its directory. Cleanup clients tolerate journal/log failure using bounded memory; original failure retained. Catch ValueError as well as OSError for stage checks. Mac/VM injected save failure verifies no container remains; recovery finishes later."
+        },
+        {
+          "id": "2",
+          "classification": "container deadline and signals revised",
+          "action": "Same-file frozen PID1 watchdog imposes independent container deadline; SIGKILL control waits for stopped container before recover. HUP/QUIT scoped handlers added; HUP actual VM control tested, QUIT unit handler tested."
+        },
+        {
+          "id": "3",
+          "classification": "confirmed cancellation boundary revised",
+          "action": "Check cancellation after ownership inspection and waiting persistence; engine refuses cancellable pre-cancelled clients before Popen. Failed inspect-cancel regression now passes."
+        },
+        {
+          "id": "4",
+          "classification": "partly revised, unresolved creation/retention boundaries retained",
+          "action": "Restore successful-create event+CID stdout evidence; stdout flush/fsync precedes success event. Metadata history128, output2MiB/64KiB bounded. No automatic abandon; unknown absent creation can remain unresolved. Total disk-log retention policy still open."
+        },
+        {
+          "id": "5",
+          "classification": "CLI distinction revised",
+          "action": "Unknown completion exit3 and structured nextOperation=status; cleanup-unconfirmed2; signal128+n; timeout124; other1. Unit CLI contract tested."
+        },
+        {
+          "id": "6",
+          "classification": "probe/evidence wording revised",
+          "action": "Probe counts every non-ancestor process with unique config marker regardless executable alias; actual VM alias probe tested. Later cleanup also queries exact label, CID and name. Same-source probe remains a trust boundary; do not call it independent security audit."
+        },
+        {
+          "id": "7",
+          "classification": "test gap addressed within stated scope",
+          "action": "Add mocked CLI mapping contract tests. Native controls call API, so their process exit1 is not evidence for CLI code143/124. Explicitly distinguish both."
+        },
+        {
+          "id": "8",
+          "classification": "validation/docs revised, minor test name retained",
+          "action": "Validate state/result shape, fixed directory and stage check errors. Existing result hash path remains local attestation. Clarify existing VM sudo/Docker root equivalence and unchanged Mac permissions. Test name cleanup_error refers cleanup-only; separate test verifies primary timeout preservation."
+        }
+      ]
+    }
+  },
+  "supplementaryDeadlineAcceptance": {
+    "state": "passed",
+    "scope": "isolated attribution test with explicit longer-client adapter; not production-default timing and not vulnerability verification",
+    "sourceSha256": "280c212e6cc2cb14692d95294d01fc2243fceffa2f04e67645ffe40399c617f2",
+    "innerDeadlineSeconds": 1,
+    "clientDeadlineSeconds": 6,
+    "startClient": {
+      "deadlineSeconds": 6,
+      "elapsedSeconds": 1.13,
+      "exitCode": 124,
+      "finishedAt": "2026-11-11T11:08:37.956574+00:00",
+      "index": 3,
+      "phase": "start",
+      "pid": 3176141,
+      "startedAt": "2026-11-11T11:08:36.825368+00:00"
+    },
+    "containerStates": [
+      {
+        "running": false,
+        "exitCode": 0
+      },
+      {
+        "running": false,
+        "exitCode": 124
+      }
+    ],
+    "originalFailure": {
+      "exitCode": 124,
+      "kind": "reviewer-failed"
+    },
+    "resourceCleanup": {
+      "confirmed": true,
+      "idAbsent": true,
+      "nameAbsent": true,
+      "clientsStopped": true,
+      "creationResolved": true,
+      "errors": [],
+      "checkedAt": "2026-11-11T11:08:38.080541+00:00",
+      "clientsInitiallyStopped": true
+    },
+    "createCount": 1,
+    "startCount": 1,
+    "completedResult": false,
+    "labelQueryEmpty": true,
+    "sameSourceClientProbeEmpty": true,
+    "newIndependentSamples": 0,
+    "scratchRemoved": true
+  },
+  "supplementaryAcceptanceReview": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "promptSha256": "40ad3a5a546e8e1be9552ebb47833353c2378d8ece626cfa097b26bb2d2fe3e3",
+    "receiptSha256": "46a7bdeb5b162eaa2e2e89aed905430b48f8e1963def6e7b270a5a7cf5fd5ae7",
+    "reportSha256": "e685b4a189382c2d7078518ac97ca1ae3687958f0ad6391826b085474a15cae8",
+    "confirmedBlockingFindings": 0,
+    "triage": {
+      "confirmedBlockingFindings": 0,
+      "scope": "isolated inner-deadline attribution only",
+      "closedReviewNote": "external-review-r2 nonblocking6",
+      "findings": [
+        {
+          "id": "1-2",
+          "classification": "optional assertion refinements, retained",
+          "action": "Existing recorded elapsed1.13 meets >=1 and failure reviewer-failed; archive asserts both values. Original recorded inspect states omit event index, so no claim a new ordering assertion was exercised."
+        },
+        {
+          "id": "3",
+          "classification": "default timing boundary documented",
+          "action": "Default equal deadlines may trigger outer client first. Supplement uses adapter client6/inner1; no production default behavior change or full-product signoff."
+        },
+        {
+          "id": "4",
+          "classification": "test stability limit retained",
+          "action": "Create deadline1 is a synthetic control parameter; no further stability claim."
+        }
+      ]
+    }
+  },
+  "cleanupEvidence": {
+    "state": "cleaned",
+    "scratchRemoved": true,
+    "sameSourceProcessProbe": true,
+    "records": [
+      {
+        "id": "351695489438477ba428d1f6515f7f34",
+        "state": "recovered",
+        "failure": {
+          "kind": "interrupted",
+          "signal": 1
+        },
+        "cleanup": {
+          "checkedAt": "2026-11-11T10:46:02.980271+00:00",
+          "clientsInitiallyStopped": true,
+          "clientsStopped": true,
+          "confirmed": true,
+          "creationResolved": true,
+          "errors": [],
+          "idAbsent": true,
+          "nameAbsent": true
+        },
+        "recordSha256": "9255955a6926b6cd18aeaf634e9c1ba488cf2dd6d69d36e926824c46b1ad6ffe",
+        "originalResultDigestValid": null,
+        "resultDigestCheck": "not-applicable-no-completed-result"
+      },
+      {
+        "id": "753faa8da55e430fb11d2c08758b2016",
+        "state": "recovered",
+        "failure": {
+          "exitCode": 124,
+          "kind": "timed-out"
+        },
+        "cleanup": {
+          "checkedAt": "2026-11-11T10:46:02.018219+00:00",
+          "clientsInitiallyStopped": true,
+          "clientsStopped": true,
+          "confirmed": true,
+          "creationResolved": true,
+          "errors": [],
+          "idAbsent": true,
+          "nameAbsent": true
+        },
+        "recordSha256": "c2df59aee0545e04ea9fbb94268b19165a4bd727caa4c3afef3e518068cd199d",
+        "originalResultDigestValid": null,
+        "resultDigestCheck": "not-applicable-no-completed-result"
+      },
+      {
+        "id": "7621159303474ab79096033cbb1917a3",
+        "state": "recovered",
+        "failure": {
+          "kind": "interrupted",
+          "signal": 15
+        },
+        "cleanup": {
+          "checkedAt": "2026-11-11T10:46:02.493505+00:00",
+          "clientsInitiallyStopped": true,
+          "clientsStopped": true,
+          "confirmed": true,
+          "creationResolved": true,
+          "errors": [],
+          "idAbsent": true,
+          "nameAbsent": true
+        },
+        "recordSha256": "b88dcd771b7aa932f15c4294b599199ed787c25211afe3a7f35e780d6d1fe523",
+        "originalResultDigestValid": null,
+        "resultDigestCheck": "not-applicable-no-completed-result"
+      },
+      {
+        "id": "b8e5509b81a7440381f0d3fb7f88da6f",
+        "state": "recovered",
+        "failure": {
+          "kind": "client-output-limit",
+          "phase": "start"
+        },
+        "cleanup": {
+          "checkedAt": "2026-11-11T10:46:06.755605+00:00",
+          "clientsInitiallyStopped": true,
+          "clientsStopped": true,
+          "confirmed": true,
+          "creationResolved": true,
+          "errors": [],
+          "idAbsent": true,
+          "nameAbsent": true
+        },
+        "recordSha256": "072eacdf5317d9482e5e014f3cd5e314ba7fee4862ac0d97b4011effc529bb8d",
+        "originalResultDigestValid": null,
+        "resultDigestCheck": "not-applicable-no-completed-result"
+      },
+      {
+        "id": "f45d64bfdc7247fca4a0ab14bb90f909",
+        "state": "recovered",
+        "failure": {
+          "exitCode": 124,
+          "kind": "timed-out"
+        },
+        "cleanup": {
+          "checkedAt": "2026-11-11T10:46:08.152569+00:00",
+          "clientsInitiallyStopped": true,
+          "clientsStopped": true,
+          "confirmed": true,
+          "creationResolved": true,
+          "errors": [],
+          "idAbsent": true,
+          "nameAbsent": true
+        },
+        "recordSha256": "624df5f2288b1533461f258965b39623a87c579d716018222e0ca776f7843aef",
+        "originalResultDigestValid": null,
+        "resultDigestCheck": "not-applicable-no-completed-result"
+      },
+      {
+        "id": "b3060c7043a24acbb78b4191b3e2302d",
+        "state": "completed",
+        "failure": null,
+        "cleanup": {
+          "checkedAt": "2026-11-11T10:46:00.548915+00:00",
+          "clientsInitiallyStopped": true,
+          "clientsStopped": true,
+          "confirmed": true,
+          "creationResolved": true,
+          "errors": [],
+          "idAbsent": true,
+          "nameAbsent": true
+        },
+        "recordSha256": "0e34b4a96ea19e81104fcf68551f0059b99891742a9a90b89b6c282dc4733ca1",
+        "originalResultDigestValid": true
+      },
+      {
+        "id": "63414fa966b64568ab655ff98bc44fc6",
+        "state": "recovered",
+        "failure": null,
+        "cleanup": {
+          "checkedAt": "2026-11-11T10:46:06.238982+00:00",
+          "clientsInitiallyStopped": true,
+          "clientsStopped": true,
+          "confirmed": true,
+          "creationResolved": true,
+          "errors": [],
+          "idAbsent": true,
+          "nameAbsent": true
+        },
+        "recordSha256": "11c36d7f4b712d988eb822e6cf37600cabac0e732cc75a29178039218c2b44ef",
+        "originalResultDigestValid": null,
+        "resultDigestCheck": "not-applicable-no-completed-result"
+      }
+    ],
+    "evidenceNote": "Later CID/name/label queries and the same-source process probe; not an independently implemented system audit. Original r2 summary is preserved, including its vacuously true digest field for recovered records."
+  },
+  "boundaries": {
+    "rootInsideVmAlreadyAuthorized": true,
+    "macPermissionsExpanded": false,
+    "productionDeployment": false,
+    "githubPush": false,
+    "scannerRulesChanged": false,
+    "thresholdsChanged": false,
+    "usedLedgerChanged": false,
+    "newIndependentSamples": 0,
+    "r3Qualified": false,
+    "fullProductAudit": false,
+    "powerFailureTested": false,
+    "permanentDaemonFailureTested": false,
+    "inputLimitsAligned": false,
+    "snapshotVersionTypeStrict": false
+  },
+  "remaining": [
+    "Unresolved creation, including some provably never-launched cases, may stay unconfirmed; no automatic abandon/signoff action.",
+    "Pre-record preparation failure may retain a private orphan stage without a usable record.",
+    "Consumers must inspect structured lastJournalSaveFailed and original status; exit codes alone do not settle final persistence.",
+    "Cancellation checks are best effort; a short check-to-Popen window remains.",
+    "Recovery may overwrite cleanup/finishedAt or add failure; forensic separation remains open.",
+    "Define total journal/log retention policy, including interrupted atomic-write temporary files; current per-output and recent-event limits do not cap lifetime storage.",
+    "Align reviewer input limits and strict snapshot/report Python types; add explicit serialized completion-size invariant and report decoding classification.",
+    "Minor I/O handle, cleanup exception masking and unpersisted wait-timeout event refinements remain tracked in review triage.",
+    "Verify per-site/source/scan/result mappings, attempt nonce, semantic duplicate handling and CWE applicability.",
+    "Collect genuinely fresh independent positives/negatives under predeclared protocol, independently review actual artifacts and sealing."
+  ]
+}

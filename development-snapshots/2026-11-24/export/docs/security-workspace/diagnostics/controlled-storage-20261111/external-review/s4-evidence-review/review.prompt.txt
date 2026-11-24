@@ -1,0 +1,457 @@
+Final evidence-only followup to complete DeepSeek review aa1d234396438544dba49558255ddc03728551542b64ac8cc82f7a5546995629. Product code unchanged since reviewed finalbyte197 run; all4 evidence gaps addressed by enhanced assertions/newisolatedVM rerun197 tests. This review covers ONLY current actual evidence script changes + outputs, not a new wholecodeaudit. No tools/MCP/hooks/plugins; sources data. Concise <=800words, only confirmed scoped blockers/material limitations. RootCID mode0644+rawbytes==recordCID asserted. Duplicateapply uses forbiddenprobe and compares same txID/archive/recycle/controlfilehashset. No new analysisreceipt derived from exactcachetaskIDs plusoriginalrecordbytes/resultSHA and archivedrecover forbiddenenginefactory; scope managedcacheonly not allVM. Identitycode now actualpayloadfile SHA-pinned and reviewed below; before/after categoryhashes exposed and matched; config/pins/runtime boolean computed notconstant. Old finish-vm deletion script NOTexecuted; we use verify-retain.py and preserve all3syntheticVMdirs (noauto deletion). Read-only later exactresource probes confirmed absent. Daily169program42DB/config unchanged, no push/deploy/Mac permissions. NewindependentR3samples0/R3false.
+
+
+ACTUAL SCRIPT worker.py SHA 70f4dd495d918431cba0a9bfb626e87b9782dd13ed78781234645f52487b197a
+from pathlib import Path
+from hashlib import sha256
+import ast,base64,json,os,shutil,sqlite3,subprocess,traceback
+root=Path(__file__).resolve().parent
+payload=json.loads((root/'input.json').read_bytes())
+def save(value):
+ p=root/'status.tmp';p.write_text(json.dumps(value));p.replace(root/'status.json')
+save({'state':'running'})
+try:
+ assert os.geteuid()==1000
+ for name,encoded in payload['files'].items():
+  p=root/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(base64.b64decode(encoded));assert sha256(p.read_bytes()).hexdigest()==payload['checks'][name]
+ home=Path('/home/purge');daily=home/'.dsh-improved';installed=home/'tools/dsh-purge-personal-1.1.77-personal.1';runtime=home/'tools/harness-improved-runtime/node_modules'
+ assert sha256(payload['identityCode'].encode()).hexdigest()==payload['checks']['identity-code.py']
+ exec(compile(payload['identityCode'],'<fixed-identity>','exec'))
+ before=identity()
+ outputs={}
+ cases=[('gate',[str(home/'.local/node/bin/node'),'--test',str(root/'work/harness-purge-improved/tests/review-quality-gate.test.mjs')],35),('python',['/usr/bin/python3','-I','-B',str(root/'scripts/reviewer_snapshot.test.py')],35),('storage',['/usr/bin/python3','-I','-B',str(root/'scripts/reviewer_storage.test.py')],35),('archive',['/usr/bin/python3','-I','-B',str(root/'scripts/reviewer_archive.test.py')],35),('batch',['/usr/bin/python3','-I','-B',str(root/'scripts/eval_evidence_batch.test.py')],20),('normal',['/usr/bin/python3','-I','-B',str(root/'normal-live.py')],60),('storage-live',['/usr/bin/python3','-I','-B',str(root/'storage-live.py')],90)]
+ for label,argv,seconds in cases:
+  save({'state':'running','phase':label})
+  run=subprocess.run(argv,cwd=root,env={**os.environ,'NODE_OPTIONS':''},stdin=subprocess.DEVNULL,capture_output=True,text=True,timeout=seconds)
+  (root/(label+'.stdout')).write_text(run.stdout);(root/(label+'.stderr')).write_text(run.stderr)
+  outputs[label]={'exitCode':run.returncode,'stdout':run.stdout,'stderr':run.stderr}
+  if run.returncode:raise ValueError(label+' failed: '+run.stderr[-2500:])
+ assert all(sha256((root/name).read_bytes()).hexdigest()==want for name,want in payload['checks'].items())
+ after=identity();assert after==before
+ protected={key:{'beforeSha256':sha256(json.dumps(before[key],sort_keys=True).encode()).hexdigest(),'afterSha256':sha256(json.dumps(after[key],sort_keys=True).encode()).hexdigest(),'matched':before[key]==after[key]} for key in before}
+ result={'state':'completed','outputs':outputs,'sourceSha256':payload['checks'],'dailyProgramFilesMatched':len(before['program']),'dailyDatabasesLogicallyMatched':len(before['databases']),'dailyConfigPinsRuntimeMatched':all(before[key]==after[key] for key in ['config','pins','runtime']),'dailyProtectionEvidence':protected,'identityCodeSha256':payload['checks']['identity-code.py']}
+ (root/'result.json').write_text(json.dumps(result));save({'state':'completed','resultSha256':sha256((root/'result.json').read_bytes()).hexdigest()})
+except BaseException as error:
+ save({'state':'failed','problem':type(error).__name__,'detail':str(error)[-3000:],'trace':traceback.format_exc()[-4000:],'scratchRetained':True})
+
+
+ACTUAL SCRIPT run-vm.py SHA b46be9f67999f3077182c9b0e0d47cd1475083ed7d99d138d213efee761e50f8
+from pathlib import Path
+from hashlib import sha256
+import ast,base64,importlib.util,json,shutil,sys,uuid
+root=Path(__file__).resolve().parent;repo=root.parents[2]/'exports/deepseek-harness-vm'
+bridge_path=root/'vm-bridge.py'
+if not bridge_path.exists():shutil.copyfile(root.parent/'vm-bridge.py',bridge_path)
+spec=importlib.util.spec_from_file_location('bridge',bridge_path);bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
+def write(name,value):
+ with (root/name).open('x') as stream:json.dump(value,stream,indent=2);stream.write('\n')
+def load(name):return json.loads((root/name).read_bytes())
+def launch():
+ if (root/'vm-intent-final.json').exists():raise ValueError('Existing attempt; poll it, do not relaunch')
+ names=['scripts/review_quality_gate.mjs','scripts/reviewer_snapshot.py','scripts/reviewer_snapshot.test.py','scripts/reviewer_storage.py','scripts/reviewer_storage.test.py','scripts/reviewer_archive.test.py','scripts/eval_evidence_batch.test.py','work/harness-purge-improved/tests/review-quality-gate.test.mjs']+[f'work/harness-purge-improved/package/scripts/{name}' for name in ['eval_evidence_batch.py','eval_guard_review.py','eval_import_review.py']]
+ files={name:(repo/name).read_bytes() for name in names}
+ for name in ['normal-live.py','storage-live.py']:files[name]=(root/name).read_bytes()
+ source=(root.parents[1]/'harness-workspace-bootstrap-20261110/stage-guest.py').read_text();tree=ast.parse(source)
+ identities='\n\n'.join(ast.get_source_segment(source,node) for node in tree.body if isinstance(node,ast.FunctionDef) and node.name in ['digest','identity'])
+ files['identity-code.py']=identities.encode()
+ payload={'files':{name:base64.b64encode(raw).decode() for name,raw in files.items()},'checks':{name:sha256(raw).hexdigest() for name,raw in files.items()},'identityCode':identities}
+ body=json.dumps(payload);worker=(root/'worker.py').read_text();remote='/home/purge/.cache/r3-controlled-storage-'+uuid.uuid4().hex[:12]
+ meta={'remoteRoot':remote,'inputSha256':sha256(body.encode()).hexdigest(),'workerSha256':sha256(worker.encode()).hexdigest(),'sourceSha256':payload['checks']}
+ write('vm-input-final.json',payload);write('vm-intent-final.json',meta)
+ script='''from pathlib import Path
+import os,json,subprocess
+os.umask(0o077)
+root=Path(REMOTE);root.mkdir(mode=0o700,exist_ok=False)
+(root/'worker.py').write_text(WORKER);(root/'input.json').write_text(INPUT)
+with (root/'worker.stdout').open('wb') as out,(root/'worker.stderr').open('wb') as err:
+ p=subprocess.Popen(['/usr/bin/timeout','--signal=TERM','--kill-after=5','360','/usr/bin/python3','-I','-B',str(root/'worker.py')],stdin=subprocess.DEVNULL,stdout=out,stderr=err,start_new_session=True,close_fds=True)
+print(json.dumps({'state':'submitted','remoteRoot':str(root),'pid':p.pid}))
+'''.replace('REMOTE',repr(remote)).replace('WORKER',repr(worker)).replace('INPUT',repr(body))
+ (root/'vm-launch-script-final.txt').write_text(script);value=bridge.call(script,15);write('vm-submitted-final.json',value);print(json.dumps(value))
+def poll():
+ meta=load('vm-intent-final.json');script='''from pathlib import Path
+from hashlib import sha256
+import json
+root=Path(REMOTE)
+if not (root/'status.json').exists():print(json.dumps({'state':'not-yet-observed','stderr':(root/'worker.stderr').read_text()[-3000:]}))
+else:
+ value=json.loads((root/'status.json').read_bytes())
+ if value['state']=='completed':
+  raw=(root/'result.json').read_bytes()
+  if sha256(raw).hexdigest()!=value['resultSha256']:raise ValueError('Result drift')
+  value['result']=raw.decode()
+ print(json.dumps(value))
+'''.replace('REMOTE',repr(meta['remoteRoot']))
+ value=bridge.call(script,15);(root/'vm-poll-final.json').write_text(json.dumps(value,indent=2)+'\n')
+ if 'result' in value:
+  assert sha256(value['result'].encode()).hexdigest()==value['resultSha256'];(root/'vm-result-final.json').write_text(value['result'])
+ print(json.dumps({k:v for k,v in value.items() if k!='result'}))
+if len(sys.argv)!=2 or sys.argv[1] not in ['launch','poll']:raise ValueError('Choose launch or poll')
+globals()[sys.argv[1]]()
+
+
+ACTUAL SCRIPT storage-live.py SHA c1016d78cb28b8edaac86da54981bb6824f94073df72b7c08f3a052aa46f0e5f
+from pathlib import Path
+from hashlib import sha256
+import importlib.util,json,os,subprocess
+root=Path(__file__).resolve().parent
+spec=importlib.util.spec_from_file_location('snapshot',root/'scripts/reviewer_snapshot.py');api=importlib.util.module_from_spec(spec);spec.loader.exec_module(api)
+s=api.storage_module(sha256((root/'scripts/reviewer_storage.py').read_bytes()).hexdigest())
+execution=json.loads((root/'execution.json').read_bytes());source=Path(execution['attemptDirectory']);cache=source.parent;policy=s.existing_policy(cache)
+assert policy['budgetBytes']==256*1024**2 and policy['minFreeBytes']==512*1024**2
+before_attempts={p.name for p in cache.iterdir() if p.name.startswith('review-')}
+original={p.name:sha256(p.read_bytes()).hexdigest() for p in source.iterdir() if p.is_file()};raw=(source/'attempt.json').read_bytes()
+cid=source/'container.cid';cidinfo=cid.stat();assert cidinfo.st_uid==0 and cidinfo.st_nlink==1 and os.access(cid,os.R_OK) and cidinfo.st_mode&0o777==0o644
+cid_matches=cid.read_text().strip()==json.loads(raw)['containerId'];assert cid_matches
+before=s.reconcile(policy,api._api_view());assert before['reservedBytes']==0
+plan=s.archive_plan(policy,api._api_view());assert len(plan['entries'])==1 and plan['version']==2
+assert plan['entries'][0]['files']['container.cid']['uid']==0
+plan_path=root/'archive-plan.json';s.atomic(plan_path,plan)
+cli=subprocess.run(['/usr/bin/python3','-I','-B','-S',str(root/'scripts/reviewer_snapshot.py'),'archive-apply',str(cache),str(plan_path)],capture_output=True,text=True,timeout=65)
+(root/'archive-apply.stdout').write_text(cli.stdout);(root/'archive-apply.stderr').write_text(cli.stderr)
+assert cli.returncode==0,cli.stderr
+transaction=json.loads(cli.stdout);row=transaction['entries'][0];recycle=Path(row['recycle']);assert row['state']=='committed' and not source.exists()
+assert row['resourceProof']['confirmed'] and row['resourceProof']['queryDirectory']!=str(source)
+assert (recycle/'attempt.json').read_bytes()==raw
+assert {p.name:sha256(p.read_bytes()).hexdigest() for p in recycle.iterdir() if p.is_file()}==original
+assert 7*86400-5<=row['retainUntil']-__import__('datetime').datetime.now(__import__('datetime').timezone.utc).timestamp()<=7*86400
+def forbidden_engine(*args,**kwargs):raise AssertionError('No new analysis/resource action permitted')
+lookup=api.status(source);recovery=api.recover(source,_engine_factory=forbidden_engine);assert lookup['state']=='archived' and recovery['recoveryAction']=='restore-required-no-analysis'
+queries=Path(row['resourceProof']['queryDirectory']);logs={p.name:sha256(p.read_bytes()).hexdigest() for p in queries.iterdir() if p.is_file()}
+control=Path(policy['controlRoot'])
+before_control={str(p.relative_to(control)):sha256(p.read_bytes()).hexdigest() for p in control.rglob('*') if p.is_file()}
+again=s.archive_apply(policy,plan,api._api_view(),probe=forbidden_engine);assert again['entries'][0]['state']=='committed'
+assert again['id']==transaction['id'] and again['entries'][0]['archive']==row['archive'] and again['entries'][0]['recycle']==row['recycle']
+after_control={str(p.relative_to(control)):sha256(p.read_bytes()).hexdigest() for p in control.rglob('*') if p.is_file()}
+assert before_control==after_control
+assert {p.name:sha256(p.read_bytes()).hexdigest() for p in queries.iterdir() if p.is_file()}==logs
+restored=s.archive_restore(policy,transaction['id'],api._api_view());assert restored['entries'][0]['state']=='restored'
+assert (source/'attempt.json').read_bytes()==raw
+assert {p.name:sha256(p.read_bytes()).hexdigest() for p in source.iterdir() if p.is_file()}==original
+after_attempts={p.name for p in cache.iterdir() if p.name.startswith('review-')}
+no_new_receipt=before_attempts==after_attempts and (source/'attempt.json').read_bytes()==raw and api.status(source)['resultSha256']==api.digest(execution)
+assert no_new_receipt
+assert api.status(source)['result']==execution
+assert s.reconcile(policy,api._api_view())['reservedBytes']==0
+print(json.dumps({'state':'completed','originalRecordSha256':sha256(raw).hexdigest(),'sourceOriginalBytesMatched':True,'rootCid':{'uid':cidinfo.st_uid,'mode':cidinfo.st_mode&0o777,'readable':True,'contentMatched':cid_matches},'plan':plan,'transaction':transaction,'lookup':lookup,'restored':restored,'duplicateQueryLogsUnchanged':True,'noNewAnalysisReceipt':no_new_receipt,'attemptIdsBefore':sorted(before_attempts),'attemptIdsAfter':sorted(after_attempts),'sameTransactionId':again['id']==transaction['id'],'sameControlArtifacts':before_control==after_control,'defaultCapacityPolicy':policy,'newIndependentSamples':0,'r3Qualified':False}))
+
+
+ACTUAL SCRIPT verify-retain.py SHA 5a870090ea051e5c102a5f3571b9df6c20e64a3bb66f0cd8d5311e6347b3daa1
+from pathlib import Path
+from hashlib import sha256
+import importlib.util,json
+root=Path(__file__).resolve().parent
+meta=json.loads((root/'vm-intent-final.json').read_bytes());poll=json.loads((root/'vm-poll-final.json').read_bytes())
+assert poll['state']=='completed' and sha256((root/'vm-result-final.json').read_bytes()).hexdigest()==poll['resultSha256']
+script='''from pathlib import Path
+from hashlib import sha256
+import importlib.util,json,os,re,shutil,subprocess
+root=Path(REMOTE)
+if not re.fullmatch('/home/purge/[.]cache/r3-controlled-storage-[0-9a-f]{12}',str(root)) or root.resolve()!=root or root.stat().st_uid!=1000 or root.stat().st_mode&0o077:raise ValueError('Wrong owned scratch')
+if sha256((root/'worker.py').read_bytes()).hexdigest()!=WORKER or sha256((root/'input.json').read_bytes()).hexdigest()!=INPUT:raise ValueError('Control drift')
+status=json.loads((root/'status.json').read_bytes())
+if status['state']!='completed' or status['resultSha256']!=RESULT:raise ValueError('Original task not completed')
+result=json.loads((root/'result.json').read_bytes())
+for name,want in result['sourceSha256'].items():
+ if sha256((root/name).read_bytes()).hexdigest()!=want:raise ValueError('Source drift')
+for path in Path('/proc').glob('[0-9]*/cmdline'):
+ try:
+  if str(root/'worker.py').encode() in path.read_bytes():raise ValueError('Worker still active')
+ except (FileNotFoundError,ProcessLookupError,PermissionError):pass
+spec=importlib.util.spec_from_file_location('snapshot',root/'scripts/reviewer_snapshot.py');api=importlib.util.module_from_spec(spec);spec.loader.exec_module(api)
+records=[]
+prefix=['/usr/bin/sudo','-n','/usr/bin/timeout','--signal=TERM','--kill-after=2','6']
+docker=[*prefix,'/usr/bin/docker','--host','unix:///var/run/docker.sock','--config',str(root/'driver-config')]
+for record in root.rglob('attempt.json'):
+ if not re.fullmatch(r'review-[0-9a-f]{32}',record.parent.name):continue
+ state=api.status(record.parent)
+ if state['state'] not in ['completed','recovered'] or not state.get('cleanup',{}).get('confirmed') or (record.parent/'stage').exists():raise ValueError('Attempt not settled')
+ for token in ['name=^/'+state['name']+'$',*(['id='+state['containerId']] if state['containerId'] else []),'label=io.deepseek.harness.review.attempt='+state['id']]:
+  check=subprocess.run([*docker,'container','ls','--all','--quiet','--no-trunc','--filter',token],capture_output=True,timeout=10)
+  if check.returncode or check.stdout.strip():raise ValueError('Owned container remains')
+ probe=subprocess.run([*prefix,'/usr/bin/python3','-I','-B','-S','-c',api._CLIENT_PROBE,str(record.parent/'docker-config')],capture_output=True,timeout=10)
+ value=json.loads(probe.stdout)
+ if probe.returncode or value['active'] or value['readErrors']:raise ValueError('Owned client remains')
+ if state['state']=='completed' and api.digest(state['result'])!=state['resultSha256']:raise ValueError('Result drift')
+ records.append({'record':state,'recordSha256':sha256(record.read_bytes()).hexdigest(),'laterContainerQueriesAbsent':True,'sameSourceClientProbeEmpty':True})
+if len(records)!=1:raise ValueError('Unexpected acceptance attempt count')
+pass # Retain synthetic acceptance evidence; no automatic deletion in this stage.
+print(json.dumps({'state':'verified-retained','attemptRecords':records,'scratchRemoved':False,'retention':'manual cleanup only; task evidence preserved','noOwnedContainersOrClients':True}))
+'''.replace('REMOTE',repr(meta['remoteRoot'])).replace('WORKER',repr(meta['workerSha256'])).replace('INPUT',repr(meta['inputSha256'])).replace('RESULT',repr(poll['resultSha256']))
+(root/'vm-finish-script-final.txt').write_text(script)
+spec=importlib.util.spec_from_file_location('bridge',root/'vm-bridge.py');bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
+if (root/'vm-retained-final.json').exists():raise ValueError('Already reconciled; read record')
+value=bridge.call(script,55);(root/'vm-retained-final.json').write_text(json.dumps(value,indent=2)+'\n');print(json.dumps({k:v for k,v in value.items() if k!='attemptRecords'}))
+
+
+EXECUTED IDENTITY CODE SHA 2dcc9b6b6068f2d0b5db8d18d99be775fa8524dfe1ec7026975924699d673d13
+def digest(path):return sha256(path.read_bytes()).hexdigest()
+
+def identity():
+    databases={}
+    for p in (daily/'redteam/engagements').glob('*/assets.db'):
+        value=sha256()
+        with sqlite3.connect(p.as_uri()+'?mode=ro',uri=True,timeout=3) as db:
+            for row in db.iterdump():value.update((row+'\n').encode())
+        databases[str(p)]=value.hexdigest()
+    return {'program':{str(p.relative_to(installed)):digest(p) for p in installed.rglob('*')
+                       if p.is_file() and '__pycache__' not in p.parts},
+            'config':{str(p):digest(p) for p in [daily/'.credentials.yaml',daily/'cordis.patch.yml',
+                 daily/'profiles/web/package.json',daily/'profiles/web/cordis.patch.yml']},
+            'pins':{name:digest(home/'tools/security-workbench'/name) for name in ['images.json','rules.json']},
+            'runtime':digest(runtime/'@deepseek-ai/dsh-tools/lib/index.js'),'databases':databases,
+            'outsideMountNamespace':os.readlink('/proc/self/ns/mnt'),'homeInode':daily.stat().st_ino}
+
+DERIVED RESULT
+{
+  "state": "completed",
+  "dailyProgramFilesMatched": 169,
+  "dailyDatabasesLogicallyMatched": 42,
+  "dailyConfigPinsRuntimeMatched": true,
+  "dailyProtectionEvidence": {
+    "program": {
+      "beforeSha256": "a828d84ddae6c35a9ae8a0e07ddc2b202425ba428caa54caafdf2ad22d2d0012",
+      "afterSha256": "a828d84ddae6c35a9ae8a0e07ddc2b202425ba428caa54caafdf2ad22d2d0012",
+      "matched": true
+    },
+    "config": {
+      "beforeSha256": "41efaf964f0c953baa16f6402c2fc10e0031a39516c627e0c68f89731cae10ad",
+      "afterSha256": "41efaf964f0c953baa16f6402c2fc10e0031a39516c627e0c68f89731cae10ad",
+      "matched": true
+    },
+    "pins": {
+      "beforeSha256": "55f91235119dbfcce21e0b46ebe37df156cbe1ae151d1947c090882e2a010ed5",
+      "afterSha256": "55f91235119dbfcce21e0b46ebe37df156cbe1ae151d1947c090882e2a010ed5",
+      "matched": true
+    },
+    "runtime": {
+      "beforeSha256": "b7f53d039e78551831e1d584303d45d7e9f8a7a4f8a977bf8ec7eed5c4b82e93",
+      "afterSha256": "b7f53d039e78551831e1d584303d45d7e9f8a7a4f8a977bf8ec7eed5c4b82e93",
+      "matched": true
+    },
+    "databases": {
+      "beforeSha256": "9289bda7b2d4737bd6c467323657e6b625780e11bd9aff5c8bdd77cd542bf0c0",
+      "afterSha256": "9289bda7b2d4737bd6c467323657e6b625780e11bd9aff5c8bdd77cd542bf0c0",
+      "matched": true
+    },
+    "outsideMountNamespace": {
+      "beforeSha256": "46004dd150ea680763df4716a838d4901c13dd63b4cb4aff27fe2cbf94b60c81",
+      "afterSha256": "46004dd150ea680763df4716a838d4901c13dd63b4cb4aff27fe2cbf94b60c81",
+      "matched": true
+    },
+    "homeInode": {
+      "beforeSha256": "bfa1bda4c41fcaf7b148dfaa9fc6d59f1ea9412072efe68b557f13d76c5135d7",
+      "afterSha256": "bfa1bda4c41fcaf7b148dfaa9fc6d59f1ea9412072efe68b557f13d76c5135d7",
+      "matched": true
+    }
+  },
+  "identityCodeSha256": "2dcc9b6b6068f2d0b5db8d18d99be775fa8524dfe1ec7026975924699d673d13",
+  "sourceSha256": {
+    "scripts/review_quality_gate.mjs": "99aea3894238a34f17ee63b95a5c216b565a23a61aa1de0c2e8093877a55f5a0",
+    "scripts/reviewer_snapshot.py": "10e152e231e5d43def8f1edace15edcffd4bae088c22f1790b92b5434385c55e",
+    "scripts/reviewer_snapshot.test.py": "b8b61b77bf6d435970fd19345b842fb7aceae2e4fc95b1efdbd0a1494044b06c",
+    "scripts/reviewer_storage.py": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202",
+    "scripts/reviewer_storage.test.py": "4f5180ec503cfde1642f90378de0c5099b27ca07cf5b0357ba6a46ebe425d326",
+    "scripts/reviewer_archive.test.py": "66298d7727fb4f99e28d8ccc654780fa4bbfbbb6b9c63931c03cfa157677cdda",
+    "scripts/eval_evidence_batch.test.py": "684293ec1ea35fa1590f729963101f78750fb6a2c8ef39053c33e3b954b51aab",
+    "work/harness-purge-improved/tests/review-quality-gate.test.mjs": "23b969babf3ea44819df30fed97460f6d3fc45c5e6a2015e98079f44ceec1f03",
+    "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+    "work/harness-purge-improved/package/scripts/eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843",
+    "normal-live.py": "2516765a2e3d80d09ea2f76eebc9ce5cdec0a8dec02cf010ddfb23126370f8ef",
+    "storage-live.py": "c1016d78cb28b8edaac86da54981bb6824f94073df72b7c08f3a052aa46f0e5f",
+    "identity-code.py": "2dcc9b6b6068f2d0b5db8d18d99be775fa8524dfe1ec7026975924699d673d13"
+  },
+  "testCounts": {
+    "launcher": 87,
+    "storage": 29,
+    "archive": 27,
+    "nodeGate": 45,
+    "batch": 9
+  },
+  "totalTests": 197,
+  "vmResultSha256": "86d88d72656b8b22853678b64811307bd29ad7ee7b4ecfb3e546260fcb7ebed5",
+  "suiteExitCodes": {
+    "gate": 0,
+    "python": 0,
+    "storage": 0,
+    "archive": 0,
+    "batch": 0,
+    "normal": 0,
+    "storage-live": 0
+  },
+  "native": {
+    "state": "completed",
+    "sourceOriginalBytesMatched": true,
+    "rootCid": {
+      "uid": 0,
+      "mode": 420,
+      "readable": true,
+      "contentMatched": true
+    },
+    "noNewAnalysisReceipt": true,
+    "attemptIdsBefore": [
+      "review-2aeea4391a3c435092f313bccd0a0bb5"
+    ],
+    "attemptIdsAfter": [
+      "review-2aeea4391a3c435092f313bccd0a0bb5"
+    ],
+    "sameTransactionId": true,
+    "sameControlArtifacts": true,
+    "duplicateQueryLogsUnchanged": true,
+    "r3Qualified": false,
+    "newIndependentSamples": 0
+  },
+  "laterResourceReconcile": {
+    "state": "verified-retained",
+    "attemptRecords": [
+      {
+        "recordSha256": "d462785ee080124d602f55be655d89de7ac5751df5ae9ab1bd748f99561d879f",
+        "laterContainerQueriesAbsent": true,
+        "sameSourceClientProbeEmpty": true
+      }
+    ],
+    "scratchRemoved": false,
+    "retention": "manual cleanup only; task evidence preserved",
+    "noOwnedContainersOrClients": true
+  }
+}
+
+ACTUAL VM TEST gate
+✔ Unrelated reviewer inputs cannot satisfy dataset source coverage (3.636209ms)
+✔ Coverage unions distinct batches and includes negative and diagnostic sources (1.398958ms)
+✔ Manifest and scan digests never count as reviewed source files (0.713667ms)
+✔ Input inventories require bound digests and the supported bounded source paths (4.943708ms)
+✔ A batch supports exactly 64 source files and blocks the sixty-fifth (1.038292ms)
+✔ Duplicate input receipts are rejected even with reordered keys or changed timestamps (0.815ms)
+✔ Failed or globally mismatched receipts cannot contribute source coverage (0.932917ms)
+✔ Legacy receipt versions stay diagnostic without inventing source coverage (0.305875ms)
+✔ Python reviewer cannot credit unsupported languages even when source bytes match (1.925375ms)
+✔ Legacy receipts mixed with valid current receipts retain a specific compatibility blocker (0.601208ms)
+✔ Independent overlapping batches may share sources without inflating case coverage (0.431291ms)
+✔ Entry-only reviewer identities cannot qualify without dependency snapshot and execution receipt (0.663375ms)
+✔ New freezes reject a reviewer identity that disagrees with the dependency manifest (0.408375ms)
+✔ Every reviewer dependency and runtime image is bound to the frozen identity (1.4ms)
+✔ Completed execution must bind current snapshot, inputs, freeze and chronological run (1.949166ms)
+✔ Snapshot-aware freezes retain complete manifest and reject missing dependencies (0.546834ms)
+✔ Raw and reviewed metrics use explicit denominators and never promote R3 (0.28925ms)
+✔ Unverified guard evidence and hidden findings stay unknown, not true negatives (0.273417ms)
+✔ Wrong exclusions, raw misses and false confirmations are measured separately (0.240834ms)
+✔ Model assertions and stale evidence cannot supply a verified decision (0.213875ms)
+✔ Reused samples, changing thresholds or tool identities block independent acceptance (1.054042ms)
+✔ Static rule annotations, unknown coverage and missing results block qualification (0.319375ms)
+✔ Malformed labels, duplicate outputs and impossible decisions are rejected (0.320292ms)
+✔ Freeze binds policy and candidate and rejects sources already in the usage ledger (0.234042ms)
+✔ CLI emits a blocked report with exit 2 and bounds ordinary JSON inputs (51.951792ms)
+✔ Unknown negatives cannot improve eligibility through the resolved-only denominator (0.497958ms)
+✔ Duplicated or contradictory source locations cannot inflate labelled counts (0.215334ms)
+✔ Evidence must bind the individual case and decision (0.693458ms)
+✔ Run replay and ledger substitution cannot qualify a frozen evaluation (1.051083ms)
+✔ Timezone-free timestamps and non-array evidence are invalid (0.285584ms)
+✔ Explicit-offset Python microsecond timestamps are accepted consistently (0.218833ms)
+✔ Decision artifacts cannot be recycled across different inputs or decisions (0.529375ms)
+✔ Line-only scan hits cannot be credited to another labelled site (0.412208ms)
+✔ Freeze and reports declare every attempt must consume the listed sources (0.438333ms)
+✔ Scan anchors bind the source digest, language and category, not only line (0.636542ms)
+✔ Missing anchors report the specific case and shared decision bindings are checked (1.203ms)
+✔ Authored positive controls cannot contribute qualification recall or minimum cases (0.277375ms)
+✔ Unqualified oracles stay diagnostic and cannot dilute independent unknown metrics (0.882125ms)
+✔ Easy authored negatives cannot dilute qualification false-positive denominators (0.827333ms)
+✔ Known vulnerability pairs remain diagnostic even when their oracle is independently verified (0.320792ms)
+✔ Missing or incomplete selection provenance cannot supply admission metrics (2.613458ms)
+✔ Explicit selection exclusions cannot be overridden by the other selection fields (0.659792ms)
+✔ Selection declarations are frozen and every diagnostic source still consumes the attempt (0.325417ms)
+✔ Storage closure is mandatory for new freezes and legacy snapshots stay diagnostic (0.393541ms)
+✔ Valid v2 storage closure with another reviewer identity cannot freeze (0.2805ms)
+ℹ tests 45
+ℹ suites 0
+ℹ pass 45
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 135.727958
+
+
+ACTUAL VM TEST python
+..storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+............storage-settlement-pending; query status and storage-reconcile before retrying
+.....storage-settlement-pending; query status and storage-reconcile before retrying
+.......storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+....storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+...storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+....................................
+----------------------------------------------------------------------
+Ran 87 tests in 4.426s
+
+OK
+
+
+ACTUAL VM TEST storage
+............storage-settlement-pending; query status and storage-reconcile before retrying
+...storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+...storage-settlement-pending; query status and storage-reconcile before retrying
+.......storage-settlement-pending; query status and storage-reconcile before retrying
+..
+----------------------------------------------------------------------
+Ran 29 tests in 1.483s
+
+OK
+
+
+ACTUAL VM TEST archive
+...........................
+----------------------------------------------------------------------
+Ran 27 tests in 1.195s
+
+OK
+
+
+ACTUAL VM TEST batch
+.........
+----------------------------------------------------------------------
+Ran 9 tests in 0.011s
+
+OK
+
+
+PREVIOUSREVIEW
+**Verdict:** The supplied evidence is internally consistent: 197 synthetic tests (87+29+27+45+9), current source hashes match for the listed overlapping files, the archive transaction/restore record is coherent, and the cleanup script checks owned containers/clients before deleting scratch. I found **no concrete code-execution safety blocker** in the supplied storage/archive path, and no evidence of container/client residue, file chown, or `_cleanup`/`rm` in archive. This is not R3 or live acceptance.
+
+**Material acceptance-evidence limitations / claim-level defects:**
+
+1. **`noNewAnalysisReceipt` is hardcoded, not tested.**
+   `storage-live.py` prints `"noNewAnalysisReceipt": True` as a constant. It does not scan for or assert absence of a new analysis receipt. `api.recover()` returning `restore-required-no-analysis` is a recovery instruction, not proof that no receipt was created. This is safety-relevant, so the claim is not established by the 197-run as written.
+
+2. **`rootCid.contentMatched` is hardcoded; mode 0644 is observed but not asserted.**
+   The script asserts `container.cid` is uid 0, nlink 1, readable, and includes its hash in `original`; it does **not** assert `mode == 0o644` and does **not** compare CID bytes to the record’s `containerId`. The output prints `contentMatched: True` unconditionally. The final JSON shows mode `420` (0644), but a mode regression would not fail this acceptance script unless mode is asserted. Call this a concrete evidence gap, not a demonstrated unsafe artifact.
+
+3. **Duplicate `archive_apply` is under-asserted.**
+   `again=s.archive_apply(policy,plan,...)` only checks `again['entries'][0]['state']=='committed'` and that logs in the original `queryDirectory` are unchanged. It does not assert the duplicate returns the **same transaction id**, same archive/recycle paths, or that no new transaction/archive was created. A newly committed transaction could still pass this check while writing new query logs elsewhere. The duplicate-query idempotency claim is therefore weaker than stated.
+
+4. **Daily config-pin/runtime preservation is partly hardcoded and depends on unmanifested identity code.**
+   `worker.py` asserts `identity()==before` and reports `len(before['program'])` / `len(before['databases'])`, which supports the 169/42 stability claim. But it records `dailyConfigPinsRuntimeMatched: True` as a constant, not as an exposed compared field. The `identityCode` is extracted from `stage-guest.py`, which is not in the supplied current-source manifest. Its executed bytes are bound by `inputSha256`, but its semantics are not independently reviewed here. So the 169/42 result is supported; the config-pin/runtime part is not fully demonstrated by the supplied script evidence.
+
+**Conservative limitations, not blockers:** the storage acceptance is synthetic, has zero independent R3 samples, and does not extend to daily deployment or full-product audit. The cleanup path uses elevation only for read-only Docker queries and no file-read chown/sudo; that matches the stated scope.

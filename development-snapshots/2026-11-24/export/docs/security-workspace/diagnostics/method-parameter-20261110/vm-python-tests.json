@@ -1,0 +1,21 @@
+{
+  "records": [
+    {
+      "name": "python_namespace_review.test.py",
+      "sourceSha256": "bf9b7cff0fdfe9c3f66554c2e28dccfa983b076c1d53deb794ee86c52abc75e5",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "................................\n----------------------------------------------------------------------\nRan 32 tests in 0.136s\n\nOK\n"
+    },
+    {
+      "name": "namespace_managed_worker.test.py",
+      "sourceSha256": "b5077a4619fd17a38084c96d2be7aafa1895f0eefcb3420b0a39e70c911d185c",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.161s\n\nOK\n"
+    }
+  ],
+  "workerSha256": "6c8c7446b99a777e5f496c008c9eeebecebc15134a5aedb6c7be4a14144a6705",
+  "temporaryRemoved": true,
+  "checkedAt": "2026-11-10T22:57:43.497402+00:00"
+}

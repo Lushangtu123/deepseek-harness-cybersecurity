@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "reviews": [
+    {
+      "scope": "normal-path evidence and measurement methodology",
+      "requestedModel": "claude-opus-5-5",
+      "requestedEffort": "high",
+      "actualOutputModels": [
+        "claude-opus-5-5"
+      ],
+      "acceptedAsRequestedModel": true,
+      "receiptSha256": "0c61bec4370247e9cfd77790b9aa11798e557e8e33f301f8511a36fce7e56540"
+    },
+    {
+      "scope": "v3 qualification/diagnostic role split",
+      "requestedModel": "claude-opus-5-5",
+      "requestedEffort": "high",
+      "actualOutputModels": [
+        "claude-opus-5-5"
+      ],
+      "acceptedAsRequestedModel": true,
+      "receiptSha256": "61929a3f6b7cb5672c543f76f1828da7c72faf277c338200bf6cbdf959b72ec6"
+    },
+    {
+      "scope": "previous SKF requested-model fix-review attempt",
+      "requestedModel": "claude-opus-5-5",
+      "requestedEffort": "high",
+      "actualOutputModels": [
+        "claude-opus-4-8"
+      ],
+      "acceptedAsRequestedModel": false,
+      "receiptSha256": "e50255e7b91d1c517b1386b103b10f2d89f2b6ba16659b1c27086c6924d3ad2a"
+    }
+  ],
+  "sourceTruth": "Source/API behavior and actual VM witness; model review is supplemental, not the sole truth oracle.",
+  "findingsFixed": [
+    "Authored controls no longer count in qualification thresholds or metrics.",
+    "Alert locations split from static/runtime call inventory.",
+    "Finite-sample unknown accounting explicitly distinguished from a statistical confidence interval."
+  ],
+  "caveatsRetained": [
+    "No proof the scanner recognized sanitization; no-hit may follow arity or missing source modelling.",
+    "Two easy/normal cases do not represent a hard-negative or population false-positive benchmark.",
+    "Source authenticity and oracle declarations still need independent manual release review."
+  ],
+  "lastTestOnlyChange": "Added authored-negative denominator regression after code review; production evaluator code unchanged, Mac/VM tests rerun.",
+  "previousSKFReviewClosed": false,
+  "previousClosureRejectedReason": "Text self-claimed Opus5.5, but CLI accounting recorded output by Opus4.8; model prose is not used as identity evidence."
+}

@@ -1,0 +1,89 @@
+{
+  "rows": [
+    {
+      "phase": "baseline16",
+      "originalWarnings": 0,
+      "summary": {
+        "version": 1,
+        "state": "not-applicable",
+        "eligible": 0,
+        "checked": 0,
+        "observations": 0,
+        "unmatched": 0,
+        "retained": 0,
+        "cleanupVerified": true
+      },
+      "artifacts": []
+    },
+    {
+      "phase": "research20",
+      "originalWarnings": 1,
+      "summary": {
+        "version": 1,
+        "state": "completed",
+        "eligible": 1,
+        "checked": 1,
+        "observations": 1,
+        "unmatched": 0,
+        "retained": 1,
+        "cleanupVerified": true,
+        "execution": {
+          "profile": "namespace-ast-1",
+          "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+          "workerSha256": "9ec513ddb83d94c0c2f63629b7f218b1971704b4ff25d21169f30ad6e0ea9a51",
+          "pythonVersion": "3.12.15",
+          "cleanupVerified": true
+        }
+      },
+      "artifacts": [
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "vulnerable.py",
+          "line": 111,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "5810f4e837d20b6c889ee8b276ac2624e6fa7512f8cef79858d6c95611819d2e",
+            "path": "vulnerable.py",
+            "sourceSha256": "97001081edfea081b211bc58650abb271ce7fb2f035f7ff17c1354062775a95f",
+            "byteLength": 7083,
+            "copyRedacted": false,
+            "start": {
+              "line": 111,
+              "col": 27,
+              "offset": 4007
+            },
+            "end": {
+              "line": 111,
+              "col": 84,
+              "offset": 4064
+            }
+          },
+          "sink": "eval",
+          "argumentCount": 3,
+          "bindingHint": "unsupported-scope",
+          "builtinIdentity": "unverified",
+          "sourceKind": "expression-unresolved",
+          "externalControl": "unverified",
+          "assignmentLines": [],
+          "constraintState": "unresolved"
+        }
+      ]
+    }
+  ],
+  "snapshotId": "5810f4e837d20b6c889ee8b276ac2624e6fa7512f8cef79858d6c95611819d2e",
+  "originalWarningsUnchanged": true,
+  "newScannerInvocations": 0,
+  "newModelCalls": 0,
+  "changesFindingDisposition": false,
+  "r3Qualified": false,
+  "observedNamespaceContainerCreates": 1,
+  "programFilesMatched": 169,
+  "oldDatabaseLogicalHashesMatched": 42,
+  "pinsUnchanged": true,
+  "temporaryRemoved": true
+}

@@ -1,0 +1,38 @@
+{
+  "id": "398c659a-100a-4196-bd37-4419dd23903d",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "No remaining blocker in the added result-digest/source-rehash guard itself. The ordering is correct: local `vm-result-final.json` is bound to `poll['resultSha256']`; remote `status.resultSha256` and raw `result.json` bytes are checked against the same `RESULT` before `json.loads`; only then are `sourceSha256` entries rehashed. Mismatch, missing source, or drift fails closed. That closes the prior “trust source map without rehash” defect.\n\nConservative limitations, not new blockers under the stated assumptions: host-side `meta`/`poll`/local result files are trusted as pinned; no external anchor or arbitrary same-UID immutability; source-map path confinement/coverage is not asserted; no R3, physical-power-loss, or full-product claim.\n\nTwo scoped non-digest issues in the exact script:\n1. `vm-finish-script-final.txt` is written before `if (root/'vm-retained-r2.json').exists()`, so a rerun after reconciliation overwrites that artifact before raising “Already reconciled.” Move the existence check before the write to keep rerun read-only. This is an evidence-mutation/idempotency defect, not a bypass of the digest guard.\n2. The displayed summary is not literal output of either print: the remote print includes `record` state inside `attemptRecords`; the host final print omits `attemptRecords` entirely. If the shown JSON is a redacted summary, fine; otherwise confirm `vm-retained-r2.json` retains the full `record` object.\n\nSo: digest guard = no remaining blocker for the prior defect; rerun write-order = concrete adjacent evidence-integrity defect."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1731,
+    "completion_tokens": 9181,
+    "total_tokens": 10912,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 8819
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 1731
+  },
+  "streamDone": true,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 39644,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "bfdf05e52bbe55d8c3c41a2a754ab70de931c62bdcfc5fb9ba12cb9ae1d9ebd8",
+  "promptSha256": "13c6c4602d4e091797d73171d7a31ce6d9f4e2a4d819f1c0e4ccb030d8b00950"
+}

@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-11-10T22:02:24.303918+00:00",
+  "dailyProgramMatchesPriorVerifiedBaseline": true,
+  "dailyProgramFilesChecked": 169,
+  "dailyProgramManifestSha256": "a828d84ddae6c35a9ae8a0e07ddc2b202425ba428caa54caafdf2ad22d2d0012",
+  "baselineRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+  "scannerImageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "witnessContainerNamesChecked": [
+    "harness-r3-xinference-ba8f1ead7b63-witness",
+    "harness-r3-xinference-ba8f1ead7b63-diagnose"
+  ],
+  "witnessContainersAbsent": true,
+  "originalScratchAbsent": true,
+  "scriptSha256": "d2622906069ccedeeed16d387ed741c990647f324e15db5fa0b88a2403206eae"
+}

@@ -1,0 +1,42 @@
+{
+  "reviews": [
+    {
+      "receipt": "claude-review.json",
+      "models": [
+        "claude-opus-5-5"
+      ],
+      "effort": "high",
+      "toolsEnabled": false,
+      "result": "fixes requested"
+    },
+    {
+      "receipt": "claude-closure.json",
+      "models": [
+        "claude-opus-5-5"
+      ],
+      "effort": "high",
+      "toolsEnabled": false,
+      "result": "fixes requested"
+    },
+    {
+      "receipt": "claude-final.json",
+      "models": [
+        "claude-opus-5-5"
+      ],
+      "effort": "high",
+      "toolsEnabled": false,
+      "result": "no remaining blockers in focused edits; native rerun independently completed after review prompt"
+    }
+  ],
+  "closureNativeIntentSha256": "b02c1ac3648ec48462c5f41cc6aeec06dc32c85ebd96bda2fce726494ccd6c43",
+  "finalNativeReceiptSha256": "4c63fbe64dcd82c9905b5efe7d5796c9f574342292f7ebcd3691d1a91f9998d7",
+  "r1AssignmentEqualityFixed": true,
+  "r2WriteLineLimitFixed": true,
+  "reviewScope": "source excerpts, no model-driven test execution or independent audit",
+  "supersededRuns": [
+    "harness-namespace-managed-20261103 initial",
+    "harness-namespace-managed-final-20261103",
+    "harness-namespace-managed-closure-20261103",
+    "harness-namespace-managed-acceptance-20261103"
+  ]
+}

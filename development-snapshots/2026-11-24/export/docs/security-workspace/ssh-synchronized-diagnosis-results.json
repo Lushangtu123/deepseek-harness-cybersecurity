@@ -1,0 +1,257 @@
+{
+  "schemaVersion": 1,
+  "stage": "SSH synchronized diagnostic development and one synthetic acceptance",
+  "date": "2026-11-09 America/Los_Angeles",
+  "state": "reviewed-archive-only",
+  "workDirectory": "work/harness-ssh-sync-20261109",
+  "runId": "6db67294-7e82-4302-bcbc-248a192312a2",
+  "testCount": 74,
+  "testSuites": 16,
+  "runtimeInputCount": 17,
+  "executionManifestSha256": "579df8bef2bbe74202578a53c1c797545cb5c84bb6bcd7696176ee6b7c920af5",
+  "candidateAndExecutedRuntimeAllMatch": true,
+  "evidence": {
+    "runId": "6db67294-7e82-4302-bcbc-248a192312a2",
+    "synchronizedCaptureComplete": true,
+    "packetCounters": [
+      344,
+      344,
+      0
+    ],
+    "packetSummaryBytes": 45224,
+    "clockStable": true,
+    "bootStable": true,
+    "interfaceBefore": {
+      "available": true,
+      "rx_dropped": 0,
+      "rx_errors": 0,
+      "rx_missed_errors": 0
+    },
+    "interfaceAfter": {
+      "available": true,
+      "rx_dropped": 0,
+      "rx_errors": 0,
+      "rx_missed_errors": 0
+    },
+    "journalRows": 428,
+    "journalTruncated": false,
+    "journalCategories": {
+      "accepted-key": 86,
+      "other": 256,
+      "disconnected": 85,
+      "preauth": 1
+    },
+    "failurePortCandidates": {
+      "known": 9,
+      "guestSynObserved": 1,
+      "guestSynAbsentUnderPortPreservationAssumption": 8,
+      "unknownPort": 3
+    },
+    "unassignedGuestSynFlows": [
+      {
+        "keySha256": "4d0aa87899ce2d904bfc941e6678b910d1ac70ab48519b2219b94ebc26d27e52",
+        "hostFailedPortCandidateCount": 0,
+        "failedCandidateIDs": [],
+        "guestFlags": {
+          "In:S": 1,
+          "Out:S.": 1,
+          "In:R.": 1,
+          "In:R": 1
+        },
+        "journalCategories": {},
+        "firstSynOffsetFromArmedMs": 9.016
+      },
+      {
+        "keySha256": "cf0bfb845c894c768930ba9082c98517e00162665f023de8e5908d537b9eb796",
+        "hostFailedPortCandidateCount": 1,
+        "failedCandidateIDs": [
+          "df03e68d-e20d-4800-bca7-6e04973913b8"
+        ],
+        "guestFlags": {
+          "In:S": 1,
+          "Out:S.": 1,
+          "In:F.": 1,
+          "Out:F.": 1
+        },
+        "journalCategories": {
+          "preauth": 1
+        },
+        "firstSynOffsetFromArmedMs": 1317.891
+      }
+    ],
+    "noncausalOrderWarning": "fixed direct then fdpass; do not compare failure rates as mode effect",
+    "rawPrivateFilesIncluded": false,
+    "exactRootCauseConfirmed": false,
+    "historicalSidebarFailureAttributed": false,
+    "dailyProgramModified": false,
+    "nextEvidenceNeeded": "Resolve unassigned guest SYN identities and observe forwarding internals without widening host privileges; no guessed production patch."
+  },
+  "hostObservation": {
+    "probeCount": 96,
+    "markerSuccesses": 84,
+    "noMarkerFailures": 12,
+    "byMode": {
+      "direct": 48,
+      "fdpass": 48
+    },
+    "failurePhases": {
+      "direct-identification": 2,
+      "connected-and-descriptor-sent": 9,
+      "connect-error": 1
+    },
+    "observationSamples": 2759,
+    "initialFDCount": 220,
+    "peakFDCount": 312,
+    "peakFDNumber": 311,
+    "lastFDCount": 218,
+    "queueLimitsObserved": [
+      1
+    ],
+    "peakQueueLength": 0,
+    "peakIncompleteQueueLength": 0,
+    "socketErrorsObserved": [],
+    "nonzeroSocketErrorSamples": 0,
+    "fdErrorCounts": {
+      "connect|syscall|54": 1
+    },
+    "markerSuccessesWithFDErrors": 0,
+    "maxInterSampleGapMs": 8.86,
+    "tailObservationMs": 17542.612,
+    "firstSampleAtOrBelowInitialFDsAfterBurstMs": 10200.732,
+    "allProbeIntervalsInsideSamplingHorizon": true,
+    "actualProcessFDLimitMeasured": false,
+    "limits": [
+      "Discrete snapshots can miss faster transients; overlap does not establish causal coincidence.",
+      "Descriptor sent means SCM_RIGHTS sendmsg succeeded, not independent proof OpenSSH consumed it.",
+      "Queue/FD snapshots are not an errno trace or an actual process RLIMIT measurement.",
+      "Queue fields are retained separately: do not add qlen/incqlen or assume an overflow threshold without matching-kernel semantics.",
+      "Listener metrics only cover pre-accept state; zero listener fields do not exclude errors after accept.",
+      "This host-only summary does not prove guest packet/journal attribution; a separate synchronized association is required."
+    ]
+  },
+  "association": {
+    "runId": "6db67294-7e82-4302-bcbc-248a192312a2",
+    "positiveMarkerCount": 84,
+    "positivesWithGuestSynAndAcceptedKey": 84,
+    "successfulFdpassMappingControls": 38,
+    "allObservedSuccessfulFdpassPortsPreserved": true,
+    "uniqueGuestIPv4SynFlows": 86,
+    "unassignedSynFlowCount": 2,
+    "ambiguousReusedSynFlowCount": 0,
+    "noAdditionalUnassignedGuestIPv4SynObserved": false,
+    "causalProtocolValidated": true,
+    "directHostGuestClockSubtractionUsed": false,
+    "limitations": [
+      "Candidate failed flow uses source-port preservation as an assumption, supported only by successful controls.",
+      "Unassigned SYNs or reused flow/sequence identities block aggregate no-extra-flow interpretation.",
+      "No observed accepted-key event is not proof authentication never occurred.",
+      "Packet visibility is limited to guest IPv4 TCP22 SYN/FIN/RST summaries and tcpdump counters; it cannot locate an exact host component.",
+      "This run does not retroactively identify historical sidebar failures."
+    ]
+  },
+  "postReviewLocalChecks": {
+    "postHocLedger": true,
+    "preregisteredAssociationUnchanged": true,
+    "rawPrivateInputsSubmitted": false,
+    "acceptedKeyEventCount": 86,
+    "acceptedKeyLedger": {
+      "unassigned-authentication": 1,
+      "control-tuple": 1,
+      "successful-marker-tuple": 84
+    },
+    "unassignedAcceptedKeys": [
+      {
+        "peerTupleSha256": "7aa55420f6e333ebcd281174367805fcca5063ab402d6efb7a010776ddce2156",
+        "beforeReady": true,
+        "beforeArmed": true,
+        "insideArmedDone": false,
+        "offsetFromReadyMs": -664.359,
+        "exactSessionIdentityConfirmed": false
+      }
+    ],
+    "unassignedAcceptedKeysInsideProbeWindow": 0,
+    "beforeAfterCompared": {
+      "bootSha256": true,
+      "sshdLimits": true,
+      "sshdVersion": true
+    },
+    "interfaceBeforeAfter": {
+      "bothAvailable": true,
+      "deltas": {
+        "rx_dropped": 0,
+        "rx_errors": 0,
+        "rx_missed_errors": 0
+      }
+    },
+    "successfulFdpassCount": 38,
+    "allSuccessfulFdpassHaveMetadataAndDescriptorSent": true
+  },
+  "review": {
+    "primaryModel": "claude-opus-5-5",
+    "primaryState": "quota-failed",
+    "primaryReceiptSha256": "4b76c6a19dad969b7c99df3b9c146fb393f98e49a843316279ad6cb84ebbac31",
+    "fallbackAuthorized": true,
+    "provider": "https://api.deepseek.com",
+    "displayModel": "DeepSeek-V4.1-Flash",
+    "actualModels": [
+      "deepseek-flash"
+    ],
+    "effort": "high",
+    "state": "completed",
+    "finishReason": "stop",
+    "elapsedSeconds": 328.9,
+    "usage": {
+      "prompt_tokens": 85015,
+      "completion_tokens": 45282,
+      "total_tokens": 130297,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 43044
+      },
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 85015
+    },
+    "promptSha256": "7480e3d037b6df728f69496d7fa65fdb4d028dd5f6433dc258f065ec01fe85f8",
+    "reportSha256": "803069cb42a644e5a8addaf90d49a075fc918f58e6245ecbc3a1b2c294ac7fcc",
+    "receiptSha256": "789e3037dcf2cdaf7d09a36ebf850631abc2472f2fab72edb34a80fe099e2a0e",
+    "blockingArchiveDefects": 0,
+    "triageSha256": "c356b833da62018aa20e30b89d747615bd23f17c516d626c2855eb6b1a353ac0",
+    "fullReportWorkPath": "work/harness-ssh-sync-20261109/external-review/ssh-sync-stage2.review.md"
+  },
+  "r1PriorClaudeProcessEvidence": {
+    "state": "completed",
+    "actualModels": [
+      "claude-opus-5-5"
+    ],
+    "stopReason": "end_turn",
+    "elapsedSeconds": 375.5,
+    "receiptSha256": "14aef2f82eeffe13b70a059d4953627414f47e203e82ce100e81f8ab022b9544",
+    "triageSha256": "3423549efdf4c17211acee59e55424fe118a8f9cc9f7b5f4f1ff1f0601192125"
+  },
+  "cleanup": {
+    "removed": true,
+    "scope": "only owned completed model-review scratch",
+    "workerStopped": true,
+    "dailyProgramFilesChecked": 169,
+    "dailyProgramUnchanged": true,
+    "credentialCopiedToHost": false,
+    "vmConfigurationChanged": false
+  },
+  "pending": [
+    "exact forwarding component/root cause",
+    "2 unassigned guest SYN flow identities; one conditional known failed port match",
+    "pre-READY accepted-key exact session identity",
+    "historical sidebar request attribution",
+    "ordinary R3 independent quality acceptance and full product release holds"
+  ],
+  "daily169ProgramBeforeAfterMatched": true,
+  "ordinaryR3Closed": false,
+  "historicalSidebarCauseConfirmed": false,
+  "rootCauseConfirmed": false,
+  "dailyDeploymentPerformed": false,
+  "githubPushPerformed": false,
+  "hostPrivilegeExpanded": false,
+  "rawPrivateCaptureExported": false
+}

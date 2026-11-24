@@ -1,0 +1,334 @@
+{
+  "kind": "all20-link-lifecycle-source-review",
+  "sourceOnly": true,
+  "all20Entries": 20,
+  "activeSites": 10,
+  "registeredSites": 9,
+  "existingClosureSites": 1,
+  "historicalSites": 16,
+  "sites": [
+    {
+      "path": "candidate/baseline/checks/run_recovery_close_checks.py",
+      "line": 389,
+      "sourceSha256": "f19b07fa5f29c71891381ae100d5939f7ac8fbb747fd0d8c185a2f7768b64913",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    },
+    {
+      "path": "candidate/baseline/checks/run_recovery_close_checks.py",
+      "line": 610,
+      "sourceSha256": "f19b07fa5f29c71891381ae100d5939f7ac8fbb747fd0d8c185a2f7768b64913",
+      "operation": "identity_path.symlink_to(target)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    },
+    {
+      "path": "candidate/baseline/checks/run_regressions.py",
+      "line": 291,
+      "sourceSha256": "90759283e2f56a9aed8fea0c0f0c26cd5de74423c35b0b0ff6e04fad2dcf9c2d",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    },
+    {
+      "path": "candidate/baseline/checks/run_rev6_checks.py",
+      "line": 663,
+      "sourceSha256": "3f193e9a0852be55429e95e87d88eb80828a3344aac43c05ef6563bacbeb6c6b",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    },
+    {
+      "path": "candidate/baseline/checks/run_rev6_checks.py",
+      "line": 666,
+      "sourceSha256": "3f193e9a0852be55429e95e87d88eb80828a3344aac43c05ef6563bacbeb6c6b",
+      "operation": "dangling.symlink_to(base / \"does-not-exist\", target_is_directory=True)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    },
+    {
+      "path": "candidate/baseline/checks/run_rev8_checks.py",
+      "line": 217,
+      "sourceSha256": "d950abef29bd9c89e661d4621c568c2a28d9a5fca7fbf838142c83404b28a010",
+      "operation": "box.stage.symlink_to(target, target_is_directory=True)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    },
+    {
+      "path": "candidate/baseline/checks/run_rev8_checks.py",
+      "line": 307,
+      "sourceSha256": "d950abef29bd9c89e661d4621c568c2a28d9a5fca7fbf838142c83404b28a010",
+      "operation": "(root / \"preflight\").symlink_to(outside, target_is_directory=True)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    },
+    {
+      "path": "candidate/baseline/checks/run_unified_recovery_checks.py",
+      "line": 608,
+      "sourceSha256": "d1ab033418c6d76ca39ac7ae12e9bde8d46b9ba42e21327dcc7f7ac4a69e24fc",
+      "operation": "(workspace.prepare / \"plans\").symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    },
+    {
+      "path": "candidate/checks/run_consumer_closure_checks.py",
+      "oldLine": 126,
+      "line": 128,
+      "function": "damage_plan",
+      "sourceSha256": "794164a246fbff2ea874e2526aa85080165d988852314850bc82149a54454d5a",
+      "operation": "os.symlink(str(path) + '.missing-target', path)",
+      "nextLines": [
+        "        os.symlink(str(path) + \".missing-target\", path)",
+        "        workspace.track_fixture_link(path)",
+        "        return None",
+        "    else:"
+      ],
+      "disposition": "immediate explicit owned-link registration; shared FixtureLinks closes before conservative retirement"
+    },
+    {
+      "path": "candidate/checks/run_evidence_gate_checks.py",
+      "oldLine": 733,
+      "line": 733,
+      "function": "proof_contract_members",
+      "sourceSha256": "36296ba2a5e2cbd26472a0ba892ccedf52eec477a2df27f28531fb4707a6b531",
+      "operation": "os.symlink(outside, result_path)",
+      "nextLines": [
+        "        os.symlink(outside, result_path)",
+        "        outcome = verify_contract(closure_gate, root, source)",
+        "        variants[\"symlink-member\"] = outcome",
+        "        cases.append(outcome.get(\"ok\") is False"
+      ],
+      "disposition": "existing finally rmtree closure"
+    },
+    {
+      "path": "candidate/checks/run_recovery_close_checks.py",
+      "oldLine": 391,
+      "line": 396,
+      "function": "b1_stage_paths",
+      "sourceSha256": "8de5a125c9bd8e49bf3c683699dd7ee87a81d16d5ae41e9dc79afc4e873931d2",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "nextLines": [
+        "        link.symlink_to(real, target_is_directory=True)",
+        "        workspace.track_fixture_link(link)",
+        "        prepare_id, plan, _identity = created_plan(",
+        "            runner, guard, \"bind-\" + tag[:8], real, tag)"
+      ],
+      "disposition": "immediate explicit owned-link registration; shared FixtureLinks closes before conservative retirement"
+    },
+    {
+      "path": "candidate/checks/run_recovery_close_checks.py",
+      "oldLine": 612,
+      "line": 618,
+      "function": "b2_identity_journal",
+      "sourceSha256": "8de5a125c9bd8e49bf3c683699dd7ee87a81d16d5ae41e9dc79afc4e873931d2",
+      "operation": "identity_path.symlink_to(target)",
+      "nextLines": [
+        "                identity_path.symlink_to(target)",
+        "                workspace.track_fixture_link(identity_path)",
+        "            with resource_doubles(runner, guard) as calls:",
+        "                kind, value = exit_code(runner.cleanup_attempt, record)"
+      ],
+      "disposition": "immediate explicit owned-link registration; shared FixtureLinks closes before conservative retirement"
+    },
+    {
+      "path": "candidate/checks/run_regressions.py",
+      "oldLine": 291,
+      "line": 293,
+      "function": "scenario_stage_identity",
+      "sourceSha256": "5be3cb6bf83a56f757e52e47968016c87197b45cb358b2ef825844719f849ca6",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "nextLines": [
+        "        link.symlink_to(real, target_is_directory=True)",
+        "        links.track(link)",
+        "        link_identity = guard.stage_identity(link)",
+        "        link_clean = guard.cleanup_stage(str(link), link_identity)"
+      ],
+      "disposition": "immediate explicit owned-link registration; shared FixtureLinks closes before conservative retirement"
+    },
+    {
+      "path": "candidate/checks/run_rev6_checks.py",
+      "oldLine": 663,
+      "line": 665,
+      "function": "test_recover_stage_link_and_identity",
+      "sourceSha256": "92eff5801e7f8d295a8713352e8e625e434683ea4ce4a2b45b63475fb82b1287",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "nextLines": [
+        "        link.symlink_to(real, target_is_directory=True)",
+        "        links.track(link)",
+        "        link_result = preflight._recover_stage(str(link), identity, True, None)",
+        "        dangling = base / \"dangling\""
+      ],
+      "disposition": "immediate explicit owned-link registration; shared FixtureLinks closes before conservative retirement"
+    },
+    {
+      "path": "candidate/checks/run_rev6_checks.py",
+      "oldLine": 666,
+      "line": 669,
+      "function": "test_recover_stage_link_and_identity",
+      "sourceSha256": "92eff5801e7f8d295a8713352e8e625e434683ea4ce4a2b45b63475fb82b1287",
+      "operation": "dangling.symlink_to(base / 'does-not-exist', target_is_directory=True)",
+      "nextLines": [
+        "        dangling.symlink_to(base / \"does-not-exist\", target_is_directory=True)",
+        "        links.track(dangling)",
+        "        dangling_result = preflight._recover_stage(str(dangling), identity, True, None)",
+        "        replaced = base / \"replaced\""
+      ],
+      "disposition": "immediate explicit owned-link registration; shared FixtureLinks closes before conservative retirement"
+    },
+    {
+      "path": "candidate/checks/run_rev8_checks.py",
+      "oldLine": 218,
+      "line": 218,
+      "function": "effect",
+      "sourceSha256": "32cd8e2407332085b23c3a3b2c96b9b5a515b88eaafef6b7ff10768baa410231",
+      "operation": "box.stage.symlink_to(target, target_is_directory=True)",
+      "nextLines": [
+        "            box.stage.symlink_to(target, target_is_directory=True)",
+        "            box.track_fixture_link(box.stage)",
+        "            return {\"removed\": True, \"state\": \"never-created\"}",
+        ""
+      ],
+      "disposition": "immediate explicit owned-link registration; shared FixtureLinks closes before conservative retirement"
+    },
+    {
+      "path": "candidate/checks/run_rev8_checks.py",
+      "oldLine": 308,
+      "line": 310,
+      "function": "test_intermediate_symlink_blocked",
+      "sourceSha256": "32cd8e2407332085b23c3a3b2c96b9b5a515b88eaafef6b7ff10768baa410231",
+      "operation": "(root / 'preflight').symlink_to(outside, target_is_directory=True)",
+      "nextLines": [
+        "        (root / \"preflight\").symlink_to(outside, target_is_directory=True)",
+        "        fixture_links.track(root / \"preflight\")",
+        "        box.module.ROOT = root",
+        "        value = box.module._final_stage_recheck("
+      ],
+      "disposition": "immediate explicit owned-link registration; shared FixtureLinks closes before conservative retirement"
+    },
+    {
+      "path": "candidate/checks/run_unified_recovery_checks.py",
+      "oldLine": 742,
+      "line": 675,
+      "function": "b8_directory_symlink",
+      "sourceSha256": "9432fcf37cb861aca121376753a7a90766963c9d70e4b945aa4ab1cb13ec5d0e",
+      "operation": "plans_link.symlink_to(real, target_is_directory=True)",
+      "nextLines": [
+        "        plans_link.symlink_to(real, target_is_directory=True)",
+        "        workspace.track_fixture_link(plans_link)",
+        "        with resource_doubles(runner, guard) as calls:",
+        "            result = recover(runner, number=1)"
+      ],
+      "disposition": "immediate explicit owned-link registration; shared FixtureLinks closes before conservative retirement"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_recovery_close_checks.py",
+      "line": 389,
+      "sourceSha256": "f19b07fa5f29c71891381ae100d5939f7ac8fbb747fd0d8c185a2f7768b64913",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_recovery_close_checks.py",
+      "line": 610,
+      "sourceSha256": "f19b07fa5f29c71891381ae100d5939f7ac8fbb747fd0d8c185a2f7768b64913",
+      "operation": "identity_path.symlink_to(target)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_regressions.py",
+      "line": 291,
+      "sourceSha256": "90759283e2f56a9aed8fea0c0f0c26cd5de74423c35b0b0ff6e04fad2dcf9c2d",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_rev6_checks.py",
+      "line": 663,
+      "sourceSha256": "3f193e9a0852be55429e95e87d88eb80828a3344aac43c05ef6563bacbeb6c6b",
+      "operation": "link.symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_rev6_checks.py",
+      "line": 666,
+      "sourceSha256": "3f193e9a0852be55429e95e87d88eb80828a3344aac43c05ef6563bacbeb6c6b",
+      "operation": "dangling.symlink_to(base / \"does-not-exist\", target_is_directory=True)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_rev8_checks.py",
+      "line": 217,
+      "sourceSha256": "d950abef29bd9c89e661d4621c568c2a28d9a5fca7fbf838142c83404b28a010",
+      "operation": "box.stage.symlink_to(target, target_is_directory=True)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_rev8_checks.py",
+      "line": 307,
+      "sourceSha256": "d950abef29bd9c89e661d4621c568c2a28d9a5fca7fbf838142c83404b28a010",
+      "operation": "(root / \"preflight\").symlink_to(outside, target_is_directory=True)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    },
+    {
+      "path": "references/stdlib-cli-record-validation/checks/run_unified_recovery_checks.py",
+      "line": 608,
+      "sourceSha256": "d1ab033418c6d76ca39ac7ae12e9bde8d46b9ba42e21327dcc7f7ac4a69e24fc",
+      "operation": "(workspace.prepare / \"plans\").symlink_to(real, target_is_directory=True)",
+      "classification": "historical-readonly",
+      "disposition": "unchanged historical source; baseline byte-read and reference protected-file comparisons only"
+    }
+  ],
+  "identityChecks": [
+    {
+      "path": "candidate/checks/regression_lib.py",
+      "nativeIdsPreserved": true,
+      "assertStatementsPreserved": true
+    },
+    {
+      "path": "candidate/checks/run_recovery_close_checks.py",
+      "nativeIdsPreserved": true,
+      "assertStatementsPreserved": true
+    },
+    {
+      "path": "candidate/checks/rev8_support.py",
+      "nativeIdsPreserved": true,
+      "assertStatementsPreserved": true
+    },
+    {
+      "path": "candidate/checks/run_rev8_checks.py",
+      "nativeIdsPreserved": true,
+      "assertStatementsPreserved": true
+    },
+    {
+      "path": "candidate/checks/run_unified_recovery_checks.py",
+      "nativeIdsPreserved": true,
+      "assertStatementsPreserved": true
+    },
+    {
+      "path": "candidate/checks/run_consumer_closure_checks.py",
+      "nativeIdsPreserved": true,
+      "assertStatementsPreserved": true
+    },
+    {
+      "path": "candidate/checks/run_rev6_checks.py",
+      "nativeIdsPreserved": true,
+      "assertStatementsPreserved": true
+    },
+    {
+      "path": "candidate/checks/run_regressions.py",
+      "nativeIdsPreserved": true,
+      "assertStatementsPreserved": true
+    }
+  ],
+  "genericRetirementFunctionsUnchanged": true,
+  "VMResult": false,
+  "zeroBlindSamples": true
+}

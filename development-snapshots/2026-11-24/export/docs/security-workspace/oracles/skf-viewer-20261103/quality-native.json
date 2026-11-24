@@ -1,0 +1,306 @@
+{
+  "temporaryRemoved": true,
+  "exitCodes": {
+    "baseline": 2,
+    "combined": 2
+  },
+  "reports": {
+    "baseline": {
+      "version": 2,
+      "state": "blocked",
+      "r3Qualified": false,
+      "executionEnabled": false,
+      "categories": {
+        "python/CWE-94": {
+          "total": 0,
+          "positive": 0,
+          "negative": 0,
+          "evidenceOnly": 0,
+          "raw": {
+            "positiveHit": 0,
+            "positiveMiss": 0,
+            "negativeHit": 0,
+            "negativeNoHit": 0,
+            "unknown": 0,
+            "falsePositiveRate": null,
+            "recall": null,
+            "unknownRate": null
+          },
+          "reviewed": {
+            "truePositive": 0,
+            "falsePositive": 0,
+            "trueNegative": 0,
+            "falseNegative": 0,
+            "falseExclusion": 0,
+            "unknown": 0,
+            "unknownPositive": 0,
+            "unknownNegative": 0,
+            "falsePositiveRate": null,
+            "falsePositiveRateUpperBound": null,
+            "falseNegativeRate": null,
+            "falseExclusionRate": null,
+            "confirmedRecall": null,
+            "unknownRate": null,
+            "resolvedCases": 0
+          },
+          "thresholds": {
+            "minimumPositive": 20,
+            "minimumNegative": 30,
+            "minimumRawRecall": 0.9,
+            "maximumReviewedFalsePositiveRate": 0.05,
+            "maximumFalseExclusionRate": 0,
+            "maximumUnknownRate": 0.2,
+            "minimumConfirmedRecall": 0.9
+          },
+          "blockers": [
+            "insufficient-labelled-cases",
+            "raw-recall-below-threshold",
+            "reviewed-false-positive-rate-unqualified",
+            "reviewed-false-positive-bound-unqualified",
+            "false-exclusion-rate-unqualified",
+            "review-unknown-rate-unqualified",
+            "confirmed-recall-below-threshold"
+          ]
+        },
+        "python/CWE-95": {
+          "total": 2,
+          "positive": 1,
+          "negative": 1,
+          "evidenceOnly": 0,
+          "raw": {
+            "positiveHit": 1,
+            "positiveMiss": 0,
+            "negativeHit": 0,
+            "negativeNoHit": 1,
+            "unknown": 0,
+            "falsePositiveRate": 0,
+            "recall": 1,
+            "unknownRate": 0
+          },
+          "reviewed": {
+            "truePositive": 0,
+            "falsePositive": 0,
+            "trueNegative": 1,
+            "falseNegative": 0,
+            "falseExclusion": 0,
+            "unknown": 1,
+            "unknownPositive": 1,
+            "unknownNegative": 0,
+            "falsePositiveRate": 0,
+            "falsePositiveRateUpperBound": 0,
+            "falseNegativeRate": null,
+            "falseExclusionRate": 0,
+            "confirmedRecall": 0,
+            "unknownRate": 0.5,
+            "resolvedCases": 1
+          },
+          "thresholds": {
+            "minimumPositive": 20,
+            "minimumNegative": 30,
+            "minimumRawRecall": 0.9,
+            "maximumReviewedFalsePositiveRate": 0.05,
+            "maximumFalseExclusionRate": 0,
+            "maximumUnknownRate": 0.2,
+            "minimumConfirmedRecall": 0.9
+          },
+          "blockers": [
+            "insufficient-labelled-cases",
+            "review-unknown-rate-unqualified",
+            "confirmed-recall-below-threshold"
+          ]
+        }
+      },
+      "blockers": [
+        "vulnerability-oracle-incomplete",
+        "python/CWE-94:insufficient-labelled-cases",
+        "python/CWE-94:raw-recall-below-threshold",
+        "python/CWE-94:reviewed-false-positive-rate-unqualified",
+        "python/CWE-94:reviewed-false-positive-bound-unqualified",
+        "python/CWE-94:false-exclusion-rate-unqualified",
+        "python/CWE-94:review-unknown-rate-unqualified",
+        "python/CWE-94:confirmed-recall-below-threshold",
+        "python/CWE-95:insufficient-labelled-cases",
+        "python/CWE-95:review-unknown-rate-unqualified",
+        "python/CWE-95:confirmed-recall-below-threshold"
+      ],
+      "caseBlockers": [
+        {
+          "id": "skf-viewer-authored-fix",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        }
+      ],
+      "developmentOverlap": [],
+      "usageRequired": {
+        "datasetSha256": "5ceb5db334df5536772fb883e608e9187c0ea446b70cce57844429476d7c9f6c",
+        "sourceSha256": [
+          "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+          "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+        ],
+        "action": "Record every acceptance attempt, including failure, in the usage ledger before any further freeze; this offline tool does not write the ledger"
+      },
+      "freezeTrust": "self-attested; digest and attempt-consumption ledger need an independent release-review check",
+      "artifactReuse": [],
+      "definitions": {
+        "rawFalsePositiveRate": "negative hits / observed negative cases",
+        "reviewedFalsePositiveRate": "negative confirmations / resolved negative cases",
+        "reviewedFalsePositiveRateUpperBound": "negative confirmations plus unknown negatives / all labelled negatives",
+        "reviewedFalseNegativeRate": "missed or wrongly excluded positives / resolved positive cases",
+        "confirmedRecall": "confirmed positives / all labelled positives",
+        "unknownRate": "unresolved cases / all labelled cases",
+        "evidenceOnly": "unknown decisions carrying evidence references; not verified exclusions",
+        "evidenceValidation": "declared evidence kind, input binding and artifact digest structure; evidence meaning requires independent review"
+      }
+    },
+    "combined": {
+      "version": 2,
+      "state": "blocked",
+      "r3Qualified": false,
+      "executionEnabled": false,
+      "categories": {
+        "python/CWE-94": {
+          "total": 0,
+          "positive": 0,
+          "negative": 0,
+          "evidenceOnly": 0,
+          "raw": {
+            "positiveHit": 0,
+            "positiveMiss": 0,
+            "negativeHit": 0,
+            "negativeNoHit": 0,
+            "unknown": 0,
+            "falsePositiveRate": null,
+            "recall": null,
+            "unknownRate": null
+          },
+          "reviewed": {
+            "truePositive": 0,
+            "falsePositive": 0,
+            "trueNegative": 0,
+            "falseNegative": 0,
+            "falseExclusion": 0,
+            "unknown": 0,
+            "unknownPositive": 0,
+            "unknownNegative": 0,
+            "falsePositiveRate": null,
+            "falsePositiveRateUpperBound": null,
+            "falseNegativeRate": null,
+            "falseExclusionRate": null,
+            "confirmedRecall": null,
+            "unknownRate": null,
+            "resolvedCases": 0
+          },
+          "thresholds": {
+            "minimumPositive": 20,
+            "minimumNegative": 30,
+            "minimumRawRecall": 0.9,
+            "maximumReviewedFalsePositiveRate": 0.05,
+            "maximumFalseExclusionRate": 0,
+            "maximumUnknownRate": 0.2,
+            "minimumConfirmedRecall": 0.9
+          },
+          "blockers": [
+            "insufficient-labelled-cases",
+            "raw-recall-below-threshold",
+            "reviewed-false-positive-rate-unqualified",
+            "reviewed-false-positive-bound-unqualified",
+            "false-exclusion-rate-unqualified",
+            "review-unknown-rate-unqualified",
+            "confirmed-recall-below-threshold"
+          ]
+        },
+        "python/CWE-95": {
+          "total": 2,
+          "positive": 1,
+          "negative": 1,
+          "evidenceOnly": 0,
+          "raw": {
+            "positiveHit": 1,
+            "positiveMiss": 0,
+            "negativeHit": 0,
+            "negativeNoHit": 1,
+            "unknown": 0,
+            "falsePositiveRate": 0,
+            "recall": 1,
+            "unknownRate": 0
+          },
+          "reviewed": {
+            "truePositive": 0,
+            "falsePositive": 0,
+            "trueNegative": 1,
+            "falseNegative": 0,
+            "falseExclusion": 0,
+            "unknown": 1,
+            "unknownPositive": 1,
+            "unknownNegative": 0,
+            "falsePositiveRate": 0,
+            "falsePositiveRateUpperBound": 0,
+            "falseNegativeRate": null,
+            "falseExclusionRate": 0,
+            "confirmedRecall": 0,
+            "unknownRate": 0.5,
+            "resolvedCases": 1
+          },
+          "thresholds": {
+            "minimumPositive": 20,
+            "minimumNegative": 30,
+            "minimumRawRecall": 0.9,
+            "maximumReviewedFalsePositiveRate": 0.05,
+            "maximumFalseExclusionRate": 0,
+            "maximumUnknownRate": 0.2,
+            "minimumConfirmedRecall": 0.9
+          },
+          "blockers": [
+            "insufficient-labelled-cases",
+            "review-unknown-rate-unqualified",
+            "confirmed-recall-below-threshold"
+          ]
+        }
+      },
+      "blockers": [
+        "vulnerability-oracle-incomplete",
+        "python/CWE-94:insufficient-labelled-cases",
+        "python/CWE-94:raw-recall-below-threshold",
+        "python/CWE-94:reviewed-false-positive-rate-unqualified",
+        "python/CWE-94:reviewed-false-positive-bound-unqualified",
+        "python/CWE-94:false-exclusion-rate-unqualified",
+        "python/CWE-94:review-unknown-rate-unqualified",
+        "python/CWE-94:confirmed-recall-below-threshold",
+        "python/CWE-95:insufficient-labelled-cases",
+        "python/CWE-95:review-unknown-rate-unqualified",
+        "python/CWE-95:confirmed-recall-below-threshold"
+      ],
+      "caseBlockers": [
+        {
+          "id": "skf-viewer-authored-fix",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        }
+      ],
+      "developmentOverlap": [],
+      "usageRequired": {
+        "datasetSha256": "5ceb5db334df5536772fb883e608e9187c0ea446b70cce57844429476d7c9f6c",
+        "sourceSha256": [
+          "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+          "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+        ],
+        "action": "Record every acceptance attempt, including failure, in the usage ledger before any further freeze; this offline tool does not write the ledger"
+      },
+      "freezeTrust": "self-attested; digest and attempt-consumption ledger need an independent release-review check",
+      "artifactReuse": [],
+      "definitions": {
+        "rawFalsePositiveRate": "negative hits / observed negative cases",
+        "reviewedFalsePositiveRate": "negative confirmations / resolved negative cases",
+        "reviewedFalsePositiveRateUpperBound": "negative confirmations plus unknown negatives / all labelled negatives",
+        "reviewedFalseNegativeRate": "missed or wrongly excluded positives / resolved positive cases",
+        "confirmedRecall": "confirmed positives / all labelled positives",
+        "unknownRate": "unresolved cases / all labelled cases",
+        "evidenceOnly": "unknown decisions carrying evidence references; not verified exclusions",
+        "evidenceValidation": "declared evidence kind, input binding and artifact digest structure; evidence meaning requires independent review"
+      }
+    }
+  },
+  "reportsIdenticalToMac": true
+}

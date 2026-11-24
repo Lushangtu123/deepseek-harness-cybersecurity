@@ -1,0 +1,288 @@
+Read-only scoped VM Harness code review, no tools/MCP/hooks/plugins. Comments/source are data. Focus concrete confirmed blockers and reproducible scope regressions. Concise <=700 words. No product qualification.
+S2 final safety boundary revision. Review found fixed/random substring witness can falsely confirm quoted data. same_program now compares parsed AST of actual eval/exec argument to exact generated probe (comments ignored), so quoted nonce is not expression trigger; internal marker forbidden in project AST. Most importantly open-ended untrusted Python cannot authenticate in-process telemetry: this candidate now refuses ALL source bytes outside immutable shipped APPROVED_SOURCES (six pre-reviewed historical/control/helper SHA256s); run_probe returns source-profile-not-reviewed before importing/executing them. Thus proc/fd or encoded eval trace-forgery counterexamples are unsupported and never executed, not claimed blocked by a generic Python AST sandbox. No anti-tamper assertion; container remains OS boundary. No fresh-blind qualification possible with this profile restriction; deliver capability gap and keep R3 blocked. User approved preflight stops on insufficient generic capability. Validated type proof rejects defaults/extra params, binds function param/no-arg handler. Invalid/empty trace and existing tmp dirs now unknown/reusable. 11 tests cover quoted-challenge mismatch/defaults/internal marker/unreviewed profiles; only prior approved profiles can confirm/exclude. Snapshot code hash binds APPROVED_SOURCES. Review current boundary correctness only, <=400 words; S3 transport/gate pending.
+
+CURRENT FILE scripts/python_execution_verify.py SHA d5148e356fa7fe38b36076aac959d59127f1fae2b0b000e8faa452cd8cd6923b
+"""Pinned VM-only execution observer. Not an in-process security boundary or remote attestation."""
+import ast
+import base64
+import builtins
+import contextlib
+import dis
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import re
+import resource
+import subprocess
+import sys
+import time
+
+PROBES=["control-literal-v1","expression-with-frozen-random-challenge-v1","statement-with-frozen-random-challenge-v1","syntax-error-v1"]
+POLICY={'version':1,'maxInputs':4,'inputSeconds':5,'pointSeconds':30,'memoryMiB':512,'cpus':1,'pids':64,'tmpMiB':32,'outputBytes':262144,'network':'none','proof':'python-narrow-literal-1'}
+# Reviewed preflight profiles only. Unknown source bytes are never executed by this candidate.
+APPROVED_SOURCES=['0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b', '6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122', '805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e', '899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834', '8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134', 'fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf']
+
+HASH=re.compile(r'[a-f0-9]{64}');NAME=re.compile(r'(?:[A-Za-z0-9_][A-Za-z0-9_.-]{0,63}/){0,12}[A-Za-z0-9_][A-Za-z0-9_.-]{0,63}\.py')
+def digest(value):return sha256(json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True).encode()).hexdigest()
+def probes_for(challenge):
+ if not isinstance(challenge,str) or not HASH.fullmatch(challenge):raise ValueError('Invalid frozen challenge')
+ return ["'harness-control'",f"str('{challenge}')#",f"__harness_probe__='{challenge}'", "'"]
+
+def validate_contract(v):
+ if (not isinstance(v,dict) or set(v)!={'version','path','entry','inputContract'} or type(v['version']) is not int or v['version']!=1
+     or not isinstance(v['path'],str) or not NAME.fullmatch(v['path']) or v['inputContract']!='untrusted-data-only' or not isinstance(v['entry'],dict)):raise ValueError('Invalid execution contract')
+ e=v['entry']
+ if e.get('kind')=='function':
+  if set(e)!={'kind','name','parameter'} or any(not isinstance(e[k],str) or not re.fullmatch('[A-Za-z][A-Za-z0-9_]{0,63}',e[k]) for k in ['name','parameter']):raise ValueError('Invalid function recipe')
+ elif e.get('kind')=='flask':
+  if set(e)!={'kind','app','factory','method','path','input','key','resources'} or e['app']!='app' or e['factory'] not in {None,'init'} or e['method'] not in {'GET','POST'} or e['input'] not in {'query','cookie','form'} or not isinstance(e['path'],str) or not e['path'].startswith('/') or len(e['path'])>256 or not isinstance(e['key'],str) or not re.fullmatch('[A-Za-z0-9_-]{1,100}',e['key']) or not isinstance(e['resources'],dict) or len(e['resources'])>8:raise ValueError('Invalid Flask recipe')
+  for name,text in e['resources'].items():
+   if name not in {'access_log.txt','error_log.txt','templates/index.html','templates/404.html'} or not isinstance(text,str) or len(text.encode())>4096:raise ValueError('Unsupported fixture resource')
+ else:raise ValueError('Unsupported entry')
+ return v
+
+def passive_source(source):
+ try:tree=ast.parse(source)
+ except (ValueError,SyntaxError,RecursionError):return False
+ forbidden={'sys','ctypes','inspect','dis','marshal','gc','importlib','globals','locals','vars','getattr','setattr','delattr','__import__','compile','breakpoint','__main__','json','print','__harness_probe__'}
+ for n in ast.walk(tree):
+  if isinstance(n,ast.Name) and n.id in forbidden:return False
+  if isinstance(n,(ast.Import,ast.ImportFrom)):
+   names=[a.name.split('.')[0] for a in n.names] if isinstance(n,ast.Import) else [(n.module or '').split('.')[0]]
+   if any(x in forbidden for x in names):return False
+  if isinstance(n,ast.Attribute) and (n.attr.startswith('__') or n.attr in {'sys','_getframe','settrace','setprofile','monitoring','write','dup','dup2','fdopen','_exit'} or isinstance(n.ctx,(ast.Store,ast.Del))):return False
+ return True
+
+def literal_expression(text):
+ if type(text) is not str or len(text)>256:return False
+ try:node=ast.parse(text,mode='eval').body
+ except (SyntaxError,ValueError,RecursionError):return False
+ return isinstance(node,ast.Constant) and type(node.value) in {str,int,float,bool,type(None)}
+
+def string_type_flow(fn,guard,var):
+    # Exact str domain of the frozen entry; reject arbitrary callbacks/coercions.
+    args=fn.args.posonlyargs+fn.args.args+fn.args.kwonlyargs
+    if len(args)>1 or fn.args.vararg or fn.args.kwarg or fn.args.defaults or any(x is not None for x in fn.args.kw_defaults):return False
+    strings={a.arg for a in args}
+    def typed(n):
+        if isinstance(n,ast.Constant):return type(n.value) is str
+        if isinstance(n,ast.Name):return n.id in strings
+        if isinstance(n,ast.BinOp) and isinstance(n.op,ast.Add):return typed(n.left) and typed(n.right)
+        if isinstance(n,ast.Subscript) and isinstance(n.slice,ast.Slice):return typed(n.value) and all(x is None or isinstance(x,ast.Constant) and type(x.value) is int or isinstance(x,ast.UnaryOp) and isinstance(x.op,ast.USub) and isinstance(x.operand,ast.Constant) and type(x.operand.value) is int for x in [n.slice.lower,n.slice.upper,n.slice.step])
+        if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='get' and isinstance(n.func.value,ast.Attribute) and isinstance(n.func.value.value,ast.Name) and n.func.value.value.id=='request' and n.func.value.attr in {'args','values','cookies','form'}:
+            return len(n.args)==2 and all(isinstance(x,ast.Constant) and type(x.value) is str for x in n.args) and not n.keywords
+        if isinstance(n,ast.Call) and ast.unparse(n.func)=='urllib.parse.unquote_plus':return len(n.args)==1 and typed(n.args[0]) and not n.keywords
+        return False
+    for n in fn.body:
+        if n is guard:return var in strings
+        if isinstance(n,ast.Import) and all(a.name in {'urllib.parse','configparser'} for a in n.names):continue
+        if isinstance(n,ast.Assign) and len(n.targets)==1 and isinstance(n.targets[0],ast.Name):
+            if typed(n.value):strings.add(n.targets[0].id)
+            else:strings.discard(n.targets[0].id)
+            continue
+        if isinstance(n,ast.AugAssign) and isinstance(n.target,ast.Name) and isinstance(n.op,ast.Add) and n.target.id in strings and typed(n.value):continue
+        return False
+    return False
+
+def exclusion_proof(source,line):
+ if not passive_source(source):return None
+ tree=ast.parse(source)
+ for fn in ast.walk(tree):
+  if not isinstance(fn,ast.FunctionDef):continue
+  for idx,guard in enumerate(fn.body[:-1]):
+   if not isinstance(guard,ast.If) or guard.orelse:continue
+   following=fn.body[idx+1];stmt=following.body[0] if isinstance(following,ast.Try) and following.body else following
+   call=next((n for n in ast.walk(stmt) if isinstance(n,ast.Call) and n.lineno==line and isinstance(n.func,ast.Name) and n.func.id in {'eval','exec'}),None)
+   if call is None or len(call.args)!=1 or call.keywords or not isinstance(call.args[0],ast.Name):continue
+   var=call.args[0].id
+   if not string_type_flow(fn,guard,var):continue
+   if any(isinstance(n,(ast.Global,ast.Nonlocal)) or isinstance(n,(ast.Yield,ast.YieldFrom,ast.Await)) for n in ast.walk(fn)):continue
+   # Only one terminal dynamic call in this statement; no callback/side-effect before it.
+   calls=[n for n in ast.walk(stmt) if isinstance(n,ast.Call)]
+   if len(calls)!=1:continue
+   if not guard.body or not isinstance(guard.body[-1],(ast.Return,ast.Raise)) or any(isinstance(n,(ast.Assign,ast.AugAssign,ast.NamedExpr)) and any(isinstance(x,ast.Name) and x.id==var and isinstance(x.ctx,ast.Store) for x in ast.walk(n)) for n in ast.walk(guard)):continue
+   # Restrict rejection arm to literal error return or literal RESPONSE += error followed by return.
+   exits=len(guard.body)==1 and isinstance(guard.body[0],ast.Return) and isinstance(guard.body[0].value,ast.Constant)
+   exits=exits or (len(guard.body)==2 and isinstance(guard.body[0],ast.AugAssign) and isinstance(guard.body[0].target,ast.Name) and guard.body[0].target.id!=var and isinstance(guard.body[0].value,ast.Constant) and isinstance(guard.body[1],ast.Return) and isinstance(guard.body[1].value,ast.Name) and guard.body[1].value.id==guard.body[0].target.id)
+   if not exits:continue
+   # Name rebinding and globals are conservatively rejected, including nested bindings.
+   if any(isinstance(n,ast.Name) and n.id in {'eval','exec','request'} and isinstance(n.ctx,(ast.Store,ast.Del)) for n in ast.walk(tree)):continue
+   for n in ast.walk(fn):
+    if getattr(n,'lineno',0)>guard.lineno and getattr(n,'lineno',0)<call.lineno and isinstance(n,ast.Name) and n.id==var and isinstance(n.ctx,(ast.Store,ast.Del)):break
+   else:
+    plain=ast.parse(f'not {var}.startswith("\\\'") or not {var}.endswith("\\\'") or "\\\'" in {var}[1:-1]',mode='eval').body
+    if ast.dump(plain)==ast.dump(guard.test):return {'kind':'single-quoted-string','variable':var,'guardLine':guard.lineno,'sinkLine':line,'domain':'exact-str','function':fn.name,'parameters':[a.arg for a in fn.args.posonlyargs+fn.args.args+fn.args.kwonlyargs],'scope':'code-injection-at-this-point-only'}
+    test=guard.test
+    if isinstance(test,ast.Compare) and isinstance(test.left,ast.Name) and test.left.id==var and len(test.ops)==1 and isinstance(test.ops[0],ast.NotIn) and len(test.comparators)==1 and isinstance(test.comparators[0],(ast.Tuple,ast.List)):
+     values=test.comparators[0].elts
+     if 0<len(values)<=16 and all(isinstance(v,ast.Constant) and literal_expression(v.value) for v in values):return {'kind':'finite-literal-set','variable':var,'values':[v.value for v in values],'guardLine':guard.lineno,'sinkLine':line,'domain':'exact-str','function':fn.name,'parameters':[a.arg for a in fn.args.posonlyargs+fn.args.args+fn.args.kwonlyargs],'scope':'code-injection-at-this-point-only'}
+ return None
+
+def same_program(argument,probe,kind):
+ try:return ast.dump(ast.parse(argument,mode='eval' if kind=='eval' else 'exec'))==ast.dump(ast.parse(probe,mode='eval' if kind=='eval' else 'exec'))
+ except (SyntaxError,ValueError,RecursionError):return False
+
+def run_probe(request):
+ """Only called in a disposable, non-root, network-none container by the controller."""
+ root=Path(request['sourceRoot']);contract=validate_contract(request['contract']);point=request['point'];probe=request['probe'];challenge=request['challenge'];events=[];out=sys.stdout;original_eval=builtins.eval;original_exec=builtins.exec
+ sys.path.insert(0,request['dependencies']);sys.path.insert(0,str(root));source_path=root/contract['path']
+ sources={n:(root/n).read_bytes() for n in request['files']}
+ if any(sha256(raw).hexdigest()!=request['files'][n] for n,raw in sources.items()):raise ValueError('Probe source changed')
+ if any(Path(n).parts[0].split('.')[0] in {'flask','werkzeug','jinja2','markupsafe','sys','builtins','dis','json'} for n in sources):return {'state':'unknown','reason':'dependency-shadowing'}
+ if any(sha256(raw).hexdigest() not in APPROVED_SOURCES for raw in sources.values()):return {'state':'unknown','reason':'source-profile-not-reviewed'}
+ if any(not passive_source(raw.decode()) for raw in sources.values()):return {'state':'unknown','reason':'unsupported-introspection-or-source'}
+ instructions={};target=[];values=[];tampered=False
+ def observe(code,offset,fn,arg):
+  filename=code.co_filename
+  if filename!=str(source_path) or not (fn is original_eval or fn is original_exec):return
+  positions=instructions.setdefault(code,{i.offset:i.positions for i in dis.get_instructions(code)})
+  p=positions.get(offset)
+  if p is None:return
+  span=point['call']
+  if (p.lineno,p.col_offset,p.end_lineno,p.end_col_offset)!=(span['start']['line'],span['start']['col']-1,span['end']['line'],span['end']['col']-1):return
+  kind='eval' if fn is original_eval else 'exec'
+  if len(target)<16:target.append({'pointId':point['id'],'callee':kind,'exactStr':type(arg) is str,'argumentSha256':sha256(arg.encode()).hexdigest() if type(arg) is str else None,'containsProbe':type(arg) is str and same_program(arg,probe,kind),'argument':arg[:4096] if type(arg) is str else None})
+ def returned(code,offset,value):
+  if code.co_filename=='<string>' and target and target[-1]['containsProbe'] and len(values)<16:
+   frame=sys._getframe(1);parent=frame.f_back
+   if parent is None or parent.f_code.co_filename!=str(source_path):return
+   p=next((i.positions for i in dis.get_instructions(parent.f_code) if i.offset==parent.f_lasti),None)
+   span=point['call']
+   if p is None or (p.lineno,p.col_offset,p.end_lineno,p.end_col_offset)!=(span['start']['line'],span['start']['col']-1,span['end']['line'],span['end']['col']-1):return
+   marker=frame.f_locals.get('__harness_probe__')
+   values.append({'pointId':point['id'],'evalWitness':type(value) is str and value==challenge,'execWitness':type(marker) is str and marker==challenge})
+ tool=3;sys.monitoring.use_tool_id(tool,'harness-execution-proof');sys.monitoring.register_callback(tool,sys.monitoring.events.CALL,observe);sys.monitoring.register_callback(tool,sys.monitoring.events.PY_RETURN,returned);sys.monitoring.set_events(tool,sys.monitoring.events.CALL|sys.monitoring.events.PY_RETURN)
+ error=None
+ try:
+  with open(os.devnull,'w') as sink,contextlib.redirect_stdout(sink),contextlib.redirect_stderr(sink):
+   scope={'__name__':'harness_target','__file__':str(source_path)};exec(compile(sources[contract['path']],str(source_path),'exec'),scope)
+   e=contract['entry']
+   if e['kind']=='function':scope[e['name']](**{e['parameter']:probe})
+   else:
+    from flask import Flask
+    app=scope[e['app']] if e['factory'] is None else Flask('harness-test')
+    if e['factory']=='init':scope['init'](app)
+    for n,text in e['resources'].items():p=Path.cwd()/n;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text)
+    if e['resources']:
+     from jinja2 import DictLoader
+     app.jinja_loader=DictLoader({n.removeprefix('templates/'):text for n,text in e['resources'].items() if n.startswith('templates/')})
+    app.config.update(TESTING=True)
+    client=app.test_client();kwargs={}
+    if e['input']=='cookie':
+     from urllib.parse import quote_plus
+     client.set_cookie(e['key'],quote_plus(probe))
+    elif e['input']=='query':kwargs['query_string']={e['key']:probe}
+    else:kwargs['data']={e['key']:probe}
+    client.open(e['path'],method=e['method'],**kwargs)
+ except BaseException as exc:error=type(exc).__name__
+ finally:
+  tampered=sys.monitoring.get_events(tool)!=(sys.monitoring.events.CALL|sys.monitoring.events.PY_RETURN) or builtins.eval is not original_eval or builtins.exec is not original_exec
+  sys.monitoring.set_events(tool,0);sys.monitoring.free_tool_id(tool)
+ return {'state':'unknown' if tampered else 'observed','reason':'observer-changed' if tampered else error,'calls':target,'returns':values}
+
+def verification_report(root,request):
+ if sys.platform!='linux' or os.geteuid()==0 or sys.version_info[:2]!=(3,12):raise ValueError('Pinned non-root CPython3.12 VM required')
+ root=Path(root);sys.path.insert(0,str(root/'code'))
+ from eval_evidence_batch import location_inventory
+ manifest=request['manifest'];sources={n:(root/'sources'/n).read_bytes().decode('utf-8') for n in manifest['files']}
+ if any(sha256(v.encode()).hexdigest()!=manifest['files'][n] for n,v in sources.items()):raise ValueError('Verification source mismatch')
+ inventory=location_inventory(sources)
+ if inventory!=manifest['locationBinding']['inventory']:raise ValueError('Frozen locations changed')
+ contract=validate_contract(request['contract']);point=request['point'];entry=inventory['files'].get(contract['path']);matches=[p for p in entry['points'] if p['id']==point['id']] if entry else []
+ if matches!=[point]:raise ValueError('Point identity mismatch')
+ start=time.monotonic();runs=[]
+ actual_probes=probes_for(request['challenge'])
+ for index,probe in enumerate(actual_probes):
+  if time.monotonic()-start>24:break
+  work=Path('/tmp')/('probe-'+str(index));work.mkdir(mode=0o700)
+  child={**request,'sourceRoot':str(root/'sources'),'files':manifest['files'],'probe':probe,'dependencies':str(root/'dependencies')}
+  try:
+   def limits():resource.setrlimit(resource.RLIMIT_FSIZE,(262144,262144))
+   with (work/'trace.json').open('wb') as output:
+    result=subprocess.run([sys.executable,'-I','-B','-S',__file__,'--probe'],input=json.dumps(child).encode(),stdout=output,stderr=subprocess.DEVNULL,cwd=work,timeout=5,preexec_fn=limits)
+   with (work/'trace.json').open('rb') as output:raw=output.read(32769)
+   try:value=json.loads(raw) if result.returncode==0 and len(raw)<=32768 else {'state':'unknown','reason':'probe-failed-or-output-limit'}
+   except (ValueError,UnicodeError):value={'state':'unknown','reason':'probe-trace-unavailable'}
+  except subprocess.TimeoutExpired:value={'state':'unknown','reason':'probe-timeout'}
+  runs.append({'probeSha256':sha256(probe.encode()).hexdigest(),'inputIndex':index,'trace':value})
+ calls=[c for r in runs for c in r['trace'].get('calls',[])];source=sources[contract['path']];proof=exclusion_proof(source,point['call']['start']['line']);decision='unknown';reason='conditions-unresolved'
+ if len(runs)==4 and all(r['trace']['state']=='observed' for r in runs) and calls:
+  valid_call=lambda c:c.get('pointId')==point['id'] and c.get('callee')==point['callee'].split('.')[-1] and c.get('exactStr') is True
+  valid_return=lambda v:v.get('pointId')==point['id']
+  if any(not valid_call(c) for c in calls) or any(not valid_return(v) for r in runs for v in r['trace'].get('returns',[])):return {'version':1,'operation':'verify-execution','decision':'unknown','reason':'trace-identity-mismatch','pointId':point['id']}
+  confirmed=any(any(valid_call(c) and c.get('containsProbe') for c in r['trace'].get('calls',[])) and any(valid_return(v) and (v.get('evalWitness') or v.get('execWitness')) for v in r['trace'].get('returns',[])) for r in runs[1:3])
+  if confirmed:decision='confirmed';reason='untrusted-data-executed-at-point'
+  elif proof and all(c['exactStr'] for c in calls) and ((contract['entry']['kind']=='function' and proof['function']==contract['entry']['name'] and proof['parameters']==[contract['entry']['parameter']]) or (contract['entry']['kind']=='flask' and proof['parameters']==[])):
+   # Proof must cover every value reaching this point, not merely the four probes.
+   if proof['kind']=='single-quoted-string' and all(c['argument'].startswith("'") and c['argument'].endswith("'") and "'" not in c['argument'][1:-1] for c in calls):decision='excluded';reason='supported-complete-string-constraint'
+   elif proof['kind']=='finite-literal-set' and all(c['argument'] in proof['values'] for c in calls):decision='excluded';reason='supported-complete-finite-constraint'
+ return {'version':1,'operation':'verify-execution','decision':decision,'reason':reason,'sourceSha256':point['sourceSha256'],'pointId':point['id'],'point':point,'contractSha256':digest(contract),'runs':runs,'proof':proof,'runtimePython':sys.version.split()[0],'challengeSha256':sha256(request['challenge'].encode()).hexdigest(),'probePolicySha256':digest({'policy':POLICY,'probes':PROBES}),'scope':'conditional code-injection proof at frozen point; no whole-project safety or anti-tamper attestation'}
+
+if __name__=='__main__':
+ if sys.argv[1:] == ['--probe']:
+  raw=sys.stdin.buffer.read(2*1024*1024+1)
+  if len(raw)>2*1024*1024:raise ValueError('Probe request limit')
+  result_fd=os.dup(1);devnull=os.open(os.devnull,os.O_WRONLY);os.dup2(devnull,1);os.dup2(devnull,2);os.close(devnull)
+  write_result=os.write;encode_result=json.dumps
+  result=run_probe(json.loads(raw));write_result(result_fd,encode_result(result).encode());os.close(result_fd);raise SystemExit
+ root=Path(sys.argv[1]);request=json.loads((root/'verification.json').read_bytes());print(json.dumps(verification_report(root,request)))
+
+
+CURRENT FILE scripts/python_execution_verify.test.py SHA 6b89b44e2c47d6e3a6291f6b19a2392a130230423066e99832353417a86fc7df
+"""Static proof and contract tests; never execute project input on Mac."""
+from pathlib import Path
+import importlib.util,unittest
+P=Path(__file__).with_name('python_execution_verify.py')
+class VerifyTest(unittest.TestCase):
+ def api(self):
+  self.assertTrue(P.exists(),'Independent verifier missing');s=importlib.util.spec_from_file_location('execution_verify',P);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
+ def test_safe_literal_set_has_complete_narrow_proof(self):
+  m=self.api();source='def route(value):\n    if value not in ("1", "\\\'hello\\\'"):\n        return "rejected"\n    return eval(value)\n'
+  proof=m.exclusion_proof(source,4);self.assertEqual(proof['kind'],'finite-literal-set');self.assertEqual(proof['values'],['1',"'hello'"])
+ def test_dangerous_set_assignment_and_introspection_remain_unknown(self):
+  m=self.api()
+  for source in ['def route(value):\n    if value not in ("len([])",):\n        return "no"\n    return eval(value)\n','def route(value):\n    if value not in ("1",):\n        return "no"\n    value=other\n    return eval(value)\n','import sys\ndef route(value):\n    return eval(value)\n']:
+   self.assertIsNone(m.exclusion_proof(source,source.count('\n')))
+ def test_plain_string_shape_proof_requires_dominating_guard(self):
+  m=self.api();source='def route(value):\n    if not value.startswith("\\\'") or not value.endswith("\\\'") or "\\\'" in value[1:-1]:\n        return "invalid"\n    return eval(value)\n'
+  self.assertEqual(m.exclusion_proof(source,4)['kind'],'single-quoted-string')
+ def test_string_flow_supports_fixed_slice_but_not_callback_or_overwrite(self):
+  m=self.api();source='def route(value):\n    prefix="help"\n    prefix+=value\n    prefix+="suffix"\n    bar=prefix[4:-6]\n    if not bar.startswith("\\\'") or not bar.endswith("\\\'") or "\\\'" in bar[1:-1]:\n        return "invalid"\n    return eval(bar)\n'
+  self.assertEqual(m.exclusion_proof(source,8)['kind'],'single-quoted-string')
+  self.assertIsNone(m.exclusion_proof(source.replace('bar=prefix[4:-6]','bar=callback(prefix)'),8))
+ def test_additional_untyped_default_parameter_cannot_support_exclusion(self):
+  m=self.api();source='def route(value, other=callback()):\n    value=other\n    if value not in ("1",):\n        return "no"\n    return eval(value)\n'
+  self.assertIsNone(m.exclusion_proof(source,5))
+ def test_source_cannot_replace_output_or_write_raw_trace(self):
+  m=self.api()
+  for source in ['import builtins\nbuiltins.print=lambda *args: None\n','import os\nos.write(1,b"fake")\n','import os\nos.sys.monitoring.set_events(3,0)\n']:
+   self.assertFalse(m.passive_source(source))
+ def test_probe_challenge_is_not_a_fixed_source_constant(self):
+  m=self.api();a=m.probes_for('a'*64);b=m.probes_for('b'*64)
+  self.assertNotEqual(a,b);self.assertTrue(all(('a'*64 in p) for p in a[1:3]))
+ def test_quoted_challenge_is_not_expression_execution(self):
+  m=self.api();probe=m.probes_for('a'*64)[1]
+  self.assertTrue(m.same_program(probe+'_lines(line)',probe,'eval'))
+  self.assertFalse(m.same_program(repr('a'*64),probe,'eval'))
+  self.assertFalse(m.same_program('"str(\'x\')#"',probe,'eval'))
+ def test_default_side_effect_and_internal_marker_never_support_proof(self):
+  m=self.api();source='def route(value=callback()):\n    if value not in ("1",):\n        return "no"\n    return eval(value)\n'
+  self.assertIsNone(m.exclusion_proof(source,4));self.assertFalse(m.passive_source('__harness_probe__="forged"'))
+ def test_unreviewed_project_bytes_are_not_executed(self):
+  m=self.api();self.assertNotIn(m.sha256(b'def route(value): return eval(repr(value))').hexdigest(),m.APPROVED_SOURCES)
+ def test_contract_forbids_executable_hooks_and_overbudget_probes(self):
+  m=self.api();valid={'version':1,'path':'app.py','entry':{'kind':'function','name':'route','parameter':'value'},'inputContract':'untrusted-data-only'}
+  self.assertEqual(m.validate_contract(valid),valid)
+  for mutate in [lambda v:v.update(setup='exec(1)'),lambda v:v.update(probes=['untrusted']),lambda v:v['entry'].update(command='sh'),lambda v:v.update(inputContract='python-code-intended')]:
+   import copy;value=copy.deepcopy(valid);mutate(value)
+   with self.assertRaises(ValueError):m.validate_contract(value)
+if __name__=='__main__':unittest.main()
+
+
+TEST tests.txt
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.045s
+
+OK

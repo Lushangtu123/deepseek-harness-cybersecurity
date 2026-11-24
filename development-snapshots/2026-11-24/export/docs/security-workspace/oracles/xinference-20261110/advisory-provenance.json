@@ -1,0 +1,6 @@
+{
+  "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/08/GHSA-x2rj-828p-hx9m/GHSA-x2rj-828p-hx9m.json",
+  "gitBlobSha1": "37325301a99d1fecbcb37fade784001473f8e0cf",
+  "origin": "GitHub reviewed advisory record with maintainer advisory reference",
+  "timing": "Supplement obtained after first external review, not a pre-run artifact"
+}

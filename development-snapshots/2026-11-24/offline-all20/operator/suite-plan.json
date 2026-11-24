@@ -1,0 +1,271 @@
+{
+  "allFresh": true,
+  "noHistoricalOrSyntheticResults": true,
+  "order": [
+    "consumer-12",
+    "evidence-gate",
+    "record-validation-15",
+    "unified-recovery-27",
+    "association-recovery-21",
+    "recovery-close-24",
+    "formal-admission-15",
+    "original-28",
+    "end-lf-13",
+    "rev6-24",
+    "rev7-12",
+    "rev8-13",
+    "diagnostics-20",
+    "repair-11",
+    "buffer-preflight-29",
+    "pure-compile",
+    "buffer-red-6",
+    "baseline-verify",
+    "independent-116",
+    "static"
+  ],
+  "sourceManifestSha256": "affef050148f527c0a21dfb7c989eded6cd9c07f30f945ba9eb1048395d27f63",
+  "suites": {
+    "association-recovery-21": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_association_recovery_checks.py",
+        "--out",
+        "{RUN}/association-recovery-21.json",
+        "--tools",
+        "{CANDIDATE}/tools"
+      ],
+      "resultName": "association-recovery-21.json"
+    },
+    "baseline-verify": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/verify_baseline.py",
+        "--out",
+        "{RUN}/baseline-verification.json"
+      ],
+      "resultName": "baseline-verification.json"
+    },
+    "buffer-preflight-29": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_buffer_preflight_checks.py",
+        "--out",
+        "{RUN}/buffer-preflight-results.json"
+      ],
+      "resultName": "buffer-preflight-results.json"
+    },
+    "buffer-red-6": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_buffer_v2_red.py",
+        "--out",
+        "{RUN}/buffer-red-6.json",
+        "--root",
+        "{CANDIDATE}"
+      ],
+      "resultName": "buffer-red-6.json"
+    },
+    "consumer-12": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_consumer_closure_checks.py",
+        "--out",
+        "{RUN}/consumer-12.json",
+        "--tools",
+        "{CANDIDATE}/tools"
+      ],
+      "resultName": "consumer-12.json"
+    },
+    "diagnostics-20": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_diagnostics_checks.py",
+        "--out",
+        "{RUN}/diagnostics-results.json",
+        "--root",
+        "{CANDIDATE}"
+      ],
+      "resultName": "diagnostics-results.json"
+    },
+    "end-lf-13": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_end_lf_checks.py",
+        "--out",
+        "{RUN}/end-lf-13.json"
+      ],
+      "resultName": "end-lf-13.json"
+    },
+    "evidence-gate": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_evidence_gate_checks.py",
+        "--out",
+        "{RUN}/evidence-gate.json",
+        "--tools",
+        "{CANDIDATE}/tools"
+      ],
+      "resultName": "evidence-gate.json"
+    },
+    "formal-admission-15": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_formal_admission_checks.py",
+        "--out",
+        "{RUN}/formal-admission-15.json"
+      ],
+      "resultName": "formal-admission-15.json"
+    },
+    "independent-116": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{OPERATOR}/collect_independent.py",
+        "{RUN}/independent-116.json",
+        "{AUX}/independent-source.py",
+        "{CANDIDATE}",
+        "{REFERENCES}"
+      ],
+      "resultName": "independent-116.json"
+    },
+    "original-28": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_regressions.py",
+        "--out",
+        "{RUN}/regression-results.json",
+        "--evidence",
+        "{RUN}/regression-evidence"
+      ],
+      "resultName": "regression-results.json"
+    },
+    "pure-compile": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/compile_check.py",
+        "--out",
+        "{RUN}/compile-results.json"
+      ],
+      "resultName": "compile-results.json"
+    },
+    "record-validation-15": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_record_validation_checks.py",
+        "--out",
+        "{RUN}/record-validation-15.json"
+      ],
+      "resultName": "record-validation-15.json"
+    },
+    "recovery-close-24": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_recovery_close_checks.py",
+        "--out",
+        "{RUN}/recovery-close-24.json",
+        "--tools",
+        "{CANDIDATE}/tools"
+      ],
+      "resultName": "recovery-close-24.json"
+    },
+    "repair-11": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_repair_checks.py",
+        "--out",
+        "{RUN}/repair-results.json",
+        "--root",
+        "{CANDIDATE}"
+      ],
+      "resultName": "repair-results.json"
+    },
+    "rev6-24": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_rev6_checks.py",
+        "--out",
+        "{RUN}/rev6-results.json"
+      ],
+      "resultName": "rev6-results.json"
+    },
+    "rev7-12": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_rev7_checks.py",
+        "--out",
+        "{RUN}/rev7-results.json"
+      ],
+      "resultName": "rev7-results.json"
+    },
+    "rev8-13": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_rev8_checks.py",
+        "--out",
+        "{RUN}/rev8-results.json"
+      ],
+      "resultName": "rev8-results.json"
+    },
+    "static": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/static_check.py",
+        "--out",
+        "{RUN}/static-checks.json",
+        "--run-dir",
+        "{RUN}"
+      ],
+      "resultName": "static-checks.json"
+    },
+    "unified-recovery-27": {
+      "command": [
+        "{PYTHON}",
+        "-I",
+        "-B",
+        "{CANDIDATE}/checks/run_unified_recovery_checks.py",
+        "--out",
+        "{RUN}/unified-recovery-27.json",
+        "--tools",
+        "{CANDIDATE}/tools"
+      ],
+      "resultName": "unified-recovery-27.json"
+    }
+  }
+}

@@ -1,0 +1,2200 @@
+{
+ "failed": [],
+ "fixturesImported": 0,
+ "formalTargets": "0/16",
+ "guardSha256": "704b9ce6f6f7c12085555d87bda3148d9e3224ea6d0397b9e92161e50687c828",
+ "kind": "association-recovery-b5-b7-checks",
+ "passed": 21,
+ "r3": "blocked",
+ "realBpftrace": 0,
+ "realContainers": 0,
+ "realTargets": 0,
+ "results": [
+  {
+   "description": "a reappeared associated stage makes the current cleanup incomplete, not a stale success",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 6,
+     "remove": 0,
+     "spawn": 9,
+     "stage": 5,
+     "stop": 0,
+     "tagLookup": 6
+    },
+    "checks": {
+     "counterSpent": true,
+     "firstSettled": true,
+     "firstSuccess": true,
+     "historicalCreationUnchanged": true,
+     "historicalHasNoCleanupRegression": true,
+     "historicalReceiptsPreserved": true,
+     "noRealDocker": true,
+     "noReplay": true,
+     "secondChildHeld": true,
+     "secondChildStageRetained": true,
+     "secondCleanupUnconfirmed": true,
+     "secondIncomplete3": true,
+     "secondNotPhaseRegression78": true,
+     "secondParentHeld": true,
+     "secondParentNotSettled": true,
+     "thirdChildReleased": true,
+     "thirdCleanupConfirmed": true,
+     "thirdSettled": true,
+     "thirdSuccess": true
+    },
+    "first": [
+     "return",
+     0,
+     "{\"attempt\": 1, \"cleanupConfirmed\": true, \"executionState\": \"not-started\", \"replayed\": false, \"targetExecutions\": 0}\n",
+     ""
+    ],
+    "second": [
+     "return",
+     3,
+     "{\"attempt\": 1, \"cleanupConfirmed\": false, \"executionState\": \"not-started\", \"replayed\": false, \"targetExecutions\": 0}\n",
+     ""
+    ],
+    "secondCheck": {
+     "attempt": 1,
+     "finishedAt": "2026-11-24T16:39:09.487564+00:00",
+     "protocol": "cleanup-check-v1",
+     "resourceCreationPhase": "stage-created",
+     "startedAt": "2026-11-24T16:39:09.478609+00:00",
+     "startedCount": 2,
+     "state": "incomplete"
+    },
+    "secondCleanup": {
+     "associated": {
+      "e09ebd96f8aebe0f6e4c7e3d0c2da38a": {
+       "cleanup": {
+        "checkedAt": "2026-11-24T16:39:09.484406+00:00",
+        "clientState": {
+         "proof": "not-started",
+         "state": "exited"
+        },
+        "clientStop": {
+         "forced": false,
+         "proof": "not-started",
+         "state": "exited",
+         "stopped": true
+        },
+        "confirmed": false,
+        "container": {
+         "queries": {
+          "name": {
+           "state": "absent"
+          },
+          "tag": {
+           "state": "absent"
+          }
+         },
+         "removed": true,
+         "state": "never-created"
+        },
+        "finalStageCheck": "after-resources",
+        "observerState": {
+         "proof": "not-applicable",
+         "state": "exited"
+        },
+        "observerStop": {
+         "proof": "not-applicable",
+         "state": "exited",
+         "stopped": true
+        },
+        "resourceCreationPhase": null,
+        "stage": {
+         "lstatAfter": "present",
+         "removed": false,
+         "state": "identity-changed"
+        },
+        "state": "incomplete"
+       },
+       "confirmed": false
+      }
+     },
+     "associatedClear": false,
+     "associationCandidates": 1,
+     "associationHold": {
+      "e09ebd96f8aebe0f6e4c7e3d0c2da38a": {
+       "cleanup": {
+        "checkedAt": "2026-11-24T16:39:09.480034+00:00",
+        "confirmed": false,
+        "finalStageCheck": "not-attempted-parent-scope-held",
+        "reason": "parent-full-recheck-required",
+        "stage": {
+         "removed": false,
+         "state": "not-attempted-parent-scope-held"
+        },
+        "state": "incomplete"
+       },
+       "held": true,
+       "state": "held"
+      }
+     },
+     "associationScan": {
+      "directory": "present",
+      "directoryDetail": "directory",
+      "listed": [
+       "e09ebd96f8aebe0f6e4c7e3d0c2da38a"
+      ],
+      "pendingIntents": 0,
+      "scanned": 2
+     },
+     "checkedAt": "2026-11-24T16:39:09.485973+00:00",
+     "clientExited": true,
+     "clientState": {
+      "proof": "not-started",
+      "state": "exited"
+     },
+     "clientStop": {
+      "forced": false,
+      "proof": "not-started",
+      "state": "exited",
+      "stopped": true
+     },
+     "confirmed": false,
+     "container": {
+      "queries": {
+       "name": {
+        "state": "absent"
+       },
+       "tag": {
+        "state": "absent"
+       }
+      },
+      "removed": true,
+      "state": "never-created"
+     },
+     "finalStageCheck": "after-resources",
+     "observerExited": true,
+     "observerState": {
+      "proof": "not-started",
+      "state": "exited"
+     },
+     "observerStop": {
+      "forced": false,
+      "proof": "not-started",
+      "state": "exited",
+      "stopped": true
+     },
+     "resourceCreationPhase": "stage-created",
+     "stage": {
+      "lstatAfter": "absent",
+      "removed": false,
+      "state": "retained-resources-unresolved"
+     },
+     "state": "incomplete"
+    },
+    "third": [
+     "return",
+     0,
+     "{\"attempt\": 1, \"cleanupConfirmed\": true, \"executionState\": \"not-started\", \"replayed\": false, \"targetExecutions\": 0}\n",
+     ""
+    ],
+    "thirdReceipts": [
+     {
+      "checkedAt": "2026-11-24T16:39:09.473450+00:00",
+      "confirmed": true,
+      "resourceCreationPhase": "stage-created",
+      "state": "confirmed"
+     },
+     {
+      "checkedAt": "2026-11-24T16:39:09.485973+00:00",
+      "confirmed": false,
+      "resourceCreationPhase": "stage-created",
+      "state": "incomplete"
+     },
+     {
+      "checkedAt": "2026-11-24T16:39:09.497896+00:00",
+      "confirmed": true,
+      "resourceCreationPhase": "stage-created",
+      "state": "confirmed"
+     }
+    ]
+   },
+   "error": null,
+   "id": "B5-current-cleanup-after-previous-success",
+   "passed": true
+  },
+  {
+   "description": "cleanup writes checking/held/unsettled durably before the first resource query",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 1,
+     "spawn": 2,
+     "stage": 1,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "checks": {
+     "checkingDurableBeforeQuery": true,
+     "cleanupReturned": true,
+     "currentCleanupChecking": true,
+     "noOtherRealCalls": true,
+     "reservationHeldBeforeQuery": true,
+     "resourceQueryRan": true,
+     "settledFalseBeforeQuery": true
+    },
+    "observed": {
+     "attempt": 1,
+     "checkpoints": [],
+     "cleanup": {
+      "checkedAt": "2026-11-24T16:39:09.508328+00:00",
+      "confirmed": false,
+      "finalStageCheck": "not-attempted",
+      "state": "checking"
+     },
+     "cleanupCheck": {
+      "attempt": 1,
+      "previousState": null,
+      "protocol": "cleanup-check-v1",
+      "startedAt": "2026-11-24T16:39:09.508328+00:00",
+      "startedCount": 1,
+      "state": "checking"
+     },
+     "cleanupReceipts": [],
+     "executionState": "not-started",
+     "prepareId": "772d7496f2288b0200ad898ff685fc20",
+     "processes": {
+      "client": {
+       "spawnState": "not-started"
+      },
+      "observer": {
+       "spawnState": "not-started"
+      }
+     },
+     "reservationHeld": true,
+     "resourceIntent": {
+      "attempt": 1,
+      "containerId": "1111111111111111111111111111111111111111111111111111111111111111",
+      "containerName": "stdlib-cli-run-0001-9999999999999999",
+      "containerState": "created",
+      "createdAt": "1970-01-01T00:00:00+00:00",
+      "image": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "kind": "resource-lifecycle-plan",
+      "mounts": [],
+      "operationRole": "run-0001",
+      "prepareId": "772d7496f2288b0200ad898ff685fc20",
+      "processes": {
+       "client": {
+        "spawnState": "not-started"
+       },
+       "observer": {
+        "spawnState": "not-started"
+       }
+      },
+      "protocolRevision": 3,
+      "reservationHeld": true,
+      "role": "run-0001",
+      "stageDir": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/b5-checking-5afirt3r/runs/0001/stage-9999999999999999",
+      "stageIdentity": null,
+      "stageState": "not-created",
+      "state": "planned",
+      "tag": "9999999999999999",
+      "version": 3
+     },
+     "resourceProof": {
+      "notCreated": {
+       "client": true,
+       "container": true,
+       "observer": true,
+       "stage": true
+      },
+      "phase": "reserved",
+      "protocol": "resource-phase-v1",
+      "sequence": [
+       {
+        "at": "1970-01-01T00:00:00+00:00",
+        "phase": "reserved"
+       }
+      ],
+      "targetAttempt": 1
+     },
+     "settled": false,
+     "stageDir": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/b5-checking-5afirt3r/runs/0001/stage-9999999999999999",
+     "stageIdentity": null,
+     "state": "planned",
+     "targetExecutions": 0,
+     "version": 1
+    }
+   },
+   "error": null,
+   "id": "B5-durable-checking-before-query",
+   "passed": true
+  },
+  {
+   "description": "an unpersisted cleanup-check start is incomplete and performs no resource query",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "spawn": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "checks": {
+     "diagnostic": true,
+     "incomplete3": true,
+     "noResourceQuery": true,
+     "notSettled": true,
+     "parentHeld": true
+    },
+    "stderr": "runner: incomplete-cleanup:OSError:simulated-cleanup-check-start-failure\n",
+    "stored": {
+     "attempt": 1,
+     "checkpoints": [],
+     "executionState": "not-started",
+     "prepareId": "676c3d276b93392e2053b6795a84d3ce",
+     "processes": {
+      "client": {
+       "spawnState": "not-started"
+      },
+      "observer": {
+       "spawnState": "not-started"
+      }
+     },
+     "reservationHeld": true,
+     "resourceIntent": {
+      "attempt": 1,
+      "containerId": null,
+      "containerName": "stdlib-cli-run-0001-9999999999999999",
+      "containerState": "not-created",
+      "createdAt": "1970-01-01T00:00:00+00:00",
+      "image": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "kind": "resource-lifecycle-plan",
+      "mounts": [],
+      "operationRole": "run-0001",
+      "prepareId": "676c3d276b93392e2053b6795a84d3ce",
+      "processes": {
+       "client": {
+        "spawnState": "not-started"
+       },
+       "observer": {
+        "spawnState": "not-started"
+       }
+      },
+      "protocolRevision": 3,
+      "reservationHeld": true,
+      "role": "run-0001",
+      "stageDir": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/b5-begin-fail-my688i35/runs/0001/stage-9999999999999999",
+      "stageIdentity": null,
+      "stageState": "not-created",
+      "state": "planned",
+      "tag": "9999999999999999",
+      "version": 3
+     },
+     "resourceProof": {
+      "notCreated": {
+       "client": true,
+       "container": true,
+       "observer": true,
+       "stage": true
+      },
+      "phase": "reserved",
+      "protocol": "resource-phase-v1",
+      "sequence": [
+       {
+        "at": "1970-01-01T00:00:00+00:00",
+        "phase": "reserved"
+       }
+      ],
+      "targetAttempt": 1
+     },
+     "settled": false,
+     "stageDir": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/b5-begin-fail-my688i35/runs/0001/stage-9999999999999999",
+     "stageIdentity": null,
+     "state": "planned",
+     "targetExecutions": 0,
+     "version": 1
+    }
+   },
+   "error": null,
+   "id": "B5-begin-check-journal-failure",
+   "passed": true
+  },
+  {
+   "description": "final attempt or plan journal failure is incomplete, never success",
+   "detail": {
+    "allIncomplete": true,
+    "cases": {
+     "attempt": {
+      "calls": {
+       "docker": 0,
+       "lookup": 1,
+       "remove": 0,
+       "spawn": 2,
+       "stage": 1,
+       "stop": 0,
+       "tagLookup": 1
+      },
+      "check": {
+       "attempt": 1,
+       "previousState": null,
+       "protocol": "cleanup-check-v1",
+       "startedAt": "2026-11-24T16:39:09.522120+00:00",
+       "startedCount": 1,
+       "state": "checking"
+      },
+      "kind": "return",
+      "reservationHeld": true,
+      "settled": false,
+      "stderr": "runner: incomplete-cleanup:RuntimeError:cleanup-attempt-journal:OSError\n",
+      "value": 3
+     },
+     "plan": {
+      "calls": {
+       "docker": 0,
+       "lookup": 0,
+       "remove": 0,
+       "spawn": 0,
+       "stage": 0,
+       "stop": 0,
+       "tagLookup": 0
+      },
+      "childHeld": true,
+      "kind": "return",
+      "reservationHeld": true,
+      "settled": false,
+      "stderr": "",
+      "value": 3
+     }
+    }
+   },
+   "error": null,
+   "id": "B5-final-journal-failure",
+   "passed": true
+  },
+  {
+   "description": "parent intent + child id, child parentAttempt, parent completion write order",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "spawn": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "checks": {
+     "attemptIntentFirst": true,
+     "childParentAttemptSecond": true,
+     "noResourceCalls": true,
+     "parentCompletionThird": true,
+     "threeWrites": true
+    },
+    "childId": "864d2217924e6c1d1e050f345a8ff83b",
+    "writes": [
+     {
+      "fields": {
+       "associationIntents": [
+        {
+         "attempt": 1,
+         "prepareId": "864d2217924e6c1d1e050f345a8ff83b",
+         "protocol": "association-intent-v1",
+         "startedAt": "2026-11-24T16:39:09.540365+00:00",
+         "state": "pending"
+        }
+       ],
+       "reservationHeld": true,
+       "settled": false
+      },
+      "kind": "attempt"
+     },
+     {
+      "fields": {
+       "associatedAt": "2026-11-24T16:39:09.541891+00:00",
+       "associationState": "pending",
+       "parentAttempt": 1
+      },
+      "kind": "plan",
+      "prepareId": "864d2217924e6c1d1e050f345a8ff83b"
+     },
+     {
+      "fields": {
+       "associatedPrepareIds": [
+        "864d2217924e6c1d1e050f345a8ff83b"
+       ],
+       "associationCompleteAt": "2026-11-24T16:39:09.543339+00:00",
+       "associationIntents": [
+        {
+         "attempt": 1,
+         "completedAt": "2026-11-24T16:39:09.543337+00:00",
+         "prepareId": "864d2217924e6c1d1e050f345a8ff83b",
+         "protocol": "association-intent-v1",
+         "startedAt": "2026-11-24T16:39:09.540365+00:00",
+         "state": "complete"
+        }
+       ]
+      },
+      "kind": "attempt"
+     }
+    ]
+   },
+   "error": null,
+   "id": "B6-association-order",
+   "passed": true
+  },
+  {
+   "description": "failure before the first association write holds the parent and creates nothing",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "spawn": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "checks": {
+     "noResourceCalls": true,
+     "noStage": true,
+     "noTool": true,
+     "parentHeld": true,
+     "parentNotSettled": true,
+     "raised": true
+    },
+    "plans": [
+     {
+      "parentAttempt": null,
+      "prepareId": "412fca64c8c7446f11812ec23c1bb89d",
+      "stageState": "not-created"
+     }
+    ],
+    "raised": "OSError:simulated-intent-write-failure",
+    "stageDirs": [],
+    "stored": {
+     "associatedPrepareIds": [],
+     "associationIntents": null,
+     "reservationHeld": true,
+     "settled": false
+    }
+   },
+   "error": null,
+   "id": "B6-interrupt-at-parent-intent",
+   "passed": true
+  },
+  {
+   "description": "failure writing child parentAttempt holds the parent and creates nothing",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "spawn": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "checks": {
+     "childNotLinked": true,
+     "intentDurable": true,
+     "noResourceCalls": true,
+     "noStage": true,
+     "noTool": true,
+     "parentHeld": true,
+     "parentNotSettled": true,
+     "raised": true
+    },
+    "plans": [
+     {
+      "parentAttempt": null,
+      "prepareId": "167216a9da51f2c0ca10cf4b5caefbf4",
+      "stageState": "not-created"
+     }
+    ],
+    "raised": "OSError:simulated-child-write-failure",
+    "stageDirs": [],
+    "stored": {
+     "associatedPrepareIds": [],
+     "associationIntents": [
+      {
+       "attempt": 1,
+       "prepareId": "167216a9da51f2c0ca10cf4b5caefbf4",
+       "protocol": "association-intent-v1",
+       "startedAt": "2026-11-24T16:39:09.554114+00:00",
+       "state": "pending"
+      }
+     ],
+     "reservationHeld": true,
+     "settled": false
+    }
+   },
+   "error": null,
+   "id": "B6-interrupt-at-child-parent",
+   "passed": true
+  },
+  {
+   "description": "failure of the final association-complete write holds parent and child",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "spawn": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "interruption": {
+     "calls": {
+      "docker": 0,
+      "lookup": 0,
+      "remove": 0,
+      "spawn": 0,
+      "stage": 0,
+      "stop": 0,
+      "tagLookup": 0
+     },
+     "checks": {
+      "childParentAttempt": true,
+      "intentDurable": true,
+      "noResourceCalls": true,
+      "noStage": true,
+      "noTool": true,
+      "parentHeld": true,
+      "parentListEmpty": true,
+      "parentNotSettled": true,
+      "raised": true
+     },
+     "plans": [
+      {
+       "parentAttempt": 1,
+       "prepareId": "4bb1e775f2db5aa0cf306861f3d5e6e6",
+       "stageState": "not-created"
+      }
+     ],
+     "raised": "OSError:simulated-completion-write-failure",
+     "stageDirs": [],
+     "stored": {
+      "associatedPrepareIds": [],
+      "associationIntents": [
+       {
+        "attempt": 1,
+        "prepareId": "4bb1e775f2db5aa0cf306861f3d5e6e6",
+        "protocol": "association-intent-v1",
+        "startedAt": "2026-11-24T16:39:09.560421+00:00",
+        "state": "pending"
+       }
+      ],
+      "reservationHeld": true,
+      "settled": false
+     }
+    },
+    "recovery": [
+     "return",
+     3,
+     ""
+    ],
+    "recoveryChecks": {
+     "incomplete3": true,
+     "noDestructive": true,
+     "parentHeld": true,
+     "parentNotSettled": true,
+     "pendingIntentPreserved": true
+    },
+    "stored": {
+     "argvBase": [
+      "--expr="
+     ],
+     "associatedPrepareIds": [],
+     "associationIntents": [
+      {
+       "attempt": 1,
+       "prepareId": "504d54b9801b40315193ee39e03c84d4",
+       "protocol": "association-intent-v1",
+       "startedAt": "2026-11-24T16:39:09.568080+00:00",
+       "state": "pending"
+      }
+     ],
+     "attempt": 1,
+     "bindingId": null,
+     "bindingSha256": null,
+     "budget": {
+      "admissionBudget": 1,
+      "maxAttempts": 16,
+      "usedAfterReserve": 1
+     },
+     "bufferParser": "tools/buffer_protocol_v2.py",
+     "bufferParserSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+     "bufferTemplate": "tools/observer_template_buffer_v2.bt",
+     "bufferTemplateSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+     "challenge": "731c06086d1e0b852a06e0452ec49924",
+     "challengeSha256": "1381d6069d03a65d31ec87e1217b29d8d14d6f450932bc2a2c7e241abe90e617",
+     "checkpoints": [
+      {
+       "at": "2026-11-24T16:39:09.565688+00:00",
+       "step": "reserved"
+      }
+     ],
+     "classId": "S",
+     "cleanup": {
+      "associated": {
+       "504d54b9801b40315193ee39e03c84d4": {
+        "cleanup": {
+         "checkedAt": "2026-11-24T16:39:09.572634+00:00",
+         "confirmed": false,
+         "finalStageCheck": "not-attempted-parent-scope-held",
+         "reason": "association-incomplete",
+         "stage": {
+          "removed": false,
+          "state": "not-attempted-parent-scope-held"
+         },
+         "state": "incomplete"
+        },
+        "held": true,
+        "state": "held"
+       }
+      },
+      "associatedClear": false,
+      "associationCandidates": 1,
+      "associationDamaged": [],
+      "associationIncomplete": [
+       "pending-intent:504d54b9801b40315193ee39e03c84d4"
+      ],
+      "associationScan": {
+       "directory": "present",
+       "directoryDetail": "directory",
+       "listed": [],
+       "pendingIntents": 1,
+       "scanned": 1
+      },
+      "associationUnreadable": [],
+      "checkedAt": "2026-11-24T16:39:09.574019+00:00",
+      "confirmed": false,
+      "finalStageCheck": "not-attempted-identity-mismatch",
+      "identityReason": "association-incomplete",
+      "reason": "association-incomplete",
+      "stage": {
+       "removed": false,
+       "state": "not-attempted-identity-mismatch"
+      },
+      "state": "incomplete"
+     },
+     "cleanupCheck": {
+      "attempt": 1,
+      "finishedAt": "2026-11-24T16:39:09.574021+00:00",
+      "protocol": "cleanup-check-v1",
+      "reason": "association-incomplete",
+      "startedAt": "2026-11-24T16:39:09.571135+00:00",
+      "startedCount": 1,
+      "state": "incomplete"
+     },
+     "cleanupReceipts": [
+      {
+       "checkedAt": "2026-11-24T16:39:09.574019+00:00",
+       "confirmed": false,
+       "resourceCreationPhase": null,
+       "state": "incomplete"
+      }
+     ],
+     "clientExited": false,
+     "executionState": "not-started",
+     "expected": {
+      "decision": "confirmed",
+      "dynamicEvents": 1,
+      "reason": "structure-match",
+      "targetExit": 0
+     },
+     "expectedSha256": null,
+     "fixture": "fixtures/structure-controlled/sce_raw_sink.py",
+     "framingPolicy": "end-lf-padding-v1",
+     "frozenTemplate": "observer_template_buffer_v2.bt",
+     "frozenTemplateSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+     "goState": "not-attempted",
+     "observationProtocol": "buffer-v2",
+     "observationRawSha256": null,
+     "observationSha256": null,
+     "observerEnd": null,
+     "observerSha256": null,
+     "observerStop": null,
+     "observerStopped": false,
+     "planSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+     "pointId": null,
+     "prepare": {},
+     "prepareId": null,
+     "probeIndex": 0,
+     "probePrefix": "--expr=",
+     "probeSuffix": "",
+     "processes": {
+      "client": {
+       "spawnState": "not-started"
+      },
+      "observer": {
+       "spawnState": "not-started"
+      }
+     },
+     "reservationHeld": true,
+     "reservedAt": "2026-11-24T16:39:09.565680+00:00",
+     "resourceIdentity": null,
+     "resourceIntent": null,
+     "resourcePlanPath": null,
+     "resourceProof": {
+      "notCreated": {
+       "client": true,
+       "container": true,
+       "observer": true,
+       "stage": true
+      },
+      "phase": "reserved",
+      "protocol": "resource-phase-v1",
+      "sequence": [
+       {
+        "at": "2026-11-24T16:39:09.565686+00:00",
+        "phase": "reserved"
+       }
+      ],
+      "targetAttempt": 1
+     },
+     "settled": false,
+     "sourceSha256": "fb799416a87ce896e747acd66618a98e3e349c6800a58843b196560399ca2dba",
+     "stageDir": null,
+     "stageIdentity": null,
+     "state": "reserved",
+     "targetExecutions": 0,
+     "targetExit": null,
+     "targetOutputDiagnosticOnly": true,
+     "targetPid": null,
+     "targetUid": 65534,
+     "verificationSha256": null,
+     "version": 1
+    }
+   },
+   "error": null,
+   "id": "B6-interrupt-at-completion",
+   "passed": true
+  },
+  {
+   "description": "a reverse child-parent relation is reconciled even with an empty parent list",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 2,
+     "remove": 0,
+     "spawn": 3,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 2
+    },
+    "checks": {
+     "childHeld": true,
+     "childStageRetained": true,
+     "incomplete3": true,
+     "noRealDocker": true,
+     "parentCleanupUnconfirmed": true,
+     "parentHeld": true,
+     "parentNotSettled": true
+    },
+    "stderr": "",
+    "stored": {
+     "attempt": 1,
+     "checkpoints": [],
+     "cleanup": {
+      "associated": {
+       "b3d1e2d32d0425064eb2034732218f57": {
+        "cleanup": {
+         "checkedAt": "2026-11-24T16:39:09.588050+00:00",
+         "clientState": {
+          "detail": "synthetic-unknown",
+          "state": "unknown"
+         },
+         "clientStop": {
+          "forced": false,
+          "proof": null,
+          "state": "unknown",
+          "stopped": false
+         },
+         "confirmed": false,
+         "container": {
+          "queries": {
+           "name": {
+            "state": "absent"
+           },
+           "tag": {
+            "state": "absent"
+           }
+          },
+          "removed": true,
+          "state": "never-created"
+         },
+         "finalStageCheck": "after-resources",
+         "observerState": {
+          "proof": "not-applicable",
+          "state": "exited"
+         },
+         "observerStop": {
+          "proof": "not-applicable",
+          "state": "exited",
+          "stopped": true
+         },
+         "resourceCreationPhase": null,
+         "stage": {
+          "lstatAfter": "present",
+          "removed": false,
+          "state": "retained-resources-unresolved"
+         },
+         "state": "incomplete"
+        },
+        "confirmed": false
+       }
+      },
+      "associatedClear": false,
+      "associationCandidates": 1,
+      "associationHold": {
+       "b3d1e2d32d0425064eb2034732218f57": {
+        "cleanup": {
+         "checkedAt": "2026-11-24T16:39:09.583545+00:00",
+         "confirmed": false,
+         "finalStageCheck": "not-attempted-parent-scope-held",
+         "reason": "parent-full-recheck-required",
+         "stage": {
+          "removed": false,
+          "state": "not-attempted-parent-scope-held"
+         },
+         "state": "incomplete"
+        },
+        "held": true,
+        "state": "held"
+       }
+      },
+      "associationScan": {
+       "directory": "present",
+       "directoryDetail": "directory",
+       "listed": [],
+       "pendingIntents": 0,
+       "scanned": 2
+      },
+      "checkedAt": "2026-11-24T16:39:09.589534+00:00",
+      "clientExited": true,
+      "clientState": {
+       "proof": "not-started",
+       "state": "exited"
+      },
+      "clientStop": {
+       "forced": false,
+       "proof": "not-started",
+       "state": "exited",
+       "stopped": true
+      },
+      "confirmed": false,
+      "container": {
+       "queries": {
+        "name": {
+         "state": "absent"
+        },
+        "tag": {
+         "state": "absent"
+        }
+       },
+       "removed": true,
+       "state": "never-created"
+      },
+      "finalStageCheck": "after-resources",
+      "observerExited": true,
+      "observerState": {
+       "proof": "not-started",
+       "state": "exited"
+      },
+      "observerStop": {
+       "forced": false,
+       "proof": "not-started",
+       "state": "exited",
+       "stopped": true
+      },
+      "resourceCreationPhase": "reserved",
+      "stage": {
+       "lstatAfter": "absent",
+       "removed": false,
+       "state": "retained-resources-unresolved"
+      },
+      "state": "incomplete"
+     },
+     "cleanupCheck": {
+      "attempt": 1,
+      "finishedAt": "2026-11-24T16:39:09.591975+00:00",
+      "protocol": "cleanup-check-v1",
+      "resourceCreationPhase": "reserved",
+      "startedAt": "2026-11-24T16:39:09.581299+00:00",
+      "startedCount": 1,
+      "state": "incomplete"
+     },
+     "cleanupReceipts": [
+      {
+       "checkedAt": "2026-11-24T16:39:09.589534+00:00",
+       "confirmed": false,
+       "resourceCreationPhase": "reserved",
+       "state": "incomplete"
+      }
+     ],
+     "clientExited": true,
+     "executionState": "not-started",
+     "observerStopped": true,
+     "prepareId": "0c92da68b387ae2938e8fdc4bbad6b75",
+     "processes": {
+      "client": {
+       "spawnState": "not-started"
+      },
+      "observer": {
+       "spawnState": "not-started"
+      }
+     },
+     "reservationHeld": true,
+     "resourceIntent": {
+      "attempt": 1,
+      "containerId": null,
+      "containerName": "stdlib-cli-run-0001-ffffffffffffffff",
+      "containerState": "not-created",
+      "createdAt": "1970-01-01T00:00:00+00:00",
+      "image": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "kind": "resource-lifecycle-plan",
+      "mounts": [],
+      "operationRole": "run-0001",
+      "prepareId": "0c92da68b387ae2938e8fdc4bbad6b75",
+      "processes": {
+       "client": {
+        "spawnState": "not-started"
+       },
+       "observer": {
+        "spawnState": "not-started"
+       }
+      },
+      "protocolRevision": 3,
+      "reservationHeld": true,
+      "role": "run-0001",
+      "stageDir": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/b6-reverse-zph4czxg/runs/0001/stage-ffffffffffffffff",
+      "stageIdentity": null,
+      "stageState": "not-created",
+      "state": "planned",
+      "tag": "ffffffffffffffff",
+      "version": 3
+     },
+     "resourceProof": {
+      "notCreated": {
+       "client": true,
+       "container": true,
+       "observer": true,
+       "stage": true
+      },
+      "phase": "reserved",
+      "protocol": "resource-phase-v1",
+      "sequence": [
+       {
+        "at": "1970-01-01T00:00:00+00:00",
+        "phase": "reserved"
+       }
+      ],
+      "targetAttempt": 1
+     },
+     "settled": false,
+     "stageDir": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/b6-reverse-zph4czxg/runs/0001/stage-ffffffffffffffff",
+     "stageIdentity": null,
+     "state": "planned",
+     "targetExecutions": 0,
+     "version": 1
+    }
+   },
+   "error": null,
+   "id": "B6-reverse-only-child-held",
+   "passed": true
+  },
+  {
+   "description": "a standalone compile plan for the attempt is included in parent settlement",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 2,
+     "remove": 0,
+     "spawn": 3,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 2
+    },
+    "checks": {
+     "childHeld": true,
+     "childStageRetained": true,
+     "incomplete3": true,
+     "parentHeld": true,
+     "parentNotSettled": true,
+     "scanRecorded": true
+    },
+    "cleanup": {
+     "associated": {
+      "c62ea9c809dab1dcf5e5976a5bd3d4ac": {
+       "cleanup": {
+        "checkedAt": "2026-11-24T16:39:09.606547+00:00",
+        "clientState": {
+         "detail": "synthetic-unknown",
+         "state": "unknown"
+        },
+        "clientStop": {
+         "forced": false,
+         "proof": null,
+         "state": "unknown",
+         "stopped": false
+        },
+        "confirmed": false,
+        "container": {
+         "queries": {
+          "name": {
+           "state": "absent"
+          },
+          "tag": {
+           "state": "absent"
+          }
+         },
+         "removed": true,
+         "state": "never-created"
+        },
+        "finalStageCheck": "after-resources",
+        "observerState": {
+         "proof": "not-applicable",
+         "state": "exited"
+        },
+        "observerStop": {
+         "proof": "not-applicable",
+         "state": "exited",
+         "stopped": true
+        },
+        "resourceCreationPhase": null,
+        "stage": {
+         "lstatAfter": "present",
+         "removed": false,
+         "state": "retained-resources-unresolved"
+        },
+        "state": "incomplete"
+       },
+       "confirmed": false
+      }
+     },
+     "associatedClear": false,
+     "associationCandidates": 1,
+     "associationHold": {
+      "c62ea9c809dab1dcf5e5976a5bd3d4ac": {
+       "cleanup": {
+        "checkedAt": "2026-11-24T16:39:09.601289+00:00",
+        "confirmed": false,
+        "finalStageCheck": "not-attempted-parent-scope-held",
+        "reason": "parent-full-recheck-required",
+        "stage": {
+         "removed": false,
+         "state": "not-attempted-parent-scope-held"
+        },
+        "state": "incomplete"
+       },
+       "held": true,
+       "state": "held"
+      }
+     },
+     "associationScan": {
+      "directory": "present",
+      "directoryDetail": "directory",
+      "listed": [],
+      "pendingIntents": 0,
+      "scanned": 2
+     },
+     "checkedAt": "2026-11-24T16:39:09.608627+00:00",
+     "clientExited": true,
+     "clientState": {
+      "proof": "not-started",
+      "state": "exited"
+     },
+     "clientStop": {
+      "forced": false,
+      "proof": "not-started",
+      "state": "exited",
+      "stopped": true
+     },
+     "confirmed": false,
+     "container": {
+      "queries": {
+       "name": {
+        "state": "absent"
+       },
+       "tag": {
+        "state": "absent"
+       }
+      },
+      "removed": true,
+      "state": "never-created"
+     },
+     "finalStageCheck": "after-resources",
+     "observerExited": true,
+     "observerState": {
+      "proof": "not-started",
+      "state": "exited"
+     },
+     "observerStop": {
+      "forced": false,
+      "proof": "not-started",
+      "state": "exited",
+      "stopped": true
+     },
+     "resourceCreationPhase": "reserved",
+     "stage": {
+      "lstatAfter": "absent",
+      "removed": false,
+      "state": "retained-resources-unresolved"
+     },
+     "state": "incomplete"
+    }
+   },
+   "error": null,
+   "id": "B6-preexisting-standalone-compile-accounted",
+   "passed": true
+  },
+  {
+   "description": "unreadable or malformed potentially relevant plans keep parent held with no destruction",
+   "detail": {
+    "allIncomplete": true,
+    "variants": {
+     "io": {
+      "calls": {
+       "docker": 0,
+       "lookup": 0,
+       "remove": 0,
+       "spawn": 0,
+       "stage": 0,
+       "stop": 0,
+       "tagLookup": 0
+      },
+      "checks": {
+       "incomplete3": true,
+       "noDestructive": true,
+       "noDocker": true,
+       "parentHeld": true,
+       "parentNotSettled": true
+      },
+      "stderr": ""
+     },
+     "malformed": {
+      "calls": {
+       "docker": 0,
+       "lookup": 0,
+       "remove": 0,
+       "spawn": 0,
+       "stage": 0,
+       "stop": 0,
+       "tagLookup": 0
+      },
+      "checks": {
+       "incomplete3": true,
+       "noDestructive": true,
+       "noDocker": true,
+       "parentHeld": true,
+       "parentNotSettled": true
+      },
+      "stderr": ""
+     },
+     "permission": {
+      "calls": {
+       "docker": 0,
+       "lookup": 0,
+       "remove": 0,
+       "spawn": 0,
+       "stage": 0,
+       "stop": 0,
+       "tagLookup": 0
+      },
+      "checks": {
+       "incomplete3": true,
+       "noDestructive": true,
+       "noDocker": true,
+       "parentHeld": true,
+       "parentNotSettled": true
+      },
+      "stderr": ""
+     }
+    }
+   },
+   "error": null,
+   "id": "B6-unreadable-related-plan-held",
+   "passed": true
+  },
+  {
+   "description": "ownership contradictions block 78 before any signal or delete",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "spawn": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "checks": {
+     "blocked78": true,
+     "firstStageRetained": true,
+     "noDestructiveBeforeBlock": true,
+     "noDocker": true,
+     "secondStageRetained": true
+    },
+    "stderr": "runner: association-contradiction:prepare-plan-selector-mismatch:22222222222222222222222222222222:holds={\"22222222222222222222222222222222\": {\"detail\": \"contradictory-or-damaged-record\", \"held\": false, \"state\": \"blocked\"}}\nrunner: prepare-plan-selector-mismatch:22222222222222222222222222222222\n"
+   },
+   "error": null,
+   "id": "B6-ownership-contradiction-before-destruction",
+   "passed": true
+  },
+  {
+   "description": "pending intent for a missing original child is never substituted by another child",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "spawn": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "checks": {
+     "incomplete3": true,
+     "noAutoLink": true,
+     "noDestructive": true,
+     "noSubstitution": true,
+     "originalIntentPreserved": true,
+     "parentHeld": true,
+     "parentNotSettled": true
+    },
+    "stderr": "",
+    "stored": {
+     "associationIntents": [
+      {
+       "attempt": 1,
+       "prepareId": "cccccccccccccccccccccccccccccccc",
+       "protocol": "association-intent-v1",
+       "startedAt": "1970-01-01T00:00:00+00:00",
+       "state": "pending"
+      }
+     ],
+     "attempt": 1,
+     "checkpoints": [],
+     "cleanup": {
+      "associated": {
+       "cccccccccccccccccccccccccccccccc": {
+        "detail": "file-not-found",
+        "held": false,
+        "state": "missing"
+       },
+       "dddddddddddddddddddddddddddddddd": {
+        "cleanup": {
+         "checkedAt": "2026-11-24T16:39:09.663812+00:00",
+         "confirmed": false,
+         "finalStageCheck": "not-attempted-parent-scope-held",
+         "reason": "association-incomplete",
+         "stage": {
+          "removed": false,
+          "state": "not-attempted-parent-scope-held"
+         },
+         "state": "incomplete"
+        },
+        "held": true,
+        "state": "held"
+       }
+      },
+      "associatedClear": false,
+      "associationCandidates": 1,
+      "associationDamaged": [],
+      "associationIncomplete": [
+       "pending-intent:cccccccccccccccccccccccccccccccc"
+      ],
+      "associationScan": {
+       "directory": "present",
+       "directoryDetail": "directory",
+       "listed": [],
+       "pendingIntents": 1,
+       "scanned": 2
+      },
+      "associationUnreadable": [],
+      "checkedAt": "2026-11-24T16:39:09.666624+00:00",
+      "confirmed": false,
+      "finalStageCheck": "not-attempted-identity-mismatch",
+      "identityReason": "association-incomplete",
+      "reason": "association-incomplete",
+      "stage": {
+       "removed": false,
+       "state": "not-attempted-identity-mismatch"
+      },
+      "state": "incomplete"
+     },
+     "cleanupCheck": {
+      "attempt": 1,
+      "finishedAt": "2026-11-24T16:39:09.666627+00:00",
+      "protocol": "cleanup-check-v1",
+      "reason": "association-incomplete",
+      "startedAt": "2026-11-24T16:39:09.660944+00:00",
+      "startedCount": 1,
+      "state": "incomplete"
+     },
+     "cleanupReceipts": [
+      {
+       "checkedAt": "2026-11-24T16:39:09.666624+00:00",
+       "confirmed": false,
+       "resourceCreationPhase": null,
+       "state": "incomplete"
+      }
+     ],
+     "executionState": "not-started",
+     "prepareId": "87648faf2b7cf1704455257bf1b0252b",
+     "processes": {
+      "client": {
+       "spawnState": "not-started"
+      },
+      "observer": {
+       "spawnState": "not-started"
+      }
+     },
+     "reservationHeld": true,
+     "resourceIntent": {
+      "attempt": 1,
+      "containerId": null,
+      "containerName": "stdlib-cli-run-0001-c1c1c1c1c1c1c1c1",
+      "containerState": "not-created",
+      "createdAt": "1970-01-01T00:00:00+00:00",
+      "image": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "kind": "resource-lifecycle-plan",
+      "mounts": [],
+      "operationRole": "run-0001",
+      "prepareId": "87648faf2b7cf1704455257bf1b0252b",
+      "processes": {
+       "client": {
+        "spawnState": "not-started"
+       },
+       "observer": {
+        "spawnState": "not-started"
+       }
+      },
+      "protocolRevision": 3,
+      "reservationHeld": true,
+      "role": "run-0001",
+      "stageDir": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/b6-original-ty3eu8li/runs/0001/stage-c1c1c1c1c1c1c1c1",
+      "stageIdentity": null,
+      "stageState": "not-created",
+      "state": "planned",
+      "tag": "c1c1c1c1c1c1c1c1",
+      "version": 3
+     },
+     "resourceProof": {
+      "notCreated": {
+       "client": true,
+       "container": true,
+       "observer": true,
+       "stage": true
+      },
+      "phase": "reserved",
+      "protocol": "resource-phase-v1",
+      "sequence": [
+       {
+        "at": "1970-01-01T00:00:00+00:00",
+        "phase": "reserved"
+       }
+      ],
+      "targetAttempt": 1
+     },
+     "settled": false,
+     "stageDir": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/b6-original-ty3eu8li/runs/0001/stage-c1c1c1c1c1c1c1c1",
+     "stageIdentity": null,
+     "state": "planned",
+     "targetExecutions": 0,
+     "version": 1
+    }
+   },
+   "error": null,
+   "id": "B6-intent-identifies-original-child",
+   "passed": true
+  },
+  {
+   "description": "a pending association prevents subsequent stage/container/process creation",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "spawn": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "checks": {
+     "noResourceCalls": true,
+     "noStage": true,
+     "parentHeld": true,
+     "parentListNotCompleted": true,
+     "raised": true
+    },
+    "raised": "RecoveryIncomplete:association-incomplete",
+    "stored": {
+     "argvBase": [
+      "--expr="
+     ],
+     "associatedPrepareIds": [],
+     "associationIntents": [
+      {
+       "attempt": 1,
+       "prepareId": "0df95fbc10f9c822a79cffaf3ad7799c",
+       "protocol": "association-intent-v1",
+       "startedAt": "1970-01-01T00:00:00+00:00",
+       "state": "pending"
+      }
+     ],
+     "attempt": 1,
+     "bindingId": null,
+     "bindingSha256": null,
+     "budget": {
+      "admissionBudget": 1,
+      "maxAttempts": 16,
+      "usedAfterReserve": 1
+     },
+     "bufferParser": "tools/buffer_protocol_v2.py",
+     "bufferParserSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+     "bufferTemplate": "tools/observer_template_buffer_v2.bt",
+     "bufferTemplateSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+     "challenge": "8b52c0880b0af338028ea4e09d59933a",
+     "challengeSha256": "dc4828bf34539b4455a649ad8be9d5696d9dae7e95caac3daeef448aadcb9972",
+     "checkpoints": [
+      {
+       "at": "2026-11-24T16:39:09.670553+00:00",
+       "step": "reserved"
+      }
+     ],
+     "classId": "S",
+     "cleanup": {
+      "confirmed": false
+     },
+     "clientExited": false,
+     "executionState": "not-started",
+     "expected": {
+      "decision": "confirmed",
+      "dynamicEvents": 1,
+      "reason": "structure-match",
+      "targetExit": 0
+     },
+     "expectedSha256": null,
+     "fixture": "fixtures/structure-controlled/sce_raw_sink.py",
+     "framingPolicy": "end-lf-padding-v1",
+     "frozenTemplate": "observer_template_buffer_v2.bt",
+     "frozenTemplateSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+     "goState": "not-attempted",
+     "observationProtocol": "buffer-v2",
+     "observationRawSha256": null,
+     "observationSha256": null,
+     "observerEnd": null,
+     "observerSha256": null,
+     "observerStop": null,
+     "observerStopped": false,
+     "planSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+     "pointId": null,
+     "prepare": {},
+     "prepareId": null,
+     "probeIndex": 0,
+     "probePrefix": "--expr=",
+     "probeSuffix": "",
+     "processes": {
+      "client": {
+       "spawnState": "not-started"
+      },
+      "observer": {
+       "spawnState": "not-started"
+      }
+     },
+     "reservationHeld": true,
+     "reservedAt": "2026-11-24T16:39:09.670543+00:00",
+     "resourceIdentity": null,
+     "resourceIntent": null,
+     "resourcePlanPath": null,
+     "resourceProof": {
+      "notCreated": {
+       "client": true,
+       "container": true,
+       "observer": true,
+       "stage": true
+      },
+      "phase": "reserved",
+      "protocol": "resource-phase-v1",
+      "sequence": [
+       {
+        "at": "2026-11-24T16:39:09.670550+00:00",
+        "phase": "reserved"
+       }
+      ],
+      "targetAttempt": 1
+     },
+     "settled": false,
+     "sourceSha256": "fb799416a87ce896e747acd66618a98e3e349c6800a58843b196560399ca2dba",
+     "stageDir": null,
+     "stageIdentity": null,
+     "state": "reserved",
+     "targetExecutions": 0,
+     "targetExit": null,
+     "targetOutputDiagnosticOnly": true,
+     "targetPid": null,
+     "targetUid": 65534,
+     "verificationSha256": null,
+     "version": 1
+    }
+   },
+   "error": null,
+   "id": "B6-incomplete-association-blocks-creation",
+   "passed": true
+  },
+  {
+   "description": "a bind plan reverse-linked to the attempt is reconciled and retained",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 2,
+     "remove": 0,
+     "spawn": 3,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 2
+    },
+    "checks": {
+     "candidateScanned": true,
+     "childHeld": true,
+     "childStageRetained": true,
+     "incomplete3": true,
+     "parentHeld": true,
+     "parentNotSettled": true
+    },
+    "cleanup": {
+     "associated": {
+      "d39c7dbeb439d218a2fa9ee33e43e264": {
+       "cleanup": {
+        "checkedAt": "2026-11-24T16:39:09.687300+00:00",
+        "clientState": {
+         "detail": "synthetic-unknown",
+         "state": "unknown"
+        },
+        "clientStop": {
+         "forced": false,
+         "proof": null,
+         "state": "unknown",
+         "stopped": false
+        },
+        "confirmed": false,
+        "container": {
+         "queries": {
+          "name": {
+           "state": "absent"
+          },
+          "tag": {
+           "state": "absent"
+          }
+         },
+         "removed": true,
+         "state": "never-created"
+        },
+        "finalStageCheck": "after-resources",
+        "observerState": {
+         "proof": "not-applicable",
+         "state": "exited"
+        },
+        "observerStop": {
+         "proof": "not-applicable",
+         "state": "exited",
+         "stopped": true
+        },
+        "resourceCreationPhase": null,
+        "stage": {
+         "lstatAfter": "present",
+         "removed": false,
+         "state": "retained-resources-unresolved"
+        },
+        "state": "incomplete"
+       },
+       "confirmed": false
+      }
+     },
+     "associatedClear": false,
+     "associationCandidates": 1,
+     "associationHold": {
+      "d39c7dbeb439d218a2fa9ee33e43e264": {
+       "cleanup": {
+        "checkedAt": "2026-11-24T16:39:09.681343+00:00",
+        "confirmed": false,
+        "finalStageCheck": "not-attempted-parent-scope-held",
+        "reason": "parent-full-recheck-required",
+        "stage": {
+         "removed": false,
+         "state": "not-attempted-parent-scope-held"
+        },
+        "state": "incomplete"
+       },
+       "held": true,
+       "state": "held"
+      }
+     },
+     "associationScan": {
+      "directory": "present",
+      "directoryDetail": "directory",
+      "listed": [],
+      "pendingIntents": 0,
+      "scanned": 2
+     },
+     "checkedAt": "2026-11-24T16:39:09.688878+00:00",
+     "clientExited": true,
+     "clientState": {
+      "proof": "not-started",
+      "state": "exited"
+     },
+     "clientStop": {
+      "forced": false,
+      "proof": "not-started",
+      "state": "exited",
+      "stopped": true
+     },
+     "confirmed": false,
+     "container": {
+      "queries": {
+       "name": {
+        "state": "absent"
+       },
+       "tag": {
+        "state": "absent"
+       }
+      },
+      "removed": true,
+      "state": "never-created"
+     },
+     "finalStageCheck": "after-resources",
+     "observerExited": true,
+     "observerState": {
+      "proof": "not-started",
+      "state": "exited"
+     },
+     "observerStop": {
+      "forced": false,
+      "proof": "not-started",
+      "state": "exited",
+      "stopped": true
+     },
+     "resourceCreationPhase": "reserved",
+     "stage": {
+      "lstatAfter": "absent",
+      "removed": false,
+      "state": "retained-resources-unresolved"
+     },
+     "state": "incomplete"
+    }
+   },
+   "error": null,
+   "id": "B6-reverse-only-bind-held",
+   "passed": true
+  },
+  {
+   "description": "an unrelated attempt plan is neither destructive evidence nor a blocker",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 1,
+     "remove": 0,
+     "spawn": 2,
+     "stage": 1,
+     "stop": 0,
+     "tagLookup": 1
+    },
+    "checks": {
+     "noRealDocker": true,
+     "targetSettled": true,
+     "targetSuccess": true,
+     "unrelatedCandidateExcluded": true,
+     "unrelatedStageRetained": true
+    },
+    "cleanup": {
+     "associated": {},
+     "associatedClear": true,
+     "associationCandidates": 0,
+     "associationHold": {},
+     "associationScan": {
+      "directory": "present",
+      "directoryDetail": "directory",
+      "listed": [],
+      "pendingIntents": 0,
+      "scanned": 2
+     },
+     "checkedAt": "2026-11-24T16:39:09.704848+00:00",
+     "clientExited": true,
+     "clientState": {
+      "proof": "not-started",
+      "state": "exited"
+     },
+     "clientStop": {
+      "forced": false,
+      "proof": "not-started",
+      "state": "exited",
+      "stopped": true
+     },
+     "confirmed": true,
+     "container": {
+      "queries": {
+       "name": {
+        "state": "absent"
+       },
+       "tag": {
+        "state": "absent"
+       }
+      },
+      "removed": true,
+      "state": "never-created"
+     },
+     "finalStageCheck": "after-resources",
+     "observerExited": true,
+     "observerState": {
+      "proof": "not-started",
+      "state": "exited"
+     },
+     "observerStop": {
+      "forced": false,
+      "proof": "not-started",
+      "state": "exited",
+      "stopped": true
+     },
+     "resourceCreationPhase": "reserved",
+     "stage": {
+      "lstatAfter": "absent",
+      "removed": true,
+      "state": "absent"
+     },
+     "state": "confirmed"
+    }
+   },
+   "error": null,
+   "id": "B6-unrelated-plan-not-cleaned",
+   "passed": true
+  },
+  {
+   "description": "a parent-list child without parentAttempt holds instead of auto-repairing",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "spawn": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "checks": {
+     "noIntentInvented": true,
+     "noResourceCalls": true,
+     "noStage": true,
+     "parentHeld": true,
+     "parentListUnchanged": true,
+     "raised": true
+    },
+    "raised": "RecoveryIncomplete:association-incomplete",
+    "stored": {
+     "argvBase": [
+      "--expr="
+     ],
+     "associatedPrepareIds": [
+      "41a44ef775b7b75a8162d7e29a1ae844"
+     ],
+     "attempt": 1,
+     "bindingId": null,
+     "bindingSha256": null,
+     "budget": {
+      "admissionBudget": 1,
+      "maxAttempts": 16,
+      "usedAfterReserve": 1
+     },
+     "bufferParser": "tools/buffer_protocol_v2.py",
+     "bufferParserSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+     "bufferTemplate": "tools/observer_template_buffer_v2.bt",
+     "bufferTemplateSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+     "challenge": "bd24007b855661dc9b975cd18b07e148",
+     "challengeSha256": "db34ace247b850eac5292c4c6c314d329a1f736333bf0a526fcfc7c7644a1beb",
+     "checkpoints": [
+      {
+       "at": "2026-11-24T16:39:09.712134+00:00",
+       "step": "reserved"
+      }
+     ],
+     "classId": "S",
+     "cleanup": {
+      "confirmed": false
+     },
+     "clientExited": false,
+     "executionState": "not-started",
+     "expected": {
+      "decision": "confirmed",
+      "dynamicEvents": 1,
+      "reason": "structure-match",
+      "targetExit": 0
+     },
+     "expectedSha256": null,
+     "fixture": "fixtures/structure-controlled/sce_raw_sink.py",
+     "framingPolicy": "end-lf-padding-v1",
+     "frozenTemplate": "observer_template_buffer_v2.bt",
+     "frozenTemplateSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+     "goState": "not-attempted",
+     "observationProtocol": "buffer-v2",
+     "observationRawSha256": null,
+     "observationSha256": null,
+     "observerEnd": null,
+     "observerSha256": null,
+     "observerStop": null,
+     "observerStopped": false,
+     "planSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+     "pointId": null,
+     "prepare": {},
+     "prepareId": null,
+     "probeIndex": 0,
+     "probePrefix": "--expr=",
+     "probeSuffix": "",
+     "processes": {
+      "client": {
+       "spawnState": "not-started"
+      },
+      "observer": {
+       "spawnState": "not-started"
+      }
+     },
+     "reservationHeld": true,
+     "reservedAt": "2026-11-24T16:39:09.712123+00:00",
+     "resourceIdentity": null,
+     "resourceIntent": null,
+     "resourcePlanPath": null,
+     "resourceProof": {
+      "notCreated": {
+       "client": true,
+       "container": true,
+       "observer": true,
+       "stage": true
+      },
+      "phase": "reserved",
+      "protocol": "resource-phase-v1",
+      "sequence": [
+       {
+        "at": "2026-11-24T16:39:09.712131+00:00",
+        "phase": "reserved"
+       }
+      ],
+      "targetAttempt": 1
+     },
+     "settled": false,
+     "sourceSha256": "fb799416a87ce896e747acd66618a98e3e349c6800a58843b196560399ca2dba",
+     "stageDir": null,
+     "stageIdentity": null,
+     "state": "reserved",
+     "targetExecutions": 0,
+     "targetExit": null,
+     "targetOutputDiagnosticOnly": true,
+     "targetPid": null,
+     "targetUid": 65534,
+     "verificationSha256": null,
+     "version": 1
+    }
+   },
+   "error": null,
+   "id": "B6-unlinked-existing-association-blocks-creation",
+   "passed": true
+  },
+  {
+   "description": "missing/malformed/permission/IO direct prepare reads are incomplete 3",
+   "detail": {
+    "allIncomplete": true,
+    "variants": {
+     "io": {
+      "calls": {
+       "docker": 0,
+       "lookup": 0,
+       "remove": 0,
+       "spawn": 0,
+       "stage": 0,
+       "stop": 0,
+       "tagLookup": 0
+      },
+      "checks": {
+       "diagnosticNamesIncomplete": true,
+       "incomplete3": true,
+       "noDestructive": true,
+       "noDocker": true,
+       "not79": true,
+       "parentHeld": true,
+       "parentNotSettled": true
+      },
+      "result": [
+       "return",
+       3
+      ],
+      "stderr": "runner: prepare-plan-incomplete:invalid:json-or-io\n"
+     },
+     "malformed": {
+      "calls": {
+       "docker": 0,
+       "lookup": 0,
+       "remove": 0,
+       "spawn": 0,
+       "stage": 0,
+       "stop": 0,
+       "tagLookup": 0
+      },
+      "checks": {
+       "diagnosticNamesIncomplete": true,
+       "incomplete3": true,
+       "noDestructive": true,
+       "noDocker": true,
+       "not79": true,
+       "parentHeld": true,
+       "parentNotSettled": true
+      },
+      "result": [
+       "return",
+       3
+      ],
+      "stderr": "runner: prepare-plan-incomplete:invalid:json-or-io\n"
+     },
+     "missing": {
+      "calls": {
+       "docker": 0,
+       "lookup": 0,
+       "remove": 0,
+       "spawn": 0,
+       "stage": 0,
+       "stop": 0,
+       "tagLookup": 0
+      },
+      "checks": {
+       "diagnosticNamesIncomplete": true,
+       "incomplete3": true,
+       "noDestructive": true,
+       "noDocker": true,
+       "not79": true,
+       "parentHeld": true,
+       "parentNotSettled": true
+      },
+      "result": [
+       "return",
+       3
+      ],
+      "stderr": "runner: prepare-plan-incomplete:missing:file-not-found\n"
+     },
+     "permission": {
+      "calls": {
+       "docker": 0,
+       "lookup": 0,
+       "remove": 0,
+       "spawn": 0,
+       "stage": 0,
+       "stop": 0,
+       "tagLookup": 0
+      },
+      "checks": {
+       "diagnosticNamesIncomplete": true,
+       "incomplete3": true,
+       "noDestructive": true,
+       "noDocker": true,
+       "not79": true,
+       "parentHeld": true,
+       "parentNotSettled": true
+      },
+      "result": [
+       "return",
+       3
+      ],
+      "stderr": "runner: prepare-plan-incomplete:unreadable:permission-denied\n"
+     }
+    }
+   },
+   "error": null,
+   "id": "B7-direct-prepare-read-classification",
+   "passed": true
+  },
+  {
+   "description": "direct prepare ownership contradiction is blocked 78 with no destruction",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "spawn": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "checks": {
+     "blocked78": true,
+     "noDestructive": true,
+     "parentHeld": true
+    },
+    "stderr": "runner: prepare-plan-selector-mismatch\n"
+   },
+   "error": null,
+   "id": "B7-direct-ownership-contradiction",
+   "passed": true
+  },
+  {
+   "description": "cleanup --prepare-id uses the same incomplete classification as recover",
+   "detail": {
+    "calls": {
+     "docker": 0,
+     "lookup": 0,
+     "remove": 0,
+     "spawn": 0,
+     "stage": 0,
+     "stop": 0,
+     "tagLookup": 0
+    },
+    "checks": {
+     "incomplete3": true,
+     "noDestructive": true,
+     "parentHeld": true
+    },
+    "result": [
+     "return",
+     3
+    ]
+   },
+   "error": null,
+   "id": "B7-direct-cleanup-alias-classification",
+   "passed": true
+  },
+  {
+   "description": "a genuine held batch lock stays 79 and CLI ambiguity stays 2",
+   "detail": {
+    "ambiguity": [
+     [
+      "exit",
+      2
+     ],
+     [
+      "exit",
+      2
+     ],
+     [
+      "exit",
+      2
+     ]
+    ],
+    "checks": {
+     "ambiguous2": true,
+     "lockDiagnostic": true,
+     "lockbusy79": true
+    },
+    "lockReturn": 79,
+    "lockStderr": "runner: batch-locked\n"
+   },
+   "error": null,
+   "id": "B7-genuine-lockbusy-and-cli-ambiguity",
+   "passed": true
+  }
+ ],
+ "runnerSha256": "b1c4a1f1e4248f3d279e953989b1b9b3ddec8d7f29b222910818594416a9e5bc",
+ "selfcheckExecutions": 0,
+ "simulated": true,
+ "sourceTools": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/tools",
+ "targetExecutions": 0,
+ "total": 21
+}

@@ -1,0 +1,248 @@
+{
+  "version": 3,
+  "cases": [
+    {
+      "id": "BenchmarkTest00074",
+      "file": "BenchmarkTest00074.py",
+      "language": "python",
+      "cwe": "CWE-94",
+      "truth": "positive",
+      "sourceSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+      "location": {
+        "line": 51,
+        "column": 4
+      },
+      "oracle": {
+        "kind": "historical-diagnostic",
+        "reference": "Historical OWASP file-level label plus local sink location"
+      },
+      "selection": {
+        "method": "previously-used-diagnostic",
+        "blind": false,
+        "qualificationEligible": false
+      },
+      "path": "BenchmarkTest00074.py",
+      "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec"
+    },
+    {
+      "id": "BenchmarkTest00073",
+      "file": "BenchmarkTest00073.py",
+      "language": "python",
+      "cwe": "CWE-94",
+      "truth": "negative",
+      "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+      "location": {
+        "line": 54,
+        "column": 5
+      },
+      "oracle": {
+        "kind": "historical-diagnostic",
+        "reference": "Historical OWASP file-level label plus local sink location"
+      },
+      "selection": {
+        "method": "previously-used-diagnostic",
+        "blind": false,
+        "qualificationEligible": false
+      },
+      "path": "BenchmarkTest00073.py",
+      "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762"
+    },
+    {
+      "id": "skf-viewer-upstream",
+      "file": "skf-upstream.py",
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "positive",
+      "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+      "location": {
+        "line": 37,
+        "column": 20
+      },
+      "oracle": {
+        "kind": "historical-diagnostic",
+        "reference": "https://github.com/blabla1337/skf-labs/blob/35199b6f49658b75f860530c0f09b91e985198aa/python/CMD2/CMD2.py#L37"
+      },
+      "selection": {
+        "method": "previously-used-diagnostic",
+        "blind": false,
+        "qualificationEligible": false
+      },
+      "path": "skf-upstream.py",
+      "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041"
+    },
+    {
+      "id": "skf-viewer-authored-fix",
+      "file": "skf-fixed-control.py",
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "negative",
+      "sourceSha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+      "location": null,
+      "oracle": {
+        "kind": "historical-diagnostic",
+        "reference": "Authored one-line fixed comparator, not third-party negative"
+      },
+      "selection": {
+        "method": "previously-used-diagnostic",
+        "blind": false,
+        "qualificationEligible": false
+      },
+      "path": "skf-fixed-control.py",
+      "pointId": null
+    },
+    {
+      "id": "synthetic-boundary-0",
+      "path": "boundary.py",
+      "pointId": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+      "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "location": {
+        "line": 7,
+        "column": 3
+      },
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "positive",
+      "oracle": {
+        "kind": "synthetic-location-control",
+        "reference": "byte-boundary only, no runtime truth"
+      },
+      "selection": {
+        "method": "authored-diagnostic",
+        "blind": false,
+        "qualificationEligible": false
+      }
+    },
+    {
+      "id": "synthetic-boundary-1",
+      "path": "boundary.py",
+      "pointId": "30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0",
+      "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "location": {
+        "line": 8,
+        "column": 2
+      },
+      "language": "python",
+      "cwe": "CWE-94",
+      "truth": "positive",
+      "oracle": {
+        "kind": "synthetic-location-control",
+        "reference": "byte-boundary only, no runtime truth"
+      },
+      "selection": {
+        "method": "authored-diagnostic",
+        "blind": false,
+        "qualificationEligible": false
+      }
+    },
+    {
+      "id": "synthetic-boundary-2",
+      "path": "boundary.py",
+      "pointId": "8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450",
+      "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "location": {
+        "line": 8,
+        "column": 15
+      },
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "positive",
+      "oracle": {
+        "kind": "synthetic-location-control",
+        "reference": "byte-boundary only, no runtime truth"
+      },
+      "selection": {
+        "method": "authored-diagnostic",
+        "blind": false,
+        "qualificationEligible": false
+      }
+    },
+    {
+      "id": "synthetic-boundary-3",
+      "path": "boundary.py",
+      "pointId": "6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b",
+      "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "location": {
+        "line": 10,
+        "column": 3
+      },
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "positive",
+      "oracle": {
+        "kind": "synthetic-location-control",
+        "reference": "byte-boundary only, no runtime truth"
+      },
+      "selection": {
+        "method": "authored-diagnostic",
+        "blind": false,
+        "qualificationEligible": false
+      }
+    },
+    {
+      "id": "synthetic-boundary-4",
+      "path": "boundary.py",
+      "pointId": "bb9b0f0d843ba3baa5f9d1a1e8d7e31ef6a1eff47f137a31b174e7c9ab54c10b",
+      "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "location": {
+        "line": 15,
+        "column": 9
+      },
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "positive",
+      "oracle": {
+        "kind": "synthetic-location-control",
+        "reference": "byte-boundary only, no runtime truth"
+      },
+      "selection": {
+        "method": "authored-diagnostic",
+        "blind": false,
+        "qualificationEligible": false
+      }
+    },
+    {
+      "id": "synthetic-boundary-5",
+      "path": "boundary.py",
+      "pointId": "ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63",
+      "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "location": {
+        "line": 15,
+        "column": 14
+      },
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "positive",
+      "oracle": {
+        "kind": "synthetic-location-control",
+        "reference": "byte-boundary only, no runtime truth"
+      },
+      "selection": {
+        "method": "authored-diagnostic",
+        "blind": false,
+        "qualificationEligible": false
+      }
+    },
+    {
+      "id": "synthetic-boundary-6",
+      "path": "boundary.py",
+      "pointId": "f7fce12a3eebae79df2b300396a6f6fa6adf4a939e737ce9f32d521e5cbe4cbc",
+      "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "location": {
+        "line": 17,
+        "column": 9
+      },
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "positive",
+      "oracle": {
+        "kind": "synthetic-location-control",
+        "reference": "byte-boundary only, no runtime truth"
+      },
+      "selection": {
+        "method": "authored-diagnostic",
+        "blind": false,
+        "qualificationEligible": false
+      }
+    }
+  ]
+}

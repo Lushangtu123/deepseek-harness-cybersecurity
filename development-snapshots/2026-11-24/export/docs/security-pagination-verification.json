@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-30",
+  "timezone": "America/Los_Angeles",
+  "changes": [
+    "bounded RPC and SSH diagnostics",
+    "independent audit task and finding pagination and filters",
+    "dependency-free CI and pinned GitHub Actions"
+  ],
+  "localChecks": {
+    "python": {
+      "cases": 186,
+      "files": 22,
+      "controllerSubset": {
+        "cases": 146,
+        "files": 18
+      }
+    },
+    "pluginNodeCases": 432,
+    "hostNodeCases": 124,
+    "reproducibleClient": true,
+    "deploymentFaultCases": 7,
+    "countsAreSeparateSuites": true,
+    "actualLinuxVmFullGate": {
+      "passed": true,
+      "temporarySanitizedSourceFiles": 397,
+      "productionProgramsOrDataChanged": false,
+      "pythonCases": 186,
+      "pluginCases": 432,
+      "hostCases": 124,
+      "reproducibleClient": true
+    }
+  },
+  "nativePaging": {
+    "engagement": "personal-security-pagination-ci-20261030",
+    "syntheticStoredFixtures": true,
+    "noScannerOrModelInvocation": true,
+    "seededFindings": 620,
+    "findingsAfterConcurrentInsert": 621,
+    "findingPagesRead": 9,
+    "originalWindowFindingsRead": 620,
+    "uniqueOriginalWindowFindings": 620,
+    "originalWindowIdDigest": "52e033f121693e9f10ab7de4486b4040fc331b7c131ebaef624a0514aa0be6c3",
+    "refreshIncludesInsertedFinding": true,
+    "storedRuns": 45,
+    "runPagesRead": 7,
+    "allRunIdsReadOnce": true,
+    "literalWildcardSearchMatchedId": 600,
+    "filteredFindings": 104,
+    "allSyntheticFindingsUnverified": true,
+    "diagnostic": {
+      "requestId": "9eb67eee-ee52-41bb-8787-037c3de8b9ec",
+      "operation": "securityStatus",
+      "stage": "dispatch",
+      "code": "RPC_REJECTED",
+      "elapsedMs": 1
+    },
+    "ownerJournalMatchedReference": true,
+    "scannerContainersRunning": 0,
+    "hostReportedPythonFailure": {
+      "trace": {
+        "id": "eb61c670-476d-465e-a37e-a98a36676e71",
+        "phase": "native-check",
+        "remoteException": "AssertionError",
+        "remoteLine": 3
+      },
+      "exitCode": 1,
+      "diagnosticRecorded": true,
+      "rawCommandSourceAndMessageNotPersisted": true
+    }
+  },
+  "browser": {
+    "actualUiTested": true,
+    "firstPageFindings": 50,
+    "storedSyntheticFindings": 622,
+    "firstPageRuns": 10,
+    "storedSyntheticRuns": 45,
+    "independentNextPages": true,
+    "explicitRefreshResetsBothAndSeesNewRow": true,
+    "literalSearchAndCombinedFilter": true,
+    "postColdRead": true,
+    "recoveryBadgeCovered": true,
+    "twoSelectToolRetentionErrorsThenObservedCorrectState": true,
+    "staleTabReplacedWithinSameBrowser": true,
+    "newModelGenerationCalls": 0,
+    "scopeWritesOrFindingReviews": 0,
+    "wholeBrowserReloadRetainsMutationReceipt": false
+  },
+  "recovery": {
+    "point": "ready-security-pagination-20261030",
+    "selectedProofFiles": 2612,
+    "programFiles": 127,
+    "independentDiskActuallyBooted": true,
+    "noQcowBacking": true,
+    "originalInodeReturned": true,
+    "originalNowRunning": true,
+    "temporaryCopiedDiskRemoved": true,
+    "snapshots": 12,
+    "previousSnapshotsPreserved": true,
+    "coverage": {
+      "state": "matches",
+      "name": "ready-security-pagination-20261030",
+      "createdAt": "2026-10-31T00:29:57Z",
+      "scope": "improved-program-tools-config",
+      "helpersMatch": true,
+      "launchAgentsMatch": true,
+      "uncoveredFiles": [],
+      "groups": {
+        "program": {
+          "state": "matches",
+          "filesChecked": 127,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "runtime": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "tools": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "config": {
+          "state": "matches",
+          "filesChecked": 11,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "plugins": {
+          "state": "matches",
+          "filesChecked": 1320,
+          "uncoveredFiles": [],
+          "differentFiles": [],
+          "differentFileCount": 0,
+          "differenceDetailsTruncated": false
+        }
+      }
+    }
+  },
+  "finalOriginalVm": {
+    "programHashesMatched": 127,
+    "trackedRealProjectHashesMatched": 459,
+    "realProjectGitHeadUnchanged": true,
+    "realProjectSixAuditTablesUnchanged": true,
+    "realProjectFindings": 95,
+    "realProjectAllUnverified": true,
+    "service": "active",
+    "auditOwnerActive": true,
+    "privateSocket0600": true,
+    "crashInterruptedRowPersisted": true,
+    "scannerContainersRunning": 0,
+    "noRunningAuditRows": true,
+    "runtimePreflight": {
+      "ok": true,
+      "readOnly": true,
+      "automaticChanges": false,
+      "scope": "local pinned images, rules and database identity; no scanner execution, model call, network download or GitHub latest check",
+      "tools": {
+        "semgrep": {
+          "ready": true,
+          "version": "1.182.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-31T00:38:45.098Z",
+          "cached": false,
+          "rules": {
+            "version": "local-reviewed-2",
+            "count": 16,
+            "languages": [
+              "javascript",
+              "python",
+              "typescript"
+            ]
+          }
+        },
+        "trivy": {
+          "ready": true,
+          "version": "0.76.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-31T00:38:45.098Z",
+          "cached": false,
+          "database": {
+            "state": "fresh",
+            "updatedAt": "2026-10-29T19:18:50.969Z",
+            "nextUpdate": "2026-10-30T19:18:50.969Z",
+            "ageDays": 1
+          },
+          "lastUpdate": {
+            "state": "current",
+            "checkedAt": "2026-10-29T22:59:00.361501+00:00"
+          }
+        },
+        "zap": {
+          "ready": true,
+          "version": "2.17.0",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-31T00:38:45.098Z",
+          "cached": false
+        }
+      }
+    },
+    "hostIsolationValidated": true,
+    "wholeVmRecovery": "ready-security-pagination-20261030",
+    "newWholeVmSnapshot": false,
+    "clockOffsetSeconds": -0.08680272102355957,
+    "postMaintenanceSshRead": "restored-read-ok"
+  },
+  "sshObservation": {
+    "oneNewPreCommandIdentificationReset": true,
+    "readOnlyRetrySucceeded": true,
+    "serverWindowLackedExplicitRejectionReason": true,
+    "underlyingRootCause": "unattributed",
+    "oldFailuresReconstructed": false,
+    "serverPolicyChanged": false
+  },
+  "cloudCiAtPackaging": {
+    "state": "two-native-ubuntu-test-fixture-failures-corrected-awaiting-remote-verification",
+    "firstRun": "https://github.com/Lushangtu123/deepseek-harness-vm/actions/runs/41151882378",
+    "failedTest": "Lifecycle.test_proxy_stop_failure_is_not_reported_as_success",
+    "cause": "unmocked web_entry_stop attempted /bin/launchctl on Ubuntu",
+    "correction": "mock web entry stop; assert no real host subprocess; preserve exact proxy error expectation",
+    "deployedProgramChanged": false,
+    "workflow": "https://github.com/Lushangtu123/deepseek-harness-vm/actions/workflows/verify.yml",
+    "sourceChecksDoNotReplaceNativeVmAcceptance": true,
+    "secondRun": "https://github.com/Lushangtu123/deepseek-harness-vm/actions/runs/41152782048",
+    "secondCause": "synthetic checked-helper test depended on fixed Mac Python path",
+    "secondCorrection": "only test interpreter uses sys.executable; still assert production Mac interpreter and exact checked stdin bytes"
+  },
+  "boundaries": {
+    "hostFullAccessGranted": false,
+    "networkOrVmSharingExpanded": false,
+    "realProjectFindings": 95,
+    "realProjectAllUnverified": true,
+    "realProjectTrackedFilesUnchanged": 459,
+    "realProjectGitHeadAndSixTablesUnchanged": true,
+    "newRealScans": 0,
+    "semgrepPartialParsingRemains": true,
+    "otherThreeVmsStoppedAndUntouched": true,
+    "freshVmProvisioningTestedThisPhase": false,
+    "authenticatedZapImplemented": false
+  },
+  "evidencePolicy": "Summary derived from successful captured commands and actual browser observations; expected RED and transient failures retained separately. Selected hashes are not a whole-disk file count. No raw credentials, project databases, chat archives or VM disks in this export."
+}

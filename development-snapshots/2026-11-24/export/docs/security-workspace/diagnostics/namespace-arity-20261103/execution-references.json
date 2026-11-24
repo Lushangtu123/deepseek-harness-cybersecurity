@@ -1,0 +1,9 @@
+{
+  "scanSandboxSourceSha256": "9b7b9eefb8f9e9b8ac36e797a6173f59b220bc7acf6e453e5046d674b073fee5",
+  "scanSandboxSource": "scan-sandbox-source.py",
+  "hostHelperSha256": "12dcfa4c93f06ef482145ab3691819ea01ca261faed0dcfff7122613acca643c",
+  "hostHelperExcerptSha256": "1463a8f27d0fc97e2fcf95db40b478b9951894f3952773b206c0549fb868636c",
+  "hostClaim": "Existing validate and fixed SSH call sites only; no request or mutation of host full-access configuration. This is not a full host-manager security audit.",
+  "oracleDeadline": "15s inside container; VM subprocess timeout22s, finally docker forced removal",
+  "frozenArtifactsNotRegenerated": true
+}

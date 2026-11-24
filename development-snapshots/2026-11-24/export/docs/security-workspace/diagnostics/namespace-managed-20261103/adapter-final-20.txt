@@ -1,0 +1,30 @@
+(node:18412) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ existing16 findings are explicitly not applicable and never launch a worker (2.134459ms)
+✔ eligible input carries exact full copy span and hash without importing source (1.822709ms)
+✔ eligible snapshot mismatch never reaches worker (0.69725ms)
+✔ eligible hash mismatch never reaches worker (0.811ms)
+✔ eligible unbound mismatch never reaches worker (0.449459ms)
+✔ eligible label mismatch never reaches worker (0.433333ms)
+✔ changed same-size source refuses anchored request (0.717875ms)
+✔ worker failure preserves original warning and reports unavailable (0.801167ms)
+✔ cleanup uncertainty must escape to block later tasks (1.128083ms)
+✔ joint collector preserves persisted scanner warning when namespace unavailable (89.288667ms)
+✔ joint collector preserves persisted scanner warning when namespace stop-unknown (79.106625ms)
+✔ joint collector preserves persisted scanner warning when namespace shutdown-stop-unknown (78.473625ms)
+✔ real AST worker output projects only copy-bound unverified structure (36.185583ms)
+✔ invalid worker output cannot become evidence: r=>r.observations[0].anchor.offset++ (35.185166ms)
+✔ invalid worker output cannot become evidence: r=>r.observations[0].sourceSha256='c'.repeat(64) (34.909042ms)
+✔ invalid worker output cannot become evidence: r=>r.observations[0].disposition='confirmed' (34.868833ms)
+✔ invalid worker output cannot become evidence: r=>r.observations.push(r.observations[0]) (35.033833ms)
+✔ invalid worker output cannot become evidence: r=>r.checks=0 (35.0475ms)
+✔ a preceding assignment on the same line remains structural unverified evidence (34.970584ms)
+✔ excessive source writes remain unmatched instead of discarding valid worker output (36.307834ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 611.469291

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "recordedAfterReview": true,
+  "recordedAt": "2026-11-04T04:11:26.342573+00:00",
+  "originalStep": "Prose reconstruction of the tool-history Python step after prepare.py: load protocol.json; set probeSha256=sha256(probe.py bytes); write json.dumps(plan, indent=2) plus newline. This is not a verbatim command or a promise of byte-identical regeneration.",
+  "protocolSha256": "5328d3e20f700fe538a8c0fdb60c8333017718a5127b0ac3d7731b17f51e4fe4",
+  "probeSha256": "8cf09282ecfaf466682b09e605eb99ee07970d8da260ab0a4c8968985f401dea",
+  "intentSha256": "1b0d2fbc1df91068ec2601b49dc79637e93b56fc4eeedcdb3bd4bd29fec99886",
+  "candidateFreezeSha256": "42386b4d335571ebce2c633d187e1a3fd0ccd3353dfb5e89542017b2c7c84b0f",
+  "reconstruction": "prepare.py now performs that finalization directly and refuses to overwrite a frozen experiment. Existing frozen files were not regenerated.",
+  "timestampLimitation": "Host/VM timestamps are not trusted preregistration or cryptographic origin proof."
+}

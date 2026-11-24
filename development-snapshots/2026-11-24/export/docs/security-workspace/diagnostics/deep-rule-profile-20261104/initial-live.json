@@ -1,0 +1,2117 @@
+{
+  "ok": true,
+  "scope": "actual default managed scanner on reused development sources; no project code execution or new R3 qualification",
+  "sourceFiles": 28,
+  "scannerInvocations": 2,
+  "namespaceReviewerInvocations": 1,
+  "ordinaryScannerInvocations": 0,
+  "modelCalls": 0,
+  "launches": [
+    {
+      "name": "dsh-sec-7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "network": "none",
+      "user": "1000:1000",
+      "rootReadonly": true,
+      "capDrop": [
+        "ALL"
+      ],
+      "securityOpt": [
+        "no-new-privileges"
+      ],
+      "cpus": 1,
+      "memoryBytes": 805306368,
+      "pids": 160,
+      "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+      "rulesCount": 17,
+      "ruleMountReadonly": true,
+      "workspaceMode": "deep",
+      "stagedInputRemovedAfterRun": true,
+      "coverageKey": "cc62a52b8c82b4351fc90673aa4cd95cec03065d7339683b6a66c13262964fff"
+    },
+    {
+      "name": "dsh-sec-7e50a7cd-aec9-437b-8ffc-c12cec9b6bc4",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "network": "none",
+      "user": "1000:1000",
+      "rootReadonly": true,
+      "capDrop": [
+        "ALL"
+      ],
+      "securityOpt": [
+        "no-new-privileges"
+      ],
+      "cpus": 1,
+      "memoryBytes": 805306368,
+      "pids": 160,
+      "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+      "rulesCount": 16,
+      "ruleMountReadonly": true,
+      "workspaceMode": null,
+      "stagedInputRemovedAfterRun": true,
+      "coverageKey": "24c88e883edc095059c5298a183419bb6258f1c0c787aa72378217ec304ba4a1"
+    }
+  ],
+  "joint": {
+    "task": {
+      "id": "41c11cf4-4550-4c5d-a42f-793dcabdf01a",
+      "engagement": "deep17-real-managed-candidate",
+      "state": "completed",
+      "scopeRevision": 1,
+      "workspace": {
+        "version": "workspace-dispatch-s1-2",
+        "mode": "deep",
+        "sandboxProfile": "S1",
+        "selectedSteps": [
+          "semgrep"
+        ],
+        "toolIdentities": {
+          "semgrep": "598208862ad1449a5c64391f5bb0bef537e2ee334d89588e5b3582c900c4b608"
+        },
+        "budgetSeconds": 180,
+        "modelRequests": 0,
+        "fullWorkspaceReady": false,
+        "ruleProfiles": {
+          "semgrep": {
+            "version": 1,
+            "id": "deep-namespace17",
+            "mode": "deep",
+            "baseRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+            "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+            "ruleCount": 17,
+            "qualification": "managed-candidate-not-r3"
+          }
+        }
+      },
+      "startedAt": "2026-11-04T17:44:10.916Z",
+      "finishedAt": "2026-11-04T17:44:16.879Z",
+      "deadline": "2026-11-04T17:47:10.916Z",
+      "budgetSeconds": 180,
+      "modelCalls": 0,
+      "cleanupVerified": true,
+      "problem": null,
+      "webTarget": null,
+      "snapshot": {
+        "id": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+        "files": 28,
+        "bytes": 135056,
+        "git": {
+          "head": null,
+          "dirty": null,
+          "statusHash": null
+        },
+        "excluded": 0,
+        "exclusionsRetained": 0,
+        "exclusionsTruncated": false,
+        "redactedFiles": 0
+      },
+      "steps": [
+        {
+          "tool": "semgrep",
+          "id": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "state": "completed",
+          "complete": true,
+          "coverageScope": "scanner-reported-files",
+          "eligibleFiles": null,
+          "cleanupVerified": null,
+          "version": "1.182.1",
+          "checkedFiles": 28,
+          "problem": null,
+          "fileCoverage": {
+            "scope": "managed-copy",
+            "scanned": 28,
+            "total": 28,
+            "uncovered": 0,
+            "withoutLanguageRule": 0
+          },
+          "coverageNotes": [],
+          "diagnostics": {
+            "total": 0,
+            "retained": 0,
+            "truncated": false
+          },
+          "pythonEvidence": "completed",
+          "sourceLocations": {
+            "version": 1,
+            "state": "completed",
+            "total": 22,
+            "bound": 22,
+            "unavailable": 0
+          },
+          "observationSummary": {
+            "version": 1,
+            "total": 22,
+            "executionPoints": 20,
+            "other": 2
+          },
+          "namespaceReview": {
+            "version": 1,
+            "state": "completed",
+            "eligible": 20,
+            "checked": 20,
+            "observations": 20,
+            "unmatched": 0,
+            "retained": 20,
+            "cleanupVerified": true,
+            "execution": {
+              "profile": "namespace-ast-1",
+              "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+              "workerSha256": "9ec513ddb83d94c0c2f63629b7f218b1971704b4ff25d21169f30ad6e0ea9a51",
+              "pythonVersion": "3.12.15",
+              "cleanupVerified": true
+            }
+          },
+          "modelCalls": 0,
+          "artifacts": 20
+        }
+      ],
+      "findings": 22,
+      "coverageComplete": false,
+      "manualChecks": [
+        "authentication",
+        "authorization",
+        "business-logic",
+        "architecture"
+      ],
+      "notice": "\u5b8c\u6210\u8868\u793a\u5df2\u9009\u6b65\u9aa4\u7ed3\u675f\uff1b\u547d\u4e2d\u4fdd\u6301\u5f85\u9a8c\u8bc1\u3002Git\u672a\u63d0\u4ea4\u72b6\u6001\u672a\u63a2\u6d4b\uff0c\u6309\u9010\u6587\u4ef6\u54c8\u5e0c\u56fa\u5b9a\u5b9e\u9645\u5185\u5bb9\u3002\u8131\u654f/\u6392\u9664\u6587\u4ef6\u3001\u624b\u5de5\u9879\u4e0e\u672a\u9009\u5de5\u5177\u4ecd\u672a\u8986\u76d6\uff1bREA\u4ec5\u9759\u6001JavaScript\u56fe\uff1bPentAGI\u8f93\u51fa\u662f\u672a\u9a8c\u8bc1\u6a21\u578b\u7ed3\u8bba\uff0c\u8c03\u7528\u6b21\u6570\u9884\u7b97\u4e0d\u7b49\u540c\u8d27\u5e01\u91d1\u989d\u4e0a\u9650\u3002"
+    },
+    "sections": {
+      "files": [
+        {
+          "path": "alias-eval.py",
+          "sha256": "6f2dceb17bd74070ea5335910f548f39b1c6e4a18a26d59a6bc091f63b79cac0",
+          "originalSha256": "6f2dceb17bd74070ea5335910f548f39b1c6e4a18a26d59a6bc091f63b79cac0",
+          "bytes": 121,
+          "redacted": false
+        },
+        {
+          "path": "alias-exec.py",
+          "sha256": "92699ed5dbbcfbb0484afabed5474086544060e22dfd5de898a07ee563be06b2",
+          "originalSha256": "92699ed5dbbcfbb0484afabed5474086544060e22dfd5de898a07ee563be06b2",
+          "bytes": 145,
+          "redacted": false
+        },
+        {
+          "path": "guard-append-eval.py",
+          "sha256": "0c7ff334b1d7051385b36f8fd21d5496ebab3ca88ddd419c534cd06cc540cd39",
+          "originalSha256": "0c7ff334b1d7051385b36f8fd21d5496ebab3ca88ddd419c534cd06cc540cd39",
+          "bytes": 206,
+          "redacted": false
+        },
+        {
+          "path": "guard-append-exec.py",
+          "sha256": "6148aa251e946f5f1a6d9a7dd21ddaf8a446cce46b452a3ae26b5a87896be31c",
+          "originalSha256": "6148aa251e946f5f1a6d9a7dd21ddaf8a446cce46b452a3ae26b5a87896be31c",
+          "bytes": 244,
+          "redacted": false
+        },
+        {
+          "path": "guard-complete-eval.py",
+          "sha256": "ca21ccb7d9f0d1578bcdcd7f1f2867b2d60f7a657691c1e50d547a3249f2644b",
+          "originalSha256": "ca21ccb7d9f0d1578bcdcd7f1f2867b2d60f7a657691c1e50d547a3249f2644b",
+          "bytes": 187,
+          "redacted": false
+        },
+        {
+          "path": "guard-complete-exec.py",
+          "sha256": "89d1f5c2705920402a02196b0fb0e908da32233baa66cdae732f7ffbea61659c",
+          "originalSha256": "89d1f5c2705920402a02196b0fb0e908da32233baa66cdae732f7ffbea61659c",
+          "bytes": 225,
+          "redacted": false
+        },
+        {
+          "path": "guard-conditional-eval.py",
+          "sha256": "5f000d210e1133ff59102cb813af055a28252a681bf8b7e09b7afcc27a4237af",
+          "originalSha256": "5f000d210e1133ff59102cb813af055a28252a681bf8b7e09b7afcc27a4237af",
+          "bytes": 199,
+          "redacted": false
+        },
+        {
+          "path": "guard-conditional-exec.py",
+          "sha256": "87e3cab73b358ec41a2ca0d5c57360abd1a275b6b30832e48873d9ebc173a079",
+          "originalSha256": "87e3cab73b358ec41a2ca0d5c57360abd1a275b6b30832e48873d9ebc173a079",
+          "bytes": 237,
+          "redacted": false
+        },
+        {
+          "path": "guard-overwrite-eval.py",
+          "sha256": "64818360c9db8695fe4de41ddbfea1a0c359a0461ea0cfbf04ba93405cc8cd2a",
+          "originalSha256": "64818360c9db8695fe4de41ddbfea1a0c359a0461ea0cfbf04ba93405cc8cd2a",
+          "bytes": 205,
+          "redacted": false
+        },
+        {
+          "path": "guard-overwrite-exec.py",
+          "sha256": "8f92178588aea81dd789cc723239e8fcbe54393f0ffc1c01806b85b0ee27de3d",
+          "originalSha256": "8f92178588aea81dd789cc723239e8fcbe54393f0ffc1c01806b85b0ee27de3d",
+          "bytes": 243,
+          "redacted": false
+        },
+        {
+          "path": "literal-eval.py",
+          "sha256": "96d40a4decc712ea14308dcedfdec48f362c80319af6aed722edba33ce809eab",
+          "originalSha256": "96d40a4decc712ea14308dcedfdec48f362c80319af6aed722edba33ce809eab",
+          "bytes": 105,
+          "redacted": false
+        },
+        {
+          "path": "literal-exec.py",
+          "sha256": "6313434fcc3c32466e602c412ff529d7b6be8dfa15541e6946e445f11efe89ab",
+          "originalSha256": "6313434fcc3c32466e602c412ff529d7b6be8dfa15541e6946e445f11efe89ab",
+          "bytes": 136,
+          "redacted": false
+        },
+        {
+          "path": "mapping-eval.py",
+          "sha256": "0a9b42a779a21740ba89813f6d6b9c33beba4787f5368c217600d1204a7793b0",
+          "originalSha256": "0a9b42a779a21740ba89813f6d6b9c33beba4787f5368c217600d1204a7793b0",
+          "bytes": 154,
+          "redacted": false
+        },
+        {
+          "path": "mapping-exec.py",
+          "sha256": "ea0a90b33740db1ce012721c082c75048ca5d3d79906d590d0056f03e72b3089",
+          "originalSha256": "ea0a90b33740db1ce012721c082c75048ca5d3d79906d590d0056f03e72b3089",
+          "bytes": 192,
+          "redacted": false
+        },
+        {
+          "path": "patched.py",
+          "sha256": "84d5f4320e6888ee96b1d63f7895ad63efe31e49edddb7633ea1b13935da3926",
+          "originalSha256": "84d5f4320e6888ee96b1d63f7895ad63efe31e49edddb7633ea1b13935da3926",
+          "bytes": 7443,
+          "redacted": false
+        },
+        {
+          "path": "plain-eval-1.py",
+          "sha256": "9838ecce20b5dcc303735f8fd8dfe1695e2a42b816fb38663f4d2fe3b97633ae",
+          "originalSha256": "9838ecce20b5dcc303735f8fd8dfe1695e2a42b816fb38663f4d2fe3b97633ae",
+          "bytes": 93,
+          "redacted": false
+        },
+        {
+          "path": "plain-eval-2.py",
+          "sha256": "a6524a3e038e30149cce84ae23d8d569971a48d9e7f7edbe2acb11275ad9da6b",
+          "originalSha256": "a6524a3e038e30149cce84ae23d8d569971a48d9e7f7edbe2acb11275ad9da6b",
+          "bytes": 100,
+          "redacted": false
+        },
+        {
+          "path": "plain-eval-3.py",
+          "sha256": "ed34bf506c0262d7010400d0c21dc0fbbd79d0e57e0e82e7a63b9959d52ec934",
+          "originalSha256": "ed34bf506c0262d7010400d0c21dc0fbbd79d0e57e0e82e7a63b9959d52ec934",
+          "bytes": 113,
+          "redacted": false
+        },
+        {
+          "path": "plain-exec-1.py",
+          "sha256": "0fc75c5986c3324c740129812a4d0bc17a4c9db9e70703a1222afa460a7724e4",
+          "originalSha256": "0fc75c5986c3324c740129812a4d0bc17a4c9db9e70703a1222afa460a7724e4",
+          "bytes": 120,
+          "redacted": false
+        },
+        {
+          "path": "plain-exec-2.py",
+          "sha256": "aed712cec5eabbe4c032a72993ad303cc79bba9418c6d622734327b45ef67c45",
+          "originalSha256": "aed712cec5eabbe4c032a72993ad303cc79bba9418c6d622734327b45ef67c45",
+          "bytes": 124,
+          "redacted": false
+        },
+        {
+          "path": "plain-exec-3.py",
+          "sha256": "830a03cdefa903756ebfa7610b50b98b6d94deb8d5f000e0f06ab20520396515",
+          "originalSha256": "830a03cdefa903756ebfa7610b50b98b6d94deb8d5f000e0f06ab20520396515",
+          "bytes": 143,
+          "redacted": false
+        },
+        {
+          "path": "qualified-eval.py",
+          "sha256": "0a766258e6b1b544f92b6886707ee93afdd0b2aa08e4af20b1d5b90e3efa464c",
+          "originalSha256": "0a766258e6b1b544f92b6886707ee93afdd0b2aa08e4af20b1d5b90e3efa464c",
+          "bytes": 104,
+          "redacted": false
+        },
+        {
+          "path": "qualified-exec.py",
+          "sha256": "1ef0f0ea665475fd32882a83c4d0d4dd92c9d72de54196bce7c9ed18ab5df4f5",
+          "originalSha256": "1ef0f0ea665475fd32882a83c4d0d4dd92c9d72de54196bce7c9ed18ab5df4f5",
+          "bytes": 128,
+          "redacted": false
+        },
+        {
+          "path": "shadow-eval.py",
+          "sha256": "b69101e618dd161ce0ef01d0f3536afb6d4f9ff80055280d443a13c600e05196",
+          "originalSha256": "b69101e618dd161ce0ef01d0f3536afb6d4f9ff80055280d443a13c600e05196",
+          "bytes": 88,
+          "redacted": false
+        },
+        {
+          "path": "shadow-exec.py",
+          "sha256": "2afb108f06f87ffafa566b3cde29997f4d1e15e5aecdd4c8a28562889c1efba8",
+          "originalSha256": "2afb108f06f87ffafa566b3cde29997f4d1e15e5aecdd4c8a28562889c1efba8",
+          "bytes": 88,
+          "redacted": false
+        },
+        {
+          "path": "stdlib_ast.py",
+          "sha256": "b515c23dbbc459329d3b802a3aac742cc456d7472e66f7ed6e9dc97e40596d7d",
+          "originalSha256": "b515c23dbbc459329d3b802a3aac742cc456d7472e66f7ed6e9dc97e40596d7d",
+          "bytes": 64452,
+          "redacted": false
+        },
+        {
+          "path": "stdlib_collections.py",
+          "sha256": "7fdb04dd248ab37909f46d2085bfee56b32d7e91e49ad3a2fad99c453295659b",
+          "originalSha256": "7fdb04dd248ab37909f46d2085bfee56b32d7e91e49ad3a2fad99c453295659b",
+          "bytes": 52378,
+          "redacted": false
+        },
+        {
+          "path": "vulnerable.py",
+          "sha256": "97001081edfea081b211bc58650abb271ce7fb2f035f7ff17c1354062775a95f",
+          "originalSha256": "97001081edfea081b211bc58650abb271ce7fb2f035f7ff17c1354062775a95f",
+          "bytes": 7083,
+          "redacted": false
+        }
+      ],
+      "findings": [
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "guard-append-eval.py:6",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-append-eval.py",
+            "sourceSha256": "0c7ff334b1d7051385b36f8fd21d5496ebab3ca88ddd419c534cd06cc540cd39",
+            "byteLength": 206,
+            "copyRedacted": false,
+            "start": {
+              "line": 6,
+              "col": 12,
+              "offset": 187
+            },
+            "end": {
+              "line": 6,
+              "col": 30,
+              "offset": 205
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "guard-append-exec.py:6",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-append-exec.py",
+            "sourceSha256": "6148aa251e946f5f1a6d9a7dd21ddaf8a446cce46b452a3ae26b5a87896be31c",
+            "byteLength": 244,
+            "copyRedacted": false,
+            "start": {
+              "line": 6,
+              "col": 5,
+              "offset": 194
+            },
+            "end": {
+              "line": 6,
+              "col": 23,
+              "offset": 212
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "guard-complete-eval.py:5",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-complete-eval.py",
+            "sourceSha256": "ca21ccb7d9f0d1578bcdcd7f1f2867b2d60f7a657691c1e50d547a3249f2644b",
+            "byteLength": 187,
+            "copyRedacted": false,
+            "start": {
+              "line": 5,
+              "col": 12,
+              "offset": 168
+            },
+            "end": {
+              "line": 5,
+              "col": 30,
+              "offset": 186
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "guard-complete-exec.py:5",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-complete-exec.py",
+            "sourceSha256": "89d1f5c2705920402a02196b0fb0e908da32233baa66cdae732f7ffbea61659c",
+            "byteLength": 225,
+            "copyRedacted": false,
+            "start": {
+              "line": 5,
+              "col": 5,
+              "offset": 175
+            },
+            "end": {
+              "line": 5,
+              "col": 23,
+              "offset": 193
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "guard-conditional-eval.py:5",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-conditional-eval.py",
+            "sourceSha256": "5f000d210e1133ff59102cb813af055a28252a681bf8b7e09b7afcc27a4237af",
+            "byteLength": 199,
+            "copyRedacted": false,
+            "start": {
+              "line": 5,
+              "col": 12,
+              "offset": 180
+            },
+            "end": {
+              "line": 5,
+              "col": 30,
+              "offset": 198
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "guard-conditional-exec.py:5",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-conditional-exec.py",
+            "sourceSha256": "87e3cab73b358ec41a2ca0d5c57360abd1a275b6b30832e48873d9ebc173a079",
+            "byteLength": 237,
+            "copyRedacted": false,
+            "start": {
+              "line": 5,
+              "col": 5,
+              "offset": 187
+            },
+            "end": {
+              "line": 5,
+              "col": 23,
+              "offset": 205
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "guard-overwrite-eval.py:6",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-overwrite-eval.py",
+            "sourceSha256": "64818360c9db8695fe4de41ddbfea1a0c359a0461ea0cfbf04ba93405cc8cd2a",
+            "byteLength": 205,
+            "copyRedacted": false,
+            "start": {
+              "line": 6,
+              "col": 12,
+              "offset": 186
+            },
+            "end": {
+              "line": 6,
+              "col": 30,
+              "offset": 204
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "guard-overwrite-exec.py:6",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-overwrite-exec.py",
+            "sourceSha256": "8f92178588aea81dd789cc723239e8fcbe54393f0ffc1c01806b85b0ee27de3d",
+            "byteLength": 243,
+            "copyRedacted": false,
+            "start": {
+              "line": 6,
+              "col": 5,
+              "offset": 193
+            },
+            "end": {
+              "line": 6,
+              "col": 23,
+              "offset": 211
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "literal-eval.py:3",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "literal-eval.py",
+            "sourceSha256": "96d40a4decc712ea14308dcedfdec48f362c80319af6aed722edba33ce809eab",
+            "byteLength": 105,
+            "copyRedacted": false,
+            "start": {
+              "line": 3,
+              "col": 12,
+              "offset": 86
+            },
+            "end": {
+              "line": 3,
+              "col": 30,
+              "offset": 104
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "literal-exec.py:3",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "literal-exec.py",
+            "sourceSha256": "6313434fcc3c32466e602c412ff529d7b6be8dfa15541e6946e445f11efe89ab",
+            "byteLength": 136,
+            "copyRedacted": false,
+            "start": {
+              "line": 3,
+              "col": 5,
+              "offset": 79
+            },
+            "end": {
+              "line": 3,
+              "col": 30,
+              "offset": 104
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "mapping-eval.py:4",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "mapping-eval.py",
+            "sourceSha256": "0a9b42a779a21740ba89813f6d6b9c33beba4787f5368c217600d1204a7793b0",
+            "byteLength": 154,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 12,
+              "offset": 135
+            },
+            "end": {
+              "line": 4,
+              "col": 30,
+              "offset": 153
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "mapping-exec.py:4",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "mapping-exec.py",
+            "sourceSha256": "ea0a90b33740db1ce012721c082c75048ca5d3d79906d590d0056f03e72b3089",
+            "byteLength": 192,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 5,
+              "offset": 142
+            },
+            "end": {
+              "line": 4,
+              "col": 23,
+              "offset": 160
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.eval",
+          "title": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+          "severity": "high",
+          "location": "plain-eval-1.py:4",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "plain-eval-1.py",
+            "sourceSha256": "9838ecce20b5dcc303735f8fd8dfe1695e2a42b816fb38663f4d2fe3b97633ae",
+            "byteLength": 93,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 12,
+              "offset": 81
+            },
+            "end": {
+              "line": 4,
+              "col": 23,
+              "offset": 92
+            }
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "plain-eval-2.py:4",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "plain-eval-2.py",
+            "sourceSha256": "a6524a3e038e30149cce84ae23d8d569971a48d9e7f7edbe2acb11275ad9da6b",
+            "byteLength": 100,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 12,
+              "offset": 81
+            },
+            "end": {
+              "line": 4,
+              "col": 30,
+              "offset": 99
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "plain-eval-3.py:4",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "plain-eval-3.py",
+            "sourceSha256": "ed34bf506c0262d7010400d0c21dc0fbbd79d0e57e0e82e7a63b9959d52ec934",
+            "byteLength": 113,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 12,
+              "offset": 81
+            },
+            "end": {
+              "line": 4,
+              "col": 43,
+              "offset": 112
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.exec",
+          "title": "\u52a8\u6001 exec\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u907f\u514d\u8fd0\u884c\u4e0d\u53ef\u4fe1\u4ee3\u7801",
+          "severity": "high",
+          "location": "plain-exec-1.py:4",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "plain-exec-1.py",
+            "sourceSha256": "0fc75c5986c3324c740129812a4d0bc17a4c9db9e70703a1222afa460a7724e4",
+            "byteLength": 120,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 5,
+              "offset": 74
+            },
+            "end": {
+              "line": 4,
+              "col": 16,
+              "offset": 85
+            }
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "plain-exec-2.py:4",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "plain-exec-2.py",
+            "sourceSha256": "aed712cec5eabbe4c032a72993ad303cc79bba9418c6d622734327b45ef67c45",
+            "byteLength": 124,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 5,
+              "offset": 74
+            },
+            "end": {
+              "line": 4,
+              "col": 23,
+              "offset": 92
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "plain-exec-3.py:4",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "plain-exec-3.py",
+            "sourceSha256": "830a03cdefa903756ebfa7610b50b98b6d94deb8d5f000e0f06ab20520396515",
+            "byteLength": 143,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 5,
+              "offset": 74
+            },
+            "end": {
+              "line": 4,
+              "col": 36,
+              "offset": 105
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "shadow-eval.py:4",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "shadow-eval.py",
+            "sourceSha256": "b69101e618dd161ce0ef01d0f3536afb6d4f9ff80055280d443a13c600e05196",
+            "byteLength": 88,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 12,
+              "offset": 72
+            },
+            "end": {
+              "line": 4,
+              "col": 27,
+              "offset": 87
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "shadow-exec.py:4",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "shadow-exec.py",
+            "sourceSha256": "2afb108f06f87ffafa566b3cde29997f4d1e15e5aecdd4c8a28562889c1efba8",
+            "byteLength": 88,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 12,
+              "offset": 72
+            },
+            "end": {
+              "line": 4,
+              "col": 27,
+              "offset": 87
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "stdlib_collections.py:441",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "stdlib_collections.py",
+            "sourceSha256": "7fdb04dd248ab37909f46d2085bfee56b32d7e91e49ad3a2fad99c453295659b",
+            "byteLength": 52378,
+            "copyRedacted": false,
+            "start": {
+              "line": 441,
+              "col": 15,
+              "offset": 15041
+            },
+            "end": {
+              "line": 441,
+              "col": 36,
+              "offset": 15062
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "title": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+          "severity": "medium",
+          "location": "vulnerable.py:111",
+          "evidence": "\u89c4\u5219\u547d\u4e2d\uff1b\u6e90\u7801\u7247\u6bb5\u672a\u6536\u5f55",
+          "subject": null,
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "vulnerable.py",
+            "sourceSha256": "97001081edfea081b211bc58650abb271ce7fb2f035f7ff17c1354062775a95f",
+            "byteLength": 7083,
+            "copyRedacted": false,
+            "start": {
+              "line": 111,
+              "col": 27,
+              "offset": 4007
+            },
+            "end": {
+              "line": 111,
+              "col": 84,
+              "offset": 4064
+            }
+          },
+          "observation": {
+            "version": 1,
+            "kind": "execution-point",
+            "confidence": "low",
+            "risk": "not-assessed",
+            "calleeIdentity": "unverified",
+            "inputControl": "unverified"
+          },
+          "tool": "semgrep",
+          "status": "unverified",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        }
+      ],
+      "artifacts": [
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "guard-append-eval.py",
+          "line": 6,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-append-eval.py",
+            "sourceSha256": "0c7ff334b1d7051385b36f8fd21d5496ebab3ca88ddd419c534cd06cc540cd39",
+            "byteLength": 206,
+            "copyRedacted": false,
+            "start": {
+              "line": 6,
+              "col": 12,
+              "offset": 187
+            },
+            "end": {
+              "line": 6,
+              "col": 30,
+              "offset": 205
+            }
+          },
+          "sink": "eval",
+          "argumentCount": 2,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "local-reassignment-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [
+            4
+          ],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "guard-append-exec.py",
+          "line": 6,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-append-exec.py",
+            "sourceSha256": "6148aa251e946f5f1a6d9a7dd21ddaf8a446cce46b452a3ae26b5a87896be31c",
+            "byteLength": 244,
+            "copyRedacted": false,
+            "start": {
+              "line": 6,
+              "col": 5,
+              "offset": 194
+            },
+            "end": {
+              "line": 6,
+              "col": 23,
+              "offset": 212
+            }
+          },
+          "sink": "exec",
+          "argumentCount": 2,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "local-reassignment-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [
+            4
+          ],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "guard-complete-eval.py",
+          "line": 5,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-complete-eval.py",
+            "sourceSha256": "ca21ccb7d9f0d1578bcdcd7f1f2867b2d60f7a657691c1e50d547a3249f2644b",
+            "byteLength": 187,
+            "copyRedacted": false,
+            "start": {
+              "line": 5,
+              "col": 12,
+              "offset": 168
+            },
+            "end": {
+              "line": 5,
+              "col": 30,
+              "offset": 186
+            }
+          },
+          "sink": "eval",
+          "argumentCount": 2,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "parameter-name-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [],
+          "constraintState": "fixed-set-guard-observed",
+          "guardLine": 2,
+          "literalCount": 2,
+          "runtimeStringSemantics": "unverified",
+          "fixedValuesMayExecuteCode": true,
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "guard-complete-exec.py",
+          "line": 5,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-complete-exec.py",
+            "sourceSha256": "89d1f5c2705920402a02196b0fb0e908da32233baa66cdae732f7ffbea61659c",
+            "byteLength": 225,
+            "copyRedacted": false,
+            "start": {
+              "line": 5,
+              "col": 5,
+              "offset": 175
+            },
+            "end": {
+              "line": 5,
+              "col": 23,
+              "offset": 193
+            }
+          },
+          "sink": "exec",
+          "argumentCount": 2,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "parameter-name-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [],
+          "constraintState": "fixed-set-guard-observed",
+          "guardLine": 2,
+          "literalCount": 2,
+          "runtimeStringSemantics": "unverified",
+          "fixedValuesMayExecuteCode": true,
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "guard-conditional-eval.py",
+          "line": 5,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-conditional-eval.py",
+            "sourceSha256": "5f000d210e1133ff59102cb813af055a28252a681bf8b7e09b7afcc27a4237af",
+            "byteLength": 199,
+            "copyRedacted": false,
+            "start": {
+              "line": 5,
+              "col": 12,
+              "offset": 180
+            },
+            "end": {
+              "line": 5,
+              "col": 30,
+              "offset": 198
+            }
+          },
+          "sink": "eval",
+          "argumentCount": 2,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "parameter-name-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "guard-conditional-exec.py",
+          "line": 5,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-conditional-exec.py",
+            "sourceSha256": "87e3cab73b358ec41a2ca0d5c57360abd1a275b6b30832e48873d9ebc173a079",
+            "byteLength": 237,
+            "copyRedacted": false,
+            "start": {
+              "line": 5,
+              "col": 5,
+              "offset": 187
+            },
+            "end": {
+              "line": 5,
+              "col": 23,
+              "offset": 205
+            }
+          },
+          "sink": "exec",
+          "argumentCount": 2,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "parameter-name-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "guard-overwrite-eval.py",
+          "line": 6,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-overwrite-eval.py",
+            "sourceSha256": "64818360c9db8695fe4de41ddbfea1a0c359a0461ea0cfbf04ba93405cc8cd2a",
+            "byteLength": 205,
+            "copyRedacted": false,
+            "start": {
+              "line": 6,
+              "col": 12,
+              "offset": 186
+            },
+            "end": {
+              "line": 6,
+              "col": 30,
+              "offset": 204
+            }
+          },
+          "sink": "eval",
+          "argumentCount": 2,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "local-reassignment-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [
+            4
+          ],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "guard-overwrite-exec.py",
+          "line": 6,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "guard-overwrite-exec.py",
+            "sourceSha256": "8f92178588aea81dd789cc723239e8fcbe54393f0ffc1c01806b85b0ee27de3d",
+            "byteLength": 243,
+            "copyRedacted": false,
+            "start": {
+              "line": 6,
+              "col": 5,
+              "offset": 193
+            },
+            "end": {
+              "line": 6,
+              "col": 23,
+              "offset": 211
+            }
+          },
+          "sink": "exec",
+          "argumentCount": 2,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "local-reassignment-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [
+            4
+          ],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "literal-eval.py",
+          "line": 3,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "literal-eval.py",
+            "sourceSha256": "96d40a4decc712ea14308dcedfdec48f362c80319af6aed722edba33ce809eab",
+            "byteLength": 105,
+            "copyRedacted": false,
+            "start": {
+              "line": 3,
+              "col": 12,
+              "offset": 86
+            },
+            "end": {
+              "line": 3,
+              "col": 30,
+              "offset": 104
+            }
+          },
+          "sink": "eval",
+          "argumentCount": 2,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "literal-expression-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "literal-exec.py",
+          "line": 3,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "literal-exec.py",
+            "sourceSha256": "6313434fcc3c32466e602c412ff529d7b6be8dfa15541e6946e445f11efe89ab",
+            "byteLength": 136,
+            "copyRedacted": false,
+            "start": {
+              "line": 3,
+              "col": 5,
+              "offset": 79
+            },
+            "end": {
+              "line": 3,
+              "col": 30,
+              "offset": 104
+            }
+          },
+          "sink": "exec",
+          "argumentCount": 2,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "literal-expression-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "mapping-eval.py",
+          "line": 4,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "mapping-eval.py",
+            "sourceSha256": "0a9b42a779a21740ba89813f6d6b9c33beba4787f5368c217600d1204a7793b0",
+            "byteLength": 154,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 12,
+              "offset": 135
+            },
+            "end": {
+              "line": 4,
+              "col": 30,
+              "offset": 153
+            }
+          },
+          "sink": "eval",
+          "argumentCount": 2,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "local-reassignment-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [
+            2
+          ],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "mapping-exec.py",
+          "line": 4,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "mapping-exec.py",
+            "sourceSha256": "ea0a90b33740db1ce012721c082c75048ca5d3d79906d590d0056f03e72b3089",
+            "byteLength": 192,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 5,
+              "offset": 142
+            },
+            "end": {
+              "line": 4,
+              "col": 23,
+              "offset": 160
+            }
+          },
+          "sink": "exec",
+          "argumentCount": 2,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "local-reassignment-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [
+            2
+          ],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "plain-eval-2.py",
+          "line": 4,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "plain-eval-2.py",
+            "sourceSha256": "a6524a3e038e30149cce84ae23d8d569971a48d9e7f7edbe2acb11275ad9da6b",
+            "byteLength": 100,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 12,
+              "offset": 81
+            },
+            "end": {
+              "line": 4,
+              "col": 30,
+              "offset": 99
+            }
+          },
+          "sink": "eval",
+          "argumentCount": 2,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "parameter-name-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "plain-eval-3.py",
+          "line": 4,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "plain-eval-3.py",
+            "sourceSha256": "ed34bf506c0262d7010400d0c21dc0fbbd79d0e57e0e82e7a63b9959d52ec934",
+            "byteLength": 113,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 12,
+              "offset": 81
+            },
+            "end": {
+              "line": 4,
+              "col": 43,
+              "offset": 112
+            }
+          },
+          "sink": "eval",
+          "argumentCount": 3,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "parameter-name-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "plain-exec-2.py",
+          "line": 4,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "plain-exec-2.py",
+            "sourceSha256": "aed712cec5eabbe4c032a72993ad303cc79bba9418c6d622734327b45ef67c45",
+            "byteLength": 124,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 5,
+              "offset": 74
+            },
+            "end": {
+              "line": 4,
+              "col": 23,
+              "offset": 92
+            }
+          },
+          "sink": "exec",
+          "argumentCount": 2,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "parameter-name-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "plain-exec-3.py",
+          "line": 4,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "plain-exec-3.py",
+            "sourceSha256": "830a03cdefa903756ebfa7610b50b98b6d94deb8d5f000e0f06ab20520396515",
+            "byteLength": 143,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 5,
+              "offset": 74
+            },
+            "end": {
+              "line": 4,
+              "col": 36,
+              "offset": 105
+            }
+          },
+          "sink": "exec",
+          "argumentCount": 3,
+          "bindingHint": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "parameter-name-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "shadow-eval.py",
+          "line": 4,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "shadow-eval.py",
+            "sourceSha256": "b69101e618dd161ce0ef01d0f3536afb6d4f9ff80055280d443a13c600e05196",
+            "byteLength": 88,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 12,
+              "offset": 72
+            },
+            "end": {
+              "line": 4,
+              "col": 27,
+              "offset": 87
+            }
+          },
+          "sink": "eval",
+          "argumentCount": 2,
+          "bindingHint": "module-binding-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "parameter-name-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "shadow-exec.py",
+          "line": 4,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "shadow-exec.py",
+            "sourceSha256": "2afb108f06f87ffafa566b3cde29997f4d1e15e5aecdd4c8a28562889c1efba8",
+            "byteLength": 88,
+            "copyRedacted": false,
+            "start": {
+              "line": 4,
+              "col": 12,
+              "offset": 72
+            },
+            "end": {
+              "line": 4,
+              "col": 27,
+              "offset": 87
+            }
+          },
+          "sink": "exec",
+          "argumentCount": 2,
+          "bindingHint": "module-binding-conflict-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "parameter-name-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "stdlib_collections.py",
+          "line": 441,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "stdlib_collections.py",
+            "sourceSha256": "7fdb04dd248ab37909f46d2085bfee56b32d7e91e49ad3a2fad99c453295659b",
+            "byteLength": 52378,
+            "copyRedacted": false,
+            "start": {
+              "line": 441,
+              "col": 15,
+              "offset": 15041
+            },
+            "end": {
+              "line": 441,
+              "col": 36,
+              "offset": 15062
+            }
+          },
+          "sink": "eval",
+          "argumentCount": 2,
+          "bindingHint": "namespace-effects-observed",
+          "builtinIdentity": "unverified",
+          "sourceKind": "local-reassignment-observed",
+          "externalControl": "unverified",
+          "assignmentLines": [
+            440
+          ],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        },
+        {
+          "tool": "semgrep",
+          "evidenceKind": "python-namespace-structure",
+          "path": "vulnerable.py",
+          "line": 111,
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "status": "unverified",
+          "sourceLocation": {
+            "version": 1,
+            "state": "bound",
+            "scope": "managed-source-copy",
+            "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+            "path": "vulnerable.py",
+            "sourceSha256": "97001081edfea081b211bc58650abb271ce7fb2f035f7ff17c1354062775a95f",
+            "byteLength": 7083,
+            "copyRedacted": false,
+            "start": {
+              "line": 111,
+              "col": 27,
+              "offset": 4007
+            },
+            "end": {
+              "line": 111,
+              "col": 84,
+              "offset": 4064
+            }
+          },
+          "sink": "eval",
+          "argumentCount": 3,
+          "bindingHint": "unsupported-scope",
+          "builtinIdentity": "unverified",
+          "sourceKind": "expression-unresolved",
+          "externalControl": "unverified",
+          "assignmentLines": [],
+          "constraintState": "unresolved",
+          "sourceTask": "7943faec-e6eb-44c1-bd3e-ac2c6967da00",
+          "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5"
+        }
+      ],
+      "exclusions": [],
+      "diagnostics": []
+    }
+  },
+  "legacy": {
+    "task": {
+      "id": "af2a441d-fb46-438c-ab1d-857afb5fc5bc",
+      "engagement": "deep17-real-managed-candidate",
+      "state": "completed",
+      "scopeRevision": 1,
+      "workspace": null,
+      "startedAt": "2026-11-04T17:44:17.693Z",
+      "finishedAt": "2026-11-04T17:44:21.384Z",
+      "deadline": "2026-11-04T17:47:17.693Z",
+      "budgetSeconds": 180,
+      "modelCalls": 0,
+      "cleanupVerified": true,
+      "problem": null,
+      "webTarget": null,
+      "snapshot": {
+        "id": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+        "files": 28,
+        "bytes": 135056,
+        "git": {
+          "head": null,
+          "dirty": null,
+          "statusHash": null
+        },
+        "excluded": 0,
+        "exclusionsRetained": 0,
+        "exclusionsTruncated": false,
+        "redactedFiles": 0
+      },
+      "steps": [
+        {
+          "tool": "semgrep",
+          "id": "7e50a7cd-aec9-437b-8ffc-c12cec9b6bc4",
+          "state": "completed",
+          "complete": true,
+          "coverageScope": "scanner-reported-files",
+          "eligibleFiles": null,
+          "cleanupVerified": null,
+          "version": "1.182.1",
+          "checkedFiles": 28,
+          "problem": null,
+          "fileCoverage": {
+            "scope": "managed-copy",
+            "scanned": 28,
+            "total": 28,
+            "uncovered": 0,
+            "withoutLanguageRule": 0
+          },
+          "coverageNotes": [],
+          "diagnostics": {
+            "total": 0,
+            "retained": 0,
+            "truncated": false
+          },
+          "sourceLocations": {
+            "version": 1,
+            "state": "completed",
+            "total": 2,
+            "bound": 2,
+            "unavailable": 0
+          },
+          "modelCalls": 0,
+          "artifacts": 0
+        }
+      ],
+      "findings": 2,
+      "coverageComplete": false,
+      "manualChecks": [
+        "authentication",
+        "authorization",
+        "business-logic",
+        "architecture"
+      ],
+      "notice": "\u5b8c\u6210\u8868\u793a\u5df2\u9009\u6b65\u9aa4\u7ed3\u675f\uff1b\u547d\u4e2d\u4fdd\u6301\u5f85\u9a8c\u8bc1\u3002Git\u672a\u63d0\u4ea4\u72b6\u6001\u672a\u63a2\u6d4b\uff0c\u6309\u9010\u6587\u4ef6\u54c8\u5e0c\u56fa\u5b9a\u5b9e\u9645\u5185\u5bb9\u3002\u8131\u654f/\u6392\u9664\u6587\u4ef6\u3001\u624b\u5de5\u9879\u4e0e\u672a\u9009\u5de5\u5177\u4ecd\u672a\u8986\u76d6\uff1bREA\u4ec5\u9759\u6001JavaScript\u56fe\uff1bPentAGI\u8f93\u51fa\u662f\u672a\u9a8c\u8bc1\u6a21\u578b\u7ed3\u8bba\uff0c\u8c03\u7528\u6b21\u6570\u9884\u7b97\u4e0d\u7b49\u540c\u8d27\u5e01\u91d1\u989d\u4e0a\u9650\u3002"
+    }
+  },
+  "realProjectFindingChanges": 0,
+  "r3Qualified": false,
+  "candidateDeployed": false,
+  "syntheticStoreRemoved": true,
+  "observedNamespaceCreates": 1,
+  "dailyProgramHashesMatched": 169,
+  "dailyDatabaseLogicalHashesMatched": 42,
+  "runtimePinsMatched": true,
+  "stderr": "",
+  "candidateTemporaryRemoved": true
+}

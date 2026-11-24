@@ -1,0 +1,74 @@
+{
+  "kind": "all20-fixture-lifecycle-disposition",
+  "state": "closed-gap-delivery",
+  "sourceCandidate": "affef050148f527c0a21dfb7c989eded6cd9c07f30f945ba9eb1048395d27f63",
+  "sourceReviews": {
+    "source-shared": {
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "statusSha256": "d6262f520f64a280739e0af3f16f9d0cfc952592e52c303c8bcaf9df15edcfea",
+      "receiptSha256": "37de12cb120e264e3a428581f52bf78274f3f497b72bb49b13868534857566ac",
+      "reportSha256": "9e3c3e66d1fba4e777e891840bbe68d5c2b2a97588e6ea88970c184f7ac4a626",
+      "verdict": "PASS-limited"
+    },
+    "source-suites": {
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "statusSha256": "f1b5b0d907afae1f02c18a1e5f132a808e307bad786dac936156d51d2dafc98b",
+      "receiptSha256": "8b7761535502a991775b513482c83119ecde1f9a3c257ac50b50db312e291813",
+      "reportSha256": "316db39d33fb4612b35c58a8ac4e0ce598e06eef1fd9eb7b3038f502f6d1a765",
+      "verdict": "PASS-limited"
+    },
+    "source-admission": {
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "statusSha256": "288fa011054c6749afdd3eb1c0cf314019f64622275bb358aed1e97655eed78e",
+      "receiptSha256": "52c901e18ad3c7137bc6a29529a804dfb2757366f4c7b31d99f88c3ca3d89d57",
+      "reportSha256": "54bf44aa9511e2fe3367faa6c091f919a0b59308636a939a22c684b134191e5c",
+      "verdict": "PASS-limited"
+    }
+  },
+  "sourceCorrectionsRequired": 0,
+  "boundedRevisionUsed": false,
+  "followupReviewConcerns": {
+    "productTouchedClosures": "seven existing pure scenarios passed, subprocess starts denied",
+    "redRev6Provenance": "before-image is pre-change candidate bound by BASELINE-FREEZE, not87 historical baseline; separately verified",
+    "unifiedAssertionShift": "shared-helper consolidation,160 native conditions preserved",
+    "sameUidRaces": "disclosed conditional, not claimed resolved",
+    "optionalDuplicateTrackAndOldBroadTests": "deferred nonblockers"
+  },
+  "VMSubmissions": 1,
+  "completedGroups": 9,
+  "nativePassed": 168,
+  "nativeTotal": 168,
+  "stoppedBeforeGroup": "rev6-24",
+  "stoppedReason": "suite-capacity-admission",
+  "remainingUnexecutedGroups": 11,
+  "officialOverallStatus": "unknown-row-coverage",
+  "independentObservedRecordedControllerAndGroups": "exited",
+  "noClaimAllResourcesGloballyClosed": true,
+  "full20Passed": false,
+  "noReplay": true,
+  "formalTargets": "0/16",
+  "r3": "blocked",
+  "finalEvidenceReview": {
+    "provider": "DeepSeek official API",
+    "actualModel": "deepseek-flash",
+    "requestedEffort": "high",
+    "verdict": "PASS-for-gap-delivery",
+    "sameFixedPacketAsClaude": true,
+    "promptSha256": "ad411360e28a96f6a8a6ca6acc6d5d197fe60b4fa89a3060add07d514f86c2a9",
+    "receiptSha256": "3a63b4df3770067c0b4284e59af8d3c4d27b6a38d495e2994b8c82030e52652a",
+    "reportSha256": "26fc392a212acd9f7f2a330445179a75fe7e66fb7090d509ce52fcd2da493baf",
+    "ClaudeOutcome": "5-hour quota failure retained; not PASS",
+    "ClaudeStatusSha256": "e0ba6aa9ff95a921997176e777225fe39095ffde6cc369ab3d687fabe6665702",
+    "notFull20R3OrReleaseApproval": true
+  },
+  "remaining": [
+    "11 unexecuted groups including rev6",
+    "temporary tools path footprint and full-batch storage lifecycle",
+    "pre-admission-refusal row/status bookkeeping",
+    "complete VM archive and exact93 nested source coverage compensation",
+    "formal detection/R3 and daily release"
+  ]
+}

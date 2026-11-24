@@ -1,0 +1,9 @@
+{
+  "promptSha256": "46724af9f2b52bd67b1db02c5118100cbc36c75f081b13146a5336d88fda490d",
+  "sourceFiles": {
+    "scripts/review_quality_gate.mjs": "9650842cadb0cec7e8d2f63f2dcdec9b5c987b629aa7a52e82e6c7685d38874b",
+    "work/harness-purge-improved/tests/verification-artifacts.test.mjs": "7b3d5d02d7d104f2648c97875d933348ddb819e7d359dfebde85268fc250f38c"
+  },
+  "bytes": 55412,
+  "parentTruncatedPromptSha256": "b67f7422cb3d2318955d19b5e1f0f8f403869a25628652d6f888556dfb039a6e"
+}

@@ -1,0 +1,17 @@
+{
+  "logSha256": "fdc255e9c6b670c2f561957afdb4b31acb2a6674c952d80b3ad6b09b300edaa0",
+  "tests": 1000,
+  "pass": 1000,
+  "fail": 0,
+  "exitCode": 0,
+  "tail": [
+    "\u2139 tests 1000",
+    "\u2139 suites 0",
+    "\u2139 pass 1000",
+    "\u2139 fail 0",
+    "\u2139 cancelled 0",
+    "\u2139 skipped 0",
+    "\u2139 todo 0",
+    "\u2139 duration_ms 10854.677958"
+  ]
+}

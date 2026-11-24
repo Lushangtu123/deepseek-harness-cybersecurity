@@ -1,0 +1,23 @@
+[
+  {
+    "path": "Lib/ast.py",
+    "sha256": "b515c23dbbc459329d3b802a3aac742cc456d7472e66f7ed6e9dc97e40596d7d",
+    "blobSha1": "6d9785cc48e40cd307b87faaefa6c0ce106fcd21",
+    "bytes": 64452,
+    "url": "https://github.com/python/cpython/blob/e848e4b09ca4bc67c0041c9ce7526dae471d4c36/Lib/ast.py"
+  },
+  {
+    "path": "Lib/collections/__init__.py",
+    "sha256": "7fdb04dd248ab37909f46d2085bfee56b32d7e91e49ad3a2fad99c453295659b",
+    "blobSha1": "2da0cd5b3af42b0375699c01ef0e7110d4b02e98",
+    "bytes": 52378,
+    "url": "https://github.com/python/cpython/blob/e848e4b09ca4bc67c0041c9ce7526dae471d4c36/Lib/collections/__init__.py"
+  },
+  {
+    "path": "LICENSE",
+    "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf",
+    "blobSha1": "f26bcf4d2de6eb136e31006ca3ab447d5e488adf",
+    "bytes": 13936,
+    "url": "https://github.com/python/cpython/blob/e848e4b09ca4bc67c0041c9ce7526dae471d4c36/LICENSE"
+  }
+]

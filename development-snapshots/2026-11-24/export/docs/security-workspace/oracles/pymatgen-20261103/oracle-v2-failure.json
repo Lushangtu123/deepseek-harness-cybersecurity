@@ -1,0 +1,5 @@
+{
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 50, in <module>\nRuntimeError: Oracle process failed: Traceback (most recent call last):\n  File \"/probe.py\", line 58, in <module>\n    assert len(sum_calls)==1 and sum_calls[0]['builtinsDisabled'] and any(v['parentLine']==plan['sinkLine'] and v['parentFunction']=='<listcomp>' and v['builtinsDisabled'] for v in eval_frames)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n\n",
+  "summary": "VM SSH failed (exit 1): SSH or remote command error; raw command and output omitted; ref=c21f5fb4-90db-4c9e-8f53-595bb2930444 phase=native-check transport=remote reported=AssertionError stdinLine=50 diagnosticSaved=true"
+}

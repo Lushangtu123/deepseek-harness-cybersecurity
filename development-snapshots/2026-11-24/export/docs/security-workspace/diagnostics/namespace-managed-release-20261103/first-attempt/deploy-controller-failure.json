@@ -1,0 +1,6 @@
+{
+  "errorType": "RuntimeError",
+  "vmOutcome": "inspect deploy-observation and VM state",
+  "inspectOperation": "/home/purge/.cache/harness-namespace-managed-release-20261103.operation",
+  "relaunchAllowed": false
+}

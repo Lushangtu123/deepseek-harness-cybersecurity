@@ -1,0 +1,3 @@
+#!/bin/sh
+# Execute this catalog tool only in the dedicated Kali VM.
+exec /home/purge/.local/bin/kali-vm tool frpc "$@"

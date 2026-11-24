@@ -1,0 +1,24 @@
+{
+  "servicesActiveObserved": {
+    "dsh-original.service": "active",
+    "harness-security.socket": "active",
+    "harness-security.service": "active"
+  },
+  "semgrepPin": {
+    "tool": "semgrep",
+    "sourceRepository": "semgrep/semgrep",
+    "sourceTag": "latest",
+    "indexDigest": "sha256:451b3d875c00dac7ed5db5293e584a07de11449a409c10b3c2d2652f429630b6",
+    "manifestDigest": "sha256:5347c70f22a33b419cd515ec7fa0d3e76da7eb09f1d8cb4081d88a3bb17d87f6",
+    "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+    "tag": "personal-security/semgrep:8a0b4b7d02bb",
+    "architecture": "arm64",
+    "archiveSha256": "1d7d2a4d304bd20da66fb8b17972abb057b6573a56c7d05b9e11da72e17c9976",
+    "archiveBytes": 1156147200,
+    "layersVerified": 15,
+    "upstreamConfigDigest": "sha256:8a0b4b7d02bb39f11942c14397c14a9f74218e1746cd750941886e462cf06258",
+    "imageRef": "personal-security/semgrep@sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+    "version": "1.182.1"
+  },
+  "ruleCount": 16
+}

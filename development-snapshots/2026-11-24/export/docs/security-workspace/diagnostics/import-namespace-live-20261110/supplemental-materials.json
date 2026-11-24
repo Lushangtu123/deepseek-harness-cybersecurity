@@ -1,0 +1,26 @@
+{
+  "addedAfterReview": true,
+  "originalReviewUnchanged": true,
+  "hostRelayReceipt": "host-relay-cleanup.json",
+  "originalDownloadFile": "acceptance-r2/downloaded-report.json",
+  "originalDownloadSha256": "f6e545b742215d68d61d2369a45e5f0992848b6bb7478fe3a1102a8e107450cd",
+  "recoveredFinalEvidence": {
+    "initial": {
+      "source": "cleanup-full.json",
+      "sourceSha256": "251630b5456f59b6532a1440950fa50f854f88f30c613ffa2f1aeb504cb136ac",
+      "field": "final",
+      "derivedFile": "final-evidence-logical.json",
+      "derivedSha256": "17634d965ee164c1172e2e56ab3c615194dd351bf8ceca4311c8d1850e91236b",
+      "logicalRecoveryNotOriginalGuestByteReceipt": true
+    },
+    "r2": {
+      "source": "acceptance-r2/cleanup-full.json",
+      "sourceSha256": "37761bb2636a4ce2413472cae7230d508927ba35353934aafbc09f9fbeccf1ba",
+      "field": "final",
+      "derivedFile": "acceptance-r2/final-evidence-logical.json",
+      "derivedSha256": "a98c3495bac6bd5acba5c8ae69d376aad9fc0756a6cd72cf96619e65728640ce",
+      "logicalRecoveryNotOriginalGuestByteReceipt": true
+    }
+  },
+  "note": "These supplement the reviewed summaries; the model did not review these additional files."
+}

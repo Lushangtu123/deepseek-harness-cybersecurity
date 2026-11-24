@@ -1,0 +1,82 @@
+{
+  "checkedAt": "2026-11-11T06:07:12.981140+00:00",
+  "ledgerSha256": "62f38218bb84fd4b1ff1ef2b8133d6deaa71c7d132d03501e1cf6a732b195b7e",
+  "ledgerEntries": 295,
+  "files": {
+    "case0/evaluator.py": {
+      "sha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+      "alreadyInLedger": true
+    },
+    "case0/routes.py": {
+      "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+      "alreadyInLedger": true
+    },
+    "case1/evaluator.py": {
+      "sha256": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+      "alreadyInLedger": true
+    },
+    "case1/routes.py": {
+      "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+      "alreadyInLedger": true
+    },
+    "case2/evaluator.py": {
+      "sha256": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+      "alreadyInLedger": true
+    },
+    "case2/routes.py": {
+      "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+      "alreadyInLedger": true
+    },
+    "case3/evaluator.py": {
+      "sha256": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+      "alreadyInLedger": true
+    },
+    "case3/routes.py": {
+      "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+      "alreadyInLedger": true
+    },
+    "case4/evaluator.py": {
+      "sha256": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+      "alreadyInLedger": true
+    },
+    "case4/routes.py": {
+      "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+      "alreadyInLedger": true
+    },
+    "case5/evaluator.py": {
+      "sha256": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+      "alreadyInLedger": true
+    },
+    "case5/routes.py": {
+      "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+      "alreadyInLedger": true
+    },
+    "case6/evaluator.py": {
+      "sha256": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+      "alreadyInLedger": true
+    },
+    "case6/routes.py": {
+      "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+      "alreadyInLedger": true
+    },
+    "case7/evaluator.py": {
+      "sha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+      "alreadyInLedger": true
+    },
+    "case7/routes.py": {
+      "sha256": "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+      "alreadyInLedger": true
+    },
+    "case8/evaluator.py": {
+      "sha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+      "alreadyInLedger": true
+    },
+    "case8/routes.py": {
+      "sha256": "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb",
+      "alreadyInLedger": true
+    }
+  },
+  "qualificationCasesAdded": 0,
+  "supplementAddedAfterReview": true,
+  "modelDidNotSeeLedgerBody": true
+}

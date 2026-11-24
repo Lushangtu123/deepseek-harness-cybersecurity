@@ -1,0 +1,170 @@
+{
+  "state": "reviewed-method-parameter-candidate-complete",
+  "createdAt": "2026-11-10T22:58:21.994424+00:00",
+  "scope": "Lexical parameter observations only, for direct synchronous methods of top-level classes and protected try bodies up to eight levels.",
+  "changedProgramFiles": [
+    "scripts/python_namespace_review.py",
+    "lib/redteam/personal-namespace-sandbox.mjs"
+  ],
+  "workerSha256": "6c8c7446b99a777e5f496c008c9eeebecebc15134a5aedb6c7be4a14144a6705",
+  "candidateProgramFiles": 173,
+  "tests": {
+    "macPlugin": 1000,
+    "macStructuralPython": 34,
+    "macProtocol": 4,
+    "macFocusedNode": 30,
+    "vmStructuralPython": 34,
+    "vmProtocol": 4,
+    "vmJointReplays": 2
+  },
+  "vm": {
+    "state": "completed",
+    "startedAt": "2026-11-10T22:56:52.114800+00:00",
+    "driverExitCode": 0,
+    "resultSha256": "25d823fd123252edc43d67e989aadddcf0ccf96f8b764788f6c0e5a411a7339a",
+    "dailyProgramFilesChecked": 169,
+    "dailyProgramUnchanged": true,
+    "runtimeConfigurationUnchanged": true,
+    "finishedAt": "2026-11-10T22:56:52.906690+00:00"
+  },
+  "positive": {
+    "version": 1,
+    "state": "completed",
+    "eligible": 1,
+    "checked": 1,
+    "observations": 1,
+    "unmatched": 0,
+    "retained": 1,
+    "cleanupVerified": true,
+    "execution": {
+      "profile": "namespace-ast-1",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "workerSha256": "6c8c7446b99a777e5f496c008c9eeebecebc15134a5aedb6c7be4a14144a6705",
+      "pythonVersion": "3.12.15",
+      "cleanupVerified": true
+    }
+  },
+  "artifact": {
+    "tool": "semgrep",
+    "evidenceKind": "python-namespace-structure",
+    "path": "before.py",
+    "line": 46,
+    "rule": "policy.harness.python.dynamic-code-namespace",
+    "status": "unverified",
+    "sourceLocation": {
+      "version": 1,
+      "state": "bound",
+      "scope": "managed-source-copy",
+      "snapshotId": "85baea7aed284abedf6f43e0ca2429672e29a912d6d8ec36613a42cb37264c73",
+      "path": "before.py",
+      "sourceSha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+      "byteLength": 2787,
+      "copyRedacted": false,
+      "start": {
+        "line": 46,
+        "col": 20,
+        "offset": 1466
+      },
+      "end": {
+        "line": 46,
+        "col": 46,
+        "offset": 1492
+      }
+    },
+    "sink": "eval",
+    "argumentCount": 3,
+    "bindingHint": "no-direct-conflict-observed",
+    "builtinIdentity": "unverified",
+    "sourceKind": "parameter-name-observed",
+    "externalControl": "unverified",
+    "assignmentLines": [],
+    "constraintState": "unresolved",
+    "sourceTask": "c4a9b506-3704-4ef4-aef0-d8658eb94a90",
+    "snapshotId": "85baea7aed284abedf6f43e0ca2429672e29a912d6d8ec36613a42cb37264c73"
+  },
+  "deployed": false,
+  "ordinaryR3Qualified": false,
+  "qualificationCasesAdded": 0,
+  "scannerInvocations": 0,
+  "modelCallsInAcceptance": 0,
+  "limits": [
+    "Parameter name observation is lexical, not a proven externally controlled source.",
+    "Runtime builtin identity and constraint semantics remain unverified.",
+    "Method constraints remain unresolved even for a syntactic fixed-set guard.",
+    "Handlers, else/finally, branches, loops, nested/async functions and nested classes do not gain parameter observation.",
+    "New namespace worker is tested only in candidate173 scratch, not deployed to daily169.",
+    "Recorded scan and readiness/receipt fixtures do not provide new scanner admission, fresh scan, Chrome or model acceptance."
+  ],
+  "testOnlyRevision": {
+    "newControls": "Eight-level accepted, nine-level unresolved; module-level try lexical observation remains non-authoritative",
+    "productionWorkerUnchangedAfterFirstReview": true
+  },
+  "scopeBlockers": 0,
+  "review": {
+    "model": "DeepSeek-V4.1-Flash",
+    "effort": "high",
+    "samePromptSha256": "ad1b2f5d2338a367b54f7b5e584e896c53093560e6a582f022b3067291db4aab",
+    "claudeState": "failed-401-authentication-expired",
+    "claudeReceiptSha256": "259eb967a3d0518ac4896e1a6907c2212af4c9789fab5e5fda6a2e47811bcaaf",
+    "receiptSha256": "009c670582c46bc8d1842a36cd95eb02ee406e72320b7e44b0895b073a215492",
+    "reportSha256": "92f494e906b22566a006e87c355163be507586b412e6344c2a103a478b6e5272",
+    "cleanup": {
+      "removed": true,
+      "workerStopped": true,
+      "dailyProgramUnchanged": true,
+      "dailyProgramFilesChecked": 169,
+      "credentialCopiedToHost": false,
+      "scope": "only owned completed model-review scratch"
+    },
+    "triage": {
+      "scopeBlockers": 0,
+      "canArchive": true,
+      "reportSha256": "92f494e906b22566a006e87c355163be507586b412e6344c2a103a478b6e5272",
+      "disposition": "Limited pass for lexical parameter observations and boundary-test revision. No R3 or daily deployment.",
+      "verified": [
+        "Owner restricted to module-level synchronous functions or direct methods of top-level classes.",
+        "Protected try prefix limited to eight levels; ninth remains unresolved, explicitly tested on Mac and VM.",
+        "Method constraints remain unresolved; all builtin identities, external control and finding dispositions remain unverified.",
+        "Before/after source hash and sandbox worker pin match; production bytes unchanged after first review.",
+        "Mac plugin1000/Node30, final Mac and VM structural34/protocol4 passed. VM real default sandbox on used scanner replay produced one anchored parameter observation."
+      ],
+      "remaining": [
+        "The module-function try control lacks a fixed-set guard; that exact combination is supported by code reasoning, not direct regression evidence. The test name must not be read as direct coverage of every guard combination.",
+        "Method constraint reason reuses callee-or-scope-unresolved.",
+        "Earlier try handlers/else writes in lexical prefix can conservatively lower source classification.",
+        "External input reachability, runtime callee identity, full data flow and R3 gate remain incomplete.",
+        "Candidate173 scratch acceptance does not stand for deployment, daily169 full execution, fresh scanning, native model or Chrome acceptance.",
+        "Reused kit manifest retains the previous createdAt; step baseline, attempts and job records provide this step timing, while recomputed hashes prove the observed source identities."
+      ],
+      "reviewRoute": {
+        "claude": "Each round failed with401 expired authentication; failures retained, no refusal or completion claimed.",
+        "deepseek": "Same user prompt per round, standing VM-project source/test/evidence transmission authorization, official V4.1 Flash high identity/complete stop receipts verified.",
+        "limits": "Review was static and did not execute tests."
+      }
+    }
+  },
+  "sourceLedgerEntries": 252,
+  "newAuthoredSourceHashes": [
+    "0d66f7e9813ee8a8c16e96d562e742ae742316ebda4d0fd2cc6c7705f6bf891d",
+    "20fc55b4536185abada383ac0195bfb8c29670de18e6ff3b4dbe1e6e4cb73a2c",
+    "26550a8e5565c28003f6b7f76be60b6dc64dce035e2ed8f4b02aa87037c293b1",
+    "2f7147990d9d6ead6cadd22e8abea119912564b66d12b95b587222deb444f054",
+    "3c44c66412535e2292b45973066476046626ec58e12cb8e49f86db7f7f2495ce",
+    "43f60f6b07c48458e7f6176e5f17f8cddf70e1e290c1d3cba53d655be1ab4cce",
+    "54217858f16139e1db4aae37ab46ac562b190dc4a4e8119bb83d0f3c4e4fb803",
+    "8331e762bd83516e8d71211c73e8d8660bb292134f2af3c92ddcfd639c51ae73",
+    "8cfc60e399dade202dbb73b620cf4c050a3213b2967533f73848d3c7734e53f7",
+    "90dbb86a4ae50bb59e1df665fef191206f2e4e36c61274426ec1f98422527909",
+    "913dba152959dfe0e52f6f80daf9b00fca6ffd9d525d05b1dc0e3c165d101ba1",
+    "9da2c32239dd0d750f9a4f542292d96d177f6fc8ad2305a3f7981ab4a3295fe2",
+    "b306e7610d8e0c1f33ba80a99fd48855b53c2a6d68d822430cd6de537e40ab23",
+    "c8a0b8789b22f8285380d2597f450f655d928f4650a92707cd4b330b6f797063",
+    "c980be807eee197d3630f29b650d057e25b4891cbd2fab563003aeb3dad8aa61",
+    "d4673d84ec4420fc9f9769f0a9a11d0dbdca5958fa6be6097b0e47a7e58fbaee",
+    "e48fbf323fcbfffe46638f2bea008e4bb247b8ccde95312a64e776b7d0f0e597",
+    "e675ebb836aa5e27200b921314b0af8deef1d77eafccc7fd87cae671d55a3811",
+    "e7d01a0e88e2c6bdf8a3d044e13dfa6123e6cd1a9a23adaa6fe3133553528401",
+    "f735d2f6745d3063a9bf57e4b2961442dfe571bb93d272d1b9c3d44035dac8ed",
+    "ff63fad229d33aaff89baead6ff7b64acb9dacb6508967bc35b132f834ee793b"
+  ]
+}

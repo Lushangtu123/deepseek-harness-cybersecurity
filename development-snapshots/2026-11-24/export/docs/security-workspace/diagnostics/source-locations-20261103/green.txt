@@ -1,0 +1,16 @@
+(node:8479) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Semgrep parsing retains exact byte spans and rejects redacted control identities (2.728042ms)
+✔ Missing, negative, oversized or contradictory spans retain warnings without fabricated precision (0.556ms)
+✔ Managed bindings cross-check raw UTF8 and CRLF bytes with snapshot identity (3.018375ms)
+✔ Changed bytes, shifted offsets and symlinks cannot inherit exact source identity (2.580375ms)
+✔ Legacy line-only input is explicitly unavailable while retaining finding status (0.536583ms)
+✔ Same-line sites survive managed persistence, pagination and reload, with immutable source hashes (90.407625ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 170.000917

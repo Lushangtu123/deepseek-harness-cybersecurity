@@ -1,0 +1,41 @@
+{
+  "state": "passed",
+  "observedAt": "2026-11-04T17:30:28.440300+00:00",
+  "browser": "Google Chrome native UI through cua_repl",
+  "scope": "read-only formal-component replay of final actual VM candidate joint task, not deployed Harness/model acceptance",
+  "taskId": "2f2945ba-d2b0-4a45-9fb2-cfe387a19d5e",
+  "sourceTaskId": "ccd8864e-9f93-4d08-8f0f-4bbda351b737",
+  "snapshotId": "dced8f922f9b02cbb333535ce68cca13b020cefa9bd2da9b817a54c7ed5a9a60",
+  "summary": {
+    "total": 21,
+    "executionPoints": 19,
+    "other": 2
+  },
+  "findingPagesObserved": 7,
+  "findingRowsObserved": 21,
+  "evidencePagesObserved": 7,
+  "evidenceRowsObserved": 19,
+  "lowConfidenceAndUnassessedRiskExplicit": true,
+  "toolGradeMediumSeparateFromConfirmedRisk": true,
+  "ordinaryWarningsRetained": true,
+  "classifiedFindingsAndEvidenceCoexist": true,
+  "fixedSetEvalAndExecStillUnverified": true,
+  "conditionalAndReassignedInputsRemainUnknown": true,
+  "shadowedCalleeRemainsUnverified": true,
+  "normalCpythonNamedtupleCallStillObservation": true,
+  "lastPageNextButtonsAbsent": true,
+  "noMismatchAfterDeepRefresh": true,
+  "initialFixtureMismatch": {
+    "action": "legacy generic refresh against deep-only plan fixture",
+    "message": "联合检查模式未确认",
+    "resolution": "used 核对深度检查范围; no production fix needed"
+  },
+  "newScans": 0,
+  "newModelCalls": 0,
+  "ownedTabsCreated": 1,
+  "ownedTabsClosed": 1,
+  "previousUserTabRestored": "New Tab",
+  "clipboardRestoredByAppPaste": true,
+  "replayServiceStopped": true,
+  "candidateDeployed": false
+}

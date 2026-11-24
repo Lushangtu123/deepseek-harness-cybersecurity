@@ -1,0 +1,417 @@
+{
+  "version": 1,
+  "scope": "python-reviewed-source-profile-verification-preflight",
+  "state": "preflight-completed-capability-gap-retained",
+  "dailyDeployed": false,
+  "githubPushed": false,
+  "r3Qualified": false,
+  "newIndependentSamples": 0,
+  "sourceFiles": {
+    "scripts/python_execution_verify.py": "f9fcc7e6e57986bc4771c1b1677df1b6bfc9a6c1cba3e071e95d71c7ad734acb",
+    "scripts/verifier_snapshot.py": "fdf2d0d00ae75a158ec6bc38d49b7944030ef2ede101879da0ad8912fe558dca",
+    "scripts/reviewer_snapshot.py": "f9706edeba2279aca7a4b78d1a36d54e87a39e19359a585a50184493c47a662d",
+    "scripts/reviewer_storage.py": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202",
+    "scripts/review_quality_gate.mjs": "623f85986748ffb14b2c94fab47f8d2d385535f45c11578c0a52fea44f1e8aee",
+    "scripts/verifier-dependencies.lock.json": "6fdb3995e50f63d50714c99c529550d741354286849d3b044ecf83ec97c35394",
+    "work/harness-purge-improved/package/scripts/security-joint-adapter.py": "7daa08a445378a2b974a4fa10c2598f22553e1f8b2e8a85a575f58c2707647ac",
+    "work/harness-purge-improved/package/lib/redteam/personal-joint-adapter.mjs": "3e28380a8a6f51d4b1867f6746aaf52cb29eab4a5f6682ab4fe55fdb0a4d65ab",
+    "work/harness-purge-improved/package/lib/redteam/personal-joint-review.mjs": "78331e76fd90f3d01fa9fd2526715deeefdebff61643641080d7daf82ee971aa",
+    "work/harness-purge-improved/package/lib/redteam/personal-security-client.mjs": "2a3d14aa689e9298dc89569ec1159fb88ccbda45434e68bec1dcf61f98e1bb70"
+  },
+  "schemas": {
+    "staticSnapshot": 2,
+    "dataset": 3,
+    "staticReceipt": 3,
+    "verifierSnapshot": 1,
+    "verificationReceipt": 1,
+    "freeze": 4,
+    "run": 4,
+    "qualityReport": 8
+  },
+  "caseEvidence": {
+    "outputs": [
+      {
+        "id": "BenchmarkTest00074",
+        "raw": "hit",
+        "decision": "confirmed",
+        "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+        "location": {
+          "line": 51,
+          "column": 4,
+          "sourceSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e"
+        },
+        "language": "python",
+        "cwe": "CWE-94",
+        "evidence": [
+          {
+            "kind": "sandbox-verification",
+            "caseId": "BenchmarkTest00074",
+            "decision": "confirmed",
+            "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+            "inputSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+            "artifactSha256": "7de69c6ed9436feccb717a2b024e133b51535c330aea62ae4d4742288e9e5062"
+          }
+        ]
+      },
+      {
+        "id": "BenchmarkTest00073",
+        "raw": "hit",
+        "decision": "excluded",
+        "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+        "location": {
+          "line": 54,
+          "column": 5,
+          "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122"
+        },
+        "language": "python",
+        "cwe": "CWE-94",
+        "evidence": [
+          {
+            "kind": "sandbox-verification",
+            "caseId": "BenchmarkTest00073",
+            "decision": "excluded",
+            "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+            "inputSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+            "artifactSha256": "ef43b2d8e1ffb037b816e8def227a3f9cd6e0e8cc52c4abe7bb2d0f83e9d519f"
+          }
+        ]
+      },
+      {
+        "id": "skf-viewer-upstream",
+        "raw": "hit",
+        "decision": "confirmed",
+        "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+        "location": {
+          "line": 37,
+          "column": 20,
+          "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+        },
+        "language": "python",
+        "cwe": "CWE-95",
+        "evidence": [
+          {
+            "kind": "sandbox-verification",
+            "caseId": "skf-viewer-upstream",
+            "decision": "confirmed",
+            "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+            "inputSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+            "artifactSha256": "33728b5e941c6b5d6e2b536e8b0f0b735b09437408be2090ee917f7ed11e4b12"
+          }
+        ]
+      },
+      {
+        "id": "skf-viewer-authored-fix",
+        "raw": "no-hit",
+        "decision": "not-required",
+        "pointId": null,
+        "location": {
+          "sourceSha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134"
+        },
+        "language": "python",
+        "cwe": "CWE-95",
+        "evidence": []
+      },
+      {
+        "id": "literal-set-control",
+        "raw": "hit",
+        "decision": "excluded",
+        "pointId": "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b",
+        "location": {
+          "line": 4,
+          "column": 12,
+          "sourceSha256": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b"
+        },
+        "language": "python",
+        "cwe": "CWE-95",
+        "evidence": [
+          {
+            "kind": "sandbox-verification",
+            "caseId": "literal-set-control",
+            "decision": "excluded",
+            "pointId": "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b",
+            "inputSha256": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+            "artifactSha256": "91224507b32d8bf621dab5943ec3f4372e4fe4050db80fa908009b069e9d99d4"
+          }
+        ]
+      }
+    ],
+    "rawFindings": 5,
+    "mapped": 5,
+    "pointsReviewed": 4,
+    "confirmed": 2,
+    "excluded": 2,
+    "incorrectExclusions": 0,
+    "priorCasesAndSyntheticOnly": true,
+    "newIndependentSamples": 0
+  },
+  "boundaries": [
+    {
+      "name": "fixed-marker",
+      "sourceFiles": {
+        "literal-set.py": "24fc6dd4d4950f94667f76c65522fad9c4290c54aac06405aa8c10c48fc55ddd"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "quoted-echo",
+      "sourceFiles": {
+        "literal-set.py": "2f46af997cf895d92cdaba043476c89b34d791f5aa71bd266619f6689822fdd1"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "same-name",
+      "sourceFiles": {
+        "literal-set.py": "b1b09f210af818cbea5fc76f8efbb66b01e52806403da6a775e441e1cdb0826b"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "rebound",
+      "sourceFiles": {
+        "literal-set.py": "672479b6daa0d76d85d9180ab78137a2c8d4a473ba7feddbbe405e92d6e2d403"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "after-guard-overwrite",
+      "sourceFiles": {
+        "literal-set.py": "1abe614d55c961574ecd71f15fc0f7aae390cb7ff12f8d115d82b9b3d79af196"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "dangerous-whitelist",
+      "sourceFiles": {
+        "literal-set.py": "c830feb07881234b41302b6ef2d20ba2d3b1e014318d592b1a744198539e15b8"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "same-line",
+      "sourceFiles": {
+        "literal-set.py": "625c10da52a8fab03dc66955526bb2442483d2df2be743c47052e09b0e564946"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "nested",
+      "sourceFiles": {
+        "literal-set.py": "1c1729f357c8204429f97addfd0726389b1049eeca7f4da3f030e0acd7091fa0"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "loop-not-executed",
+      "sourceFiles": {
+        "literal-set.py": "49a314d3a89b45fedb2a18824da2933732a403ba7a08818d594f64a0e7581364"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "fd-output",
+      "sourceFiles": {
+        "literal-set.py": "799c6574c50826c6b2ab5eeed16e6f7978da457ef1e3f0f719d4fd6a47128f9b"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    },
+    {
+      "name": "cross-file",
+      "sourceFiles": {
+        "literal-set.py": "6b84b56c5d35958e61d04454994a7a6a74de9b6dd0017a31cdb4f2b4b5df8d83",
+        "helper.py": "db96e553e8f66be5e6cd8e5872234962d96425acff027649c382c679dace10b0"
+      },
+      "decision": "unknown",
+      "reason": "source-profile-not-reviewed",
+      "executed": false
+    }
+  ],
+  "actualContainerInspections": 15,
+  "containerPolicy": {
+    "user": "1000:1000",
+    "stagedSourceClosureVerified": true,
+    "stagedSources": {
+      "literal-set.py": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+      "skf-fixed-control.py": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+      "BenchmarkTest00073.py": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+      "skf-upstream.py": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+      "BenchmarkTest00074.py": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+      "helpers/utils.py": "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834"
+    },
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  "macVmScoresIdentical": true,
+  "dailyProtection": {
+    "program": {
+      "before": "a828d84ddae6c35a9ae8a0e07ddc2b202425ba428caa54caafdf2ad22d2d0012",
+      "after": "a828d84ddae6c35a9ae8a0e07ddc2b202425ba428caa54caafdf2ad22d2d0012"
+    },
+    "config": {
+      "before": "41efaf964f0c953baa16f6402c2fc10e0031a39516c627e0c68f89731cae10ad",
+      "after": "41efaf964f0c953baa16f6402c2fc10e0031a39516c627e0c68f89731cae10ad"
+    },
+    "pins": {
+      "before": "55f91235119dbfcce21e0b46ebe37df156cbe1ae151d1947c090882e2a010ed5",
+      "after": "55f91235119dbfcce21e0b46ebe37df156cbe1ae151d1947c090882e2a010ed5"
+    },
+    "runtime": {
+      "before": "b7f53d039e78551831e1d584303d45d7e9f8a7a4f8a977bf8ec7eed5c4b82e93",
+      "after": "b7f53d039e78551831e1d584303d45d7e9f8a7a4f8a977bf8ec7eed5c4b82e93"
+    },
+    "databases": {
+      "before": "9289bda7b2d4737bd6c467323657e6b625780e11bd9aff5c8bdd77cd542bf0c0",
+      "after": "9289bda7b2d4737bd6c467323657e6b625780e11bd9aff5c8bdd77cd542bf0c0"
+    },
+    "outsideMountNamespace": {
+      "before": "46004dd150ea680763df4716a838d4901c13dd63b4cb4aff27fe2cbf94b60c81",
+      "after": "46004dd150ea680763df4716a838d4901c13dd63b4cb4aff27fe2cbf94b60c81"
+    },
+    "homeInode": {
+      "before": "bfa1bda4c41fcaf7b148dfaa9fc6d59f1ea9412072efe68b557f13d76c5135d7",
+      "after": "bfa1bda4c41fcaf7b148dfaa9fc6d59f1ea9412072efe68b557f13d76c5135d7"
+    }
+  },
+  "dailyProgramFilesMatched": 169,
+  "dailyDatabasesMatched": 42,
+  "testSummary": {
+    "python": [
+      {
+        "file": "scripts/reviewer_snapshot.test.py",
+        "exitCode": 0,
+        "tests": 87
+      },
+      {
+        "file": "scripts/reviewer_locations.test.py",
+        "exitCode": 0,
+        "tests": 5
+      },
+      {
+        "file": "scripts/reviewer_storage.test.py",
+        "exitCode": 0,
+        "tests": 29
+      },
+      {
+        "file": "scripts/reviewer_archive.test.py",
+        "exitCode": 0,
+        "tests": 27
+      },
+      {
+        "file": "scripts/python_execution_verify.test.py",
+        "exitCode": 0,
+        "tests": 13
+      },
+      {
+        "file": "scripts/verifier_snapshot.test.py",
+        "exitCode": 0,
+        "tests": 5
+      },
+      {
+        "file": "scripts/verify_execution_controller.test.py",
+        "exitCode": 0,
+        "tests": 2
+      },
+      {
+        "file": "scripts/eval_locations.test.py",
+        "exitCode": 0,
+        "tests": 8
+      },
+      {
+        "file": "scripts/eval_evidence_batch.test.py",
+        "exitCode": 0,
+        "tests": 9
+      },
+      {
+        "file": "scripts/eval_guard_review.test.py",
+        "exitCode": 0,
+        "tests": 14
+      },
+      {
+        "file": "scripts/eval_import_review.test.py",
+        "exitCode": 0,
+        "tests": 9
+      },
+      {
+        "file": "work/harness-purge-improved/tests/model-counts.test.py",
+        "exitCode": 0,
+        "tests": 9
+      },
+      {
+        "file": "work/harness-purge-improved/tests/joint-adapters.test.py",
+        "exitCode": 0,
+        "tests": 9
+      }
+    ],
+    "pythonTotal": 226,
+    "nodeGate": 69,
+    "nodeJointCounts": 87,
+    "allPassed": true
+  },
+  "limitations": [
+    "Only exact reviewed source profiles execute; generic projects and fresh holdout remain unsupported.",
+    "In-process Python events are conditional observations, not tamper-proof attestation.",
+    "Unknown profiles are refused before execution; loop boundary test is not a runtime timeout exercise.",
+    "Diagnostic counts are not detection-rate or false-positive-rate estimates.",
+    "Adapter preparation before first receipt may leave a fail-closed orphan requiring manual recovery."
+  ],
+  "next": [
+    "Design independent trustworthy observation for arbitrary source, then preflight with new reviewed controls.",
+    "Only after capability preflight passes, freeze selection protocol and start new independent holdout evaluation.",
+    "Chrome full workflow and daily delivery remain subsequent stages."
+  ],
+  "externalReview": {
+    "state": "closed-with-capability-gap",
+    "requestedClaudeModel": "claude-opus-5-5",
+    "claudeOutcome": "weekly-quota-exhausted",
+    "fallbackActualModel": "deepseek-flash",
+    "fallbackOfficialName": "DeepSeek-V4.1-Flash",
+    "effort": "high",
+    "finalPromptSha256": "6f3c28546cfad081073be15263f2713e0fbe06707f02acf8ccddad12d47f190c",
+    "finalReportSha256": "2b5e61e6115f91c026c853fb1ddc896bffcf68f1e6ba0979f9d21f1df1350715"
+  },
+  "acceptanceClosureEvidence": "diagnostics/python-verification-20261112/s4-r2/closure-evidence.json"
+}

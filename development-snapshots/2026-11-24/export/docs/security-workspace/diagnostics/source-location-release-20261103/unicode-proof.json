@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "source": "actual VM report-bound snapshot bytes retained in collected.json",
+  "rows": [
+    {
+      "path": "same_line.py",
+      "sourceSha256": "0ee96b76471ee0d197ce6e75a1cacfa32932f7cc5adee4b8ef36bfd867a64263",
+      "utf8ByteColumn": 35,
+      "unicodeCodePointColumn": 28,
+      "unicodeAndEmojiBeforeCall": true
+    },
+    {
+      "path": "same_line.py",
+      "sourceSha256": "0ee96b76471ee0d197ce6e75a1cacfa32932f7cc5adee4b8ef36bfd867a64263",
+      "utf8ByteColumn": 50,
+      "unicodeCodePointColumn": 43,
+      "unicodeAndEmojiBeforeCall": true
+    }
+  ]
+}

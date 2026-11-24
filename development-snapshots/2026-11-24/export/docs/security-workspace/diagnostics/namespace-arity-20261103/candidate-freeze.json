@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "createdAt": "2026-11-04T04:01:46.071173+00:00",
+  "intentSha256": "1b0d2fbc1df91068ec2601b49dc79637e93b56fc4eeedcdb3bd4bd29fec99886",
+  "datasetSha256": "e3e3b23351e088efe74d018ad73f42bb02cb2689e575dbebd9b0daa7d39c33cb",
+  "rulesDeployed": false,
+  "r3Qualified": false,
+  "independentQualificationCases": 0,
+  "packs": {
+    "arity17": {
+      "sha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+      "ruleCount": 17,
+      "preservedIds": [
+        "harness.python.eval",
+        "harness.python.pickle",
+        "harness.python.shell",
+        "harness.python.yaml-load",
+        "harness.javascript.eval",
+        "harness.python.sql-fstring",
+        "harness.python.exec",
+        "harness.python.os-system",
+        "harness.python.requests-verify-false",
+        "harness.python.tempfile-mktemp",
+        "harness.python.jwt-noverify",
+        "harness.javascript.child-process-exec",
+        "harness.javascript.dom-innerhtml",
+        "harness.javascript.document-write",
+        "harness.javascript.tls-reject-disabled",
+        "harness.javascript.sql-concat"
+      ],
+      "addedId": "harness.python.dynamic-code-namespace"
+    },
+    "combined20": {
+      "sha256": "b1be84af0a007baa2f40891adf985cf81c2f84ff16aa70f927731621ff3e7328",
+      "ruleCount": 20,
+      "preservedIds": [
+        "harness.python.eval",
+        "harness.python.pickle",
+        "harness.python.shell",
+        "harness.python.yaml-load",
+        "harness.javascript.eval",
+        "harness.python.sql-fstring",
+        "harness.python.exec",
+        "harness.python.os-system",
+        "harness.python.requests-verify-false",
+        "harness.python.tempfile-mktemp",
+        "harness.python.jwt-noverify",
+        "harness.javascript.child-process-exec",
+        "harness.javascript.dom-innerhtml",
+        "harness.javascript.document-write",
+        "harness.javascript.tls-reject-disabled",
+        "harness.javascript.sql-concat",
+        "harness.php.dynamic-eval",
+        "harness.php.unsafe-unserialize",
+        "harness.python.request-to-dynamic-code"
+      ],
+      "addedId": "harness.python.dynamic-code-namespace"
+    }
+  }
+}

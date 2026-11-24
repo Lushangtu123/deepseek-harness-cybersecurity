@@ -1,0 +1,11 @@
+✔ deep rules are a fixed17 bundle preserving every baseline16 rule (1.799125ms)
+✔ only a matching deep workspace can select the pinned17 manifest (0.316083ms)
+✔ staging pins exact17 bytes and rejects changed base or bundle without overwriting an existing stage (3.088833ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 49.627958

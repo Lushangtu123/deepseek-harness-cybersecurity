@@ -1,0 +1,38 @@
+{
+  "id": "bbcca773-96ed-4e0c-b268-fde0e05b7134",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "No confirmed safety blocker in the corrected tests.\n\nThe two S3 tests now exercise the actual production seam: `tree()` reads through `os.fdopen(os.dup(file),'rb')`, not obsolete `Path.read_bytes`. The first test records exactly one `stream.read`, verifies the returned bytes hash to the expected dependency digest, and would fail if the implementation used another read API. The second mutates the same path after the fd read and before the post-read `fstat`, deterministically changing size/metadata so `tree()` raises `ValueError('Dependency changed during read')`; the read count remains one.\n\nScoped limitations, not blockers: both tests are white-box and bind to `os.fdopen`; a future switch to `os.read` or another path would need a matching test update. The mutation test relies on ordinary filesystem metadata behavior, though the size change makes it strong here. This remains evidence-only; the Node excerpt is context, not live or R3 acceptance."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 4538,
+    "completion_tokens": 2274,
+    "total_tokens": 6812,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 2066
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 4538
+  },
+  "streamDone": true,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 9203,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "eb308abbdd37813c51498246282e58b26a0ac0a005e46fe18db511e7d0171158",
+  "promptSha256": "e23764a5fd47f55a472836857dfbfd490379c542c4333d425c94bec1eca5c028"
+}

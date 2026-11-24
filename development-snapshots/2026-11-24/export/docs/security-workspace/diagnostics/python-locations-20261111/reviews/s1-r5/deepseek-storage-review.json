@@ -1,0 +1,38 @@
+{
+  "id": "369bc7eb-d64a-4518-96b4-dea23cdc8cd7",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Confirmed scoped defects:\n\n1. **Guard/plain finding `pointId` is not enforced.** In the v2 `guardEvidence` / `plainStringEvidence` loops, validation checks `validPoint(f.executionPoint, files[f.file])` but not `f.pointId === f.executionPoint.id`. `locationFields()` later drops location fields on mismatch, but the artifact is still pushed and the result is `completed`. Repro: valid `executionPoint`, matching result, correct observation/lines, forged `f.pointId='f'.repeat(64)` → completed artifact without location identity. This should degrade to `unavailable`. Tests cover forged `findingLocations` IDs only, not guard/plain finding IDs.\n\n2. **`findingLocations` bound path is not tied to the indexed result.** Validation checks `m.index === i` and `validPoint(m.point, files[m.path])`, but never `m.path === results[i].path`. With two inventory files, index 0 for a `sample.py` finding can return a valid bound point for `other.py` and still complete. Cross-check `m.path` against `results[i].path` and require an own inventory key.\n\n3. **`validPoint()` can accept a missing source binding.** If `files[f.file]` is `undefined` (finding path absent from inventory), `p.sourceSha256 === undefined` passes when `executionPoint` omits `sourceSha256`; the digest can be recomputed without that field. This permits source-unbound points in `findingLocations`, guard, and plain-string evidence. Require `typeof sourceSha === 'string'` and an own-key check before calling `validPoint`.\n\n4. **Test gap:** the four synthetic tests cover null/malformed findings, no-Python unmatched retention, import missing/forged point IDs, and forged `findingLocations` point ID. They do not cover guard/plain forged `pointId`, `findingLocations` path/result mismatch, or missing `sourceSha256`.\n\nConservative limitations, not confirmation defects: 2 MiB output overflow → `unavailable`; >64 Python files → `unavailable`; no-Python supported findings → unmatched retention. These are acceptable conservative degradation, not evidence confirmation.\n\nAdditional gap: import evidence validates caller/sink point IDs but not `sinkLocation.callee === e.sink`; if sink identity part of inventory is required, add that check. No R3 or live acceptance claim."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 3077,
+    "completion_tokens": 11597,
+    "total_tokens": 14674,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 11074
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3077
+  },
+  "streamDone": true,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 49011,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "733bf3c4937e163df03e2ada7d3e07a3712762d180964aafb0b0fc82ba54fc62",
+  "promptSha256": "8a85bb073ace9a7b5d3d69692108f94a68e2e9b6c66d5465ae3f71e74b7a641f"
+}

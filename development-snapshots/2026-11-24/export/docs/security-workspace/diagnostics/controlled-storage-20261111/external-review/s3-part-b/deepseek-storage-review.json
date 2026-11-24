@@ -1,0 +1,38 @@
+{
+  "id": "a0c5f491-2f87-483e-ac02-9c014c4b6f00",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "## Scoped review result\n\nAssumption: the pasted B/C text is the claimed byte-exact source. I did not execute or verify hashes. Part A (`archive_plan`/`validate_plan`/`source_snapshot`) is not present, so producer/plan and complete file-inventory claims cannot be independently confirmed.\n\n### Blocking functional/evidence defect\n\n1. **Missing `@contextmanager` on `capacity_lock` and `task_lock` as supplied.**\n   Both functions contain `yield`, and callers use `with capacity_lock(...)` / `with task_lock(...)`. Without `@contextmanager`, calling them returns a generator and `with` raises `TypeError`. This would fail the first `archive_apply`, `archive_status`, or `archive_restore`; the supplied green archive logs therefore cannot correspond to these exact bytes.\n\n   Reproduction: load `reviewer_storage.py` as supplied and execute `with s.capacity_lock(policy): pass` → `TypeError: 'generator' object does not support the context manager protocol`.\n\n   Classification: functional/evidence blocker, not a live data-safety bypass. If the hashed file actually contains the decorators, then the supplied excerpt is incomplete and the review/evidence binding is invalid; re-supply exact bytes.\n\n### Conditional capacity/correctness defect\n\n2. **`archive_restore` under-admits disk for archive-copy restore.**\n   `archive_apply` reserves roughly `entry['bytes']*2 + len(entry['files'])*4096 + MAX_STATE_BYTES`, but `archive_restore` uses only `amount = row['manifest']['bytes']` plus `MAX_STATE_BYTES` in the free-space check. It omits per-entry filesystem block/inode overhead for the restored tree, even though it creates up to 20,000 entries.\n\n   Reproduction: policy with `minFreeBytes=0`; archived source containing 20,000 zero-byte files; restore with only ~1 MiB free. The check passes because `amount == 0`, but the restore creates ~20,000 files and can hit `ENOSPC` mid-staging. The partial staging and transaction are retained; no overwrite/delete occurs.\n\n   Classification: capacity-admission correctness defect; not silent data loss. Under default 512 MiB min-free it is a margin violation rather than an immediate fill, but it should use the same per-entry estimator as archive apply or be explicitly documented as a cooperative limitation.\n\n### Relevant conditions/limitations\n\n3. **Directory-entry durability is incomplete for archive creation and archive-copy restore.**\n   `create_archive` fsyncs the archive file, not the `archives` directory. Archive-copy restore fsyncs each file, but not the staging directories; `rename_noreplace` fsyncs source/destination parents, not the moved directory’s internal entries. A power loss after reported success can lose directory entries even though file data was fsynced. Process-crash tests do not cover this. No delete/overwrite is involved.\n\n4. **`cleanup_inventory` fails the whole reconcile on an empty/corrupt transaction directory.**\n   `archive_apply` creates `transactions/<txid>` before `save_transaction`; a crash in that window leaves an empty directory. Later `cleanup_inventory` calls `load_transaction` for every 32-hex entry without a per-transaction error path, so one such directory aborts the full `storage-reconcile` listing.\n\n   Reproduction: create `.harness-storage-…/transactions/<32hex>/` with no `transaction.json`, then call `cleanup_inventory` → `ValueError` from `load_transaction`. Source data is not moved or deleted; this is a fail-closed maintenance block.\n\n5. **`archived_lookup` does not reconcile a `moving` transaction.**\n   `status(path)` for a missing source uses `archived_lookup` directly, not `archive_status_locked`. A crash after rename but before commit can leave row state `moving` with recycle present; path status may report `archive-pending` until the operator queries by transaction ID. If both source and recycle are absent, it still returns `restore-required-no-analysis`, but `archive_restore` later rejects the non-committed row. This is conservative/unknown handling, not replay or deletion.\n\n6. **Archive corruption blocks restore even when the recycle copy is intact.**\n   `archive_status_locked` verifies the archive before committing a `moving` recycle copy, and `archive_restore` verifies the archive before using recycle. The supplied test expects this. It is safe/fail-closed, but it means a damaged archive can prevent recovery of otherwise good recycle bytes.\n\n7. **Fresh probe portability is fail-closed but narrow.**\n   `_archive_probe` hardcodes `/usr/bin/python3` and the client probe relies on readable `/proc/*/cmdline`. Missing interpreter, hidepid, or a process exposing the marker only via environment rather than argv will make `clientsStopped` false and block archiving. This is conservative, not a bypass.\n\n### False positives / non-blockers\n\n- The failures in `limits-red.txt` are stale relative to the current pasted `verify_archive` and `load_transaction`: current `verify_archive` charges the compressed size before `read_bytes`, and `load_transaction` calls `validate_manifest`. Do not cite those red failures as current blockers.\n- `rename_noreplace`, no-overwrite checks, `verify_archive` member-by-member reread, no `extractall`, and no `_cleanup`/`rm` in the shown archive path are consistent with the stated safety design.\n- Same-UID arbitrary mutation and cooperative-lock TOCTOU remain explicitly outside the atomic-snapshot guarantee.\n- The green synthetic tests and this review do not establish live Linux/root-CID acceptance, full product audit, or R3. R3 remains false."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 15541,
+    "completion_tokens": 48641,
+    "total_tokens": 64182,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 47355
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 15541
+  },
+  "streamDone": true,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 205280,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "1d97fbf923ee8e55cd18a741b8c79b50b8bc73605403b32d888fd8b0d20e9bef",
+  "promptSha256": "12fb9d760fcbfe457327ca33d29d5f419992ab4c4ce5d85aa688a01893d1405c"
+}

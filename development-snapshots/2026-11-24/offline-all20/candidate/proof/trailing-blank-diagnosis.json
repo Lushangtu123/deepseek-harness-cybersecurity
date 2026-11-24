@@ -1,0 +1,33 @@
+{
+  "kind": "counterfactual-tail-framing-diagnosis-only",
+  "preflightId": "c58ce185e8804901b0abae8510f8d081",
+  "originalRawBytes": 306,
+  "originalRawSha256": "5e61c6b689cf4e31905fb6e2863648a0c1d0376446d8dc237189b9cc8627806b",
+  "originalState": "invalid",
+  "originalErrors": [
+    "ParseError:blank-line"
+  ],
+  "originalEqualsNativeStdout": true,
+  "trailingLFBytes": 4,
+  "extraBlankLinesAfterEND": 3,
+  "firstBlankLineOneBased": 18,
+  "diagnosticCopyBytes": 303,
+  "diagnosticCopySha256": "80ff4e4f8896c13d97641cca817cd39d6317627a3073bc78aaa6d102cfb8600a",
+  "diagnosticCopyState": "complete",
+  "diagnosticCanonicalHashesMatch": true,
+  "diagnosticIntegerZero": true,
+  "observedStringClasses": [
+    "QUALB",
+    "KCONSTB",
+    "KNAMEB"
+  ],
+  "notRuntimeCoveredStringClasses": [
+    "DCONSTB",
+    "DNAMEB"
+  ],
+  "acceptedEvidence": false,
+  "originalEvidenceRewritten": false,
+  "newExecution": false,
+  "r3": "blocked",
+  "limitation": "Transformed in-memory bytes only isolate the framing rejection. They are not substituted for observer.raw or observation.json and cannot satisfy runtime acceptance. Exact bpftrace output step appending the blank lines has not been separately localized."
+}

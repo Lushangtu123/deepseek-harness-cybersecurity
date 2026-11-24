@@ -1,0 +1,493 @@
+{
+  "recoveryPoint": "ready-security-background-20261029",
+  "programFiles": 126,
+  "testCountsBySuite": {
+    "plugin": 417,
+    "hostEntry": 124,
+    "controller": 139
+  },
+  "countsNotSummedAcrossSuites": true,
+  "architecture": {
+    "owner": "VM systemd user service",
+    "transport": "private Unix socket 0600, no TCP",
+    "callerExitCancels": false,
+    "vmOrOwnerStopCanInterrupt": true,
+    "automaticRescan": false,
+    "localFallback": false,
+    "startIdempotency": "same requestId required",
+    "modelBudgetAndScopeRulesUnchanged": true,
+    "corruptProjectIsolated": true
+  },
+  "nativeAcceptance": {
+    "engagement": "personal-security-background-20261029",
+    "firstRunId": "6cb3bc6f-1faa-4163-a39a-a9943cfb3830",
+    "initiatingProcessExited": true,
+    "runningRowObservedAfterCallerExit": true,
+    "ownerPidSurvivedCallerExit": true,
+    "completed": {
+      "ok": true,
+      "engagement": "personal-security-background-20261029",
+      "run": {
+        "id": "6cb3bc6f-1faa-4163-a39a-a9943cfb3830",
+        "tool": "semgrep",
+        "state": "completed",
+        "complete": 1,
+        "profileRevision": 1,
+        "startedAt": "2026-10-30T06:54:42.195Z",
+        "finishedAt": "2026-10-30T06:54:44.302Z",
+        "error": null,
+        "coveredFiles": 20,
+        "diagnostics": {
+          "total": 0,
+          "items": [],
+          "truncated": false
+        }
+      },
+      "timedOut": false,
+      "next": "任务已到终态；partial不等于完整覆盖，可用report分页读取。"
+    },
+    "duplicateStartSameId": true,
+    "cancelled": {
+      "ok": true,
+      "run": {
+        "id": "738a157c-f249-482b-97f0-65063e27e6f3",
+        "state": "cancelled"
+      },
+      "execution": "asynchronous",
+      "next": "使用wait和返回任务id等待；超时仍运行时继续同一id，不能重发start。VM独立后台持有任务，会话或headless退出不取消；VM关机或后台服务停止仍会中断。"
+    },
+    "ownerRestartPidChanged": true,
+    "restartTask": {
+      "ok": true,
+      "engagement": "personal-security-background-20261029",
+      "run": {
+        "id": "e51e24f3-a256-4c57-bd68-b6c9eead9095",
+        "tool": "semgrep",
+        "state": "interrupted",
+        "complete": 0,
+        "profileRevision": 1,
+        "startedAt": "2026-10-30T06:54:47.701Z",
+        "finishedAt": "2026-10-30T06:54:47.709Z",
+        "error": "服务关闭，结果未确认",
+        "coveredFiles": null,
+        "diagnostics": null
+      },
+      "timedOut": false,
+      "next": "任务已到终态；partial不等于完整覆盖，可用report分页读取。"
+    },
+    "restartDidNotRescan": true,
+    "runStates": {
+      "cancelled": 1,
+      "completed": 1,
+      "interrupted": 1
+    },
+    "unverifiedFindings": 20,
+    "scannerContainersRunning": 0,
+    "privateSocketMode": "0o600",
+    "socketEnabled": "enabled",
+    "noModelApiCall": true
+  },
+  "postColdAcceptance": {
+    "postColdBackendRequestPassed": true,
+    "persistedQaTaskStates": {
+      "cancelled": 1,
+      "completed": 1,
+      "interrupted": 1
+    },
+    "persistedQaFindings": 20,
+    "automaticRescan": false,
+    "privateSocketMode": "0600",
+    "socketEnabled": true,
+    "ownerActive": true,
+    "scannerContainersRunning": 0,
+    "noModelApiCall": true
+  },
+  "clock": {
+    "baselineHostMinusGuestSeconds": 0.045674800872802734,
+    "injectedOffsetSeconds": 12.056073188781738,
+    "automaticOffsetSeconds": 0.042270660400390625,
+    "samples": [
+      {
+        "elapsedSeconds": 0.11,
+        "hostMinusGuestSeconds": 12.053503274917603
+      },
+      {
+        "elapsedSeconds": 5.27,
+        "hostMinusGuestSeconds": 12.032150030136108
+      },
+      {
+        "elapsedSeconds": 10.43,
+        "hostMinusGuestSeconds": 12.031121730804443
+      },
+      {
+        "elapsedSeconds": 15.58,
+        "hostMinusGuestSeconds": 12.033579111099243
+      },
+      {
+        "elapsedSeconds": 20.7,
+        "hostMinusGuestSeconds": 12.048807144165039
+      },
+      {
+        "elapsedSeconds": 25.85,
+        "hostMinusGuestSeconds": 12.031956195831299
+      },
+      {
+        "elapsedSeconds": 31.01,
+        "hostMinusGuestSeconds": 12.034534692764282
+      },
+      {
+        "elapsedSeconds": 36.16,
+        "hostMinusGuestSeconds": 12.03641963005066
+      },
+      {
+        "elapsedSeconds": 41.32,
+        "hostMinusGuestSeconds": 12.033512592315674
+      },
+      {
+        "elapsedSeconds": 46.47,
+        "hostMinusGuestSeconds": 12.038827419281006
+      },
+      {
+        "elapsedSeconds": 51.59,
+        "hostMinusGuestSeconds": 12.047306537628174
+      },
+      {
+        "elapsedSeconds": 56.7,
+        "hostMinusGuestSeconds": 12.059086322784424
+      },
+      {
+        "elapsedSeconds": 61.86,
+        "hostMinusGuestSeconds": 0.042270660400390625
+      }
+    ],
+    "installedMonitorAdjustmentEvents": [
+      "VM clock maintenance: {\"state\":\"adjusted\",\"adjusted\":true,\"offsetSeconds\":0.000313}"
+    ],
+    "automaticCorrectionObserved": true,
+    "physicalMacSleepTested": false,
+    "timerGapUnitTested": true,
+    "hostTimeUnchanged": true,
+    "externalNtpEnabled": false
+  },
+  "autoClockIntervalSeconds": 60,
+  "autoClockHostEntryRequired": true,
+  "physicalMacSleepTested": false,
+  "independentStaticReview": "stale lifecycle instructions corrected; global startup project failure reproduced and isolated; clock listener change reviewed; no remaining Important/Critical, reviewer ran no commands",
+  "recovery": {
+    "selectedStableFilesMatched": 2607,
+    "selectedStableEntries": 2607,
+    "programsMatched": 126,
+    "configurationFilesMatched": 11,
+    "copyRestore": {
+      "recoveryPoint": "ready-security-background-20261029",
+      "copiedHelperReplaceFaultInjected": true,
+      "copiedHostHelpersRolledBack": true,
+      "copiedFaultTemporaryCleaned": true,
+      "offlineDiskRestorePassed": true,
+      "diskCheckPassed": true,
+      "hostHelpersRestored": 5,
+      "launchDefinitionsRestoredInSyntheticHost": 2,
+      "missingAndCorruptCopiedHelpersRepaired": true,
+      "primaryDiskUnmodified": true,
+      "noVmRegistered": true,
+      "copyBootTested": false,
+      "probeArchive": "/Users/LOCAL_USER/Library/Application Support/Harness Purge Original/archived-validation/restore-probe-security-background-20261029",
+      "temporaryDiskCopyRemoved": true
+    },
+    "snapshotCount": 10,
+    "previousSnapshotsPreserved": 9,
+    "registeredVmsObserved": 4,
+    "managedHarnessVmsObserved": 1,
+    "activeChatArchivesExcludedOnlyFromByteProof": 1
+  },
+  "realProject": {
+    "trackedRealProjectHashesMatched": 459,
+    "realProjectGitHeadUnchanged": true,
+    "realProjectSixAuditTablesUnchanged": true,
+    "realProjectFindings": 95,
+    "realProjectAllUnverified": true
+  },
+  "history": {
+    "initialRed": "missing automatic monitor and IPC module; captured failures",
+    "projectReconciliationRed": "mixed valid/missing/corrupt fixture initially failed, then passed with per-project isolation",
+    "controllerCoverageChecks": "first failed obsolete9 vs11 config count, then fixture edit had IndentationError; both retained, corrected final139pass",
+    "firstAutomaticClockAcceptance": "12sec perturbation not corrected80sec; finally manual existing calibration restored clock",
+    "automaticClockDiagnosis": "actual installed timer logged fixed vm-controller-unavailable/exit1; no claim of exact underlying TCC/IPC cause. Background no longer invokes UTM IPC. Fixed ownedloopbacklistener plus pinnedSSH retainsidentity",
+    "separateShellProbe": "non-escalated tool probe could not write host operationlock; this was a tool sandbox observation distinct from actual background timer failure",
+    "psProbe": "a non-escalated read-only process inspection was denied by sandbox in native tool output, not evidence of runtime health",
+    "secondAutomaticClockAcceptance": "actual installed scheduler corrected controlled12sec offset to~0.04sec; not a physical sleep test"
+  },
+  "limits": [
+    "single active audit task and4minute budget retained",
+    "caller exit survival only while VM/backend continues; no promise of scanning during physical Macsleep",
+    "forced owner death orphan cleanup path reviewed, graceful ownerrestart was native-tested; did not inject SIGKILL",
+    "existing Semgrep PartialParsing remains, original project not rewritten",
+    "real95findings remainunverified, no vulnerability validation",
+    "original historical SSH255 lacks clientstderr and remainsunattributed",
+    "offline copy restored and primary coldboot separately verified; copiedVM not booted",
+    "no new model-provider API calls this phase"
+  ],
+  "permissionsExpanded": false,
+  "gitPush": false,
+  "commandReceipts": [
+    {
+      "id": "acceptance",
+      "scope": "native-acceptance",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "b21d5eb5c242a125abf95e8e06edafe768fec38837224c63d0d79009bfd74904"
+    },
+    {
+      "id": "baseline",
+      "scope": "baseline",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "887752e96efff0c01143cb10c8fb8e064558afd93e283eaf9b1e18aecf4572d3"
+    },
+    {
+      "id": "build-client",
+      "scope": "build",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "a743611072e3e100d8ed1e5157b012ffb40c8541686e941d161ad506991b44b6"
+    },
+    {
+      "id": "clock-acceptance-r2",
+      "scope": "native-acceptance",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "749248058c93a86b2c5dce1f8a0fc0ba8ace303acf2aefd1cba92ee2c706fdc0"
+    },
+    {
+      "id": "clock-acceptance",
+      "scope": "native-acceptance",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "29a9c962fed46143f06095e290930ddc7214ad45d90b5a166d831179568c5e17"
+    },
+    {
+      "id": "clock-diagnosis",
+      "scope": "native-acceptance",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "7dd35bf953d21230e06e8487f482082cf48afe710d9d56c33d471171f6d519f9"
+    },
+    {
+      "id": "clock-green",
+      "scope": "clock",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "4e1a7f73bc1d00b8fd20eee261aa9fdeba956848c077ee9412c8a6c37cf35db8"
+    },
+    {
+      "id": "clock-ipc-green",
+      "scope": "clock",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "0727b5087fc28a36fb602b999c62da8f767dd07513d1621e63f595368e20f33f"
+    },
+    {
+      "id": "clock-ipc-red",
+      "scope": "clock",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "4a9080de30c6448ba2d1d5f382054ad42022b7c1c277e20a768ff066458f30a1"
+    },
+    {
+      "id": "clock-log-observation",
+      "scope": "native-acceptance",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "02139a07aba364090cf5f33fa16fbd2443aee34fd3328c4a4e254baee829025f"
+    },
+    {
+      "id": "clock-red",
+      "scope": "clock",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "7c8b40b549d3c50780c1ab094460ccf37aa506f546a11ec8e44dd4e601a4ca0a"
+    },
+    {
+      "id": "cold-verify",
+      "scope": "final-runtime",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "cedc7ea1857e650dcc0446206ec08e1495fca4d1d4f9f3a8d5963f956dfb3ace"
+    },
+    {
+      "id": "deployment",
+      "scope": "deployment",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "a07ab0cb030f47fabbcea7de3732d1753388d4813b049baec7b2e281726bd65e"
+    },
+    {
+      "id": "final-live",
+      "scope": "final-runtime",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "249c1b2f3e5a8d6e6b9c39b30a5e3b4be0b429aad4eab8903484f7b752efc674"
+    },
+    {
+      "id": "host-complete",
+      "scope": "complete-tests",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "f374d89a0559be52a55c98c887acb2abf711b90e7993725c77dd6cf27a247dc2"
+    },
+    {
+      "id": "host-final",
+      "scope": "final-tests",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "dc12b18f876d798dd7b94b8cf5e8b9acea6a45a7e813b5dcc1a6e38eca06b25f"
+    },
+    {
+      "id": "host-install",
+      "scope": "deployment",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "7a29a267e74ca7fa5806a346ef82ad970cc14f03aba860a6cd78d2566017700a"
+    },
+    {
+      "id": "host-tests",
+      "scope": "tests",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "126ae0c64253daf332412c3b99cdd764dcc95a4be7e75eae62a2e54dd580ef63"
+    },
+    {
+      "id": "monitor-diagnosis-install",
+      "scope": "deployment",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "ab20f26ddc7d99d797f650e622cd22c4f7c227632838293991b1be23e68a8ec1"
+    },
+    {
+      "id": "monitor-fix-install",
+      "scope": "deployment",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "d0744c5fdbff1822ce58e743430fde01034e952c22ba02744b72621e6b60ad3a"
+    },
+    {
+      "id": "plugin-complete",
+      "scope": "complete-tests",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "532221b2ee29c841656ece1b3105e39c431609b82cf2efed104c76026ab0b1db"
+    },
+    {
+      "id": "plugin-final",
+      "scope": "final-tests",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "82a2cc9762325394c62bb30f531a7a53f0ee0e467e241e26b422d3c732ad738f"
+    },
+    {
+      "id": "plugin-tests",
+      "scope": "tests",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "a8beb7a5ae3f370c84fb34390896d588d5e17ca0e220a190d373ded33591c590"
+    },
+    {
+      "id": "post-cold-service",
+      "scope": "final-runtime",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "3007b0258583718ca14bb5b517025aee687e3debf94d2dfcd626f8c558674acf"
+    },
+    {
+      "id": "python-complete",
+      "scope": "complete-tests",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "35a046939bc0f4469f6b8431825122cfc45e1a0061695c461e079e2965f9bfbd"
+    },
+    {
+      "id": "python-final-r2",
+      "scope": "final-tests",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "a7b0ae13c4f0c2c6b13edc0fd85ce234f640ab509289905e4799642a8fe1da3e"
+    },
+    {
+      "id": "python-final-r3",
+      "scope": "final-tests",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "c697ba2fe02f61083b4be07fb7ef646e701384d4044eb6b85bd02aca5dbeef8b"
+    },
+    {
+      "id": "python-final",
+      "scope": "final-tests",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "838eaa07a795c587b445e981eed7a889f75c7af06084473e1405e6a5c5a747be"
+    },
+    {
+      "id": "python-tests",
+      "scope": "tests",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "9e729f674b8e0081ebb9b58dae20d589ea9d81bee5f9b3f6eef9fb4cb1b0996c"
+    },
+    {
+      "id": "recovery-create",
+      "scope": "recovery",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "2cef32f690cab0cd99aae9243aa8c3993c9f3ca080e766d3e38347569adc2423"
+    },
+    {
+      "id": "service-final",
+      "scope": "service",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "7ef936f63df7c96fe88fb0c23032e3d41231b40680649bee7b34808d52793137"
+    },
+    {
+      "id": "service-green",
+      "scope": "service",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "a5187fd796b29460421cea977682699b76e43fa208c7cd6509387eb4423c5ca2"
+    },
+    {
+      "id": "service-lifecycle",
+      "scope": "service",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "d649dbf6955fb3d49a32467f40265e5ed0f069e60ec02c45255795383d162ae2"
+    },
+    {
+      "id": "service-loss",
+      "scope": "service",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "1b149bb3b73a32661e89f98c1e108ba5a75e06a2a22395b738779dc3836d465a"
+    },
+    {
+      "id": "service-red",
+      "scope": "service",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "3557736928cae23a815ca2ff547553c991f2bad6da3ce8289ebd3a13eeb5e6ac"
+    },
+    {
+      "id": "service-review-red",
+      "scope": "service",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "f34f05843785b028277e20df0e967c072fa37ad022be18bf66ee032189dbf262"
+    },
+    {
+      "id": "snapshot-inventory",
+      "scope": "recovery",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "a3bfb5aae3b483c66afe1e7833b739e27a3172faf52507926e4439d790fc96bd"
+    }
+  ]
+}

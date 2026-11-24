@@ -1,0 +1,676 @@
+{
+  "version": 2,
+  "purpose": "retrospective diagnostic replay; no new independent samples",
+  "reports": {
+    "historical": {
+      "version": 2,
+      "state": "blocked",
+      "r3Qualified": false,
+      "executionEnabled": false,
+      "categories": {
+        "python/CWE-94": {
+          "total": 53,
+          "positive": 20,
+          "negative": 33,
+          "evidenceOnly": 22,
+          "raw": {
+            "positiveHit": 20,
+            "positiveMiss": 0,
+            "negativeHit": 33,
+            "negativeNoHit": 0,
+            "unknown": 0,
+            "falsePositiveRate": 1,
+            "recall": 1,
+            "unknownRate": 0
+          },
+          "reviewed": {
+            "truePositive": 0,
+            "falsePositive": 0,
+            "trueNegative": 0,
+            "falseNegative": 0,
+            "falseExclusion": 0,
+            "unknown": 53,
+            "unknownPositive": 20,
+            "unknownNegative": 33,
+            "falsePositiveRate": null,
+            "falsePositiveRateUpperBound": 1,
+            "falseNegativeRate": null,
+            "falseExclusionRate": 0,
+            "confirmedRecall": 0,
+            "unknownRate": 1,
+            "resolvedCases": 0
+          },
+          "thresholds": {
+            "minimumPositive": 20,
+            "minimumNegative": 30,
+            "minimumRawRecall": 0.9,
+            "maximumReviewedFalsePositiveRate": 0.05,
+            "maximumFalseExclusionRate": 0,
+            "maximumUnknownRate": 0.2,
+            "minimumConfirmedRecall": 0.9
+          },
+          "blockers": [
+            "reviewed-false-positive-rate-unqualified",
+            "reviewed-false-positive-bound-unqualified",
+            "review-unknown-rate-unqualified",
+            "confirmed-recall-below-threshold"
+          ]
+        }
+      },
+      "blockers": [
+        "freeze-not-before-run",
+        "development-sample-reused",
+        "vulnerability-oracle-incomplete",
+        "python/CWE-94:reviewed-false-positive-rate-unqualified",
+        "python/CWE-94:reviewed-false-positive-bound-unqualified",
+        "python/CWE-94:review-unknown-rate-unqualified",
+        "python/CWE-94:confirmed-recall-below-threshold"
+      ],
+      "caseBlockers": [
+        {
+          "id": "BenchmarkTest00073",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00074",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00075",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00156",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00157",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00158",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00159",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00160",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00161",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00162",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00163",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00263",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00264",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00342",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00343",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00344",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00345",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00346",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00347",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00422",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00423",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00424",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00425",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00426",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00503",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00504",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00599",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00600",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00601",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00602",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00603",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00728",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00729",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00730",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00818",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00819",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00820",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00821",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00822",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00890",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00891",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00892",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00893",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00894",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00986",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00987",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00988",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest00989",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest01164",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest01165",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest01166",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest01167",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "BenchmarkTest01188",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        }
+      ],
+      "developmentOverlap": [
+        "BenchmarkTest00073",
+        "BenchmarkTest00074",
+        "BenchmarkTest00075",
+        "BenchmarkTest00156",
+        "BenchmarkTest00157",
+        "BenchmarkTest00158",
+        "BenchmarkTest00159",
+        "BenchmarkTest00160",
+        "BenchmarkTest00161",
+        "BenchmarkTest00162",
+        "BenchmarkTest00163",
+        "BenchmarkTest00263",
+        "BenchmarkTest00264",
+        "BenchmarkTest00342",
+        "BenchmarkTest00343",
+        "BenchmarkTest00344",
+        "BenchmarkTest00345",
+        "BenchmarkTest00346",
+        "BenchmarkTest00347",
+        "BenchmarkTest00422",
+        "BenchmarkTest00423",
+        "BenchmarkTest00424",
+        "BenchmarkTest00425",
+        "BenchmarkTest00426",
+        "BenchmarkTest00503",
+        "BenchmarkTest00504",
+        "BenchmarkTest00599",
+        "BenchmarkTest00600",
+        "BenchmarkTest00601",
+        "BenchmarkTest00602",
+        "BenchmarkTest00603",
+        "BenchmarkTest00728",
+        "BenchmarkTest00729",
+        "BenchmarkTest00730",
+        "BenchmarkTest00818",
+        "BenchmarkTest00819",
+        "BenchmarkTest00820",
+        "BenchmarkTest00821",
+        "BenchmarkTest00822",
+        "BenchmarkTest00890",
+        "BenchmarkTest00891",
+        "BenchmarkTest00892",
+        "BenchmarkTest00893",
+        "BenchmarkTest00894",
+        "BenchmarkTest00986",
+        "BenchmarkTest00987",
+        "BenchmarkTest00988",
+        "BenchmarkTest00989",
+        "BenchmarkTest01164",
+        "BenchmarkTest01165",
+        "BenchmarkTest01166",
+        "BenchmarkTest01167",
+        "BenchmarkTest01188"
+      ],
+      "usageRequired": {
+        "datasetSha256": "a131c5c7b0b31e53fe626e0d1b9688388a92166e7174f4977447daa6e2f75585",
+        "sourceSha256": [
+          "03e86c5de51c8f0e9a01331571f53852b6d80405e23fccfbfd48ccb727650ee6",
+          "1252055c6d5eb366d70c6f17f50d3db4e5c614374d6eedb2be55e9d6801ee8d4",
+          "1c6ed47f97f360e6c3acff24b898e7e2110996bd5918355f4728cd7aaf6e165e",
+          "1f2497bd5c7d50330acdc6f1d0bf3cec86b4627e761d8c8f0fb9b78600dd98fc",
+          "2126b277ce092a36f30dd8a2305a60e803be717071ab417d1e6b29c2b132d2f2",
+          "22c315e7b4d6e41444eb36a28db4593c23ab48cf52dcc7fe2de566d2738ecefd",
+          "23d572933a63dbafc9565acb6b6ccb16d79703cb9c6fa17c1abb4912771f8ae0",
+          "24243ddb5ce663fb8725714ed4a751db76967b5fa0158af3a37a7b9c6dc38a09",
+          "27b39b04367f4348b9950c042427ad1e212d32f236d3ebf6bbe49c76e4f62e6c",
+          "306827934eb6796baef118c3fb5860f4d48eac8594a9b77d51374f81aea749d6",
+          "37e211f44b3b847bd05358b6ee5cc8d29480db8e0cb277f302038abb83c929e3",
+          "3942c43bb5176713ced8faf7777a09dc3c014dff814c84cefebce09b517241ff",
+          "39ed9366e976ad5f4ae1ec8d8bd725693f5b0487a3a5a620a858e5c976ff4393",
+          "3e80a4c66d6a6c69de1e21818026fdbe43b9ff0634d02bd047d8e4e6c64cb391",
+          "443f71145aac0d9feb700ad02210f3bf27a874190dcdda8ba82232c4654f455e",
+          "45c84b5a7c93aa0361edb4288b3e3e3a38968eb0ca95787369b3241756eeb8a3",
+          "48654673286abcb6e3704251980dd8a661dd776258140387dd8e436fe4bf4562",
+          "4948a056205fd1c832ad194aa94c7b04c93ea998b68e28f2959715c50696d13f",
+          "5b7fff85449c25547a5beea20039187be606733bbbfef06d0ef431d896395a8b",
+          "62875d49da9f3427e58592e6bb2a71d8e121054d45b47393e3fb21a74b36f172",
+          "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+          "6a8797e90985961e51aa93d9a46ea646a52635285a9deb9558629b59fa657b31",
+          "705f6c48c2f30ab1070fa187440064c1676a71dae4377535599d38a0fe0f6923",
+          "742d44414c81a7dbac0cd99ec96ec14c26905f7e41a10bb0d7a2097da71aafa2",
+          "7b3163863c4162d4481f54061c2823e0d3c90a787c4b6c7dbfa94dd20867bc4b",
+          "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+          "80c8864eb65a9b446ffe9f80e25d7aaf11d2746bdcd0ce8cec1c8ac5c336aaf3",
+          "8244ce76291f95097d98225a1ddf12e7ba445da09aff9532c555e4d5445f23c7",
+          "8307a4b47f229b4a689167dce0b96940281ae2077eca9dac30c6d35423dde51a",
+          "8f6788c7952296b80e61f5bbd43bbc8f839b1b2ea81b7cd5844eb640e785ab3f",
+          "982d445efadff613e947398496e77bcd17e94a48a50949772463f005906fa949",
+          "a0918b418a76604ce2b296ed3710c6459f6005a7017ddf54bc51539178912272",
+          "a0a5b629d6c62d373f5adedccab68738844d97a4c6f696603fda0b93c096bad0",
+          "a7e3644b617d6ffe34562526741ddcb7bad97478e710fa66b9e40b2a8043f539",
+          "ad6a8e062b226c80882e82f29a128699297e5999db7ba3c6f6bbd4d02419f9e4",
+          "b02d24512c10d3165effaa48336cb808e1884f86782d8ce6a295b236708dcf6a",
+          "badca856232d750d871edc374e1f86f4a9a3c7bb783944bec295f48d081880a6",
+          "bbbdbf0094156cf6dadda45a1fddf8fabdc0d05b4b5bdace3775f37e3df21040",
+          "bf12aec2e97161286417d8b438a9b8996ddc3798197e53b85c9fe3d9c91ff63b",
+          "bf310860a3a6716d6de2c12740eec2dbd8a2792f15086c4840a60466c74034ca",
+          "ce3006b28c03e5f892f9f388d10e95088a5153b3a5f1d6e2055c39b244748c5f",
+          "d07b1423cdf636bbba29c05ad79cfe7eecdb33023a5e2a9e9e13d4a74332447c",
+          "d09f6d15ed5aae76476f4d6377a34aeb7a51edcf9d3e49a8431cfef9215e477b",
+          "d3e8adc582ab3d6e032b763789379091a3e3d6ca63fd9158e18ad55290173d94",
+          "d69929fb437c36029622d36cfd096c8e3735787bb1c9680c16bd5d80f4460959",
+          "dc303f7723cb57dbf3339e08a8beac977064def27d99dcbdb48d6231836994b5",
+          "dc76498b69bf71d97b63e4fd586c1d69c43f63bb86a41be57e5bb69f6cd35f6b",
+          "e16bed57525e8e1b27cd724cedac15deb040dca744d702b92b109192ba2b9a5c",
+          "e8bea0d882d6c2cb82e3f0639a02647622d2eeb96b673f12a62288da93db278f",
+          "ea16ae72984b3afe3bd69b60f2189975866a72e9ecd3763059b46517a31a062a",
+          "efe375ca877668c453bb63596f0dbf031dd3730f2e9eb90b350640fdfcb902b4",
+          "f0a0255dc84a1f0ef10c4c25668e48a89ee7eab4453726482fe419a10c2067ff",
+          "fb969cc8da38a1d92352aa0e8ff5abb90f502d2a26117fdb3f023b09ed4ed16c"
+        ],
+        "action": "Record every acceptance attempt, including failure, in the usage ledger before any further freeze; this offline tool does not write the ledger"
+      },
+      "freezeTrust": "self-attested; digest and attempt-consumption ledger need an independent release-review check",
+      "artifactReuse": [
+        {
+          "sha256": "6b76210117766950e86d2b5dffbfb7a795b3b50536ea6b309f082970ca0eec6b",
+          "caseIds": [
+            "BenchmarkTest00073",
+            "BenchmarkTest00075",
+            "BenchmarkTest00158",
+            "BenchmarkTest00162",
+            "BenchmarkTest00163",
+            "BenchmarkTest00345",
+            "BenchmarkTest00423",
+            "BenchmarkTest00426",
+            "BenchmarkTest00504",
+            "BenchmarkTest00603",
+            "BenchmarkTest00730",
+            "BenchmarkTest00818",
+            "BenchmarkTest00821",
+            "BenchmarkTest00822",
+            "BenchmarkTest00892",
+            "BenchmarkTest00893",
+            "BenchmarkTest00987",
+            "BenchmarkTest00988",
+            "BenchmarkTest00989",
+            "BenchmarkTest01165",
+            "BenchmarkTest01166",
+            "BenchmarkTest01167"
+          ]
+        }
+      ],
+      "definitions": {
+        "rawFalsePositiveRate": "negative hits / observed negative cases",
+        "reviewedFalsePositiveRate": "negative confirmations / resolved negative cases",
+        "reviewedFalsePositiveRateUpperBound": "negative confirmations plus unknown negatives / all labelled negatives",
+        "reviewedFalseNegativeRate": "missed or wrongly excluded positives / resolved positive cases",
+        "confirmedRecall": "confirmed positives / all labelled positives",
+        "unknownRate": "unresolved cases / all labelled cases",
+        "evidenceOnly": "unknown decisions carrying evidence references; not verified exclusions",
+        "evidenceValidation": "declared evidence kind, input binding and artifact digest structure; evidence meaning requires independent review"
+      }
+    },
+    "external": {
+      "version": 2,
+      "state": "blocked",
+      "r3Qualified": false,
+      "executionEnabled": false,
+      "categories": {
+        "python/CWE-95": {
+          "total": 4,
+          "positive": 3,
+          "negative": 1,
+          "evidenceOnly": 0,
+          "raw": {
+            "positiveHit": 3,
+            "positiveMiss": 0,
+            "negativeHit": 1,
+            "negativeNoHit": 0,
+            "unknown": 0,
+            "falsePositiveRate": 1,
+            "recall": 1,
+            "unknownRate": 0
+          },
+          "reviewed": {
+            "truePositive": 0,
+            "falsePositive": 0,
+            "trueNegative": 0,
+            "falseNegative": 0,
+            "falseExclusion": 0,
+            "unknown": 4,
+            "unknownPositive": 3,
+            "unknownNegative": 1,
+            "falsePositiveRate": null,
+            "falsePositiveRateUpperBound": 1,
+            "falseNegativeRate": null,
+            "falseExclusionRate": 0,
+            "confirmedRecall": 0,
+            "unknownRate": 1,
+            "resolvedCases": 0
+          },
+          "thresholds": {
+            "minimumPositive": 20,
+            "minimumNegative": 30,
+            "minimumRawRecall": 0.9,
+            "maximumReviewedFalsePositiveRate": 0.05,
+            "maximumFalseExclusionRate": 0,
+            "maximumUnknownRate": 0.2,
+            "minimumConfirmedRecall": 0.9
+          },
+          "blockers": [
+            "insufficient-labelled-cases",
+            "reviewed-false-positive-rate-unqualified",
+            "reviewed-false-positive-bound-unqualified",
+            "review-unknown-rate-unqualified",
+            "confirmed-recall-below-threshold"
+          ]
+        }
+      },
+      "blockers": [
+        "freeze-not-before-run",
+        "development-sample-reused",
+        "vulnerability-oracle-incomplete",
+        "python/CWE-95:insufficient-labelled-cases",
+        "python/CWE-95:reviewed-false-positive-rate-unqualified",
+        "python/CWE-95:reviewed-false-positive-bound-unqualified",
+        "python/CWE-95:review-unknown-rate-unqualified",
+        "python/CWE-95:confirmed-recall-below-threshold"
+      ],
+      "caseBlockers": [
+        {
+          "id": "django-eval-line-5",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "django-eval-line-11",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "django-eval-line-15",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        },
+        {
+          "id": "django-eval-line-19",
+          "reasons": [
+            "vulnerability-oracle-incomplete"
+          ]
+        }
+      ],
+      "developmentOverlap": [
+        "django-eval-line-5",
+        "django-eval-line-11",
+        "django-eval-line-15",
+        "django-eval-line-19"
+      ],
+      "usageRequired": {
+        "datasetSha256": "3f578e8df0a39597b65fcd868cdb497cc6bcd9345f0b1a1ce0f5e22ca542df4d",
+        "sourceSha256": [
+          "504296d837fc9ebf60dff4b0c13a8e13266608e62fbfdebcc41e4f256b88d5f4"
+        ],
+        "action": "Record every acceptance attempt, including failure, in the usage ledger before any further freeze; this offline tool does not write the ledger"
+      },
+      "freezeTrust": "self-attested; digest and attempt-consumption ledger need an independent release-review check",
+      "artifactReuse": [],
+      "definitions": {
+        "rawFalsePositiveRate": "negative hits / observed negative cases",
+        "reviewedFalsePositiveRate": "negative confirmations / resolved negative cases",
+        "reviewedFalsePositiveRateUpperBound": "negative confirmations plus unknown negatives / all labelled negatives",
+        "reviewedFalseNegativeRate": "missed or wrongly excluded positives / resolved positive cases",
+        "confirmedRecall": "confirmed positives / all labelled positives",
+        "unknownRate": "unresolved cases / all labelled cases",
+        "evidenceOnly": "unknown decisions carrying evidence references; not verified exclusions",
+        "evidenceValidation": "declared evidence kind, input binding and artifact digest structure; evidence meaning requires independent review"
+      }
+    }
+  },
+  "evaluatorSha256": "1dc6d416bcd483aef67b797d754185e25982689ce2a432d49e667464f58d29ec",
+  "nativeAcceptance": {
+    "ok": true,
+    "testsPassed": 20,
+    "exitCodes": {
+      "external": 2,
+      "historical": 2
+    },
+    "temporaryRemoved": true,
+    "scannerManifestUnchanged": true
+  },
+  "r3Qualified": false,
+  "runtimePolicyChanged": false
+}

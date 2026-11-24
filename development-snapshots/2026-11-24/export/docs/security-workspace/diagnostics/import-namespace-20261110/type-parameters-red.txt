@@ -1,0 +1,59 @@
+....FFFFFF...
+======================================================================
+FAIL: test_generic_caller_bindings_do_not_become_flask_query_identity (__main__.ImportFlowTest.test_generic_caller_bindings_do_not_become_flask_query_identity) (type_parameter='request')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/eval_import_review.test.py", line 36, in test_generic_caller_bindings_do_not_become_flask_query_identity
+    self.assertIsNone(review_import_flow(caller, 'evaluator', callee, 6))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'observation': 'direct-import-execution-flow-observed', 'sourceLine': 5, 'importLine': 2, 'callLine': 6, 'definitionLine': 1, 'sinkLine': 2, 'sink': 'eval', 'disposition': 'unverified'} is not None
+
+======================================================================
+FAIL: test_generic_caller_bindings_do_not_become_flask_query_identity (__main__.ImportFlowTest.test_generic_caller_bindings_do_not_become_flask_query_identity) (type_parameter='execute')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/eval_import_review.test.py", line 36, in test_generic_caller_bindings_do_not_become_flask_query_identity
+    self.assertIsNone(review_import_flow(caller, 'evaluator', callee, 6))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'observation': 'direct-import-execution-flow-observed', 'sourceLine': 5, 'importLine': 2, 'callLine': 6, 'definitionLine': 1, 'sinkLine': 2, 'sink': 'eval', 'disposition': 'unverified'} is not None
+
+======================================================================
+FAIL: test_generic_caller_bindings_do_not_become_flask_query_identity (__main__.ImportFlowTest.test_generic_caller_bindings_do_not_become_flask_query_identity) (type_parameter='eval')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/eval_import_review.test.py", line 36, in test_generic_caller_bindings_do_not_become_flask_query_identity
+    self.assertIsNone(review_import_flow(caller, 'evaluator', callee, 6))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'observation': 'direct-import-execution-flow-observed', 'sourceLine': 5, 'importLine': 2, 'callLine': 6, 'definitionLine': 1, 'sinkLine': 2, 'sink': 'eval', 'disposition': 'unverified'} is not None
+
+======================================================================
+FAIL: test_generic_type_parameters_do_not_become_builtin_or_import_identity (__main__.ImportFlowTest.test_generic_type_parameters_do_not_become_builtin_or_import_identity) (suffix='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/eval_import_review.test.py", line 28, in test_generic_type_parameters_do_not_become_builtin_or_import_identity
+    self.assertIsNone(review_import_flow(CALLER, 'evaluator', callee, 6))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'observation': 'direct-import-execution-flow-observed', 'sourceLine': 5, 'importLine': 2, 'callLine': 6, 'definitionLine': 1, 'sinkLine': 2, 'sink': 'eval', 'disposition': 'unverified'} is not None
+
+======================================================================
+FAIL: test_generic_type_parameters_do_not_become_builtin_or_import_identity (__main__.ImportFlowTest.test_generic_type_parameters_do_not_become_builtin_or_import_identity) (suffix=', {}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/eval_import_review.test.py", line 28, in test_generic_type_parameters_do_not_become_builtin_or_import_identity
+    self.assertIsNone(review_import_flow(CALLER, 'evaluator', callee, 6))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'observation': 'direct-import-execution-flow-observed', 'sourceLine': 5, 'importLine': 2, 'callLine': 6, 'definitionLine': 1, 'sinkLine': 2, 'sink': 'eval', 'disposition': 'unverified'} is not None
+
+======================================================================
+FAIL: test_generic_type_parameters_do_not_become_builtin_or_import_identity (__main__.ImportFlowTest.test_generic_type_parameters_do_not_become_builtin_or_import_identity) (suffix=', {}, {}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/eval_import_review.test.py", line 28, in test_generic_type_parameters_do_not_become_builtin_or_import_identity
+    self.assertIsNone(review_import_flow(CALLER, 'evaluator', callee, 6))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'observation': 'direct-import-execution-flow-observed', 'sourceLine': 5, 'importLine': 2, 'callLine': 6, 'definitionLine': 1, 'sinkLine': 2, 'sink': 'eval', 'disposition': 'unverified'} is not None
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.006s
+
+FAILED (failures=6)

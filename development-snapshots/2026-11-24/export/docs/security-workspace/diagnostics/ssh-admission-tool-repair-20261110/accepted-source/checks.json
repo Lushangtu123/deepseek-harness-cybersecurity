@@ -1,0 +1,78 @@
+{
+  "state": "passed",
+  "sourceHashes": {
+    "tooling/admission.py": "4e8b5de2c8fea925e42d669590f442a655c7f20f2ed52dac559cdde4a35a9b77",
+    "record-analysis.py": "45c262be5d053f473dda1f5a599cb3f69df50b5ceda88edf070f078eae12843a",
+    "tooling/regression.test.py": "65acb73f9be3bc6bb06b107d7435c0bae53aa86a3f6e7656828f2a32ae641d62",
+    "tooling/analysis.test.py": "487b85b32d492870ea9695bf97be427e82b1ede453a932949cb8eab7a581827d",
+    "inputs/manage.py": "69cc27ae32ba7be4362e6a4d94a4f253ac54d573380c98f58fa40bdb8758e401",
+    "inputs/ssh-queue.test.py": "07979ee7d2d38fd9a0796d8f53e960c8cf6680ce4569533d7bffda6aeece8e00",
+    "tooling/r2.test.py": "a2b66523eb281e2a6255597718721c66b9fc38a334ee04a0400ee9baff2ffe1c"
+  },
+  "sourcesUnchanged": true,
+  "suites": [
+    {
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-I",
+        "-B",
+        "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/regression.test.py"
+      ],
+      "startedAtUtc": "2026-11-10T18:34:24.273248+00:00",
+      "finishedAtUtc": "2026-11-10T18:34:26.975858+00:00",
+      "elapsedSeconds": 2.702,
+      "exitCode": 0,
+      "log": "regression.test.checked.txt",
+      "logSha256": "e2f8e39fff9d8702d776cb5490ea5e7bbf3e80d4a322976b07db123dc9687002",
+      "testedSourceSha256": "65acb73f9be3bc6bb06b107d7435c0bae53aa86a3f6e7656828f2a32ae641d62"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-I",
+        "-B",
+        "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/analysis.test.py"
+      ],
+      "startedAtUtc": "2026-11-10T18:34:26.975957+00:00",
+      "finishedAtUtc": "2026-11-10T18:34:27.045444+00:00",
+      "elapsedSeconds": 0.069,
+      "exitCode": 0,
+      "log": "analysis.test.checked.txt",
+      "logSha256": "8291979b307800a2411ed99e4708747c62ec4cba471072141b444acc35421016",
+      "testedSourceSha256": "487b85b32d492870ea9695bf97be427e82b1ede453a932949cb8eab7a581827d"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-I",
+        "-B",
+        "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/inputs/ssh-queue.test.py"
+      ],
+      "startedAtUtc": "2026-11-10T18:34:27.045510+00:00",
+      "finishedAtUtc": "2026-11-10T18:34:28.454085+00:00",
+      "elapsedSeconds": 1.409,
+      "exitCode": 0,
+      "log": "ssh-queue.test.checked.txt",
+      "logSha256": "ab012140e4e03ea82f2a5b1f49750dbba99f7fd5bf812f9ebb51301135d748c3",
+      "testedSourceSha256": "07979ee7d2d38fd9a0796d8f53e960c8cf6680ce4569533d7bffda6aeece8e00"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-I",
+        "-B",
+        "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/r2.test.py"
+      ],
+      "startedAtUtc": "2026-11-10T18:34:28.454224+00:00",
+      "finishedAtUtc": "2026-11-10T18:34:29.407728+00:00",
+      "elapsedSeconds": 0.954,
+      "exitCode": 0,
+      "log": "r2.test.checked.txt",
+      "logSha256": "21c2411ceb6f353a049530d6fbc86be95319891055c4e15fb5970e6e7f5a3702",
+      "testedSourceSha256": "a2b66523eb281e2a6255597718721c66b9fc38a334ee04a0400ee9baff2ffe1c"
+    }
+  ],
+  "newVmRequests": 0,
+  "newLoopbackControlRuns": 0,
+  "scope": "synthetic lifecycle and evidence validation plus existing manager regression; no SSH process or daily configuration modification"
+}

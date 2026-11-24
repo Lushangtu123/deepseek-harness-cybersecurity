@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Los_Angeles",
+  "baselineCommit": "a1116010528a3fde041058fe32d62ee366e27293",
+  "phase": 1,
+  "programFilesMatched": 118,
+  "regressionTests": 355,
+  "runtimeVersions": {
+    "semgrep": "1.182.1",
+    "trivy": "0.76.1",
+    "zap": "2.17.0"
+  },
+  "nativeSdk": {
+    "registeredTools": 66,
+    "currentBindingRead": true,
+    "crossProjectDenied": true,
+    "unboundDenied": true,
+    "modelRequests": 0
+  },
+  "staticAcceptance": {
+    "repositoryCommit": "3b512cd629e3d10dc658e3fc7b07ee9b16153c30",
+    "semgrepFiles": 146,
+    "trivyTargets": 5,
+    "unverifiedHits": 62,
+    "temporaryDatabaseRemoved": true,
+    "repositoryEdited": false
+  },
+  "browserAcceptance": {
+    "scopeSaved": true,
+    "allThreeScannersCompleted": true,
+    "cancelThenRestart": true,
+    "syntheticFixRetestPassed": true,
+    "refreshPreservedDraft": true,
+    "projectSwitchIsolated": true,
+    "reportDownloadedAndChecked": true,
+    "downloadedReportFindings": 29,
+    "downloadedReportRuns": 5,
+    "latestPageRuns": 6,
+    "latestPageFindings": 29
+  },
+  "httpContract": {
+    "authenticatedStatus": 200,
+    "unauthenticatedStatus": 401,
+    "foreignOriginStatus": 403,
+    "explicitRejectionStatus": 200,
+    "explicitRejectionBody": {
+      "ok": false,
+      "error": "范围已变化，请刷新后重试"
+    },
+    "scopeUnchanged": true
+  },
+  "zapBoundary": {
+    "listener": "[::ffff:127.0.0.1]:49090",
+    "crossPortLinkAndRedirectOutsideRequests": 0,
+    "source": "native container socket watcher + synthetic HTTP request logs",
+    "endedWithApiClosed": true,
+    "endedWithNoScannerContainers": true
+  },
+  "hostIsolationValidated": true,
+  "newVmSnapshot": false,
+  "newVmDiskImage": false,
+  "runtimeAssetsInGit": false,
+  "currentRecoveryPointIncludesUpdate": false,
+  "limitations": [
+    "Six starter Semgrep rules, not comprehensive security coverage",
+    "Fixed offline Trivy vulnerability database; no automatic refresh",
+    "ZAP JSON does not establish original-URL retest coverage; absent hit cannot automatically close",
+    "New scanner scope does not fence VM full-access shell, browser or existing original capabilities",
+    "No live model invocation or public target scanning tested"
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Los_Angeles",
+  "runId": "security-status-20261029",
+  "feature": "validate rendered securityStatus fields before state adoption; retain last success and draft on invalid read, pause action buttons until valid refresh",
+  "regression": {
+    "fullPluginPassed": 395,
+    "focusedClientPassed": 20,
+    "focusedOverlapsFull": true,
+    "failed": 0,
+    "newTests": 6,
+    "firstFullRevisionPassed": 393,
+    "reviewImportantFindingsInitially": 2,
+    "reviewImportantFindingsRemaining": 0,
+    "reviewTestsExecuted": false
+  },
+  "cases": [
+    "nested run/finding/profile/runtime field shapes rejected before render",
+    "duplicate IDs/page limits/count contradictions rejected",
+    "failed refresh retains verified records and draft; valid refresh resumes",
+    "legacy absent optional totals and unknown string states remain displayable",
+    "array tool names cannot pass key coercion",
+    "prototype-named statuses are literal labels and maintenance fallback is safe"
+  ],
+  "validation": {
+    "requiredRuntimeTools": [
+      "semgrep",
+      "trivy",
+      "zap"
+    ],
+    "runPageLimit": 30,
+    "findingPageLimit": 500,
+    "duplicateRecordIdsAllowed": false,
+    "totalsOptionalForLegacy": true,
+    "providedTotalsMustMatchExistingPageContract": true,
+    "unknownStringStatusesAccepted": true,
+    "toolIdsMustBeKnownStrings": true,
+    "serverAuthorizationReplacement": false
+  },
+  "httpAcceptance": {
+    "statusCode": 200,
+    "project": "personal-security-compare-20261029",
+    "findingCount": 3,
+    "runCount": 2,
+    "allFindingsStillUnverified": true,
+    "unauthenticatedStatus": 401,
+    "foreignOriginStatus": 403,
+    "reportAvailable": true,
+    "modelCalls": 0,
+    "newScans": 0
+  },
+  "browserAcceptance": {
+    "browser": "IAB",
+    "project": "personal-security-compare-20261029",
+    "normalStatusAccepted": true,
+    "runsDisplayed": 2,
+    "findingsDisplayed": 3,
+    "exportEnabledAfterRead": true,
+    "unsavedDraftPreservedThroughRuntimeRecheck": true,
+    "testDraftNeverSaved": true,
+    "testDraftDiscardedByTabUnmount": true,
+    "savedScopeRestored": "/home/purge/workspace/security-comparison-fixture-20261029",
+    "draftScreenshot": "status-draft.jpg",
+    "finalScreenshot": "status-final.jpg",
+    "scope": "normal page read and runtime recheck with unsaved draft; malformed payloads tested with component host, not browser injection",
+    "modelCalls": 0,
+    "newScans": 0
+  },
+  "live": {
+    "programFilesMatched": 122,
+    "ruleHashMatched": true,
+    "runtimeManifestMatched": true,
+    "service": "active",
+    "activeScannerContainers": 0,
+    "preflight": {
+      "ok": true,
+      "readOnly": true,
+      "automaticChanges": false,
+      "scope": "local pinned images, rules and database identity; no scanner execution, model call, network download or GitHub latest check",
+      "tools": {
+        "semgrep": {
+          "ready": true,
+          "version": "1.182.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T03:26:05.659Z",
+          "cached": false,
+          "rules": {
+            "version": "local-reviewed-2",
+            "count": 16,
+            "languages": [
+              "javascript",
+              "python",
+              "typescript"
+            ]
+          }
+        },
+        "trivy": {
+          "ready": true,
+          "version": "0.76.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T03:26:05.659Z",
+          "cached": false,
+          "database": {
+            "state": "fresh",
+            "updatedAt": "2026-10-29T19:18:50.969Z",
+            "nextUpdate": "2026-10-30T19:18:50.969Z",
+            "ageDays": 0
+          },
+          "lastUpdate": {
+            "state": "current",
+            "checkedAt": "2026-10-29T22:59:00.361501+00:00"
+          }
+        },
+        "zap": {
+          "ready": true,
+          "version": "2.17.0",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T03:26:05.659Z",
+          "cached": false
+        }
+      }
+    },
+    "hostIsolationValidated": true
+  },
+  "deployment": {
+    "changedGuestFiles": [
+      "tools/dsh-purge-personal-1.1.77-personal.1/PERSONAL-CHANGES.md",
+      "tools/dsh-purge-personal-1.1.77-personal.1/client.js",
+      "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-client.mjs"
+    ],
+    "forkHashesMatched": 122,
+    "guestBackup": "/home/purge/downloads/security-status-20261030T032530Z",
+    "serviceRestarted": true
+  },
+  "history": {
+    "firstNativeStatusRender": "test hook host used default project a; real payload was correctly refused. Matching actual project fixed harness only; production source not weakened",
+    "review": "array key coercion and inherited status object independently reported; review-red reproduced both; type guard and own-property label mapping fixed, re-review closed both",
+    "originalFailuresRetained": true
+  },
+  "scope": {
+    "newScans": 0,
+    "modelCalls": 0,
+    "backendChanges": false,
+    "schemaChanges": false,
+    "permissionsChanged": false,
+    "scannerAssetsChanged": false,
+    "gitPush": false,
+    "browserFaultInjection": false
+  },
+  "limits": [
+    "not evidence that past intermittent blank pages were caused by these fields",
+    "browser observed normal reads and unsaved draft refresh; malformed response paths use controlled component tests",
+    "frontend validation is not server authentication or a VM access boundary",
+    "unknown or absent optional totals do not establish complete historical coverage"
+  ],
+  "recovery": {
+    "point": "ready-security-audit-20261029",
+    "updateIncluded": false,
+    "newSnapshot": false,
+    "sourceBackup": "/home/purge/downloads/security-status-20261030T032530Z",
+    "existingFilesChanged": 3
+  },
+  "commandReceipts": {
+    "status-red": {
+      "scope": "status-red",
+      "returncode": 1,
+      "sha256": "82c83b178ae722e31896e9df38dcdc6cacd735818d34e1527088127d98d6fcd0"
+    },
+    "status-green": {
+      "scope": "status-green",
+      "returncode": 0,
+      "sha256": "4e0629bd5f854f60ea3d5c548c8fc9536e86380dc3b99d142fdef9acfa03b96a"
+    },
+    "build-client": {
+      "scope": "build",
+      "returncode": 0,
+      "sha256": "9f8e0ca38c09a6135bc03f40b80f050cdb256e348e227874ccd1026ab67ecd0c"
+    },
+    "package-final": {
+      "scope": "package-final",
+      "returncode": 0,
+      "sha256": "b8acf7795f0460c1fc17cfcae154b3788759f5d683184257239a675ae9298a10"
+    },
+    "http-baseline": {
+      "scope": "http-baseline",
+      "returncode": 0,
+      "sha256": "ac8ea6cca9660bf04841973e614a68aac1f65652589f73412b028e40d4b0f19e"
+    },
+    "native-status-render": {
+      "scope": "native-status",
+      "returncode": 1,
+      "sha256": "ef20b6bfc44be25a956b47f1135f624ef67b7c0a89a1dff80b212d263a389ba0"
+    },
+    "native-status-render-2": {
+      "scope": "native-status",
+      "returncode": 0,
+      "sha256": "26d6f4f96631ae4ac8b60531abb4a0136265c7cf862304a140180f60f9bc0050"
+    },
+    "review-red": {
+      "scope": "review-red",
+      "returncode": 1,
+      "sha256": "7710f76c9dc1676f433d37ff3d8e8894ecf9ee6c402504ad6267a027b941f0ab"
+    },
+    "status-final": {
+      "scope": "status-final",
+      "returncode": 0,
+      "sha256": "86115128be78de10a011e911b57b5dd9aa6f6abc42a67d5be1e293845aaa19a3"
+    },
+    "build-final": {
+      "scope": "build",
+      "returncode": 0,
+      "sha256": "adf279b9b371c3c543255245460012a62fa30c7aa0d0130f7d68ae14768eaf94"
+    },
+    "package-final-2": {
+      "scope": "package-final",
+      "returncode": 0,
+      "sha256": "a373c3bc68d9092308dafbde95528cee8d9abe638551677332c766fcd676ea37"
+    },
+    "deployment": {
+      "scope": "deployment",
+      "returncode": 0,
+      "sha256": "549136e4be5d4435cbd5c66485a72df5a4f8dd8295d53464acdd39dc038fb7eb"
+    },
+    "http-final": {
+      "scope": "http-final",
+      "returncode": 0,
+      "sha256": "734586180a20db7b59ddf8f2a216ef45e00ba2ee455857d275ed503a19b9eaec"
+    },
+    "native-status-final": {
+      "scope": "native-status",
+      "returncode": 0,
+      "sha256": "13205275ce4830b6f6c70f348dbcff123af116f6f35aea0a3c9afa1a30dd8f44"
+    },
+    "live-final": {
+      "scope": "deployment",
+      "returncode": 0,
+      "sha256": "0b76ee120c48b66718f6802ae6a30ad7d9e6a16a3e7166fe3fc27cd18537ea71"
+    }
+  }
+}

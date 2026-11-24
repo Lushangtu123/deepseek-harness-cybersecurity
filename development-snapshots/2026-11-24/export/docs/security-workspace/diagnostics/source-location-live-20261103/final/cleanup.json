@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "recovery": {
+    "cause": "case-sensitive Docker no-such-object parser rejected lowercase error",
+    "originalFailurePreserved": true,
+    "revalidatedAbsence": [
+      {
+        "containerId": "cec7d1dad995a676a23e1625b1b22059ba9477807b2b410f04fa02627bee483e",
+        "absent": true,
+        "imageControlMatched": true
+      }
+    ]
+  },
+  "programFilesMatched": 165,
+  "databaseLogicalDigestsMatched": 40,
+  "pinsAndConfigsMatched": true,
+  "ownedContainersAbsent": 1,
+  "guestPortClosed": true,
+  "ownedProcessAbsent": true,
+  "root": "/home/purge/.cache/source-location-live-pfiv8whj",
+  "temporaryRootRemoved": true
+}

@@ -1,0 +1,14 @@
+✔ only fixed synthetic scope and selected local scan can start (0.461375ms)
+✔ original start id can be retried idempotently but a new request is refused (0.1155ms)
+✔ only remembered actual task id may be read (0.124792ms)
+✔ plan and pending original status are readable without starting (0.066834ms)
+✔ cancel, runtime startup and direct scanner entry are never admitted (0.36675ms)
+✔ a different returned task cannot silently replace the original (0.105084ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 46.107292

@@ -1,0 +1,1 @@
+{"name":"vm-rea-runtime","private":true,"dependencies":{"rea-agents":"file:../../downloads/rea-agents-6.8.0.tgz"},"overrides":{"zod":"4.6.6"}}

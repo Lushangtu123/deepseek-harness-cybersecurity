@@ -1,0 +1,866 @@
+[
+  {
+    "id": "dsh-purge@1.1.77-personal.11",
+    "name": "dsh-purge",
+    "version": "1.1.77-personal.11",
+    "size": 2298970,
+    "unpackedSize": 4988285,
+    "shasum": "a3095b44dd8e5ba45a0628863103d3f2d5ad0b64",
+    "integrity": "sha512-JwgKsgHD6ANXR069oaTrxXrjLEU/pAnYXsxJZ+c9n3GMxj8RDsCO/myUx9YJbbgGSk2GVpGKdyAb/siageDoKQ==",
+    "filename": "dsh-purge-1.1.77-personal.11.tgz",
+    "files": [
+      {
+        "path": "LICENSE",
+        "size": 11341,
+        "mode": 420
+      },
+      {
+        "path": "NOTICE",
+        "size": 210,
+        "mode": 420
+      },
+      {
+        "path": "README.md",
+        "size": 31414,
+        "mode": 420
+      },
+      {
+        "path": "README.zh-CN.md",
+        "size": 30712,
+        "mode": 420
+      },
+      {
+        "path": "bin/dsh-purge.js",
+        "size": 6649,
+        "mode": 493
+      },
+      {
+        "path": "bin/personal-cli.mjs",
+        "size": 510,
+        "mode": 493
+      },
+      {
+        "path": "client.js",
+        "size": 711643,
+        "mode": 420
+      },
+      {
+        "path": "cordis.patch.yml",
+        "size": 570,
+        "mode": 420
+      },
+      {
+        "path": "docs/banner.svg",
+        "size": 1132,
+        "mode": 420
+      },
+      {
+        "path": "docs/drill-auth-legal.html",
+        "size": 16537,
+        "mode": 420
+      },
+      {
+        "path": "docs/notice/image.png",
+        "size": 312360,
+        "mode": 420
+      },
+      {
+        "path": "docs/notice/laozhang-live-1.jpg",
+        "size": 97897,
+        "mode": 420
+      },
+      {
+        "path": "docs/notice/laozhang-live-2.jpg",
+        "size": 98745,
+        "mode": 420
+      },
+      {
+        "path": "docs/notice/laozhang-wechat-1.jpg",
+        "size": 47329,
+        "mode": 420
+      },
+      {
+        "path": "docs/preview/dock-auth.png",
+        "size": 133615,
+        "mode": 420
+      },
+      {
+        "path": "docs/preview/dock-clean.png",
+        "size": 48582,
+        "mode": 420
+      },
+      {
+        "path": "docs/preview/dock-drill.png",
+        "size": 45298,
+        "mode": 420
+      },
+      {
+        "path": "docs/preview/own-servers-en.png",
+        "size": 22345,
+        "mode": 420
+      },
+      {
+        "path": "docs/preview/own-servers.png",
+        "size": 24789,
+        "mode": 420
+      },
+      {
+        "path": "docs/preview/rules.png",
+        "size": 77267,
+        "mode": 420
+      },
+      {
+        "path": "docs/preview/settings.png",
+        "size": 323668,
+        "mode": 420
+      },
+      {
+        "path": "docs/redteam-upstream-DISCLOSURE",
+        "size": 4252,
+        "mode": 420
+      },
+      {
+        "path": "docs/redteam-upstream-LICENSE",
+        "size": 1367,
+        "mode": 420
+      },
+      {
+        "path": "docs/v1.1.34-prompt-inject.md",
+        "size": 33882,
+        "mode": 420
+      },
+      {
+        "path": "docs/修改文档.md",
+        "size": 12002,
+        "mode": 420
+      },
+      {
+        "path": "docs/注入方式改造方案-1.1.34化.md",
+        "size": 10441,
+        "mode": 420
+      },
+      {
+        "path": "lib/asset-table.js",
+        "size": 16684,
+        "mode": 420
+      },
+      {
+        "path": "lib/capability-protocol.js",
+        "size": 3268,
+        "mode": 420
+      },
+      {
+        "path": "lib/child-process-hide.mjs",
+        "size": 3010,
+        "mode": 420
+      },
+      {
+        "path": "lib/continue-retry.js",
+        "size": 11758,
+        "mode": 420
+      },
+      {
+        "path": "lib/core.js",
+        "size": 343580,
+        "mode": 420
+      },
+      {
+        "path": "lib/default-prompt-inject.en.md",
+        "size": 29427,
+        "mode": 420
+      },
+      {
+        "path": "lib/default-prompt-inject.md.bak",
+        "size": 24455,
+        "mode": 420
+      },
+      {
+        "path": "lib/default-prompt-inject.zh.md",
+        "size": 25727,
+        "mode": 420
+      },
+      {
+        "path": "lib/desktop.js",
+        "size": 72311,
+        "mode": 420
+      },
+      {
+        "path": "lib/drill-grant.js",
+        "size": 1740,
+        "mode": 420
+      },
+      {
+        "path": "lib/extract-asar.js",
+        "size": 16091,
+        "mode": 420
+      },
+      {
+        "path": "lib/hide-console.js",
+        "size": 11804,
+        "mode": 420
+      },
+      {
+        "path": "lib/hooks-deny.js",
+        "size": 8054,
+        "mode": 420
+      },
+      {
+        "path": "lib/host-clean.js",
+        "size": 1043,
+        "mode": 420
+      },
+      {
+        "path": "lib/host.js",
+        "size": 652,
+        "mode": 420
+      },
+      {
+        "path": "lib/identity.js",
+        "size": 41989,
+        "mode": 420
+      },
+      {
+        "path": "lib/index.js",
+        "size": 106214,
+        "mode": 420
+      },
+      {
+        "path": "lib/mnemon-settings.js",
+        "size": 1661,
+        "mode": 420
+      },
+      {
+        "path": "lib/net-scope.js",
+        "size": 32199,
+        "mode": 420
+      },
+      {
+        "path": "lib/official-update.js",
+        "size": 1832,
+        "mode": 420
+      },
+      {
+        "path": "lib/official-update.wscript",
+        "size": 4815,
+        "mode": 420
+      },
+      {
+        "path": "lib/personal-controls.mjs",
+        "size": 4273,
+        "mode": 420
+      },
+      {
+        "path": "lib/personal-daily-filter.js",
+        "size": 660,
+        "mode": 420
+      },
+      {
+        "path": "lib/personal-daily.js",
+        "size": 2257,
+        "mode": 420
+      },
+      {
+        "path": "lib/personal-http-auth.mjs",
+        "size": 1079,
+        "mode": 420
+      },
+      {
+        "path": "lib/personal-joint-filter.js",
+        "size": 874,
+        "mode": 420
+      },
+      {
+        "path": "lib/personal-joint.js",
+        "size": 3004,
+        "mode": 420
+      },
+      {
+        "path": "lib/personal-original.mjs",
+        "size": 918,
+        "mode": 420
+      },
+      {
+        "path": "lib/personal-pnpm-repair.mjs",
+        "size": 6441,
+        "mode": 420
+      },
+      {
+        "path": "lib/personal-redteam.js",
+        "size": 691,
+        "mode": 420
+      },
+      {
+        "path": "lib/personal-reliability.js",
+        "size": 7203,
+        "mode": 420
+      },
+      {
+        "path": "lib/personal-review-filter.js",
+        "size": 3449,
+        "mode": 420
+      },
+      {
+        "path": "lib/personal-review.js",
+        "size": 2203,
+        "mode": 420
+      },
+      {
+        "path": "lib/personal-startup-diagnostics.mjs",
+        "size": 5413,
+        "mode": 420
+      },
+      {
+        "path": "lib/personal-startup-recovery.mjs",
+        "size": 6960,
+        "mode": 420
+      },
+      {
+        "path": "lib/phase1-keep.js",
+        "size": 904,
+        "mode": 420
+      },
+      {
+        "path": "lib/preset-default.js",
+        "size": 7079,
+        "mode": 420
+      },
+      {
+        "path": "lib/reapply-cli.js",
+        "size": 177,
+        "mode": 420
+      },
+      {
+        "path": "lib/reapply.js",
+        "size": 13653,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/client.js",
+        "size": 322918,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/evidence-ledger.mjs",
+        "size": 19914,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/index.js",
+        "size": 24171,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/ip-utils.js",
+        "size": 6151,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-binding-client.mjs",
+        "size": 1726,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-evidence-receipts.mjs",
+        "size": 5735,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-evidence-redaction.mjs",
+        "size": 3689,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-joint-adapter.mjs",
+        "size": 1631,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-joint-kali.mjs",
+        "size": 1536,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-joint-review.mjs",
+        "size": 30100,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-kali-environment.mjs",
+        "size": 4445,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-namespace-evidence.mjs",
+        "size": 6786,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-namespace-sandbox.mjs",
+        "size": 5673,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-project-runtime.mjs",
+        "size": 6685,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-project-slots.mjs",
+        "size": 9552,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-python-evidence.mjs",
+        "size": 3474,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-review-python.mjs",
+        "size": 5172,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-review-snapshot.mjs",
+        "size": 12452,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-runtime-source.mjs",
+        "size": 22988,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-runtime-transport.mjs",
+        "size": 3480,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-runtime-ui.mjs",
+        "size": 16065,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-security-auth.mjs",
+        "size": 8913,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-security-client.mjs",
+        "size": 91296,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-security-comparison.mjs",
+        "size": 4615,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-security-identity.mjs",
+        "size": 2497,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-security-model.mjs",
+        "size": 10268,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-security-observation.mjs",
+        "size": 1072,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-security-pages.mjs",
+        "size": 3692,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-security-parser-text.mjs",
+        "size": 4367,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-security-report.mjs",
+        "size": 8134,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-security-review.mjs",
+        "size": 6818,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-security-runtime.mjs",
+        "size": 16304,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-security-service.mjs",
+        "size": 6944,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-security-source-location.mjs",
+        "size": 5322,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-security-workbench.mjs",
+        "size": 58132,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-semgrep-profile.mjs",
+        "size": 808,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-session-bindings.mjs",
+        "size": 7123,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-session-resolution.mjs",
+        "size": 3688,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-toolchain-status.mjs",
+        "size": 1424,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-workspace-contract.mjs",
+        "size": 7459,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-workspace-input.mjs",
+        "size": 4234,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-workspace-policy.mjs",
+        "size": 7322,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/personal-workspace-risk.mjs",
+        "size": 11560,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/platform-config.js",
+        "size": 28204,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/preset-composition.js",
+        "size": 16861,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/report-replay.js",
+        "size": 10923,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/role-section.js",
+        "size": 6479,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/schema.js",
+        "size": 33554,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/score-rules.js",
+        "size": 63287,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/settings.js",
+        "size": 4794,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/skill-availability.js",
+        "size": 17783,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/skill-fixes.js",
+        "size": 38363,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/store-core.js",
+        "size": 348607,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/store.js",
+        "size": 3086,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/tools.js",
+        "size": 136245,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/ui.js",
+        "size": 53872,
+        "mode": 420
+      },
+      {
+        "path": "lib/redteam/validate.js",
+        "size": 3538,
+        "mode": 420
+      },
+      {
+        "path": "lib/restart-desktop.js",
+        "size": 14602,
+        "mode": 420
+      },
+      {
+        "path": "lib/restart-web.js",
+        "size": 2903,
+        "mode": 420
+      },
+      {
+        "path": "lib/rewind.js",
+        "size": 20894,
+        "mode": 420
+      },
+      {
+        "path": "lib/rules.js",
+        "size": 17682,
+        "mode": 420
+      },
+      {
+        "path": "lib/settle-policy.js",
+        "size": 2024,
+        "mode": 420
+      },
+      {
+        "path": "lib/skills.js",
+        "size": 28555,
+        "mode": 420
+      },
+      {
+        "path": "lib/surface.js",
+        "size": 3838,
+        "mode": 420
+      },
+      {
+        "path": "lib/table-key.js",
+        "size": 915,
+        "mode": 420
+      },
+      {
+        "path": "lib/table-read.js",
+        "size": 567,
+        "mode": 420
+      },
+      {
+        "path": "lib/uninstall-restart.js",
+        "size": 1653,
+        "mode": 420
+      },
+      {
+        "path": "lib/uninstall.js",
+        "size": 7885,
+        "mode": 420
+      },
+      {
+        "path": "lib/update.js",
+        "size": 39203,
+        "mode": 420
+      },
+      {
+        "path": "lib/web.js",
+        "size": 3385,
+        "mode": 420
+      },
+      {
+        "path": "lib/zip-extract.js",
+        "size": 5810,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 2823,
+        "mode": 420
+      },
+      {
+        "path": "presets/redteam/agent.cordis.yml",
+        "size": 28220,
+        "mode": 420
+      },
+      {
+        "path": "presets/redteam/anchor-gate.mjs",
+        "size": 7787,
+        "mode": 420
+      },
+      {
+        "path": "presets/redteam/preset.yml",
+        "size": 361,
+        "mode": 420
+      },
+      {
+        "path": "screenshots.json",
+        "size": 231,
+        "mode": 420
+      },
+      {
+        "path": "scripts/__pycache__/eval_guard_review.cpython-313.pyc",
+        "size": 15153,
+        "mode": 420
+      },
+      {
+        "path": "scripts/__pycache__/security-parser-check.cpython-313.pyc",
+        "size": 18083,
+        "mode": 420
+      },
+      {
+        "path": "scripts/__pycache__/security-scanner-update.cpython-313.pyc",
+        "size": 29201,
+        "mode": 420
+      },
+      {
+        "path": "scripts/__pycache__/security-storage-preview.cpython-313.pyc",
+        "size": 16463,
+        "mode": 420
+      },
+      {
+        "path": "scripts/build-client.mjs",
+        "size": 4106,
+        "mode": 420
+      },
+      {
+        "path": "scripts/embed-default-prompt.mjs",
+        "size": 1086,
+        "mode": 420
+      },
+      {
+        "path": "scripts/ensure-profile-bundle.mjs",
+        "size": 1861,
+        "mode": 420
+      },
+      {
+        "path": "scripts/eval_evidence_batch.py",
+        "size": 7395,
+        "mode": 420
+      },
+      {
+        "path": "scripts/eval_guard_review.py",
+        "size": 9474,
+        "mode": 420
+      },
+      {
+        "path": "scripts/eval_import_review.py",
+        "size": 5582,
+        "mode": 420
+      },
+      {
+        "path": "scripts/export-engagement-report.mjs",
+        "size": 6988,
+        "mode": 420
+      },
+      {
+        "path": "scripts/patch-client-dock.mjs",
+        "size": 24229,
+        "mode": 420
+      },
+      {
+        "path": "scripts/python_namespace_review.py",
+        "size": 18195,
+        "mode": 420
+      },
+      {
+        "path": "scripts/redteam-setup.sh",
+        "size": 25046,
+        "mode": 420
+      },
+      {
+        "path": "scripts/security-joint-adapter.py",
+        "size": 33128,
+        "mode": 420
+      },
+      {
+        "path": "scripts/security-kali-bandit-requirements.txt",
+        "size": 6272,
+        "mode": 420
+      },
+      {
+        "path": "scripts/security-kali-lab.py",
+        "size": 6390,
+        "mode": 420
+      },
+      {
+        "path": "scripts/security-kali-project.py",
+        "size": 11754,
+        "mode": 420
+      },
+      {
+        "path": "scripts/security-local-lab.py",
+        "size": 13055,
+        "mode": 420
+      },
+      {
+        "path": "scripts/security-output.sh",
+        "size": 1374,
+        "mode": 420
+      },
+      {
+        "path": "scripts/security-parser-check.py",
+        "size": 9623,
+        "mode": 420
+      },
+      {
+        "path": "scripts/security-runtime-phishguard-lock.json",
+        "size": 3301,
+        "mode": 420
+      },
+      {
+        "path": "scripts/security-runtime-preflight.mjs",
+        "size": 980,
+        "mode": 420
+      },
+      {
+        "path": "scripts/security-runtime-source.mjs",
+        "size": 4012,
+        "mode": 420
+      },
+      {
+        "path": "scripts/security-runtime-template-build.py",
+        "size": 6395,
+        "mode": 420
+      },
+      {
+        "path": "scripts/security-scanner-update.py",
+        "size": 14297,
+        "mode": 420
+      },
+      {
+        "path": "scripts/security-service.mjs",
+        "size": 1850,
+        "mode": 420
+      },
+      {
+        "path": "scripts/security-storage-preview.py",
+        "size": 9789,
+        "mode": 420
+      },
+      {
+        "path": "scripts/semgrep-deep17.json",
+        "size": 11825,
+        "mode": 420
+      }
+    ],
+    "entryCount": 170,
+    "bundled": []
+  }
+]

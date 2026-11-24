@@ -1,0 +1,15 @@
+✔ Actual reviewed-profile VM v4 artifacts verify while used samples remain blocked (9.451666ms)
+✔ Point mismatch cannot be made valid by updating report digest (6.303416ms)
+✔ Quoted challenge echo is not arbitrary code-probe execution even with recomputed hashes (5.290708ms)
+✔ No raw witness cannot support a claimed confirmation (5.087875ms)
+✔ Non-dominating or dangerous finite-set proof cannot exclude (9.124166ms)
+✔ Source, dependency, challenge, cleanup or verifier identity changes cannot inherit a decision (18.964708ms)
+✔ Human evidence is supplementary and cannot supply tool main-score confirmation (4.356791ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 108.819875

@@ -1,0 +1,121 @@
+(node:8404) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ Semgrep parsing retains exact byte spans and rejects redacted control identities (2.608333ms)
+✔ Missing, negative, oversized or contradictory spans retain warnings without fabricated precision (0.333ms)
+✖ Managed bindings cross-check raw UTF8 and CRLF bytes with snapshot identity (0.150541ms)
+✖ Changed bytes, shifted offsets and symlinks cannot inherit exact source identity (0.115583ms)
+✖ Legacy line-only input is explicitly unavailable while retaining finding status (0.104625ms)
+✖ Same-line sites survive managed persistence, pagination and reload, with immutable source hashes (158.080833ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 1
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 231.935125
+
+✖ failing tests:
+
+test at work/harness-purge-improved/tests/source-location.test.mjs:24:1
+✖ Semgrep parsing retains exact byte spans and rejects redacted control identities (2.608333ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + undefined
+  - {
+  -   end: {
+  -     col: 36,
+  -     line: 1,
+  -     offset: 35
+  -   },
+  -   path: 'app.py',
+  -   start: {
+  -     col: 18,
+  -     line: 1,
+  -     offset: 17
+  -   },
+  -   version: 1
+  - }
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/source-location.test.mjs:26:9)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.start (node:internal/test_runner/test:878:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:297:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { version: 1, path: 'app.py', start: { line: 1, col: 18, offset: 17 }, end: { line: 1, col: 36, offset: 35 } },
+    operator: 'deepStrictEqual'
+  }
+
+test at work/harness-purge-improved/tests/source-location.test.mjs:37:1
+✖ Managed bindings cross-check raw UTF8 and CRLF bytes with snapshot identity (0.150541ms)
+  AssertionError [ERR_ASSERTION]: Missing bounded source-location binder
+      at api (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/source-location.test.mjs:12:29)
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/source-location.test.mjs:38:43)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '=='
+  }
+
+test at work/harness-purge-improved/tests/source-location.test.mjs:49:1
+✖ Changed bytes, shifted offsets and symlinks cannot inherit exact source identity (0.115583ms)
+  AssertionError [ERR_ASSERTION]: Missing bounded source-location binder
+      at api (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/source-location.test.mjs:12:29)
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/source-location.test.mjs:50:43)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '=='
+  }
+
+test at work/harness-purge-improved/tests/source-location.test.mjs:62:1
+✖ Legacy line-only input is explicitly unavailable while retaining finding status (0.104625ms)
+  AssertionError [ERR_ASSERTION]: Missing bounded source-location binder
+      at api (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/source-location.test.mjs:12:29)
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/source-location.test.mjs:63:43)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '=='
+  }
+
+test at work/harness-purge-improved/tests/source-location.test.mjs:68:1
+✖ Same-line sites survive managed persistence, pagination and reload, with immutable source hashes (158.080833ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 2
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/source-location.test.mjs:78:85)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 2,
+    operator: 'strictEqual'
+  }

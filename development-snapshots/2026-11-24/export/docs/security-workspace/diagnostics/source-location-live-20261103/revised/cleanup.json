@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "programFilesMatched": 165,
+  "databaseLogicalDigestsMatched": 40,
+  "pinsAndConfigsMatched": true,
+  "ownedContainersAbsent": 1,
+  "guestPortClosed": true,
+  "ownedProcessAbsent": true,
+  "root": "/home/purge/.cache/source-location-live-duxbgzso",
+  "temporaryRootRemoved": true
+}

@@ -1,0 +1,284 @@
+{
+  "scope": [
+    "RELAY-EXEC-START-CLASSIFICATION",
+    "FINAL-SCRUB-SYMMETRY"
+  ],
+  "candidateProgramDigest": "764760fdbf5577f6977b38142a2ea73bace1c2eb98797977412efd1662ea18e6",
+  "startErrorProbe": {
+    "injection": "one synthetic FileNotFoundError in acceptance relay only",
+    "httpStatuses": [
+      502,
+      303
+    ],
+    "errorClass": "FileNotFoundError",
+    "errorPhase": "ssh-client",
+    "misclassifiedAsClientDisconnect": false,
+    "recoveryLoginSucceeded": true,
+    "responseCredentialsRetained": false
+  },
+  "lifecycle": {
+    "authenticatedMaster": true,
+    "masterPID": 47430,
+    "clientFallbackDisabled": true,
+    "maxConcurrentExecChannels": 8,
+    "maxConnectionHandlers": 16,
+    "peakExecClients": 8,
+    "admissionTimeoutSeconds": 5.0,
+    "maxQueuedBytesPerConnection": 65536,
+    "masterStopped": true,
+    "remainingPids": [],
+    "stopped": true,
+    "controlDirectoryRemoved": true
+  },
+  "directGuestCount": {
+    "directMeasurement": "VM /proc cmdline exact QA root/port and python -c; excludes manager probe",
+    "samples": [
+      {
+        "activeGuestWorkers": 8,
+        "pids": [
+          1637739,
+          1637740,
+          1637741,
+          1637742,
+          1637743,
+          1637744,
+          1637746,
+          1637747
+        ]
+      },
+      {
+        "activeGuestWorkers": 8,
+        "pids": [
+          1637739,
+          1637740,
+          1637741,
+          1637742,
+          1637743,
+          1637744,
+          1637746,
+          1637747
+        ]
+      },
+      {
+        "activeGuestWorkers": 8,
+        "pids": [
+          1637739,
+          1637740,
+          1637741,
+          1637742,
+          1637743,
+          1637744,
+          1637746,
+          1637747
+        ]
+      }
+    ],
+    "timeoutResponse": {
+      "status": 503,
+      "elapsedSeconds": 5.001
+    },
+    "afterClientsClosed": {
+      "activeGuestWorkers": 0,
+      "pids": []
+    },
+    "cancelledWithoutExec": true,
+    "timedOutWithoutExec": true
+  },
+  "admittedPrefix": {
+    "queuedPrefixForwarded": true,
+    "loginStatus": 303,
+    "queuedMs": 211,
+    "activeGuestWorkersAfter": 0,
+    "responseHeadersAndBodyRetained": false
+  },
+  "normalReadRegression": {
+    "requests": 24,
+    "failures": 0
+  },
+  "guestCleanup": {
+    "stopped": true,
+    "dailyProgramFiles": 169,
+    "dailyProgramUnchanged": true,
+    "dailyConfigurationUnchanged": true,
+    "installedSdkUnchanged": true,
+    "temporaryDirectoryRemoved": true
+  },
+  "model": {
+    "programDigest": "764760fdbf5577f6977b38142a2ea73bace1c2eb98797977412efd1662ea18e6",
+    "nativeToolCalls": 3,
+    "nativeToolResults": 3,
+    "terminal": "completed",
+    "modelConfigured": "deepseek-flash",
+    "providerConfigured": "deepseek-official",
+    "providerRawModelFieldCaptured": false,
+    "configurationSha256": "f0efe96db9e1b297cfbdc3989453d75dbab23445a2d8b1409e2f92a7093c23c5",
+    "expected": {
+      "projectPoints": 14,
+      "windowPoints": [
+        8,
+        1
+      ],
+      "fullCoverage": false,
+      "unreadHitCount": 497,
+      "sampleSumIsProjectTotal": false
+    },
+    "structuredAnswerMatched": true,
+    "middleUnobservedPoints": 5,
+    "unreadAttackChainRows": 497,
+    "cliFinalCount": 1,
+    "cliFinalCountScope": "complete captured stdout",
+    "rawBindingVerifiedBeforeRedaction": true,
+    "syntheticRedactionExercised": true,
+    "rawFinalTextSha256": "b04939250d07e04b8c11cc816d5d3ee37bb2bdba488f9d9afeedb96626e8ba0e",
+    "fullStdoutSha256": "553827c17578e0fe411c94233b250f0f0e55ce80150ad85cedb71990db9ff2b6",
+    "fullStdoutBytes": 30868,
+    "cliFinalMatchesSameSessionAssistant": true,
+    "finalAfterLastToolResult": true,
+    "rawReceiptSha256": "f53efb471c9b1f56295262e4ccc461b3e09ee826f0fdfbf344e9a5b29572dd2e",
+    "privateReceiptMode": "0600",
+    "temporaryDirectoryRemoved": true,
+    "dailyProgramMatched": true,
+    "checkedConfigsMatched": true,
+    "checkedSdkMatched": true,
+    "promptFixtureHashes": {
+      "native-cap-live.py": "1a810973043eea7708c49af027ccf142f3a7cc2b4561130ad62e51090b7daca3",
+      "native-cap-guest.py": "c07db5758662ddc2777abb42caf3d0d4a0cf3f72da3d7f5209b9bd651d72d01d",
+      "seed.mjs": "4f8a29455f5db0d4f41727f82a11697958a963e405e6ffd3b79a8a0947de7956",
+      "qa-fence.mjs": "ca0ad7cbc6e6899898b09b24ca664ddfe4be69a1f369bdc53ea2efdce1268520",
+      "final-output.py": "a1ec89dc0a6cd0536ca9901bc6a71b0336446a8e01907cf8f74bcf832ed6e820"
+    }
+  },
+  "modelTests": {
+    "positiveCases": 2,
+    "negativeCases": 15,
+    "allPassed": true,
+    "cases": [
+      {
+        "case": "real synthetic receipt",
+        "passed": true
+      },
+      {
+        "case": "wrong program digest",
+        "rejected": true
+      },
+      {
+        "case": "wrong executed fixture",
+        "rejected": true
+      },
+      {
+        "case": "wrong launch intent",
+        "rejected": true
+      },
+      {
+        "case": "wrong model config",
+        "rejected": true
+      },
+      {
+        "case": "duplicate event sequence",
+        "rejected": true
+      },
+      {
+        "case": "assistant text mismatch",
+        "rejected": true
+      },
+      {
+        "case": "wrong assistant turn",
+        "rejected": true
+      },
+      {
+        "case": "missing accepted call",
+        "rejected": true
+      },
+      {
+        "case": "duplicate full-output final",
+        "rejected": true
+      },
+      {
+        "case": "missing full-output final",
+        "rejected": true
+      },
+      {
+        "case": "full-output final differs",
+        "rejected": true
+      },
+      {
+        "case": "raw binding false",
+        "rejected": true
+      },
+      {
+        "case": "raw binding hash mismatch",
+        "rejected": true
+      },
+      {
+        "case": "redaction not exercised",
+        "rejected": true
+      },
+      {
+        "case": "pre-tool assistant is outside final binding scope",
+        "passed": true
+      },
+      {
+        "case": "overbroad private receipt mode",
+        "rejected": true
+      }
+    ]
+  },
+  "localTests": {
+    "startErrors": 2,
+    "collectorAndRawBinding": 9,
+    "lifecycle": 7
+  },
+  "relayTraceSha256": "a386eb40a5a321809595dcc1d4139b979d79b8bdd95649c2357cfbe24a282a70",
+  "browserRepeated": false,
+  "ordinaryR3Qualified": false,
+  "wholeProductReleaseQualified": false,
+  "date": "2026-11-09",
+  "sourceAndAcceptanceDate": "2026-11-08",
+  "scopeItems": [
+    "RELAY-EXEC-START-CLASSIFICATION",
+    "FINAL-SCRUB-SYMMETRY"
+  ],
+  "sourceHashes": {
+    "scripts/harness_acceptance_relay.py": "9066f1884f100cbddcae9ef428c7e243df1683baee47c490e97f20169678875d",
+    "scripts/harness_final_output.py": "a1ec89dc0a6cd0536ca9901bc6a71b0336446a8e01907cf8f74bcf832ed6e820",
+    "scripts/tests/harness_final_output_test.py": "07754eff4cdc81e6840c7d7874a14bbd453a8f90a5f3fa36d5f64be927d44db7",
+    "scripts/tests/harness_relay_start_error_test.py": "679efae31a0391d0f3126507dd67fa82346c80e93145fb027ad85a31138bae5c",
+    "docs/security-workspace/first-load-relay.md": "f6dd158fdfc7f358731a9c6cec5fbfb6aed932dec313243f525c0a8de43b8f50"
+  },
+  "externalReview": {
+    "state": "completed-and-triaged",
+    "scopedBlockers": 0,
+    "requestedClaudeModel": "claude-opus-5-5",
+    "claudeState": "weekly-quota-exhausted",
+    "reviewer": "DeepSeek V4.1 Flash",
+    "model": "deepseek-flash",
+    "effort": "high",
+    "finishReason": "stop",
+    "promptSha256": "81ee98f8b10350261bc7b69f62244dcb3dc88db2ca403a9df8730b11a91a75c6",
+    "reportSha256": "0e2f4b0d786758401f9599957022c473aa7626e3261309cec62ae1c592d68966",
+    "receiptSha256": "92e5f7aedde28c342b66543ec66dce4784c9145461ce472dccb36a58e347b611",
+    "temporaryReviewCopyRemoved": true,
+    "triageSha256": "7c5e7f8e4ba55ff4511b163c456c9f24ff98c1585adb08213cb791f5e06adca0"
+  },
+  "followUp": [
+    {
+      "id": "DAILY-PROBE-COVERAGE-CONTRACT",
+      "status": "open",
+      "scope": "future-run automation"
+    },
+    {
+      "id": "SSH-RESET-LOWER-LAYER",
+      "status": "open"
+    },
+    {
+      "id": "SCORE-SIDEBAR-HISTORICAL-FAILURE",
+      "status": "open"
+    },
+    {
+      "id": "ORDINARY-R3",
+      "status": "pending"
+    }
+  ],
+  "candidatePluginDeployed": false,
+  "githubPushed": false
+}

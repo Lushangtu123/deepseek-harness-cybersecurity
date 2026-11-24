@@ -1,0 +1,60 @@
+{
+  "state": "live-acceptance-tested-awaiting-review",
+  "createdAt": "2026-11-11T03:55:37.705756+00:00",
+  "productSourceChanged": false,
+  "candidateProgramFiles": 173,
+  "dailyProgramFiles": 169,
+  "dailyDatabasesLogicallyMatched": 42,
+  "scannerInvocations": 2,
+  "successfulFinalScannerInvocations": 1,
+  "namespaceDiagnosticInvocations": 2,
+  "businessModelInvocations": 0,
+  "qualificationCasesAdded": 0,
+  "ordinaryR3Qualified": false,
+  "deployed": false,
+  "tests": {
+    "reusedProofContract": 4,
+    "finalScanFiles": 18,
+    "finalFindings": 9,
+    "finalBoundLocations": 9,
+    "finalImportArtifacts": 4,
+    "finalNamespaceArtifacts": 9,
+    "chromeFindingPages": 5,
+    "chromeEvidencePages": 4,
+    "downloadFiveSectionsMatched": true,
+    "refreshOriginalTaskRestored": true,
+    "singleStartAfterRefresh": true
+  },
+  "rootCause": {
+    "component": "acceptance staging only",
+    "firstWorkerMode": "0600",
+    "sandboxUid": 65534,
+    "actualError": "python3 cannot open /review.py: Permission denied",
+    "fix": "only bind-mounted fixed worker0644; private parent directory0700 and container restrictions unchanged",
+    "sameInputDiagnosticAfterFix": "9 checks and9 observations, cleanupVerified true",
+    "initialFailedTaskRetained": true,
+    "newNumberedFullRunPassed": true
+  },
+  "finalTask": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+  "finalSnapshot": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+  "allFindingsAndArtifacts": "unverified",
+  "newAuthoredSourceHashes": 0,
+  "allSourcesAlreadyInLedger": true,
+  "nativeChromeComponentAndVmRpcTested": true,
+  "fullHarnessChatModelChainTested": false,
+  "fullHarnessReleaseNotAsserted": true,
+  "cleanup": {
+    "bothVmTemporaryRootsRemoved": true,
+    "bothGuestPortsClosed": true,
+    "bothOwnedProcessesAbsent": true,
+    "bothHostRelaysClosed": true,
+    "dailyProgramDatabasePinsConfigsMatched": true
+  },
+  "limits": [
+    "Production component was hosted by an isolated service, not the full Harness chat/plugin router.",
+    "No project source executed, real Flask request or third-party import/builtin identity proven.",
+    "Rules and observed running Docker inputs are measured local evidence, not cryptographic attestation.",
+    "This reused synthetic source set is not an independent R3 benchmark.",
+    "Counts0 for business model calls exclude required external code review calls."
+  ]
+}

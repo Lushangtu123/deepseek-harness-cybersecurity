@@ -1,0 +1,7 @@
+{
+  "previousAttempt": "../harness-namespace-managed-release-20261103",
+  "cause": "systemctl show without --all omitted empty Job property; stop gate rejected completed stop",
+  "observedFailure": "Unit stop or job completion not confirmed: harness-security.socket",
+  "old166And48ProtectedVerified": true,
+  "change": "include --all on show; unique operation/backup name; no candidate program changes"
+}

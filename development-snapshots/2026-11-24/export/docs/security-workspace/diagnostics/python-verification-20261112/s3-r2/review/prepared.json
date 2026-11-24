@@ -1,0 +1,10 @@
+{
+  "promptSha256": "f1d3051fccab8894c955a481fc264d2cfd821ba96935ee70acfb19823a69809f",
+  "sourceFiles": {
+    "scripts/verifier_snapshot.py": "59ba75f82903f03757f4af1c21f50dd3c45a4d45fcd80a19451dc972dc8468f7",
+    "scripts/verifier_snapshot.test.py": "15f399ed849444ba5386a9b48c52698fdc249f989a9cbbda34c7ccf6b72249ad",
+    "scripts/python_execution_verify.py": "f9fcc7e6e57986bc4771c1b1677df1b6bfc9a6c1cba3e071e95d71c7ad734acb",
+    "scripts/python_execution_verify.test.py": "86c570e23401abb9b351957c3df87fccdce23b8354cbe0f17a33901eae1af9ed"
+  },
+  "bytes": 37974
+}

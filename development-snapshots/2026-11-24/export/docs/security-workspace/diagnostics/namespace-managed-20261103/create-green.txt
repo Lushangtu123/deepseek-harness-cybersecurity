@@ -1,0 +1,15 @@
+✔ review sandbox sends data through stdin and mounts only trusted worker (1.876791ms)
+✔ unexpected capability prevents worker startup and still cleans owned container (5.292708ms)
+✔ lost worker reply is not retried and triggers removal (0.534417ms)
+✔ daemon failure cannot be confused with container absence (0.537542ms)
+✔ already cancelled review never creates a container (0.104541ms)
+✔ short remaining budget never starts work (0.350708ms)
+✔ unknown create outcome never claims cleanup success from an empty name lookup (0.360375ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 53.519625

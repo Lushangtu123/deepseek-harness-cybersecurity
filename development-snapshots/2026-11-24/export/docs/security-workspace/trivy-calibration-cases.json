@@ -1,0 +1,259 @@
+{
+  "version": 1,
+  "scope": "Fixed advisory/recognizer observations, not exploitability, latest-patch advice or R3 qualification",
+  "cases": [
+    {
+      "id": "jinja-affected",
+      "category": "dependency",
+      "files": {
+        "requirements.txt": "Jinja2==3.1.4\n"
+      },
+      "expected": "present",
+      "target": "requirements.txt",
+      "rule": "CVE-2024-56326",
+      "package": "jinja2",
+      "version": "3.1.4",
+      "patchedVersion": "3.1.5",
+      "sources": [
+        "https://github.com/pallets/jinja/security/advisories/GHSA-q2x7-8rv6-6q7h",
+        "https://github.com/pallets/jinja/releases/tag/3.1.5"
+      ],
+      "assumption": "Package version match only; exploitation requires untrusted sandbox templates and applicable custom filter behavior."
+    },
+    {
+      "id": "jinja-patched",
+      "category": "dependency",
+      "files": {
+        "requirements.txt": "Jinja2==3.1.5\n"
+      },
+      "expected": "absent",
+      "target": "requirements.txt",
+      "rule": "CVE-2024-56326",
+      "package": "jinja2",
+      "version": "3.1.5",
+      "patchedVersion": "3.1.5",
+      "sources": [
+        "https://github.com/pallets/jinja/security/advisories/GHSA-q2x7-8rv6-6q7h",
+        "https://github.com/pallets/jinja/releases/tag/3.1.5"
+      ],
+      "assumption": "Package version match only; exploitation requires untrusted sandbox templates and applicable custom filter behavior."
+    },
+    {
+      "id": "lodash-affected",
+      "category": "dependency",
+      "files": {
+        "package.json": "{\"name\": \"synthetic-only\", \"version\": \"1.0.0\", \"dependencies\": {\"lodash\": \"4.17.20\"}}",
+        "package-lock.json": "{\"name\": \"synthetic-only\", \"version\": \"1.0.0\", \"lockfileVersion\": 2, \"requires\": true, \"packages\": {\"\": {\"name\": \"synthetic-only\", \"version\": \"1.0.0\", \"dependencies\": {\"lodash\": \"4.17.20\"}}, \"node_modules/lodash\": {\"version\": \"4.17.20\", \"dev\": false}}, \"dependencies\": {\"lodash\": {\"version\": \"4.17.20\", \"dev\": false}}}"
+      },
+      "expected": "present",
+      "target": "package-lock.json",
+      "rule": "CVE-2021-23337",
+      "package": "lodash",
+      "version": "4.17.20",
+      "patchedVersion": "4.17.21",
+      "sources": [
+        "https://github.com/advisories/GHSA-35jh-r3h4-6jhm"
+      ],
+      "assumption": "Package version match only; application use and attacker-controlled template options are not established."
+    },
+    {
+      "id": "lodash-patched",
+      "category": "dependency",
+      "files": {
+        "package.json": "{\"name\": \"synthetic-only\", \"version\": \"1.0.0\", \"dependencies\": {\"lodash\": \"4.17.21\"}}",
+        "package-lock.json": "{\"name\": \"synthetic-only\", \"version\": \"1.0.0\", \"lockfileVersion\": 2, \"requires\": true, \"packages\": {\"\": {\"name\": \"synthetic-only\", \"version\": \"1.0.0\", \"dependencies\": {\"lodash\": \"4.17.21\"}}, \"node_modules/lodash\": {\"version\": \"4.17.21\", \"dev\": false}}, \"dependencies\": {\"lodash\": {\"version\": \"4.17.21\", \"dev\": false}}}"
+      },
+      "expected": "absent",
+      "target": "package-lock.json",
+      "rule": "CVE-2021-23337",
+      "package": "lodash",
+      "version": "4.17.21",
+      "patchedVersion": "4.17.21",
+      "sources": [
+        "https://github.com/advisories/GHSA-35jh-r3h4-6jhm"
+      ],
+      "assumption": "Package version match only; application use and attacker-controlled template options are not established."
+    },
+    {
+      "id": "symfony-affected",
+      "category": "dependency",
+      "files": {
+        "composer.lock": "{\"_readme\": [\"Synthetic metadata; do not install\"], \"content-hash\": \"00000000000000000000000000000000\", \"packages\": [{\"name\": \"symfony/http-foundation\", \"version\": \"v5.4.45\", \"type\": \"library\"}], \"packages-dev\": [], \"aliases\": [], \"minimum-stability\": \"stable\", \"stability-flags\": {}, \"prefer-stable\": false, \"prefer-lowest\": false, \"platform\": {}, \"platform-dev\": {}}"
+      },
+      "expected": "present",
+      "target": "composer.lock",
+      "rule": "CVE-2024-50345",
+      "package": "symfony/http-foundation",
+      "version": "5.4.45",
+      "patchedVersion": "5.4.46",
+      "sources": [
+        "https://github.com/symfony/symfony/security/advisories/GHSA-mrqx-rp3w-jpjp"
+      ],
+      "assumption": "Package identity/range only; validator use and redirect conditions remain unverified."
+    },
+    {
+      "id": "symfony-patched",
+      "category": "dependency",
+      "files": {
+        "composer.lock": "{\"_readme\": [\"Synthetic metadata; do not install\"], \"content-hash\": \"00000000000000000000000000000000\", \"packages\": [{\"name\": \"symfony/http-foundation\", \"version\": \"v5.4.46\", \"type\": \"library\"}], \"packages-dev\": [], \"aliases\": [], \"minimum-stability\": \"stable\", \"stability-flags\": {}, \"prefer-stable\": false, \"prefer-lowest\": false, \"platform\": {}, \"platform-dev\": {}}"
+      },
+      "expected": "absent",
+      "target": "composer.lock",
+      "rule": "CVE-2024-50345",
+      "package": "symfony/http-foundation",
+      "version": "5.4.46",
+      "patchedVersion": "5.4.46",
+      "sources": [
+        "https://github.com/symfony/symfony/security/advisories/GHSA-mrqx-rp3w-jpjp"
+      ],
+      "assumption": "Package identity/range only; validator use and redirect conditions remain unverified."
+    },
+    {
+      "id": "lodash-dev",
+      "category": "dependency",
+      "files": {
+        "package.json": "{\"name\": \"synthetic-only\", \"version\": \"1.0.0\", \"devDependencies\": {\"lodash\": \"4.17.20\"}}",
+        "package-lock.json": "{\"name\": \"synthetic-only\", \"version\": \"1.0.0\", \"lockfileVersion\": 2, \"requires\": true, \"packages\": {\"\": {\"name\": \"synthetic-only\", \"version\": \"1.0.0\", \"devDependencies\": {\"lodash\": \"4.17.20\"}}, \"node_modules/lodash\": {\"version\": \"4.17.20\", \"dev\": true}}, \"dependencies\": {\"lodash\": {\"version\": \"4.17.20\", \"dev\": true}}}"
+      },
+      "expected": "present",
+      "target": "package-lock.json",
+      "rule": "CVE-2021-23337",
+      "package": "lodash",
+      "version": "4.17.20",
+      "patchedVersion": "4.17.21",
+      "sources": [
+        "https://github.com/advisories/GHSA-35jh-r3h4-6jhm"
+      ],
+      "assumption": "Development-only dependency remains relevant to build/CI; observe default scanner filtering without enabling new execution."
+    },
+    {
+      "id": "jinja-range",
+      "category": "dependency",
+      "files": {
+        "requirements.txt": "Jinja2>=3.1.4\n"
+      },
+      "expected": "unresolved",
+      "target": "requirements.txt",
+      "rule": "CVE-2024-56326",
+      "package": "jinja2",
+      "version": null,
+      "sources": [
+        "https://github.com/pallets/jinja/security/advisories/GHSA-q2x7-8rv6-6q7h",
+        "https://github.com/pallets/jinja/releases/tag/3.1.5"
+      ],
+      "assumption": "No installed or locked version; do not manufacture a component version or negative vulnerability conclusion."
+    },
+    {
+      "id": "docker-root",
+      "category": "configuration",
+      "files": {
+        "Dockerfile": "FROM scratch\nUSER root\n"
+      },
+      "expected": "present",
+      "target": "Dockerfile",
+      "rule": "AVD-DS-0002",
+      "sources": [
+        "https://avd.aquasec.com/misconfig/dockerfile/general/avd-ds-0002/"
+      ],
+      "assumption": "Only the final image user rule is compared; other Dockerfile findings are preserved."
+    },
+    {
+      "id": "docker-uid-zero",
+      "category": "configuration",
+      "files": {
+        "Dockerfile": "FROM scratch\nUSER 0\n"
+      },
+      "expected": "present",
+      "target": "Dockerfile",
+      "rule": "AVD-DS-0002",
+      "sources": [
+        "https://avd.aquasec.com/misconfig/dockerfile/general/avd-ds-0002/"
+      ],
+      "assumption": "Only the final image user rule is compared; other Dockerfile findings are preserved."
+    },
+    {
+      "id": "docker-nonroot",
+      "category": "configuration",
+      "files": {
+        "Dockerfile": "FROM scratch\nUSER 10001\n"
+      },
+      "expected": "absent",
+      "target": "Dockerfile",
+      "rule": "AVD-DS-0002",
+      "sources": [
+        "https://avd.aquasec.com/misconfig/dockerfile/general/avd-ds-0002/"
+      ],
+      "assumption": "Only the final image user rule is compared; other Dockerfile findings are preserved."
+    },
+    {
+      "id": "docker-multistage",
+      "category": "configuration",
+      "files": {
+        "Dockerfile": "FROM scratch AS build\nUSER root\nFROM scratch\nUSER 10001\n"
+      },
+      "expected": "absent",
+      "target": "Dockerfile",
+      "rule": "AVD-DS-0002",
+      "sources": [
+        "https://avd.aquasec.com/misconfig/dockerfile/general/avd-ds-0002/"
+      ],
+      "assumption": "The final stage uses a non-root user; build-stage and other-rule observations remain separate."
+    },
+    {
+      "id": "secret-pattern",
+      "category": "secret",
+      "files": {
+        "settings.txt": {
+          "parts": [
+            "api_key = \"",
+            "ghp_",
+            "dR4k2Grjz7CLnPEWc3oTuBx6mQbD9Nwy51Ks",
+            "\"\n"
+          ]
+        }
+      },
+      "expected": "present",
+      "target": "settings.txt",
+      "rule": "github-pat",
+      "sources": [
+        "https://github.com/aquasecurity/trivy/blob/v0.76.1/pkg/fanal/secret/builtin-rules.go"
+      ],
+      "assumption": "Synthetic recognizer string assembled only inside VM; not an active account credential."
+    },
+    {
+      "id": "secret-placeholder",
+      "category": "secret",
+      "files": {
+        "settings.txt": "api_key = \"synthetic-placeholder\"\n"
+      },
+      "expected": "absent",
+      "target": "settings.txt",
+      "rule": "github-pat",
+      "sources": [
+        "https://github.com/aquasecurity/trivy/blob/v0.76.1/pkg/fanal/secret/builtin-rules.go"
+      ],
+      "assumption": "No matching token pattern expected; absence of a secret result is not a file-coverage proof."
+    },
+    {
+      "id": "token-copy",
+      "category": "secret",
+      "files": {
+        "settings.txt": {
+          "parts": [
+            "api_key = \"",
+            "ghp_",
+            "dR4k2Grjz7CLnPEWc3oTuBx6mQbD9Nwy51Ks",
+            "\"\n"
+          ]
+        }
+      },
+      "expected": "present",
+      "target": "settings.txt",
+      "rule": "github-pat",
+      "sources": [
+        "https://github.com/aquasecurity/trivy/blob/v0.76.1/pkg/fanal/secret/builtin-rules.go"
+      ],
+      "assumption": "Additional controlled path for redaction: unlike secret-prefixed directories this file is eligible for the managed copy, where its synthetic pattern is rewritten."
+    }
+  ]
+}

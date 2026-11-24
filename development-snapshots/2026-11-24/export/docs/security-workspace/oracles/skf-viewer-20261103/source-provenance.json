@@ -1,0 +1,11 @@
+{
+  "repo": "https://github.com/blabla1337/skf-labs",
+  "commit": "35199b6f49658b75f860530c0f09b91e985198aa",
+  "path": "python/CMD2/CMD2.py",
+  "gitBlobSha1": "c339e78b4dc02235fea6b277ed9fc85a6860aacc",
+  "sha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+  "bytes": 1585,
+  "apiMetadata": "https://api.github.com/repos/blabla1337/skf-labs/contents/python/CMD2/CMD2.py?ref=35199b6f49658b75f860530c0f09b91e985198aa",
+  "blobIdentityMatchesCommitContentsMetadata": true,
+  "trustLimit": "HTTPS GitHub metadata and content identity; no signed commit verification"
+}

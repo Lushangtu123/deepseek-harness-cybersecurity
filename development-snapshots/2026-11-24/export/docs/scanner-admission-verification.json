@@ -1,0 +1,114 @@
+{
+  "date": "2026-11-01",
+  "timezone": "America/Los_Angeles",
+  "runtime": {
+    "version": "1.1.77-personal.2",
+    "programFiles": 133,
+    "installedScannerImagesChanged": false,
+    "newDependencies": false
+  },
+  "admission": {
+    "tool": "semgrep",
+    "entry": "Harness.command option11; scripts/security_scanner_update.py; VM security-scanner-update.py",
+    "alreadyLoadedImmutableLinuxArm64Only": true,
+    "automaticallyDownloadsOrPulls": false,
+    "fiveSyntheticParserRuleControlsRequired": true,
+    "exactExecutableVersionChecked": true,
+    "checkOnlyNoPinChange": true,
+    "applyRequiresExpectedManifestHashAndExplicitConfirmation": true,
+    "freshProbeBeforeCommit": true,
+    "sharedDatabaseMaintenanceLock": true,
+    "activeTasksRefused": true,
+    "changedManifestRefused": true,
+    "onlySemgrepPinFieldsChangedByTransaction": true,
+    "originalManifestBackupAndConditionalRollback": true,
+    "interruptionRecoveryRequiresExactJournalAndConfirmation": true,
+    "crossProcessLockAndCasTestsPassed": true,
+    "successRollbackAndRecoveryTests": "real temporary files with injected accepting probe and service callbacks; no live accepting scanner candidate available",
+    "actualMacLauncherCheck": {
+      "actualMacUnifiedLauncher": true,
+      "selection": "11 / 1 check-only",
+      "childExitCode": 1,
+      "candidateAdmitted": false,
+      "candidateControlsPassed": true,
+      "noApplyConfirmationReached": true,
+      "sameInstalledManifestExpected": "6a3a04e4f0f81aaa77e4f312eb6cb90a28ebc75c6e0b1ee06b214dc48195c36c"
+    },
+    "actualKnownBrokenCandidateRejected": true,
+    "actualApplyRejected": true,
+    "installedManifestUnchanged": true,
+    "knownParserGapPreserved": true,
+    "candidateActuallyAdopted": false,
+    "otherInstallers": "Pristine basic/professional paths retain fixed reviewed asset pins; not converted into arbitrary candidate upgrade channels"
+  },
+  "outputLimits": {
+    "perScanTmpfsBytes": 67108864,
+    "parserProbeTmpfsBytes": 16777216,
+    "scannerTmpBytes": 268435456,
+    "parserTmpBytes": 134217728,
+    "zapConfigTmpfsBytes": 67108864,
+    "resultReadLimitBytes": 8388608,
+    "authReceiptReadLimitBytes": 1024,
+    "parserResultReadLimitBytes": 2097152,
+    "readonlyHostInputBinds": true,
+    "dockerLogDriver": "none",
+    "rawLogsTemporary": true,
+    "rawScanJsonPersisted": false,
+    "actual16MiBEnospcControl": {
+      "errno": 28,
+      "bytesWritten": 16777216,
+      "outputBytes": 16777216
+    },
+    "actual64MiBEnospcControl": {
+      "errno": 28,
+      "bytesWritten": 67108864
+    },
+    "allThreeNativeScannersPassed": true,
+    "authenticatedZapCompleted": true,
+    "authPrivateCopyRemoved": true,
+    "outOfScopeSinkRequests": 0,
+    "ownedLabAndProfileClosed": true,
+    "limits": "Per-container temporary spaces only; not a VM/global disk quota. tmpfs can use guest swap. Historical stored files are not purged."
+  },
+  "validation": {
+    "canonicalPredeployPython": 253,
+    "canonicalPredeployPluginNode": 483,
+    "canonicalPredeployHostNode": 129,
+    "reproducibleClient": true,
+    "review": "No verified actionable findings;18 focused tests independently passed. Native behavior checked by implementing agent.",
+    "finalMacLinuxAndCloudCi": "See exact public commit and matching Actions run; repeated/cross-platform counts are not summed."
+  },
+  "recovery": {
+    "name": "ready-scanner-admission-20261101",
+    "selectedProofFiles": 2632,
+    "programFiles": 133,
+    "snapshots": 22,
+    "previous21Preserved": true,
+    "copyActuallyBooted": true,
+    "originalDiskReturned": true,
+    "temporaryCopyRemoved": true,
+    "hostHelpersMatched": 5,
+    "coverageState": "matches"
+  },
+  "protectedState": {
+    "trackedFiles": 459,
+    "gitHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "realFindings": 95,
+    "allUnverified": true,
+    "newRealProjectScans": 0,
+    "modelCalls": 0,
+    "hostPermissionsExpanded": false,
+    "networkSharingClipboardUsbExpanded": false,
+    "newVmRegistered": false,
+    "otherThreeVmsStoppedUnchanged": true
+  },
+  "remainingLimits": [
+    "Semgrep parser defect remains; no candidate adopted this round.",
+    "Candidate passing synthetic controls does not certify complete project or language coverage.",
+    "Successful live engine upgrade was not exercised; accepting/rollback/recovery paths use injected probe with real file transactions.",
+    "Other installers remain strict reviewed-pin installers, not general candidate upgrade paths.",
+    "Output limits are per-container tmpfs, not total VM disk or cumulative stored audit quotas.",
+    "Real login/MFA and physical overnight sleep remain separate;95findings remain unverified."
+  ]
+}

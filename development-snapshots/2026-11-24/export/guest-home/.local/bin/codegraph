@@ -1,0 +1,4 @@
+#!/bin/sh
+# Pinned user-local CodeGraph, no auto-download or telemetry.
+export DO_NOT_TRACK=1 CODEGRAPH_TELEMETRY=0 CODEGRAPH_NO_UPDATE_CHECK=1 CODEGRAPH_NO_DOWNLOAD=1
+exec /home/purge/tools/codegraph-1.6.2/node_modules/@colbymchenry/codegraph-linux-arm64/bin/codegraph "$@"

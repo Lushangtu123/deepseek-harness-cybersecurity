@@ -1,0 +1,10 @@
+{
+  "work/harness-purge-improved/package/lib/redteam/personal-python-evidence.mjs": "2790a7642d0a127804e75d531bdaf5a1083d77971461d64846328fd1448a2482",
+  "work/harness-purge-improved/package/lib/redteam/personal-security-workbench.mjs": "19fc0d2fc89d28615869248150d23b5981f241f3c59abb71af0d254017c528ab",
+  "work/harness-purge-improved/package/lib/redteam/personal-joint-review.mjs": "787ea11b49a5e2870711632cc06eeaee93ef6a6f9a7b7459db9cf5724115731f",
+  "work/harness-purge-improved/package/lib/redteam/personal-security-client.mjs": "f56c46c86e9e38b3b91d2a1779797718f75219aab435c419f98584ed3659d346",
+  "work/harness-purge-improved/tests/source-location.test.mjs": "042c41d26aa0b803dd77655aa6475b4a783518614d548986bf406d6230be95f5",
+  "work/harness-purge-improved/tests/joint-source-client.test.mjs": "304af5dcf67195cf1516aaa63b0a549f23443d5adc181fe53b7c61bb5ce990c3",
+  "docs/security-workspace/python-execution-locations.md": "c8b3038e6af0ea5600a9a8a9e670df3f7d985f93e20bf06370f4bab76efa79e9",
+  "docs/security-workspace/python-execution-locations-results.json": "3c419601d8e5e44007ce5fb2d2d063dbdf220f8c407cbf7a914225b44f50cf19"
+}

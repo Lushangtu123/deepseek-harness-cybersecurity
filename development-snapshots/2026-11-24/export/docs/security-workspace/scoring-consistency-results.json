@@ -1,0 +1,117 @@
+{
+  "date": "2026-11-04",
+  "state": "final source candidate reviewed and triaged; no daily deployment",
+  "scope": [
+    "SCORE-REVIEW-01",
+    "SCORE-REVIEW-02",
+    "SCORE-REVIEW-03"
+  ],
+  "programFiles": 173,
+  "sourceHashes": {
+    "package/lib/redteam/store-core.js": "c1cb2159fc61a2f82f09b6198773fef836722cf8be24553f863c5bf601384c65",
+    "package/lib/redteam/score-rules.js": "4d768be5d0bccb7d876fcfcc5a6a5599819d4a63b2a98f8b03fda52d5ac15ba2",
+    "tests/score-consistency.test.mjs": "dca004662061d9d4999da7139d226dca49d2dddba7a7d6ee0fec97b923f72a5f",
+    "tests/security-sdk-boundary.test.mjs": "45f1a12c309f8315d6d7f8cfda37b306e1e51d0462021bf28706e4945fe2abcd",
+    "tests/report-score-provenance.test.mjs": "a3bf8da3e81a6d35d716f407e082647743d2ca6ab0586b2a0dd99fe6e064b7ac"
+  },
+  "deployed": false,
+  "pushed": false,
+  "tests": {
+    "macPluginPassed": 954,
+    "vmPluginPassed": 954,
+    "pythonFiles": 43,
+    "pythonPassed": 352,
+    "targetedPassed": 33,
+    "targetedIncludedInPluginTotals": true,
+    "clientRebuildReproducible": true,
+    "initialRed": {
+      "passed": 17,
+      "expectedFailures": 8
+    },
+    "additionalCapLabelRed": true
+  },
+  "native": {
+    "exitCode": 0,
+    "testFiles": 103,
+    "sdkSmokeExitCode": 0,
+    "node": "v24.22.1",
+    "python": "3.12.3",
+    "dailyProgramUnchanged": true,
+    "dailyOverrideUnchanged": true,
+    "temporaryCopyRemoved": true
+  },
+  "externalReview": {
+    "state": "completed-and-triaged",
+    "firstModel": "claude-opus-5-5",
+    "firstModelState": "provider-safety-refusal",
+    "effort": "high",
+    "fallback": "DeepSeek V4.1 Flash",
+    "actualModel": "deepseek-flash",
+    "finishReason": "stop",
+    "finalPromptSha256": "e35797dbdf57e119a00e93c020e86e16494cce880cb1a0488d57c179619b5384",
+    "reportSha256": "98ca71a657c99e489857b9cf7255e92dae30b14e79fd840911291f172e6ce61d",
+    "receiptSha256": "da14925e3cb625c8f574692c767c88aef6d11f1f6b72c7fe93d7a84ce3519c1c",
+    "remainingScopedP1P2Blockers": 0,
+    "newRegressionConfirmed": false,
+    "scope": "three original findings plus nullable-code default compatibility only; not full scoring-system or product qualification",
+    "finalReviewAfterBalanceRestored": true,
+    "previous402Retained": true,
+    "firstSnapshotNotCountedAsFinalApproval": true
+  },
+  "limitations": [
+    "Synthetic tests only; no project scan or model-driven tool execution",
+    "Original zero-point creation API still rejects zero; test concerns persisted rows",
+    "Original cap/dedup policies and tie-breaking retained",
+    "No host bridge implementation, daily deployment or GitHub push",
+    "HOST-F1/F3, R3, full workspace and 95 real-project findings remain open"
+  ],
+  "compatibilityCorrection": "nullable custom code: per-row point_default is passed to shared hitPointsOf; report/board/chain use point-id-specific fallback",
+  "retainedConditionalIssue": "Disabled hits may consume cap/dedup positions when different codes share a rule. Reproduced only with synthetic shared-rule metadata; stock built-in catalog has no shared-rule pairs. Existing and separate from exclusion-count partition; not claimed fixed.",
+  "closedFindings": [
+    "SCORE-REVIEW-01",
+    "SCORE-REVIEW-02",
+    "SCORE-REVIEW-03"
+  ],
+  "retainedInheritedFindings": [
+    {
+      "id": "INHERITED-NOCODE-DISABLED",
+      "severity": "P2",
+      "verifiedOnCandidateAndBaseline": true,
+      "fixed": false,
+      "summary": "disabled nullable-code point remains counted in chain stages though totals exclude it"
+    },
+    {
+      "id": "INHERITED-DISABLED-COMPETITION",
+      "severity": "P2",
+      "conditional": true,
+      "fixed": false,
+      "summary": "synthetic shared-rule disabled hit may consume cap/dedup slot; stock built-in catalog has no shared-rule pair"
+    },
+    {
+      "id": "INHERITED-CHAIN-COVERAGE",
+      "severity": "P3",
+      "verifiedOnCandidateAndBaseline": true,
+      "fixed": false,
+      "summary": "default first500 chain stages and full summary cover different ranges; UI applicability not audited"
+    },
+    {
+      "id": "INHERITED-CAP-LABEL",
+      "severity": "P3",
+      "verifiedOnCandidateAndBaseline": true,
+      "fixed": false,
+      "summary": "panel aggregate labels rule-cap exclusions as duplicates"
+    }
+  ],
+  "appendixPointsObservation": "Recorded points is the raw base value; separate effective-points column is a clarity suggestion, not a newly confirmed numeric defect",
+  "wholeProductReleaseQualified": false,
+  "globalReleaseHold": true,
+  "reviewScratchCleanup": {
+    "removed": true,
+    "scope": "only owned completed model-review scratch",
+    "workerStopped": true,
+    "dailyProgramFilesChecked": 169,
+    "dailyProgramUnchanged": true,
+    "credentialCopiedToHost": false,
+    "vmConfigurationChanged": false
+  }
+}

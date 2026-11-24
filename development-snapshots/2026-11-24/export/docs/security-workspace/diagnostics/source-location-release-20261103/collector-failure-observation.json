@@ -1,0 +1,1 @@
+{"observed":true,"kind":"SyntaxError","reason":"unescaped literal parenthesis in collector regexp","remoteReference":"394a9d56-3304-4acc-9522-adc1d0f75b29","beforeAnyRPC":true,"fix":"string startsWith instead of regexp; node --check before rerun","scope":"acceptance collector only; no product code change or second scan"}

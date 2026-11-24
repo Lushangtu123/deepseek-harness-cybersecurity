@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-04",
+  "scope": [
+    "PRE-F2",
+    "SDK-F1"
+  ],
+  "state": "validated and independently reviewed VM source candidate; not deployed",
+  "deployed": false,
+  "pushed": false,
+  "programFiles": 173,
+  "guestFiles": 124,
+  "sourceHashes": {
+    "package/lib/redteam/store-core.js": "6b89c635c5d7d7313559a1068b9b7c33fc2c75c170fd58181e340d78df20936e",
+    "package/lib/redteam/tools.js": "12d2f409c8a8a85f3758aea6666a268a05718a03b59ee651600d8e3dd19dbdd9",
+    "tests/report-score-provenance.test.mjs": "a3bf8da3e81a6d35d716f407e082647743d2ca6ab0586b2a0dd99fe6e064b7ac",
+    "tests/security-sdk-boundary.test.mjs": "f2d6e0eae8ead9fb9bdd38405416049881f617d1a3d3617e535a8e84fc1ba568",
+    "tests/security-sdk.test.mjs": "15e2984ce5f00d7857676b40e98c6a43fbca00ee0dd28e7650ea2d9f0cf31c86"
+  },
+  "regression": {
+    "macPlugin": {
+      "files": 102,
+      "passed": 933,
+      "failed": 0
+    },
+    "vmPlugin": {
+      "files": 102,
+      "passed": 933,
+      "failed": 0
+    },
+    "python": {
+      "files": 43,
+      "passed": 352,
+      "failed": 0
+    },
+    "targeted": {
+      "passed": 13,
+      "includedInFullPluginSuite": true
+    },
+    "clientRebuildReproducible": true
+  },
+  "native": {
+    "exitCode": 0,
+    "testFiles": 102,
+    "sdkSmokeExitCode": 0,
+    "node": "v24.22.1",
+    "python": "3.12.3",
+    "dailyProgramUnchanged": true,
+    "dailyOverrideUnchanged": true,
+    "temporaryCopyRemoved": true
+  },
+  "actualSdkSmoke": {
+    "ok": true,
+    "installations": [
+      {
+        "root": "/home/purge/tools/harness-improved-runtime",
+        "factoryConstructed": true,
+        "executeNotInvoked": true,
+        "projectSdkNotEvaluated": true
+      },
+      {
+        "root": "/home/purge/tools/harness-original-capabilities",
+        "factoryConstructed": true,
+        "executeNotInvoked": true,
+        "projectSdkNotEvaluated": true
+      }
+    ],
+    "fullModuleImported": true,
+    "applyNotInvoked": true,
+    "modelRequests": 0,
+    "privateProjectAccess": false
+  },
+  "independentReview": {
+    "reviewer": "Codex independent subagent",
+    "externalClaudeOrDeepSeekRequest": false,
+    "status": "passed final targeted recheck",
+    "candidateFindings": [
+      "default-score display P2: reproduced and closed",
+      "ancestor metadata fallback P2: reproduced and closed"
+    ],
+    "targetedPassed": 13,
+    "remainingScopedP1P2Blockers": 0,
+    "scope": "Two production files and three targeted test files; full-product review not claimed"
+  },
+  "redEvidence": [
+    "initial-red.tap",
+    "default-points-red.tap",
+    "ancestor-red.tap"
+  ],
+  "validationNotes": "First SDK smoke used an incomplete synthetic output definition; corrected script passed. First Python run could not execute sandbox-restricted ps; authorized rerun passed. See batch validation-notes.md and preserved initial VM failure logs.",
+  "unchanged": {
+    "dailyVmProgram": true,
+    "dailyVmSdkOverride": true,
+    "macHarnessConfigurationAndPermissions": true,
+    "hostBridgeImplementation": true
+  },
+  "open": [
+    "HOST-F1: same-origin VM/host authority boundary; plan only",
+    "HOST-F3: proxy unknown-write receipt semantics; plan only",
+    "Chrome/Harness native model chain and release acceptance",
+    "ordinary R3 independent qualification",
+    "full workspace completion",
+    "95 real project findings remain unverified"
+  ],
+  "limitations": [
+    "No private project scan, exploit or model API request",
+    "Installed SDK construction and module import are compatibility smoke checks, not tool execution or end-to-end approval",
+    "Approved installation roots remain trusted; not complete transitive dependency integrity protection",
+    "No claim of globally improved detection accuracy or completed overall security audit"
+  ]
+}

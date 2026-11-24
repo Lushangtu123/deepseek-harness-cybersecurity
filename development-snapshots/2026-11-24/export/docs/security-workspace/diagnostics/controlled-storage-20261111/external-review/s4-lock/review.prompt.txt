@@ -1,0 +1,240 @@
+Review this narrow interface fix before final isolatedVM rerun. No tools/MCP/hooks/plugins. Previously reviewed storage transaction code unchanged (SHA68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202). First isolatedVM passed196 tests and native normalreview→archive→recycle→oldpathstatus/recover→restore, rootCIDuid0mode0644 matched, daily169program42DB/config unchanged. That result predates this tiny launcher change and is NOT final-byte VM acceptance. Full final VM rerun pending your review. Original operation_lock raises generic ValueError onbusy; userplan requires retryableJSON. Add ReviewTaskBusy(ValueError) staticcode/retryable/directory, preserve originalhumanmessage, same NBflock and no new actions/permissions. GenericCLIhandler already serializes storageerror attributes toexit4. New CLIregression red→green;27archive87launcher29storage45Node green. Check concrete scoped regression or blocker only, concise<=700words. R3false/no daily deployment/push.
+
+
+ACTUAL SOURCE scripts/reviewer_snapshot.py SHA 10e152e231e5d43def8f1edace15edcffd4bae088c22f1790b92b5434385c55e
+class ReviewTaskBusy(ValueError):
+    code='task-busy'
+    retryable=True
+    def __init__(self, root):
+        self.details={'directory':str(root)}
+        super().__init__('attempt still has an active operation')
+
+@contextmanager
+def operation_lock(root):
+    root = _private(root)
+    fd = os.open(root / 'operation.lock', os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600)
+    try:
+        value = os.fstat(fd)
+        if not stat.S_ISREG(value.st_mode) or value.st_uid != os.geteuid() or value.st_mode & 0o077 or value.st_nlink != 1:
+            raise ValueError('invalid operation lock')
+        try:
+            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise ReviewTaskBusy(root) from None
+        yield
+    finally:
+        os.close(fd)
+
+def recover(directory, *, _engine_factory=None):
+    if not Path(directory).exists():return _archived_status(directory)
+    value=_recover_core(directory,_engine_factory=_engine_factory)
+    _settle_storage(Path(directory))
+    return value
+
+def _recover_core(directory, *, _engine_factory=None):
+    root, _ = _load_attempt(directory)
+    cancel = {}
+    with operation_lock(root), _interrupts(cancel):
+        _, job = _load_attempt(root)
+        holder={}
+        with _failure_guard(root,job,holder,True):
+            return _recover_locked(root,job,cancel,holder,_engine_factory)
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    commands = parser.add_subparsers(dest='action', required=True)
+    creator = commands.add_parser('freeze')
+    creator.add_argument('sources', type=Path)
+    creator.add_argument('destination', type=Path)
+    creator.add_argument('image_id')
+    verifier = commands.add_parser('verify')
+    runner = commands.add_parser('run')
+    for command in [verifier, runner]:
+        command.add_argument('bundle', type=Path)
+        command.add_argument('expected')
+    for name in ['root', 'manifest_path', 'scan_path']:
+        runner.add_argument(name, type=Path)
+    runner.add_argument('dataset_sha')
+    runner.add_argument('freeze_sha')
+    runner.add_argument('--attempts-root', type=Path)
+    runner.add_argument('--timeout', type=float, default=30)
+    runner.add_argument('--storage-policy',type=Path)
+    for name in ['status','recover']:
+        commands.add_parser(name).add_argument('directory', type=Path)
+    inventory=commands.add_parser('retention-inventory')
+    inventory.add_argument('directory',type=Path,nargs='?')
+    inventory.add_argument('--budget-mib',type=int,default=256)
+    inventory.add_argument('--minimum-age-days',type=int,default=30)
+    commands.add_parser('storage-reconcile').add_argument('directory',type=Path,nargs='?')
+    planner=commands.add_parser('archive-plan');planner.add_argument('directory',type=Path);planner.add_argument('--attempt-id',action='append',dest='attempt_ids')
+    apply=commands.add_parser('archive-apply');apply.add_argument('directory',type=Path);apply.add_argument('plan_path',type=Path)
+    for name in ['archive-status','archive-restore']:
+        command=commands.add_parser(name);command.add_argument('directory',type=Path);command.add_argument('transaction_id')
+    args = vars(parser.parse_args())
+    action = args.pop('action')
+    try:
+        if action=='retention-inventory':
+            args['budget_bytes']=args.pop('budget_mib')*1024*1024
+            value=retention_inventory(**args)
+        elif action=='storage-reconcile' or action.startswith('archive-'):
+            storage=storage_module(sha256(read(Path(__file__).resolve().with_name(STORAGE_FILE))).hexdigest())
+            directory=args['directory'] or Path.home()/'.cache/harness-review-attempts'
+            policy=storage.existing_policy(directory)
+            if action=='storage-reconcile':value=storage.reconcile(policy,_api_view())
+            elif action=='archive-plan':value=storage.archive_plan(policy,_api_view(),attempt_ids=args.get('attempt_ids'))
+            elif action=='archive-apply':value=storage.archive_apply(policy,load_json(read(args['plan_path'],ATTEMPT_LIMIT)),_api_view())
+            elif action=='archive-status':value=storage.archive_status(policy,args['transaction_id'],_api_view())
+            else:value=storage.archive_restore(policy,args['transaction_id'],_api_view())
+        else:
+            if action=='run' and args.get('storage_policy') is not None:args['storage_policy']=load_json(read(args['storage_policy']))
+            value = freeze(**args) if action == 'freeze' else verify(**args)[0] if action == 'verify' else status(**args) if action == 'status' else recover(**args) if action == 'recover' else execute(**args)
+        print(json.dumps(value, indent=2))
+        if action=='recover' and value.get('state')!='completed' and not value.get('cleanup',{}).get('confirmed'):
+            parser.exit(2)
+    except ReviewAttemptError as error:
+        print(json.dumps({'attemptDirectory':error.attempt_directory,'status':error.status,'nextOperation':'status'},indent=2))
+        state=error.status['state'];failure=error.status['failure']
+        parser.exit(3 if state=='completion-unconfirmed' else 2 if state=='cleanup-unconfirmed' else 128+failure.get('signal',2) if failure['kind']=='interrupted' else 124 if failure['kind']=='timed-out' else 1)
+    except (OSError, ValueError, SyntaxError, subprocess.SubprocessError) as error:
+        if isinstance(getattr(error,'code',None),str):
+            print(json.dumps({'state':'storage-blocked','reason':error.code,'retryable':getattr(error,'retryable',False),'details':getattr(error,'details',{})}))
+            parser.exit(4)
+        parser.exit(1, f'Reviewer snapshot rejected: {error}\n')
+
+
+ACTUAL SOURCE scripts/reviewer_archive.test.py SHA 66298d7727fb4f99e28d8ccc654780fa4bbfbbb6b9c63931c03cfa157677cdda
+ def test_original_recover_lock_busy_is_retryable_json(self):
+  import contextlib
+  path=self.job();out=io.StringIO()
+  with self.api.operation_lock(path),patch.object(self.api.sys,'argv',['snapshot','recover',str(path)]),contextlib.redirect_stdout(out),contextlib.redirect_stderr(io.StringIO()):
+   with self.assertRaises(SystemExit) as stopped:self.api.main()
+  self.assertEqual(stopped.exception.code,4);value=json.loads(out.getvalue());self.assertEqual(value['reason'],'task-busy');self.assertTrue(value['retryable'])
+
+
+EVIDENCE lock-red.txt
+.................F.........
+======================================================================
+FAIL: test_original_recover_lock_busy_is_retryable_json (__main__.ArchiveTest.test_original_recover_lock_busy_is_retryable_json)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/reviewer_archive.test.py", line 204, in test_original_recover_lock_busy_is_retryable_json
+    self.assertEqual(stopped.exception.code,4);value=json.loads(out.getvalue());self.assertEqual(value['reason'],'task-busy');self.assertTrue(value['retryable'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 4
+
+----------------------------------------------------------------------
+Ran 27 tests in 1.059s
+
+FAILED (failures=1)
+
+
+EVIDENCE archive-green.txt
+...........................
+----------------------------------------------------------------------
+Ran 27 tests in 1.154s
+
+OK
+
+
+EVIDENCE python-green.txt
+..storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+............storage-settlement-pending; query status and storage-reconcile before retrying
+.....storage-settlement-pending; query status and storage-reconcile before retrying
+.......storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+....storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+...storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+....................................
+----------------------------------------------------------------------
+Ran 87 tests in 4.367s
+
+OK
+
+
+EVIDENCE storage-green.txt
+............storage-settlement-pending; query status and storage-reconcile before retrying
+...storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+...storage-settlement-pending; query status and storage-reconcile before retrying
+.......storage-settlement-pending; query status and storage-reconcile before retrying
+..
+----------------------------------------------------------------------
+Ran 29 tests in 1.486s
+
+OK
+
+
+EVIDENCE gate-green.txt
+✔ Unrelated reviewer inputs cannot satisfy dataset source coverage (8.057208ms)
+✔ Coverage unions distinct batches and includes negative and diagnostic sources (1.539917ms)
+✔ Manifest and scan digests never count as reviewed source files (0.469875ms)
+✔ Input inventories require bound digests and the supported bounded source paths (4.0165ms)
+✔ A batch supports exactly 64 source files and blocks the sixty-fifth (0.671292ms)
+✔ Duplicate input receipts are rejected even with reordered keys or changed timestamps (0.546583ms)
+✔ Failed or globally mismatched receipts cannot contribute source coverage (0.809333ms)
+✔ Legacy receipt versions stay diagnostic without inventing source coverage (0.239417ms)
+✔ Python reviewer cannot credit unsupported languages even when source bytes match (2.206ms)
+✔ Legacy receipts mixed with valid current receipts retain a specific compatibility blocker (0.540875ms)
+✔ Independent overlapping batches may share sources without inflating case coverage (0.477833ms)
+✔ Entry-only reviewer identities cannot qualify without dependency snapshot and execution receipt (0.248125ms)
+✔ New freezes reject a reviewer identity that disagrees with the dependency manifest (0.348292ms)
+✔ Every reviewer dependency and runtime image is bound to the frozen identity (1.401ms)
+✔ Completed execution must bind current snapshot, inputs, freeze and chronological run (1.590334ms)
+✔ Snapshot-aware freezes retain complete manifest and reject missing dependencies (1.027833ms)
+✔ Raw and reviewed metrics use explicit denominators and never promote R3 (0.280917ms)
+✔ Unverified guard evidence and hidden findings stay unknown, not true negatives (0.404583ms)
+✔ Wrong exclusions, raw misses and false confirmations are measured separately (0.265958ms)
+✔ Model assertions and stale evidence cannot supply a verified decision (0.230083ms)
+✔ Reused samples, changing thresholds or tool identities block independent acceptance (0.809792ms)
+✔ Static rule annotations, unknown coverage and missing results block qualification (0.362ms)
+✔ Malformed labels, duplicate outputs and impossible decisions are rejected (0.328625ms)
+✔ Freeze binds policy and candidate and rejects sources already in the usage ledger (0.388417ms)
+✔ CLI emits a blocked report with exit 2 and bounds ordinary JSON inputs (80.276584ms)
+✔ Unknown negatives cannot improve eligibility through the resolved-only denominator (0.447375ms)
+✔ Duplicated or contradictory source locations cannot inflate labelled counts (0.251583ms)
+✔ Evidence must bind the individual case and decision (0.264917ms)
+✔ Run replay and ledger substitution cannot qualify a frozen evaluation (1.0815ms)
+✔ Timezone-free timestamps and non-array evidence are invalid (0.238417ms)
+✔ Explicit-offset Python microsecond timestamps are accepted consistently (0.199958ms)
+✔ Decision artifacts cannot be recycled across different inputs or decisions (0.2415ms)
+✔ Line-only scan hits cannot be credited to another labelled site (0.443125ms)
+✔ Freeze and reports declare every attempt must consume the listed sources (0.527833ms)
+✔ Scan anchors bind the source digest, language and category, not only line (0.667083ms)
+✔ Missing anchors report the specific case and shared decision bindings are checked (0.842083ms)
+✔ Authored positive controls cannot contribute qualification recall or minimum cases (0.265833ms)
+✔ Unqualified oracles stay diagnostic and cannot dilute independent unknown metrics (0.66525ms)
+✔ Easy authored negatives cannot dilute qualification false-positive denominators (0.628333ms)
+✔ Known vulnerability pairs remain diagnostic even when their oracle is independently verified (0.293667ms)
+✔ Missing or incomplete selection provenance cannot supply admission metrics (2.100291ms)
+✔ Explicit selection exclusions cannot be overridden by the other selection fields (0.729542ms)
+✔ Selection declarations are frozen and every diagnostic source still consumes the attempt (0.274209ms)
+✔ Storage closure is mandatory for new freezes and legacy snapshots stay diagnostic (0.3795ms)
+✔ Valid v2 storage closure with another reviewer identity cannot freeze (0.135792ms)
+ℹ tests 45
+ℹ suites 0
+ℹ pass 45
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 173.186584

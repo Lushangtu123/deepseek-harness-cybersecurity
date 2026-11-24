@@ -1,0 +1,137 @@
+{
+  "summary": {
+    "version": 1,
+    "total": 14,
+    "bound": 13,
+    "unmatched": 1
+  },
+  "points": [
+    {
+      "location": "BenchmarkTest00073.py:53",
+      "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+      "executionMapping": {
+        "version": 1,
+        "state": "bound",
+        "protocol": "python-sink-locations-1"
+      }
+    },
+    {
+      "location": "BenchmarkTest00074.py:51",
+      "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+      "executionMapping": {
+        "version": 1,
+        "state": "bound",
+        "protocol": "python-sink-locations-1"
+      }
+    },
+    {
+      "location": "boundary.py:7",
+      "pointId": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+      "executionMapping": {
+        "version": 1,
+        "state": "bound",
+        "protocol": "python-sink-locations-1"
+      }
+    },
+    {
+      "location": "boundary.py:7",
+      "pointId": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+      "executionMapping": {
+        "version": 1,
+        "state": "bound",
+        "protocol": "python-sink-locations-1"
+      }
+    },
+    {
+      "location": "boundary.py:8",
+      "pointId": "30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0",
+      "executionMapping": {
+        "version": 1,
+        "state": "bound",
+        "protocol": "python-sink-locations-1"
+      }
+    },
+    {
+      "location": "boundary.py:8",
+      "pointId": "30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0",
+      "executionMapping": {
+        "version": 1,
+        "state": "bound",
+        "protocol": "python-sink-locations-1"
+      }
+    },
+    {
+      "location": "boundary.py:8",
+      "pointId": "8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450",
+      "executionMapping": {
+        "version": 1,
+        "state": "bound",
+        "protocol": "python-sink-locations-1"
+      }
+    },
+    {
+      "location": "boundary.py:8",
+      "pointId": "8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450",
+      "executionMapping": {
+        "version": 1,
+        "state": "bound",
+        "protocol": "python-sink-locations-1"
+      }
+    },
+    {
+      "location": "boundary.py:9",
+      "pointId": "6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b",
+      "executionMapping": {
+        "version": 1,
+        "state": "bound",
+        "protocol": "python-sink-locations-1"
+      }
+    },
+    {
+      "location": "boundary.py:11",
+      "pointId": "6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b",
+      "executionMapping": {
+        "version": 1,
+        "state": "bound",
+        "protocol": "python-sink-locations-1"
+      }
+    },
+    {
+      "location": "boundary.py:15",
+      "executionMapping": {
+        "version": 1,
+        "state": "unmatched",
+        "reason": "ambiguous-execution-points"
+      }
+    },
+    {
+      "location": "boundary.py:15",
+      "pointId": "ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63",
+      "executionMapping": {
+        "version": 1,
+        "state": "bound",
+        "protocol": "python-sink-locations-1"
+      }
+    },
+    {
+      "location": "skf-upstream.py:37",
+      "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+      "executionMapping": {
+        "version": 1,
+        "state": "bound",
+        "protocol": "python-sink-locations-1"
+      }
+    },
+    {
+      "location": "skf-upstream.py:37",
+      "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+      "executionMapping": {
+        "version": 1,
+        "state": "bound",
+        "protocol": "python-sink-locations-1"
+      }
+    }
+  ],
+  "artifacts": 3,
+  "guestPythonMatchesFixedImageIds": true
+}

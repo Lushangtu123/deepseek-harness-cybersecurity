@@ -1,0 +1,9 @@
+{
+  "state": "closed-with-current-evidence",
+  "confirmed": [
+    "Condensed packet lacked explicit fifth finding mapping, actual matching report digests, and test-source digests. All now recorded in s4-r2 closure-evidence.json."
+  ],
+  "limits": [
+    "Daily identity is a before/after check for this run. Counts are counts of those matched before/after objects. The source refusal evidence is controlled preflight telemetry."
+  ]
+}

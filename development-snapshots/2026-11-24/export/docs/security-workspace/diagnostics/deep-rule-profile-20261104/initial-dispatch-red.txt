@@ -1,0 +1,97 @@
+(node:30618) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Ordinary plan reports missing R3 qualification without handing off files or starting tools (27.567209ms)
+✔ Deep S1 dispatch persists the original mode and identities and launches only selected steps (176.784584ms)
+✔ Mode dispatch rejects unqualified adapters, invalid modes and over-budget work before creating a task (18.331125ms)
+✔ A pinned runtime identity change after acceptance prevents dispatch of the original step (17.047958ms)
+✔ Child admission cannot swap the pinned identity after the parent pre-dispatch check (80.480375ms)
+✔ Mode admission requires a current runtime identity instead of trusting a ready flag (16.4555ms)
+✔ Mode contract survives reopening the existing database and old joint tasks retain a null mode (239.916917ms)
+✔ Native service mode requests share one ledger and protect mode metadata against redaction (185.174916ms)
+✔ Ordinary submission binds the current preview, exact steps and bounded budget before R3 (23.773708ms)
+✔ A late S1 scanner result does not persist findings after the monotonic deadline (84.636208ms)
+✔ Managed Semgrep persists Python review evidence separately from findings (151.577167ms)
+✖ deep Semgrep selection binds the fixed profile to parent, child options and persisted runtime details (16.977125ms)
+✖ deep rule base mismatch is unavailable without silently dispatching the baseline (15.501333ms)
+✖ a deep profile changed after acceptance is rejected before handing off the source (21.240084ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 11
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1149.501583
+
+✖ failing tests:
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:195:1
+✖ deep Semgrep selection binds the fixed profile to parent, child options and persisted runtime details (16.977125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + undefined
+  - {
+  -   semgrep: {
+  -     baseRulesSha256: '44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed',
+  -     id: 'deep-namespace17',
+  -     mode: 'deep',
+  -     qualification: 'managed-candidate-not-r3',
+  -     ruleCount: 17,
+  -     rulesSha256: 'e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773',
+  -     version: 1
+  -   }
+  - }
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:195:400)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { semgrep: { version: 1, id: 'deep-namespace17', mode: 'deep', baseRulesSha256: '44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed', rulesSha256: 'e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773', ruleCount: 17, qualification: 'managed-candidate-not-r3' } },
+    operator: 'deepStrictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:196:1
+✖ deep rule base mismatch is unavailable without silently dispatching the baseline (15.501333ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:196:310)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:197:1
+✖ a deep profile changed after acceptance is rejected before handing off the source (21.240084ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(f.bench.joint.active.data.workspace.ruleProfiles?.semgrep)
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/workspace-dispatch.test.mjs:197:174)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '=='
+  }

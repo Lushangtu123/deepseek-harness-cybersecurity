@@ -1,0 +1,56 @@
+from pathlib import Path
+from hashlib import sha256
+import errno,json,os,re,shutil,signal,socket,sqlite3,subprocess,time
+root=Path(ROOT);stage=json.loads((root/'stage.json').read_text())
+assert root.parent==Path('/home/purge/.cache') and re.fullmatch(r'score-native-qa-[a-z0-9_]{8}',root.name)
+assert root.resolve()==root and root.stat().st_uid==1000 and root.stat().st_mode&0o077==0
+assert (root/'home/owned-test-state').read_text()==root.name
+before=json.loads((root/'protected.json').read_text());intent=json.loads((root/'intent.json').read_text())
+assert all(sha256((root/n).read_bytes()).hexdigest()==h for n,h in intent.items())
+pid=stage['supervisorPID'];proc=Path('/proc/'+str(pid))
+if proc.exists() and (proc/'stat').read_text().split()[2]!='Z':
+ assert str(root/'namespace-init.py').encode() in (proc/'cmdline').read_bytes()
+ os.killpg(pid,signal.SIGTERM)
+for _ in range(100):
+ if (root/'app-stopped.json').exists() and (root/'backend-stopped.json').exists():break
+ time.sleep(.1)
+assert (root/'app-stopped.json').exists() and (root/'backend-stopped.json').exists(),'Owned shutdown acknowledgements missing'
+owned=[]
+for p in Path('/proc').glob('[0-9]*/cmdline'):
+ try:
+  args=p.read_bytes().split(b'\0')
+  if any(str(root/n).encode() in args for n in ['run-app.py','test-service.mjs','activate-security.py']):owned.append(p.parent.name)
+ except (FileNotFoundError,PermissionError,ProcessLookupError):pass
+assert not owned,owned
+with socket.socket() as s:
+ s.settimeout(1);code=s.connect_ex(('127.0.0.1',stage['port']));assert code==errno.ECONNREFUSED,code
+backend=json.loads((root/'backend-stopped.json').read_text());assert backend['cleanupErrors']==[] and len(backend['proofs'])==1
+assert backend['proofs'][0]['containerAbsent'] and backend['proofs'][0]['outcome']=='passed'
+for p in backend['proofs']:
+ x=subprocess.run(['/usr/bin/sudo','-n','/usr/bin/docker','ps','-aq','--filter','name=^'+p['containerName']+'$'],capture_output=True,text=True,check=True,timeout=8)
+ assert not x.stdout.strip()
+home=Path('/home/purge');daily=home/'.dsh-improved';installed=home/'tools/dsh-purge-personal-1.1.77-personal.1';runtime=home/'tools/harness-improved-runtime/node_modules'
+def digest(path):return sha256(path.read_bytes()).hexdigest()
+def identity():
+    databases={}
+    for p in (daily/'redteam/engagements').glob('*/assets.db'):
+        value=sha256()
+        with sqlite3.connect(p.as_uri()+'?mode=ro',uri=True,timeout=3) as db:
+            for row in db.iterdump():value.update((row+'\n').encode())
+        databases[str(p)]=value.hexdigest()
+    return {'program':{str(p.relative_to(installed)):digest(p) for p in installed.rglob('*')
+                       if p.is_file() and '__pycache__' not in p.parts},
+            'config':{str(p):digest(p) for p in [daily/'.credentials.yaml',daily/'cordis.patch.yml',
+                 daily/'profiles/web/package.json',daily/'profiles/web/cordis.patch.yml']},
+            'pins':{name:digest(home/'tools/security-workbench'/name) for name in ['images.json','rules.json']},
+            'runtime':digest(runtime/'@deepseek-ai/dsh-tools/lib/index.js'),'databases':databases,
+            'outsideMountNamespace':os.readlink('/proc/self/ns/mnt'),'homeInode':daily.stat().st_ino}
+
+after=identity();assert after==before,'Daily program, database, configuration, namespace or runtime changed'
+assert not (daily/'owned-test-state').exists()
+summary={'namespaceChildrenStopped':True,'backendAcknowledged':True,'appAcknowledged':True,'guestPortClosedErrno':code,
+ 'ownedScannerContainersAbsent':len(backend['proofs']),'dailyProgramFilesMatched':len(before['program']),
+ 'dailyDatabaseLogicalDigestsMatched':len(before['databases']),'dailyConfigAndPinsMatched':True,'installedRuntimeMatched':True,
+ 'outsideNamespaceAndHomeInodeMatched':True,'candidateStagedFilesMatched':len(intent),'credentialCopiesRemoved':True}
+shutil.rmtree(root);assert not root.exists();summary['temporaryRootRemoved']=True
+print(json.dumps({'summary':summary,'backendFinal':backend}))

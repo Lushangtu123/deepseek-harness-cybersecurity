@@ -1,0 +1,465 @@
+{
+  "version": 1,
+  "trivyVersion": "0.76.1",
+  "datasetSha256": "1925ca180651ba75503fa18036e05ee3869057f789bb0bd4d9e191ef2fb7bb9f",
+  "r3Qualified": false,
+  "deployed": false,
+  "runs": {
+    "baselineFlags": {
+      "receiptSha256": "7c7da8ed79a2cfd8a1df82d2b0c47395ad973e9e95e8cd92d41d8a3120c12ffc",
+      "candidateSourceSha256": "c58e91376a5764bd9952afda14ffb4b29b2524b6414772875881c2e7c681c779",
+      "deployedBaseline": {
+        "programFiles": 157,
+        "programDigest": "28709ff69c47956d313012c6b827ced25429d4fb2deae59dbabe4710a7e74818",
+        "scannerManifestSha256": "6a3a04e4f0f81aaa77e4f312eb6cb90a28ebc75c6e0b1ee06b214dc48195c36c"
+      },
+      "trivyAdmissionIdentity": "67102d46834501e610bed2188e42390d1e3932aecb5ecd00014fa05e0e87d297",
+      "dependencyScope": null,
+      "evaluation": {
+        "version": 1,
+        "scope": "fixed advisory/rule observations only",
+        "r3Qualified": false,
+        "projectSafe": false,
+        "findingStatus": "unverified",
+        "totals": {
+          "cases": 15,
+          "matchedExpectations": 12,
+          "mismatches": 0,
+          "unknown": 3
+        },
+        "cases": [
+          {
+            "id": "jinja-affected",
+            "category": "dependency",
+            "rule": "CVE-2024-56326",
+            "expected": "present",
+            "expectationSatisfied": true,
+            "observation": "expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "observed",
+            "ruleReported": true,
+            "otherObservations": 2
+          },
+          {
+            "id": "jinja-patched",
+            "category": "dependency",
+            "rule": "CVE-2024-56326",
+            "expected": "absent",
+            "expectationSatisfied": true,
+            "observation": "no-expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "observed",
+            "ruleReported": false,
+            "otherObservations": 1
+          },
+          {
+            "id": "lodash-affected",
+            "category": "dependency",
+            "rule": "CVE-2021-23337",
+            "expected": "present",
+            "expectationSatisfied": true,
+            "observation": "expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "observed",
+            "ruleReported": true,
+            "otherObservations": 4
+          },
+          {
+            "id": "lodash-patched",
+            "category": "dependency",
+            "rule": "CVE-2021-23337",
+            "expected": "absent",
+            "expectationSatisfied": true,
+            "observation": "no-expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "observed",
+            "ruleReported": false,
+            "otherObservations": 3
+          },
+          {
+            "id": "symfony-affected",
+            "category": "dependency",
+            "rule": "CVE-2024-50345",
+            "expected": "present",
+            "expectationSatisfied": true,
+            "observation": "expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "observed",
+            "ruleReported": true,
+            "otherObservations": 2
+          },
+          {
+            "id": "symfony-patched",
+            "category": "dependency",
+            "rule": "CVE-2024-50345",
+            "expected": "absent",
+            "expectationSatisfied": true,
+            "observation": "no-expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "observed",
+            "ruleReported": false,
+            "otherObservations": 2
+          },
+          {
+            "id": "lodash-dev",
+            "category": "dependency",
+            "rule": "CVE-2021-23337",
+            "expected": "present",
+            "expectationSatisfied": null,
+            "observation": "component-identity-unproven",
+            "coverage": "unknown",
+            "componentIdentity": "unproven",
+            "ruleReported": false,
+            "otherObservations": 0
+          },
+          {
+            "id": "jinja-range",
+            "category": "dependency",
+            "rule": "CVE-2024-56326",
+            "expected": "unresolved",
+            "expectationSatisfied": null,
+            "observation": "no-fixed-version",
+            "coverage": "unknown",
+            "componentIdentity": "unproven",
+            "ruleReported": false,
+            "otherObservations": 0
+          },
+          {
+            "id": "docker-root",
+            "category": "configuration",
+            "rule": "AVD-DS-0002",
+            "expected": "present",
+            "expectationSatisfied": true,
+            "observation": "expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "not-applicable",
+            "ruleReported": true,
+            "otherObservations": 1
+          },
+          {
+            "id": "docker-uid-zero",
+            "category": "configuration",
+            "rule": "AVD-DS-0002",
+            "expected": "present",
+            "expectationSatisfied": true,
+            "observation": "expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "not-applicable",
+            "ruleReported": true,
+            "otherObservations": 1
+          },
+          {
+            "id": "docker-nonroot",
+            "category": "configuration",
+            "rule": "AVD-DS-0002",
+            "expected": "absent",
+            "expectationSatisfied": true,
+            "observation": "no-expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "not-applicable",
+            "ruleReported": false,
+            "otherObservations": 1
+          },
+          {
+            "id": "docker-multistage",
+            "category": "configuration",
+            "rule": "AVD-DS-0002",
+            "expected": "absent",
+            "expectationSatisfied": true,
+            "observation": "no-expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "not-applicable",
+            "ruleReported": false,
+            "otherObservations": 1
+          },
+          {
+            "id": "secret-pattern",
+            "category": "secret",
+            "rule": "github-pat",
+            "expected": "present",
+            "expectationSatisfied": true,
+            "observation": "expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "not-applicable",
+            "ruleReported": true,
+            "otherObservations": 0
+          },
+          {
+            "id": "secret-placeholder",
+            "category": "secret",
+            "rule": "github-pat",
+            "expected": "absent",
+            "expectationSatisfied": null,
+            "observation": "target-coverage-unknown",
+            "coverage": "unknown",
+            "componentIdentity": "not-applicable",
+            "ruleReported": false,
+            "otherObservations": 0
+          },
+          {
+            "id": "token-copy",
+            "category": "secret",
+            "rule": "github-pat",
+            "expected": "present",
+            "expectationSatisfied": true,
+            "observation": "expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "not-applicable",
+            "ruleReported": true,
+            "otherObservations": 0
+          }
+        ]
+      },
+      "packageMetadataProbeSameEvaluation": true,
+      "managed": {
+        "directFindings": 25,
+        "copyFindings": 23,
+        "directSecretObserved": true,
+        "copySecretObserved": false,
+        "inputRedaction": {
+          "scope": "managed-copy",
+          "redactedFiles": 1,
+          "excludedEntries": 2,
+          "originalSecretCoverage": "not-proven"
+        },
+        "coverageComplete": false,
+        "report": {
+          "pages": 5,
+          "maxWireBytes": 5722,
+          "findings": 23,
+          "secretObserved": false
+        },
+        "realModelCalls": 0,
+        "cleanedContainers": 4
+      }
+    },
+    "candidateFlags": {
+      "receiptSha256": "075dc31e878a19ff08ceb38bc2884c336fdc34329a672bd6728cd3ccfa6e7993",
+      "candidateSourceSha256": "a01966e0f37654da91fbcd17e6c1b83f9166642af50c5286a2f4b72c2f0b43f2",
+      "deployedBaseline": {
+        "programFiles": 157,
+        "programDigest": "28709ff69c47956d313012c6b827ced25429d4fb2deae59dbabe4710a7e74818",
+        "scannerManifestSha256": "6a3a04e4f0f81aaa77e4f312eb6cb90a28ebc75c6e0b1ee06b214dc48195c36c"
+      },
+      "trivyAdmissionIdentity": "67102d46834501e610bed2188e42390d1e3932aecb5ecd00014fa05e0e87d297",
+      "dependencyScope": "including-development-1",
+      "evaluation": {
+        "version": 1,
+        "scope": "fixed advisory/rule observations only",
+        "r3Qualified": false,
+        "projectSafe": false,
+        "findingStatus": "unverified",
+        "totals": {
+          "cases": 15,
+          "matchedExpectations": 13,
+          "mismatches": 0,
+          "unknown": 2
+        },
+        "cases": [
+          {
+            "id": "jinja-affected",
+            "category": "dependency",
+            "rule": "CVE-2024-56326",
+            "expected": "present",
+            "expectationSatisfied": true,
+            "observation": "expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "observed",
+            "ruleReported": true,
+            "otherObservations": 2
+          },
+          {
+            "id": "jinja-patched",
+            "category": "dependency",
+            "rule": "CVE-2024-56326",
+            "expected": "absent",
+            "expectationSatisfied": true,
+            "observation": "no-expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "observed",
+            "ruleReported": false,
+            "otherObservations": 1
+          },
+          {
+            "id": "lodash-affected",
+            "category": "dependency",
+            "rule": "CVE-2021-23337",
+            "expected": "present",
+            "expectationSatisfied": true,
+            "observation": "expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "observed",
+            "ruleReported": true,
+            "otherObservations": 4
+          },
+          {
+            "id": "lodash-patched",
+            "category": "dependency",
+            "rule": "CVE-2021-23337",
+            "expected": "absent",
+            "expectationSatisfied": true,
+            "observation": "no-expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "observed",
+            "ruleReported": false,
+            "otherObservations": 3
+          },
+          {
+            "id": "symfony-affected",
+            "category": "dependency",
+            "rule": "CVE-2024-50345",
+            "expected": "present",
+            "expectationSatisfied": true,
+            "observation": "expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "observed",
+            "ruleReported": true,
+            "otherObservations": 2
+          },
+          {
+            "id": "symfony-patched",
+            "category": "dependency",
+            "rule": "CVE-2024-50345",
+            "expected": "absent",
+            "expectationSatisfied": true,
+            "observation": "no-expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "observed",
+            "ruleReported": false,
+            "otherObservations": 2
+          },
+          {
+            "id": "lodash-dev",
+            "category": "dependency",
+            "rule": "CVE-2021-23337",
+            "expected": "present",
+            "expectationSatisfied": true,
+            "observation": "expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "observed",
+            "ruleReported": true,
+            "otherObservations": 4
+          },
+          {
+            "id": "jinja-range",
+            "category": "dependency",
+            "rule": "CVE-2024-56326",
+            "expected": "unresolved",
+            "expectationSatisfied": null,
+            "observation": "no-fixed-version",
+            "coverage": "unknown",
+            "componentIdentity": "unproven",
+            "ruleReported": false,
+            "otherObservations": 0
+          },
+          {
+            "id": "docker-root",
+            "category": "configuration",
+            "rule": "AVD-DS-0002",
+            "expected": "present",
+            "expectationSatisfied": true,
+            "observation": "expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "not-applicable",
+            "ruleReported": true,
+            "otherObservations": 1
+          },
+          {
+            "id": "docker-uid-zero",
+            "category": "configuration",
+            "rule": "AVD-DS-0002",
+            "expected": "present",
+            "expectationSatisfied": true,
+            "observation": "expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "not-applicable",
+            "ruleReported": true,
+            "otherObservations": 1
+          },
+          {
+            "id": "docker-nonroot",
+            "category": "configuration",
+            "rule": "AVD-DS-0002",
+            "expected": "absent",
+            "expectationSatisfied": true,
+            "observation": "no-expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "not-applicable",
+            "ruleReported": false,
+            "otherObservations": 1
+          },
+          {
+            "id": "docker-multistage",
+            "category": "configuration",
+            "rule": "AVD-DS-0002",
+            "expected": "absent",
+            "expectationSatisfied": true,
+            "observation": "no-expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "not-applicable",
+            "ruleReported": false,
+            "otherObservations": 1
+          },
+          {
+            "id": "secret-pattern",
+            "category": "secret",
+            "rule": "github-pat",
+            "expected": "present",
+            "expectationSatisfied": true,
+            "observation": "expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "not-applicable",
+            "ruleReported": true,
+            "otherObservations": 0
+          },
+          {
+            "id": "secret-placeholder",
+            "category": "secret",
+            "rule": "github-pat",
+            "expected": "absent",
+            "expectationSatisfied": null,
+            "observation": "target-coverage-unknown",
+            "coverage": "unknown",
+            "componentIdentity": "not-applicable",
+            "ruleReported": false,
+            "otherObservations": 0
+          },
+          {
+            "id": "token-copy",
+            "category": "secret",
+            "rule": "github-pat",
+            "expected": "present",
+            "expectationSatisfied": true,
+            "observation": "expected-rule-reported",
+            "coverage": "target-reported",
+            "componentIdentity": "not-applicable",
+            "ruleReported": true,
+            "otherObservations": 0
+          }
+        ]
+      },
+      "packageMetadataProbeSameEvaluation": true,
+      "managed": {
+        "directFindings": 30,
+        "copyFindings": 28,
+        "directSecretObserved": true,
+        "copySecretObserved": false,
+        "inputRedaction": {
+          "scope": "managed-copy",
+          "redactedFiles": 1,
+          "excludedEntries": 2,
+          "originalSecretCoverage": "not-proven"
+        },
+        "coverageComplete": false,
+        "report": {
+          "pages": 6,
+          "maxWireBytes": 5831,
+          "findings": 28,
+          "secretObserved": false
+        },
+        "realModelCalls": 0,
+        "cleanedContainers": 4
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "createdAt": "2026-11-04T03:23:57.008031+00:00",
+  "repo": "python/cpython",
+  "tag": "v3.12.15",
+  "commit": "e848e4b09ca4bc67c0041c9ce7526dae471d4c36",
+  "paths": [
+    "Lib/ast.py",
+    "Lib/collections/__init__.py",
+    "LICENSE"
+  ],
+  "candidateFiles": {
+    "scripts/review_quality_gate.mjs": "1dc6d416bcd483aef67b797d754185e25982689ce2a432d49e667464f58d29ec",
+    "docs/security-workspace/review-quality-policy.candidate.json": "e9b429fc21e5d86578333e6cd4cfad9ef2455be578b7ea37336fced14c788ad1",
+    "docs/security-workspace/ordinary-rules-combined.candidate.json": "c4357ddb0d52f3273525be08d8f5cdc1182523c1f9502497722bb6a44fe4ef94",
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": "2dfd384c175692b7972917832b545c7058ae968cad68be34e718c021ec06e49f",
+    "work/harness-purge-improved/package/lib/redteam/personal-python-evidence.mjs": "4b0963715d0acb45e1b66a599a41c6901f3d38d4176ae55c295bff2e8b852e02"
+  },
+  "scope": "bounded plain-string literal_eval and namedtuple API cases for CWE95; no memory/DoS/all-module safety claim",
+  "ruleOrThresholdAdjustmentAllowed": false
+}

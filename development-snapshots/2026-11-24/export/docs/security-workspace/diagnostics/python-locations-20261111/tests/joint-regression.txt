@@ -1,0 +1,57 @@
+✔ Joint panel retains an uncertain startup request and recovers it with read-only status, without replay (2.356542ms)
+✔ A paid PentAGI step is available after consent but never preselected by refresh (0.293625ms)
+✔ An authorized ZAP step is visible but network checks are never preselected on refresh (0.899916ms)
+✔ Joint panel pages Python evidence and keeps it separate from scanner findings (1.1965ms)
+✔ Deep mode starts only the explicitly planned S1 steps and retains its mode (0.590417ms)
+(node:15533) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Joint review hands off a fixed redacted source copy and accounts for excluded files (207.741084ms)
+✔ Project-local git fsmonitor cannot execute code while collecting snapshot metadata (127.672291ms)
+✔ Project-local Git clean filters cannot execute during snapshot metadata collection (122.689166ms)
+✔ Unknown remote outcome blocks a different request and restart never replays the original child (94.221084ms)
+✔ Cancel before the scanner dispatch cannot launch a new scanner process (18.718875ms)
+✔ Native joint tool binds to the current project and forwards only to the managed service (20.848042ms)
+✔ Kali handoff is an explicit saved scope choice and parent cancellation awaits the original remote task (304.742958ms)
+✔ Joint preset has a separate managed dispatch guard and preserves the restricted preset (0.743792ms)
+✔ Joint task pins scope, deduplicates start and records scanner evidence against the captured copy (107.675292ms)
+✔ Joint snapshots cannot rewrite or reopen an existing ordinary audit finding (86.152583ms)
+✔ Snapshot verification rejects additions as well as changed admitted files (63.310875ms)
+✔ Rejected starts have a durable read-only rejection receipt without creating tasks (17.636708ms)
+✔ Unified report retains parser diagnostics and explicitly reports bounded diagnostic coverage (81.928041ms)
+✔ Final joint wire rejects redaction-expanded results and altered task/hash/cursor identities (0.496416ms)
+✔ Joint coverage explanations may be redacted while structured coverage and control identities stay protected (0.384041ms)
+✔ Kali completeness describes the handed-off Python subset without claiming whole-project coverage (82.070958ms)
+✔ Redaction-expanded files are recorded as exclusions before adapter handoff (137.803875ms)
+✔ Completed Semgrep steps retain calibrated PHP coverage gaps and keep hits unverified (212.227833ms)
+✔ Joint views explain the known Trivy exclusion policy without inferring legacy coverage (17.453125ms)
+(node:15534) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ existing16 findings are explicitly not applicable and never launch a worker (1.6905ms)
+✔ eligible input carries exact full copy span and hash without importing source (1.822584ms)
+✔ eligible snapshot mismatch never reaches worker (0.725334ms)
+✔ eligible hash mismatch never reaches worker (0.859625ms)
+✔ eligible unbound mismatch never reaches worker (0.493333ms)
+✔ eligible label mismatch never reaches worker (0.449ms)
+✔ changed same-size source refuses anchored request (0.770834ms)
+✔ worker failure preserves original warning and reports unavailable (0.795292ms)
+✔ cleanup uncertainty must escape to block later tasks (1.190834ms)
+✔ joint collector preserves persisted scanner warning when namespace unavailable (96.977125ms)
+✔ joint collector preserves persisted scanner warning when namespace stop-unknown (86.940833ms)
+✔ joint collector preserves persisted scanner warning when namespace shutdown-stop-unknown (90.301333ms)
+✔ real AST worker output projects only copy-bound unverified structure (41.504541ms)
+✔ invalid worker output cannot become evidence: r=>r.observations[0].anchor.offset++ (40.544708ms)
+✔ invalid worker output cannot become evidence: r=>r.observations[0].sourceSha256='c'.repeat(64) (38.744917ms)
+✔ invalid worker output cannot become evidence: r=>r.observations[0].disposition='confirmed' (37.796ms)
+✔ invalid worker output cannot become evidence: r=>r.observations.push(r.observations[0]) (38.747375ms)
+✔ invalid worker output cannot become evidence: r=>r.checks=0 (38.64875ms)
+✔ a preceding assignment on the same line remains structural unverified evidence (38.283292ms)
+✔ class method parameter observation reaches the existing artifact contract without confirming external input (40.924709ms)
+✔ excessive source writes remain unmatched instead of discarding valid worker output (41.2985ms)
+ℹ tests 45
+ℹ suites 0
+ℹ pass 45
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1779.75775

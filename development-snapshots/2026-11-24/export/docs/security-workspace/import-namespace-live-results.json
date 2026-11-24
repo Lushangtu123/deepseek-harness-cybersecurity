@@ -1,0 +1,138 @@
+{
+  "state": "reviewed-real-scan-component-acceptance-complete",
+  "createdAt": "2026-11-11T03:55:37.705756+00:00",
+  "productSourceChanged": false,
+  "candidateProgramFiles": 173,
+  "dailyProgramFiles": 169,
+  "dailyDatabasesLogicallyMatched": 42,
+  "scannerInvocations": 2,
+  "successfulFinalScannerInvocations": 1,
+  "namespaceDiagnosticInvocations": 2,
+  "businessModelInvocations": 0,
+  "qualificationCasesAdded": 0,
+  "ordinaryR3Qualified": false,
+  "deployed": false,
+  "tests": {
+    "reusedProofContract": 4,
+    "finalScanFiles": 18,
+    "finalFindings": 9,
+    "finalBoundLocations": 9,
+    "finalImportArtifacts": 4,
+    "finalNamespaceArtifacts": 9,
+    "chromeFindingPages": 5,
+    "chromeEvidencePages": 4,
+    "downloadFiveSectionsMatched": true,
+    "refreshOriginalTaskRestored": true,
+    "singleStartAfterRefresh": true
+  },
+  "rootCause": {
+    "component": "acceptance staging only",
+    "firstWorkerMode": "0600",
+    "sandboxUid": 65534,
+    "actualError": "python3 cannot open /review.py: Permission denied",
+    "fix": "only bind-mounted fixed worker0644; private parent directory0700 and container restrictions unchanged",
+    "sameInputDiagnosticAfterFix": "9 checks and9 observations, cleanupVerified true",
+    "initialFailedTaskRetained": true,
+    "newNumberedFullRunPassed": true
+  },
+  "finalTask": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+  "finalSnapshot": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+  "allFindingsAndArtifacts": "unverified",
+  "newAuthoredSourceHashes": 0,
+  "allSourcesAlreadyInLedger": true,
+  "nativeChromeComponentAndVmRpcTested": true,
+  "fullHarnessChatModelChainTested": false,
+  "fullHarnessReleaseNotAsserted": true,
+  "cleanup": {
+    "bothVmTemporaryRootsRemoved": true,
+    "bothGuestPortsClosed": true,
+    "bothOwnedProcessesAbsent": true,
+    "bothHostRelaysClosed": true,
+    "dailyProgramDatabasePinsConfigsMatched": true
+  },
+  "limits": [
+    "Production component was hosted by an isolated service, not the full Harness chat/plugin router.",
+    "No project source executed, real Flask request or third-party import/builtin identity proven.",
+    "Rules and observed running Docker inputs are measured local evidence, not cryptographic attestation.",
+    "This reused synthetic source set is not an independent R3 benchmark.",
+    "Counts0 for business model calls exclude required external code review calls."
+  ],
+  "review": {
+    "model": "DeepSeek-V4.1-Flash",
+    "effort": "high",
+    "promptSha256": "934edac8eb8d426e2288856d262c0f1d75c235328f4cd0f502cc0ee5512ce326",
+    "claudeState": "failed-401-authentication-expired",
+    "receiptSha256": "bfc5d6830b8bf5137dc784a246168009a3af0ed862732d50e241b4d5fb49a132",
+    "reportSha256": "c34e6a533f758e226c2e0efa438867bc027f3c9a8a0398315c7fbe18990d4122",
+    "triage": {
+      "at": "2026-11-11T04:02:24.866667+00:00",
+      "scopeBlockers": 0,
+      "canArchive": true,
+      "reportSha256": "c34e6a533f758e226c2e0efa438867bc027f3c9a8a0398315c7fbe18990d4122",
+      "actualModel": "DeepSeek-V4.1-Flash",
+      "effort": "high",
+      "finishReason": "stop",
+      "reviewIsStatic": true,
+      "verdict": "limited-step-pass-with-record-clarifications",
+      "items": [
+        {
+          "id": "staging-permissions",
+          "classification": "confirmed-acceptance-scaffold-defect-closed",
+          "basis": "600→644 mode-only correction, same content SHA and9 inputs; direct sandbox9/9 success followed by fresh numbered actual scanner/Chrome run. Product source unchanged."
+        },
+        {
+          "id": "host-relay-close-record",
+          "classification": "review-material-omission-supplemented",
+          "basis": "Original pack omitted direct host relay proof. Supplemental socket probes record ECONNREFUSED61 on both exact owned ports; both original exec sessions returned exit0. OS PIDs were not captured.",
+          "supplement": "host-relay-cleanup.json",
+          "modelSawSupplement": false
+        },
+        {
+          "id": "raw-download-and-final-evidence",
+          "classification": "review-material-omission-supplemented",
+          "basis": "Raw34544-byte downloaded report is archived with same hash as reviewed download summary and exact object equality to actual backend report. Both final guest evidence objects are recoverable from original cleanup-full responses; derived JSON is logical recovery, not original guest-byte hash.",
+          "supplement": "supplemental-materials.json",
+          "modelSawSupplement": false
+        },
+        {
+          "id": "wording-boundaries",
+          "classification": "record-clarification-applied",
+          "basis": "Final report limits completion to selected Semgrep over18 fixed files and states ordinary finding table0 rows alongside9 unverified scanner warnings. Full Harness chat/model chain and R3 remain untested/unqualified."
+        },
+        {
+          "id": "browser-raw-trace",
+          "classification": "retained-evidence-limit",
+          "basis": "5/4 page boundaries are native CUA observations summarized in browser-observations, supported by backend RPC events and full report. Raw screenshots/AX trees not retained for independent re-evaluation; unrelated browser content is excluded."
+        },
+        {
+          "id": "observer-errors",
+          "classification": "retained-diagnostic",
+          "basis": "No-such-object inspect errors remain in proofs. Later running Docker observation passed controls and source checks. Pre-create race is plausible but per-error timestamps were not retained; exact timing not proven."
+        },
+        {
+          "id": "scope",
+          "classification": "outside-step-unresolved",
+          "items": [
+            "full Harness chat/plugin/model chain acceptance",
+            "candidate deployment",
+            "independent R3 admission",
+            "runtime request/import/builtin identity",
+            "remaining language and data-flow coverage"
+          ]
+        }
+      ],
+      "noProductPatchNeeded": true,
+      "ordinaryR3Qualified": false,
+      "deployed": false
+    },
+    "cleanup": {
+      "removed": true,
+      "workerStopped": true,
+      "dailyProgramUnchanged": true,
+      "dailyProgramFilesChecked": 169,
+      "credentialCopiedToHost": false,
+      "scope": "only owned completed model-review scratch"
+    }
+  },
+  "sourceLedgerEntries": 295
+}

@@ -1,0 +1,22 @@
+{
+  "downloadBytes": 11781,
+  "sha256": "bd01ba25d59e286e299294caa2bb5053ecd9b4a71c114e2fbf2d231fa67df266",
+  "exactJSONMatchesModelWireReport": true,
+  "sections": {
+    "findings": 7,
+    "files": 5,
+    "exclusions": 0,
+    "diagnostics": 0,
+    "artifacts": 0
+  },
+  "namespaceReview": {
+    "version": 1,
+    "state": "not-applicable",
+    "eligible": 0,
+    "checked": 0,
+    "observations": 0,
+    "unmatched": 0,
+    "retained": 0,
+    "cleanupVerified": true
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "repository": "xorbitsai/inference",
+  "advisory": "https://github.com/xorbitsai/inference/security/advisories/GHSA-x2rj-828p-hx9m",
+  "cve": "CVE-2026-61539",
+  "sources": [
+    {
+      "file": "before.py",
+      "commit": "4cefcaa1e63d7e29d26bcd4be96cb267da113871",
+      "path": "xinference/model/llm/tool_parsers/llama3_tool_parser.py",
+      "gitBlobSha1": "de87ad7ffd9358d8d80eaf0913f8d653116be6dd",
+      "url": "https://github.com/xorbitsai/inference/blob/4cefcaa1e63d7e29d26bcd4be96cb267da113871/xinference/model/llm/tool_parsers/llama3_tool_parser.py",
+      "encoding": "utf-8",
+      "sha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+      "bytes": 2787,
+      "alreadyInLedger": false,
+      "method": {
+        "startLine": 26,
+        "endLine": 49,
+        "astSha256": "bd2328077cb9fac0acc3fab36bab2f80d35d6d89992b83e49580a074f1663719",
+        "calls": [
+          {
+            "line": 46,
+            "name": "eval",
+            "args": 3
+          }
+        ]
+      }
+    },
+    {
+      "file": "fixed.py",
+      "commit": "1b3d220f342ce68d34cec4586d9409d457dadc42",
+      "path": "xinference/model/llm/tool_parsers/llama3_tool_parser.py",
+      "gitBlobSha1": "bba9aa283faabfaea0e9260cd672305734c24dbe",
+      "url": "https://github.com/xorbitsai/inference/blob/1b3d220f342ce68d34cec4586d9409d457dadc42/xinference/model/llm/tool_parsers/llama3_tool_parser.py",
+      "encoding": "utf-8",
+      "sha256": "4e09cd7602e0e8186c47b92f1562a97b44a3a9325fab718ec64cf5c2f5ea2d6a",
+      "bytes": 3416,
+      "alreadyInLedger": false,
+      "method": {
+        "startLine": 28,
+        "endLine": 62,
+        "astSha256": "81863e0b019e46cb963413718089f06690f985917f36d3de8a0e98051333edbd",
+        "calls": [
+          {
+            "line": 49,
+            "name": "json.loads",
+            "args": 1
+          },
+          {
+            "line": 56,
+            "name": "ast.literal_eval",
+            "args": 1
+          }
+        ]
+      }
+    }
+  ],
+  "trust": "Pinned GitHub connector content identity and maintainer advisory. Commit signature not independently verified."
+}

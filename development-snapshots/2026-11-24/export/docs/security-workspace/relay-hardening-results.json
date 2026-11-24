@@ -1,0 +1,123 @@
+{
+  "date": "2026-11-08",
+  "scope": [
+    "RELAY-SECOND-WAIT-CLEANUP",
+    "RELAY-CONNECTION-THREAD-LIMIT",
+    "FINAL-CLEANUP-REVISION-CHROME"
+  ],
+  "sourceHashes": {
+    "scripts/harness_acceptance_relay.py": "d335273a3d1e254b48a4af29a06728f99dbb27cb03ac81bd12e1cf982039f277",
+    "scripts/tests/harness_acceptance_relay_test.py": "ab138e044daed5c03b90e44dc16d436ababd70eb5639024577f7996c2b158d3c"
+  },
+  "verification": {
+    "sourceHashes": {
+      "scripts/harness_acceptance_relay.py": "d335273a3d1e254b48a4af29a06728f99dbb27cb03ac81bd12e1cf982039f277",
+      "scripts/tests/harness_acceptance_relay_test.py": "ab138e044daed5c03b90e44dc16d436ababd70eb5639024577f7996c2b158d3c"
+    },
+    "regressionsPassed": 4,
+    "initialExpectedFailures": 2,
+    "finalProbeRequests": 24,
+    "finalProbeFailures": 0,
+    "firstEightHandlerProbeFailureCount": 19,
+    "maxConnectionHandlers": 16,
+    "maxSshExecChannels": 8,
+    "remainingPids": [],
+    "chromeFinalSourceMatched": true,
+    "chromeForceReloadsPassed": 3,
+    "vmCleanup": {
+      "stopped": true,
+      "dailyProgramFiles": 169,
+      "dailyProgramUnchanged": true,
+      "dailyConfigurationUnchanged": true,
+      "installedSdkUnchanged": true,
+      "temporaryDirectoryRemoved": true
+    },
+    "hostRelayClosed": true,
+    "dailyDeployed": false,
+    "wholeProductReleaseQualified": false
+  },
+  "browser": {
+    "browser": "Google Chrome native accessibility UI",
+    "sourceIdentity": "source-intent.json",
+    "syntheticProject": "Harness QA Scoring Caps",
+    "noticeConfirmedForThisInstance": true,
+    "sideScoreFirstReadSucceeded": true,
+    "fullWindowLoaded": true,
+    "projectPoints": 9,
+    "countedHits": 499,
+    "firstPagePoints": 8,
+    "lastPagePoints": 1,
+    "forceReloads": [
+      {
+        "cycle": 1,
+        "score9": true,
+        "resourceWarning": false,
+        "readFailure": false
+      },
+      {
+        "cycle": 2,
+        "score9": true,
+        "resourceWarning": false,
+        "readFailure": false
+      },
+      {
+        "cycle": 3,
+        "score9": true,
+        "resourceWarning": false,
+        "readFailure": false
+      }
+    ],
+    "qaTabsClosed": true,
+    "modelRequestsSubmitted": 0
+  },
+  "externalReview": {
+    "state": "completed-and-triaged",
+    "remainingScopedP1P2Blockers": 0,
+    "promptSha256": "0b5303b39ceffc92f95af22f8958de71043f6cec8df38dc0943650c238bf3d7b",
+    "claudeState": "weekly-quota-exhausted",
+    "reviewer": "DeepSeek V4.1 Flash",
+    "model": "deepseek-flash",
+    "effort": "high",
+    "finishReason": "stop",
+    "reportSha256": "aab5f217aeaeaa49ce4d47f9801b4bffebe18e4592e47a9cde7791060c34af8f",
+    "receiptSha256": "4c39998cd72991f4903084c41d6b21e4db33863674688b3c893ae7f122380370",
+    "unchangedUserPacket": true,
+    "temporaryReviewCopyRemoved": true,
+    "triageSha256": "0eceba289a0e4e921231d5a922f277acde74669c953601f9f49940960cc4aec5"
+  },
+  "followUp": [
+    {
+      "id": "RELAY-ADMISSION-WAIT",
+      "status": "open",
+      "scope": "non-blocking availability",
+      "detail": "No separate timeout or disconnect cancellation while a bounded handler waits for one of eight forwarding permits."
+    },
+    {
+      "id": "RELAY-LIVE-EXEC-COUNTERS",
+      "status": "pending",
+      "detail": "Eight-channel limit is source-verified. Direct live SSH exec counting has not been added."
+    },
+    {
+      "id": "DAILY-FIRST-LOAD",
+      "status": "pending"
+    },
+    {
+      "id": "SCORE-MODEL-WINDOW-EXPLANATION",
+      "status": "pending"
+    },
+    {
+      "id": "SSH-RESET-LOWER-LAYER",
+      "status": "open"
+    },
+    {
+      "id": "SCORE-SIDEBAR-HISTORICAL-FAILURE",
+      "status": "open"
+    },
+    {
+      "id": "ORDINARY-R3",
+      "status": "pending"
+    }
+  ],
+  "dailyDeployed": false,
+  "wholeProductReleaseQualified": false
+}

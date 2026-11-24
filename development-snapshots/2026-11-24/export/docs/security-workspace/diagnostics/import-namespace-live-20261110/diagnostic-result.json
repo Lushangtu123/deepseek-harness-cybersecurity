@@ -1,0 +1,14 @@
+{
+  "workerMode": "0o600",
+  "workerUid": 1000,
+  "nodeExitCode": 0,
+  "diagnostic": {
+    "state": "failed",
+    "code": 2,
+    "name": "Error",
+    "message": "Command failed: /usr/bin/sudo -n /usr/bin/docker start --attach --interactive e15d2e3e64193d580069f2b6565919cb4128fec278cea9df81da395574ed2fd0\npython3: can't open file '/review.py': [Errno 13] Permission denied\n",
+    "stdout": "",
+    "stderr": "python3: can't open file '/review.py': [Errno 13] Permission denied\n"
+  },
+  "nodeStderr": ""
+}

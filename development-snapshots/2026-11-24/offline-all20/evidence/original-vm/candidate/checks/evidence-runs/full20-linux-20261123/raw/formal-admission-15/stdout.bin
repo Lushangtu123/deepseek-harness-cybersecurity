@@ -1,0 +1,16 @@
+PASS normal-preparation-target-v2
+PASS admission-identity-mismatch-rejected-before-resources
+PASS plan-write-failure-prevents-stage-creation
+PASS prepare-id-query-status-and-recover-no-replay
+PASS cli-exclusivity-and-preserved-attempt-selector
+PASS plan-written-before-stage-config-and-create
+PASS final-stage-absent-present-permission-link-reappearance
+PASS cleanup-unconfirmed-retains-reservation
+PASS different-resource-evidence-rejected-zero-destruction
+PASS repeat-recover-no-replay-and-busy-lock
+PASS attempt-budget-spent-and-no-refund
+PASS judge-valid-data-echo-wrong-function-q4
+PASS judge-corruptions-clear-unknown-not-exception
+PASS judge-end-lf-trailer-boundary-and-strict-types
+PASS preparation-does-not-consume-target-attempt
+{"failed": [], "passed": 15, "total": 15}

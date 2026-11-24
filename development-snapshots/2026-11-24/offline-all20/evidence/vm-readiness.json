@@ -1,0 +1,15 @@
+{
+  "batchSubmitted": false,
+  "executable": "/usr/bin/python3",
+  "executableSha256": "c86f21d0da9290ece2d7d49a3f7ed52aed59cb029abdf0ea25c79634f6cbe960",
+  "floorBytes": 536870912,
+  "freeBytes": 33861001216,
+  "guestFilesWritten": 0,
+  "kind": "readonly-vm-readiness",
+  "machine": "aarch64",
+  "platform": "linux",
+  "pythonVersion": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "resolvedExecutable": "/usr/bin/python3.12",
+  "rootState": "absent",
+  "uid": 1000
+}

@@ -1,0 +1,33 @@
+{
+  "ok": true,
+  "temporaryRemoved": true,
+  "scannerManifestUnchanged": true,
+  "sourceIdentities": [
+    {
+      "path": "input_one.py",
+      "sha256": "683c5916501746486c7ffd2974323e83f912fab2cf7360db6d4063583a11b6d5"
+    },
+    {
+      "path": "input_two.py",
+      "sha256": "fd86e48da90999bf795de59e4dab86e84de2236386bd3053206eb42b5de12d82"
+    },
+    {
+      "path": "stdlib_ast.py",
+      "sha256": "b515c23dbbc459329d3b802a3aac742cc456d7472e66f7ed6e9dc97e40596d7d"
+    },
+    {
+      "path": "stdlib_collections.py",
+      "sha256": "7fdb04dd248ab37909f46d2085bfee56b32d7e91e49ad3a2fad99c453295659b"
+    }
+  ],
+  "reports": {
+    "baseline": {
+      "state": "completed",
+      "artifacts": []
+    },
+    "combined": {
+      "state": "completed",
+      "artifacts": []
+    }
+  }
+}

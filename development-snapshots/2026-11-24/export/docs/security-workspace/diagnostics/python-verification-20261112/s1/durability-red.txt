@@ -1,0 +1,14 @@
+.....F...
+======================================================================
+FAIL: test_reservation_syncs_parent_directory_before_returning (__main__.ModelCountsTest.test_reservation_syncs_parent_directory_before_returning)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.py", line 45, in test_reservation_syncs_parent_directory_before_returning
+    self.assertIn(True,seen)
+    ~~~~~~~~~~~~~^^^^^^^^^^^
+AssertionError: True not found in [False]
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.541s
+
+FAILED (failures=1)

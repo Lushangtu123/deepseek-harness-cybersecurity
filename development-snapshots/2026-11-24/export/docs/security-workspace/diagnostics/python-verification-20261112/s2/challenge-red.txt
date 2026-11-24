@@ -1,0 +1,23 @@
+....E.F.
+======================================================================
+ERROR: test_probe_challenge_is_not_a_fixed_source_constant (__main__.VerifyTest.test_probe_challenge_is_not_a_fixed_source_constant)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_execution_verify.test.py", line 30, in test_probe_challenge_is_not_a_fixed_source_constant
+    m=self.api();a=m.probes_for('a'*64);b=m.probes_for('b'*64)
+                   ^^^^^^^^^^^^
+AttributeError: module 'execution_verify' has no attribute 'probes_for'
+
+======================================================================
+FAIL: test_source_cannot_replace_output_or_write_raw_trace (__main__.VerifyTest.test_source_cannot_replace_output_or_write_raw_trace)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_execution_verify.test.py", line 28, in test_source_cannot_replace_output_or_write_raw_trace
+    self.assertFalse(m.passive_source(source))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.033s
+
+FAILED (failures=1, errors=1)

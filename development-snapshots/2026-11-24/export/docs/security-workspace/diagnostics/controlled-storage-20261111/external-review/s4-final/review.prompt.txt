@@ -1,0 +1,1591 @@
+Read-only final acceptance review, no tools/MCP/hooks/plugins. No product-code changes since complete scoped code reviews; current source hashes and prior receipt binding below. Review validation evidence, VM script correctness and claims; report only concrete scoped blocker or material limitation, concise<=1000words. No R3/fullproductaudit/dailydeployment claim. Current LinuxVM197 tests passed and full real Docker normalreview→archive→private7dayrecycle→originalpathstatus/recover→duplicatequery→restore originalrecordbytes. RootCIDactualuid0mode0644readable exactmatch, no chown/sudo for file read. Read-only Docker queries use existing VM runner elevation, no _cleanup/rm in archive. Tests syntheticalreadyused, zero independentR3 samples. First196 result predates finalbusyinterface; only this197result is final bytes. Code reviewed in parts A/B/C and fixing6b94b00f... finaltinybusyfixc67f116c7ff44d7e77742a3e4fab15d44a4c5a5f9621ddcb4841076516bacd42. Daily169program42DB/config preserved by fixedidentity comparison. All VM tasks in private scratch, no daily installation or GitHub.
+
+{
+  "version": 1,
+  "scope": "offline candidate and isolated VM synthetic maintenance acceptance",
+  "state": "passed",
+  "testCounts": {
+    "launcher": 87,
+    "storage": 29,
+    "archive": 27,
+    "nodeGate": 45,
+    "batch": 9
+  },
+  "totalTests": 197,
+  "vmResultSha256": "f78c63d1ef245d358e5254c0dff6295cd7a5e44c6d506432f8ca68f2ba673d3d",
+  "sourceChecksCurrent": {
+    "scripts/review_quality_gate.mjs": true,
+    "scripts/reviewer_snapshot.py": true,
+    "scripts/reviewer_snapshot.test.py": true,
+    "scripts/reviewer_storage.py": true,
+    "scripts/reviewer_storage.test.py": true,
+    "scripts/reviewer_archive.test.py": true,
+    "scripts/eval_evidence_batch.test.py": true,
+    "work/harness-purge-improved/tests/review-quality-gate.test.mjs": true,
+    "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": true,
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": true,
+    "work/harness-purge-improved/package/scripts/eval_import_review.py": true
+  },
+  "sourceSha256": {
+    "scripts/review_quality_gate.mjs": "99aea3894238a34f17ee63b95a5c216b565a23a61aa1de0c2e8093877a55f5a0",
+    "scripts/reviewer_snapshot.py": "10e152e231e5d43def8f1edace15edcffd4bae088c22f1790b92b5434385c55e",
+    "scripts/reviewer_snapshot.test.py": "b8b61b77bf6d435970fd19345b842fb7aceae2e4fc95b1efdbd0a1494044b06c",
+    "scripts/reviewer_storage.py": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202",
+    "scripts/reviewer_storage.test.py": "4f5180ec503cfde1642f90378de0c5099b27ca07cf5b0357ba6a46ebe425d326",
+    "scripts/reviewer_archive.test.py": "66298d7727fb4f99e28d8ccc654780fa4bbfbbb6b9c63931c03cfa157677cdda",
+    "scripts/eval_evidence_batch.test.py": "684293ec1ea35fa1590f729963101f78750fb6a2c8ef39053c33e3b954b51aab",
+    "work/harness-purge-improved/tests/review-quality-gate.test.mjs": "23b969babf3ea44819df30fed97460f6d3fc45c5e6a2015e98079f44ceec1f03",
+    "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+    "work/harness-purge-improved/package/scripts/eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843",
+    "normal-live.py": "2516765a2e3d80d09ea2f76eebc9ce5cdec0a8dec02cf010ddfb23126370f8ef",
+    "storage-live.py": "8d17ca59c69355266f3e55ad26b8ce9ac9012bd9e6e1a36222b963804b30a94c"
+  },
+  "dailyProtected": {
+    "programFiles": 169,
+    "projectDatabasesLogical": 42,
+    "configPinsRuntimeUnchanged": true
+  },
+  "native": {
+    "state": "completed",
+    "sourceOriginalBytesMatched": true,
+    "rootCid": {
+      "uid": 0,
+      "mode": 420,
+      "readable": true,
+      "contentMatched": true
+    },
+    "duplicateQueryLogsUnchanged": true,
+    "noNewAnalysisReceipt": true,
+    "newIndependentSamples": 0,
+    "r3Qualified": false
+  },
+  "transactionId": "fafc41eca4034284b8ce29a666e1a389",
+  "originalRecordSha256": "8be41eeb222c9f7dd0e9321ca19e837d9d56925e14e92ea66025e0e8437e3ff1",
+  "readBytes": 97037,
+  "defaultPolicy": {
+    "budgetBytes": 268435456,
+    "cacheRoot": "/home/purge/.cache/r3-controlled-storage-090957ce6458/normal-attempts",
+    "controlRoot": "/home/purge/.cache/r3-controlled-storage-090957ce6458/.harness-storage-88e567c5b0dc1741",
+    "maxArchiveAttempts": 8,
+    "maxArchiveBytes": 67108864,
+    "minFreeBytes": 536870912,
+    "minimumAgeDays": 0,
+    "planTtlSeconds": 900,
+    "recycleSeconds": 604800,
+    "reservationOverheadBytes": 100663296,
+    "uid": 1000,
+    "version": 1
+  },
+  "dependencyMutationRejected": true,
+  "dailyDeployment": false,
+  "githubPush": false,
+  "hostPermissionsExpanded": false,
+  "r3Qualified": false,
+  "finalReview": "pending"
+}
+CURRENT SOURCE MANIFEST
+{
+  "scripts/reviewer_storage.py": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202",
+  "scripts/reviewer_snapshot.py": "10e152e231e5d43def8f1edace15edcffd4bae088c22f1790b92b5434385c55e",
+  "scripts/reviewer_archive.test.py": "66298d7727fb4f99e28d8ccc654780fa4bbfbbb6b9c63931c03cfa157677cdda",
+  "scripts/reviewer_storage.test.py": "4f5180ec503cfde1642f90378de0c5099b27ca07cf5b0357ba6a46ebe425d326",
+  "scripts/reviewer_snapshot.test.py": "b8b61b77bf6d435970fd19345b842fb7aceae2e4fc95b1efdbd0a1494044b06c",
+  "scripts/review_quality_gate.mjs": "99aea3894238a34f17ee63b95a5c216b565a23a61aa1de0c2e8093877a55f5a0",
+  "work/harness-purge-improved/tests/review-quality-gate.test.mjs": "23b969babf3ea44819df30fed97460f6d3fc45c5e6a2015e98079f44ceec1f03",
+  "docs/security-workspace/reviewer-controlled-storage.md": "6f7f0476ecffb52c32e9130ca860a07858be6e16cbf7cbc0654b422e99833c85"
+}
+
+ACTUAL ACCEPTANCE SCRIPT worker.py SHA 1e373f21e2f1d9a5269687da4709896a849dcc2d5bfe80e0c43d11d601e11adc
+from pathlib import Path
+from hashlib import sha256
+import ast,base64,json,os,shutil,sqlite3,subprocess,traceback
+root=Path(__file__).resolve().parent
+payload=json.loads((root/'input.json').read_bytes())
+def save(value):
+ p=root/'status.tmp';p.write_text(json.dumps(value));p.replace(root/'status.json')
+save({'state':'running'})
+try:
+ assert os.geteuid()==1000
+ for name,encoded in payload['files'].items():
+  p=root/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(base64.b64decode(encoded));assert sha256(p.read_bytes()).hexdigest()==payload['checks'][name]
+ home=Path('/home/purge');daily=home/'.dsh-improved';installed=home/'tools/dsh-purge-personal-1.1.77-personal.1';runtime=home/'tools/harness-improved-runtime/node_modules'
+ exec(compile(payload['identityCode'],'<fixed-identity>','exec'))
+ before=identity()
+ outputs={}
+ cases=[('gate',[str(home/'.local/node/bin/node'),'--test',str(root/'work/harness-purge-improved/tests/review-quality-gate.test.mjs')],35),('python',['/usr/bin/python3','-I','-B',str(root/'scripts/reviewer_snapshot.test.py')],35),('storage',['/usr/bin/python3','-I','-B',str(root/'scripts/reviewer_storage.test.py')],35),('archive',['/usr/bin/python3','-I','-B',str(root/'scripts/reviewer_archive.test.py')],35),('batch',['/usr/bin/python3','-I','-B',str(root/'scripts/eval_evidence_batch.test.py')],20),('normal',['/usr/bin/python3','-I','-B',str(root/'normal-live.py')],60),('storage-live',['/usr/bin/python3','-I','-B',str(root/'storage-live.py')],90)]
+ for label,argv,seconds in cases:
+  save({'state':'running','phase':label})
+  run=subprocess.run(argv,cwd=root,env={**os.environ,'NODE_OPTIONS':''},stdin=subprocess.DEVNULL,capture_output=True,text=True,timeout=seconds)
+  (root/(label+'.stdout')).write_text(run.stdout);(root/(label+'.stderr')).write_text(run.stderr)
+  outputs[label]={'exitCode':run.returncode,'stdout':run.stdout,'stderr':run.stderr}
+  if run.returncode:raise ValueError(label+' failed: '+run.stderr[-2500:])
+ assert all(sha256((root/name).read_bytes()).hexdigest()==want for name,want in payload['checks'].items())
+ assert identity()==before
+ result={'state':'completed','outputs':outputs,'sourceSha256':payload['checks'],'dailyProgramFilesMatched':len(before['program']),'dailyDatabasesLogicallyMatched':len(before['databases']),'dailyConfigPinsRuntimeMatched':True}
+ (root/'result.json').write_text(json.dumps(result));save({'state':'completed','resultSha256':sha256((root/'result.json').read_bytes()).hexdigest()})
+except BaseException as error:
+ save({'state':'failed','problem':type(error).__name__,'detail':str(error)[-3000:],'trace':traceback.format_exc()[-4000:],'scratchRetained':True})
+
+
+ACTUAL ACCEPTANCE SCRIPT normal-live.py SHA 2516765a2e3d80d09ea2f76eebc9ce5cdec0a8dec02cf010ddfb23126370f8ef
+from pathlib import Path
+from hashlib import sha256
+import importlib.util,json,subprocess,sys
+root=Path(__file__).resolve().parent
+script=root/'scripts/reviewer_snapshot.py'
+spec=importlib.util.spec_from_file_location('snap',script);api=importlib.util.module_from_spec(spec);spec.loader.exec_module(api)
+package=root/'work/harness-purge-improved/package/scripts'
+image='sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7'
+manifest=api.freeze(package,root/'snapshot',image)
+expected=api.digest(manifest)
+# Reuse existing authored unit-test controls; no independent R3 samples.
+import ast
+tree=ast.parse((root/'scripts/eval_evidence_batch.test.py').read_text())
+values={n.targets[0].id:ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and isinstance(n.targets[0],ast.Name) and n.targets[0].id in ['CALLER','CALLEE']}
+sources=root/'project';sources.mkdir()
+for name,value in [('routes.py',values['CALLER']),('evaluator.py',values['CALLEE'])]:(sources/name).write_text(value)
+scan={'results':[{'check_id':'policy.harness.python.eval','path':'/src/routes.py','start':{'line':6}}]}
+(root/'scan.json').write_text(json.dumps(scan))
+request={'files':{p.name:sha256(p.read_bytes()).hexdigest() for p in sources.iterdir()},'scanSha256':sha256((root/'scan.json').read_bytes()).hexdigest(),'discoverImports':True}
+(root/'manifest.json').write_text(json.dumps(request))
+(root/'snapshot-input.json').write_text(json.dumps(manifest))
+node='/home/purge/.local/node/bin/node'
+prep="""import {readFileSync,writeFileSync} from 'node:fs';
+import {freezeReviewInputs,digest} from './scripts/review_quality_gate.mjs';
+const snapshot=JSON.parse(readFileSync('./snapshot-input.json'));
+const request=JSON.parse(readFileSync('./manifest.json'));
+const dataset={version:2,cases:[{id:'fixture',language:'python',cwe:'CWE-95',truth:'positive',sourceSha256:request.files['routes.py'],location:{line:6,column:1},oracle:{kind:'authored-control',reference:'existing unit-test CALLER'},selection:{method:'synthetic-technical-fixture',blind:false,qualificationEligible:false}}]};
+const policy={version:2,role:'candidate-evaluation',categories:{'python/CWE-95':{minimumPositive:1,minimumNegative:1,minimumRawRecall:1,maximumReviewedFalsePositiveRate:0,maximumFalseExclusionRate:0,maximumUnknownRate:0,minimumConfirmedRecall:1}}};
+const ledger={version:1,sources:[]},identity={scanner:'a'.repeat(64),rules:'b'.repeat(64),reviewer:digest(snapshot)};
+const freeze=freezeReviewInputs(dataset,policy,identity,ledger,snapshot);
+writeFileSync('binding.json',JSON.stringify({dataset,policy,ledger,identity,freeze,datasetSha256:digest(dataset),freezeSha256:digest(freeze)}));
+"""
+(root/'prep.mjs').write_text(prep)
+subprocess.run([node,str(root/'prep.mjs')],cwd=root,check=True,capture_output=True)
+binding=json.loads((root/'binding.json').read_bytes())
+from datetime import datetime,timezone
+started=datetime.now(timezone.utc).isoformat()
+result=api.execute(root/'snapshot',expected,sources,root/'manifest.json',root/'scan.json',binding['datasetSha256'],binding['freezeSha256'],attempts_root=root/'normal-attempts')
+assert result['report']['guardChecks']==1 and result['report']['importChecks']==1
+assert result['temporaryRemoved']
+(root/'execution.json').write_text(json.dumps(result))
+finish="""import {readFileSync,writeFileSync} from 'node:fs';
+import {evaluateReviewQuality,digest} from './scripts/review_quality_gate.mjs';
+const binding=JSON.parse(readFileSync('binding.json')),execution=JSON.parse(readFileSync('execution.json'));
+const run={version:2,identity:binding.identity,startedAt:process.argv[2],datasetSha256:binding.datasetSha256,freezeSha256:binding.freezeSha256,reviewerExecutions:[execution.reviewerExecution],outputs:[{id:'fixture',raw:'hit',decision:'unknown',evidence:[],location:{line:6,sourceSha256:binding.dataset.cases[0].sourceSha256},language:'python',cwe:'CWE-95'}]};
+const result=evaluateReviewQuality(binding.dataset,run,binding.freeze,binding.policy,binding.ledger);
+if(result.blockers.some(x=>x.startsWith('reviewer-')))throw Error(JSON.stringify(result.blockers));
+if(result.state!=='blocked'||result.r3Qualified||result.categories['python/CWE-95'].total!==0)throw Error('Synthetic control incorrectly qualified');
+if(result.reviewerCoverage.missingCaseIds.length||result.reviewerCoverage.coveredCaseIds.join(',')!=='fixture')throw Error('Actual receipt failed source coverage');
+const wrong=structuredClone(run);wrong.reviewerExecutions[0].inputFiles['sources/routes.py']='9'.repeat(64);wrong.reviewerExecutions[0].inputSha256=digest(wrong.reviewerExecutions[0].inputFiles);
+const unrelated=evaluateReviewQuality(binding.dataset,wrong,binding.freeze,binding.policy,binding.ledger);
+if(!unrelated.blockers.includes('reviewer-execution-coverage-incomplete')||unrelated.reviewerCoverage.missingCaseIds.join(',')!=='fixture')throw Error('Unrelated input accepted');
+const duplicated=structuredClone(run);duplicated.reviewerExecutions.push(structuredClone(duplicated.reviewerExecutions[0]));
+const duplicate=evaluateReviewQuality(binding.dataset,duplicated,binding.freeze,binding.policy,binding.ledger);
+if(!duplicate.blockers.includes('reviewer-execution-duplicate'))throw Error('Duplicate receipt accepted');
+const stale=structuredClone(run);stale.reviewerExecutions[0].inputFiles['sources/routes.py']='9'.repeat(64);
+const staleResult=evaluateReviewQuality(binding.dataset,stale,binding.freeze,binding.policy,binding.ledger);
+if(!staleResult.blockers.includes('reviewer-execution-inputs-missing-or-invalid'))throw Error('Stale input inventory accepted');
+writeFileSync('coverage-checks.json',JSON.stringify({valid:result.reviewerCoverage,unrelated:unrelated.reviewerCoverage,duplicate:duplicate.reviewerCoverage,stale:staleResult.reviewerCoverage,allExpectedBlockers:true}));
+writeFileSync('evaluated.json',JSON.stringify(result));
+"""
+(root/'finish.mjs').write_text(finish)
+subprocess.run([node,str(root/'finish.mjs'),started],cwd=root,check=True,capture_output=True)
+# Entry stays unchanged while a transitive dependency is changed: reject before launching.
+dep=root/'snapshot/eval_guard_review.py';old=dep.read_bytes();dep.write_bytes(old+b'\n# deliberate drift\n')
+try:
+ api.verify(root/'snapshot',expected)
+ raise AssertionError('Dependency drift accepted')
+except ValueError as error:
+ assert 'digest' in str(error)
+finally:dep.write_bytes(old)
+print(json.dumps({'snapshot':manifest,'snapshotSha256':expected,'execution':result,'quality':json.loads((root/'evaluated.json').read_bytes()),'dependencyMutationRejected':True,'coverageChecks':json.loads((root/'coverage-checks.json').read_bytes()),'newIndependentSamples':0,'runtimeImageId':image}))
+
+
+ACTUAL ACCEPTANCE SCRIPT storage-live.py SHA 8d17ca59c69355266f3e55ad26b8ce9ac9012bd9e6e1a36222b963804b30a94c
+from pathlib import Path
+from hashlib import sha256
+import importlib.util,json,os,subprocess
+root=Path(__file__).resolve().parent
+spec=importlib.util.spec_from_file_location('snapshot',root/'scripts/reviewer_snapshot.py');api=importlib.util.module_from_spec(spec);spec.loader.exec_module(api)
+s=api.storage_module(sha256((root/'scripts/reviewer_storage.py').read_bytes()).hexdigest())
+execution=json.loads((root/'execution.json').read_bytes());source=Path(execution['attemptDirectory']);cache=source.parent;policy=s.existing_policy(cache)
+assert policy['budgetBytes']==256*1024**2 and policy['minFreeBytes']==512*1024**2
+original={p.name:sha256(p.read_bytes()).hexdigest() for p in source.iterdir() if p.is_file()};raw=(source/'attempt.json').read_bytes()
+cid=source/'container.cid';cidinfo=cid.stat();assert cidinfo.st_uid==0 and cidinfo.st_nlink==1 and os.access(cid,os.R_OK)
+before=s.reconcile(policy,api._api_view());assert before['reservedBytes']==0
+plan=s.archive_plan(policy,api._api_view());assert len(plan['entries'])==1 and plan['version']==2
+assert plan['entries'][0]['files']['container.cid']['uid']==0
+plan_path=root/'archive-plan.json';s.atomic(plan_path,plan)
+cli=subprocess.run(['/usr/bin/python3','-I','-B','-S',str(root/'scripts/reviewer_snapshot.py'),'archive-apply',str(cache),str(plan_path)],capture_output=True,text=True,timeout=65)
+(root/'archive-apply.stdout').write_text(cli.stdout);(root/'archive-apply.stderr').write_text(cli.stderr)
+assert cli.returncode==0,cli.stderr
+transaction=json.loads(cli.stdout);row=transaction['entries'][0];recycle=Path(row['recycle']);assert row['state']=='committed' and not source.exists()
+assert row['resourceProof']['confirmed'] and row['resourceProof']['queryDirectory']!=str(source)
+assert (recycle/'attempt.json').read_bytes()==raw
+assert {p.name:sha256(p.read_bytes()).hexdigest() for p in recycle.iterdir() if p.is_file()}==original
+assert 7*86400-5<=row['retainUntil']-__import__('datetime').datetime.now(__import__('datetime').timezone.utc).timestamp()<=7*86400
+lookup=api.status(source);recovery=api.recover(source);assert lookup['state']=='archived' and recovery['recoveryAction']=='restore-required-no-analysis'
+queries=Path(row['resourceProof']['queryDirectory']);logs={p.name:sha256(p.read_bytes()).hexdigest() for p in queries.iterdir() if p.is_file()}
+again=s.archive_apply(policy,plan,api._api_view());assert again['entries'][0]['state']=='committed'
+assert {p.name:sha256(p.read_bytes()).hexdigest() for p in queries.iterdir() if p.is_file()}==logs
+restored=s.archive_restore(policy,transaction['id'],api._api_view());assert restored['entries'][0]['state']=='restored'
+assert (source/'attempt.json').read_bytes()==raw
+assert {p.name:sha256(p.read_bytes()).hexdigest() for p in source.iterdir() if p.is_file()}==original
+assert api.status(source)['result']==execution
+assert s.reconcile(policy,api._api_view())['reservedBytes']==0
+print(json.dumps({'state':'completed','originalRecordSha256':sha256(raw).hexdigest(),'sourceOriginalBytesMatched':True,'rootCid':{'uid':cidinfo.st_uid,'mode':cidinfo.st_mode&0o777,'readable':True,'contentMatched':True},'plan':plan,'transaction':transaction,'lookup':lookup,'restored':restored,'duplicateQueryLogsUnchanged':True,'noNewAnalysisReceipt':True,'defaultCapacityPolicy':policy,'newIndependentSamples':0,'r3Qualified':False}))
+
+
+ACTUAL ACCEPTANCE SCRIPT run-vm.py SHA 5087b057b0f56c1ac3137b45bd9669a21e5612e92bb6a5d2164c0ddd18b42f30
+from pathlib import Path
+from hashlib import sha256
+import ast,base64,importlib.util,json,shutil,sys,uuid
+root=Path(__file__).resolve().parent;repo=root.parents[2]/'exports/deepseek-harness-vm'
+bridge_path=root/'vm-bridge.py'
+if not bridge_path.exists():shutil.copyfile(root.parent/'vm-bridge.py',bridge_path)
+spec=importlib.util.spec_from_file_location('bridge',bridge_path);bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
+def write(name,value):
+ with (root/name).open('x') as stream:json.dump(value,stream,indent=2);stream.write('\n')
+def load(name):return json.loads((root/name).read_bytes())
+def launch():
+ if (root/'vm-intent-final.json').exists():raise ValueError('Existing attempt; poll it, do not relaunch')
+ names=['scripts/review_quality_gate.mjs','scripts/reviewer_snapshot.py','scripts/reviewer_snapshot.test.py','scripts/reviewer_storage.py','scripts/reviewer_storage.test.py','scripts/reviewer_archive.test.py','scripts/eval_evidence_batch.test.py','work/harness-purge-improved/tests/review-quality-gate.test.mjs']+[f'work/harness-purge-improved/package/scripts/{name}' for name in ['eval_evidence_batch.py','eval_guard_review.py','eval_import_review.py']]
+ files={name:(repo/name).read_bytes() for name in names}
+ for name in ['normal-live.py','storage-live.py']:files[name]=(root/name).read_bytes()
+ source=(root.parents[1]/'harness-workspace-bootstrap-20261110/stage-guest.py').read_text();tree=ast.parse(source)
+ identities='\n\n'.join(ast.get_source_segment(source,node) for node in tree.body if isinstance(node,ast.FunctionDef) and node.name in ['digest','identity'])
+ payload={'files':{name:base64.b64encode(raw).decode() for name,raw in files.items()},'checks':{name:sha256(raw).hexdigest() for name,raw in files.items()},'identityCode':identities}
+ body=json.dumps(payload);worker=(root/'worker.py').read_text();remote='/home/purge/.cache/r3-controlled-storage-'+uuid.uuid4().hex[:12]
+ meta={'remoteRoot':remote,'inputSha256':sha256(body.encode()).hexdigest(),'workerSha256':sha256(worker.encode()).hexdigest(),'sourceSha256':payload['checks']}
+ write('vm-input-final.json',payload);write('vm-intent-final.json',meta)
+ script='''from pathlib import Path
+import os,json,subprocess
+os.umask(0o077)
+root=Path(REMOTE);root.mkdir(mode=0o700,exist_ok=False)
+(root/'worker.py').write_text(WORKER);(root/'input.json').write_text(INPUT)
+with (root/'worker.stdout').open('wb') as out,(root/'worker.stderr').open('wb') as err:
+ p=subprocess.Popen(['/usr/bin/timeout','--signal=TERM','--kill-after=5','360','/usr/bin/python3','-I','-B',str(root/'worker.py')],stdin=subprocess.DEVNULL,stdout=out,stderr=err,start_new_session=True,close_fds=True)
+print(json.dumps({'state':'submitted','remoteRoot':str(root),'pid':p.pid}))
+'''.replace('REMOTE',repr(remote)).replace('WORKER',repr(worker)).replace('INPUT',repr(body))
+ (root/'vm-launch-script-final.txt').write_text(script);value=bridge.call(script,15);write('vm-submitted-final.json',value);print(json.dumps(value))
+def poll():
+ meta=load('vm-intent-final.json');script='''from pathlib import Path
+from hashlib import sha256
+import json
+root=Path(REMOTE)
+if not (root/'status.json').exists():print(json.dumps({'state':'not-yet-observed','stderr':(root/'worker.stderr').read_text()[-3000:]}))
+else:
+ value=json.loads((root/'status.json').read_bytes())
+ if value['state']=='completed':
+  raw=(root/'result.json').read_bytes()
+  if sha256(raw).hexdigest()!=value['resultSha256']:raise ValueError('Result drift')
+  value['result']=raw.decode()
+ print(json.dumps(value))
+'''.replace('REMOTE',repr(meta['remoteRoot']))
+ value=bridge.call(script,15);(root/'vm-poll-final.json').write_text(json.dumps(value,indent=2)+'\n')
+ if 'result' in value:
+  assert sha256(value['result'].encode()).hexdigest()==value['resultSha256'];(root/'vm-result-final.json').write_text(value['result'])
+ print(json.dumps({k:v for k,v in value.items() if k!='result'}))
+if len(sys.argv)!=2 or sys.argv[1] not in ['launch','poll']:raise ValueError('Choose launch or poll')
+globals()[sys.argv[1]]()
+
+
+ACTUAL ACCEPTANCE SCRIPT finish-vm.py SHA a0b6f5fe98baf5659a41a28a2245e31895af771029a4146bbf2a6533d74c8f9d
+from pathlib import Path
+from hashlib import sha256
+import importlib.util,json
+root=Path(__file__).resolve().parent
+meta=json.loads((root/'vm-intent-final.json').read_bytes());poll=json.loads((root/'vm-poll-final.json').read_bytes())
+assert poll['state']=='completed' and sha256((root/'vm-result-final.json').read_bytes()).hexdigest()==poll['resultSha256']
+script='''from pathlib import Path
+from hashlib import sha256
+import importlib.util,json,os,re,shutil,subprocess
+root=Path(REMOTE)
+if not re.fullmatch('/home/purge/[.]cache/r3-controlled-storage-[0-9a-f]{12}',str(root)) or root.resolve()!=root or root.stat().st_uid!=1000 or root.stat().st_mode&0o077:raise ValueError('Wrong owned scratch')
+if sha256((root/'worker.py').read_bytes()).hexdigest()!=WORKER or sha256((root/'input.json').read_bytes()).hexdigest()!=INPUT:raise ValueError('Control drift')
+status=json.loads((root/'status.json').read_bytes())
+if status['state']!='completed' or status['resultSha256']!=RESULT:raise ValueError('Original task not completed')
+result=json.loads((root/'result.json').read_bytes())
+for name,want in result['sourceSha256'].items():
+ if sha256((root/name).read_bytes()).hexdigest()!=want:raise ValueError('Source drift')
+for path in Path('/proc').glob('[0-9]*/cmdline'):
+ try:
+  if str(root/'worker.py').encode() in path.read_bytes():raise ValueError('Worker still active')
+ except (FileNotFoundError,ProcessLookupError,PermissionError):pass
+spec=importlib.util.spec_from_file_location('snapshot',root/'scripts/reviewer_snapshot.py');api=importlib.util.module_from_spec(spec);spec.loader.exec_module(api)
+records=[]
+prefix=['/usr/bin/sudo','-n','/usr/bin/timeout','--signal=TERM','--kill-after=2','6']
+docker=[*prefix,'/usr/bin/docker','--host','unix:///var/run/docker.sock','--config',str(root/'driver-config')]
+for record in root.rglob('attempt.json'):
+ if not re.fullmatch(r'review-[0-9a-f]{32}',record.parent.name):continue
+ state=api.status(record.parent)
+ if state['state'] not in ['completed','recovered'] or not state.get('cleanup',{}).get('confirmed') or (record.parent/'stage').exists():raise ValueError('Attempt not settled')
+ for token in ['name=^/'+state['name']+'$',*(['id='+state['containerId']] if state['containerId'] else []),'label=io.deepseek.harness.review.attempt='+state['id']]:
+  check=subprocess.run([*docker,'container','ls','--all','--quiet','--no-trunc','--filter',token],capture_output=True,timeout=10)
+  if check.returncode or check.stdout.strip():raise ValueError('Owned container remains')
+ probe=subprocess.run([*prefix,'/usr/bin/python3','-I','-B','-S','-c',api._CLIENT_PROBE,str(record.parent/'docker-config')],capture_output=True,timeout=10)
+ value=json.loads(probe.stdout)
+ if probe.returncode or value['active'] or value['readErrors']:raise ValueError('Owned client remains')
+ if state['state']=='completed' and api.digest(state['result'])!=state['resultSha256']:raise ValueError('Result drift')
+ records.append({'record':state,'recordSha256':sha256(record.read_bytes()).hexdigest(),'laterContainerQueriesAbsent':True,'sameSourceClientProbeEmpty':True})
+if len(records)!=1:raise ValueError('Unexpected acceptance attempt count')
+shutil.rmtree(root)
+print(json.dumps({'state':'cleaned','attemptRecords':records,'scratchRemoved':not root.exists(),'noOwnedContainersOrClients':True}))
+'''.replace('REMOTE',repr(meta['remoteRoot'])).replace('WORKER',repr(meta['workerSha256'])).replace('INPUT',repr(meta['inputSha256'])).replace('RESULT',repr(poll['resultSha256']))
+(root/'vm-finish-script-final.txt').write_text(script)
+spec=importlib.util.spec_from_file_location('bridge',root/'vm-bridge.py');bridge=importlib.util.module_from_spec(spec);spec.loader.exec_module(bridge)
+if (root/'vm-cleanup-final.json').exists():raise ValueError('Already reconciled; read record')
+value=bridge.call(script,55);(root/'vm-cleanup-final.json').write_text(json.dumps(value,indent=2)+'\n');print(json.dumps({k:v for k,v in value.items() if k!='attemptRecords'}))
+
+
+VM TEST gate EXIT 0
+✔ Unrelated reviewer inputs cannot satisfy dataset source coverage (3.588042ms)
+✔ Coverage unions distinct batches and includes negative and diagnostic sources (1.523333ms)
+✔ Manifest and scan digests never count as reviewed source files (0.883125ms)
+✔ Input inventories require bound digests and the supported bounded source paths (5.723916ms)
+✔ A batch supports exactly 64 source files and blocks the sixty-fifth (0.676041ms)
+✔ Duplicate input receipts are rejected even with reordered keys or changed timestamps (0.745458ms)
+✔ Failed or globally mismatched receipts cannot contribute source coverage (1.027916ms)
+✔ Legacy receipt versions stay diagnostic without inventing source coverage (0.368458ms)
+✔ Python reviewer cannot credit unsupported languages even when source bytes match (2.194333ms)
+✔ Legacy receipts mixed with valid current receipts retain a specific compatibility blocker (0.470583ms)
+✔ Independent overlapping batches may share sources without inflating case coverage (0.375041ms)
+✔ Entry-only reviewer identities cannot qualify without dependency snapshot and execution receipt (0.53975ms)
+✔ New freezes reject a reviewer identity that disagrees with the dependency manifest (0.4175ms)
+✔ Every reviewer dependency and runtime image is bound to the frozen identity (1.258ms)
+✔ Completed execution must bind current snapshot, inputs, freeze and chronological run (1.797ms)
+✔ Snapshot-aware freezes retain complete manifest and reject missing dependencies (0.70375ms)
+✔ Raw and reviewed metrics use explicit denominators and never promote R3 (0.225833ms)
+✔ Unverified guard evidence and hidden findings stay unknown, not true negatives (0.264666ms)
+✔ Wrong exclusions, raw misses and false confirmations are measured separately (0.284584ms)
+✔ Model assertions and stale evidence cannot supply a verified decision (0.200375ms)
+✔ Reused samples, changing thresholds or tool identities block independent acceptance (1.099875ms)
+✔ Static rule annotations, unknown coverage and missing results block qualification (0.217292ms)
+✔ Malformed labels, duplicate outputs and impossible decisions are rejected (0.404125ms)
+✔ Freeze binds policy and candidate and rejects sources already in the usage ledger (0.246917ms)
+✔ CLI emits a blocked report with exit 2 and bounds ordinary JSON inputs (53.734126ms)
+✔ Unknown negatives cannot improve eligibility through the resolved-only denominator (0.416667ms)
+✔ Duplicated or contradictory source locations cannot inflate labelled counts (0.180792ms)
+✔ Evidence must bind the individual case and decision (0.706375ms)
+✔ Run replay and ledger substitution cannot qualify a frozen evaluation (1.035ms)
+✔ Timezone-free timestamps and non-array evidence are invalid (0.260708ms)
+✔ Explicit-offset Python microsecond timestamps are accepted consistently (0.309417ms)
+✔ Decision artifacts cannot be recycled across different inputs or decisions (0.413083ms)
+✔ Line-only scan hits cannot be credited to another labelled site (0.353875ms)
+✔ Freeze and reports declare every attempt must consume the listed sources (0.456292ms)
+✔ Scan anchors bind the source digest, language and category, not only line (0.778292ms)
+✔ Missing anchors report the specific case and shared decision bindings are checked (1.141792ms)
+✔ Authored positive controls cannot contribute qualification recall or minimum cases (0.257417ms)
+✔ Unqualified oracles stay diagnostic and cannot dilute independent unknown metrics (0.772291ms)
+✔ Easy authored negatives cannot dilute qualification false-positive denominators (0.779417ms)
+✔ Known vulnerability pairs remain diagnostic even when their oracle is independently verified (0.296125ms)
+✔ Missing or incomplete selection provenance cannot supply admission metrics (2.62425ms)
+✔ Explicit selection exclusions cannot be overridden by the other selection fields (0.646333ms)
+✔ Selection declarations are frozen and every diagnostic source still consumes the attempt (0.317208ms)
+✔ Storage closure is mandatory for new freezes and legacy snapshots stay diagnostic (0.353167ms)
+✔ Valid v2 storage closure with another reviewer identity cannot freeze (0.263584ms)
+ℹ tests 45
+ℹ suites 0
+ℹ pass 45
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 137.89225
+
+
+VM TEST python EXIT 0
+..storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+............storage-settlement-pending; query status and storage-reconcile before retrying
+.....storage-settlement-pending; query status and storage-reconcile before retrying
+.......storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+....storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+...storage-settlement-pending; query status and storage-reconcile before retrying
+.storage-settlement-pending; query status and storage-reconcile before retrying
+storage-settlement-pending; query status and storage-reconcile before retrying
+....................................
+----------------------------------------------------------------------
+Ran 87 tests in 4.440s
+
+OK
+
+
+VM TEST storage EXIT 0
+............storage-settlement-pending; query status and storage-reconcile before retrying
+...storage-settlement-pending; query status and storage-reconcile before retrying
+..storage-settlement-pending; query status and storage-reconcile before retrying
+...storage-settlement-pending; query status and storage-reconcile before retrying
+.......storage-settlement-pending; query status and storage-reconcile before retrying
+..
+----------------------------------------------------------------------
+Ran 29 tests in 1.434s
+
+OK
+
+
+VM TEST archive EXIT 0
+...........................
+----------------------------------------------------------------------
+Ran 27 tests in 1.216s
+
+OK
+
+
+VM TEST batch EXIT 0
+.........
+----------------------------------------------------------------------
+Ran 9 tests in 0.011s
+
+OK
+
+
+NATIVE TRANSACTION/PLAN EVIDENCE
+{
+  "state": "completed",
+  "originalRecordSha256": "8be41eeb222c9f7dd0e9321ca19e837d9d56925e14e92ea66025e0e8437e3ff1",
+  "sourceOriginalBytesMatched": true,
+  "rootCid": {
+    "uid": 0,
+    "mode": 420,
+    "readable": true,
+    "contentMatched": true
+  },
+  "plan": {
+    "version": 2,
+    "id": "fafc41eca4034284b8ce29a666e1a389",
+    "uid": 1000,
+    "producer": {
+      "version": "controlled-storage-v2",
+      "launcherSha256": "10e152e231e5d43def8f1edace15edcffd4bae088c22f1790b92b5434385c55e",
+      "storageSha256": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202"
+    },
+    "policy": {
+      "budgetBytes": 268435456,
+      "cacheRoot": "/home/purge/.cache/r3-controlled-storage-090957ce6458/normal-attempts",
+      "controlRoot": "/home/purge/.cache/r3-controlled-storage-090957ce6458/.harness-storage-88e567c5b0dc1741",
+      "maxArchiveAttempts": 8,
+      "maxArchiveBytes": 67108864,
+      "minFreeBytes": 536870912,
+      "minimumAgeDays": 0,
+      "planTtlSeconds": 900,
+      "recycleSeconds": 604800,
+      "reservationOverheadBytes": 100663296,
+      "uid": 1000,
+      "version": 1
+    },
+    "generatedAt": "2026-11-12T04:01:47.557606+00:00",
+    "expiresAt": 1794457007.557606,
+    "scanLimits": {
+      "attempts": 8,
+      "contentBytes": 67108864,
+      "entries": 20000
+    },
+    "cacheIdentity": {
+      "device": 64769,
+      "inode": 327377
+    },
+    "scanned": 1,
+    "hashedBytes": 30458,
+    "entries": [
+      {
+        "source": "/home/purge/.cache/r3-controlled-storage-090957ce6458/normal-attempts/review-605d1038db81484a934e2dcaa84ec8da",
+        "rootIdentity": {
+          "device": 64769,
+          "inode": 327378,
+          "uid": 1000,
+          "mode": 448
+        },
+        "files": {
+          "attempt.json": {
+            "device": 64769,
+            "inode": 327380,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 7892,
+            "mtimeNs": 1794456107467993236,
+            "type": "file",
+            "sha256": "8be41eeb222c9f7dd0e9321ca19e837d9d56925e14e92ea66025e0e8437e3ff1"
+          },
+          "client-1.stderr": {
+            "device": 64769,
+            "inode": 327393,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 0,
+            "mtimeNs": 1794456107113993235,
+            "type": "file",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "client-1.stdout": {
+            "device": 64769,
+            "inode": 327392,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 65,
+            "mtimeNs": 1794456107158993235,
+            "type": "file",
+            "sha256": "36474b42944c3b2fbf961effb89248f84b45ee5604eeaf9ad8bfa793c38007f9"
+          },
+          "client-10.stderr": {
+            "device": 64769,
+            "inode": 327412,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 0,
+            "mtimeNs": 1794456107444993236,
+            "type": "file",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "client-10.stdout": {
+            "device": 64769,
+            "inode": 327409,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 32,
+            "mtimeNs": 1794456107463993236,
+            "type": "file",
+            "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd"
+          },
+          "client-2.stderr": {
+            "device": 64769,
+            "inode": 327396,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 0,
+            "mtimeNs": 1794456107161993235,
+            "type": "file",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "client-2.stdout": {
+            "device": 64769,
+            "inode": 327395,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 10603,
+            "mtimeNs": 1794456107172993235,
+            "type": "file",
+            "sha256": "2b835e51104b41610a11c9360b07eaffdd541d72b8c85cb1332e685554ba117a"
+          },
+          "client-3.stderr": {
+            "device": 64769,
+            "inode": 327398,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 0,
+            "mtimeNs": 1794456107178993235,
+            "type": "file",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "client-3.stdout": {
+            "device": 64769,
+            "inode": 327397,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 643,
+            "mtimeNs": 1794456107325993235,
+            "type": "file",
+            "sha256": "dad005b20e9d412a444f000e0bf79e8ef33949b95ada8d764ec9e06dad7645de"
+          },
+          "client-4.stderr": {
+            "device": 64769,
+            "inode": 327400,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 0,
+            "mtimeNs": 1794456107330993235,
+            "type": "file",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "client-4.stdout": {
+            "device": 64769,
+            "inode": 327399,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 32,
+            "mtimeNs": 1794456107349993235,
+            "type": "file",
+            "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd"
+          },
+          "client-5.stderr": {
+            "device": 64769,
+            "inode": 327402,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 0,
+            "mtimeNs": 1794456107353993236,
+            "type": "file",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "client-5.stdout": {
+            "device": 64769,
+            "inode": 327394,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 65,
+            "mtimeNs": 1794456107364993236,
+            "type": "file",
+            "sha256": "36474b42944c3b2fbf961effb89248f84b45ee5604eeaf9ad8bfa793c38007f9"
+          },
+          "client-6.stderr": {
+            "device": 64769,
+            "inode": 327404,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 0,
+            "mtimeNs": 1794456107368993236,
+            "type": "file",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "client-6.stdout": {
+            "device": 64769,
+            "inode": 327401,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 10997,
+            "mtimeNs": 1794456107380993236,
+            "type": "file",
+            "sha256": "e4ce0ef76f16b2594295dde9f94af42e8d911c102de166b83837f063119565b1"
+          },
+          "client-7.stderr": {
+            "device": 64769,
+            "inode": 327406,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 0,
+            "mtimeNs": 1794456107386993236,
+            "type": "file",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "client-7.stdout": {
+            "device": 64769,
+            "inode": 327403,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 65,
+            "mtimeNs": 1794456107408993236,
+            "type": "file",
+            "sha256": "36474b42944c3b2fbf961effb89248f84b45ee5604eeaf9ad8bfa793c38007f9"
+          },
+          "client-8.stderr": {
+            "device": 64769,
+            "inode": 327408,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 0,
+            "mtimeNs": 1794456107412993236,
+            "type": "file",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "client-8.stdout": {
+            "device": 64769,
+            "inode": 327405,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 0,
+            "mtimeNs": 1794456107412993236,
+            "type": "file",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "client-9.stderr": {
+            "device": 64769,
+            "inode": 327410,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 0,
+            "mtimeNs": 1794456107427993236,
+            "type": "file",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "client-9.stdout": {
+            "device": 64769,
+            "inode": 327407,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 0,
+            "mtimeNs": 1794456107427993236,
+            "type": "file",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "container.cid": {
+            "device": 64769,
+            "inode": 327391,
+            "mode": 420,
+            "uid": 0,
+            "gid": 0,
+            "links": 1,
+            "bytes": 64,
+            "mtimeNs": 1794456107156993235,
+            "type": "file",
+            "sha256": "e5815bc5c5c1f9c650237e860af1008a2778edadf277dd9ce8f7d0187dcc488b"
+          },
+          "docker-config": {
+            "device": 64769,
+            "inode": 327379,
+            "mode": 448,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 2,
+            "bytes": 4096,
+            "mtimeNs": 1794456107109993235,
+            "type": "directory"
+          },
+          "operation.lock": {
+            "device": 64769,
+            "inode": 327390,
+            "mode": 384,
+            "uid": 1000,
+            "gid": 1000,
+            "links": 1,
+            "bytes": 0,
+            "mtimeNs": 1794456107109993235,
+            "type": "file",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "recordSha256": "8be41eeb222c9f7dd0e9321ca19e837d9d56925e14e92ea66025e0e8437e3ff1",
+        "bytes": 30458,
+        "originalState": "completed"
+      }
+    ],
+    "retained": [],
+    "readOnly": true,
+    "deleteEnabled": false,
+    "planSha256": "5b6c78fd702ee2f95dd9d8b585203c38da4a47544fdb54acf4db6ee162bb3611"
+  },
+  "transaction": {
+    "version": 2,
+    "id": "fafc41eca4034284b8ce29a666e1a389",
+    "policySha256": "a0a7dd0fdcebc8c5c6d530257b9083885a7660b61014d17010bb829c8cd72510",
+    "planSha256": "5b6c78fd702ee2f95dd9d8b585203c38da4a47544fdb54acf4db6ee162bb3611",
+    "createdAt": "2026-11-12T04:01:47.613339+00:00",
+    "entries": [
+      {
+        "identity": "605d1038db81484a934e2dcaa84ec8da",
+        "source": "/home/purge/.cache/r3-controlled-storage-090957ce6458/normal-attempts/review-605d1038db81484a934e2dcaa84ec8da",
+        "recycle": "/home/purge/.cache/r3-controlled-storage-090957ce6458/.harness-storage-88e567c5b0dc1741/recycle/fafc41eca4034284b8ce29a666e1a389-605d1038db81484a934e2dcaa84ec8da",
+        "archive": "/home/purge/.cache/r3-controlled-storage-090957ce6458/.harness-storage-88e567c5b0dc1741/archives/fafc41eca4034284b8ce29a666e1a389-605d1038db81484a934e2dcaa84ec8da.tar.gz",
+        "state": "committed",
+        "manifest": {
+          "bytes": 30458,
+          "files": {
+            "attempt.json": {
+              "bytes": 7892,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327380,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107467993236,
+              "sha256": "8be41eeb222c9f7dd0e9321ca19e837d9d56925e14e92ea66025e0e8437e3ff1",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-1.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327393,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107113993235,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-1.stdout": {
+              "bytes": 65,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327392,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107158993235,
+              "sha256": "36474b42944c3b2fbf961effb89248f84b45ee5604eeaf9ad8bfa793c38007f9",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-10.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327412,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107444993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-10.stdout": {
+              "bytes": 32,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327409,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107463993236,
+              "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-2.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327396,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107161993235,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-2.stdout": {
+              "bytes": 10603,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327395,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107172993235,
+              "sha256": "2b835e51104b41610a11c9360b07eaffdd541d72b8c85cb1332e685554ba117a",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-3.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327398,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107178993235,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-3.stdout": {
+              "bytes": 643,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327397,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107325993235,
+              "sha256": "dad005b20e9d412a444f000e0bf79e8ef33949b95ada8d764ec9e06dad7645de",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-4.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327400,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107330993235,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-4.stdout": {
+              "bytes": 32,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327399,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107349993235,
+              "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-5.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327402,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107353993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-5.stdout": {
+              "bytes": 65,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327394,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107364993236,
+              "sha256": "36474b42944c3b2fbf961effb89248f84b45ee5604eeaf9ad8bfa793c38007f9",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-6.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327404,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107368993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-6.stdout": {
+              "bytes": 10997,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327401,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107380993236,
+              "sha256": "e4ce0ef76f16b2594295dde9f94af42e8d911c102de166b83837f063119565b1",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-7.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327406,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107386993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-7.stdout": {
+              "bytes": 65,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327403,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107408993236,
+              "sha256": "36474b42944c3b2fbf961effb89248f84b45ee5604eeaf9ad8bfa793c38007f9",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-8.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327408,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107412993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-8.stdout": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327405,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107412993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-9.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327410,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107427993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-9.stdout": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327407,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107427993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "container.cid": {
+              "bytes": 64,
+              "device": 64769,
+              "gid": 0,
+              "inode": 327391,
+              "links": 1,
+              "mode": 420,
+              "mtimeNs": 1794456107156993235,
+              "sha256": "e5815bc5c5c1f9c650237e860af1008a2778edadf277dd9ce8f7d0187dcc488b",
+              "type": "file",
+              "uid": 0
+            },
+            "docker-config": {
+              "bytes": 4096,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327379,
+              "links": 2,
+              "mode": 448,
+              "mtimeNs": 1794456107109993235,
+              "type": "directory",
+              "uid": 1000
+            },
+            "operation.lock": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327390,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107109993235,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            }
+          },
+          "originalState": "completed",
+          "recordSha256": "8be41eeb222c9f7dd0e9321ca19e837d9d56925e14e92ea66025e0e8437e3ff1",
+          "rootIdentity": {
+            "device": 64769,
+            "inode": 327378,
+            "mode": 448,
+            "uid": 1000
+          },
+          "source": "/home/purge/.cache/r3-controlled-storage-090957ce6458/normal-attempts/review-605d1038db81484a934e2dcaa84ec8da"
+        },
+        "manifestSha256": "c4f142839b7a523a239f2f7179b0add8b7a0bbf92f35c3145376fdc73e79e74b",
+        "resourceProof": {
+          "confirmed": true,
+          "readOnly": true,
+          "containerAbsent": true,
+          "clientsStopped": true,
+          "checkedAt": "2026-11-12T04:01:47.680174+00:00",
+          "queryDirectory": "/home/purge/.cache/r3-controlled-storage-090957ce6458/.harness-storage-88e567c5b0dc1741/transactions/fafc41eca4034284b8ce29a666e1a389/605d1038db81484a934e2dcaa84ec8da",
+          "logSha256": {
+            "client-4.stdout": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd",
+            "client-3.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "client-1.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "client-3.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "client-1.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "client-4.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "attempt.json": "6e578900f0431b6d9674af6d784aa19739e77a53ee53ee893dbfe0075cc03a66",
+            "client-2.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "client-2.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "archiveSha256": "23b3cad8a51166b07990f7c3f1bbc1abd11e57d218501ba62419415a4b1c68ec",
+        "moveStartedAt": "2026-11-12T04:01:47.688178+00:00",
+        "committedAt": "2026-11-12T04:01:47.691064+00:00",
+        "retainUntil": 1795060907.691068
+      }
+    ],
+    "readBytes": 97037
+  },
+  "lookup": {
+    "state": "archived",
+    "directory": "/home/purge/.cache/r3-controlled-storage-090957ce6458/normal-attempts/review-605d1038db81484a934e2dcaa84ec8da",
+    "originalState": "completed",
+    "transactionId": "fafc41eca4034284b8ce29a666e1a389",
+    "archive": "/home/purge/.cache/r3-controlled-storage-090957ce6458/.harness-storage-88e567c5b0dc1741/archives/fafc41eca4034284b8ce29a666e1a389-605d1038db81484a934e2dcaa84ec8da.tar.gz",
+    "recycle": "/home/purge/.cache/r3-controlled-storage-090957ce6458/.harness-storage-88e567c5b0dc1741/recycle/fafc41eca4034284b8ce29a666e1a389-605d1038db81484a934e2dcaa84ec8da",
+    "recordSha256": "8be41eeb222c9f7dd0e9321ca19e837d9d56925e14e92ea66025e0e8437e3ff1",
+    "recordedOnly": true,
+    "recoveryAction": "restore-required-no-analysis"
+  },
+  "restored": {
+    "createdAt": "2026-11-12T04:01:47.613339+00:00",
+    "entries": [
+      {
+        "archive": "/home/purge/.cache/r3-controlled-storage-090957ce6458/.harness-storage-88e567c5b0dc1741/archives/fafc41eca4034284b8ce29a666e1a389-605d1038db81484a934e2dcaa84ec8da.tar.gz",
+        "archiveSha256": "23b3cad8a51166b07990f7c3f1bbc1abd11e57d218501ba62419415a4b1c68ec",
+        "committedAt": "2026-11-12T04:01:47.691064+00:00",
+        "identity": "605d1038db81484a934e2dcaa84ec8da",
+        "manifest": {
+          "bytes": 30458,
+          "files": {
+            "attempt.json": {
+              "bytes": 7892,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327380,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107467993236,
+              "sha256": "8be41eeb222c9f7dd0e9321ca19e837d9d56925e14e92ea66025e0e8437e3ff1",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-1.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327393,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107113993235,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-1.stdout": {
+              "bytes": 65,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327392,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107158993235,
+              "sha256": "36474b42944c3b2fbf961effb89248f84b45ee5604eeaf9ad8bfa793c38007f9",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-10.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327412,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107444993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-10.stdout": {
+              "bytes": 32,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327409,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107463993236,
+              "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-2.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327396,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107161993235,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-2.stdout": {
+              "bytes": 10603,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327395,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107172993235,
+              "sha256": "2b835e51104b41610a11c9360b07eaffdd541d72b8c85cb1332e685554ba117a",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-3.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327398,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107178993235,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-3.stdout": {
+              "bytes": 643,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327397,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107325993235,
+              "sha256": "dad005b20e9d412a444f000e0bf79e8ef33949b95ada8d764ec9e06dad7645de",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-4.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327400,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107330993235,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-4.stdout": {
+              "bytes": 32,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327399,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107349993235,
+              "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-5.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327402,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107353993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-5.stdout": {
+              "bytes": 65,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327394,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107364993236,
+              "sha256": "36474b42944c3b2fbf961effb89248f84b45ee5604eeaf9ad8bfa793c38007f9",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-6.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327404,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107368993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-6.stdout": {
+              "bytes": 10997,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327401,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107380993236,
+              "sha256": "e4ce0ef76f16b2594295dde9f94af42e8d911c102de166b83837f063119565b1",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-7.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327406,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107386993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-7.stdout": {
+              "bytes": 65,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327403,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107408993236,
+              "sha256": "36474b42944c3b2fbf961effb89248f84b45ee5604eeaf9ad8bfa793c38007f9",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-8.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327408,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107412993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-8.stdout": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327405,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107412993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-9.stderr": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327410,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107427993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "client-9.stdout": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327407,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107427993236,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            },
+            "container.cid": {
+              "bytes": 64,
+              "device": 64769,
+              "gid": 0,
+              "inode": 327391,
+              "links": 1,
+              "mode": 420,
+              "mtimeNs": 1794456107156993235,
+              "sha256": "e5815bc5c5c1f9c650237e860af1008a2778edadf277dd9ce8f7d0187dcc488b",
+              "type": "file",
+              "uid": 0
+            },
+            "docker-config": {
+              "bytes": 4096,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327379,
+              "links": 2,
+              "mode": 448,
+              "mtimeNs": 1794456107109993235,
+              "type": "directory",
+              "uid": 1000
+            },
+            "operation.lock": {
+              "bytes": 0,
+              "device": 64769,
+              "gid": 1000,
+              "inode": 327390,
+              "links": 1,
+              "mode": 384,
+              "mtimeNs": 1794456107109993235,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "type": "file",
+              "uid": 1000
+            }
+          },
+          "originalState": "completed",
+          "recordSha256": "8be41eeb222c9f7dd0e9321ca19e837d9d56925e14e92ea66025e0e8437e3ff1",
+          "rootIdentity": {
+            "device": 64769,
+            "inode": 327378,
+            "mode": 448,
+            "uid": 1000
+          },
+          "source": "/home/purge/.cache/r3-controlled-storage-090957ce6458/normal-attempts/review-605d1038db81484a934e2dcaa84ec8da"
+        },
+        "manifestSha256": "c4f142839b7a523a239f2f7179b0add8b7a0bbf92f35c3145376fdc73e79e74b",
+        "moveStartedAt": "2026-11-12T04:01:47.688178+00:00",
+        "recycle": "/home/purge/.cache/r3-controlled-storage-090957ce6458/.harness-storage-88e567c5b0dc1741/recycle/fafc41eca4034284b8ce29a666e1a389-605d1038db81484a934e2dcaa84ec8da",
+        "resourceProof": {
+          "checkedAt": "2026-11-12T04:01:47.680174+00:00",
+          "clientsStopped": true,
+          "confirmed": true,
+          "containerAbsent": true,
+          "logSha256": {
+            "attempt.json": "6e578900f0431b6d9674af6d784aa19739e77a53ee53ee893dbfe0075cc03a66",
+            "client-1.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "client-1.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "client-2.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "client-2.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "client-3.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "client-3.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "client-4.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "client-4.stdout": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd"
+          },
+          "queryDirectory": "/home/purge/.cache/r3-controlled-storage-090957ce6458/.harness-storage-88e567c5b0dc1741/transactions/fafc41eca4034284b8ce29a666e1a389/605d1038db81484a934e2dcaa84ec8da",
+          "readOnly": true
+        },
+        "retainUntil": 1795060907.691068,
+        "source": "/home/purge/.cache/r3-controlled-storage-090957ce6458/normal-attempts/review-605d1038db81484a934e2dcaa84ec8da",
+        "state": "restored",
+        "restoredAt": "2026-11-12T04:01:47.740353+00:00"
+      }
+    ],
+    "id": "fafc41eca4034284b8ce29a666e1a389",
+    "planSha256": "5b6c78fd702ee2f95dd9d8b585203c38da4a47544fdb54acf4db6ee162bb3611",
+    "policySha256": "a0a7dd0fdcebc8c5c6d530257b9083885a7660b61014d17010bb829c8cd72510",
+    "readBytes": 97037,
+    "version": 2
+  },
+  "duplicateQueryLogsUnchanged": true,
+  "noNewAnalysisReceipt": true,
+  "defaultCapacityPolicy": {
+    "budgetBytes": 268435456,
+    "cacheRoot": "/home/purge/.cache/r3-controlled-storage-090957ce6458/normal-attempts",
+    "controlRoot": "/home/purge/.cache/r3-controlled-storage-090957ce6458/.harness-storage-88e567c5b0dc1741",
+    "maxArchiveAttempts": 8,
+    "maxArchiveBytes": 67108864,
+    "minFreeBytes": 536870912,
+    "minimumAgeDays": 0,
+    "planTtlSeconds": 900,
+    "recycleSeconds": 604800,
+    "reservationOverheadBytes": 100663296,
+    "uid": 1000,
+    "version": 1
+  },
+  "newIndependentSamples": 0,
+  "r3Qualified": false
+}
+
+CURRENT DOC
+# 受控归档与容量准入（离线 VM 候选）
+
+本阶段增加协作式启动准入和受控归档维护，仅用于 VM 候选及隔离验收。日常 VM、宿主权限和 R3 资格不变。此文档的接口已实现；最终隔离 VM 结果与外部复审在结构化记录中单独报告。
+
+## 容量准入
+
+`run` 在创建任务目录、stage 和 Docker 客户端之前登记预留。默认活动缓存预算 256 MiB，每任务预留实际冻结代码/输入字节加 96 MiB，文件系统另留 512 MiB，并计入其他未结算预留。活动任务计预留，终态任务计普通文件实测逻辑长度；无法可靠核对时拒绝新任务，不终止正在运行的任务。
+
+容量锁在任务锁之前，均非阻塞；锁忙返回可重试。执行和恢复先退出原任务锁，再结算预留。新准入会先核对已有预留；未知、缺记录、损坏和不完整状态继续保留，年龄和 PID 退出均不是释放证据。已知准备失败在当前控制器能证明引擎未触及、同步写入已退出时，先保存正向证据；后续核对原目录身份及记录/CID 缺失后才释放，残留字节仍保留并计数。
+
+这是协作式启动准入，不是操作系统硬磁盘配额。目录块、Docker 自身占用不在逻辑缓存计量内；磁盘余量另外检查。重复恢复可能增添日志，不提供运行期间硬限制。断电恰好发生在登记预留与准备失败证据之间时，未知预留会保留；对账必须查询原任务，不能删账本或仅凭超时放行。
+
+策略和账本位于缓存同级 `.harness-storage-<缓存路径摘要>/`，独立于活动缓存。策略首次初始化后固定；显式 `run --storage-policy JSON` 仅接受完整、当前 UID/规范缓存路径匹配的工具策略（可调整预算和最低余量），不是项目提供的执行模块。默认运行保持 256/512 MiB。维护对账可能初始化私有控制目录，属于写操作。安装升级前应保留原工具与账本并先对账；没有自动策略迁移。
+
+## 快照和旧记录
+
+新冻结快照为 v2，绑定 `reviewer_storage.py`、启动器、三个复核模块和镜像不可变 ID。Python 只执行安装目录固定路径、摘要匹配且导入闭包通过的存储模块；bundle 只作字节核对。项目、计划和模块路径参数均不能指定执行代码。归档使用固定 libc 无覆盖重命名原语；不加载项目动态库。
+
+旧快照和旧清单可用于只读诊断，不能执行新任务或搬迁。Python 旧快照诊断优先提示重新冻结；Node 同时保留形状合法快照的身份不匹配诊断。质量报告仍为 v6，新增 `reviewer-snapshot-legacy-storage-unbound` 门槛；历史回执格式未改。新冻结任务必须使用当前 v2 字节，历史完成结果不回写。
+
+## 归档命令
+
+以下在非 root 的 Linux VM 中执行；缓存需是工具的私有目录。计划包含路径/文件名元数据，应以 0600 私有保存。
+
+```sh
+CACHE=/home/purge/.cache/harness-review-attempts
+python3 -I -B -S scripts/reviewer_snapshot.py storage-reconcile "$CACHE"
+umask 077
+python3 -I -B -S scripts/reviewer_snapshot.py archive-plan "$CACHE" \
+  --attempt-id 0123456789abcdef0123456789abcdef > archive-plan.json
+python3 -I -B -S scripts/reviewer_snapshot.py archive-apply "$CACHE" archive-plan.json
+python3 -I -B -S scripts/reviewer_snapshot.py archive-status "$CACHE" TRANSACTION_ID
+python3 -I -B -S scripts/reviewer_snapshot.py status "$CACHE/review-ATTEMPT_ID"
+python3 -I -B -S scripts/reviewer_snapshot.py archive-restore "$CACHE" TRANSACTION_ID
+```
+
+省略 `--attempt-id` 时有界观察最多 1000 个顶层项，一批选最多 8 个终态任务；指定 ID 可对大缓存逐批维护。新 v2 计划绑定工具版本/源码摘要、UID、策略、限额、缓存和源目录身份、完整文件指纹，默认 15 分钟有效。旧 v1 清单只诊断。新受控归档允许已核对的终态立即进入回收区；原只读预览的默认 30 天年龄设置不改。
+
+计划源读取和一次 apply 的累计内容读取分别最多 64 MiB。apply 预算包含两次源指纹读取、压缩文件读取及解压成员核验；估计时为多遍核对和头部预留，因此每批实际独有源数据可能明显少于 64 MiB。每任务最多 20000 个条目，已知日志编号最多 9999；仅完整唯一客户端记录（最多 128 条）可归档，已截断历史任务保留。达到限制保留任务并缩小批次，不省略证据。空间检查还为压缩包、事务、逐文件块和写入暂存预留余量。
+
+只接受已确认资源清理、stage 移除、完整原记录与日志清单一致的终态。文件需是普通单链接文件；链接、特殊文件、跨设备、未知配置/文件、活动锁、未知或损坏任务保留。root CID 的精确例外只适用于可读的普通单链接 CID 文件、64 个十六进制字符（可带换行）且与记录完全一致；不通过 sudo 读文件或改变属主。
+
+## 事务和恢复
+
+维护先取容量锁再取任务独占锁，重新核对指纹。Docker 的名称、CID、任务标签和源客户端标记均需实时只读查询为空；查询日志写入独立事务目录，不调用删除资源的清理函数。然后生成 0600 的私有压缩归档，重新读取校验所有成员、大小、权限和 SHA-256，再核对原指纹并在同一文件系统用原子无覆盖重命名迁入私有回收区。
+
+事务目录保存每步进度，外部索引绑定原路径。重复 apply 查询同一事务，即使计划已过期也不会重新探测、分析或搬迁。中断后运行 archive-status；迁移前源仍在会记录 not-moved，迁移后原路径缺失且回收目录/归档完整则完成原事务。两边都缺失/同时存在或无法核对时保留未知状态、事务和索引，不盲目重做。
+
+原路径的 status/recover 会返回 archived 或 archive-pending，以及事务编号；recover 指向 restore-required-no-analysis，不重新启动复核。restore 只回原路径，原路径已存在（包括空目录/链接）就拒绝覆盖，检查归档、容量、路径和原字节。回收目录尚在时原子搬回，保留原文件身份；若操作者已移除回收副本，则从已核验归档逐个恢复固定成员，不使用 extractall，归属当前 VM 用户、文件 0600，保留原字节；不自动 chown/root。新复制文件身份可能变化，事务记录恢复指纹。部分复制无法证明完整时保留暂存和事务，不覆盖或删除。
+
+完成记录、历史 result 和完成回执不重写，也不生成新的分析回执。恢复进度独立于原任务。回收副本至少保留 7 天；不完整或损坏的事务在 `transactionUnknown` 中保留报告。期满 `storage-reconcile` 仅给出 `cleanupCandidates`，`deleteEnabled:false`、`safeToDelete:false`，不会删除回收目录、归档、任务或容器。本阶段没有删除命令或定时清理。
+
+非阻塞锁忙和容量拒绝输出 storage-blocked JSON（exit4）；格式/身份/指纹异常拒绝并保留原事务，可用计划中的 id 查询。旧原路径恢复要求下一步是查询/恢复原任务，不应创建新分析任务。文件系统和同 UID/特权任意篡改不提供原子快照保证；逐遍核对、私有目录与合作式锁控制工具自身并发。
+
+## 仍在本阶段之外
+
+独立检测效果样本、Chrome 完整用户流程和日常 VM 交付待后续阶段。当前合成夹具、存储维护通过或模型复审都不等于真实漏洞确认、完整产品审计或 R3 达标。不得提升 R3 状态。

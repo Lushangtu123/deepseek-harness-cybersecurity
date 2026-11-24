@@ -1,0 +1,37 @@
+{
+  "scope": "Authored metadata regression controls only; no independent qualification",
+  "sources": [
+    {
+      "sha256": "ea2eb8cfdc972e9eeeb1ae6e96df9345443bfc51659ae8ffc70f5ae03df7e114",
+      "source": "eval(value, scope)\n"
+    },
+    {
+      "sha256": "9090e56e30c6904d4e079104dcf9b6c0fae806ef2da2275c838793e46356aef9",
+      "source": "eval(VALUE, scope)\n"
+    },
+    {
+      "sha256": "dd72b55448670f2354fa080b5ad7e206013f3e8a301eebcea4884642e7bb9f03",
+      "source": "eval(value, scope)\n# changed\n"
+    },
+    {
+      "sha256": "4c5a7a4e263d4077b09105dd7bf7b2d9351521a1f837af2c5f90578a6c6c8edd",
+      "source": "\"中文字🙂\"; eval(value, scope)\n"
+    },
+    {
+      "sha256": "614441302ea23719365696e3381077f6af65de6dac95467058fefb22a76bcfe2",
+      "source": "\"中文字🙂\"; eval(value, scope)\r\n"
+    },
+    {
+      "sha256": "735424f69481b30fae7c7df1610f60c2dca7d9cf5add924a78b4febc45960d41",
+      "source": "\t\"中文字🙂\"; eval(value, scope)\r\n"
+    },
+    {
+      "sha256": "ac41ce884032ba383e26862bb1c9a49151dfb209d4956f29a72b64aa6b2b16be",
+      "source": "\"中文字🙂\"; eval(value, scope); eval(value, scope)\n"
+    },
+    {
+      "sha256": "4da1826770f674fbc69fe6488d99e0c20060ceac989067d92a473f82a409d5c8",
+      "source": "label=\"REGISTERED_LOCATION_CANARY_ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ\"; eval(value, scope); eval(value, scope)\n"
+    }
+  ]
+}

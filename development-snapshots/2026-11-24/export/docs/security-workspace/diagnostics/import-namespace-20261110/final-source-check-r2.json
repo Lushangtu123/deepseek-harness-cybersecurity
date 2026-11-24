@@ -1,0 +1,10 @@
+{
+  "files": {
+    "work/harness-purge-improved/package/scripts/eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843",
+    "scripts/eval_import_review.test.py": "63745c36fc5322a108de9e691692dcb30ebf75d3b8914dd304404242feb9a3fe",
+    "scripts/eval_evidence_batch.test.py": "684293ec1ea35fa1590f729963101f78750fb6a2c8ef39053c33e3b954b51aab",
+    "scripts/python_namespace_review.test.py": "02d2ce70d5f452265b4ed83c70ad777682b2f1f246a58339e3c5db0eb26d7e59",
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+    "scripts/eval_guard_review.test.py": "5c45aca6e0b2dd3ee7f1fcfe7779ef0c323671417bca8d770d38e29b9885e051"
+  }
+}

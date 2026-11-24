@@ -1,0 +1,335 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Los_Angeles",
+  "runId": "security-rules-20261029",
+  "ruleVersion": "local-reviewed-2",
+  "ruleCount": 16,
+  "ruleSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+  "oldRuleCount": 6,
+  "languages": [
+    "python",
+    "javascript",
+    "typescript"
+  ],
+  "nativeAnnotationTest": {
+    "ruleCount": 16,
+    "fixtureFiles": [
+      "cases.js",
+      "cases.py",
+      "cases.ts"
+    ],
+    "positiveCases": 34,
+    "negativeCases": 41,
+    "errors": [],
+    "scannedFiles": [
+      "/src/cases.js",
+      "/src/cases.py",
+      "/src/cases.ts"
+    ],
+    "missing": [],
+    "unexpected": [],
+    "negativeHits": [],
+    "exactAnnotationMatch": true,
+    "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+    "network": "none",
+    "fixturesExecuted": false
+  },
+  "perRuleControls": {
+    "harness.python.eval": {
+      "languages": [
+        "python"
+      ],
+      "positive": 1,
+      "negative": 2
+    },
+    "harness.python.pickle": {
+      "languages": [
+        "python"
+      ],
+      "positive": 2,
+      "negative": 1
+    },
+    "harness.python.shell": {
+      "languages": [
+        "python"
+      ],
+      "positive": 2,
+      "negative": 2
+    },
+    "harness.python.yaml-load": {
+      "languages": [
+        "python"
+      ],
+      "positive": 2,
+      "negative": 3
+    },
+    "harness.javascript.eval": {
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "positive": 2,
+      "negative": 4
+    },
+    "harness.python.sql-fstring": {
+      "languages": [
+        "python"
+      ],
+      "positive": 1,
+      "negative": 2
+    },
+    "harness.python.exec": {
+      "languages": [
+        "python"
+      ],
+      "positive": 1,
+      "negative": 1
+    },
+    "harness.python.os-system": {
+      "languages": [
+        "python"
+      ],
+      "positive": 1,
+      "negative": 1
+    },
+    "harness.python.requests-verify-false": {
+      "languages": [
+        "python"
+      ],
+      "positive": 2,
+      "negative": 2
+    },
+    "harness.python.tempfile-mktemp": {
+      "languages": [
+        "python"
+      ],
+      "positive": 1,
+      "negative": 1
+    },
+    "harness.python.jwt-noverify": {
+      "languages": [
+        "python"
+      ],
+      "positive": 1,
+      "negative": 2
+    },
+    "harness.javascript.child-process-exec": {
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "positive": 4,
+      "negative": 4
+    },
+    "harness.javascript.dom-innerhtml": {
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "positive": 2,
+      "negative": 4
+    },
+    "harness.javascript.document-write": {
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "positive": 2,
+      "negative": 2
+    },
+    "harness.javascript.tls-reject-disabled": {
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "positive": 6,
+      "negative": 6
+    },
+    "harness.javascript.sql-concat": {
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "positive": 4,
+      "negative": 4
+    }
+  },
+  "regressionTests": 370,
+  "review": {
+    "importantFindings": 0,
+    "focusedTestsRepeated": 30,
+    "existingDeploymentFaultTestsRepeated": 6
+  },
+  "productionWorkbenchAcceptance": {
+    "engagement": "personal-security-rules-20261029",
+    "run": {
+      "id": "76984cec-abfa-4500-825c-4690b821d76d",
+      "request_id": "native-rules-20261029",
+      "request_hash": "f4d9e528f295d499bd83b9b3319fc2a0b8edebeb39f5a05bacd3fb4e40a7352b",
+      "tool": "semgrep",
+      "profile_revision": 1,
+      "state": "completed",
+      "started_at": "2026-10-30T01:52:58.474Z",
+      "finished_at": "2026-10-30T01:53:00.282Z",
+      "complete": 1,
+      "coverage_key": "d2f8a31dbf809136b5e0f4687a186a780013614b66cc5bd3f56192ac60c51607",
+      "revision_ref": "工作区未确认",
+      "error_code": null,
+      "details": {
+        "profile": {
+          "repoRoot": "/home/purge/workspace/security-rule-fixtures-20261029",
+          "tools": [
+            "semgrep"
+          ],
+          "url": null,
+          "expiresAt": "2026-10-31T01:52:57.651Z",
+          "revision": 1
+        },
+        "version": "1.182.1",
+        "runtime": {
+          "checkedAt": "2026-10-30T01:52:57.657Z",
+          "database": null,
+          "rules": {
+            "version": "local-reviewed-2",
+            "count": 16,
+            "languages": [
+              "javascript",
+              "python",
+              "typescript"
+            ]
+          },
+          "warning": null
+        },
+        "retestFindingId": null,
+        "coveredFiles": 3
+      }
+    },
+    "findings": 34,
+    "allUnverified": true,
+    "reportContainsPolicy": true,
+    "exportComplete": true,
+    "rules": {
+      "version": "local-reviewed-2",
+      "count": 16,
+      "languages": [
+        "javascript",
+        "python",
+        "typescript"
+      ]
+    },
+    "fixtureBytesUnchanged": true,
+    "modelCalls": 0,
+    "privateUserProjectsScanned": false
+  },
+  "deployment": {
+    "changedGuestFiles": [
+      "tools/dsh-purge-personal-1.1.77-personal.1/PERSONAL-CHANGES.md",
+      "tools/dsh-purge-personal-1.1.77-personal.1/client.js",
+      "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-client.mjs",
+      "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-runtime.mjs",
+      "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-workbench.mjs",
+      "tools/security-workbench/images.json",
+      "tools/security-workbench/rules.json"
+    ],
+    "forkHashesMatched": 122,
+    "guestBackup": "/home/purge/downloads/security-rules-20261030T015220Z",
+    "serviceRestarted": true,
+    "programFilesMatched": 120,
+    "assetFilesMatched": 2
+  },
+  "runtimeVerification": {
+    "programFilesMatched": 120,
+    "ruleHashMatched": true,
+    "runtimeManifestMatched": true,
+    "service": "active",
+    "activeScannerContainers": 0,
+    "preflight": {
+      "ok": true,
+      "readOnly": true,
+      "automaticChanges": false,
+      "scope": "local pinned images, rules and database identity; no scanner execution, model call, network download or GitHub latest check",
+      "tools": {
+        "semgrep": {
+          "ready": true,
+          "version": "1.182.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T01:53:40.374Z",
+          "cached": false,
+          "rules": {
+            "version": "local-reviewed-2",
+            "count": 16,
+            "languages": [
+              "javascript",
+              "python",
+              "typescript"
+            ]
+          }
+        },
+        "trivy": {
+          "ready": true,
+          "version": "0.76.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T01:53:40.374Z",
+          "cached": false,
+          "database": {
+            "state": "fresh",
+            "updatedAt": "2026-10-29T19:18:50.969Z",
+            "nextUpdate": "2026-10-30T19:18:50.969Z",
+            "ageDays": 0
+          },
+          "lastUpdate": {
+            "state": "current",
+            "checkedAt": "2026-10-29T22:59:00.361501+00:00"
+          }
+        },
+        "zap": {
+          "ready": true,
+          "version": "2.17.0",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T01:53:40.374Z",
+          "cached": false
+        }
+      }
+    },
+    "hostIsolationValidated": true
+  },
+  "preservedRuntime": {
+    "imagePinsUnchanged": true,
+    "databaseIdentityUnchanged": true,
+    "modelCalls": 0,
+    "publicTargetsScanned": false,
+    "realProjectFilesEdited": false,
+    "newNetworkAccess": false,
+    "newMacFullAccess": false
+  },
+  "recovery": {
+    "name": "ready-security-audit-20261029",
+    "containsThisRuleUpdate": false,
+    "newSnapshotCreated": false,
+    "exactSourceAndAssetBackup": "/home/purge/downloads/security-rules-20261030T015220Z",
+    "restoreEffect": "whole VM recovery reverts to previous six-rule policy; fixed file backup supports this deployment rollback"
+  },
+  "browser": {
+    "verifiedRuleVersionCountLanguagesVisible": true,
+    "completedTaskVisible": true,
+    "unverifiedFindingsVisible": true,
+    "existingRecoveryDriftVisible": true
+  },
+  "workingTreePushed": false,
+  "limitations": [
+    "syntactic review heuristics; not exploitability, whole-project coverage or production accuracy metrics",
+    "fixture controls are bounded samples, not proof of zero false positives/negatives",
+    "no custom sanitizers, interfile data flow, alias variants or unlisted frameworks promised",
+    "default scanner ignore rules, 1MB target size, per-file timeout and overall runtime budgets remain",
+    "old recovery point intentionally preserved and does not contain new rules/source"
+  ],
+  "history": [
+    "initial six-rule run missed new positives and hit documented benign controls",
+    "first16-rule fixture run passed32positive39negative",
+    "new HTTPS Agent constructor controls exposed two missing cases; explicit constructor pattern fixed them",
+    "final16-rule run matched34positive41negative exactly; duplicate failing variant receipts retained"
+  ]
+}

@@ -1,0 +1,801 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-10 America/Los_Angeles",
+  "state": "reviewed-candidate-mechanism-not-production-root-cause",
+  "workDirectory": "work/harness-slirp-investigation-20261110",
+  "inventory": {
+    "pid": 39674,
+    "vmUUID": "347CD41C-E149-4BD7-BC9E-21A55E06243A",
+    "sameListenerIdentityBeforeAfter": true,
+    "identity": {
+      "kind": "identity",
+      "pid": 39674,
+      "startSec": 1794163282,
+      "startUsec": 360679,
+      "sampleBeginMonoNs": 399903428380000,
+      "sampleEndMonoNs": 399903428384000,
+      "wallNs": 1794330833028176000,
+      "fdCount": 218,
+      "maxFD": 224,
+      "listenerFD": 21,
+      "socketGeneration": 198547,
+      "queueLength": 0,
+      "incompleteQueueLength": 0,
+      "queueLimit": 1,
+      "socketError": 0
+    },
+    "runtimeNetworkArgs": [
+      "user,id=purgenet,ipv6=off,restrict=on,hostfwd=tcp:127.0.0.1:49223-:22,hostfwd=tcp:127.0.0.1:49224-:3080,guestfwd=tcp:10.0.2.100:3128-cmd:/usr/bin/nc 127.0.0.1 49222"
+    ],
+    "configSha256": "ce0505aa4e8415df6b84d7c6b446e7c57abb966ba5451d060be28f4addbcae95",
+    "managerSha256": "69cc27ae32ba7be4362e6a4d94a4f253ac54d573380c98f58fa40bdb8758e401",
+    "vmDiskContentRead": false,
+    "vmDiskOpenMetadataConfirmed": true,
+    "utmVersion": "4.6.4",
+    "utmBuild": "107",
+    "macOSVersion": "27.2",
+    "kernelRelease": "27.2.0",
+    "kernelBuild": "26B123",
+    "loadedLibraryDiskMetadata": [
+      {
+        "path": "/Applications/UTM.app/Contents/Frameworks/slirp.0.framework/Versions/A/slirp.0",
+        "sha256": "5b5222874c68e9c499c80fcf9891d7eca1572b5920b2c92d884379771ccaddd4",
+        "size": 468064,
+        "versionStrings": [
+          "4.7.0"
+        ],
+        "fileInode": 12612314,
+        "scope": "disk image at current mapped path,not live-memory hash"
+      },
+      {
+        "path": "/Applications/UTM.app/Contents/Frameworks/qemu-aarch64-softmmu.framework/Versions/A/qemu-aarch64-softmmu",
+        "sha256": "8620e27cbd011f37a509ea9c9c9e9b602ac89cf76244410b576adb7c5c7fcba8",
+        "size": 59837488,
+        "versionStrings": [
+          "QEMU emulator version 9.1.2"
+        ],
+        "fileInode": 12611993,
+        "scope": "disk image at current mapped path,not live-memory hash"
+      }
+    ],
+    "monitorTransport": "existing spiceport QMP;not connected",
+    "existingVMLogFiles": [],
+    "qemuDebugLogSetting": null,
+    "selectedProcessLog": {
+      "exitCode": 0,
+      "bytes": 2,
+      "outputCapped": false,
+      "queryStartAtUTC": "2026-11-10T17:13:53.207658+00:00",
+      "window": "last1h at call,PID only",
+      "rawMessagesExported": false,
+      "sourceSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "available": true,
+      "rows": 0,
+      "classes": {
+        "slirp": 0,
+        "accept": 0,
+        "queue": 0,
+        "too many open files": 0,
+        "guest address not available": 0
+      }
+    },
+    "persistentConfigurationModified": false,
+    "newVmRequests": 0
+  },
+  "sourceFetch": [
+    {
+      "name": "utm-slirp-patch",
+      "url": "https://raw.githubusercontent.com/utmapp/UTM/v4.6.4/patches/libslirp-v4.7.0.patch",
+      "httpStatus": 200,
+      "bytes": 637,
+      "sha256": "03061ab3142caaa688b2526f92167f40cd9b53f48e8c7966ba9f9e592af66de6"
+    },
+    {
+      "name": "upstream-v470-archive",
+      "url": "https://gitlab.freedesktop.org/slirp/libslirp/-/archive/v4.7.0/libslirp-v4.7.0.tar.gz",
+      "httpStatus": 200,
+      "bytes": 143251,
+      "sha256": "9398f0ec5a581d4e1cd6856b88ae83927e458d643788c3391a39e61b75db3d3b"
+    },
+    {
+      "name": "utm-slirp-default-commit",
+      "url": "https://api.github.com/repos/utmapp/libslirp/commits/master",
+      "problem": "HTTPError",
+      "status": 422
+    }
+  ],
+  "upstreamSourceManifest": {
+    "archiveSha256": "9398f0ec5a581d4e1cd6856b88ae83927e458d643788c3391a39e61b75db3d3b",
+    "selectedSources": [
+      {
+        "name": "COPYRIGHT",
+        "size": 2960,
+        "sha256": "b28aecf4796a6a22054167f0a976de13d9db335669d37afd2dc7ea4c335e1e13"
+      },
+      {
+        "name": "meson.build",
+        "size": 4127,
+        "sha256": "4311e51110c23580a8ac062e44479af22a6ef1c2cf1137694aa578a70d79863c"
+      },
+      {
+        "name": "src/bootp.c",
+        "size": 12334,
+        "sha256": "9e981b131b4cbc7b97c3b903783145639d0ac84c1d2b60fa35d46c2a68716e52"
+      },
+      {
+        "name": "src/bootp.h",
+        "size": 3237,
+        "sha256": "1dea76539d9e57352656a8ae0efe29b60fbab6b1a5b0546f198e7772a77640a3"
+      },
+      {
+        "name": "src/if.c",
+        "size": 6602,
+        "sha256": "e0b08b75f4cfc01fb58dc13a999b41b3cc5b41176ff459cdcb1e75b8ff5fc524"
+      },
+      {
+        "name": "src/libslirp.h",
+        "size": 10396,
+        "sha256": "30ffd62d568c33e80a84b4a6be77a79a0526489c93b2d2511ce2322c4c35ee3b"
+      },
+      {
+        "name": "src/slirp.c",
+        "size": 48161,
+        "sha256": "7cf1bf4e6b717c873f18ce013ba9e9215942f81819d984da2c83f1a47cc73027"
+      },
+      {
+        "name": "src/slirp.h",
+        "size": 7429,
+        "sha256": "28254aefe55df0c7ed90975910ad6badfcb13dbcaf652985ee25389b581197da"
+      },
+      {
+        "name": "src/socket.c",
+        "size": 36552,
+        "sha256": "e85ae70d413fbae6682037e62072c9d7c2e90e24e212ca7a9b527dd8147fedea"
+      },
+      {
+        "name": "src/socket.h",
+        "size": 6822,
+        "sha256": "cbc9d529d989c0a40a445fb76d6a3b7bd22cc17ba1530a284f9e14628bbc83e4"
+      },
+      {
+        "name": "src/tcp.h",
+        "size": 5707,
+        "sha256": "4717249d2a1afc68b72a08e58a4ed210c4cd33b86d679ae19216fa49b26448ce"
+      },
+      {
+        "name": "src/tcp_output.c",
+        "size": 17279,
+        "sha256": "a4a806870b2c38a29b248aedd2159f1733e242a3e4735ac5bd4ecc420822d1c6"
+      },
+      {
+        "name": "src/tcp_subr.c",
+        "size": 33102,
+        "sha256": "f709b34fb1155a5d0ba62b379002308d161ac96189462e80e9c3b97847360df2"
+      },
+      {
+        "name": "src/tcp_timer.c",
+        "size": 10054,
+        "sha256": "13bc54e90d0a291e3154c85bf3656922c77e6edad67163c70b67c103dcda5dce"
+      }
+    ],
+    "sourceOnlyNoBuildOrExecution": true
+  },
+  "staticBinaryProvenance": {
+    "fullDisassemblySha256": "59d0d3a8b4e8d29f67a173fcfb58b558e91060e19a419c17cbc197c7921834b9",
+    "fullDisassemblyBytes": 1502009,
+    "librarySha256": "5b5222874c68e9c499c80fcf9891d7eca1572b5920b2c92d884379771ccaddd4",
+    "actualReviewedFunctions": {
+      "tcp_connect": {
+        "sha256": "6ab5563b46a4549451a573a70ad08cd632917d47460f3f9493f73da877686065",
+        "lineCount": 349,
+        "alreadyInOriginalReviewManifest": true
+      },
+      "tcpx_listen": {
+        "sha256": "a26b994a6a6e92b7fc686230eda3d691ddffcb86af0f0ee4e8d82d6a1dbcf663",
+        "lineCount": 454,
+        "alreadyInOriginalReviewManifest": true
+      },
+      "soassign_guest_addr_if_needed": {
+        "sha256": "121d2f3414be53a7c8a114d5aa46d4a0fce7e41ed9754b14f08091d183fddf5b",
+        "lineCount": 188,
+        "alreadyInOriginalReviewManifest": true
+      }
+    },
+    "extraction": "literal symbol label until next global symbol;comparison ignores trailing newlines only",
+    "toolVersion": [
+      "Apple LLVM version 21.0.0",
+      "  Optimized build."
+    ],
+    "fullCaptureArgv": [
+      "/usr/bin/xcrun",
+      "llvm-objdump",
+      "--macho",
+      "--arch=arm64",
+      "--disassemble",
+      "/Applications/UTM.app/Contents/Frameworks/slirp.0.framework/Versions/A/slirp.0"
+    ],
+    "firstAttempt": {
+      "extraArgument": "--disassemble-symbols=_tcp_connect",
+      "outcome": "Mach-O mode output included whole disassembly despite requested filter;tool display was truncated",
+      "exitCode": 0,
+      "fullStdoutOfFirstAttemptRetained": false,
+      "subsequentFullCaptureRetained": true
+    },
+    "oldMetadataClarification": "binary-functions.json first listed tcp_connect/tcp_listen/slirp_pollfds_poll;actual main review manifest already included tcp_connect/tcpx_listen/soassign. New metadata aligns the selected list without overwriting old records."
+  },
+  "loopbackContract": {
+    "sourceSha256": "deacbd17fac4ce85ae53d79b8c025023cf17ad87b532a387b902f467c4215a41",
+    "schedule": [
+      {
+        "block": 0,
+        "backlog": 1,
+        "delay": 0.025
+      },
+      {
+        "block": 0,
+        "backlog": 1,
+        "delay": 0
+      },
+      {
+        "block": 0,
+        "backlog": 128,
+        "delay": 0.025
+      },
+      {
+        "block": 0,
+        "backlog": 128,
+        "delay": 0
+      },
+      {
+        "block": 1,
+        "backlog": 1,
+        "delay": 0
+      },
+      {
+        "block": 1,
+        "backlog": 1,
+        "delay": 0.025
+      },
+      {
+        "block": 1,
+        "backlog": 128,
+        "delay": 0
+      },
+      {
+        "block": 1,
+        "backlog": 128,
+        "delay": 0.025
+      },
+      {
+        "block": 2,
+        "backlog": 128,
+        "delay": 0.025
+      },
+      {
+        "block": 2,
+        "backlog": 1,
+        "delay": 0.025
+      },
+      {
+        "block": 2,
+        "backlog": 1,
+        "delay": 0
+      },
+      {
+        "block": 2,
+        "backlog": 128,
+        "delay": 0
+      },
+      {
+        "block": 3,
+        "backlog": 1,
+        "delay": 0
+      },
+      {
+        "block": 3,
+        "backlog": 128,
+        "delay": 0
+      },
+      {
+        "block": 3,
+        "backlog": 128,
+        "delay": 0.025
+      },
+      {
+        "block": 3,
+        "backlog": 1,
+        "delay": 0.025
+      }
+    ],
+    "maxClients": 96,
+    "maxConcurrentClients": 6,
+    "socketScope": "only own IPv4 loopback ephemeral listeners;not VM ports,not external network",
+    "deadlineSeconds": 30,
+    "noVmConnections": true,
+    "limitations": [
+      "Requested backlog and synthetic accept delay are controlled;production QEMU scheduling is not measured.",
+      "Client connect errors are separate from send/read errors;no packet capture or inferred kernel reason.",
+      "This control cannot identify which original QEMU failure used which kernel path."
+    ]
+  },
+  "loopbackResultSha256": "362cfe4958283d3d9d06ae57dd19aa4b34ddf629e58df9dd64fcda369e483a4a",
+  "loopbackAggregates": [
+    {
+      "requestedBacklog": 1,
+      "acceptDelaySeconds": 0,
+      "trials": 4,
+      "clients": 24,
+      "connected": 21,
+      "complete": 11,
+      "errors": {
+        "read|ConnectionResetError|54": 8,
+        "connect|ConnectionResetError|54": 3,
+        "send|BrokenPipeError|32": 2
+      },
+      "accepted": 13,
+      "serverErrors": 2,
+      "acceptErrors": 0
+    },
+    {
+      "requestedBacklog": 1,
+      "acceptDelaySeconds": 0.025,
+      "trials": 4,
+      "clients": 24,
+      "connected": 18,
+      "complete": 4,
+      "errors": {
+        "read|ConnectionResetError|54": 14,
+        "connect|ConnectionResetError|54": 6
+      },
+      "accepted": 4,
+      "serverErrors": 0,
+      "acceptErrors": 0
+    },
+    {
+      "requestedBacklog": 128,
+      "acceptDelaySeconds": 0,
+      "trials": 4,
+      "clients": 24,
+      "connected": 24,
+      "complete": 24,
+      "errors": {},
+      "accepted": 24,
+      "serverErrors": 0,
+      "acceptErrors": 0
+    },
+    {
+      "requestedBacklog": 128,
+      "acceptDelaySeconds": 0.025,
+      "trials": 4,
+      "clients": 24,
+      "connected": 24,
+      "complete": 24,
+      "errors": {},
+      "accepted": 24,
+      "serverErrors": 0,
+      "acceptErrors": 0
+    }
+  ],
+  "serverStopByConstruction": true,
+  "localPostReviewAnalysis": {
+    "sourceSha256": "c6473ed04b4749e29df8c8519cd1b610b440d7e74ed7189889db3ce60530543c",
+    "inputSha256": "362cfe4958283d3d9d06ae57dd19aa4b34ddf629e58df9dd64fcda369e483a4a",
+    "originalOrderAnalysisSha256": "290794c706779c5775c4f22dff07102081d30d0ef4818852b9945483ae9485a5",
+    "originalDelayProofSha256": "340f694bf531df5050a44e2e4e98f4d43029f57ae6c380456eddb2e5197be6a0",
+    "orderRows": [
+      {
+        "block": 0,
+        "backlog": 1,
+        "delay": 0.025,
+        "failed": 5,
+        "failedBeforeFirstAccept": 5,
+        "earlyErrors": {
+          "read|ConnectionResetError|54": 5
+        },
+        "firstAcceptOffsetMs": 30.096,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      },
+      {
+        "block": 0,
+        "backlog": 1,
+        "delay": 0,
+        "failed": 4,
+        "failedBeforeFirstAccept": 0,
+        "earlyErrors": {},
+        "firstAcceptOffsetMs": 0.307,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      },
+      {
+        "block": 0,
+        "backlog": 128,
+        "delay": 0.025,
+        "failed": 0,
+        "failedBeforeFirstAccept": 0,
+        "earlyErrors": {},
+        "firstAcceptOffsetMs": 30.195,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      },
+      {
+        "block": 0,
+        "backlog": 128,
+        "delay": 0,
+        "failed": 0,
+        "failedBeforeFirstAccept": 0,
+        "earlyErrors": {},
+        "firstAcceptOffsetMs": 0.484,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      },
+      {
+        "block": 1,
+        "backlog": 1,
+        "delay": 0,
+        "failed": 0,
+        "failedBeforeFirstAccept": 0,
+        "earlyErrors": {},
+        "firstAcceptOffsetMs": 0.39,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      },
+      {
+        "block": 1,
+        "backlog": 1,
+        "delay": 0.025,
+        "failed": 5,
+        "failedBeforeFirstAccept": 5,
+        "earlyErrors": {
+          "read|ConnectionResetError|54": 5
+        },
+        "firstAcceptOffsetMs": 30.21,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      },
+      {
+        "block": 1,
+        "backlog": 128,
+        "delay": 0,
+        "failed": 0,
+        "failedBeforeFirstAccept": 0,
+        "earlyErrors": {},
+        "firstAcceptOffsetMs": 0.693,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      },
+      {
+        "block": 1,
+        "backlog": 128,
+        "delay": 0.025,
+        "failed": 0,
+        "failedBeforeFirstAccept": 0,
+        "earlyErrors": {},
+        "firstAcceptOffsetMs": 27.645,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      },
+      {
+        "block": 2,
+        "backlog": 128,
+        "delay": 0.025,
+        "failed": 0,
+        "failedBeforeFirstAccept": 0,
+        "earlyErrors": {},
+        "firstAcceptOffsetMs": 30.343,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      },
+      {
+        "block": 2,
+        "backlog": 1,
+        "delay": 0.025,
+        "failed": 5,
+        "failedBeforeFirstAccept": 5,
+        "earlyErrors": {
+          "connect|ConnectionResetError|54": 5
+        },
+        "firstAcceptOffsetMs": 29.667,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      },
+      {
+        "block": 2,
+        "backlog": 1,
+        "delay": 0,
+        "failed": 4,
+        "failedBeforeFirstAccept": 0,
+        "earlyErrors": {},
+        "firstAcceptOffsetMs": 0.507,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      },
+      {
+        "block": 2,
+        "backlog": 128,
+        "delay": 0,
+        "failed": 0,
+        "failedBeforeFirstAccept": 0,
+        "earlyErrors": {},
+        "firstAcceptOffsetMs": 0.576,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      },
+      {
+        "block": 3,
+        "backlog": 1,
+        "delay": 0,
+        "failed": 5,
+        "failedBeforeFirstAccept": 0,
+        "earlyErrors": {},
+        "firstAcceptOffsetMs": 0.557,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      },
+      {
+        "block": 3,
+        "backlog": 128,
+        "delay": 0,
+        "failed": 0,
+        "failedBeforeFirstAccept": 0,
+        "earlyErrors": {},
+        "firstAcceptOffsetMs": 0.659,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      },
+      {
+        "block": 3,
+        "backlog": 128,
+        "delay": 0.025,
+        "failed": 0,
+        "failedBeforeFirstAccept": 0,
+        "earlyErrors": {},
+        "firstAcceptOffsetMs": 27.898,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      },
+      {
+        "block": 3,
+        "backlog": 1,
+        "delay": 0.025,
+        "failed": 5,
+        "failedBeforeFirstAccept": 5,
+        "earlyErrors": {
+          "read|ConnectionResetError|54": 4,
+          "connect|ConnectionResetError|54": 1
+        },
+        "firstAcceptOffsetMs": 30.306,
+        "allClientResultsPrecedeStopRequestByConstruction": true
+      }
+    ],
+    "delayRows": [
+      {
+        "block": 0,
+        "failures": 5,
+        "maxFailureOffsetFromReleaseMs": 0.386958,
+        "allFailedWithinScheduledAcceptDelay": true,
+        "hasSuccessfulReplyRequiringAcceptBeforeStop": true
+      },
+      {
+        "block": 1,
+        "failures": 5,
+        "maxFailureOffsetFromReleaseMs": 0.686167,
+        "allFailedWithinScheduledAcceptDelay": true,
+        "hasSuccessfulReplyRequiringAcceptBeforeStop": true
+      },
+      {
+        "block": 2,
+        "failures": 5,
+        "maxFailureOffsetFromReleaseMs": 0.693416,
+        "allFailedWithinScheduledAcceptDelay": true,
+        "hasSuccessfulReplyRequiringAcceptBeforeStop": true
+      },
+      {
+        "block": 3,
+        "failures": 5,
+        "maxFailureOffsetFromReleaseMs": 0.664291,
+        "allFailedWithinScheduledAcceptDelay": true,
+        "hasSuccessfulReplyRequiringAcceptBeforeStop": true
+      }
+    ],
+    "matchesOriginalDerivedResults": true,
+    "createdAfterExternalReview": true,
+    "notAnIndependentModelReview": true
+  },
+  "productionBurstPostcheck": {
+    "scope": "post-review existing-data check,not model-reviewed or new VM experiment",
+    "generatorSha256": "b9e81f1d60633899de50f5b8f37f583d8c718d895c4ab1a41500a673f6f8fb5e",
+    "probeRowsSha256": "3e610e3bd75f135f8b9ea072f379aef221daf2879b2400122b550321b30fdc0b",
+    "runId": "2295c70a-c434-4460-a87d-e9d7368ea299",
+    "peakProbeIntervals": 6,
+    "failures": 13,
+    "minimumOtherIntervalsOverlapping": 5,
+    "knownFDReturnsWithOtherReturnWithin1ms": 10,
+    "sshWordCounts": {
+      "connection reset": 2,
+      "kex_exchange_identification": 2,
+      "banner exchange": 10,
+      "broken pipe": 10
+    },
+    "structuredErrorCounts": {
+      "connect|syscall|54": 1
+    },
+    "details": [
+      {
+        "id": "6fd4be0f-d04f-415b-98d2-9e6056572c5c",
+        "otherProbeIntervalsOverlapping": 5,
+        "otherFDConnectReturnsWithin1ms": null,
+        "sshErrorWords": [
+          "connection reset",
+          "kex_exchange_identification"
+        ],
+        "structuredConnectorErrors": []
+      },
+      {
+        "id": "3ae8a3d9-c107-4ef9-8c7a-7be24615abc5",
+        "otherProbeIntervalsOverlapping": 5,
+        "otherFDConnectReturnsWithin1ms": null,
+        "sshErrorWords": [
+          "connection reset",
+          "kex_exchange_identification"
+        ],
+        "structuredConnectorErrors": []
+      },
+      {
+        "id": "94d6626c-6add-4d75-b24a-ad1781c7f7b3",
+        "otherProbeIntervalsOverlapping": 5,
+        "otherFDConnectReturnsWithin1ms": 1,
+        "sshErrorWords": [
+          "banner exchange",
+          "broken pipe"
+        ],
+        "structuredConnectorErrors": []
+      },
+      {
+        "id": "ef942961-0e25-4973-aadb-175ad26bbaa9",
+        "otherProbeIntervalsOverlapping": 5,
+        "otherFDConnectReturnsWithin1ms": 3,
+        "sshErrorWords": [
+          "banner exchange",
+          "broken pipe"
+        ],
+        "structuredConnectorErrors": []
+      },
+      {
+        "id": "f292f399-a101-40d6-a61c-1a24f86958b5",
+        "otherProbeIntervalsOverlapping": 5,
+        "otherFDConnectReturnsWithin1ms": 3,
+        "sshErrorWords": [
+          "banner exchange",
+          "broken pipe"
+        ],
+        "structuredConnectorErrors": []
+      },
+      {
+        "id": "28a3912c-7d64-42c6-96e9-6ef0e3fe2659",
+        "otherProbeIntervalsOverlapping": 5,
+        "otherFDConnectReturnsWithin1ms": 2,
+        "sshErrorWords": [
+          "banner exchange",
+          "broken pipe"
+        ],
+        "structuredConnectorErrors": []
+      },
+      {
+        "id": "ebad032a-dbc4-49ac-bfae-874c5d6e919e",
+        "otherProbeIntervalsOverlapping": 5,
+        "otherFDConnectReturnsWithin1ms": 1,
+        "sshErrorWords": [
+          "banner exchange",
+          "broken pipe"
+        ],
+        "structuredConnectorErrors": []
+      },
+      {
+        "id": "6aaa4520-e9ac-4834-8c08-67c3821cc4ab",
+        "otherProbeIntervalsOverlapping": 5,
+        "otherFDConnectReturnsWithin1ms": 3,
+        "sshErrorWords": [
+          "banner exchange",
+          "broken pipe"
+        ],
+        "structuredConnectorErrors": []
+      },
+      {
+        "id": "efcfc4b6-67e6-4836-9baa-591bee26d05c",
+        "otherProbeIntervalsOverlapping": 5,
+        "otherFDConnectReturnsWithin1ms": 3,
+        "sshErrorWords": [
+          "banner exchange",
+          "broken pipe"
+        ],
+        "structuredConnectorErrors": []
+      },
+      {
+        "id": "a72c4551-a217-4491-bbc5-02ed4d79efbb",
+        "otherProbeIntervalsOverlapping": 5,
+        "otherFDConnectReturnsWithin1ms": 3,
+        "sshErrorWords": [
+          "banner exchange",
+          "broken pipe"
+        ],
+        "structuredConnectorErrors": []
+      },
+      {
+        "id": "33300b93-4e32-4b1a-8422-a1a56eab1574",
+        "otherProbeIntervalsOverlapping": 5,
+        "otherFDConnectReturnsWithin1ms": 2,
+        "sshErrorWords": [
+          "banner exchange",
+          "broken pipe"
+        ],
+        "structuredConnectorErrors": []
+      },
+      {
+        "id": "a97062c3-3c44-4c06-9907-761e4ad86a1c",
+        "otherProbeIntervalsOverlapping": 5,
+        "otherFDConnectReturnsWithin1ms": 2,
+        "sshErrorWords": [
+          "banner exchange",
+          "broken pipe"
+        ],
+        "structuredConnectorErrors": []
+      },
+      {
+        "id": "c31d4494-5bc5-41bb-8ac9-39e4e0d08a0b",
+        "otherProbeIntervalsOverlapping": 5,
+        "otherFDConnectReturnsWithin1ms": null,
+        "sshErrorWords": [],
+        "structuredConnectorErrors": [
+          {
+            "stage": "connect",
+            "errno": 54,
+            "errnoKind": "syscall"
+          }
+        ]
+      }
+    ],
+    "limitation": "overlapping probe lifetimes and clustered connect returns do not measure simultaneous unaccepted TCP sockets;SSH words are not syscall errnos"
+  },
+  "mappedFilePostcheck": {
+    "lsofExitCode": 0,
+    "selectedLibraryInodes": {
+      "/Applications/UTM.app/Contents/Frameworks/slirp.0.framework/Versions/A/slirp.0": {
+        "mappedVnodeInode": "12612314",
+        "currentPathInode": 12612314,
+        "inodeMatches": true,
+        "mtimeBeforeProcessBirth": true,
+        "ctimeBeforeProcessBirth": true
+      },
+      "/Applications/UTM.app/Contents/Frameworks/qemu-aarch64-softmmu.framework/Versions/A/qemu-aarch64-softmmu": {
+        "mappedVnodeInode": "12611993",
+        "currentPathInode": 12611993,
+        "inodeMatches": true,
+        "mtimeBeforeProcessBirth": true,
+        "ctimeBeforeProcessBirth": true
+      }
+    },
+    "listenerMetadataRows": [
+      "p39674",
+      "f21",
+      "n127.0.0.1:49223"
+    ],
+    "port49223FD21Confirmed": true,
+    "scope": "post-review read-only metadata;no process memory read or new VM connection"
+  },
+  "review": {
+    "actualModels": [
+      "claude-opus-5-5"
+    ],
+    "effort": "high",
+    "state": "completed",
+    "elapsedSeconds": 200.3,
+    "stopReason": "end_turn",
+    "promptSha256": "8e8454a275a8e5fb63be10a5b8f6d305a8b48ff3ba03aacf12f1c2fe9ffff69d",
+    "receiptSha256": "b2aecdd31dea592140563d3b1e8d40330b7ec8e3a7111c766359e6ead134715c",
+    "reportSha256": "ebd97b228a72c81bdd7e305204328654e2fece22ed9ac65031eb4e6d59563eee",
+    "blockingDefects": 0,
+    "statisticalErrors": 0,
+    "triageSha256": "a2ba5ecfbd70314b86cba5707094791e58bbd44b72c66f9ba41a06a12c43e666",
+    "fullReportPath": "work/harness-slirp-investigation-20261110/external-review/claude.review.md"
+  },
+  "pending": [
+    "production13 failures per-flow kernel/forwarder attribution",
+    "real QEMU accept/poll scheduling delay",
+    "QEMU9.1.2-utm net/slirp.c entry selection",
+    "old2 unknown SYN/pre-READY authentication/historical sidebar/ordinaryR3",
+    "candidate connection admission or reuse cross-control before any deployment"
+  ],
+  "preciseProductionRootCauseConfirmed": false,
+  "newVmRequests": 0,
+  "persistentConfigurationModified": false,
+  "hostPermissionsExpanded": false,
+  "dailyProgramModified": false,
+  "githubPushPerformed": false,
+  "oldUnknownFlowsClosed": false
+}

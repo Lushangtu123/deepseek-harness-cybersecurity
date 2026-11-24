@@ -1,0 +1,407 @@
+{
+  "reviewerSnapshot": {
+    "version": 2,
+    "kind": "python-evidence-reviewer",
+    "entrypoint": "eval_evidence_batch.py",
+    "files": {
+      "eval_evidence_batch.py": "9897972ad669a3c33dfe648703afbfd176325164776917f602ecfcbf206a5f42",
+      "eval_guard_review.py": "d285565a42bfd91e13386aca6d3e56e6e0387d336a95abdf7ade4683c2889b04",
+      "eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843"
+    },
+    "storageSha256": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202",
+    "launcherSha256": "f9706edeba2279aca7a4b78d1a36d54e87a39e19359a585a50184493c47a662d",
+    "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7"
+  },
+  "reviewerExecution": {
+    "version": 3,
+    "state": "completed",
+    "snapshotSha256": "dc3c96ccde0571f5120e8e7ab095fe05af68ce2bea9b110927c88194a52df6ff",
+    "datasetSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "freezeSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "inputSha256": "cd26e38cf7ad4821c8e6a0bd57e8a093dae040270f49b4329bb479bd08bab225",
+    "inputFiles": {
+      "manifest.json": "b17134d689923bb2c317b05affa7d135cca2c489edc0295f44c3f32f7f18f46c",
+      "scan.json": "5021e624e752b001ce3e3846e8f158ed4aeb93a4c9a72fdb35a0c5b14a0eea84",
+      "sources/literal-set.py": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+      "sources/skf-fixed-control.py": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+      "sources/BenchmarkTest00073.py": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+      "sources/skf-upstream.py": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+      "sources/BenchmarkTest00074.py": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+      "sources/helpers/utils.py": "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834"
+    },
+    "scanSha256": "5021e624e752b001ce3e3846e8f158ed4aeb93a4c9a72fdb35a0c5b14a0eea84",
+    "reportSha256": "269d7b74a3e7ed08239c7bfcd6a454394c747cb39a56692330653efb93cff884",
+    "startedAt": "2026-11-12T17:52:45.852199+00:00",
+    "finishedAt": "2026-11-12T17:52:46.245681+00:00",
+    "operation": "locations",
+    "locationBindingSha256": "e0ab2fe9ec44680983d5cf9adef4920b83f38d542d3422e5c8b23fb8e10e3e7e"
+  },
+  "report": {
+    "version": 2,
+    "operation": "locations",
+    "locations": {
+      "version": 1,
+      "protocol": "python-sink-locations-1",
+      "runtimePython": "3.12.15",
+      "files": {
+        "BenchmarkTest00073.py": {
+          "sha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+          "bytes": 1877,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 54,
+                  "col": 5,
+                  "offset": 1748
+                },
+                "end": {
+                  "line": 54,
+                  "col": 14,
+                  "offset": 1757
+                }
+              },
+              "id": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 54,
+                  "col": 10,
+                  "offset": 1753
+                },
+                "end": {
+                  "line": 54,
+                  "col": 13,
+                  "offset": 1756
+                }
+              }
+            }
+          ]
+        },
+        "BenchmarkTest00074.py": {
+          "sha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+          "bytes": 1881,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+              "callee": "exec",
+              "call": {
+                "start": {
+                  "line": 51,
+                  "col": 4,
+                  "offset": 1759
+                },
+                "end": {
+                  "line": 51,
+                  "col": 13,
+                  "offset": 1768
+                }
+              },
+              "id": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 51,
+                  "col": 9,
+                  "offset": 1764
+                },
+                "end": {
+                  "line": 51,
+                  "col": 12,
+                  "offset": 1767
+                }
+              }
+            }
+          ]
+        },
+        "helpers/utils.py": {
+          "sha256": "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834",
+          "bytes": 2280,
+          "state": "completed",
+          "points": []
+        },
+        "literal-set.py": {
+          "sha256": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+          "bytes": 117,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 4,
+                  "col": 12,
+                  "offset": 105
+                },
+                "end": {
+                  "line": 4,
+                  "col": 23,
+                  "offset": 116
+                }
+              },
+              "id": "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 4,
+                  "col": 17,
+                  "offset": 110
+                },
+                "end": {
+                  "line": 4,
+                  "col": 22,
+                  "offset": 115
+                }
+              }
+            }
+          ]
+        },
+        "skf-fixed-control.py": {
+          "sha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+          "bytes": 1652,
+          "state": "completed",
+          "points": []
+        },
+        "skf-upstream.py": {
+          "sha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+          "bytes": 1585,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 37,
+                  "col": 20,
+                  "offset": 1296
+                },
+                "end": {
+                  "line": 37,
+                  "col": 51,
+                  "offset": 1327
+                }
+              },
+              "id": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 37,
+                  "col": 25,
+                  "offset": 1301
+                },
+                "end": {
+                  "line": 37,
+                  "col": 50,
+                  "offset": 1326
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "findingLocations": []
+  },
+  "reportJson": "{\"version\": 2, \"operation\": \"locations\", \"locations\": {\"version\": 1, \"protocol\": \"python-sink-locations-1\", \"runtimePython\": \"3.12.15\", \"files\": {\"BenchmarkTest00073.py\": {\"sha256\": \"6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122\", \"bytes\": 1877, \"state\": \"completed\", \"points\": [{\"sourceSha256\": \"6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 54, \"col\": 5, \"offset\": 1748}, \"end\": {\"line\": 54, \"col\": 14, \"offset\": 1757}}, \"id\": \"f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 54, \"col\": 10, \"offset\": 1753}, \"end\": {\"line\": 54, \"col\": 13, \"offset\": 1756}}}]}, \"BenchmarkTest00074.py\": {\"sha256\": \"805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e\", \"bytes\": 1881, \"state\": \"completed\", \"points\": [{\"sourceSha256\": \"805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e\", \"callee\": \"exec\", \"call\": {\"start\": {\"line\": 51, \"col\": 4, \"offset\": 1759}, \"end\": {\"line\": 51, \"col\": 13, \"offset\": 1768}}, \"id\": \"0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 51, \"col\": 9, \"offset\": 1764}, \"end\": {\"line\": 51, \"col\": 12, \"offset\": 1767}}}]}, \"helpers/utils.py\": {\"sha256\": \"899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834\", \"bytes\": 2280, \"state\": \"completed\", \"points\": []}, \"literal-set.py\": {\"sha256\": \"0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b\", \"bytes\": 117, \"state\": \"completed\", \"points\": [{\"sourceSha256\": \"0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 4, \"col\": 12, \"offset\": 105}, \"end\": {\"line\": 4, \"col\": 23, \"offset\": 116}}, \"id\": \"e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 4, \"col\": 17, \"offset\": 110}, \"end\": {\"line\": 4, \"col\": 22, \"offset\": 115}}}]}, \"skf-fixed-control.py\": {\"sha256\": \"8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134\", \"bytes\": 1652, \"state\": \"completed\", \"points\": []}, \"skf-upstream.py\": {\"sha256\": \"fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf\", \"bytes\": 1585, \"state\": \"completed\", \"points\": [{\"sourceSha256\": \"fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 37, \"col\": 20, \"offset\": 1296}, \"end\": {\"line\": 37, \"col\": 51, \"offset\": 1327}}, \"id\": \"5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 37, \"col\": 25, \"offset\": 1301}, \"end\": {\"line\": 37, \"col\": 50, \"offset\": 1326}}}]}}}, \"findingLocations\": []}\n",
+  "inputFiles": {
+    "manifest.json": "b17134d689923bb2c317b05affa7d135cca2c489edc0295f44c3f32f7f18f46c",
+    "scan.json": "5021e624e752b001ce3e3846e8f158ed4aeb93a4c9a72fdb35a0c5b14a0eea84",
+    "sources/literal-set.py": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+    "sources/skf-fixed-control.py": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+    "sources/BenchmarkTest00073.py": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+    "sources/skf-upstream.py": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+    "sources/BenchmarkTest00074.py": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+    "sources/helpers/utils.py": "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834"
+  },
+  "temporaryRemoved": true,
+  "cleanup": {
+    "confirmed": true,
+    "idAbsent": true,
+    "nameAbsent": true,
+    "clientsStopped": true,
+    "creationResolved": true,
+    "errors": [],
+    "checkedAt": "2026-11-12T17:52:46.120289+00:00",
+    "clientsInitiallyStopped": true
+  },
+  "attemptDirectory": "/home/purge/.cache/verify-execution-acceptance-329ab08ecd/attempts/review-33b6dfa2837c4a02bea1a3418ba2b2bd",
+  "locationBinding": {
+    "version": 1,
+    "snapshotSha256": "dc3c96ccde0571f5120e8e7ab095fe05af68ce2bea9b110927c88194a52df6ff",
+    "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+    "uid": 1000,
+    "inventory": {
+      "version": 1,
+      "protocol": "python-sink-locations-1",
+      "runtimePython": "3.12.15",
+      "files": {
+        "BenchmarkTest00073.py": {
+          "sha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+          "bytes": 1877,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 54,
+                  "col": 5,
+                  "offset": 1748
+                },
+                "end": {
+                  "line": 54,
+                  "col": 14,
+                  "offset": 1757
+                }
+              },
+              "id": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 54,
+                  "col": 10,
+                  "offset": 1753
+                },
+                "end": {
+                  "line": 54,
+                  "col": 13,
+                  "offset": 1756
+                }
+              }
+            }
+          ]
+        },
+        "BenchmarkTest00074.py": {
+          "sha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+          "bytes": 1881,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+              "callee": "exec",
+              "call": {
+                "start": {
+                  "line": 51,
+                  "col": 4,
+                  "offset": 1759
+                },
+                "end": {
+                  "line": 51,
+                  "col": 13,
+                  "offset": 1768
+                }
+              },
+              "id": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 51,
+                  "col": 9,
+                  "offset": 1764
+                },
+                "end": {
+                  "line": 51,
+                  "col": 12,
+                  "offset": 1767
+                }
+              }
+            }
+          ]
+        },
+        "helpers/utils.py": {
+          "sha256": "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834",
+          "bytes": 2280,
+          "state": "completed",
+          "points": []
+        },
+        "literal-set.py": {
+          "sha256": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+          "bytes": 117,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 4,
+                  "col": 12,
+                  "offset": 105
+                },
+                "end": {
+                  "line": 4,
+                  "col": 23,
+                  "offset": 116
+                }
+              },
+              "id": "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 4,
+                  "col": 17,
+                  "offset": 110
+                },
+                "end": {
+                  "line": 4,
+                  "col": 22,
+                  "offset": 115
+                }
+              }
+            }
+          ]
+        },
+        "skf-fixed-control.py": {
+          "sha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+          "bytes": 1652,
+          "state": "completed",
+          "points": []
+        },
+        "skf-upstream.py": {
+          "sha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+          "bytes": 1585,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 37,
+                  "col": 20,
+                  "offset": 1296
+                },
+                "end": {
+                  "line": 37,
+                  "col": 51,
+                  "offset": 1327
+                }
+              },
+              "id": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 37,
+                  "col": 25,
+                  "offset": 1301
+                },
+                "end": {
+                  "line": 37,
+                  "col": 50,
+                  "offset": 1326
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

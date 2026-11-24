@@ -1,0 +1,817 @@
+{
+ "failed": [],
+ "formalTargets": "0/16",
+ "framingPolicy": "end-lf-padding-v1",
+ "kind": "formal-admission-simulated-results",
+ "note": "Docker and bpftrace are controlled shims. In-process cases monkeypatch resource calls. Not a real-machine result.",
+ "observationProtocol": "buffer-v2",
+ "passed": 15,
+ "r3": "blocked",
+ "realBpftrace": 0,
+ "realContainers": 0,
+ "realTargets": 0,
+ "results": [
+  {
+   "checks": {
+    "attemptFraming": true,
+    "attemptParserSha": true,
+    "attemptProtocol": true,
+    "attemptTemplateSha": true,
+    "cleanupConfirmed": true,
+    "counter": true,
+    "observationFraming": true,
+    "observationProtocol": true,
+    "observerV2": true,
+    "planCreated": true,
+    "planExists": true,
+    "planId": true,
+    "reservationReleased": true,
+    "return0": true,
+    "stageFinalAbsent": true,
+    "targetExecutions": true,
+    "verdictConfirmed": true
+   },
+   "error": null,
+   "passed": true,
+   "test": "normal-preparation-target-v2",
+   "verificationReason": "structure-match"
+  },
+  {
+   "checks": {
+    "noAttempt": true,
+    "noCreate": true,
+    "reason": true,
+    "rejected78": true
+   },
+   "error": null,
+   "passed": true,
+   "stderr": "runner: admission-framingPolicy\n",
+   "test": "admission-identity-mismatch-rejected-before-resources"
+  },
+  {
+   "checks": {
+    "noStage": true,
+    "raised": true,
+    "writeAttempted": true
+   },
+   "error": null,
+   "passed": true,
+   "raised": "OSError",
+   "test": "plan-write-failure-prevents-stage-creation"
+  },
+  {
+   "checks": {
+    "bindPlanExists": true,
+    "noNewStart": true,
+    "normal": true,
+    "queryAttempt0": true,
+    "queryPlan0": true,
+    "queryPlanId": true,
+    "recover0": true,
+    "replayedFalse": true,
+    "statusHasPlans": true,
+    "statusReturn0": true
+   },
+   "error": null,
+   "passed": true,
+   "recoverStdout": "{\"attempt\": 1, \"cleanupConfirmed\": true, \"executionState\": \"observed\", \"prepareId\": \"f8255ba6a93bb21b5cf71ad614d34afb\", \"replayed\": false, \"targetExecutions\": 1}\n",
+   "test": "prepare-id-query-status-and-recover-no-replay"
+  },
+  {
+   "checks": {
+    "bothCleanupRejected": true,
+    "bothQueryRejected": true,
+    "neitherQueryRejected": true,
+    "neitherRecoverRejected": true,
+    "newPrepareIdWorks": true,
+    "oldAttemptWorks": true
+   },
+   "error": null,
+   "passed": true,
+   "test": "cli-exclusivity-and-preserved-attempt-selector"
+  },
+  {
+   "bind": {
+    "planAtStageCreation": true,
+    "planKeys": [
+     "attempt",
+     "containerId",
+     "containerName",
+     "containerState",
+     "createdAt",
+     "image",
+     "imageId",
+     "kind",
+     "mounts",
+     "operationRole",
+     "prepareId",
+     "processes",
+     "protocolRevision",
+     "reservationHeld",
+     "role",
+     "stageDir",
+     "stageIdentity",
+     "stageState",
+     "state",
+     "tag",
+     "version"
+    ],
+    "planPath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/tmphgfnvfmf/prepare/plans/627053b72363a492c15259c60cfadaf4.json"
+   },
+   "checks": {
+    "bindPlanBeforeStage": true,
+    "identityWriteUnknown": true,
+    "targetPlanBeforeStage": true
+   },
+   "error": null,
+   "identity": null,
+   "passed": true,
+   "target": {
+    "intentAtStageRunInputs": true,
+    "planFiles": [
+     "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/tmp0rluucxc/prepare/plans/69e2639246e6bf5ae8b9e07fec7ba194.json"
+    ],
+    "prepareId": "69e2639246e6bf5ae8b9e07fec7ba194",
+    "recordKeys": [
+     "attempt",
+     "challenge",
+     "checkpointStep",
+     "checkpoints",
+     "classId",
+     "expectedSha256",
+     "prepareId",
+     "processes",
+     "resourceIntent",
+     "resourcePlanPath",
+     "resourceProof",
+     "stageDir",
+     "state",
+     "version"
+    ]
+   },
+   "test": "plan-written-before-stage-config-and-create"
+  },
+  {
+   "cases": {
+    "absent": {
+     "confirmed": true,
+     "raised": null,
+     "reservationHeld": true,
+     "stageExists": false,
+     "stageOutcome": {
+      "lstatAfter": "absent",
+      "removed": true,
+      "state": "absent"
+     },
+     "storedCleanup": {
+      "associated": {},
+      "associatedClear": true,
+      "associationCandidates": 0,
+      "associationHold": {},
+      "associationScan": {
+       "directory": "absent",
+       "directoryDetail": "file-not-found",
+       "listed": [],
+       "pendingIntents": 0,
+       "scanned": 0
+      },
+      "checkedAt": "2026-11-24T16:39:17.422745+00:00",
+      "clientExited": true,
+      "clientState": {
+       "proof": "not-started",
+       "state": "exited"
+      },
+      "clientStop": {
+       "forced": false,
+       "proof": "not-started",
+       "state": "exited",
+       "stopped": true
+      },
+      "confirmed": true,
+      "container": {
+       "removed": true,
+       "state": "never-created"
+      },
+      "finalStageCheck": "after-resources",
+      "observerExited": true,
+      "observerState": {
+       "proof": "not-started",
+       "state": "exited"
+      },
+      "observerStop": {
+       "forced": false,
+       "proof": "not-started",
+       "state": "exited",
+       "stopped": true
+      },
+      "resourceCreationPhase": null,
+      "stage": {
+       "lstatAfter": "absent",
+       "removed": true,
+       "state": "absent"
+      },
+      "state": "confirmed"
+     }
+    },
+    "delete": {
+     "confirmed": false,
+     "raised": null,
+     "reservationHeld": true,
+     "stageExists": true,
+     "stageOutcome": {
+      "lstatAfter": "present",
+      "removed": false,
+      "state": "rmtree"
+     },
+     "storedCleanup": {
+      "associated": {},
+      "associatedClear": true,
+      "associationCandidates": 0,
+      "associationHold": {},
+      "associationScan": {
+       "directory": "absent",
+       "directoryDetail": "file-not-found",
+       "listed": [],
+       "pendingIntents": 0,
+       "scanned": 0
+      },
+      "checkedAt": "2026-11-24T16:39:17.493053+00:00",
+      "clientExited": true,
+      "clientState": {
+       "proof": "not-started",
+       "state": "exited"
+      },
+      "clientStop": {
+       "forced": false,
+       "proof": "not-started",
+       "state": "exited",
+       "stopped": true
+      },
+      "confirmed": false,
+      "container": {
+       "removed": true,
+       "state": "never-created"
+      },
+      "finalStageCheck": "after-resources",
+      "observerExited": true,
+      "observerState": {
+       "proof": "not-started",
+       "state": "exited"
+      },
+      "observerStop": {
+       "forced": false,
+       "proof": "not-started",
+       "state": "exited",
+       "stopped": true
+      },
+      "resourceCreationPhase": null,
+      "stage": {
+       "lstatAfter": "present",
+       "removed": false,
+       "state": "rmtree"
+      },
+      "state": "incomplete"
+     }
+    },
+    "identity": {
+     "confirmed": false,
+     "raised": null,
+     "reservationHeld": true,
+     "stageExists": true,
+     "stageOutcome": {
+      "lstatAfter": "present",
+      "removed": false,
+      "state": "identity-changed"
+     },
+     "storedCleanup": {
+      "associated": {},
+      "associatedClear": true,
+      "associationCandidates": 0,
+      "associationHold": {},
+      "associationScan": {
+       "directory": "absent",
+       "directoryDetail": "file-not-found",
+       "listed": [],
+       "pendingIntents": 0,
+       "scanned": 0
+      },
+      "checkedAt": "2026-11-24T16:39:17.468506+00:00",
+      "clientExited": true,
+      "clientState": {
+       "proof": "not-started",
+       "state": "exited"
+      },
+      "clientStop": {
+       "forced": false,
+       "proof": "not-started",
+       "state": "exited",
+       "stopped": true
+      },
+      "confirmed": false,
+      "container": {
+       "removed": true,
+       "state": "never-created"
+      },
+      "finalStageCheck": "after-resources",
+      "observerExited": true,
+      "observerState": {
+       "proof": "not-started",
+       "state": "exited"
+      },
+      "observerStop": {
+       "forced": false,
+       "proof": "not-started",
+       "state": "exited",
+       "stopped": true
+      },
+      "resourceCreationPhase": null,
+      "stage": {
+       "lstatAfter": "present",
+       "removed": false,
+       "state": "identity-changed"
+      },
+      "state": "incomplete"
+     }
+    },
+    "journal": {
+     "confirmed": null,
+     "raised": "OSError:simulated-final-journal-failure",
+     "reservationHeld": true,
+     "stageExists": true,
+     "stageOutcome": null,
+     "storedCleanup": null
+    },
+    "permission": {
+     "confirmed": false,
+     "raised": null,
+     "reservationHeld": true,
+     "stageExists": true,
+     "stageOutcome": {
+      "detail": "permission-denied",
+      "lstatAfter": "unknown",
+      "removed": false,
+      "state": "lstat-error"
+     },
+     "storedCleanup": {
+      "associated": {},
+      "associatedClear": true,
+      "associationCandidates": 0,
+      "associationHold": {},
+      "associationScan": {
+       "directory": "absent",
+       "directoryDetail": "file-not-found",
+       "listed": [],
+       "pendingIntents": 0,
+       "scanned": 0
+      },
+      "checkedAt": "2026-11-24T16:39:17.516170+00:00",
+      "clientExited": true,
+      "clientState": {
+       "proof": "not-started",
+       "state": "exited"
+      },
+      "clientStop": {
+       "forced": false,
+       "proof": "not-started",
+       "state": "exited",
+       "stopped": true
+      },
+      "confirmed": false,
+      "container": {
+       "removed": true,
+       "state": "never-created"
+      },
+      "finalStageCheck": "after-resources",
+      "observerExited": true,
+      "observerState": {
+       "proof": "not-started",
+       "state": "exited"
+      },
+      "observerStop": {
+       "forced": false,
+       "proof": "not-started",
+       "state": "exited",
+       "stopped": true
+      },
+      "resourceCreationPhase": null,
+      "stage": {
+       "detail": "permission-denied",
+       "lstatAfter": "unknown",
+       "removed": false,
+       "state": "lstat-error"
+      },
+      "state": "incomplete"
+     }
+    },
+    "present": {
+     "confirmed": true,
+     "raised": null,
+     "reservationHeld": true,
+     "stageExists": false,
+     "stageOutcome": {
+      "lstatAfter": "absent",
+      "removed": true,
+      "state": "removed"
+     },
+     "storedCleanup": {
+      "associated": {},
+      "associatedClear": true,
+      "associationCandidates": 0,
+      "associationHold": {},
+      "associationScan": {
+       "directory": "absent",
+       "directoryDetail": "file-not-found",
+       "listed": [],
+       "pendingIntents": 0,
+       "scanned": 0
+      },
+      "checkedAt": "2026-11-24T16:39:17.445532+00:00",
+      "clientExited": true,
+      "clientState": {
+       "proof": "not-started",
+       "state": "exited"
+      },
+      "clientStop": {
+       "forced": false,
+       "proof": "not-started",
+       "state": "exited",
+       "stopped": true
+      },
+      "confirmed": true,
+      "container": {
+       "removed": true,
+       "state": "never-created"
+      },
+      "finalStageCheck": "after-resources",
+      "observerExited": true,
+      "observerState": {
+       "proof": "not-started",
+       "state": "exited"
+      },
+      "observerStop": {
+       "forced": false,
+       "proof": "not-started",
+       "state": "exited",
+       "stopped": true
+      },
+      "resourceCreationPhase": null,
+      "stage": {
+       "lstatAfter": "absent",
+       "removed": true,
+       "state": "removed"
+      },
+      "state": "confirmed"
+     }
+    },
+    "reappear": {
+     "confirmed": false,
+     "raised": null,
+     "reservationHeld": true,
+     "stageExists": true,
+     "stageOutcome": {
+      "lstatAfter": "present",
+      "removed": false,
+      "state": "still-present"
+     },
+     "storedCleanup": {
+      "associated": {},
+      "associatedClear": true,
+      "associationCandidates": 0,
+      "associationHold": {},
+      "associationScan": {
+       "directory": "absent",
+       "directoryDetail": "file-not-found",
+       "listed": [],
+       "pendingIntents": 0,
+       "scanned": 0
+      },
+      "checkedAt": "2026-11-24T16:39:17.538600+00:00",
+      "clientExited": true,
+      "clientState": {
+       "proof": "not-started",
+       "state": "exited"
+      },
+      "clientStop": {
+       "forced": false,
+       "proof": "not-started",
+       "state": "exited",
+       "stopped": true
+      },
+      "confirmed": false,
+      "container": {
+       "removed": true,
+       "state": "never-created"
+      },
+      "finalStageCheck": "after-resources",
+      "observerExited": true,
+      "observerState": {
+       "proof": "not-started",
+       "state": "exited"
+      },
+      "observerStop": {
+       "forced": false,
+       "proof": "not-started",
+       "state": "exited",
+       "stopped": true
+      },
+      "resourceCreationPhase": null,
+      "stage": {
+       "lstatAfter": "present",
+       "removed": false,
+       "state": "still-present"
+      },
+      "state": "incomplete"
+     }
+    }
+   },
+   "checks": {
+    "absentConfirmed": true,
+    "deletionFailureRetained": true,
+    "identityChangedRetained": true,
+    "journalFailureRaised": true,
+    "permissionUnknownRetained": true,
+    "presentRemoved": true,
+    "reappearanceRetained": true
+   },
+   "error": null,
+   "passed": true,
+   "test": "final-stage-absent-present-permission-link-reappearance"
+  },
+  {
+   "case": {
+    "confirmed": false,
+    "raised": null,
+    "reservationHeld": true,
+    "stageExists": true,
+    "stageOutcome": {
+     "lstatAfter": "present",
+     "removed": false,
+     "state": "retained-resources-unresolved"
+    },
+    "storedCleanup": {
+     "associated": {},
+     "associatedClear": true,
+     "associationCandidates": 0,
+     "associationHold": {},
+     "associationScan": {
+      "directory": "absent",
+      "directoryDetail": "file-not-found",
+      "listed": [],
+      "pendingIntents": 0,
+      "scanned": 0
+     },
+     "checkedAt": "2026-11-24T16:39:17.584774+00:00",
+     "clientExited": true,
+     "clientState": {
+      "proof": "not-started",
+      "state": "exited"
+     },
+     "clientStop": {
+      "forced": false,
+      "proof": "not-started",
+      "state": "exited",
+      "stopped": true
+     },
+     "confirmed": false,
+     "container": {
+      "detail": "query-failed",
+      "removed": false,
+      "state": "unknown"
+     },
+     "finalStageCheck": "after-resources",
+     "observerExited": true,
+     "observerState": {
+      "proof": "not-started",
+      "state": "exited"
+     },
+     "observerStop": {
+      "forced": false,
+      "proof": "not-started",
+      "state": "exited",
+      "stopped": true
+     },
+     "resourceCreationPhase": null,
+     "stage": {
+      "lstatAfter": "present",
+      "removed": false,
+      "state": "retained-resources-unresolved"
+     },
+     "state": "incomplete"
+    }
+   },
+   "checks": {
+    "containerUnknown": true,
+    "finalCheckAfterResources": true,
+    "notConfirmed": true,
+    "reservationHeld": true,
+    "stageFilesRetained": true
+   },
+   "error": null,
+   "passed": true,
+   "test": "cleanup-unconfirmed-retains-reservation"
+  },
+  {
+   "checks": {
+    "identityReason": true,
+    "noRm": true,
+    "noStart": true,
+    "rejected78": true
+   },
+   "error": null,
+   "passed": true,
+   "stderr": "runner: prepare-plan-identity:identity:stage-role-path\n",
+   "test": "different-resource-evidence-rejected-zero-destruction"
+  },
+  {
+   "busyStderr": "runner: batch-locked\n",
+   "checks": {
+    "busy79": true,
+    "first0": true,
+    "noStart": true,
+    "replayedFalse": true,
+    "second0": true
+   },
+   "error": null,
+   "passed": true,
+   "test": "repeat-recover-no-replay-and-busy-lock"
+  },
+  {
+   "checks": {
+    "settledCleanup": true,
+    "spent": true,
+    "syntaxUnknown": true,
+    "unknownExit3": true,
+    "used": true
+   },
+   "error": null,
+   "passed": true,
+   "test": "attempt-budget-spent-and-no-refund"
+  },
+  {
+   "checks": {
+    "allV2": true,
+    "confirmed1": true,
+    "dataOnly5": true,
+    "echo9": true,
+    "q4Correct": true,
+    "wrongFn13": true
+   },
+   "decisions": {
+    "1": "confirmed",
+    "5": "excluded",
+    "8": "excluded",
+    "9": "excluded",
+    "13": "excluded"
+   },
+   "error": null,
+   "passed": true,
+   "test": "judge-valid-data-echo-wrong-function-q4"
+  },
+  {
+   "cases": {
+    "bad-policy": {
+     "decision": "unknown",
+     "reason": "ValueError:framing-policy:legacy",
+     "return": 3
+    },
+    "forged-confirmed": {
+     "decision": "unknown",
+     "reason": "frozen-event-count-mismatch",
+     "return": 3
+    },
+    "legacy-template": {
+     "decision": "unknown",
+     "reason": "ValueError:digest-chain:attempt.observerTemplateSha256 == frozen template bytes",
+     "return": 3
+    },
+    "missing-end": {
+     "decision": "unknown",
+     "reason": "ValueError:recomputed-observation-state:end-missing",
+     "return": 3
+    },
+    "missing-raw": {
+     "decision": "unknown",
+     "reason": "PreflightError:missing:/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/fa-corrupt-c84ab53d/runs/0001/missing.raw",
+     "return": 3
+    },
+    "payload-none": {
+     "decision": "unknown",
+     "reason": "ValueError:expected-payload-type",
+     "return": 3
+    },
+    "raw-tamper": {
+     "decision": "unknown",
+     "reason": "ValueError:recomputed-observation-state:trailing-after-end",
+     "return": 3
+    },
+    "stale-events": {
+     "decision": "unknown",
+     "reason": "ValueError:observation-canonical:stored-mismatch:events",
+     "return": 3
+    },
+    "truncated": {
+     "decision": "unknown",
+     "reason": "ValueError:recomputed-observation-state:end-missing",
+     "return": 3
+    },
+    "unsupported": {
+     "decision": "unknown",
+     "reason": "ValueError:recomputed-observation-state:event-0:unsupported:probe",
+     "return": 3
+    },
+    "wrong-offset": {
+     "decision": "unknown",
+     "reason": "ValueError:observation-canonical:stored-mismatch:callOffset",
+     "return": 3
+    },
+    "wrong-point": {
+     "decision": "unknown",
+     "reason": "ValueError:attempt-point-id",
+     "return": 3
+    }
+   },
+   "checks": {
+    "allExit3": true,
+    "allUnknown": true,
+    "forgedNotConfirmed": true,
+    "payloadReason": true,
+    "policyReason": true,
+    "staleReason": true
+   },
+   "error": null,
+   "passed": true,
+   "test": "judge-corruptions-clear-unknown-not-exception"
+  },
+  {
+   "cases": {
+    "bool-exit": {
+     "decision": "unknown",
+     "reason": "invalid-returncode-type:bool",
+     "return": 3
+    },
+    "lf-0": {
+     "decision": "confirmed",
+     "reason": "structure-match",
+     "return": 0
+    },
+    "lf-1": {
+     "decision": "confirmed",
+     "reason": "structure-match",
+     "return": 0
+    },
+    "lf-8": {
+     "decision": "confirmed",
+     "reason": "structure-match",
+     "return": 0
+    },
+    "lf-9": {
+     "decision": "unknown",
+     "reason": "ValueError:recomputed-observation-state:trailing-lf-overflow",
+     "return": 3
+    }
+   },
+   "checks": {
+    "boolUnknown": true,
+    "lf0": true,
+    "lf1": true,
+    "lf8": true,
+    "lf9Unknown": true
+   },
+   "error": null,
+   "passed": true,
+   "test": "judge-end-lf-trailer-boundary-and-strict-types"
+  },
+  {
+   "checks": {
+    "bindPlanRecorded": true,
+    "counterUnchanged": true,
+    "noAttemptFiles": true,
+    "noTargetPlan": true
+   },
+   "error": null,
+   "passed": true,
+   "test": "preparation-does-not-consume-target-attempt"
+  }
+ ],
+ "shimResolution": {
+  "bpftrace": {
+   "controlledDirectory": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/shims",
+   "executable": true,
+   "expectedPath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/shims/bpftrace",
+   "name": "bpftrace",
+   "resolvedPath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/shims/bpftrace",
+   "sha256": "6104b989cabdd9675d124c5ce48ad2b36e5462f89a291ed298fea635f0c3cf79"
+  },
+  "docker": {
+   "controlledDirectory": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/shims",
+   "executable": true,
+   "expectedPath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/shims/docker",
+   "name": "docker",
+   "resolvedPath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/shims/docker",
+   "sha256": "2bc481cb094eaba100e8424c205adb5ebae9ae2c9c454571f02abde2dc0d7725"
+  }
+ },
+ "simulated": true,
+ "targetExecutions": 0,
+ "total": 15
+}

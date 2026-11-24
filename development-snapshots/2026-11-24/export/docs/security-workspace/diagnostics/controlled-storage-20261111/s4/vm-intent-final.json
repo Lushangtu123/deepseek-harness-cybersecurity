@@ -1,0 +1,20 @@
+{
+  "remoteRoot": "/home/purge/.cache/r3-controlled-storage-c0c61168be61",
+  "inputSha256": "d607bfaa2843a8422bd25e86b564f882529992c86249e6b3c363ec75d190f98b",
+  "workerSha256": "1e373f21e2f1d9a5269687da4709896a849dcc2d5bfe80e0c43d11d601e11adc",
+  "sourceSha256": {
+    "scripts/review_quality_gate.mjs": "99aea3894238a34f17ee63b95a5c216b565a23a61aa1de0c2e8093877a55f5a0",
+    "scripts/reviewer_snapshot.py": "82041ef6c683e54e3f947219eb6037da25ee0aa2fd5d0ebe3eced64a8991b0c6",
+    "scripts/reviewer_snapshot.test.py": "b8b61b77bf6d435970fd19345b842fb7aceae2e4fc95b1efdbd0a1494044b06c",
+    "scripts/reviewer_storage.py": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202",
+    "scripts/reviewer_storage.test.py": "4f5180ec503cfde1642f90378de0c5099b27ca07cf5b0357ba6a46ebe425d326",
+    "scripts/reviewer_archive.test.py": "e43c9c5de838c7d463c1f4b6c4cf3d3f0e5b3efc9f7a66c8ee4d398bd1eaff5a",
+    "scripts/eval_evidence_batch.test.py": "684293ec1ea35fa1590f729963101f78750fb6a2c8ef39053c33e3b954b51aab",
+    "work/harness-purge-improved/tests/review-quality-gate.test.mjs": "23b969babf3ea44819df30fed97460f6d3fc45c5e6a2015e98079f44ceec1f03",
+    "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+    "work/harness-purge-improved/package/scripts/eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843",
+    "normal-live.py": "2516765a2e3d80d09ea2f76eebc9ce5cdec0a8dec02cf010ddfb23126370f8ef",
+    "storage-live.py": "8d17ca59c69355266f3e55ad26b8ce9ac9012bd9e6e1a36222b963804b30a94c"
+  }
+}

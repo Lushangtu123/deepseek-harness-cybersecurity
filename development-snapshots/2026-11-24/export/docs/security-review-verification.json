@@ -1,0 +1,134 @@
+{
+  "date": "2026-11-01",
+  "timezone": "America/Los_Angeles",
+  "runtime": {
+    "version": "1.1.77-personal.2",
+    "programFiles": 139,
+    "defaultPreset": "personal-daily",
+    "optionalPreset": "personal-review",
+    "hostPermissionsExpanded": false
+  },
+  "checks": {
+    "python": 281,
+    "pluginNode": 511,
+    "hostNode": 139,
+    "restoreRoot": 18,
+    "macCiPassed": true,
+    "actualLinuxCiPassed": true,
+    "clientRebuildMatched": true,
+    "cloud": "Exact-commit Actions is checked separately after push; repeated test counts are not summed."
+  },
+  "nativeToolBoundaries": {
+    "nativeCordis": true,
+    "nativeToolRuntime": true,
+    "deploymentDefault": "ptc",
+    "reviewVisibleNames": [
+      "redteam_security_audit",
+      "redteam_session_bind",
+      "redteam_session_info"
+    ],
+    "firstBindReservation": true,
+    "rebindDenied": true,
+    "scopedAliasDenied": true,
+    "sameNameShadowDenied": true,
+    "preparedShadowDenied": true,
+    "forbiddenBodies": 0,
+    "allowedBodies": 2,
+    "realProjectTouched": false
+  },
+  "browserAcceptance": {
+    "browser": "Google Chrome",
+    "newPresetSelected": true,
+    "readOnlyCoverageCardObserved": true,
+    "eightCoverageRowsObserved": true,
+    "currentScopeVersionShown": 1,
+    "manualItemsStillUnverified": 4,
+    "trajectoryToolCalls": 8,
+    "actions": [
+      "bind",
+      "preflight",
+      "source README.md",
+      "source app.py",
+      "start semgrep",
+      "wait",
+      "kali_check",
+      "report"
+    ],
+    "evidence": "Live UI tool trajectory plus synthetic SQLite and fixed Kali status; private chat archives are not exported."
+  },
+  "syntheticAcceptance": {
+    "engagement": "security-review-synthetic-20261101",
+    "scopeRevision": 1,
+    "run": {
+      "id": "fe0441de-4861-460e-99ba-6cccdf93eb31",
+      "request_id": "review-model-semgrep-20261101",
+      "tool": "semgrep",
+      "profile_revision": 1,
+      "state": "completed",
+      "complete": 1
+    },
+    "findings": [
+      {
+        "rule": "policy.harness.python.eval",
+        "location": "app.py:2",
+        "status": "unverified"
+      }
+    ],
+    "coveredFiles": 1,
+    "fixtureUnchanged": true,
+    "injectionMarkerAbsent": true,
+    "kaliStatus": {
+      "ok": true,
+      "engagement": "security-review-synthetic-20261101",
+      "requestId": "review-model-kali-20261101",
+      "state": "completed",
+      "cleanupVerified": true,
+      "checks": [
+        {
+          "name": "nmap-loopback-tcp",
+          "passed": true
+        },
+        {
+          "name": "curl-loopback-http",
+          "passed": true
+        }
+      ],
+      "target": "Kali 127.0.0.1 合成服务",
+      "notice": "仅合成链路验收，不扫描真实项目，不代表全部Kali工具或业务测试已通过。"
+    },
+    "kaliWasQueriedNotReplayed": true
+  },
+  "kaliControlCases": {
+    "normal": "completed; cleanup verified",
+    "subprocessTimeout": "timed-out; cleanup verified",
+    "sigterm": "cancelled; cleanup verified",
+    "sshDisconnect": "Caller SSH interrupted; remote task completed; status recovered its original receipt, no replay",
+    "arbitraryTargetsAccepted": false,
+    "uid": 1000
+  },
+  "protectedState": {
+    "protectedProjectFilesMatched": 459,
+    "projectHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "findingsByStatus": {
+      "unverified": 95
+    },
+    "scannerManifestUnchanged": true,
+    "programHashesMatched": 139,
+    "installedToolsPresent": true,
+    "harnessActive": true,
+    "pentagiRunning": true,
+    "harnessVmConfigurationUnchanged": true,
+    "otherFourHostHelpersUnchanged": true,
+    "proxyMatchesReviewedSource": true,
+    "hostResourceLimitsUnchanged": true,
+    "snapshotCount": 24,
+    "recoveryPointStillPredatesKaliBridge": true
+  },
+  "remainingLimits": [
+    "Tool restrictions are agent-scoped controls, not an operating-system sandbox; installed host plugins must be trusted.",
+    "Complex authentication, role/authorization, business logic and architecture still need human verification.",
+    "Existing Semgrep parsing gap and95real unverified findings are retained.",
+    "Existing24recovery points do not cover the new program/connection and Kali disk; no new full recovery point was created."
+  ]
+}

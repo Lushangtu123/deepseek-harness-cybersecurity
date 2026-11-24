@@ -1,0 +1,38 @@
+{
+  "id": "8caf46e5-e17e-412f-941d-69473ad1e331",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "**Scoped verdict:** Not accepted as a fully demonstrated closed source/dependency execution set. Exact listed source hashes and locked dependency file bytes are bound, and the listed container isolation controls are supported; however the observer leaves an unchecked import surface, and dependency package metadata is not closed. No R3 or live acceptance implied.\n\n**Findings**\n\n1. **Safety blocker — unchecked `sourceRoot` imports.** `run_probe` hashes only `request['files']`, then inserts the entire `sourceRoot` at `sys.path[0]`. It never enumerates `sourceRoot` or rejects extra `.py` files. Approved code can import an unlisted sibling; that file bypasses `APPROVED_SOURCES`, `passive_source`, and the source-shadowing check. Because `sourceRoot` precedes dependencies on `sys.path`, such a file can also shadow locked dependencies. Closure holds only if staging is separately proven to contain exactly `request['files']`; this code does not prove it.\n\n2. **Dependency-closure limitation.** `verifier_snapshot.tree` binds dependency file bytes by lock digest with read/fstat checks, so the file map is hash-closed. But `freeze` accepts `lock['packages']` without validation, and `verify` never checks `dependencyPackages`. Package provenance/metadata should be treated as unattested; only the file map is bound. The green tests do not close this metadata gap.\n\n3. **Conservative proof defect.** In `exclusion_proof`, the finite-literal-set branch calls `literal_expression(v.value)`, which parses the constant’s content as source. Ordinary string sets such as `x not in ('safe','bad')`, and integer sets, are rejected; valid exclusions degrade to `unknown`. This is conservative, not an unsafe exclusion.\n\n**Isolation conclusion:** Supported for the stated controls: non-root 1000, `--network none`, read-only rootfs, cap-drop ALL, no extra caps/privileged, `no-new-privileges`, 512 MiB memory/swap cap, 1 CPU, 64 pids, 32 MiB tmpfs, single read-only stage mount. No custom seccomp is specified; the daemon default remains a residual limitation, not evidence of a hardened syscall allowlist."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 13498,
+    "completion_tokens": 19302,
+    "total_tokens": 32800,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 18817
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 13498
+  },
+  "streamDone": true,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 79625,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "75e52abf501f12fa7c0a5d9c56eb7c56941e6ae7061b6b6a8debd5603a43c973",
+  "promptSha256": "1eb2ae4fb09095a0d65d41567e910ca23f060e2e423c0c3b2a59fe1876577299"
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "scope": "professional-offline-assets",
+  "platform": "linux/arm64",
+  "manifestSha256": "b9a1e88354bda9494020b52f262c8369a5930e5d8baef8ac554202d1b6b3d913",
+  "archives": {
+    "programs.tgz": {
+      "sha256": "672d338f020abd5ba7ced1be9504fad0a0ba6ea54648ea6e6546c1cab5d6df2a",
+      "bytes": 1509748298
+    },
+    "images.tar.gz": {
+      "sha256": "6efce7f802f5b88031440f0452adc75cb72ca011a04e6d76458075f1db41f3ef",
+      "bytes": 2221363602
+    }
+  },
+  "payload": {
+    "files": 206790,
+    "links": 53,
+    "bytes": 5207909678
+  },
+  "components": [
+    "rea",
+    "reverse-skill",
+    "pentagi",
+    "security-scanners",
+    "original-capabilities",
+    "runtime-overrides",
+    "optional-plugins",
+    "codegraph"
+  ],
+  "storage": "Separate private offline assets; archive bytes and account files are not included in this repository",
+  "upstreamReproducibleBuildClaimed": false,
+  "credentialsOrDockerVolumesIncluded": false
+}

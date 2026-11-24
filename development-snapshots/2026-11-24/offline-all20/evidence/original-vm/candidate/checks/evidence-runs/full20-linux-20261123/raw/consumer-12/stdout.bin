@@ -1,0 +1,13 @@
+PASS settlement-parent-and-damaged-child-refused
+PASS settlement-linked-child-unavailable-variants
+PASS settlement-complete-scope-releases
+PASS settlement-semantic-unknown-with-confirmed-cleanup-can-settle
+PASS settlement-recompute-after-child-change
+PASS recovery-settlement-refuses-stale-parent-success
+PASS new-reservation-blocked-by-damaged-preparation
+PASS new-reservation-blocked-by-unknown-plans-directory
+PASS new-reservation-empty-directory-and-separate-batch
+PASS compile-and-bind-preparation-blocked-before-writes
+PASS query-status-available-with-damaged-batch
+PASS public-compile-known-failure-is-diagnostic-3
+{"failed": [], "passed": 12, "total": 12}

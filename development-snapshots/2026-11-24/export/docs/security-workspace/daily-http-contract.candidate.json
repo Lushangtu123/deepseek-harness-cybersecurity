@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "role": "candidate daily-entry HTTP coverage; pinned prior observed main HTML asset baseline, not an independent security attestation",
+  "origin": "http://127.0.0.1:49226",
+  "rounds": 3,
+  "pageTitle": "DeepSeek Harness",
+  "assets": {
+    "/assets/index-BNyAYEM7.css": {
+      "sha256": "47c890e8b3898eb4e5a53933bd318e58d4cf168cd7ccef46789d48a070bba591",
+      "bytes": 77471,
+      "contentTypes": [
+        "text/css"
+      ]
+    },
+    "/assets/index-BXV-oxvX.js": {
+      "sha256": "0f3fc6b857e4f8bd4d69619ce1010240cdaaa443abf0826532a24ef8f6e32ef0",
+      "bytes": 941436,
+      "contentTypes": [
+        "text/javascript",
+        "application/javascript"
+      ]
+    },
+    "/assets/vendor-DV2921Zo.css": {
+      "sha256": "4cea59483551208ce61ff27251da83d5f7a0893ef34cfe4b808d61be6e13ebc7",
+      "bytes": 27312,
+      "contentTypes": [
+        "text/css"
+      ]
+    },
+    "/assets/vendor-DcuzkuQH.js": {
+      "sha256": "c14ba1089d78f48b8959a7bc42c9013b4a57aa4122e053d54f74c0a4d1d156a7",
+      "bytes": 741114,
+      "contentTypes": [
+        "text/javascript",
+        "application/javascript"
+      ]
+    }
+  },
+  "baselineEvidence": "docs/security-workspace/load-window-acceptance-results.json",
+  "baselineObservedDate": "2026-11-08",
+  "baseHref": "./",
+  "bootstrapScripts": [
+    {
+      "path": "/plugins/",
+      "queryPresent": true
+    },
+    {
+      "path": "/__harness/banner.js",
+      "queryPresent": false
+    },
+    {
+      "path": "/__harness/storage.js",
+      "queryPresent": false
+    }
+  ],
+  "bootstrapScope": "Inventory only; bodies and query values are not fetched or validated. Explicit known local references adopted after parser diagnostic; core asset hashes unchanged.",
+  "bootstrapPreloads": [
+    {
+      "path": "/plugins/",
+      "queryPresent": true,
+      "count": 2
+    }
+  ]
+}

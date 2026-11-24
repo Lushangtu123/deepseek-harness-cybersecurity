@@ -1,0 +1,17 @@
+..............F.........
+======================================================================
+FAIL: test_lambda_parameter_shadow_is_not_no_direct_conflict (__main__.NamespaceReviewTests.test_lambda_parameter_shadow_is_not_no_direct_conflict)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 45, in test_lambda_parameter_shadow_is_not_no_direct_conflict
+    self.assertEqual(row['callee']['staticBinding'],'unsupported-scope')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'no-direct-conflict-observed' != 'unsupported-scope'
+- no-direct-conflict-observed
++ unsupported-scope
+
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.144s
+
+FAILED (failures=1)

@@ -1,0 +1,38 @@
+{
+  "id": "e4da3a8a-d10e-408d-9456-fe7dba14b2a9",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Scoped result: C1 and R1 are present and the supplied red2→green evidence matches the claims. I see no safety blocker in these two guards under the stated launcher assumptions. I do see one low-severity hardening inconsistency and one conservative concurrency limitation.\n\nC1 — verified\n- `reserve()` validates policy/identity/input size, enters `capacity_lock`, loads `state_locked`, and checks the outcome file before the active-idempotent branch. The busy-lock regression now leaves proof and the next same-ID reserve raises `reservation-already-settled`.\n- This satisfies the stated C1 guard in the normal serialized launcher path.\n\nR1 — verified for validation order\n- `cancel_preparation()` does `validate_policy` → strict `ID.fullmatch` → `private(controlRoot/outcomes)` before constructing the ID-derived `review-<id>` path. The traversal test’s ledger-preservation assertion is consistent with the green run.\n- No ID-derived write occurs before policy/ID validation.\n\nLauncher ordering — matches cited V1\n- `execute()` generates `uuid.uuid4().hex` each call.\n- `_execute_verified()` creates staging synchronously, then enters `operation_lock(attempt)` before the first `_save(attempt, job)`, and holds that lock through the final commit `_save`.\n- `_recover_core()` wraps `_recover_locked` in `operation_lock(root)`.\n- No subprocess/engine work starts before `phase['enginePossible']=True`; the shown staging path has no detached writer.\n\nResidual scoped issue — low-severity hardening, not a safety blocker\n- `cancel_preparation()` checks `attempt.json` and `container.cid` with `.exists()` only. A dangling symlink is treated as absent, while `settle_locked()` explicitly rejects `is_symlink()`. If `logical_bytes()` does not itself reject that residue, `cancel_preparation` could write the known-preparation-failure proof and drop the active row for an unconfirmed marker. To be consistent with `settle_locked`, the guard should treat `exists()` or `is_symlink()` as unconfirmed for both markers, and probably `path.is_symlink()` too. Normal launcher operation should not create dangling symlinks, so this is hardening, not a blocker.\n\nConservative concurrency limitation — not a blocker under stated assumptions\n- `reserve()` checks the outcome before active-idempotent return, but `cancel_preparation()` intentionally publishes proof before taking `capacity_lock`. A cross-process same-ID reserve could therefore miss a proof written mid-call. With fresh UUIDs, synchronous staging, and no detached preparation writers, this is not reachable in the cited launcher flow. If you ever intend C1 to be linearizable across processes for the same ID, proof publication would need coordination; otherwise this remains a limitation.\n\nThe red run shows exactly the two expected regressions; the green run shows 26/26 storage tests OK. I do not claim R3, live acceptance, archive assessment, or that the tracked low-severity notes are fixed."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 6162,
+    "completion_tokens": 16442,
+    "total_tokens": 22604,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 15776
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 6162
+  },
+  "streamDone": true,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 72482,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "574715b9a3227c647b9844b6aa6d9b7adbdf8034dd6c7d3e2ddbb9faabdc09fe",
+  "promptSha256": "ffb08db2607847fdf9e5ac176065cef958aecee1a75c58a0ed6e821c40336e8a"
+}

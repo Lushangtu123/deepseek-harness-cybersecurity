@@ -1,0 +1,19 @@
+{
+  "kind": "actual-host-launch-command-result",
+  "command": [
+    "/opt/homebrew/opt/python@3.13/bin/python3.13",
+    "-I",
+    "-B",
+    "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/execution/operator/run_vm.py",
+    "run"
+  ],
+  "cwd": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/execution",
+  "interpreter": "3.13.1 (main, Dec  3 2024, 17:59:52) [Clang 16.0.0 (clang-1600.0.26.4)]",
+  "startedAt": "2026-11-24T16:39:04.712761+00:00",
+  "finishedAt": "2026-11-24T16:40:30.868089+00:00",
+  "elapsedSeconds": 86.155,
+  "exitCode": 3,
+  "stdoutSha256": "bfcea0f03cd5b0977ad6807e544009cebcd29b8a925317bd5355bf9d226fc923",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "oneSubmissionOnly": true
+}

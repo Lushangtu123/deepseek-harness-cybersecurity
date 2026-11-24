@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "createdAt": "2026-11-04T03:27:05.144287+00:00",
+  "sourceCommit": "e848e4b09ca4bc67c0041c9ce7526dae471d4c36",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "sources": {
+    "stdlib_ast.py": "b515c23dbbc459329d3b802a3aac742cc456d7472e66f7ed6e9dc97e40596d7d",
+    "stdlib_collections.py": "7fdb04dd248ab37909f46d2085bfee56b32d7e91e49ad3a2fad99c453295659b",
+    "input_one.py": "683c5916501746486c7ffd2974323e83f912fab2cf7360db6d4063583a11b6d5",
+    "input_two.py": "fd86e48da90999bf795de59e4dab86e84de2236386bd3053206eb42b5de12d82"
+  },
+  "operatorTimezone": "America/Los_Angeles",
+  "scope": "CWE95 only, bounded built-in plain strings; no DoS/general safety claim",
+  "independentNegatives": 2,
+  "authoredPositiveControls": 2,
+  "marker": 137703491,
+  "expression": "17389 * 7919",
+  "literalCases": [
+    {
+      "id": "literal-list",
+      "value": "[1,2,3]",
+      "expected": "[1, 2, 3]",
+      "accept": true
+    },
+    {
+      "id": "literal-dict",
+      "value": "{'x': 1, 'y': None}",
+      "expected": "{'x': 1, 'y': None}",
+      "accept": true
+    },
+    {
+      "id": "literal-negative-float",
+      "value": "-1.5",
+      "expected": "-1.5",
+      "accept": true
+    },
+    {
+      "id": "literal-call",
+      "value": "str(17389 * 7919)",
+      "accept": false
+    },
+    {
+      "id": "literal-multiply",
+      "value": "17389 * 7919",
+      "accept": false
+    },
+    {
+      "id": "literal-fstring",
+      "value": "f'{17389 * 7919}'",
+      "accept": false
+    }
+  ],
+  "namedtupleCases": [
+    {
+      "id": "named-normal",
+      "typename": "Point",
+      "fields": [
+        "x",
+        "y"
+      ],
+      "rename": false,
+      "accept": true,
+      "expectedFields": [
+        "x",
+        "y"
+      ]
+    },
+    {
+      "id": "named-unicode",
+      "typename": "位置",
+      "fields": [
+        "经度",
+        "纬度"
+      ],
+      "rename": false,
+      "accept": true,
+      "expectedFields": [
+        "经度",
+        "纬度"
+      ]
+    },
+    {
+      "id": "named-bad-type",
+      "typename": "Point); str(17389 * 7919)#",
+      "fields": [
+        "x",
+        "y"
+      ],
+      "rename": false,
+      "accept": false
+    },
+    {
+      "id": "named-bad-field",
+      "typename": "Point",
+      "fields": [
+        "x = str(17389 * 7919)",
+        "y"
+      ],
+      "rename": false,
+      "accept": false
+    },
+    {
+      "id": "named-keyword",
+      "typename": "Point",
+      "fields": [
+        "class",
+        "y"
+      ],
+      "rename": false,
+      "accept": false
+    },
+    {
+      "id": "named-duplicate",
+      "typename": "Point",
+      "fields": [
+        "x",
+        "x"
+      ],
+      "rename": false,
+      "accept": false
+    },
+    {
+      "id": "named-renamed",
+      "typename": "Point",
+      "fields": [
+        "x = str(17389 * 7919)",
+        "y"
+      ],
+      "rename": true,
+      "accept": true,
+      "expectedFields": [
+        "_0",
+        "y"
+      ]
+    },
+    {
+      "id": "named-underscore",
+      "typename": "Point",
+      "fields": [
+        "__class__",
+        "y"
+      ],
+      "rename": false,
+      "accept": false
+    }
+  ],
+  "locations": {
+    "literalEvalEntry": 56,
+    "namedtupleEntry": 355,
+    "namedtupleEval": 441,
+    "positiveControls": 2
+  },
+  "sourceAlreadyUsed": {
+    "stdlib_ast.py": false,
+    "stdlib_collections.py": false,
+    "input_one.py": false,
+    "input_two.py": false
+  },
+  "numericalThresholdsChanged": false,
+  "probeSha256": "a9727e3911c57a67f5b90d91562117655fbe6625d92da8b587ef7eb55661cdeb"
+}

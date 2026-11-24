@@ -1,0 +1,71 @@
+{
+  "model": "DeepSeek-V4.1-Flash",
+  "effort": "high",
+  "samePromptSha256": "dfa639c8c449c1aed87f5c4a926ee502c203615248ec3b19b409fb57106f2c31",
+  "claudeState": "failed-401-authentication-expired",
+  "claudeReceiptSha256": "a0a96ee805d0755673d7b9102e5cc978090d099c4a06b5b68bd9613e5d20b847",
+  "receiptSha256": "c50d965046eed401a95ba7ad3a6200094b26d6ee85086656eb0023768e3d9225",
+  "reportSha256": "4f25f1a87d70cf4e1f0f348537db6fea97830018dee0430cb43953e46ba1681e",
+  "cleanup": {
+    "removed": true,
+    "workerStopped": true,
+    "dailyProgramUnchanged": true,
+    "dailyProgramFilesChecked": 169,
+    "credentialCopiedToHost": false,
+    "scope": "only owned completed model-review scratch"
+  },
+  "triage": {
+    "at": "2026-11-11T02:47:42.461073+00:00",
+    "scope": "Final explicit import namespace helper path candidate and conservative generic binding rejection",
+    "scopeBlockers": 0,
+    "canArchive": true,
+    "reportSha256": "4f25f1a87d70cf4e1f0f348537db6fea97830018dee0430cb43953e46ba1681e",
+    "actualModel": "DeepSeek-V4.1-Flash",
+    "effort": "high",
+    "completion": "stop",
+    "reviewIsStatic": true,
+    "items": [
+      {
+        "id": "PEP695-binding-gap",
+        "classification": "confirmed-prior-defect-closed",
+        "basis": "R1 identified inherited missing type_params binding handling; six failing subcases retained before the shared rejection fix. Final source rejects any nonempty type_params in the AST. Import9, guard14 and four negative generic VM controls pass.",
+        "limitation": "Conservative rejection may omit otherwise observable nongeneric paths in the same file. Runtime semantics not modelled."
+      },
+      {
+        "id": "generic-class-alias-coverage",
+        "classification": "nonblocking-coverage-gap",
+        "basis": "Final tests execute generic functions on Mac and VM. Generic class/type-alias rejection follows the same AST-wide guard but no dedicated executable fixture was supplied.",
+        "closed": false
+      },
+      {
+        "id": "caller-protocol-isolation",
+        "classification": "verified-contract",
+        "basis": "Only target_sink opts into namespace mode; caller call-site and auto-discovery keep old single-Name contract. Negative caller tests and existing guard cases pass."
+      },
+      {
+        "id": "joint-evidence-provenance",
+        "classification": "verified-limited-acceptance",
+        "basis": "Nine VM fixtures use synthetic scanner and readiness receipts, real default AST process and namespace sandbox; all findings/artifacts remain unverified, ordinary finding rows0 and no scanner/model invocations. No runtime import or vulnerability claim."
+      },
+      {
+        "id": "first-cleanup-visibility",
+        "classification": "review-material-omission",
+        "basis": "Reviewer correctly noted missing dedicated first acceptance cleanup receipt in R2 frozen material. work root vm-cleanup.json exists and confirms workerStopped/scratchRemoved; both original receipt and R2 cleanup are included in final archive. No claim that reviewer saw the omitted first receipt.",
+        "confirmedByLocalEvidence": true
+      },
+      {
+        "id": "remaining-product-gaps",
+        "classification": "outside-step-unresolved",
+        "items": [
+          "class method import flow",
+          "longer helper call chains",
+          "runtime third-party import identity",
+          "real Flask source/builtin identity",
+          "independent R3 admission"
+        ]
+      }
+    ],
+    "ordinaryR3Qualified": false,
+    "deployed": false
+  }
+}

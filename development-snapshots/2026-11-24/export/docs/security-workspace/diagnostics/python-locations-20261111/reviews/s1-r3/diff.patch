@@ -1,0 +1,51 @@
+--- before/work/harness-purge-improved/package/lib/redteam/personal-python-evidence.mjs
++++ current/work/harness-purge-improved/package/lib/redteam/personal-python-evidence.mjs
+@@ -15,21 +15,24 @@
+  const results=findings.flatMap(f=>{
+   if(!rules.has(f.rule))return[];
+   const match=/^(.+):(\d+)$/.exec(f.location);
+-  return match&&Object.hasOwn(files,match[1])?[{check_id:f.rule,path:match[1],start:{line:Number(match[2])}}]:[];
++  const bound=f.sourceLocation?.state==='bound'?f.sourceLocation:null;
++  return [{check_id:f.rule,path:match?.[1]??'',originalLocation:typeof f.location==='string'?f.location:null,start:bound?{...bound.start}:match?{line:Number(match[2])}:{},...(bound?{end:{...bound.end}}:{})}];
+  });
+  try{
+   const output=execFileSync('/usr/bin/python3',['-B','-I',worker,'--managed',snapshot.sourceRoot],{
+-   input:JSON.stringify({files,results}),encoding:'utf8',timeout,killSignal:'SIGKILL',maxBuffer:128*1024,
++   input:JSON.stringify({files,results}),encoding:'utf8',timeout,killSignal:'SIGKILL',maxBuffer:2*1024*1024,
+    stdio:['pipe','pipe','pipe'],env:{PATH:'/usr/bin:/bin',LANG:'C.UTF-8'}
+   });
+   const report=JSON.parse(output),artifacts=[];
+-  if(report.version!==1||!Array.isArray(report.guardEvidence)||!Array.isArray(report.importEvidence)||!Array.isArray(report.plainStringEvidence))return unavailable();
++  const locationFields=f=>f.executionPoint&&f.pointId===f.executionPoint.id&&/^[a-f0-9]{64}$/.test(f.pointId)&&f.executionPoint.sourceSha256===files[f.file]
++   ?{pointId:f.pointId,executionPoint:f.executionPoint,scannerSpan:f.scannerSpan}:{};
++  if(![1,2].includes(report.version)||!Array.isArray(report.guardEvidence)||!Array.isArray(report.importEvidence)||!Array.isArray(report.plainStringEvidence))return unavailable();
+   for(const {finding:f,evidence:e} of report.guardEvidence){
+    if(!results.some(r=>r.check_id===f.rule&&r.path===f.file&&r.start.line===f.line)||
+-     f.rule==='policy.harness.python.exec'||e.observation!=='literal-identifier-guard-observed'||e.evalLine!==f.line||
++     f.rule==='policy.harness.python.exec'||e.observation!=='literal-identifier-guard-observed'||e.evalLine!==(f.executionPoint?.call.start.line??f.line)||
+      ![e.assignmentLine,e.guardLine,e.literalCount].every(line))return unavailable();
+    artifacts.push({tool:'semgrep',evidenceKind:'python-eval-guard',path:f.file,line:f.line,rule:f.rule,status:'unverified',
+-    assignmentLine:e.assignmentLine,guardLine:e.guardLine,literalCount:e.literalCount});
++    assignmentLine:e.assignmentLine,guardLine:e.guardLine,literalCount:e.literalCount,...locationFields(f)});
+   }
+   for(const {finding:f,evidence:e} of report.plainStringEvidence){
+    if(!results.some(r=>r.check_id===f.rule&&r.path===f.file&&r.start.line===f.line)||
+@@ -37,14 +40,15 @@
+      (f.rule==='policy.harness.python.eval'&&e.sink!=='eval')||(f.rule==='policy.harness.python.exec'&&e.sink!=='exec')||
+      ![e.guardLine,e.executionLine].every(line))return unavailable();
+    artifacts.push({tool:'semgrep',evidenceKind:'python-string-guard',path:f.file,line:f.line,rule:f.rule,status:'unverified',
+-    guardLine:e.guardLine,executionLine:e.executionLine,sink:e.sink});
++    guardLine:e.guardLine,executionLine:e.executionLine,sink:e.sink,...locationFields(f)});
+   }
+   for(const e of report.importEvidence){
+    if(e.observation!=='direct-import-execution-flow-observed'||!Object.hasOwn(files,e.callerFile)||
+      !Object.hasOwn(files,e.calleeFile)||!['eval','exec'].includes(e.sink)||
+-     ![e.sourceLine,e.importLine,e.callLine,e.definitionLine,e.sinkLine].every(line))return unavailable();
++     ![e.sourceLine,e.importLine,e.callLine,e.definitionLine,e.sinkLine].every(line)||
++     e.callerLocation&&e.callerLocation.sourceSha256!==files[e.callerFile]||e.sinkLocation&&e.sinkLocation.sourceSha256!==files[e.calleeFile])return unavailable();
+    artifacts.push({tool:'semgrep',evidenceKind:'python-import-flow',path:e.callerFile,line:e.callLine,status:'unverified',
+-    calleeFile:e.calleeFile,sourceLine:e.sourceLine,importLine:e.importLine,definitionLine:e.definitionLine,sinkLine:e.sinkLine,sink:e.sink});
++    calleeFile:e.calleeFile,sourceLine:e.sourceLine,importLine:e.importLine,definitionLine:e.definitionLine,sinkLine:e.sinkLine,sink:e.sink,...(e.callerLocation&&e.sinkLocation?{callerLocation:e.callerLocation,sinkLocation:e.sinkLocation}:{})});
+   }
+   return {state:artifacts.length>20?'truncated':'completed',artifacts:artifacts.slice(0,20)};
+  }catch{return unavailable()}

@@ -1,0 +1,104 @@
+FFFFFFFFFFF
+======================================================================
+FAIL: test_after_check_overwrite_append_and_side_effect_stay_unresolved (__main__.NamespaceReviewTests.test_after_check_overwrite_append_and_side_effect_stay_unresolved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 27, in setUp
+    self.assertTrue(WORKER.exists(), 'Missing offline namespace evidence reviewer')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing offline namespace evidence reviewer
+
+======================================================================
+FAIL: test_batch_pins_sources_and_full_scan_anchors_without_changing_findings (__main__.NamespaceReviewTests.test_batch_pins_sources_and_full_scan_anchors_without_changing_findings)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 27, in setUp
+    self.assertTrue(WORKER.exists(), 'Missing offline namespace evidence reviewer')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing offline namespace evidence reviewer
+
+======================================================================
+FAIL: test_batch_rejects_incomplete_anchor_and_ignores_unpinned_paths (__main__.NamespaceReviewTests.test_batch_rejects_incomplete_anchor_and_ignores_unpinned_paths)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 27, in setUp
+    self.assertTrue(WORKER.exists(), 'Missing offline namespace evidence reviewer')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing offline namespace evidence reviewer
+
+======================================================================
+FAIL: test_conditional_nonterminating_and_wrong_value_checks_stay_unresolved (__main__.NamespaceReviewTests.test_conditional_nonterminating_and_wrong_value_checks_stay_unresolved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 27, in setUp
+    self.assertTrue(WORKER.exists(), 'Missing offline namespace evidence reviewer')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing offline namespace evidence reviewer
+
+======================================================================
+FAIL: test_fixed_literals_are_never_equated_to_benign_code (__main__.NamespaceReviewTests.test_fixed_literals_are_never_equated_to_benign_code)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 27, in setUp
+    self.assertTrue(WORKER.exists(), 'Missing offline namespace evidence reviewer')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing offline namespace evidence reviewer
+
+======================================================================
+FAIL: test_fixed_set_guard_two_and_three_arguments_is_only_conditional_evidence (__main__.NamespaceReviewTests.test_fixed_set_guard_two_and_three_arguments_is_only_conditional_evidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 27, in setUp
+    self.assertTrue(WORKER.exists(), 'Missing offline namespace evidence reviewer')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing offline namespace evidence reviewer
+
+======================================================================
+FAIL: test_inputs_are_bounded_and_parsed_without_executing_source (__main__.NamespaceReviewTests.test_inputs_are_bounded_and_parsed_without_executing_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 27, in setUp
+    self.assertTrue(WORKER.exists(), 'Missing offline namespace evidence reviewer')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing offline namespace evidence reviewer
+
+======================================================================
+FAIL: test_location_includes_rule_independent_exact_start_and_end (__main__.NamespaceReviewTests.test_location_includes_rule_independent_exact_start_and_end)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 27, in setUp
+    self.assertTrue(WORKER.exists(), 'Missing offline namespace evidence reviewer')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing offline namespace evidence reviewer
+
+======================================================================
+FAIL: test_module_and_local_bindings_do_not_become_builtin_proof (__main__.NamespaceReviewTests.test_module_and_local_bindings_do_not_become_builtin_proof)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 27, in setUp
+    self.assertTrue(WORKER.exists(), 'Missing offline namespace evidence reviewer')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing offline namespace evidence reviewer
+
+======================================================================
+FAIL: test_nested_calls_decorators_defaults_and_annotations_are_not_guard_proof (__main__.NamespaceReviewTests.test_nested_calls_decorators_defaults_and_annotations_are_not_guard_proof)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 27, in setUp
+    self.assertTrue(WORKER.exists(), 'Missing offline namespace evidence reviewer')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing offline namespace evidence reviewer
+
+======================================================================
+FAIL: test_unknown_namespace_expressions_and_unproven_mapping_stay_unresolved (__main__.NamespaceReviewTests.test_unknown_namespace_expressions_and_unproven_mapping_stay_unresolved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 27, in setUp
+    self.assertTrue(WORKER.exists(), 'Missing offline namespace evidence reviewer')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing offline namespace evidence reviewer
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.001s
+
+FAILED (failures=11)

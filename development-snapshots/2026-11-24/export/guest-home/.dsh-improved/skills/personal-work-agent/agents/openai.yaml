@@ -1,0 +1,4 @@
+interface:
+  display_name: "Personal Work Agent"
+  short_description: "Route and verify personal code and knowledge work"
+  default_prompt: "Use $personal-work-agent to route and complete this task with the appropriate workflow, permissions, and fresh verification evidence."

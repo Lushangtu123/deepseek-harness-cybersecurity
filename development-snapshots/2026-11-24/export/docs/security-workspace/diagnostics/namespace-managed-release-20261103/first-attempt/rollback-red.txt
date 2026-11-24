@@ -1,0 +1,14 @@
+.F
+======================================================================
+FAIL: test_changed_candidate_is_preserved_and_cannot_block_old_program_restore (__main__.RollbackQuarantine.test_changed_candidate_is_preserved_and_cannot_block_old_program_restore)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-namespace-managed-release-20261103/deployment-protection.test.py", line 30, in test_changed_candidate_is_preserved_and_cannot_block_old_program_restore
+    self.assertIsNotNone(restore,'Rollback must not require the failed candidate to be unchanged')
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: unexpectedly None : Rollback must not require the failed candidate to be unchanged
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.009s
+
+FAILED (failures=1)

@@ -1,0 +1,11 @@
+{
+  "promptSha256": "effe5945a77c6f44bf8b4c0308a69661f854af9179d3de03a2c7343d4817695c",
+  "sourceFiles": {
+    "scripts/reviewer_storage.py": "10ccaff4b3061b770d3ec43f91e286867e71da4e87d455dcaba9ea269c6b995d",
+    "scripts/reviewer_snapshot.py": "28c1c0bc7140b954387f39b67a4db9222ef827dafc938b473847b2fef89447a4",
+    "scripts/reviewer_archive.test.py": "cd99a735c9a7c5a2589ce9db7b078b9ee9357304413698b58a1c20da1c79cbb0",
+    "scripts/reviewer_storage.test.py": "5ef5fd67252169f0ed855d3c5c8c4a9420a7c847bf80adda89fc153f8a5e691d",
+    "docs/security-workspace/reviewer-controlled-storage.md": "66d12b345df44a4fc49956ff5a65418ce0cb17ef16a0eaf6f99a24e8d138c640"
+  },
+  "bytes": 212272
+}

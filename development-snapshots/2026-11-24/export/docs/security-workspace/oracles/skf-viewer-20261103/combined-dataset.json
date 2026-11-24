@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "cases": [
+    {
+      "id": "skf-viewer-upstream",
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "positive",
+      "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+      "location": {
+        "line": 37,
+        "column": 20
+      },
+      "oracle": {
+        "kind": "independent-vulnerability",
+        "positionVerified": true,
+        "conditionsVerified": true,
+        "reference": "https://github.com/blabla1337/skf-labs/blob/35199b6f49658b75f860530c0f09b91e985198aa/python/CMD2/CMD2.py#L37",
+        "conditions": "Flask 3.1.2/Python 3.12.15; /viewer only; in-process WSGI test requests; no live deployment reachability claim",
+        "artifactSha256": "7bb98fe070ad2162bcee89b816e0873023ed48e1aa1173ccfadb8596355319bc"
+      }
+    },
+    {
+      "id": "skf-viewer-authored-fix",
+      "language": "python",
+      "cwe": "CWE-95",
+      "truth": "negative",
+      "sourceSha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+      "location": {
+        "line": 37,
+        "column": 20
+      },
+      "oracle": {
+        "kind": "developer-control",
+        "positionVerified": true,
+        "conditionsVerified": true,
+        "reference": "Authored one-line fixed comparator, not third-party negative",
+        "conditions": "Flask 3.1.2/Python 3.12.15; /viewer only; in-process WSGI test requests; no live deployment reachability claim",
+        "artifactSha256": "7bb98fe070ad2162bcee89b816e0873023ed48e1aa1173ccfadb8596355319bc"
+      }
+    }
+  ]
+}

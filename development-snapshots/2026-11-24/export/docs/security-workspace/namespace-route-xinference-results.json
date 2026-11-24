@@ -1,0 +1,118 @@
+{
+  "state": "reviewed-existing-namespace-route-complete",
+  "productionCodeChanged": false,
+  "deployed": false,
+  "candidateProgramFiles": 173,
+  "dailyProgramFilesChecked": 169,
+  "runtime": {
+    "nodeVersion": "v24.22.1",
+    "nodeExecutableSha256": "c8c5721679d8d1a09e9987e345d5f9a64899bb85f7a384783ba8a93e6e62348a",
+    "structuralPython": "3.12.15"
+  },
+  "acceptance": {
+    "scannerInvocations": 0,
+    "scannerReplays": 2,
+    "modelCalls": 0,
+    "positive": {
+      "eligible": 1,
+      "checked": 1,
+      "structuralObservations": 1,
+      "line": 46,
+      "argumentCount": 3,
+      "disposition": "unverified",
+      "bindingHint": "unsupported-scope",
+      "sourceKind": "expression-unresolved",
+      "externalControl": "unverified"
+    },
+    "patchedFileSubset": {
+      "eligible": 0,
+      "state": "not-applicable"
+    },
+    "ordinaryFindingRows": 0
+  },
+  "programIdentity": {
+    "lib/redteam/personal-python-evidence.mjs": true,
+    "lib/redteam/personal-namespace-evidence.mjs": true,
+    "lib/redteam/personal-namespace-sandbox.mjs": true,
+    "lib/redteam/personal-joint-review.mjs": false,
+    "scripts/python_namespace_review.py": true
+  },
+  "dailyJointRouteSourceCheck": {
+    "sha256": "17f4621ea482ed2d9cb079d4efaaf79ce1b9ee5b47c209e43d8d9f07b91fbab2",
+    "callsNamespaceCollector": true,
+    "workspaceGuardPresent": true
+  },
+  "tests": {
+    "macNode": 29,
+    "macStructuralPython": 25,
+    "macManagedProtocol": 3,
+    "sourceOfLogs": "Existing suites; no production source edits."
+  },
+  "failuresRetained": [
+    {
+      "kind": "unstarted-submit",
+      "cause": "Naive placeholder replacement collided with base64 data.",
+      "remoteRootAbsentVerified": true
+    },
+    {
+      "kind": "rejected-replay-fixture",
+      "cause": "coverageKey was not a SHA256 identity; existing receipt validator rejected it.",
+      "scratchRemoved": true
+    }
+  ],
+  "qualificationCasesAdded": 0,
+  "ordinaryR3Qualified": false,
+  "limitations": [
+    "Real default namespace sandbox ran under 173-source candidate orchestration in an isolated temporary VM copy; not a daily169 full execution.",
+    "Four relevant Python/namespace modules match the daily169 baseline, but joint orchestration differs. Daily source only checked for route presence.",
+    "Readiness/admission and scanner completion receipts are replay fixtures, not actual scanner admission or new scans.",
+    "Patched-only is a filtered subset of the previously recorded candidate scan.",
+    "The current class/try source does not yield input-control, runtime builtin identity or complete data-flow proof.",
+    "No Chrome, native model or full API acceptance in this step."
+  ],
+  "scopeBlockers": 0,
+  "review": {
+    "model": "DeepSeek-V4.1-Flash",
+    "effort": "high",
+    "samePromptSha256": "63fa23e2e52daefbd9cc44d01047b23e13bdd8f61238daa0a2151cf064727334",
+    "claudeState": "failed",
+    "claudeFailureKind": "401 expired authentication",
+    "claudeReceiptSha256": "337e116bced312da30033d85fec15abffc8ef7f92c612b73cec17d7975d387ad",
+    "receiptSha256": "8dd4e6624f1532ee80abab137f2e9844ad4bd6a602bb5a08ad03ccbd8d84a642",
+    "reportSha256": "92e8ca62a62b5b73d32eebfb75d3bcbae7d22fe4de937020be9b757e66a4558b",
+    "cleanup": {
+      "removed": true,
+      "workerStopped": true,
+      "dailyProgramUnchanged": true,
+      "dailyProgramFilesChecked": 169,
+      "credentialCopiedToHost": false,
+      "scope": "only owned completed model-review scratch"
+    },
+    "triage": {
+      "scopeBlockers": 0,
+      "canArchive": true,
+      "reportSha256": "92e8ca62a62b5b73d32eebfb75d3bcbae7d22fe4de937020be9b757e66a4558b",
+      "disposition": "Limited pass for existing namespace route controlled acceptance. No production code change or R3 admission.",
+      "verified": [
+        "Old guard-batch zero checks do not describe the separate joint namespace route.",
+        "Candidate173 orchestration reused real default collector and sandbox on a recorded scanner output.",
+        "One source-bound structural observation remains unverified; patched subset is not applicable.",
+        "All173 application files checked before dynamic imports and again after; 169 daily files and runtime config unchanged.",
+        "58 focused Mac tests passed; submission and fixture failures were preserved and owned scratch removed."
+      ],
+      "limits": [
+        "Readiness and scanner receipts are fixtures. No new scanner, business model or independent acceptance sample.",
+        "Class/try scope, external input reachability, runtime builtin identity and full data flow remain unknown.",
+        "Daily169 route was source-checked only. Its joint module differs from the executed candidate173.",
+        "No Chrome, native model or full API acceptance.",
+        "External reviewer read supplied evidence without executing it."
+      ],
+      "modelRouting": {
+        "claude": "failed:401 expired authentication, retained and not counted as refusal/completion",
+        "fallback": "Standing AGENTS.md item3 authorization for necessary material transmission to both named review services; identical user prompt retained",
+        "deepseek": "Official V4.1 Flash identity and completed response verified"
+      }
+    }
+  },
+  "sourceLedgerEntries": 231
+}

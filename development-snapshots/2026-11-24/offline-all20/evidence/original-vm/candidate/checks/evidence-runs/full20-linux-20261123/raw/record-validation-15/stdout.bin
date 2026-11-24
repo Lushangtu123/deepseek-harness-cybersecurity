@@ -1,0 +1,16 @@
+PASS legacy-missing-null-and-empty-controls
+PASS invalid-intent-shapes-preserve-parent-and-hold-valid-child
+PASS malformed-history-parent-and-child-preserved
+PASS recognized-cleanup-field-types-are-validated
+PASS valid-parent-invalid-child-holds-valid-sibling
+PASS multiple-children-one-contradiction-holds-read-sibling
+PASS read-error-and-partial-enumeration-hold-known-child
+PASS write-failure-cannot-claim-durable-hold
+PASS raw-success-is-not-effective-success
+PASS reservation-and-settlement-refuse-damaged-record
+PASS normal-cleanup-and-repeat-recovery-are-not-replayed
+PASS restored-correct-fixture-can-finish-normally
+PASS broken-relationship-is-not-guessed
+PASS receipt-append-never-coerces-or-overwrites-damage
+PASS record-state-and-issues-contract
+{"failed": [], "passed": 15, "total": 15}

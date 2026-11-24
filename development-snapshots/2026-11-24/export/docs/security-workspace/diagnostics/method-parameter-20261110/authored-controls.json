@@ -1,0 +1,122 @@
+{
+  "scope": "Authored development controls only, not independent qualification",
+  "tests": [
+    "test_class_attribute_does_not_bind_the_method_bare_eval_name",
+    "test_class_method_parameter_is_observed_through_protected_try_body",
+    "test_method_fixed_set_guard_does_not_become_a_validated_constraint",
+    "test_method_headers_and_nested_classes_do_not_gain_body_parameter_evidence",
+    "test_method_prefix_assignments_and_bindings_are_not_parameter_origin",
+    "test_module_function_try_observations_do_not_gain_guard_proof",
+    "test_nested_try_prefix_and_same_line_write_are_accounted_before_call",
+    "test_try_branch_handlers_loops_and_nested_methods_stay_unresolved",
+    "test_try_path_budget_accepts_eight_levels_and_declines_nine"
+  ],
+  "sources": [
+    {
+      "sha256": "0d66f7e9813ee8a8c16e96d562e742ae742316ebda4d0fd2cc6c7705f6bf891d",
+      "source": "class Parser:\n    def run(value):\n        if value not in (\"6*7\", \"7*8\"):\n            raise ValueError(\"outside\")\n        scope = {\"__builtins__\": {}}\n        return eval(value, scope)\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "20fc55b4536185abada383ac0195bfb8c29670de18e6ff3b4dbe1e6e4cb73a2c",
+      "source": "def outer():\n    class Parser:\n        def parse(self, value):\n            return eval(value, {})\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "26550a8e5565c28003f6b7f76be60b6dc64dce035e2ed8f4b02aa87037c293b1",
+      "source": "class Parser:\n    def parse(self, value):\n        try:\n            pass\n        except Exception as value:\n            pass\n        try:\n            return eval(value, {})\n        except Exception:\n            return None\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "2f7147990d9d6ead6cadd22e8abea119912564b66d12b95b587222deb444f054",
+      "source": "class Parser:\n    def parse(self, value):\n        def inner(value):\n            return eval(value, {})\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "3c44c66412535e2292b45973066476046626ec58e12cb8e49f86db7f7f2495ce",
+      "source": "class Parser:\n    def parse(self, value):\n        try:\n            pass\n        except Exception as value:\n            return eval(value, {})\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "43f60f6b07c48458e7f6176e5f17f8cddf70e1e290c1d3cba53d655be1ab4cce",
+      "source": "class Parser:\n    def parse(self, value):\n        try:\n            pass\n        finally:\n            return eval(value, {})\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "54217858f16139e1db4aae37ab46ac562b190dc4a4e8119bb83d0f3c4e4fb803",
+      "source": "class Parser:\n    def parse(self, value):\n        try:\n            try:\n                try:\n                    try:\n                        try:\n                            try:\n                                try:\n                                    try:\n                                        try:\n                                            return eval(value, {})\n                                        except Exception:\n                                            return None\n                                    except Exception:\n                                        return None\n                                except Exception:\n                                    return None\n                            except Exception:\n                                return None\n                        except Exception:\n                            return None\n                    except Exception:\n                        return None\n                except Exception:\n                    return None\n            except Exception:\n                return None\n        except Exception:\n            return None\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "8331e762bd83516e8d71211c73e8d8660bb292134f2af3c92ddcfd639c51ae73",
+      "source": "class Parser:\n    def parse(self, value):\n        value = replacement\n        try:\n            return eval(value, {})\n        except Exception:\n            return None\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "8cfc60e399dade202dbb73b620cf4c050a3213b2967533f73848d3c7734e53f7",
+      "source": "class Parser:\n    def parse(self, value):\n        try:\n            value = replacement\n            try:\n                data = value; return eval(data, {})\n            except Exception:\n                return None\n        except Exception:\n            return None\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "90dbb86a4ae50bb59e1df665fef191206f2e4e36c61274426ec1f98422527909",
+      "source": "class Parser:\n    def parse(self, value=eval(raw, {})):\n        return value\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "913dba152959dfe0e52f6f80daf9b00fca6ffd9d525d05b1dc0e3c165d101ba1",
+      "source": "class Parser:\n    eval = custom\n    def parse(self, value):\n        return eval(value, {})\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "9da2c32239dd0d750f9a4f542292d96d177f6fc8ad2305a3f7981ab4a3295fe2",
+      "source": "class Parser:\n    def parse(self, value):\n        try:\n            try:\n                try:\n                    try:\n                        try:\n                            try:\n                                try:\n                                    try:\n                                        return eval(value, {})\n                                    except Exception:\n                                        return None\n                                except Exception:\n                                    return None\n                            except Exception:\n                                return None\n                        except Exception:\n                            return None\n                    except Exception:\n                        return None\n                except Exception:\n                    return None\n            except Exception:\n                return None\n        except Exception:\n            return None\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "b306e7610d8e0c1f33ba80a99fd48855b53c2a6d68d822430cd6de537e40ab23",
+      "source": "class Parser:\n    def parse(self, value):\n        if flag:\n            return eval(value, {})\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "c8a0b8789b22f8285380d2597f450f655d928f4650a92707cd4b330b6f797063",
+      "source": "class Parser:\n    def parse(self, value):\n        for value in items:\n            return eval(value, {})\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "c980be807eee197d3630f29b650d057e25b4891cbd2fab563003aeb3dad8aa61",
+      "source": "class Parser:\n    async def parse(self, value):\n        return eval(value, {})\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "d4673d84ec4420fc9f9769f0a9a11d0dbdca5958fa6be6097b0e47a7e58fbaee",
+      "source": "class Parser:\n    def parse(self, model_output: str):\n        try:\n            data = eval(model_output, {}, {})\n            return data\n        except Exception as model_output:\n            return None\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "e48fbf323fcbfffe46638f2bea008e4bb247b8ccde95312a64e776b7d0f0e597",
+      "source": "class Outer:\n    class Parser:\n        def parse(self, value):\n            return eval(value, {})\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "e675ebb836aa5e27200b921314b0af8deef1d77eafccc7fd87cae671d55a3811",
+      "source": "class Parser:\n    eval = custom\n    def parse(self, value, eval):\n        return eval(value, {})\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "e7d01a0e88e2c6bdf8a3d044e13dfa6123e6cd1a9a23adaa6fe3133553528401",
+      "source": "def parse(value):\n    try:\n        return eval(value, {})\n    except Exception:\n        return None\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "f735d2f6745d3063a9bf57e4b2961442dfe571bb93d272d1b9c3d44035dac8ed",
+      "source": "class Parser:\n    def parse(self, value):\n        import replacement as value\n        try:\n            return eval(value, {})\n        except Exception:\n            return None\n",
+      "role": "authored-method-parameter-development-control"
+    },
+    {
+      "sha256": "ff63fad229d33aaff89baead6ff7b64acb9dacb6508967bc35b132f834ee793b",
+      "source": "class Parser:\n    def parse(self, value):\n        try:\n            return eval(value, {}, {})\n        except Exception:\n            return None\n",
+      "role": "authored-method-parameter-development-control"
+    }
+  ],
+  "captureReplayPassed": true
+}

@@ -1,0 +1,172 @@
+{
+  "date": "2026-11-08",
+  "scope": "isolated acceptance relay first-load reliability",
+  "state": "verified-relay-mitigation",
+  "sourceHashes": {
+    "scripts/harness_acceptance_relay.py": "26526082c038b49fb9c0a8b2a1afc1aa6c61e5fca72f63428894e7387404cd9c",
+    "scripts/tests/harness_acceptance_relay_test.py": "3ba8444fe87b83ce7bee683fa97d70e9ad12c6ac127fcf532a99f43750e21c0f"
+  },
+  "verification": {
+    "sourceHashes": {
+      "scripts/harness_acceptance_relay.py": "26526082c038b49fb9c0a8b2a1afc1aa6c61e5fca72f63428894e7387404cd9c",
+      "scripts/tests/harness_acceptance_relay_test.py": "3ba8444fe87b83ce7bee683fa97d70e9ad12c6ac127fcf532a99f43750e21c0f"
+    },
+    "lifecycleExpectedFailuresBefore": 2,
+    "lifecycleRegressionPassed": 2,
+    "liveReadProbeCount": 24,
+    "liveReadProbeFailures": 0,
+    "liveRelayEmptyConnections": 0,
+    "originMissingProbeCssFailures": 1,
+    "correctedProbeCssFailures": 1,
+    "otherBaselineEmptyResponses": [
+      "/manifest.webmanifest"
+    ],
+    "baselineConnectionStage": "SSH connection failure before guest relay stage was recorded; only records containing kex_exchange_identification identify the identification/key-exchange substage",
+    "lowestLevelResetCauseConfirmed": false,
+    "historicalScoreRequestRootCauseConfirmed": false,
+    "chromeRepeatedAfterCleanupRevision": false,
+    "priorChromeSourceSha256": "30ede037cbd9d488277823eae6084ae12afeae7c5997790523e399f3312fd4c7",
+    "cleanup": {
+      "stopped": true,
+      "dailyProgramFiles": 169,
+      "dailyProgramUnchanged": true,
+      "dailyConfigurationUnchanged": true,
+      "installedSdkUnchanged": true,
+      "temporaryDirectoryRemoved": true
+    },
+    "localCleanup": {
+      "listenerClosed": true,
+      "noLsofListener": true,
+      "controlDirectoryRemoved": true,
+      "masterStopped": true
+    },
+    "testLogHashes": {
+      "lifecycle-red.txt": "ec018ea7ea85977e9794afd9406cff44161807cf8e460bc234dcc7689eb7369a",
+      "lifecycle-green.txt": "34872cc7c543d10bfac9c1384cfdfb2f2ed860590ab0d4ee5a820c7e287204d8"
+    }
+  },
+  "browser": {
+    "browser": "Google Chrome native accessibility UI, Guest windows",
+    "baseline": {
+      "blankFirstPage": true,
+      "asset": "/assets/index-BXV-oxvX.js",
+      "consoleError": "net::ERR_EMPTY_RESPONSE",
+      "uiWarning": "页面脚本资源加载失败"
+    },
+    "finalScriptSha256": "30ede037cbd9d488277823eae6084ae12afeae7c5997790523e399f3312fd4c7",
+    "final": {
+      "freshGuestFirstPageLoaded": true,
+      "sideScoreFirstReadSucceeded": true,
+      "fullWindowFirstLoadSucceeded": true,
+      "projectPoints": 9,
+      "countedHits": 499,
+      "firstPagePoints": 8,
+      "lastPagePoints": 1,
+      "forceReloads": [
+        {
+          "cycle": 1,
+          "score9": true,
+          "resourceWarning": false,
+          "unconfirmed": false
+        },
+        {
+          "cycle": 2,
+          "score9": true,
+          "resourceWarning": false,
+          "unconfirmed": false
+        },
+        {
+          "cycle": 3,
+          "score9": true,
+          "resourceWarning": false,
+          "unconfirmed": false
+        }
+      ]
+    },
+    "userNoticeConfirmedForThisInstance": true,
+    "qaTabsClosed": true,
+    "modelRequestsSubmitted": 0,
+    "scope": "Synthetic scoring and loading through the acceptance relay"
+  },
+  "initialReview": {
+    "model": "deepseek-flash",
+    "effort": "high",
+    "promptSha256": "4787a0ff046fc55250514a1a9deed474bc270fa04a404d1f642be88c98ca0c1a",
+    "reportSha256": "542851586d4ce8f3e0774bcfe3345c1f5ceba51a3ad2b0aa0a23d92bdd7182a5",
+    "receiptSha256": "8256f0117a6962ff81d3fd6cfa296217315844041d84e4ddbb602299524e3831",
+    "cleanupFindingFixed": true,
+    "temporaryReviewCopyRemoved": true
+  },
+  "externalReview": {
+    "state": "completed-and-triaged",
+    "remainingScopedP1P2Blockers": 0,
+    "promptSha256": "c818087afdf6b227bbeeee8ede52e4861cf924de093d8baacf715c91c93447dd",
+    "claudeState": "weekly-quota-exhausted",
+    "claudeRequestedModel": "claude-opus-5-5",
+    "fallbackExplicitlyApprovedForThisStep": true,
+    "reviewer": "DeepSeek V4.1 Flash",
+    "actualApiAlias": "deepseek-flash",
+    "effort": "high",
+    "finishReason": "stop",
+    "reportSha256": "747922e5e85d2990e81aecaf1fa0e0f05984ac4ae3457bb5cfba5ba916cd70a7",
+    "receiptSha256": "6e271bb9fa378cd506568fac767abc7aaab32feec670c62a87b9a18679f686e2",
+    "unchangedUserPacket": true,
+    "triageSha256": "d6533d11f3cbcbf4752b8f082053acb35a75d59461858254dc4ee0603e3c130e",
+    "temporaryReviewCopyRemoved": true,
+    "initialPromptSha256": "4787a0ff046fc55250514a1a9deed474bc270fa04a404d1f642be88c98ca0c1a"
+  },
+  "followUp": [
+    {
+      "id": "RELAY-SECOND-WAIT-CLEANUP",
+      "status": "open",
+      "scope": "non-blocking hardening",
+      "detail": "A wait after SIGKILL can still time out, and one child cleanup error can skip later master termination."
+    },
+    {
+      "id": "RELAY-CONNECTION-THREAD-LIMIT",
+      "status": "open",
+      "scope": "non-blocking hardening",
+      "detail": "SSH forwarding concurrency is bounded to eight, while waiting TCP handler threads remain unbounded."
+    },
+    {
+      "id": "SSH-RESET-LOWER-LAYER",
+      "status": "open",
+      "detail": "Failure before guest relay stage is recorded is reproduced. The underlying connection reset cause is not confirmed."
+    },
+    {
+      "id": "SCORE-SIDEBAR-HISTORICAL-FAILURE",
+      "status": "open",
+      "detail": "The historical failed score request was not captured, so the same cause is not established."
+    },
+    {
+      "id": "DAILY-FIRST-LOAD",
+      "status": "pending",
+      "detail": "The daily entry uses a different path and has not been validated by this acceptance-relay step."
+    },
+    {
+      "id": "FINAL-CLEANUP-REVISION-CHROME",
+      "status": "pending",
+      "detail": "Chrome passed on the connection-reuse version. The final cleanup revision has lifecycle and real-VM request regression, with no repeated Chrome run."
+    },
+    {
+      "id": "ORDINARY-R3",
+      "status": "pending"
+    },
+    {
+      "id": "SCORE-MODEL-WINDOW-EXPLANATION",
+      "status": "pending"
+    }
+  ],
+  "candidateProgramFiles": 173,
+  "evidenceCorrections": {
+    "scoreQueryStrictlyReadOnly": false,
+    "scoreQueryReason": "The scores route calls listScorePoints, which invokes seedScorePoints before reading. Only the temporary synthetic project is targeted.",
+    "baselineCssFailuresWithoutOrigin": 1,
+    "baselineCssFailuresWithOrigin": 1,
+    "baselineChromeJsFailures": 1,
+    "baselineManifestFailures": 1
+  },
+  "dailyProgramFiles": 169,
+  "dailyDeployed": false,
+  "wholeProductReleaseQualified": false
+}

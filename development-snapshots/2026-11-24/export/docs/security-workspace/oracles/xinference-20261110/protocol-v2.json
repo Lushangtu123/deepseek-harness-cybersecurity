@@ -1,0 +1,76 @@
+{
+  "version": 2,
+  "createdAt": "2026-11-10T22:01:25.185598+00:00",
+  "sources": [
+    {
+      "file": "before.py",
+      "commit": "4cefcaa1e63d7e29d26bcd4be96cb267da113871",
+      "path": "xinference/model/llm/tool_parsers/llama3_tool_parser.py",
+      "gitBlobSha1": "de87ad7ffd9358d8d80eaf0913f8d653116be6dd",
+      "url": "https://github.com/xorbitsai/inference/blob/4cefcaa1e63d7e29d26bcd4be96cb267da113871/xinference/model/llm/tool_parsers/llama3_tool_parser.py",
+      "encoding": "utf-8",
+      "sha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+      "bytes": 2787,
+      "alreadyInLedger": false,
+      "method": {
+        "startLine": 26,
+        "endLine": 49,
+        "astSha256": "bd2328077cb9fac0acc3fab36bab2f80d35d6d89992b83e49580a074f1663719",
+        "calls": [
+          {
+            "line": 46,
+            "name": "eval",
+            "args": 3
+          }
+        ],
+        "sourceSha256": "66a025ea74dc17e2f7a9c8187efe1490178678c4e32f1f8362c4ee4ea1ecc5c2",
+        "astDigestRuntime": "3.13.1"
+      }
+    },
+    {
+      "file": "fixed.py",
+      "commit": "1b3d220f342ce68d34cec4586d9409d457dadc42",
+      "path": "xinference/model/llm/tool_parsers/llama3_tool_parser.py",
+      "gitBlobSha1": "bba9aa283faabfaea0e9260cd672305734c24dbe",
+      "url": "https://github.com/xorbitsai/inference/blob/1b3d220f342ce68d34cec4586d9409d457dadc42/xinference/model/llm/tool_parsers/llama3_tool_parser.py",
+      "encoding": "utf-8",
+      "sha256": "4e09cd7602e0e8186c47b92f1562a97b44a3a9325fab718ec64cf5c2f5ea2d6a",
+      "bytes": 3416,
+      "alreadyInLedger": false,
+      "method": {
+        "startLine": 28,
+        "endLine": 62,
+        "astSha256": "81863e0b019e46cb963413718089f06690f985917f36d3de8a0e98051333edbd",
+        "calls": [
+          {
+            "line": 49,
+            "name": "json.loads",
+            "args": 1
+          },
+          {
+            "line": 56,
+            "name": "ast.literal_eval",
+            "args": 1
+          }
+        ],
+        "sourceSha256": "7db084759d2244c7bcebbe1020bc8f9c93c82bfa59760d947f62b5f326cc7484",
+        "astDigestRuntime": "3.13.1"
+      }
+    }
+  ],
+  "sourceIntentSha256": "4f781d32397c3e78305b11bd7055e7a5f069af3208f53a2f8bed7e1730bda606",
+  "witnessSha256": "b62fdb3f22efcd3f9846a65a9249f5cb89ba7129335606c73169cf0342c47e7f",
+  "workerSha256": "d3a7e50e66b2e2763599b31bf8d9eb5218455032f9979003c7f4ef6197f0eb38",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "vectorsPerSource": 7,
+  "sampleCount": 2,
+  "vulnerableSites": 1,
+  "selection": "Curated same-advisory before/after pair. No new rule edits. Method AST extracted at original line numbers, package imports and full API not run.",
+  "boundedInputs": "Small fixed dictionaries, harmless arithmetic and str(), invalid text and wrong-shape list. No process, file, network, imports in supplied inputs.",
+  "methodIdentity": "Full source bytes and extracted method source bytes, independent of ast.dump formatting",
+  "supersedes": {
+    "file": "protocol.json",
+    "sha256": "13fb47b5e9edf68df5e18f5731af9a48fa524cfbb59934f8ac9ac1bdcdc5ff0a"
+  },
+  "revisionPurpose": "Archive correction after external review: timestamp now records this revision; earlier v2 inherited v1 time. No new scanner run."
+}

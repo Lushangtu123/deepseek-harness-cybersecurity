@@ -1,0 +1,216 @@
+{
+  "phase": "combined19",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "rulesSha256": "c4357ddb0d52f3273525be08d8f5cdc1182523c1f9502497722bb6a44fe4ef94",
+  "datasetSha256": "e3e3b23351e088efe74d018ad73f42bb02cb2689e575dbebd9b0daa7d39c33cb",
+  "caseIds": [
+    "plain-eval-1",
+    "plain-eval-2",
+    "plain-eval-3",
+    "guard-complete-eval",
+    "guard-conditional-eval",
+    "guard-overwrite-eval",
+    "guard-append-eval",
+    "mapping-eval",
+    "literal-eval",
+    "shadow-eval",
+    "qualified-eval",
+    "alias-eval",
+    "plain-exec-1",
+    "plain-exec-2",
+    "plain-exec-3",
+    "guard-complete-exec",
+    "guard-conditional-exec",
+    "guard-overwrite-exec",
+    "guard-append-exec",
+    "mapping-exec",
+    "literal-exec",
+    "shadow-exec",
+    "qualified-exec",
+    "alias-exec",
+    "stdlib_ast",
+    "stdlib_collections"
+  ],
+  "scannerExitCode": 0,
+  "native": {
+    "result": {
+      "version": "1.182.1",
+      "results": [
+        {
+          "check_id": "policy.harness.python.eval",
+          "path": "/src/plain-eval-1.py",
+          "start": {
+            "line": 4,
+            "col": 12,
+            "offset": 81
+          },
+          "end": {
+            "line": 4,
+            "col": 23,
+            "offset": 92
+          },
+          "extra": {
+            "message": "\u52a8\u6001 eval\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u4f18\u5148\u4f7f\u7528\u53d7\u9650\u89e3\u6790\u5668",
+            "metadata": {
+              "category": "security",
+              "cwe": [
+                "CWE-95"
+              ],
+              "confidence": "MEDIUM",
+              "source": "Harness local review heuristics",
+              "requires-manual-review": true
+            },
+            "severity": "ERROR",
+            "fingerprint": "requires login",
+            "lines": "requires login",
+            "validation_state": "NO_VALIDATOR",
+            "engine_kind": "OSS"
+          }
+        },
+        {
+          "check_id": "policy.harness.python.exec",
+          "path": "/src/plain-exec-1.py",
+          "start": {
+            "line": 4,
+            "col": 5,
+            "offset": 74
+          },
+          "end": {
+            "line": 4,
+            "col": 16,
+            "offset": 85
+          },
+          "extra": {
+            "message": "\u52a8\u6001 exec\uff1a\u8bf7\u6838\u5bf9\u8f93\u5165\u6765\u6e90\uff0c\u907f\u514d\u8fd0\u884c\u4e0d\u53ef\u4fe1\u4ee3\u7801",
+            "metadata": {
+              "category": "security",
+              "cwe": [
+                "CWE-95"
+              ],
+              "confidence": "MEDIUM",
+              "source": "Harness local review heuristics",
+              "requires-manual-review": true
+            },
+            "severity": "ERROR",
+            "fingerprint": "requires login",
+            "lines": "requires login",
+            "validation_state": "NO_VALIDATOR",
+            "engine_kind": "OSS"
+          }
+        }
+      ],
+      "errors": [],
+      "paths": {
+        "scanned": [
+          "/src/alias-eval.py",
+          "/src/alias-exec.py",
+          "/src/guard-append-eval.py",
+          "/src/guard-append-exec.py",
+          "/src/guard-complete-eval.py",
+          "/src/guard-complete-exec.py",
+          "/src/guard-conditional-eval.py",
+          "/src/guard-conditional-exec.py",
+          "/src/guard-overwrite-eval.py",
+          "/src/guard-overwrite-exec.py",
+          "/src/literal-eval.py",
+          "/src/literal-exec.py",
+          "/src/mapping-eval.py",
+          "/src/mapping-exec.py",
+          "/src/plain-eval-1.py",
+          "/src/plain-eval-2.py",
+          "/src/plain-eval-3.py",
+          "/src/plain-exec-1.py",
+          "/src/plain-exec-2.py",
+          "/src/plain-exec-3.py",
+          "/src/qualified-eval.py",
+          "/src/qualified-exec.py",
+          "/src/shadow-eval.py",
+          "/src/shadow-exec.py",
+          "/src/stdlib_ast.py",
+          "/src/stdlib_collections.py"
+        ]
+      },
+      "time": {
+        "rules": [],
+        "rules_parse_time": 0.0031440258026123047,
+        "profiling_times": {
+          "config_time": 0.09858179092407227,
+          "core_time": 0.3857457637786865,
+          "ignores_time": 6.747245788574219e-05,
+          "total_time": 0.492351770401001
+        },
+        "parsing_time": {
+          "total_time": 0.04929757118225098,
+          "per_file_time": {
+            "mean": 0.0016999162476638266,
+            "std_dev": 2.7763960543194766e-05
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_files": []
+        },
+        "scanning_time": {
+          "total_time": 0.1171879768371582,
+          "per_file_time": {
+            "mean": 0.00450722987835224,
+            "std_dev": 0.00021308313589966907
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_files": []
+        },
+        "matching_time": {
+          "total_time": 0.03827500343322754,
+          "per_file_and_rule_time": {
+            "mean": 0.0013198277045940532,
+            "std_dev": 3.226795054260936e-05
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_rules_on_files": []
+        },
+        "tainting_time": {
+          "total_time": 0.010428905487060547,
+          "per_def_and_rule_time": {
+            "mean": 5.062575479155605e-05,
+            "std_dev": 3.938231435750229e-08
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_rules_on_defs": []
+        },
+        "fixpoint_timeouts": [],
+        "prefiltering": {
+          "project_level_time": 0.0,
+          "file_level_time": 0.0,
+          "rules_with_project_prefilters_ratio": 0.0,
+          "rules_with_file_prefilters_ratio": 1.0,
+          "rules_selected_ratio": 0.10139860139860139,
+          "rules_matched_ratio": 0.10139860139860139
+        },
+        "targets": [],
+        "total_bytes": 0,
+        "max_memory_bytes": 145841600
+      },
+      "engine_requested": "OSS",
+      "skipped_rules": [],
+      "profiling_results": []
+    },
+    "authentication": null
+  },
+  "stderr": "",
+  "temporaryRemoved": true,
+  "containerAbsent": true,
+  "runtimeRulesUnchanged": true,
+  "scannerManifestUnchanged": true,
+  "startedAt": "2026-11-04T04:00:32.620963+00:00",
+  "finishedAt": "2026-11-04T04:00:34.199675+00:00"
+}

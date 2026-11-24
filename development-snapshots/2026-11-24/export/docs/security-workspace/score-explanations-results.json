@@ -1,0 +1,85 @@
+{
+  "date": "2026-11-04",
+  "scope": [
+    "CHAIN-MAXIMUM-UNDEFINED",
+    "CHAIN-EXCLUSION-REASONS",
+    "SCORE-DEDUP-SCOPE"
+  ],
+  "tests": {
+    "localPluginPassed": 982,
+    "vmPluginPassed": 982,
+    "pluginFiles": 105,
+    "focusedPassed": 58,
+    "pythonPassed": 352,
+    "pythonFiles": 43,
+    "clientReproducible": true,
+    "initialExpectedFailures": 6,
+    "browser": "component harness only",
+    "nativeModelToolCall": false
+  },
+  "native": {
+    "exitCode": 0,
+    "testFiles": 105,
+    "sdkSmokeExitCode": 0,
+    "node": "v24.22.1",
+    "python": "3.12.3",
+    "dailyProgramUnchanged": true,
+    "dailyOverrideUnchanged": true,
+    "temporaryCopyRemoved": true
+  },
+  "sourceHashes": {
+    "work/harness-purge-improved/package/lib/redteam/score-rules.js": "00b5a80657c89e86927bfb1958b8446dd41cba93d7a13bcb7bcdc99a53e2138e",
+    "work/harness-purge-improved/package/lib/redteam/store-core.js": "e99f5214fedd1940936c919f9cd98a5d7aa07adf664f89dc0e730711852d6afc",
+    "work/harness-purge-improved/package/lib/redteam/client.js": "8fb81486ac05ac3c24fc2e43e3f2479ad1462dcbc7d148edc06dd7d0598554fd",
+    "work/harness-purge-improved/package/lib/redteam/tools.js": "c83a6b48488503fca83dab1716eb506445042d797303bbd4ed89bdc3dc11127d",
+    "work/harness-purge-improved/tests/chain-coverage.test.mjs": "b044381547bb95ad28118caccc1d9f4bc8c013f32618db71ecd9a3a57b8ddcea",
+    "work/harness-purge-improved/tests/chain-project.test.mjs": "e009df1645fb408813a860c2695fa51d9066b6e2d1c57abb5c2e2bcda2ba5687",
+    "work/harness-purge-improved/package/client.js": "9565afc1fc23a02dd4cf85a03ca0d860532f627f066c0904ce58182c9b9abb43"
+  },
+  "externalReview": {
+    "state": "completed-and-triaged",
+    "promptSha256": "de7c4c03eb61419ec96c138f7b264b1a21185ee215a83cd4ca63f5093cd3ef39",
+    "requestedModel": "claude-opus-5-5",
+    "actualModel": "claude-opus-5-5",
+    "effort": "high",
+    "finishReason": "end_turn",
+    "reportSha256": "b233ec848f43fccb33ac88603ccf47489ccc204617bce329e8a31cdb74ca8d40",
+    "receiptSha256": "94bfa78eac734976c61893942d2f07b3e56bc63cf5280f9167efb4f001a689a5",
+    "fallbackUsed": false,
+    "remainingScopedP1P2Blockers": 0
+  },
+  "inheritedConfirmed": [
+    "SCORE-NULL-CODE-SCOPE-MISMATCH",
+    "SCORE-OVER-CAP-WINNER-DEMOTION-RECEIPT"
+  ],
+  "reviewProbes": {
+    "baseline": {
+      "systemMissingKeyDoesNotMerge": true,
+      "nullCodeScopeMismatch": true,
+      "overCapWinnerOmission": true,
+      "enabledIdCountingAgrees": true,
+      "olderEqualHitWins": true,
+      "capReceiptShowsConfiguredLimit": false,
+      "projectMaximum": "undefined"
+    },
+    "candidate": {
+      "systemMissingKeyDoesNotMerge": true,
+      "nullCodeScopeMismatch": true,
+      "overCapWinnerOmission": true,
+      "enabledIdCountingAgrees": true,
+      "olderEqualHitWins": true,
+      "capReceiptShowsConfiguredLimit": true,
+      "projectMaximum": "explicit-null"
+    }
+  },
+  "acceptance": {
+    "candidateProgramFiles": 173,
+    "dailyProgramFiles": 169,
+    "deployed": false,
+    "chromeEndToEnd": false,
+    "nativeModelToolCall": false,
+    "ordinaryR3Qualified": false,
+    "wholeProductReleaseQualified": false,
+    "realFindingsStillUnverified": 95
+  }
+}

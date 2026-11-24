@@ -1,0 +1,38 @@
+{
+  "id": "75e60c4a-bda8-4c5c-ae77-b418086f1b5a",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "**Scoped verdict: PASS for the narrow VM diagnostic preflight only; no R3 or live/general acceptance.** Current evidence supports VM quality v8 `blocked`, `r3Qualified=false`, 0 incorrect exclusions, 225/67/87 green tests, 4 reviewed execution points with 2 confirmed/2 excluded, 11 unreviewed-boundary refusals, and 15 inspected containers. No safety blocker found in this scope; remaining issues are evidence-binding limitations.\n\n1. **Counts mostly reconcile, but raw-hit provenance is incomplete.** Python tests sum to 225; 11 boundaries + 4 verifications = 15 inspections. However, `caseEvidence` reports `rawFindings:5` and `mapped:5`, while only four outputs have `raw:\"hit\"`; the fifth mapped raw finding or duplicate point is not shown. This is consistent with two hits at one point, but is not independently traceable from the supplied case evidence.\n\n2. **Unknown-source refusal is supported as a diagnostic behavior, not as independent attestation.** All 11 boundary variants report `decision:\"unknown\"`, `source-profile-not-reviewed`, `executed:false`, four runs, and cleanup/recover. That supports refusal before project execution. It does not prove absence of execution independently, because the same in-process verifier supplies the trace; the documented limitation remains.\n\n3. **Mac/VM identity, daily identity, and test-hash binding are under-evidenced.** The VM v8 blocked result and zero incorrect exclusions are current. `macVmScoresIdentical:true` is a bare boolean with no Mac quality report or digest, so the identical-score claim is unavailable here. `dailyProtection` before/after equality supports only “no daily change during this run”; `169` programs and `42` databases are lengths, not matches against an externally accepted baseline. The green test summary lists files/counts but no test-file SHA256, so the “exact test hashes” claim is not verifiable from this packet."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 12274,
+    "completion_tokens": 10304,
+    "total_tokens": 22578,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 9876
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 12274
+  },
+  "streamDone": true,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 42873,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "c687cd6edb8750420e6c9860906f6108b2f9ed10d780c29722f3a89dd06a4cd3",
+  "promptSha256": "41833f54442d1613fafca3ac066cc2e104b40ac24b15a1a07cb38c1c97d0fa7b"
+}

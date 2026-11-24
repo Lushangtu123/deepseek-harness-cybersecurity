@@ -1,0 +1,292 @@
+{
+  "scope": "offline supported Python reviewer closure snapshot and execution receipt binding",
+  "qualityReportVersion": 5,
+  "inputVersion": 2,
+  "changedSources": {
+    "docs/security-workspace/review-quality.md": "0a9b710e46cc57bf0f8c57e11e3322a4417a034f18696c5576799b1e55727928",
+    "docs/security-workspace/reviewer-dependencies.md": "01b878655b3cd66282cb2ba91eb6a71b01a38073471e7b23e3b5cc6373cc590e",
+    "scripts/review_quality_gate.mjs": "c6578a4fc058e99813a22cabea5fb17546f22a1a10c1c8dd27b0a0f0f0972ec6",
+    "scripts/reviewer_snapshot.py": "a4580fd6719b65a05b525a30bfca5a34a9b39dd32d1de566556ec60e003a21e7",
+    "scripts/reviewer_snapshot.test.py": "5fd42d9f048af8f2e54ae8a72e485b92f8d2141b4dd85a5d357461673903f2c4",
+    "work/harness-purge-improved/tests/review-quality-gate.test.mjs": "08851dde8ca061ea122317659bd27b4028141c526b23cc2a57a12ec95b56e6a4"
+  },
+  "tests": {
+    "macSnapshot": 10,
+    "vmSnapshot": 10,
+    "macQualityGate": 32,
+    "vmQualityGate": 32,
+    "macPluginSuite": 1009,
+    "macExistingBatchGuardImport": 32,
+    "failures": 0
+  },
+  "runtime": {
+    "snapshot": {
+      "version": 1,
+      "kind": "python-evidence-reviewer",
+      "entrypoint": "eval_evidence_batch.py",
+      "files": {
+        "eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+        "eval_guard_review.py": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+        "eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843"
+      },
+      "launcherSha256": "a4580fd6719b65a05b525a30bfca5a34a9b39dd32d1de566556ec60e003a21e7",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7"
+    },
+    "snapshotSha256": "f374e7298581d4d95467b9d632bc284daa53835616189e77da88d191da5a9a64",
+    "executionReceipt": {
+      "version": 1,
+      "state": "completed",
+      "snapshotSha256": "f374e7298581d4d95467b9d632bc284daa53835616189e77da88d191da5a9a64",
+      "datasetSha256": "15c249b3e5a9e2ecc39e6bfe3815224dcc224949177d9855cb08aff45795b00d",
+      "freezeSha256": "edd856f1d9cfa581493b64c6e0bfcdd81a7ab370e9445e21cffe5d5e6b3bc34a",
+      "inputSha256": "82b3742a95eada0271aa1de6b8f2c04c7eab5a66daf823f0bd42ed4b0574d601",
+      "reportSha256": "dad005b20e9d412a444f000e0bf79e8ef33949b95ada8d764ec9e06dad7645de",
+      "startedAt": "2026-11-11T08:45:16.101554+00:00",
+      "finishedAt": "2026-11-11T08:45:16.355081+00:00"
+    },
+    "rawReportRetained": true,
+    "reportJson": "{\"version\": 1, \"guardChecks\": 1, \"importChecks\": 1, \"discoveredImportChecks\": 1, \"guardEvidence\": [{\"finding\": {\"rule\": \"policy.harness.python.eval\", \"file\": \"routes.py\", \"line\": 6}, \"evidence\": {\"observation\": \"literal-identifier-guard-observed\", \"assignmentLine\": 4, \"guardLine\": 5, \"evalLine\": 6, \"literalCount\": 2, \"disposition\": \"unverified\"}}], \"importEvidence\": [{\"observation\": \"direct-import-execution-flow-observed\", \"sourceLine\": 8, \"importLine\": 2, \"callLine\": 9, \"definitionLine\": 1, \"sinkLine\": 2, \"sink\": \"exec\", \"disposition\": \"unverified\", \"callerFile\": \"routes.py\", \"calleeFile\": \"evaluator.py\"}], \"plainStringEvidence\": []}\n",
+    "inputFiles": {
+      "manifest.json": "4d7b76ea492751511e581a6294e0fdb043e3d93ae3273b33171f26b971d038ea",
+      "scan.json": "ff9be56babc328d3e65b2104dc0d1ed661c688ccc0b8a7e7306265144060546d",
+      "sources/evaluator.py": "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+      "sources/routes.py": "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+    },
+    "sourceDriftAfterSnapshotIgnored": true,
+    "transitiveDependencyMutationRejected": true,
+    "guardObservations": 1,
+    "importObservations": 1,
+    "confirmedVulnerabilities": 0
+  },
+  "vmProtection": {
+    "dailyProgramFilesMatched": 169,
+    "dailyDatabasesLogicallyMatched": 42,
+    "dailyConfigPinsRuntimeMatched": true,
+    "temporaryRemoved": true
+  },
+  "historicalReplay": {
+    "scope": "retrospective replay of already-used archived scan outputs, not a fresh detector run",
+    "newQualificationSamples": 0,
+    "beforeGateSha256": "c1bcf811c2d59d96c29cbb95f6286c03d7ef8fc5a5318523c62c059c460c4952",
+    "scenarios": [
+      {
+        "name": "original-legacy",
+        "beforeVersion": 4,
+        "afterVersion": 5,
+        "beforeQualificationCount": 0,
+        "afterQualificationCount": 0,
+        "diagnosticCount": 2,
+        "state": "blocked",
+        "newSelectionReason": "sample-selection-incomplete",
+        "priorBlockers": [
+          "sample-selection-incomplete",
+          "python/CWE-94:insufficient-labelled-cases",
+          "python/CWE-94:raw-recall-below-threshold",
+          "python/CWE-94:reviewed-false-positive-rate-unqualified",
+          "python/CWE-94:reviewed-false-positive-bound-unqualified",
+          "python/CWE-94:false-exclusion-rate-unqualified",
+          "python/CWE-94:review-unknown-rate-unqualified",
+          "python/CWE-94:confirmed-recall-below-threshold",
+          "python/CWE-95:insufficient-labelled-cases",
+          "python/CWE-95:raw-recall-below-threshold",
+          "python/CWE-95:reviewed-false-positive-rate-unqualified",
+          "python/CWE-95:reviewed-false-positive-bound-unqualified",
+          "python/CWE-95:false-exclusion-rate-unqualified",
+          "python/CWE-95:review-unknown-rate-unqualified",
+          "python/CWE-95:confirmed-recall-below-threshold"
+        ],
+        "priorBlockersPreserved": true,
+        "allBlockers": [
+          "reviewer-snapshot-missing-or-invalid",
+          "reviewer-execution-missing-or-mismatched",
+          "sample-selection-incomplete",
+          "python/CWE-94:insufficient-labelled-cases",
+          "python/CWE-94:raw-recall-below-threshold",
+          "python/CWE-94:reviewed-false-positive-rate-unqualified",
+          "python/CWE-94:reviewed-false-positive-bound-unqualified",
+          "python/CWE-94:false-exclusion-rate-unqualified",
+          "python/CWE-94:review-unknown-rate-unqualified",
+          "python/CWE-94:confirmed-recall-below-threshold",
+          "python/CWE-95:insufficient-labelled-cases",
+          "python/CWE-95:raw-recall-below-threshold",
+          "python/CWE-95:reviewed-false-positive-rate-unqualified",
+          "python/CWE-95:reviewed-false-positive-bound-unqualified",
+          "python/CWE-95:false-exclusion-rate-unqualified",
+          "python/CWE-95:review-unknown-rate-unqualified",
+          "python/CWE-95:confirmed-recall-below-threshold"
+        ]
+      },
+      {
+        "name": "marked-diagnostic",
+        "beforeVersion": 4,
+        "afterVersion": 5,
+        "beforeQualificationCount": 0,
+        "afterQualificationCount": 0,
+        "diagnosticCount": 2,
+        "state": "blocked",
+        "newSelectionReason": "sample-selection-ineligible",
+        "priorBlockers": [
+          "dataset-changed-after-freeze",
+          "run-dataset-mismatch",
+          "vulnerability-oracle-incomplete",
+          "sample-selection-ineligible",
+          "python/CWE-94:insufficient-labelled-cases",
+          "python/CWE-94:raw-recall-below-threshold",
+          "python/CWE-94:reviewed-false-positive-rate-unqualified",
+          "python/CWE-94:reviewed-false-positive-bound-unqualified",
+          "python/CWE-94:false-exclusion-rate-unqualified",
+          "python/CWE-94:review-unknown-rate-unqualified",
+          "python/CWE-94:confirmed-recall-below-threshold",
+          "python/CWE-95:insufficient-labelled-cases",
+          "python/CWE-95:raw-recall-below-threshold",
+          "python/CWE-95:reviewed-false-positive-rate-unqualified",
+          "python/CWE-95:reviewed-false-positive-bound-unqualified",
+          "python/CWE-95:false-exclusion-rate-unqualified",
+          "python/CWE-95:review-unknown-rate-unqualified",
+          "python/CWE-95:confirmed-recall-below-threshold"
+        ],
+        "priorBlockersPreserved": true,
+        "allBlockers": [
+          "reviewer-snapshot-missing-or-invalid",
+          "reviewer-execution-missing-or-mismatched",
+          "dataset-changed-after-freeze",
+          "run-dataset-mismatch",
+          "vulnerability-oracle-incomplete",
+          "sample-selection-ineligible",
+          "python/CWE-94:insufficient-labelled-cases",
+          "python/CWE-94:raw-recall-below-threshold",
+          "python/CWE-94:reviewed-false-positive-rate-unqualified",
+          "python/CWE-94:reviewed-false-positive-bound-unqualified",
+          "python/CWE-94:false-exclusion-rate-unqualified",
+          "python/CWE-94:review-unknown-rate-unqualified",
+          "python/CWE-94:confirmed-recall-below-threshold",
+          "python/CWE-95:insufficient-labelled-cases",
+          "python/CWE-95:raw-recall-below-threshold",
+          "python/CWE-95:reviewed-false-positive-rate-unqualified",
+          "python/CWE-95:reviewed-false-positive-bound-unqualified",
+          "python/CWE-95:false-exclusion-rate-unqualified",
+          "python/CWE-95:review-unknown-rate-unqualified",
+          "python/CWE-95:confirmed-recall-below-threshold"
+        ]
+      }
+    ],
+    "afterGateSha256": "c6578a4fc058e99813a22cabea5fb17546f22a1a10c1c8dd27b0a0f0f0972ec6",
+    "inputFiles": {
+      "dataset.json": "73ad0135884f37d86b9a947bf9ba3e6d07f7e19ca18424ab1c211deaa30ac5cc",
+      "dataset-diagnostic.json": "21b44e78ff2645175b429d41a972a6978510b558eebfaf1da0f3005104417ede",
+      "candidate-run.json": "d4d3af165bd4d05e704bc6579be27ec0b51731a759a35bf656382e2c34cfa57f",
+      "candidate-freeze.json": "6b39a73fc1b1719725f657bce42748493cb2cd59dcaa5cc85bc17f1d430700d9",
+      "policy.json": "e9b429fc21e5d86578333e6cd4cfad9ef2455be578b7ea37336fced14c788ad1",
+      "ledger-before.json": "f9d4a3bf73c7806d6193dc96381162465402f71a917e8fc870fca04623e16f77"
+    }
+  },
+  "artifactCrossChecks": {
+    "receiptDigestsVerified": true,
+    "reportRawRetained": true,
+    "programInventoryUnchanged": true,
+    "sourceLedgerUnchanged": true,
+    "independentNewSamples": 0,
+    "vmSyntheticCounts": {
+      "guardChecks": 1,
+      "importChecks": 1
+    },
+    "previousBlockersPreserved": true,
+    "pythonChecks": {
+      "batch-tests.txt": "OK",
+      "guard-tests.txt": "OK",
+      "import-tests.txt": "OK"
+    }
+  },
+  "review": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "promptSha256": "f867214d9b202d56d9893776c04fac104eb17b320551dbe9c2d4f3e7ea963a6f",
+    "receiptSha256": "4f5f9e0726e1488e071422fcfba3dddc32d27ecaba36287d0e9aff621b000687",
+    "reportSha256": "99e07bce0aaa2b3144273c1b45e8366883849c24538e964e60af8d2f72e4a511",
+    "confirmedBlockingFindings": 0,
+    "triage": {
+      "confirmedBlockingFindings": 0,
+      "scope": "accepted supported three-module closure and self-attested receipt binding; not R3 sample coverage or all-product approval",
+      "notes": [
+        {
+          "id": "N1",
+          "classification": "declared release-gate gap; follow-up priority",
+          "verified": "executionsValid checks inputSha256 format, not membership of dataset sources; unrelated batch can satisfy receipt structure when caller supplies dataset/freeze hashes",
+          "action": "Before R3 release, bind inputFiles/source membership mechanically, reject duplicate receipts, and check all dataset source digests. Remains open; no full coverage claim."
+        },
+        {
+          "id": "N2",
+          "classification": "conditional cleanup robustness risk; follow-up priority",
+          "verified": "subprocess.run timeout kills sudo directly; rm return status alone is not a proof against a delayed surviving client, and SIGTERM is not handled",
+          "action": "Current successful real VM runs completed and removed scratch; no timeout leak observed. Completion receipt is not emitted on timeout/cleanup errors. Strong cancellation, CID tracking and inspect recovery remain open. Correct documentation to distinguish successful cleanup command from independent recovery proof."
+        },
+        {
+          "id": "N3",
+          "classification": "confirmed non-blocking limits mismatch",
+          "verified": "launcher 2MiB/16MiB bounds exceed current reviewer 1MiB/8MiB; reviewer rejects oversized batch",
+          "action": "Align limits before production use; fail-closed now, not a false-success path."
+        },
+        {
+          "id": "N4",
+          "classification": "confirmed non-blocking type/canonicalization mismatch",
+          "verified": "Python equality accepts True/1.0 as version 1, JS strict equality and float JSON serialization differ",
+          "action": "Use exact Python integer validation in follow-up; current generated manifests use integer 1 and ASCII strings, VM interop verified; malformed variants cannot qualify in current gate."
+        },
+        {
+          "id": "N5",
+          "classification": "static-check scope clarification",
+          "verified": "imports is not a complete Python dynamic-import/path mutation detector; current frozen modules use supported imports only",
+          "action": "Clarify static import declaration scope during archive. Arbitrary modified reviewer code still requires independent review; no generic code-security guarantee."
+        },
+        {
+          "id": "N6",
+          "classification": "environment constraints / conditional risk",
+          "verified": "VM tester asserts uid 1000; real temporary paths had no comma/equal sign; launcher does not explicitly guard these assumptions",
+          "action": "Validate UID and mount path in follow-up; no Mac execution or host privilege change authorized."
+        },
+        {
+          "id": "N7",
+          "classification": "confirmed non-blocking test gaps",
+          "verified": "some negative paths currently verified by code review rather than separate fixtures; malformed snapshot test does not cover valid-manifest/wrong-identity branch",
+          "action": "Add negative fixtures with hardening follow-up; current 10 snapshot +32 gate tests do not claim exhaustive branch coverage."
+        },
+        {
+          "id": "N8",
+          "classification": "documentation/archive bookkeeping",
+          "verified": "earlier CLI section describes legacy 4-argument freeze; new optional argument is described in appended v5 section; final result path not created until accepted review archive",
+          "action": "Update CLI guide and current progress during final archive; result link created by archive, not asserted to exist during initial review."
+        },
+        {
+          "id": "N9",
+          "classification": "evidence disclosure bookkeeping",
+          "verified": "host recomputed current protected hashes and raw report/input/snapshot digests. Initial prompt included baseline but not separate current digest table",
+          "action": "Save current-protected-digests.json, after evaluator hash and replay input hashes; original review prompt/receipt unchanged. Global inventory includes all new sources/docs and verifies 1628 files."
+        },
+        {
+          "id": "N10",
+          "classification": "compatibility check",
+          "verified": "bounded consumer search found only offline gate helper/tests within current executable source scope; no production gate/version positional consumer",
+          "action": "Keep consumers.txt and historical replay; report v5 change documented, old input versions remain readable. External untracked consumers not assessed."
+        }
+      ]
+    }
+  },
+  "boundaries": {
+    "selfAttestedBindings": true,
+    "fullProductReview": false,
+    "newIndependentSamples": 0,
+    "usedLedgerChanged": false,
+    "numericThresholdsChanged": false,
+    "detectionRulesChanged": false,
+    "productionDeployment": false,
+    "githubPush": false,
+    "r3Qualified": false
+  },
+  "remaining": [
+    "Mechanically bind receipt input-file membership to every dataset source and reject duplicate receipts.",
+    "Strengthen timeout/signal cancellation, container ID tracking, post-removal inspection and failed-attempt records; align limits/types/VM environment validation and add negative fixtures.",
+    "Independently check sealing, batch completeness and raw artifact mappings before qualification.",
+    "Review and predeclare representative sample-selection protocol; collect genuinely fresh independently labelled positives and negatives.",
+    "Supported closure covers eval evidence batch with three modules; other reviewer entrypoints require their own manifest and acceptance."
+  ]
+}

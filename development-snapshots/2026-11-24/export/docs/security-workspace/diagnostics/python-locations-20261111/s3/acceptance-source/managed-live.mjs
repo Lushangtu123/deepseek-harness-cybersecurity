@@ -1,0 +1,10 @@
+import {readFileSync,writeFileSync} from 'node:fs';import assert from 'node:assert/strict';
+import {collectPythonEvidence,bindPythonExecutionPoints} from './work/harness-purge-improved/package/lib/redteam/personal-python-evidence.mjs';
+const loc=JSON.parse(readFileSync('locations.json')),scan=JSON.parse(readFileSync('candidate-scan.json')),execution=JSON.parse(readFileSync('execution.json'));
+const files=Object.entries(loc.locationBinding.inventory.files).map(([path,f])=>({path,sha256:f.sha256})),sourceRoot=new URL('./sources/',import.meta.url).pathname.replace(/\/$/,'');
+const rules=new Set(['policy.harness.python.eval','policy.harness.python.exec','policy.harness.python.request-to-dynamic-code']);
+const findings=scan.results.filter(r=>rules.has(r.check_id)).map(r=>({rule:r.check_id,location:r.path.slice(5)+':'+r.start.line,sourceLocation:{state:'bound',path:r.path.slice(5),sourceSha256:loc.locationBinding.inventory.files[r.path.slice(5)].sha256,start:r.start,end:r.end}}));
+const evidence=collectPythonEvidence({files,sourceRoot},findings,performance.now()+10000);assert.equal(evidence.state,'completed');assert.equal(evidence.findingLocations.length,findings.length);
+const expected=execution.report.findingLocations.filter(r=>rules.has(r.rule));assert.deepEqual(evidence.findingLocations.map(m=>({state:m.state,pointId:m.pointId})),expected.map(m=>({state:m.state,pointId:m.pointId})));
+const bound=bindPythonExecutionPoints(findings,evidence);assert.equal(bound.summary.bound,evidence.findingLocations.filter(m=>m.state==='bound').length);assert.equal(bound.summary.total,findings.length);
+writeFileSync('managed-live.json',JSON.stringify({summary:bound.summary,points:bound.findings.map(f=>({location:f.location,pointId:f.pointId,executionMapping:f.executionMapping})),artifacts:evidence.artifacts.length,guestPythonMatchesFixedImageIds:true},null,2)+'\n');

@@ -1,0 +1,41 @@
+..FFFF....
+======================================================================
+FAIL: test_empty_literal_namespaces_preserve_conditional_import_flow (__main__.ImportFlowTest.test_empty_literal_namespaces_preserve_conditional_import_flow) (sink='eval', namespaces=', {}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/eval_import_review.test.py", line 30, in test_empty_literal_namespaces_preserve_conditional_import_flow
+    self.assertIsNotNone(row)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^
+AssertionError: unexpectedly None
+
+======================================================================
+FAIL: test_empty_literal_namespaces_preserve_conditional_import_flow (__main__.ImportFlowTest.test_empty_literal_namespaces_preserve_conditional_import_flow) (sink='eval', namespaces=', {}, {}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/eval_import_review.test.py", line 30, in test_empty_literal_namespaces_preserve_conditional_import_flow
+    self.assertIsNotNone(row)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^
+AssertionError: unexpectedly None
+
+======================================================================
+FAIL: test_empty_literal_namespaces_preserve_conditional_import_flow (__main__.ImportFlowTest.test_empty_literal_namespaces_preserve_conditional_import_flow) (sink='exec', namespaces=', {}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/eval_import_review.test.py", line 30, in test_empty_literal_namespaces_preserve_conditional_import_flow
+    self.assertIsNotNone(row)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^
+AssertionError: unexpectedly None
+
+======================================================================
+FAIL: test_empty_literal_namespaces_preserve_conditional_import_flow (__main__.ImportFlowTest.test_empty_literal_namespaces_preserve_conditional_import_flow) (sink='exec', namespaces=', {}, {}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/eval_import_review.test.py", line 30, in test_empty_literal_namespaces_preserve_conditional_import_flow
+    self.assertIsNotNone(row)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^
+AssertionError: unexpectedly None
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.003s
+
+FAILED (failures=4)

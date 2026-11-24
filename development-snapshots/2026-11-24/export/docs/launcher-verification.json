@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "menuTests": 17,
+  "pythonRegressionTestsIncludingMenu": 108,
+  "realMenuStatusPassed": true,
+  "realDefaultEnterOpenPassed": true,
+  "servicePidUnchanged": true,
+  "mode": "improved",
+  "originalCapabilities": false,
+  "recovery": "ready-merged-switch-20261029",
+  "coverageMatched": true,
+  "managedHostHelpersUnchanged": true,
+  "rootCommand": "Harness.command",
+  "rootCommandCount": 1,
+  "legacyCommandsPreservedByteForByte": 5,
+  "actualModeSwitchOrRestorePerformed": false,
+  "modelRequests": 0
+}

@@ -1,0 +1,354 @@
+{
+  "version": 1,
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "sources": {
+    "plain-eval-1.py": "9838ecce20b5dcc303735f8fd8dfe1695e2a42b816fb38663f4d2fe3b97633ae",
+    "plain-eval-2.py": "a6524a3e038e30149cce84ae23d8d569971a48d9e7f7edbe2acb11275ad9da6b",
+    "plain-eval-3.py": "ed34bf506c0262d7010400d0c21dc0fbbd79d0e57e0e82e7a63b9959d52ec934",
+    "guard-complete-eval.py": "ca21ccb7d9f0d1578bcdcd7f1f2867b2d60f7a657691c1e50d547a3249f2644b",
+    "guard-conditional-eval.py": "5f000d210e1133ff59102cb813af055a28252a681bf8b7e09b7afcc27a4237af",
+    "guard-overwrite-eval.py": "64818360c9db8695fe4de41ddbfea1a0c359a0461ea0cfbf04ba93405cc8cd2a",
+    "guard-append-eval.py": "0c7ff334b1d7051385b36f8fd21d5496ebab3ca88ddd419c534cd06cc540cd39",
+    "mapping-eval.py": "0a9b42a779a21740ba89813f6d6b9c33beba4787f5368c217600d1204a7793b0",
+    "literal-eval.py": "96d40a4decc712ea14308dcedfdec48f362c80319af6aed722edba33ce809eab",
+    "shadow-eval.py": "b69101e618dd161ce0ef01d0f3536afb6d4f9ff80055280d443a13c600e05196",
+    "qualified-eval.py": "0a766258e6b1b544f92b6886707ee93afdd0b2aa08e4af20b1d5b90e3efa464c",
+    "alias-eval.py": "6f2dceb17bd74070ea5335910f548f39b1c6e4a18a26d59a6bc091f63b79cac0",
+    "plain-exec-1.py": "0fc75c5986c3324c740129812a4d0bc17a4c9db9e70703a1222afa460a7724e4",
+    "plain-exec-2.py": "aed712cec5eabbe4c032a72993ad303cc79bba9418c6d622734327b45ef67c45",
+    "plain-exec-3.py": "830a03cdefa903756ebfa7610b50b98b6d94deb8d5f000e0f06ab20520396515",
+    "guard-complete-exec.py": "89d1f5c2705920402a02196b0fb0e908da32233baa66cdae732f7ffbea61659c",
+    "guard-conditional-exec.py": "87e3cab73b358ec41a2ca0d5c57360abd1a275b6b30832e48873d9ebc173a079",
+    "guard-overwrite-exec.py": "8f92178588aea81dd789cc723239e8fcbe54393f0ffc1c01806b85b0ee27de3d",
+    "guard-append-exec.py": "6148aa251e946f5f1a6d9a7dd21ddaf8a446cce46b452a3ae26b5a87896be31c",
+    "mapping-exec.py": "ea0a90b33740db1ce012721c082c75048ca5d3d79906d590d0056f03e72b3089",
+    "literal-exec.py": "6313434fcc3c32466e602c412ff529d7b6be8dfa15541e6946e445f11efe89ab",
+    "shadow-exec.py": "2afb108f06f87ffafa566b3cde29997f4d1e15e5aecdd4c8a28562889c1efba8",
+    "qualified-exec.py": "1ef0f0ea665475fd32882a83c4d0d4dd92c9d72de54196bce7c9ed18ab5df4f5",
+    "alias-exec.py": "92699ed5dbbcfbb0484afabed5474086544060e22dfd5de898a07ee563be06b2"
+  },
+  "vectors": [
+    {
+      "id": "plain-eval-1-0",
+      "caseId": "plain-eval-1",
+      "args": [
+        "17389*7919"
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "plain-eval-2-0",
+      "caseId": "plain-eval-2",
+      "args": [
+        "17389*7919"
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "plain-eval-3-0",
+      "caseId": "plain-eval-3",
+      "args": [
+        "17389*7919"
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "guard-complete-eval-0",
+      "caseId": "guard-complete-eval",
+      "args": [
+        "6*7"
+      ],
+      "expected": 42,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "guard-complete-eval-1",
+      "caseId": "guard-complete-eval",
+      "args": [
+        "17389*7919"
+      ],
+      "error": "ValueError",
+      "dynamicFrames": 0
+    },
+    {
+      "id": "guard-conditional-eval-0",
+      "caseId": "guard-conditional-eval",
+      "args": [
+        "6*7"
+      ],
+      "expected": 42,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "guard-conditional-eval-1",
+      "caseId": "guard-conditional-eval",
+      "args": [
+        "17389*7919",
+        null,
+        false
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "guard-overwrite-eval-0",
+      "caseId": "guard-overwrite-eval",
+      "args": [
+        "6*7",
+        "6*7"
+      ],
+      "expected": 42,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "guard-overwrite-eval-1",
+      "caseId": "guard-overwrite-eval",
+      "args": [
+        "6*7",
+        "17389*7919"
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "guard-append-eval-0",
+      "caseId": "guard-append-eval",
+      "args": [
+        "6*7",
+        ""
+      ],
+      "expected": 42,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "guard-append-eval-1",
+      "caseId": "guard-append-eval",
+      "args": [
+        "6*7",
+        "+137703449"
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "mapping-eval-0",
+      "caseId": "mapping-eval",
+      "args": [
+        "allowed"
+      ],
+      "expected": 42,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "mapping-eval-1",
+      "caseId": "mapping-eval",
+      "args": [
+        "17389*7919"
+      ],
+      "expected": 56,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "literal-eval-0",
+      "caseId": "literal-eval",
+      "args": [
+        "17389*7919"
+      ],
+      "expected": 42,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "shadow-eval-0",
+      "caseId": "shadow-eval",
+      "args": [
+        "17389*7919"
+      ],
+      "expected": "17389*7919",
+      "dynamicFrames": 0
+    },
+    {
+      "id": "qualified-eval-0",
+      "caseId": "qualified-eval",
+      "args": [
+        "17389*7919"
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "alias-eval-0",
+      "caseId": "alias-eval",
+      "args": [
+        "17389*7919"
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "plain-exec-1-0",
+      "caseId": "plain-exec-1",
+      "args": [
+        "answer=17389*7919"
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "plain-exec-2-0",
+      "caseId": "plain-exec-2",
+      "args": [
+        "answer=17389*7919"
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "plain-exec-3-0",
+      "caseId": "plain-exec-3",
+      "args": [
+        "answer=17389*7919"
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "guard-complete-exec-0",
+      "caseId": "guard-complete-exec",
+      "args": [
+        "answer=6*7"
+      ],
+      "expected": 42,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "guard-complete-exec-1",
+      "caseId": "guard-complete-exec",
+      "args": [
+        "answer=17389*7919"
+      ],
+      "error": "ValueError",
+      "dynamicFrames": 0
+    },
+    {
+      "id": "guard-conditional-exec-0",
+      "caseId": "guard-conditional-exec",
+      "args": [
+        "answer=6*7"
+      ],
+      "expected": 42,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "guard-conditional-exec-1",
+      "caseId": "guard-conditional-exec",
+      "args": [
+        "answer=17389*7919",
+        null,
+        false
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "guard-overwrite-exec-0",
+      "caseId": "guard-overwrite-exec",
+      "args": [
+        "answer=6*7",
+        "answer=6*7"
+      ],
+      "expected": 42,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "guard-overwrite-exec-1",
+      "caseId": "guard-overwrite-exec",
+      "args": [
+        "answer=6*7",
+        "answer=17389*7919"
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "guard-append-exec-0",
+      "caseId": "guard-append-exec",
+      "args": [
+        "answer=6*7",
+        ""
+      ],
+      "expected": 42,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "guard-append-exec-1",
+      "caseId": "guard-append-exec",
+      "args": [
+        "answer=6*7",
+        "+137703449"
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "mapping-exec-0",
+      "caseId": "mapping-exec",
+      "args": [
+        "allowed"
+      ],
+      "expected": 42,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "mapping-exec-1",
+      "caseId": "mapping-exec",
+      "args": [
+        "answer=17389*7919"
+      ],
+      "expected": 56,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "literal-exec-0",
+      "caseId": "literal-exec",
+      "args": [
+        "answer=17389*7919"
+      ],
+      "expected": 42,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "shadow-exec-0",
+      "caseId": "shadow-exec",
+      "args": [
+        "answer=17389*7919"
+      ],
+      "expected": "answer=17389*7919",
+      "dynamicFrames": 0
+    },
+    {
+      "id": "qualified-exec-0",
+      "caseId": "qualified-exec",
+      "args": [
+        "answer=17389*7919"
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    },
+    {
+      "id": "alias-exec-0",
+      "caseId": "alias-exec",
+      "args": [
+        "answer=17389*7919"
+      ],
+      "expected": 137703491,
+      "dynamicFrames": 1
+    }
+  ],
+  "independentCases": 0,
+  "qualifiesForR3": false,
+  "scope": "fixed plain-string arithmetic only; direct controlled calls, no HTTP or vulnerability truth",
+  "probeSha256": "8cf09282ecfaf466682b09e605eb99ee07970d8da260ab0a4c8968985f401dea"
+}

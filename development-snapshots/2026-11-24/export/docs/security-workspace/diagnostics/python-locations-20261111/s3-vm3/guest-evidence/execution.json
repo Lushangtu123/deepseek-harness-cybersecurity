@@ -1,0 +1,1955 @@
+{
+  "reviewerSnapshot": {
+    "version": 2,
+    "kind": "python-evidence-reviewer",
+    "entrypoint": "eval_evidence_batch.py",
+    "files": {
+      "eval_evidence_batch.py": "9897972ad669a3c33dfe648703afbfd176325164776917f602ecfcbf206a5f42",
+      "eval_guard_review.py": "d285565a42bfd91e13386aca6d3e56e6e0387d336a95abdf7ade4683c2889b04",
+      "eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843"
+    },
+    "storageSha256": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202",
+    "launcherSha256": "3e5915824420c4d6f7cd19580135348df050f89659869c21f92023a0ebad533b",
+    "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7"
+  },
+  "reviewerExecution": {
+    "version": 3,
+    "state": "completed",
+    "snapshotSha256": "8445dc83ac2981e3a835a1eadbce1d7ab56e08711a7b6aa08d1f03cbf4e15a3c",
+    "datasetSha256": "bf62ff09beb0632dbe03ffe7e4f8c42f9e070886098e24a9c386aa4cfc68e2e0",
+    "freezeSha256": "2faf22ada9c9bd2d2ca580c239dd58b7c4c05794b00c69f55c3b3a83cb1fcb1f",
+    "inputSha256": "4d1621bde7f4fa60bde0622a87decc0a9c2c26438a4286276777d6565a5ef4e3",
+    "inputFiles": {
+      "manifest.json": "554a770cebff865e2154af0dc65568e94aab8745d48bbb9f77540d1e57f68ee0",
+      "scan.json": "2ef2477cd2b4c4eb0b2ff7a2f7cd5d1bed7e3d7763e2834f41a5433868fbdab8",
+      "sources/skf-fixed-control.py": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+      "sources/BenchmarkTest00073.py": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+      "sources/skf-upstream.py": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+      "sources/boundary.py": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+      "sources/BenchmarkTest00074.py": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e"
+    },
+    "scanSha256": "2ef2477cd2b4c4eb0b2ff7a2f7cd5d1bed7e3d7763e2834f41a5433868fbdab8",
+    "reportSha256": "96d5155cf02e4dd9a2496d62f468b0fd800159126211645af3132847798c7d4d",
+    "startedAt": "2026-11-12T07:59:47.869836+00:00",
+    "finishedAt": "2026-11-12T07:59:48.224849+00:00",
+    "operation": "review",
+    "locationBindingSha256": "1aa34bda08d99039ccc4f0990b3e73dc5de5887fa9d3c76643e0597eefc28333"
+  },
+  "report": {
+    "version": 2,
+    "locations": {
+      "version": 1,
+      "protocol": "python-sink-locations-1",
+      "runtimePython": "3.12.15",
+      "files": {
+        "BenchmarkTest00073.py": {
+          "sha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+          "bytes": 1877,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 54,
+                  "col": 5,
+                  "offset": 1748
+                },
+                "end": {
+                  "line": 54,
+                  "col": 14,
+                  "offset": 1757
+                }
+              },
+              "id": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 54,
+                  "col": 10,
+                  "offset": 1753
+                },
+                "end": {
+                  "line": 54,
+                  "col": 13,
+                  "offset": 1756
+                }
+              }
+            }
+          ]
+        },
+        "BenchmarkTest00074.py": {
+          "sha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+          "bytes": 1881,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+              "callee": "exec",
+              "call": {
+                "start": {
+                  "line": 51,
+                  "col": 4,
+                  "offset": 1759
+                },
+                "end": {
+                  "line": 51,
+                  "col": 13,
+                  "offset": 1768
+                }
+              },
+              "id": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 51,
+                  "col": 9,
+                  "offset": 1764
+                },
+                "end": {
+                  "line": 51,
+                  "col": 12,
+                  "offset": 1767
+                }
+              }
+            }
+          ]
+        },
+        "boundary.py": {
+          "sha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+          "bytes": 323,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 7,
+                  "col": 3,
+                  "offset": 145
+                },
+                "end": {
+                  "line": 7,
+                  "col": 14,
+                  "offset": 156
+                }
+              },
+              "id": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 7,
+                  "col": 8,
+                  "offset": 150
+                },
+                "end": {
+                  "line": 7,
+                  "col": 13,
+                  "offset": 155
+                }
+              }
+            },
+            {
+              "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+              "callee": "exec",
+              "call": {
+                "start": {
+                  "line": 8,
+                  "col": 2,
+                  "offset": 159
+                },
+                "end": {
+                  "line": 8,
+                  "col": 13,
+                  "offset": 170
+                }
+              },
+              "id": "30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 8,
+                  "col": 7,
+                  "offset": 164
+                },
+                "end": {
+                  "line": 8,
+                  "col": 12,
+                  "offset": 169
+                }
+              }
+            },
+            {
+              "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 8,
+                  "col": 15,
+                  "offset": 172
+                },
+                "end": {
+                  "line": 8,
+                  "col": 26,
+                  "offset": 183
+                }
+              },
+              "id": "8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 8,
+                  "col": 20,
+                  "offset": 177
+                },
+                "end": {
+                  "line": 8,
+                  "col": 25,
+                  "offset": 182
+                }
+              }
+            },
+            {
+              "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 10,
+                  "col": 3,
+                  "offset": 198
+                },
+                "end": {
+                  "line": 12,
+                  "col": 4,
+                  "offset": 218
+                }
+              },
+              "id": "6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 11,
+                  "col": 4,
+                  "offset": 208
+                },
+                "end": {
+                  "line": 11,
+                  "col": 9,
+                  "offset": 213
+                }
+              }
+            },
+            {
+              "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 15,
+                  "col": 9,
+                  "offset": 252
+                },
+                "end": {
+                  "line": 15,
+                  "col": 26,
+                  "offset": 269
+                }
+              },
+              "id": "bb9b0f0d843ba3baa5f9d1a1e8d7e31ef6a1eff47f137a31b174e7c9ab54c10b",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 15,
+                  "col": 14,
+                  "offset": 257
+                },
+                "end": {
+                  "line": 15,
+                  "col": 25,
+                  "offset": 268
+                }
+              }
+            },
+            {
+              "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 15,
+                  "col": 14,
+                  "offset": 257
+                },
+                "end": {
+                  "line": 15,
+                  "col": 25,
+                  "offset": 268
+                }
+              },
+              "id": "ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 15,
+                  "col": 19,
+                  "offset": 262
+                },
+                "end": {
+                  "line": 15,
+                  "col": 24,
+                  "offset": 267
+                }
+              }
+            },
+            {
+              "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+              "callee": "builtins.eval",
+              "call": {
+                "start": {
+                  "line": 17,
+                  "col": 9,
+                  "offset": 301
+                },
+                "end": {
+                  "line": 17,
+                  "col": 29,
+                  "offset": 321
+                }
+              },
+              "id": "f7fce12a3eebae79df2b300396a6f6fa6adf4a939e737ce9f32d521e5cbe4cbc",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 17,
+                  "col": 23,
+                  "offset": 315
+                },
+                "end": {
+                  "line": 17,
+                  "col": 28,
+                  "offset": 320
+                }
+              }
+            }
+          ]
+        },
+        "skf-fixed-control.py": {
+          "sha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+          "bytes": 1652,
+          "state": "completed",
+          "points": []
+        },
+        "skf-upstream.py": {
+          "sha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+          "bytes": 1585,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 37,
+                  "col": 20,
+                  "offset": 1296
+                },
+                "end": {
+                  "line": 37,
+                  "col": 51,
+                  "offset": 1327
+                }
+              },
+              "id": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 37,
+                  "col": 25,
+                  "offset": 1301
+                },
+                "end": {
+                  "line": 37,
+                  "col": 50,
+                  "offset": 1326
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "findingLocations": [
+      {
+        "index": 0,
+        "state": "bound",
+        "path": "BenchmarkTest00073.py",
+        "rule": "policy.harness.python.eval",
+        "scannerSpan": {
+          "start": {
+            "line": 53,
+            "col": 16,
+            "offset": 1742
+          },
+          "end": {
+            "line": 55,
+            "col": 5,
+            "offset": 1762
+          }
+        },
+        "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+        "match": "call",
+        "point": {
+          "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+          "callee": "eval",
+          "call": {
+            "start": {
+              "line": 54,
+              "col": 5,
+              "offset": 1748
+            },
+            "end": {
+              "line": 54,
+              "col": 14,
+              "offset": 1757
+            }
+          },
+          "id": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+          "builtinIdentity": "unverified",
+          "argument": {
+            "start": {
+              "line": 54,
+              "col": 10,
+              "offset": 1753
+            },
+            "end": {
+              "line": 54,
+              "col": 13,
+              "offset": 1756
+            }
+          }
+        }
+      },
+      {
+        "index": 1,
+        "state": "bound",
+        "path": "BenchmarkTest00074.py",
+        "rule": "policy.harness.python.exec",
+        "scannerSpan": {
+          "start": {
+            "line": 51,
+            "col": 4,
+            "offset": 1759
+          },
+          "end": {
+            "line": 51,
+            "col": 13,
+            "offset": 1768
+          }
+        },
+        "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+        "match": "call",
+        "point": {
+          "sourceSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+          "callee": "exec",
+          "call": {
+            "start": {
+              "line": 51,
+              "col": 4,
+              "offset": 1759
+            },
+            "end": {
+              "line": 51,
+              "col": 13,
+              "offset": 1768
+            }
+          },
+          "id": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+          "builtinIdentity": "unverified",
+          "argument": {
+            "start": {
+              "line": 51,
+              "col": 9,
+              "offset": 1764
+            },
+            "end": {
+              "line": 51,
+              "col": 12,
+              "offset": 1767
+            }
+          }
+        }
+      },
+      {
+        "index": 2,
+        "state": "bound",
+        "path": "boundary.py",
+        "rule": "policy.harness.python.eval",
+        "scannerSpan": {
+          "start": {
+            "line": 7,
+            "col": 3,
+            "offset": 145
+          },
+          "end": {
+            "line": 7,
+            "col": 14,
+            "offset": 156
+          }
+        },
+        "pointId": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+        "match": "call",
+        "point": {
+          "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+          "callee": "eval",
+          "call": {
+            "start": {
+              "line": 7,
+              "col": 3,
+              "offset": 145
+            },
+            "end": {
+              "line": 7,
+              "col": 14,
+              "offset": 156
+            }
+          },
+          "id": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+          "builtinIdentity": "unverified",
+          "argument": {
+            "start": {
+              "line": 7,
+              "col": 8,
+              "offset": 150
+            },
+            "end": {
+              "line": 7,
+              "col": 13,
+              "offset": 155
+            }
+          }
+        }
+      },
+      {
+        "index": 3,
+        "state": "bound",
+        "path": "boundary.py",
+        "rule": "policy.harness.python.request-to-dynamic-code",
+        "scannerSpan": {
+          "start": {
+            "line": 7,
+            "col": 8,
+            "offset": 150
+          },
+          "end": {
+            "line": 7,
+            "col": 13,
+            "offset": 155
+          }
+        },
+        "pointId": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+        "match": "argument",
+        "point": {
+          "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+          "callee": "eval",
+          "call": {
+            "start": {
+              "line": 7,
+              "col": 3,
+              "offset": 145
+            },
+            "end": {
+              "line": 7,
+              "col": 14,
+              "offset": 156
+            }
+          },
+          "id": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+          "builtinIdentity": "unverified",
+          "argument": {
+            "start": {
+              "line": 7,
+              "col": 8,
+              "offset": 150
+            },
+            "end": {
+              "line": 7,
+              "col": 13,
+              "offset": 155
+            }
+          }
+        }
+      },
+      {
+        "index": 4,
+        "state": "bound",
+        "path": "boundary.py",
+        "rule": "policy.harness.python.exec",
+        "scannerSpan": {
+          "start": {
+            "line": 8,
+            "col": 2,
+            "offset": 159
+          },
+          "end": {
+            "line": 8,
+            "col": 13,
+            "offset": 170
+          }
+        },
+        "pointId": "30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0",
+        "match": "call",
+        "point": {
+          "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+          "callee": "exec",
+          "call": {
+            "start": {
+              "line": 8,
+              "col": 2,
+              "offset": 159
+            },
+            "end": {
+              "line": 8,
+              "col": 13,
+              "offset": 170
+            }
+          },
+          "id": "30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0",
+          "builtinIdentity": "unverified",
+          "argument": {
+            "start": {
+              "line": 8,
+              "col": 7,
+              "offset": 164
+            },
+            "end": {
+              "line": 8,
+              "col": 12,
+              "offset": 169
+            }
+          }
+        }
+      },
+      {
+        "index": 5,
+        "state": "bound",
+        "path": "boundary.py",
+        "rule": "policy.harness.python.request-to-dynamic-code",
+        "scannerSpan": {
+          "start": {
+            "line": 8,
+            "col": 7,
+            "offset": 164
+          },
+          "end": {
+            "line": 8,
+            "col": 12,
+            "offset": 169
+          }
+        },
+        "pointId": "30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0",
+        "match": "argument",
+        "point": {
+          "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+          "callee": "exec",
+          "call": {
+            "start": {
+              "line": 8,
+              "col": 2,
+              "offset": 159
+            },
+            "end": {
+              "line": 8,
+              "col": 13,
+              "offset": 170
+            }
+          },
+          "id": "30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0",
+          "builtinIdentity": "unverified",
+          "argument": {
+            "start": {
+              "line": 8,
+              "col": 7,
+              "offset": 164
+            },
+            "end": {
+              "line": 8,
+              "col": 12,
+              "offset": 169
+            }
+          }
+        }
+      },
+      {
+        "index": 6,
+        "state": "bound",
+        "path": "boundary.py",
+        "rule": "policy.harness.python.eval",
+        "scannerSpan": {
+          "start": {
+            "line": 8,
+            "col": 15,
+            "offset": 172
+          },
+          "end": {
+            "line": 8,
+            "col": 26,
+            "offset": 183
+          }
+        },
+        "pointId": "8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450",
+        "match": "call",
+        "point": {
+          "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+          "callee": "eval",
+          "call": {
+            "start": {
+              "line": 8,
+              "col": 15,
+              "offset": 172
+            },
+            "end": {
+              "line": 8,
+              "col": 26,
+              "offset": 183
+            }
+          },
+          "id": "8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450",
+          "builtinIdentity": "unverified",
+          "argument": {
+            "start": {
+              "line": 8,
+              "col": 20,
+              "offset": 177
+            },
+            "end": {
+              "line": 8,
+              "col": 25,
+              "offset": 182
+            }
+          }
+        }
+      },
+      {
+        "index": 7,
+        "state": "bound",
+        "path": "boundary.py",
+        "rule": "policy.harness.python.request-to-dynamic-code",
+        "scannerSpan": {
+          "start": {
+            "line": 8,
+            "col": 20,
+            "offset": 177
+          },
+          "end": {
+            "line": 8,
+            "col": 25,
+            "offset": 182
+          }
+        },
+        "pointId": "8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450",
+        "match": "argument",
+        "point": {
+          "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+          "callee": "eval",
+          "call": {
+            "start": {
+              "line": 8,
+              "col": 15,
+              "offset": 172
+            },
+            "end": {
+              "line": 8,
+              "col": 26,
+              "offset": 183
+            }
+          },
+          "id": "8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450",
+          "builtinIdentity": "unverified",
+          "argument": {
+            "start": {
+              "line": 8,
+              "col": 20,
+              "offset": 177
+            },
+            "end": {
+              "line": 8,
+              "col": 25,
+              "offset": 182
+            }
+          }
+        }
+      },
+      {
+        "index": 8,
+        "state": "bound",
+        "path": "boundary.py",
+        "rule": "policy.harness.python.eval",
+        "scannerSpan": {
+          "start": {
+            "line": 9,
+            "col": 9,
+            "offset": 193
+          },
+          "end": {
+            "line": 13,
+            "col": 3,
+            "offset": 222
+          }
+        },
+        "pointId": "6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b",
+        "match": "call",
+        "point": {
+          "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+          "callee": "eval",
+          "call": {
+            "start": {
+              "line": 10,
+              "col": 3,
+              "offset": 198
+            },
+            "end": {
+              "line": 12,
+              "col": 4,
+              "offset": 218
+            }
+          },
+          "id": "6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b",
+          "builtinIdentity": "unverified",
+          "argument": {
+            "start": {
+              "line": 11,
+              "col": 4,
+              "offset": 208
+            },
+            "end": {
+              "line": 11,
+              "col": 9,
+              "offset": 213
+            }
+          }
+        }
+      },
+      {
+        "index": 9,
+        "state": "bound",
+        "path": "boundary.py",
+        "rule": "policy.harness.python.request-to-dynamic-code",
+        "scannerSpan": {
+          "start": {
+            "line": 11,
+            "col": 4,
+            "offset": 208
+          },
+          "end": {
+            "line": 11,
+            "col": 9,
+            "offset": 213
+          }
+        },
+        "pointId": "6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b",
+        "match": "argument",
+        "point": {
+          "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+          "callee": "eval",
+          "call": {
+            "start": {
+              "line": 10,
+              "col": 3,
+              "offset": 198
+            },
+            "end": {
+              "line": 12,
+              "col": 4,
+              "offset": 218
+            }
+          },
+          "id": "6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b",
+          "builtinIdentity": "unverified",
+          "argument": {
+            "start": {
+              "line": 11,
+              "col": 4,
+              "offset": 208
+            },
+            "end": {
+              "line": 11,
+              "col": 9,
+              "offset": 213
+            }
+          }
+        }
+      },
+      {
+        "index": 10,
+        "state": "unmatched",
+        "reason": "ambiguous-execution-points",
+        "path": "boundary.py",
+        "rule": "policy.harness.python.eval",
+        "scannerSpan": {
+          "start": {
+            "line": 15,
+            "col": 9,
+            "offset": 252
+          },
+          "end": {
+            "line": 15,
+            "col": 26,
+            "offset": 269
+          }
+        }
+      },
+      {
+        "index": 11,
+        "state": "bound",
+        "path": "boundary.py",
+        "rule": "policy.harness.python.eval",
+        "scannerSpan": {
+          "start": {
+            "line": 15,
+            "col": 14,
+            "offset": 257
+          },
+          "end": {
+            "line": 15,
+            "col": 25,
+            "offset": 268
+          }
+        },
+        "pointId": "ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63",
+        "match": "call",
+        "point": {
+          "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+          "callee": "eval",
+          "call": {
+            "start": {
+              "line": 15,
+              "col": 14,
+              "offset": 257
+            },
+            "end": {
+              "line": 15,
+              "col": 25,
+              "offset": 268
+            }
+          },
+          "id": "ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63",
+          "builtinIdentity": "unverified",
+          "argument": {
+            "start": {
+              "line": 15,
+              "col": 19,
+              "offset": 262
+            },
+            "end": {
+              "line": 15,
+              "col": 24,
+              "offset": 267
+            }
+          }
+        }
+      },
+      {
+        "index": 12,
+        "state": "bound",
+        "path": "skf-upstream.py",
+        "rule": "policy.harness.python.eval",
+        "scannerSpan": {
+          "start": {
+            "line": 37,
+            "col": 20,
+            "offset": 1296
+          },
+          "end": {
+            "line": 37,
+            "col": 51,
+            "offset": 1327
+          }
+        },
+        "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+        "match": "call",
+        "point": {
+          "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+          "callee": "eval",
+          "call": {
+            "start": {
+              "line": 37,
+              "col": 20,
+              "offset": 1296
+            },
+            "end": {
+              "line": 37,
+              "col": 51,
+              "offset": 1327
+            }
+          },
+          "id": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+          "builtinIdentity": "unverified",
+          "argument": {
+            "start": {
+              "line": 37,
+              "col": 25,
+              "offset": 1301
+            },
+            "end": {
+              "line": 37,
+              "col": 50,
+              "offset": 1326
+            }
+          }
+        }
+      },
+      {
+        "index": 13,
+        "state": "bound",
+        "path": "skf-upstream.py",
+        "rule": "policy.harness.python.request-to-dynamic-code",
+        "scannerSpan": {
+          "start": {
+            "line": 37,
+            "col": 25,
+            "offset": 1301
+          },
+          "end": {
+            "line": 37,
+            "col": 50,
+            "offset": 1326
+          }
+        },
+        "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+        "match": "argument",
+        "point": {
+          "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+          "callee": "eval",
+          "call": {
+            "start": {
+              "line": 37,
+              "col": 20,
+              "offset": 1296
+            },
+            "end": {
+              "line": 37,
+              "col": 51,
+              "offset": 1327
+            }
+          },
+          "id": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+          "builtinIdentity": "unverified",
+          "argument": {
+            "start": {
+              "line": 37,
+              "col": 25,
+              "offset": 1301
+            },
+            "end": {
+              "line": 37,
+              "col": 50,
+              "offset": 1326
+            }
+          }
+        }
+      }
+    ],
+    "guardChecks": 13,
+    "importChecks": 0,
+    "discoveredImportChecks": 0,
+    "guardEvidence": [
+      {
+        "finding": {
+          "rule": "policy.harness.python.eval",
+          "file": "boundary.py",
+          "line": 7,
+          "pointId": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+          "executionPoint": {
+            "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+            "callee": "eval",
+            "call": {
+              "start": {
+                "line": 7,
+                "col": 3,
+                "offset": 145
+              },
+              "end": {
+                "line": 7,
+                "col": 14,
+                "offset": 156
+              }
+            },
+            "id": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+            "builtinIdentity": "unverified",
+            "argument": {
+              "start": {
+                "line": 7,
+                "col": 8,
+                "offset": 150
+              },
+              "end": {
+                "line": 7,
+                "col": 13,
+                "offset": 155
+              }
+            }
+          },
+          "scannerSpan": {
+            "start": {
+              "line": 7,
+              "col": 3,
+              "offset": 145
+            },
+            "end": {
+              "line": 7,
+              "col": 14,
+              "offset": 156
+            }
+          }
+        },
+        "evidence": {
+          "observation": "literal-identifier-guard-observed",
+          "assignmentLine": 5,
+          "guardLine": 6,
+          "evalLine": 7,
+          "literalCount": 2,
+          "disposition": "unverified"
+        }
+      },
+      {
+        "finding": {
+          "rule": "policy.harness.python.request-to-dynamic-code",
+          "file": "boundary.py",
+          "line": 7,
+          "pointId": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+          "executionPoint": {
+            "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+            "callee": "eval",
+            "call": {
+              "start": {
+                "line": 7,
+                "col": 3,
+                "offset": 145
+              },
+              "end": {
+                "line": 7,
+                "col": 14,
+                "offset": 156
+              }
+            },
+            "id": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+            "builtinIdentity": "unverified",
+            "argument": {
+              "start": {
+                "line": 7,
+                "col": 8,
+                "offset": 150
+              },
+              "end": {
+                "line": 7,
+                "col": 13,
+                "offset": 155
+              }
+            }
+          },
+          "scannerSpan": {
+            "start": {
+              "line": 7,
+              "col": 8,
+              "offset": 150
+            },
+            "end": {
+              "line": 7,
+              "col": 13,
+              "offset": 155
+            }
+          }
+        },
+        "evidence": {
+          "observation": "literal-identifier-guard-observed",
+          "assignmentLine": 5,
+          "guardLine": 6,
+          "evalLine": 7,
+          "literalCount": 2,
+          "disposition": "unverified"
+        }
+      }
+    ],
+    "importEvidence": [],
+    "plainStringEvidence": [
+      {
+        "finding": {
+          "rule": "policy.harness.python.eval",
+          "file": "BenchmarkTest00073.py",
+          "line": 53,
+          "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+          "executionPoint": {
+            "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+            "callee": "eval",
+            "call": {
+              "start": {
+                "line": 54,
+                "col": 5,
+                "offset": 1748
+              },
+              "end": {
+                "line": 54,
+                "col": 14,
+                "offset": 1757
+              }
+            },
+            "id": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+            "builtinIdentity": "unverified",
+            "argument": {
+              "start": {
+                "line": 54,
+                "col": 10,
+                "offset": 1753
+              },
+              "end": {
+                "line": 54,
+                "col": 13,
+                "offset": 1756
+              }
+            }
+          },
+          "scannerSpan": {
+            "start": {
+              "line": 53,
+              "col": 16,
+              "offset": 1742
+            },
+            "end": {
+              "line": 55,
+              "col": 5,
+              "offset": 1762
+            }
+          }
+        },
+        "evidence": {
+          "observation": "plain-string-guard-observed",
+          "guardLine": 46,
+          "executionLine": 54,
+          "sink": "eval",
+          "disposition": "unverified"
+        }
+      }
+    ]
+  },
+  "reportJson": "{\"version\": 2, \"locations\": {\"version\": 1, \"protocol\": \"python-sink-locations-1\", \"runtimePython\": \"3.12.15\", \"files\": {\"BenchmarkTest00073.py\": {\"sha256\": \"6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122\", \"bytes\": 1877, \"state\": \"completed\", \"points\": [{\"sourceSha256\": \"6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 54, \"col\": 5, \"offset\": 1748}, \"end\": {\"line\": 54, \"col\": 14, \"offset\": 1757}}, \"id\": \"f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 54, \"col\": 10, \"offset\": 1753}, \"end\": {\"line\": 54, \"col\": 13, \"offset\": 1756}}}]}, \"BenchmarkTest00074.py\": {\"sha256\": \"805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e\", \"bytes\": 1881, \"state\": \"completed\", \"points\": [{\"sourceSha256\": \"805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e\", \"callee\": \"exec\", \"call\": {\"start\": {\"line\": 51, \"col\": 4, \"offset\": 1759}, \"end\": {\"line\": 51, \"col\": 13, \"offset\": 1768}}, \"id\": \"0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 51, \"col\": 9, \"offset\": 1764}, \"end\": {\"line\": 51, \"col\": 12, \"offset\": 1767}}}]}, \"boundary.py\": {\"sha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"bytes\": 323, \"state\": \"completed\", \"points\": [{\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 7, \"col\": 3, \"offset\": 145}, \"end\": {\"line\": 7, \"col\": 14, \"offset\": 156}}, \"id\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 7, \"col\": 8, \"offset\": 150}, \"end\": {\"line\": 7, \"col\": 13, \"offset\": 155}}}, {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"exec\", \"call\": {\"start\": {\"line\": 8, \"col\": 2, \"offset\": 159}, \"end\": {\"line\": 8, \"col\": 13, \"offset\": 170}}, \"id\": \"30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 8, \"col\": 7, \"offset\": 164}, \"end\": {\"line\": 8, \"col\": 12, \"offset\": 169}}}, {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 8, \"col\": 15, \"offset\": 172}, \"end\": {\"line\": 8, \"col\": 26, \"offset\": 183}}, \"id\": \"8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 8, \"col\": 20, \"offset\": 177}, \"end\": {\"line\": 8, \"col\": 25, \"offset\": 182}}}, {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 10, \"col\": 3, \"offset\": 198}, \"end\": {\"line\": 12, \"col\": 4, \"offset\": 218}}, \"id\": \"6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 11, \"col\": 4, \"offset\": 208}, \"end\": {\"line\": 11, \"col\": 9, \"offset\": 213}}}, {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 15, \"col\": 9, \"offset\": 252}, \"end\": {\"line\": 15, \"col\": 26, \"offset\": 269}}, \"id\": \"bb9b0f0d843ba3baa5f9d1a1e8d7e31ef6a1eff47f137a31b174e7c9ab54c10b\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 15, \"col\": 14, \"offset\": 257}, \"end\": {\"line\": 15, \"col\": 25, \"offset\": 268}}}, {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 15, \"col\": 14, \"offset\": 257}, \"end\": {\"line\": 15, \"col\": 25, \"offset\": 268}}, \"id\": \"ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 15, \"col\": 19, \"offset\": 262}, \"end\": {\"line\": 15, \"col\": 24, \"offset\": 267}}}, {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"builtins.eval\", \"call\": {\"start\": {\"line\": 17, \"col\": 9, \"offset\": 301}, \"end\": {\"line\": 17, \"col\": 29, \"offset\": 321}}, \"id\": \"f7fce12a3eebae79df2b300396a6f6fa6adf4a939e737ce9f32d521e5cbe4cbc\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 17, \"col\": 23, \"offset\": 315}, \"end\": {\"line\": 17, \"col\": 28, \"offset\": 320}}}]}, \"skf-fixed-control.py\": {\"sha256\": \"8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134\", \"bytes\": 1652, \"state\": \"completed\", \"points\": []}, \"skf-upstream.py\": {\"sha256\": \"fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf\", \"bytes\": 1585, \"state\": \"completed\", \"points\": [{\"sourceSha256\": \"fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 37, \"col\": 20, \"offset\": 1296}, \"end\": {\"line\": 37, \"col\": 51, \"offset\": 1327}}, \"id\": \"5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 37, \"col\": 25, \"offset\": 1301}, \"end\": {\"line\": 37, \"col\": 50, \"offset\": 1326}}}]}}}, \"findingLocations\": [{\"index\": 0, \"state\": \"bound\", \"path\": \"BenchmarkTest00073.py\", \"rule\": \"policy.harness.python.eval\", \"scannerSpan\": {\"start\": {\"line\": 53, \"col\": 16, \"offset\": 1742}, \"end\": {\"line\": 55, \"col\": 5, \"offset\": 1762}}, \"pointId\": \"f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 54, \"col\": 5, \"offset\": 1748}, \"end\": {\"line\": 54, \"col\": 14, \"offset\": 1757}}, \"id\": \"f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 54, \"col\": 10, \"offset\": 1753}, \"end\": {\"line\": 54, \"col\": 13, \"offset\": 1756}}}}, {\"index\": 1, \"state\": \"bound\", \"path\": \"BenchmarkTest00074.py\", \"rule\": \"policy.harness.python.exec\", \"scannerSpan\": {\"start\": {\"line\": 51, \"col\": 4, \"offset\": 1759}, \"end\": {\"line\": 51, \"col\": 13, \"offset\": 1768}}, \"pointId\": \"0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e\", \"callee\": \"exec\", \"call\": {\"start\": {\"line\": 51, \"col\": 4, \"offset\": 1759}, \"end\": {\"line\": 51, \"col\": 13, \"offset\": 1768}}, \"id\": \"0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 51, \"col\": 9, \"offset\": 1764}, \"end\": {\"line\": 51, \"col\": 12, \"offset\": 1767}}}}, {\"index\": 2, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.eval\", \"scannerSpan\": {\"start\": {\"line\": 7, \"col\": 3, \"offset\": 145}, \"end\": {\"line\": 7, \"col\": 14, \"offset\": 156}}, \"pointId\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 7, \"col\": 3, \"offset\": 145}, \"end\": {\"line\": 7, \"col\": 14, \"offset\": 156}}, \"id\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 7, \"col\": 8, \"offset\": 150}, \"end\": {\"line\": 7, \"col\": 13, \"offset\": 155}}}}, {\"index\": 3, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.request-to-dynamic-code\", \"scannerSpan\": {\"start\": {\"line\": 7, \"col\": 8, \"offset\": 150}, \"end\": {\"line\": 7, \"col\": 13, \"offset\": 155}}, \"pointId\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"match\": \"argument\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 7, \"col\": 3, \"offset\": 145}, \"end\": {\"line\": 7, \"col\": 14, \"offset\": 156}}, \"id\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 7, \"col\": 8, \"offset\": 150}, \"end\": {\"line\": 7, \"col\": 13, \"offset\": 155}}}}, {\"index\": 4, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.exec\", \"scannerSpan\": {\"start\": {\"line\": 8, \"col\": 2, \"offset\": 159}, \"end\": {\"line\": 8, \"col\": 13, \"offset\": 170}}, \"pointId\": \"30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"exec\", \"call\": {\"start\": {\"line\": 8, \"col\": 2, \"offset\": 159}, \"end\": {\"line\": 8, \"col\": 13, \"offset\": 170}}, \"id\": \"30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 8, \"col\": 7, \"offset\": 164}, \"end\": {\"line\": 8, \"col\": 12, \"offset\": 169}}}}, {\"index\": 5, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.request-to-dynamic-code\", \"scannerSpan\": {\"start\": {\"line\": 8, \"col\": 7, \"offset\": 164}, \"end\": {\"line\": 8, \"col\": 12, \"offset\": 169}}, \"pointId\": \"30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0\", \"match\": \"argument\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"exec\", \"call\": {\"start\": {\"line\": 8, \"col\": 2, \"offset\": 159}, \"end\": {\"line\": 8, \"col\": 13, \"offset\": 170}}, \"id\": \"30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 8, \"col\": 7, \"offset\": 164}, \"end\": {\"line\": 8, \"col\": 12, \"offset\": 169}}}}, {\"index\": 6, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.eval\", \"scannerSpan\": {\"start\": {\"line\": 8, \"col\": 15, \"offset\": 172}, \"end\": {\"line\": 8, \"col\": 26, \"offset\": 183}}, \"pointId\": \"8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 8, \"col\": 15, \"offset\": 172}, \"end\": {\"line\": 8, \"col\": 26, \"offset\": 183}}, \"id\": \"8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 8, \"col\": 20, \"offset\": 177}, \"end\": {\"line\": 8, \"col\": 25, \"offset\": 182}}}}, {\"index\": 7, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.request-to-dynamic-code\", \"scannerSpan\": {\"start\": {\"line\": 8, \"col\": 20, \"offset\": 177}, \"end\": {\"line\": 8, \"col\": 25, \"offset\": 182}}, \"pointId\": \"8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450\", \"match\": \"argument\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 8, \"col\": 15, \"offset\": 172}, \"end\": {\"line\": 8, \"col\": 26, \"offset\": 183}}, \"id\": \"8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 8, \"col\": 20, \"offset\": 177}, \"end\": {\"line\": 8, \"col\": 25, \"offset\": 182}}}}, {\"index\": 8, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.eval\", \"scannerSpan\": {\"start\": {\"line\": 9, \"col\": 9, \"offset\": 193}, \"end\": {\"line\": 13, \"col\": 3, \"offset\": 222}}, \"pointId\": \"6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 10, \"col\": 3, \"offset\": 198}, \"end\": {\"line\": 12, \"col\": 4, \"offset\": 218}}, \"id\": \"6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 11, \"col\": 4, \"offset\": 208}, \"end\": {\"line\": 11, \"col\": 9, \"offset\": 213}}}}, {\"index\": 9, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.request-to-dynamic-code\", \"scannerSpan\": {\"start\": {\"line\": 11, \"col\": 4, \"offset\": 208}, \"end\": {\"line\": 11, \"col\": 9, \"offset\": 213}}, \"pointId\": \"6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b\", \"match\": \"argument\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 10, \"col\": 3, \"offset\": 198}, \"end\": {\"line\": 12, \"col\": 4, \"offset\": 218}}, \"id\": \"6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 11, \"col\": 4, \"offset\": 208}, \"end\": {\"line\": 11, \"col\": 9, \"offset\": 213}}}}, {\"index\": 10, \"state\": \"unmatched\", \"reason\": \"ambiguous-execution-points\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.eval\", \"scannerSpan\": {\"start\": {\"line\": 15, \"col\": 9, \"offset\": 252}, \"end\": {\"line\": 15, \"col\": 26, \"offset\": 269}}}, {\"index\": 11, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.eval\", \"scannerSpan\": {\"start\": {\"line\": 15, \"col\": 14, \"offset\": 257}, \"end\": {\"line\": 15, \"col\": 25, \"offset\": 268}}, \"pointId\": \"ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 15, \"col\": 14, \"offset\": 257}, \"end\": {\"line\": 15, \"col\": 25, \"offset\": 268}}, \"id\": \"ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 15, \"col\": 19, \"offset\": 262}, \"end\": {\"line\": 15, \"col\": 24, \"offset\": 267}}}}, {\"index\": 12, \"state\": \"bound\", \"path\": \"skf-upstream.py\", \"rule\": \"policy.harness.python.eval\", \"scannerSpan\": {\"start\": {\"line\": 37, \"col\": 20, \"offset\": 1296}, \"end\": {\"line\": 37, \"col\": 51, \"offset\": 1327}}, \"pointId\": \"5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 37, \"col\": 20, \"offset\": 1296}, \"end\": {\"line\": 37, \"col\": 51, \"offset\": 1327}}, \"id\": \"5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 37, \"col\": 25, \"offset\": 1301}, \"end\": {\"line\": 37, \"col\": 50, \"offset\": 1326}}}}, {\"index\": 13, \"state\": \"bound\", \"path\": \"skf-upstream.py\", \"rule\": \"policy.harness.python.request-to-dynamic-code\", \"scannerSpan\": {\"start\": {\"line\": 37, \"col\": 25, \"offset\": 1301}, \"end\": {\"line\": 37, \"col\": 50, \"offset\": 1326}}, \"pointId\": \"5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041\", \"match\": \"argument\", \"point\": {\"sourceSha256\": \"fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 37, \"col\": 20, \"offset\": 1296}, \"end\": {\"line\": 37, \"col\": 51, \"offset\": 1327}}, \"id\": \"5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 37, \"col\": 25, \"offset\": 1301}, \"end\": {\"line\": 37, \"col\": 50, \"offset\": 1326}}}}], \"guardChecks\": 13, \"importChecks\": 0, \"discoveredImportChecks\": 0, \"guardEvidence\": [{\"finding\": {\"rule\": \"policy.harness.python.eval\", \"file\": \"boundary.py\", \"line\": 7, \"pointId\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"executionPoint\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 7, \"col\": 3, \"offset\": 145}, \"end\": {\"line\": 7, \"col\": 14, \"offset\": 156}}, \"id\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 7, \"col\": 8, \"offset\": 150}, \"end\": {\"line\": 7, \"col\": 13, \"offset\": 155}}}, \"scannerSpan\": {\"start\": {\"line\": 7, \"col\": 3, \"offset\": 145}, \"end\": {\"line\": 7, \"col\": 14, \"offset\": 156}}}, \"evidence\": {\"observation\": \"literal-identifier-guard-observed\", \"assignmentLine\": 5, \"guardLine\": 6, \"evalLine\": 7, \"literalCount\": 2, \"disposition\": \"unverified\"}}, {\"finding\": {\"rule\": \"policy.harness.python.request-to-dynamic-code\", \"file\": \"boundary.py\", \"line\": 7, \"pointId\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"executionPoint\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 7, \"col\": 3, \"offset\": 145}, \"end\": {\"line\": 7, \"col\": 14, \"offset\": 156}}, \"id\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 7, \"col\": 8, \"offset\": 150}, \"end\": {\"line\": 7, \"col\": 13, \"offset\": 155}}}, \"scannerSpan\": {\"start\": {\"line\": 7, \"col\": 8, \"offset\": 150}, \"end\": {\"line\": 7, \"col\": 13, \"offset\": 155}}}, \"evidence\": {\"observation\": \"literal-identifier-guard-observed\", \"assignmentLine\": 5, \"guardLine\": 6, \"evalLine\": 7, \"literalCount\": 2, \"disposition\": \"unverified\"}}], \"importEvidence\": [], \"plainStringEvidence\": [{\"finding\": {\"rule\": \"policy.harness.python.eval\", \"file\": \"BenchmarkTest00073.py\", \"line\": 53, \"pointId\": \"f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762\", \"executionPoint\": {\"sourceSha256\": \"6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 54, \"col\": 5, \"offset\": 1748}, \"end\": {\"line\": 54, \"col\": 14, \"offset\": 1757}}, \"id\": \"f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 54, \"col\": 10, \"offset\": 1753}, \"end\": {\"line\": 54, \"col\": 13, \"offset\": 1756}}}, \"scannerSpan\": {\"start\": {\"line\": 53, \"col\": 16, \"offset\": 1742}, \"end\": {\"line\": 55, \"col\": 5, \"offset\": 1762}}}, \"evidence\": {\"observation\": \"plain-string-guard-observed\", \"guardLine\": 46, \"executionLine\": 54, \"sink\": \"eval\", \"disposition\": \"unverified\"}}]}\n",
+  "inputFiles": {
+    "manifest.json": "554a770cebff865e2154af0dc65568e94aab8745d48bbb9f77540d1e57f68ee0",
+    "scan.json": "2ef2477cd2b4c4eb0b2ff7a2f7cd5d1bed7e3d7763e2834f41a5433868fbdab8",
+    "sources/skf-fixed-control.py": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+    "sources/BenchmarkTest00073.py": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+    "sources/skf-upstream.py": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+    "sources/boundary.py": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+    "sources/BenchmarkTest00074.py": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e"
+  },
+  "temporaryRemoved": true,
+  "cleanup": {
+    "confirmed": true,
+    "idAbsent": true,
+    "nameAbsent": true,
+    "clientsStopped": true,
+    "creationResolved": true,
+    "errors": [],
+    "checkedAt": "2026-11-12T07:59:48.108144+00:00",
+    "clientsInitiallyStopped": true
+  },
+  "attemptDirectory": "/home/purge/.cache/r3-independent-python-locations-9fa291ec5cc2/attempts/review-d7b0969a36904173bd1090521ccbce22",
+  "locationBinding": {
+    "version": 1,
+    "snapshotSha256": "8445dc83ac2981e3a835a1eadbce1d7ab56e08711a7b6aa08d1f03cbf4e15a3c",
+    "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+    "uid": 1000,
+    "inventory": {
+      "version": 1,
+      "protocol": "python-sink-locations-1",
+      "runtimePython": "3.12.15",
+      "files": {
+        "BenchmarkTest00073.py": {
+          "sha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+          "bytes": 1877,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 54,
+                  "col": 5,
+                  "offset": 1748
+                },
+                "end": {
+                  "line": 54,
+                  "col": 14,
+                  "offset": 1757
+                }
+              },
+              "id": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 54,
+                  "col": 10,
+                  "offset": 1753
+                },
+                "end": {
+                  "line": 54,
+                  "col": 13,
+                  "offset": 1756
+                }
+              }
+            }
+          ]
+        },
+        "BenchmarkTest00074.py": {
+          "sha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+          "bytes": 1881,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+              "callee": "exec",
+              "call": {
+                "start": {
+                  "line": 51,
+                  "col": 4,
+                  "offset": 1759
+                },
+                "end": {
+                  "line": 51,
+                  "col": 13,
+                  "offset": 1768
+                }
+              },
+              "id": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 51,
+                  "col": 9,
+                  "offset": 1764
+                },
+                "end": {
+                  "line": 51,
+                  "col": 12,
+                  "offset": 1767
+                }
+              }
+            }
+          ]
+        },
+        "boundary.py": {
+          "sha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+          "bytes": 323,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 7,
+                  "col": 3,
+                  "offset": 145
+                },
+                "end": {
+                  "line": 7,
+                  "col": 14,
+                  "offset": 156
+                }
+              },
+              "id": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 7,
+                  "col": 8,
+                  "offset": 150
+                },
+                "end": {
+                  "line": 7,
+                  "col": 13,
+                  "offset": 155
+                }
+              }
+            },
+            {
+              "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+              "callee": "exec",
+              "call": {
+                "start": {
+                  "line": 8,
+                  "col": 2,
+                  "offset": 159
+                },
+                "end": {
+                  "line": 8,
+                  "col": 13,
+                  "offset": 170
+                }
+              },
+              "id": "30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 8,
+                  "col": 7,
+                  "offset": 164
+                },
+                "end": {
+                  "line": 8,
+                  "col": 12,
+                  "offset": 169
+                }
+              }
+            },
+            {
+              "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 8,
+                  "col": 15,
+                  "offset": 172
+                },
+                "end": {
+                  "line": 8,
+                  "col": 26,
+                  "offset": 183
+                }
+              },
+              "id": "8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 8,
+                  "col": 20,
+                  "offset": 177
+                },
+                "end": {
+                  "line": 8,
+                  "col": 25,
+                  "offset": 182
+                }
+              }
+            },
+            {
+              "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 10,
+                  "col": 3,
+                  "offset": 198
+                },
+                "end": {
+                  "line": 12,
+                  "col": 4,
+                  "offset": 218
+                }
+              },
+              "id": "6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 11,
+                  "col": 4,
+                  "offset": 208
+                },
+                "end": {
+                  "line": 11,
+                  "col": 9,
+                  "offset": 213
+                }
+              }
+            },
+            {
+              "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 15,
+                  "col": 9,
+                  "offset": 252
+                },
+                "end": {
+                  "line": 15,
+                  "col": 26,
+                  "offset": 269
+                }
+              },
+              "id": "bb9b0f0d843ba3baa5f9d1a1e8d7e31ef6a1eff47f137a31b174e7c9ab54c10b",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 15,
+                  "col": 14,
+                  "offset": 257
+                },
+                "end": {
+                  "line": 15,
+                  "col": 25,
+                  "offset": 268
+                }
+              }
+            },
+            {
+              "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 15,
+                  "col": 14,
+                  "offset": 257
+                },
+                "end": {
+                  "line": 15,
+                  "col": 25,
+                  "offset": 268
+                }
+              },
+              "id": "ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 15,
+                  "col": 19,
+                  "offset": 262
+                },
+                "end": {
+                  "line": 15,
+                  "col": 24,
+                  "offset": 267
+                }
+              }
+            },
+            {
+              "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+              "callee": "builtins.eval",
+              "call": {
+                "start": {
+                  "line": 17,
+                  "col": 9,
+                  "offset": 301
+                },
+                "end": {
+                  "line": 17,
+                  "col": 29,
+                  "offset": 321
+                }
+              },
+              "id": "f7fce12a3eebae79df2b300396a6f6fa6adf4a939e737ce9f32d521e5cbe4cbc",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 17,
+                  "col": 23,
+                  "offset": 315
+                },
+                "end": {
+                  "line": 17,
+                  "col": 28,
+                  "offset": 320
+                }
+              }
+            }
+          ]
+        },
+        "skf-fixed-control.py": {
+          "sha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+          "bytes": 1652,
+          "state": "completed",
+          "points": []
+        },
+        "skf-upstream.py": {
+          "sha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+          "bytes": 1585,
+          "state": "completed",
+          "points": [
+            {
+              "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+              "callee": "eval",
+              "call": {
+                "start": {
+                  "line": 37,
+                  "col": 20,
+                  "offset": 1296
+                },
+                "end": {
+                  "line": 37,
+                  "col": 51,
+                  "offset": 1327
+                }
+              },
+              "id": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+              "builtinIdentity": "unverified",
+              "argument": {
+                "start": {
+                  "line": 37,
+                  "col": 25,
+                  "offset": 1301
+                },
+                "end": {
+                  "line": 37,
+                  "col": 50,
+                  "offset": 1326
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "reviewArtifact": {
+    "locationBinding": {
+      "version": 1,
+      "snapshotSha256": "8445dc83ac2981e3a835a1eadbce1d7ab56e08711a7b6aa08d1f03cbf4e15a3c",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "uid": 1000,
+      "inventory": {
+        "version": 1,
+        "protocol": "python-sink-locations-1",
+        "runtimePython": "3.12.15",
+        "files": {
+          "BenchmarkTest00073.py": {
+            "sha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+            "bytes": 1877,
+            "state": "completed",
+            "points": [
+              {
+                "sourceSha256": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+                "callee": "eval",
+                "call": {
+                  "start": {
+                    "line": 54,
+                    "col": 5,
+                    "offset": 1748
+                  },
+                  "end": {
+                    "line": 54,
+                    "col": 14,
+                    "offset": 1757
+                  }
+                },
+                "id": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+                "builtinIdentity": "unverified",
+                "argument": {
+                  "start": {
+                    "line": 54,
+                    "col": 10,
+                    "offset": 1753
+                  },
+                  "end": {
+                    "line": 54,
+                    "col": 13,
+                    "offset": 1756
+                  }
+                }
+              }
+            ]
+          },
+          "BenchmarkTest00074.py": {
+            "sha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+            "bytes": 1881,
+            "state": "completed",
+            "points": [
+              {
+                "sourceSha256": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+                "callee": "exec",
+                "call": {
+                  "start": {
+                    "line": 51,
+                    "col": 4,
+                    "offset": 1759
+                  },
+                  "end": {
+                    "line": 51,
+                    "col": 13,
+                    "offset": 1768
+                  }
+                },
+                "id": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+                "builtinIdentity": "unverified",
+                "argument": {
+                  "start": {
+                    "line": 51,
+                    "col": 9,
+                    "offset": 1764
+                  },
+                  "end": {
+                    "line": 51,
+                    "col": 12,
+                    "offset": 1767
+                  }
+                }
+              }
+            ]
+          },
+          "boundary.py": {
+            "sha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+            "bytes": 323,
+            "state": "completed",
+            "points": [
+              {
+                "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+                "callee": "eval",
+                "call": {
+                  "start": {
+                    "line": 7,
+                    "col": 3,
+                    "offset": 145
+                  },
+                  "end": {
+                    "line": 7,
+                    "col": 14,
+                    "offset": 156
+                  }
+                },
+                "id": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+                "builtinIdentity": "unverified",
+                "argument": {
+                  "start": {
+                    "line": 7,
+                    "col": 8,
+                    "offset": 150
+                  },
+                  "end": {
+                    "line": 7,
+                    "col": 13,
+                    "offset": 155
+                  }
+                }
+              },
+              {
+                "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+                "callee": "exec",
+                "call": {
+                  "start": {
+                    "line": 8,
+                    "col": 2,
+                    "offset": 159
+                  },
+                  "end": {
+                    "line": 8,
+                    "col": 13,
+                    "offset": 170
+                  }
+                },
+                "id": "30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0",
+                "builtinIdentity": "unverified",
+                "argument": {
+                  "start": {
+                    "line": 8,
+                    "col": 7,
+                    "offset": 164
+                  },
+                  "end": {
+                    "line": 8,
+                    "col": 12,
+                    "offset": 169
+                  }
+                }
+              },
+              {
+                "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+                "callee": "eval",
+                "call": {
+                  "start": {
+                    "line": 8,
+                    "col": 15,
+                    "offset": 172
+                  },
+                  "end": {
+                    "line": 8,
+                    "col": 26,
+                    "offset": 183
+                  }
+                },
+                "id": "8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450",
+                "builtinIdentity": "unverified",
+                "argument": {
+                  "start": {
+                    "line": 8,
+                    "col": 20,
+                    "offset": 177
+                  },
+                  "end": {
+                    "line": 8,
+                    "col": 25,
+                    "offset": 182
+                  }
+                }
+              },
+              {
+                "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+                "callee": "eval",
+                "call": {
+                  "start": {
+                    "line": 10,
+                    "col": 3,
+                    "offset": 198
+                  },
+                  "end": {
+                    "line": 12,
+                    "col": 4,
+                    "offset": 218
+                  }
+                },
+                "id": "6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b",
+                "builtinIdentity": "unverified",
+                "argument": {
+                  "start": {
+                    "line": 11,
+                    "col": 4,
+                    "offset": 208
+                  },
+                  "end": {
+                    "line": 11,
+                    "col": 9,
+                    "offset": 213
+                  }
+                }
+              },
+              {
+                "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+                "callee": "eval",
+                "call": {
+                  "start": {
+                    "line": 15,
+                    "col": 9,
+                    "offset": 252
+                  },
+                  "end": {
+                    "line": 15,
+                    "col": 26,
+                    "offset": 269
+                  }
+                },
+                "id": "bb9b0f0d843ba3baa5f9d1a1e8d7e31ef6a1eff47f137a31b174e7c9ab54c10b",
+                "builtinIdentity": "unverified",
+                "argument": {
+                  "start": {
+                    "line": 15,
+                    "col": 14,
+                    "offset": 257
+                  },
+                  "end": {
+                    "line": 15,
+                    "col": 25,
+                    "offset": 268
+                  }
+                }
+              },
+              {
+                "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+                "callee": "eval",
+                "call": {
+                  "start": {
+                    "line": 15,
+                    "col": 14,
+                    "offset": 257
+                  },
+                  "end": {
+                    "line": 15,
+                    "col": 25,
+                    "offset": 268
+                  }
+                },
+                "id": "ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63",
+                "builtinIdentity": "unverified",
+                "argument": {
+                  "start": {
+                    "line": 15,
+                    "col": 19,
+                    "offset": 262
+                  },
+                  "end": {
+                    "line": 15,
+                    "col": 24,
+                    "offset": 267
+                  }
+                }
+              },
+              {
+                "sourceSha256": "9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e",
+                "callee": "builtins.eval",
+                "call": {
+                  "start": {
+                    "line": 17,
+                    "col": 9,
+                    "offset": 301
+                  },
+                  "end": {
+                    "line": 17,
+                    "col": 29,
+                    "offset": 321
+                  }
+                },
+                "id": "f7fce12a3eebae79df2b300396a6f6fa6adf4a939e737ce9f32d521e5cbe4cbc",
+                "builtinIdentity": "unverified",
+                "argument": {
+                  "start": {
+                    "line": 17,
+                    "col": 23,
+                    "offset": 315
+                  },
+                  "end": {
+                    "line": 17,
+                    "col": 28,
+                    "offset": 320
+                  }
+                }
+              }
+            ]
+          },
+          "skf-fixed-control.py": {
+            "sha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+            "bytes": 1652,
+            "state": "completed",
+            "points": []
+          },
+          "skf-upstream.py": {
+            "sha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+            "bytes": 1585,
+            "state": "completed",
+            "points": [
+              {
+                "sourceSha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+                "callee": "eval",
+                "call": {
+                  "start": {
+                    "line": 37,
+                    "col": 20,
+                    "offset": 1296
+                  },
+                  "end": {
+                    "line": 37,
+                    "col": 51,
+                    "offset": 1327
+                  }
+                },
+                "id": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+                "builtinIdentity": "unverified",
+                "argument": {
+                  "start": {
+                    "line": 37,
+                    "col": 25,
+                    "offset": 1301
+                  },
+                  "end": {
+                    "line": 37,
+                    "col": 50,
+                    "offset": 1326
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "reportJson": "{\"version\": 2, \"locations\": {\"version\": 1, \"protocol\": \"python-sink-locations-1\", \"runtimePython\": \"3.12.15\", \"files\": {\"BenchmarkTest00073.py\": {\"sha256\": \"6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122\", \"bytes\": 1877, \"state\": \"completed\", \"points\": [{\"sourceSha256\": \"6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 54, \"col\": 5, \"offset\": 1748}, \"end\": {\"line\": 54, \"col\": 14, \"offset\": 1757}}, \"id\": \"f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 54, \"col\": 10, \"offset\": 1753}, \"end\": {\"line\": 54, \"col\": 13, \"offset\": 1756}}}]}, \"BenchmarkTest00074.py\": {\"sha256\": \"805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e\", \"bytes\": 1881, \"state\": \"completed\", \"points\": [{\"sourceSha256\": \"805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e\", \"callee\": \"exec\", \"call\": {\"start\": {\"line\": 51, \"col\": 4, \"offset\": 1759}, \"end\": {\"line\": 51, \"col\": 13, \"offset\": 1768}}, \"id\": \"0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 51, \"col\": 9, \"offset\": 1764}, \"end\": {\"line\": 51, \"col\": 12, \"offset\": 1767}}}]}, \"boundary.py\": {\"sha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"bytes\": 323, \"state\": \"completed\", \"points\": [{\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 7, \"col\": 3, \"offset\": 145}, \"end\": {\"line\": 7, \"col\": 14, \"offset\": 156}}, \"id\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 7, \"col\": 8, \"offset\": 150}, \"end\": {\"line\": 7, \"col\": 13, \"offset\": 155}}}, {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"exec\", \"call\": {\"start\": {\"line\": 8, \"col\": 2, \"offset\": 159}, \"end\": {\"line\": 8, \"col\": 13, \"offset\": 170}}, \"id\": \"30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 8, \"col\": 7, \"offset\": 164}, \"end\": {\"line\": 8, \"col\": 12, \"offset\": 169}}}, {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 8, \"col\": 15, \"offset\": 172}, \"end\": {\"line\": 8, \"col\": 26, \"offset\": 183}}, \"id\": \"8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 8, \"col\": 20, \"offset\": 177}, \"end\": {\"line\": 8, \"col\": 25, \"offset\": 182}}}, {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 10, \"col\": 3, \"offset\": 198}, \"end\": {\"line\": 12, \"col\": 4, \"offset\": 218}}, \"id\": \"6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 11, \"col\": 4, \"offset\": 208}, \"end\": {\"line\": 11, \"col\": 9, \"offset\": 213}}}, {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 15, \"col\": 9, \"offset\": 252}, \"end\": {\"line\": 15, \"col\": 26, \"offset\": 269}}, \"id\": \"bb9b0f0d843ba3baa5f9d1a1e8d7e31ef6a1eff47f137a31b174e7c9ab54c10b\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 15, \"col\": 14, \"offset\": 257}, \"end\": {\"line\": 15, \"col\": 25, \"offset\": 268}}}, {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 15, \"col\": 14, \"offset\": 257}, \"end\": {\"line\": 15, \"col\": 25, \"offset\": 268}}, \"id\": \"ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 15, \"col\": 19, \"offset\": 262}, \"end\": {\"line\": 15, \"col\": 24, \"offset\": 267}}}, {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"builtins.eval\", \"call\": {\"start\": {\"line\": 17, \"col\": 9, \"offset\": 301}, \"end\": {\"line\": 17, \"col\": 29, \"offset\": 321}}, \"id\": \"f7fce12a3eebae79df2b300396a6f6fa6adf4a939e737ce9f32d521e5cbe4cbc\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 17, \"col\": 23, \"offset\": 315}, \"end\": {\"line\": 17, \"col\": 28, \"offset\": 320}}}]}, \"skf-fixed-control.py\": {\"sha256\": \"8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134\", \"bytes\": 1652, \"state\": \"completed\", \"points\": []}, \"skf-upstream.py\": {\"sha256\": \"fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf\", \"bytes\": 1585, \"state\": \"completed\", \"points\": [{\"sourceSha256\": \"fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 37, \"col\": 20, \"offset\": 1296}, \"end\": {\"line\": 37, \"col\": 51, \"offset\": 1327}}, \"id\": \"5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 37, \"col\": 25, \"offset\": 1301}, \"end\": {\"line\": 37, \"col\": 50, \"offset\": 1326}}}]}}}, \"findingLocations\": [{\"index\": 0, \"state\": \"bound\", \"path\": \"BenchmarkTest00073.py\", \"rule\": \"policy.harness.python.eval\", \"scannerSpan\": {\"start\": {\"line\": 53, \"col\": 16, \"offset\": 1742}, \"end\": {\"line\": 55, \"col\": 5, \"offset\": 1762}}, \"pointId\": \"f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 54, \"col\": 5, \"offset\": 1748}, \"end\": {\"line\": 54, \"col\": 14, \"offset\": 1757}}, \"id\": \"f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 54, \"col\": 10, \"offset\": 1753}, \"end\": {\"line\": 54, \"col\": 13, \"offset\": 1756}}}}, {\"index\": 1, \"state\": \"bound\", \"path\": \"BenchmarkTest00074.py\", \"rule\": \"policy.harness.python.exec\", \"scannerSpan\": {\"start\": {\"line\": 51, \"col\": 4, \"offset\": 1759}, \"end\": {\"line\": 51, \"col\": 13, \"offset\": 1768}}, \"pointId\": \"0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e\", \"callee\": \"exec\", \"call\": {\"start\": {\"line\": 51, \"col\": 4, \"offset\": 1759}, \"end\": {\"line\": 51, \"col\": 13, \"offset\": 1768}}, \"id\": \"0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 51, \"col\": 9, \"offset\": 1764}, \"end\": {\"line\": 51, \"col\": 12, \"offset\": 1767}}}}, {\"index\": 2, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.eval\", \"scannerSpan\": {\"start\": {\"line\": 7, \"col\": 3, \"offset\": 145}, \"end\": {\"line\": 7, \"col\": 14, \"offset\": 156}}, \"pointId\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 7, \"col\": 3, \"offset\": 145}, \"end\": {\"line\": 7, \"col\": 14, \"offset\": 156}}, \"id\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 7, \"col\": 8, \"offset\": 150}, \"end\": {\"line\": 7, \"col\": 13, \"offset\": 155}}}}, {\"index\": 3, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.request-to-dynamic-code\", \"scannerSpan\": {\"start\": {\"line\": 7, \"col\": 8, \"offset\": 150}, \"end\": {\"line\": 7, \"col\": 13, \"offset\": 155}}, \"pointId\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"match\": \"argument\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 7, \"col\": 3, \"offset\": 145}, \"end\": {\"line\": 7, \"col\": 14, \"offset\": 156}}, \"id\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 7, \"col\": 8, \"offset\": 150}, \"end\": {\"line\": 7, \"col\": 13, \"offset\": 155}}}}, {\"index\": 4, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.exec\", \"scannerSpan\": {\"start\": {\"line\": 8, \"col\": 2, \"offset\": 159}, \"end\": {\"line\": 8, \"col\": 13, \"offset\": 170}}, \"pointId\": \"30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"exec\", \"call\": {\"start\": {\"line\": 8, \"col\": 2, \"offset\": 159}, \"end\": {\"line\": 8, \"col\": 13, \"offset\": 170}}, \"id\": \"30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 8, \"col\": 7, \"offset\": 164}, \"end\": {\"line\": 8, \"col\": 12, \"offset\": 169}}}}, {\"index\": 5, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.request-to-dynamic-code\", \"scannerSpan\": {\"start\": {\"line\": 8, \"col\": 7, \"offset\": 164}, \"end\": {\"line\": 8, \"col\": 12, \"offset\": 169}}, \"pointId\": \"30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0\", \"match\": \"argument\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"exec\", \"call\": {\"start\": {\"line\": 8, \"col\": 2, \"offset\": 159}, \"end\": {\"line\": 8, \"col\": 13, \"offset\": 170}}, \"id\": \"30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 8, \"col\": 7, \"offset\": 164}, \"end\": {\"line\": 8, \"col\": 12, \"offset\": 169}}}}, {\"index\": 6, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.eval\", \"scannerSpan\": {\"start\": {\"line\": 8, \"col\": 15, \"offset\": 172}, \"end\": {\"line\": 8, \"col\": 26, \"offset\": 183}}, \"pointId\": \"8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 8, \"col\": 15, \"offset\": 172}, \"end\": {\"line\": 8, \"col\": 26, \"offset\": 183}}, \"id\": \"8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 8, \"col\": 20, \"offset\": 177}, \"end\": {\"line\": 8, \"col\": 25, \"offset\": 182}}}}, {\"index\": 7, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.request-to-dynamic-code\", \"scannerSpan\": {\"start\": {\"line\": 8, \"col\": 20, \"offset\": 177}, \"end\": {\"line\": 8, \"col\": 25, \"offset\": 182}}, \"pointId\": \"8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450\", \"match\": \"argument\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 8, \"col\": 15, \"offset\": 172}, \"end\": {\"line\": 8, \"col\": 26, \"offset\": 183}}, \"id\": \"8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 8, \"col\": 20, \"offset\": 177}, \"end\": {\"line\": 8, \"col\": 25, \"offset\": 182}}}}, {\"index\": 8, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.eval\", \"scannerSpan\": {\"start\": {\"line\": 9, \"col\": 9, \"offset\": 193}, \"end\": {\"line\": 13, \"col\": 3, \"offset\": 222}}, \"pointId\": \"6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 10, \"col\": 3, \"offset\": 198}, \"end\": {\"line\": 12, \"col\": 4, \"offset\": 218}}, \"id\": \"6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 11, \"col\": 4, \"offset\": 208}, \"end\": {\"line\": 11, \"col\": 9, \"offset\": 213}}}}, {\"index\": 9, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.request-to-dynamic-code\", \"scannerSpan\": {\"start\": {\"line\": 11, \"col\": 4, \"offset\": 208}, \"end\": {\"line\": 11, \"col\": 9, \"offset\": 213}}, \"pointId\": \"6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b\", \"match\": \"argument\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 10, \"col\": 3, \"offset\": 198}, \"end\": {\"line\": 12, \"col\": 4, \"offset\": 218}}, \"id\": \"6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 11, \"col\": 4, \"offset\": 208}, \"end\": {\"line\": 11, \"col\": 9, \"offset\": 213}}}}, {\"index\": 10, \"state\": \"unmatched\", \"reason\": \"ambiguous-execution-points\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.eval\", \"scannerSpan\": {\"start\": {\"line\": 15, \"col\": 9, \"offset\": 252}, \"end\": {\"line\": 15, \"col\": 26, \"offset\": 269}}}, {\"index\": 11, \"state\": \"bound\", \"path\": \"boundary.py\", \"rule\": \"policy.harness.python.eval\", \"scannerSpan\": {\"start\": {\"line\": 15, \"col\": 14, \"offset\": 257}, \"end\": {\"line\": 15, \"col\": 25, \"offset\": 268}}, \"pointId\": \"ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 15, \"col\": 14, \"offset\": 257}, \"end\": {\"line\": 15, \"col\": 25, \"offset\": 268}}, \"id\": \"ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 15, \"col\": 19, \"offset\": 262}, \"end\": {\"line\": 15, \"col\": 24, \"offset\": 267}}}}, {\"index\": 12, \"state\": \"bound\", \"path\": \"skf-upstream.py\", \"rule\": \"policy.harness.python.eval\", \"scannerSpan\": {\"start\": {\"line\": 37, \"col\": 20, \"offset\": 1296}, \"end\": {\"line\": 37, \"col\": 51, \"offset\": 1327}}, \"pointId\": \"5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041\", \"match\": \"call\", \"point\": {\"sourceSha256\": \"fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 37, \"col\": 20, \"offset\": 1296}, \"end\": {\"line\": 37, \"col\": 51, \"offset\": 1327}}, \"id\": \"5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 37, \"col\": 25, \"offset\": 1301}, \"end\": {\"line\": 37, \"col\": 50, \"offset\": 1326}}}}, {\"index\": 13, \"state\": \"bound\", \"path\": \"skf-upstream.py\", \"rule\": \"policy.harness.python.request-to-dynamic-code\", \"scannerSpan\": {\"start\": {\"line\": 37, \"col\": 25, \"offset\": 1301}, \"end\": {\"line\": 37, \"col\": 50, \"offset\": 1326}}, \"pointId\": \"5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041\", \"match\": \"argument\", \"point\": {\"sourceSha256\": \"fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 37, \"col\": 20, \"offset\": 1296}, \"end\": {\"line\": 37, \"col\": 51, \"offset\": 1327}}, \"id\": \"5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 37, \"col\": 25, \"offset\": 1301}, \"end\": {\"line\": 37, \"col\": 50, \"offset\": 1326}}}}], \"guardChecks\": 13, \"importChecks\": 0, \"discoveredImportChecks\": 0, \"guardEvidence\": [{\"finding\": {\"rule\": \"policy.harness.python.eval\", \"file\": \"boundary.py\", \"line\": 7, \"pointId\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"executionPoint\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 7, \"col\": 3, \"offset\": 145}, \"end\": {\"line\": 7, \"col\": 14, \"offset\": 156}}, \"id\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 7, \"col\": 8, \"offset\": 150}, \"end\": {\"line\": 7, \"col\": 13, \"offset\": 155}}}, \"scannerSpan\": {\"start\": {\"line\": 7, \"col\": 3, \"offset\": 145}, \"end\": {\"line\": 7, \"col\": 14, \"offset\": 156}}}, \"evidence\": {\"observation\": \"literal-identifier-guard-observed\", \"assignmentLine\": 5, \"guardLine\": 6, \"evalLine\": 7, \"literalCount\": 2, \"disposition\": \"unverified\"}}, {\"finding\": {\"rule\": \"policy.harness.python.request-to-dynamic-code\", \"file\": \"boundary.py\", \"line\": 7, \"pointId\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"executionPoint\": {\"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 7, \"col\": 3, \"offset\": 145}, \"end\": {\"line\": 7, \"col\": 14, \"offset\": 156}}, \"id\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 7, \"col\": 8, \"offset\": 150}, \"end\": {\"line\": 7, \"col\": 13, \"offset\": 155}}}, \"scannerSpan\": {\"start\": {\"line\": 7, \"col\": 8, \"offset\": 150}, \"end\": {\"line\": 7, \"col\": 13, \"offset\": 155}}}, \"evidence\": {\"observation\": \"literal-identifier-guard-observed\", \"assignmentLine\": 5, \"guardLine\": 6, \"evalLine\": 7, \"literalCount\": 2, \"disposition\": \"unverified\"}}], \"importEvidence\": [], \"plainStringEvidence\": [{\"finding\": {\"rule\": \"policy.harness.python.eval\", \"file\": \"BenchmarkTest00073.py\", \"line\": 53, \"pointId\": \"f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762\", \"executionPoint\": {\"sourceSha256\": \"6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122\", \"callee\": \"eval\", \"call\": {\"start\": {\"line\": 54, \"col\": 5, \"offset\": 1748}, \"end\": {\"line\": 54, \"col\": 14, \"offset\": 1757}}, \"id\": \"f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762\", \"builtinIdentity\": \"unverified\", \"argument\": {\"start\": {\"line\": 54, \"col\": 10, \"offset\": 1753}, \"end\": {\"line\": 54, \"col\": 13, \"offset\": 1756}}}, \"scannerSpan\": {\"start\": {\"line\": 53, \"col\": 16, \"offset\": 1742}, \"end\": {\"line\": 55, \"col\": 5, \"offset\": 1762}}}, \"evidence\": {\"observation\": \"plain-string-guard-observed\", \"guardLine\": 46, \"executionLine\": 54, \"sink\": \"eval\", \"disposition\": \"unverified\"}}]}\n",
+    "scanJson": "{\n  \"version\": \"1.182.1\",\n  \"results\": [\n    {\n      \"check_id\": \"policy.harness.python.eval\",\n      \"path\": \"/src/BenchmarkTest00073.py\",\n      \"start\": {\n        \"line\": 53,\n        \"col\": 16,\n        \"offset\": 1742\n      },\n      \"end\": {\n        \"line\": 55,\n        \"col\": 5,\n        \"offset\": 1762\n      },\n      \"extra\": {\n        \"message\": \"\\u52a8\\u6001 eval\\uff1a\\u8bf7\\u6838\\u5bf9\\u8f93\\u5165\\u6765\\u6e90\\uff0c\\u4f18\\u5148\\u4f7f\\u7528\\u53d7\\u9650\\u89e3\\u6790\\u5668\",\n        \"metadata\": {\n          \"category\": \"security\",\n          \"cwe\": [\n            \"CWE-95\"\n          ],\n          \"confidence\": \"MEDIUM\",\n          \"source\": \"Harness local review heuristics\",\n          \"requires-manual-review\": true\n        },\n        \"severity\": \"ERROR\",\n        \"fingerprint\": \"requires login\",\n        \"lines\": \"requires login\",\n        \"validation_state\": \"NO_VALIDATOR\",\n        \"engine_kind\": \"OSS\"\n      }\n    },\n    {\n      \"check_id\": \"policy.harness.python.exec\",\n      \"path\": \"/src/BenchmarkTest00074.py\",\n      \"start\": {\n        \"line\": 51,\n        \"col\": 4,\n        \"offset\": 1759\n      },\n      \"end\": {\n        \"line\": 51,\n        \"col\": 13,\n        \"offset\": 1768\n      },\n      \"extra\": {\n        \"message\": \"\\u52a8\\u6001 exec\\uff1a\\u8bf7\\u6838\\u5bf9\\u8f93\\u5165\\u6765\\u6e90\\uff0c\\u907f\\u514d\\u8fd0\\u884c\\u4e0d\\u53ef\\u4fe1\\u4ee3\\u7801\",\n        \"metadata\": {\n          \"category\": \"security\",\n          \"cwe\": [\n            \"CWE-95\"\n          ],\n          \"confidence\": \"MEDIUM\",\n          \"source\": \"Harness local review heuristics\",\n          \"requires-manual-review\": true\n        },\n        \"severity\": \"ERROR\",\n        \"fingerprint\": \"requires login\",\n        \"lines\": \"requires login\",\n        \"validation_state\": \"NO_VALIDATOR\",\n        \"engine_kind\": \"OSS\"\n      }\n    },\n    {\n      \"check_id\": \"policy.harness.python.eval\",\n      \"path\": \"/src/boundary.py\",\n      \"start\": {\n        \"line\": 7,\n        \"col\": 3,\n        \"offset\": 145\n      },\n      \"end\": {\n        \"line\": 7,\n        \"col\": 14,\n        \"offset\": 156\n      },\n      \"extra\": {\n        \"message\": \"\\u52a8\\u6001 eval\\uff1a\\u8bf7\\u6838\\u5bf9\\u8f93\\u5165\\u6765\\u6e90\\uff0c\\u4f18\\u5148\\u4f7f\\u7528\\u53d7\\u9650\\u89e3\\u6790\\u5668\",\n        \"metadata\": {\n          \"category\": \"security\",\n          \"cwe\": [\n            \"CWE-95\"\n          ],\n          \"confidence\": \"MEDIUM\",\n          \"source\": \"Harness local review heuristics\",\n          \"requires-manual-review\": true\n        },\n        \"severity\": \"ERROR\",\n        \"fingerprint\": \"requires login\",\n        \"lines\": \"requires login\",\n        \"validation_state\": \"NO_VALIDATOR\",\n        \"engine_kind\": \"OSS\"\n      }\n    },\n    {\n      \"check_id\": \"policy.harness.python.request-to-dynamic-code\",\n      \"path\": \"/src/boundary.py\",\n      \"start\": {\n        \"line\": 7,\n        \"col\": 8,\n        \"offset\": 150\n      },\n      \"end\": {\n        \"line\": 7,\n        \"col\": 13,\n        \"offset\": 155\n      },\n      \"extra\": {\n        \"message\": \"Tracked input reaches eval or exec directly or via a recognized local helper; verify binding and reachability.\",\n        \"metadata\": {\n          \"cwe\": [\n            \"CWE-95\"\n          ],\n          \"origin\": \"workspace-authored-candidate\",\n          \"status\": \"unverified-observation\"\n        },\n        \"severity\": \"WARNING\",\n        \"fingerprint\": \"requires login\",\n        \"lines\": \"requires login\",\n        \"validation_state\": \"NO_VALIDATOR\",\n        \"engine_kind\": \"OSS\"\n      }\n    },\n    {\n      \"check_id\": \"policy.harness.python.exec\",\n      \"path\": \"/src/boundary.py\",\n      \"start\": {\n        \"line\": 8,\n        \"col\": 2,\n        \"offset\": 159\n      },\n      \"end\": {\n        \"line\": 8,\n        \"col\": 13,\n        \"offset\": 170\n      },\n      \"extra\": {\n        \"message\": \"\\u52a8\\u6001 exec\\uff1a\\u8bf7\\u6838\\u5bf9\\u8f93\\u5165\\u6765\\u6e90\\uff0c\\u907f\\u514d\\u8fd0\\u884c\\u4e0d\\u53ef\\u4fe1\\u4ee3\\u7801\",\n        \"metadata\": {\n          \"category\": \"security\",\n          \"cwe\": [\n            \"CWE-95\"\n          ],\n          \"confidence\": \"MEDIUM\",\n          \"source\": \"Harness local review heuristics\",\n          \"requires-manual-review\": true\n        },\n        \"severity\": \"ERROR\",\n        \"fingerprint\": \"requires login\",\n        \"lines\": \"requires login\",\n        \"validation_state\": \"NO_VALIDATOR\",\n        \"engine_kind\": \"OSS\"\n      }\n    },\n    {\n      \"check_id\": \"policy.harness.python.request-to-dynamic-code\",\n      \"path\": \"/src/boundary.py\",\n      \"start\": {\n        \"line\": 8,\n        \"col\": 7,\n        \"offset\": 164\n      },\n      \"end\": {\n        \"line\": 8,\n        \"col\": 12,\n        \"offset\": 169\n      },\n      \"extra\": {\n        \"message\": \"Tracked input reaches eval or exec directly or via a recognized local helper; verify binding and reachability.\",\n        \"metadata\": {\n          \"cwe\": [\n            \"CWE-95\"\n          ],\n          \"origin\": \"workspace-authored-candidate\",\n          \"status\": \"unverified-observation\"\n        },\n        \"severity\": \"WARNING\",\n        \"fingerprint\": \"requires login\",\n        \"lines\": \"requires login\",\n        \"validation_state\": \"NO_VALIDATOR\",\n        \"engine_kind\": \"OSS\"\n      }\n    },\n    {\n      \"check_id\": \"policy.harness.python.eval\",\n      \"path\": \"/src/boundary.py\",\n      \"start\": {\n        \"line\": 8,\n        \"col\": 15,\n        \"offset\": 172\n      },\n      \"end\": {\n        \"line\": 8,\n        \"col\": 26,\n        \"offset\": 183\n      },\n      \"extra\": {\n        \"message\": \"\\u52a8\\u6001 eval\\uff1a\\u8bf7\\u6838\\u5bf9\\u8f93\\u5165\\u6765\\u6e90\\uff0c\\u4f18\\u5148\\u4f7f\\u7528\\u53d7\\u9650\\u89e3\\u6790\\u5668\",\n        \"metadata\": {\n          \"category\": \"security\",\n          \"cwe\": [\n            \"CWE-95\"\n          ],\n          \"confidence\": \"MEDIUM\",\n          \"source\": \"Harness local review heuristics\",\n          \"requires-manual-review\": true\n        },\n        \"severity\": \"ERROR\",\n        \"fingerprint\": \"requires login\",\n        \"lines\": \"requires login\",\n        \"validation_state\": \"NO_VALIDATOR\",\n        \"engine_kind\": \"OSS\"\n      }\n    },\n    {\n      \"check_id\": \"policy.harness.python.request-to-dynamic-code\",\n      \"path\": \"/src/boundary.py\",\n      \"start\": {\n        \"line\": 8,\n        \"col\": 20,\n        \"offset\": 177\n      },\n      \"end\": {\n        \"line\": 8,\n        \"col\": 25,\n        \"offset\": 182\n      },\n      \"extra\": {\n        \"message\": \"Tracked input reaches eval or exec directly or via a recognized local helper; verify binding and reachability.\",\n        \"metadata\": {\n          \"cwe\": [\n            \"CWE-95\"\n          ],\n          \"origin\": \"workspace-authored-candidate\",\n          \"status\": \"unverified-observation\"\n        },\n        \"severity\": \"WARNING\",\n        \"fingerprint\": \"requires login\",\n        \"lines\": \"requires login\",\n        \"validation_state\": \"NO_VALIDATOR\",\n        \"engine_kind\": \"OSS\"\n      }\n    },\n    {\n      \"check_id\": \"policy.harness.python.eval\",\n      \"path\": \"/src/boundary.py\",\n      \"start\": {\n        \"line\": 9,\n        \"col\": 9,\n        \"offset\": 193\n      },\n      \"end\": {\n        \"line\": 13,\n        \"col\": 3,\n        \"offset\": 222\n      },\n      \"extra\": {\n        \"message\": \"\\u52a8\\u6001 eval\\uff1a\\u8bf7\\u6838\\u5bf9\\u8f93\\u5165\\u6765\\u6e90\\uff0c\\u4f18\\u5148\\u4f7f\\u7528\\u53d7\\u9650\\u89e3\\u6790\\u5668\",\n        \"metadata\": {\n          \"category\": \"security\",\n          \"cwe\": [\n            \"CWE-95\"\n          ],\n          \"confidence\": \"MEDIUM\",\n          \"source\": \"Harness local review heuristics\",\n          \"requires-manual-review\": true\n        },\n        \"severity\": \"ERROR\",\n        \"fingerprint\": \"requires login\",\n        \"lines\": \"requires login\",\n        \"validation_state\": \"NO_VALIDATOR\",\n        \"engine_kind\": \"OSS\"\n      }\n    },\n    {\n      \"check_id\": \"policy.harness.python.request-to-dynamic-code\",\n      \"path\": \"/src/boundary.py\",\n      \"start\": {\n        \"line\": 11,\n        \"col\": 4,\n        \"offset\": 208\n      },\n      \"end\": {\n        \"line\": 11,\n        \"col\": 9,\n        \"offset\": 213\n      },\n      \"extra\": {\n        \"message\": \"Tracked input reaches eval or exec directly or via a recognized local helper; verify binding and reachability.\",\n        \"metadata\": {\n          \"cwe\": [\n            \"CWE-95\"\n          ],\n          \"origin\": \"workspace-authored-candidate\",\n          \"status\": \"unverified-observation\"\n        },\n        \"severity\": \"WARNING\",\n        \"fingerprint\": \"requires login\",\n        \"lines\": \"requires login\",\n        \"validation_state\": \"NO_VALIDATOR\",\n        \"engine_kind\": \"OSS\"\n      }\n    },\n    {\n      \"check_id\": \"policy.harness.python.eval\",\n      \"path\": \"/src/boundary.py\",\n      \"start\": {\n        \"line\": 15,\n        \"col\": 9,\n        \"offset\": 252\n      },\n      \"end\": {\n        \"line\": 15,\n        \"col\": 26,\n        \"offset\": 269\n      },\n      \"extra\": {\n        \"message\": \"\\u52a8\\u6001 eval\\uff1a\\u8bf7\\u6838\\u5bf9\\u8f93\\u5165\\u6765\\u6e90\\uff0c\\u4f18\\u5148\\u4f7f\\u7528\\u53d7\\u9650\\u89e3\\u6790\\u5668\",\n        \"metadata\": {\n          \"category\": \"security\",\n          \"cwe\": [\n            \"CWE-95\"\n          ],\n          \"confidence\": \"MEDIUM\",\n          \"source\": \"Harness local review heuristics\",\n          \"requires-manual-review\": true\n        },\n        \"severity\": \"ERROR\",\n        \"fingerprint\": \"requires login\",\n        \"lines\": \"requires login\",\n        \"validation_state\": \"NO_VALIDATOR\",\n        \"engine_kind\": \"OSS\"\n      }\n    },\n    {\n      \"check_id\": \"policy.harness.python.eval\",\n      \"path\": \"/src/boundary.py\",\n      \"start\": {\n        \"line\": 15,\n        \"col\": 14,\n        \"offset\": 257\n      },\n      \"end\": {\n        \"line\": 15,\n        \"col\": 25,\n        \"offset\": 268\n      },\n      \"extra\": {\n        \"message\": \"\\u52a8\\u6001 eval\\uff1a\\u8bf7\\u6838\\u5bf9\\u8f93\\u5165\\u6765\\u6e90\\uff0c\\u4f18\\u5148\\u4f7f\\u7528\\u53d7\\u9650\\u89e3\\u6790\\u5668\",\n        \"metadata\": {\n          \"category\": \"security\",\n          \"cwe\": [\n            \"CWE-95\"\n          ],\n          \"confidence\": \"MEDIUM\",\n          \"source\": \"Harness local review heuristics\",\n          \"requires-manual-review\": true\n        },\n        \"severity\": \"ERROR\",\n        \"fingerprint\": \"requires login\",\n        \"lines\": \"requires login\",\n        \"validation_state\": \"NO_VALIDATOR\",\n        \"engine_kind\": \"OSS\"\n      }\n    },\n    {\n      \"check_id\": \"policy.harness.python.eval\",\n      \"path\": \"/src/skf-upstream.py\",\n      \"start\": {\n        \"line\": 37,\n        \"col\": 20,\n        \"offset\": 1296\n      },\n      \"end\": {\n        \"line\": 37,\n        \"col\": 51,\n        \"offset\": 1327\n      },\n      \"extra\": {\n        \"message\": \"\\u52a8\\u6001 eval\\uff1a\\u8bf7\\u6838\\u5bf9\\u8f93\\u5165\\u6765\\u6e90\\uff0c\\u4f18\\u5148\\u4f7f\\u7528\\u53d7\\u9650\\u89e3\\u6790\\u5668\",\n        \"metadata\": {\n          \"category\": \"security\",\n          \"cwe\": [\n            \"CWE-95\"\n          ],\n          \"confidence\": \"MEDIUM\",\n          \"source\": \"Harness local review heuristics\",\n          \"requires-manual-review\": true\n        },\n        \"severity\": \"ERROR\",\n        \"fingerprint\": \"requires login\",\n        \"lines\": \"requires login\",\n        \"validation_state\": \"NO_VALIDATOR\",\n        \"engine_kind\": \"OSS\"\n      }\n    },\n    {\n      \"check_id\": \"policy.harness.python.request-to-dynamic-code\",\n      \"path\": \"/src/skf-upstream.py\",\n      \"start\": {\n        \"line\": 37,\n        \"col\": 25,\n        \"offset\": 1301\n      },\n      \"end\": {\n        \"line\": 37,\n        \"col\": 50,\n        \"offset\": 1326\n      },\n      \"extra\": {\n        \"message\": \"Tracked input reaches eval or exec directly or via a recognized local helper; verify binding and reachability.\",\n        \"metadata\": {\n          \"cwe\": [\n            \"CWE-95\"\n          ],\n          \"origin\": \"workspace-authored-candidate\",\n          \"status\": \"unverified-observation\"\n        },\n        \"severity\": \"WARNING\",\n        \"fingerprint\": \"requires login\",\n        \"lines\": \"requires login\",\n        \"validation_state\": \"NO_VALIDATOR\",\n        \"engine_kind\": \"OSS\"\n      }\n    }\n  ],\n  \"errors\": [],\n  \"paths\": {\n    \"scanned\": [\n      \"/src/BenchmarkTest00073.py\",\n      \"/src/BenchmarkTest00074.py\",\n      \"/src/boundary.py\",\n      \"/src/skf-fixed-control.py\",\n      \"/src/skf-upstream.py\"\n    ]\n  },\n  \"time\": {\n    \"rules\": [],\n    \"rules_parse_time\": 0.0029439926147460938,\n    \"profiling_times\": {\n      \"config_time\": 0.10413765907287598,\n      \"core_time\": 0.30620622634887695,\n      \"ignores_time\": 6.198883056640625e-05,\n      \"total_time\": 0.41813015937805176\n    },\n    \"parsing_time\": {\n      \"total_time\": 0.00862574577331543,\n      \"per_file_time\": {\n        \"mean\": 0.0009584161970350477,\n        \"std_dev\": 3.882199412202433e-06\n      },\n      \"very_slow_stats\": {\n        \"time_ratio\": 0.0,\n        \"count_ratio\": 0.0\n      },\n      \"very_slow_files\": []\n    },\n    \"scanning_time\": {\n      \"total_time\": 0.02263164520263672,\n      \"per_file_time\": {\n        \"mean\": 0.004526329040527344,\n        \"std_dev\": 1.9858190225932047e-05\n      },\n      \"very_slow_stats\": {\n        \"time_ratio\": 0.0,\n        \"count_ratio\": 0.0\n      },\n      \"very_slow_files\": []\n    },\n    \"matching_time\": {\n      \"total_time\": 0.011081218719482422,\n      \"per_file_and_rule_time\": {\n        \"mean\": 0.0012312465243869356,\n        \"std_dev\": 3.110364165293526e-06\n      },\n      \"very_slow_stats\": {\n        \"time_ratio\": 0.0,\n        \"count_ratio\": 0.0\n      },\n      \"very_slow_rules_on_files\": []\n    },\n    \"tainting_time\": {\n      \"total_time\": 0.0011913776397705078,\n      \"per_def_and_rule_time\": {\n        \"mean\": 5.956888198852539e-05,\n        \"std_dev\": 4.087475389269457e-09\n      },\n      \"very_slow_stats\": {\n        \"time_ratio\": 0.0,\n        \"count_ratio\": 0.0\n      },\n      \"very_slow_rules_on_defs\": []\n    },\n    \"fixpoint_timeouts\": [],\n    \"prefiltering\": {\n      \"project_level_time\": 0.0,\n      \"file_level_time\": 0.0,\n      \"rules_with_project_prefilters_ratio\": 0.0,\n      \"rules_with_file_prefilters_ratio\": 1.0,\n      \"rules_selected_ratio\": 0.16363636363636364,\n      \"rules_matched_ratio\": 0.16363636363636364\n    },\n    \"targets\": [],\n    \"total_bytes\": 0,\n    \"max_memory_bytes\": 98548224\n  },\n  \"engine_requested\": \"OSS\",\n  \"skipped_rules\": [],\n  \"profiling_results\": []\n}\n",
+    "manifestJson": "{\n  \"files\": {\n    \"skf-fixed-control.py\": \"8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134\",\n    \"BenchmarkTest00073.py\": \"6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122\",\n    \"skf-upstream.py\": \"fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf\",\n    \"boundary.py\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\",\n    \"BenchmarkTest00074.py\": \"805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e\"\n  },\n  \"scanSha256\": \"2ef2477cd2b4c4eb0b2ff7a2f7cd5d1bed7e3d7763e2834f41a5433868fbdab8\",\n  \"discoverImports\": true,\n  \"locationBinding\": {\n    \"version\": 1,\n    \"snapshotSha256\": \"8445dc83ac2981e3a835a1eadbce1d7ab56e08711a7b6aa08d1f03cbf4e15a3c\",\n    \"imageId\": \"sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7\",\n    \"uid\": 1000,\n    \"inventory\": {\n      \"version\": 1,\n      \"protocol\": \"python-sink-locations-1\",\n      \"runtimePython\": \"3.12.15\",\n      \"files\": {\n        \"BenchmarkTest00073.py\": {\n          \"sha256\": \"6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122\",\n          \"bytes\": 1877,\n          \"state\": \"completed\",\n          \"points\": [\n            {\n              \"sourceSha256\": \"6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122\",\n              \"callee\": \"eval\",\n              \"call\": {\n                \"start\": {\n                  \"line\": 54,\n                  \"col\": 5,\n                  \"offset\": 1748\n                },\n                \"end\": {\n                  \"line\": 54,\n                  \"col\": 14,\n                  \"offset\": 1757\n                }\n              },\n              \"id\": \"f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762\",\n              \"builtinIdentity\": \"unverified\",\n              \"argument\": {\n                \"start\": {\n                  \"line\": 54,\n                  \"col\": 10,\n                  \"offset\": 1753\n                },\n                \"end\": {\n                  \"line\": 54,\n                  \"col\": 13,\n                  \"offset\": 1756\n                }\n              }\n            }\n          ]\n        },\n        \"BenchmarkTest00074.py\": {\n          \"sha256\": \"805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e\",\n          \"bytes\": 1881,\n          \"state\": \"completed\",\n          \"points\": [\n            {\n              \"sourceSha256\": \"805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e\",\n              \"callee\": \"exec\",\n              \"call\": {\n                \"start\": {\n                  \"line\": 51,\n                  \"col\": 4,\n                  \"offset\": 1759\n                },\n                \"end\": {\n                  \"line\": 51,\n                  \"col\": 13,\n                  \"offset\": 1768\n                }\n              },\n              \"id\": \"0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec\",\n              \"builtinIdentity\": \"unverified\",\n              \"argument\": {\n                \"start\": {\n                  \"line\": 51,\n                  \"col\": 9,\n                  \"offset\": 1764\n                },\n                \"end\": {\n                  \"line\": 51,\n                  \"col\": 12,\n                  \"offset\": 1767\n                }\n              }\n            }\n          ]\n        },\n        \"boundary.py\": {\n          \"sha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\",\n          \"bytes\": 323,\n          \"state\": \"completed\",\n          \"points\": [\n            {\n              \"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\",\n              \"callee\": \"eval\",\n              \"call\": {\n                \"start\": {\n                  \"line\": 7,\n                  \"col\": 3,\n                  \"offset\": 145\n                },\n                \"end\": {\n                  \"line\": 7,\n                  \"col\": 14,\n                  \"offset\": 156\n                }\n              },\n              \"id\": \"f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914\",\n              \"builtinIdentity\": \"unverified\",\n              \"argument\": {\n                \"start\": {\n                  \"line\": 7,\n                  \"col\": 8,\n                  \"offset\": 150\n                },\n                \"end\": {\n                  \"line\": 7,\n                  \"col\": 13,\n                  \"offset\": 155\n                }\n              }\n            },\n            {\n              \"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\",\n              \"callee\": \"exec\",\n              \"call\": {\n                \"start\": {\n                  \"line\": 8,\n                  \"col\": 2,\n                  \"offset\": 159\n                },\n                \"end\": {\n                  \"line\": 8,\n                  \"col\": 13,\n                  \"offset\": 170\n                }\n              },\n              \"id\": \"30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0\",\n              \"builtinIdentity\": \"unverified\",\n              \"argument\": {\n                \"start\": {\n                  \"line\": 8,\n                  \"col\": 7,\n                  \"offset\": 164\n                },\n                \"end\": {\n                  \"line\": 8,\n                  \"col\": 12,\n                  \"offset\": 169\n                }\n              }\n            },\n            {\n              \"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\",\n              \"callee\": \"eval\",\n              \"call\": {\n                \"start\": {\n                  \"line\": 8,\n                  \"col\": 15,\n                  \"offset\": 172\n                },\n                \"end\": {\n                  \"line\": 8,\n                  \"col\": 26,\n                  \"offset\": 183\n                }\n              },\n              \"id\": \"8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450\",\n              \"builtinIdentity\": \"unverified\",\n              \"argument\": {\n                \"start\": {\n                  \"line\": 8,\n                  \"col\": 20,\n                  \"offset\": 177\n                },\n                \"end\": {\n                  \"line\": 8,\n                  \"col\": 25,\n                  \"offset\": 182\n                }\n              }\n            },\n            {\n              \"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\",\n              \"callee\": \"eval\",\n              \"call\": {\n                \"start\": {\n                  \"line\": 10,\n                  \"col\": 3,\n                  \"offset\": 198\n                },\n                \"end\": {\n                  \"line\": 12,\n                  \"col\": 4,\n                  \"offset\": 218\n                }\n              },\n              \"id\": \"6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b\",\n              \"builtinIdentity\": \"unverified\",\n              \"argument\": {\n                \"start\": {\n                  \"line\": 11,\n                  \"col\": 4,\n                  \"offset\": 208\n                },\n                \"end\": {\n                  \"line\": 11,\n                  \"col\": 9,\n                  \"offset\": 213\n                }\n              }\n            },\n            {\n              \"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\",\n              \"callee\": \"eval\",\n              \"call\": {\n                \"start\": {\n                  \"line\": 15,\n                  \"col\": 9,\n                  \"offset\": 252\n                },\n                \"end\": {\n                  \"line\": 15,\n                  \"col\": 26,\n                  \"offset\": 269\n                }\n              },\n              \"id\": \"bb9b0f0d843ba3baa5f9d1a1e8d7e31ef6a1eff47f137a31b174e7c9ab54c10b\",\n              \"builtinIdentity\": \"unverified\",\n              \"argument\": {\n                \"start\": {\n                  \"line\": 15,\n                  \"col\": 14,\n                  \"offset\": 257\n                },\n                \"end\": {\n                  \"line\": 15,\n                  \"col\": 25,\n                  \"offset\": 268\n                }\n              }\n            },\n            {\n              \"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\",\n              \"callee\": \"eval\",\n              \"call\": {\n                \"start\": {\n                  \"line\": 15,\n                  \"col\": 14,\n                  \"offset\": 257\n                },\n                \"end\": {\n                  \"line\": 15,\n                  \"col\": 25,\n                  \"offset\": 268\n                }\n              },\n              \"id\": \"ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63\",\n              \"builtinIdentity\": \"unverified\",\n              \"argument\": {\n                \"start\": {\n                  \"line\": 15,\n                  \"col\": 19,\n                  \"offset\": 262\n                },\n                \"end\": {\n                  \"line\": 15,\n                  \"col\": 24,\n                  \"offset\": 267\n                }\n              }\n            },\n            {\n              \"sourceSha256\": \"9cc70523678745a99521c622c3890b30e0ec2d75779f2de4895043817c84de6e\",\n              \"callee\": \"builtins.eval\",\n              \"call\": {\n                \"start\": {\n                  \"line\": 17,\n                  \"col\": 9,\n                  \"offset\": 301\n                },\n                \"end\": {\n                  \"line\": 17,\n                  \"col\": 29,\n                  \"offset\": 321\n                }\n              },\n              \"id\": \"f7fce12a3eebae79df2b300396a6f6fa6adf4a939e737ce9f32d521e5cbe4cbc\",\n              \"builtinIdentity\": \"unverified\",\n              \"argument\": {\n                \"start\": {\n                  \"line\": 17,\n                  \"col\": 23,\n                  \"offset\": 315\n                },\n                \"end\": {\n                  \"line\": 17,\n                  \"col\": 28,\n                  \"offset\": 320\n                }\n              }\n            }\n          ]\n        },\n        \"skf-fixed-control.py\": {\n          \"sha256\": \"8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134\",\n          \"bytes\": 1652,\n          \"state\": \"completed\",\n          \"points\": []\n        },\n        \"skf-upstream.py\": {\n          \"sha256\": \"fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf\",\n          \"bytes\": 1585,\n          \"state\": \"completed\",\n          \"points\": [\n            {\n              \"sourceSha256\": \"fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf\",\n              \"callee\": \"eval\",\n              \"call\": {\n                \"start\": {\n                  \"line\": 37,\n                  \"col\": 20,\n                  \"offset\": 1296\n                },\n                \"end\": {\n                  \"line\": 37,\n                  \"col\": 51,\n                  \"offset\": 1327\n                }\n              },\n              \"id\": \"5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041\",\n              \"builtinIdentity\": \"unverified\",\n              \"argument\": {\n                \"start\": {\n                  \"line\": 37,\n                  \"col\": 25,\n                  \"offset\": 1301\n                },\n                \"end\": {\n                  \"line\": 37,\n                  \"col\": 50,\n                  \"offset\": 1326\n                }\n              }\n            }\n          ]\n        }\n      }\n    }\n  }\n}\n"
+  }
+}

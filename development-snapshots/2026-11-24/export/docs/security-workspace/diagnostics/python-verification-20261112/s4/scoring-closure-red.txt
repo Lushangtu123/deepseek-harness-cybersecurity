@@ -1,0 +1,66 @@
+✔ Actual reviewed-profile VM v4 artifacts verify while used samples remain blocked (10.325917ms)
+✔ Point mismatch cannot be made valid by updating report digest (6.4175ms)
+✔ Quoted challenge echo is not arbitrary code-probe execution even with recomputed hashes (5.265958ms)
+✔ No raw witness cannot support a claimed confirmation (4.657792ms)
+✔ Non-dominating or dangerous finite-set proof cannot exclude (8.885834ms)
+✔ Source, dependency, challenge, cleanup or verifier identity changes cannot inherit a decision (19.480917ms)
+✔ Human evidence is supplementary and cannot supply tool main-score confirmation (4.845916ms)
+✖ A consistently rehashed freeze cannot substitute the shipped verifier worker or controller (6.168792ms)
+✖ Omitting a planned verifier receipt is an explicit coverage blocker (7.644333ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 7
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 124.027625
+
+✖ failing tests:
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/verification-artifacts.test.mjs:13:1
+✖ A consistently rehashed freeze cannot substitute the shipped verifier worker or controller (6.168792ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   'BenchmarkTest00074',
+  +   'BenchmarkTest00073',
+  +   'skf-viewer-upstream',
+  +   'literal-set-control'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/verification-artifacts.test.mjs:30:10)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'BenchmarkTest00074', 'BenchmarkTest00073', 'skf-viewer-upstream', 'literal-set-control' ],
+    expected: [],
+    operator: 'deepStrictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/verification-artifacts.test.mjs:35:1
+✖ Omitting a planned verifier receipt is an explicit coverage blocker (7.644333ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(result.blockers.includes('verification-request-unobserved:' + request.caseId))
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/verification-artifacts.test.mjs:44:9)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '=='
+  }

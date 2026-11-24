@@ -1,0 +1,42 @@
+{
+  "consumerCaseIds": [
+    "settlement-parent-and-damaged-child-refused",
+    "settlement-linked-child-unavailable-variants",
+    "settlement-complete-scope-releases",
+    "settlement-semantic-unknown-with-confirmed-cleanup-can-settle",
+    "settlement-recompute-after-child-change",
+    "recovery-settlement-refuses-stale-parent-success",
+    "new-reservation-blocked-by-damaged-preparation",
+    "new-reservation-blocked-by-unknown-plans-directory",
+    "new-reservation-empty-directory-and-separate-batch",
+    "compile-and-bind-preparation-blocked-before-writes",
+    "query-status-available-with-damaged-batch",
+    "public-compile-known-failure-is-diagnostic-3"
+  ],
+  "suiteOrder": [
+    "consumer-12",
+    "evidence-gate",
+    "record-validation-15",
+    "unified-recovery-27",
+    "association-recovery-21",
+    "recovery-close-24",
+    "formal-admission-15",
+    "original-28",
+    "end-lf-13",
+    "rev6-24",
+    "rev7-12",
+    "rev8-13",
+    "diagnostics-20",
+    "repair-11",
+    "buffer-preflight-29",
+    "pure-compile",
+    "buffer-red-6",
+    "baseline-verify",
+    "independent-116",
+    "static"
+  ],
+  "firstGroupIsSmoke": true,
+  "maxVmSubmissions": 1,
+  "formalTargets": "0/16",
+  "r3": "blocked"
+}

@@ -1,0 +1,386 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Los_Angeles",
+  "runId": "security-current-20261029",
+  "recoveryPoint": "ready-security-workflow-20261029",
+  "currentProgramFiles": 124,
+  "currentFeaturesIncluded": [
+    "model bounded pages and exact-run wait",
+    "source-free coverage diagnostics",
+    "package identity/snapshot/report/status guards",
+    "native model/pagination/diagnostic acceptance records"
+  ],
+  "controllerRegressionPassed": 126,
+  "independentReview": "read-only, no Important/Critical findings; no commands executed by reviewer",
+  "recoveryProof": {
+    "snapshot": "ready-security-workflow-20261029",
+    "proofFiles": 2058,
+    "programFiles": 124,
+    "volatileFileCountExcludedFromStrictProof": 1,
+    "wholeDiskStillIncludesVolatileFiles": true,
+    "databaseSha256": "74cc77deb945b9cc6edf9967f3840d92286c59b0fda882b369dc9eda67cb5e07",
+    "serviceStoppedBeforeHashes": true
+  },
+  "offlineCopyRestore": {
+    "recoveryPoint": "ready-security-workflow-20261029",
+    "copiedHelperReplaceFaultInjected": true,
+    "copiedHostHelpersRolledBack": true,
+    "copiedFaultTemporaryCleaned": true,
+    "offlineDiskRestorePassed": true,
+    "diskCheckPassed": true,
+    "hostHelpersRestored": 5,
+    "launchDefinitionsRestoredInSyntheticHost": 2,
+    "missingAndCorruptCopiedHelpersRepaired": true,
+    "primaryDiskUnmodified": true,
+    "noVmRegistered": true,
+    "copyBootTested": false,
+    "probeArchive": "/Users/LOCAL_USER/Library/Application Support/Harness Purge Original/archived-validation/restore-probe-security-workflow-20261029",
+    "temporaryDiskCopyRemoved": true
+  },
+  "coldBoot": {
+    "proofHashesMatched": 2058,
+    "proofEntries": 2058,
+    "programHashesMatched": 124,
+    "persistedFindingCounts": {
+      "personal-security-real-20261029": 95,
+      "personal-security-page-qa-20261029": 95,
+      "personal-security-followups-20261029": 8
+    },
+    "diagnosticPartialPersisted": true,
+    "modelPagesAndWaitReceiptsPersisted": true,
+    "volatileFilesNotComparedAsByteProof": 1,
+    "runtime": {
+      "ok": true,
+      "readOnly": true,
+      "automaticChanges": false,
+      "scope": "local pinned images, rules and database identity; no scanner execution, model call, network download or GitHub latest check",
+      "tools": {
+        "semgrep": {
+          "ready": true,
+          "version": "1.182.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T05:14:04.000Z",
+          "cached": false,
+          "rules": {
+            "version": "local-reviewed-2",
+            "count": 16,
+            "languages": [
+              "javascript",
+              "python",
+              "typescript"
+            ]
+          }
+        },
+        "trivy": {
+          "ready": true,
+          "version": "0.76.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T05:14:04.000Z",
+          "cached": false,
+          "database": {
+            "state": "fresh",
+            "updatedAt": "2026-10-29T19:18:50.969Z",
+            "nextUpdate": "2026-10-30T19:18:50.969Z",
+            "ageDays": 0
+          },
+          "lastUpdate": {
+            "state": "current",
+            "checkedAt": "2026-10-29T22:59:00.361501+00:00"
+          }
+        },
+        "zap": {
+          "ready": true,
+          "version": "2.17.0",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T05:14:04.000Z",
+          "cached": false
+        }
+      }
+    },
+    "service": "active",
+    "scannerContainersRunning": 0,
+    "recovery": {
+      "state": "matches",
+      "name": "ready-security-workflow-20261029",
+      "createdAt": "2026-10-30T05:11:42Z",
+      "scope": "improved-program-tools-config",
+      "helpersMatch": true,
+      "launchAgentsMatch": true,
+      "uncoveredFiles": [],
+      "groups": {
+        "program": {
+          "state": "matches",
+          "filesChecked": 124,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "runtime": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "tools": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "config": {
+          "state": "matches",
+          "filesChecked": 9,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "plugins": {
+          "state": "matches",
+          "filesChecked": 1320,
+          "uncoveredFiles": [],
+          "differentFiles": [],
+          "differentFileCount": 0,
+          "differenceDetailsTruncated": false
+        }
+      }
+    },
+    "hostIsolationValidated": true,
+    "hostHelpersMatched": true,
+    "registeredVmCount": 4,
+    "managedVmCount": 1
+  },
+  "snapshotInventory": {
+    "mainDiskSnapshotNames": [
+      "ready-original",
+      "ready-toolchain-20261025",
+      "ready-recovery-guard-20261029",
+      "ready-recovery-resume-20261029",
+      "ready-recovery-proof-20261029",
+      "ready-security-audit-20261029",
+      "ready-security-validated-20261029",
+      "ready-security-workflow-20261029"
+    ],
+    "mainDiskSnapshotCount": 8,
+    "previousSnapshotNamesPreserved": true
+  },
+  "livePreservation": {
+    "programHashesMatched": 124,
+    "trackedRealProjectHashesMatched": 459,
+    "realProjectGitHeadUnchanged": true,
+    "realProjectSixAuditTablesUnchanged": true,
+    "realProjectFindings": 95,
+    "realProjectAllUnverified": true,
+    "service": "active",
+    "scannerContainersRunning": 0,
+    "noRunningAuditRows": true,
+    "runtimePreflight": {
+      "ok": true,
+      "readOnly": true,
+      "automaticChanges": false,
+      "scope": "local pinned images, rules and database identity; no scanner execution, model call, network download or GitHub latest check",
+      "tools": {
+        "semgrep": {
+          "ready": true,
+          "version": "1.182.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T05:14:57.053Z",
+          "cached": false,
+          "rules": {
+            "version": "local-reviewed-2",
+            "count": 16,
+            "languages": [
+              "javascript",
+              "python",
+              "typescript"
+            ]
+          }
+        },
+        "trivy": {
+          "ready": true,
+          "version": "0.76.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T05:14:57.053Z",
+          "cached": false,
+          "database": {
+            "state": "fresh",
+            "updatedAt": "2026-10-29T19:18:50.969Z",
+            "nextUpdate": "2026-10-30T19:18:50.969Z",
+            "ageDays": 0
+          },
+          "lastUpdate": {
+            "state": "current",
+            "checkedAt": "2026-10-29T22:59:00.361501+00:00"
+          }
+        },
+        "zap": {
+          "ready": true,
+          "version": "2.17.0",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T05:14:57.053Z",
+          "cached": false
+        }
+      }
+    },
+    "hostIsolationValidated": true,
+    "wholeVmRecovery": "ready-security-workflow-20261029",
+    "newWholeVmSnapshot": true
+  },
+  "browser": {
+    "recovery": "ready-security-workflow-20261029",
+    "programRuntimeToolsConfigPluginsCovered": true,
+    "nativeAx": "browser-recovery.txt",
+    "screenshot": "browser-recovery.png",
+    "pageUsesLiveStatus": true
+  },
+  "parserInvestigation": {
+    "officialRelease": "https://github.com/semgrep/semgrep/releases/tag/v1.183.0",
+    "officialReleasePublishedUtc": "2026-10-29T21:29:24Z",
+    "candidate": {
+      "candidateVersion": "1.183.0",
+      "imageId": "sha256:abd6568fcd757001e14f323b5a346a921869b8522eba1524be1aae2487b57ada",
+      "manifestDigest": "sha256:791879c2ad46d3ad9411b13a1d982f10be839532ba790e883d3784109df24ac5",
+      "copiedSourceOnly": true,
+      "errorCount": 1,
+      "diagnostics": [
+        {
+          "type": "PartialParsing",
+          "path": "/src/i18n.test.mjs"
+        }
+      ],
+      "coveredFiles": 1,
+      "activeManifestUnchanged": true,
+      "adopted": false,
+      "candidateImageRemoved": false
+    },
+    "cleanup": {
+      "ownedCandidateRemoved": true,
+      "activeManifestUnchanged": true,
+      "broadPruneUsed": false,
+      "ownedHostArtifactFilesRemoved": 19,
+      "ownedHostArtifactBytesRemoved": 1605824306,
+      "retainedCandidateReceipt": true
+    },
+    "remaining": "Semgrep1.183.0 still reports PartialParsing on original copied i18n.test.mjs; no verified parser fix, keep partial and active1.182.1",
+    "upstreamConfigDigest": "sha256:d8f87b1bb836879f56fcf2d23766c818449bb3963512dcf662fefdda28a97705",
+    "archiveVerifiedBeforeLoad": true,
+    "allImageLayersVerified": 15,
+    "runOnlyInDedicatedVm": true,
+    "network": "none",
+    "sourceMount": "readonly",
+    "realSourceEdited": false,
+    "activeImagesManifestChanged": false
+  },
+  "history": {
+    "candidateFirstAttempt": "OCI config digest was incorrectly treated as containerd local image ID after successful load; read-only reconciled tag, architecture, full config and all rootfs layers before executing; did not reload image",
+    "coldFirstAttempt": "final observer assumed total UTM registrations=1; actual4 include3 stopped independent VMs. Managed Harness count1; probe UTM listing unchanged. No otherVM deleted or changed",
+    "liveFirstAttempt": "read-only SSH returned255; separate source check and next bounded read succeeded; first inner SSH error not retained, cause unknown",
+    "officialCompareRead": "read-only GitHub compare request returned404 outside structured capture; original tool observation retained; not evidence for parser behavior"
+  },
+  "limits": [
+    "2058 selected stable-file hashes are not a full-file inventory of VM disk",
+    "one known active chat archive excluded only from strict byte proof; wholeVM snapshot still includes it",
+    "offline copy restored and original cold boot verified separately; copiedVM was never booted",
+    "real95findings remainunverified; no exploitability review or source repair",
+    "no new model calls this phase; previous same-run model QA records persisted and hash verified",
+    "no verified upstream parser correction; suppressing warnings/excluding source was not used",
+    "three other registered stopped VMs were outside this task and preserved"
+  ],
+  "permissionsExpanded": false,
+  "gitPush": false,
+  "commandReceipts": {
+    "candidate-cleanup": {
+      "state": "exited",
+      "scope": "parser-candidate",
+      "returncode": 0,
+      "sha256": "bf331506e19b225e1e9c8a3938d8b3c27ca394b0cfdd43b3ccd9f8cd9422b36d"
+    },
+    "candidate-download": {
+      "state": "exited",
+      "scope": "parser-candidate",
+      "returncode": 0,
+      "sha256": "3dc47a7cdfa6165e58bac3306a6ee17fed274e9dc9ad6790b5b1cf2d5527d832"
+    },
+    "candidate-reconcile": {
+      "state": "exited",
+      "scope": "parser-candidate",
+      "returncode": 0,
+      "sha256": "b8be09bb058c6ad051e8f68a13024a79000a88f0eee078b4765a73508889fbac"
+    },
+    "candidate-test-r2": {
+      "state": "exited",
+      "scope": "parser-candidate",
+      "returncode": 0,
+      "sha256": "889d9e1ed8895ba8757f999fb4543ecf2a3fcc42af991fe38fed1e3b999546e5"
+    },
+    "candidate-test": {
+      "state": "exited",
+      "scope": "parser-candidate",
+      "returncode": 1,
+      "sha256": "a0076606e3ad4af0398688c66c1c192da3b6ccf8f7ff250281183c05be1314e4"
+    },
+    "cold-reconcile": {
+      "state": "exited",
+      "scope": "cold-final",
+      "returncode": 0,
+      "sha256": "9f18245d8b79e9ff8d772e89590348604140d8a2da7660787d523c5ad58b164a"
+    },
+    "cold-verify-r2": {
+      "state": "exited",
+      "scope": "cold-final",
+      "returncode": 0,
+      "sha256": "1b89bac59b0501b76d5468e13ff516b4d122bfeaeb7c8e9c162c22190e7feed5"
+    },
+    "cold-verify": {
+      "state": "exited",
+      "scope": "cold-final",
+      "returncode": 1,
+      "sha256": "ff5337a4fa4ce25e82ec07d9fb154440ab05501eeee4cc881a39b44cce4ca6d0"
+    },
+    "controller-install": {
+      "state": "exited",
+      "scope": "controller-deployment",
+      "returncode": 0,
+      "sha256": "ce0ccc1fc564c048011c670fe209ebaa4dc7bdb860bdb6f6516665a34f8ce78c"
+    },
+    "controller-tests": {
+      "state": "exited",
+      "scope": "controller",
+      "returncode": 0,
+      "sha256": "9d64bb71805accd32aa33f0e38ecefe7d876b4e1792ef08002cc78b08de81e5d"
+    },
+    "live-final-r2": {
+      "state": "exited",
+      "scope": "live-final",
+      "returncode": 0,
+      "sha256": "5ec0d186411f0c53d80779119995eb40a3cf44d7ddef0d14e4532e226aa165d5"
+    },
+    "live-final": {
+      "state": "exited",
+      "scope": "live-final",
+      "returncode": 1,
+      "sha256": "4ba823fdb61e00f8e099d1585491f8fb4ca2db2f2d3362fcff29163494e21e98"
+    },
+    "recovery-create": {
+      "state": "exited",
+      "scope": "recovery-live",
+      "returncode": 0,
+      "sha256": "9ab970652b348fb4ed9e358098f0126f5703b9cb604266ea621a6b9e7fe08e7d"
+    },
+    "snapshot-inventory": {
+      "state": "exited",
+      "scope": "recovery-final",
+      "returncode": 0,
+      "sha256": "54e019cad4f8cacbed4db1abf2ebad0eb9c6d622ff1289b63f4edd64bc0132db"
+    },
+    "source-final": {
+      "state": "exited",
+      "scope": "export-final",
+      "returncode": 0,
+      "sha256": "f150d5c1d89b821d8a9a33b493d1da6ba65069614bfe5e4fcd0c59775d605edc"
+    }
+  }
+}

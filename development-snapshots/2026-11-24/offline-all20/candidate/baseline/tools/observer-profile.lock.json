@@ -1,0 +1,63 @@
+{
+ "approvedSources": [
+  "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+  "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+  "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+  "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834",
+  "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+  "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+  "cce3a7dbce4c4533d75f72b1530c1b70c273574a8659b8c09f43de71e6ef1d67",
+  "15fee48bc253a3d986a2d8e28c954f2897e3f90f4025821fb6f87889f9beca0d",
+  "f4ad46e858a8e823c8b9162b75f8f149172f340f739c0c2035ecd3442d25aef3"
+ ],
+ "bpfTemplate": "// point=__POINT_BIND__ source=__SOURCE_BIND__ token=__TOKEN__\nBEGIN { printf(\"BEGIN run=%s tag=%s\\n\", \"__RUN_ID__\", \"__TAG__\"); }\nuprobe:/proc/PIDPLACEHOLDER/root/usr/lib/libpython3.12.so.1.0:_PyEval_EvalFrameDefault\n{\n  $frame = arg1; $code = *(uint64*)$frame; if ($code == 0) { return; }\n  $fnptr = *(uint64*)($code + 112); if ($fnptr == 0) { return; }\n  if (*(uint64*)($fnptr + 40) != 0x3e676e697274733c) { return; }\n  $tstate = arg0; $cframe = *(uint64*)($tstate + 56); $cur = *(uint64*)$cframe;\n  if ($cur == 0) { return; }\n  $ccode = *(uint64*)($cur); if ($ccode == 0) { return; }\n  $cfnptr = *(uint64*)($ccode + 112); if ($cfnptr == 0) { return; }\n  $cfn = str($cfnptr + 40, 80);\n  if ($cfn != \"__SOURCE_PATH__\") { return; }\n  $pi = *(uint64*)($cur + 56); $off = $pi - ($ccode + 192);\n  if ($off != __OFFSET__) { return; }\n  $consts = *(uint64*)($code + 24); if ($consts == 0) { return; }\n  $n = *(uint64*)($consts + 16); $found = 0;\n  if ($n > 0) { if (str(*(uint64*)($consts + 24) + 40, 32) == \"__TOKEN__\") { $found = 1; } }\n  if ($found == 0) { return; }\n  printf(\"EVAL run=%s tag=%s off=%d uid=%d pid=%d\\n\", \"__RUN_ID__\", \"__TAG__\", $off, uid, pid);\n}\nEND { printf(\"END run=%s tag=%s\\n\", \"__RUN_ID__\", \"__TAG__\"); }\n",
+ "bpfTemplateSha256": "a1d7df3910c097b8d93b756a2ae772145f63f3386bc9ddf9ed107ff53167bd2a",
+ "bpftraceVersion": "bpftrace v0.20.2",
+ "controllerSha256": "c00237ba3ee7c1bc5b303c930db26b3cb3b02041c2027ae20ae1b35de41612e4",
+ "dependencyLockSha256": "043ea170792912d67a4e2de92b197c259543b2dc6edd874b0e0d35ac711dad78",
+ "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+ "interpreterPath": "/usr/bin/python3.12",
+ "interpreterSha256": "7d1bf26e09ba6e5824f7f7587f2d37090def82ae83fe81485e3163a70bc8f7f5",
+ "kernelRelease": "6.8.0-147-generic",
+ "kind": "controlled-script-observer-profile",
+ "libraryPath": "/usr/lib/libpython3.12.so.1.0",
+ "librarySha256": "73531f4f375bbd8d97bd55cce30f48900a7d9c9f597aa298d4f08d057a95b4c5",
+ "mechanism": "bpftrace-uprobe-_PyEval_EvalFrameDefault",
+ "pointMap": {
+  "cce3a7dbce4c4533d75f72b1530c1b70c273574a8659b8c09f43de71e6ef1d67": {
+   "path": "nltk/collocations.py",
+   "points": [
+    {
+     "col": 18,
+     "id": "f1a49a2254171371e254988601ee4126429bec4d2a9131dee2e0f0e50737bd16",
+     "line": 398,
+     "offset": 242
+    },
+    {
+     "col": 26,
+     "id": "70c8a56635b19cbdc60ffd65856f79be3dea062a817acb6befde36a2dc5cdbe7",
+     "line": 402,
+     "offset": 292
+    }
+   ]
+  },
+  "f4ad46e858a8e823c8b9162b75f8f149172f340f739c0c2035ecd3442d25aef3": {
+   "path": "witness.py",
+   "points": [
+    {
+     "col": 12,
+     "id": "4bd5c07bb826e2e64c2e7cbb3fa1d31faaa699438374f6c58558eecbb58f883c",
+     "line": 7,
+     "offset": 54
+    }
+   ]
+  }
+ },
+ "profileSha256": "7df18a7e153fa4839a824d8dc03d52052672842962e1515be91385f9574c5546",
+ "pythonVersion": "3.12.15",
+ "scriptSyntaxPolicySha256": "45212be86de5d68c173aeee98d5a7e39350602c8f6d0471ae4319bca20580a98",
+ "storageSha256": "4c5548aa8cc1a8a51574589b82341f7b55df09ce6e7cc6b7acf4fc84dd1bfa38",
+ "verifierSnapshotSha256": "03291105e719919e75c84eaa618b15e3645151da5a9fb86007e1403f0c7e7bf4",
+ "version": 1,
+ "workerSha256": "30214d23b0eeaedc6c1f60b6c1a18318c8ebe5d2f017f4e9703746b9e114092c"
+}

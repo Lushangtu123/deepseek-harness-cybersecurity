@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-03",
+  "scope": "real installed Harness/Cordis web runtime and candidate plugin in a temporary VM mount/PID namespace",
+  "productionDeployed": false,
+  "candidateProgramFiles": 160,
+  "productionProgramFiles": 157,
+  "nativeSession": {
+    "preset": "personal-joint",
+    "tools": 6,
+    "successfulToolResults": 6,
+    "terminal": "completed",
+    "toolsUsed": ["redteam_session_bind", "redteam_joint_review"],
+    "actions": ["bind", "plan", "status", "wait", "report", "report"],
+    "modelReadFindings": 10,
+    "totalJointFindings": 47,
+    "modelReportComplete": false,
+    "maximumToolResultBytes": 5640,
+    "newScannerRunsDuringChat": 0,
+    "allFindingsRemainUnverified": true
+  },
+  "browser": {
+    "nativeChatObserved": true,
+    "chatAndPanelProjectMatch": true,
+    "nativeSecurityTabObserved": true,
+    "coverageGapsVisible": true,
+    "fullViewObserved": true,
+    "downloadBytes": 43071,
+    "downloadTaskAndAllSectionsMatch": true,
+    "downloadCounts": {"findings": 47, "files": 10, "exclusions": 0, "diagnostics": 0, "artifacts": 0},
+    "initialStyleResourceFailureObserved": true,
+    "initialEmptyResponseRootCauseConfirmed": false,
+    "oneReloadAfterRelayConcurrencyBoundWithoutEmptyResponsesObserved": true
+  },
+  "firstNativeAttempt": {
+    "recordedTool": "redteam_session_bind",
+    "acceptedByTestExecutionFence": 0,
+    "backendRequests": 0,
+    "terminal": "error",
+    "message": "Cannot read properties of undefined (reading 'prepare')",
+    "testDependencyTreesMixed": true,
+    "afterConsistentRuntimeNewSessionCompleted": true,
+    "exactInternalThrowSiteConfirmed": false
+  },
+  "isolation": {
+    "positiveAndNegativeNamespaceControlsPassed": true,
+    "nativePresetFiltersRetained": true,
+    "additionalReadOnlyTestFence": true,
+    "testSocketActivationLauncher": true,
+    "productionGlobalContainerRestartReconciliationExecuted": false,
+    "testUID": 1000,
+    "productionProgramCredentialAndScannerIdentitiesUnchanged": true,
+    "outsideMountUnchanged": true,
+    "hostNetworkOrPrivilegeChanged": false
+  },
+  "cleanup": {
+    "namespaceChildrenStopped": true,
+    "guestPortClosed": true,
+    "hostRelayClosed": true,
+    "tempRemoved": true,
+    "testContainersAbsent": 3,
+    "testTabsClosed": 2
+  },
+  "remaining": [
+    "Production systemd activation, deployment and rollback",
+    "Native mutation/approval/cancellation paths not exercised in this read-only run",
+    "Exact cause of transient SSH-exec relay empty responses remains unknown",
+    "Temporary startup journal unavailable; resource evidence is browser-native only",
+    "New workspace ordinary/deep execution integration and broader effectiveness calibration"
+  ]
+}

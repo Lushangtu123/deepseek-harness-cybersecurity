@@ -1,0 +1,168 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Los_Angeles",
+  "runId": "security-download-20261029",
+  "feature": "security audit Markdown download generation and project validation; synchronous per-request export lock",
+  "rootCause": "report export checked alive only; refreshKey cleanup and setup reuse the same live ref; no read generation, report engagement match or synchronous duplicate guard",
+  "existingBoundary": "parent already keys SecurityTab by engagement; no demonstrated production cross-project draft or mutation leak",
+  "regression": {
+    "focusedClientPassed": 14,
+    "fullPluginPassed": 384,
+    "failed": 0,
+    "focusedOverlapsFull": true,
+    "newCases": 4,
+    "initialRedFailedCases": 4,
+    "independentReviewImportantOrCriticalFindings": 0,
+    "reviewTestsExecuted": false
+  },
+  "cases": [
+    "foreign engagement/malformed success does not create Blob or download",
+    "refresh invalidates pending report and previous render callback; fresh export works",
+    "duplicate same-render clicks send one request and show busy state",
+    "old failure cannot replace current errors or release newer export lock"
+  ],
+  "browserAcceptance": {
+    "browser": "IAB",
+    "project": "personal-security-compare-20261029",
+    "view": "安全审计",
+    "initialLoadingExportDisabledObserved": true,
+    "exportBusyDisabledObserved": true,
+    "exportButtonReenabledObserved": true,
+    "downloadProjectMatched": true,
+    "downloadFindings": 3,
+    "downloadTasks": 2,
+    "allFindingsStillUnverified": true,
+    "downloadSha256": "3d299dc21843dc34e77823879ee3a32178a6f2093b3241ac505dc140a95ebf6c",
+    "screenshot": "audit-export.jpg",
+    "faultCases": "controlled component tests; no real-browser delayed-response injection",
+    "browserReconnect": "prior tab reload unavailable; new IAB tab connected successfully",
+    "modelCalls": 0,
+    "newScans": 0
+  },
+  "live": {
+    "programFilesMatched": 121,
+    "ruleHashMatched": true,
+    "runtimeManifestMatched": true,
+    "service": "active",
+    "activeScannerContainers": 0,
+    "preflight": {
+      "ok": true,
+      "readOnly": true,
+      "automaticChanges": false,
+      "scope": "local pinned images, rules and database identity; no scanner execution, model call, network download or GitHub latest check",
+      "tools": {
+        "semgrep": {
+          "ready": true,
+          "version": "1.182.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T02:28:25.795Z",
+          "cached": false,
+          "rules": {
+            "version": "local-reviewed-2",
+            "count": 16,
+            "languages": [
+              "javascript",
+              "python",
+              "typescript"
+            ]
+          }
+        },
+        "trivy": {
+          "ready": true,
+          "version": "0.76.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T02:28:25.795Z",
+          "cached": false,
+          "database": {
+            "state": "fresh",
+            "updatedAt": "2026-10-29T19:18:50.969Z",
+            "nextUpdate": "2026-10-30T19:18:50.969Z",
+            "ageDays": 0
+          },
+          "lastUpdate": {
+            "state": "current",
+            "checkedAt": "2026-10-29T22:59:00.361501+00:00"
+          }
+        },
+        "zap": {
+          "ready": true,
+          "version": "2.17.0",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T02:28:25.795Z",
+          "cached": false
+        }
+      }
+    },
+    "hostIsolationValidated": true
+  },
+  "deployment": {
+    "changedGuestFiles": [
+      "tools/dsh-purge-personal-1.1.77-personal.1/PERSONAL-CHANGES.md",
+      "tools/dsh-purge-personal-1.1.77-personal.1/client.js",
+      "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-client.mjs"
+    ],
+    "forkHashesMatched": 121,
+    "guestBackup": "/home/purge/downloads/security-download-20261030T022716Z",
+    "serviceRestarted": true
+  },
+  "scope": {
+    "newScans": 0,
+    "modelCalls": 0,
+    "backendOrSchemaChanges": false,
+    "permissionsChanged": false,
+    "gitPush": false,
+    "browserFaultInjection": false
+  },
+  "limits": [
+    "stale results are ignored; this does not cancel an already sent network request",
+    "fault cases use controlled component tests; actual browser verified normal authenticated download",
+    "whole VM recovery point predates this update"
+  ],
+  "recovery": {
+    "point": "ready-security-audit-20261029",
+    "updateIncluded": false,
+    "newSnapshot": false,
+    "sourceBackup": "/home/purge/downloads/security-download-20261030T022716Z",
+    "changedExistingFiles": 3
+  },
+  "commandReceipts": {
+    "client-red": {
+      "scope": "client-red",
+      "returncode": 1,
+      "sha256": "307de081d4b6716ce6d0ad2134fdc09d6f48cfd96b192dc82186b459d2432df2"
+    },
+    "client-green": {
+      "scope": "client-green",
+      "returncode": 0,
+      "sha256": "d6e2d2a8560713522d968efdfc1224e952be0b4313f5e8b2540c4b17741f8e34"
+    },
+    "build-client": {
+      "scope": "build",
+      "returncode": 0,
+      "sha256": "b7e1c11d83ffffb714d3f040c156dd2071242fb7ab5c200bf0f020b4923618fa"
+    },
+    "package-final": {
+      "scope": "package-final",
+      "returncode": 0,
+      "sha256": "1d4089e6bffcfc3700ab2c8aa2a888f2b735807577f390ec807c2f753f0427e2"
+    },
+    "deployment": {
+      "scope": "deployment",
+      "returncode": 0,
+      "sha256": "db8ca49007a66f34da43ce7adb63a6a113b4a644ce77bc487a6b4d4ee68f0e9b"
+    },
+    "live-final": {
+      "scope": "deployment",
+      "returncode": 0,
+      "sha256": "34d13a3e65d8401ef8f1f75e97558cf188297ab03b40c2dc3a4a409f49116e76"
+    },
+    "browser-artifact": {
+      "scope": "browser-artifact",
+      "returncode": 0,
+      "sha256": "dc72ffd7f33c41914f620b01b90b4cbbb8d3fdcc3b5bd43504fcef835cf359a8"
+    }
+  }
+}

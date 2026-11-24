@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "reviews": [
+    {
+      "receipt": "claude-oracle.json",
+      "requestedModel": "claude-opus-5-5",
+      "effort": "xhigh",
+      "actualOutputModels": [
+        "claude-opus-5-5"
+      ],
+      "state": "requested-model-returned",
+      "acceptedAsOpus55": true
+    },
+    {
+      "receipt": "claude-oracle-followup.json",
+      "requestedModel": "claude-opus-5-5",
+      "effort": "high",
+      "actualOutputModels": [
+        "claude-opus-4-8"
+      ],
+      "state": "model-mismatch-or-failed",
+      "acceptedAsOpus55": false
+    },
+    {
+      "receipt": "claude-strict55.json",
+      "requestedModel": "claude-opus-5-5",
+      "effort": "high",
+      "actualOutputModels": [
+        "claude-opus-4-8"
+      ],
+      "state": "model-mismatch-or-failed",
+      "acceptedAsOpus55": false
+    },
+    {
+      "receipt": "claude-final55.json",
+      "requestedModel": "claude-opus-5-5",
+      "effort": "xhigh",
+      "actualOutputModels": [
+        "claude-opus-4-8"
+      ],
+      "state": "model-mismatch-or-failed",
+      "acceptedAsOpus55": false
+    }
+  ],
+  "policy": "Inspect actual output model accounting; a requested model flag is not sufficient.",
+  "followup20261103": {
+    "attempts": [
+      {
+        "file": "skf-closure.json",
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "modelsRecorded": [],
+        "outputModelsRecorded": [],
+        "countedAsRequestedModelClosure": false,
+        "error": true,
+        "selfDeclaredModelIsNotAuthoritative": true
+      },
+      {
+        "file": "skf-closure-retry1.json",
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "modelsRecorded": [
+          "claude-opus-5-5",
+          "claude-opus-4-8"
+        ],
+        "outputModelsRecorded": [
+          "claude-opus-4-8"
+        ],
+        "countedAsRequestedModelClosure": false,
+        "error": false,
+        "selfDeclaredModelIsNotAuthoritative": true
+      },
+      {
+        "file": "skf-concise.json",
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "modelsRecorded": [
+          "claude-opus-5-5",
+          "claude-opus-4-8"
+        ],
+        "outputModelsRecorded": [
+          "claude-opus-4-8"
+        ],
+        "countedAsRequestedModelClosure": false,
+        "error": false,
+        "selfDeclaredModelIsNotAuthoritative": true
+      }
+    ],
+    "authenticationWasRenewed": true,
+    "requestedModelFixReviewComplete": false,
+    "reason": "post-login requested5.5stillmixedwith4.8output",
+    "notNewExecutionOrQualification": true
+  }
+}

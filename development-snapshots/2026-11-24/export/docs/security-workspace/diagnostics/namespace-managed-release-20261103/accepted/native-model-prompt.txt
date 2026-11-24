@@ -1,0 +1,3 @@
+这次是VM本地合成项目的正式发布验收。只使用redteam_session_bind和redteam_joint_review，不使用Shell、其他工具、远程目标或研究规则，不修改任何发现状态。
+先调用redteam_session_bind绑定 engagement=vm-namespace-managed-release-20261103。然后用redteam_joint_review action=plan、mode=deep核对已保存范围；只选择semgrep。通过则只启动一次：action=start、mode=deep、steps=["semgrep"]、budgetSeconds=120、requestId=namespace-managed-native-release-20261103-001，使用当前profileRevision。
+用wait等原任务结束，不重新start。完成后读取findings、files、exclusions、diagnostics、artifacts五节报告，limit=5，使用nextCursor续读到complete=true。报告各节数量，引用两处same_line.py调用的完整起止行列及字节偏移，说明namespaceReview适用状态及计数。现用16条规则可能不适用结构复核，不要为显示观察而换规则或重扫。所有命中保持待核实，不声称确认漏洞或项目安全。主聊天模型请求次数若无法读取请写未知；子任务modelCalls与主聊天分开。

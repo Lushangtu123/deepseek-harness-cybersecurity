@@ -1,0 +1,16 @@
+{
+  "requestedModel": "claude-opus-5-5",
+  "effort": "high",
+  "state": "failed",
+  "promptSha256": "b67f7422cb3d2318955d19b5e1f0f8f403869a25628652d6f888556dfb039a6e",
+  "tools": [],
+  "startedAt": "2026-11-12T17:56:29.432331+00:00",
+  "observedModels": [],
+  "elapsedSeconds": 1.5,
+  "exitCode": 1,
+  "actualModels": [],
+  "isError": true,
+  "receiptSha256": "7c2dfdfcd271c0b38ba46c08f7d587e62421d89f936c9e32c6ddb524da2f3d25",
+  "problem": "You've hit your weekly limit · resets 1am (America/Los_Angeles)",
+  "finishedAt": "2026-11-12T17:56:30.957103+00:00"
+}

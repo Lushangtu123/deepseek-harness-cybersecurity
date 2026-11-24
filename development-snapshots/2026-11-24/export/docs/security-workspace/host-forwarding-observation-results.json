@@ -1,0 +1,136 @@
+{
+  "probeCount": 96,
+  "markerSuccesses": 81,
+  "noMarkerFailures": 15,
+  "byMode": {
+    "direct": 48,
+    "fdpass": 48
+  },
+  "failurePhases": {
+    "direct-identification": 2,
+    "direct-connect": 2,
+    "connected-and-descriptor-sent": 7,
+    "no-connect-metadata": 4
+  },
+  "observationSamples": 3225,
+  "initialFDCount": 218,
+  "peakFDCount": 301,
+  "peakFDNumber": 300,
+  "lastFDCount": 219,
+  "queueLimitsObserved": [
+    1
+  ],
+  "peakQueueLength": 1,
+  "peakIncompleteQueueLength": 1,
+  "maxInterSampleGapMs": 13.794,
+  "tailObservationMs": 17457.307,
+  "firstSampleAtOrBelowInitialFDsAfterBurstMs": null,
+  "allProbeIntervalsInsideSamplingHorizon": true,
+  "actualProcessFDLimitMeasured": false,
+  "limits": [
+    "Discrete snapshots can miss faster transients; overlap does not establish causal coincidence.",
+    "Descriptor sent means SCM_RIGHTS sendmsg succeeded, not independent proof OpenSSH consumed it.",
+    "Queue/FD snapshots are not an errno trace or an actual process RLIMIT measurement.",
+    "System-wide listen overflow counters cannot be attributed solely to this VM.",
+    "This run does not include a new guest packet capture or explain historical sidebar failures."
+  ],
+  "systemListenOverflowDelta": 0,
+  "systemCounterScope": "system-wide, cannot attribute to target process",
+  "hostSamplesSha256": "12cdfdeb59634150925b9f0ef2c60a8ed5e617b85d00792ae3ae4d4da081c249",
+  "probeRowsSha256": "8a4ef2c39464d9c17aa1e16f49c8d539c4faab9f3c8394275356ed4c3cd5b033",
+  "observerReaped": true,
+  "date": "2026-11-09",
+  "state": "observation-reviewed-with-nonblocking-gaps",
+  "scope": "Fixed same-user target observation only; no product or root-cause approval",
+  "localTests": 12,
+  "sourceSha256": {
+    "host_socket_observer.c": "d518e32d53daa9860ce81bafa7f2dc0e56c1409b66fef610b02c07c970827be8",
+    "host-socket-observer": "2900751c50b5b493b5b8480dfe43f74dacfcd98abdad77f6244948cb0a81b1fc",
+    "run-observation.py": "72a4d4a9be31f7480fb0a18c519edabead1ba143c1ad46fce2e618416d577ae2",
+    "observations.py": "4aa37ad10d69422e78b4395ce00fd12aecb5c7efbd072299a9723e122f69735c",
+    "probes.py": "497a8808ff00a4d5fe5c19b0f5ab02ff71d32119a632c768628f322c7947b1a4",
+    "fdpass.py": "cca3f297c5c27a262a69749c762be6a54783913198d3168a028a86b0804da71e",
+    "probe_stream.py": "8b93078cb0cdca19e72a996ab88d9bed1ac0f3373a874eb95cd45873658d3f92",
+    "vm.py": "faec66df0a33a91449883e19c79bc5e695319a83dceafd3a7c786f5086813abe"
+  },
+  "externalReview": {
+    "state": "completed-and-triaged",
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "finishReason": "end_turn",
+    "elapsedSeconds": 394.2,
+    "promptSha256": "bcb1953eb780e5a64ce4086de4f164cad8e53bdec09b45b4117370d2c3f9505e",
+    "receiptSha256": "03f2361b4c0702c89594fa3b25c69d3a7b6a8f5ae87bb72aedc5d6703a91eb15",
+    "reportSha256": "18d99f8401f9555fc4c0a4abb3e9ca9343006edddbe1de2415a9ca99132663a5",
+    "scopedBlockers": 0,
+    "newScopeLowSeverityIssues": 6,
+    "items": {
+      "D1": {
+        "state": "confirmed-deferred-before-tool-reuse",
+        "detail": "Stale errno possible on logical mismatch/short API read. No error records in current observation; current successful numeric samples unaffected. Original executed source retained, not silently corrected."
+      },
+      "D2": {
+        "state": "posthoc-provenance-added-runtime-gap-retained",
+        "detail": "manage.py current hash recorded after run. Cannot retroactively bind the runtime manager; direct stage labels remain heuristics."
+      },
+      "D3": {
+        "state": "data-only-supplement-added-aggregator-unchanged",
+        "detail": "Unchanged raw snapshots locally recomputed for socketError/incqlen and descriptor-send nearest neighbors. No new causal claim; supplement not separately model-reviewed."
+      },
+      "D4": {
+        "state": "coverage-gaps-deferred-before-tool-reuse",
+        "detail": "Backlog4-to-queueLimit positive control, real observe rejection paths and remaining phase/clock branches not fully covered. queueLimit1 remains raw SDK-field observation, not a validated local backlog model."
+      },
+      "D5": {
+        "state": "archive-wording-corrected",
+        "detail": "Archive states FD count before and after self-test equal; does not retain unsupported literal3 as required evidence."
+      },
+      "D6": {
+        "state": "posthoc-source-hash-and-command-provenance-added",
+        "detail": "Current source JSON/baseline-map hashes recorded, equal independent earlier HTTP169 baseline. Not runtime-intent backfill. Post-burst identify command documented after the fact."
+      }
+    },
+    "conditionalRisks": [
+      "Observer may perturb scheduling/FD/socket locks; this is not randomized observer-on/off comparison",
+      "Global zero overflow delta informative only if target path is covered by that monotonic counter; local kernel coverage not verified",
+      "No FD_META can occur after an already-established connection was reset; missing metadata does not prove handshake phase",
+      "Fixed mode and batch order confounds timing, FD count and failure statistics",
+      "Cleanup matches same-user exact marker tasks at a point in time, not all sshd session processes"
+    ],
+    "followUp": [
+      "Fix D1 and complete D4 tests before reusing observation tooling for another experiment",
+      "Per-instance forwarding/guest-side state and structured errno; exact root cause still unknown",
+      "Local kernel/libslirp version and counter semantics not established",
+      "Historical sidebar first-read cause",
+      "Ordinary R3 independent quality samples and thresholds"
+    ],
+    "noProductionToolPromotion": true,
+    "candidatePluginDeployed": false,
+    "githubPushed": false
+  },
+  "localEvidenceSha256": {
+    "verification.json": "5c3486f44dee6c82c081acd6b75070f4e6641579bb193b9357448ce2f6d3e710",
+    "evidence-verification.json": "d3d5831744859ec2a77f3b92beeeed978f6f9b80a708529fe3eac9b31ec42065",
+    "postcheck.json": "0bcbc5985e76946a54f51536f1f8aaa7811917f2b9920d92ac68bc2bdc645491",
+    "provenance-posthoc.json": "6ea96d8dd28fd535307e8f41058394072fedf8b7cb3b7a1ca509f33ea9a3c1e5",
+    "review-data-supplement.json": "f6471a7d8923ee1252b49bde7a080b35a37a12968e2fda9ef92fffc6addc6213"
+  },
+  "postReviewSupplement": {
+    "separatelyModelReviewed": false,
+    "newProbeCommands": 0,
+    "newCausalFinding": false,
+    "socketErrorNonzeroSamples": 0
+  },
+  "underlyingSSHRootCauseConfirmed": false,
+  "historicalSidebarRootCauseConfirmed": false,
+  "ordinaryR3Passed": false,
+  "globalReleaseHold": true,
+  "dailyProgramFilesChecked": 169,
+  "candidateProgramFilesChecked": 173,
+  "guestFilesChecked": 124,
+  "candidatePluginDeployed": false,
+  "githubPushed": false,
+  "hostConfigurationModified": false,
+  "vmConfigurationModified": false,
+  "rawPrivateInputsExported": false
+}

@@ -1,0 +1,7 @@
+{
+  "path": "/usr/bin/xdg-user-dir",
+  "exitCode": 0,
+  "stdout": "/home/purge\n",
+  "stderr": "",
+  "HOME": "/home/purge"
+}

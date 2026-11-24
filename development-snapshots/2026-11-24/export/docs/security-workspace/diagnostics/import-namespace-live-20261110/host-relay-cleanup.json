@@ -1,0 +1,33 @@
+{
+  "checkedAt": "2026-11-11T04:01:19.068933+00:00",
+  "scope": "Only the two loopback ports and exec sessions created for this step",
+  "ports": [
+    {
+      "host": "127.0.0.1",
+      "port": 53244,
+      "connectErrno": 61,
+      "meaning": "ECONNREFUSED"
+    },
+    {
+      "host": "127.0.0.1",
+      "port": 53438,
+      "connectErrno": 61,
+      "meaning": "ECONNREFUSED"
+    }
+  ],
+  "execExitReceipts": [
+    {
+      "sessionId": 66642,
+      "exitCode": 0,
+      "observedFrom": "write_stdin completion chunk ee36a4"
+    },
+    {
+      "sessionId": 23019,
+      "exitCode": 0,
+      "observedFrom": "write_stdin completion chunk935b83"
+    }
+  ],
+  "osPidsNotRecorded": true,
+  "bothHostRelaysClosed": true,
+  "supplementAddedAfterReview": true
+}

@@ -1,0 +1,1274 @@
+{
+  "version": 1,
+  "scope": "per-step source and synthetic/previously-used diagnostic acceptance; no full product qualification",
+  "reviews": [
+    {
+      "step": "s1",
+      "material": {
+        "promptSha256": "6d32ffb4654be063251bbeb1a9413834ec715cd0f208776039eff5c3de164aa6",
+        "sourceFiles": {
+          "work/harness-purge-improved/package/scripts/security-joint-adapter.py": "7daa08a445378a2b974a4fa10c2598f22553e1f8b2e8a85a575f58c2707647ac",
+          "work/harness-purge-improved/package/lib/redteam/personal-joint-review.mjs": "9d35e9b4943cd0d0a19bfc40c8549c2930fa6e8bf31f5eaf319eee5bdc2f8ccc",
+          "work/harness-purge-improved/package/lib/redteam/personal-security-client.mjs": "9eb4c6281739435bf7803bb57a2a3185d2e209d2faeb4d9016b06141bad50dbc",
+          "work/harness-purge-improved/tests/model-counts.test.py": "f9c82d4144c19d094cf1f3ed926f187e9d5291ddc7ac4b76051574626c684b94",
+          "work/harness-purge-improved/tests/model-counts.test.mjs": "afb8d34e6800703f1a4e650fe1651f0e0576b6b58b73096060a7c9894a6ba1ca"
+        },
+        "bytes": 127290,
+        "excerptedFiles": {
+          "personal-security-client.mjs": [
+            45,
+            245
+          ]
+        }
+      },
+      "claude": {
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "state": "failed",
+        "promptSha256": "6d32ffb4654be063251bbeb1a9413834ec715cd0f208776039eff5c3de164aa6",
+        "tools": [],
+        "startedAt": "2026-11-12T16:52:25.319629+00:00",
+        "observedModels": [],
+        "elapsedSeconds": 2.5,
+        "exitCode": 1,
+        "actualModels": [],
+        "isError": true,
+        "receiptSha256": "2388b01f3406f8658ac10be0a2e30290f93f3213689b9f2a6ad047596390bca6",
+        "problem": "You've hit your weekly limit · resets 1am (America/Los_Angeles)",
+        "finishedAt": "2026-11-12T16:52:27.850990+00:00"
+      },
+      "fallback": {
+        "version": 1,
+        "provider": "https://api.deepseek.com",
+        "requestedModel": "deepseek-flash",
+        "effort": "high",
+        "tools": [],
+        "jobs": [
+          {
+            "id": "storage-review",
+            "bodySha256": "fa822c6004c655fd224ba09a622f794dd54bbd6eb2460b56b8dbcfb1fd8e9f8c",
+            "promptSha256": "6d32ffb4654be063251bbeb1a9413834ec715cd0f208776039eff5c3de164aa6",
+            "state": "completed",
+            "startedAt": "2026-11-12T16:54:41.619822+00:00",
+            "elapsedSeconds": 89.5,
+            "observedModels": [
+              "deepseek-flash"
+            ],
+            "reportChars": 953,
+            "reasoningCharsReceived": 61746,
+            "wireBytes": 4713958,
+            "lastEventAt": "2026-11-12T16:56:08.763430+00:00",
+            "receipt": "storage-review.json",
+            "receiptSha256": "dbef61c6bf0dc991854f0453a27c2c15435984386a8b2826cecd4c04a2e77d6a",
+            "actualModels": [
+              "deepseek-flash"
+            ],
+            "finishReason": "stop",
+            "usage": {
+              "prompt_tokens": 36011,
+              "completion_tokens": 15507,
+              "total_tokens": 51518,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 14762
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 36011
+            },
+            "report": "storage-review.review.md",
+            "reportSha256": "a71e9e65cc25e47ebaa4cffdd3efdc7b6f97585f43e56134ec0233b71812eeef",
+            "finishedAt": "2026-11-12T16:56:11.147892+00:00"
+          }
+        ],
+        "done": true,
+        "stopRequested": false,
+        "updatedAt": "2026-11-12T16:56:11.150958+00:00"
+      },
+      "reportSha256": "a71e9e65cc25e47ebaa4cffdd3efdc7b6f97585f43e56134ec0233b71812eeef",
+      "report": "diagnostics/python-verification-20261112/s1/review/deepseek-storage-review.review.md",
+      "triage": {
+        "state": "closed",
+        "review": "S1 and S1-r2 DeepSeek Flash high completed after Claude quota failures",
+        "fixed": [
+          "missing/corrupt budget never resets",
+          "flock+fsync reservations",
+          "protocol-bound verified totals",
+          "unknown UI count and legacy labeling"
+        ],
+        "rejectedFinding": "deep profile validator already exact; regression added, no product duplicate",
+        "conditionalNotes": [
+          "modelCallsRecorded on unknown is not rendered; helper ignores legacy when unknown",
+          "receipt verified lacking protocol stays unverified legacy for compatibility; cannot become known total",
+          "local adapter is trusted; recorded historical number is never verified budget"
+        ],
+        "outOfScope": [
+          "pre-receipt preparation orphan may need manual recovery; no forwarding and no initialized count lost"
+        ]
+      }
+    },
+    {
+      "step": "s1-r2",
+      "material": {
+        "promptSha256": "92274776146a7c18293ea64f84719e48536b0f928a6b4505ba429b3030ebd901",
+        "sourceFiles": {
+          "work/harness-purge-improved/package/lib/redteam/personal-joint-review.mjs": "78331e76fd90f3d01fa9fd2526715deeefdebff61643641080d7daf82ee971aa",
+          "work/harness-purge-improved/tests/model-counts.test.mjs": "327893b028c721d4f6a0fbd61c9e0e0f967119bd11de6805b85f5ff9aacc824b"
+        },
+        "bytes": 43169
+      },
+      "claude": {
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "state": "failed",
+        "promptSha256": "92274776146a7c18293ea64f84719e48536b0f928a6b4505ba429b3030ebd901",
+        "tools": [],
+        "startedAt": "2026-11-12T17:02:26.188987+00:00",
+        "observedModels": [],
+        "elapsedSeconds": 2.0,
+        "exitCode": 1,
+        "actualModels": [],
+        "isError": true,
+        "receiptSha256": "3b7bd2ef811c13c4cf7f8f3cbf5a3255e34a677d2dc65f04205ff8f89786d8ff",
+        "problem": "You've hit your weekly limit · resets 1am (America/Los_Angeles)",
+        "finishedAt": "2026-11-12T17:02:28.210779+00:00"
+      },
+      "fallback": {
+        "version": 1,
+        "provider": "https://api.deepseek.com",
+        "requestedModel": "deepseek-flash",
+        "effort": "high",
+        "tools": [],
+        "jobs": [
+          {
+            "id": "storage-review",
+            "bodySha256": "9c9ccbc760a3b583d65e0caba4090c21224901966bb1b3deca0d024d3df6924f",
+            "promptSha256": "92274776146a7c18293ea64f84719e48536b0f928a6b4505ba429b3030ebd901",
+            "state": "completed",
+            "startedAt": "2026-11-12T17:02:58.031160+00:00",
+            "elapsedSeconds": 35.3,
+            "observedModels": [
+              "deepseek-flash"
+            ],
+            "reportChars": 0,
+            "reasoningCharsReceived": 23228,
+            "wireBytes": 1673573,
+            "lastEventAt": "2026-11-12T17:03:29.280230+00:00",
+            "receipt": "storage-review.json",
+            "receiptSha256": "50bc1209372717db8a0c17057474402711541ed6c25a2edd8fed73100959d519",
+            "actualModels": [
+              "deepseek-flash"
+            ],
+            "finishReason": "stop",
+            "usage": {
+              "prompt_tokens": 11793,
+              "completion_tokens": 6181,
+              "total_tokens": 17974,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 5579
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 11793
+            },
+            "report": "storage-review.review.md",
+            "reportSha256": "bcc515b2367462750db4f80fb39fb88ef15556a4258b63a0f634ab6bcaf2416e",
+            "finishedAt": "2026-11-12T17:03:33.374924+00:00"
+          }
+        ],
+        "done": true,
+        "stopRequested": false,
+        "updatedAt": "2026-11-12T17:03:33.376748+00:00"
+      },
+      "reportSha256": "bcc515b2367462750db4f80fb39fb88ef15556a4258b63a0f634ab6bcaf2416e",
+      "report": "diagnostics/python-verification-20261112/s1-r2/review/deepseek-storage-review.review.md",
+      "triage": {
+        "state": "addressed-by-following-revision",
+        "historyRetained": true
+      }
+    },
+    {
+      "step": "s2",
+      "material": {
+        "promptSha256": "49fd08466bdac684c8890fd339bf29394ccdaa3d1465a50c5fb099a3bcc95a02",
+        "sourceFiles": {
+          "scripts/python_execution_verify.py": "d6521d8dc66df6d3c63b4a0971e615e469cb96f488ec01698ff9f88828b29d81",
+          "scripts/verifier_snapshot.py": "b525eb7ebf58f2d145033ebead6ccda3e74c605a8ad14e53b06ac4f52b9a46bd",
+          "scripts/python_execution_verify.test.py": "fd6b193338e6bd818e380eacd69d003351117a40923c971bcddce581ad92c4e6",
+          "scripts/verifier_snapshot.test.py": "df38e9f5e7a02ce10b65f0169d80fd29e0ec92c219d25994cd439641ec03b889"
+        },
+        "bytes": 57333
+      },
+      "claude": {
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "state": "failed",
+        "promptSha256": "49fd08466bdac684c8890fd339bf29394ccdaa3d1465a50c5fb099a3bcc95a02",
+        "tools": [],
+        "startedAt": "2026-11-12T17:11:41.411186+00:00",
+        "observedModels": [],
+        "elapsedSeconds": 1.5,
+        "exitCode": 1,
+        "actualModels": [],
+        "isError": true,
+        "receiptSha256": "e622256ad83ce3232e120d2a956b4d933b1075c8b1c4a724dabf96e7c894a4e6",
+        "problem": "You've hit your weekly limit · resets 1am (America/Los_Angeles)",
+        "finishedAt": "2026-11-12T17:11:42.933182+00:00"
+      },
+      "fallback": {
+        "version": 1,
+        "provider": "https://api.deepseek.com",
+        "requestedModel": "deepseek-flash",
+        "effort": "high",
+        "tools": [],
+        "jobs": [
+          {
+            "id": "storage-review",
+            "bodySha256": "aa4e99d5349cde14193577447cbb8c7e0ba172ff1df354f6543a80a5d1dadc36",
+            "promptSha256": "49fd08466bdac684c8890fd339bf29394ccdaa3d1465a50c5fb099a3bcc95a02",
+            "state": "completed",
+            "startedAt": "2026-11-12T17:11:56.522342+00:00",
+            "elapsedSeconds": 159.0,
+            "observedModels": [
+              "deepseek-flash"
+            ],
+            "reportChars": 761,
+            "reasoningCharsReceived": 114476,
+            "wireBytes": 8729346,
+            "lastEventAt": "2026-11-12T17:14:32.548350+00:00",
+            "receipt": "storage-review.json",
+            "receiptSha256": "c8e65fe3bb77e3fc8daa44fba22324966071fcb331ca2f64be7ad13fc6aa42d0",
+            "actualModels": [
+              "deepseek-flash"
+            ],
+            "finishReason": "stop",
+            "usage": {
+              "prompt_tokens": 17058,
+              "completion_tokens": 28442,
+              "total_tokens": 45500,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 27597
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 17058
+            },
+            "report": "storage-review.review.md",
+            "reportSha256": "1e5bb42faec2ec307670b1628422e4376cdb6086ae3e99b2d6674a92c46ab300",
+            "finishedAt": "2026-11-12T17:14:35.524737+00:00"
+          }
+        ],
+        "done": true,
+        "stopRequested": false,
+        "updatedAt": "2026-11-12T17:14:35.526334+00:00"
+      },
+      "reportSha256": "1e5bb42faec2ec307670b1628422e4376cdb6086ae3e99b2d6674a92c46ab300",
+      "report": "diagnostics/python-verification-20261112/s2/review/deepseek-storage-review.review.md",
+      "triage": {
+        "state": "closed-s2-r4",
+        "fixed": [
+          "random per-point frozen challenge",
+          "exact probe AST instead of substring",
+          "same call/return point and callee identity",
+          "default and multi-param type proofs rejected",
+          "stdout separate from result writer",
+          "invalid/empty trace becomes unknown",
+          "source allowlist before execution"
+        ],
+        "capabilityGap": "No generic unreviewed-source verification; exact reviewed profiles only; in-process monitoring is not adversarial attestation. Fresh holdout blocked.",
+        "r3Qualified": false,
+        "notes": "Trusted code/deps are separately frozen; APPPROVED_SOURCES applies to project file manifest. No generic-source verification or fresh holdout qualification."
+      }
+    },
+    {
+      "step": "s2-r2",
+      "material": {
+        "promptSha256": "50aca9d5e77c3d38396665a9ace16921d01e4dbf4a68696b1d47c2fa05b99b77",
+        "sourceFiles": {
+          "scripts/python_execution_verify.py": "b1fea002920c65708ac7b40d453b196ce01b76d02f9941c2140c848b52277ab6",
+          "scripts/python_execution_verify.test.py": "0ffbbf5514589a720321dac3c5b9f76ac1aec6295caced9d6b9ac67548a1b3ba"
+        },
+        "bytes": 24149
+      },
+      "claude": {
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "state": "failed",
+        "promptSha256": "50aca9d5e77c3d38396665a9ace16921d01e4dbf4a68696b1d47c2fa05b99b77",
+        "tools": [],
+        "startedAt": "2026-11-12T17:17:22.155438+00:00",
+        "observedModels": [],
+        "elapsedSeconds": 1.5,
+        "exitCode": 1,
+        "actualModels": [],
+        "isError": true,
+        "receiptSha256": "92bb4c8e392471e3c779b9c525e731ccab2f516f77985d38bde5745a0ed068e8",
+        "problem": "You've hit your weekly limit · resets 1am (America/Los_Angeles)",
+        "finishedAt": "2026-11-12T17:17:23.682091+00:00"
+      },
+      "fallback": {
+        "version": 1,
+        "provider": "https://api.deepseek.com",
+        "requestedModel": "deepseek-flash",
+        "effort": "high",
+        "tools": [],
+        "jobs": [
+          {
+            "id": "storage-review",
+            "bodySha256": "d422700d8f305698dfe88549509a6b9085c8b8ea2268ed27126a2ef7887a94ae",
+            "promptSha256": "50aca9d5e77c3d38396665a9ace16921d01e4dbf4a68696b1d47c2fa05b99b77",
+            "state": "completed",
+            "startedAt": "2026-11-12T17:17:50.811371+00:00",
+            "elapsedSeconds": 169.9,
+            "observedModels": [
+              "deepseek-flash"
+            ],
+            "reportChars": 0,
+            "reasoningCharsReceived": 112281,
+            "wireBytes": 8473962,
+            "lastEventAt": "2026-11-12T17:20:36.779954+00:00",
+            "receipt": "storage-review.json",
+            "receiptSha256": "bcc48ce1833312572d1f568888d06309a53c06bfda93660da90fce4e5ba65a63",
+            "actualModels": [
+              "deepseek-flash"
+            ],
+            "finishReason": "stop",
+            "usage": {
+              "prompt_tokens": 7018,
+              "completion_tokens": 27732,
+              "total_tokens": 34750,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 27128
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 7018
+            },
+            "report": "storage-review.review.md",
+            "reportSha256": "fde5abeacb03b9b2d595b7bf96a23192e7f388ed23e80aa0a1187f7a5c76194f",
+            "finishedAt": "2026-11-12T17:20:40.715059+00:00"
+          }
+        ],
+        "done": true,
+        "stopRequested": false,
+        "updatedAt": "2026-11-12T17:20:40.716615+00:00"
+      },
+      "reportSha256": "fde5abeacb03b9b2d595b7bf96a23192e7f388ed23e80aa0a1187f7a5c76194f",
+      "report": "diagnostics/python-verification-20261112/s2-r2/review/deepseek-storage-review.review.md",
+      "triage": {
+        "state": "addressed-by-following-revision",
+        "historyRetained": true
+      }
+    },
+    {
+      "step": "s2-r3",
+      "material": {
+        "promptSha256": "feaeb32ce7cc021ea5fc8dd77fd17698eb1089e8e101ed680979a46b380c5bfd",
+        "sourceFiles": {
+          "scripts/python_execution_verify.py": "d5148e356fa7fe38b36076aac959d59127f1fae2b0b000e8faa452cd8cd6923b",
+          "scripts/python_execution_verify.test.py": "6b89b44e2c47d6e3a6291f6b19a2392a130230423066e99832353417a86fc7df"
+        },
+        "bytes": 26114
+      },
+      "claude": {
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "state": "failed",
+        "promptSha256": "feaeb32ce7cc021ea5fc8dd77fd17698eb1089e8e101ed680979a46b380c5bfd",
+        "tools": [],
+        "startedAt": "2026-11-12T17:22:45.622322+00:00",
+        "observedModels": [],
+        "elapsedSeconds": 1.5,
+        "exitCode": 1,
+        "actualModels": [],
+        "isError": true,
+        "receiptSha256": "f6966836c7cc817db69c01015f18196262023c3918acf849ef9adf7543a0133b",
+        "problem": "You've hit your weekly limit · resets 1am (America/Los_Angeles)",
+        "finishedAt": "2026-11-12T17:22:47.145802+00:00"
+      },
+      "fallback": {
+        "version": 1,
+        "provider": "https://api.deepseek.com",
+        "requestedModel": "deepseek-flash",
+        "effort": "high",
+        "tools": [],
+        "jobs": [
+          {
+            "id": "storage-review",
+            "bodySha256": "6db6892e1329ad6f1302dcf21f634b13e27c786a9d847d35b6a4f76ba00968d3",
+            "promptSha256": "feaeb32ce7cc021ea5fc8dd77fd17698eb1089e8e101ed680979a46b380c5bfd",
+            "state": "completed",
+            "startedAt": "2026-11-12T17:23:02.368432+00:00",
+            "elapsedSeconds": 135.5,
+            "observedModels": [
+              "deepseek-flash"
+            ],
+            "reportChars": 0,
+            "reasoningCharsReceived": 94361,
+            "wireBytes": 7015089,
+            "lastEventAt": "2026-11-12T17:25:13.422128+00:00",
+            "receipt": "storage-review.json",
+            "receiptSha256": "e022880b0acfea4d19b0fb04264df0acbd898debb069508dee7de28e87900668",
+            "actualModels": [
+              "deepseek-flash"
+            ],
+            "finishReason": "stop",
+            "usage": {
+              "prompt_tokens": 7683,
+              "completion_tokens": 23256,
+              "total_tokens": 30939,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 22695
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 7683
+            },
+            "report": "storage-review.review.md",
+            "reportSha256": "937db255230987f927be859188ff2cf1e46e42d9a84a78759d4d04fe0288a9bd",
+            "finishedAt": "2026-11-12T17:25:17.850238+00:00"
+          }
+        ],
+        "done": true,
+        "stopRequested": false,
+        "updatedAt": "2026-11-12T17:25:17.851896+00:00"
+      },
+      "reportSha256": "937db255230987f927be859188ff2cf1e46e42d9a84a78759d4d04fe0288a9bd",
+      "report": "diagnostics/python-verification-20261112/s2-r3/review/deepseek-storage-review.review.md",
+      "triage": {
+        "state": "addressed-by-following-revision",
+        "historyRetained": true
+      }
+    },
+    {
+      "step": "s2-r4",
+      "material": {
+        "promptSha256": "3005508ffbdc70e3de0da02692b989909053832de992a9a9b8be6242159678ef",
+        "sourceFiles": {
+          "scripts/python_execution_verify.py": "2ae0cf6bf299f89c85c9d657343cf16a4bfa3e2eb915905902565ab05aa5dc8d",
+          "scripts/python_execution_verify.test.py": "bcf9daafaa4913c5c80f8b96377953696ab812bd46e85e8a688cb5e18a657a6b"
+        },
+        "bytes": 26313
+      },
+      "claude": {
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "state": "failed",
+        "promptSha256": "3005508ffbdc70e3de0da02692b989909053832de992a9a9b8be6242159678ef",
+        "tools": [],
+        "startedAt": "2026-11-12T17:26:29.039621+00:00",
+        "observedModels": [],
+        "elapsedSeconds": 1.5,
+        "exitCode": 1,
+        "actualModels": [],
+        "isError": true,
+        "receiptSha256": "bfb12ed9141de7de13839f640050d8d7a846d56ed0bdcac7b8bf41ca40a531f9",
+        "problem": "You've hit your weekly limit · resets 1am (America/Los_Angeles)",
+        "finishedAt": "2026-11-12T17:26:30.561362+00:00"
+      },
+      "fallback": {
+        "version": 1,
+        "provider": "https://api.deepseek.com",
+        "requestedModel": "deepseek-flash",
+        "effort": "high",
+        "tools": [],
+        "jobs": [
+          {
+            "id": "storage-review",
+            "bodySha256": "62d4bb5f087843a92d4570c4ebdcd212693e637b7e0b592c3b2c0c613deeef85",
+            "promptSha256": "3005508ffbdc70e3de0da02692b989909053832de992a9a9b8be6242159678ef",
+            "state": "completed",
+            "startedAt": "2026-11-12T17:26:56.466196+00:00",
+            "elapsedSeconds": 23.5,
+            "observedModels": [
+              "deepseek-flash"
+            ],
+            "reportChars": 0,
+            "reasoningCharsReceived": 15346,
+            "wireBytes": 1108553,
+            "lastEventAt": "2026-11-12T17:27:17.190090+00:00",
+            "receipt": "storage-review.json",
+            "receiptSha256": "9ea7fba6cae2f2e84c118a23e21677b0c376c77b1f4687211bca6e1e00a9f027",
+            "actualModels": [
+              "deepseek-flash"
+            ],
+            "finishReason": "stop",
+            "usage": {
+              "prompt_tokens": 7790,
+              "completion_tokens": 4071,
+              "total_tokens": 11861,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 3744
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 7790
+            },
+            "report": "storage-review.review.md",
+            "reportSha256": "5eff33c38c99270b2c03e4dfbe0c02aef533c2e7c696d676168f1555730c21b0",
+            "finishedAt": "2026-11-12T17:27:19.990451+00:00"
+          }
+        ],
+        "done": true,
+        "stopRequested": false,
+        "updatedAt": "2026-11-12T17:27:19.992397+00:00"
+      },
+      "reportSha256": "5eff33c38c99270b2c03e4dfbe0c02aef533c2e7c696d676168f1555730c21b0",
+      "report": "diagnostics/python-verification-20261112/s2-r4/review/deepseek-storage-review.review.md",
+      "triage": {
+        "state": "addressed-by-following-revision",
+        "historyRetained": true
+      }
+    },
+    {
+      "step": "s3",
+      "material": {
+        "promptSha256": "239c3a5a4123d79efffead59328db7b8415f2063400727d2acf904ce10e9afc1",
+        "sourceFiles": {
+          "scripts/reviewer_snapshot.py": "f9706edeba2279aca7a4b78d1a36d54e87a39e19359a585a50184493c47a662d",
+          "scripts/verifier_snapshot.py": "8575c2650a6309cd1473283e62a904d8293a089128d3733240bdb65c2933b06d",
+          "scripts/review_quality_gate.mjs": "9650842cadb0cec7e8d2f63f2dcdec9b5c987b629aa7a52e82e6c7685d38874b",
+          "scripts/verify_execution_controller.test.py": "1a4fa5914d9121cb33ebbe5932830223b7388e9d958bbb3280e26dc01ce7242b",
+          "work/harness-purge-improved/tests/review-verification-v4.test.mjs": "7cd66df9022d961b052cc7c9cbfd0c45edf70e6d00ae09440457a99bd3a3e165",
+          "work/harness-purge-improved/tests/verification-artifacts.test.mjs": "7b3d5d02d7d104f2648c97875d933348ddb819e7d359dfebde85268fc250f38c"
+        },
+        "bytes": 154106
+      },
+      "claude": {
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "state": "failed",
+        "promptSha256": "239c3a5a4123d79efffead59328db7b8415f2063400727d2acf904ce10e9afc1",
+        "tools": [],
+        "startedAt": "2026-11-12T17:37:57.047478+00:00",
+        "observedModels": [],
+        "elapsedSeconds": 1.5,
+        "exitCode": 1,
+        "actualModels": [],
+        "isError": true,
+        "receiptSha256": "cbebef747aa05852b224cd856c0f693c4945b64f2de24c08b78dfb6c6a7de6bc",
+        "problem": "You've hit your weekly limit · resets 1am (America/Los_Angeles)",
+        "finishedAt": "2026-11-12T17:37:58.573545+00:00"
+      },
+      "fallback": {
+        "version": 1,
+        "provider": "https://api.deepseek.com",
+        "requestedModel": "deepseek-flash",
+        "effort": "high",
+        "tools": [],
+        "jobs": [
+          {
+            "id": "storage-review",
+            "bodySha256": "003e5d39e8981c2e0e46fc87518f254b1d632a51b8e6611fd4ae42a3aef389f5",
+            "promptSha256": "239c3a5a4123d79efffead59328db7b8415f2063400727d2acf904ce10e9afc1",
+            "state": "completed",
+            "startedAt": "2026-11-12T17:38:19.845079+00:00",
+            "elapsedSeconds": 238.8,
+            "observedModels": [
+              "deepseek-flash"
+            ],
+            "reportChars": 1265,
+            "reasoningCharsReceived": 183932,
+            "wireBytes": 13725783,
+            "lastEventAt": "2026-11-12T17:42:16.628770+00:00",
+            "receipt": "storage-review.json",
+            "receiptSha256": "c1dceec61a13d6c3f2d8a7c9b5c9e7a4c7e615f7fb232bcb381b437c61bd3972",
+            "actualModels": [
+              "deepseek-flash"
+            ],
+            "finishReason": "stop",
+            "usage": {
+              "prompt_tokens": 41516,
+              "completion_tokens": 44086,
+              "total_tokens": 85602,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 43362
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 41516
+            },
+            "report": "storage-review.review.md",
+            "reportSha256": "3207cb49a71b5e0cf182279d6e34bc1d587c3bbb5a2cd0007eabd4a3fc4274c9",
+            "finishedAt": "2026-11-12T17:42:18.611465+00:00"
+          }
+        ],
+        "done": true,
+        "stopRequested": false,
+        "updatedAt": "2026-11-12T17:42:18.612096+00:00"
+      },
+      "reportSha256": "3207cb49a71b5e0cf182279d6e34bc1d587c3bbb5a2cd0007eabd4a3fc4274c9",
+      "report": "diagnostics/python-verification-20261112/s3/review/deepseek-storage-review.review.md",
+      "triage": {
+        "state": "addressed-by-following-revision",
+        "historyRetained": true
+      }
+    },
+    {
+      "step": "s3-r2",
+      "material": {
+        "promptSha256": "f1d3051fccab8894c955a481fc264d2cfd821ba96935ee70acfb19823a69809f",
+        "sourceFiles": {
+          "scripts/verifier_snapshot.py": "59ba75f82903f03757f4af1c21f50dd3c45a4d45fcd80a19451dc972dc8468f7",
+          "scripts/verifier_snapshot.test.py": "15f399ed849444ba5386a9b48c52698fdc249f989a9cbbda34c7ccf6b72249ad",
+          "scripts/python_execution_verify.py": "f9fcc7e6e57986bc4771c1b1677df1b6bfc9a6c1cba3e071e95d71c7ad734acb",
+          "scripts/python_execution_verify.test.py": "86c570e23401abb9b351957c3df87fccdce23b8354cbe0f17a33901eae1af9ed"
+        },
+        "bytes": 37974
+      },
+      "claude": {
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "state": "failed",
+        "promptSha256": "f1d3051fccab8894c955a481fc264d2cfd821ba96935ee70acfb19823a69809f",
+        "tools": [],
+        "startedAt": "2026-11-12T17:44:06.775280+00:00",
+        "observedModels": [],
+        "elapsedSeconds": 2.0,
+        "exitCode": 1,
+        "actualModels": [],
+        "isError": true,
+        "receiptSha256": "15eac65bb657261b2844be680c57667b48f57e371a7411b200c568e05cf454f7",
+        "problem": "You've hit your weekly limit · resets 1am (America/Los_Angeles)",
+        "finishedAt": "2026-11-12T17:44:08.806269+00:00"
+      },
+      "fallback": {
+        "version": 1,
+        "provider": "https://api.deepseek.com",
+        "requestedModel": "deepseek-flash",
+        "effort": "high",
+        "tools": [],
+        "jobs": [
+          {
+            "id": "storage-review",
+            "bodySha256": "5590ac01f7a48c364076ba274d51f325e6f9ee8ecd2229563c98b0eb15f83664",
+            "promptSha256": "f1d3051fccab8894c955a481fc264d2cfd821ba96935ee70acfb19823a69809f",
+            "state": "completed",
+            "startedAt": "2026-11-12T17:44:18.214984+00:00",
+            "elapsedSeconds": 102.8,
+            "observedModels": [
+              "deepseek-flash"
+            ],
+            "reportChars": 421,
+            "reasoningCharsReceived": 72553,
+            "wireBytes": 5635253,
+            "lastEventAt": "2026-11-12T17:45:59.230202+00:00",
+            "receipt": "storage-review.json",
+            "receiptSha256": "77c0c17aeb31eee4db9dcda0f03dbe472113070e3407da2342a17abcf0811ce2",
+            "actualModels": [
+              "deepseek-flash"
+            ],
+            "finishReason": "stop",
+            "usage": {
+              "prompt_tokens": 11162,
+              "completion_tokens": 18278,
+              "total_tokens": 29440,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 17833
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 11162
+            },
+            "report": "storage-review.review.md",
+            "reportSha256": "1e4384821c3b4a477d7245b63a1e7b70ee7a9d9784b4249d9e6d0e24f2cee4d6",
+            "finishedAt": "2026-11-12T17:46:01.033785+00:00"
+          }
+        ],
+        "done": true,
+        "stopRequested": false,
+        "updatedAt": "2026-11-12T17:46:01.035867+00:00"
+      },
+      "reportSha256": "1e4384821c3b4a477d7245b63a1e7b70ee7a9d9784b4249d9e6d0e24f2cee4d6",
+      "report": "diagnostics/python-verification-20261112/s3-r2/review/deepseek-storage-review.review.md",
+      "triage": {
+        "state": "addressed-by-following-revision",
+        "historyRetained": true
+      }
+    },
+    {
+      "step": "s3-r3",
+      "material": {
+        "promptSha256": "e23764a5fd47f55a472836857dfbfd490379c542c4333d425c94bec1eca5c028",
+        "sourceFiles": {
+          "scripts/verifier_snapshot.py": "59ba75f82903f03757f4af1c21f50dd3c45a4d45fcd80a19451dc972dc8468f7",
+          "scripts/verifier_snapshot.test.py": "889941e2ca96927b8542149c50005d0f2922dc8904433100b31ddf6524d234dd"
+        },
+        "bytes": 15257
+      },
+      "claude": {
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "state": "failed",
+        "promptSha256": "e23764a5fd47f55a472836857dfbfd490379c542c4333d425c94bec1eca5c028",
+        "tools": [],
+        "startedAt": "2026-11-12T17:47:14.785290+00:00",
+        "observedModels": [],
+        "elapsedSeconds": 1.5,
+        "exitCode": 1,
+        "actualModels": [],
+        "isError": true,
+        "receiptSha256": "6096486834ca7bcc9947d53013fe0b6a89ee1f519189d128db38245912db84b5",
+        "problem": "You've hit your weekly limit · resets 1am (America/Los_Angeles)",
+        "finishedAt": "2026-11-12T17:47:16.330809+00:00"
+      },
+      "fallback": {
+        "version": 1,
+        "provider": "https://api.deepseek.com",
+        "requestedModel": "deepseek-flash",
+        "effort": "high",
+        "tools": [],
+        "jobs": [
+          {
+            "id": "storage-review",
+            "bodySha256": "eb308abbdd37813c51498246282e58b26a0ac0a005e46fe18db511e7d0171158",
+            "promptSha256": "e23764a5fd47f55a472836857dfbfd490379c542c4333d425c94bec1eca5c028",
+            "state": "completed",
+            "startedAt": "2026-11-12T17:50:59.661271+00:00",
+            "elapsedSeconds": 15.0,
+            "observedModels": [
+              "deepseek-flash"
+            ],
+            "reportChars": 0,
+            "reasoningCharsReceived": 6841,
+            "wireBytes": 476863,
+            "lastEventAt": "2026-11-12T17:51:10.302438+00:00",
+            "receipt": "storage-review.json",
+            "receiptSha256": "6946a956ca3e60c255c23c87c8fc70dddb73d689698597df52398b89c8b1662d",
+            "actualModels": [
+              "deepseek-flash"
+            ],
+            "finishReason": "stop",
+            "usage": {
+              "prompt_tokens": 4538,
+              "completion_tokens": 2274,
+              "total_tokens": 6812,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 2066
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 4538
+            },
+            "report": "storage-review.review.md",
+            "reportSha256": "cc5b9e512c39e095a1cc7a42e07f6a97b0ba534e2a5cdfba4695a252ae3e0968",
+            "finishedAt": "2026-11-12T17:51:14.691479+00:00"
+          }
+        ],
+        "done": true,
+        "stopRequested": false,
+        "updatedAt": "2026-11-12T17:51:14.693514+00:00"
+      },
+      "reportSha256": "cc5b9e512c39e095a1cc7a42e07f6a97b0ba534e2a5cdfba4695a252ae3e0968",
+      "report": "diagnostics/python-verification-20261112/s3-r3/review/deepseek-storage-review.review.md",
+      "triage": {
+        "state": "closed",
+        "review": "DeepSeek V4.1 Flash high after Claude weekly quota failure",
+        "confirmedBlockers": [],
+        "testCount": 4,
+        "resolution": "Tests instrument actual fdopen read seam, verify same returned bytes and deterministic fstat mutation rejection",
+        "limitations": [
+          "reviewed source profiles only",
+          "white-box test seam changes require matching test update"
+        ]
+      }
+    },
+    {
+      "step": "s4",
+      "material": {
+        "promptSha256": "b67f7422cb3d2318955d19b5e1f0f8f403869a25628652d6f888556dfb039a6e",
+        "sourceFiles": {
+          "scripts/reviewer_snapshot.py": "f9706edeba2279aca7a4b78d1a36d54e87a39e19359a585a50184493c47a662d",
+          "scripts/verifier_snapshot.py": "59ba75f82903f03757f4af1c21f50dd3c45a4d45fcd80a19451dc972dc8468f7",
+          "scripts/python_execution_verify.py": "f9fcc7e6e57986bc4771c1b1677df1b6bfc9a6c1cba3e071e95d71c7ad734acb",
+          "scripts/review_quality_gate.mjs": "9650842cadb0cec7e8d2f63f2dcdec9b5c987b629aa7a52e82e6c7685d38874b",
+          "scripts/verifier_snapshot.test.py": "889941e2ca96927b8542149c50005d0f2922dc8904433100b31ddf6524d234dd",
+          "scripts/python_execution_verify.test.py": "86c570e23401abb9b351957c3df87fccdce23b8354cbe0f17a33901eae1af9ed",
+          "work/harness-purge-improved/tests/verification-artifacts.test.mjs": "7b3d5d02d7d104f2648c97875d933348ddb819e7d359dfebde85268fc250f38c",
+          "docs/security-workspace/python-execution-verification.md": "02aed313263631be0a264c26714434f8c7dec01f14a9e75a710135c841f854a9"
+        },
+        "bytes": 235035
+      },
+      "claude": {
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "state": "failed",
+        "promptSha256": "b67f7422cb3d2318955d19b5e1f0f8f403869a25628652d6f888556dfb039a6e",
+        "tools": [],
+        "startedAt": "2026-11-12T17:56:29.432331+00:00",
+        "observedModels": [],
+        "elapsedSeconds": 1.5,
+        "exitCode": 1,
+        "actualModels": [],
+        "isError": true,
+        "receiptSha256": "7c2dfdfcd271c0b38ba46c08f7d587e62421d89f936c9e32c6ddb524da2f3d25",
+        "problem": "You've hit your weekly limit · resets 1am (America/Los_Angeles)",
+        "finishedAt": "2026-11-12T17:56:30.957103+00:00"
+      },
+      "fallback": {
+        "version": 1,
+        "provider": "https://api.deepseek.com",
+        "requestedModel": "deepseek-flash",
+        "effort": "high",
+        "tools": [],
+        "jobs": [
+          {
+            "id": "storage-review",
+            "bodySha256": "386fd34b27aa7bfcaa86d0277c96573144df498524d10e6d89bda439ac1c9396",
+            "promptSha256": "b67f7422cb3d2318955d19b5e1f0f8f403869a25628652d6f888556dfb039a6e",
+            "state": "partial",
+            "startedAt": "2026-11-12T17:57:02.871660+00:00",
+            "elapsedSeconds": 356.7,
+            "observedModels": [
+              "deepseek-flash"
+            ],
+            "reportChars": 0,
+            "reasoningCharsReceived": 269546,
+            "wireBytes": 20333173,
+            "lastEventAt": "2026-11-12T18:02:54.907309+00:00",
+            "receipt": "storage-review.json",
+            "receiptSha256": "52d1e9a4726755b357e525f9e264ff1d40f5468e028f5ac31ef5a315271e1aa2",
+            "actualModels": [
+              "deepseek-flash"
+            ],
+            "finishReason": "length",
+            "usage": {
+              "prompt_tokens": 69507,
+              "completion_tokens": 65536,
+              "total_tokens": 135043,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 65536
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 69507
+            },
+            "problem": "incomplete response, output limit, or missing usage",
+            "finishedAt": "2026-11-12T18:02:59.551256+00:00"
+          }
+        ],
+        "done": true,
+        "stopRequested": false,
+        "updatedAt": "2026-11-12T18:02:59.552729+00:00"
+      },
+      "reportSha256": null,
+      "report": null,
+      "triage": {
+        "state": "superseded-by-split-review",
+        "finishReason": "length",
+        "reportAvailable": false,
+        "next": [
+          "s4-isolation",
+          "s4-scoring",
+          "s4-acceptance"
+        ]
+      }
+    },
+    {
+      "step": "s4-isolation",
+      "material": {
+        "promptSha256": "1eb2ae4fb09095a0d65d41567e910ca23f060e2e423c0c3b2a59fe1876577299",
+        "sourceFiles": {
+          "scripts/python_execution_verify.py": "f9fcc7e6e57986bc4771c1b1677df1b6bfc9a6c1cba3e071e95d71c7ad734acb",
+          "scripts/verifier_snapshot.py": "59ba75f82903f03757f4af1c21f50dd3c45a4d45fcd80a19451dc972dc8468f7",
+          "scripts/verifier_snapshot.test.py": "889941e2ca96927b8542149c50005d0f2922dc8904433100b31ddf6524d234dd"
+        },
+        "bytes": 47463,
+        "parentTruncatedPromptSha256": "b67f7422cb3d2318955d19b5e1f0f8f403869a25628652d6f888556dfb039a6e"
+      },
+      "claude": {
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "state": "failed",
+        "promptSha256": "1eb2ae4fb09095a0d65d41567e910ca23f060e2e423c0c3b2a59fe1876577299",
+        "tools": [],
+        "startedAt": "2026-11-12T18:04:11.065151+00:00",
+        "observedModels": [],
+        "elapsedSeconds": 2.0,
+        "exitCode": 1,
+        "actualModels": [],
+        "isError": true,
+        "receiptSha256": "30eea0bdc701a4332714dc703f197275afbd1f1a5c812cd9d26fd98547b4d540",
+        "problem": "You've hit your weekly limit · resets 1am (America/Los_Angeles)",
+        "finishedAt": "2026-11-12T18:04:13.088424+00:00"
+      },
+      "fallback": {
+        "version": 1,
+        "provider": "https://api.deepseek.com",
+        "requestedModel": "deepseek-flash",
+        "effort": "high",
+        "tools": [],
+        "jobs": [
+          {
+            "id": "storage-review",
+            "bodySha256": "75e52abf501f12fa7c0a5d9c56eb7c56941e6ae7061b6b6a8debd5603a43c973",
+            "promptSha256": "1eb2ae4fb09095a0d65d41567e910ca23f060e2e423c0c3b2a59fe1876577299",
+            "state": "completed",
+            "startedAt": "2026-11-12T18:04:28.326231+00:00",
+            "elapsedSeconds": 110.2,
+            "observedModels": [
+              "deepseek-flash"
+            ],
+            "reportChars": 0,
+            "reasoningCharsReceived": 77767,
+            "wireBytes": 5778288,
+            "lastEventAt": "2026-11-12T18:06:14.354109+00:00",
+            "receipt": "storage-review.json",
+            "receiptSha256": "d096635ef3c76300d2eef979582fb555bf0b0cb81d7e0719e8bddc5c131d979f",
+            "actualModels": [
+              "deepseek-flash"
+            ],
+            "finishReason": "stop",
+            "usage": {
+              "prompt_tokens": 13498,
+              "completion_tokens": 19302,
+              "total_tokens": 32800,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 18817
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 13498
+            },
+            "report": "storage-review.review.md",
+            "reportSha256": "7d0c947382065eed619a240b5681d63bae26edf07b9ca76e1caad9a8195fc821",
+            "finishedAt": "2026-11-12T18:06:18.545290+00:00"
+          }
+        ],
+        "done": true,
+        "stopRequested": false,
+        "updatedAt": "2026-11-12T18:06:18.546773+00:00"
+      },
+      "reportSha256": "7d0c947382065eed619a240b5681d63bae26edf07b9ca76e1caad9a8195fc821",
+      "report": "diagnostics/python-verification-20261112/s4-isolation/review/deepseek-storage-review.review.md",
+      "triage": {
+        "state": "addressed-in-s4-r2",
+        "confirmed": [
+          "Dependency file hash closure was not compared to an independent tool lock. Added shipped lock equality checks in Python freeze/verify and Node."
+        ],
+        "conditionallyAddressed": [
+          "The source-root bypass requires extra files in the stage. The actual controller creates a new private directory and writes only payload. Final native test inspected the actual stage and confirmed an intentionally unlisted file stayed out of the mount."
+        ],
+        "conservative": [
+          "Finite guards only exclude the explicitly supported safe Python literal grammar. Other domains stay unknown."
+        ]
+      }
+    },
+    {
+      "step": "s4-scoring",
+      "material": {
+        "promptSha256": "46724af9f2b52bd67b1db02c5118100cbc36c75f081b13146a5336d88fda490d",
+        "sourceFiles": {
+          "scripts/review_quality_gate.mjs": "9650842cadb0cec7e8d2f63f2dcdec9b5c987b629aa7a52e82e6c7685d38874b",
+          "work/harness-purge-improved/tests/verification-artifacts.test.mjs": "7b3d5d02d7d104f2648c97875d933348ddb819e7d359dfebde85268fc250f38c"
+        },
+        "bytes": 55412,
+        "parentTruncatedPromptSha256": "b67f7422cb3d2318955d19b5e1f0f8f403869a25628652d6f888556dfb039a6e"
+      },
+      "claude": {
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "state": "failed",
+        "promptSha256": "46724af9f2b52bd67b1db02c5118100cbc36c75f081b13146a5336d88fda490d",
+        "tools": [],
+        "startedAt": "2026-11-12T18:04:11.068346+00:00",
+        "observedModels": [],
+        "elapsedSeconds": 2.0,
+        "exitCode": 1,
+        "actualModels": [],
+        "isError": true,
+        "receiptSha256": "dab2795daeecf7ca653bb78f737243dba93049b8623ab731305ec62b0efc2de8",
+        "problem": "You've hit your weekly limit · resets 1am (America/Los_Angeles)",
+        "finishedAt": "2026-11-12T18:04:13.088005+00:00"
+      },
+      "fallback": {
+        "version": 1,
+        "provider": "https://api.deepseek.com",
+        "requestedModel": "deepseek-flash",
+        "effort": "high",
+        "tools": [],
+        "jobs": [
+          {
+            "id": "storage-review",
+            "bodySha256": "a46c94e085e9816234e67864d12336d67511ba13e592103ae6513c0ab0731cdb",
+            "promptSha256": "46724af9f2b52bd67b1db02c5118100cbc36c75f081b13146a5336d88fda490d",
+            "state": "completed",
+            "startedAt": "2026-11-12T18:04:30.105198+00:00",
+            "elapsedSeconds": 65.1,
+            "observedModels": [
+              "deepseek-flash"
+            ],
+            "reportChars": 0,
+            "reasoningCharsReceived": 45105,
+            "wireBytes": 3022368,
+            "lastEventAt": "2026-11-12T18:05:31.091610+00:00",
+            "receipt": "storage-review.json",
+            "receiptSha256": "2428cc810e1a2d4992a6367ce770732dd782956c4cbb54f8ffc8be9ac94e79e8",
+            "actualModels": [
+              "deepseek-flash"
+            ],
+            "finishReason": "stop",
+            "usage": {
+              "prompt_tokens": 16040,
+              "completion_tokens": 10361,
+              "total_tokens": 26401,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 9859
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 16040
+            },
+            "report": "storage-review.review.md",
+            "reportSha256": "3fc2bec026d9677d4129aef7c75be2ccb35f67537403b7f2ef6e5b156905fed3",
+            "finishedAt": "2026-11-12T18:05:35.199184+00:00"
+          }
+        ],
+        "done": true,
+        "stopRequested": false,
+        "updatedAt": "2026-11-12T18:05:35.200874+00:00"
+      },
+      "reportSha256": "3fc2bec026d9677d4129aef7c75be2ccb35f67537403b7f2ef6e5b156905fed3",
+      "report": "diagnostics/python-verification-20261112/s4-scoring/review/deepseek-storage-review.review.md",
+      "triage": {
+        "state": "addressed-in-s4-r2",
+        "confirmed": [
+          "Self-consistent substitution of worker/controller hashes passed format checks. Node now recomputes trusted shipped bytes.",
+          "Omitted frozen request lacked a coverage issue. Node now reports each missing valid receipt."
+        ],
+        "limitations": [
+          "Node verifies raw witness and bounded proof fields from a trusted tool, and does not independently prove Python control-flow dominance."
+        ]
+      }
+    },
+    {
+      "step": "s4-acceptance",
+      "material": {
+        "promptSha256": "41833f54442d1613fafca3ac066cc2e104b40ac24b15a1a07cb38c1c97d0fa7b",
+        "sourceFiles": {
+          "docs/security-workspace/python-execution-verification.md": "02aed313263631be0a264c26714434f8c7dec01f14a9e75a710135c841f854a9"
+        },
+        "bytes": 40491,
+        "parentTruncatedPromptSha256": "b67f7422cb3d2318955d19b5e1f0f8f403869a25628652d6f888556dfb039a6e"
+      },
+      "claude": {
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "state": "failed",
+        "promptSha256": "41833f54442d1613fafca3ac066cc2e104b40ac24b15a1a07cb38c1c97d0fa7b",
+        "tools": [],
+        "startedAt": "2026-11-12T18:04:11.550604+00:00",
+        "observedModels": [],
+        "elapsedSeconds": 1.5,
+        "exitCode": 1,
+        "actualModels": [],
+        "isError": true,
+        "receiptSha256": "4ae1a5d44a7ce6e1e44dd8184a5923c77c5effd8ea12e48e44a8add301963e8b",
+        "problem": "You've hit your weekly limit · resets 1am (America/Los_Angeles)",
+        "finishedAt": "2026-11-12T18:04:13.071851+00:00"
+      },
+      "fallback": {
+        "version": 1,
+        "provider": "https://api.deepseek.com",
+        "requestedModel": "deepseek-flash",
+        "effort": "high",
+        "tools": [],
+        "jobs": [
+          {
+            "id": "storage-review",
+            "bodySha256": "c687cd6edb8750420e6c9860906f6108b2f9ed10d780c29722f3a89dd06a4cd3",
+            "promptSha256": "41833f54442d1613fafca3ac066cc2e104b40ac24b15a1a07cb38c1c97d0fa7b",
+            "state": "completed",
+            "startedAt": "2026-11-12T18:04:27.576376+00:00",
+            "elapsedSeconds": 60.6,
+            "observedModels": [
+              "deepseek-flash"
+            ],
+            "reportChars": 0,
+            "reasoningCharsReceived": 41177,
+            "wireBytes": 2980355,
+            "lastEventAt": "2026-11-12T18:05:23.418498+00:00",
+            "receipt": "storage-review.json",
+            "receiptSha256": "fd0e7008d8b86762586bc9273e0cb74c626a111cf1ffdc4128a2904c9e35cb16",
+            "actualModels": [
+              "deepseek-flash"
+            ],
+            "finishReason": "stop",
+            "usage": {
+              "prompt_tokens": 12274,
+              "completion_tokens": 10304,
+              "total_tokens": 22578,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 9876
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 12274
+            },
+            "report": "storage-review.review.md",
+            "reportSha256": "3a949b01b85e46f625166fc9f477d9c77235fd6470c32ceeeab657769fddb652",
+            "finishedAt": "2026-11-12T18:05:28.155715+00:00"
+          }
+        ],
+        "done": true,
+        "stopRequested": false,
+        "updatedAt": "2026-11-12T18:05:28.157306+00:00"
+      },
+      "reportSha256": "3a949b01b85e46f625166fc9f477d9c77235fd6470c32ceeeab657769fddb652",
+      "report": "diagnostics/python-verification-20261112/s4-acceptance/review/deepseek-storage-review.review.md",
+      "triage": {
+        "state": "closed-with-current-evidence",
+        "confirmed": [
+          "Condensed packet lacked explicit fifth finding mapping, actual matching report digests, and test-source digests. All now recorded in s4-r2 closure-evidence.json."
+        ],
+        "limits": [
+          "Daily identity is a before/after check for this run. Counts are counts of those matched before/after objects. The source refusal evidence is controlled preflight telemetry."
+        ]
+      }
+    },
+    {
+      "step": "s4-r2",
+      "material": {
+        "promptSha256": "6f3c28546cfad081073be15263f2713e0fbe06707f02acf8ccddad12d47f190c",
+        "sourceFiles": {
+          "scripts/verifier_snapshot.py": "fdf2d0d00ae75a158ec6bc38d49b7944030ef2ede101879da0ad8912fe558dca",
+          "scripts/reviewer_snapshot.py": "f9706edeba2279aca7a4b78d1a36d54e87a39e19359a585a50184493c47a662d",
+          "scripts/review_quality_gate.mjs": "623f85986748ffb14b2c94fab47f8d2d385535f45c11578c0a52fea44f1e8aee",
+          "scripts/verifier-dependencies.lock.json": "6fdb3995e50f63d50714c99c529550d741354286849d3b044ecf83ec97c35394",
+          "scripts/verifier_snapshot.test.py": "57514342548d13d9d8e7da4ba9956fc17ed741024cd2a88569a662a7d2422c22",
+          "scripts/verify_execution_controller.test.py": "4178a30ec5c393a354847926f5ce74757c103b25ae9197824ff8a9f3ba12a801",
+          "work/harness-purge-improved/tests/verification-artifacts.test.mjs": "e0c51d7eebdb86f0b460d10aba29ef7d3ef5193bb227fb1885d411cd9c2e24c6",
+          "docs/security-workspace/python-execution-verification.md": "74432f13248ce19be3ad51817adb0e9b63f4add6dcf71af1fe88da3001374504"
+        },
+        "bytes": 32026
+      },
+      "claude": {
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "state": "failed",
+        "promptSha256": "6f3c28546cfad081073be15263f2713e0fbe06707f02acf8ccddad12d47f190c",
+        "tools": [],
+        "startedAt": "2026-11-12T18:09:55.650397+00:00",
+        "observedModels": [],
+        "elapsedSeconds": 1.5,
+        "exitCode": 1,
+        "actualModels": [],
+        "isError": true,
+        "receiptSha256": "ffee3b7baeb95c13058a208d096a798c06e81a1fec9332ea87860e0d08ee6042",
+        "problem": "You've hit your weekly limit · resets 1am (America/Los_Angeles)",
+        "finishedAt": "2026-11-12T18:09:57.181992+00:00"
+      },
+      "fallback": {
+        "version": 1,
+        "provider": "https://api.deepseek.com",
+        "requestedModel": "deepseek-flash",
+        "effort": "high",
+        "tools": [],
+        "jobs": [
+          {
+            "id": "storage-review",
+            "bodySha256": "190980f2bc6a397f4ea0b7396dcbcecc6512cb0ba3b2684dbfc4ea5fca2ea972",
+            "promptSha256": "6f3c28546cfad081073be15263f2713e0fbe06707f02acf8ccddad12d47f190c",
+            "state": "completed",
+            "startedAt": "2026-11-12T18:10:06.406431+00:00",
+            "elapsedSeconds": 33.2,
+            "observedModels": [
+              "deepseek-flash"
+            ],
+            "reportChars": 503,
+            "reasoningCharsReceived": 21993,
+            "wireBytes": 1596876,
+            "lastEventAt": "2026-11-12T18:10:37.380988+00:00",
+            "receipt": "storage-review.json",
+            "receiptSha256": "3a4887173966141e48bf638ccc9b41b579ce2786db741d368ada87df55eda586",
+            "actualModels": [
+              "deepseek-flash"
+            ],
+            "finishReason": "stop",
+            "usage": {
+              "prompt_tokens": 10054,
+              "completion_tokens": 5509,
+              "total_tokens": 15563,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 4960
+              },
+              "prompt_cache_hit_tokens": 0,
+              "prompt_cache_miss_tokens": 10054
+            },
+            "report": "storage-review.review.md",
+            "reportSha256": "2b5e61e6115f91c026c853fb1ddc896bffcf68f1e6ba0979f9d21f1df1350715",
+            "finishedAt": "2026-11-12T18:10:39.572918+00:00"
+          }
+        ],
+        "done": true,
+        "stopRequested": false,
+        "updatedAt": "2026-11-12T18:10:39.576651+00:00"
+      },
+      "reportSha256": "2b5e61e6115f91c026c853fb1ddc896bffcf68f1e6ba0979f9d21f1df1350715",
+      "report": "diagnostics/python-verification-20261112/s4-r2/review/deepseek-storage-review.review.md",
+      "triage": {
+        "state": "closed",
+        "scope": "VM diagnostic preflight",
+        "confirmedBlockersRemaining": [],
+        "closed": [
+          "Shipped verifier worker and controller hash binding",
+          "Explicit missing receipt coverage blockers",
+          "Tool-owned dependency lock checks in Python and Node",
+          "Observed exact staged source closure including intentionally unlisted file",
+          "Current raw maps, score digests and test source digests recorded"
+        ],
+        "rawFindingReconciliation": {
+          "rawHits": 5,
+          "uniquePoints": 4,
+          "hitCountsByPoint": {
+            "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762": 1,
+            "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec": 1,
+            "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b": 1,
+            "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041": 2
+          },
+          "duplicateRuleHitsAt": "skf-upstream.py"
+        },
+        "scoreReconciliation": {
+          "equalBytes": true,
+          "sha256": "328f062bda856f86e7563ea57f056fceff85a53354fdd512a1c5adfa06092c29"
+        },
+        "residualLimits": [
+          "Host and receipt provenance are operational records, not independent attestation.",
+          "The static reviewer launcher trust boundary is inherited from snapshot v2; the VM checks shipped launcher bytes during freeze/execute.",
+          "Exclusions are narrow proof results from approved profiles, not arbitrary source analysis.",
+          "Generic verification, new blind holdout and R3 remain blocked."
+        ]
+      }
+    }
+  ],
+  "finalScopeState": "closed-with-explicit-generic-verification-gap",
+  "r3Qualified": false
+}

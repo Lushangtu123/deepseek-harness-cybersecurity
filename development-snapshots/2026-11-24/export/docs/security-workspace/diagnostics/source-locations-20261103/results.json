@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "scope": "candidate source-location collection; reused scan-byte replay, not new scanner or R3 qualification",
+  "candidateProgramFiles": 166,
+  "dailyBaselineProgramFiles": 165,
+  "programDelta": {
+    "lib/redteam/personal-security-workbench.mjs": "changed",
+    "lib/redteam/personal-joint-review.mjs": "changed",
+    "lib/redteam/personal-security-source-location.mjs": "new"
+  },
+  "candidateDeployed": false,
+  "programSourceMatchesDeployed": false,
+  "hostPluginTests": 759,
+  "vmPluginTests": 759,
+  "sourceLocationTests": 11,
+  "nativeFailuresBeforeCompleteKit": 2,
+  "failureCause": "temporary test kits omitted repository-level fixture/evaluator dependencies; complete kit contains all8 dependencies",
+  "phases": {
+    "arity17": {
+      "fixtureRunnerCalls": 1,
+      "newScannerInvocations": 0,
+      "rawWarnings": 21,
+      "persistedFindings": 21,
+      "pagedFindings": 21,
+      "bound": 21,
+      "offlineObservations": 19,
+      "conditionalGuards": 2,
+      "unresolved": 17,
+      "fullRangeAndSourceHashesMatched": true,
+      "legacyFindingTableRows": 0,
+      "sourceLocations": {
+        "version": 1,
+        "state": "completed",
+        "total": 21,
+        "bound": 21,
+        "unavailable": 0
+      },
+      "scope": "candidate replay of prior real scanner bytes; fixture admission, not live tool or R3 acceptance"
+    },
+    "combined20": {
+      "fixtureRunnerCalls": 1,
+      "newScannerInvocations": 0,
+      "rawWarnings": 21,
+      "persistedFindings": 21,
+      "pagedFindings": 21,
+      "bound": 21,
+      "offlineObservations": 19,
+      "conditionalGuards": 2,
+      "unresolved": 17,
+      "fullRangeAndSourceHashesMatched": true,
+      "legacyFindingTableRows": 0,
+      "sourceLocations": {
+        "version": 1,
+        "state": "completed",
+        "total": 21,
+        "bound": 21,
+        "unavailable": 0
+      },
+      "scope": "candidate replay of prior real scanner bytes; fixture admission, not live tool or R3 acceptance"
+    },
+    "anchors": {
+      "fixtureRunnerCalls": 1,
+      "newScannerInvocations": 0,
+      "rawWarnings": 6,
+      "persistedFindings": 6,
+      "pagedFindings": 6,
+      "bound": 6,
+      "offlineObservations": 6,
+      "conditionalGuards": 0,
+      "unresolved": 6,
+      "fullRangeAndSourceHashesMatched": true,
+      "legacyFindingTableRows": 0,
+      "sourceLocations": {
+        "version": 1,
+        "state": "completed",
+        "total": 6,
+        "bound": 6,
+        "unavailable": 0
+      },
+      "scope": "candidate replay of prior real scanner bytes; fixture admission, not live tool or R3 acceptance"
+    }
+  },
+  "scannerInvocations": 0,
+  "modelInvocationsInReplay": 0,
+  "independentQualificationCasesAdded": 0,
+  "findingDispositionChanges": 0,
+  "dailyProgramFilesMatched": 165,
+  "databaseLogicalDigestsMatched": 40,
+  "runtimePinsMatched": true,
+  "temporaryCandidateRemoved": true,
+  "legacyFindingSchemaAndComparison": "unchanged line-based; not a precision-evidence source",
+  "offlineReviewerRegistered": false,
+  "r3Qualified": false
+}

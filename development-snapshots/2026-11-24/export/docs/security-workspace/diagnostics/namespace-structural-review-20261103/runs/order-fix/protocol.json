@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "createdAt": "2026-11-04T04:30:47.275466+00:00",
+  "scope": "Reused development sources and raw scans only; static reviewer, no source execution or finding changes",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "probeSha256": "42b2fb1caa7cbeb6f777bea46e7cd87c3dc923fff9adc0c8be4683d2e46aac3a",
+  "sources": {
+    "plain-eval-1.py": "9838ecce20b5dcc303735f8fd8dfe1695e2a42b816fb38663f4d2fe3b97633ae",
+    "plain-eval-2.py": "a6524a3e038e30149cce84ae23d8d569971a48d9e7f7edbe2acb11275ad9da6b",
+    "plain-eval-3.py": "ed34bf506c0262d7010400d0c21dc0fbbd79d0e57e0e82e7a63b9959d52ec934",
+    "guard-complete-eval.py": "ca21ccb7d9f0d1578bcdcd7f1f2867b2d60f7a657691c1e50d547a3249f2644b",
+    "guard-conditional-eval.py": "5f000d210e1133ff59102cb813af055a28252a681bf8b7e09b7afcc27a4237af",
+    "guard-overwrite-eval.py": "64818360c9db8695fe4de41ddbfea1a0c359a0461ea0cfbf04ba93405cc8cd2a",
+    "guard-append-eval.py": "0c7ff334b1d7051385b36f8fd21d5496ebab3ca88ddd419c534cd06cc540cd39",
+    "mapping-eval.py": "0a9b42a779a21740ba89813f6d6b9c33beba4787f5368c217600d1204a7793b0",
+    "literal-eval.py": "96d40a4decc712ea14308dcedfdec48f362c80319af6aed722edba33ce809eab",
+    "shadow-eval.py": "b69101e618dd161ce0ef01d0f3536afb6d4f9ff80055280d443a13c600e05196",
+    "qualified-eval.py": "0a766258e6b1b544f92b6886707ee93afdd0b2aa08e4af20b1d5b90e3efa464c",
+    "alias-eval.py": "6f2dceb17bd74070ea5335910f548f39b1c6e4a18a26d59a6bc091f63b79cac0",
+    "plain-exec-1.py": "0fc75c5986c3324c740129812a4d0bc17a4c9db9e70703a1222afa460a7724e4",
+    "plain-exec-2.py": "aed712cec5eabbe4c032a72993ad303cc79bba9418c6d622734327b45ef67c45",
+    "plain-exec-3.py": "830a03cdefa903756ebfa7610b50b98b6d94deb8d5f000e0f06ab20520396515",
+    "guard-complete-exec.py": "89d1f5c2705920402a02196b0fb0e908da32233baa66cdae732f7ffbea61659c",
+    "guard-conditional-exec.py": "87e3cab73b358ec41a2ca0d5c57360abd1a275b6b30832e48873d9ebc173a079",
+    "guard-overwrite-exec.py": "8f92178588aea81dd789cc723239e8fcbe54393f0ffc1c01806b85b0ee27de3d",
+    "guard-append-exec.py": "6148aa251e946f5f1a6d9a7dd21ddaf8a446cce46b452a3ae26b5a87896be31c",
+    "mapping-exec.py": "ea0a90b33740db1ce012721c082c75048ca5d3d79906d590d0056f03e72b3089",
+    "literal-exec.py": "6313434fcc3c32466e602c412ff529d7b6be8dfa15541e6946e445f11efe89ab",
+    "shadow-exec.py": "2afb108f06f87ffafa566b3cde29997f4d1e15e5aecdd4c8a28562889c1efba8",
+    "qualified-exec.py": "1ef0f0ea665475fd32882a83c4d0d4dd92c9d72de54196bce7c9ed18ab5df4f5",
+    "alias-exec.py": "92699ed5dbbcfbb0484afabed5474086544060e22dfd5de898a07ee563be06b2",
+    "stdlib_ast.py": "b515c23dbbc459329d3b802a3aac742cc456d7472e66f7ed6e9dc97e40596d7d",
+    "stdlib_collections.py": "7fdb04dd248ab37909f46d2085bfee56b32d7e91e49ad3a2fad99c453295659b"
+  },
+  "reviewFiles": {
+    "arity17-manifest.json": "c23e1f5f19a8217cd07426110838d1a5999ec2b5bf20de9a8b2ab65b8cf0bd45",
+    "combined20-scan.json": "72c2a53129b8b2d769c067467b892232d748bac693577827b94ab93d16c44bb2",
+    "combined20-manifest.json": "b95e6b33f54c9c5fa220d5e7d177f023959e82b262711456655ed524cf9b1b85",
+    "arity17-scan.json": "a97d57e4fbfbd790b0eeb634df9706bbb87c75105310f63bcada5e9448356239",
+    "scripts/python_namespace_review.test.py": "5f0097393254f09b6be8522aa726908ff4cd7e161c366808f6b00d6468a6de19",
+    "scripts/python_namespace_review.py": "6e240dbbcc31cbdbb49befbd5ab56b8b9c945b85c557e12d3ef4f637223144ee",
+    "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": "2dfd384c175692b7972917832b545c7058ae968cad68be34e718c021ec06e49f",
+    "work/harness-purge-improved/package/scripts/eval_import_review.py": "6cb262c8dac7f10b9962784f8d379a68f1ee2a78eb17bd1a6e96fd5db79f4075"
+  },
+  "expectedConditionalGuardFiles": [
+    "guard-complete-eval.py",
+    "guard-complete-exec.py"
+  ],
+  "expectedObservations": 19,
+  "sourceCases": 26,
+  "scans": {
+    "arity17": {
+      "originalReceiptSha256": "4f9dff20e371ec3d916669edae825d0ad555a8f0d7cfc52a16b03c8025692de8",
+      "rawResultSha256": "a97d57e4fbfbd790b0eeb634df9706bbb87c75105310f63bcada5e9448356239",
+      "warningsBefore": 21
+    },
+    "combined20": {
+      "originalReceiptSha256": "91c0befd754382d8856ef24261fb98f30a098d13880519845d69eee9320d28c6",
+      "rawResultSha256": "72c2a53129b8b2d769c067467b892232d748bac693577827b94ab93d16c44bb2",
+      "warningsBefore": 21
+    }
+  },
+  "independentCasesAdded": 0,
+  "r3Qualified": false
+}

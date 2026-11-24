@@ -1,0 +1,56 @@
+{
+  "state": "completed",
+  "dailyProgramFilesMatched": 169,
+  "dailyDatabasesMatched": 42,
+  "dailyProtection": {
+    "program": {
+      "before": "a828d84ddae6c35a9ae8a0e07ddc2b202425ba428caa54caafdf2ad22d2d0012",
+      "after": "a828d84ddae6c35a9ae8a0e07ddc2b202425ba428caa54caafdf2ad22d2d0012"
+    },
+    "config": {
+      "before": "41efaf964f0c953baa16f6402c2fc10e0031a39516c627e0c68f89731cae10ad",
+      "after": "41efaf964f0c953baa16f6402c2fc10e0031a39516c627e0c68f89731cae10ad"
+    },
+    "pins": {
+      "before": "55f91235119dbfcce21e0b46ebe37df156cbe1ae151d1947c090882e2a010ed5",
+      "after": "55f91235119dbfcce21e0b46ebe37df156cbe1ae151d1947c090882e2a010ed5"
+    },
+    "runtime": {
+      "before": "b7f53d039e78551831e1d584303d45d7e9f8a7a4f8a977bf8ec7eed5c4b82e93",
+      "after": "b7f53d039e78551831e1d584303d45d7e9f8a7a4f8a977bf8ec7eed5c4b82e93"
+    },
+    "databases": {
+      "before": "9289bda7b2d4737bd6c467323657e6b625780e11bd9aff5c8bdd77cd542bf0c0",
+      "after": "9289bda7b2d4737bd6c467323657e6b625780e11bd9aff5c8bdd77cd542bf0c0"
+    },
+    "outsideMountNamespace": {
+      "before": "46004dd150ea680763df4716a838d4901c13dd63b4cb4aff27fe2cbf94b60c81",
+      "after": "46004dd150ea680763df4716a838d4901c13dd63b4cb4aff27fe2cbf94b60c81"
+    },
+    "homeInode": {
+      "before": "bfa1bda4c41fcaf7b148dfaa9fc6d59f1ea9412072efe68b557f13d76c5135d7",
+      "after": "bfa1bda4c41fcaf7b148dfaa9fc6d59f1ea9412072efe68b557f13d76c5135d7"
+    }
+  },
+  "artifactSha256": {
+    "locations.json": "7a94823515d5fc39aa4d0c4198f319875cc21a426158ca323143e149519e2223",
+    "verifier-snapshot.json": "34fd39263c9b36467d61faf01e34b6868893751bfb6a9c15d60ecb8b94df729b",
+    "diagnostic-dataset.json": "d35bba63ac9e51426b46876e1db4c6b11c5ba2c71c06dc8f09a7b18bbae1c217",
+    "diagnostic-freeze.json": "152a3efc346aa0211024bfae8526c9379d8131abfe3f393a0ad0f7ad1997d7f7",
+    "verification-plan.json": "1488054e22ab1503cc2bde3e15eda0cfff5b95a60d0f5730e1cd1c2d88757561",
+    "diagnostic-run.json": "d2d99e1994ba2945edc46d307d0e8a019e9d9a000d644ed15f357f2fa329a364",
+    "vm-quality.json": "328f062bda856f86e7563ea57f056fceff85a53354fdd512a1c5adfa06092c29",
+    "case-evidence.json": "5e72b3b8ffb745c8ba4870db8bba2db5dae4beb970aa97cf579edbc21809c6a5",
+    "binding.json": "6b9c5eebd3cf5d57f3f96a29f3e64e05c30454e0d54705ad23656ebd85ed2bd0",
+    "static-result.json": "bb47b2e3e38f5184bc4097ae84ec89262d64300ba2b0c4e19881e55edb3d91d2",
+    "verifications.json": "67a93582fcd52813b4129882d3678b42c59342687ce8904287fcbc79fdc74389",
+    "baseline-scan.json": "61f407afa5a6cd9e788215f705e619b1212479317e8184dd98defe6cf9e4243c",
+    "candidate-scan.json": "dc1114eb31d1b2e65aff72e28ab584d5f1f829ddabf15e590a95630a46ef0b98",
+    "policy.json": "e9b429fc21e5d86578333e6cd4cfad9ef2455be578b7ea37336fced14c788ad1",
+    "ledger.json": "ce22fccba92822ed7b1ddc0abb18dc49f952d4dd28b5043a9e7fc50b6599a8d2",
+    "review-manifest.json": "6b5b1fdac7fb42db6a665c06a46e2f60e4cef6ad48ff682b04aa8bd7e62230c8",
+    "snapshot-identity.json": "5883336dd933fe345f6d4a0a88756f23ab8f31748434c91080369f7b17476cd3",
+    "boundary-results.json": "a4bf8709220d324000a6f73ec04eaf3def44b7f2c81fbda1c90d133bce2480f6",
+    "container-policies.json": "4d5e67bd519ad7a6c1a8bf2eac8eae4ffa9c83dd52384d453f88d693cf6e48c0"
+  }
+}

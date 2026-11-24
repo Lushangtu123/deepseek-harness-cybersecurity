@@ -1,0 +1,44 @@
+**有限结论：**在给定静态材料范围内，本轮“完整 Harness 外壳中的 3-tool 受管链”证据基本自洽，未发现会使本轮链断裂的硬阻断。可支持：专用 VM 内原生页面/RPC/默认 scanner 路径完成了一次受管审查，并产生可读回报告、停止与清理回执。不能支持：生产启动等价、173 个候选文件全扫、全工具/全模式、漏洞确认、R3、部署或全产品准入。
+
+### 1. 私有 mount/PID namespace 与 Docker 物理路径
+- `namespace-init.py` 确实创建私有 mount/PID namespace，并以临时物理目录 bind 到逻辑 `DSH_HOME`、redteam、安装目录和 `/run/user/1000`；`getpid()==1` 支持 PID namespace 实际生效。
+- semgrep 的 Docker 证据显示 `sourceMount.source` 是 `/home/purge/.cache/score-native-qa-.../state/.../source`，不是私有 namespace 内才可见的 bind 路径；`validateLive` 也要求 sourceRoot 位于临时 stateRoot 下。这避开了 Docker daemon 位于挂载 namespace 外时读取日常程序的路径问题。
+- 日常状态匹配有 before/after `identity()` 对比：169 程序文件、42 个数据库逻辑摘要、配置/pins/runtime、外部 mount namespace 与 home inode 均匹配。  
+  **边界：**42 个数据库是 SQLite `iterdump` 逻辑摘要，不是物理文件零写；也不是全 home 字节级相等。
+
+### 2. Gate、唯一 start、20 工具与报告页证据链
+- `rpc-events` 中实际只有 1 次 `start`，且为模型发起；后续独立读回为 `model:false` 的 `status/report`，任务均指向同一 taskId，`NativeGate` 的 `remember()` 也防返回任务被替换。  
+  **注意：**Gate 允许同一 start 键的幂等重试，并非物理上“只能调用一次”；本轮证据支持“实际只发生一次”，不能外推为未来/生产不可重复启动。
+- 计数自洽：`acceptedTools` 20 次调用（3 种工具：bind、info、joint review）；其中 15 次为报告分页，5 次为绑定/信息/plan/start/wait。`modelEvents` 为 21 次主调度 + 1 次辅助调度，共 22 条流；`independentPages` 为 findings 5、files 4、exclusions 1、diagnostics 1、artifacts 4，共 15 页。
+- `scannerProofs` 只有 1 个 semgrep 容器证明；`security_finding` 表 0 行、ordinaryFindingRows 0。  
+  **边界：**“1 scan”指所选 semgrep 扫描；namespace 结构复核 worker 是另一次受限容器执行，不应把 1 scan 解释为全链只起过一个容器。
+- `scannerProofs[0].observerErrors` 中的首轮 `no such object` 是容器创建前轮询竞争，最终 `observed` 存在且 outcome 为 passed；不计入 native tool/RPC error，但说明证明采样有初始失败。
+
+### 3. model 边界是否诚实
+- `modelEvents` 的 `provider/model/reasoningEffort` 来自 `llm/stream` 的请求/调度元数据；`adapterReplayModel` 来自 adapter 的 `chunk.replayState.response.model`。`model-hook-source`/`chunk-source` 也显示 replay 是 adapter 侧构造/校验的元数据。
+- 材料明确写 `rawProviderResponseModelNotExposed:true`，报告也说不能把 adapter replay model 当成 provider 原始响应 model。这一边界是诚实的。
+- UI 的 `DeepSeek-V4.1-Flash1017 / High` 是页面显示/配置；dispatch 中实际为 `deepseek-flash`。不能据此证明 wire 精确版本或 provider 原始响应字段。
+
+### 4. 18 文件、9 warning、4 import + 9 namespace、unverified 与无 R3
+- 18 个合成 fixture 文件哈希、9 条 finding、9 个 namespace artifact、4 个 import artifact、13 个总 artifact 与 `collect-script.txt` 断言一致；所有 findings/artifacts 均为 `unverified`，`security_finding` 为 0，`ordinaryFindingRows` 为 0。
+- `ruleProfile.qualification=managed-candidate-not-r3`；`ordinaryR3Qualified`、`deployed` 在 baseline/analysis/report 中均为 false。  
+  **关键边界：**这里的 18 是合成项目快照；173 是候选包 staging 哈希匹配数，不是 173 个候选文件被扫描。不能混淆 `candidateFilesMatched=173` 与 `fileHashesMatched=18`。
+- `controls.allAlreadyUsed=true` 与“18 源已用”内部一致；但材料未包含 295 来源台账本体，不能独立复核该台账。
+
+### 5. 停止回执、169/42 DB、密钥副本与宿主 mux master
+- 清理摘要显示：namespace 子进程停止、app/backend 回执存在、guest 端口 `ECONNREFUSED 111`、扫描容器不存在、169 程序匹配、42 DB 逻辑摘要匹配、临时根目录删除、候选 staged 文件 182 个匹配。
+- 宿主侧 `host-relay-cleanup` 显示端口 `ECONNREFUSED`、mux lifecycle stopped、master stopped、remainingPids 空、controlDirectoryRemoved true；`mux-lifecycle.json` 与此一致。**本步没有看到停止/清理阻断。**
+- 密钥副本位于临时根目录内，最终 `rmtree` 成功可解释其被删除；但没有单独的凭证文件存在性/磁盘取证回执。`app-stopped.json` 原始内容未在材料中，只有清理脚本断言和摘要，属于证据层级限制。
+
+### 分类结论
+- **本步确认缺陷：**严格说没有“根因已确认”的产品硬缺陷；确认存在的未修复现象是默认 workspace 自动创建失败，根因未诊断，手动选择已有授权目录成功后未阻断本轮。
+- **条件风险/证据缺口：**
+  - Gate 允许同一 start 幂等重试，不是严格单次调用；只能证明本轮实际一次。
+  - namespace worker 只有候选执行结果中的 `execution`/`cleanupVerified`，没有与 semgrep 同等级的独立 Docker inspect 证明。
+  - 日常 DB 仅为逻辑摘要；全 home 物理零写未证明。
+  - 凭证删除依赖临时树整体删除，缺少独立文件级回执。
+  - 测试后端跳过 VM 全局 production reconciliation，且附加测试围栏/预算限制不等于生产限制。
+  - `fullWorkspaceReady=false`、`coverageComplete=false`，只覆盖 3-tool 受管路径；不是全工具/全模式。
+- **路线外事项：**R3 独立准入、deployment、全产品准入、生产服务启动恢复、额外工具/设备/模式、漏洞可利用性、provider 原始 wire model 精确版本、独立 operator 哈希验证。
+
+**可核对意见：**重点对照 `namespace-init.py` 的 bind 行、`stage.json.outsideMountNamespace`、`scannerProofs[0].observed.sourceMount`；`review-safe-evidence.acceptedTools/modelEvents/independentPages` 的计数；`qa-fence.mjs` 的 `llm/stream` 日志；`collect-script.txt` 的 18/9/4+9/unverified 断言；以及 `cleanup.json`、`cleanup-full.json`、`host-relay-cleanup.json`、`mux-lifecycle.json` 的停止回执。上述静态一致性不等于独立运行复核或全产品准入。

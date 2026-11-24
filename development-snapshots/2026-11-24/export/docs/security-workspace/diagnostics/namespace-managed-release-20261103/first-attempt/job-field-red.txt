@@ -1,0 +1,15 @@
+..E
+======================================================================
+ERROR: test_timeout_waits_for_inactive_unit_and_an_empty_job_field (__main__.StopCompletion.test_timeout_waits_for_inactive_unit_and_an_empty_job_field)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-namespace-managed-release-20261103/deployment-protection.test.py", line 53, in test_timeout_waits_for_inactive_unit_and_an_empty_job_field
+    exec(compile(ast.Module(body=[stop],type_ignores=[]),'stop','exec'),context);context['stop']();self.assertEqual(seen,{'socket':2,'security':2,'daily':2})
+                                                                                 ~~~~~~~~~~~~~~~^^
+  File "stop", line 91, in stop
+RuntimeError: Unit stop or job completion not confirmed: socket
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.015s
+
+FAILED (errors=1)

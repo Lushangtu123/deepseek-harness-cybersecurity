@@ -1,0 +1,265 @@
+{
+  "date": "2026-11-01",
+  "scope": "Dedicated Harness VM to separately installed Kali VM; no target scanning",
+  "persistentDisk": {
+    "source": "/dev/vda3",
+    "filesystem": "ext4",
+    "sshActive": true
+  },
+  "sshSettings": {
+    "usepam": "yes",
+    "permitrootlogin": "no",
+    "pubkeyauthentication": "yes",
+    "passwordauthentication": "no",
+    "kbdinteractiveauthentication": "no",
+    "disableforwarding": "yes",
+    "allowusers": "harness",
+    "permittunnel": "no"
+  },
+  "nativeStatus": {
+    "hostname": "kali",
+    "uid": 1000,
+    "kernel": "7.1.5+kali-arm64",
+    "osRelease": "PRETTY_NAME=\"Kali GNU/Linux Rolling\"\nNAME=\"Kali GNU/Linux\"\nVERSION_ID=\"2026.3\"\nVERSION=\"2026.3\"\nVERSION_CODENAME=kali-rolling\nID=kali\nID_LIKE=debian\nHOME_URL=\"https://www.kali.org/\"\nSUPPORT_URL=\"https://forums.kali.org/\"\nBUG_REPORT_URL=\"https://bugs.kali.org/\"\nANSI_COLOR=\"1;31\"\n",
+    "persistentInstall": true
+  },
+  "nmapVersionLine": "Nmap version 7.99 ( https://nmap.org )",
+  "argumentBoundariesVerified": true,
+  "remoteExit23Preserved": true,
+  "passwordlessSudoDenied": true,
+  "authenticationNegativeControls": {
+    "wrongHostKeyRejected": true,
+    "wrongClientKeyRejected": true,
+    "normalConnectionAfterRejections": true,
+    "temporaryPrivateKeyStayedInHarness": true,
+    "temporaryFilesRemoved": true
+  },
+  "actualRestart": {
+    "bootIdChanged": true,
+    "nativeSshAfterReboot": true
+  },
+  "protectedAssets": {
+    "protectedProjectFilesMatched": 459,
+    "projectHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "findingsByStatus": {
+      "unverified": 95
+    },
+    "scannerManifestUnchanged": true,
+    "programHashesMatched": 134,
+    "installedToolsPresent": true,
+    "harnessActive": true,
+    "pentagiRunning": true,
+    "harnessVmConfigurationUnchanged": true,
+    "otherFourHostHelpersUnchanged": true,
+    "proxyMatchesReviewedSource": true,
+    "hostResourceLimitsUnchanged": true,
+    "snapshotCount": 24,
+    "recoveryPointStillPredatesKaliBridge": true
+  },
+  "installedSource": {
+    "skillSha256": "b233a0033abc67606ffd0339cdcd9d733e824e071b09447a69e9cf7599b057f2",
+    "proxySha256": "ddb3ea6b057a549b7f4c33e1548695e42455851add6c905c669ca89f33343033",
+    "resourceLimitsUnchanged": true
+  },
+  "chatAcceptance": {
+    "skill": "kali",
+    "nativeCommands": [
+      "kali-vm status",
+      "kali-vm exec -- nmap --version"
+    ],
+    "bothObservedExitCode": 0,
+    "method": "Browser tool details observed, screenshot retained locally"
+  },
+  "recoveryLimit": "Existing 24 recovery points retained; current bridge and Kali disk are not covered",
+  "excluded": "Private keys, known_hosts, credentials, chats, installation media and VM disks",
+  "environmentPage": {
+    "selection": {
+      "executionTarget": "kali",
+      "reason": "kali-ssh",
+      "ready": true,
+      "toolsFound": 6,
+      "toolsTotal": 15,
+      "toolIds": [
+        "nmap",
+        "nuclei",
+        "masscan",
+        "ffuf",
+        "httpx",
+        "impacket"
+      ],
+      "allSourcesKali": true,
+      "localTemplatesNotUsed": true,
+      "preflightDoesNotClaimAllToolsOrSkillsAvailable": true,
+      "configSavedOnDisk": true
+    },
+    "wrapperVersionCheck": "Nmap version 7.99 ( https://nmap.org )",
+    "missingToolControl": {
+      "id": "fscan",
+      "exitCode": 127
+    },
+    "browserObservedSaved": true,
+    "browserRefreshRetainedSelection": true,
+    "observedAvailableTools": [
+      "nmap",
+      "nuclei",
+      "masscan",
+      "ffuf",
+      "httpx",
+      "impacket"
+    ],
+    "inputOutputPathScope": "Kali VM filesystem; no automatic file or credential copy",
+    "macAndLinuxRegression": {
+      "python": 276,
+      "pluginNode": 493,
+      "hostNode": 139,
+      "restoreAndBackup": 18,
+      "clientBundleReproducible": true
+    },
+    "protectedAssets": {
+      "protectedProjectFilesMatched": 459,
+      "projectHeadUnchanged": true,
+      "sixAuditTablesUnchanged": true,
+      "findingsByStatus": {
+        "unverified": 95
+      },
+      "scannerManifestUnchanged": true,
+      "programHashesMatched": 135,
+      "installedToolsPresent": true,
+      "harnessActive": true,
+      "pentagiRunning": true,
+      "harnessVmConfigurationUnchanged": true,
+      "otherFourHostHelpersUnchanged": true,
+      "proxyMatchesReviewedSource": true,
+      "hostResourceLimitsUnchanged": true,
+      "snapshotCount": 24,
+      "recoveryPointStillPredatesKaliBridge": true
+    },
+    "recordScope": "Historical initial integration before tool expansion (6/15)"
+  },
+  "toolExpansion": {
+    "date": "2026-11-01",
+    "installedRootless": [
+      {
+        "id": "fscan",
+        "release": "v2.2.2",
+        "sha256": "cfa5a78adc0b310811af11c0b9bdaaeda0d8443d271ad2c0b28b8b52064eb9fe"
+      },
+      {
+        "id": "gogo",
+        "release": "v2.15.0",
+        "sha256": "f34e248bc1d0f8e18101655850082b9f48f5f9f5a102cbac107086f3798c20a9"
+      },
+      {
+        "id": "suo5",
+        "release": "v2.2.0",
+        "sha256": "06ce70daa0b33a2abfbac790a8923df732dcd2b524a107763b8ac77df4fc6842"
+      },
+      {
+        "id": "frpc",
+        "release": "v0.71.1",
+        "sha256": "651de3428bdc7f37b4bad76ed3236b221939a989c433cd7daee79d2817519f8b"
+      },
+      {
+        "id": "frps",
+        "release": "v0.71.1",
+        "sha256": "45a45650cf6ad2568a90f646b1ad79ac483510c1d845ecc55c532ad271ff5366"
+      },
+      {
+        "id": "chisel",
+        "release": "v1.12.0",
+        "sha256": "8417fbcd05a93f4c6ca1b971cb8fd7ba4702c283c1fdde47b8dce22affc6dba8"
+      },
+      {
+        "id": "dnsx",
+        "release": "v1.3.1",
+        "sha256": "bdeb1329494b124c35076196811b33df54c7aa95838ba5165bc3921899fa1d6a"
+      },
+      {
+        "id": "subfinder",
+        "release": "v2.17.0",
+        "sha256": "e6a8fb863f26315b8ab79a956d79847fd91970045979c374874e0755cabe7588"
+      }
+    ],
+    "toolsFound": 25,
+    "catalogTotal": 26,
+    "availableTools": [
+      "nmap",
+      "nuclei",
+      "masscan",
+      "fscan",
+      "gogo",
+      "suo5",
+      "frpc",
+      "frps",
+      "chisel",
+      "ffuf",
+      "httpx",
+      "dnsx",
+      "subfinder",
+      "impacket",
+      "curl",
+      "wget",
+      "dig",
+      "openssl",
+      "tcpdump",
+      "tshark",
+      "whatweb",
+      "nikto",
+      "sqlmap",
+      "file",
+      "strings"
+    ],
+    "missingTools": [
+      "ksubdomain"
+    ],
+    "all25VersionOrHelpChecksMatched": true,
+    "masscanVersionExitCode": 1,
+    "masscanExitCodeExpectedByUpstream": "https://github.com/robertdavidgraham/masscan/blob/1.3.2/src/main-conf.c",
+    "other24VersionOrHelpExitCode": 0,
+    "missingToolExitCode": 127,
+    "uid": 1000,
+    "pathDiscoveryIgnoresEmptyAndRelativeEntries": true,
+    "extraCapabilitiesOrSudoRulesAdded": false,
+    "scansOrCapturesPerformed": false,
+    "chromeUi": {
+      "method": "Native Google Chrome app via CUA; extension interface unavailable",
+      "toolsFoundObserved": 25,
+      "catalogTotalObserved": 26,
+      "savedNoticeObserved": true,
+      "fullPageRefreshRetainedRemoteKaliSelection": true,
+      "newToolsRemotePathsObserved": true,
+      "screenshotsRetainedLocally": true
+    },
+    "binariesAndArchivesIncludedInExport": false,
+    "provenanceLock": "work/harness-purge-vm/kali-tools-lock.json",
+    "recoveryPointCoversKaliDiskOrNewBinaries": false,
+    "macAndLinuxRegression": {
+      "python": 279,
+      "pluginNode": 493,
+      "hostNode": 139,
+      "restoreAndBackup": 18,
+      "clientBundleReproducible": true,
+      "linuxTemporaryCopyRemoved": true
+    },
+    "protectedAssets": {
+      "protectedProjectFilesMatched": 459,
+      "projectHeadUnchanged": true,
+      "sixAuditTablesUnchanged": true,
+      "findingsByStatus": {
+        "unverified": 95
+      },
+      "scannerManifestUnchanged": true,
+      "programHashesMatched": 135,
+      "installedToolsPresent": true,
+      "harnessActive": true,
+      "pentagiRunning": true,
+      "harnessVmConfigurationUnchanged": true,
+      "otherFourHostHelpersUnchanged": true,
+      "proxyMatchesReviewedSource": true,
+      "hostResourceLimitsUnchanged": true,
+      "snapshotCount": 24,
+      "recoveryPointStillPredatesKaliBridge": true
+    }
+  }
+}

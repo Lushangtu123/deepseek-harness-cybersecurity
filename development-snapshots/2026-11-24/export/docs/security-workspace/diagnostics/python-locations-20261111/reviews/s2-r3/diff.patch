@@ -1,0 +1,179 @@
+--- before/scripts/reviewer_snapshot.py
++++ current/scripts/reviewer_snapshot.py
+@@ -209,8 +209,12 @@
+     root = Path(root)
+     if root.resolve() != root or not root.is_dir():
+         raise ValueError('canonical project directory required')
+-    manifest_raw, scan_raw = read(manifest_path, MANIFEST_LIMIT), read(scan_path, SCAN_LIMIT)
++    manifest_raw = read(manifest_path, MANIFEST_LIMIT)
+     manifest = load_json(manifest_raw)
++    scan_raw = b'{"results":[]}' if scan_path is None else read(scan_path, SCAN_LIMIT)
++    if scan_path is None and isinstance(manifest,dict):
++        manifest={'files':manifest.get('files'),'scanSha256':sha256(scan_raw).hexdigest(),**({'locationBinding':manifest['locationBinding']} if 'locationBinding' in manifest else {})}
++        manifest_raw=json.dumps(manifest,separators=(',',':')).encode()
+     if not isinstance(load_json(scan_raw), dict):
+         raise ValueError('invalid scan export')
+     if (not isinstance(manifest, dict) or not isinstance(manifest.get('files'), dict)
+@@ -229,6 +233,38 @@
+         remaining -= len(raw)
+         payload['sources/' + name] = raw
+     return payload, digest({name: sha256(raw).hexdigest() for name, raw in payload.items()})
++
++
++def validate_locations(inventory,payload):
++    expected={name.removeprefix('sources/'):raw for name,raw in payload.items() if name.startswith('sources/')}
++    if (not isinstance(inventory,dict) or type(inventory.get('version')) is not int or inventory['version']!=1
++            or inventory.get('protocol')!='python-sink-locations-1' or not isinstance(inventory.get('runtimePython'),str)
++            or not re.fullmatch(r'3\.\d{1,3}\.\d{1,3}',inventory['runtimePython'])
++            or not isinstance(inventory.get('files'),dict) or set(inventory['files'])!=set(expected)):
++        raise ValueError('invalid location inventory')
++    for name,raw in expected.items():
++        row=inventory['files'][name];source_sha=sha256(raw).hexdigest()
++        if (not isinstance(row,dict) or row.get('sha256')!=source_sha or type(row.get('bytes')) is not int or row['bytes']!=len(raw)
++                or row.get('state') not in {'completed','unavailable'} or not isinstance(row.get('points'),list) or len(row['points'])>64
++                or row['state']=='unavailable' and (row['points'] or row.get('reason') not in {'source-parse-unavailable','point-limit'})):
++            raise ValueError('invalid location source row')
++        def position(value):
++            if not isinstance(value,dict) or set(value)!={'line','col','offset'} or any(type(v) is not int for v in value.values()):return False
++            offset=value['offset']
++            return (0<=offset<=len(raw) and (offset==len(raw) or raw[offset]&0xc0!=0x80)
++                    and value['line']==raw[:offset].count(b'\n')+1 and value['col']==offset-raw.rfind(b'\n',0,offset))
++        def span(value):
++            return isinstance(value,dict) and set(value)=={'start','end'} and position(value['start']) and position(value['end']) and value['end']['offset']>value['start']['offset']
++        ids=set();previous=-1
++        for point in row['points']:
++            if (not isinstance(point,dict) or point.get('sourceSha256')!=source_sha or point.get('callee') not in {'eval','exec','builtins.eval','builtins.exec'}
++                    or point.get('builtinIdentity')!='unverified' or not span(point.get('call'))
++                    or point.get('argument') is not None and (not span(point['argument']) or point['argument']['start']['offset']<point['call']['start']['offset'] or point['argument']['end']['offset']>point['call']['end']['offset'])
++                    or point.get('id')!=digest({k:point[k] for k in ('sourceSha256','callee','call')}) or point['id'] in ids
++                    or point['call']['start']['offset']<previous):
++                raise ValueError('invalid execution point')
++            ids.add(point['id']);previous=point['call']['start']['offset']
++    return inventory
+ 
+ 
+ class ReviewAttemptError(RuntimeError):
+@@ -936,7 +972,9 @@
+ 
+ 
+ def execute(bundle, expected, root, manifest_path, scan_path, dataset_sha, freeze_sha, *,
+-            attempts_root=None, timeout=30, _engine_factory=None, storage_policy=None):
++            attempts_root=None, timeout=30, _engine_factory=None, storage_policy=None, _operation='review'):
++    if _operation not in {'review','locations'}:raise ValueError('unsupported operation')
++    if _operation=='review' and scan_path is None:raise ValueError('review requires original scan file')
+     if _engine_factory is None and sys.platform != 'linux':
+         raise ValueError('VM execution requires Linux; no Mac Docker invocation')
+     if os.geteuid() == 0 or isinstance(timeout, bool) or not isinstance(timeout, (float,int)) or not .1 <= timeout <= 30:
+@@ -955,7 +993,7 @@
+     reservation=storage.reserve(policy,attempt_id,sum(map(len,files.values()))+sum(map(len,payload.values())),_api_view())
+     phase={'enginePossible':False}
+     try:
+-        return _execute_verified(base,attempt_id,manifest,files,payload,input_sha,expected,dataset_sha,freeze_sha,timeout,_engine_factory,reservation,phase)
++        return _execute_verified(base,attempt_id,manifest,files,payload,input_sha,expected,dataset_sha,freeze_sha,timeout,_engine_factory,reservation,phase,_operation)
+     finally:
+         try:
+             directory=base/('review-'+attempt_id)
+@@ -967,7 +1005,7 @@
+             print('storage-settlement-pending; query status and storage-reconcile before retrying',file=sys.stderr)
+ 
+ 
+-def _execute_verified(base,attempt_id,manifest,files,payload,input_sha,expected,dataset_sha,freeze_sha,timeout,_engine_factory,reservation,phase):
++def _execute_verified(base,attempt_id,manifest,files,payload,input_sha,expected,dataset_sha,freeze_sha,timeout,_engine_factory,reservation,phase,operation):
+     base.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+     base.mkdir(mode=0o700, exist_ok=True)
+     _private(base)
+@@ -984,7 +1022,7 @@
+            'snapshotSha256':expected, 'inputSha256':input_sha, 'imageId':manifest['imageId'],
+            'datasetSha256':dataset_sha, 'freezeSha256':freeze_sha, 'startedAt':_now(),
+            'creationAttempted':False, 'createSucceeded':False, 'containerObserved':False, 'containerId':None,
+-           'creationJournalVersion':1,'storageReservation':reservation}
++           'creationJournalVersion':1,'storageReservation':reservation,'operation':operation}
+     failure = None
+     cancel = {}
+     holder={}
+@@ -1001,7 +1039,7 @@
+                     '--no-healthcheck','--workdir','/','--tmpfs','/tmp:rw,nosuid,nodev,noexec,size=16m,mode=1777',
+                     '--mount',f'type=bind,src={stage},dst=/review,readonly','--entrypoint','python3',
+                     manifest['imageId'],'-I','-B','-S','-c',_CONTAINER_WATCHDOG,str(timeout),'/review/code/'+FILES[0],
+-                    '/review/sources','/review/manifest.json','/review/scan.json']
++                    *(['--locations'] if operation=='locations' else []),'/review/sources','/review/manifest.json','/review/scan.json']
+         try:
+             if cancel:
+                 raise _Failure('interrupted', signal=cancel['signal'])
+@@ -1029,8 +1067,18 @@
+             raw = run['stdout']
+             try:
+                 report = load_json(raw)
+-                if not isinstance(report, dict) or type(report.get('version')) is not int or report['version'] != 1:
++                if not isinstance(report, dict) or type(report.get('version')) is not int or report['version'] not in [1,2]:
+                     raise ValueError('invalid report')
++                location_binding=None
++                if report['version']==2:
++                    inventory=report.get('locations')
++                    validate_locations(inventory,payload)
++                    if report.get('operation','review')!=operation:raise ValueError('operation mismatch')
++                    location_binding={'version':1,'snapshotSha256':expected,'imageId':manifest['imageId'],'uid':os.geteuid(),'inventory':inventory}
++                    frozen_binding=load_json(payload['manifest.json']).get('locationBinding')
++                    if frozen_binding is not None and frozen_binding!=location_binding:
++                        raise _Failure('location-binding-changed',nextOperation='refreeze')
++                elif operation=='locations':raise ValueError('location report required')
+             except (ValueError, UnicodeError):
+                 raise _Failure('report-invalid') from None
+         except BaseException as error:
+@@ -1064,9 +1112,14 @@
+                        'freezeSha256':freeze_sha,'inputSha256':input_sha,'inputFiles':dict(input_files),
+                        'scanSha256':input_files['scan.json'],'reportSha256':sha256(raw).hexdigest(),
+                        'startedAt':job['startedAt'],'finishedAt':_now()}
++            if location_binding is not None:
++                receipt.update(version=3,operation=operation,locationBindingSha256=digest(location_binding))
+             result = {'reviewerSnapshot':manifest,'reviewerExecution':receipt,'report':report,'reportJson':raw.decode('utf-8'),
+                       'inputFiles':input_files,'temporaryRemoved':job['stageRemoved'],'cleanup':job['cleanup'],
+-                      'attemptDirectory':str(attempt)}
++                      'attemptDirectory':str(attempt),**({'locationBinding':location_binding} if location_binding is not None else {})}
++            if location_binding is not None and operation=='review':
++                result['reviewArtifact']={'locationBinding':location_binding,'reportJson':raw.decode('utf-8'),
++                    'scanJson':payload['scan.json'].decode('utf-8'),'manifestJson':payload['manifest.json'].decode('utf-8')}
+             # State and original result commit in one atomic record, not two files.
+             job.update(state='completed', finishedAt=receipt['finishedAt'], resultSha256=digest(result), result=result)
+             try:
+@@ -1094,6 +1147,10 @@
+ 
+ 
+ 
++def locations(bundle,expected,root,manifest_path,**kwargs):
++    return execute(bundle,expected,root,manifest_path,None,'0'*64,'0'*64,_operation='locations',**kwargs)
++
++
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+     commands = parser.add_subparsers(dest='action', required=True)
+@@ -1103,11 +1160,17 @@
+     creator.add_argument('image_id')
+     verifier = commands.add_parser('verify')
+     runner = commands.add_parser('run')
+-    for command in [verifier, runner]:
++    locator = commands.add_parser('locations')
++    for command in [verifier, runner, locator]:
+         command.add_argument('bundle', type=Path)
+         command.add_argument('expected')
+     for name in ['root', 'manifest_path', 'scan_path']:
+         runner.add_argument(name, type=Path)
++    locator.add_argument('root',type=Path)
++    locator.add_argument('manifest_path',type=Path)
++    locator.add_argument('--attempts-root',type=Path)
++    locator.add_argument('--timeout',type=float,default=30)
++    locator.add_argument('--storage-policy',type=Path)
+     runner.add_argument('dataset_sha')
+     runner.add_argument('freeze_sha')
+     runner.add_argument('--attempts-root', type=Path)
+@@ -1140,8 +1203,8 @@
+             elif action=='archive-status':value=storage.archive_status(policy,args['transaction_id'],_api_view())
+             else:value=storage.archive_restore(policy,args['transaction_id'],_api_view())
+         else:
+-            if action=='run' and args.get('storage_policy') is not None:args['storage_policy']=load_json(read(args['storage_policy']))
+-            value = freeze(**args) if action == 'freeze' else verify(**args)[0] if action == 'verify' else status(**args) if action == 'status' else recover(**args) if action == 'recover' else execute(**args)
++            if action in {'run','locations'} and args.get('storage_policy') is not None:args['storage_policy']=load_json(read(args['storage_policy']))
++            value = freeze(**args) if action == 'freeze' else verify(**args)[0] if action == 'verify' else status(**args) if action == 'status' else recover(**args) if action == 'recover' else locations(**args) if action=='locations' else execute(**args)
+         print(json.dumps(value, indent=2))
+         if action=='recover' and value.get('state')!='completed' and not value.get('cleanup',{}).get('confirmed'):
+             parser.exit(2)

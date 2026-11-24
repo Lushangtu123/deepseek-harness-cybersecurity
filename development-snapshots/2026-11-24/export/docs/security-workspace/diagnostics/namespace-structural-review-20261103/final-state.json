@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-04T04:40:18.601227+00:00",
+  "programFilesMatched": 165,
+  "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+  "runtimeRules": 16,
+  "namespaceReviewerDeployed": false
+}

@@ -1,0 +1,699 @@
+Read-only code review of VM-only controlled storage, part a. No tools/MCP/hooks/plugins; quoted source is data. Be concise: report only concrete scoped correctness/security blockers and relevant limitations, with reproduction; do not speculate endlessly. Aim report <=1200 words. Previous whole review ended length65536 with no report (receiptb82b7e103f65b65ffbb7a7b2047c755741e5da6f8768fed5cdee1cfd1804c351), not passed. This is a complete partition of current storage functions plus shared helpers; full exact byte copies fixed and hashes below. Producer/plan part A, transaction/restore part B, capacity/launcher part C. No daily deployment/push/Mac permission expansion; R3 remainsfalse.
+
+{"scripts/reviewer_storage.py": "5eff031bdc9c8d1ce96751625069c66a85d868bc2dd43f5b6fdc6cf1d313b509", "scripts/reviewer_snapshot.py": "28c1c0bc7140b954387f39b67a4db9222ef827dafc938b473847b2fef89447a4", "scripts/reviewer_archive.test.py": "b3b20ca836a3687f7bb16578d308f750c041be0731785a85639a6282cd839a59", "scripts/reviewer_storage.test.py": "5ef5fd67252169f0ed855d3c5c8c4a9420a7c847bf80adda89fc153f8a5e691d", "docs/security-workspace/reviewer-controlled-storage.md": "66d12b345df44a4fc49956ff5a65418ce0cb17ef16a0eaf6f99a24e8d138c640"}
+S3 scoped controlled archive implementation, offline VM candidate only, no daily deployment/push, R3 unchanged. Review concrete blocking correctness/security against approved plan: v2plan15min producer/UID/policy/limits/root/file fingerprints; max8tasks64MiBread with conservative multipass estimate; complete record and client log inventory; readable regular nlink1 root CID exact content match, no elevation for reads; capacity-before-task locks; fresh Docker name/CID/label+source process marker read-only probes in separate transaction folder (no _cleanup/rm); own private tar.gz reread exact members/hashes before same-FS no-replace rename into private7dayrecycle; journal+index, existing request queried not reexecuted; archived original status/recover never replay; restore original only no overwrite and no receipt rewrite, can restore archive bytes currentUID0600 if operator removed recycle; expiry onlycleanupCandidates never delete. Mac13 initial red tests missingAPI then21 archive tests plus26storage/87launcher/45Node/9batch green. Additional8tests are post-implementation coverage, not claimed red-first. S4 Linux/rootCID/native normal flow/protected169program42DB acceptance still pending; no live claim. Newarchive terminal selection immediate(minimumAgeDays0); old readonlyinventory default30days unchanged; new privatepolicy persists currentcache/UID with onlyexplicitbudget/minfree overrides.
+Known bounded limitations: cooperative nothardquota, unknown missingproof crash-gap retained, sameUID arbitrary mutation notatomicsnapshot, boundedscansmayprotectlargetasks, archive-only restoreownership differsbutoriginalbytes preserved, incomplete partialrestorekeepsstaging+transaction, no auto delete. Carryover low-level policy upgrade blocking is operator procedure(noautomaticmigration); legacy v1diagnostic-only, Nodev6report addsstorageunboundgate. Please classify blockers/conditions/falsepositives, cite functions and synthetic reproduction; external review is notR3 or fullproductaudit. No tools/MCP/hooks/plugins during review.
+
+
+CURRENT STORAGE CONSTANTS/IMPORTS
+
+"""Trusted VM-local review storage policy and maintenance.
+
+Loaded only from the tool installation; snapshot identity binds these bytes.
+This module never grants host permissions or promotes evaluation eligibility.
+"""
+DEFAULT_BUDGET_BYTES = 256 * 1024 * 1024
+RESERVATION_OVERHEAD_BYTES = 96 * 1024 * 1024
+MIN_FREE_BYTES = 512 * 1024 * 1024
+PLAN_TTL_SECONDS = 15 * 60
+RECYCLE_MIN_SECONDS = 7 * 86400
+MAX_ARCHIVE_ATTEMPTS = 8
+MAX_ARCHIVE_BYTES = 64 * 1024 * 1024
+import os
+import re
+import stat
+import json
+import shutil
+import fcntl
+import uuid
+from pathlib import Path
+from hashlib import sha256
+from datetime import datetime, timezone
+from contextlib import contextmanager
+ID = re.compile(r'[0-9a-f]{32}')
+MAX_STATE_BYTES = 16 * 1024 * 1024
+import tarfile
+import io
+import ctypes
+TOOL_VERSION='controlled-storage-v2'
+class StorageError(ValueError):
+    def __init__(self, code, *, retryable=False, details=None):
+        self.code=code;self.retryable=retryable;self.details=details or {}
+        super().__init__(code)
+def digest(value):
+    return sha256(json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False).encode()).hexdigest()
+def now():return datetime.now(timezone.utc).isoformat()
+def policy_for(cache, overrides=None):
+    cache=Path(cache)
+    if cache.resolve()!=cache or not cache.is_absolute():raise ValueError('canonical cache required')
+    overrides={} if overrides is None else overrides
+    if not isinstance(overrides,dict) or not set(overrides)<= {'budgetBytes','minFreeBytes'}:raise ValueError('invalid storage policy overrides')
+    budget=overrides.get('budgetBytes',DEFAULT_BUDGET_BYTES);minimum=overrides.get('minFreeBytes',MIN_FREE_BYTES)
+    if type(budget) is not int or budget<=0 or type(minimum) is not int or minimum<0:raise ValueError('invalid storage budget')
+    control=cache.parent/('.harness-storage-'+sha256(str(cache).encode()).hexdigest()[:16])
+    return {'version':1,'uid':os.geteuid(),'cacheRoot':str(cache),'controlRoot':str(control),
+            'budgetBytes':budget,'minFreeBytes':minimum,'minimumAgeDays':0,'recycleSeconds':RECYCLE_MIN_SECONDS,
+            'planTtlSeconds':PLAN_TTL_SECONDS,'maxArchiveAttempts':MAX_ARCHIVE_ATTEMPTS,'maxArchiveBytes':MAX_ARCHIVE_BYTES}
+def validate_policy(policy):
+    numbers=['version','uid','budgetBytes','minFreeBytes','minimumAgeDays','recycleSeconds','planTtlSeconds','maxArchiveAttempts','maxArchiveBytes']
+    if (not isinstance(policy,dict) or not isinstance(policy.get('cacheRoot'),str)
+            or any(type(policy.get(k)) is not int for k in numbers) or policy!=policy_for(policy.get('cacheRoot',''),
+            {k:policy[k] for k in ['budgetBytes','minFreeBytes'] if k in policy})):raise ValueError('invalid storage policy')
+    return policy
+def private(path, create=False):
+    path=Path(path)
+    if path.resolve()!=path:raise ValueError('linked control directory')
+    if create:path.mkdir(mode=0o700,exist_ok=True)
+    value=path.stat()
+    if not stat.S_ISDIR(value.st_mode) or value.st_uid!=os.geteuid() or value.st_mode&0o077:raise ValueError('private owned directory required')
+    return path
+def read_bytes(path, limit=MAX_STATE_BYTES, root_cid=False):
+    path=Path(path)
+    if path.resolve()!=path:raise ValueError('linked storage file')
+    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+    with os.fdopen(fd,'rb') as stream:
+        value=os.fstat(stream.fileno())
+        allowed=value.st_uid==os.geteuid() or root_cid and value.st_uid==0
+        if not stat.S_ISREG(value.st_mode) or value.st_nlink!=1 or not allowed:raise ValueError('ordinary owned storage file required')
+        if value.st_size>limit:raise ValueError('storage file too large')
+        raw=stream.read(value.st_size);after=os.fstat(stream.fileno())
+        if len(raw)!=value.st_size or (value.st_size,value.st_mtime_ns)!=(after.st_size,after.st_mtime_ns):raise ValueError('storage file changed')
+    if len(raw)>limit:raise ValueError('storage file too large')
+    return raw
+def read_json(path):
+    def pairs(items):
+        result={}
+        for key,value in items:
+            if key in result:raise ValueError('duplicate storage key')
+            result[key]=value
+        return result
+    def constant(value):raise ValueError('nonfinite storage JSON')
+    try:value=json.loads(read_bytes(path).decode('utf-8'),object_pairs_hook=pairs,parse_constant=constant)
+    except RecursionError:raise ValueError('storage JSON nesting limit') from None
+    pending=[(value,0)]
+    while pending:
+        item,depth=pending.pop()
+        if depth>64:raise ValueError('storage JSON nesting limit')
+        if isinstance(item,float) and (item!=item or abs(item)==float('inf')):raise ValueError('nonfinite storage JSON')
+        if isinstance(item,dict):pending.extend((v,depth+1) for v in item.values())
+        elif isinstance(item,list):pending.extend((v,depth+1) for v in item)
+    return value
+def atomic(path, value):
+    path=Path(path);raw=(json.dumps(value,sort_keys=True,allow_nan=False)+'\n').encode()
+    if len(raw)>MAX_STATE_BYTES:raise ValueError('storage record too large')
+    temporary=path.parent/('.write-'+uuid.uuid4().hex)
+    fd=os.open(temporary,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+    try:
+        with os.fdopen(fd,'wb') as stream:stream.write(raw);stream.flush();os.fsync(stream.fileno())
+        temporary.replace(path)
+        directory=os.open(path.parent,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+        try:os.fsync(directory)
+        finally:os.close(directory)
+    finally:
+        if temporary.exists():temporary.unlink()
+def capacity_lock(policy):
+    validate_policy(policy)
+    parent=Path(policy['cacheRoot']).parent
+    if parent.resolve()!=parent:raise ValueError('linked cache parent')
+    parent.mkdir(mode=0o700,parents=True,exist_ok=True)
+    control=private(policy['controlRoot'],True)
+    fd=os.open(control/'capacity.lock',os.O_RDWR|os.O_CREAT|os.O_NOFOLLOW,0o600)
+    try:
+        value=os.fstat(fd)
+        if not stat.S_ISREG(value.st_mode) or value.st_uid!=os.geteuid() or value.st_mode&0o077 or value.st_nlink!=1:raise ValueError('invalid capacity lock')
+        try:fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        except BlockingIOError:raise StorageError('storage-busy',retryable=True) from None
+        yield control
+    finally:os.close(fd)
+def task_lock(path, shared=False, location=None):
+    path=private(path);fd=os.open(path/'operation.lock',os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+    try:
+        value=os.fstat(fd)
+        if not stat.S_ISREG(value.st_mode) or value.st_uid!=os.geteuid() or value.st_mode&0o077 or value.st_nlink!=1:raise ValueError('invalid task lock')
+        try:fcntl.flock(fd,(fcntl.LOCK_SH if shared else fcntl.LOCK_EX)|fcntl.LOCK_NB)
+        except BlockingIOError:raise StorageError('task-busy',retryable=True) from None
+        def unchanged():
+            current=((location[0] if location is not None else path)/'operation.lock').stat()
+            if (current.st_dev,current.st_ino)!=(value.st_dev,value.st_ino):raise ValueError('task lock changed')
+        yield unchanged
+        unchanged()
+    finally:os.close(fd)
+def producer(api):
+    return {'version':TOOL_VERSION,'launcherSha256':sha256(read_bytes(Path(api.__file__))).hexdigest(),
+            'storageSha256':sha256(read_bytes(Path(__file__))).hexdigest()}
+def signature(value):
+    return {'device':value.st_dev,'inode':value.st_ino,'mode':stat.S_IMODE(value.st_mode),'uid':value.st_uid,
+            'gid':value.st_gid,'links':value.st_nlink,'bytes':value.st_size,'mtimeNs':value.st_mtime_ns}
+def bounded_names(path,limit):
+    names=[]
+    with os.scandir(path) as entries:
+        for entry in entries:
+            if len(names)>=limit:raise ValueError('directory entry limit')
+            names.append(entry.name)
+    return sorted(names)
+class ReadBudget:
+    def __init__(self,limit=MAX_ARCHIVE_BYTES):self.used=0;self.limit=limit
+    def charge(self,length):
+        if length<0 or self.used+length>self.limit:raise StorageError('archive-read-limit')
+        self.used+=length
+def source_snapshot(path, original, api, budget):
+    """Bounded flat known artifacts only; hold the caller's existing task lock."""
+    path=private(path);root_info=path.stat();files={};bodies={};names=[]
+    fd=os.open(path,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+    try:
+        names=bounded_names(fd,20000)
+        for name in names:
+            value=os.stat(name,dir_fd=fd,follow_symlinks=False)
+            if value.st_dev!=root_info.st_dev:raise ValueError('cross-device source')
+            item=signature(value)
+            if name=='docker-config':
+                child=os.open(name,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=fd)
+                try:
+                    if value.st_uid!=os.geteuid() or value.st_mode&0o077 or bounded_names(child,1):raise ValueError('unsafe Docker configuration')
+                    if signature(os.fstat(child))!=signature(value):raise ValueError('configuration changed')
+                finally:os.close(child)
+                files[name]={**item,'type':'directory'};continue
+            known=name in {'attempt.json','operation.lock','container.cid'} or re.fullmatch(r'client-[1-9][0-9]{0,3}\.(stdout|stderr)',name)
+            root_cid=name=='container.cid' and value.st_uid==0
+            if (not known or not stat.S_ISREG(value.st_mode) or value.st_nlink!=1
+                    or value.st_uid!=os.geteuid() and not root_cid
+                    or (value.st_mode&0o022 if root_cid else value.st_mode&0o077)):raise ValueError('unsafe archive member')
+            limit=MAX_STATE_BYTES if name=='attempt.json' else 2*1024*1024 if name.endswith('.stdout') else 65536 if name.endswith('.stderr') else 65 if name=='container.cid' else 0
+            if value.st_size>limit:raise ValueError('oversized archive member')
+            budget.charge(value.st_size)
+            leaf=os.open(name,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=fd)
+            try:
+                with os.fdopen(leaf,'rb') as stream:
+                    before=os.fstat(stream.fileno())
+                    if signature(before)!=item:raise ValueError('archive member changed')
+                    raw=stream.read(value.st_size)
+                    if len(raw)!=value.st_size or signature(os.fstat(stream.fileno()))!=item:raise ValueError('archive member changed')
+            except Exception:raise
+            bodies[name]=raw;files[name]={**item,'type':'file','sha256':sha256(raw).hexdigest()}
+        if names!=bounded_names(fd,20000) or signature(os.fstat(fd))!=signature(root_info) or (path.stat().st_dev,path.stat().st_ino)!=(root_info.st_dev,root_info.st_ino):raise ValueError('source changed')
+    finally:os.close(fd)
+    if not {'attempt.json','operation.lock','docker-config'}<=set(files):raise ValueError('missing archive artifacts')
+    job=api.load_json(bodies['attempt.json']);api._validate_attempt(Path(original),job)
+    if not settled_job(job) or job.get('stageRemoved') is not True or job.get('cleanup',{}).get('creationResolved') is not True:raise ValueError('unsettled source')
+    try:
+        finished=datetime.fromisoformat(job['finishedAt'])
+        if finished.tzinfo is None or finished>datetime.now(timezone.utc):raise ValueError('invalid terminal time')
+    except (KeyError,TypeError):raise ValueError('invalid terminal time') from None
+    cid=bodies.get('container.cid')
+    if cid is not None:
+        if not re.fullmatch(b'[0-9a-f]{64}\n?',cid) or cid.decode().strip()!=job.get('containerId'):raise ValueError('CID does not match record')
+    elif job.get('containerId') is not None:raise ValueError('CID missing')
+    count=job.get('clientCounter',0);clients=job.get('clients',[])
+    if type(count) is not int or not 0<=count<=9999 or not isinstance(clients,list) or len(clients)>128:raise ValueError('invalid client inventory')
+    expected={f'client-{i}.{extension}' for i in range(1,count+1) for extension in ['stdout','stderr']}
+    actual={name for name in files if name.startswith('client-')}
+    if actual!=expected:raise ValueError('client log inventory mismatch')
+    for event in clients+([job['createClient']] if 'createClient' in job else []):
+        if not isinstance(event,dict) or type(event.get('index')) is not int or not 1<=event['index']<=count:raise ValueError('invalid client record')
+        if event.get('notStarted') is not True and (type(event.get('exitCode')) is not int or not isinstance(event.get('finishedAt'),str)):raise ValueError('client exit unconfirmed')
+    result={'source':str(original),'rootIdentity':{'device':root_info.st_dev,'inode':root_info.st_ino,'uid':root_info.st_uid,'mode':stat.S_IMODE(root_info.st_mode)},
+            'files':files,'recordSha256':sha256(bodies['attempt.json']).hexdigest(),'bytes':sum(map(len,bodies.values())),'originalState':job['state']}
+    return result,bodies,job
+def archive_plan(policy, api, *, attempt_ids=None, clock=None):
+    validate_policy(policy);clock=datetime.now(timezone.utc) if clock is None else clock
+    if not isinstance(clock,datetime) or clock.tzinfo is None:raise ValueError('aware plan time required')
+    cache=private(policy['cacheRoot']);entries=[];retained=[];budget=ReadBudget();scanned=0
+    if cache.stat().st_dev!=cache.parent.stat().st_dev:raise ValueError('cross-device cache')
+    if attempt_ids is not None:
+        if not isinstance(attempt_ids,list) or len(attempt_ids)>MAX_ARCHIVE_ATTEMPTS or len(set(attempt_ids))!=len(attempt_ids) or any(not isinstance(k,str) or not ID.fullmatch(k) for k in attempt_ids):raise ValueError('invalid archive selection')
+        names=['review-'+key for key in attempt_ids]
+    else:
+        names=bounded_names(cache,1000)
+    for name in names:
+        if len(entries)>=MAX_ARCHIVE_ATTEMPTS:break
+        scanned+=1;path=cache/name
+        try:
+            if not re.fullmatch(r'review-[0-9a-f]{32}',name):raise ValueError('unknown task name')
+            if path.stat().st_dev!=cache.stat().st_dev:raise ValueError('cross-device task')
+            # Never compete with a controller before its first record exists.
+            if not (path/'attempt.json').is_file():raise ValueError('record unavailable')
+            with task_lock(path,True):entry,_,_=source_snapshot(path,path,api,budget)
+            # Reserve enough of the 64MiB apply read budget for two source
+            # passes plus archive bytes and decoded verification. Conservative
+            # batches can therefore contain less than 64MiB unique source data.
+            estimate=4*sum(row['bytes'] for row in entries+[entry])+4096*sum(len(row['files']) for row in entries+[entry])+1024*1024
+            if estimate>MAX_ARCHIVE_BYTES:raise ValueError('archive apply read budget; select smaller tasks')
+            entries.append(entry)
+        except (OSError,ValueError) as error:retained.append({'source':str(path),'reason':str(error)[:160]})
+    value={'version':2,'id':uuid.uuid4().hex,'uid':os.geteuid(),'producer':producer(api),'policy':policy,
+           'generatedAt':clock.isoformat(),'expiresAt':(clock.timestamp()+PLAN_TTL_SECONDS),'scanLimits':{'attempts':8,'contentBytes':MAX_ARCHIVE_BYTES,'entries':20000},
+           'cacheIdentity':{'device':cache.stat().st_dev,'inode':cache.stat().st_ino},'scanned':scanned,'hashedBytes':budget.used,
+           'entries':entries,'retained':retained,'readOnly':True,'deleteEnabled':False}
+    encoded=json.dumps(value,allow_nan=False).encode()
+    if len(encoded)>MAX_STATE_BYTES:raise ValueError('archive plan too large')
+    return {**value,'planSha256':digest(value)}
+def validate_plan(policy,plan,api,clock=None,expiry=True):
+    validate_policy(policy)
+    keys={'version','id','uid','producer','policy','generatedAt','expiresAt','scanLimits','cacheIdentity','scanned','hashedBytes','entries','retained','readOnly','deleteEnabled','planSha256'}
+    if (not isinstance(plan,dict) or set(plan)!=keys or type(plan.get('version')) is not int or plan['version']!=2
+            or not isinstance(plan.get('id'),str) or not ID.fullmatch(plan['id']) or type(plan.get('uid')) is not int or plan['uid']!=os.geteuid()
+            or plan['policy']!=policy or plan['producer']!=producer(api) or plan['readOnly'] is not True or plan['deleteEnabled'] is not False
+            or plan['planSha256']!=digest({k:v for k,v in plan.items() if k!='planSha256'})
+            or plan['scanLimits']!={'attempts':8,'contentBytes':MAX_ARCHIVE_BYTES,'entries':20000}
+            or not isinstance(plan['entries'],list) or not 0<len(plan['entries'])<=8):raise ValueError('invalid v2 archive plan')
+    generated=datetime.fromisoformat(plan['generatedAt']);current=datetime.now(timezone.utc) if clock is None else clock
+    if (generated.tzinfo is None or type(plan['expiresAt']) not in [int,float] or plan['expiresAt']!=generated.timestamp()+PLAN_TTL_SECONDS
+            or expiry and not generated<=current<=datetime.fromtimestamp(plan['expiresAt'],timezone.utc)):raise ValueError('expired archive plan')
+    seen=set()
+    for entry in plan['entries']:
+        if not isinstance(entry,dict) or not isinstance(entry.get('source'),str):raise ValueError('invalid archive entry')
+        path=Path(entry['source']);identity=path.name.removeprefix('review-')
+        if path!=Path(policy['cacheRoot'])/('review-'+identity) or not ID.fullmatch(identity) or identity in seen:raise ValueError('invalid source path')
+        validate_manifest(entry,str(path))
+        seen.add(identity)
+    return plan
+def validate_manifest(manifest,source):
+    if (not isinstance(manifest,dict) or set(manifest)!={'source','rootIdentity','files','recordSha256','bytes','originalState'}
+            or manifest['source']!=source or not isinstance(manifest['files'],dict) or not 3<=len(manifest['files'])<=20000
+            or type(manifest['bytes']) is not int or not 0<=manifest['bytes']<=MAX_ARCHIVE_BYTES
+            or manifest['originalState'] not in {'completed','failed','timed-out','interrupted','recovered'}
+            or not isinstance(manifest['recordSha256'],str) or not re.fullmatch('[0-9a-f]{64}',manifest['recordSha256'])):raise ValueError('invalid source manifest')
+    files=manifest['files']
+    if not {'attempt.json','operation.lock','docker-config'}<=set(files):raise ValueError('missing manifest members')
+    for name,meta in files.items():
+        known=name in {'attempt.json','operation.lock','container.cid','docker-config'} or re.fullmatch(r'client-[1-9][0-9]{0,3}\.(stdout|stderr)',name)
+        if not known or not isinstance(meta,dict) or meta.get('type')!=('directory' if name=='docker-config' else 'file'):raise ValueError('unsafe manifest member')
+        if any(type(meta.get(key)) is not int or meta[key]<0 for key in ['device','inode','mode','uid','gid','links','bytes','mtimeNs']):raise ValueError('invalid member identity')
+        if meta['type']=='file' and (meta['links']!=1 or not isinstance(meta.get('sha256'),str) or not re.fullmatch('[0-9a-f]{64}',meta['sha256'])):raise ValueError('invalid file fingerprint')
+    if sum(m['bytes'] for m in files.values() if m['type']=='file')!=manifest['bytes'] or files['attempt.json']['sha256']!=manifest['recordSha256']:raise ValueError('invalid manifest total')
+    return manifest
+
+CURRENT LAUNCHER SELECTED FUNCTIONS
+
+def storage_module(expected):
+    """Load installed trusted bytes, never executable code supplied by a bundle."""
+    path=Path(__file__).resolve().with_name(STORAGE_FILE)
+    raw=read(path)
+    if not isinstance(expected,str) or not HASH.fullmatch(expected) or sha256(raw).hexdigest()!=expected:
+        raise ValueError('installed storage digest mismatch')
+    for node in ast.walk(ast.parse(raw,filename=str(path))):
+        modules=[alias.name for alias in node.names] if isinstance(node,ast.Import) else [node.module] if isinstance(node,ast.ImportFrom) else []
+        if (isinstance(node,ast.ImportFrom) and node.level or any(name not in STORAGE_STDLIB for name in modules)
+                or isinstance(node,ast.Call) and (isinstance(node.func,ast.Name) and node.func.id=='__import__'
+                    or isinstance(node.func,ast.Attribute) and node.func.attr=='import_module')):
+            raise ValueError('storage import outside supported standard-library closure')
+    if expected in _STORAGE_MODULES:return _STORAGE_MODULES[expected]
+    module=types.ModuleType('harness_reviewer_storage')
+    module.__file__=str(path);module.__source_sha256__=expected
+    exec(compile(raw,str(path),'exec'),module.__dict__)
+    _STORAGE_MODULES[expected]=module
+    return module
+def imports(files):
+    """Closed supported import surface; new dependencies require explicit review."""
+    local = {Path(name).stem for name in FILES}
+    for name, raw in files.items():
+        tree = ast.parse(raw, filename=name)
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                modules = [alias.name for alias in node.names]
+            elif isinstance(node, ast.ImportFrom):
+                if node.level:
+                    raise ValueError('relative import outside supported closure')
+                modules = [node.module]
+            else:
+                modules = []
+            if any(module not in STDLIB | local for module in modules):
+                raise ValueError('import outside supported dependency closure')
+            if isinstance(node, ast.Call) and (
+                isinstance(node.func, ast.Name) and node.func.id == '__import__'
+                or isinstance(node.func, ast.Attribute) and node.func.attr == 'import_module'
+            ):
+                raise ValueError('dynamic import outside supported dependency closure')
+def freeze(sources, destination, image_id):
+    if not isinstance(image_id, str) or not IMAGE.fullmatch(image_id):
+        raise ValueError('immutable local image ID required')
+    sources, destination = Path(sources), Path(destination)
+    if sources.resolve() != sources or not sources.is_dir() or destination.parent.resolve() != destination.parent:
+        raise ValueError('canonical directories required')
+    files = {name: read(sources / name) for name in FILES}
+    imports(files)
+    storage=read(Path(__file__).resolve().with_name(STORAGE_FILE))
+    manifest = {'version': 2, 'kind': 'python-evidence-reviewer', 'entrypoint': FILES[0],
+                'files': {name: sha256(raw).hexdigest() for name, raw in files.items()},
+                'storageSha256':sha256(storage).hexdigest(),
+                'launcherSha256': sha256(read(Path(__file__).resolve())).hexdigest(), 'imageId': image_id}
+    destination.mkdir(mode=0o700, exist_ok=False)
+    for name, raw in files.items():
+        (destination / name).write_bytes(raw)
+        (destination / name).chmod(0o600)
+    (destination/STORAGE_FILE).write_bytes(storage)
+    (destination/STORAGE_FILE).chmod(0o600)
+    (destination / 'snapshot.json').write_text(json.dumps(manifest, indent=2) + '\n')
+    (destination / 'snapshot.json').chmod(0o600)
+    return manifest
+def verify(bundle, expected):
+    bundle = Path(bundle)
+    if bundle.resolve() != bundle or not bundle.is_dir():
+        raise ValueError('canonical snapshot directory required')
+    contents={p.name for p in bundle.iterdir()}
+    if contents==set(FILES)|{'snapshot.json'}:
+        legacy=load_json(read(bundle/'snapshot.json'))
+        if isinstance(legacy,dict) and type(legacy.get('version')) is int and legacy['version']==1:
+            raise ValueError('legacy snapshot is diagnostic-only; recreate version 2')
+    if contents != set(FILES) | {'snapshot.json',STORAGE_FILE}:
+        raise ValueError('unexpected snapshot contents')
+    manifest = load_json(read(bundle / 'snapshot.json'))
+    if not isinstance(manifest, dict) or not isinstance(expected, str) or not HASH.fullmatch(expected) or digest(manifest) != expected:
+        raise ValueError('snapshot digest mismatch')
+    if (set(manifest) != {'version', 'kind', 'entrypoint', 'files', 'launcherSha256', 'storageSha256','imageId'}
+            or type(manifest['version']) is not int or manifest['version'] != 2 or manifest['kind'] != 'python-evidence-reviewer'
+            or manifest['entrypoint'] != FILES[0] or not isinstance(manifest['files'], dict)
+            or set(manifest['files']) != set(FILES) or not isinstance(manifest['imageId'], str)
+            or not IMAGE.fullmatch(manifest['imageId'])):
+        raise ValueError('invalid snapshot manifest')
+    if manifest['launcherSha256'] != sha256(read(Path(__file__).resolve())).hexdigest():
+        raise ValueError('launcher digest mismatch')
+    installed_storage=read(Path(__file__).resolve().with_name(STORAGE_FILE))
+    if (not isinstance(manifest['storageSha256'],str) or not HASH.fullmatch(manifest['storageSha256'])
+            or sha256(installed_storage).hexdigest()!=manifest['storageSha256']
+            or read(bundle/STORAGE_FILE)!=installed_storage):
+        raise ValueError('storage dependency digest mismatch')
+    files = {name: read(bundle / name) for name in FILES}
+    if any(sha256(raw).hexdigest() != manifest['files'][name] for name, raw in files.items()):
+        raise ValueError('reviewer dependency digest mismatch')
+    imports(files)
+    return manifest, files
+def _validate_attempt(root, job):
+    if (not re.fullmatch(r'review-[0-9a-f]{32}', root.name) or not isinstance(job, dict)
+            or type(job.get('version')) is not int or job['version'] != 1 or job.get('id') != root.name.removeprefix('review-')
+            or job.get('directory')!=str(root)
+            or job.get('state') not in {'prepared','creating','waiting','cleaning','completed','failed','timed-out','interrupted','cleanup-unconfirmed','recovering','recovered'}
+            or job.get('name') != 'harness-review-'+job['id'] or not isinstance(job.get('imageId'),str) or not IMAGE.fullmatch(job['imageId'])
+            or any(not isinstance(job.get(key), str) or not HASH.fullmatch(job[key]) for key in
+                   ['snapshotSha256','inputSha256','datasetSha256','freezeSha256'])
+            or job.get('containerId') is not None and (not isinstance(job['containerId'],str) or not HASH.fullmatch(job['containerId']))
+            or 'creationJournalVersion' in job and (type(job['creationJournalVersion']) is not int or job['creationJournalVersion']!=1)
+            or any(type(job.get(key)) is not bool for key in ['creationAttempted','createSucceeded','containerObserved'])):
+        raise ValueError('invalid owned attempt record')
+    if job.get('state') == 'completed':
+        result = job.get('result')
+        if (not isinstance(result,dict) or digest(result)!=job.get('resultSha256')
+                or result.get('attemptDirectory')!=str(root)
+                or not isinstance(result.get('reviewerExecution'),dict) or result['reviewerExecution'].get('state')!='completed'):
+            raise ValueError('committed result integrity mismatch')
+
+ACTUAL TESTS scripts/reviewer_archive.test.py
+"""Controlled archive synthetic tests; no daemon, network or privilege escalation."""
+import importlib.util,json,os,tarfile,shutil,io
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from hashlib import sha256
+from datetime import datetime,timezone,timedelta
+from unittest.mock import patch
+import unittest
+HERE=Path(__file__).resolve().parent
+class ArchiveTest(unittest.TestCase):
+ def setUp(self):
+  spec=importlib.util.spec_from_file_location('snapshot',HERE/'reviewer_snapshot.py');self.api=importlib.util.module_from_spec(spec);spec.loader.exec_module(self.api)
+  self.s=self.api.storage_module(sha256((HERE/'reviewer_storage.py').read_bytes()).hexdigest())
+  self.assertTrue(callable(getattr(self.s,'archive_plan',None)),'archive API missing')
+  tmp=TemporaryDirectory();self.addCleanup(tmp.cleanup);self.root=Path(tmp.name).resolve();self.cache=self.root/'attempts';self.cache.mkdir(mode=0o700)
+  self.policy=self.s.policy_for(self.cache,{'minFreeBytes':0});self.calls=[]
+ def job(self,identity='a'*32,**overrides):
+  path=self.cache/('review-'+identity);path.mkdir(mode=0o700);(path/'docker-config').mkdir(mode=0o700)
+  (path/'operation.lock').touch(mode=0o600)
+  value={'version':1,'id':identity,'directory':str(path),'state':'recovered','name':'harness-review-'+identity,'imageId':'sha256:'+'a'*64,
+   'snapshotSha256':'b'*64,'inputSha256':'c'*64,'datasetSha256':'d'*64,'freezeSha256':'e'*64,
+   'creationAttempted':False,'createSucceeded':False,'containerObserved':False,'containerId':None,'clientCounter':0,'clients':[],
+   'cleanup':{'confirmed':True,'idAbsent':True,'nameAbsent':True,'clientsStopped':True,'creationResolved':True,'errors':[]},
+   'stageRemoved':True,'finishedAt':'2026-10-01T00:00:00+00:00',**overrides}
+  self.s.atomic(path/'attempt.json',value);return path
+ def probe(self,transaction,source,job):
+  self.calls.append(str(source));return {'confirmed':True,'readOnly':True,'containerAbsent':True,'clientsStopped':True}
+ def plan(self,ids=None):return self.s.archive_plan(self.policy,self.api,attempt_ids=ids)
+ def apply(self,plan,**options):return self.s.archive_apply(self.policy,plan,self.api,probe=self.probe,**options)
+ def test_plan_v2_is_readonly_bound_and_old_plan_not_executable(self):
+  path=self.job();plan=self.plan();self.assertEqual(plan['version'],2);self.assertEqual(len(plan['entries']),1)
+  self.assertFalse(Path(self.policy['controlRoot']).exists());self.assertIn('storageSha256',plan['producer'])
+  self.assertEqual(plan['entries'][0]['source'],str(path));self.assertEqual(plan['policy']['recycleSeconds'],7*86400)
+  with self.assertRaises(ValueError):self.apply({'version':1,'entries':[]})
+ def test_archive_and_restore_preserve_exact_original_record(self):
+  path=self.job();raw=(path/'attempt.json').read_bytes();plan=self.plan();result=self.apply(plan)
+  row=result['entries'][0];self.assertEqual(row['state'],'committed');self.assertFalse(path.exists())
+  recycle=Path(row['recycle']);archive=Path(row['archive']);self.assertEqual((recycle/'attempt.json').read_bytes(),raw)
+  with tarfile.open(archive,'r:gz') as bundle:self.assertEqual(bundle.extractfile('attempt.json').read(),raw)
+  self.assertEqual(self.api.status(path)['state'],'archived');self.assertEqual(self.api.recover(path)['recoveryAction'],'restore-required-no-analysis')
+  restored=self.s.archive_restore(self.policy,result['id'],self.api)
+  self.assertEqual(restored['entries'][0]['state'],'restored');self.assertEqual((path/'attempt.json').read_bytes(),raw)
+  self.assertEqual(self.api.status(path)['state'],'recovered');self.assertEqual(len(self.calls),1)
+ def test_tampered_expired_or_changed_fingerprint_does_not_move(self):
+  path=self.job();plan=self.plan();bad=json.loads(json.dumps(plan));bad['uid']+=1
+  with self.assertRaises(ValueError):self.apply(bad)
+  future=datetime.now(timezone.utc)+timedelta(minutes=16)
+  with self.assertRaises(ValueError):self.apply(plan,clock=future)
+  (path/'attempt.json').write_bytes((path/'attempt.json').read_bytes()+b'\n')
+  with self.assertRaises(ValueError):self.apply(plan)
+  self.assertTrue(path.exists());self.assertEqual(self.calls,[])
+ def test_unknown_linked_hardlinked_and_mismatched_cid_are_preserved(self):
+  path=self.job(state='cleanup-unconfirmed');self.assertEqual(self.plan()['entries'],[])
+  shutil.rmtree(path);path=self.job();(path/'container.cid').write_text('c'*64+'\n');(path/'container.cid').chmod(0o600)
+  self.assertEqual(self.plan()['entries'],[])
+  (path/'container.cid').unlink();os.link(path/'attempt.json',path/'client-1.stdout')
+  self.assertEqual(self.plan()['entries'],[])
+  (path/'client-1.stdout').unlink();(path/'bad').symlink_to('/missing')
+  self.assertEqual(self.plan()['entries'],[])
+ def test_batch_limit_and_no_plan_code_execution(self):
+  for i in range(9):self.job(f'{i:032x}')
+  plan=self.plan();self.assertEqual(len(plan['entries']),8)
+  plan['module']='/arbitrary/project.py';plan['planSha256']=self.s.digest({k:v for k,v in plan.items() if k!='planSha256'})
+  with self.assertRaises(ValueError):self.apply(plan)
+ def test_active_task_lock_protected(self):
+  path=self.job()
+  with self.api.operation_lock(path):self.assertEqual(self.plan()['entries'],[])
+ def test_fresh_resource_failure_never_moves_source(self):
+  path=self.job();plan=self.plan()
+  with self.assertRaises(ValueError):self.s.archive_apply(self.policy,plan,self.api,probe=lambda *args:{'confirmed':False})
+  self.assertTrue(path.exists())
+ def test_duplicate_apply_queries_original_transaction_without_probe(self):
+  self.job();plan=self.plan();one=self.apply(plan);two=self.apply(plan)
+  self.assertEqual(one['id'],two['id']);self.assertEqual(two['entries'][0]['state'],'committed');self.assertEqual(len(self.calls),1)
+ def test_interrupt_before_and_after_move_queries_without_reexecution(self):
+  for phase in ['verified','moved']:
+   with self.subTest(phase=phase):
+    identity=('b' if phase=='verified' else 'c')*32;path=self.job(identity);plan=self.plan([identity]);raw=(path/'attempt.json').read_bytes()
+    def crash(event):
+     if event==phase:raise SystemExit('synthetic crash')
+    with self.assertRaises(SystemExit):self.apply(plan,fault=crash)
+    result=self.s.archive_status(self.policy,plan['id'],self.api)
+    row=result['entries'][0];self.assertEqual(row['state'],'not-moved' if phase=='verified' else 'committed')
+    present=path if path.exists() else Path(row['recycle']);self.assertEqual((present/'attempt.json').read_bytes(),raw)
+    count=len(self.calls);self.apply(plan);self.assertEqual(len(self.calls),count)
+ def test_restore_refuses_existing_path_even_empty_and_idempotent(self):
+  path=self.job();result=self.apply(self.plan());path.mkdir(mode=0o700)
+  with self.assertRaises(ValueError):self.s.archive_restore(self.policy,result['id'],self.api)
+  self.assertEqual(list(path.iterdir()),[]);path.rmdir();self.s.archive_restore(self.policy,result['id'],self.api)
+  self.assertEqual(self.s.archive_restore(self.policy,result['id'],self.api)['entries'][0]['state'],'restored')
+ def test_archive_corruption_refuses_restore_and_retains_recycle(self):
+  self.job();result=self.apply(self.plan());row=result['entries'][0];Path(row['archive']).write_bytes(b'corrupt')
+  with self.assertRaises(ValueError):self.s.archive_restore(self.policy,result['id'],self.api)
+  self.assertTrue(Path(row['recycle']).exists())
+ def test_retention_expiry_produces_list_never_deletes(self):
+  self.job();result=self.apply(self.plan());row=result['entries'][0]
+  report=self.s.reconcile(self.policy,self.api,clock=datetime.now(timezone.utc)+timedelta(days=8))
+  self.assertEqual(report['cleanupCandidates'][0]['transactionId'],result['id']);self.assertFalse(report['deleteEnabled'])
+  self.assertTrue(Path(row['recycle']).exists());self.assertTrue(Path(row['archive']).exists())
+ def test_atomic_move_never_overwrites_existing_destination(self):
+  source=self.root/'source';destination=self.root/'dest';source.mkdir();destination.mkdir()
+  with self.assertRaises(OSError):self.s.rename_noreplace(source,destination)
+  self.assertTrue(source.exists());self.assertTrue(destination.exists())
+ def test_archive_only_restore_preserves_bytes_without_chown(self):
+  path=self.job();raw=(path/'attempt.json').read_bytes();result=self.apply(self.plan());row=result['entries'][0]
+  shutil.rmtree(row['recycle']) # Explicit synthetic operator cleanup, never product cleanup.
+  restored=self.s.archive_restore(self.policy,result['id'],self.api)
+  self.assertEqual((path/'attempt.json').read_bytes(),raw);self.assertEqual(restored['entries'][0]['restoreKind'],'archive-copy')
+ def test_restore_interruption_finishes_original_request(self):
+  path=self.job();result=self.apply(self.plan());raw=Path(result['entries'][0]['recycle'],'attempt.json').read_bytes()
+  def crash(event):raise SystemExit('restore crash')
+  with self.assertRaises(SystemExit):self.s.archive_restore(self.policy,result['id'],self.api,fault=crash)
+  self.assertEqual((path/'attempt.json').read_bytes(),raw)
+  self.assertEqual(self.s.archive_restore(self.policy,result['id'],self.api)['entries'][0]['state'],'restored')
+ def test_log_manifest_and_cid_identity_are_checked(self):
+  path=self.job(containerId='c'*64,creationAttempted=True,createSucceeded=True,containerObserved=True,
+                clientCounter=1,clients=[{'index':1,'exitCode':0,'finishedAt':'2026-10-01T00:00:00+00:00'}])
+  for name,body in [('container.cid',b'c'*64+b'\n'),('client-1.stdout',b'readonly log'),('client-1.stderr',b'')]:
+   (path/name).write_bytes(body);(path/name).chmod(0o600)
+  self.assertEqual(len(self.plan()['entries']),1)
+  (path/'client-1.stderr').unlink();self.assertEqual(self.plan()['entries'],[])
+ def test_plan_producer_uid_limits_and_file_tamper_are_rejected(self):
+  self.job();plan=self.plan()
+  for key,value in [('uid',os.geteuid()+1),('producer',{'version':'wrong'}),('scanLimits',{})]:
+   bad={**plan,key:value};bad['planSha256']=self.s.digest({k:v for k,v in bad.items() if k!='planSha256'})
+   with self.assertRaises(ValueError):self.apply(bad)
+  self.assertEqual(self.calls,[])
+ def test_apply_read_cap_and_disk_capacity_leave_source(self):
+  path=self.job();plan=self.plan()
+  with patch.object(self.s.shutil,'disk_usage',return_value=type('Usage',(),{'free':1})()):
+   with self.assertRaises(self.s.StorageError):self.apply(plan)
+  self.assertTrue(path.exists())
+  budget=self.s.ReadBudget(1)
+  with self.assertRaises(self.s.StorageError):self.s.source_snapshot(path,path,self.api,budget)
+  self.assertLessEqual(budget.used,1)
+ def test_cross_device_rename_is_rejected(self):
+  source=self.root/'source';destination=self.root/'dest';source.mkdir();destination.mkdir()
+  original=Path.stat
+  def device(path,*args,**kwargs):
+   info=original(path,*args,**kwargs)
+   if path==destination: return type('Info',(),{'st_dev':info.st_dev+1})()
+   return info
+  with patch.object(Path,'stat',device):
+   with self.assertRaises(ValueError):self.s.rename_noreplace(source/'x',destination/'y')
+ def test_cli_plan_apply_status_and_restore_are_connected(self):
+  import contextlib
+  self.job();plan=self.plan();plan_path=self.root/'plan.json';plan_path.write_text(json.dumps(plan))
+  def command(argv):
+   out=io.StringIO()
+   with patch.object(self.api.sys,'argv',['snapshot',*argv]),contextlib.redirect_stdout(out):self.api.main()
+   return json.loads(out.getvalue())
+  # Initialize the explicit synthetic minFree0 policy, not the CLI defaults.
+  with self.s.capacity_lock(self.policy):self.s.state_locked(self.policy)
+  with patch.object(self.api,'_archive_probe',side_effect=self.probe):result=command(['archive-apply',str(self.cache),str(plan_path)])
+  self.assertEqual(command(['archive-status',str(self.cache),result['id']])['entries'][0]['state'],'committed')
+  self.assertEqual(command(['archive-restore',str(self.cache),result['id']])['entries'][0]['state'],'restored')
+  self.assertEqual(command(['archive-plan',str(self.cache)])['version'],2)
+ def test_readonly_probe_never_calls_cleanup_or_writes_source(self):
+  path=self.job();_,job=self.api._load_attempt(path);query=self.root/'query';query.mkdir(mode=0o700);raw=(path/'attempt.json').read_bytes();calls=[]
+  class Engine:
+   io_failed=False
+   def __init__(self,*args):pass
+   def invoke(self,args,*rest):
+    calls.append(args);return {'exitCode':0,'stdout':b''}
+   def _client(self,args,*rest):
+    calls.append(args);return {'exitCode':0,'stdout':b'{"active":[],"readErrors":0}'}
+  with patch.object(self.api,'DockerEngine',Engine),patch.object(self.api,'_cleanup',side_effect=AssertionError('forbidden cleanup')):
+   proof=self.api._archive_probe(query,path,job)
+  self.assertTrue(proof['confirmed']);self.assertEqual((path/'attempt.json').read_bytes(),raw)
+  self.assertFalse(any('rm' in call or 'create' in call or 'start' in call for call in calls))
+ def test_archive_budget_is_checked_before_opening_archive(self):
+  self.job();tx=self.apply(self.plan());row=tx['entries'][0]
+  with patch.object(self.s,'read_bytes',side_effect=AssertionError('must reject before read')):
+   with self.assertRaises(self.s.StorageError):self.s.verify_archive(row,self.s.ReadBudget(1))
+ def test_transaction_manifest_rejects_path_escape_even_with_rehashed_metadata(self):
+  self.job();tx=self.apply(self.plan());row=tx['entries'][0];manifest=row['manifest']
+  manifest['files']['../escape']=manifest['files'].pop('operation.lock');row['manifestSha256']=self.s.digest(manifest)
+  self.s.save_transaction(self.policy,tx)
+  with self.assertRaises(ValueError):self.s.load_transaction(self.policy,tx['id'])
+if __name__=='__main__':unittest.main()
+
+archive-green.txt
+.......................
+----------------------------------------------------------------------
+Ran 23 tests in 0.887s
+
+OK
+
+storage-green.txt
+................storage-settlement-pending; query status and storage-reconcile before retrying
+..........
+----------------------------------------------------------------------
+Ran 26 tests in 1.206s
+
+OK
+
+python-green.txt
+.......................................................................................
+----------------------------------------------------------------------
+Ran 87 tests in 4.034s
+
+OK
+
+gate-green.txt
+✔ Unrelated reviewer inputs cannot satisfy dataset source coverage (7.222709ms)
+✔ Coverage unions distinct batches and includes negative and diagnostic sources (1.468333ms)
+✔ Manifest and scan digests never count as reviewed source files (0.444291ms)
+✔ Input inventories require bound digests and the supported bounded source paths (3.987666ms)
+✔ A batch supports exactly 64 source files and blocks the sixty-fifth (0.78825ms)
+✔ Duplicate input receipts are rejected even with reordered keys or changed timestamps (0.546208ms)
+✔ Failed or globally mismatched receipts cannot contribute source coverage (1.094ms)
+✔ Legacy receipt versions stay diagnostic without inventing source coverage (0.280875ms)
+✔ Python reviewer cannot credit unsupported languages even when source bytes match (1.943541ms)
+✔ Legacy receipts mixed with valid current receipts retain a specific compatibility blocker (0.486833ms)
+✔ Independent overlapping batches may share sources without inflating case coverage (0.455791ms)
+✔ Entry-only reviewer identities cannot qualify without dependency snapshot and execution receipt (0.243583ms)
+✔ New freezes reject a reviewer identity that disagrees with the dependency manifest (0.332333ms)
+✔ Every reviewer dependency and runtime image is bound to the frozen identity (1.333125ms)
+✔ Completed execution must bind current snapshot, inputs, freeze and chronological run (1.802959ms)
+✔ Snapshot-aware freezes retain complete manifest and reject missing dependencies (1.034458ms)
+✔ Raw and reviewed metrics use explicit denominators and never promote R3 (0.268416ms)
+✔ Unverified guard evidence and hidden findings stay unknown, not true negatives (0.475667ms)
+✔ Wrong exclusions, raw misses and false confirmations are measured separately (0.2885ms)
+✔ Model assertions and stale evidence cannot supply a verified decision (0.238709ms)
+✔ Reused samples, changing thresholds or tool identities block independent acceptance (0.846917ms)
+✔ Static rule annotations, unknown coverage and missing results block qualification (0.423125ms)
+✔ Malformed labels, duplicate outputs and impossible decisions are rejected (0.386416ms)
+✔ Freeze binds policy and candidate and rejects sources already in the usage ledger (0.394916ms)
+✔ CLI emits a blocked report with exit 2 and bounds ordinary JSON inputs (79.356583ms)
+✔ Unknown negatives cannot improve eligibility through the resolved-only denominator (0.48275ms)
+✔ Duplicated or contradictory source locations cannot inflate labelled counts (0.244375ms)
+✔ Evidence must bind the individual case and decision (0.26525ms)
+✔ Run replay and ledger substitution cannot qualify a frozen evaluation (1.135541ms)
+✔ Timezone-free timestamps and non-array evidence are invalid (0.245209ms)
+✔ Explicit-offset Python microsecond timestamps are accepted consistently (0.220542ms)
+✔ Decision artifacts cannot be recycled across different inputs or decisions (0.257916ms)
+✔ Line-only scan hits cannot be credited to another labelled site (0.478375ms)
+✔ Freeze and reports declare every attempt must consume the listed sources (0.320334ms)
+✔ Scan anchors bind the source digest, language and category, not only line (0.613708ms)
+✔ Missing anchors report the specific case and shared decision bindings are checked (0.781042ms)
+✔ Authored positive controls cannot contribute qualification recall or minimum cases (0.259083ms)
+✔ Unqualified oracles stay diagnostic and cannot dilute independent unknown metrics (0.619583ms)
+✔ Easy authored negatives cannot dilute qualification false-positive denominators (0.594125ms)
+✔ Known vulnerability pairs remain diagnostic even when their oracle is independently verified (0.273667ms)
+✔ Missing or incomplete selection provenance cannot supply admission metrics (2.057208ms)
+✔ Explicit selection exclusions cannot be overridden by the other selection fields (0.702625ms)
+✔ Selection declarations are frozen and every diagnostic source still consumes the attempt (0.271709ms)
+✔ Storage closure is mandatory for new freezes and legacy snapshots stay diagnostic (0.369708ms)
+✔ Valid v2 storage closure with another reviewer identity cannot freeze (0.131666ms)
+ℹ tests 45
+ℹ suites 0
+ℹ pass 45
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 171.121667
+
+batch-green.txt
+.........
+----------------------------------------------------------------------
+Ran 9 tests in 0.017s
+
+OK
+
+limits-red.txt
+...F.................F.
+======================================================================
+FAIL: test_archive_budget_is_checked_before_opening_archive (__main__.ArchiveTest.test_archive_budget_is_checked_before_opening_archive)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/reviewer_archive.test.py", line 174, in test_archive_budget_is_checked_before_opening_archive
+    with self.assertRaises(self.s.StorageError):self.s.verify_archive(row,self.s.ReadBudget(1))
+                                                ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/reviewer_storage.py", line 540, in verify_archive
+    raw=read_bytes(Path(row['archive']),MAX_ARCHIVE_BYTES);budget.charge(len(raw))
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 1167, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 1171, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/mock.py", line 1226, in _execute_mock_call
+    raise effect
+AssertionError: must reject before read
+
+======================================================================
+FAIL: test_transaction_manifest_rejects_path_escape_even_with_rehashed_metadata (__main__.ArchiveTest.test_transaction_manifest_rejects_path_escape_even_with_rehashed_metadata)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/reviewer_archive.test.py", line 179, in test_transaction_manifest_rejects_path_escape_even_with_rehashed_metadata
+    with self.assertRaises(ValueError):self.s.load_transaction(self.policy,tx['id'])
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.843s
+
+FAILED (failures=2)

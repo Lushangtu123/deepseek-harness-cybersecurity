@@ -1,0 +1,261 @@
+{
+  "version": 1,
+  "date": "2026-11-03",
+  "timezone": "America/Los_Angeles",
+  "scope": "isolated component oracle for officialCVE+upstreamfix family; broad discovery comparison and existing structural review; no daily program/rule change",
+  "advisory": "https://github.com/materialsproject/pymatgen/security/advisories/GHSA-vgv8-5cpj-qj2f",
+  "cve": "CVE-2024-23346",
+  "officialCwe": "CWE-77",
+  "sourceProvenance": {
+    "vulnerable": {
+      "commit": "12ab947261cda104ac87548429c69ce5014bbf02",
+      "gitBlobSha1": "a0d3050984ffd4fb21ce201814771ab72bb50e95",
+      "sha256": "97001081edfea081b211bc58650abb271ce7fb2f035f7ff17c1354062775a95f"
+    },
+    "patched": {
+      "commit": "c231cbd3d5147ee920a37b6ee9dd236b376bcf5a",
+      "gitBlobSha1": "87d4fde6f35d5208c196bf0a301aff5978a9994b",
+      "sha256": "84d5f4320e6888ee96b1d63f7895ad63efe31e49edddb7633ea1b13935da3926"
+    },
+    "licenseGitBlobSha1": "5533d21a204942bc370fab54a4472e121820dc37",
+    "repository": "materialsproject/pymatgen",
+    "path": "pymatgen/symmetry/settings.py",
+    "retrievedWith": "connected GitHub file/commit APIs; local Git blob hashes will be verified"
+  },
+  "measurement": {
+    "ok": true,
+    "advisoryFamilies": 1,
+    "officialCwe": "CWE-77",
+    "CWE95QualificationCasesAdded": 0,
+    "independentNegativeCasesAdded": 0,
+    "componentVectors": 12,
+    "normalEquivalenceVectors": 4,
+    "benignBuiltinEscapeVectors": 2,
+    "baseline16Hits": 0,
+    "research20Hits": 1,
+    "runtimeProofAndStructuralUnknownKeptSeparate": true,
+    "fullPymatgenOrCIFPathTested": false,
+    "r3Qualified": false
+  },
+  "runtime": {
+    "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+    "python": "3.12.15",
+    "dependencies": {
+      "numpy": {
+        "version": "1.26.4",
+        "file": "/deps/numpy/__init__.py"
+      },
+      "sympy": {
+        "version": "1.12",
+        "file": "/deps/sympy/__init__.py"
+      },
+      "mpmath": {
+        "version": "1.3.0",
+        "file": "/deps/mpmath/__init__.py"
+      }
+    },
+    "observations": 12,
+    "normalEquivalenceVectors": 4,
+    "harmlessBuiltinEscapeVectors": 2,
+    "isolatedControlsVerified": true,
+    "containerRemoved": true,
+    "temporaryRemoved": true,
+    "volumeSetUnchanged": true,
+    "programFilesMatched": 169,
+    "existingDatabaseLogicalDigestsMatched": 42
+  },
+  "detection": {
+    "existing16": {
+      "originalSiteHit": false,
+      "patchedSourceHits": 0,
+      "bothSourcesScanned": true,
+      "parsingErrors": 0
+    },
+    "research20": {
+      "originalSiteHit": true,
+      "matchedPosition": {
+        "line": 111,
+        "col": 27,
+        "endLine": 111,
+        "endCol": 84,
+        "offset": 4007,
+        "endOffset": 4064
+      },
+      "patchedSourceHits": 0,
+      "bothSourcesScanned": true,
+      "parsingErrors": 0,
+      "installed": false
+    }
+  },
+  "structuralReview": {
+    "scope": "same original Semgrep bytes, actual installed default reviewer; no new scan",
+    "summary": {
+      "version": 1,
+      "state": "completed",
+      "eligible": 1,
+      "checked": 1,
+      "observations": 1,
+      "unmatched": 0,
+      "retained": 1,
+      "cleanupVerified": true,
+      "execution": {
+        "profile": "namespace-ast-1",
+        "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+        "workerSha256": "9ec513ddb83d94c0c2f63629b7f218b1971704b4ff25d21169f30ad6e0ea9a51",
+        "pythonVersion": "3.12.15",
+        "cleanupVerified": true
+      }
+    },
+    "artifact": {
+      "tool": "semgrep",
+      "evidenceKind": "python-namespace-structure",
+      "path": "vulnerable.py",
+      "line": 111,
+      "rule": "policy.harness.python.dynamic-code-namespace",
+      "status": "unverified",
+      "sourceLocation": {
+        "version": 1,
+        "state": "bound",
+        "scope": "managed-source-copy",
+        "snapshotId": "5810f4e837d20b6c889ee8b276ac2624e6fa7512f8cef79858d6c95611819d2e",
+        "path": "vulnerable.py",
+        "sourceSha256": "97001081edfea081b211bc58650abb271ce7fb2f035f7ff17c1354062775a95f",
+        "byteLength": 7083,
+        "copyRedacted": false,
+        "start": {
+          "line": 111,
+          "col": 27,
+          "offset": 4007
+        },
+        "end": {
+          "line": 111,
+          "col": 84,
+          "offset": 4064
+        }
+      },
+      "sink": "eval",
+      "argumentCount": 3,
+      "bindingHint": "unsupported-scope",
+      "builtinIdentity": "unverified",
+      "sourceKind": "expression-unresolved",
+      "externalControl": "unverified",
+      "assignmentLines": [],
+      "constraintState": "unresolved"
+    },
+    "namespaceContainerCreates": 1,
+    "originalWarningsUnchanged": true,
+    "changesFindingDisposition": false
+  },
+  "failedInstrumentationAttempts": [
+    {
+      "revision": 1,
+      "countedAsPass": false,
+      "cause": "ASTdump representation differs betweenhost3.13 andcontainer3.12; rawclasssourcefingerprint used after fix"
+    },
+    {
+      "revision": 2,
+      "countedAsPass": false,
+      "cause": "listcomp frame inlined inCPython3.12; exact parse_transformation_string parent bound after PEP709 correction"
+    }
+  ],
+  "acceptedOracleRevision": 3,
+  "qualification": {
+    "newAdvisoryFamilies": 1,
+    "CWE95CasesAdded": 0,
+    "independentNegativeCasesAdded": 0,
+    "sameFamilyPatchedComparator": 1,
+    "r3Qualified": false,
+    "reason": "officialCWE77 kept separate; component/runtime conditions not fullpackage/CIFpath; repeated probes are not independent sites; model5.5closure pending"
+  },
+  "postcheck": {
+    "dailyProgramFilesMatched": 169,
+    "servicesActive": {
+      "dsh-original.service": true,
+      "harness-security.socket": true,
+      "harness-security.service": true
+    },
+    "ruleCount": 16,
+    "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+    "realFindingStates": {
+      "unverified": 95
+    },
+    "diagnosticContainersAbsent": true,
+    "diagnosticDirectoriesAbsent": true,
+    "namespaceWorkersAbsent": true,
+    "browseProject": "phishguard-model-closure-20261102",
+    "hostManagerUnchanged": true
+  },
+  "review": {
+    "reviews": [
+      {
+        "file": "pymatgen-review.json",
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "modelsRecorded": [
+          "claude-opus-5-5",
+          "claude-opus-4-8"
+        ],
+        "outputModelsRecorded": [
+          "claude-opus-4-8"
+        ],
+        "countedAsRequestedModelClosure": false,
+        "error": false,
+        "selfDeclaredModelIsNotAuthoritative": true
+      },
+      {
+        "file": "pymatgen-closure.json",
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "modelsRecorded": [
+          "claude-opus-5-5",
+          "claude-opus-4-8"
+        ],
+        "outputModelsRecorded": [
+          "claude-opus-5-5",
+          "claude-opus-4-8"
+        ],
+        "countedAsRequestedModelClosure": false,
+        "error": false,
+        "selfDeclaredModelIsNotAuthoritative": true
+      }
+    ],
+    "requestedModelReviewComplete": false,
+    "lastSupplementalOpinion": "packet-omission false finding withdrawn; no other concrete measurement bug found in focused review",
+    "packetCorrection": "candidateProgram was omitted only in initial prompt for brevity, not absent from original frozen file; actual169entry equality test passed",
+    "deterministicEvidenceCheck": "consistency.json",
+    "limitation": "actual output model4.8 despite5.5requested; supplemental text not requested-model closure or release qualification"
+  },
+  "ledger": {
+    "sourceHashesConsumed": 2,
+    "totalKnownSourceHashes": 229,
+    "independentHoldoutClaim": false
+  },
+  "replay": {
+    "downloadDependencies": "oracles/pymatgen-20261103/fetch-frozen-runtime.py",
+    "selfContainedFrozenOracleRunner": "oracles/pymatgen-20261103/rerun-from-evidence.py",
+    "status": "source archived; wrapper itself not additionally run; underlying oracle-remote-v3 was executed onVM",
+    "behavior": "preserves original receipts, uses same VM manager and requires daily169byteidentity; rerun is prior-used diagnostic"
+  },
+  "deterministicCheckMacAndVm": {
+    "ok": true,
+    "MacAndVMResultsIdentical": true,
+    "dailyProgramFilesMatched": 169,
+    "temporaryRemoved": true,
+    "sourceExecutionDuringConsistencyCheck": false,
+    "result": {
+      "ok": true,
+      "advisoryFamilies": 1,
+      "officialCwe": "CWE-77",
+      "CWE95QualificationCasesAdded": 0,
+      "independentNegativeCasesAdded": 0,
+      "componentVectors": 12,
+      "normalEquivalenceVectors": 4,
+      "benignBuiltinEscapeVectors": 2,
+      "baseline16Hits": 0,
+      "research20Hits": 1,
+      "runtimeProofAndStructuralUnknownKeptSeparate": true,
+      "fullPymatgenOrCIFPathTested": false,
+      "r3Qualified": false
+    }
+  }
+}

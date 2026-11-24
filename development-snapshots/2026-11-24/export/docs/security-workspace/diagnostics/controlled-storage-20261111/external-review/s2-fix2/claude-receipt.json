@@ -1,0 +1,120 @@
+{
+  "duration_api_ms": 116266,
+  "stop_reason": "end_turn",
+  "session_id": "681a93ca-7730-47e5-9215-574e713ce6d6",
+  "total_cost_usd": 0.41241419999999995,
+  "usage": {
+    "input_tokens": 2,
+    "cache_creation_input_tokens": 23188,
+    "cache_read_input_tokens": 1711,
+    "output_tokens": 11328,
+    "output_tokens_details": {
+      "thinking_tokens": 8444
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 23188,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 11328,
+        "cache_read_input_tokens": 1711,
+        "cache_creation_input_tokens": 23188,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 23188
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 2,
+      "outputTokens": 11328,
+      "cacheReadInputTokens": 1711,
+      "cacheCreationInputTokens": 23188,
+      "webSearchRequests": 0,
+      "costUSD": 0.41241419999999995,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 8444,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 23188,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 1,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# Review: N1/N2 positive-proof retry and reconciliation delta (`scripts/reviewer_storage.py` 2ddeb4e6…)\n\nI read only the quoted sources and evidence. I did not see `reviewer_snapshot.py`, so any claim that depends on how `execute` or `_load_attempt` behave is marked as a verification item, not a finding.\n\n## Verdict\n\n- **No unconditional safety, deletion, or under-counting blocker in the delta.**\n- **One conditional under-count (C1).** Close it before S3, either by citing `execute` code or with a small guard.\n- **One input-validation regression (R1).** It is a one-line fix.\n- **N1** is closed for the stated case, subject to C1.\n- **N2** is closed for the missing-record case. A residual dependency on snapshot lock ordering remains (V1).\n\n## C1 (conditional under-count): the proof is not fenced against reuse of the identity\n\n**Where:** `cancel_preparation` writes the `known-preparation-failure` proof before taking the capacity lock. Meanwhile, the idempotent branch of `reserve` (`if identity in ledger['active']: return row`) does not check `outcomes/{id}.json`.\n\n**How to reproduce:**\n1. Controller A reserves `X`. Preparation fails before `review-X` is created.\n2. `cancel_preparation` writes a proof with `sourceIdentity: null`, then gets `storage-busy` (retryable=True).\n3. A caller treats the retryable error as \"retry execute\" and runs `execute` again with the same deterministic identity `X`. `reserve` returns the still-active row.\n4. A reconcile, or any other `reserve` (through the new settle loop), runs `settle_locked(X)` before the retry runs `mkdir review-X`. `attempt.json` is absent, the proof matches, and both `source` and `None` are `None`, so the reservation is released.\n5. The retry now creates the directory and runs without a reservation. A third `reserve` in the window between the release and the `mkdir` sees nothing for `X` in `usage_locked` and admits.\n\nOnce `review-X` exists unsettled, `usage_locked` fails closed, because the `sourceIdentity` mismatch falls through to `task_lock`. That bounds the overrun to one admission in a short window, but it is still over budget. The proof also stays as `known-preparation-failure` for an attempt that actually ran.\n\n**Applies only if** identities can repeat across `execute` calls, or the CLI or launcher re-runs analysis on a retryable cancel error. The test name `…without_retrying_analysis` suggests the intent is not to retry, but the storage layer does not enforce that.\n\n**Fix (either):**\n- In `reserve`'s active-identity branch, raise `reservation-already-settled` (or a new `reservation-cancelled`) when an outcome file exists.\n- Or show from `reviewer_snapshot.py` that identities are fresh per `execute` and never reused after cancel.\n\nAdd a red test: reserve → busy cancel → `reserve(same id)` must refuse.\n\n## R1 (regression): `cancel_preparation` writes before validating its inputs\n\nPreviously, the outcome write ran only after `ledger['active'].get(identity)` matched a validated `ID` key. Now `cancel_preparation` writes `outcomes/{identity}.json` with no `ID.fullmatch` and no `validate_policy`.\n\n**Reproduction:** `identity='../ledger'` makes `atomic` replace `controlRoot/ledger.json` with the proof object. All active reservations are lost, and `state_locked` then raises \"invalid reservation ledger\" on every call. That fails closed, but if an operator \"repairs\" it by deleting the ledger, every in-flight reservation is under-counted. `'../policy'` similarly wedges the store with `storage-policy-changed`.\n\n**Severity:** low if the only caller passes a `reserve()` row id, but it is a regression with a trivial fix. At the top of `cancel_preparation`, add:\n- `validate_policy(policy)`\n- `ID.fullmatch(identity)`\n- `private(controlRoot/'outcomes')`\n\n## V1 (verify, outside this file): N2 depends on lock ordering in the snapshot\n\nThe missing-record branch of `settle_locked` correctly avoids `task_lock`, and the red/green test pins that. However, the delta also adds `for previous in ledger['active']: settle_locked(...)` to `reserve`. As a result, every `reserve` now takes a non-blocking exclusive `task_lock` on every active attempt that has an `attempt.json`.\n\nThis is safe only if the snapshot controller does both of the following:\n- creates and holds `operation.lock` before publishing `attempt.json`;\n- holds it continuously until settlement, or tolerates `task-busy` on any later re-acquire.\n\nIf the controller drops and re-takes the lock between phases, a concurrent `reserve` or `reconcile` can make that re-acquire fail spuriously. Please confirm against the execute and recover code paths.\n\n## Bounded design limitations (document; not blockers)\n\n- **L1 (writer quiescence).** The proof binds only `(st_dev, st_ino)` of the directory. If anything can still write into `review-X` after `cancel_preparation` returns (for example a detached copy subprocess), reconcile releases the 96 MiB overhead while contents can still grow. `usage_locked` counts the actual bytes at each later `reserve`, but growth between admissions is unreserved. State the precondition that all preparation writers are joined before cancel.\n- **L2 (inode reuse).** `(dev, ino)` is vulnerable to ABA if a directory is ever removed and recreated. That is not possible today, since this module never deletes. If S3 adds recycle or removal, bind the proof to something non-reusable (a nonce file or birth time) in addition to the inode.\n- **L3 (fail-closed liveness on malformed state).** `usage_locked` calls `proof.get(...)` on a non-dict proof, and `settled_job(job)` runs on a non-dict job. `_load_attempt` can also raise non-`OSError`/`ValueError` errors, as does `api=None` once an `attempt.json` exists. All of these propagate out of `reserve` and `reconcile` as raw exceptions. That is safe, but one malformed record wedges admission, and the CLI may print a traceback instead of exiting with code 4 and a reason. This fits into the N3–N7 reporting work.\n\n## Confirmed correct in the delta\n\n- **Crash recovery after the proof is durable:** if the process crashes after the proof `atomic` (file and directory fsync) but before the ledger delete, the reservation stays retained. Then `reconcile` or the `reserve` loop releases it only if `attempt.json` is absent, it is not a symlink, `container.cid` is absent, and the directory identity matches.\n- **No proof, no release:** a missing, mismatched, or `settled` proof, or a `logical_bytes` failure, returns `False`. Unknown reservations are still never age-expired (`test_unknown_reservation_is_not_expired_by_age`).\n- **Residue is kept and counted:** proven-preparation residue is never deleted and is counted by `usage_locked`'s proof branch. A dangling or linked entry trips `logical_bytes`, which fails closed.\n- **Pre-settlement recheck:** the `unchanged()` recheck before the settled-outcome write in `settle_locked` is an improvement. A malformed `storageReservation` now stays pending.\n\n## Test notes (synthetic coverage only; not product or R3 evidence)\n\n- `test_busy_preparation_release…` should assert `code == 'storage-busy'`. It currently accepts any `StorageError`.\n- `test_proven_preparation_residue…` asserts the residue still exists but not that it was counted. Add a tight-budget case where the residue bytes push the next `reserve` over budget.\n- Missing cases:\n  - proof with `null` source, then the directory appears → retained;\n  - proof present, then `attempt.json` appears → task path;\n  - proof whose `id` mismatches;\n  - C1's same-identity re-reserve;\n  - R1's traversal identity.\n\n## Before S3\n\n1. Fix R1.\n2. Either guard C1 in `reserve` or cite the `execute` code that rules it out.\n3. Confirm V1 against `reviewer_snapshot.py`.\n4. Document L1 and L2 as preconditions.\n\nThis review covers only the stated delta for the VM offline candidate. It is not a complete product review and not R3 acceptance.",
+  "ttft_ms": 89307,
+  "type": "result",
+  "duration_ms": 116555,
+  "uuid": "5fe0d4da-a2ff-4757-a4ee-4cb046cb2e61",
+  "ttft_stream_ms": 2268,
+  "time_to_request_ms": 287,
+  "first_content_frame_ms": 2268,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 2,
+      "outputTokens": 11328,
+      "cacheReadInputTokens": 1711,
+      "cacheCreationInputTokens": 23188,
+      "webSearchRequests": 0,
+      "costUSD": 0.41241419999999995,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 8444,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 23188,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-12-05T18:49:08.808Z"
+}

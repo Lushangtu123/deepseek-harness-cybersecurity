@@ -1,0 +1,23 @@
+{
+  "nodeSha256": "dbabf7a1cbf947e6059ffad2c27b80041db97dea1e553b62afdee7f13fca336e",
+  "harness": {
+    "name": "@deepseek-ai/dsh",
+    "version": "0.2.1-rc.3",
+    "dist": {
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh/-/dsh-0.2.1-rc.3.tgz",
+      "integrity": "sha512-H+E9HLnHf7fJqzen84Z9Bq8ggb5xbrcbyhZjXTJLE9NabHr3zteGvTRvdvGkxPl4ov80is4WLglFmSo+/olJjg=="
+    }
+  },
+  "pnpm": {
+    "name": "pnpm",
+    "version": "11.28.5",
+    "dist": {
+      "tarball": "https://registry.npmjs.org/pnpm/-/pnpm-11.28.5.tgz",
+      "integrity": "sha512-SEVj0wtMKtJ8tIqpT/KzAtvOvI/2vyiBbCWJiG4UbOf3bzVPO8GkOOb16XaMMCqgpvet2CMpA81M+BQmy8FNng=="
+    }
+  },
+  "schemaVersion": 1,
+  "nodeVersion": "24.22.1",
+  "nodeUrl": "https://nodejs.org/dist/v24.22.1/node-v24.22.1-linux-arm64.tar.xz",
+  "scope": "basic-harness-plugin-web"
+}

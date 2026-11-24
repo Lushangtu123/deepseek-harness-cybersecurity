@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "timezone": "America/Los_Angeles",
+  "scope": "Professional offline assets after basic installation on the existing isolated Ubuntu 24.04 ARM64 VM template",
+  "cleanInstall": {
+    "finalAttempt": 4,
+    "fullJdkInstalledBeforeBasicAndProfessionalInstall": true,
+    "freshVendorBaseUsed": true,
+    "installation": {
+      "ok": true,
+      "scope": "professional-offline-assets",
+      "components": [
+        "rea",
+        "reverse-skill",
+        "pentagi",
+        "security-scanners",
+        "original-capabilities",
+        "runtime-overrides",
+        "optional-plugins",
+        "codegraph"
+      ],
+      "assetManifestSha256": "b9a1e88354bda9494020b52f262c8369a5930e5d8baef8ac554202d1b6b3d913",
+      "payloadFiles": 206790,
+      "payloadLinks": 53,
+      "configFiles": 78,
+      "imagesLoaded": 6,
+      "copiesCredentials": false,
+      "oldProjectsOrAuditDataCopied": false,
+      "modelOrScannerInvocation": false,
+      "accountSetupRequired": true,
+      "pentagiServiceStarted": false,
+      "originalCapabilitiesEnabled": false,
+      "hostIntegrationChanged": false,
+      "privateInstallationLog": "/home/purge/.harness-professional/installation.log",
+      "readiness": {
+        "versions": {
+          "@deepseek-ai/dsh": "0.2.1-rc.3",
+          "rea-agents": "6.8.0",
+          "@colbymchenry/codegraph": "1.6.2",
+          "dsh-context": "0.75.1",
+          "dsh-whale-widget": "0.4.2",
+          "dshmarket": "1.70.2"
+        },
+        "reaCommandVersionMatched": true,
+        "originalRuntimeFilesVerified": 62988,
+        "scannerRuntimeReady": true,
+        "scannerVersions": {
+          "semgrep": "1.182.1",
+          "trivy": "0.76.1",
+          "zap": "2.17.0"
+        },
+        "webResponding": true,
+        "webAndSocketActive": true,
+        "credentialsOrModelValidityTested": false,
+        "modelOrScanStarted": false
+      }
+    },
+    "sourceAccountsChatsProjectsAndAuditDataCopied": false,
+    "modelAccountSetupRequired": true,
+    "workspaceSelectionRequired": true,
+    "basicAndSystemDependenciesUseNetwork": true,
+    "professionalAssetsImportedOffline": true
+  },
+  "nativeAcceptance": {
+    "rea": {
+      "reaMcpTools": 229,
+      "expectedToolsPresent": true,
+      "binarySessionRead": true,
+      "localSyntheticJavascriptAnalyzed": true,
+      "ghidraSyntheticBinaryOpened": true,
+      "syntheticArithmeticDecompiled": true,
+      "provider": "ghidra",
+      "modelCallsOrSecurityScans": 0,
+      "reverseRouterHelpPassed": true,
+      "codegraphVersionMatched": true,
+      "offlineWorkerArithmetic": "42",
+      "newUserProjectOrRealAuditChanged": false
+    },
+    "pentagi": {
+      "pentagiLocalHttpReady": true,
+      "localCliAuthenticationVerified": true,
+      "providersResponseRead": true,
+      "flowsResponseRead": true,
+      "flowsCreated": 0,
+      "credentialMetadata": {
+        "admin": {
+          "private": true,
+          "exists": true
+        },
+        "localApi": {
+          "private": true,
+          "exists": true
+        }
+      },
+      "modelApiKeyBlank": true,
+      "oldCredentialsCopied": false,
+      "modelOrSecurityScanInvoked": false
+    },
+    "modes": {
+      "originalCapabilitiesEntryActuallyStarted": true,
+      "returnedToImprovedDefault": true,
+      "originalPluginVersion": "1.1.77",
+      "independentOriginalProfilePresent": true,
+      "modelOrSecurityScanInvoked": false
+    },
+    "modelTasksSubmitted": 0,
+    "securityScansStarted": 0,
+    "pentagiModelCredentialsNotValidated": true,
+    "originalIndependentProfileExecutionNotExercised": true,
+    "reaCatalogCountDoesNotMeanEveryToolTested": true
+  },
+  "browser": {
+    "backend": "IAB",
+    "temporarySerializedLoopbackEntry": true,
+    "productionManagementMetadataDisabledDuringBlankQa": true,
+    "userNoticeExplicitlyAccepted": true,
+    "pluginVersion": "1.1.77-personal.2",
+    "componentsRunning": 5,
+    "componentsTotal": 5,
+    "coldReloadObserved": true,
+    "viewport": {
+      "width": 425,
+      "height": 664
+    },
+    "nativeScreenshotAndAccessibilityEvidenceKeptLocally": true,
+    "temporaryTabAndProxyClosed": true
+  },
+  "diagnosedAndCorrected": {
+    "normalSdkSessionCodeWasExcluded": true,
+    "fixedPackageNamespacesAndPrivateDataNegativeControlsAdded": true,
+    "allOriginalManifestEntriesRequiredBeforeBundleBuild": true,
+    "runtimeOnlyJavaPassedOldVersionGate": true,
+    "fullJdkCompilerRequiredBeforeStagingAndDuringReadiness": true,
+    "finalFreshInstallNeededNoManualRepair": true,
+    "testClientUpdatedToInstalledMcpSplitSdk": true
+  },
+  "checks": {
+    "pythonCases": 219,
+    "pythonFiles": 25,
+    "pluginNodeCases": 447,
+    "hostNodeCases": 129,
+    "clientRebuildMatched": true,
+    "independentStaticReview": "no actionable Important or Critical issue in final changes",
+    "failedAttemptsRetainedPrivately": true
+  },
+  "recovery": {
+    "point": "ready-professional-bootstrap-20261031",
+    "selectedProofEntries": 2616,
+    "programFiles": 127,
+    "snapshotCount": 17,
+    "oldSnapshotsPreserved": true,
+    "independentCopyActuallyBooted": true,
+    "originalDiskAndSeedReturned": true,
+    "temporaryCopyRemoved": true,
+    "coverage": {
+      "state": "matches",
+      "name": "ready-professional-bootstrap-20261031",
+      "createdAt": "2026-11-01T05:19:36Z",
+      "scope": "improved-program-tools-config",
+      "helpersMatch": true,
+      "launchAgentsMatch": true,
+      "uncoveredFiles": [],
+      "groups": {
+        "program": {
+          "state": "matches",
+          "filesChecked": 127,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "runtime": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "tools": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "config": {
+          "state": "matches",
+          "filesChecked": 11,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "plugins": {
+          "state": "matches",
+          "filesChecked": 1320,
+          "uncoveredFiles": [],
+          "differentFiles": [],
+          "differentFileCount": 0,
+          "differenceDetailsTruncated": false
+        }
+      }
+    }
+  },
+  "boundaries": {
+    "hostPermissionsExpanded": false,
+    "newVmRegistered": false,
+    "realTrackedFilesMatched": 459,
+    "realProjectHeadAndSixAuditTablesUnchanged": true,
+    "findingsStillUnverified": 95,
+    "temporaryBlankDisksRemoved": 4,
+    "acceptedLargeAssetsKeptOutsideGit": true
+  },
+  "remaining": [
+    "Model accounts and workspace selection must be configured locally in a future new installation",
+    "No full PentAGI model workflow was tested",
+    "One SSH identification reset was observed in this run; the serial read recovered but its root cause remains undetermined",
+    "Existing Semgrep parser gaps remain",
+    "Authenticated ZAP has not been configured"
+  ],
+  "cloudCiAtPackaging": {
+    "state": "not-observed-before-push",
+    "workflow": "https://github.com/Lushangtu123/deepseek-harness-vm/actions/workflows/verify.yml"
+  },
+  "sshReadFailureObserved": {
+    "count": 1,
+    "stage": "identification",
+    "exitCode": 255,
+    "controllerDiagnosticSaved": false,
+    "serialRetrySucceeded": true,
+    "readOnlyServerWindowSampled": true,
+    "windowJournalRows": 6,
+    "windowJournalTruncated": false,
+    "matchingDropMaxStartupsOrMemoryMarkersObserved": false,
+    "exactConnectionIdentified": false,
+    "rootCauseEstablished": false
+  }
+}

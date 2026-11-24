@@ -1,0 +1,227 @@
+{
+  "kind": "independent-partial-nine-group-readback",
+  "groups": [
+    {
+      "suite": "consumer-12",
+      "passed": 12,
+      "total": 12,
+      "rawHashesChecked": true,
+      "sourceSnapshotsMatchActualHostSource": true,
+      "all301FingerprintsMatchFrozenPacket": true
+    },
+    {
+      "suite": "evidence-gate",
+      "passed": 13,
+      "total": 13,
+      "rawHashesChecked": true,
+      "sourceSnapshotsMatchActualHostSource": true,
+      "all301FingerprintsMatchFrozenPacket": true
+    },
+    {
+      "suite": "record-validation-15",
+      "passed": 15,
+      "total": 15,
+      "rawHashesChecked": true,
+      "sourceSnapshotsMatchActualHostSource": true,
+      "all301FingerprintsMatchFrozenPacket": true
+    },
+    {
+      "suite": "unified-recovery-27",
+      "passed": 27,
+      "total": 27,
+      "rawHashesChecked": true,
+      "sourceSnapshotsMatchActualHostSource": true,
+      "all301FingerprintsMatchFrozenPacket": true
+    },
+    {
+      "suite": "association-recovery-21",
+      "passed": 21,
+      "total": 21,
+      "rawHashesChecked": true,
+      "sourceSnapshotsMatchActualHostSource": true,
+      "all301FingerprintsMatchFrozenPacket": true
+    },
+    {
+      "suite": "recovery-close-24",
+      "passed": 24,
+      "total": 24,
+      "rawHashesChecked": true,
+      "sourceSnapshotsMatchActualHostSource": true,
+      "all301FingerprintsMatchFrozenPacket": true
+    },
+    {
+      "suite": "formal-admission-15",
+      "passed": 15,
+      "total": 15,
+      "rawHashesChecked": true,
+      "sourceSnapshotsMatchActualHostSource": true,
+      "all301FingerprintsMatchFrozenPacket": true
+    },
+    {
+      "suite": "original-28",
+      "passed": 28,
+      "total": 28,
+      "rawHashesChecked": true,
+      "sourceSnapshotsMatchActualHostSource": true,
+      "all301FingerprintsMatchFrozenPacket": true
+    },
+    {
+      "suite": "end-lf-13",
+      "passed": 13,
+      "total": 13,
+      "rawHashesChecked": true,
+      "sourceSnapshotsMatchActualHostSource": true,
+      "all301FingerprintsMatchFrozenPacket": true
+    }
+  ],
+  "groupCount": 9,
+  "passed": 168,
+  "total": 168,
+  "selectedFiles": 93,
+  "selectedBytes": 2885266,
+  "allSelectedHashesVerified": true,
+  "allNativeResultsRevalidatedByActualTrustedReader": true,
+  "currentCapacity": {
+    "capBytes": 67108864,
+    "categories": {
+      "other-phase-files": 8950164,
+      "temporary-other-files": 9396978,
+      "temporary-tool-paths": 37873072
+    },
+    "excessForNewGroup": 1694262,
+    "filesystemFreeBytes": 33784266752,
+    "maxExistingBytesForNewGroup": 54525952,
+    "newGroupAdmitted": false,
+    "newGroupPlannedBytes": 8388608,
+    "phaseBytes": 56220214,
+    "stopReserveBytes": 4194304,
+    "treeErrors": []
+  },
+  "controllerState": {
+    "detail": "pid-absent",
+    "state": "exited"
+  },
+  "outerGroupStates": [
+    {
+      "identityRelationChecked": true,
+      "state": {
+        "members": 0,
+        "proof": "empty-group-query",
+        "state": "exited"
+      },
+      "suite": "consumer-12"
+    },
+    {
+      "identityRelationChecked": true,
+      "state": {
+        "members": 0,
+        "proof": "empty-group-query",
+        "state": "exited"
+      },
+      "suite": "evidence-gate"
+    },
+    {
+      "identityRelationChecked": true,
+      "state": {
+        "members": 0,
+        "proof": "empty-group-query",
+        "state": "exited"
+      },
+      "suite": "record-validation-15"
+    },
+    {
+      "identityRelationChecked": true,
+      "state": {
+        "members": 0,
+        "proof": "empty-group-query",
+        "state": "exited"
+      },
+      "suite": "unified-recovery-27"
+    },
+    {
+      "identityRelationChecked": true,
+      "state": {
+        "members": 0,
+        "proof": "empty-group-query",
+        "state": "exited"
+      },
+      "suite": "association-recovery-21"
+    },
+    {
+      "identityRelationChecked": true,
+      "state": {
+        "members": 0,
+        "proof": "empty-group-query",
+        "state": "exited"
+      },
+      "suite": "recovery-close-24"
+    },
+    {
+      "identityRelationChecked": true,
+      "state": {
+        "members": 0,
+        "proof": "empty-group-query",
+        "state": "exited"
+      },
+      "suite": "formal-admission-15"
+    },
+    {
+      "identityRelationChecked": true,
+      "state": {
+        "members": 0,
+        "proof": "empty-group-query",
+        "state": "exited"
+      },
+      "suite": "original-28"
+    },
+    {
+      "identityRelationChecked": true,
+      "state": {
+        "members": 0,
+        "proof": "empty-group-query",
+        "state": "exited"
+      },
+      "suite": "end-lf-13"
+    }
+  ],
+  "inner": [
+    {
+      "box": "checks/tmp/closure-public-compile-907b66ad",
+      "containers": {
+        "allRemoved": true,
+        "count": 2
+      },
+      "ok": true,
+      "preflightEvidence": "53cfc02d5c530946d3914bca915a440b",
+      "roleStates": {
+        "client": {
+          "members": 0,
+          "proof": "group-query",
+          "state": "exited"
+        },
+        "observer": {
+          "members": 0,
+          "proof": "group-query",
+          "state": "exited"
+        }
+      },
+      "stage": {
+        "path": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/closure-public-compile-907b66ad/preflight/evidence/53cfc02d5c530946d3914bca915a440b/stage-a17896bcb651ab79",
+        "state": "absent"
+      }
+    }
+  ],
+  "batchLock": {
+    "released": true,
+    "state": "released"
+  },
+  "tenthPreLaunchPaths": {
+    "candidate/checks/evidence-runs/full20-linux-20261123/raw/rev6-24": "absent",
+    "candidate/checks/evidence-runs/full20-linux-20261123/rev6-results.json": "absent",
+    "evidence/rev6-24": "absent"
+  },
+  "full20Passed": false,
+  "officialStatusUnchangedUnknown": true,
+  "formalTargets": "0/16",
+  "r3": "blocked"
+}

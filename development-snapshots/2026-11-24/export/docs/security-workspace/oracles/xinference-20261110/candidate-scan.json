@@ -1,0 +1,139 @@
+{
+  "phase": "candidate",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+  "datasetSha256": "97c29329e48fcc140688f913eac392e7bedc93413e6ff621b0f739a7e5af504d",
+  "caseIds": [
+    "before",
+    "fixed"
+  ],
+  "scannerExitCode": 0,
+  "native": {
+    "result": {
+      "version": "1.182.1",
+      "results": [
+        {
+          "check_id": "policy.harness.python.dynamic-code-namespace",
+          "path": "/src/before.py",
+          "start": {
+            "line": 46,
+            "col": 20,
+            "offset": 1466
+          },
+          "end": {
+            "line": 46,
+            "col": 46,
+            "offset": 1492
+          },
+          "extra": {
+            "message": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+            "metadata": {
+              "category": "security",
+              "cwe": [
+                "CWE-95"
+              ],
+              "confidence": "LOW",
+              "source": "Harness local sink-inventory research candidate",
+              "requires-manual-review": true,
+              "evidence-level": "sink-only",
+              "qualification": "unverified",
+              "no-automatic-suppression": true,
+              "scope": "two or three positional arguments; no callee identity or input-source proof"
+            },
+            "severity": "WARNING",
+            "fingerprint": "requires login",
+            "lines": "requires login",
+            "validation_state": "NO_VALIDATOR",
+            "engine_kind": "OSS"
+          }
+        }
+      ],
+      "errors": [],
+      "paths": {
+        "scanned": [
+          "/src/before.py",
+          "/src/fixed.py"
+        ]
+      },
+      "time": {
+        "rules": [],
+        "rules_parse_time": 0.0014109611511230469,
+        "profiling_times": {
+          "config_time": 0.1008901596069336,
+          "core_time": 0.35361647605895996,
+          "ignores_time": 0.000118255615234375,
+          "total_time": 0.4624004364013672
+        },
+        "parsing_time": {
+          "total_time": 0.00683903694152832,
+          "per_file_time": {
+            "mean": 0.0011398394902547202,
+            "std_dev": 5.543687780434287e-06
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_files": []
+        },
+        "scanning_time": {
+          "total_time": 0.009402275085449219,
+          "per_file_time": {
+            "mean": 0.004701137542724609,
+            "std_dev": 1.369013267549235e-05
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_files": []
+        },
+        "matching_time": {
+          "total_time": 0.0020444393157958984,
+          "per_file_and_rule_time": {
+            "mean": 0.00034073988596598304,
+            "std_dev": 3.724538149501516e-07
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_rules_on_files": []
+        },
+        "tainting_time": {
+          "total_time": 0.0,
+          "per_def_and_rule_time": {
+            "mean": 0.0,
+            "std_dev": 0.0
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_rules_on_defs": []
+        },
+        "fixpoint_timeouts": [],
+        "prefiltering": {
+          "project_level_time": 0.0,
+          "file_level_time": 0.0,
+          "rules_with_project_prefilters_ratio": 0.0,
+          "rules_with_file_prefilters_ratio": 1.0,
+          "rules_selected_ratio": 0.2727272727272727,
+          "rules_matched_ratio": 0.2727272727272727
+        },
+        "targets": [],
+        "total_bytes": 0,
+        "max_memory_bytes": 93213184
+      },
+      "engine_requested": "OSS",
+      "skipped_rules": [],
+      "profiling_results": []
+    },
+    "authentication": null
+  },
+  "stderr": "",
+  "temporaryRemoved": true,
+  "containerAbsent": true,
+  "runtimeRulesUnchanged": true,
+  "scannerManifestUnchanged": true
+}

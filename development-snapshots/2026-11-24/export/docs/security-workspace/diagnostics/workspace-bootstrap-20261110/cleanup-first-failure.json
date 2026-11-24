@@ -1,0 +1,7 @@
+{
+  "state": "failed-before-signals-or-removal",
+  "remoteStdinLine": 14,
+  "ref": "e6981840-480f-4357-a72d-489658eb9baf",
+  "cause": "test assumed no generated records; SDK generated one grant record in each disposable profile; no refs present",
+  "credentialValuesCollected": false
+}

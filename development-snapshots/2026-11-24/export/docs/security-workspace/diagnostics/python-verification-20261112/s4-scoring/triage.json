@@ -1,0 +1,10 @@
+{
+  "state": "addressed-in-s4-r2",
+  "confirmed": [
+    "Self-consistent substitution of worker/controller hashes passed format checks. Node now recomputes trusted shipped bytes.",
+    "Omitted frozen request lacked a coverage issue. Node now reports each missing valid receipt."
+  ],
+  "limitations": [
+    "Node verifies raw witness and bounded proof fields from a trusted tool, and does not independently prove Python control-flow dominance."
+  ]
+}

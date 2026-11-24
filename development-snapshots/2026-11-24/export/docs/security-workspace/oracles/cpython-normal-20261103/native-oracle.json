@@ -1,0 +1,307 @@
+{
+  "ok": true,
+  "startedAt": "2026-11-04T03:29:03.869367+00:00",
+  "finishedAt": "2026-11-04T03:29:04.046067+00:00",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "programFilesMatched": 165,
+  "databaseLogicalDigestsMatched": 40,
+  "manifestAndRulesMatched": true,
+  "containerRemoved": true,
+  "temporaryRemoved": true,
+  "volumeSetUnchanged": true,
+  "result": {
+    "ok": true,
+    "python": "3.12.15",
+    "probeSha256": "a9727e3911c57a67f5b90d91562117655fbe6625d92da8b587ef7eb55661cdeb",
+    "protocolSha256": "3cf27d21aee3b113a0b6067ec901c111a2b2bb5aac9d53837d15a15b3f2d0e90",
+    "sourceIdentityMatched": true,
+    "conditions": {
+      "uid": 65534,
+      "networkInterfaces": [
+        "lo"
+      ],
+      "tcpListenersAfter": 0,
+      "readonlyFailuresRequired": "EROFS",
+      "plainBuiltInStringsOnly": true,
+      "noDoSOrCustomPythonObjectClaim": true
+    },
+    "observations": [
+      {
+        "id": "literal-list",
+        "role": "independent-normal-path-witness",
+        "caseId": "cpython-literal-eval",
+        "countsTowardMinima": false,
+        "accepted": true,
+        "errorType": null,
+        "resultRepresentation": "[1, 2, 3]",
+        "evalFrames": []
+      },
+      {
+        "id": "literal-dict",
+        "role": "independent-normal-path-witness",
+        "caseId": "cpython-literal-eval",
+        "countsTowardMinima": false,
+        "accepted": true,
+        "errorType": null,
+        "resultRepresentation": "{'x': 1, 'y': None}",
+        "evalFrames": []
+      },
+      {
+        "id": "literal-negative-float",
+        "role": "independent-normal-path-witness",
+        "caseId": "cpython-literal-eval",
+        "countsTowardMinima": false,
+        "accepted": true,
+        "errorType": null,
+        "resultRepresentation": "-1.5",
+        "evalFrames": []
+      },
+      {
+        "id": "literal-call",
+        "role": "independent-normal-path-witness",
+        "caseId": "cpython-literal-eval",
+        "countsTowardMinima": false,
+        "accepted": false,
+        "errorType": "ValueError",
+        "resultRepresentation": null,
+        "evalFrames": []
+      },
+      {
+        "id": "literal-multiply",
+        "role": "independent-normal-path-witness",
+        "caseId": "cpython-literal-eval",
+        "countsTowardMinima": false,
+        "accepted": false,
+        "errorType": "ValueError",
+        "resultRepresentation": null,
+        "evalFrames": []
+      },
+      {
+        "id": "literal-fstring",
+        "role": "independent-normal-path-witness",
+        "caseId": "cpython-literal-eval",
+        "countsTowardMinima": false,
+        "accepted": false,
+        "errorType": "ValueError",
+        "resultRepresentation": null,
+        "evalFrames": []
+      },
+      {
+        "id": "named-normal",
+        "role": "independent-normal-path-witness",
+        "caseId": "cpython-namedtuple",
+        "countsTowardMinima": false,
+        "accepted": true,
+        "errorType": null,
+        "result": {
+          "fields": [
+            "x",
+            "y"
+          ],
+          "values": [
+            11,
+            22
+          ]
+        },
+        "evalFrames": [
+          {
+            "line": 441,
+            "function": "namedtuple",
+            "names": [],
+            "constants": [],
+            "nestedCode": [
+              {
+                "name": "<lambda>",
+                "names": [
+                  "_tuple_new"
+                ],
+                "variables": [
+                  "_cls",
+                  "x",
+                  "y"
+                ]
+              }
+            ],
+            "generatedCode": "lambda _cls, x, y: _tuple_new(_cls, (x, y))",
+            "emptyBuiltins": true
+          }
+        ]
+      },
+      {
+        "id": "named-unicode",
+        "role": "independent-normal-path-witness",
+        "caseId": "cpython-namedtuple",
+        "countsTowardMinima": false,
+        "accepted": true,
+        "errorType": null,
+        "result": {
+          "fields": [
+            "\u7ecf\u5ea6",
+            "\u7eac\u5ea6"
+          ],
+          "values": [
+            11,
+            22
+          ]
+        },
+        "evalFrames": [
+          {
+            "line": 441,
+            "function": "namedtuple",
+            "names": [],
+            "constants": [],
+            "nestedCode": [
+              {
+                "name": "<lambda>",
+                "names": [
+                  "_tuple_new"
+                ],
+                "variables": [
+                  "_cls",
+                  "\u7ecf\u5ea6",
+                  "\u7eac\u5ea6"
+                ]
+              }
+            ],
+            "generatedCode": "lambda _cls, \u7ecf\u5ea6, \u7eac\u5ea6: _tuple_new(_cls, (\u7ecf\u5ea6, \u7eac\u5ea6))",
+            "emptyBuiltins": true
+          }
+        ]
+      },
+      {
+        "id": "named-bad-type",
+        "role": "independent-normal-path-witness",
+        "caseId": "cpython-namedtuple",
+        "countsTowardMinima": false,
+        "accepted": false,
+        "errorType": "ValueError",
+        "result": null,
+        "evalFrames": []
+      },
+      {
+        "id": "named-bad-field",
+        "role": "independent-normal-path-witness",
+        "caseId": "cpython-namedtuple",
+        "countsTowardMinima": false,
+        "accepted": false,
+        "errorType": "ValueError",
+        "result": null,
+        "evalFrames": []
+      },
+      {
+        "id": "named-keyword",
+        "role": "independent-normal-path-witness",
+        "caseId": "cpython-namedtuple",
+        "countsTowardMinima": false,
+        "accepted": false,
+        "errorType": "ValueError",
+        "result": null,
+        "evalFrames": []
+      },
+      {
+        "id": "named-duplicate",
+        "role": "independent-normal-path-witness",
+        "caseId": "cpython-namedtuple",
+        "countsTowardMinima": false,
+        "accepted": false,
+        "errorType": "ValueError",
+        "result": null,
+        "evalFrames": []
+      },
+      {
+        "id": "named-renamed",
+        "role": "independent-normal-path-witness",
+        "caseId": "cpython-namedtuple",
+        "countsTowardMinima": false,
+        "accepted": true,
+        "errorType": null,
+        "result": {
+          "fields": [
+            "_0",
+            "y"
+          ],
+          "values": [
+            11,
+            22
+          ]
+        },
+        "evalFrames": [
+          {
+            "line": 441,
+            "function": "namedtuple",
+            "names": [],
+            "constants": [],
+            "nestedCode": [
+              {
+                "name": "<lambda>",
+                "names": [
+                  "_tuple_new"
+                ],
+                "variables": [
+                  "_cls",
+                  "_0",
+                  "y"
+                ]
+              }
+            ],
+            "generatedCode": "lambda _cls, _0, y: _tuple_new(_cls, (_0, y))",
+            "emptyBuiltins": true
+          }
+        ]
+      },
+      {
+        "id": "named-underscore",
+        "role": "independent-normal-path-witness",
+        "caseId": "cpython-namedtuple",
+        "countsTowardMinima": false,
+        "accepted": false,
+        "errorType": "ValueError",
+        "result": null,
+        "evalFrames": []
+      },
+      {
+        "id": "input_one.py",
+        "caseId": "input_one.py",
+        "role": "authored-positive-control",
+        "countsTowardMinima": false,
+        "result": 137703491,
+        "evalFrames": [
+          {
+            "line": 2,
+            "function": "<module>",
+            "names": [],
+            "constants": [
+              137703491
+            ],
+            "nestedCode": [],
+            "generatedCode": null,
+            "emptyBuiltins": false
+          }
+        ]
+      },
+      {
+        "id": "input_two.py",
+        "caseId": "input_two.py",
+        "role": "authored-positive-control",
+        "countsTowardMinima": false,
+        "result": 137703491,
+        "evalFrames": [
+          {
+            "line": 2,
+            "function": "<module>",
+            "names": [],
+            "constants": [
+              137703491
+            ],
+            "nestedCode": [],
+            "generatedCode": null,
+            "emptyBuiltins": false
+          }
+        ]
+      }
+    ],
+    "independentNegativeSourceCases": 2,
+    "authoredPositiveControls": 2,
+    "vectorsAreNotCaseCounts": true
+  }
+}

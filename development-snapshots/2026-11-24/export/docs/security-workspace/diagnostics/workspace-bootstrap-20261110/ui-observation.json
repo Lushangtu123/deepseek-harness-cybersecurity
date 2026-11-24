@@ -1,0 +1,10 @@
+{
+  "browser": "Google Chrome, native accessibility interface",
+  "scope": "two isolated, initially empty VM profiles using installed Harness SDK 0.2.1-rc.3; base and web bundles only",
+  "sameActions": ["open local relay", "dismiss account onboarding without signing in", "observe initial workspace state", "reload and dismiss account onboarding again"],
+  "baseline": {"selectedWorkspace": null, "workspacePrompt": "Choose workspace", "sessionOutline": "No sessions yet", "directToastCaptured": false, "rpcEvidence": "two initialize-error events in ui-cleanup.json"},
+  "fixed": {"defaultWorkspaceRows": 1, "selectedSessionRow": "New Session", "composer": "Describe what you want to build, / commands, @ files or sessions", "defaultWorkspaceRowsAfterReload": 1, "selectedSessionAfterReload": "New Session", "manualWorkspaceSelection": false, "rpcEvidence": "one initialize-complete event in ui-cleanup.json"},
+  "onlyQaTabClosed": true,
+  "modelPromptsSent": 0,
+  "testLimit": "The production profile and dsh-purge were not loaded in this focused reproduction. The generic UI toast was not captured directly."
+}

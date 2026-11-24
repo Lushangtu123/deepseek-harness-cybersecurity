@@ -1,0 +1,151 @@
+{
+  "date": "2026-11-02",
+  "version": "1.1.77-personal.9",
+  "programFiles": 152,
+  "scope": "VM improved owner runtime application panel only; owned stdlib Python synthetic projects",
+  "features": [
+    "read-only redacted source preview, temporary copied files immediately removed",
+    "explicit inline start/stop confirmation; no new model runtime tool",
+    "persistent original request with atomic child claim and cancellation barrier before resource allocation",
+    "separate transient VM launcher survives security backend restart without replay",
+    "backend exclusion for startup, stopping and elapsed-but-unclean deadline",
+    "source copy hash/scope revision/pinned image revalidated before Docker",
+    "current integrity distinct from two-observation ZAP source association"
+  ],
+  "independentReview": {
+    "remainingActionableP1P2": 0,
+    "focusedRuntimeTests": 22,
+    "focusedClientAndParentTests": 60,
+    "resolved": [
+      "stale cross-tab closed status deleting newer startup recovery hint",
+      "elapsed deadline treated ready during cleanup",
+      "sibling React key collision found in actual browser"
+    ]
+  },
+  "regression": {
+    "python": 293,
+    "pluginNode": 576,
+    "hostNode": 139,
+    "extraLinuxRoot": 18
+  },
+  "native": {
+    "changedSource": {
+      "rejectedBeforeDocker": true,
+      "cleanupVerified": true
+    },
+    "backendRestart": {
+      "sameRuntimeId": true,
+      "sameLauncherPid": true,
+      "readiness": "ready",
+      "duplicateStartSameRuntime": true
+    },
+    "association": {
+      "taskId": "24d48837-e137-4ade-a980-f4898c794c7d",
+      "sourceState": "managed-source-copy-matched"
+    },
+    "stop": {
+      "ok": true,
+      "engagement": "runtime-panel-native-20261102",
+      "requestId": "runtime-panel-restart",
+      "requestState": "accepted",
+      "phase": "closed",
+      "cleanupVerified": true,
+      "observedAt": "2026-11-03T01:21:34.233Z",
+      "runtime": {
+        "id": "2897ef30-fa94-4a29-bd44-7e5112c9e874",
+        "entry": "app.py",
+        "origin": "http://127.0.0.1:18784",
+        "repoRoot": "/home/purge/workspace/runtime-panel-native-20261102",
+        "copySha256": "7f3aee72f01e5a3877a0fb309534709368da6c22119ab289d80daa5b4004b585",
+        "files": 1,
+        "expiresAt": "2026-11-03T01:23:13.380Z",
+        "integrity": "not-checked",
+        "association": {
+          "taskId": "24d48837-e137-4ade-a980-f4898c794c7d",
+          "state": "managed-source-copy-matched",
+          "checkedAt": "2026-11-03T01:21:33.600Z"
+        }
+      },
+      "problem": null
+    },
+    "ttl": {
+      "phase": "closed",
+      "cleanupVerified": true
+    }
+  },
+  "browser": {
+    "nativeChrome": true,
+    "project": "runtime-panel-native-20261102",
+    "previewFileCount": 1,
+    "previewBytes": 425,
+    "excluded": 0,
+    "redacted": 0,
+    "startDisabledBeforeConfirmation": true,
+    "oneStartClick": true,
+    "sameRequestAfterReload": true,
+    "readinessDisplayed": true,
+    "currentIntegrityDisplayed": true,
+    "associationAbsentForNewRuntimeWithoutScan": true,
+    "explicitStopConfirmed": true,
+    "oneCardAfterIdentityFix": true,
+    "finalClosedAndCleanupTextObserved": true,
+    "backend": {
+      "startRequestId": "a97b6f5e-db4c-465a-9242-b8fb3d1f6791",
+      "oneOriginalEvent": true,
+      "runtimeId": "6999ba66-142b-4f4e-9236-fed31dcd0628",
+      "requestedSeconds": 90,
+      "cleanupVerified": true,
+      "phase": "closed",
+      "runtimeContainersNetworksAndIndexEmpty": true,
+      "loopbackClosed": true
+    },
+    "noNewModelRequest": true,
+    "invalidEmptySecondsRejectedBeforeExecution": true
+  },
+  "recovery": {
+    "recoveryPoint": "ready-runtime-panel-20261102",
+    "selectedProofFiles": 2822,
+    "programFiles": 152,
+    "snapshotCount": 31,
+    "previous30SnapshotsPreserved": true
+  },
+  "copyBoot": {
+    "restoredDiskActuallyBooted": true,
+    "independentInodeAndNoQcowBacking": true,
+    "originalInodeReturned": true,
+    "originalNowStarted": true,
+    "utmListUnchanged": true,
+    "newVmRegistered": false
+  },
+  "protected": {
+    "protectedProjectFilesMatched": 459,
+    "projectHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "findingsByStatus": {
+      "unverified": 95
+    },
+    "scannerManifestUnchanged": true,
+    "programHashesMatched": 152,
+    "installedToolsPresent": true,
+    "harnessActive": true,
+    "pentagiRunning": true,
+    "hostHelpersUnchanged": 5,
+    "hostLaunchDefinitionsUnchanged": true,
+    "vmConfigurationUnchanged": true,
+    "originalDiskInodeUnchanged": true,
+    "utmListUnchanged": true,
+    "allPreviousSnapshotsPreserved": true,
+    "snapshotCount": 31
+  },
+  "limitations": [
+    "owner panel supports standard-library Python entry only; no dependency installation/framework build",
+    "manual CLI runtimes remain managed through the original CLI; owner panel controls its own persistent request IDs",
+    "single current integrity observation is not a two-observation ZAP association",
+    "copied files/container/proxy identity is not dependency, reproducible build or memory attestation",
+    "Docker internal bridge does not isolate VM host-gateway services; same-UID original Shell is outside record trust boundary",
+    "model cannot start/stop through the new RPC; existing original capabilities retain their existing VM permissions",
+    "main model campaign and all six native tools not rerun; only owned local ZAP association used",
+    "money hard cap, off-Mac backup, Semgrep parsing gaps, historical loading/SSH causes and manual security conclusions not addressed",
+    "Mac global recovery label remains old; new checkpoint uses private explicit entry"
+  ]
+}

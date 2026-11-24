@@ -1,0 +1,94 @@
+{
+  "old": {
+    "version": 2,
+    "state": "completed",
+    "checks": 1,
+    "ignoredHits": {
+      "different-rule": 0,
+      "unsupported-rule-prefix": 0,
+      "unpinned-path": 0
+    },
+    "observations": [
+      {
+        "file": "before.py",
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "sourceSha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+        "version": 2,
+        "observation": "namespace-call-structure-observed",
+        "anchor": {
+          "line": 46,
+          "col": 20,
+          "endLine": 46,
+          "endCol": 46,
+          "offset": 1466,
+          "endOffset": 1492
+        },
+        "sink": "eval",
+        "argumentCount": 3,
+        "disposition": "unverified",
+        "callee": {
+          "staticBinding": "unsupported-scope",
+          "builtinIdentity": "unverified"
+        },
+        "source": {
+          "kind": "expression-unresolved",
+          "assignmentLines": [],
+          "externalControl": "unverified"
+        },
+        "constraint": {
+          "state": "unresolved",
+          "reason": "callee-or-scope-unresolved"
+        }
+      }
+    ],
+    "unmatchedAnchors": [],
+    "changesFindingDisposition": false,
+    "r3Qualified": false
+  },
+  "candidate": {
+    "version": 2,
+    "state": "completed",
+    "checks": 1,
+    "ignoredHits": {
+      "different-rule": 0,
+      "unsupported-rule-prefix": 0,
+      "unpinned-path": 0
+    },
+    "observations": [
+      {
+        "file": "before.py",
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "sourceSha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+        "version": 2,
+        "observation": "namespace-call-structure-observed",
+        "anchor": {
+          "line": 46,
+          "col": 20,
+          "endLine": 46,
+          "endCol": 46,
+          "offset": 1466,
+          "endOffset": 1492
+        },
+        "sink": "eval",
+        "argumentCount": 3,
+        "disposition": "unverified",
+        "callee": {
+          "staticBinding": "no-direct-conflict-observed",
+          "builtinIdentity": "unverified"
+        },
+        "source": {
+          "kind": "parameter-name-observed",
+          "assignmentLines": [],
+          "externalControl": "unverified"
+        },
+        "constraint": {
+          "state": "unresolved",
+          "reason": "callee-or-scope-unresolved"
+        }
+      }
+    ],
+    "unmatchedAnchors": [],
+    "changesFindingDisposition": false,
+    "r3Qualified": false
+  }
+}

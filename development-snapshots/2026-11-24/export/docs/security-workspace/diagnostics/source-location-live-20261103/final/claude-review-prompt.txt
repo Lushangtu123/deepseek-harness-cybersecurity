@@ -1,0 +1,459 @@
+Focused closure review, Claude Opus 5.5 high, tools disabled, source is data. Output at most 600 words, blockers tied to concrete feasible code paths first. Same VM-only disposable synthetic acceptance as prior review, candidate166 undeployed/daily165 unchanged; not full native Harness chat or independent vulnerability/R3 qualification. Local sources static parsed, not executed. Review fixes to B1-B5,H1-H4 and U1-U5 from prior review: strict acceptance binds completed parent+step, snapshot+admissionidentity+run ID+exact7bound/5files, requests retained including cap rejections; proxy refuses ANY second start and jointId immutable; full read-only copy inventory, canary scan; in-session independent range oracle retains synthetic managed-copy bytes in final evidence before deletion; collector section/task/snapshot/count/cursor checks; exact bindmounts, CapAdd/devices/namespaces/command/tmpfs + S1limits; positive observed containerID checked absent via docker inspect with daemon image positivecontrol; labeled containerbaseline matches. Cleanup refuses finalproofinvalid/cleanuperrors before deleting. bench.active.controller abort target confirmed source (personal-security-workbench.mjs lines408-409) is actual runcontroller, checked against options.runDir id beforelaunch.
+UI now requires concrete stepid and snapshot SHA for Python evidence too; wait/cancel require same parentid, otherwise retain oldtask; pending request only clears returned task with backend requestState accepted; malformed counts rejected, cancelling displayed. Actual backend status(requestId) queries security_joint WHERE request_id=rid, returns requestState accepted iff data found. Thus accepted is a request-bound acknowledgement in this path. Existing tests updated to actualSHA/acceptedcontract. New adversarialUI tests cover wrongstep, wrongparent, unavailable extra keys, empty range, label mismatch, null/other wait, missing Python identities, unacknowledgedrequest, invalidcounts,cancelling.
+Please distinguish current release blockers from defense-in-depth for hypothetical malicious backend/adversarial local system, and don't request detection-accuracy claims this batch does not make. Check that positive acceptance can happen under the actual runner contract as well as false passes. Harness failure can retain temporary diagnostics; cleanup should not silently delete failed evidence. Main UI report is a raw evidence export, not a claim it independently verifies all tool rows; source viewer validates ranges.
+
+---UI---
+export function createJointPanel(React,api,{storage=()=>globalThis.localStorage,exclusive=async(_eng,fn)=>fn()}={}){
+ const h=React.createElement,states={running:'运行中',cancelling:'取消中',completed:'所选步骤已结束',partial:'覆盖不完整',failed:'失败',cancelled:'已取消',interrupted:'中断',unconfirmed:'停止或结果未确认','timed-out':'预算到期',unavailable:'工具不可用','not-run':'未运行',pending:'待运行'};
+ const evidenceLabels={completed:'复核已完成',truncated:'证据已截断',unavailable:'复核不可用，原扫描结果仍可读取'};
+ const evidenceKinds=new Set(['python-eval-guard','python-string-guard','python-import-flow']);
+ const positive=n=>Number.isSafeInteger(n)&&n>0;
+ const evidencePath=v=>typeof v==='string'&&v.length>0&&v.length<=400;
+ const validEvidence=(row,step,snapshot)=>!!step&&sha(snapshot)&&typeof step.id==='string'&&!!step.id&&row.tool==='semgrep'&&row.status==='unverified'&&row.sourceTask===step.id&&row.snapshotId===snapshot&&evidencePath(row.path)&&positive(row.line)&&
+  (row.evidenceKind==='python-eval-guard'?positive(row.assignmentLine)&&positive(row.guardLine)&&positive(row.literalCount):
+   row.evidenceKind==='python-string-guard'?positive(row.guardLine)&&positive(row.executionLine)&&['eval','exec'].includes(row.sink):
+   evidencePath(row.calleeFile)&&positive(row.sinkLine)&&['eval','exec'].includes(row.sink));
+ const count=n=>Number.isSafeInteger(n)&&n>=0;
+ const sha=v=>typeof v==='string'&&/^[a-f0-9]{64}$/.test(v);
+ const sourcePath=v=>evidencePath(v)&&!/[\\\x00-\x1f]/.test(v)&&v.split('/').every(p=>p&&!p.startsWith('.'));
+ const sourceReasons=new Set(['missing-or-invalid-span','snapshot-unavailable','span-not-in-snapshot','source-unavailable','source-digest-mismatch','source-range-mismatch','source-read-budget']);
+ const validSourceRow=(row,step,snapshot)=>{
+  if(!step||row?.tool!=='semgrep'||row.status!=='unverified'||row.sourceTask!==step.id||row.snapshotId!==snapshot||typeof row.rule!=='string'||row.rule.length>240||typeof row.location!=='string'||row.location.length>800)return false;
+  const l=row.sourceLocation;if(l?.version!==1)return false;
+  if(l.state==='unavailable')return sourceReasons.has(l.reason)&&Object.keys(l).every(k=>['version','state','reason'].includes(k));
+  if(l.state!=='bound'||l.scope!=='managed-source-copy'||l.snapshotId!==snapshot||!sha(l.sourceSha256)||!sourcePath(l.path)||typeof l.copyRedacted!=='boolean'||!positive(l.byteLength)||l.byteLength>1048576)return false;
+  const point=p=>p&&positive(p.line)&&positive(p.col)&&p.line<=l.byteLength+1&&p.col<=l.byteLength+1&&count(p.offset)&&p.offset<=l.byteLength;
+  return point(l.start)&&point(l.end)&&l.end.offset>l.start.offset&&(l.end.line>l.start.line||l.end.line===l.start.line&&l.end.col>l.start.col)&&row.location===l.path+':'+l.start.line;
+ };
+ const validStepCoverage=s=>{
+  const l=s.sourceLocations;
+  if(l!==undefined&&(s.tool!=='semgrep'||l?.version!==1||![l.total,l.bound,l.unavailable].every(n=>count(n)&&n<=2000)||l.total!==l.bound+l.unavailable||l.state!==(l.unavailable===0?'completed':l.bound===0?'unavailable':'partial')))return false;
+  if(s.pythonEvidence!==undefined&&(s.tool!=='semgrep'||!Object.hasOwn(evidenceLabels,s.pythonEvidence)||!count(s.artifacts)))return false;
+  if(s.inputRedaction!==undefined&&(s.tool!=='trivy'||!trivyInputCoverageText(s.inputRedaction)))return false;
+  const c=s.fileCoverage;
+  return c===undefined||s.tool==='semgrep'&&c?.scope==='managed-copy'&&
+   count(c.scanned)&&count(c.total)&&count(c.uncovered)&&c.scanned+c.uncovered===c.total&&
+   (c.withoutLanguageRule===null||count(c.withoutLanguageRule)&&c.withoutLanguageRule<=c.uncovered);
+ };
+ const validTask=(v,eng)=>v===null||v&&typeof v.id==='string'&&v.engagement===eng&&Object.hasOwn(states,v.state)&&Number.isSafeInteger(v.scopeRevision)&&Array.isArray(v.steps)&&v.steps.length<=6&&new Set(v.steps.map(s=>s?.tool)).size===v.steps.length&&v.steps.every(s=>s&&['semgrep','trivy','zap','kali','rea','pentagi'].includes(s.tool)&&Object.hasOwn(states,s.state)&&validStepCoverage(s)&&(!(s.sourceLocations||s.pythonEvidence)||sha(v.snapshot?.id)&&typeof s.id==='string'&&!!s.id))&&count(v.findings)&&(v.modelCalls==null||count(v.modelCalls))&&(!v.snapshot||['files','bytes','excluded','redactedFiles'].every(k=>v.snapshot[k]===undefined||count(v.snapshot[k])))&&typeof v.cleanupVerified==='boolean';
+ const parse=(v,eng)=>{if(v?.ok!==true||v.engagement!==eng)throw Error(typeof v?.error==='string'?v.error:'联合回执未确认');return v};
+ return function JointPanel({engagement,profile}){
+  const [plan,setPlan]=React.useState(null),[task,setTask]=React.useState(null),[selected,setSelected]=React.useState([]),[busy,setBusy]=React.useState(false),[error,setError]=React.useState(''),[pending,setPending]=React.useState(false),[evidence,setEvidence]=React.useState(null),[locations,setLocations]=React.useState(null),alive=React.useRef(true),requesting=React.useRef(false);
+  React.useEffect(()=>{alive.current=true;return()=>{alive.current=false}},[]);
+  const key='dsh-joint-request-v1:'+encodeURIComponent(engagement);
+  const saved=()=>{const raw=storage().getItem(key);if(!raw)return null;const v=JSON.parse(raw);if(v?.engagement!==engagement||typeof v.requestId!=='string'||!/^[A-Za-z0-9_-]{8,100}$/.test(v.requestId))throw Error('联合恢复提示无效，请核对后台原任务');return v};
+  const accept=v=>{parse(v,engagement);if(!validTask(v.task,engagement))throw Error('联合任务回执与项目不匹配');if(alive.current)setTask(v.task);return v.task};
+  const perform=async operation=>{
+   if(requesting.current)return;requesting.current=true;if(alive.current){setBusy(true);setError('')}
+   try{await operation()}catch(e){if(alive.current)setError(String(e?.message||'联合结果未确认'))}finally{requesting.current=false;if(alive.current)setBusy(false)}
+  };
+  const refresh=(mode)=>perform(async()=>{
+   if(alive.current){setPlan(null);setSelected([])}
+   const next=parse(await api({op:'securityJoint',engagement,action:'plan',...(mode?{mode}:{})}),engagement);
+   if((next.workspace?.mode??undefined)!==mode)throw Error('联合检查模式未确认');
+   if(!Number.isSafeInteger(next.profileRevision)||!Array.isArray(next.availableSteps)||next.availableSteps.some(s=>!['semgrep','trivy','zap'].includes(s))||typeof next.kaliAllowed!=='boolean')throw Error('联合范围资料无效');
+   if(alive.current){setPlan(next);setSelected([...next.availableSteps.filter(s=>s!=='zap'),...(next.kaliAllowed?['kali']:[])])}
+   const original=saved(),result=await api({op:'securityJoint',engagement,action:'status',...(original?{requestId:original.requestId}:{})});if(original&&result?.task&&result.requestState!=='accepted')throw Error('原启动请求的受理状态未确认，恢复提示已保留');const current=accept(result);
+   if(original&&(current||result.requestState==='rejected'))storage().removeItem(key);if(alive.current){setPending(!!original&&!current&&result.requestState!=='rejected');if(result.requestState==='rejected')setError('原启动请求未受理：'+String(result.rejection??'请核对范围后重新提交'))}
+  });
+  const start=()=>perform(()=>exclusive(engagement,async()=>{
+   if(saved()){if(alive.current)setPending(true);throw Error('已有启动请求待核对，请先查询原任务，不重发启动')}
+   const request={op:'securityJoint',engagement,action:'start',profileRevision:profile.revision,steps:selected,budgetSeconds:360,...(plan?.workspace?.mode==='deep'?{mode:'deep'}:{}),requestId:globalThis.crypto?.randomUUID?.()||'joint-'+Date.now()+'-'+Math.random().toString(36).slice(2)};
+   storage().setItem(key,JSON.stringify(request));if(alive.current)setPending(true);
+   const current=accept(await api(request));if(!current||request.mode&&current.workspace?.mode!==request.mode)throw Error('启动未返回匹配的任务和模式，请核对原请求');storage().removeItem(key);if(alive.current)setPending(false);
+  }));
+  const update=action=>perform(async()=>{const result=parse(await api({op:'securityJoint',engagement,action,id:task.id,...(action==='wait'?{waitSeconds:15}:{})}),engagement);if(result.task?.id!==task.id)throw Error('原任务回执不匹配，已保留当前任务');accept(result)});
+  const download=()=>perform(async()=>{
+   const report={version:1,engagement,task:null,findings:[],files:[],exclusions:[],diagnostics:[],artifacts:[]};
+   for(const section of ['findings','files','exclusions','diagnostics','artifacts']){
+    let cursor,total;const seenCursors=new Set();for(let n=0;n<1001;n++){
+     const result=parse(await api({op:'securityJoint',engagement,action:'report',id:task.id,section,limit:10,...(cursor?{cursor}:{})}),engagement),page=result.page;
+     if(!validTask(result.task,engagement)||result.task.id!==task.id||!page||page.section!==section||!Array.isArray(page.items)||typeof page.complete!=='boolean'||!count(page.total)||page.items.length>10||page.items.length>page.total)throw Error('报告分页未确认');
+     if(result.task.snapshot?.id!==task.snapshot?.id||report.task&&report.task.snapshot?.id!==result.task.snapshot?.id)throw Error('报告副本已变化');if(total!==undefined&&total!==page.total)throw Error('报告总数已变化');total=page.total;report.task=result.task;report[section].push(...page.items);if(report[section].length>page.total)throw Error('报告条目超出总数');
+     if(page.complete){if(report[section].length!==page.total)throw Error('报告明细不完整');break}
+     if(typeof page.nextCursor!=='string'||!page.nextCursor||page.nextCursor.length>512||seenCursors.has(page.nextCursor)||page.nextCursor===cursor||n===1000)throw Error('报告续读未完成');seenCursors.add(page.nextCursor);cursor=page.nextCursor;
+    }
+   }
+   if(!alive.current)return;const blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='joint-review-'+task.id+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  });
+  const pythonStep=task?.steps.find(step=>Object.hasOwn(evidenceLabels,step.pythonEvidence));
+  const sourceStep=task?.steps.find(step=>step.tool==='semgrep'&&step.sourceLocations);
+  const snapshot=task?.snapshot?.id;
+  const locationPage=locations?.taskId===task?.id&&locations?.snapshot===snapshot?locations:null;
+  const loadLocations=cursor=>perform(async()=>{
+   const result=parse(await api({op:'securityJoint',engagement,action:'report',id:task.id,section:'findings',limit:5,...(cursor?{cursor}:{})}),engagement),page=result.page;
+   if(!validTask(result.task,engagement)||result.task?.id!==task.id||result.task.snapshot?.id!==snapshot||page?.section!=='findings'||!Array.isArray(page.items)||page.items.length>5||!count(page.total)||page.items.length>page.total||typeof page.complete!=='boolean'||(!page.complete&&(typeof page.nextCursor!=='string'||!page.nextCursor||page.nextCursor.length>512||page.nextCursor===cursor)))throw Error('命中位置分页未确认');
+   const rows=page.items.filter(row=>row?.tool==='semgrep');
+   if(rows.some(row=>!validSourceRow(row,sourceStep,snapshot)))throw Error('命中位置与原任务或副本不匹配');
+   if(alive.current)setLocations({taskId:task.id,snapshot,rows,nextCursor:page.complete?null:page.nextCursor});
+  });
+  const evidencePage=evidence?.taskId===task?.id&&evidence?.snapshot===snapshot?evidence:null;
+  const loadEvidence=cursor=>perform(async()=>{
+   const result=parse(await api({op:'securityJoint',engagement,action:'report',id:task.id,section:'artifacts',limit:5,...(cursor?{cursor}:{})}),engagement),page=result.page;
+   if(!validTask(result.task,engagement)||result.task?.id!==task.id||result.task.snapshot?.id!==snapshot||
+     page?.section!=='artifacts'||!Array.isArray(page.items)||page.items.length>5||!count(page.total)||page.items.length>page.total||typeof page.complete!=='boolean'||
+     (!page.complete&&(typeof page.nextCursor!=='string'||!page.nextCursor||page.nextCursor.length>512||page.nextCursor===cursor)))throw Error('Python 证据分页未确认');
+   const rows=page.items.filter(row=>evidenceKinds.has(row?.evidenceKind));
+   if(rows.some(row=>!validEvidence(row,pythonStep,snapshot)))throw Error('Python 证据与原任务或副本不匹配');
+   if(alive.current)setEvidence({taskId:task.id,snapshot,rows,nextCursor:page.complete?null:page.nextCursor});
+  });
+  const location=(path,line)=>h('code',{style:{overflowWrap:'anywhere'}},path+':'+line);
+  const inProgress=task&&['running','cancelling'].includes(task.state),ready=plan&&plan.profileRevision===profile?.revision&&Date.parse(profile.expiresAt)>Date.now();
+  const button=(label,fn,disabled=false)=>h('button',{type:'button',className:'rt-btn',onClick:fn,disabled:busy||disabled},label);
+  return h('section',{className:'rt-card','aria-label':'联合安全审查'},h('div',{className:'rts-head'},h('h4',null,'联合安全审查'),h('span',{className:'rts-state'},'VM · 受管工具')),
+   h('p',null,'源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告'),h('p',{className:'rts-meta'},'Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。'),
+   plan?.webTarget&&h('p',{className:'rts-meta'},'ZAP目标：'+plan.webTarget.origin+' · 会发送本地请求；版本关联以本次扫描前后核对为准，刷新不默认勾选。'),button('核对联合范围与原任务',()=>refresh()),button('核对深度检查范围',()=>refresh('deep'),inProgress),
+   plan?.workspace?.mode==='deep'&&h('p',{className:'rts-meta'},'深度检查 · 当前可运行 Semgrep 和 Trivy 的 S1 静态步骤。'),plan&&h('div',{className:'rts-tools'},...['semgrep','trivy','zap','kali','rea','pentagi'].map(tool=>{const allowed={kali:plan.kaliAllowed,rea:plan.reaAllowed,pentagi:plan.pentagiAllowed}[tool]??plan.availableSteps.includes(tool);return h('label',{key:tool},h('input',{type:'checkbox',checked:selected.includes(tool),disabled:busy||!allowed,onChange:e=>setSelected(old=>e.target.checked?[...old,tool]:old.filter(s=>s!==tool))}),' '+tool+(allowed?'':' · 未授权或未就绪'))})),
+   plan&&!plan.kaliAllowed&&h('p',{className:'rts-meta'},'Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。'),
+   h('div',{className:'rts-actions'},button(plan?.workspace?.mode==='deep'?'启动深度检查':'启动联合审查',start,!ready||!selected.length||pending||inProgress),task&&button('等待原联合任务',()=>update('wait'),!inProgress),task&&button('取消或核对停止',()=>update('cancel'),!inProgress&&task.cleanupVerified),task&&button('下载联合报告 JSON',download,inProgress)),
+   pending&&h('p',{className:'rts-alert'},'启动请求已保留；回执未确认时先核对原任务，不自动重发。'),error&&h('p',{className:'rts-alert',role:'alert'},error),
+   task&&h('div',null,task.webTarget&&h('p',{className:'rts-meta'},'运行版本关联：'+(task.webTarget.appRevision==='managed-source-copy-matched'?'受管源码副本前后匹配；依赖及内存行为未证明':'未证明；请查看报告artifacts中的运行身份核对')) ,h('p',null,'任务：'+task.id+' · '+(states[task.state]||task.state)),h('p',null,'工具命中 '+task.findings+' 条 · 子任务模型请求 '+(task.modelCalls??'未知')+' 次 · 停止核对：'+(task.cleanupVerified?'已确认':'未确认')),task.snapshot&&h('p',{className:'rts-meta'},'副本 '+task.snapshot.id+' · '+task.snapshot.files+' 文件 · 排除路径 '+task.snapshot.excluded+' · 脱敏文件 '+task.snapshot.redactedFiles),...task.steps.map(s=>h('p',{key:s.tool},s.tool+'：'+(s.state==='completed'?'步骤已完成':states[s.state]||s.state)+
+     (s.fileCoverage?' · 受管副本已扫描 '+s.fileCoverage.scanned+'/'+s.fileCoverage.total+' 个文件 · 未覆盖 '+s.fileCoverage.uncovered+' 个'+
+      (s.fileCoverage.withoutLanguageRule?'（其中 '+s.fileCoverage.withoutLanguageRule+' 个 PHP 文件缺少语言规则）':''):'')+
+     (s.inputPolicy==='archive-xml-exclusions-1'?' · 未覆盖 JAR/WAR/PAR/EAR/ZIP/XML/POM 文件':'')+
+     (s.inputRedaction?' · '+trivyInputCoverageText(s.inputRedaction):'')+
+     (s.dependencyScope==='including-development-1'?' · 已启用开发依赖检查（按所支持锁文件识别）':'')+
+     (s.id?' · '+s.id:''))),
+    sourceStep&&h('section',{'aria-label':'命中位置'},h('h5',null,'命中位置'),
+     h('p',{className:'rts-meta'},'副本范围已关联 '+sourceStep.sourceLocations.bound+'/'+sourceStep.sourceLocations.total+' 条 · 未关联 '+sourceStep.sourceLocations.unavailable+' 条'),
+     h('p',{className:'rts-meta'},'列号使用 UTF-8 字节。仅核对扫描副本的字节范围，不证明扫描来源、AST、执行或漏洞；所有命中仍待验证。'),
+     sourceStep.sourceLocations.total>0&&snapshot&&button('查看命中位置',()=>loadLocations(),inProgress),
+     locationPage&&h('div',{role:'region','aria-label':'本页命中位置','aria-live':'polite'},
+      locationPage.rows.length?h('ul',null,...locationPage.rows.map((row,index)=>{const l=row.sourceLocation;return h('li',{key:row.rule+':'+row.location+':'+index},
+       h('strong',null,'待验证 · '+(l.state==='bound'?'副本范围已关联':'位置未关联')),
+       h('p',{style:{overflowWrap:'anywhere'}},l.state==='bound'?l.path+':'+l.start.line+':'+l.start.col+' → '+l.end.line+':'+l.end.col:row.location),
+       l.state==='bound'?h('div',null,h('p',null,'字节 '+l.start.offset+'–'+l.end.offset+'（末端不含）'),
+        l.copyRedacted&&h('p',null,'扫描副本已脱敏；这些位置仅对副本有效，原文件需另行核对。'),
+        h('details',null,h('summary',null,'副本标识'),h('p',{style:{overflowWrap:'anywhere'}},'SHA-256 · '+l.sourceSha256),h('p',{style:{overflowWrap:'anywhere'}},'快照 · '+l.snapshotId)))
+        :h('p',null,'缺少可核对的完整范围或副本身份；保留原始警告，不推测列和偏移。'))}))
+       :h('p',null,'本页没有 Semgrep 命中位置。'),
+      locationPage.nextCursor&&button('下一页命中',()=>loadLocations(locationPage.nextCursor),inProgress))),
+    pythonStep&&h('section',{'aria-label':'Python 复核证据'},h('h5',null,'Python 复核证据'),
+     h('p',{className:'rts-meta'},evidenceLabels[pythonStep.pythonEvidence]+' · '+pythonStep.artifacts+' 条补充证据'),
+     pythonStep.artifacts>0&&snapshot&&button('查看 Python 证据',()=>loadEvidence(),inProgress),
+     evidencePage&&h('div',{role:'region','aria-label':'本页 Python 证据','aria-live':'polite'},
+      evidencePage.rows.length?h('ul',null,...evidencePage.rows.map((row,index)=>h('li',{key:row.evidenceKind+':'+row.path+':'+row.line+':'+index},
+       h('strong',null,row.evidenceKind==='python-eval-guard'?'白名单条件':row.evidenceKind==='python-string-guard'?'字符串条件':'跨文件数据流'),' · 待核实',
+       row.evidenceKind==='python-eval-guard'
+        ?h('p',null,location(row.path,row.line),'，条件见第 '+row.guardLine+' 行，限制为 '+row.literalCount+' 个字面量。')
+         :row.evidenceKind==='python-string-guard'
+         ?h('p',null,location(row.path,row.line),'，条件见第 '+row.guardLine+' 行，'+row.sink+' 执行点见第 '+row.executionLine+' 行。实际字符串类型与方法绑定仍需核实。')
+         :h('p',null,location(row.path,row.line),' → ',location(row.calleeFile,row.sinkLine),'（'+row.sink+'）')
+      ))):h('p',null,'本页没有 Python 复核证据。'),
+      evidencePage.nextCursor&&button('下一页证据',()=>loadEvidence(evidencePage.nextCursor),inProgress))),
+   h('p',{className:'rts-meta'},'工具命中待验证；登录、越权、业务逻辑、架构、未选工具与排除内容仍未覆盖。')));
+ };
+}
+---UI tests---
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createJointPanel} from '../package/lib/redteam/personal-security-client.mjs';
+const nodes=n=>Array.isArray(n)?n.flatMap(nodes):n&&typeof n==='object'?[n,...nodes(n.children??[])]:[];
+const text=n=>Array.isArray(n)?n.map(text).join(''):typeof n==='string'?n:typeof n==='number'?String(n):text(n?.children??[]);
+function fixture(){
+ const cells=[];let index=0,phase='first',bad=false,rowMutator=()=>{},taskMutator=()=>{},replyOverride;const stored=new Map();
+ const calls=[],snapshot='a'.repeat(64),source='b'.repeat(64);
+ const React={createElement:(type,props,...children)=>({type,props:props??{},children}),useState:v=>{const i=index++;if(!(i in cells))cells[i]=v;return[cells[i],n=>cells[i]=typeof n==='function'?n(cells[i]):n]},useRef:v=>({current:v}),useEffect:()=>{}};
+ const task={id:'location-task-001',engagement:'fixture',state:'completed',scopeRevision:1,steps:[{tool:'semgrep',id:'scan-001',state:'completed',sourceLocations:{version:1,state:'completed',total:2,bound:2,unavailable:0}}],snapshot:{id:snapshot},findings:2,cleanupVerified:true};
+ const row=col=>({tool:'semgrep',status:'unverified',sourceTask:'scan-001',snapshotId:snapshot,rule:'policy.harness.python.dynamic-code-namespace',location:'app.py:1',sourceLocation:{version:1,state:'bound',scope:'managed-source-copy',snapshotId:snapshot,path:'app.py',sourceSha256:source,byteLength:120,copyRedacted:true,start:{line:1,col,offset:col-1},end:{line:1,col:col+18,offset:col+17}}});
+ const Component=createJointPanel(React,async r=>{
+  calls.push(r);
+  if(r.action==='plan')return{ok:true,engagement:'fixture',profileRevision:1,availableSteps:['semgrep'],kaliAllowed:false};
+  if(r.action==='status'||r.action==='wait'||r.action==='cancel')return replyOverride??{ok:true,engagement:'fixture',task,requestState:'accepted'};
+  const item=row(r.cursor?51:21);if(bad)item.sourceLocation.snapshotId='c'.repeat(64);
+  if(phase==='unavailable')item.sourceLocation={version:1,state:'unavailable',reason:'missing-or-invalid-span'};
+  rowMutator(item);const returned=structuredClone(task);taskMutator(returned);return{ok:true,engagement:'fixture',task:returned,page:{section:'findings',items:[item],total:2,complete:!!r.cursor,nextCursor:r.cursor?null:'positions-next'}};
+ },{storage:()=>({getItem:k=>stored.get(k)??null,setItem:(k,v)=>stored.set(k,v),removeItem:k=>stored.delete(k)})});
+ const render=()=>{index=0;return Component({engagement:'fixture',profile:{revision:1,expiresAt:'2099-01-01T00:00:00Z'}})};
+ const click=async name=>{const button=nodes(render()).find(n=>n.type==='button'&&text(n)===name);assert.ok(button,'Missing '+name);await button.props.onClick()};
+ return{render,click,calls,task,stored,mutateRow(fn){rowMutator=fn},mutateReplyTask(fn){taskMutator=fn},override(v){replyOverride=v},setBad(){bad=true},setUnavailable(){phase='unavailable';task.steps[0].sourceLocations={version:1,state:'unavailable',total:2,bound:0,unavailable:2}},setInvalidTask(){task.snapshot.id='invalid'},duplicateStep(){task.steps.push({...task.steps[0],id:'other-scan'})}};
+}
+test('Joint source positions page same-line sites separately with copy-only unverified language',async()=>{
+ const f=fixture();await f.click('核对联合范围与原任务');assert.equal(f.calls.some(r=>r.action==='report'),false);
+ await f.click('查看命中位置');let content=text(f.render());assert.match(content,/app.py:1:21/);assert.match(content,/待验证/);assert.match(content,/已脱敏/);assert.match(content,/不证明.*AST/);
+ await f.click('下一页命中');assert.equal(f.calls.at(-1).cursor,'positions-next');content=text(f.render());assert.match(content,/app.py:1:51/);assert.doesNotMatch(content,/app.py:1:21/);
+ assert.equal(f.calls.filter(r=>r.action==='start').length,0);
+});
+test('A mismatched snapshot cannot replace the already validated source-position page',async()=>{
+ const f=fixture();await f.click('核对联合范围与原任务');await f.click('查看命中位置');f.setBad();await f.click('下一页命中');
+ const content=text(f.render());assert.match(content,/命中位置.*不匹配/);assert.match(content,/app.py:1:21/);assert.doesNotMatch(content,/app.py:1:51/);
+});
+test('Unavailable source ranges keep the finding visible without invented coordinates',async()=>{
+ const f=fixture();f.setUnavailable();await f.click('核对联合范围与原任务');await f.click('查看命中位置');
+ const content=text(f.render());assert.match(content,/位置未关联/);assert.match(content,/待验证/);assert.doesNotMatch(content,/app.py:1:21/);
+});
+test('A source-location task needs a real snapshot digest before exposing its detail controls',async()=>{
+ const f=fixture();f.setInvalidTask();await f.click('核对联合范围与原任务');
+ assert.match(text(f.render()),/联合任务回执与项目不匹配/);
+ assert.equal(nodes(f.render()).some(n=>n.type==='button'&&text(n)==='查看命中位置'),false);
+});
+test('Duplicate Semgrep steps are rejected rather than lending another step identity',async()=>{
+ const f=fixture();f.duplicateStep();await f.click('核对联合范围与原任务');
+ assert.match(text(f.render()),/联合任务回执与项目不匹配/);
+});
+test('Missing model counts stay unknown and byte-column units are explicit',async()=>{
+ const f=fixture();await f.click('核对联合范围与原任务');
+ assert.match(text(f.render()),/子任务模型请求 未知/);assert.doesNotMatch(text(f.render()),/子任务模型请求 0/);
+ await f.click('查看命中位置');assert.match(text(f.render()),/列号.*UTF-8.*字节/);
+});
+
+for(const [name,change] of [
+ ['wrong source task',r=>r.sourceTask='another-step'],['unavailable extra coordinates',r=>r.sourceLocation={version:1,state:'unavailable',reason:'source-unavailable',start:{offset:0}}],['empty range',r=>r.sourceLocation.end={...r.sourceLocation.start}],['wrong line label',r=>r.location='other.py:1']])test('Source page rejects '+name+' while retaining the valid page',async()=>{
+ const f=fixture();await f.click('核对联合范围与原任务');await f.click('查看命中位置');f.mutateRow(change);await f.click('下一页命中');assert.match(text(f.render()),/不匹配/);assert.match(text(f.render()),/app.py:1:21/);
+});
+test('A page for a different parent task cannot replace existing positions',async()=>{const f=fixture();await f.click('核对联合范围与原任务');await f.click('查看命中位置');f.mutateReplyTask(t=>t.id='other-task');await f.click('下一页命中');assert.match(text(f.render()),/分页未确认/);assert.match(text(f.render()),/app.py:1:21/)});
+for(const reply of [null,{id:'other-task',engagement:'fixture',state:'completed',scopeRevision:1,steps:[],findings:0,cleanupVerified:true}])test('Wait cannot replace the displayed task with '+(reply?'another task':'null'),async()=>{
+ const f=fixture();await f.click('核对联合范围与原任务');f.override({ok:true,engagement:'fixture',task:reply});await f.click('等待原联合任务');assert.match(text(f.render()),/原任务.*不匹配/);assert.match(text(f.render()),/location-task-001/);
+});
+test('Python evidence also requires a concrete step id and snapshot SHA',async()=>{const f=fixture();delete f.task.steps[0].sourceLocations;f.task.steps[0].pythonEvidence='completed';f.task.steps[0].artifacts=1;delete f.task.steps[0].id;f.task.snapshot.id='invalid';await f.click('核对联合范围与原任务');assert.match(text(f.render()),/回执与项目不匹配/)});
+test('A pending request is not cleared by an unrelated unacknowledged task',async()=>{const f=fixture();f.stored.set('dsh-joint-request-v1:fixture',JSON.stringify({engagement:'fixture',requestId:'pending-request-001'}));f.override({ok:true,engagement:'fixture',task:f.task,requestState:'unknown'});await f.click('核对联合范围与原任务');assert.equal(f.stored.size,1);assert.match(text(f.render()),/原启动请求.*未确认/)});
+for(const value of ['0',-1,{}])test('Malformed model count is rejected: '+JSON.stringify(value),async()=>{const f=fixture();f.task.modelCalls=value;await f.click('核对联合范围与原任务');assert.match(text(f.render()),/回执与项目不匹配/)});
+test('Cancelling state is visible while stop remains unconfirmed',async()=>{const f=fixture();f.task.state='cancelling';await f.click('核对联合范围与原任务');assert.match(text(f.render()),/取消中/);assert.doesNotMatch(text(f.render()),/回执与项目不匹配/)});
+
+---Proof---
+import assert from 'node:assert/strict';
+import {resolve,sep} from 'node:path';
+export class AttemptLedger {
+ attempts=[];requests=[];
+ reserve(containerName){this.requests.push({containerName,accepted:this.attempts.length===0});assert.equal(this.attempts.length,0,'Real runner invocation cap reached');const attempt={containerName,outcome:'pending',observed:null,observerErrors:[]};this.attempts.push(attempt);return attempt}
+}
+export function validateLive(v,e){
+ assert.ok(v,'No running scanner observed');assert.notEqual(resolve(e.sourceRoot),resolve(e.project));assert.ok(resolve(e.sourceRoot).startsWith(resolve(e.stateRoot)+sep));
+ assert.equal(v.running,true);assert.equal(v.imageId,e.image);assert.equal(v.ruleSha256,e.rules);assert.deepEqual(v.sourceMount,{source:e.sourceRoot,readonly:true});
+ assert.equal(v.containerName,'/'+e.containerName);assert.match(v.containerId,/^[a-f0-9]{64}$/);assert.ok(!v.capAdd?.length);assert.ok(!v.devices?.length);assert.ok(!v.deviceRequests?.length);assert.equal(v.pidMode,'');assert.equal(v.ipcMode,'private');assert.equal(v.utsMode,'');assert.deepEqual(v.entrypoint,['/bin/sh']);
+ const binds=v.mounts.filter(m=>m.type==='bind').sort((a,b)=>a.destination.localeCompare(b.destination));
+ const wanted=[{type:'bind',source:e.sourceRoot,destination:'/src',rw:false},{type:'bind',source:e.outputScript,destination:'/policy-output.sh',rw:false},{type:'bind',source:e.ruleFile,destination:'/policy/rules.json',rw:false}].sort((a,b)=>a.destination.localeCompare(b.destination));assert.deepEqual(binds,wanted);assert.ok(v.mounts.every(m=>m.type==='bind'||m.type==='tmpfs'&&['/tmp','/out'].includes(m.destination)));
+ assert.deepEqual(v.tmpfs,{'/tmp':'rw,nosuid,nodev,noexec,size=268435456,mode=1777','/out':'rw,nosuid,nodev,noexec,size=67108864,uid=1000,gid=1000,mode=0700'});
+ assert.ok(/^\d+$/.test(v.command?.[3])&&+v.command[3]>=1&&+v.command[3]<=230);assert.deepEqual(v.command,['/policy-output.sh','/out','--deadline-seconds',v.command[3],'semgrep','scan','--config','/policy/rules.json','--json','--output','/out/result.json','--metrics=off','--disable-version-check','--jobs','1','--timeout','5','--max-target-bytes','1000000','/src']);
+ assert.equal(v.user,'1000:1000');assert.equal(v.network,'none');assert.equal(v.readonlyRoot,true);assert.equal(v.privileged,false);
+ assert.ok(v.capDrop?.includes('ALL'));assert.ok(v.securityOpt?.includes('no-new-privileges'));assert.equal(v.memory,805306368);assert.equal(v.memorySwap,805306368);assert.equal(v.pids,160);assert.equal(v.nanoCpus,1000000000);return true;
+}
+export async function collectPages(read,id,snapshotId,maxPages=100,section='findings'){
+ let cursor,total,task;const items=[],seen=new Set();
+ for(let n=0;n<maxPages;n++){
+  const r=await read(cursor);assert.equal(r?.ok,true);assert.equal(r.task?.id,id);assert.equal(r.task?.snapshot?.id,snapshotId);task=r.task;
+  const p=r.page;assert.equal(p?.section,section);assert.ok(p&&Array.isArray(p.items)&&p.items.length<=5);assert.ok(Number.isSafeInteger(p.total)&&p.total>=0);assert.equal(typeof p.complete,'boolean');
+  if(total===undefined)total=p.total;assert.equal(p.total,total);items.push(...p.items);assert.ok(items.length<=total);
+  if(p.complete){assert.equal(p.nextCursor,null);assert.equal(items.length,total);return{items,task}}
+  assert.ok(p.items.length>0);assert.ok(typeof p.nextCursor==='string'&&p.nextCursor.length>0&&p.nextCursor.length<=512);assert.ok(!seen.has(p.nextCursor));seen.add(p.nextCursor);cursor=p.nextCursor;
+ }
+ throw Error('Report collection exceeded page cap; incomplete evidence');
+}
+
+export function validateAcceptance({jointId,requests,proofs,report}){
+ assert.ok(jointId);assert.equal(requests.length,1);assert.equal(requests[0].accepted,true);assert.equal(proofs.length,1);const p=proofs[0],t=report.task;assert.equal(p.outcome,'passed');assert.equal(t?.id,jointId);assert.equal(t.state,'completed');assert.equal(t.cleanupVerified,true);assert.equal(t.modelCalls,0);assert.equal(t.snapshot?.files,5);assert.equal(t.snapshot.id,p.snapshotId);assert.equal(t.workspace?.toolIdentities?.semgrep,p.admissionIdentity);
+ assert.equal(t.steps.length,1);const step=t.steps[0];assert.equal(step.tool,'semgrep');assert.equal(step.state,'completed');assert.equal(p.containerName,'dsh-sec-'+step.id);assert.equal(step.sourceLocations?.total,7);assert.equal(step.sourceLocations.bound,7);assert.equal(step.sourceLocations.unavailable,0);assert.equal(report.findings.length,7);assert.equal(report.files.length,5);assert.ok(report.findings.every(r=>r.tool==='semgrep'&&r.status==='unverified'&&r.sourceTask===step.id&&r.snapshotId===t.snapshot.id&&r.sourceLocation?.state==='bound'));return true;
+}
+
+---Proof tests---
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {AttemptLedger,validateLive,collectPages,validateAcceptance} from './proof-contract.mjs';
+const expected={sourceRoot:'/owned/state/source',project:'/owned/workspace/project',stateRoot:'/owned/state',image:'sha256:pin',rules:'rules-sha',containerName:'owned',outputScript:'/owned/package/scripts/security-output.sh',ruleFile:'/owned/run/semgrep-rules.json'};
+const live=()=>({imageId:expected.image,running:true,sourceMount:{source:expected.sourceRoot,readonly:true},ruleSha256:expected.rules,user:'1000:1000',network:'none',readonlyRoot:true,privileged:false,capDrop:['ALL'],securityOpt:['no-new-privileges'],memory:805306368,memorySwap:805306368,pids:160,nanoCpus:1000000000,containerName:'/owned',containerId:'a'.repeat(64),capAdd:[],devices:[],deviceRequests:[],pidMode:'',ipcMode:'private',utsMode:'',entrypoint:['/bin/sh'],mounts:[{type:'bind',source:expected.sourceRoot,destination:'/src',rw:false},{type:'bind',source:expected.outputScript,destination:'/policy-output.sh',rw:false},{type:'bind',source:expected.ruleFile,destination:'/policy/rules.json',rw:false}],tmpfs:{'/tmp':'rw,nosuid,nodev,noexec,size=268435456,mode=1777','/out':'rw,nosuid,nodev,noexec,size=67108864,uid=1000,gid=1000,mode=0700'},command:['/policy-output.sh','/out','--deadline-seconds','229','semgrep','scan','--config','/policy/rules.json','--json','--output','/out/result.json','--metrics=off','--disable-version-check','--jobs','1','--timeout','5','--max-target-bytes','1000000','/src']});
+test('runner limit is applied before invocation and failed attempts remain recorded',()=>{const l=new AttemptLedger();const a=l.reserve('owned');a.outcome='failed';assert.throws(()=>l.reserve('owned2'));assert.equal(l.attempts.length,1);assert.equal(l.attempts[0].outcome,'failed');assert.equal(l.requests.length,2);assert.equal(l.requests[1].accepted,false)});
+test('live proof requires managed copy, pinned inputs and all sandbox limits',()=>{assert.equal(validateLive(live(),expected),true);for(const [key,v] of [['imageId','bad'],['network','bridge'],['running',false],['ruleSha256','wrong'],['memory',0],['privileged',true]])assert.throws(()=>validateLive({...live(),[key]:v},expected));assert.throws(()=>validateLive(null,expected));assert.throws(()=>validateLive(live(),{...expected,sourceRoot:expected.project}));assert.throws(()=>validateLive({...live(),sourceMount:{source:'/owned/workspace/project',readonly:true}},expected))});
+const page=(items,total,complete,nextCursor=null)=>({ok:true,task:{id:'task',snapshot:{id:'snapshot'}},page:{section:'findings',items,total,complete,nextCursor}});
+test('report collection verifies terminal count and stable identity',async()=>{const pages=[page([1,2],3,false,'a'),page([3],3,true)];assert.deepEqual((await collectPages(async()=>pages.shift(),'task','snapshot')).items,[1,2,3]);await assert.rejects(collectPages(async()=>page([1],2,true),'task','snapshot'));await assert.rejects(collectPages(async()=>({...page([],0,true),task:{id:'other',snapshot:{id:'snapshot'}}}),'task','snapshot'))});
+test('report collection rejects cursor cycles, drift and bounded truncation',async()=>{await assert.rejects(collectPages(async()=>page([1],3,false,'a'),'task','snapshot'));const pages=[page([1],3,false,'a'),page([2],4,true)];await assert.rejects(collectPages(async()=>pages.shift(),'task','snapshot'));await assert.rejects(collectPages(async()=>page([1],3,false,'a'),'task','snapshot',1))});
+
+test('live proof rejects additional capability, mounts, namespaces and commands',()=>{for(const change of [{capAdd:['SYS_ADMIN']},{devices:[{}]},{deviceRequests:[{}]},{pidMode:'host'},{ipcMode:'host'},{utsMode:'host'},{command:['sh','-c','anything']},{mounts:[...live().mounts,{type:'bind',source:'/home',destination:'/escape',rw:true}]}])assert.throws(()=>validateLive({...live(),...change},expected))});
+test('collector rejects a wrong section',async()=>{await assert.rejects(collectPages(async()=>({...page([],0,true),page:{...page([],0,true).page,section:'files'}}),'task','snapshot'))});
+const acceptance=()=>({jointId:'task',requests:[{accepted:true}],proofs:[{outcome:'passed',snapshotId:'snapshot',admissionIdentity:'admission',containerName:'dsh-sec-scan'}],report:{task:{id:'task',state:'completed',cleanupVerified:true,modelCalls:0,snapshot:{id:'snapshot',files:5},workspace:{toolIdentities:{semgrep:'admission'}},steps:[{id:'scan',tool:'semgrep',state:'completed',sourceLocations:{total:7,bound:7,unavailable:0}}]},findings:Array.from({length:7},()=>({tool:'semgrep',status:'unverified',sourceTask:'scan',snapshotId:'snapshot',sourceLocation:{state:'bound'}})),files:Array(5).fill({})}});
+test('acceptance requires complete task, proof and report bound to exactly one attempt',()=>{assert.equal(validateAcceptance(acceptance()),true);for(const mutate of [v=>v.jointId=null,v=>v.report.task.state='failed',v=>v.report.task.steps[0].state='partial',v=>v.report.task.cleanupVerified=false,v=>v.report.task.snapshot.id='other',v=>v.report.task.workspace.toolIdentities.semgrep='wrong',v=>v.report.findings=[],v=>v.requests.push({accepted:false}),v=>v.report.task.steps[0].sourceLocations.bound=0]){const v=acceptance();mutate(v);assert.throws(()=>validateAcceptance(v))}});
+
+---Service---
+import http from 'node:http';
+import assert from 'node:assert/strict';
+import {AttemptLedger,validateLive,collectPages,validateAcceptance} from './proof-contract.mjs';
+import fs from 'node:fs';
+import {join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import {execFile,execFileSync} from 'node:child_process';
+import {promisify} from 'node:util';
+import {RedteamStore} from './package/lib/redteam/store-core.js';
+import {securityFor,executeSecurityOp} from './package/lib/redteam/personal-security-workbench.mjs';
+import {createSecurityServer,requestSecurityService} from './package/lib/redteam/personal-security-service.mjs';
+
+const root=fileURLToPath(new URL('.',import.meta.url)),workspace=join(root,'workspace'),project=join(workspace,'synthetic'),sha=v=>createHash('sha256').update(v).digest('hex');
+assert.ok(!fs.existsSync(workspace)&&!fs.existsSync(join(root,'state')),'Fresh acceptance state required');
+fs.mkdirSync(project,{recursive:true,mode:0o700});
+const canary='LIVE_LOCATION_SYNTHETIC_'+'Z'.repeat(50);
+const fixture={
+ 'same_line.py':'# 中文位置对照🙂\n"中文🙂"; label="'+canary+'"; eval(input()); eval(input())\n',
+ 'crlf_tabs.py':'def run(value):\r\n\teval(value)\r\n\texec(value)\r\n',
+ 'extra.py':'def run(value):\n    eval(value)\n    exec(value)\n',
+ 'helper.py':'def run(value):\n    return eval(value)\n',
+ 'constant.py':'def fixed():\n    return eval("6*7")\n',
+};
+for(const [name,text] of Object.entries(fixture))fs.writeFileSync(join(project,name),text,{mode:0o600});
+const ledger=new AttemptLedger(),proofs=ledger.attempts,events=[];let store,bench,rpc,ui,timer,evidence;
+const activeContainers=()=>execFileSync('/usr/bin/sudo',['-n','/usr/bin/docker','ps','-aq','--filter','label=personal.harness.security=true'],{encoding:'utf8',timeout:8000}).trim().split('\n').filter(Boolean).sort();
+const containersBefore=activeContainers();
+try{
+store=new RedteamStore(join(root,'state'));const eng=store.openEngagement('Isolated source location live').id;bench=securityFor(store);
+bench.workspaceRoot=workspace;store.addCredential(eng,{host:'synthetic.invalid',secret_type:'api',secret_value:canary});
+const socket=join(root,'review.sock');rpc=createSecurityServer({dispatch:(request,options)=>executeSecurityOp(store,request,options)});
+await new Promise(resolve=>rpc.listen(socket,resolve));fs.chmodSync(socket,0o600);
+const call=input=>requestSecurityService({engagement:eng,...input},{socketPath:socket,timeoutMs:40000});
+const expiresAt=new Date(Date.now()+1200000).toISOString();
+const saved=await call({op:'securityScopeSave',requestId:'source-live-scope-001',revision:0,repoRoot:project,tools:['semgrep'],expiresAt,confirm:true});
+if(!saved.ok)throw Error(saved.error);
+const originalRunner=bench.runner,execAsync=promisify(execFile);
+const manifest=JSON.parse(fs.readFileSync('/home/purge/tools/security-workbench/images.json','utf8'));
+const protectedBefore=JSON.parse(fs.readFileSync(join(root,'protected-before.json'),'utf8'));
+assert.equal(sha(fs.readFileSync('/home/purge/tools/security-workbench/images.json')),protectedBefore.pins['images.json']);
+const image=manifest.tools.find(t=>t.tool==='semgrep').imageId,rules=protectedBefore.pins['rules.json'];
+bench.runner=async(tool,profile,options)=>{
+ const proof=ledger.reserve('dsh-sec-'+options.runDir.split('/').pop());
+ let timer,pending=Promise.resolve(),checking=false,violation;
+ try{
+  assert.equal(tool,'semgrep');const snapshot=bench.joint.active.data.snapshot;
+  assert.equal(profile.repoRoot,snapshot.sourceRoot);
+  const expected={sourceRoot:snapshot.sourceRoot,project,stateRoot:join(root,'state'),image,rules,containerName:proof.containerName,ruleFile:join(options.runDir,'semgrep-rules.json'),outputScript:join(root,'package/scripts/security-output.sh')};
+  assert.equal(bench.active?.id,options.runDir.split('/').pop());assert.ok(bench.active.controller instanceof AbortController);
+  const inventory=()=>{const actual=[];const walk=dir=>{for(const name of fs.readdirSync(dir)){const p=join(dir,name),st=fs.lstatSync(p);assert.ok(!st.isSymbolicLink());if(st.isDirectory())walk(p);else{assert.ok(st.isFile()&&st.nlink===1);actual.push(p.slice(profile.repoRoot.length+1))}}};walk(profile.repoRoot);assert.deepEqual(actual.sort(),snapshot.files.map(f=>f.path).sort());return Object.fromEntries(snapshot.files.map(f=>{const bytes=fs.readFileSync(join(profile.repoRoot,f.path));assert.ok(!bytes.includes(Buffer.from(canary)),'Synthetic secret remained in scanner copy');return[f.path,sha(bytes)]}))};
+  Object.assign(proof,{tool,snapshotId:snapshot.id,admissionIdentity:options.admissionIdentity,sourceRoot:profile.repoRoot,expected,before:inventory()});
+  assert.ok(snapshot.files.every(f=>proof.before[f.path]===f.sha256));
+  const inspect=()=>{
+   if(proof.observed||checking||violation)return;checking=true;
+   pending=execAsync('/usr/bin/sudo',['-n','/usr/bin/docker','inspect',proof.containerName],{encoding:'utf8',timeout:2000,maxBuffer:256*1024}).then(({stdout})=>{
+    try{
+     const v=JSON.parse(stdout)[0];if(!v?.State?.Running)return;
+     const mount=v.Mounts.find(m=>m.Destination==='/src'),policy=v.Mounts.find(m=>m.Destination==='/policy/rules.json');
+     const observed={containerName:v.Name,containerId:v.Id,capAdd:v.HostConfig.CapAdd,devices:v.HostConfig.Devices,deviceRequests:v.HostConfig.DeviceRequests,pidMode:v.HostConfig.PidMode,ipcMode:v.HostConfig.IpcMode,utsMode:v.HostConfig.UTSMode,entrypoint:v.Config.Entrypoint,mounts:v.Mounts.map(m=>({type:m.Type,source:m.Source,destination:m.Destination,rw:m.RW})),tmpfs:v.HostConfig.Tmpfs,imageId:v.Image,running:true,sourceMount:{source:mount?.Source,readonly:mount?.RW===false},ruleSha256:policy&&policy.RW===false?sha(fs.readFileSync(policy.Source)):null,user:v.Config.User,network:v.HostConfig.NetworkMode,readonlyRoot:v.HostConfig.ReadonlyRootfs,privileged:v.HostConfig.Privileged,capDrop:v.HostConfig.CapDrop,securityOpt:v.HostConfig.SecurityOpt,memory:v.HostConfig.Memory,memorySwap:v.HostConfig.MemorySwap,pids:v.HostConfig.PidsLimit,nanoCpus:v.HostConfig.NanoCpus,command:v.Config.Cmd};
+     proof.observed=observed;validateLive(observed,expected);
+    }catch(error){violation=String(error.message);proof.violation=violation;bench.active?.controller?.abort()}
+   },error=>{if(proof.observerErrors.length<8)proof.observerErrors.push(String(error.message).slice(0,500))}).finally(()=>{checking=false});
+  };
+  timer=setInterval(inspect,40);inspect();
+  const result=await originalRunner(tool,profile,options);clearInterval(timer);await pending;
+  if(violation)throw Error(violation);validateLive(proof.observed,expected);
+  proof.after=inventory();assert.deepEqual(proof.after,proof.before);proof.sourceHashesMatch=true;proof.manifestHashesMatch=true;proof.copyCanaryAbsent=true;
+  Object.assign(proof,{outcome:'passed',findings:result.findings.length,declaredSpans:result.findings.map(f=>({rule:f.rule,location:f.location,scannerSpan:f.scannerSpan})),complete:result.complete,version:result.version});return result;
+ }catch(error){proof.outcome='failed';proof.error=String(error.message);throw error}
+ finally{if(timer)clearInterval(timer);await pending}
+};
+const profile={revision:1,expiresAt},assets=new Map([
+ ['/',['text/html',fs.readFileSync(join(root,'index.html'),'utf8').replace('__FIXTURE__',()=>JSON.stringify([eng,profile]).replace(/</g,'\\u003c'))]],
+ ['/react.js',['text/javascript',fs.readFileSync(join(root,'react.production.min.js'))]],
+ ['/react-dom.js',['text/javascript',fs.readFileSync(join(root,'react-dom.production.min.js'))]],
+ ['/client.mjs',['text/javascript',fs.readFileSync(join(root,'package/lib/redteam/personal-security-client.mjs'))]],
+ ['/base.css',['text/css',fs.readFileSync(join(root,'base.css'))]],
+]);
+let finish,startRequest=null,jointId=null;const done=new Promise(resolve=>finish=resolve);
+async function collect(){
+ const report={version:1,engagement:eng,task:null,findings:[],files:[],exclusions:[],diagnostics:[],artifacts:[]};
+ if(jointId){
+  const status=await call({op:'securityJoint',action:'status',id:jointId});assert.ok(status.ok&&status.task.id===jointId);const snapshotId=status.task.snapshot.id;
+  for(const section of ['findings','files','exclusions','diagnostics','artifacts']){
+   const result=await collectPages(cursor=>call({op:'securityJoint',action:'report',id:jointId,section,limit:5,...(cursor?{cursor}:{})}),jointId,snapshotId,100,section);
+   report.task=result.task;report[section]=result.items;
+  }
+ }
+ let proofValid=false,rangeOracle=null;const acceptanceErrors=[];try{validateAcceptance({jointId,requests:ledger.requests,proofs,report});rangeOracle=verifyRanges(report,proofs[0].sourceRoot);proofValid=true}catch(error){acceptanceErrors.push(String(error.message))}
+ const runs=bench.db(eng).prepare('SELECT * FROM security_run').all(),facts=bench.db(eng).prepare('SELECT COUNT(*) n FROM security_finding').get().n;
+ return{ok:true,engagement:eng,jointId,startRequest,events,proofs,report,runs:runs.map(r=>({...r,details:JSON.parse(r.details)})),ordinaryFindingRows:facts,
+  fixtureSourceHashes:Object.fromEntries(Object.entries(fixture).map(([n,s])=>[n,sha(s)])),newScannerCalls:proofs.length,modelCalls:Number.isSafeInteger(report.task?.modelCalls)?report.task.modelCalls:null,proofValid,acceptanceErrors,rangeOracle,runnerRequests:ledger.requests};
+}
+function verifyRanges(report,sourceRoot){
+ const rows=[],copies={};for(const file of report.files){const bytes=fs.readFileSync(join(sourceRoot,file.path));assert.equal(sha(bytes),file.sha256);assert.ok(!bytes.includes(Buffer.from(canary)));copies[file.path]={sha256:sha(bytes),base64:bytes.toString('base64')}}
+ for(const f of report.findings){const l=f.sourceLocation,raw=Buffer.from(copies[l.path].base64,'base64');assert.equal(sha(raw),l.sourceSha256);assert.equal(raw.length,l.byteLength);
+  for(const which of ['start','end']){const p=l[which],prefix=raw.subarray(0,p.offset);new TextDecoder('utf8',{fatal:true}).decode(prefix);assert.equal(prefix.reduce((n,b)=>n+(b===10),0),p.line-1);assert.equal(prefix.length-prefix.lastIndexOf(10),p.col)}
+  const slice=raw.subarray(l.start.offset,l.end.offset).toString('utf8');assert.ok(/^(eval|exec)\(/.test(slice));if(l.path==='same_line.py'){assert.ok(raw.includes(Buffer.from('中文🙂')));const prefix=raw.subarray(0,l.start.offset);assert.notEqual([...prefix.subarray(prefix.lastIndexOf(10)+1).toString('utf8')].length+1,l.start.col)}
+  rows.push({path:l.path,start:l.start,end:l.end,slice});
+ }
+ const same=rows.filter(r=>r.path==='same_line.py');assert.equal(same.length,2);assert.notEqual(same[0].start.offset,same[1].start.offset);return{ok:true,matchedRanges:rows.length,unicodeSameLineByteUnitsProven:true,rows,copies};
+}
+ui=http.createServer(async(req,res)=>{
+ const send=(status,value)=>{res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify(value))};
+ try{
+  const host=req.headers.host;
+  if(!/^127\.0\.0\.1:\d+$/.test(host))return send(403,{ok:false});
+  if(req.method==='GET'&&assets.has(req.url)){const [type,body]=assets.get(req.url);res.writeHead(200,{'Content-Type':type+'; charset=utf-8','Cache-Control':'no-store'});return res.end(body)}
+  if(req.method==='GET'&&req.url==='/health')return send(200,{ok:true,engagement:eng});
+  if(req.method!=='POST'||req.headers.origin!=='http://'+host)return send(404,{ok:false});
+  if(req.url==='/__collect')return send(200,await collect());
+  if(req.url==='/__stop'){res.once('finish',finish);const value=await collect();send(200,value);return}
+  if(req.url!=='/api')return send(404,{ok:false});
+  let body='';for await(const chunk of req){body+=chunk;if(body.length>32768)return send(413,{ok:false})}
+  const input=JSON.parse(body);
+  if(input.engagement!==eng||input.op!=='securityJoint'||!['plan','start','status','wait','report','cancel'].includes(input.action))return send(403,{ok:false});
+  if(input.id&&input.id!==jointId)return send(403,{ok:false});
+  if(input.action==='start'){
+   if(input.mode!=='deep'||JSON.stringify(input.steps)!=='["semgrep"]'||typeof input.requestId!=='string'||startRequest!==null)return send(403,{ok:false,error:'Only one owned synthetic scan is allowed'});
+   startRequest=input.requestId;
+  }
+  const event={action:input.action,section:input.section??null,requestId:input.requestId??null,id:input.id??null,cursorUsed:!!input.cursor,outcome:'pending'};events.push(event);
+  let result;try{result=await call(input);event.outcome=result.ok?'returned-ok':'returned-error'}catch(error){event.outcome='threw';event.error=String(error.message);throw error}
+  if(input.action==='start'&&result.ok){assert.equal(jointId,null);jointId=result.task.id}
+  send(200,result);
+ }catch(error){send(500,{ok:false,error:String(error.message)})}
+});
+ await new Promise((resolve,reject)=>{ui.once('error',reject);ui.listen(0,'127.0.0.1',resolve)});
+ console.log(JSON.stringify({browserReady:true,port:ui.address().port,engagement:eng,fixtureFiles:Object.keys(fixture).length}));
+ timer=setTimeout(finish,1200000);await done;evidence=await collect();
+}finally{
+ if(timer)clearTimeout(timer);
+ if(ui?.listening){ui.closeAllConnections();await new Promise(resolve=>ui.close(resolve))}
+ const cleanupErrors=[];
+ for(const [name,fn] of [['rpc',()=>rpc?.shutdown()],['bench',()=>bench?.dispose()],['store',()=>store?.close()]])try{await fn()}catch(error){cleanupErrors.push(name+': '+String(error.message))}
+ for(const proof of proofs)try{
+  const id=proof.observed?.containerId;assert.ok(id,'Container identity was not positively observed');
+  try{execFileSync('/usr/bin/sudo',['-n','/usr/bin/docker','inspect',id],{encoding:'utf8',timeout:8000,stdio:['ignore','pipe','pipe']});throw Error('Owned scanner remains')}
+  catch(error){assert.ok(error.status!==undefined&&String(error.stderr).includes('No such object'),'Container absence not proven')}
+  execFileSync('/usr/bin/sudo',['-n','/usr/bin/docker','image','inspect',proof.expected.image],{encoding:'utf8',timeout:8000,stdio:['ignore','pipe','pipe']});proof.containerAbsent=true;
+ }catch(error){cleanupErrors.push(String(error.message))}
+ try{assert.deepEqual(activeContainers(),containersBefore)}catch(error){cleanupErrors.push('Labeled container baseline mismatch')}
+ evidence??={ok:false,error:'Final report collection failed',proofs,events};evidence.cleanupErrors=cleanupErrors;
+ fs.writeFileSync(join(root,'final-evidence.json'),JSON.stringify(evidence));
+ console.log(JSON.stringify({stopped:true,containersAbsent:proofs.filter(p=>p.containerAbsent).length,cleanupErrors}));
+}
+
+---Cleanup---
+from pathlib import Path
+from urllib.request import Request,urlopen
+from urllib.error import URLError
+import importlib.util,json,socket,time
+w=Path(__file__).resolve().parent;session=json.loads((w/'session.json').read_text());origin=(w/'access-url.txt').read_text().strip().rstrip('/')
+try:
+ with urlopen(Request(origin+'/__stop',data=b'{}',headers={'Origin':origin,'Content-Type':'application/json'}),timeout=45) as response:r=json.load(response)
+ (w/'stop-receipt.json').write_text(json.dumps(r,indent=2)+'\n')
+except URLError:
+ # A self-expired owned process is inspected below; no other service is stopped.
+ pass
+spec=importlib.util.spec_from_file_location('m',Path.home()/'Library/Application Support/Harness Purge Original/host-tools/manage.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);m.validate()
+source='SESSION='+repr(session)+'\n'+r'''
+from pathlib import Path
+from hashlib import sha256
+import json,shutil,socket,sqlite3,subprocess,time
+home=Path('/home/purge');root=Path(SESSION['root']);assert root.parent==home/'.cache' and root.name.startswith('source-location-live-') and root.resolve()==root
+assert (root/'owned-session').read_text()=='source-location-live-20261103'
+for _ in range(40):
+ if not Path('/proc/'+str(SESSION['pid'])).exists():break
+ time.sleep(.1)
+assert not Path('/proc/'+str(SESSION['pid'])).exists(),'Owned service did not stop'
+with socket.socket() as s:assert s.connect_ex(('127.0.0.1',SESSION['port']))!=0
+final=json.loads((root/'final-evidence.json').read_text());assert final['proofValid'] and final['cleanupErrors']==[] and final['newScannerCalls']==1
+intent=json.loads((root/'stage-intent.json').read_text());assert all(sha256((root/n).read_bytes()).hexdigest()==v for n,v in intent['files'].items())
+proof_tests=(root/'proof-tests.txt').read_text();assert 'fail 0' in proof_tests
+before=json.loads((root/'protected-before.json').read_text())
+program=home/'tools/dsh-purge-personal-1.1.77-personal.1';actual={str(p.relative_to(program)):sha256(p.read_bytes()).hexdigest() for p in program.rglob('*') if p.is_file() and '__pycache__' not in p.parts};assert actual==before['program']
+dbs={}
+for p in (home/'.dsh-improved/redteam/engagements').glob('*/assets.db'):
+ digest=sha256()
+ with sqlite3.connect(p.as_uri()+'?mode=ro',uri=True,timeout=3) as db:
+  for row in db.iterdump():digest.update((row+'\n').encode())
+ dbs[str(p)]=digest.hexdigest()
+assert dbs==before['databases']
+runtime=home/'tools/security-workbench';assert {n:sha256((runtime/n).read_bytes()).hexdigest() for n in before['pins']}==before['pins']
+assert all(sha256(Path(n).read_bytes()).hexdigest()==v for n,v in before['config'].items())
+for proof in final['proofs']:
+ remain=subprocess.check_output(['/usr/bin/sudo','-n','/usr/bin/docker','ps','-aq','--filter','name=^'+proof['containerName']+'$'],text=True,timeout=8);assert not remain.strip()
+summary={'ok':True,'programFilesMatched':len(actual),'databaseLogicalDigestsMatched':len(dbs),'pinsAndConfigsMatched':True,'ownedContainersAbsent':len(final['proofs']),'guestPortClosed':True,'ownedProcessAbsent':True,'root':str(root),'final':final}
+shutil.rmtree(root);assert not root.exists();summary['temporaryRootRemoved']=True
+print(json.dumps(summary))
+'''
+r=json.loads(m.ssh('python3 -B -',input=source,timeout=30,phase='native-check').stdout)
+(w/'cleanup-full.json').write_text(json.dumps(r,indent=2)+'\n');summary={k:v for k,v in r.items() if k!='final'};(w/'cleanup.json').write_text(json.dumps(summary,indent=2)+'\n');print(json.dumps(summary))

@@ -1,0 +1,105 @@
+{
+  "ok": true,
+  "matchedRanges": 7,
+  "unicodeSameLineByteUnitsProven": true,
+  "rows": [
+    {
+      "path": "crlf_tabs.py",
+      "start": {
+        "line": 2,
+        "col": 2,
+        "offset": 18
+      },
+      "end": {
+        "line": 2,
+        "col": 13,
+        "offset": 29
+      },
+      "matchedSlice": "eval(value)"
+    },
+    {
+      "path": "crlf_tabs.py",
+      "start": {
+        "line": 3,
+        "col": 2,
+        "offset": 32
+      },
+      "end": {
+        "line": 3,
+        "col": 13,
+        "offset": 43
+      },
+      "matchedSlice": "exec(value)"
+    },
+    {
+      "path": "extra.py",
+      "start": {
+        "line": 2,
+        "col": 5,
+        "offset": 20
+      },
+      "end": {
+        "line": 2,
+        "col": 16,
+        "offset": 31
+      },
+      "matchedSlice": "eval(value)"
+    },
+    {
+      "path": "extra.py",
+      "start": {
+        "line": 3,
+        "col": 5,
+        "offset": 36
+      },
+      "end": {
+        "line": 3,
+        "col": 16,
+        "offset": 47
+      },
+      "matchedSlice": "exec(value)"
+    },
+    {
+      "path": "helper.py",
+      "start": {
+        "line": 2,
+        "col": 12,
+        "offset": 27
+      },
+      "end": {
+        "line": 2,
+        "col": 23,
+        "offset": 38
+      },
+      "matchedSlice": "eval(value)"
+    },
+    {
+      "path": "same_line.py",
+      "start": {
+        "line": 2,
+        "col": 35,
+        "offset": 59
+      },
+      "end": {
+        "line": 2,
+        "col": 48,
+        "offset": 72
+      },
+      "matchedSlice": "eval(input())"
+    },
+    {
+      "path": "same_line.py",
+      "start": {
+        "line": 2,
+        "col": 50,
+        "offset": 74
+      },
+      "end": {
+        "line": 2,
+        "col": 63,
+        "offset": 87
+      },
+      "matchedSlice": "eval(input())"
+    }
+  ]
+}

@@ -1,0 +1,361 @@
+{
+  "date": "2026-10-29",
+  "timezone": "America/Los_Angeles",
+  "runId": "security-followups-20261029",
+  "scope": "Harness only; real project findings stay unverified",
+  "features": [
+    "bounded model summary/status and version-checked keyset report pages",
+    "exact-run wait 0–30 seconds without relaunch",
+    "persisted source-free coverage diagnostics in UI and Markdown"
+  ],
+  "regression": {
+    "fullPluginPassed": 411,
+    "newCases": 7,
+    "focusedOverlapsFull": true,
+    "reviewInitialImportantFinding": "post-project-redaction budget and control-token corruption",
+    "reviewRemainingImportantCritical": 0,
+    "reviewExecutedTests": false
+  },
+  "modelContract": {
+    "finalSerializedUtf8ByteLimit": 6000,
+    "reportDefaultLimit": 5,
+    "reportLimitRange": [
+      1,
+      10
+    ],
+    "reportSections": [
+      "findings",
+      "runs"
+    ],
+    "cursorVersionIncludesProjectSectionScopeAndDatabaseState": true,
+    "cursorInvalidation": "read again from first page if state changes",
+    "postRedactionIdentityMasked": "explicit error; no unredacted recovery or corrupted cursor retry",
+    "postRedactionOversize": "explicit error; smaller limit or UI export",
+    "uiFullStatusAndMarkdownUnchanged": true,
+    "startIdempotencyUnchanged": true,
+    "waitDefaultSeconds": 15,
+    "waitMaximumSeconds": 30,
+    "waitTimeoutCancelsScan": false,
+    "headlessStillOneShot": true
+  },
+  "coverageDiagnostics": {
+    "persistedFields": [
+      "code",
+      "path",
+      "line"
+    ],
+    "maximumItems": 20,
+    "allErrorCountRetained": true,
+    "rawScannerMessageOrSourceSnippetRetained": false,
+    "legacyReasonsBackfilled": false,
+    "partialCoverageWeakened": false
+  },
+  "nativePages": {
+    "nativeWrappedCalls": 15,
+    "modelWireByteMax": 5707,
+    "records": 95,
+    "uniqueRecords": 95,
+    "storedAllUnverified": true,
+    "fixtureGeneratedNotScannerResults": true,
+    "retainedRealSemgrepDiagnostics": {
+      "total": 1,
+      "items": [
+        {
+          "code": "PartialParsing",
+          "path": "website/static/i18n.test.mjs",
+          "line": 143
+        }
+      ],
+      "truncated": false
+    },
+    "realHistoryUnchanged": true
+  },
+  "realModelAcceptance": {
+    "modelToolCalls": 9,
+    "startCalls": 2,
+    "waitCalls": 2,
+    "reportPages": 3,
+    "allNativeResultJsonIntact": true,
+    "maxAuditResultBytes": 1885,
+    "allPagesRead": true,
+    "allFindingsUnverified": true,
+    "findingCounts": {
+      "semgrep": 1,
+      "trivy": 7
+    },
+    "diagnostics": {
+      "total": 0,
+      "items": [],
+      "truncated": false
+    },
+    "runs": [
+      {
+        "id": "45453794-da81-4b45-bf71-f801bd1ca654",
+        "tool": "semgrep",
+        "state": "completed",
+        "complete": 1
+      },
+      {
+        "id": "71c95988-ad6d-4905-b515-5d0d67f4d265",
+        "tool": "trivy",
+        "state": "completed",
+        "complete": 1
+      }
+    ],
+    "scannerContainersRunning": 0,
+    "syntheticSourceUnchanged": true,
+    "initialDiagnosticFixtureTriggered": false
+  },
+  "nativeDiagnosticAcceptance": {
+    "engagement": "personal-security-diagnostics-20261029",
+    "runId": "50e73100-a922-4238-a117-88258e49f8b6",
+    "state": "partial",
+    "complete": 0,
+    "coveredFiles": 1,
+    "diagnostics": {
+      "total": 1,
+      "items": [
+        {
+          "code": "PartialParsing",
+          "path": "i18n.test.mjs",
+          "line": 143
+        }
+      ],
+      "truncated": false
+    },
+    "reportContainsDiagnostics": true,
+    "sourceAndOwnedCopyHashesUnchanged": true,
+    "fixtureCopiedNotExecuted": true,
+    "allFindingsUnverified": true
+  },
+  "browser": {
+    "project": "personal-security-diagnostics-20261029",
+    "pageShowsPartial": true,
+    "diagnosticType": "PartialParsing",
+    "diagnosticLocation": "i18n.test.mjs:143",
+    "observedTaskId": "50e73100-a922-4238-a117-88258e49f8b6",
+    "noReviewOrScopeWrite": true,
+    "screenshot": "browser-diagnostic.png",
+    "nativeAx": "browser-diagnostic.txt",
+    "downloadTestThisPhase": false,
+    "fullMarkdownCheckedInGuest": true
+  },
+  "live": {
+    "programHashesMatched": 124,
+    "trackedRealProjectHashesMatched": 459,
+    "realProjectGitHeadUnchanged": true,
+    "realProjectSixAuditTablesUnchanged": true,
+    "realProjectFindings": 95,
+    "realProjectAllUnverified": true,
+    "service": "active",
+    "scannerContainersRunning": 0,
+    "noRunningAuditRows": true,
+    "runtimePreflight": {
+      "ok": true,
+      "readOnly": true,
+      "automaticChanges": false,
+      "scope": "local pinned images, rules and database identity; no scanner execution, model call, network download or GitHub latest check",
+      "tools": {
+        "semgrep": {
+          "ready": true,
+          "version": "1.182.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T04:57:30.169Z",
+          "cached": false,
+          "rules": {
+            "version": "local-reviewed-2",
+            "count": 16,
+            "languages": [
+              "javascript",
+              "python",
+              "typescript"
+            ]
+          }
+        },
+        "trivy": {
+          "ready": true,
+          "version": "0.76.1",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T04:57:30.169Z",
+          "cached": false,
+          "database": {
+            "state": "fresh",
+            "updatedAt": "2026-10-29T19:18:50.969Z",
+            "nextUpdate": "2026-10-30T19:18:50.969Z",
+            "ageDays": 0
+          },
+          "lastUpdate": {
+            "state": "current",
+            "checkedAt": "2026-10-29T22:59:00.361501+00:00"
+          }
+        },
+        "zap": {
+          "ready": true,
+          "version": "2.17.0",
+          "reason": null,
+          "warning": null,
+          "checkedAt": "2026-10-30T04:57:30.169Z",
+          "cached": false
+        }
+      }
+    },
+    "hostIsolationValidated": true,
+    "wholeVmRecoveryUnchanged": "ready-security-validated-20261029",
+    "newWholeVmSnapshot": false
+  },
+  "deployments": [
+    {
+      "changedGuestFiles": [
+        "tools/dsh-purge-personal-1.1.77-personal.1/PERSONAL-CHANGES.md",
+        "tools/dsh-purge-personal-1.1.77-personal.1/client.js",
+        "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-client.mjs",
+        "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-model.mjs",
+        "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-report.mjs",
+        "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-workbench.mjs",
+        "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/tools.js"
+      ],
+      "forkHashesMatched": 124,
+      "guestBackup": "/home/purge/downloads/security-followups-20261030T045426Z",
+      "serviceRestarted": true,
+      "sqliteBackupCount": 11
+    },
+    {
+      "changedGuestFiles": [
+        "tools/dsh-purge-personal-1.1.77-personal.1/lib/redteam/personal-security-model.mjs"
+      ],
+      "forkHashesMatched": 124,
+      "guestBackup": "/home/purge/downloads/security-followups-boundary-20261030T045508Z",
+      "serviceRestarted": true,
+      "sqliteBackupCount": 12
+    }
+  ],
+  "history": {
+    "firstRed": "diagnostics absent; missing wait caused unresolved fixture cleanup and subsequent cases cancelled; not all initial cases credited as intended RED",
+    "firstGreen": "report diagnostics not yet rendered; 3 of4 passed",
+    "firstModelVerification": "simple invalid-JS fixture produced no Semgrep error; expectation of partial failed. Kept completed observations, then separately reproduced real PartialParsing with a copied known triggering file and native fixed scanner",
+    "modelInvocationRetries": 0,
+    "reviewFix": "final wire checked after existing project redaction; masked IDs/cursors or expanded results return structured errors"
+  },
+  "limits": [
+    "Semgrep parser itself not upgraded; actual real-project coverage gap remains and is now diagnosable for new scans",
+    "one-shot headless must keep calling wait to terminal or use persistent web service; does not survive process exit",
+    "text fields in model pages may be shortened; full report through page export",
+    "broad project redaction can prevent usable model pages, with explicit safe errors",
+    "real project findings not reviewed, exploited or repaired; all95 unchanged",
+    "whole-VM recovery remains previous123-file baseline; this phase backed up per file, no new snapshot",
+    "native95-row page fixture is synthetic persistence data, not95 scanner-verified vulnerabilities",
+    "no new browser download test; diagnostic Markdown checked separately"
+  ],
+  "commandReceipts": {
+    "boundary-deployment": {
+      "state": "exited",
+      "returncode": 0,
+      "scope": "deployment",
+      "sha256": "430e4b71795a01592036eefd4c2fbb007e5efe862b70f2a5a3d8b895f2aeb5f5"
+    },
+    "build": {
+      "state": "exited",
+      "returncode": 0,
+      "scope": "final-source",
+      "sha256": "7910b379122a4ee141af8ea67ce44b528feb6b4f435c1b073bb5ce8b902938c7"
+    },
+    "deployment": {
+      "state": "exited",
+      "returncode": 0,
+      "scope": "deployment",
+      "sha256": "6858b1e09a5b016aadc4975dea254dd30d80f15e3dbc772adda2a37b427c9cc4"
+    },
+    "final-tests-2": {
+      "state": "exited",
+      "returncode": 0,
+      "scope": "final-source",
+      "sha256": "fba9e44df32bfe9f35093c6b164a445ea3dce0fabd75ca15f36dc2b22789681c"
+    },
+    "final-tests": {
+      "state": "exited",
+      "returncode": 0,
+      "scope": "final-source",
+      "sha256": "ec81a25463d137e4c2ca1514c4b3b79aefc7c4516e21485935176a11a8a57e21"
+    },
+    "followups-green-2": {
+      "state": "exited",
+      "returncode": 0,
+      "scope": "followups",
+      "sha256": "7e08c637223054210f34bd9af3ee4abe5e1d3acdd2c3f56d064a36108db34308"
+    },
+    "followups-green-3": {
+      "state": "exited",
+      "returncode": 0,
+      "scope": "followups",
+      "sha256": "61209eca5208dc24a435995cda9b27b4341aa5bc12a219ea04b979bb843ddac9"
+    },
+    "followups-green": {
+      "state": "exited",
+      "returncode": 1,
+      "scope": "followups",
+      "sha256": "c4156d8dcd2e0dc32fb49ee8f5daad87518d7b8d7ef1b7a4c0a6d6fd0c9d15bd"
+    },
+    "followups-red": {
+      "state": "exited",
+      "returncode": 1,
+      "scope": "followups",
+      "sha256": "7087f2dae7a797b1b9c0ede7a93403f354bb2f5cafd316e60b790d4b3764b6ad"
+    },
+    "full-tests": {
+      "state": "exited",
+      "returncode": 0,
+      "scope": "final-source",
+      "sha256": "5ba1c1f81f7f13c629a5400bf20ab93da90020591aeef4e9584dc35697778201"
+    },
+    "live-final": {
+      "state": "exited",
+      "returncode": 0,
+      "scope": "final-live",
+      "sha256": "d01a0b0f43440b81f8b79f9ff84b403fdc07f20e9eaef571b87b460824b1374c"
+    },
+    "model-prepare": {
+      "state": "exited",
+      "returncode": 0,
+      "scope": "model",
+      "sha256": "060d776af35e9bc8f78f109ca7464bea7d91ab604dedf609520d9884828bd883"
+    },
+    "model-run": {
+      "state": "exited",
+      "returncode": 0,
+      "scope": "model",
+      "sha256": "1d59c5189d7fe765154f9d3ce7d89ae73fa4c919e77a4b7b895ebc0cec609df3"
+    },
+    "model-verified-2": {
+      "state": "exited",
+      "returncode": 0,
+      "scope": "model-final",
+      "sha256": "f153071a859fdf2d6de46229a4cff99671c5fe98326d841c0ed1d6442f44cfd0"
+    },
+    "model-verified": {
+      "state": "exited",
+      "returncode": 1,
+      "scope": "model-final",
+      "sha256": "07d3e0bbc8213368dd67f71f82073d7b248c538d5db5e740b81ff1d33a635365"
+    },
+    "native-diagnostics": {
+      "state": "exited",
+      "returncode": 0,
+      "scope": "native",
+      "sha256": "3b384adc8385bde5b735a9ad664ddbb70d72caa90d474758c80cf5226ebf16f6"
+    },
+    "native-pages": {
+      "state": "exited",
+      "returncode": 0,
+      "scope": "native",
+      "sha256": "36f439c7b44bd29ce488955c39cf732aa2ec68e522a8da31c993947d8fc18d05"
+    },
+    "source-export-final": {
+      "state": "exited",
+      "returncode": 0,
+      "scope": "export-final",
+      "sha256": "d1ce8a86e59989f8446f1f7c123b690e0bd341141b06e001ea1f08150530fd2a"
+    }
+  }
+}

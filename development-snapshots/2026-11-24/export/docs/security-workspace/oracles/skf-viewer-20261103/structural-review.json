@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "temporaryRemoved": true,
+  "scannerManifestUnchanged": true,
+  "sourceIdentities": [
+    {
+      "path": "fixed_control.py",
+      "sha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134"
+    },
+    {
+      "path": "original.py",
+      "sha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+    }
+  ],
+  "reports": {
+    "baseline": {
+      "state": "completed",
+      "artifacts": []
+    },
+    "combined": {
+      "state": "completed",
+      "artifacts": []
+    }
+  }
+}

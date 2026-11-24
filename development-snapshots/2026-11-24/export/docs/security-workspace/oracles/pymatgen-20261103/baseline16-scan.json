@@ -1,0 +1,107 @@
+{
+  "phase": "baseline",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+  "datasetSha256": "f3da1c7a1a437956b90fd71d5447773669adaa91c3e0051a60564d8a56d57826",
+  "caseIds": [
+    "vulnerable",
+    "patched"
+  ],
+  "scannerExitCode": 0,
+  "native": {
+    "result": {
+      "version": "1.182.1",
+      "results": [],
+      "errors": [],
+      "paths": {
+        "scanned": [
+          "/src/patched.py",
+          "/src/vulnerable.py"
+        ]
+      },
+      "time": {
+        "rules": [],
+        "rules_parse_time": 0.003011941909790039,
+        "profiling_times": {
+          "config_time": 0.1426088809967041,
+          "core_time": 0.2888493537902832,
+          "ignores_time": 6.0558319091796875e-05,
+          "total_time": 0.4392514228820801
+        },
+        "parsing_time": {
+          "total_time": 0.011697769165039062,
+          "per_file_time": {
+            "mean": 0.005848884582519531,
+            "std_dev": 1.574502726953142e-05
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_files": []
+        },
+        "scanning_time": {
+          "total_time": 0.01503896713256836,
+          "per_file_time": {
+            "mean": 0.00751948356628418,
+            "std_dev": 2.4241660469215276e-05
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_files": []
+        },
+        "matching_time": {
+          "total_time": 0.002432107925415039,
+          "per_file_and_rule_time": {
+            "mean": 0.0012160539627075195,
+            "std_dev": 9.74038144363476e-07
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_rules_on_files": []
+        },
+        "tainting_time": {
+          "total_time": 0.0,
+          "per_def_and_rule_time": {
+            "mean": 0.0,
+            "std_dev": 0.0
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_rules_on_defs": []
+        },
+        "fixpoint_timeouts": [],
+        "prefiltering": {
+          "project_level_time": 0.0,
+          "file_level_time": 0.0,
+          "rules_with_project_prefilters_ratio": 0.0,
+          "rules_with_file_prefilters_ratio": 1.0,
+          "rules_selected_ratio": 0.1,
+          "rules_matched_ratio": 0.1
+        },
+        "targets": [],
+        "total_bytes": 0,
+        "max_memory_bytes": 95483712
+      },
+      "engine_requested": "OSS",
+      "skipped_rules": [],
+      "profiling_results": []
+    },
+    "authentication": null
+  },
+  "stderr": "",
+  "temporaryRemoved": true,
+  "containerAbsent": true,
+  "runtimeRulesUnchanged": true,
+  "scannerManifestUnchanged": true,
+  "dailyProgramFilesMatched": 169,
+  "projectDatabaseLogicalHashesMatched": 42,
+  "startedAt": "2026-11-04T07:43:14.778702+00:00",
+  "finishedAt": "2026-11-04T07:43:16.623854+00:00"
+}

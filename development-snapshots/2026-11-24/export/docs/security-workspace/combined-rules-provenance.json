@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "composition": "all current rules unchanged, plus three separately evaluated rules",
+  "candidateSha256": "c4357ddb0d52f3273525be08d8f5cdc1182523c1f9502497722bb6a44fe4ef94",
+  "baseSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+  "sources": {
+    "work/harness-purge-improved/security-rules.json": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+    "docs/security-workspace/ordinary-rules.candidate.json": "9073a01a11c70b906192d70a683032bd06c8603c75b5df1e792f546b139a214f",
+    "docs/security-workspace/python-eval-exec-flow-v5.candidate.json": "d76c5a31a2ae5fdf98667cd421e0357785b7234081e57f2826ab7f9a7c62b7b8"
+  },
+  "preservedRules": [
+    "harness.python.eval",
+    "harness.python.pickle",
+    "harness.python.shell",
+    "harness.python.yaml-load",
+    "harness.javascript.eval",
+    "harness.python.sql-fstring",
+    "harness.python.exec",
+    "harness.python.os-system",
+    "harness.python.requests-verify-false",
+    "harness.python.tempfile-mktemp",
+    "harness.python.jwt-noverify",
+    "harness.javascript.child-process-exec",
+    "harness.javascript.dom-innerhtml",
+    "harness.javascript.document-write",
+    "harness.javascript.tls-reject-disabled",
+    "harness.javascript.sql-concat"
+  ],
+  "addedRules": [
+    "harness.php.dynamic-eval",
+    "harness.php.unsafe-unserialize",
+    "harness.python.request-to-dynamic-code"
+  ],
+  "ruleCount": 19,
+  "rulesDeployed": false,
+  "r3Qualified": false
+}

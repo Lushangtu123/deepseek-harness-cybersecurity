@@ -1,0 +1,11 @@
+{
+  "promptSha256": "e30aa0bf30b3a4c2ac89c71f7eb2d6a54c60500f993e48b880742b2285281a08",
+  "sourceFiles": {
+    "worker.py": "70f4dd495d918431cba0a9bfb626e87b9782dd13ed78781234645f52487b197a",
+    "run-vm.py": "b46be9f67999f3077182c9b0e0d47cd1475083ed7d99d138d213efee761e50f8",
+    "storage-live.py": "c1016d78cb28b8edaac86da54981bb6824f94073df72b7c08f3a052aa46f0e5f",
+    "verify-retain.py": "5a870090ea051e5c102a5f3571b9df6c20e64a3bb66f0cd8d5311e6347b3daa1"
+  },
+  "vmResultSha256": "86d88d72656b8b22853678b64811307bd29ad7ee7b4ecfb3e546260fcb7ebed5",
+  "bytes": 34200
+}

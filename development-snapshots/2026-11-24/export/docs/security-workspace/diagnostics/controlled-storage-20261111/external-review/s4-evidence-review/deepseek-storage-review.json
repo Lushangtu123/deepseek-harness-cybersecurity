@@ -1,0 +1,26 @@
+{
+  "id": "c8834574-dc17-4518-8184-0ed80826055c",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": ""
+      },
+      "finish_reason": null
+    }
+  ],
+  "usage": null,
+  "streamDone": false,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 62907,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "ef91e23393c703c93fc5ab6ec221d021d15518642da404bb9b78855d02924928",
+  "promptSha256": "e30aa0bf30b3a4c2ac89c71f7eb2d6a54c60500f993e48b880742b2285281a08"
+}

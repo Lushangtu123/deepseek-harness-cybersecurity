@@ -1,0 +1,832 @@
+{
+  "ok": true,
+  "startedAt": "2026-11-04T04:01:22.111862+00:00",
+  "finishedAt": "2026-11-04T04:01:22.241106+00:00",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "programFilesMatched": 165,
+  "databaseLogicalDigestsMatched": 40,
+  "manifestAndRulesMatched": true,
+  "containerRemoved": true,
+  "temporaryRemoved": true,
+  "volumeSetUnchanged": true,
+  "result": {
+    "ok": true,
+    "python": "3.12.15",
+    "probeSha256": "8cf09282ecfaf466682b09e605eb99ee07970d8da260ab0a4c8968985f401dea",
+    "protocolSha256": "5328d3e20f700fe538a8c0fdb60c8333017718a5127b0ac3d7731b17f51e4fe4",
+    "sourceIdentityMatched": true,
+    "conditions": {
+      "uid": 65534,
+      "networkInterfaces": [
+        "lo"
+      ],
+      "tcpListenersAfter": 0,
+      "readonlyFailuresRequired": "EROFS",
+      "plainStringsAndFixedArithmeticOnly": true
+    },
+    "observations": [
+      {
+        "id": "plain-eval-1-0",
+        "caseId": "plain-eval-1",
+        "sourceSha256": "9838ecce20b5dcc303735f8fd8dfe1695e2a42b816fb38663f4d2fe3b97633ae",
+        "arguments": [
+          "17389*7919"
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 4,
+            "function": "run",
+            "codeNames": [],
+            "constants": [
+              137703491
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "plain-eval-2-0",
+        "caseId": "plain-eval-2",
+        "sourceSha256": "a6524a3e038e30149cce84ae23d8d569971a48d9e7f7edbe2acb11275ad9da6b",
+        "arguments": [
+          "17389*7919"
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 4,
+            "function": "run",
+            "codeNames": [],
+            "constants": [
+              137703491
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "plain-eval-3-0",
+        "caseId": "plain-eval-3",
+        "sourceSha256": "ed34bf506c0262d7010400d0c21dc0fbbd79d0e57e0e82e7a63b9959d52ec934",
+        "arguments": [
+          "17389*7919"
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 4,
+            "function": "run",
+            "codeNames": [],
+            "constants": [
+              137703491
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-complete-eval-0",
+        "caseId": "guard-complete-eval",
+        "sourceSha256": "ca21ccb7d9f0d1578bcdcd7f1f2867b2d60f7a657691c1e50d547a3249f2644b",
+        "arguments": [
+          "6*7"
+        ],
+        "result": 42,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 5,
+            "function": "run",
+            "codeNames": [],
+            "constants": [
+              42
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-complete-eval-1",
+        "caseId": "guard-complete-eval",
+        "sourceSha256": "ca21ccb7d9f0d1578bcdcd7f1f2867b2d60f7a657691c1e50d547a3249f2644b",
+        "arguments": [
+          "17389*7919"
+        ],
+        "result": null,
+        "error": "ValueError",
+        "dynamicFrames": [],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-conditional-eval-0",
+        "caseId": "guard-conditional-eval",
+        "sourceSha256": "5f000d210e1133ff59102cb813af055a28252a681bf8b7e09b7afcc27a4237af",
+        "arguments": [
+          "6*7"
+        ],
+        "result": 42,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 5,
+            "function": "run",
+            "codeNames": [],
+            "constants": [
+              42
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-conditional-eval-1",
+        "caseId": "guard-conditional-eval",
+        "sourceSha256": "5f000d210e1133ff59102cb813af055a28252a681bf8b7e09b7afcc27a4237af",
+        "arguments": [
+          "17389*7919",
+          null,
+          false
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 5,
+            "function": "run",
+            "codeNames": [],
+            "constants": [
+              137703491
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-overwrite-eval-0",
+        "caseId": "guard-overwrite-eval",
+        "sourceSha256": "64818360c9db8695fe4de41ddbfea1a0c359a0461ea0cfbf04ba93405cc8cd2a",
+        "arguments": [
+          "6*7",
+          "6*7"
+        ],
+        "result": 42,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 6,
+            "function": "run",
+            "codeNames": [],
+            "constants": [
+              42
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-overwrite-eval-1",
+        "caseId": "guard-overwrite-eval",
+        "sourceSha256": "64818360c9db8695fe4de41ddbfea1a0c359a0461ea0cfbf04ba93405cc8cd2a",
+        "arguments": [
+          "6*7",
+          "17389*7919"
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 6,
+            "function": "run",
+            "codeNames": [],
+            "constants": [
+              137703491
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-append-eval-0",
+        "caseId": "guard-append-eval",
+        "sourceSha256": "0c7ff334b1d7051385b36f8fd21d5496ebab3ca88ddd419c534cd06cc540cd39",
+        "arguments": [
+          "6*7",
+          ""
+        ],
+        "result": 42,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 6,
+            "function": "run",
+            "codeNames": [],
+            "constants": [
+              42
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-append-eval-1",
+        "caseId": "guard-append-eval",
+        "sourceSha256": "0c7ff334b1d7051385b36f8fd21d5496ebab3ca88ddd419c534cd06cc540cd39",
+        "arguments": [
+          "6*7",
+          "+137703449"
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 6,
+            "function": "run",
+            "codeNames": [],
+            "constants": [
+              137703491
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "mapping-eval-0",
+        "caseId": "mapping-eval",
+        "sourceSha256": "0a9b42a779a21740ba89813f6d6b9c33beba4787f5368c217600d1204a7793b0",
+        "arguments": [
+          "allowed"
+        ],
+        "result": 42,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 4,
+            "function": "run",
+            "codeNames": [],
+            "constants": [
+              42
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "mapping-eval-1",
+        "caseId": "mapping-eval",
+        "sourceSha256": "0a9b42a779a21740ba89813f6d6b9c33beba4787f5368c217600d1204a7793b0",
+        "arguments": [
+          "17389*7919"
+        ],
+        "result": 56,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 4,
+            "function": "run",
+            "codeNames": [],
+            "constants": [
+              56
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "literal-eval-0",
+        "caseId": "literal-eval",
+        "sourceSha256": "96d40a4decc712ea14308dcedfdec48f362c80319af6aed722edba33ce809eab",
+        "arguments": [
+          "17389*7919"
+        ],
+        "result": 42,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 3,
+            "function": "run",
+            "codeNames": [],
+            "constants": [
+              42
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "shadow-eval-0",
+        "caseId": "shadow-eval",
+        "sourceSha256": "b69101e618dd161ce0ef01d0f3536afb6d4f9ff80055280d443a13c600e05196",
+        "arguments": [
+          "17389*7919"
+        ],
+        "result": "17389*7919",
+        "error": null,
+        "dynamicFrames": [],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "qualified-eval-0",
+        "caseId": "qualified-eval",
+        "sourceSha256": "0a766258e6b1b544f92b6886707ee93afdd0b2aa08e4af20b1d5b90e3efa464c",
+        "arguments": [
+          "17389*7919"
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 4,
+            "function": "run",
+            "codeNames": [],
+            "constants": [
+              137703491
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "alias-eval-0",
+        "caseId": "alias-eval",
+        "sourceSha256": "6f2dceb17bd74070ea5335910f548f39b1c6e4a18a26d59a6bc091f63b79cac0",
+        "arguments": [
+          "17389*7919"
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 4,
+            "function": "run",
+            "codeNames": [],
+            "constants": [
+              137703491
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "plain-exec-1-0",
+        "caseId": "plain-exec-1",
+        "sourceSha256": "0fc75c5986c3324c740129812a4d0bc17a4c9db9e70703a1222afa460a7724e4",
+        "arguments": [
+          "answer=17389*7919"
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 4,
+            "function": "run",
+            "codeNames": [
+              "answer"
+            ],
+            "constants": [
+              137703491,
+              null
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "plain-exec-2-0",
+        "caseId": "plain-exec-2",
+        "sourceSha256": "aed712cec5eabbe4c032a72993ad303cc79bba9418c6d622734327b45ef67c45",
+        "arguments": [
+          "answer=17389*7919"
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 4,
+            "function": "run",
+            "codeNames": [
+              "answer"
+            ],
+            "constants": [
+              137703491,
+              null
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "plain-exec-3-0",
+        "caseId": "plain-exec-3",
+        "sourceSha256": "830a03cdefa903756ebfa7610b50b98b6d94deb8d5f000e0f06ab20520396515",
+        "arguments": [
+          "answer=17389*7919"
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 4,
+            "function": "run",
+            "codeNames": [
+              "answer"
+            ],
+            "constants": [
+              137703491,
+              null
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-complete-exec-0",
+        "caseId": "guard-complete-exec",
+        "sourceSha256": "89d1f5c2705920402a02196b0fb0e908da32233baa66cdae732f7ffbea61659c",
+        "arguments": [
+          "answer=6*7"
+        ],
+        "result": 42,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 5,
+            "function": "run",
+            "codeNames": [
+              "answer"
+            ],
+            "constants": [
+              42,
+              null
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-complete-exec-1",
+        "caseId": "guard-complete-exec",
+        "sourceSha256": "89d1f5c2705920402a02196b0fb0e908da32233baa66cdae732f7ffbea61659c",
+        "arguments": [
+          "answer=17389*7919"
+        ],
+        "result": null,
+        "error": "ValueError",
+        "dynamicFrames": [],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-conditional-exec-0",
+        "caseId": "guard-conditional-exec",
+        "sourceSha256": "87e3cab73b358ec41a2ca0d5c57360abd1a275b6b30832e48873d9ebc173a079",
+        "arguments": [
+          "answer=6*7"
+        ],
+        "result": 42,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 5,
+            "function": "run",
+            "codeNames": [
+              "answer"
+            ],
+            "constants": [
+              42,
+              null
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-conditional-exec-1",
+        "caseId": "guard-conditional-exec",
+        "sourceSha256": "87e3cab73b358ec41a2ca0d5c57360abd1a275b6b30832e48873d9ebc173a079",
+        "arguments": [
+          "answer=17389*7919",
+          null,
+          false
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 5,
+            "function": "run",
+            "codeNames": [
+              "answer"
+            ],
+            "constants": [
+              137703491,
+              null
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-overwrite-exec-0",
+        "caseId": "guard-overwrite-exec",
+        "sourceSha256": "8f92178588aea81dd789cc723239e8fcbe54393f0ffc1c01806b85b0ee27de3d",
+        "arguments": [
+          "answer=6*7",
+          "answer=6*7"
+        ],
+        "result": 42,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 6,
+            "function": "run",
+            "codeNames": [
+              "answer"
+            ],
+            "constants": [
+              42,
+              null
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-overwrite-exec-1",
+        "caseId": "guard-overwrite-exec",
+        "sourceSha256": "8f92178588aea81dd789cc723239e8fcbe54393f0ffc1c01806b85b0ee27de3d",
+        "arguments": [
+          "answer=6*7",
+          "answer=17389*7919"
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 6,
+            "function": "run",
+            "codeNames": [
+              "answer"
+            ],
+            "constants": [
+              137703491,
+              null
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-append-exec-0",
+        "caseId": "guard-append-exec",
+        "sourceSha256": "6148aa251e946f5f1a6d9a7dd21ddaf8a446cce46b452a3ae26b5a87896be31c",
+        "arguments": [
+          "answer=6*7",
+          ""
+        ],
+        "result": 42,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 6,
+            "function": "run",
+            "codeNames": [
+              "answer"
+            ],
+            "constants": [
+              42,
+              null
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "guard-append-exec-1",
+        "caseId": "guard-append-exec",
+        "sourceSha256": "6148aa251e946f5f1a6d9a7dd21ddaf8a446cce46b452a3ae26b5a87896be31c",
+        "arguments": [
+          "answer=6*7",
+          "+137703449"
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 6,
+            "function": "run",
+            "codeNames": [
+              "answer"
+            ],
+            "constants": [
+              137703491,
+              null
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "mapping-exec-0",
+        "caseId": "mapping-exec",
+        "sourceSha256": "ea0a90b33740db1ce012721c082c75048ca5d3d79906d590d0056f03e72b3089",
+        "arguments": [
+          "allowed"
+        ],
+        "result": 42,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 4,
+            "function": "run",
+            "codeNames": [
+              "answer"
+            ],
+            "constants": [
+              42,
+              null
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "mapping-exec-1",
+        "caseId": "mapping-exec",
+        "sourceSha256": "ea0a90b33740db1ce012721c082c75048ca5d3d79906d590d0056f03e72b3089",
+        "arguments": [
+          "answer=17389*7919"
+        ],
+        "result": 56,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 4,
+            "function": "run",
+            "codeNames": [
+              "answer"
+            ],
+            "constants": [
+              56,
+              null
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "literal-exec-0",
+        "caseId": "literal-exec",
+        "sourceSha256": "6313434fcc3c32466e602c412ff529d7b6be8dfa15541e6946e445f11efe89ab",
+        "arguments": [
+          "answer=17389*7919"
+        ],
+        "result": 42,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 3,
+            "function": "run",
+            "codeNames": [
+              "answer"
+            ],
+            "constants": [
+              42,
+              null
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "shadow-exec-0",
+        "caseId": "shadow-exec",
+        "sourceSha256": "2afb108f06f87ffafa566b3cde29997f4d1e15e5aecdd4c8a28562889c1efba8",
+        "arguments": [
+          "answer=17389*7919"
+        ],
+        "result": "answer=17389*7919",
+        "error": null,
+        "dynamicFrames": [],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "qualified-exec-0",
+        "caseId": "qualified-exec",
+        "sourceSha256": "1ef0f0ea665475fd32882a83c4d0d4dd92c9d72de54196bce7c9ed18ab5df4f5",
+        "arguments": [
+          "answer=17389*7919"
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 4,
+            "function": "run",
+            "codeNames": [
+              "answer"
+            ],
+            "constants": [
+              137703491,
+              null
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      },
+      {
+        "id": "alias-exec-0",
+        "caseId": "alias-exec",
+        "sourceSha256": "92699ed5dbbcfbb0484afabed5474086544060e22dfd5de898a07ee563be06b2",
+        "arguments": [
+          "answer=17389*7919"
+        ],
+        "result": 137703491,
+        "error": null,
+        "dynamicFrames": [
+          {
+            "line": 4,
+            "function": "run",
+            "codeNames": [
+              "answer"
+            ],
+            "constants": [
+              137703491,
+              null
+            ],
+            "compiledFilename": "<string>"
+          }
+        ],
+        "role": "authored-runtime-diagnostic",
+        "qualifiesForR3": false
+      }
+    ],
+    "independentCases": 0,
+    "qualifiesForR3": false,
+    "noHttpOrVulnerabilityConfirmationClaim": true
+  }
+}

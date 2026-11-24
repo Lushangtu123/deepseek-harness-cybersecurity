@@ -1,0 +1,14 @@
+...........F.............
+======================================================================
+FAIL: test_excessive_write_lines_leave_only_this_anchor_unmatched (__main__.NamespaceReviewTests.test_excessive_write_lines_leave_only_this_anchor_unmatched)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 124, in test_excessive_write_lines_leave_only_this_anchor_unmatched
+    self.assertIsNone(self.review(source))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'version': 2, 'observation': 'namespace-call-structure-observed', 'anchor': {'line': 67, 'col': 12, 'endLine': 67, 'endCol': 27, 'offset': 1197, 'endOffset': 1212}, 'sink': 'eval', 'argumentCount': 2, 'disposition': 'unverified', 'callee': {'staticBinding': 'no-direct-conflict-observed', 'builtinIdentity': 'unverified'}, 'source': {'kind': 'local-reassignment-observed', 'assignmentLines': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66], 'externalControl': 'unverified'}, 'constraint': {'state': 'unresolved', 'reason': 'prefix-limit'}} is not None
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.134s
+
+FAILED (failures=1)

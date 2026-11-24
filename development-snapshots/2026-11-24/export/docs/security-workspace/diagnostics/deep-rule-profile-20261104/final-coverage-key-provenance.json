@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "scope": "pre-profile accepted170 source candidate; base buildScanPlan function unchanged",
+  "oldFileSha256": "8a3e5c8672b5324f9b016b9bc440361c7498b5ea3766d77e5b13012f1c7ac786",
+  "oldFrozenFileMatched": true,
+  "oldFunctionSha256": "97d4350867d0171524ffe14e4a2b131dc1690ed9e5052f4ad0e5a4a37fa84910",
+  "newFunctionSha256": "97d4350867d0171524ffe14e4a2b131dc1690ed9e5052f4ad0e5a4a37fa84910",
+  "functionSourceEqual": true,
+  "profile": {
+    "repoRoot": "/tmp/profile-project"
+  },
+  "run": "/tmp/profile-run/00000000-0000-4000-8000-000000000001",
+  "manifest": {
+    "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+    "tools": [
+      {
+        "tool": "semgrep",
+        "imageId": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "version": "1.2.3"
+      }
+    ]
+  },
+  "previous": "4dea051d3e13b552f40c4426105b03a82e23d81f1568d123f2e8e7a4cbfc2ec8",
+  "current": "4dea051d3e13b552f40c4426105b03a82e23d81f1568d123f2e8e7a4cbfc2ec8"
+}

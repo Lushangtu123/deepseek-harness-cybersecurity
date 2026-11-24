@@ -1,0 +1,330 @@
+{
+  "version": 1,
+  "date": "2026-11-04",
+  "scope": "VM source172 candidate: mode-bound deep Semgrep17 managed S1 profile; daily169/16 unchanged",
+  "candidate": {
+    "programFiles": 172,
+    "frozenProgramHashesMatched": true,
+    "deployed": false,
+    "profile": {
+      "version": 1,
+      "id": "deep-namespace17",
+      "mode": "deep",
+      "baseRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+      "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+      "ruleCount": 17,
+      "qualification": "managed-candidate-not-r3"
+    }
+  },
+  "daily": {
+    "programFiles": 169,
+    "rules": 16,
+    "programHashesMatched": 169,
+    "databaseLogicalDigestsMatched": 42,
+    "runtimePinsMatched": true,
+    "retainedProgramRollbackFiles": 166
+  },
+  "tests": {
+    "macNodePassed": 865,
+    "vmNodePassed": 865,
+    "failed": 0,
+    "pythonStructuralPassed": 25,
+    "pythonManagedPassed": 3,
+    "testOnlySupplementMacPassed": 27,
+    "testOnlySupplementVmPassed": 27,
+    "goldenKeyProvenance": "diagnostics/deep-rule-profile-20261104/final-coverage-key-provenance.json",
+    "npmFilesIncluded": [
+      "lib/redteam/personal-semgrep-profile.mjs",
+      "scripts/semgrep-deep17.json"
+    ]
+  },
+  "live": {
+    "sourceFiles": 28,
+    "scannerInvocations": 2,
+    "ordinaryScannerInvocations": 0,
+    "deepFindings": 22,
+    "deepObservationSummary": {
+      "version": 1,
+      "total": 22,
+      "executionPoints": 20,
+      "other": 2
+    },
+    "deepNamespaceReview": {
+      "version": 1,
+      "state": "completed",
+      "eligible": 20,
+      "checked": 20,
+      "observations": 20,
+      "unmatched": 0,
+      "retained": 20,
+      "cleanupVerified": true,
+      "execution": {
+        "profile": "namespace-ast-1",
+        "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+        "workerSha256": "9ec513ddb83d94c0c2f63629b7f218b1971704b4ff25d21169f30ad6e0ea9a51",
+        "pythonVersion": "3.12.15",
+        "cleanupVerified": true
+      }
+    },
+    "legacyFindings": 2,
+    "legacyWorkspace": null,
+    "launches": [
+      {
+        "name": "dsh-sec-bab1c256-17d1-4871-8e60-0ba331499937",
+        "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+        "network": "none",
+        "user": "1000:1000",
+        "rootReadonly": true,
+        "capDrop": [
+          "ALL"
+        ],
+        "securityOpt": [
+          "no-new-privileges"
+        ],
+        "cpus": 1,
+        "memoryBytes": 805306368,
+        "pids": 160,
+        "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+        "rulesCount": 17,
+        "ruleMountReadonly": true,
+        "workspaceMode": "deep",
+        "stagedInputRemovedAfterRun": true,
+        "executedRules": {
+          "sha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+          "count": 17
+        },
+        "coverageKey": "840545725daf88c33e5b2c2085227ed5d89171a6a4192ab821341bafdd43313b"
+      },
+      {
+        "name": "dsh-sec-751e8cd5-cf4b-4273-b8f9-fc2bed62c569",
+        "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+        "network": "none",
+        "user": "1000:1000",
+        "rootReadonly": true,
+        "capDrop": [
+          "ALL"
+        ],
+        "securityOpt": [
+          "no-new-privileges"
+        ],
+        "cpus": 1,
+        "memoryBytes": 805306368,
+        "pids": 160,
+        "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+        "rulesCount": 16,
+        "ruleMountReadonly": true,
+        "workspaceMode": null,
+        "stagedInputRemovedAfterRun": true,
+        "executedRules": {
+          "sha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+          "count": 16
+        },
+        "coverageKey": "acee05cfd9d9cf69c382a2d0857f7977cd20bf8be3ac1c2e534395feade6b776"
+      }
+    ],
+    "observedNamespaceCreates": 1,
+    "syntheticStoreRemoved": true,
+    "candidateTemporaryRemoved": true,
+    "scope": "actual default managed scanner, existing28 development sources; no project execution or independent qualification"
+  },
+  "replays": {
+    "scannerInvocations": 0,
+    "phases": {
+      "arity17": {
+        "fixtureRunnerCalls": 1,
+        "newScannerInvocations": 0,
+        "rawWarnings": 21,
+        "persistedFindings": 21,
+        "pagedFindings": 21,
+        "bound": 21,
+        "observationSummary": {
+          "version": 1,
+          "total": 21,
+          "executionPoints": 19,
+          "other": 2
+        },
+        "offlineObservations": 19,
+        "conditionalGuards": 2,
+        "unresolved": 17,
+        "fullRangeAndSourceHashesMatched": true,
+        "legacyFindingTableRows": 0,
+        "sourceLocations": {
+          "version": 1,
+          "state": "completed",
+          "total": 21,
+          "bound": 21,
+          "unavailable": 0
+        },
+        "scope": "candidate replay of prior real scanner bytes; fixture admission, not live tool or R3 acceptance"
+      },
+      "combined20": {
+        "fixtureRunnerCalls": 1,
+        "newScannerInvocations": 0,
+        "rawWarnings": 21,
+        "persistedFindings": 21,
+        "pagedFindings": 21,
+        "bound": 21,
+        "observationSummary": {
+          "version": 1,
+          "total": 21,
+          "executionPoints": 19,
+          "other": 2
+        },
+        "offlineObservations": 19,
+        "conditionalGuards": 2,
+        "unresolved": 17,
+        "fullRangeAndSourceHashesMatched": true,
+        "legacyFindingTableRows": 0,
+        "sourceLocations": {
+          "version": 1,
+          "state": "completed",
+          "total": 21,
+          "bound": 21,
+          "unavailable": 0
+        },
+        "scope": "candidate replay of prior real scanner bytes; fixture admission, not live tool or R3 acceptance"
+      },
+      "anchors": {
+        "fixtureRunnerCalls": 1,
+        "newScannerInvocations": 0,
+        "rawWarnings": 6,
+        "persistedFindings": 6,
+        "pagedFindings": 6,
+        "bound": 6,
+        "observationSummary": {
+          "version": 1,
+          "total": 6,
+          "executionPoints": 6,
+          "other": 0
+        },
+        "offlineObservations": 6,
+        "conditionalGuards": 0,
+        "unresolved": 6,
+        "fullRangeAndSourceHashesMatched": true,
+        "legacyFindingTableRows": 0,
+        "sourceLocations": {
+          "version": 1,
+          "state": "completed",
+          "total": 6,
+          "bound": 6,
+          "unavailable": 0
+        },
+        "scope": "candidate replay of prior real scanner bytes; fixture admission, not live tool or R3 acceptance"
+      },
+      "pymatgen": {
+        "fixtureRunnerCalls": 1,
+        "newScannerInvocations": 0,
+        "rawWarnings": 1,
+        "persistedFindings": 1,
+        "pagedFindings": 1,
+        "bound": 1,
+        "observationSummary": {
+          "version": 1,
+          "total": 1,
+          "executionPoints": 1,
+          "other": 0
+        },
+        "offlineObservations": 1,
+        "conditionalGuards": 0,
+        "unresolved": 1,
+        "fullRangeAndSourceHashesMatched": true,
+        "legacyFindingTableRows": 0,
+        "sourceLocations": {
+          "version": 1,
+          "state": "completed",
+          "total": 1,
+          "bound": 1,
+          "unavailable": 0
+        },
+        "scope": "candidate replay of prior real scanner bytes; fixture admission, not live tool or R3 acceptance"
+      }
+    },
+    "scope": "injected runner replay; not actual profile execution proof"
+  },
+  "reviews": [
+    {
+      "receipt": "initial-claude-review.json",
+      "requestedModel": "claude-opus-5-5",
+      "effort": "high",
+      "actualModels": [
+        "claude-opus-5-5"
+      ],
+      "toolsEnabled": false
+    },
+    {
+      "receipt": "superseded-claude-closure.json",
+      "requestedModel": "claude-opus-5-5",
+      "effort": "high",
+      "actualModels": [
+        "claude-opus-5-5"
+      ],
+      "toolsEnabled": false
+    },
+    {
+      "receipt": "final-claude-final.json",
+      "requestedModel": "claude-opus-5-5",
+      "effort": "high",
+      "actualModels": [
+        "claude-opus-5-5"
+      ],
+      "toolsEnabled": false
+    }
+  ],
+  "reviewSummary": "diagnostics/deep-rule-profile-20261104/review-summary.json",
+  "browser": {
+    "state": "passed",
+    "browser": "Google Chrome native cua_repl",
+    "scope": "read-only formal component replay of actual final candidate default-scanner task; no daily deployment or native model acceptance",
+    "observedAt": "2026-11-04T18:00:22.737148+00:00",
+    "taskId": "37a116c7-fa97-4823-a982-0cabb3d7542a",
+    "snapshotId": "35c6e6da88a6955058753550258af37e3edaaba17c6d31f62e5e7e8a69851ad5",
+    "ruleProfile": {
+      "version": 1,
+      "id": "deep-namespace17",
+      "mode": "deep",
+      "baseRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+      "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+      "ruleCount": 17,
+      "qualification": "managed-candidate-not-r3"
+    },
+    "sourceFiles": 28,
+    "findings": 22,
+    "executionPoints": 20,
+    "other": 2,
+    "findingPagesObserved": 8,
+    "evidencePagesObserved": 7,
+    "evidenceRows": 20,
+    "contractShaAndR3UnqualifiedVisible": true,
+    "lowConfidenceRiskNotAssessedVisible": true,
+    "supplementalEvidenceCoexists": true,
+    "cveRangeObserved": "vulnerable.py:111:27 → 111:84;4007–4064 exclusive",
+    "normalCpythonCallStillUnverified": true,
+    "lastPageNextButtonsAbsent": true,
+    "noReceiptMismatch": true,
+    "ownedTabsCreated": 1,
+    "ownedTabsClosed": 1,
+    "originalUserTabRestored": "New Tab",
+    "clipboardRestoredByAppPaste": true,
+    "replayServiceStopped": true,
+    "newScannerInvocationsDuringUi": 0,
+    "modelCalls": 0,
+    "candidateDeployed": false
+  },
+  "modelCallsForCandidate": 0,
+  "realProjectFindingChanges": 0,
+  "realProjectUnverifiedFindings": 95,
+  "r3Qualified": false,
+  "fullWorkspaceReady": false,
+  "newIndependentQualificationCases": 0,
+  "sampleLedgerSources": 229,
+  "networkOrHostPermissionsChanged": false,
+  "accountsOrKaliChanged": false,
+  "wholeVmRecoveryCheckpointCreated": false,
+  "committedOrPushed": false,
+  "remaining": [
+    "daily172 deployment and native Harness model acceptance",
+    "ordinaryR3 independent quality qualification",
+    "cross-function/cross-file and dynamic alias coverage",
+    "current whole-VM recovery acceptance"
+  ]
+}

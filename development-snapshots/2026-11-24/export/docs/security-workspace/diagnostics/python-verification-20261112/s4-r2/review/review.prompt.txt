@@ -1,0 +1,414 @@
+Read-only final targeted follow-up to completed S4 split review. Return a verdict and concrete findings in at most 400 words. Verify the specific fixes and evidence, rather than re-auditing the product. No tools, MCP, plugins or hooks. This preflight remains reviewed-source only, no new holdout, no R3, no independent attestation. Prior findings: (1) rehashing a Node envelope could substitute verifier worker/controller; (2) incomplete frozen requests were not an explicit issue; (3) sourceRoot imports rely on real stage closure; (4) candidate-supplied dependency metadata had no independent policy comparison; (5) raw finding count and Mac/VM identity needed evidence. Node now checks shipped code and lock; each missing planned receipt emits a blocker. Python loads the fixed shipped dependency lock and checks both freeze and verification. The controller already uses a fresh private stage populated only from checked payload; final real VM inspected the exact staged map including an extra synthetic file outside the manifest that stayed outside stage. Disjoint historical old red tests proved the missing behavior; this packet's current logs are green. Review whether these particular findings are closed, distinguishing residual trust/attestation limitations.
+{
+  "scripts/verifier_snapshot.py": "fdf2d0d00ae75a158ec6bc38d49b7944030ef2ede101879da0ad8912fe558dca",
+  "scripts/reviewer_snapshot.py": "f9706edeba2279aca7a4b78d1a36d54e87a39e19359a585a50184493c47a662d",
+  "scripts/review_quality_gate.mjs": "623f85986748ffb14b2c94fab47f8d2d385535f45c11578c0a52fea44f1e8aee",
+  "scripts/verifier-dependencies.lock.json": "6fdb3995e50f63d50714c99c529550d741354286849d3b044ecf83ec97c35394",
+  "scripts/verifier_snapshot.test.py": "57514342548d13d9d8e7da4ba9956fc17ed741024cd2a88569a662a7d2422c22",
+  "scripts/verify_execution_controller.test.py": "4178a30ec5c393a354847926f5ce74757c103b25ae9197824ff8a9f3ba12a801",
+  "work/harness-purge-improved/tests/verification-artifacts.test.mjs": "e0c51d7eebdb86f0b460d10aba29ef7d3ef5193bb227fb1885d411cd9c2e24c6",
+  "docs/security-workspace/python-execution-verification.md": "74432f13248ce19be3ad51817adb0e9b63f4add6dcf71af1fe88da3001374504"
+}
+{
+  "rawMapping": [
+    {
+      "path": "BenchmarkTest00073.py",
+      "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+      "rule": "policy.harness.python.eval",
+      "state": "bound"
+    },
+    {
+      "path": "BenchmarkTest00074.py",
+      "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+      "rule": "policy.harness.python.exec",
+      "state": "bound"
+    },
+    {
+      "path": "literal-set.py",
+      "pointId": "e871c9dc6249e9857bd70247b57faa281699ae0e95199c86cb107bd7e62c981b",
+      "rule": "policy.harness.python.eval",
+      "state": "bound"
+    },
+    {
+      "path": "skf-upstream.py",
+      "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+      "rule": "policy.harness.python.eval",
+      "state": "bound"
+    },
+    {
+      "path": "skf-upstream.py",
+      "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+      "rule": "policy.harness.python.request-to-dynamic-code",
+      "state": "bound"
+    }
+  ],
+  "coverage": {
+    "supportedCases": [
+      "BenchmarkTest00074",
+      "BenchmarkTest00073",
+      "skf-viewer-upstream",
+      "literal-set-control"
+    ],
+    "issues": []
+  },
+  "scoreStatus": "blocked",
+  "r3Qualified": false,
+  "rawVMScoreSha256": "328f062bda856f86e7563ea57f056fceff85a53354fdd512a1c5adfa06092c29",
+  "rawMacScoreSha256": "328f062bda856f86e7563ea57f056fceff85a53354fdd512a1c5adfa06092c29",
+  "bothCanonicalScoreSha256": "b03eb23e312da3042a544cb6746720139402cffc0258c6851a0af7273e56857b",
+  "dailyProtection": {
+    "program": {
+      "before": "a828d84ddae6c35a9ae8a0e07ddc2b202425ba428caa54caafdf2ad22d2d0012",
+      "after": "a828d84ddae6c35a9ae8a0e07ddc2b202425ba428caa54caafdf2ad22d2d0012"
+    },
+    "config": {
+      "before": "41efaf964f0c953baa16f6402c2fc10e0031a39516c627e0c68f89731cae10ad",
+      "after": "41efaf964f0c953baa16f6402c2fc10e0031a39516c627e0c68f89731cae10ad"
+    },
+    "pins": {
+      "before": "55f91235119dbfcce21e0b46ebe37df156cbe1ae151d1947c090882e2a010ed5",
+      "after": "55f91235119dbfcce21e0b46ebe37df156cbe1ae151d1947c090882e2a010ed5"
+    },
+    "runtime": {
+      "before": "b7f53d039e78551831e1d584303d45d7e9f8a7a4f8a977bf8ec7eed5c4b82e93",
+      "after": "b7f53d039e78551831e1d584303d45d7e9f8a7a4f8a977bf8ec7eed5c4b82e93"
+    },
+    "databases": {
+      "before": "9289bda7b2d4737bd6c467323657e6b625780e11bd9aff5c8bdd77cd542bf0c0",
+      "after": "9289bda7b2d4737bd6c467323657e6b625780e11bd9aff5c8bdd77cd542bf0c0"
+    },
+    "outsideMountNamespace": {
+      "before": "46004dd150ea680763df4716a838d4901c13dd63b4cb4aff27fe2cbf94b60c81",
+      "after": "46004dd150ea680763df4716a838d4901c13dd63b4cb4aff27fe2cbf94b60c81"
+    },
+    "homeInode": {
+      "before": "bfa1bda4c41fcaf7b148dfaa9fc6d59f1ea9412072efe68b557f13d76c5135d7",
+      "after": "bfa1bda4c41fcaf7b148dfaa9fc6d59f1ea9412072efe68b557f13d76c5135d7"
+    }
+  },
+  "dailyCounts": [
+    169,
+    42
+  ],
+  "inspected": 15,
+  "stageExample": {
+    "user": "1000:1000",
+    "stagedSourceClosureVerified": true,
+    "stagedSources": {
+      "literal-set.py": "0d9f9f873c7b8fb13a947d8c4dbbf22e76840a2fe0d2ceef5ef900647fa5aa0b",
+      "skf-fixed-control.py": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+      "BenchmarkTest00073.py": "6314bcc14c605c9d3d21c23d801a3a0fe03ffa8d6635776b3492f6cda007a122",
+      "skf-upstream.py": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+      "BenchmarkTest00074.py": "805fe3b4a9d999163593958cb195d76818ee1e58d2a950bc842221a47456240e",
+      "helpers/utils.py": "899b04b2610fe168cecf618ee12c9f318dffaeb0a7b4e59f27bcd629c5795834"
+    },
+    "hostConfig": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CapAdd": null,
+      "Privileged": false,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,nosuid,nodev,noexec,size=32m,mode=1777"
+      }
+    },
+    "mounts": [
+      {
+        "destination": "/review",
+        "rw": false,
+        "type": "bind"
+      }
+    ]
+  },
+  "boundaryCount": 11,
+  "verifiedScopeSourceProfileOnly": true,
+  "sourceTestHashes": {
+    "scripts/verifier_snapshot.test.py": "57514342548d13d9d8e7da4ba9956fc17ed741024cd2a88569a662a7d2422c22",
+    "scripts/verify_execution_controller.test.py": "4178a30ec5c393a354847926f5ce74757c103b25ae9197824ff8a9f3ba12a801",
+    "work/harness-purge-improved/tests/verification-artifacts.test.mjs": "e0c51d7eebdb86f0b460d10aba29ef7d3ef5193bb227fb1885d411cd9c2e24c6"
+  },
+  "evidenceFiles": {
+    "guest-evidence/vm-quality.json": "328f062bda856f86e7563ea57f056fceff85a53354fdd512a1c5adfa06092c29",
+    "mac-quality.json": "328f062bda856f86e7563ea57f056fceff85a53354fdd512a1c5adfa06092c29",
+    "guest-evidence/candidate-scan.json": "dc1114eb31d1b2e65aff72e28ab584d5f1f829ddabf15e590a95630a46ef0b98",
+    "guest-evidence/static-result.json": "bb47b2e3e38f5184bc4097ae84ec89262d64300ba2b0c4e19881e55edb3d91d2",
+    "guest-evidence/container-policies.json": "4d5e67bd519ad7a6c1a8bf2eac8eae4ffa9c83dd52384d453f88d693cf6e48c0",
+    "guest-evidence/boundary-results.json": "a4bf8709220d324000a6f73ec04eaf3def44b7f2c81fbda1c90d133bce2480f6",
+    "gate-tests.txt": "c160170f3420b27b381976740db1ee7fbb3821d3e28dde9b075c5ebb794518b9",
+    "verifier_snapshot.test.py.txt": "1eb8c76751caebe28f921b72d909525610b1e3a7e7ca3295b8f7c4575c8f65d6",
+    "verify_execution_controller.test.py.txt": "58a558f9678c611046d4ceabc157b455d2ac637fbaca197af8a6e00af13fd08a"
+  }
+}
+Python snapshot current validation
+
+def contract(v):
+ # Shipped worker is trusted tool code; never import a module selected by project/recipe.
+ path=HERE/'python_execution_verify.py';spec=importlib.util.spec_from_file_location('trusted_verifier_contract',path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m.validate_contract(v)
+def approved_sources():
+ path=HERE/'python_execution_verify.py';spec=importlib.util.spec_from_file_location('trusted_verifier_profiles',path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m.APPROVED_SOURCES
+
+def trusted_dependency_lock():
+ return json.loads((HERE/'verifier-dependencies.lock.json').read_bytes())
+
+def freeze(static_bundle,static_sha,dependencies,lock,contracts,destination):
+ api=launcher();snapshot,verified=api.verify(Path(static_bundle),static_sha);code={n:verified[n] for n in CODE[:3]}
+ if lock!=trusted_dependency_lock():raise ValueError('Untrusted verifier dependency lock')
+ deps=tree(dependencies,lock.get('files'))
+ if not isinstance(contracts,list) or not 1<=len(contracts)<=64:raise ValueError('Recipe limit')
+ recipes={digest(contract(v)):v for v in contracts}
+ if len(recipes)!=len(contracts):raise ValueError('Duplicate recipe')
+ raw=(HERE/'python_execution_verify.py').read_bytes();code['python_execution_verify.py']=raw
+ value={'version':1,'kind':'python-execution-verifier','code':{n:sha256(v).hexdigest() for n,v in code.items()},'staticSnapshot':snapshot,'staticSha256':static_sha,'imageId':snapshot['imageId'],'pythonVersion':'3.12.15','sourceProfiles':approved_sources(),'dependencies':lock['files'],'dependencyPackages':lock['packages'],'recipes':recipes,'policy':POLICY,'probes':PROBES,'controllerSha256':sha256((HERE/'reviewer_snapshot.py').read_bytes()).hexdigest(),'verifierControllerSha256':sha256(Path(__file__).read_bytes()).hexdigest(),'storageSha256':snapshot['storageSha256']}
+ dest=Path(destination)
+ if dest.resolve()!=dest:raise ValueError('Canonical destination required')
+ dest.mkdir(mode=0o700,parents=False,exist_ok=False)
+ (dest/'dependencies').mkdir(mode=0o755)
+ for n,data in {**{'code/'+k:v for k,v in code.items()},**{'dependencies/'+k:v for k,v in deps.items()}}.items():
+  path=dest/n;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(data);path.chmod(0o444)
+ (dest/'verifier.json').write_text(json.dumps(value,indent=2)+'\n');return value
+
+def verify(bundle,expected):
+ api=launcher();bundle=Path(bundle)
+ if bundle.resolve()!=bundle or bundle.stat().st_uid!=os.geteuid() or bundle.stat().st_mode&0o077:raise ValueError('Private canonical verifier required')
+ value=api.load_json(api.read(bundle/'verifier.json'))
+ if (not isinstance(value,dict) or value.get('version')!=1 or value.get('kind')!='python-execution-verifier' or digest(value)!=expected
+     or set(value.get('code',{}))!=set(CODE) or value.get('policy')!=POLICY or value.get('probes')!=PROBES
+     or value.get('staticSha256')!=digest(value.get('staticSnapshot')) or value.get('imageId')!=value['staticSnapshot'].get('imageId')
+     or value.get('controllerSha256')!=sha256((HERE/'reviewer_snapshot.py').read_bytes()).hexdigest()
+     or value.get('verifierControllerSha256')!=sha256(Path(__file__).read_bytes()).hexdigest()
+     or value.get('storageSha256')!=sha256((HERE/'reviewer_storage.py').read_bytes()).hexdigest()):raise ValueError('Verifier identity mismatch')
+ if value.get('sourceProfiles')!=approved_sources():raise ValueError('Source profile mismatch')
+ if value['pythonVersion']!='3.12.15' or value['staticSnapshot'].get('version')!=2:raise ValueError('Verifier runtime mismatch')
+ lock=trusted_dependency_lock()
+ if value.get('dependencies')!=lock['files'] or value.get('dependencyPackages')!=lock['packages']:raise ValueError('Untrusted verifier dependency lock')
+ code=tree(bundle/'code',value['code']);deps=tree(bundle/'dependencies',value['dependencies'])
+ for n in CODE[:3]:
+  if value['code'][n]!=value['staticSnapshot']['files'].get(n):raise ValueError('Static closure mismatch')
+ if value['code']['python_execution_verify.py']!=sha256((HERE/'python_execution_verify.py').read_bytes()).hexdigest():raise ValueError('Untrusted verifier worker')
+ if not isinstance(value.get('recipes'),dict) or not 1<=len(value['recipes'])<=64 or any(digest(contract(v))!=k for k,v in value['recipes'].items()):raise ValueError('Invalid frozen recipes')
+ return value,{**{'code/'+n:raw for n,raw in code.items()},**{'dependencies/'+n:raw for n,raw in deps.items()}}
+
+Controller source input and private stage current excerpts
+def inputs(root, manifest_path, scan_path):
+    root = Path(root)
+    if root.resolve() != root or not root.is_dir():
+        raise ValueError('canonical project directory required')
+    manifest_raw = read(manifest_path, MANIFEST_LIMIT)
+    manifest = load_json(manifest_raw)
+    scan_raw = b'{"results":[]}' if scan_path is None else read(scan_path, SCAN_LIMIT)
+    if scan_path is None and isinstance(manifest,dict):
+        manifest={'files':manifest.get('files'),'scanSha256':sha256(scan_raw).hexdigest(),**({'locationBinding':manifest['locationBinding']} if 'locationBinding' in manifest else {})}
+        manifest_raw=json.dumps(manifest,separators=(',',':')).encode()
+    if not isinstance(load_json(scan_raw), dict):
+        raise ValueError('invalid scan export')
+    if (not isinstance(manifest, dict) or not isinstance(manifest.get('files'), dict)
+            or not 1 <= len(manifest['files']) <= 64
+            or manifest.get('scanSha256') != sha256(scan_raw).hexdigest()):
+        raise ValueError('invalid input manifest or scan digest')
+    payload = {'manifest.json': manifest_raw, 'scan.json': scan_raw}
+    remaining = TOTAL_SOURCE_LIMIT
+    for name, expected in manifest['files'].items():
+        if not NAME.fullmatch(name) or not isinstance(expected, str) or not HASH.fullmatch(expected):
+            raise ValueError('invalid source name or digest')
+        raw = read(root / name, min(SOURCE_LIMIT, remaining))
+        if sha256(raw).hexdigest() != expected:
+            raise ValueError('source digest mismatch')
+        raw.decode('utf-8')
+        remaining -= len(raw)
+        payload['sources/' + name] = raw
+    return payload, digest({name: sha256(raw).hexdigest() for name, raw in payload.items()})
+def _execute_verified(base,attempt_id,manifest,files,payload,input_sha,expected,dataset_sha,freeze_sha,timeout,_engine_factory,reservation,phase,operation):
+    base.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+    base.mkdir(mode=0o700, exist_ok=True)
+    _private(base)
+    attempt = base/('review-'+attempt_id)
+    attempt.mkdir(mode=0o700)
+    (attempt/'docker-config').mkdir(mode=0o700)
+    stage = attempt/'stage'
+    stage.mkdir(mode=0o700)
+    for relative, raw in {**{'code/'+key:value for key,value in files.items()}, **payload}.items():
+        path = stage/relative
+        path.parent.mkdir(mode=0o755, parents=True, exist_ok=True)
+        path.write_bytes(raw);path.chmod(0o444)
+
+Node current validation and receipt checking
+}
+
+const verifierPolicy={version:1,maxInputs:4,inputSeconds:5,pointSeconds:30,memoryMiB:512,cpus:1,pids:64,tmpMiB:32,outputBytes:262144,network:'none',proof:'python-narrow-literal-1'};
+const probeTemplates=['control-literal-v1','expression-with-frozen-random-challenge-v1','statement-with-frozen-random-challenge-v1','syntax-error-v1'];
+const probeValues=c=>["'harness-control'",`str('${c}')#`,`__harness_probe__='${c}'`,"'"];
+const bytesHash=s=>typeof s==='string'?createHash('sha256').update(s).digest('hex'):null;
+function shippedVerifierHash(filename){
+ const bytes=readFileSync(new URL(filename,import.meta.url));
+ return createHash('sha256').update(bytes).digest('hex');
+}
+function validVerificationPlan(plan,dataset,staticSnapshot){
+ try{
+  const v=plan.snapshot;requireValue(plan.version===1&&record(v)&&v.version===1&&v.kind==='python-execution-verifier'&&v.pythonVersion==='3.12.15'&&v.imageId===staticSnapshot.imageId&&v.staticSha256===digest(staticSnapshot)&&digest(v.staticSnapshot)===digest(staticSnapshot));
+  requireValue(digest(v.policy)===digest(verifierPolicy)&&digest(v.probes)===digest(probeTemplates)&&record(v.code)&&Object.keys(v.code).sort().join(',')==='eval_evidence_batch.py,eval_guard_review.py,eval_import_review.py,python_execution_verify.py'&&Object.values(v.code).every(h=>hashPattern.test(h)));
+  requireValue(v.controllerSha256===staticSnapshot.launcherSha256&&v.storageSha256===staticSnapshot.storageSha256&&hashPattern.test(v.verifierControllerSha256??'')&&record(v.dependencies)&&Object.keys(v.dependencies).length<=1000&&Object.values(v.dependencies).every(h=>hashPattern.test(h)));
+  requireValue(v.code['python_execution_verify.py']===shippedVerifierHash('./python_execution_verify.py')&&
+   v.verifierControllerSha256===shippedVerifierHash('./verifier_snapshot.py'));
+  const lock=JSON.parse(readFileSync(new URL('./verifier-dependencies.lock.json',import.meta.url),'utf8'));
+  requireValue(digest(v.dependencies)===digest(lock.files)&&digest(v.dependencyPackages)===digest(lock.packages));
+  requireValue(Array.isArray(v.sourceProfiles)&&v.sourceProfiles.length>0&&v.sourceProfiles.every(h=>hashPattern.test(h))&&record(v.recipes)&&Object.entries(v.recipes).every(([h,c])=>h===digest(c)&&c.version===1&&c.inputContract==='untrusted-data-only'));
+  for(const n of reviewerFiles)requireValue(v.code[n]===staticSnapshot.files[n]);
+  requireValue(Array.isArray(plan.requests)&&plan.requests.length===dataset.cases.filter(r=>r.pointId!==null).length&&plan.requests.length<=1000);
+  const seen=new Set(),challenges=new Set();
+  for(const r of plan.requests){
+   const c=dataset.cases.find(c=>c.id===r.caseId);requireValue(c&&c.pointId!==null&&!seen.has(c.id)&&r.point.id===c.pointId&&r.point.sourceSha256===c.sourceSha256&&r.contract.path===c.path&&pointValid(r.point,c.sourceSha256)&&v.sourceProfiles.includes(c.sourceSha256)&&v.recipes[digest(r.contract)]&&digest(v.recipes[digest(r.contract)])===digest(r.contract)&&hashPattern.test(r.challenge??'')&&!challenges.has(r.challenge));
+   seen.add(c.id);challenges.add(r.challenge);
+  }
+  return true;
+ }catch{return false}
+}
+function observedDecision(report,request){
+ const point=request.point,callee=point.callee.split('.').at(-1),probes=probeValues(request.challenge),calls=[];
+ if(report.pointId!==point.id||report.sourceSha256!==point.sourceSha256||digest(report.point)!==digest(point)||report.contractSha256!==digest(request.contract)||report.challengeSha256!==bytesHash(request.challenge)||report.runtimePython!=='3.12.15'||report.probePolicySha256!==digest({policy:verifierPolicy,probes:probeTemplates})||!Array.isArray(report.runs)||report.runs.length!==4)return'unknown';
+ let triggered=false;
+ for(const [i,r] of report.runs.entries()){
+  if(r.inputIndex!==i||r.probeSha256!==bytesHash(probes[i])||r.trace?.state!=='observed'||!Array.isArray(r.trace.calls)||!Array.isArray(r.trace.returns)||r.trace.calls.length>16||r.trace.returns.length>16)return'unknown';
+  for(const c of r.trace.calls){if(c.pointId!==point.id||c.callee!==callee||c.exactStr!==true||typeof c.argument!=='string'||c.argumentSha256!==bytesHash(c.argument))return'unknown';calls.push(c)}
+  if(r.trace.returns.some(v=>v.pointId!==point.id))return'unknown';
+  const exact=r.trace.calls.some(c=>c.argument===probes[i]||(i===1&&c.argument.startsWith(probes[i])));
+  const witnessed=r.trace.returns.some(v=>callee==='eval'?v.evalWitness===true&&v.returnValue===request.challenge:v.execWitness===true&&v.markerValue===request.challenge);
+  if(((callee==='eval'&&i===1)||(callee==='exec'&&i===2))&&exact&&witnessed)triggered=true;
+ }
+ if(triggered)return'confirmed';
+ const proof=report.proof,e=request.contract.entry;
+ if(!calls.length||!record(proof)||proof.domain!=='exact-str'||proof.sinkLine!==point.call.start.line||!Number.isSafeInteger(proof.guardLine)||proof.guardLine>=proof.sinkLine||!(e.kind==='function'&&proof.function===e.name&&digest(proof.parameters)===digest([e.parameter])||e.kind==='flask'&&digest(proof.parameters)===digest([])))return'unknown';
+ if(proof.kind==='single-quoted-string'&&calls.every(c=>c.argument.startsWith("'")&&c.argument.endsWith("'")&&!c.argument.slice(1,-1).includes("'")))return'excluded';
+ const literal=t=>typeof t==='string'&&t.length<=256&&/^(?:None|True|False|\d+(?:\.\d+)?|'[^'\n\r]*'|"[^"\n\r]*")$/.test(t);
+ if(proof.kind==='finite-literal-set'&&Array.isArray(proof.values)&&proof.values.length>0&&proof.values.length<=16&&proof.values.every(literal)&&calls.every(c=>proof.values.includes(c.argument)))return'excluded';
+ return'unknown';
+}
+function verificationArtifacts(dataset,run,freeze){
+ const cases=new Map(),issues=[];
+ if(!validVerificationPlan(freeze.verificationPlan,dataset,freeze.reviewerSnapshot)||digest(freeze.verificationPlan)!==freeze.verificationPlanSha256)return{cases,issues:['verification-plan-missing-or-changed']};
+ if(!Array.isArray(run.verifierExecutions)||!Array.isArray(run.verificationArtifacts)||run.verifierExecutions.length!==run.verificationArtifacts.length||run.verifierExecutions.length>1000)return{cases,issues:['verification-artifacts-missing']};
+ const pin=digest(freeze.verificationPlan.snapshot),seen=new Set();
+ for(const [i,r] of run.verifierExecutions.entries()){
+  try{
+   const a=run.verificationArtifacts[i],request=JSON.parse(a.requestJson),report=JSON.parse(a.reportJson),manifest=JSON.parse(a.manifestJson),planned=freeze.verificationPlan.requests.find(p=>p.point.id===request.point.id&&p.contract.path===request.contract.path);
+   requireValue(planned&&!seen.has(planned.caseId)&&digest({version:1,point:planned.point,contract:planned.contract,challenge:planned.challenge})===digest(request));
+   requireValue(r.version===1&&r.operation==='verify-execution'&&r.state==='completed'&&r.cleanupVerified===true&&r.verifierSha256===pin&&r.datasetSha256===run.datasetSha256&&r.freezeSha256===digest(freeze)&&r.policySha256===digest(verifierPolicy)&&Number.isSafeInteger(r.uid)&&r.uid>0&&timestamp(r.startedAt)&&timestamp(r.finishedAt)&&Date.parse(r.startedAt)>=Date.parse(run.startedAt)&&Date.parse(r.finishedAt)>=Date.parse(r.startedAt));
+   requireValue(record(r.inputFiles)&&Object.keys(r.inputFiles).length<=1100&&digest(r.inputFiles)===r.inputSha256&&r.reportSha256===bytesHash(a.reportJson)&&r.requestSha256===bytesHash(a.requestJson)&&r.inputFiles['verification-request.json']===r.requestSha256&&r.inputFiles['manifest.json']===bytesHash(a.manifestJson)&&r.inputFiles['scan.json']===bytesHash(a.scanJson));
+   requireValue(manifest.locationBinding?.snapshotSha256===run.identity.reviewer&&manifest.locationBinding.imageId===freeze.reviewerSnapshot.imageId&&manifest.locationBinding.uid===r.uid&&r.inputFiles['sources/'+planned.contract.path]===planned.point.sourceSha256);
+   requireValue(Object.entries(manifest.files).every(([n,h])=>r.inputFiles['sources/'+n]===h&&freeze.verificationPlan.snapshot.sourceProfiles.includes(h)));
+   requireValue(Object.entries(freeze.verificationPlan.snapshot.dependencies).every(([n,h])=>r.inputFiles['dependencies/'+n]===h));
+   const decision=observedDecision(report,request);requireValue(report.decision===decision||report.decision==='unknown');
+   seen.add(planned.caseId);cases.set(planned.caseId,{decision:report.decision==='unknown'?'unknown':decision,artifactSha256:r.reportSha256});
+  }catch{issues.push('verification-artifact-invalid:'+i)}
+ }
+ for(const request of freeze.verificationPlan.requests){
+  if(!seen.has(request.caseId))issues.push('verification-request-unobserved:'+request.caseId);
+ }
+ return{cases,issues};
+}
+
+
+Final VM inspect assertion
+ class InspectEngine(api.DockerEngine):
+  def invoke(self,args,seconds,phase,cancellable=True):
+   if phase=='start' and self.job.get('operation')=='verify-execution':
+    details=json.loads(super().invoke(['container','inspect',args[-1]],6,'acceptance-policy',False)['stdout'])[0];host=details['HostConfig'];config=details['Config'];mounts=details['Mounts']
+    assert config['User']=='1000:1000' and host['NetworkMode']=='none' and host['ReadonlyRootfs'] is True
+    assert host['Memory']==536870912 and host['MemorySwap']==536870912 and host['NanoCpus']==1000000000 and host['PidsLimit']==64
+    assert host['CapDrop']==['ALL'] and not host['CapAdd'] and not host['Privileged'] and 'no-new-privileges' in host['SecurityOpt']
+    assert len(mounts)==1 and mounts[0]['Destination']=='/review' and mounts[0]['RW'] is False
+    stage=Path(mounts[0]['Source']);assert stage==self.root/'stage' and stage.stat().st_mode&0o077==0
+    source_stage=stage/'sources';expected=json.loads((stage/'manifest.json').read_bytes())['files']
+    staged={str(p.relative_to(source_stage)):sha256(p.read_bytes()).hexdigest() for p in source_stage.rglob('*') if p.is_file()}
+    assert staged==expected and all(not p.is_symlink() for p in source_stage.rglob('*'))
+    assert 'size=32m' in host['Tmpfs']['/tmp'] and 'seccomp=unconfined' not in host['SecurityOpt']
+    container_policies.append({'user':config['User'],'stagedSourceClosureVerified':True,'stagedSources':staged,'hostConfig':{k:host[k] for k in ['NetworkMode','ReadonlyRootfs','Memory','MemorySwap','NanoCpus','PidsLimit','CapDrop','CapAdd','Privileged','SecurityOpt','Tmpfs']},'mounts':[{'destination':m['Destination'],'rw':m['RW'],'type':m['Type']} for m in mounts]})
+   return super().invoke(args,seconds,phase,cancellable)
+ source_files={str(p.relative_to(root/'sources')):sha256(p.read_bytes()).hexdigest() for p in (root/'sources').rglob('*.py')};write('locations-manifest.json',{'files':source_files})
+ locations=api.locations(root/'static',staticpin,root/'sources',root/'locations-manifest.json',attempts_root=root/'attempts');write('locations.json',locations)
+ contracts=json.loads((root/'contracts.json').read_bytes());verifier=vs.freeze(root/'static',staticpin,root/'vendor',json.loads((root/'dependency-lock.json').read_bytes()),list(contracts.values()),root/'verifier');write('verifier-snapshot.json',verifier)
+ # All sources in this profile must be the audited original bytes.
+ assert all(h in verifier['sourceProfiles'] for h in source_files.values())
+ docker=['/usr/bin/sudo','-n','/usr/bin/docker']
+
+Current test tails
+✔ Source, dependency, challenge, cleanup or verifier identity changes cannot inherit a decision (23.963916ms)
+✔ Human evidence is supplementary and cannot supply tool main-score confirmation (5.2335ms)
+✔ A consistently rehashed freeze cannot substitute shipped verifier code or its dependency lock (14.623166ms)
+✔ Omitting a planned verifier receipt is an explicit coverage blocker (5.004375ms)
+ℹ tests 69
+ℹ suites 0
+ℹ pass 69
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 166.021292
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.147s
+
+OK
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.176s
+
+OK
+
+Relevant test source
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
+import {evaluateReviewQuality,digest} from '../../../scripts/review_quality_gate.mjs';
+const url=new URL('../../../docs/security-workspace/diagnostics/python-verification-20261112/v4-fixture.json',import.meta.url),fixture=()=>JSON.parse(readFileSync(url)),score=f=>evaluateReviewQuality(f.dataset,f.run,f.freeze,f.policy,f.ledger),hash=s=>createHash('sha256').update(s).digest('hex');
+function editReport(f,fn,index=0){const a=f.run.verificationArtifacts[index],r=JSON.parse(a.reportJson);fn(r,JSON.parse(a.requestJson));a.reportJson=JSON.stringify(r);const receipt=f.run.verifierExecutions[index];receipt.reportSha256=hash(a.reportJson);f.run.outputs.find(o=>o.pointId===r.pointId)?.evidence.forEach(e=>e.artifactSha256=receipt.reportSha256)}
+test('Actual reviewed-profile VM v4 artifacts verify while used samples remain blocked',()=>{const f=fixture(),v=score(f);assert.equal(v.version,8);assert.deepEqual(v.verificationCoverage.issues,[]);assert.equal(v.verificationCoverage.supportedCases.length,4);assert.equal(v.r3Qualified,false);assert.equal(v.state,'blocked');assert.ok(v.blockers.includes('development-sample-reused'));assert.equal(v.categories['python/CWE-94'].diagnostic.reviewed.truePositive,1);assert.equal(v.categories['python/CWE-95'].diagnostic.reviewed.truePositive,1)});
+test('Point mismatch cannot be made valid by updating report digest',()=>{const f=fixture();editReport(f,r=>r.pointId='f'.repeat(64));assert.ok(score(f).verificationCoverage.issues.length)});
+test('Quoted challenge echo is not arbitrary code-probe execution even with recomputed hashes',()=>{const f=fixture(),index=2;editReport(f,(r,q)=>{for(const run of r.runs)for(const c of run.trace.calls){c.argument=JSON.stringify(q.challenge);c.argumentSha256=hash(c.argument)}},index);assert.ok(score(f).verificationCoverage.issues.length)});
+test('No raw witness cannot support a claimed confirmation',()=>{const f=fixture();editReport(f,r=>{for(const run of r.runs)for(const v of run.trace.returns)v.markerValue=null});assert.ok(score(f).verificationCoverage.issues.length)});
+test('Non-dominating or dangerous finite-set proof cannot exclude',()=>{for(const mutate of [r=>r.proof.guardLine=r.proof.sinkLine+1,r=>r.proof.values=['len([])']]){const f=fixture();editReport(f,mutate,3);const r=score(f);assert.ok(r.verificationCoverage.issues.length)}});
+test('Source, dependency, challenge, cleanup or verifier identity changes cannot inherit a decision',()=>{for(const mutate of [f=>f.run.verifierExecutions[0].cleanupVerified=false,f=>f.run.verifierExecutions[0].verifierSha256='f'.repeat(64),f=>{f.run.verificationArtifacts[0].requestJson+=' '},f=>{const r=f.run.verifierExecutions[0];delete r.inputFiles[Object.keys(r.inputFiles).find(k=>k.startsWith('dependencies/'))];r.inputSha256=digest(r.inputFiles)},f=>{f.freeze.verificationPlan.requests[0].challenge='f'.repeat(64)}]){const f=fixture();mutate(f);assert.ok(score(f).blockers.some(x=>x.startsWith('verification-')))}});
+test('Human evidence is supplementary and cannot supply tool main-score confirmation',()=>{const f=fixture();f.run.outputs[0].evidence[0].kind='human-review';f.run.humanSupplement=[{caseId:f.dataset.cases[0].id,decision:'confirmed'}];const v=score(f);assert.ok(v.blockers.includes('verification-evidence-unavailable-or-mismatched'));assert.equal(v.categories['python/CWE-94'].diagnostic.reviewed.truePositive,0);assert.equal(v.humanSupplement.length,1)});
+
+test('A consistently rehashed freeze cannot substitute shipped verifier code or its dependency lock', () => {
+ for (const replace of [
+  snapshot => { snapshot.code['python_execution_verify.py'] = 'f'.repeat(64) },
+  snapshot => { snapshot.verifierControllerSha256 = 'f'.repeat(64) },
+  snapshot => { snapshot.dependencyPackages[0].version = 'changed' },
+  snapshot => { snapshot.dependencies[Object.keys(snapshot.dependencies)[0]] = 'f'.repeat(64) },
+ ]) {
+  const input = fixture();
+  const { freeze, run } = input;
+  replace(freeze.verificationPlan.snapshot);
+  freeze.verificationPlanSha256 = digest(freeze.verificationPlan);
+  run.freezeSha256 = digest(freeze);
+  for (const receipt of [...run.reviewerExecutions, ...run.verifierExecutions]) {
+   receipt.freezeSha256 = run.freezeSha256;
+  }
+  for (const receipt of run.verifierExecutions) {
+   receipt.verifierSha256 = digest(freeze.verificationPlan.snapshot);
+  }
+  const result = score(input);
+  assert.deepEqual(result.verificationCoverage.supportedCases, []);
+  assert.ok(result.blockers.includes('verification-plan-missing-or-changed'));
+ }
+});
+
+test('Omitting a planned verifier receipt is an explicit coverage blocker', () => {
+ const input = fixture();
+ const request = input.freeze.verificationPlan.requests.at(-1);
+ input.run.verifierExecutions.pop();
+ input.run.verificationArtifacts.pop();
+ const output = input.run.outputs.find(item => item.id === request.caseId);
+ output.decision = 'unknown';
+ output.evidence = [];
+ const result = score(input);
+ assert.ok(result.blockers.includes('verification-request-unobserved:' + request.caseId));
+ assert.equal(result.verificationCoverage.supportedCases.length, 3);
+});

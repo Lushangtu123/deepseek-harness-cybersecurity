@@ -1,0 +1,413 @@
+{
+  "rules": [
+    {
+      "id": "harness.python.eval",
+      "languages": [
+        "python"
+      ],
+      "severity": "ERROR",
+      "message": "动态 eval：请核对输入来源，优先使用受限解析器",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-95"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "patterns": [
+        {
+          "pattern": "eval($VALUE)"
+        },
+        {
+          "pattern-not": "eval(\"...\")"
+        }
+      ]
+    },
+    {
+      "id": "harness.python.pickle",
+      "languages": [
+        "python"
+      ],
+      "severity": "WARNING",
+      "message": "pickle 反序列化：请验证数据可信度，勿直接接受外部输入",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-502"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "pattern-either": [
+        {
+          "pattern": "pickle.loads(...)"
+        },
+        {
+          "pattern": "pickle.load(...)"
+        }
+      ]
+    },
+    {
+      "id": "harness.python.shell",
+      "languages": [
+        "python"
+      ],
+      "severity": "WARNING",
+      "message": "subprocess shell=True：请核对命令构造，优先参数数组与 shell=False",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-78"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "pattern-either": [
+        {
+          "pattern": "subprocess.run(..., shell=True, ...)"
+        },
+        {
+          "pattern": "subprocess.call(..., shell=True, ...)"
+        },
+        {
+          "pattern": "subprocess.check_call(..., shell=True, ...)"
+        },
+        {
+          "pattern": "subprocess.check_output(..., shell=True, ...)"
+        },
+        {
+          "pattern": "subprocess.Popen(..., shell=True, ...)"
+        }
+      ]
+    },
+    {
+      "id": "harness.python.yaml-load",
+      "languages": [
+        "python"
+      ],
+      "severity": "WARNING",
+      "message": "yaml.load：请核对 Loader，优先 safe_load 或 SafeLoader",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-502"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "patterns": [
+        {
+          "pattern": "yaml.load(...)"
+        },
+        {
+          "pattern-not": "yaml.load(..., Loader=yaml.SafeLoader, ...)"
+        },
+        {
+          "pattern-not": "yaml.load(..., Loader=yaml.CSafeLoader, ...)"
+        }
+      ]
+    },
+    {
+      "id": "harness.javascript.eval",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "severity": "ERROR",
+      "message": "动态 eval：请核对输入来源，优先 JSON.parse 等受限解析器",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-95"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "patterns": [
+        {
+          "pattern": "eval($VALUE)"
+        },
+        {
+          "pattern-not": "eval(\"...\")"
+        }
+      ]
+    },
+    {
+      "id": "harness.python.sql-fstring",
+      "languages": [
+        "python"
+      ],
+      "severity": "WARNING",
+      "message": "SQL f-string 含插值：请验证绑定参数，避免拼接不可信值",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-89"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "pattern": "$CURSOR.execute(f\"...{$VALUE}...\", ...)"
+    },
+    {
+      "id": "harness.python.exec",
+      "languages": [
+        "python"
+      ],
+      "severity": "ERROR",
+      "message": "动态 exec：请核对输入来源，避免运行不可信代码",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-95"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "patterns": [
+        {
+          "pattern": "exec($VALUE)"
+        },
+        {
+          "pattern-not": "exec(\"...\")"
+        }
+      ]
+    },
+    {
+      "id": "harness.python.os-system",
+      "languages": [
+        "python"
+      ],
+      "severity": "WARNING",
+      "message": "动态 os.system：请核对命令来源，优先无 Shell 的参数数组",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-78"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "patterns": [
+        {
+          "pattern": "os.system($VALUE)"
+        },
+        {
+          "pattern-not": "os.system(\"...\")"
+        }
+      ]
+    },
+    {
+      "id": "harness.python.requests-verify-false",
+      "languages": [
+        "python"
+      ],
+      "severity": "WARNING",
+      "message": "requests 关闭证书验证：请恢复证书校验或配置可信 CA",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-295"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "patterns": [
+        {
+          "pattern": "requests.$METHOD(..., verify=False, ...)"
+        },
+        {
+          "metavariable-regex": {
+            "metavariable": "$METHOD",
+            "regex": "^(get|post|put|delete|patch|head|options|request)$"
+          }
+        }
+      ]
+    },
+    {
+      "id": "harness.python.tempfile-mktemp",
+      "languages": [
+        "python"
+      ],
+      "severity": "WARNING",
+      "message": "mktemp 只生成路径：请检查竞态，优先 mkstemp 或 NamedTemporaryFile",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-377"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "pattern": "tempfile.mktemp(...)"
+    },
+    {
+      "id": "harness.python.jwt-noverify",
+      "languages": [
+        "python"
+      ],
+      "severity": "WARNING",
+      "message": "JWT 签名验证被关闭：请核对验证流程和允许的算法",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-347"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "pattern": "jwt.decode(..., options={..., \"verify_signature\": False, ...}, ...)"
+    },
+    {
+      "id": "harness.javascript.child-process-exec",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "severity": "WARNING",
+      "message": "动态 child_process.exec：请核对命令构造，优先 execFile 参数数组",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-78"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "patterns": [
+        {
+          "pattern": "child_process.exec($VALUE, ...)"
+        },
+        {
+          "pattern-not": "child_process.exec(\"...\", ...)"
+        }
+      ]
+    },
+    {
+      "id": "harness.javascript.dom-innerhtml",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "severity": "WARNING",
+      "message": "innerHTML 接收动态值：请核对转义/净化，纯文本优先 textContent",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-79"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "patterns": [
+        {
+          "pattern": "$ELEMENT.innerHTML = $VALUE"
+        },
+        {
+          "pattern-not": "$ELEMENT.innerHTML = \"...\""
+        }
+      ]
+    },
+    {
+      "id": "harness.javascript.document-write",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "severity": "WARNING",
+      "message": "document.write 接收动态值：请核对输入与上下文编码",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-79"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "patterns": [
+        {
+          "pattern": "document.write($VALUE, ...)"
+        },
+        {
+          "pattern-not": "document.write(\"...\", ...)"
+        }
+      ]
+    },
+    {
+      "id": "harness.javascript.tls-reject-disabled",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "severity": "WARNING",
+      "message": "HTTPS/TLS 证书验证被关闭：请核对并恢复证书校验",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-295"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "pattern-either": [
+        {
+          "pattern": "https.request(..., {..., rejectUnauthorized: false, ...}, ...)"
+        },
+        {
+          "pattern": "https.get(..., {..., rejectUnauthorized: false, ...}, ...)"
+        },
+        {
+          "pattern": "https.Agent(..., {..., rejectUnauthorized: false, ...}, ...)"
+        },
+        {
+          "pattern": "tls.connect(..., {..., rejectUnauthorized: false, ...}, ...)"
+        },
+        {
+          "pattern": "new https.Agent({... , rejectUnauthorized: false, ...})"
+        }
+      ]
+    },
+    {
+      "id": "harness.javascript.sql-concat",
+      "languages": [
+        "javascript",
+        "typescript"
+      ],
+      "severity": "WARNING",
+      "message": "query 字符串含拼接或插值：请验证占位符/绑定参数，核对实际数据库 API",
+      "metadata": {
+        "category": "security",
+        "cwe": [
+          "CWE-89"
+        ],
+        "confidence": "MEDIUM",
+        "source": "Harness local review heuristics",
+        "requires-manual-review": true
+      },
+      "pattern-either": [
+        {
+          "pattern": "$DB.query(\"...\" + $VALUE, ...)"
+        },
+        {
+          "pattern": "$DB.query(`...${$VALUE}...`, ...)"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+PASS B5-current-cleanup-after-previous-success
+PASS B5-durable-checking-before-query
+PASS B5-begin-check-journal-failure
+PASS B5-final-journal-failure
+PASS B6-association-order
+PASS B6-interrupt-at-parent-intent
+PASS B6-interrupt-at-child-parent
+PASS B6-interrupt-at-completion
+PASS B6-reverse-only-child-held
+PASS B6-preexisting-standalone-compile-accounted
+PASS B6-unreadable-related-plan-held
+PASS B6-ownership-contradiction-before-destruction
+PASS B6-intent-identifies-original-child
+PASS B6-incomplete-association-blocks-creation
+PASS B6-reverse-only-bind-held
+PASS B6-unrelated-plan-not-cleaned
+PASS B6-unlinked-existing-association-blocks-creation
+PASS B7-direct-prepare-read-classification
+PASS B7-direct-ownership-contradiction
+PASS B7-direct-cleanup-alias-classification
+PASS B7-genuine-lockbusy-and-cli-ambiguity
+{"failed": [], "passed": 21, "total": 21}

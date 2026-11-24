@@ -1,0 +1,19 @@
+{"launchException": null, "resultFailed": null, "resultPassed": null, "resultTotal": null, "returncode": 0, "run": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/capture-run-uohf06e0/run", "sourceClosureOk": true, "sourceUnchanged": true, "suite": "synthetic"}
+PASS capture-full-baseline-87-map
+{"launchException": null, "resultFailed": null, "resultPassed": null, "resultTotal": null, "returncode": 0, "run": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/capture-run-5qriovz4/run", "sourceClosureOk": false, "sourceUnchanged": true, "suite": "synthetic"}
+PASS capture-rejects-missing-declared-document
+{"launchException": null, "resultFailed": null, "resultPassed": null, "resultTotal": null, "returncode": 0, "run": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/capture-run-7kebmjgs/run", "sourceClosureOk": false, "sourceUnchanged": true, "suite": "synthetic"}
+PASS capture-rejects-same-count-swap-and-mutation
+{"launchException": null, "resultFailed": null, "resultPassed": null, "resultTotal": null, "returncode": 0, "run": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/capture-run-fimspwhf/run", "sourceClosureOk": true, "sourceUnchanged": true, "suite": "synthetic"}
+PASS capture-metadata-separate-not-source-counted
+{"launchException": "FileNotFoundError", "resultFailed": null, "resultPassed": null, "resultTotal": null, "returncode": null, "run": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/capture-run-w7exgiue/run", "sourceClosureOk": true, "sourceUnchanged": true, "suite": "synthetic"}
+PASS capture-target-launch-failure-retained
+PASS gate-report-failure-prevents-archive
+PASS gate-proof-failure-prevents-archive
+PASS gate-missing-and-mismatched-member-prevents-archive
+PASS gate-normal-closure-readback-and-report
+PASS proof-contract-rejects-state-only-unbound-and-wrong-digests
+PASS proof-contract-rejects-forged-summary-and-stale-index
+PASS proof-contract-rejects-member-digest-missing-symlink-and-escape
+PASS gate-forged-proof-prevents-archive
+{"failed": [], "passed": 13, "total": 13}

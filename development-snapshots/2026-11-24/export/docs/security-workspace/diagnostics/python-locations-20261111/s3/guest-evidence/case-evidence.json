@@ -1,0 +1,89 @@
+{
+  "byCase": [
+    {
+      "id": "BenchmarkTest00074",
+      "path": "BenchmarkTest00074.py",
+      "pointId": "0fcc6879bfdae7dfddd542c6c3c4842dcdbe6a19a5095b94040d822e0185d6ec",
+      "raw": "hit",
+      "rawHits": 1
+    },
+    {
+      "id": "BenchmarkTest00073",
+      "path": "BenchmarkTest00073.py",
+      "pointId": "f64692ad42fe545cb810b37ce2355ebed000da8bd37f50771feb85c6268ed762",
+      "raw": "hit",
+      "rawHits": 1
+    },
+    {
+      "id": "skf-viewer-upstream",
+      "path": "skf-upstream.py",
+      "pointId": "5fb31cdd85f9077213977721ec6101cd8ddb1e20607ae0b46b10e499b49c5041",
+      "raw": "hit",
+      "rawHits": 2
+    },
+    {
+      "id": "skf-viewer-authored-fix",
+      "path": "skf-fixed-control.py",
+      "pointId": null,
+      "raw": "no-hit",
+      "rawHits": 0
+    },
+    {
+      "id": "synthetic-boundary-0",
+      "path": "boundary.py",
+      "pointId": "f79ada243c78880cf4c555f773a2fe0c064162031884dd464ab8db288fe8c914",
+      "raw": "unknown",
+      "rawHits": 2
+    },
+    {
+      "id": "synthetic-boundary-1",
+      "path": "boundary.py",
+      "pointId": "30538169863d547806aa69f6c5ebafb2dd7867ab557e1e6c6353927bbc2442d0",
+      "raw": "unknown",
+      "rawHits": 2
+    },
+    {
+      "id": "synthetic-boundary-2",
+      "path": "boundary.py",
+      "pointId": "8c08d150b3c59896013c66f404a46a3ade9ed29aaf26feb7ed190a65cd79f450",
+      "raw": "unknown",
+      "rawHits": 2
+    },
+    {
+      "id": "synthetic-boundary-3",
+      "path": "boundary.py",
+      "pointId": "6a44812ecd146bc6ab1136378b82f88db8397d5834de1cff5265f3e2ae7c056b",
+      "raw": "unknown",
+      "rawHits": 2
+    },
+    {
+      "id": "synthetic-boundary-4",
+      "path": "boundary.py",
+      "pointId": "bb9b0f0d843ba3baa5f9d1a1e8d7e31ef6a1eff47f137a31b174e7c9ab54c10b",
+      "raw": "unknown",
+      "rawHits": 0
+    },
+    {
+      "id": "synthetic-boundary-5",
+      "path": "boundary.py",
+      "pointId": "ece18710b2e3e042e637dd9b99920006d9b2a4113f477de9480ba01f9ea47c63",
+      "raw": "unknown",
+      "rawHits": 1
+    },
+    {
+      "id": "synthetic-boundary-6",
+      "path": "boundary.py",
+      "pointId": "f7fce12a3eebae79df2b300396a6f6fa6adf4a939e737ce9f32d521e5cbe4cbc",
+      "raw": "unknown",
+      "rawHits": 0
+    }
+  ],
+  "rawHits": 14,
+  "bound": 13,
+  "unmatched": 1,
+  "ignored": 0,
+  "uniqueHitPoints": 8,
+  "priorSamplesOnly": true,
+  "newIndependentSamples": 0,
+  "reviewerDecisionsConfirmed": 0
+}

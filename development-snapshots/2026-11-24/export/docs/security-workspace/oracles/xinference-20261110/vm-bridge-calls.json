@@ -1,0 +1,44 @@
+[
+  {
+    "purpose": "fixed R3 diagnostic job control only",
+    "remoteScriptSha256": "ef2c19b8c2089ae6fdb91a11226bd77c925eb4a05e7ae5d56714ad4e744f4b8e",
+    "exitCode": 0,
+    "timeout": 10
+  },
+  {
+    "purpose": "fixed R3 diagnostic job control only",
+    "remoteScriptSha256": "a7259f2604dec5176ac460e9ac7e72b64b004ea73e93f749c10cdd1444e94c0b",
+    "exitCode": 0,
+    "timeout": 10
+  },
+  {
+    "purpose": "fixed R3 diagnostic job control only",
+    "remoteScriptSha256": "0d101eef48347a5389d995861879b424b3cfa39e7d60b17d2250a4221ff71236",
+    "exitCode": 0,
+    "timeout": 35
+  },
+  {
+    "purpose": "fixed R3 diagnostic job control only",
+    "remoteScriptSha256": "3e05e75f3c227577541b971c5c0e9f9b402889af605fe96d6b2d2441268cb9de",
+    "exitCode": 0,
+    "timeout": 35
+  },
+  {
+    "purpose": "fixed R3 diagnostic job control only",
+    "remoteScriptSha256": "df97709c50e522d6e4ff958b52811be7ab726012d94a3dfc83555a2417a1ae1e",
+    "exitCode": 0,
+    "timeout": 10
+  },
+  {
+    "purpose": "fixed R3 diagnostic job control only",
+    "remoteScriptSha256": "67949fe1fd7957650dfa852b132e8c90286323b5a6522d52c6b700f3902dab06",
+    "exitCode": 0,
+    "timeout": 15
+  },
+  {
+    "purpose": "fixed R3 diagnostic job control only",
+    "remoteScriptSha256": "d2622906069ccedeeed16d387ed741c990647f324e15db5fa0b88a2403206eae",
+    "exitCode": 0,
+    "timeout": 20
+  }
+]

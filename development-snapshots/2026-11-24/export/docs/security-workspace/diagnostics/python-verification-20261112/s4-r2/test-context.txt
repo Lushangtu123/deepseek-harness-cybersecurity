@@ -1,0 +1,73 @@
+{
+  "python": [
+    {
+      "file": "scripts/reviewer_snapshot.test.py",
+      "exitCode": 0,
+      "tests": 87
+    },
+    {
+      "file": "scripts/reviewer_locations.test.py",
+      "exitCode": 0,
+      "tests": 5
+    },
+    {
+      "file": "scripts/reviewer_storage.test.py",
+      "exitCode": 0,
+      "tests": 29
+    },
+    {
+      "file": "scripts/reviewer_archive.test.py",
+      "exitCode": 0,
+      "tests": 27
+    },
+    {
+      "file": "scripts/python_execution_verify.test.py",
+      "exitCode": 0,
+      "tests": 13
+    },
+    {
+      "file": "scripts/verifier_snapshot.test.py",
+      "exitCode": 0,
+      "tests": 5
+    },
+    {
+      "file": "scripts/verify_execution_controller.test.py",
+      "exitCode": 0,
+      "tests": 2
+    },
+    {
+      "file": "scripts/eval_locations.test.py",
+      "exitCode": 0,
+      "tests": 8
+    },
+    {
+      "file": "scripts/eval_evidence_batch.test.py",
+      "exitCode": 0,
+      "tests": 9
+    },
+    {
+      "file": "scripts/eval_guard_review.test.py",
+      "exitCode": 0,
+      "tests": 14
+    },
+    {
+      "file": "scripts/eval_import_review.test.py",
+      "exitCode": 0,
+      "tests": 9
+    },
+    {
+      "file": "work/harness-purge-improved/tests/model-counts.test.py",
+      "exitCode": 0,
+      "tests": 9
+    },
+    {
+      "file": "work/harness-purge-improved/tests/joint-adapters.test.py",
+      "exitCode": 0,
+      "tests": 9
+    }
+  ],
+  "pythonTotal": 226,
+  "nodeGate": 69,
+  "nodeJointCounts": 87,
+  "allPassed": true
+}

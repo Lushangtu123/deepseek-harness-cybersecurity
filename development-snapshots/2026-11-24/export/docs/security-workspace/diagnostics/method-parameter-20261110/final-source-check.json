@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-11-10T23:04:49.487018+00:00",
+  "files": {
+    "work/harness-purge-improved/package/scripts/python_namespace_review.py": "6c8c7446b99a777e5f496c008c9eeebecebc15134a5aedb6c7be4a14144a6705",
+    "work/harness-purge-improved/package/lib/redteam/personal-namespace-sandbox.mjs": "9f6161f87fbb996af53fc031f6f90ace515ff15c19d5167d9c66f8c848d11bfe",
+    "scripts/python_namespace_review.test.py": "f8d4f4220d128d6abd823cc9aa4d6a2efa705b94b69e7afb62f7b7678de042a0",
+    "scripts/namespace_managed_worker.test.py": "b5077a4619fd17a38084c96d2be7aafa1895f0eefcb3420b0a39e70c911d185c",
+    "work/harness-purge-improved/tests/namespace-managed.test.mjs": "afa9ba3d28a64fd85fb7521d6c3fa4eb017651e47f97b7425c4a36c7e7b949b4"
+  },
+  "workerMatchesFirstReview": true,
+  "reusedManifestCreatedAt": "frozen-inputs.json retains the previous route manifest createdAt; use this step baseline/attempt/job timestamps instead. Hashes were recomputed and checked before imports, so the inherited field does not certify a new freeze time."
+}

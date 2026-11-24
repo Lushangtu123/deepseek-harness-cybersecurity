@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "architecture": "linux-arm64",
+  "installScope": "Kali user harness private ~/.local/bin; no sudo rules, capabilities or services",
+  "tools": [
+    {
+      "id": "fscan",
+      "repository": "shadow1ng/fscan",
+      "release": "v2.2.2",
+      "releaseUrl": "https://github.com/shadow1ng/fscan/releases/tag/v2.2.2",
+      "assetName": "fscan_2.2.2_linux_arm64",
+      "assetUrl": "https://github.com/shadow1ng/fscan/releases/download/v2.2.2/fscan_2.2.2_linux_arm64",
+      "assetBytes": 7522200,
+      "assetSha256": "cfa5a78adc0b310811af11c0b9bdaaeda0d8443d271ad2c0b28b8b52064eb9fe",
+      "binaryBytes": 7522200,
+      "binarySha256": "cfa5a78adc0b310811af11c0b9bdaaeda0d8443d271ad2c0b28b8b52064eb9fe",
+      "architecture": "linux-arm64",
+      "verification": "GitHub release API SHA256 digest + ELF machine AArch64"
+    },
+    {
+      "id": "gogo",
+      "repository": "chainreactors/gogo",
+      "release": "v2.15.0",
+      "releaseUrl": "https://github.com/chainreactors/gogo/releases/tag/v2.15.0",
+      "assetName": "gogo_linux_arm64",
+      "assetUrl": "https://github.com/chainreactors/gogo/releases/download/v2.15.0/gogo_linux_arm64",
+      "assetBytes": 10223616,
+      "assetSha256": "f34e248bc1d0f8e18101655850082b9f48f5f9f5a102cbac107086f3798c20a9",
+      "binaryBytes": 10223616,
+      "binarySha256": "f34e248bc1d0f8e18101655850082b9f48f5f9f5a102cbac107086f3798c20a9",
+      "architecture": "linux-arm64",
+      "verification": "GitHub release API SHA256 digest + ELF machine AArch64"
+    },
+    {
+      "id": "suo5",
+      "repository": "zema1/suo5",
+      "release": "v2.2.0",
+      "releaseUrl": "https://github.com/zema1/suo5/releases/tag/v2.2.0",
+      "assetName": "suo5-linux-arm64",
+      "assetUrl": "https://github.com/zema1/suo5/releases/download/v2.2.0/suo5-linux-arm64",
+      "assetBytes": 10616994,
+      "assetSha256": "06ce70daa0b33a2abfbac790a8923df732dcd2b524a107763b8ac77df4fc6842",
+      "binaryBytes": 10616994,
+      "binarySha256": "06ce70daa0b33a2abfbac790a8923df732dcd2b524a107763b8ac77df4fc6842",
+      "architecture": "linux-arm64",
+      "verification": "GitHub release API SHA256 digest + ELF machine AArch64"
+    },
+    {
+      "id": "frpc",
+      "repository": "fatedier/frp",
+      "release": "v0.71.1",
+      "releaseUrl": "https://github.com/fatedier/frp/releases/tag/v0.71.1",
+      "assetName": "frp_0.71.1_linux_arm64.tar.gz",
+      "assetUrl": "https://github.com/fatedier/frp/releases/download/v0.71.1/frp_0.71.1_linux_arm64.tar.gz",
+      "assetBytes": 12539075,
+      "assetSha256": "8edf590b0c396fa42f9c147121a76af83cfc2002b08f5aef0ea1008c43482019",
+      "binaryBytes": 15007906,
+      "binarySha256": "651de3428bdc7f37b4bad76ed3236b221939a989c433cd7daee79d2817519f8b",
+      "architecture": "linux-arm64",
+      "verification": "GitHub release API SHA256 digest + ELF machine AArch64"
+    },
+    {
+      "id": "frps",
+      "repository": "fatedier/frp",
+      "release": "v0.71.1",
+      "releaseUrl": "https://github.com/fatedier/frp/releases/tag/v0.71.1",
+      "assetName": "frp_0.71.1_linux_arm64.tar.gz",
+      "assetUrl": "https://github.com/fatedier/frp/releases/download/v0.71.1/frp_0.71.1_linux_arm64.tar.gz",
+      "assetBytes": 12539075,
+      "assetSha256": "8edf590b0c396fa42f9c147121a76af83cfc2002b08f5aef0ea1008c43482019",
+      "binaryBytes": 18481314,
+      "binarySha256": "45a45650cf6ad2568a90f646b1ad79ac483510c1d845ecc55c532ad271ff5366",
+      "architecture": "linux-arm64",
+      "verification": "GitHub release API SHA256 digest + ELF machine AArch64"
+    },
+    {
+      "id": "chisel",
+      "repository": "jpillora/chisel",
+      "release": "v1.12.0",
+      "releaseUrl": "https://github.com/jpillora/chisel/releases/tag/v1.12.0",
+      "assetName": "chisel_1.12.0_linux_arm64.gz",
+      "assetUrl": "https://github.com/jpillora/chisel/releases/download/v1.12.0/chisel_1.12.0_linux_arm64.gz",
+      "assetBytes": 4265191,
+      "assetSha256": "2ec6152cd2c74fe0146d4d79e4e7aa174521368c56e433d55e023a92ea404ec3",
+      "binaryBytes": 10748064,
+      "binarySha256": "8417fbcd05a93f4c6ca1b971cb8fd7ba4702c283c1fdde47b8dce22affc6dba8",
+      "architecture": "linux-arm64",
+      "verification": "GitHub release API SHA256 digest + ELF machine AArch64"
+    },
+    {
+      "id": "dnsx",
+      "repository": "projectdiscovery/dnsx",
+      "release": "v1.3.1",
+      "releaseUrl": "https://github.com/projectdiscovery/dnsx/releases/tag/v1.3.1",
+      "assetName": "dnsx_1.3.1_linux_arm64.zip",
+      "assetUrl": "https://github.com/projectdiscovery/dnsx/releases/download/v1.3.1/dnsx_1.3.1_linux_arm64.zip",
+      "assetBytes": 8943209,
+      "assetSha256": "dd657dd1ccee5e137eca2dbad0e97dbd067555f744adb97efcda774f1b2fbde1",
+      "binaryBytes": 27066552,
+      "binarySha256": "bdeb1329494b124c35076196811b33df54c7aa95838ba5165bc3921899fa1d6a",
+      "architecture": "linux-arm64",
+      "verification": "GitHub release API SHA256 digest + ELF machine AArch64"
+    },
+    {
+      "id": "subfinder",
+      "repository": "projectdiscovery/subfinder",
+      "release": "v2.17.0",
+      "releaseUrl": "https://github.com/projectdiscovery/subfinder/releases/tag/v2.17.0",
+      "assetName": "subfinder_2.17.0_linux_arm64.zip",
+      "assetUrl": "https://github.com/projectdiscovery/subfinder/releases/download/v2.17.0/subfinder_2.17.0_linux_arm64.zip",
+      "assetBytes": 9378288,
+      "assetSha256": "24913d49dddc1d3a5e99a4a7580da5be980959b9415b96f52c4f7f4124392190",
+      "binaryBytes": 28770466,
+      "binarySha256": "e6a8fb863f26315b8ab79a956d79847fd91970045979c374874e0755cabe7588",
+      "architecture": "linux-arm64",
+      "verification": "GitHub release API SHA256 digest + ELF machine AArch64"
+    }
+  ],
+  "uninstalled": [
+    {
+      "id": "ksubdomain",
+      "repository": "boy-hack/ksubdomain",
+      "checkedRelease": "v2.4.0",
+      "reason": "No official Linux ARM64 binary asset in this release; no incompatible asset installed"
+    }
+  ]
+}

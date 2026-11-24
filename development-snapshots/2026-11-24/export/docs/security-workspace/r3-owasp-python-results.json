@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "benchmark": "OWASP BenchmarkPython 0.1",
+  "sourceCommit": "f1291485808b66e20ddb6b01b10dc71b3df8c8ba",
+  "labelsSha256": "6396f37c97cfd0c018db3d8750095ce6c678a083f83620cfb3e88fe27a46bb0c",
+  "indexSha256": "27d5fbc01e634f5652279409568d5a68c4a1e3c3bc6de19695a854d5d68945ac",
+  "method": "case-file plus exact rule ID; no sink-line oracle or runtime confirmation",
+  "caseCount": 53,
+  "positives": 20,
+  "negatives": 33,
+  "primaryRule": "policy.harness.python.eval",
+  "diagnosticFamily": [
+    "policy.harness.python.eval",
+    "policy.harness.python.exec"
+  ],
+  "r3Qualified": false,
+  "runs": {
+    "baseline": {
+      "scannerVersion": "1.182.1",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+      "scanned": 53,
+      "parserErrors": 0,
+      "primary": {
+        "tp": 10,
+        "fp": 16,
+        "tn": 17,
+        "fn": 10,
+        "unknownPositive": 0,
+        "unknownNegative": 0,
+        "recallAllLabelled": 0.5,
+        "falsePositiveFractionAllLabelled": 0.48484848484848486,
+        "matchedCasePrecision": 0.38461538461538464
+      },
+      "diagnostic": {
+        "tp": 20,
+        "fp": 33,
+        "tn": 0,
+        "fn": 0,
+        "unknownPositive": 0,
+        "unknownNegative": 0,
+        "recallAllLabelled": 1.0,
+        "falsePositiveFractionAllLabelled": 1.0,
+        "matchedCasePrecision": 0.37735849056603776
+      },
+      "hitsByRule": {
+        "policy.harness.python.eval": 26,
+        "policy.harness.python.exec": 27
+      }
+    },
+    "candidate": {
+      "scannerVersion": "1.182.1",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "rulesSha256": "9073a01a11c70b906192d70a683032bd06c8603c75b5df1e792f546b139a214f",
+      "scanned": 53,
+      "parserErrors": 0,
+      "primary": {
+        "tp": 10,
+        "fp": 16,
+        "tn": 17,
+        "fn": 10,
+        "unknownPositive": 0,
+        "unknownNegative": 0,
+        "recallAllLabelled": 0.5,
+        "falsePositiveFractionAllLabelled": 0.48484848484848486,
+        "matchedCasePrecision": 0.38461538461538464
+      },
+      "diagnostic": {
+        "tp": 10,
+        "fp": 16,
+        "tn": 17,
+        "fn": 10,
+        "unknownPositive": 0,
+        "unknownNegative": 0,
+        "recallAllLabelled": 0.5,
+        "falsePositiveFractionAllLabelled": 0.48484848484848486,
+        "matchedCasePrecision": 0.38461538461538464
+      },
+      "hitsByRule": {
+        "policy.harness.python.eval": 26
+      }
+    }
+  }
+}

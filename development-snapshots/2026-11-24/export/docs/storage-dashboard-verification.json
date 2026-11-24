@@ -1,0 +1,126 @@
+{
+  "date": "2026-11-01",
+  "timezone": "America/Los_Angeles",
+  "runtime": {
+    "version": "1.1.77-personal.2",
+    "programFiles": 134,
+    "newDependencies": false
+  },
+  "entry": {
+    "page": "/__harness/storage",
+    "api": "/__harness/storage/status",
+    "script": "/__harness/storage.js",
+    "sharedSampleSeconds": 60,
+    "browserPollSeconds": 15,
+    "staleAfterSeconds": 90,
+    "hostManagerCommand": "storage-capacity",
+    "guestCliFlag": "--capacity-only",
+    "newDaemonOrStartupJob": false,
+    "systemNotificationsAdded": false,
+    "dataPersistence": "entry process memory only",
+    "existingEntryRunningAndHostAwakeRequired": true,
+    "stoppedVmNeverStarted": true
+  },
+  "contract": {
+    "readOnly": true,
+    "deletionAvailable": false,
+    "automaticCleanup": false,
+    "taskOrGlobalQuotaAdded": false,
+    "guestDirectoryWalksAndDockerInLightweightMode": false,
+    "warningFreeGiB": 10,
+    "criticalFreeGiB": 5,
+    "warningFreePercent": 15,
+    "criticalFreePercent": 5,
+    "warningFreeInodePercent": 15,
+    "criticalFreeInodePercent": 5,
+    "singleFlightSampling": true,
+    "repeatManualSampleThrottleSeconds": 5,
+    "fixedCommandTimeoutSeconds": 10,
+    "browserRequestDeadlineSeconds": 12,
+    "timerGapRejectSeconds": 15,
+    "oldFailedOrUnknownNeverCurrentHealthy": true,
+    "httpReturnsOnlyApprovedCountersAndStatus": true,
+    "apiLocalHeaderAndOriginHostChecks": true
+  },
+  "review": {
+    "independentReadOnlyReviewNoRemainingImportantIssues": true,
+    "concurrentRefreshUndefinedOriginalFailureRetained": true,
+    "serverSleepSampleRelabelOriginalFailureRetained": true,
+    "browserSleepResponseRelabelOriginalFailureRetained": true,
+    "positiveNegativeAndWallClockRollbackCasesPassed": true
+  },
+  "nativeAcceptance": {
+    "installedHostHelpersMatched": 5,
+    "programHashesMatched": 134,
+    "actualCapacityOnlyCli": true,
+    "guestFilesystemStateAtAcceptance": "warning",
+    "automaticSamplingObserved": true,
+    "firstSampleAt": "2026-11-01T23:08:46.080Z",
+    "nextSampleAt": "2026-11-01T23:09:46.081Z",
+    "concurrentManualRefreshBothReturnedSnapshot": true,
+    "sameSnapshotCoalesced": true,
+    "readOnly": true,
+    "deletionAvailable": false,
+    "newDaemonAdded": false,
+    "hostPermissionsExpanded": false
+  },
+  "browserAcceptance": {
+    "syntheticWarningGiB": 9,
+    "syntheticCriticalGiB": 4,
+    "syntheticHealthyGiB": 30,
+    "actualButtonTransitionObserved": true,
+    "syntheticWidthsChecked": [
+      390,
+      1040
+    ],
+    "horizontalOverflowAtThoseWidths": false,
+    "productionCapacityPanelObserved": true,
+    "productionCollapsedChatBadgeWarningObserved": true,
+    "productionStorageLinkFollowed": true,
+    "physicalSleepTriggeredThisRound": false,
+    "ordinaryAndCriticalDiskFillPerformed": false
+  },
+  "checks": {
+    "python": 268,
+    "pluginNode": 483,
+    "hostNode": 139,
+    "clientRebuildMatched": true,
+    "crossPlatformAndCloud": "Final Mac, actual Linux VM and exact-commit Actions are checked separately; repeated counts are not summed."
+  },
+  "recovery": {
+    "name": "ready-storage-dashboard-20261101",
+    "selectedProofFiles": 2635,
+    "programFiles": 134,
+    "snapshotCount": 24,
+    "previous23Preserved": true,
+    "restoredCopyActuallyBooted": true,
+    "restoredLightweightCapacityCli": {
+      "readOnly": true,
+      "deletionAvailable": false,
+      "objectsAndDockerAbsent": true
+    },
+    "originalDiskReturned": true,
+    "temporaryTestCopyRemoved": true,
+    "hostHelpersMatched": 5,
+    "coverageState": "matches"
+  },
+  "protectedState": {
+    "trackedFiles": 459,
+    "gitHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "findings": 95,
+    "allUnverified": true,
+    "realProjectScansStarted": 0,
+    "modelCallsStarted": 0,
+    "hostPermissionsExpanded": false,
+    "networkSharingClipboardUsbExpanded": false,
+    "existingImagesSnapshotsAndBackupsCleaned": false,
+    "newVmRegistered": false
+  },
+  "remainingLimits": [
+    "Sampling stops when the entry exits or the Mac sleeps; no OS push/notification or wake scheduling.",
+    "Memory-only current/latest sample, no historical trend database or global quota enforcement.",
+    "Detailed object preview remains on-demand and bounded; no deletion/prune endpoint or guaranteed reclaim estimate.",
+    "Physical overnight sleep, complex login/MFA, Semgrep parser gap, and historical QEMU internal defect remain outside this task;95findings remain unverified."
+  ]
+}

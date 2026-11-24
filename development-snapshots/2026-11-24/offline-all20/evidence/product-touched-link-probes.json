@@ -1,0 +1,420 @@
+{
+  "kind": "actual-existing-product-touched-fixture-probes",
+  "unitOnly": true,
+  "platform": "darwin",
+  "subprocessStartsDenied": true,
+  "managedLockFileActuallyCreatedForUnit": true,
+  "VMSubmissions": 0,
+  "targetExecutions": 0,
+  "allPassed": true,
+  "rows": [
+    {
+      "function": "settlement_child_variants",
+      "moduleSha256": "794164a246fbff2ea874e2526aa85080165d988852314850bc82149a54454d5a",
+      "scratch": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/tmp/product-link-probe-pvewfjgq",
+      "assertionsPassed": true,
+      "result": [
+        true,
+        {
+          "variants": {
+            "missing": {
+              "checks": {
+                "stateUnknown": true,
+                "notSettled": true,
+                "held": true,
+                "bytesRetained": true,
+                "noResourceOperation": true,
+                "cleanupConfirmedFalse": true,
+                "historyPreserved": true
+              },
+              "state": "unknown"
+            },
+            "malformed": {
+              "checks": {
+                "stateUnknown": true,
+                "notSettled": true,
+                "held": true,
+                "bytesRetained": true,
+                "noResourceOperation": true,
+                "cleanupConfirmedFalse": true,
+                "historyPreserved": true
+              },
+              "state": "unknown"
+            },
+            "unicode": {
+              "checks": {
+                "stateUnknown": true,
+                "notSettled": true,
+                "held": true,
+                "bytesRetained": true,
+                "noResourceOperation": true,
+                "cleanupConfirmedFalse": true,
+                "historyPreserved": true
+              },
+              "state": "unknown"
+            },
+            "permission": {
+              "checks": {
+                "stateUnknown": true,
+                "notSettled": true,
+                "held": true,
+                "bytesRetained": true,
+                "noResourceOperation": true,
+                "cleanupConfirmedFalse": true,
+                "historyPreserved": true
+              },
+              "state": "unknown"
+            },
+            "symlink": {
+              "checks": {
+                "stateUnknown": true,
+                "notSettled": true,
+                "held": true,
+                "bytesRetained": true,
+                "noResourceOperation": true,
+                "cleanupConfirmedFalse": true,
+                "historyPreserved": true
+              },
+              "state": "unknown"
+            }
+          }
+        }
+      ],
+      "remainingLinks": [],
+      "stdout": ""
+    },
+    {
+      "function": "reservation_blocked",
+      "moduleSha256": "794164a246fbff2ea874e2526aa85080165d988852314850bc82149a54454d5a",
+      "scratch": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/tmp/product-link-probe-yl7u_84d",
+      "assertionsPassed": true,
+      "result": [
+        true,
+        {
+          "variants": {
+            "fields": {
+              "checks": {
+                "incomplete3": true,
+                "notRaised": true,
+                "counterUnchanged": true,
+                "noAttempt2": true,
+                "stateUnchanged": true,
+                "noResourceOperation": true
+              },
+              "kind": "exit",
+              "value": 3
+            },
+            "malformed": {
+              "checks": {
+                "incomplete3": true,
+                "notRaised": true,
+                "counterUnchanged": true,
+                "noAttempt2": true,
+                "stateUnchanged": true,
+                "noResourceOperation": true
+              },
+              "kind": "exit",
+              "value": 3
+            },
+            "unicode": {
+              "checks": {
+                "incomplete3": true,
+                "notRaised": true,
+                "counterUnchanged": true,
+                "noAttempt2": true,
+                "stateUnchanged": true,
+                "noResourceOperation": true
+              },
+              "kind": "exit",
+              "value": 3
+            },
+            "symlink": {
+              "checks": {
+                "incomplete3": true,
+                "notRaised": true,
+                "counterUnchanged": true,
+                "noAttempt2": true,
+                "stateUnchanged": true,
+                "noResourceOperation": true
+              },
+              "kind": "exit",
+              "value": 3
+            },
+            "standalone": {
+              "checks": {
+                "incomplete3": true,
+                "notRaised": true,
+                "counterUnchanged": true,
+                "noAttempt2": true,
+                "stateUnchanged": true,
+                "noResourceOperation": true
+              },
+              "kind": "exit",
+              "value": 3
+            }
+          }
+        }
+      ],
+      "remainingLinks": [],
+      "stdout": ""
+    },
+    {
+      "function": "b8_directory_symlink",
+      "moduleSha256": "9432fcf37cb861aca121376753a7a90766963c9d70e4b945aa4ab1cb13ec5d0e",
+      "scratch": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/tmp/product-link-probe-0uaj0xrt",
+      "assertionsPassed": true,
+      "result": [
+        true,
+        {
+          "checks": {
+            "blocked78": true,
+            "parentHeld": true,
+            "parentNotSettled": true,
+            "noDestructive": true,
+            "linkRetained": true
+          },
+          "calls": {
+            "remove": 0,
+            "stop": 0,
+            "stage": 0,
+            "docker": 0,
+            "lookup": 0,
+            "tagLookup": 0,
+            "spawn": 0,
+            "removed": [],
+            "stagePaths": []
+          },
+          "result": [
+            "exit",
+            78
+          ],
+          "stderr": "runner: association-contradiction:association-directory:symlink:holds={}\nrunner: association-directory:symlink\n"
+        }
+      ],
+      "remainingLinks": [],
+      "stdout": ""
+    },
+    {
+      "function": "b1_stage_paths",
+      "moduleSha256": "8de5a125c9bd8e49bf3c683699dd7ee87a81d16d5ae41e9dc79afc4e873931d2",
+      "scratch": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/tmp/product-link-probe-c9l8pc_k",
+      "assertionsPassed": true,
+      "result": [
+        true,
+        {
+          "prepare-root": {
+            "kind": "exit",
+            "value": 78,
+            "calls": {
+              "remove": 0,
+              "stop": 0,
+              "stage": 0,
+              "docker": 0,
+              "lookup": 0,
+              "tagLookup": 0
+            },
+            "rootExists": true
+          },
+          "runs-root": {
+            "kind": "exit",
+            "value": 78,
+            "calls": {
+              "remove": 0,
+              "stop": 0,
+              "stage": 0,
+              "docker": 0,
+              "lookup": 0,
+              "tagLookup": 0
+            },
+            "rootExists": true
+          },
+          "nul": {
+            "kind": "exit",
+            "value": 78,
+            "calls": {
+              "remove": 0,
+              "stop": 0,
+              "stage": 0,
+              "docker": 0,
+              "lookup": 0,
+              "tagLookup": 0
+            },
+            "stageExists": true
+          },
+          "traversal": {
+            "kind": "exit",
+            "value": 78,
+            "calls": {
+              "remove": 0,
+              "stop": 0,
+              "stage": 0,
+              "docker": 0,
+              "lookup": 0,
+              "tagLookup": 0
+            },
+            "stageExists": true
+          },
+          "role-path": {
+            "kind": "exit",
+            "value": 78,
+            "calls": {
+              "remove": 0,
+              "stop": 0,
+              "stage": 0,
+              "docker": 0,
+              "lookup": 0,
+              "tagLookup": 0
+            },
+            "stageExists": true
+          },
+          "symlink": {
+            "kind": "exit",
+            "value": 78,
+            "calls": {
+              "remove": 0,
+              "stop": 0,
+              "stage": 0,
+              "docker": 0,
+              "lookup": 0,
+              "tagLookup": 0
+            },
+            "linkExists": true,
+            "realExists": true
+          }
+        }
+      ],
+      "remainingLinks": [],
+      "stdout": ""
+    },
+    {
+      "function": "b2_identity_journal",
+      "moduleSha256": "8de5a125c9bd8e49bf3c683699dd7ee87a81d16d5ae41e9dc79afc4e873931d2",
+      "scratch": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/tmp/product-link-probe-zo3jmaji",
+      "assertionsPassed": true,
+      "result": [
+        true,
+        {
+          "contradiction": {
+            "kind": "exit",
+            "value": 78,
+            "calls": {
+              "remove": 0,
+              "stop": 0,
+              "stage": 0,
+              "docker": 0,
+              "lookup": 0,
+              "tagLookup": 0
+            },
+            "reservationHeld": true
+          },
+          "json": {
+            "kind": "return",
+            "value": false,
+            "calls": {
+              "remove": 0,
+              "stop": 0,
+              "stage": 0,
+              "docker": 0,
+              "lookup": 0,
+              "tagLookup": 0
+            },
+            "reservationHeld": true
+          },
+          "symlink": {
+            "kind": "exit",
+            "value": 78,
+            "calls": {
+              "remove": 0,
+              "stop": 0,
+              "stage": 0,
+              "docker": 0,
+              "lookup": 0,
+              "tagLookup": 0
+            },
+            "reservationHeld": true
+          }
+        }
+      ],
+      "remainingLinks": [],
+      "stdout": ""
+    },
+    {
+      "function": "test_final_symlink_blocked",
+      "moduleSha256": "32cd8e2407332085b23c3a3b2c96b9b5a515b88eaafef6b7ff10768baa410231",
+      "scratch": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/tmp/product-link-probe-n_n6pcc4",
+      "assertionsPassed": true,
+      "result": {
+        "test": "final-recheck-symlink-is-blocked",
+        "passed": true,
+        "simulated": true,
+        "checks": {
+          "exitBlocked": true,
+          "stateBlocked": true,
+          "reasonSymlink": true,
+          "stageNotRemoved": true,
+          "stageLstatPresent": true,
+          "stageStateSymlink": true,
+          "actualPathIsLink": true,
+          "targetRetained": true,
+          "deleteNotCalled": true,
+          "containerQueryRan": true
+        },
+        "code": 78,
+        "stage": {
+          "lstatAfter": "present",
+          "path": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/tmp/product-link-probe-n_n6pcc4/candidate/checks/tmp/rev8-symlink-fu2k75yd/preflight/evidence/acb7cdd9dfc6ce690a93f87dc781b010/stage-779e722535ba8958",
+          "removed": false,
+          "state": "symlink"
+        },
+        "stagePath": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/tmp/product-link-probe-n_n6pcc4/candidate/checks/tmp/rev8-symlink-fu2k75yd/preflight/evidence/acb7cdd9dfc6ce690a93f87dc781b010/stage-779e722535ba8958",
+        "target": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/tmp/product-link-probe-n_n6pcc4/candidate/checks/tmp/rev8-link-target-sbir1v06/outside",
+        "calls": {
+          "containerQuery": 1,
+          "delete": 0,
+          "signal": 0,
+          "stageRelQueries": 2,
+          "stageRelFinalStates": [
+            "present",
+            "symlink"
+          ]
+        }
+      },
+      "remainingLinks": [],
+      "stdout": "PASS final-recheck-symlink-is-blocked\n"
+    },
+    {
+      "function": "test_intermediate_symlink_blocked",
+      "moduleSha256": "32cd8e2407332085b23c3a3b2c96b9b5a515b88eaafef6b7ff10768baa410231",
+      "scratch": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/tmp/product-link-probe-8ebdo0o2",
+      "assertionsPassed": true,
+      "result": {
+        "test": "final-recheck-intermediate-link-is-blocked",
+        "passed": true,
+        "simulated": true,
+        "checks": {
+          "decisionBlocked": true,
+          "exitCode78": true,
+          "reasonSymlink": true,
+          "lstatPresent": true,
+          "linkRetained": true,
+          "noResourceActions": true
+        },
+        "resourceCalls": {
+          "containerQuery": 0,
+          "delete": 0,
+          "signal": 0
+        },
+        "result": {
+          "removed": false,
+          "state": "symlink",
+          "path": "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/tmp/product-link-probe-8ebdo0o2/candidate/checks/tmp/rev8-path-link-59r0feof/root/preflight/evidence/3e255f3c1723afa6264d29c5a3a9c06d/stage-d9dc10ee6c7f803f",
+          "lstatAfter": "present",
+          "decision": "blocked",
+          "reason": "stage-symlink"
+        }
+      },
+      "remainingLinks": [],
+      "stdout": "PASS final-recheck-intermediate-link-is-blocked\n"
+    }
+  ]
+}

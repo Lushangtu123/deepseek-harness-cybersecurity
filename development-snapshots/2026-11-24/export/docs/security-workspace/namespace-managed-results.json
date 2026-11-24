@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "date": "2026-11-03",
+  "timezone": "America/Los_Angeles",
+  "scope": "VM candidate: automatic supplemental AST observations after managed joint Semgrep collection; previous genuine scanner JSON reused for positive integration, no new scanner invocation or model call",
+  "deployed": false,
+  "sourceProgramFiles": 169,
+  "dailyProgramFiles": 166,
+  "dailyBaselineReceipt": "source-location-release-results.json",
+  "nativeIntent": "diagnostics/namespace-managed-20261103/native-intent.json",
+  "programBytesMatchFinalNativeKit": true,
+  "tests": {
+    "macPlugin": 819,
+    "vmPlugin": 819,
+    "pythonNamespaceMac": 25,
+    "pythonNamespaceVm": 25,
+    "managedProtocolMac": 3,
+    "managedProtocolVm": 3
+  },
+  "native": {
+    "originalWarnings": 21,
+    "eligibleAnchors": 19,
+    "structureObservations": 19,
+    "fixedSetObservations": 2,
+    "ordinaryFindingTableRows": 0,
+    "allUnverified": true,
+    "realReviewContainersCreated": 3,
+    "positiveAutomaticJointUsesDefaultSandbox": true,
+    "scannerInput": "prior actual scan receipt; runner replays fixed JSON, fixture tool admission",
+    "newScans": 0,
+    "modelCalls": 0,
+    "invalidDigestFailureCleaned": true,
+    "cancelDuringStartCleaned": true,
+    "ordinary16NotApplicable": true,
+    "runtime": {
+      "profile": "namespace-ast-1",
+      "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+      "workerSha256": "9ec513ddb83d94c0c2f63629b7f218b1971704b4ff25d21169f30ad6e0ea9a51",
+      "pythonVersion": "3.12.15",
+      "cleanupVerified": true
+    },
+    "observedStdinAndAutoRemove": [
+      {
+        "stdin": {
+          "open": true,
+          "attach": true,
+          "once": true
+        },
+        "autoRemove": true
+      }
+    ],
+    "candidateTemporaryRemoved": true,
+    "dailyProgramHashesMatched": 166,
+    "projectDatabaseLogicalHashesMatched": 41,
+    "runtimeRulesAndImagesMatched": true
+  },
+  "claudeReviews": [
+    {
+      "receipt": "claude-review.json",
+      "models": [
+        "claude-opus-5-5"
+      ],
+      "effort": "high",
+      "toolsEnabled": false,
+      "result": "fixes requested"
+    },
+    {
+      "receipt": "claude-closure.json",
+      "models": [
+        "claude-opus-5-5"
+      ],
+      "effort": "high",
+      "toolsEnabled": false,
+      "result": "fixes requested"
+    },
+    {
+      "receipt": "claude-final.json",
+      "models": [
+        "claude-opus-5-5"
+      ],
+      "effort": "high",
+      "toolsEnabled": false,
+      "result": "no remaining blockers in focused edits; native rerun independently completed after review prompt"
+    }
+  ],
+  "ui": {
+    "scope": "formal React component against read-only fixture API serving final VM joint records; not native Harness or live model acceptance",
+    "state": "passed-component-replay",
+    "receipt": "diagnostics/namespace-managed-20261103/ui-observations.json"
+  },
+  "independentQualificationCasesAdded": 0,
+  "r3Qualified": false,
+  "researchRulesInstalled": false,
+  "newDevelopmentSampleUsage": {
+    "providedDevelopmentSources": 7,
+    "newUniqueHashesAdded": 7,
+    "newHashes": [
+      "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+      "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+      "bca1197d58fa408510dd9d4880f33c06e07a4bb68374da695807fae96cfe3955",
+      "27b561e88b5059dc318f480285023b44869d5bccd6c503ceaabdc3b747568a22",
+      "1d6e3288f71673f3edaf480378e7f51d39e9d2a44dc189261adfe8af67cfa062",
+      "762652b9524828a9600bd1f836b930d5cebaab6e477c5e495a07318a0d34f99f",
+      "ded311d424f66ea11047d9abc377f66552048b9673711d5a5ab517f272927503"
+    ],
+    "ledgerHashCount": 227,
+    "independentQualificationCasesAdded": 0
+  },
+  "limits": [
+    "only exact namespace rule with complete copy-bound anchor; current16 rules do not trigger it",
+    "original warnings and dispositions unchanged; no runtime builtin identity or external input proof",
+    "artifact retention20 per producer; Python/namespace can jointly retain40 on one Semgrep step",
+    "up to64 checks/files,8MiB source; ASCII relative Python paths only; resource failures preserve warnings",
+    "worker4s alarm, parent positive timeouts; cleanup outside task budget at most three2s calls",
+    "missing create identity always STOP_UNCONFIRMED; fail-closed auto-remove race may require reconciliation",
+    "installed worker trusted by pinned program digest before/after; not immune to a hostile VM administrator",
+    "full security workspace and independent R3 qualification remain unfinished; older SKF requested-model closure remains separate"
+  ],
+  "subsequentDailyRelease": {
+    "deployed": true,
+    "receipt": "namespace-managed-release-results.json",
+    "programFiles": 169
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-02",
+  "timezone": "America/Los_Angeles",
+  "scope": "VM improved Harness only; first-stage managed joint review",
+  "pluginVersion": "1.1.77-personal.3",
+  "programFiles": 146,
+  "programInventorySha256": "f94b409f8b97f3720bea5cb971caf99aec79ab5c48082462d49fa6ec81241c5d",
+  "features": {
+    "separatePreset": "personal-joint",
+    "managedSteps": [
+      "semgrep",
+      "trivy",
+      "kali-bandit"
+    ],
+    "kaliConsentSavedByOwner": true,
+    "boundedSourceSnapshot": true,
+    "ordinaryFindingsIsolated": true,
+    "postRedactionWireBudget": 6000,
+    "rawGitRefsOnly": true,
+    "gitDirtyState": "unobserved",
+    "subtaskDeadlineSeconds": [
+      30,
+      900
+    ],
+    "defaultSeconds": 360,
+    "additionalModelSubtasks": 0
+  },
+  "nativePipeline": {
+    "passed": true,
+    "steps": [
+      "semgrep",
+      "trivy",
+      "kali"
+    ],
+    "findings": 7,
+    "allFindingsUnverified": true,
+    "capturedFiles": 3,
+    "excludedPaths": 1,
+    "ordinaryFindingRows": 0,
+    "sameRequestDeduplicated": true,
+    "allPagesWithinBudget": true
+  },
+  "kaliLifecycle": {
+    "normal": "completed",
+    "sameRequestReturnsOriginal": true,
+    "cancel": "cancelled",
+    "timeout": "timed-out",
+    "workerKilledWithSurvivingChild": true,
+    "workerDeathCleanupVerified": true,
+    "postSpawnCrashBeforeChildIdentity": true,
+    "postSpawnCrashCleanupVerified": true
+  },
+  "backendRestart": {
+    "faultObserved": true,
+    "recoveredState": "interrupted",
+    "newStartBlockedUntilReconciled": true,
+    "originalCleanupVerified": true,
+    "automaticallyReplayed": false
+  },
+  "modelAcceptance": {
+    "browser": "Google Chrome native UI",
+    "preset": "personal-joint",
+    "session": "session-20fabcb1-4f12-441a-91b5-40bb811ebf94",
+    "observedToolCalls": 8,
+    "modelSelfReportedToolCalls": 6,
+    "selfReportedCountAccurate": false,
+    "observedTools": [
+      "redteam_session_bind",
+      "redteam_joint_review"
+    ],
+    "chosenSteps": [
+      "semgrep",
+      "trivy",
+      "kali"
+    ],
+    "findings": 7,
+    "allFindingsUnverified": true,
+    "limitedToOwnedSyntheticProject": true,
+    "subsequentFix": "Kali complete flag now describes handed-off Python subset; supplemental native task verifies it; whole-project coverage remains false"
+  },
+  "browserAcceptance": {
+    "presetVisible": true,
+    "oldPresetsRetained": true,
+    "kaliConsentVisible": true,
+    "jointCardLoaded": true,
+    "visualLayoutInspected": true,
+    "downloadCompleted": true,
+    "downloadBytes": 3144,
+    "downloadSha256": "0bbf7e84ebe1c1765ce759a442d96830acb954a918abb4147487aec95876d0f2",
+    "downloadCounts": {
+      "findings": 1,
+      "files": 3,
+      "exclusions": 1,
+      "diagnostics": 0
+    },
+    "downloadMatchesBackendSnapshot": true
+  },
+  "checks": {
+    "mac": {
+      "python": 284,
+      "pluginNode": 529,
+      "entryNode": 139,
+      "clientReproducible": true
+    },
+    "linux": {
+      "python": 284,
+      "pluginNode": 529,
+      "entryNode": 139,
+      "restoreRoot": 18,
+      "clientReproducible": true
+    },
+    "independentSourceReview": "no Important blockers after fixes; native acceptance separate"
+  },
+  "protected": {
+    "projectFiles": 459,
+    "projectHeadUnchanged": true,
+    "sixAuditTablesUnchanged": true,
+    "findings": {
+      "unverified": 95
+    },
+    "scannerManifestUnchanged": true,
+    "vmConfigurationUnchanged": true,
+    "macHarnessOrPermissionsChanged": false,
+    "snapshotCount": 25
+  },
+  "limits": [
+    "REA/reverse-skill/PentAGI are not automatic managed children in this first stage",
+    "No arbitrary network targets or project-code execution through this preset",
+    "Authentication/authorization/business logic/architecture remain manual",
+    "Excluded or redacted files and parser failures are not complete coverage",
+    "Existing offline recovery points do not contain this new program version or Kali Bandit installation",
+    "Native process receipts and source review are not signed attestations"
+  ]
+}

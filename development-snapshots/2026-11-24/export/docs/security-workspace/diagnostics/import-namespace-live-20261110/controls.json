@@ -1,0 +1,94 @@
+{
+  "controls": [
+    {
+      "sink": "eval",
+      "suffix": ", {}",
+      "imported": true
+    },
+    {
+      "sink": "eval",
+      "suffix": ", {}, {}",
+      "imported": true
+    },
+    {
+      "sink": "exec",
+      "suffix": ", {}",
+      "imported": true
+    },
+    {
+      "sink": "exec",
+      "suffix": ", {}, {}",
+      "imported": true
+    },
+    {
+      "sink": "eval",
+      "suffix": ", scope",
+      "imported": false
+    },
+    {
+      "sink": "eval",
+      "suffix": ", {}, {}",
+      "calleeType": "eval",
+      "imported": false
+    },
+    {
+      "sink": "exec",
+      "suffix": ", {}",
+      "calleeType": "exec",
+      "imported": false
+    },
+    {
+      "sink": "eval",
+      "suffix": ", {}",
+      "callerType": "request",
+      "imported": false
+    },
+    {
+      "sink": "eval",
+      "suffix": ", {}",
+      "callerType": "execute",
+      "imported": false
+    }
+  ],
+  "fixture": {
+    "case0/evaluator.py": "def run(value):\n    return eval(value, {})\n",
+    "case0/routes.py": "from flask import request\nfrom evaluator import run as execute\ndef route():\n    code = request.args.get(\"code\")\n    return execute(code)\n",
+    "case1/evaluator.py": "def run(value):\n    return eval(value, {}, {})\n",
+    "case1/routes.py": "from flask import request\nfrom evaluator import run as execute\ndef route():\n    code = request.args.get(\"code\")\n    return execute(code)\n",
+    "case2/evaluator.py": "def run(value):\n    return exec(value, {})\n",
+    "case2/routes.py": "from flask import request\nfrom evaluator import run as execute\ndef route():\n    code = request.args.get(\"code\")\n    return execute(code)\n",
+    "case3/evaluator.py": "def run(value):\n    return exec(value, {}, {})\n",
+    "case3/routes.py": "from flask import request\nfrom evaluator import run as execute\ndef route():\n    code = request.args.get(\"code\")\n    return execute(code)\n",
+    "case4/evaluator.py": "def run(value):\n    return eval(value, scope)\n",
+    "case4/routes.py": "from flask import request\nfrom evaluator import run as execute\ndef route():\n    code = request.args.get(\"code\")\n    return execute(code)\n",
+    "case5/evaluator.py": "def run[eval](value):\n    return eval(value, {}, {})\n",
+    "case5/routes.py": "from flask import request\nfrom evaluator import run as execute\ndef route():\n    code = request.args.get(\"code\")\n    return execute(code)\n",
+    "case6/evaluator.py": "def run[exec](value):\n    return exec(value, {})\n",
+    "case6/routes.py": "from flask import request\nfrom evaluator import run as execute\ndef route():\n    code = request.args.get(\"code\")\n    return execute(code)\n",
+    "case7/evaluator.py": "def run(value):\n    return eval(value, {})\n",
+    "case7/routes.py": "from flask import request\nfrom evaluator import run as execute\ndef route[request]():\n    code = request.args.get(\"code\")\n    return execute(code)\n",
+    "case8/evaluator.py": "def run(value):\n    return eval(value, {})\n",
+    "case8/routes.py": "from flask import request\nfrom evaluator import run as execute\ndef route[execute]():\n    code = request.args.get(\"code\")\n    return execute(code)\n"
+  },
+  "sourceSha256": {
+    "case0/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+    "case0/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+    "case1/evaluator.py": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+    "case1/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+    "case2/evaluator.py": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+    "case2/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+    "case3/evaluator.py": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+    "case3/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+    "case4/evaluator.py": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+    "case4/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+    "case5/evaluator.py": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+    "case5/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+    "case6/evaluator.py": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+    "case6/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+    "case7/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+    "case7/routes.py": "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+    "case8/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+    "case8/routes.py": "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb"
+  },
+  "allAlreadyUsed": true
+}

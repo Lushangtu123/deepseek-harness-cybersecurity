@@ -1,0 +1,616 @@
+--- before/scripts/reviewer_snapshot.py
++++ current/scripts/reviewer_snapshot.py
+@@ -209,8 +209,12 @@
+     root = Path(root)
+     if root.resolve() != root or not root.is_dir():
+         raise ValueError('canonical project directory required')
+-    manifest_raw, scan_raw = read(manifest_path, MANIFEST_LIMIT), read(scan_path, SCAN_LIMIT)
++    manifest_raw = read(manifest_path, MANIFEST_LIMIT)
+     manifest = load_json(manifest_raw)
++    scan_raw = b'{"results":[]}' if scan_path is None else read(scan_path, SCAN_LIMIT)
++    if scan_path is None and isinstance(manifest,dict):
++        manifest={'files':manifest.get('files'),'scanSha256':sha256(scan_raw).hexdigest()}
++        manifest_raw=json.dumps(manifest,separators=(',',':')).encode()
+     if not isinstance(load_json(scan_raw), dict):
+         raise ValueError('invalid scan export')
+     if (not isinstance(manifest, dict) or not isinstance(manifest.get('files'), dict)
+@@ -936,7 +940,8 @@
+ 
+ 
+ def execute(bundle, expected, root, manifest_path, scan_path, dataset_sha, freeze_sha, *,
+-            attempts_root=None, timeout=30, _engine_factory=None, storage_policy=None):
++            attempts_root=None, timeout=30, _engine_factory=None, storage_policy=None, _operation='review'):
++    if _operation not in {'review','locations'}:raise ValueError('unsupported operation')
+     if _engine_factory is None and sys.platform != 'linux':
+         raise ValueError('VM execution requires Linux; no Mac Docker invocation')
+     if os.geteuid() == 0 or isinstance(timeout, bool) or not isinstance(timeout, (float,int)) or not .1 <= timeout <= 30:
+@@ -955,7 +960,7 @@
+     reservation=storage.reserve(policy,attempt_id,sum(map(len,files.values()))+sum(map(len,payload.values())),_api_view())
+     phase={'enginePossible':False}
+     try:
+-        return _execute_verified(base,attempt_id,manifest,files,payload,input_sha,expected,dataset_sha,freeze_sha,timeout,_engine_factory,reservation,phase)
++        return _execute_verified(base,attempt_id,manifest,files,payload,input_sha,expected,dataset_sha,freeze_sha,timeout,_engine_factory,reservation,phase,_operation)
+     finally:
+         try:
+             directory=base/('review-'+attempt_id)
+@@ -967,7 +972,7 @@
+             print('storage-settlement-pending; query status and storage-reconcile before retrying',file=sys.stderr)
+ 
+ 
+-def _execute_verified(base,attempt_id,manifest,files,payload,input_sha,expected,dataset_sha,freeze_sha,timeout,_engine_factory,reservation,phase):
++def _execute_verified(base,attempt_id,manifest,files,payload,input_sha,expected,dataset_sha,freeze_sha,timeout,_engine_factory,reservation,phase,operation):
+     base.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+     base.mkdir(mode=0o700, exist_ok=True)
+     _private(base)
+@@ -984,7 +989,7 @@
+            'snapshotSha256':expected, 'inputSha256':input_sha, 'imageId':manifest['imageId'],
+            'datasetSha256':dataset_sha, 'freezeSha256':freeze_sha, 'startedAt':_now(),
+            'creationAttempted':False, 'createSucceeded':False, 'containerObserved':False, 'containerId':None,
+-           'creationJournalVersion':1,'storageReservation':reservation}
++           'creationJournalVersion':1,'storageReservation':reservation,'operation':operation}
+     failure = None
+     cancel = {}
+     holder={}
+@@ -1001,7 +1006,7 @@
+                     '--no-healthcheck','--workdir','/','--tmpfs','/tmp:rw,nosuid,nodev,noexec,size=16m,mode=1777',
+                     '--mount',f'type=bind,src={stage},dst=/review,readonly','--entrypoint','python3',
+                     manifest['imageId'],'-I','-B','-S','-c',_CONTAINER_WATCHDOG,str(timeout),'/review/code/'+FILES[0],
+-                    '/review/sources','/review/manifest.json','/review/scan.json']
++                    *(['--locations'] if operation=='locations' else []),'/review/sources','/review/manifest.json','/review/scan.json']
+         try:
+             if cancel:
+                 raise _Failure('interrupted', signal=cancel['signal'])
+@@ -1029,8 +1034,22 @@
+             raw = run['stdout']
+             try:
+                 report = load_json(raw)
+-                if not isinstance(report, dict) or type(report.get('version')) is not int or report['version'] != 1:
++                if not isinstance(report, dict) or type(report.get('version')) is not int or report['version'] not in [1,2]:
+                     raise ValueError('invalid report')
++                location_binding=None
++                if report['version']==2:
++                    inventory=report.get('locations')
++                    expected_files={name.removeprefix('sources/'):sha256(value).hexdigest() for name,value in payload.items() if name.startswith('sources/')}
++                    if (not isinstance(inventory,dict) or inventory.get('version')!=1 or inventory.get('protocol')!='python-sink-locations-1'
++                            or not isinstance(inventory.get('runtimePython'),str) or not re.fullmatch(r'3\.\d+\.\d+',inventory['runtimePython'])
++                            or not isinstance(inventory.get('files'),dict) or set(inventory['files'])!=set(expected_files)
++                            or any(not isinstance(row,dict) or row.get('sha256')!=expected_files[name] for name,row in inventory['files'].items())
++                            or report.get('operation','review')!=operation):raise ValueError('invalid location inventory')
++                    location_binding={'version':1,'snapshotSha256':expected,'imageId':manifest['imageId'],'uid':os.geteuid(),'inventory':inventory}
++                    frozen_binding=load_json(payload['manifest.json']).get('locationBinding')
++                    if frozen_binding is not None and frozen_binding!=location_binding:
++                        raise _Failure('location-binding-changed',nextOperation='refreeze')
++                elif operation=='locations':raise ValueError('location report required')
+             except (ValueError, UnicodeError):
+                 raise _Failure('report-invalid') from None
+         except BaseException as error:
+@@ -1064,9 +1083,11 @@
+                        'freezeSha256':freeze_sha,'inputSha256':input_sha,'inputFiles':dict(input_files),
+                        'scanSha256':input_files['scan.json'],'reportSha256':sha256(raw).hexdigest(),
+                        'startedAt':job['startedAt'],'finishedAt':_now()}
++            if location_binding is not None:
++                receipt.update(version=3,operation=operation,locationBindingSha256=digest(location_binding))
+             result = {'reviewerSnapshot':manifest,'reviewerExecution':receipt,'report':report,'reportJson':raw.decode('utf-8'),
+                       'inputFiles':input_files,'temporaryRemoved':job['stageRemoved'],'cleanup':job['cleanup'],
+-                      'attemptDirectory':str(attempt)}
++                      'attemptDirectory':str(attempt),**({'locationBinding':location_binding} if location_binding is not None else {})}
+             # State and original result commit in one atomic record, not two files.
+             job.update(state='completed', finishedAt=receipt['finishedAt'], resultSha256=digest(result), result=result)
+             try:
+@@ -1094,6 +1115,10 @@
+ 
+ 
+ 
++def locations(bundle,expected,root,manifest_path,**kwargs):
++    return execute(bundle,expected,root,manifest_path,None,'0'*64,'0'*64,_operation='locations',**kwargs)
++
++
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+     commands = parser.add_subparsers(dest='action', required=True)
+@@ -1103,11 +1128,17 @@
+     creator.add_argument('image_id')
+     verifier = commands.add_parser('verify')
+     runner = commands.add_parser('run')
+-    for command in [verifier, runner]:
++    locator = commands.add_parser('locations')
++    for command in [verifier, runner, locator]:
+         command.add_argument('bundle', type=Path)
+         command.add_argument('expected')
+     for name in ['root', 'manifest_path', 'scan_path']:
+         runner.add_argument(name, type=Path)
++    locator.add_argument('root',type=Path)
++    locator.add_argument('manifest_path',type=Path)
++    locator.add_argument('--attempts-root',type=Path)
++    locator.add_argument('--timeout',type=float,default=30)
++    locator.add_argument('--storage-policy',type=Path)
+     runner.add_argument('dataset_sha')
+     runner.add_argument('freeze_sha')
+     runner.add_argument('--attempts-root', type=Path)
+@@ -1140,8 +1171,8 @@
+             elif action=='archive-status':value=storage.archive_status(policy,args['transaction_id'],_api_view())
+             else:value=storage.archive_restore(policy,args['transaction_id'],_api_view())
+         else:
+-            if action=='run' and args.get('storage_policy') is not None:args['storage_policy']=load_json(read(args['storage_policy']))
+-            value = freeze(**args) if action == 'freeze' else verify(**args)[0] if action == 'verify' else status(**args) if action == 'status' else recover(**args) if action == 'recover' else execute(**args)
++            if action in {'run','locations'} and args.get('storage_policy') is not None:args['storage_policy']=load_json(read(args['storage_policy']))
++            value = freeze(**args) if action == 'freeze' else verify(**args)[0] if action == 'verify' else status(**args) if action == 'status' else recover(**args) if action == 'recover' else locations(**args) if action=='locations' else execute(**args)
+         print(json.dumps(value, indent=2))
+         if action=='recover' and value.get('state')!='completed' and not value.get('cleanup',{}).get('confirmed'):
+             parser.exit(2)
+--- before/scripts/review_quality_gate.mjs
++++ current/scripts/review_quality_gate.mjs
+@@ -28,8 +28,8 @@
+   typeof value.imageId==='string'&&/^sha256:[a-f0-9]{64}$/.test(value.imageId);
+ }
+ function executionValid(row,run,frozenSha256){
+- return record(row)&&[1,2].includes(row.version)&&row.state==='completed'&&
+-   row.snapshotSha256===run.identity.reviewer&&row.datasetSha256===run.datasetSha256&&row.freezeSha256===frozenSha256&&
++ return record(row)&&[1,2,3].includes(row.version)&&row.state==='completed'&&
++   (run.version!==3||row.version===3&&row.operation==='review')&&row.snapshotSha256===run.identity.reviewer&&row.datasetSha256===run.datasetSha256&&row.freezeSha256===frozenSha256&&
+    ['inputSha256','reportSha256'].every(key=>typeof row[key]==='string'&&hashPattern.test(row[key]))&&
+    timestamp(row.startedAt)&&timestamp(row.finishedAt)&&Date.parse(row.startedAt)>=Date.parse(run.startedAt)&&
+    Date.parse(row.finishedAt)>=Date.parse(row.startedAt);
+@@ -41,7 +41,7 @@
+ const sourceInputPattern=/^sources\/(?:[A-Za-z0-9_][A-Za-z0-9_.-]{0,63}\/){0,12}[A-Za-z0-9_][A-Za-z0-9_.-]{0,63}\.py$/;
+ const sourceInputName=name=>name.endsWith('.py')&&sourceInputPattern.test(name);
+ function receiptInputsValid(row){
+- if(row.version!==2||!record(row.inputFiles))return false;
++ if(![2,3].includes(row.version)||!record(row.inputFiles))return false;
+  const names=Object.keys(row.inputFiles);
+  return names.length>=3&&names.length<=66&&names.includes('manifest.json')&&names.includes('scan.json')&&
+   names.every(name=>['manifest.json','scan.json'].includes(name)||sourceInputName(name))&&
+@@ -52,7 +52,7 @@
+  const receipts=Array.isArray(run.reviewerExecutions)?run.reviewerExecutions.slice(0,1000):[];
+  const seen=new Set(),covered=new Set(),invalidReceiptIndices=[],duplicateReceiptIndices=[],legacyReceiptIndices=[];
+  for(const [index,row] of receipts.entries()){
+-  if(record(row)&&row.version===1)legacyReceiptIndices.push(index);
++  if(record(row)&&(row.version===1||run.version===3&&row.version!==3))legacyReceiptIndices.push(index);
+   if(!executionValid(row,run,frozenSha256)||!receiptInputsValid(row)){invalidReceiptIndices.push(index);continue}
+   if(seen.has(row.inputSha256)){duplicateReceiptIndices.push(index);continue}
+   seen.add(row.inputSha256);
+@@ -90,15 +90,16 @@
+  }
+ }
+ function validateDataset(dataset){
+- requireValue(dataset?.version===2&&Array.isArray(dataset.cases)&&dataset.cases.length>0&&dataset.cases.length<=1000);
++ requireValue([2,3].includes(dataset?.version)&&Array.isArray(dataset.cases)&&dataset.cases.length>0&&dataset.cases.length<=1000);
+  const ids=new Set(),locations=new Set();
+  for(const row of dataset.cases){
+   requireValue(record(row)&&typeof row.id==='string'&&/^[A-Za-z0-9][A-Za-z0-9._-]{0,119}$/.test(row.id)&&!ids.has(row.id));
+   ids.add(row.id);
+   requireValue(['python','php','javascript','typescript','java','cpp'].includes(row.language)&&/^CWE-[1-9][0-9]{0,5}$/.test(row.cwe));
+   requireValue(['positive','negative'].includes(row.truth)&&hashPattern.test(row.sourceSha256??''));
+-  requireValue(record(row.location)&&['line','column'].every(key=>Number.isSafeInteger(row.location[key])&&row.location[key]>=1&&row.location[key]<=1000000));
+-  const location=[row.sourceSha256,row.language,row.cwe,row.location.line].join(':');
++  if(dataset.version===2||row.pointId!==null)requireValue(record(row.location)&&['line','column'].every(key=>Number.isSafeInteger(row.location[key])&&row.location[key]>=1&&row.location[key]<=1000000));
++  if(dataset.version===3)requireValue(row.language==='python'&&sourceInputName('sources/'+row.path)&&(row.pointId===null?row.truth==='negative'&&row.location===null:hashPattern.test(row.pointId??'')));
++  const location=dataset.version===3?(row.pointId??'file:'+row.sourceSha256):[row.sourceSha256,row.language,row.cwe,row.location.line].join(':');
+   requireValue(!locations.has(location));locations.add(location);
+   requireValue(record(row.oracle)&&typeof row.oracle.reference==='string'&&row.oracle.reference.length>0&&row.oracle.reference.length<=1200);
+  }
+@@ -106,7 +107,7 @@
+ function validDecisionEvidence(row,output){
+  return Array.isArray(output.evidence)&&output.evidence.length>0&&output.evidence.length<=20&&output.evidence.every(item=>
+   record(item)&&['human-review','sandbox-verification'].includes(item.kind)&&
+-  item.caseId===row.id&&item.decision===output.decision&&item.inputSha256===row.sourceSha256&&hashPattern.test(item.artifactSha256??''));
++  (row.pointId===undefined||item.pointId===row.pointId)&&item.caseId===row.id&&item.decision===output.decision&&item.inputSha256===row.sourceSha256&&hashPattern.test(item.artifactSha256??''));
+ }
+ function countsFor(rows){
+  const raw={positiveHit:0,positiveMiss:0,negativeHit:0,negativeNoHit:0,unknown:0};
+@@ -150,15 +151,16 @@
+ const usageRequired=dataset=>({datasetSha256:digest(dataset),sourceSha256:[...new Set(dataset.cases.map(row=>row.sourceSha256))].sort(),
+  action:'Record every acceptance attempt, including failure, in the usage ledger before any further freeze; this offline tool does not write the ledger'});
+ 
+-export function freezeReviewInputs(dataset,policy,identity,ledger,reviewerSnapshot){
++export function freezeReviewInputs(dataset,policy,identity,ledger,reviewerSnapshot,locationExecutions){
+  validateDataset(dataset);
+  validatePolicy(policy);
+  requireValue(identityValid(identity));
+  if(reviewerSnapshot!==undefined)requireValue(snapshotValid(reviewerSnapshot)&&reviewerSnapshot.version===2&&digest(reviewerSnapshot)===identity.reviewer);
++ const locations=dataset.version===3?freezeLocations(dataset,identity,reviewerSnapshot,locationExecutions):undefined;
+  const used=validateLedger(ledger);
+  const usedSet=new Set(used);
+  if(dataset.cases.some(row=>usedSet.has(row.sourceSha256)))throw Error('Acceptance source already used in the sample ledger');
+- return{version:2,createdAt:new Date().toISOString(),datasetSha256:digest(dataset),policySha256:digest(policy),ledgerSha256:digest(ledger),
++ return{version:dataset.version, ...(locations?{locations,locationsSha256:digest(locations)}:{}),createdAt:new Date().toISOString(),datasetSha256:digest(dataset),policySha256:digest(policy),ledgerSha256:digest(ledger),
+   identity:{...identity},...(reviewerSnapshot===undefined?{}:{reviewerSnapshot:structuredClone(reviewerSnapshot)}),
+   developmentSourceSha256:used,usageRequired:usageRequired(dataset)};
+ }
+@@ -167,12 +169,16 @@
+  validateDataset(dataset);
+  validatePolicy(policy);
+  const used=validateLedger(ledger);
+- requireValue(run?.version===2&&identityValid(run.identity)&&timestamp(run.startedAt)&&hashPattern.test(run.datasetSha256??'')&&hashPattern.test(run.freezeSha256??''));
+- requireValue(freeze?.version===2&&identityValid(freeze.identity)&&timestamp(freeze.createdAt));
++ requireValue([2,3].includes(run?.version)&&identityValid(run.identity)&&timestamp(run.startedAt)&&hashPattern.test(run.datasetSha256??'')&&hashPattern.test(run.freezeSha256??''));
++ requireValue([2,3].includes(freeze?.version)&&identityValid(freeze.identity)&&timestamp(freeze.createdAt));
+  requireValue(Array.isArray(freeze.developmentSourceSha256)&&freeze.developmentSourceSha256.length<=20000&&
+   freeze.developmentSourceSha256.every(value=>typeof value==='string'&&hashPattern.test(value)));
+  requireValue(Array.isArray(run.outputs)&&run.outputs.length<=dataset.cases.length);
+  const blockers=new Set(),overlap=[],records=new Map(),caseBlockers=[],artifactCases=new Map(),decisionBindings=new Map();
++ const precise=dataset.version===3;
++ if(run.version!==dataset.version||freeze.version!==dataset.version)blockers.add('location-schema-mismatch');
++ const actual=precise?preciseArtifacts(dataset,run,freeze):null;
++ if(actual)for(const issue of actual.issues)blockers.add(issue);
+  const ids=new Set(dataset.cases.map(row=>row.id));
+  for(const output of run.outputs){
+   requireValue(record(output)&&ids.has(output.id)&&!records.has(output.id)&&['hit','no-hit','unknown'].includes(output.raw)&&
+@@ -225,6 +231,12 @@
+   const selection=selectionIssue(row);
+   if(selection){blockers.add(selection);reasons.push(selection)}
+   let output=records.get(row.id)??{id:row.id,raw:'unknown',decision:'unknown',evidence:[]};
++  if(precise){
++   const source=actual.cases.get(row.id);
++   if(!source||source.raw!==output.raw||output.pointId!==row.pointId||output.location?.sourceSha256!==row.sourceSha256){
++    output={...output,raw:'unknown',decision:'unknown'};blockers.add('execution-point-output-mismatch');reasons.push('execution-point-output-mismatch');
++   }
++  }
+   if(output.raw==='hit'&&(output.location?.line!==row.location.line||output.location?.sourceSha256!==row.sourceSha256||
+      output.language!==row.language||output.cwe!==row.cwe)){
+    output={...output,raw:'unknown',decision:'unknown'};blockers.add('scan-location-mismatch');reasons.push('scan-location-mismatch');
+@@ -261,8 +273,8 @@
+   for(const reason of reasons)blockers.add(category+':'+reason);
+   categories[category]={...summary,diagnostic:countsFor(rows),excludedFromQualification:rows.filter(item=>!qualifyingSample(item.row)).map(item=>item.row.id),thresholds:limits??null,blockers:reasons};
+  }
+- return{version:6,state:blockers.size?'blocked':'eligible-for-release-review',r3Qualified:false,executionEnabled:false,
+-  reviewerCoverage:coverage,
++ return{version:7,legacyDiagnosticOnly:!precise,state:blockers.size?'blocked':precise?'eligible-for-release-review':'diagnostic-only',r3Qualified:false,executionEnabled:false,
++  reviewerCoverage:coverage,...(actual?{executionPoints:dataset.cases.map(row=>({id:row.id,path:row.path,sourceSha256:row.sourceSha256,pointId:row.pointId,location:row.location,actual:actual.cases.get(row.id)??{raw:'unknown'}}))}:{}),
+   categories,blockers:[...blockers],caseBlockers,developmentOverlap:overlap,usageRequired:usageRequired(dataset),freezeTrust:'self-attested; digest and attempt-consumption ledger need an independent release-review check',
+   artifactReuse:[...artifactCases].filter(([,cases])=>cases.size>1).map(([sha256,cases])=>({sha256,caseIds:[...cases]})),
+   definitions:{
+@@ -283,6 +295,96 @@
+   }};
+ }
+ 
++
++// v3 point identities and frozen inventories bind actual scanner/reviewer artifacts.
++const supportedRules=new Set(['policy.harness.python.eval','policy.harness.python.exec','policy.harness.python.request-to-dynamic-code']);
++const position=p=>record(p)&&Object.keys(p).sort().join(',')==='col,line,offset'&&Number.isSafeInteger(p.line)&&p.line>=1&&Number.isSafeInteger(p.col)&&p.col>=1&&Number.isSafeInteger(p.offset)&&p.offset>=0&&p.offset<=1048576;
++function pointValid(p,hash){
++ return record(p)&&p.sourceSha256===hash&&hashPattern.test(hash??'')&&['eval','exec','builtins.eval','builtins.exec'].includes(p.callee)&&
++ record(p.call)&&position(p.call.start)&&position(p.call.end)&&p.call.end.offset>p.call.start.offset&&
++ (p.call.end.line>p.call.start.line||p.call.end.line===p.call.start.line&&p.call.end.col>p.call.start.col)&&
++ p.id===digest({sourceSha256:p.sourceSha256,callee:p.callee,call:p.call})&&p.builtinIdentity==='unverified'&&
++ (p.argument===null||record(p.argument)&&position(p.argument.start)&&position(p.argument.end)&&p.argument.start.offset>=p.call.start.offset&&p.argument.end.offset<=p.call.end.offset&&p.argument.end.offset>p.argument.start.offset);
++}
++function bindingValid(binding,snapshot,identity){
++ if(!record(binding)||binding.version!==1||binding.snapshotSha256!==identity.reviewer||binding.imageId!==snapshot?.imageId||!Number.isSafeInteger(binding.uid)||binding.uid<=0)return false;
++ const inv=binding.inventory;
++ if(!record(inv)||inv.version!==1||inv.protocol!=='python-sink-locations-1'||!/^3\.\d+\.\d+$/.test(inv.runtimePython)||!record(inv.files))return false;
++ const files=Object.entries(inv.files);if(files.length<1||files.length>64)return false;
++ return files.every(([path,f])=>sourceInputName('sources/'+path)&&record(f)&&hashPattern.test(f.sha256??'')&&Number.isSafeInteger(f.bytes)&&f.bytes>=0&&f.bytes<=1048576&&
++ ['completed','unavailable'].includes(f.state)&&Array.isArray(f.points)&&f.points.length<=64&&new Set(f.points.map(p=>p.id)).size===f.points.length&&
++ f.points.every(p=>pointValid(p,f.sha256)&&p.call.end.offset<=f.bytes)&&(f.state!=='unavailable'||f.points.length===0));
++}
++function artifactBinding(value,snapshot,identity,operation){
++ try{
++  const r=value.reviewerExecution,b=value.locationBinding,report=JSON.parse(value.reportJson);
++  if(!bindingValid(b,snapshot,identity)||r?.version!==3||r.state!=='completed'||r.operation!==operation||r.snapshotSha256!==identity.reviewer||
++   r.locationBindingSha256!==digest(b)||createHash('sha256').update(value.reportJson).digest('hex')!==r.reportSha256||!receiptInputsValid(r)||
++   report.version!==2||(report.operation??'review')!==operation||digest(report.locations)!==digest(b.inventory)||
++   !timestamp(r.startedAt)||!timestamp(r.finishedAt)||Date.parse(r.finishedAt)<Date.parse(r.startedAt))return null;
++  const files=Object.fromEntries(Object.entries(r.inputFiles).filter(([n])=>sourceInputName(n)).map(([n,h])=>[n.slice(8),h]));
++  if(digest(files)!==digest(Object.fromEntries(Object.entries(b.inventory.files).map(([n,f])=>[n,f.sha256]))))return null;
++  return{binding:b,receipt:r,report};
++ }catch{return null}
++}
++function rowBound(row,bindings){
++ const matches=bindings.flatMap(b=>{const f=b.inventory.files[row.path];return f&&f.sha256===row.sourceSha256?[f]:[]});
++ if(matches.length!==1||matches[0].state!=='completed')return false;
++ if(row.pointId===null)return matches[0].points.length===0;
++ const points=matches[0].points.filter(p=>p.id===row.pointId);
++ return points.length===1&&row.location.line===points[0].call.start.line&&row.location.column===points[0].call.start.col;
++}
++function freezeLocations(dataset,identity,snapshot,values){
++ requireValue(snapshotValid(snapshot)&&Array.isArray(values)&&values.length>0&&values.length<=1000);
++ const rows=values.map(v=>artifactBinding(v,snapshot,identity,'locations'));requireValue(rows.every(Boolean));
++ const locations=values.map(v=>({reviewerExecution:structuredClone(v.reviewerExecution),locationBinding:structuredClone(v.locationBinding),reportJson:v.reportJson}));
++ requireValue(dataset.cases.every(row=>rowBound(row,rows.map(r=>r.binding))));
++ requireValue(rows.every(r=>Date.parse(r.receipt.finishedAt)<=Date.now()));
++ return locations;
++}
++function preciseArtifacts(dataset,run,freeze){
++ const issues=[],cases=new Map();let frozen;
++ try{
++  requireValue(Array.isArray(freeze.locations)&&freeze.locations.length>0&&freeze.locations.length<=1000&&digest(freeze.locations)===freeze.locationsSha256);
++  frozen=freeze.locations.map(v=>artifactBinding(v,freeze.reviewerSnapshot,freeze.identity,'locations'));
++  requireValue(frozen.every(r=>r&&Date.parse(r.receipt.finishedAt)<=Date.parse(freeze.createdAt)));
++  requireValue(dataset.cases.every(row=>rowBound(row,frozen.map(r=>r.binding))));
++ }catch{return{issues:['frozen-locations-invalid-or-changed'],cases}}
++ if(!Array.isArray(run.reviewArtifacts)||run.reviewArtifacts.length!==run.reviewerExecutions?.length||run.reviewArtifacts.length>1000)return{issues:['review-artifacts-missing'],cases};
++ const batches=[];
++ for(const [i,value] of run.reviewArtifacts.entries()){
++  try{
++   const r=run.reviewerExecutions[i],a=artifactBinding({...value,reviewerExecution:r},freeze.reviewerSnapshot,run.identity,'review');
++   requireValue(a&&frozen.some(f=>digest(f.binding)===digest(a.binding)));
++   requireValue(createHash('sha256').update(value.scanJson).digest('hex')===r.scanSha256&&createHash('sha256').update(value.manifestJson).digest('hex')===r.inputFiles['manifest.json']);
++   const manifest=JSON.parse(value.manifestJson),scan=JSON.parse(value.scanJson),maps=a.report.findingLocations;
++   requireValue(digest(manifest.locationBinding)===digest(a.binding)&&manifest.scanSha256===r.scanSha256&&digest(manifest.files)===digest(Object.fromEntries(Object.entries(a.binding.inventory.files).map(([n,f])=>[n,f.sha256]))));
++   requireValue(Array.isArray(scan.results)&&scan.results.length<=2000&&Array.isArray(maps)&&maps.length===scan.results.length);
++   for(const [j,m] of maps.entries()){
++    const hit=scan.results[j];requireValue(record(m)&&m.index===j&&['bound','unmatched','ignored'].includes(m.state));
++    const path=typeof hit?.path==='string'?hit.path.replace(/^\/src\//,''):null,file=a.binding.inventory.files[path];
++    const span={start:hit?.start,end:hit?.end},rangeValid=position(span.start)&&position(span.end)&&span.end.offset>span.start.offset&&span.end.offset<=(file?.bytes??-1);
++    const expected={'policy.harness.python.eval':'eval','policy.harness.python.exec':'exec'}[hit?.check_id];
++    const candidates=rangeValid&&file?.state==='completed'&&supportedRules.has(hit?.check_id)?file.points.filter(p=>span.start.offset<=p.call.start.offset&&p.call.end.offset<=span.end.offset||!expected&&p.argument!==null&&digest(p.argument)===digest(span)):[];
++    const unique=candidates.length===1&&(!expected||candidates[0].callee.split('.').at(-1)===expected)?candidates[0]:null;
++    if(m.state==='bound')requireValue(unique&&m.path===path&&m.rule===hit.check_id&&m.pointId===unique.id&&digest(m.point)===digest(unique)&&digest(m.scannerSpan)===digest(span));
++    else requireValue(!unique);
++   }
++   batches.push({...a,scan,maps});
++  }catch{issues.push('review-artifact-binding-invalid:'+i)}
++ }
++ for(const row of dataset.cases){
++  const matches=batches.filter(b=>b.binding.inventory.files[row.path]?.sha256===row.sourceSha256);
++  if(matches.length!==1)continue;
++  const b=matches[0],scanned=b.scan.paths?.scanned;
++  const covered=Array.isArray(b.scan.errors)&&b.scan.errors.length===0&&Array.isArray(scanned)&&scanned.includes('/src/'+row.path);
++  const uncertain=b.maps.some(m=>m.path===row.path&&m.state==='unmatched'&&supportedRules.has(m.rule));
++  const hits=b.maps.filter(m=>m.state==='bound'&&m.pointId===row.pointId);
++  cases.set(row.id,{raw:!covered||uncertain?'unknown':hits.length?'hit':'no-hit',pointId:row.pointId,rawHits:hits.length});
++ }
++ return{issues,cases};
++}
++
+ function readInput(path){
+  const limit=2*1024*1024,fd=openSync(path,constants.O_RDONLY|constants.O_NOFOLLOW|constants.O_NONBLOCK);
+  try{
+@@ -302,7 +404,7 @@
+ if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
+  try{
+   if(process.argv[2]==='--freeze'){
+-   if(![7,8].includes(process.argv.length))throw Error('Usage: review_quality_gate.mjs --freeze DATASET POLICY IDENTITY LEDGER [REVIEWER_SNAPSHOT]');
++   if(![7,8,9].includes(process.argv.length))throw Error('Usage: review_quality_gate.mjs --freeze DATASET POLICY IDENTITY LEDGER [REVIEWER_SNAPSHOT [LOCATION_EXECUTIONS]]');
+    console.log(JSON.stringify(freezeReviewInputs(...process.argv.slice(3).map(readInput)),null,2));
+   }else{
+    if(process.argv.length!==7)throw Error('Usage: review_quality_gate.mjs DATASET RUN FREEZE POLICY LEDGER');
+--- before/work/harness-purge-improved/package/scripts/eval_evidence_batch.py
++++ current/work/harness-purge-improved/package/scripts/eval_evidence_batch.py
+@@ -1,5 +1,6 @@
+ """Associate Python review evidence with a fixed source inventory and scan export."""
+ import argparse
++import ast
+ from hashlib import sha256
+ import json
+ import os
+@@ -58,6 +59,138 @@
+     return sources
+ 
+ 
++MAPPING_PROTOCOL = 'python-sink-locations-1'
++
++
++def location_digest(value):
++    raw = json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=True).encode()
++    return sha256(raw).hexdigest()
++
++
++def node_span(source, node):
++    raw = source.encode('utf-8')
++    offsets = [0]
++    offsets.extend(index + 1 for index, byte in enumerate(raw) if byte == 10)
++    def position(line, column):
++        return {'line': line, 'col': column + 1, 'offset': offsets[line - 1] + column}
++    return {'start': position(node.lineno, node.col_offset),
++            'end': position(node.end_lineno, node.end_col_offset)}
++
++
++def call_name(node):
++    if isinstance(node.func, ast.Name):
++        return node.func.id
++    if (isinstance(node.func, ast.Attribute) and isinstance(node.func.value, ast.Name)
++            and node.func.value.id == 'builtins' and node.func.attr in {'eval', 'exec'}):
++        return 'builtins.' + node.func.attr
++    return None
++
++
++def call_location(source, node, name):
++    source_sha = sha256(source.encode('utf-8')).hexdigest()
++    span = node_span(source, node)
++    identity = {'sourceSha256': source_sha, 'callee': name, 'call': span}
++    return {**identity, 'id': location_digest(identity), 'builtinIdentity': 'unverified',
++            'argument': node_span(source, node.args[0]) if node.args and not isinstance(node.args[0], ast.Starred) else None}
++
++
++def location_inventory(sources):
++    if not isinstance(sources, dict) or not 1 <= len(sources) <= MAX_FILES:
++        raise ValueError('invalid location sources')
++    files = {}
++    total = 0
++    for name, source in sorted(sources.items()):
++        if not RELATIVE_PY.fullmatch(name) or not isinstance(source, str):
++            raise ValueError('invalid location source')
++        raw = source.encode('utf-8')
++        total += len(raw)
++        if len(raw) > MAX_BYTES or total > MAX_TOTAL_BYTES:
++            raise ValueError('location source limit')
++        entry = {'sha256': sha256(raw).hexdigest(), 'bytes': len(raw), 'state': 'completed', 'points': []}
++        files[name] = entry
++        try:
++            if any(byte == 13 and raw[index:index+2] != b'\r\n' for index, byte in enumerate(raw)):
++                raise ValueError('unsupported line ending')
++            tree = ast.parse(source)
++            points = [call_location(source, node, call_name(node)) for node in ast.walk(tree)
++                      if isinstance(node, ast.Call) and call_name(node) in {'eval', 'exec', 'builtins.eval', 'builtins.exec'}]
++            if len(points) > MAX_CHECKS:
++                entry.update(state='unavailable', reason='point-limit')
++            else:
++                entry['points'] = sorted(points, key=lambda point: point['call']['start']['offset'])
++        except (SyntaxError, ValueError, RecursionError):
++            entry.update(state='unavailable', reason='source-parse-unavailable')
++    return {'version': 1, 'protocol': MAPPING_PROTOCOL, 'runtimePython': sys.version.split()[0], 'files': files}
++
++
++def valid_source_span(source, start, end):
++    raw = source.encode('utf-8')
++    def valid(point):
++        if not isinstance(point, dict) or set(point) != {'line', 'col', 'offset'}:
++            return False
++        if any(type(value) is not int for value in point.values()):
++            return False
++        offset = point['offset']
++        if not 0 <= offset <= len(raw) or offset < len(raw) and raw[offset] & 0xc0 == 0x80:
++            return False
++        line = raw[:offset].count(b'\n') + 1
++        column = offset - (raw.rfind(b'\n', 0, offset) + 1) + 1
++        return (point['line'], point['col']) == (line, column)
++    return valid(start) and valid(end) and start['offset'] < end['offset']
++
++
++def map_findings(sources, inventory, hits):
++    if inventory != location_inventory(sources):
++        raise ValueError('location inventory changed')
++    if not isinstance(hits, list) or len(hits) > 2000:
++        raise ValueError('location finding limit')
++    mappings = []
++    for index, hit in enumerate(hits):
++        row = {'index': index, 'state': 'unmatched', 'reason': 'invalid-finding'}
++        mappings.append(row)
++        if not isinstance(hit, dict):
++            continue
++        name = hit.get('path', '').removeprefix('/src/') if isinstance(hit.get('path'), str) else ''
++        rule = hit.get('check_id')
++        row.update(path=name, rule=rule, scannerSpan={'start': hit.get('start'), 'end': hit.get('end')})
++        if not isinstance(rule, str):
++            continue
++        if rule not in GUARD_RULES:
++            row.update(state='ignored', reason='unsupported-rule')
++            continue
++        if name not in sources:
++            row['reason'] = 'source-not-in-inventory'
++            continue
++        start, end = hit.get('start'), hit.get('end')
++        if not valid_source_span(sources[name], start, end):
++            row['reason'] = 'missing-or-invalid-span'
++            continue
++        entry = inventory['files'][name]
++        if entry['state'] != 'completed':
++            row['reason'] = entry['reason']
++            continue
++        expected = {'policy.harness.python.eval': 'eval', 'policy.harness.python.exec': 'exec'}.get(rule)
++        points = entry['points']
++        candidates = []
++        for point in points:
++            call = point['call']
++            contained = start['offset'] <= call['start']['offset'] and call['end']['offset'] <= end['offset']
++            argument = point['argument']
++            focused = expected is None and argument is not None and argument == {'start': start, 'end': end}
++            if contained or focused:
++                candidates.append((point, 'argument' if focused else 'call'))
++        if len(candidates) != 1:
++            row['reason'] = 'ambiguous-execution-points' if candidates else 'no-supported-execution-point'
++            continue
++        point, match = candidates[0]
++        if expected is not None and point['callee'].split('.')[-1] != expected:
++            row['reason'] = 'rule-execution-point-mismatch'
++            continue
++        row.pop('reason')
++        row.update(state='bound', pointId=point['id'], match=match, point=point)
++    return mappings
++
++
+ def discovered_requests(sources):
+     siblings = {}
+     for name in sources:
+@@ -80,6 +213,11 @@
+     hits = scan.get('results')
+     if not isinstance(requests, list) or len(requests) > MAX_CHECKS or not isinstance(hits, list) or len(hits) > 2000:
+         raise ValueError('invalid scan results or import requests')
++    inventory = location_inventory(sources)
++    frozen_locations = manifest.get('locations', manifest.get('locationBinding', {}).get('inventory'))
++    if frozen_locations is not None and frozen_locations != inventory:
++        raise ValueError('frozen locations changed')
++    mappings = map_findings(sources, inventory, hits)
+     import_evidence, guard_evidence, plain_string_evidence = [], [], []
+     seen = set()
+     for request in requests:
+@@ -105,32 +243,49 @@
+     for caller, callee, line in sorted(seen):
+         evidence = review_import_flow(sources[caller], PurePosixPath(callee).stem, sources[callee], line)
+         if evidence:
+-            import_evidence.append({**evidence, 'callerFile': caller, 'calleeFile': callee})
++            caller_calls = [node for node in ast.walk(ast.parse(sources[caller])) if isinstance(node, ast.Call) and node.lineno == evidence['callLine']]
++            sink_points = [point for point in inventory['files'][callee]['points'] if point['call']['start']['line'] == evidence['sinkLine']]
++            if len(caller_calls) == len(sink_points) == 1:
++                import_evidence.append({**evidence, 'callerFile': caller, 'calleeFile': callee,
++                    'callerLocation': call_location(sources[caller], caller_calls[0], call_name(caller_calls[0]) or 'unresolved'),
++                    'sinkLocation': sink_points[0]})
+     import_count = len(seen)
+     seen = set()
+-    for hit in hits:
++    for hit, mapping in zip(hits, mappings):
+         if not isinstance(hit, dict) or not isinstance(hit.get('path'), str) or not isinstance(hit.get('check_id'), str):
+-            raise ValueError('invalid scan finding')
++            continue
+         name, rule, start = hit['path'].removeprefix('/src/'), hit['check_id'], hit.get('start')
+         if name not in sources or rule not in GUARD_RULES:
+             continue
+         line = start.get('line') if isinstance(start, dict) else None
+         if type(line) is not int or line < 1:
+-            raise ValueError('invalid scan finding location')
+-        key = (name, rule, line)
++            continue
++        precise = mapping['state'] == 'bound'
++        legacy = 'end' not in hit and set(start) == {'line'}
++        if not precise and not legacy:
++            continue
++        key = (name, rule, mapping['pointId'] if precise else line)
+         if key in seen:
+             continue
+         seen.add(key)
+         if len(seen) > MAX_CHECKS:
+             raise ValueError('guard check limit exceeded')
++        point = mapping['point'] if precise else None
++        if point is not None and point['callee'].startswith('builtins.'):
++            continue
+         expected_sink = {'policy.harness.python.eval': 'eval', 'policy.harness.python.exec': 'exec'}.get(rule)
+-        evidence = review_eval_guard(sources[name], line) if expected_sink != 'exec' else None
++        sink_line = point['call']['start']['line'] if precise else line
++        span = point['call'] if precise else None
++        finding = {'rule': rule, 'file': name, 'line': line}
++        if precise:
++            finding.update(pointId=point['id'], executionPoint=point, scannerSpan=mapping['scannerSpan'])
++        evidence = review_eval_guard(sources[name], sink_line, call_span=span) if expected_sink != 'exec' else None
+         if evidence:
+-            guard_evidence.append({'finding': {'rule': rule, 'file': name, 'line': line}, 'evidence': evidence})
+-        evidence = review_plain_string_guard(sources[name],line)
++            guard_evidence.append({'finding': finding, 'evidence': evidence})
++        evidence = review_plain_string_guard(sources[name],sink_line,call_span=span)
+         if evidence and (expected_sink is None or evidence['sink'] == expected_sink):
+-            plain_string_evidence.append({'finding':{'rule':rule,'file':name,'line':line},'evidence':evidence})
+-    return {'version': 1, 'guardChecks': len(seen), 'importChecks': import_count,
++            plain_string_evidence.append({'finding':finding,'evidence':evidence})
++    return {'version': 2, 'locations': inventory, 'findingLocations': mappings, 'guardChecks': len(seen), 'importChecks': import_count,
+             'discoveredImportChecks': len(discovered),
+             'guardEvidence': guard_evidence, 'importEvidence': import_evidence,
+             'plainStringEvidence': plain_string_evidence}
+@@ -142,20 +297,24 @@
+         print(json.dumps(review_batch(Path(sys.argv[2]), {'files':request['files'],'discoverImports':True},
+                                       {'results':request['results']})))
+         raise SystemExit
++    locating = len(sys.argv)>1 and sys.argv[1]=='--locations'
++    if locating:sys.argv.pop(1)
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument('root', type=Path)
+     parser.add_argument('manifest', type=Path)
+-    parser.add_argument('scan', type=Path)
++    parser.add_argument('scan', type=Path, nargs='?' if locating else None)
+     args = parser.parse_args()
+     try:
+         manifest = json.loads(read_bounded(args.manifest, MAX_BYTES))
+-        scan_raw = read_bounded(args.scan, MAX_TOTAL_BYTES)
++        scan_raw = b'{"results":[]}' if locating else read_bounded(args.scan, MAX_TOTAL_BYTES)
+         if not isinstance(manifest, dict) or manifest.get('scanSha256') != sha256(scan_raw).hexdigest():
+             raise ValueError('scan digest mismatch')
+         scan = json.loads(scan_raw)
+         if not isinstance(scan, dict):
+             raise ValueError('invalid scan export')
+-        report = review_batch(args.root.resolve(), manifest, scan)
++        if locating:
++            report={'version':2,'operation':'locations','locations':location_inventory(pinned_sources(args.root.resolve(),manifest['files'])),'findingLocations':[]}
++        else:report = review_batch(args.root.resolve(), manifest, scan)
+     except (OSError, ValueError, RecursionError) as error:
+         parser.exit(1, f'Batch rejected: {error}\n')
+     print(json.dumps(report))

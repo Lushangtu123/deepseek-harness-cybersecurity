@@ -1,0 +1,11 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="/base.css"><script src="/react.js"></script><script src="/react-dom.js"></script><title>命中位置 · 隔离候选验收</title>
+<style>body{background:#f6f7fa;color:#1b2430;font:16px system-ui;margin:0}main{max-width:1100px;margin:24px auto;padding:0 20px}.qa-note{padding:18px;background:white;border:1px solid #dde2eb;border-radius:12px;margin-bottom:20px}.rt-card{overflow-wrap:anywhere;background:#fff;color:#1b2430;border:1px solid #dce3ed;border-radius:12px;padding:20px}.rts-actions{display:flex;flex-wrap:wrap;gap:8px}button{margin:4px 6px 4px 0}li{margin:16px 0}code{overflow-wrap:anywhere}summary{cursor:pointer}</style></head>
+<body><main><div class="qa-note"><h2>命中位置 · 隔离候选验收</h2><p>正式安全审计组件 + 独立合成项目 + 真实 VM RPC。仅 Semgrep 静态检查，不执行项目代码。</p><p>字节范围关联不代表漏洞确认；日常 Harness 实例继续运行。</p></div><div id="root"></div></main>
+<script type="module">
+import {createJointPanel} from '/client.mjs';
+const [engagement,profile]=__FIXTURE__;
+const api=async request=>(await fetch('/api',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(request)})).json();
+const Component=createJointPanel(React,api);
+ReactDOM.createRoot(document.querySelector('#root')).render(React.createElement(Component,{engagement,profile}));
+</script></body></html>

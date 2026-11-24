@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-30",
+  "timezone": "America/Los_Angeles",
+  "changes": [
+    "cooperative same-origin audit mutation and recovery-clear Web Locks",
+    "storage/focus read-only sync with dirty-draft retention",
+    "explicit same-ID retry preserves another tab draft",
+    "single current-status documentation entry",
+    "fresh Ubuntu basic installation with exact direct archive pins and refusal of existing configuration"
+  ],
+  "localChecks": {
+    "pythonCases": 202,
+    "pythonFiles": 24,
+    "pluginNodeCases": 447,
+    "hostNodeCases": 124,
+    "reproducibleClient": true,
+    "countsAreSeparateSuites": true,
+    "deploymentFaultCases": 7,
+    "blankDiskSeedReturnCases": 5
+  },
+  "chrome": {
+    "browser": "Google Chrome native application",
+    "sameOriginTabs": 2,
+    "controlledMalformedReply": true,
+    "parallelRetryRejectedVisibly": true,
+    "writesIncludingExplicitRetry": 2,
+    "uniqueRequestIds": 1,
+    "dirtyDraftPreserved": true,
+    "noAutomaticReplay": true,
+    "syntheticScopeRevision": 2,
+    "scopeEvents": 2,
+    "eventsPerRequest": 1,
+    "postColdStableOriginRead": true,
+    "freshBasicPluginPageRead": true,
+    "freshAccountNotConfigured": true,
+    "freshBasicViaSerializedLoopbackEntry": true,
+    "rawForwardPortChromeResetsObserved": true,
+    "doesNotProvideCrossOriginOrCrossBrowserAccessControl": true
+  },
+  "freshBasicVm": {
+    "freshUbuntuBooted": true,
+    "ubuntu": "24.04 arm64",
+    "baseSha256": "50e24e1fb79e89116e939d90aa7738f7af48c442fa1bc2510131e0b39c50348e",
+    "nodeVersion": "24.22.1",
+    "harnessVersion": "0.2.1-rc.3",
+    "pnpmVersion": "11.28.5",
+    "programFiles": 127,
+    "serviceActive": true,
+    "securitySocketActive": true,
+    "repeatApplyRefused": true,
+    "originalDiskAndSeedReturned": true,
+    "temporaryDisksRemoved": true,
+    "newVmRegistered": false,
+    "copiesCredentials": false,
+    "copiesProjects": false,
+    "professionalToolsInstalled": false,
+    "originalCapabilityRuntimeInstalled": false,
+    "runtimeOverridesApplied": false,
+    "transitiveDependenciesPrelocked": false,
+    "browserRequiresExistingSerializedHostEntry": true,
+    "rawChromeResetBottomLevelRootCause": "not-established",
+    "firstAttemptFailure": "npm11 project rebuild rejected global-only --allow-scripts flag; corrected to project allowScripts and strict explicit rebuild, then tested from another fresh base"
+  },
+  "recovery": {
+    "point": "ready-security-multiwindow-20261030",
+    "selectedProofFiles": 2616,
+    "programFiles": 127,
+    "snapshotCount": 14,
+    "previousSnapshotsPreserved": true,
+    "independentDiskActuallyBooted": true,
+    "originalInodeReturned": true,
+    "originalNowRunning": true,
+    "temporaryCopiedDiskRemoved": true,
+    "coverage": {
+      "state": "matches",
+      "name": "ready-security-multiwindow-20261030",
+      "createdAt": "2026-10-31T05:07:27Z",
+      "scope": "improved-program-tools-config",
+      "helpersMatch": true,
+      "launchAgentsMatch": true,
+      "uncoveredFiles": [],
+      "groups": {
+        "program": {
+          "state": "matches",
+          "filesChecked": 127,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "runtime": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "tools": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "config": {
+          "state": "matches",
+          "filesChecked": 11,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "plugins": {
+          "state": "matches",
+          "filesChecked": 1320,
+          "uncoveredFiles": [],
+          "differentFiles": [],
+          "differentFileCount": 0,
+          "differenceDetailsTruncated": false
+        }
+      }
+    }
+  },
+  "boundaries": {
+    "hostFullAccessGranted": false,
+    "networkOrSharingExpanded": false,
+    "newRealScansOrModelCalls": 0,
+    "realProjectTrackedFilesUnchanged": 459,
+    "realProjectGitHeadAndSixTablesUnchanged": true,
+    "realFindings": 95,
+    "allRealFindingsUnverified": true,
+    "semgrepParsingGapRemains": true,
+    "historicalSshRootCause": "unattributed",
+    "authenticatedZapImplemented": false,
+    "otherThreeVmsStoppedAndUntouched": true
+  },
+  "cloudCiAtPackaging": {
+    "state": "not-observed-before-first-push",
+    "workflow": "https://github.com/Lushangtu123/deepseek-harness-vm/actions/workflows/verify.yml"
+  },
+  "evidencePolicy": "Successful captured commands plus actual native Chrome observations. Expected RED, initial fresh-install failure and sandbox-only ps failure retained locally. Selected proof hashes are not whole-disk counts. No raw credentials, account data, private URLs, chat, browser pending requests, project databases or VM disks exported."
+}

@@ -1,0 +1,300 @@
+#!/usr/bin/env python3
+"""Recorded Docker shim: no container is created and no target is executed.
+
+Pure layout/bind/structure commands are answered by calling the real tool
+functions with a simulated runtime identity.  A run target is only a recorded
+GO/exit scenario; the observer is a separate shim.
+"""
+import hashlib
+import json
+import os
+import sys
+import time
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+import shim_common as common
+
+VALUE_OPTIONS = {
+    "--name", "--network", "--cap-drop", "--security-opt", "--memory",
+    "--memory-swap", "--cpus", "--pids-limit", "--user", "--tmpfs",
+    "--hostname", "--label", "--mount", "--env", "--entrypoint",
+}
+FLAG_OPTIONS = {"--interactive", "--read-only"}
+
+
+def log(argv):
+    path = os.environ.get("SCE_DOCKER_LOG")
+    if path:
+        with open(path, "a", encoding="utf-8") as handle:
+            handle.write(" ".join(argv) + "\n")
+
+
+def fail(message):
+    sys.stderr.write(message + "\n")
+    return 1
+
+
+def parse_create(args):
+    values = {}
+    flags = set()
+    index = 0
+    while index < len(args):
+        item = args[index]
+        if item in VALUE_OPTIONS:
+            values.setdefault(item, []).append(args[index + 1])
+            index += 2
+            continue
+        if item in FLAG_OPTIONS:
+            flags.add(item)
+            index += 1
+            continue
+        if item.startswith("--"):
+            raise SystemExit("unknown option " + item)
+        break
+    image = args[index]
+    command = args[index + 1:]
+    labels = {}
+    for item in values.get("--label", []):
+        key, _, value = item.partition("=")
+        labels[key] = value
+    mounts = []
+    for spec in values.get("--mount", []):
+        fields = dict(part.split("=", 1) for part in spec.split(",") if "=" in part)
+        mounts.append({"Source": fields.get("src"), "Destination": fields.get("dst"),
+                       "RW": fields.get("readonly") is None})
+    entrypoint = (values.get("--entrypoint") or ["/usr/bin/python3.12"])[0]
+    return {
+        "name": values["--name"][0],
+        "image": image,
+        "command": command,
+        "entrypoint": entrypoint,
+        "labels": labels,
+        "mounts": mounts,
+        "interactive": "--interactive" in flags,
+        "read_only": "--read-only" in flags,
+    }
+
+
+def cmd_create(args):
+    spec = parse_create(args)
+    existing = common.load_container(spec["name"])
+    if existing is not None:
+        return fail("Conflict. The container name %s is already in use" % spec["name"])
+    identifier = hashlib.sha256((spec["name"] + os.urandom(16).hex()).encode()).hexdigest()
+    container = {
+        "id": identifier,
+        "name": spec["name"],
+        "image": spec["image"],
+        "command": spec["command"],
+        "entrypoint": spec["entrypoint"],
+        "labels": spec["labels"],
+        "mounts": spec["mounts"],
+        "interactive": spec["interactive"],
+        "status": "created",
+        "pid": None,
+        "removed": False,
+    }
+    common.save_container(container)
+    print(identifier)
+    return 0
+
+
+def cmd_inspect(args):
+    format_string = "{{json .}}"
+    target = None
+    index = 0
+    while index < len(args):
+        item = args[index]
+        if item == "--type":
+            index += 2
+            continue
+        if item == "-f" or item == "--format":
+            format_string = args[index + 1]
+            index += 2
+            continue
+        target = item
+        index += 1
+    container = common.load_container(target) if target else None
+    if container is None and os.environ.get("SCE_FORCE_NAME_CONFLICT") == "1" and target:
+        container = {
+            "id": "f" * 64,
+            "name": target.lstrip("/"),
+            "image": common.IMAGE,
+            "command": [],
+            "entrypoint": "/usr/bin/python3.12",
+            "labels": {"sce.tag": "conflict", "sce.role": "foreign"},
+            "mounts": [],
+            "interactive": True,
+            "status": "created",
+            "pid": None,
+            "removed": False,
+        }
+    if container is None:
+        return fail("Error: No such object: %s" % target)
+    value = common.container_json(container)
+    formats = {
+        "{{.Id}}": container["id"],
+        "{{.State.Status}}": value["State"]["Status"],
+        "{{.State.Pid}}": str(value["State"]["Pid"]),
+        "{{.Config.Image}}": container["image"],
+        "{{.Name}}": "/" + container["name"],
+        "{{json .Mounts}}": json.dumps(value["Mounts"]),
+        "{{json .}}": json.dumps(value, sort_keys=True),
+    }
+    if format_string not in formats:
+        return fail("unsupported inspect format " + format_string)
+    print(formats[format_string])
+    return 0
+
+
+def cmd_exec(args):
+    if os.environ.get("SCE_FORCE_EXEC_FAIL") == "1":
+        return fail("simulated-exec-failure")
+    if len(args) < 3:
+        return fail("exec usage")
+    container = common.load_container(args[0])
+    if container is None:
+        return fail("Error: No such object: %s" % args[0])
+    command = args[1:]
+    if command[0].endswith("sha256sum") and len(command) >= 2:
+        try:
+            path = common.translate(container, command[1])
+        except FileNotFoundError:
+            return fail("sha256sum: no such file")
+        print("%s  %s" % (common.sha_file(path), command[1]))
+        return 0
+    print("shim-exec")
+    return 0
+
+
+def cmd_rm(args):
+    targets = [item for item in args if not item.startswith("-")]
+    if not targets:
+        return fail("rm usage")
+    container = common.load_container(targets[0])
+    if container is None:
+        return fail("Error: No such object: %s" % targets[0])
+    container["removed"] = True
+    container["status"] = "removed"
+    common.save_container(container)
+    print(container["id"])
+    return 0
+
+
+def go_line():
+    line = sys.stdin.buffer.readline(64)
+    return line == b"GO\n"
+
+
+def cmd_start(args):
+    target = [item for item in args if not item.startswith("-")][0]
+    container = common.load_container(target)
+    if container is None:
+        return fail("Error: No such object: %s" % target)
+    container["status"] = "running"
+    container["pid"] = os.getpid()
+    common.save_container(container)
+    exit_code = 0
+    try:
+        command = " ".join(container["command"])
+        if "preflight_selfcheck.py" in command:
+            delay = float(os.environ.get("SCE_PREFLIGHT_DELAY", "0") or 0)
+            if delay > 0:
+                time.sleep(delay)
+            config = common.preflight_config(container)
+            sys.stdout.write("PREFLIGHT-CONFIG " + json.dumps(config, sort_keys=True) + "\n")
+            sys.stdout.flush()
+            if not go_line():
+                return 70
+            exit_code = 0
+        elif not go_line():
+            return 70
+        elif "target_launcher.py" in command:
+            sys.stdout.write("simulated-target-stdout\n")
+            sys.stdout.flush()
+            exit_code = int(os.environ.get("SCE_TARGET_EXIT", "0"))
+        elif "experiment_compile.py" in command:
+            command_args = container["command"]
+            mode = command_args[command_args.index("--mode") + 1]
+            if mode == "bind":
+                receipt = common.bind_receipt(container)
+            else:
+                attempt = int(command_args[command_args.index("--attempt") + 1])
+                challenge = command_args[command_args.index("--challenge") + 1]
+                receipt = common.structure_receipt(container, attempt, challenge)
+            sys.stdout.write(json.dumps(receipt, sort_keys=True) + "\n")
+            sys.stdout.flush()
+            exit_code = 0 if receipt.get("state") in {"accepted", "prepared"} else 3
+        elif "layout_probe.py" in command:
+            receipt = common.layout_receipt()
+            sys.stdout.write(json.dumps(receipt, sort_keys=True) + "\n")
+            sys.stdout.flush()
+            exit_code = 0
+        else:
+            sys.stdout.write("simulated-tool\n")
+            sys.stdout.flush()
+            exit_code = 0
+        return exit_code
+    finally:
+        container["status"] = "exited"
+        common.save_container(container)
+
+
+def cmd_ps(args):
+    tag = None
+    index = 0
+    while index < len(args):
+        if args[index] == "--filter" and index + 1 < len(args):
+            value = args[index + 1]
+            if value.startswith("label=sce.tag="):
+                tag = value[len("label=sce.tag="):]
+            index += 2
+            continue
+        if args[index] in ("-a", "--all"):
+            index += 1
+            continue
+        if args[index] == "--format":
+            index += 2
+            continue
+        index += 1
+    rows = []
+    directory = common.state_dir() / "containers"
+    if tag and directory.is_dir():
+        for path in directory.glob("*.json"):
+            value = json.loads(path.read_text())
+            if value.get("removed"):
+                continue
+            if (value.get("labels") or {}).get("sce.tag") == tag:
+                rows.append("%s %s" % (value["id"], value["name"]))
+    for row in rows:
+        print(row)
+    return 0
+
+
+def main(argv):
+    if not argv:
+        return fail("usage")
+    log(argv)
+    command, args = argv[0], argv[1:]
+    if command == "image" and args[:2] == ["inspect", "-f"]:
+        print(common.IMAGE)
+        return 0
+    if command == "ps":
+        return cmd_ps(args)
+    if command == "create":
+        return cmd_create(args)
+    if command == "inspect":
+        return cmd_inspect(args)
+    if command == "exec":
+        return cmd_exec(args)
+    if command == "rm":
+        return cmd_rm(args)
+    if command == "start":
+        return cmd_start(args)
+    return fail("unsupported shim command " + command)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))

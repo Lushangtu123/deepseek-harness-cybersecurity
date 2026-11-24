@@ -1,0 +1,5 @@
+{
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 50, in <module>\nRuntimeError: Oracle process failed: Traceback (most recent call last):\n  File \"/probe.py\", line 32, in <module>\n    assert hashlib.sha256(ast.dump(cls,include_attributes=True).encode()).hexdigest()==plan['classes'][variant]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n\n",
+  "summary": "VM SSH failed (exit 1): SSH or remote command error; raw command and output omitted; ref=e621812a-4bf0-4c91-bb80-ac3b2bb383f5 phase=native-check transport=remote reported=AssertionError stdinLine=50 diagnosticSaved=true"
+}

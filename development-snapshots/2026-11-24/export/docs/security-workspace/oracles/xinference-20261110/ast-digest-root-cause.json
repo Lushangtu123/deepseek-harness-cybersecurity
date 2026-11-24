@@ -1,0 +1,25 @@
+{
+  "state": "confirmed",
+  "hostPython": "3.13.1",
+  "guestPython": "3.12.3",
+  "cause": "Different ast.dump defaults for empty AST lists in Python 3.13 and 3.12. Host show_empty=True matches both guest digests.",
+  "officialReference": "https://docs.python.org/3.13/library/ast.html#ast.dump",
+  "evidence": [
+    {
+      "file": "before.py",
+      "hostDefaultAstSha256": "bd2328077cb9fac0acc3fab36bab2f80d35d6d89992b83e49580a074f1663719",
+      "hostShowEmptyAstSha256": "4d143def13f75669bcfdf6add6319f8197e8624d87b8615db740661777049863",
+      "guestDefaultAstSha256": "4d143def13f75669bcfdf6add6319f8197e8624d87b8615db740661777049863",
+      "stableMethodSourceSha256": "66a025ea74dc17e2f7a9c8187efe1490178678c4e32f1f8362c4ee4ea1ecc5c2"
+    },
+    {
+      "file": "fixed.py",
+      "hostDefaultAstSha256": "81863e0b019e46cb963413718089f06690f985917f36d3de8a0e98051333edbd",
+      "hostShowEmptyAstSha256": "ba2de19bba057574ea00fb734ddc8fbb1c6ed534dce5ef38c6f59ce34d3da739",
+      "guestDefaultAstSha256": "ba2de19bba057574ea00fb734ddc8fbb1c6ed534dce5ef38c6f59ce34d3da739",
+      "stableMethodSourceSha256": "7db084759d2244c7bcebbe1020bc8f9c93c82bfa59760d947f62b5f326cc7484"
+    }
+  ],
+  "sourceBytesChanged": false,
+  "scannerReplayRequired": false
+}

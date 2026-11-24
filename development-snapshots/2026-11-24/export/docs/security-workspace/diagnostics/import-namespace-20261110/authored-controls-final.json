@@ -1,0 +1,259 @@
+{
+  "scope": "Authored import/namespace, generic rejection, and try/fixed-set development controls only. Zero independent qualification.",
+  "captureTests": {
+    "ImportFlowTest": {
+      "addedTests": [
+        "test_empty_literal_namespaces_preserve_conditional_import_flow",
+        "test_generic_caller_bindings_do_not_become_flask_query_identity",
+        "test_generic_type_parameters_do_not_become_builtin_or_import_identity",
+        "test_namespace_forms_outside_the_explicit_contract_stay_unknown",
+        "test_namespace_sink_support_does_not_relax_the_imported_call_site"
+      ],
+      "captureReplayPassed": true
+    },
+    "GuardReviewTest": {
+      "addedTests": [
+        "test_generic_annotation_scopes_leave_literal_guard_unknown"
+      ],
+      "captureReplayPassed": true
+    },
+    "PlainStringGuardTest": {
+      "addedTests": [
+        "test_generic_annotation_scopes_leave_string_guard_unknown"
+      ],
+      "captureReplayPassed": true
+    }
+  },
+  "sources": [
+    {
+      "sha256": "01eb34f274051a8d3310c20c0b6477f73dadf39e77dea03cad26aceb6f9b57ca",
+      "source": "from flask import request\nfrom evaluator import run as execute\n\ndef route():\n    code = custom.args.get(\"code\")\n    return execute(code)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "0ce272186b3be3be195998ad5b629faf5726d089c149a4819e632c25ea31a18e",
+      "source": "from flask import request\ndef route[exec]():\n    value = request.args.get(\"expr\")\n    if not value.startswith(\"'\") or not value.endswith(\"'\") or \"'\" in value[1:-1]:\n        return \"invalid\"\n    try:\n        return exec(value)\n    except Exception:\n        return \"error\"\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb",
+      "source": "from flask import request\nfrom evaluator import run as execute\ndef route[execute]():\n    code = request.args.get(\"code\")\n    return execute(code)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "19345c6db63321269741dd63dafeabfac9d5eb1c07e583ea7911e21bea66839d",
+      "source": "from flask import request\ndef route[eval]():\n    value = request.args.get(\"expr\")\n    if not value.startswith(\"'\") or not value.endswith(\"'\") or \"'\" in value[1:-1]:\n        return \"invalid\"\n    try:\n        return exec(value)\n    except Exception:\n        return \"error\"\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+      "source": "def run(value):\n    return exec(value, {})\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "26d8bba8bdaf375770f2e8977856f31c5225a5d9623444b2b574e20b1c69de09",
+      "source": "def run[eval](value):\n    return eval(value)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "2ddcb4cfe028d9dc9f46e37a1e8d4f7cfcb721955123d3ac2026e41c57cf0656",
+      "source": "def run(value):\n    return eval(transform(value), {})\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+      "source": "from flask import request\nfrom evaluator import run as execute\ndef route():\n    code = request.args.get(\"code\")\n    return execute(code)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "3627a101700da45b4e852f2b39f4ddfd398547553cad126e1b4460e4261d6dd9",
+      "source": "from flask import request\nfrom evaluator import run as execute\n\ndef route():\n    code = request.args.get(\"code\")\n    return execute(code)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+      "source": "def run(value):\n    return exec(value, {}, {})\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "3fe82b0a870532e4c8cad267a5716edf0a5c5629d312a25c95bf5603d08e9d82",
+      "source": "from flask import request\ndef route[exec]():\n    value = request.args.get(\"expr\")\n    if not value.startswith(\"'\") or not value.endswith(\"'\") or \"'\" in value[1:-1]:\n        return \"invalid\"\n    try:\n        return eval(value)\n    except Exception:\n        return \"error\"\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "433956f25164c7f5d19cf5a171ffd7f45b30687f97e057f4a7350e8c895e9bf7",
+      "source": "def run(value):\n    try:\n        if value not in (\"6*7\", \"7*8\"):\n            return None\n        return eval(value, {})\n    except Exception:\n        return None\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "4351963bb884deeb92b513c147a9af0bb4616ae5aa1c91821d3cb536118bff38",
+      "source": "from flask import request\nfrom evaluator import run as execute\n\ndef route():\n    code = request.args.get(\"code\")\n    return execute(*code)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "44c0ed4ba76e97e5bf774d3007a114e55092f9110eb381d0dde3dfa0028b513f",
+      "source": "from flask import request\nfrom evaluator import run as execute\n\ndef route[eval]():\n    code = request.args.get(\"code\")\n    return execute(code)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+      "source": "def run(value):\n    return eval(value, scope)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "529a0e06a330cdbd6a6292cd4a33f9dae3b82491d6435daccc9618d5df662b29",
+      "source": "def run(value):\n    return eval(value, {}, {}, {})\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "63c6edf506e70791a26d126f0bdcdd29af57c06e1e5627b50f245dac31f37b82",
+      "source": "def run(value):\n    try:\n        if value not in (\"6*7\", \"7*8\"):\n            return None\n        exec(value, {})\n    except Exception:\n        return None\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "6a24cf221bc5fdfaf01d8a6cb61bd92f2e82deb18e45b076ea9fe839729c9c25",
+      "source": "def run(value):\n    return eval(value, {\"__builtins__\": {}})\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958",
+      "source": "from flask import request\nfrom evaluator import run\ndef direct():\n    value = request.args.get(\"value\")\n    if value in (\"foo\", \"bar\"):\n        return eval(value)\ndef indirect():\n    value = request.args.get(\"value\")\n    return run(value)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "6f440ff86c70b591b0330e2a0d6b4ff2384f03b17a4d5fa1d93d02c0c40dc0a6",
+      "source": "from flask import request\ndef route[T]():\n    value = request.args.get(\"expr\")\n    if not value.startswith(\"'\") or not value.endswith(\"'\") or \"'\" in value[1:-1]:\n        return \"invalid\"\n    try:\n        return exec(value)\n    except Exception:\n        return \"error\"\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "7208f4122e1b1b3a3b0a6c7ccd67dc602ce5c5ac039d59308e89f1cb0a866602",
+      "source": "from flask import request\ndef route[eval]():\n    value = request.args.get(\"expr\")\n    if not value.startswith(\"'\") or not value.endswith(\"'\") or \"'\" in value[1:-1]:\n        return \"invalid\"\n    try:\n        return eval(value)\n    except Exception:\n        return \"error\"\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "723475445977153045e5b36cbc4474beada9d4c56091c69c210cee8b6ff24fbf",
+      "source": "from flask import request\nfrom evaluator import run as execute\n\ndef route():\n    code = request.args.get(\"code\")\n    return execute(\"constant\")\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "758e9c085007c79ef23947d4649489fb4e3a0ecbbbed16a2ab6d88c8080a5a0e",
+      "source": "class Parser:\n    def run(value):\n        try:\n            if value not in (\"6*7\", \"7*8\"):\n                return None\n            return eval(value, {})\n        except Exception:\n            return None\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "7ab524a5196c099b311f659c89f791cd03fef6a553702723c38375d6cd6a384a",
+      "source": "from flask import request\nfrom evaluator import run as execute\n\ndef route():\n    code = request.args.get(\"code\")\n    return execute(code, {})\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "906ccf3a49cfd4d1fb79f93983e18fb246a927f1ee1ca5f9b750a3221bb3e934",
+      "source": "from flask import request\ndef route[T]():\n    value = request.args.get(\"expr\")\n    if value == \"foo\":\n        return eval(value)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "93ef2032eee4382b794047d1538fbb6f268c1f28dc3c3eb41e2853803330761c",
+      "source": "class Parser:\n    def run(value):\n        try:\n            if value not in (\"6*7\", \"7*8\"):\n                return None\n            exec(value, {})\n        except Exception:\n            return None\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "9e88dfba32f6e9b5de84caaa1d13316f23e36f7b6ee9036bec8111477b9f471d",
+      "source": "from flask import request\ndef route[request]():\n    value = request.args.get(\"expr\")\n    if not value.startswith(\"'\") or not value.endswith(\"'\") or \"'\" in value[1:-1]:\n        return \"invalid\"\n    try:\n        return exec(value)\n    except Exception:\n        return \"error\"\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+      "source": "def run(value):\n    return eval(value, {}, {})\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "aed2b46cf0697628f83355d5398e2cd6b8d777a8e76eb371d0614ab1afcd9318",
+      "source": "def run(value):\n    return execute(value, {})\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "b376e861b087a30988d79829eceaa8142dcf3b65b5d4475522c7d2251974fdda",
+      "source": "def run(value):\n    return eval(value, *scopes)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+      "source": "from flask import request\nfrom evaluator import run as execute\ndef route[request]():\n    code = request.args.get(\"code\")\n    return execute(code)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+      "source": "def run[eval](value):\n    return eval(value, {}, {})\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "c7da659ac6c9f56863effcf41f5c1758b317219cb93bb25765ee2782362fd0e0",
+      "source": "from flask import request\nfrom evaluator import run as execute\n\ndef route[execute]():\n    code = request.args.get(\"code\")\n    return execute(code)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "d2702f160a7aa68f8133cad757bb3f84a164c6907ff9159dfc520257acdf16b2",
+      "source": "def run[eval](value):\n    return eval(value, {})\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "d328dc6dc38c01946c97d19929a42e6c0e891e8f2ed854d6bae0bc8e0ebb34c3",
+      "source": "from flask import request\nfrom evaluator import run as execute\n\ndef route():\n    code = request.args.get(\"code\")\n    return execute(code=code)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+      "source": "def run(value):\n    return eval(value, {})\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "d5f6253d7e19fafc04b31a2fa57a3ce179a0444a23fdf23e89f44e75bbf96756",
+      "source": "from flask import request\ndef route[eval]():\n    value = request.args.get(\"expr\")\n    if value == \"foo\":\n        return eval(value)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "d909a81bb966952305c3feb767cc61e3d65d1cb8a06e3ddd2829be2f9d9bce7f",
+      "source": "from flask import request\ndef route[request]():\n    value = request.args.get(\"expr\")\n    if not value.startswith(\"'\") or not value.endswith(\"'\") or \"'\" in value[1:-1]:\n        return \"invalid\"\n    try:\n        return eval(value)\n    except Exception:\n        return \"error\"\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "de1f10e955652e862083dfbd2fb43f403ff4fce84f3ec384db5b3d95c7c31f59",
+      "source": "from flask import request\nfrom evaluator import run as execute\n\ndef route[request]():\n    code = request.args.get(\"code\")\n    return execute(code)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "e11980e8a560a9956bee29c07d955350074d65dfbb03580d16a3f03ed237eab0",
+      "source": "def run(value):\n    return eval(value, factory())\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "e2ef45c450849a8e2840eafa7f016f313179772e61674a87f367d1a478f39688",
+      "source": "from flask import request\ndef route[T]():\n    value = request.args.get(\"expr\")\n    if not value.startswith(\"'\") or not value.endswith(\"'\") or \"'\" in value[1:-1]:\n        return \"invalid\"\n    try:\n        return eval(value)\n    except Exception:\n        return \"error\"\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "e39eae0fda449645f95ae49330af3eeea8b74254d57a6a58b1a905fc80b5e0cf",
+      "source": "def run(value):\n    return eval(value, globals={})\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "ec18f2a43e76b40105bd1ee6aeab9012b61817ce4c4055b54a2720b01fe1fba9",
+      "source": "def run(value):\n    exec(value, {})\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "eef3f66d77c39b20a233163b711a9ced3df2b748f9d5b401ee7e7fe4a45118cc",
+      "source": "from flask import request\ndef route[request]():\n    value = request.args.get(\"expr\")\n    if value == \"foo\":\n        return eval(value)\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "fa962e7cace89cd6b02fc8ceda805ec8b3948f4ec2e8d8dcf229e06adaafcd1f",
+      "source": "def run(value):\n    exec(value, {}, {})\n",
+      "role": "authored-import-namespace-development-control"
+    },
+    {
+      "sha256": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+      "source": "def run[exec](value):\n    return exec(value, {})\n",
+      "role": "authored-import-namespace-development-control"
+    }
+  ]
+}

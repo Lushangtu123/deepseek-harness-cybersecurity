@@ -1,0 +1,106 @@
+{
+  "rules": [
+    {
+      "id": "harness.python.request-to-dynamic-code",
+      "languages": [
+        "python"
+      ],
+      "severity": "WARNING",
+      "message": "Tracked input reaches the code argument of eval or exec; verify source and reachability.",
+      "metadata": {
+        "cwe": [
+          "CWE-95"
+        ],
+        "origin": "workspace-authored-candidate",
+        "status": "unverified-observation"
+      },
+      "mode": "taint",
+      "pattern-sources": [
+        {
+          "pattern": "flask.request.args",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.form",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.values",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.cookies",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.headers",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.json",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.data",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.query_string",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.get_json(...)",
+          "exact": true
+        },
+        {
+          "pattern": "flask.request.get_data(...)",
+          "exact": true
+        },
+        {
+          "pattern": "input(...)",
+          "exact": true
+        },
+        {
+          "patterns": [
+            {
+              "pattern-inside": "$APP = flask.Flask(...)\n...\n@$APP.route(...)\ndef $HANDLER(...):\n    ...\n"
+            },
+            {
+              "pattern-regex": "(?m)^(\\h*)@\\w+\\.route\\(\\h*(['\"])[^<>'\"\\r\\n]*<(?:(?:string|path):)?([A-Za-z_]\\w*)>[^<>'\"\\r\\n]*\\2[^\\r\\n]*\\)\\h*\\r?\\n\\1def\\h+[A-Za-z_]\\w*\\(\\h*(?:[A-Za-z_]\\w*\\h*,\\h*)*(?P<ROUTE_ARG>\\3)(?=\\h*[,):=])"
+            },
+            {
+              "focus-metavariable": "$ROUTE_ARG"
+            }
+          ],
+          "exact": true
+        }
+      ],
+      "pattern-sinks": [
+        {
+          "patterns": [
+            {
+              "pattern-either": [
+                {
+                  "pattern": "eval($CODE, ...)"
+                },
+                {
+                  "pattern": "exec($CODE, ...)"
+                },
+                {
+                  "pattern": "builtins.eval($CODE, ...)"
+                },
+                {
+                  "pattern": "builtins.exec($CODE, ...)"
+                }
+              ]
+            },
+            {
+              "focus-metavariable": "$CODE"
+            }
+          ],
+          "exact": true
+        }
+      ]
+    }
+  ]
+}

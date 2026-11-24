@@ -1,0 +1,261 @@
+{
+  "scope": "offline VM reviewer N3/N4 input-size/type/JSON/record read-write boundaries",
+  "tests": {
+    "macSnapshot": 52,
+    "vmSnapshot": 52,
+    "macBatch": 9,
+    "vmBatch": 9,
+    "macQualityGate": 43,
+    "vmQualityGate": 43,
+    "failures": 0,
+    "redPhases": [
+      {
+        "tests": 50,
+        "failedSubtests": 19
+      },
+      {
+        "tests": 51,
+        "failedSubtests": 3
+      },
+      {
+        "tests": 52,
+        "failedSubtests": 1
+      }
+    ]
+  },
+  "nativeMaximumAndFailures": {
+    "state": "passed",
+    "maximumAccepted": {
+      "sourceBytes": 1048576,
+      "sourceTotalBytes": 8388608,
+      "manifestBytes": 1048576,
+      "scanBytes": 8388608
+    },
+    "overflowBeforeAttempt": [
+      "source+1",
+      "scan+1",
+      "source-total+1"
+    ],
+    "readBackOriginalResult": true,
+    "invalidReports": [
+      {
+        "case": "boolean-version",
+        "state": "recovered",
+        "failure": {
+          "kind": "report-invalid"
+        },
+        "cleanup": {
+          "confirmed": true,
+          "idAbsent": true,
+          "nameAbsent": true,
+          "clientsStopped": true,
+          "creationResolved": true,
+          "errors": [],
+          "checkedAt": "2026-11-11T17:01:42.804830+00:00",
+          "clientsInitiallyStopped": true
+        }
+      },
+      {
+        "case": "utf16-report",
+        "state": "recovered",
+        "failure": {
+          "kind": "report-invalid"
+        },
+        "cleanup": {
+          "confirmed": true,
+          "idAbsent": true,
+          "nameAbsent": true,
+          "clientsStopped": true,
+          "creationResolved": true,
+          "errors": [],
+          "checkedAt": "2026-11-11T17:01:43.449195+00:00",
+          "clientsInitiallyStopped": true
+        }
+      }
+    ],
+    "newIndependentSamples": 0
+  },
+  "settledAttempts": [
+    {
+      "id": "7f987ea096044d02bead267704e84520",
+      "state": "completed",
+      "failure": null,
+      "cleanup": {
+        "checkedAt": "2026-11-11T17:01:40.992453+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "fec08dd342bf79fdc79ef37f703888554a0f19fef15d70cf231a0605800f44e4",
+      "originalResultDigestValid": true,
+      "laterContainerQueriesAbsent": true,
+      "sameSourceClientProbeEmpty": true
+    },
+    {
+      "id": "42461979f4184a198a3fd59728ec25ec",
+      "state": "recovered",
+      "failure": {
+        "kind": "report-invalid"
+      },
+      "cleanup": {
+        "checkedAt": "2026-11-11T17:01:43.449195+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "25ee52e7fb8cb4727a3ad35a8b2d59fe4e35a650ed4dce23a2b2ced544eea2e5",
+      "originalResultDigestValid": null,
+      "laterContainerQueriesAbsent": true,
+      "sameSourceClientProbeEmpty": true
+    },
+    {
+      "id": "e6953f3065524e41aab4eec7a21e1d60",
+      "state": "recovered",
+      "failure": {
+        "kind": "report-invalid"
+      },
+      "cleanup": {
+        "checkedAt": "2026-11-11T17:01:42.804830+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "99cce3e2e06a0990848a26a9bcbb17c5f4d4ba34e1750ef7023041e775ba239d",
+      "originalResultDigestValid": null,
+      "laterContainerQueriesAbsent": true,
+      "sameSourceClientProbeEmpty": true
+    },
+    {
+      "id": "e2b3b5169b4143178d5f9afc2510b3b5",
+      "state": "completed",
+      "failure": null,
+      "cleanup": {
+        "checkedAt": "2026-11-11T17:01:41.754439+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "f7315a260e298fde574531c117b80e8a74ea70404d3254d6eeba3f48cfa0a98f",
+      "originalResultDigestValid": true,
+      "laterContainerQueriesAbsent": true,
+      "sameSourceClientProbeEmpty": true
+    }
+  ],
+  "vmProtection": {
+    "dailyProgramFilesMatched": 169,
+    "dailyDatabasesLogicallyMatched": 42,
+    "dailyConfigPinsRuntimeMatched": true
+  },
+  "protectedUnchanged": {
+    "scripts/review_quality_gate.mjs": "848cbbf3fe606f8f488bdc724cdf7e7373b43580209cc7bda83ed477fedd6f0d",
+    "work/harness-purge-improved/package-files.json": "ce47db260931cfee4c418c9dd6a2145c4791e1c33855a37e876d9a561a05d023",
+    "docs/security-workspace/review-sample-ledger.json": "62f38218bb84fd4b1ff1ef2b8133d6deaa71c7d132d03501e1cf6a732b195b7e",
+    "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+    "work/harness-purge-improved/package/scripts/eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843"
+  },
+  "pluginSuiteRerun": false,
+  "pluginSuiteReason": "No plugin source/package bytes changed; bounded helper/batch/Node gate checks targeted this change.",
+  "boundaries": {
+    "r3Qualified": false,
+    "newIndependentSamples": 0,
+    "productionDeployment": false,
+    "githubPush": false,
+    "macPermissionsExpanded": false,
+    "streamingJsonParser": false,
+    "fullReportSemanticValidation": false,
+    "schemaVersionsChanged": false
+  },
+  "reviewedFiles": {
+    "scripts/reviewer_snapshot.py": "6a78dd2247f7caa2b5117c81894b6e32af16fdd344093b59d6edb5fddb2cc29e",
+    "scripts/reviewer_snapshot.test.py": "680e04e3f5d24a6a6a301f8028f27a227876897bf30d29695f39238b57d15864",
+    "docs/security-workspace/reviewer-input-boundaries.md": "95fc373b29bd7fc946780068d383e4aaaf0f567e971be6ba33185c58f4c76fb6"
+  },
+  "review": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "promptSha256": "613d07fb19c4a6260bda9c531667471653cb3df95ba3e082ffe35698af8c3903",
+    "receiptSha256": "41153822fe1f10bd00f03b94ec0efeb795f72b088f48fc830e15dfac99ca7fc4",
+    "reportSha256": "4aa91a16ad16f43f45b1a50020c64bab4211bbc9ddc6e3cb501314afada0cc19",
+    "triage": {
+      "confirmedBlockingFindings": 0,
+      "scope": "N3/N4 fixed offline candidate contract only; R3 not approved",
+      "validation": "Compared report to actual current code,52-test suite and frozen native/negative evidence; nonblocking suggestions classified without representing unrun controls as passes.",
+      "evidenceLimitations": [
+        "External prompt omitted normal VM output, raw cleanup/poll and batch/gate test source; local archive retains and hashes them.",
+        "Intermediate red-source bytes were locally saved and rehashed after review, but not present in that model prompt.",
+        "No new independent samples or measured product precision/recall."
+      ],
+      "notes": [
+        {
+          "id": "1",
+          "classification": "confirmed combined-record depth boundary; documentation corrected",
+          "action": "Standalone report limit64 combines with job/result wrappers: effective completed report depth62. Existing 63-layer rejection test passed; 62-layer positive not run, retained as test follow-up. No candidate code changes."
+        },
+        {
+          "id": "2",
+          "classification": "conditional serialization expansion risk; bounded fail-closed, retained tests/diagnostics",
+          "action": "A literal DEL report below stdout cap can exceed real16MiB serialized record cap due two copies/ASCII escaping; source guard rejects before opening temp. Current overflow test patches a smaller limit, not this actual DEL case. Preserve report digest/size on invalid completion and real-cap control remain future work."
+        },
+        {
+          "id": "3",
+          "classification": "confirmed signal/invalid-record precedence limitation, retained",
+          "action": "If cancellation races record precheck failure, completion-record-invalid can mask signal and exit1. No result published; preserve signal metadata in later refinement."
+        },
+        {
+          "id": "4",
+          "classification": "existing semantic/coverage limit, documented",
+          "action": "UTF8 text may contain NUL or invalid syntax; preflight does not prove Python parseability. Coverage is byte membership, not per-file parse or per-site analysis. Later parser-status evidence remains open."
+        },
+        {
+          "id": "5",
+          "classification": "trusted-output and cross-language differences, documented",
+          "action": "Strict helper applies input/snapshot/report/record only; Docker inspect/process probe trusted outputs still use default json. Node parser has BOM, duplicate-key, huge-number and depth differences. Escaped lone surrogates remain accepted; no I-JSON conformance claim."
+        },
+        {
+          "id": "6",
+          "classification": "additional validation/test coverage gaps, retained",
+          "action": "Negative assertions can be more specific. Missing controls include JSON variants across all entrypoints, exact real record-size positive,62-layer completed report, more encodings/nonfinite/top-level report types and VM manifest+1. Shared guards inspected, not claimed exhaustively tested."
+        },
+        {
+          "id": "7",
+          "classification": "existing stage lifecycle distinction, documented",
+          "action": "report-invalid cleans containers/clients then retains stage until explicit recover; completion-record-invalid occurs after stage deletion. Four actual VM records are settled only after recover where required."
+        },
+        {
+          "id": "8",
+          "classification": "known parser resource boundary, retained",
+          "action": "8MiB raw input plus post-parse nesting guard is not a streaming parser or process memory/time limit. Reviewer allocation estimate was not executed or adopted as measured evidence."
+        },
+        {
+          "id": "9",
+          "classification": "trusted journal metadata validation and prior N2 refinements, retained",
+          "action": "Private record numeric metadata fields not exhaustively typed. Previously tracked N2 convergence/directory/persistence/cancellation/forensic/retention/I/O issues unchanged, no claim repaired here."
+        }
+      ]
+    },
+    "confirmedBlockingFindings": 0
+  },
+  "remaining": [
+    "Unresolved creation/pre-record directory/persistence exit-code/cancellation-window and forensic separation refinements remain tracked in N2.",
+    "Long-term record/log/temp retention is still open.",
+    "Per-site/source/scan/result mapping, nonce and semantic batch equivalence remain open.",
+    "Independent artifact review and genuinely fresh positive/negative sample admission remain required."
+  ]
+}

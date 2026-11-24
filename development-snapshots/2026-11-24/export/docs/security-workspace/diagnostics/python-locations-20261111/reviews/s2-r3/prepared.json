@@ -1,0 +1,8 @@
+{
+  "promptSha256": "956175755a4de94cad56866b7c5a2c7629908e2dcc4c9b7c673b81153dc6393d",
+  "sourceFiles": {
+    "scripts/reviewer_snapshot.py": "3e5915824420c4d6f7cd19580135348df050f89659869c21f92023a0ebad533b",
+    "scripts/reviewer_locations.test.py": "ae2cb802909118dd1bb43e689340e63feb0c05146697a78a0c23a8966e50a3e4"
+  },
+  "bytes": 75864
+}

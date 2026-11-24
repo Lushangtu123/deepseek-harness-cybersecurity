@@ -1,0 +1,38 @@
+{
+  "id": "9df561b5-000d-4f2f-ae8d-dfa9b7730f2c",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "## Scope / verdict\n\nReviewed part A only: `policy_for/validate_policy`, `private/read_bytes`, `ReadBudget`, `source_snapshot`, `archive_plan`, `validate_plan`, `validate_manifest`, plus the supplied `storage_module/freeze/verify/_validate_attempt` context. I did not execute anything. **No R3 or live-acceptance claim.**\n\nI found **one record-completeness blocker in part A** (conditional on `settled_job` not independently enforcing client records), plus several concrete plan-validation/reporting conditions. I did **not** find a new blocker in the readable-regular/`nlink==1`/root-CID/read-budget/docker-config-empty checks themselves.\n\n## Blocker A1 — incomplete client-record inventory in `source_snapshot`\n\n`source_snapshot` validates the **log file names** exactly:\n\n```python\nexpected={f'client-{i}.{extension}' for i in range(1,count+1) ...}\nactual={name for name in files if name.startswith('client-')}\nif actual!=expected: raise ValueError('client log inventory mismatch')\n```\n\nbut it never requires `clients` to contain exactly one record for every index `1..count`. It only validates the events that happen to be present:\n\n```python\ncount=job.get('clientCounter',0); clients=job.get('clients',[])\nif type(count) is not int or not 0<=count<=9999 or not isinstance(clients,list) or len(clients)>128:\n    raise ValueError('invalid client inventory')\n...\nfor event in clients+([job['createClient']] if 'createClient' in job else []):\n    if not isinstance(event,dict) or type(event.get('index')) is not int or not 1<=event['index']<=count:\n        raise ValueError('invalid client record')\n    if event.get('notStarted') is not True and (...):\n        raise ValueError('client exit unconfirmed')\n```\n\nMissing indices are accepted, and duplicate indices are accepted. The `len(clients)>128` cap does not fill or require the remaining records.\n\n**Synthetic reproduction:** use the `archive.test` `job()` fixture; set `clientCounter=2`, `clients=[]`, create empty `client-1.stdout`, `client-1.stderr`, `client-2.stdout`, `client-2.stderr` with mode `0600`. With the fixture’s settled state/cleanup, `source_snapshot` returns an entry and `archive_plan` emits it. Also `clientCounter=1` with `clients=[{index:1,...},{index:1,...}]` passes. This violates “complete record and client log inventory” and can archive an incomplete record.\n\n**Condition:** if `settled_job(job)` (not included in this part) independently enforces exactly one record per client index, this collapses to a false positive. The part-A code does not enforce it. Fix: require exactly one event per index, and validate `createClient` separately.\n\n## Condition A2 — `validate_plan`/`validate_manifest` accept forged ancillary metadata\n\n`validate_plan` checks the top-level key set and important fields, but does **not** semantically validate `cacheIdentity`, `scanned`, `hashedBytes`, or `retained`. A rehashed plan with:\n\n```python\nbad['cacheIdentity']={'device':0,'inode':0}\nbad['scanned']=10**9\nbad['hashedBytes']=0\nbad['retained']=[{'source':'/arbitrary','reason':'x'}]\nbad['planSha256']=digest({k:v for k,v in bad.items() if k!='planSha256'})\n```\n\nis accepted by `validate_plan`. This is **not source-move safety** if `archive_apply` re-snapshots and ignores these fields, but it is an audit/reporting blocker if plan status/reports trust them.\n\n`validate_manifest` also does not validate `rootIdentity` at all beyond key presence. A rehashed entry with `rootIdentity=None`, or extra/malformed keys, passes `validate_plan`. If apply indexes `rootIdentity`, this becomes a `TypeError`; if it compares it, binding is incomplete. Fix strict shapes/types for `rootIdentity` and exact file-meta fields.\n\n## Condition A3 — malformed `generatedAt` raises `TypeError`, not `ValueError`\n\n`validate_plan` calls:\n\n```python\ngenerated=datetime.fromisoformat(plan['generatedAt'])\n```\n\nwithout first requiring `generatedAt` to be a string. Rehash a valid plan with `generatedAt=None`; `validate_plan` raises `TypeError`, not a clean `ValueError`/`StorageError`. If the CLI catches only `ValueError`, this is a malformed-plan crash condition. Fix type/tz checks before parsing.\n\n## Condition A4 — `read_bytes(root_cid=True)` does not reject group/other-writable root files\n\n`read_bytes` allows `root_cid=True` based on ownership/nlink/type, but does not check mode:\n\n```python\nallowed=value.st_uid==os.geteuid() or root_cid and value.st_uid==0\n```\n\nSo a root-owned regular file with mode `0666` would be read. `source_snapshot` separately rejects root-CID `mode & 0o022`, so this is **not** a blocker in the supplied part-A CID path; it becomes relevant if another caller uses `read_bytes(..., root_cid=True)` directly for CID/trusted bytes. Condition/false positive for A.\n\n## Conservative limitations, not safety blockers\n\n- `source_snapshot` caps `len(clients)>128` while `clientCounter` allows `9999` and log-name inventory allows up to `20000` entries; valid very-large-client tasks are retained/rejected conservatively.\n- `bounded_names(cache,1000)` makes `archive_plan` raise when the cache has more than 1000 entries instead of returning `retained`; bounded scan limitation.\n- The estimate in `archive_plan` intentionally rejects batches before 64 MiB unique content; conservative, not a correctness bug.\n- Same-UID replacement races and post-check `docker-config` changes remain within the known “not atomic snapshot” limitation.\n- `finishedAt` future checking uses real `now()` rather than the injected plan `clock`; test-clock behavior only, not live safety.\n\n## Out of scope / red evidence\n\nThe `limits-red` failures are in part B functions not reviewed here: `verify_archive` reads the archive before charging/checking the budget, and `load_transaction` does not reject the rehashed `../escape` transaction-manifest path in that test. I do not classify them as part-A findings, but they are not false positives for part B. S4/live Linux/root-CID/native-flow acceptance remains pending; external review is not R3."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 13544,
+    "completion_tokens": 51244,
+    "total_tokens": 64788,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 49739
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 13544
+  },
+  "streamDone": true,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 196508,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "5a82489012000f5edbf2ac3707892b39843a16e6dd9dd6af4e22b9194fb2be48",
+  "promptSha256": "9590edcec2b1cabaa7b125a5dee2a33eaac4f73bfc3abac7dc44f1d19da76c8a"
+}

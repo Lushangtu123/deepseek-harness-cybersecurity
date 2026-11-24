@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-30",
+  "timezone": "America/Los_Angeles",
+  "scope": "docked pet menu coordinate replay; original 0.4.2 plugin and drag retained",
+  "rootCause": {
+    "originalToggleMenu": "resyncSizeCfg loads size configuration on both open and close",
+    "originalSizeCfgApply": "restores saved native anchors immediately and again after 500ms",
+    "hostConflict": "100ms delayed layout reconciliation lets stale anchors paint twice",
+    "chromeBeforeInlineSteps": [
+      [
+        5,
+        401,
+        429
+      ],
+      [
+        14,
+        319,
+        193
+      ],
+      [
+        104,
+        401,
+        429
+      ],
+      [
+        512,
+        319,
+        193
+      ],
+      [
+        612,
+        401,
+        429
+      ]
+    ]
+  },
+  "fix": {
+    "foreignDockWidgetStyleAndClassReconciledInObserverMicrotask": true,
+    "nativeDragOwnershipPreserved": true,
+    "ownStyleWritesExcluded": true,
+    "otherPageChangesStillBatched": true,
+    "pendingTimerOwnedByTimerCallback": true,
+    "freePlacementBehaviorUnchanged": true
+  },
+  "checks": {
+    "focusedCases": 36,
+    "completeHostCases": 129,
+    "failedAttemptsRetainedPrivately": true,
+    "boundedIndependentReview": "no actionable issue"
+  },
+  "chrome": {
+    "actualMenuButtonOpened": {
+      "frames": 206,
+      "maxArtworkDxCssPx": 0,
+      "maxArtworkDyCssPx": 0
+    },
+    "actualMenuButtonClosed": {
+      "frames": 206,
+      "maxArtworkDxCssPx": 0,
+      "maxArtworkDyCssPx": 0
+    },
+    "naturalOldAnchorWritesInAfterRecorder": 0,
+    "naturalRecorderNotCreditedAsFaultControl": true,
+    "separateExplicitReplayControl": {
+      "source": "temporary page-local coordinate assignments, cleared on reload",
+      "fired": 2,
+      "observedAtMs": [
+        32,
+        531
+      ],
+      "requestedLeftTop": [
+        "319px",
+        "193px"
+      ],
+      "frames": 205,
+      "maxArtworkDxCssPx": 0,
+      "maxArtworkDyCssPx": 0
+    },
+    "postColdRefreshAndBalanceVisible": true,
+    "scopeLimit": "sampled Chrome viewport and corner; not a guarantee for every original animation or free mode"
+  },
+  "recovery": {
+    "point": "ready-pet-menu-20261030",
+    "selectedProofFiles": 2616,
+    "programFiles": 127,
+    "snapshotCount": 16,
+    "previousSnapshotsPreserved": true,
+    "independentCopyActuallyBooted": true,
+    "originalReturnedAndRunning": true,
+    "temporaryCopyRemoved": true,
+    "coverage": {
+      "state": "matches",
+      "name": "ready-pet-menu-20261030",
+      "createdAt": "2026-10-31T06:10:34Z",
+      "scope": "improved-program-tools-config",
+      "helpersMatch": true,
+      "launchAgentsMatch": true,
+      "uncoveredFiles": [],
+      "groups": {
+        "program": {
+          "state": "matches",
+          "filesChecked": 127,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "runtime": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "tools": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "config": {
+          "state": "matches",
+          "filesChecked": 11,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "plugins": {
+          "state": "matches",
+          "filesChecked": 1320,
+          "uncoveredFiles": [],
+          "differentFiles": [],
+          "differentFileCount": 0,
+          "differenceDetailsTruncated": false
+        }
+      }
+    }
+  },
+  "boundaries": {
+    "guestProgramsChanged": false,
+    "originalWhalePluginChanged": false,
+    "newModelOrScannerCalls": 0,
+    "hostPermissionsExpanded": false,
+    "realTrackedFilesMatched": 459,
+    "realProjectHeadAndSixTablesUnchanged": true,
+    "realFindingsRemainUnverified": 95
+  },
+  "cloudCiAtPackaging": {
+    "state": "not-observed-before-first-push",
+    "workflow": "https://github.com/Lushangtu123/deepseek-harness-vm/actions/workflows/verify.yml"
+  }
+}

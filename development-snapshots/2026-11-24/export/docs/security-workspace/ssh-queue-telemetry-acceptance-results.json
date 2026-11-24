@@ -1,0 +1,117 @@
+{
+  "state": "reviewed-controlled-acceptance-complete",
+  "scopeBlockers": 0,
+  "localFixture": {
+    "state": "passed",
+    "waiter": {
+      "reference": "af5e4a19-d4df-453d-a43f-2e7fb3e6c61b",
+      "category": "clock-read",
+      "waitMs": 242,
+      "lockAcquired": false,
+      "contended": true,
+      "lastObservedHolder": {
+        "reference": "56c30111-1396-46e7-a433-55f892eb8639",
+        "category": "program-update",
+        "seenAfterMs": 220
+      },
+      "executorEntered": false,
+      "outcome": "not-sent",
+      "elapsedMs": 247,
+      "observedAtUnix": 1794342791.0546591
+    },
+    "holder": {
+      "reference": "56c30111-1396-46e7-a433-55f892eb8639",
+      "category": "program-update",
+      "waitMs": 0,
+      "lockAcquired": true,
+      "contended": false,
+      "lastObservedHolder": null,
+      "executorEntered": true,
+      "outcome": "cancelled",
+      "elapsedMs": 283,
+      "observedAtUnix": 1794342791.059464
+    },
+    "following": {
+      "reference": "25a59ad1-f2d8-4715-9205-26081c721cf1",
+      "category": "native-check",
+      "waitMs": 0,
+      "lockAcquired": true,
+      "contended": false,
+      "lastObservedHolder": null,
+      "executorEntered": true,
+      "outcome": "completed",
+      "elapsedMs": 1,
+      "observedAtUnix": 1794342791.0789351
+    },
+    "ownedChildReaped": true,
+    "bothLocksReacquired": true,
+    "staleObserverAbsent": true,
+    "legacyFixtureReadByCli": true,
+    "newFailureUsesSameReference": true,
+    "vmRequests": 0
+  },
+  "readOnlyVmCheck": {
+    "state": "passed",
+    "oneReadOnlyReplyMatched": true,
+    "sshExecutorInvocations": 1,
+    "usedExistingPinnedTrust": true,
+    "candidateRow": {
+      "reference": "040343d7-aa48-4134-b476-e70bf79a0555",
+      "category": "diagnostic-sample",
+      "waitMs": 0,
+      "lockAcquired": true,
+      "contended": false,
+      "lastObservedHolder": null,
+      "executorEntered": true,
+      "outcome": "completed",
+      "elapsedMs": 103,
+      "observedAtUnix": 1794342815.437899
+    },
+    "bothLocksReacquired": true,
+    "isolatedTemporaryRootCleaned": true,
+    "candidateDeployed": false,
+    "installedManagerSha256": "69cc27ae32ba7be4362e6a4d94a4f253ac54d573380c98f58fa40bdb8758e401",
+    "vmConfigUnchanged": true
+  },
+  "candidateSha256": "19bd85c390e6d7482f78e77f6fe9de733258df0454d9a7921125be82b4a48bbf",
+  "review": {
+    "model": "DeepSeek-V4.1-Flash",
+    "effort": "high",
+    "finishReason": "stop",
+    "claudeQuotaReceiptSha256": "a171c6092e9280ff9994e7178a0326294c29cd599d4569852ecc4ec1b2628ef7",
+    "samePromptSha256": "549722a0c147c1a2a7d07eb6eadd5d8ffa1218b09f6842613f33ecefbb6a658d",
+    "receiptSha256": "3c8d0b606ac5408671c6511c28d94b75b743cedcf1192468b095e321748bacc0",
+    "reportSha256": "4cf57202e8c86fb7fecd6f30e1a67a4fa3eb91cae5580f62b3e0b48086d6afce",
+    "successfulVmReviewTransportCalls": 6,
+    "transportCleanup": {
+      "removed": true,
+      "workerStopped": true,
+      "dailyProgramUnchanged": true,
+      "dailyProgramFilesChecked": 169,
+      "credentialCopiedToHost": false,
+      "scope": "only owned completed model-review scratch"
+    }
+  },
+  "triage": {
+    "scopeBlockers": 0,
+    "canArchive": true,
+    "reportSha256": "4cf57202e8c86fb7fecd6f30e1a67a4fa3eb91cae5580f62b3e0b48086d6afce",
+    "disposition": "limited pass for one real read-only request plus local queue fixture",
+    "verified": [
+      "One fixed read-only SSH request with archived candidate and existing strict host-key configuration.",
+      "Queue timeout and SIGTERM process cleanup were verified in the isolated local fixture.",
+      "CLI accepted the legacy-format fixture and correlated the new timeout by reference."
+    ],
+    "limits": [
+      "The candidate wait value excludes the outer daily queue, and live cancellation was not exercised.",
+      "Stale observer absent means no attributed holder; observer contents need not have been cleared.",
+      "The local fixture result was written before TemporaryDirectory exit; no independent removal receipt was retained.",
+      "Listener name, UID and port were checked; the live test did not independently bind a PID to a UTM bundle or record host-key fingerprints.",
+      "Configuration comparison starts after installed.validate. Installed-path hash is the scope of the deployment check.",
+      "External reviewer read supplied code and evidence without running it."
+    ]
+  },
+  "dailyCandidateDeployed": false,
+  "productionRootCauseConfirmed": false,
+  "published": false
+}

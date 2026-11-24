@@ -1,0 +1,21 @@
+# Provision a new dedicated private key and independently verified known_hosts
+# inside the Harness VM first. Neither authentication file is in this export.
+Host kali-lab
+ HostName kali.harness.internal
+ Port 443
+ User harness
+ HostKeyAlias kali-lab
+ IdentityFile /home/purge/.config/harness-kali/id_ed25519
+ IdentityAgent none
+ IdentitiesOnly yes
+ BatchMode yes
+ StrictHostKeyChecking yes
+ UserKnownHostsFile /home/purge/.config/harness-kali/known_hosts
+ GlobalKnownHostsFile /dev/null
+ ClearAllForwardings yes
+ ForwardAgent no
+ ForwardX11 no
+ ConnectTimeout 8
+ ServerAliveInterval 15
+ ServerAliveCountMax 2
+ ProxyCommand /usr/bin/nc -X connect -x 10.0.2.100:3128 kali.harness.internal 443

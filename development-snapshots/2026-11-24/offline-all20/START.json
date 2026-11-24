@@ -1,0 +1,22 @@
+{
+  "baseline": "work/harness-full20-integrated-20261123",
+  "batchDeadlineSeconds": 2700,
+  "candidateManifestSha256": "affef050148f527c0a21dfb7c989eded6cd9c07f30f945ba9eb1048395d27f63",
+  "capBytes": 67108864,
+  "createdAt": "2026-11-24T05:49:02.903769+00:00",
+  "date": "2026-11-24",
+  "filesystemFloorBytes": 536870912,
+  "firstGroupIsSmoke": true,
+  "formalTargets": "0/16",
+  "groupCaptureSeconds": 100,
+  "groupOuterSeconds": 120,
+  "guestRoot": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1",
+  "kind": "fixture-return-full20-acceptance",
+  "oneBoundedReviewRevision": true,
+  "r3": "blocked",
+  "scope": "All20 owned test-fixture link closure and file/dangling fail-closed scan; tools/baseline byte-original.",
+  "sshDeadlineSeconds": 3000,
+  "stopReserveBytes": 4194304,
+  "timezone": "America/Los_Angeles",
+  "vmSubmissionsAllowed": 1
+}

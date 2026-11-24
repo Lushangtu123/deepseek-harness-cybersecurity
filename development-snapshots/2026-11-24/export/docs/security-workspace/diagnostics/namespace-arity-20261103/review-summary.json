@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "reviews": [
+    {
+      "receipt": "claude-review.json",
+      "receiptSha256": "8ba1c5289cde27bc207d6bdfea20e9c6c857839b5a99e6e3d1a7f1a26215652e",
+      "requestedModel": "claude-opus-5-5",
+      "requestedEffort": "high",
+      "actualOutputModels": [
+        "claude-opus-5-5"
+      ],
+      "acceptedAsRequestedModel": true,
+      "scope": "read-only quoted-material consistency review; no native execution and no independent truth qualification"
+    },
+    {
+      "receipt": "claude-fix.json",
+      "receiptSha256": "2dbb9140764b780fa1daa4c2f2725f1cd15555debc97838087a274a91df15c5c",
+      "requestedModel": "claude-opus-5-5",
+      "requestedEffort": "high",
+      "actualOutputModels": [
+        "claude-opus-5-5"
+      ],
+      "acceptedAsRequestedModel": true,
+      "scope": "read-only quoted-material consistency review; no native execution and no independent truth qualification"
+    }
+  ],
+  "outcome": "Accepted for archiving as undeployed sink-only development candidate; deployment and R3 not approved",
+  "fixed": [
+    "Protocol finalization provenance and overwrite refusal",
+    "Exact rule/file/start/end identity of all19 new hits",
+    "Runtime and scan source equality; per-vector value/error/frame checks",
+    "Historical rule/dataset/image/exit/error/cleanup binding and exact preserved sets",
+    "Control selection and18-authored-plus1-upstream evidence scope documented"
+  ],
+  "reviewedVerifierSha256": "e894fb7d65ba617b7586cd75da460f3bb9608344249805381dd5593a859ec708",
+  "finalVerifierSha256": "c76c7c48f0297e9ea9d89b3956105bac97f0c31be6fcaf53e8dc65a8acc4d6ed",
+  "postReviewDelta": "After second review: image/Python-version and final-state/provenance hash assertions, five more binding tests, one stale-comment fix, and provenance wording/citation clarification. Rule/probe/frozen/native receipt bytes unchanged. These additional verifier checks were tested but not sent for a third model review.",
+  "bindingTests": {
+    "priorVerifierFailed": 5,
+    "originalTests": 7,
+    "afterFixPassed": 7,
+    "finalPassed": 12
+  },
+  "retainedCaveats": [
+    "No unsigned receipt origin attestation or trusted preregistration",
+    "Only18 authored new matched sites and1 reused upstream site; normal controls deliberately match syntax",
+    "Scan sandbox source is an execution reference, not a launcher signature embedded in old receipts",
+    "Metadata consumers, duplicate handling and expanded syntax/source/callee/constraint verification remain open",
+    "Fixed Python3.12 behavior, only bounded arithmetic; no HTTP or impact demonstration"
+  ],
+  "independentQualificationCasesAdded": 0,
+  "rulesDeployed": false,
+  "r3Qualified": false,
+  "previousSKFRequestedModelClosureComplete": false
+}

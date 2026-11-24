@@ -1,0 +1,257 @@
+{
+  "state": "verified-retained",
+  "attemptRecords": [
+    {
+      "record": {
+        "cleanup": {
+          "checkedAt": "2026-11-12T04:07:09.492963+00:00",
+          "clientsInitiallyStopped": true,
+          "clientsStopped": true,
+          "confirmed": true,
+          "creationResolved": true,
+          "errors": [],
+          "idAbsent": true,
+          "nameAbsent": true
+        },
+        "clientCounter": 10,
+        "clients": [
+          {
+            "deadlineSeconds": 30,
+            "elapsedSeconds": 0.041,
+            "exitCode": 0,
+            "finishedAt": "2026-11-12T04:07:09.319351+00:00",
+            "index": 1,
+            "phase": "create",
+            "pid": 3713948,
+            "startedAt": "2026-11-12T04:07:09.276850+00:00"
+          },
+          {
+            "deadlineSeconds": 6,
+            "elapsedSeconds": 0.012,
+            "exitCode": 0,
+            "finishedAt": "2026-11-12T04:07:09.334298+00:00",
+            "index": 2,
+            "phase": "inspect",
+            "pid": 3713959,
+            "startedAt": "2026-11-12T04:07:09.320784+00:00"
+          },
+          {
+            "deadlineSeconds": 30,
+            "elapsedSeconds": 0.152,
+            "exitCode": 0,
+            "finishedAt": "2026-11-12T04:07:09.490057+00:00",
+            "index": 3,
+            "phase": "start",
+            "pid": 3713969,
+            "startedAt": "2026-11-12T04:07:09.337112+00:00"
+          },
+          {
+            "deadlineSeconds": 5,
+            "elapsedSeconds": 0.019,
+            "exitCode": 0,
+            "finishedAt": "2026-11-12T04:07:09.513794+00:00",
+            "index": 4,
+            "phase": "client-probe",
+            "pid": 3714048,
+            "startedAt": "2026-11-12T04:07:09.492981+00:00"
+          },
+          {
+            "deadlineSeconds": 6,
+            "elapsedSeconds": 0.011,
+            "exitCode": 0,
+            "finishedAt": "2026-11-12T04:07:09.527502+00:00",
+            "index": 5,
+            "phase": "lookup",
+            "pid": 3714051,
+            "startedAt": "2026-11-12T04:07:09.515095+00:00"
+          },
+          {
+            "deadlineSeconds": 6,
+            "elapsedSeconds": 0.011,
+            "exitCode": 0,
+            "finishedAt": "2026-11-12T04:07:09.541986+00:00",
+            "index": 6,
+            "phase": "inspect",
+            "pid": 3714063,
+            "startedAt": "2026-11-12T04:07:09.528999+00:00"
+          },
+          {
+            "deadlineSeconds": 8,
+            "elapsedSeconds": 0.018,
+            "exitCode": 0,
+            "finishedAt": "2026-11-12T04:07:09.562511+00:00",
+            "index": 7,
+            "phase": "remove",
+            "pid": 3714073,
+            "startedAt": "2026-11-12T04:07:09.543358+00:00"
+          },
+          {
+            "deadlineSeconds": 6,
+            "elapsedSeconds": 0.01,
+            "exitCode": 0,
+            "finishedAt": "2026-11-12T04:07:09.575033+00:00",
+            "index": 8,
+            "phase": "lookup",
+            "pid": 3714083,
+            "startedAt": "2026-11-12T04:07:09.564199+00:00"
+          },
+          {
+            "deadlineSeconds": 6,
+            "elapsedSeconds": 0.01,
+            "exitCode": 0,
+            "finishedAt": "2026-11-12T04:07:09.587927+00:00",
+            "index": 9,
+            "phase": "lookup",
+            "pid": 3714094,
+            "startedAt": "2026-11-12T04:07:09.576545+00:00"
+          },
+          {
+            "deadlineSeconds": 5,
+            "elapsedSeconds": 0.019,
+            "exitCode": 0,
+            "finishedAt": "2026-11-12T04:07:09.609910+00:00",
+            "index": 10,
+            "phase": "client-probe",
+            "pid": 3714104,
+            "startedAt": "2026-11-12T04:07:09.589400+00:00"
+          }
+        ],
+        "containerId": "d72da174e7821052467be838ae62873ee13aa11a735b69819284b007fee6a70d",
+        "containerObserved": true,
+        "createClient": {
+          "deadlineSeconds": 30,
+          "elapsedSeconds": 0.041,
+          "exitCode": 0,
+          "finishedAt": "2026-11-12T04:07:09.319351+00:00",
+          "index": 1,
+          "phase": "create",
+          "pid": 3713948,
+          "startedAt": "2026-11-12T04:07:09.276850+00:00"
+        },
+        "createSucceeded": true,
+        "creationAttempted": true,
+        "creationJournalVersion": 1,
+        "datasetSha256": "15c249b3e5a9e2ecc39e6bfe3815224dcc224949177d9855cb08aff45795b00d",
+        "directory": "/home/purge/.cache/r3-controlled-storage-78f74ecec06e/normal-attempts/review-2aeea4391a3c435092f313bccd0a0bb5",
+        "finishedAt": "2026-11-12T04:07:09.611857+00:00",
+        "freezeSha256": "6e9f4833e7c82130f5bc8603c33613802821195abcf34587707486a08f5cc42b",
+        "id": "2aeea4391a3c435092f313bccd0a0bb5",
+        "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+        "inputSha256": "82b3742a95eada0271aa1de6b8f2c04c7eab5a66daf823f0bd42ed4b0574d601",
+        "name": "harness-review-2aeea4391a3c435092f313bccd0a0bb5",
+        "result": {
+          "attemptDirectory": "/home/purge/.cache/r3-controlled-storage-78f74ecec06e/normal-attempts/review-2aeea4391a3c435092f313bccd0a0bb5",
+          "cleanup": {
+            "checkedAt": "2026-11-12T04:07:09.492963+00:00",
+            "clientsInitiallyStopped": true,
+            "clientsStopped": true,
+            "confirmed": true,
+            "creationResolved": true,
+            "errors": [],
+            "idAbsent": true,
+            "nameAbsent": true
+          },
+          "inputFiles": {
+            "manifest.json": "4d7b76ea492751511e581a6294e0fdb043e3d93ae3273b33171f26b971d038ea",
+            "scan.json": "ff9be56babc328d3e65b2104dc0d1ed661c688ccc0b8a7e7306265144060546d",
+            "sources/evaluator.py": "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+            "sources/routes.py": "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+          },
+          "report": {
+            "discoveredImportChecks": 1,
+            "guardChecks": 1,
+            "guardEvidence": [
+              {
+                "evidence": {
+                  "assignmentLine": 4,
+                  "disposition": "unverified",
+                  "evalLine": 6,
+                  "guardLine": 5,
+                  "literalCount": 2,
+                  "observation": "literal-identifier-guard-observed"
+                },
+                "finding": {
+                  "file": "routes.py",
+                  "line": 6,
+                  "rule": "policy.harness.python.eval"
+                }
+              }
+            ],
+            "importChecks": 1,
+            "importEvidence": [
+              {
+                "callLine": 9,
+                "calleeFile": "evaluator.py",
+                "callerFile": "routes.py",
+                "definitionLine": 1,
+                "disposition": "unverified",
+                "importLine": 2,
+                "observation": "direct-import-execution-flow-observed",
+                "sink": "exec",
+                "sinkLine": 2,
+                "sourceLine": 8
+              }
+            ],
+            "plainStringEvidence": [],
+            "version": 1
+          },
+          "reportJson": "{\"version\": 1, \"guardChecks\": 1, \"importChecks\": 1, \"discoveredImportChecks\": 1, \"guardEvidence\": [{\"finding\": {\"rule\": \"policy.harness.python.eval\", \"file\": \"routes.py\", \"line\": 6}, \"evidence\": {\"observation\": \"literal-identifier-guard-observed\", \"assignmentLine\": 4, \"guardLine\": 5, \"evalLine\": 6, \"literalCount\": 2, \"disposition\": \"unverified\"}}], \"importEvidence\": [{\"observation\": \"direct-import-execution-flow-observed\", \"sourceLine\": 8, \"importLine\": 2, \"callLine\": 9, \"definitionLine\": 1, \"sinkLine\": 2, \"sink\": \"exec\", \"disposition\": \"unverified\", \"callerFile\": \"routes.py\", \"calleeFile\": \"evaluator.py\"}], \"plainStringEvidence\": []}\n",
+          "reviewerExecution": {
+            "datasetSha256": "15c249b3e5a9e2ecc39e6bfe3815224dcc224949177d9855cb08aff45795b00d",
+            "finishedAt": "2026-11-12T04:07:09.611857+00:00",
+            "freezeSha256": "6e9f4833e7c82130f5bc8603c33613802821195abcf34587707486a08f5cc42b",
+            "inputFiles": {
+              "manifest.json": "4d7b76ea492751511e581a6294e0fdb043e3d93ae3273b33171f26b971d038ea",
+              "scan.json": "ff9be56babc328d3e65b2104dc0d1ed661c688ccc0b8a7e7306265144060546d",
+              "sources/evaluator.py": "43a027ae98a6c4b0035f17ed73d0f1cb5757ddfc019b5fc8b8a0ea583c59082b",
+              "sources/routes.py": "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958"
+            },
+            "inputSha256": "82b3742a95eada0271aa1de6b8f2c04c7eab5a66daf823f0bd42ed4b0574d601",
+            "reportSha256": "dad005b20e9d412a444f000e0bf79e8ef33949b95ada8d764ec9e06dad7645de",
+            "scanSha256": "ff9be56babc328d3e65b2104dc0d1ed661c688ccc0b8a7e7306265144060546d",
+            "snapshotSha256": "79df0452c3132d8d4361261af24ec94f3ea23c898441337f253388c5aa8603e1",
+            "startedAt": "2026-11-12T04:07:09.274300+00:00",
+            "state": "completed",
+            "version": 2
+          },
+          "reviewerSnapshot": {
+            "entrypoint": "eval_evidence_batch.py",
+            "files": {
+              "eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+              "eval_guard_review.py": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+              "eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843"
+            },
+            "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+            "kind": "python-evidence-reviewer",
+            "launcherSha256": "10e152e231e5d43def8f1edace15edcffd4bae088c22f1790b92b5434385c55e",
+            "storageSha256": "68d1ffc787aefa09c162cff523690d21959b57158022510bef2bf0e7f2189202",
+            "version": 2
+          },
+          "temporaryRemoved": true
+        },
+        "resultSha256": "bb6574ee647fa103b26dd46178a2307503e74371b870e035d9d8c6439392f786",
+        "snapshotSha256": "79df0452c3132d8d4361261af24ec94f3ea23c898441337f253388c5aa8603e1",
+        "stageRemoved": true,
+        "startedAt": "2026-11-12T04:07:09.274300+00:00",
+        "state": "completed",
+        "storageReservation": {
+          "bytes": 100686907,
+          "controllerPid": 3713940,
+          "createdAt": "2026-11-12T04:07:09.272566+00:00",
+          "directory": "/home/purge/.cache/r3-controlled-storage-78f74ecec06e/normal-attempts/review-2aeea4391a3c435092f313bccd0a0bb5",
+          "id": "2aeea4391a3c435092f313bccd0a0bb5",
+          "inputBytes": 23611,
+          "policySha256": "cf8172bf3801eea721cb6066cdb4f5ba5294d45e614f7acd4dc9c7ad5b515a6d"
+        },
+        "version": 1,
+        "recordedOnly": true
+      },
+      "recordSha256": "d462785ee080124d602f55be655d89de7ac5751df5ae9ab1bd748f99561d879f",
+      "laterContainerQueriesAbsent": true,
+      "sameSourceClientProbeEmpty": true
+    }
+  ],
+  "scratchRemoved": false,
+  "retention": "manual cleanup only; task evidence preserved",
+  "noOwnedContainersOrClients": true
+}

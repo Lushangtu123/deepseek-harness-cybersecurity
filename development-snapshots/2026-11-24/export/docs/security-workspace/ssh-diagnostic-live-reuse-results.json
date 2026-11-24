@@ -1,0 +1,526 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-09 America/Los_Angeles",
+  "state": "reviewed-live-acceptance-complete-root-open",
+  "workDirectory": "work/harness-ssh-reuse-20261109",
+  "testMethods": 97,
+  "testSuites": 19,
+  "verificationSha256": "a0b42c5b729f91c49ba8837982f5127a03a5e781edeb17ca0bf41cf7e65c19a1",
+  "newRunId": "2295c70a-c434-4460-a87d-e9d7368ea299",
+  "collectionSummarySha256": "c9a6fffdf68be77dbcab2a0f5557042483db262fe84136551701de2b6b20e383",
+  "runtimeManifestSha256": "967ddfee5c4d5c304aaa3cc7f60ed07f5e51256a67e0b9bb915dfde2ce89d18f",
+  "runtimeInputs": {
+    "frozen_loader.py": "510cbc1c7f2cee15d81f101709a40e2f9eba16cb81a6be5304a4da71ba143aef",
+    "run_sync.py": "9b98fa58178f339f280b0dab89beac3541617f9100e971954c2f69053d1ae101",
+    "vm.py": "bbc5268fb6a97144f0865178d2780f64273615c8fc44be8615d8f4be3e4325ab",
+    "provenance.py": "8e4a340ee3446e29855e035ccb10dc0e69735727a35f040c65985090823f9b9d",
+    "execution-contract.json": "bc8b52ba9ffad681c4e659e3b3904031dd7db239fae707f8aff492645be6714f",
+    "runtime_pin.py": "b44a8e41673a764fb48b885bd865869c87a580eeb83595591776eeb4c012025b",
+    "probes.py": "5da5d1bec50dfdd76316ac9c5ee11d300683a127f9ed4e2aa1da86382554055a",
+    "metadata.py": "9a652b511069389801f9139d745aa65e11096d0f98cac541ddcae9391482f4b1",
+    "connector_launcher.py": "ee70761040e87809158c423b741eaa2099ee0d671076c7517631b1f171ad90a5",
+    "fdpass.py": "c2ed812e3d9e44ffdcc703a1c18dba579bc519b041220768fd50976743a42d1e",
+    "probe_stream.py": "8b93078cb0cdca19e72a996ab88d9bed1ac0f3373a874eb95cd45873658d3f92",
+    "observations.py": "d704b50fd0da199adff90aaac2c111fb0a94931850fb237d7632b38fb24c7cfd",
+    "association.py": "a23cc395939401fd3339aeab3c0075920af5de9e5094461c64823303ab2e7d7f",
+    "guest_sync.py": "11bda4b6bad2fd2f8ee2b3c7db23222644e6c6e5409cad2d6dbccc0713e529f8",
+    "guest_preflight.py": "59fecb7f5fa83c77128a55dafcac363dbd1d40544965020473deff57bb4000f3",
+    "target_binding.py": "119210094e52a0eff4f2b7d6d87d9210a9a0d902cf0ecc29f715348c68904883",
+    "host-socket-observer": "c0d534a84570c9afc9f7bfb9b2d7d51b5ea7291b8bf35eaa6c76b8ea7a3feba8",
+    "host_socket_observer.c": "c2f5f27aa48defc36fc1af09c43e7a8ed6c1e65445554ca02dc2bdd27016a65d"
+  },
+  "liveEvidenceSummary": {
+    "hostSummary": {
+      "probeCount": 96,
+      "markerSuccesses": 83,
+      "noMarkerFailures": 13,
+      "byMode": {
+        "direct": 48,
+        "fdpass": 48
+      },
+      "failurePhases": {
+        "direct-identification": 2,
+        "connected-and-descriptor-sent": 10,
+        "connect-error": 1
+      },
+      "observationSamples": 2795,
+      "initialFDCount": 222,
+      "peakFDCount": 303,
+      "peakFDNumber": 302,
+      "lastFDCount": 220,
+      "queueLimitsObserved": [
+        1
+      ],
+      "peakQueueLength": 1,
+      "peakIncompleteQueueLength": 1,
+      "socketErrorsObserved": [],
+      "nonzeroSocketErrorSamples": 0,
+      "fdErrorCounts": {
+        "connect|syscall|54": 1
+      },
+      "markerSuccessesWithFDErrors": 0,
+      "maxInterSampleGapMs": 15.298,
+      "tailObservationMs": 17550.819,
+      "firstSampleAtOrBelowInitialFDsAfterBurstMs": 10111.924,
+      "allProbeIntervalsInsideSamplingHorizon": true,
+      "actualProcessFDLimitMeasured": false,
+      "limits": [
+        "Discrete snapshots can miss faster transients; overlap does not establish causal coincidence.",
+        "Descriptor sent means SCM_RIGHTS sendmsg succeeded, not independent proof OpenSSH consumed it.",
+        "Queue/FD snapshots are not an errno trace or an actual process RLIMIT measurement.",
+        "Queue fields are retained separately: do not add qlen/incqlen or assume an overflow threshold without matching-kernel semantics.",
+        "Listener metrics only cover pre-accept state; zero listener fields do not exclude errors after accept.",
+        "This host-only summary does not prove guest packet/journal attribution; a separate synchronized association is required."
+      ]
+    },
+    "association": {
+      "runId": "2295c70a-c434-4460-a87d-e9d7368ea299",
+      "positiveMarkerCount": 83,
+      "positivesWithGuestSynAndAcceptedKey": 83,
+      "successfulFdpassMappingControls": 37,
+      "allObservedSuccessfulFdpassPortsPreserved": true,
+      "uniqueGuestIPv4SynFlows": 83,
+      "unassignedSynFlowCount": 0,
+      "ambiguousReusedSynFlowCount": 0,
+      "unassignedSynFlowLedger": [],
+      "acceptedKeyCount": 85,
+      "positiveTupleAcceptedKeyEventCount": 83,
+      "positiveTupleOutsideWindowCount": 0,
+      "controlTupleAcceptedKeyEventCount": 1,
+      "unassignedAcceptedKeyCount": 1,
+      "unassignedAcceptedKeyEvents": [
+        {
+          "peerTupleSha256": "f1de92d09d216dafb75012c659fc31a64b7080a112852b0ce073c1a5f03e56dd",
+          "windowPhase": "before-ready",
+          "offsetFromReadyNs": -690352794,
+          "exactSessionIdentityConfirmed": false
+        }
+      ],
+      "interfaceCountersVerifiedUnchanged": true,
+      "noAdditionalUnassignedGuestIPv4SynObserved": true,
+      "failures": [
+        {
+          "id": "6fd4be0f-d04f-415b-98d2-9e6056572c5c",
+          "hostPortKnown": false,
+          "candidateGuestSynObserved": null,
+          "candidateAcceptedKeyObserved": null,
+          "failurePortMappingIsAssumption": true,
+          "candidateGuestResetDirections": []
+        },
+        {
+          "id": "3ae8a3d9-c107-4ef9-8c7a-7be24615abc5",
+          "hostPortKnown": false,
+          "candidateGuestSynObserved": null,
+          "candidateAcceptedKeyObserved": null,
+          "failurePortMappingIsAssumption": true,
+          "candidateGuestResetDirections": []
+        },
+        {
+          "id": "94d6626c-6add-4d75-b24a-ad1781c7f7b3",
+          "hostPortKnown": true,
+          "candidateGuestSynObserved": false,
+          "candidateAcceptedKeyObserved": false,
+          "failurePortMappingIsAssumption": true,
+          "candidateGuestResetDirections": []
+        },
+        {
+          "id": "ef942961-0e25-4973-aadb-175ad26bbaa9",
+          "hostPortKnown": true,
+          "candidateGuestSynObserved": false,
+          "candidateAcceptedKeyObserved": false,
+          "failurePortMappingIsAssumption": true,
+          "candidateGuestResetDirections": []
+        },
+        {
+          "id": "f292f399-a101-40d6-a61c-1a24f86958b5",
+          "hostPortKnown": true,
+          "candidateGuestSynObserved": false,
+          "candidateAcceptedKeyObserved": false,
+          "failurePortMappingIsAssumption": true,
+          "candidateGuestResetDirections": []
+        },
+        {
+          "id": "28a3912c-7d64-42c6-96e9-6ef0e3fe2659",
+          "hostPortKnown": true,
+          "candidateGuestSynObserved": false,
+          "candidateAcceptedKeyObserved": false,
+          "failurePortMappingIsAssumption": true,
+          "candidateGuestResetDirections": []
+        },
+        {
+          "id": "ebad032a-dbc4-49ac-bfae-874c5d6e919e",
+          "hostPortKnown": true,
+          "candidateGuestSynObserved": false,
+          "candidateAcceptedKeyObserved": false,
+          "failurePortMappingIsAssumption": true,
+          "candidateGuestResetDirections": []
+        },
+        {
+          "id": "6aaa4520-e9ac-4834-8c08-67c3821cc4ab",
+          "hostPortKnown": true,
+          "candidateGuestSynObserved": false,
+          "candidateAcceptedKeyObserved": false,
+          "failurePortMappingIsAssumption": true,
+          "candidateGuestResetDirections": []
+        },
+        {
+          "id": "efcfc4b6-67e6-4836-9baa-591bee26d05c",
+          "hostPortKnown": true,
+          "candidateGuestSynObserved": false,
+          "candidateAcceptedKeyObserved": false,
+          "failurePortMappingIsAssumption": true,
+          "candidateGuestResetDirections": []
+        },
+        {
+          "id": "a72c4551-a217-4491-bbc5-02ed4d79efbb",
+          "hostPortKnown": true,
+          "candidateGuestSynObserved": false,
+          "candidateAcceptedKeyObserved": false,
+          "failurePortMappingIsAssumption": true,
+          "candidateGuestResetDirections": []
+        },
+        {
+          "id": "33300b93-4e32-4b1a-8422-a1a56eab1574",
+          "hostPortKnown": true,
+          "candidateGuestSynObserved": false,
+          "candidateAcceptedKeyObserved": false,
+          "failurePortMappingIsAssumption": true,
+          "candidateGuestResetDirections": []
+        },
+        {
+          "id": "a97062c3-3c44-4c06-9907-761e4ad86a1c",
+          "hostPortKnown": true,
+          "candidateGuestSynObserved": false,
+          "candidateAcceptedKeyObserved": false,
+          "failurePortMappingIsAssumption": true,
+          "candidateGuestResetDirections": []
+        },
+        {
+          "id": "c31d4494-5bc5-41bb-8ac9-39e4e0d08a0b",
+          "hostPortKnown": false,
+          "candidateGuestSynObserved": null,
+          "candidateAcceptedKeyObserved": null,
+          "failurePortMappingIsAssumption": true,
+          "candidateGuestResetDirections": []
+        }
+      ],
+      "causalProtocolValidated": true,
+      "directHostGuestClockSubtractionUsed": false,
+      "limitations": [
+        "Candidate failed flow uses source-port preservation as an assumption, supported only by successful controls.",
+        "Unassigned SYNs or reused flow/sequence identities block aggregate no-extra-flow interpretation.",
+        "Authentication ledger counts events by peer tuple, not unique sessions; before-ready events retain unknown identity.",
+        "Guest In reset is observed entering the guest; its original host generator is not identified.",
+        "No observed accepted-key event is not proof authentication never occurred.",
+        "Packet visibility is limited to guest IPv4 TCP22 SYN/FIN/RST summaries and tcpdump counters; it cannot locate an exact host component.",
+        "This run does not retroactively identify historical sidebar failures."
+      ]
+    },
+    "guestSummary": {
+      "complete": true,
+      "packetComplete": true,
+      "packetCounters": [
+        332,
+        332,
+        0
+      ],
+      "journalRows": 422,
+      "journalCategories": {
+        "accepted-key": 85,
+        "other": 253,
+        "disconnected": 84
+      },
+      "interfaceBefore": {
+        "available": true,
+        "rx_dropped": 0,
+        "rx_errors": 0,
+        "rx_missed_errors": 0
+      },
+      "interfaceAfter": {
+        "available": true,
+        "rx_dropped": 0,
+        "rx_errors": 0,
+        "rx_missed_errors": 0
+      },
+      "interfaceCountersUnchanged": true,
+      "clockStable": true,
+      "bootStable": true
+    },
+    "environment": {
+      "matches": true,
+      "fieldsCompared": [
+        "bootSha256",
+        "sshdLimits",
+        "sshdVersion",
+        "sshdEffectiveConfigSha256"
+      ]
+    },
+    "fullDefaultSshdConfigHashesEqual": true,
+    "fullConfigScope": "sshd -T default context without -C",
+    "programBefore": {
+      "matches": true,
+      "observedFileCount": 169,
+      "expectedFileCount": 169,
+      "changedCount": 0,
+      "actualMapSha256": "e2e87c41ce6171cb513a6aa8d136f32fb27028a98d370a54e728fefa38773b32",
+      "expectedMapSha256": "e2e87c41ce6171cb513a6aa8d136f32fb27028a98d370a54e728fefa38773b32"
+    },
+    "programAfter": {
+      "matches": true,
+      "observedFileCount": 169,
+      "expectedFileCount": 169,
+      "changedCount": 0,
+      "actualMapSha256": "e2e87c41ce6171cb513a6aa8d136f32fb27028a98d370a54e728fefa38773b32",
+      "expectedMapSha256": "e2e87c41ce6171cb513a6aa8d136f32fb27028a98d370a54e728fefa38773b32"
+    },
+    "guestCleanup": {
+      "oldCapturePIDEntries": [],
+      "ownedProbeProcesses": [],
+      "scope": "exact run signatures/PIDs at check time; PID reuse remains visible, no processes killed"
+    },
+    "loadedModules": {
+      "provenance": {
+        "sourceSha256": "8e4a340ee3446e29855e035ccb10dc0e69735727a35f040c65985090823f9b9d",
+        "origin": "verified-memory-buffer",
+        "bytecodeCacheUsed": false
+      },
+      "vm": {
+        "sourceSha256": "bbc5268fb6a97144f0865178d2780f64273615c8fc44be8615d8f4be3e4325ab",
+        "origin": "verified-memory-buffer",
+        "bytecodeCacheUsed": false
+      },
+      "probe_stream": {
+        "sourceSha256": "8b93078cb0cdca19e72a996ab88d9bed1ac0f3373a874eb95cd45873658d3f92",
+        "origin": "verified-memory-buffer",
+        "bytecodeCacheUsed": false
+      },
+      "metadata": {
+        "sourceSha256": "9a652b511069389801f9139d745aa65e11096d0f98cac541ddcae9391482f4b1",
+        "origin": "verified-memory-buffer",
+        "bytecodeCacheUsed": false
+      },
+      "connector_launcher": {
+        "sourceSha256": "ee70761040e87809158c423b741eaa2099ee0d671076c7517631b1f171ad90a5",
+        "origin": "verified-memory-buffer",
+        "bytecodeCacheUsed": false
+      },
+      "probes": {
+        "sourceSha256": "5da5d1bec50dfdd76316ac9c5ee11d300683a127f9ed4e2aa1da86382554055a",
+        "origin": "verified-memory-buffer",
+        "bytecodeCacheUsed": false
+      },
+      "observations": {
+        "sourceSha256": "d704b50fd0da199adff90aaac2c111fb0a94931850fb237d7632b38fb24c7cfd",
+        "origin": "verified-memory-buffer",
+        "bytecodeCacheUsed": false
+      },
+      "guest_sync": {
+        "sourceSha256": "11bda4b6bad2fd2f8ee2b3c7db23222644e6c6e5409cad2d6dbccc0713e529f8",
+        "origin": "verified-memory-buffer",
+        "bytecodeCacheUsed": false
+      },
+      "association": {
+        "sourceSha256": "a23cc395939401fd3339aeab3c0075920af5de9e5094461c64823303ab2e7d7f",
+        "origin": "verified-memory-buffer",
+        "bytecodeCacheUsed": false
+      },
+      "runtime_pin": {
+        "sourceSha256": "b44a8e41673a764fb48b885bd865869c87a580eeb83595591776eeb4c012025b",
+        "origin": "verified-memory-buffer",
+        "bytecodeCacheUsed": false
+      },
+      "target_binding": {
+        "sourceSha256": "119210094e52a0eff4f2b7d6d87d9210a9a0d902cf0ecc29f715348c68904883",
+        "origin": "verified-memory-buffer",
+        "bytecodeCacheUsed": false
+      }
+    }
+  },
+  "localAcceptanceValidation": {
+    "state": "all-live-gates-passed-awaiting-external-review",
+    "runId": "2295c70a-c434-4460-a87d-e9d7368ea299",
+    "checks": {
+      "statusComplete": true,
+      "summaryComplete": true,
+      "runtimeFinalOK": true,
+      "guestCleanupEmpty": true,
+      "environmentMatches": true,
+      "exact18FrozenInputs": true,
+      "candidateStillMatches": true,
+      "guestPacketNoDrops": true,
+      "noMetadataInvalid": true,
+      "proxyExpectedShaPinned": true,
+      "rawProbeAndGuestDigestsMatch": true,
+      "remoteSourceDigestsPinned": true,
+      "importDigestsPinned": true,
+      "finalAttestationSame": true,
+      "contractDigestPinned": true,
+      "launcherSourceMatches": true,
+      "bootstrapDigestMatches": true,
+      "authenticationCountsMatch": true,
+      "program169BaselineBeforeAfter": true,
+      "noOwnedHostProxiesBeforeDone": true
+    },
+    "sourceHashes": {
+      "frozen_loader.py": "510cbc1c7f2cee15d81f101709a40e2f9eba16cb81a6be5304a4da71ba143aef",
+      "run_sync.py": "9b98fa58178f339f280b0dab89beac3541617f9100e971954c2f69053d1ae101",
+      "vm.py": "bbc5268fb6a97144f0865178d2780f64273615c8fc44be8615d8f4be3e4325ab",
+      "provenance.py": "8e4a340ee3446e29855e035ccb10dc0e69735727a35f040c65985090823f9b9d",
+      "execution-contract.json": "bc8b52ba9ffad681c4e659e3b3904031dd7db239fae707f8aff492645be6714f",
+      "runtime_pin.py": "b44a8e41673a764fb48b885bd865869c87a580eeb83595591776eeb4c012025b",
+      "probes.py": "5da5d1bec50dfdd76316ac9c5ee11d300683a127f9ed4e2aa1da86382554055a",
+      "metadata.py": "9a652b511069389801f9139d745aa65e11096d0f98cac541ddcae9391482f4b1",
+      "connector_launcher.py": "ee70761040e87809158c423b741eaa2099ee0d671076c7517631b1f171ad90a5",
+      "fdpass.py": "c2ed812e3d9e44ffdcc703a1c18dba579bc519b041220768fd50976743a42d1e",
+      "probe_stream.py": "8b93078cb0cdca19e72a996ab88d9bed1ac0f3373a874eb95cd45873658d3f92",
+      "observations.py": "d704b50fd0da199adff90aaac2c111fb0a94931850fb237d7632b38fb24c7cfd",
+      "association.py": "a23cc395939401fd3339aeab3c0075920af5de9e5094461c64823303ab2e7d7f",
+      "guest_sync.py": "11bda4b6bad2fd2f8ee2b3c7db23222644e6c6e5409cad2d6dbccc0713e529f8",
+      "guest_preflight.py": "59fecb7f5fa83c77128a55dafcac363dbd1d40544965020473deff57bb4000f3",
+      "target_binding.py": "119210094e52a0eff4f2b7d6d87d9210a9a0d902cf0ecc29f715348c68904883",
+      "host-socket-observer": "c0d534a84570c9afc9f7bfb9b2d7d51b5ea7291b8bf35eaa6c76b8ea7a3feba8",
+      "host_socket_observer.c": "c2f5f27aa48defc36fc1af09c43e7a8ed6c1e65445554ca02dc2bdd27016a65d"
+    },
+    "inputSummarySha256": "c9a6fffdf68be77dbcab2a0f5557042483db262fe84136551701de2b6b20e383",
+    "loadedModuleCount": 11,
+    "newRun": true,
+    "exactRootCauseConfirmed": false,
+    "historicalSidebarAttributed": false,
+    "oldUnknownSynFlowsClosed": false
+  },
+  "postReviewLocalVerification": {
+    "scope": "post-review local archive check;not independently model-reviewed;no new VM run",
+    "checks": {
+      "hostSamplesDigestMatches": true,
+      "probeRowsDigestMatches": true,
+      "guestFinalDigestMatches": true,
+      "runIDsEqual": true,
+      "expectedVMDiskOpen": true,
+      "recomputedHostEqualsOriginalDerived": true,
+      "recomputedAssociationEqualsOriginalDerived": true,
+      "transcribedHostEqualsComputed": true,
+      "transcribedAssociationEqualsComputed": true
+    },
+    "originalHostSamplesSha256": "41cafabf414855fc89ca095661281cd99d5ea4c9ee1157548bd968052ad2e1af",
+    "derivedArtifactHashes": {
+      "host-observations.json": "3b563c20e92a5e94d250fd2789e79d5aa369437b8d57b824bb737dac17c01630",
+      "association-results.json": "db4a19e61908237ca085071d5bf6d88017331a375ef6100747812f8477b5d188",
+      "collection-summary.json": "c9a6fffdf68be77dbcab2a0f5557042483db262fe84136551701de2b6b20e383"
+    },
+    "generatorScope": "Original live-evidence-summary was produced by inline local orchestration,not supplied as a standalone generator to final model. This script now reproduces its host/association sections from unchanged raw inputs and exact pure analyzers.",
+    "analyzerSourceHashes": {
+      "guest_sync.py": "11bda4b6bad2fd2f8ee2b3c7db23222644e6c6e5409cad2d6dbccc0713e529f8",
+      "association.py": "a23cc395939401fd3339aeab3c0075920af5de9e5094461c64823303ab2e7d7f",
+      "observations.py": "d704b50fd0da199adff90aaac2c111fb0a94931850fb237d7632b38fb24c7cfd"
+    },
+    "pureImportAttestation": {
+      "ok": true,
+      "modules": {
+        "observations": {
+          "sourceSha256": "d704b50fd0da199adff90aaac2c111fb0a94931850fb237d7632b38fb24c7cfd",
+          "origin": "verified-memory-buffer",
+          "bytecodeCacheUsed": false
+        },
+        "guest_sync": {
+          "sourceSha256": "11bda4b6bad2fd2f8ee2b3c7db23222644e6c6e5409cad2d6dbccc0713e529f8",
+          "origin": "verified-memory-buffer",
+          "bytecodeCacheUsed": false
+        },
+        "association": {
+          "sourceSha256": "a23cc395939401fd3339aeab3c0075920af5de9e5094461c64823303ab2e7d7f",
+          "origin": "verified-memory-buffer",
+          "bytecodeCacheUsed": false
+        }
+      }
+    },
+    "r2ReceiptLocalVerification": {
+      "receiptSha256": "3446c79ceae9931b13d0450a980339bfdf5822bc87e6f349c1dab3dc73ee7a24",
+      "actualModels": [
+        "claude-opus-5-5"
+      ],
+      "stopReason": "end_turn",
+      "isError": false
+    },
+    "originalArtifactsModified": false,
+    "preciseRootCauseConfirmed": false
+  },
+  "reviewStages": [
+    {
+      "scope": "tooling-review",
+      "model": [
+        "claude-opus-5-5"
+      ],
+      "effort": "high",
+      "state": "completed",
+      "elapsedSeconds": 309.9,
+      "stopReason": "end_turn",
+      "promptSha256": "bbaf2e714867f9b8e138f27daa8e9638bee68651de13257cef73e3cbfb16d62a",
+      "receiptSha256": "88ec9a145afde47dd9c9400ed681894d0b619bbd850816c1270430ebf225274f",
+      "reportSha256": "53138a9ffa05d8ccb89dcfc5551433b4a3cd3cbd9b149d313d93b36e969e0a53",
+      "conclusion": "D1 blocked then fixed before run"
+    },
+    {
+      "scope": "tooling-review-r2",
+      "model": [
+        "claude-opus-5-5"
+      ],
+      "effort": "high",
+      "state": "completed",
+      "elapsedSeconds": 153.5,
+      "stopReason": "end_turn",
+      "promptSha256": "f89d525f45424627a2e0e1b1e2d1f5e9329840e11d364bc3f8b61fd657c3baba",
+      "receiptSha256": "3446c79ceae9931b13d0450a980339bfdf5822bc87e6f349c1dab3dc73ee7a24",
+      "reportSha256": "e7f3a5a57d35f780bc91dee6be8331efbcd3a08a478dbfc1f2cce5fa9c74553e",
+      "conclusion": "0 scope blockers"
+    },
+    {
+      "scope": "live-review",
+      "model": [
+        "claude-opus-5-5"
+      ],
+      "effort": "high",
+      "state": "completed",
+      "elapsedSeconds": 375.5,
+      "stopReason": "end_turn",
+      "promptSha256": "40c250c19afc36806964713ae27e364185807c91c1276800a07b6d84a57fbdcd",
+      "receiptSha256": "2bf6335907214e82a3df404d03ac6f491f8695d5bb7a6096b08003e6cc9ad491",
+      "reportSha256": "6b0ffffde8207314b9ee5d906ebb48317871bd611e9b26fb114d73a18d4edcb2",
+      "conclusion": "0 scope blockers"
+    }
+  ],
+  "finalReview": {
+    "actualModels": [
+      "claude-opus-5-5"
+    ],
+    "effort": "high",
+    "elapsedSeconds": 375.5,
+    "stopReason": "end_turn",
+    "confirmedDefects": 0,
+    "blockingArchiveDefects": 0,
+    "promptSha256": "40c250c19afc36806964713ae27e364185807c91c1276800a07b6d84a57fbdcd",
+    "receiptSha256": "2bf6335907214e82a3df404d03ac6f491f8695d5bb7a6096b08003e6cc9ad491",
+    "reportSha256": "6b0ffffde8207314b9ee5d906ebb48317871bd611e9b26fb114d73a18d4edcb2",
+    "triageSha256": "3ee0cce640d84191c6e86b48eb6ec978d1f7a793bcf471c3b2c89d1119b0babf",
+    "fullReportPath": "work/harness-ssh-reuse-20261109/live-review/claude.review.md"
+  },
+  "pending": [
+    "exact host/VM forwarding component and SSH root cause",
+    "old2 unassigned guest SYN identities",
+    "pre-READY authentication session identity",
+    "outer cleanup Python interpreter/path isolation",
+    "deliberate same-user native-binary TOCTOU",
+    "-C connection Match coverage",
+    "non-Exception interrupted status and non-atomic summary/status publication",
+    "early-failure best-effort poststate and host-failure probe rescan limits",
+    "historical sidebar attribution and ordinaryR3/full-product holds"
+  ],
+  "newLiveAcceptanceComplete": true,
+  "rootCauseConfirmed": false,
+  "oldUnknownFlowsClosed": false,
+  "historicalSidebarAttributed": false,
+  "ordinaryR3Closed": false,
+  "dailyDeploymentPerformed": false,
+  "githubPushPerformed": false,
+  "hostPermissionsExpanded": false,
+  "rawPrivateCapturesExported": false
+}

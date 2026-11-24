@@ -1,0 +1,169 @@
+#!/usr/bin/env python3
+"""Recorded bpftrace shim.
+
+The script emits the recorded BEGIN/EVENT/END stream only after the runner's
+graceful SIGINT.  It never mounts a probe and never executes a target.
+"""
+import json
+import os
+import re
+import signal
+import sys
+import time
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+import shim_common as common
+
+STOP = False
+
+
+def on_signal(signum, _frame):
+    global STOP
+    if os.environ.get("SCE_OBSERVER_IGNORE_INT") == "1" and signum == signal.SIGINT:
+        return
+    STOP = True
+
+
+def scenario():
+    path = os.environ.get("SCE_OBSERVER_SCENARIO")
+    if path and Path(path).is_file():
+        return json.loads(Path(path).read_text())
+    state = os.environ.get("SCE_SHIM_STATE")
+    candidate = Path(state) / "observer.json" if state else None
+    if candidate and candidate.is_file():
+        return json.loads(candidate.read_text())
+    return {}
+
+
+def candidate_descriptor(root, class_id, qualname, firstlineno):
+    sys.path.insert(0, str(root / "tools"))
+    import experiment_compile as ec
+    import structure
+    bind = json.loads((root / "prepare" / "bind" / "bind.json").read_text())
+    result = next(item for item in bind["results"] if item["classId"] == class_id)
+    plan = json.loads((root / "experiment-plan.json").read_text())
+    entry = next(item for item in plan["fixtures"] if item["classId"] == class_id)
+    source = (root / entry["path"]).read_text(encoding="utf-8")
+    filename = "/review/runroot/" + result["stagedPath"]
+    code = compile(source, filename, "exec", dont_inherit=True, optimize=0)
+    for candidate in ec.enumerate_code(code):
+        if candidate.co_qualname == qualname and candidate.co_firstlineno == firstlineno:
+            return structure.caller_descriptor(candidate)
+    raise RuntimeError("candidate-not-found")
+
+
+def dynamic_events(run_id, protocol):
+    root = common.root_dir()
+    if run_id == "preflight":
+        candidates = sorted((root / "preflight" / "evidence").glob("*/preflight-config.json"))
+        if not candidates:
+            return []
+        config = json.loads(candidates[-1].read_text())
+        return common.event_lines(config["expectedStructure"], config["callerDescriptor"],
+                                  config["callOffset"], protocol=protocol)
+    if not run_id.startswith("attempt-"):
+        return []
+    attempt = int(run_id.split("-", 1)[1])
+    expected_path = root / "prepare" / ("compile-%04d" % attempt) / "expected.json"
+    bind_path = root / "prepare" / "bind" / "bind.json"
+    if not expected_path.is_file() or not bind_path.is_file():
+        return []
+    expected = json.loads(expected_path.read_text())
+    bind = json.loads(bind_path.read_text())
+    result = next(item for item in bind["results"] if item["classId"] == expected["classId"])
+    mode = os.environ.get("SCE_OBSERVER_MODE", "auto")
+    if mode == "zero":
+        return []
+    dynamic = None
+    if mode == "wrong-caller":
+        dynamic = (expected.get("expectedComputation") or {}).get("structure")
+        candidates = result.get("callerCandidates") or []
+        unbound = next((row for row in candidates
+                        if row["callerSha256"] != result["callerSha256"]), None)
+        if dynamic is None or unbound is None:
+            return []
+        caller = candidate_descriptor(root, expected["classId"], unbound["qualname"],
+                                      unbound["firstlineno"])
+        return common.event_lines(dynamic, caller, result["callOffset"], protocol=protocol)
+    if mode == "data-only" or (mode == "auto" and expected.get("expectedComputation") is None):
+        dynamic = (expected.get("dataBaseline") or {}).get("structure")
+    else:
+        dynamic = (expected.get("expectedComputation") or {}).get("structure")
+    if dynamic is None:
+        return []
+    return common.event_lines(dynamic, result["callerDescriptor"], result["callOffset"],
+                              protocol=protocol)
+
+
+def main(argv):
+    template_path = next((item for item in reversed(argv) if not item.startswith("-")), None)
+    if template_path is None:
+        return 2
+    if os.environ.get("SCE_OBSERVER_COMPILE_ERROR") == "1":
+        marker = os.environ.get("SCE_OBSERVER_COMPILE_MARKER",
+                               "observer-shim: synthetic compile error before BEGIN")
+        sys.stderr.write(marker + "\n")
+        sys.stderr.flush()
+        return 2
+    template = Path(template_path).read_text(encoding="utf-8")
+    if "BUFFER-PROTOCOL buffer-v2" in template:
+        buffer_protocol = "buffer-v2"
+    elif "BUFFER-PROTOCOL buffer-v1" in template:
+        buffer_protocol = "buffer-v1"
+    else:
+        buffer_protocol = None
+    match = re.search(
+        r'printf\("BEGIN run=%s tag=%s\\n(?:BUFFER-PROTOCOL buffer-v[12]\\n)?", '
+        r'"([^"]+)", "([^"]+)"\)',
+        template,
+    )
+    if match is None:
+        sys.stderr.write("observer-shim: begin-template-missing\n")
+        return 2
+    run_id, tag = match.group(1), match.group(2)
+    control = scenario()
+    if not control or "events" not in control:
+        control = {
+            "events": dynamic_events(run_id, buffer_protocol or "legacy"),
+            "end": os.environ.get("SCE_OBSERVER_END", "normal"),
+            "truncate": os.environ.get("SCE_OBSERVER_TRUNCATE") == "1",
+        }
+    signal.signal(signal.SIGINT, on_signal)
+    signal.signal(signal.SIGTERM, on_signal)
+    sys.stdout.write("BEGIN run=%s tag=%s\n" % (run_id, tag))
+    if buffer_protocol and os.environ.get("SCE_OBSERVER_WITHHOLD_MARKER") != "1":
+        sys.stdout.write("BUFFER-PROTOCOL " + buffer_protocol + "\n")
+    sys.stdout.flush()
+    while not STOP:
+        time.sleep(0.02)
+    events = control.get("events") or []
+    if control.get("truncate"):
+        sys.stdout.write("X" * 300000 + "\n")
+        sys.stdout.flush()
+    for line in events:
+        sys.stdout.write(str(line) + "\n")
+    sys.stdout.flush()
+    end_mode = control.get("end", "normal")
+    event_count = sum(1 for line in events if str(line).startswith("EVENT "))
+    if end_mode == "normal":
+        sys.stdout.write("END run=%s tag=%s events=%d\n" % (run_id, tag, event_count))
+    elif end_mode == "duplicate":
+        sys.stdout.write("END run=%s tag=%s events=%d\n" % (run_id, tag, event_count))
+        sys.stdout.write("END run=%s tag=%s events=%d\n" % (run_id, tag, event_count))
+    elif end_mode == "trailing":
+        sys.stdout.write("END run=%s tag=%s events=%d\n" % (run_id, tag, event_count))
+        sys.stdout.write("@events: %d\n" % event_count)
+    elif end_mode == "missing":
+        pass
+    else:
+        sys.stderr.write("observer-shim: unknown-end\n")
+        return 2
+    sys.stdout.flush()
+    sys.stderr.write("observer-shim: stopped\n")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))

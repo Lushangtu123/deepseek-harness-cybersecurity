@@ -1,0 +1,7 @@
+{
+  "state": "verified",
+  "embeddedWitnessSha256": "b62fdb3f22efcd3f9846a65a9249f5cb89ba7129335606c73169cf0342c47e7f",
+  "fileWitnessSha256": "b62fdb3f22efcd3f9846a65a9249f5cb89ba7129335606c73169cf0342c47e7f",
+  "retryScriptSha256": "5aa6a86774cfa241fe71a907361e97a90cfdd201bd7ffe8fbd38336e1e95eb7a",
+  "scope": "Post-run independent extraction and identity check, not claimed as a pre-send guard"
+}

@@ -1,0 +1,10 @@
+{
+  "promptSha256": "ea4352bb0e81143c146cc2e2142248d1b3ce9b7901ba4fb9d89c81c72e515fdc",
+  "sourceFiles": {
+    "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": "a37683d0d31af264d0cc6643cd6f9330cd76892a6bc1e10769a21b3a106d19ea",
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": "d285565a42bfd91e13386aca6d3e56e6e0387d336a95abdf7ade4683c2889b04",
+    "work/harness-purge-improved/package/lib/redteam/personal-python-evidence.mjs": "8e4a777434f3ee1f095951e7bdf2b969533dcbd07209212558d07bebde0d9323",
+    "scripts/eval_locations.test.py": "80816a3b52a1a3591797f1a726f168a9ad03ebec966b4603d7e09daac34bbd21"
+  },
+  "bytes": 50148
+}

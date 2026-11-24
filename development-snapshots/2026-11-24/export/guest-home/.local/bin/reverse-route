@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /bin/bash "/home/purge/tools/reverse-skill/reverse-skill-cab634bd855fc287f6e420c1f36fd1a6b9245960/skills/scripts/master-route.sh" "$@"

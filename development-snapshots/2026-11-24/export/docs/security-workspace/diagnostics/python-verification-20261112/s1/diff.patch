@@ -1,0 +1,195 @@
+--- before/work/harness-purge-improved/package/scripts/security-joint-adapter.py
++++ current/work/harness-purge-improved/package/scripts/security-joint-adapter.py
+@@ -12,6 +12,9 @@
+  raw=json.dumps(value,ensure_ascii=False).encode();tmp=path.parent/('.write-'+secrets.token_hex(8));fd=os.open(tmp,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+  with os.fdopen(fd,'wb') as f:f.write(raw);f.flush();os.fsync(f.fileno())
+  os.replace(tmp,path)
++ directory=os.open(path.parent,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
++ try:os.fsync(directory)
++ finally:os.close(directory)
+ def read(path):
+  s=path.lstat()
+  if not stat.S_ISREG(s.st_mode) or s.st_nlink!=1 or s.st_uid!=os.getuid() or s.st_mode&0o077 or s.st_size>12582912:raise ValueError('Private state changed')
+@@ -45,18 +48,55 @@
+   # Reconstruct the full spec; never merge an agent-supplied HostConfig.
+   return {'Image':self.image,'User':'1000:1000','WorkingDir':'/work','Entrypoint':['/usr/bin/timeout','-k','2',str(max(1,int(getattr(self,'deadline',time.time()+600)-time.time())))+'s','tail','-f','/dev/null'],'Env':['HOME=/tmp','PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'],'Labels':{LABEL:self.identity,'personal.harness.role':'worker'},'HostConfig':{'Binds':[self.source+':/project:ro'],'NetworkMode':'none','ReadonlyRootfs':True,'CapDrop':['ALL'],'SecurityOpt':['no-new-privileges'],'Memory':536870912,'NanoCpus':1000000000,'PidsLimit':128,'RestartPolicy':{'Name':'no'},'Tmpfs':{'/tmp':'rw,nosuid,nodev,size=64m,mode=1777','/work':'rw,nosuid,nodev,size=64m,mode=1777'},'LogConfig':{'Type':'json-file','Config':{'max-size':'2m','max-file':'1'}}}}
+ class ModelBudget:
+- def __init__(self,path,max_calls=16,max_output=2048):self.path=path;self.max_calls=max_calls;self.max_output=max_output;self.lock=threading.Lock()
++ def __init__(self,path,max_calls=16,max_output=2048):
++  self.path=Path(path);self.max_calls=max_calls;self.max_output=max_output;self.lock=threading.Lock()
++ @contextlib.contextmanager
++ def locked(self):
++  with self.lock:
++   fd=os.open(str(self.path)+'.lock',os.O_RDWR|os.O_CREAT|os.O_NOFOLLOW,0o600)
++   try:
++    st=os.fstat(fd)
++    if not stat.S_ISREG(st.st_mode) or st.st_nlink!=1 or st.st_uid!=os.getuid() or st.st_mode&0o077:raise ValueError('Invalid budget lock')
++    fcntl.flock(fd,fcntl.LOCK_EX);yield
++   finally:os.close(fd)
++ def initialize(self):
++  with self.locked():
++   if self.path.exists() or self.path.is_symlink():raise ValueError('Model budget already initialized')
++   atomic(self.path,{'version':1,'identity':self.path.parent.name,'calls':0,'maxCalls':self.max_calls,'maxOutput':self.max_output,'usage':[]})
++ def _snapshot(self):
++  try:v=read(self.path)
++  except (OSError,ValueError):raise ValueError('Model budget unavailable; reconcile original job') from None
++  if (not isinstance(v,dict) or type(v.get('version')) is not int or v['version']!=1 or v.get('identity')!=self.path.parent.name
++      or type(v.get('calls')) is not int or not 0<=v['calls']<=self.max_calls
++      or type(v.get('maxCalls')) is not int or v['maxCalls']!=self.max_calls
++      or type(v.get('maxOutput')) is not int or v['maxOutput']!=self.max_output
++      or not isinstance(v.get('usage'),list) or len(v['usage'])>v['calls']):raise ValueError('Model budget invalid; reconcile original job')
++  return v
++ def snapshot(self):
++  with self.locked():return self._snapshot()
+  def reserve(self,body):
+-  with self.lock:
+-   v=read(self.path) if self.path.exists() else {'calls':0,'maxCalls':self.max_calls,'maxOutput':self.max_output,'usage':[]}
++  with self.locked():
++   v=self._snapshot()
+    if v['calls']>=self.max_calls:
+     v['exhausted']=True;atomic(self.path,v);raise ValueError('Model request budget exhausted')
+    v['calls']+=1;atomic(self.path,v)
+   # A reservation is never refunded after an uncertain upstream result.
+   safe={k:body[k] for k in ['messages','tools','tool_choice','temperature','top_p','response_format'] if k in body};safe.update(model='deepseek-flash',max_tokens=self.max_output,stream=False,thinking={'type':'disabled'});return safe
+  def usage(self,value):
+-  with self.lock:
+-   v=read(self.path);v['usage'].append(value if isinstance(value,dict) else {});atomic(self.path,v)
++  with self.locked():
++   v=self._snapshot();v['usage'].append(value if isinstance(value,dict) else {});atomic(self.path,v)
++
++def model_count_view(job,receipt):
++ v=dict(receipt);value=v.get('modelCalls');valid=type(value) is int and 0<=value<=16
++ if v.get('modelCallsProtocol')!=1:
++  v.update(modelCalls=None,modelCallsState='legacy' if valid else 'unknown')
++  if valid:v['modelCallsRecorded']=value
++  return v
++ if v.get('tool')=='rea':return {**v,'modelCalls':0,'modelCallsState':'verified'}
++ try:
++  budget=ModelBudget(Path(job)/'budget.json').snapshot();v.update(modelCalls=budget['calls'],modelCallsState='verified',modelUsage=budget['usage'])
++ except (OSError,ValueError):v.update(modelCalls=None,modelCallsState='unknown')
++ return v
+ 
+ class UnixHTTP(http.client.HTTPConnection):
+  def __init__(self):super().__init__('localhost',timeout=20)
+@@ -181,11 +221,9 @@
+  return not resources(identity)
+ def state(job):
+  v=read(job/'receipt.json')
+- if (job/'budget.json').exists():
+-  budget=read(job/'budget.json');v['modelCalls']=budget['calls'];v['modelUsage']=budget['usage']
+  if v['state']=='running' and not process_alive(job):
+   v.update(state='interrupted',cleanupVerified=False,problem='Worker stopped; cancel original ID to reconcile');atomic(job/'receipt.json',v)
+- return v
++ return model_count_view(job,v)
+ def process_alive(job):
+  try:
+   p=read(job/'process.json');f=Path('/proc/'+str(p['pid'])+'/stat').read_text().split();return f[2]!='Z' and f[21]==p['ticks'] and p['boot']==Path('/proc/sys/kernel/random/boot_id').read_text().strip()
+@@ -229,8 +267,7 @@
+   if not v['cleanupVerified']:v['state']='unconfirmed'
+   elif (job/'cancel').exists():v['state']='cancelled'
+   elif time.time()>=v['deadline']:v['state']='timed-out'
+-  if (job/'budget.json').exists():
+-   budget=read(job/'budget.json');v['modelCalls']=budget['calls'];v['modelUsage']=budget['usage']
++  v=model_count_view(job,v)
+   v['finishedAt']=time.time();atomic(job/'receipt.json',v)
+ 
+ def finished_scope(graph):
+@@ -245,6 +282,7 @@
+  return True
+ 
+ def run_pentagi(job,v,identity):
++ ModelBudget(job/'budget.json').snapshot()
+  # This job owns a new database and core instance; original PentAGI is untouched.
+  image=docker('image','inspect',WORKER,'--format','{{.Id}}').stdout.decode().strip()
+  policy=PentagiDockerPolicy(identity,str(job/'source'),image);policy.deadline=v['deadline']
+@@ -326,8 +364,8 @@
+   for task in [*(graph.get('data',{}).get('tasks') or []),*[s for t in (graph.get('data',{}).get('tasks') or []) for s in (t.get('subtasks') or [])]]:
+    summary=task.get('result','')
+    if isinstance(summary,str) and summary:summaries.insert(0,{'name':'task-result','text':bounded_text(summary),'truncated':len(summary.encode('utf-8'))>1200})
+-  budget=read(job/'budget.json') if (job/'budget.json').exists() else {'calls':0,'usage':[]}
+-  return {'state':'completed' if status=='finished' else 'partial','version':'2.2.0-ce.hcffed94','checkedFiles':0,'modelCalls':budget['calls'],'modelUsage':budget['usage'],'artifacts':[{'tool':'pentagi','flowId':flow_id,'instance':name,'flowState':status,'completionBasis':'finished-subtask-results; controller finalized the private flow','rawArtifact':'pentagi-output.json','isolationVerified':(job/'isolation.json').exists(),'summaries':summaries[:1],'toolCallsRetained':len(calls.get('data',{}).get('toolcalls',[])),'toolCallsTotal':calls.get('data',{}).get('total'),'sha256':sha((job/'pentagi-output.json').read_bytes()),'bytes':(job/'pentagi-output.json').stat().st_size,'claim':'Model-authored review, unverified. No complete file coverage is established.','budget':{'maxCalls':16,'maxOutputTokensPerCall':2048,'maxRequestBytes':262144,'moneyCap':False}}]}
++  counts=model_count_view(job,v)
++  return {'state':'completed' if status=='finished' else 'partial','version':'2.2.0-ce.hcffed94','checkedFiles':0,'modelCalls':counts['modelCalls'],'modelCallsState':counts['modelCallsState'],'modelUsage':counts.get('modelUsage',[]),'artifacts':[{'tool':'pentagi','flowId':flow_id,'instance':name,'flowState':status,'completionBasis':'finished-subtask-results; controller finalized the private flow','rawArtifact':'pentagi-output.json','isolationVerified':(job/'isolation.json').exists(),'summaries':summaries[:1],'toolCallsRetained':len(calls.get('data',{}).get('toolcalls',[])),'toolCallsTotal':calls.get('data',{}).get('total'),'sha256':sha((job/'pentagi-output.json').read_bytes()),'bytes':(job/'pentagi-output.json').stat().st_size,'claim':'Model-authored review, unverified. No complete file coverage is established.','budget':{'maxCalls':16,'maxOutputTokensPerCall':2048,'maxRequestBytes':262144,'moneyCap':False}}]}
+  finally:
+   for label in ['core','pg']:
+    logs=docker('logs','--tail','100',name+'-'+label,check=False)
+@@ -351,7 +389,8 @@
+   atomic(job/'payload.json',v);source=job/'source';source.mkdir(mode=0o700)
+   for f in v['files']:
+    p=source/f['path'];p.parent.mkdir(parents=True,exist_ok=True,mode=0o700);p.write_bytes(base64.b64decode(f['content']));p.chmod(0o400)
+-  receipt={'id':identity,'tool':tool,'snapshotId':v['snapshotId'],'state':'running','deadline':time.time()+v['seconds'],'cleanupVerified':False,'checkedFiles':0,'artifacts':[],'findings':[]};atomic(job/'receipt.json',receipt)
++  if tool=='pentagi':ModelBudget(job/'budget.json').initialize()
++  receipt={'modelCallsProtocol':1,'modelCalls':0,'modelCallsState':'verified','id':identity,'tool':tool,'snapshotId':v['snapshotId'],'state':'running','deadline':time.time()+v['seconds'],'cleanupVerified':False,'checkedFiles':0,'artifacts':[],'findings':[]};atomic(job/'receipt.json',receipt)
+   child=subprocess.Popen(['/usr/bin/python3','-I',str(Path(__file__).resolve()),tool,'worker',identity],stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True,close_fds=True)
+   f=Path('/proc/'+str(child.pid)+'/stat').read_text().split();atomic(job/'process.json',{'pid':child.pid,'ticks':f[21],'boot':Path('/proc/sys/kernel/random/boot_id').read_text().strip()});print(json.dumps(receipt));return
+  if job.resolve()!=job or not job.is_dir():raise ValueError('Unknown job')
+--- before/work/harness-purge-improved/package/lib/redteam/personal-joint-review.mjs
++++ current/work/harness-purge-improved/package/lib/redteam/personal-joint-review.mjs
+@@ -25,6 +25,12 @@
+  if(JSON.stringify(control(original))!==JSON.stringify(control(safe)))return JSON.stringify({ok:false,error:'项目脱敏规则遮蔽了联合任务、文件哈希或分页标识，请核对脱敏规则；不要猜测或改写控制标识。'});
+  const wire=JSON.stringify(safe);return Buffer.byteLength(wire)<=6000?wire:JSON.stringify({ok:false,error:'项目脱敏后的联合结果超过6000字节，请减小limit后读取原任务。'});
+ }
++function modelCount(step){
++ const valid=Number.isSafeInteger(step.modelCalls)&&step.modelCalls>=0&&step.modelCalls<=16;
++ if(step.modelCallsState==='verified'&&valid)return{modelCalls:step.modelCalls,modelCallsState:'verified'};
++ const recorded=valid?step.modelCalls:step.modelCallsRecorded;
++ return{modelCalls:null,modelCallsState:step.modelCallsState==='unknown'?'unknown':Number.isSafeInteger(recorded)?'legacy':'unknown',...(Number.isSafeInteger(recorded)?{modelCallsRecorded:recorded}:{})};
++}
+ export class JointReview{
+  constructor(bench,{kali=defaultKali,adapter=defaultAdapter,runtimeSource=inspectRuntimeSource}={}){this.bench=bench;this.kali=kali;this.adapter=adapter;this.runtimeSource=runtimeSource;this.initialized=new Set();this.active=null;this.closed=false}
+  db(eng){const db=this.bench.db(eng);if(!this.initialized.has(eng)){db.exec(schema);db.prepare("UPDATE security_joint SET state='interrupted' WHERE state IN ('running','cancelling')").run();this.initialized.add(eng)}return db}
+@@ -68,7 +74,7 @@
+   }else if(Object.hasOwn(input,'planIdentity'))throw Error('仅普通检查提交接受计划摘要');
+   const workspace=input.mode===undefined?null:workspaceDispatchContract(input.mode,steps,budget,runtime);
+   for(const step of steps){if(adapters.includes(step)){const key={kali:'jointKali',rea:'jointRea',pentagi:'jointPentagi'}[step];if(profile[key]!==true)throw Error('请先在安全审计页保存该工具的副本交接授权')}else if(!profile.tools.includes(step)||!runtime[step]?.ready)throw Error('扫描器不在已授权范围或未就绪')}
+-  const id=randomUUID(),data={id,engagement:eng,scopeRevision:profile.revision,state:'running',startedAt:stamp(),finishedAt:null,deadline:new Date(Math.min(Date.now()+budget*1000,Date.parse(profile.expiresAt))).toISOString(),budgetSeconds:budget,steps:steps.map(tool=>({tool,state:'pending'})),webTarget:steps.includes('zap')?{origin:profile.url,mode:'loopback-baseline',appRevision:'not-proven',authenticated:!!profile.authProfile}:null,snapshot:null,findings:[],cleanupVerified:false,problem:null};
++  const id=randomUUID(),data={id,engagement:eng,scopeRevision:profile.revision,state:'running',startedAt:stamp(),finishedAt:null,deadline:new Date(Math.min(Date.now()+budget*1000,Date.parse(profile.expiresAt))).toISOString(),budgetSeconds:budget,steps:steps.map(tool=>({tool,state:'pending',...(['rea','pentagi'].includes(tool)?{modelCalls:null,modelCallsState:'unknown'}:{modelCalls:0,modelCallsState:'verified'})})),webTarget:steps.includes('zap')?{origin:profile.url,mode:'loopback-baseline',appRevision:'not-proven',authenticated:!!profile.authProfile}:null,snapshot:null,findings:[],cleanupVerified:false,problem:null};
+   if(workspace)data.workspace=workspace;
+   db.prepare('INSERT INTO security_joint VALUES(?,?,?,?,?,?)').run(id,rid,requestHash,data.state,data.startedAt,JSON.stringify(data));
+   const active={id,eng,controller:new AbortController(),data,profile,ordinaryInputIdentity,deadlineMonotonic:performance.now()+Math.max(0,Date.parse(data.deadline)-Date.now()),shutdown:false};this.active=active;
+@@ -142,12 +148,12 @@
+  adapterResult(data,step,result){
+   if(step.tool==='kali')return this.kaliResult(data,step,result);
+   if(!result||result.id!==step.id||result.snapshotId!==data.snapshot.id||!['running','completed','partial','cancelled','timed-out','interrupted','failed','unavailable','unconfirmed'].includes(result.state))throw Error('受管子任务回执不匹配');
+-  if(!Number.isSafeInteger(result.checkedFiles??0)||(result.checkedFiles??0)<0||(result.checkedFiles??0)>data.snapshot.files.length||!Number.isSafeInteger(result.modelCalls??0)||(result.modelCalls??0)>16||!Array.isArray(result.artifacts)||result.artifacts.length>20)throw Error('受管子任务证据无效');
+-  step.state=result.state;step.cleanupVerified=result.cleanupVerified===true;step.version=text(result.version,80);step.checkedFiles=result.checkedFiles??0;step.problem=text(result.problem);step.modelCalls=result.modelCalls??0;step.artifacts=result.artifacts;step.complete=false;step.coverageScope=step.tool==='rea'?'handed-off-javascript-static-graph':'model-review-coverage-unknown';
++  if(!Number.isSafeInteger(result.checkedFiles??0)||(result.checkedFiles??0)<0||(result.checkedFiles??0)>data.snapshot.files.length||result.modelCalls!=null&&(!Number.isSafeInteger(result.modelCalls)||result.modelCalls<0||result.modelCalls>16)||!Array.isArray(result.artifacts)||result.artifacts.length>20)throw Error('受管子任务证据无效');
++  step.state=result.state;step.cleanupVerified=result.cleanupVerified===true;step.version=text(result.version,80);step.checkedFiles=result.checkedFiles??0;step.problem=text(result.problem);Object.assign(step,modelCount(result));step.artifacts=result.artifacts;step.complete=false;step.coverageScope=step.tool==='rea'?'handed-off-javascript-static-graph':'model-review-coverage-unknown';
+  }
+  kaliResult(data,step,result){
+   if(!result||result.id!==step.id||result.snapshotId!==data.snapshot.id||!['running','completed','partial','cancelled','timed-out','interrupted','failed','unavailable','unconfirmed'].includes(result.state))throw Error('Kali子任务回执不匹配');
+-  step.state=result.state;step.cleanupVerified=result.cleanupVerified===true;step.version=text(result.version,80);step.checkedFiles=result.checkedFiles??0;step.problem=text(result.problem);step.diagnostics={total:result.diagnosticsTotal??result.diagnostics?.length??0,items:result.diagnostics??[],truncated:result.diagnosticsTruncated===true};
++  step.modelCalls=0;step.modelCallsState='verified';step.state=result.state;step.cleanupVerified=result.cleanupVerified===true;step.version=text(result.version,80);step.checkedFiles=result.checkedFiles??0;step.problem=text(result.problem);step.diagnostics={total:result.diagnosticsTotal??result.diagnostics?.length??0,items:result.diagnostics??[],truncated:result.diagnosticsTruncated===true};
+   step.coverageScope='handed-off-python-files';step.eligibleFiles=data.snapshot.files.filter(f=>f.path.endsWith('.py')).length;step.complete=result.state==='completed'&&step.checkedFiles===step.eligibleFiles&&step.diagnostics.total===0;
+   if(result.state==='completed'&&!step.complete){step.state='partial';step.problem='Kali回执未证明全部交接Python文件已检查'}
+   if(!['running','unconfirmed'].includes(result.state)){
+@@ -157,9 +163,9 @@
+  }
+  view(data){
+   const diagnosticSummary=s=>{const d=s.tool==='kali'?s.diagnostics:s.details?.diagnostics;return d?{total:d.total,retained:d.items.length,truncated:d.truncated}:null};
+-  return{id:data.id,engagement:data.engagement,state:data.state,scopeRevision:data.scopeRevision,workspace:data.workspace??null,startedAt:data.startedAt,finishedAt:data.finishedAt,deadline:data.deadline,budgetSeconds:data.budgetSeconds,modelCalls:data.steps.reduce((n,s)=>n+(s.modelCalls??0),0),cleanupVerified:data.cleanupVerified,problem:data.problem,webTarget:data.webTarget??null,
++  return{id:data.id,engagement:data.engagement,state:data.state,scopeRevision:data.scopeRevision,workspace:data.workspace??null,startedAt:data.startedAt,finishedAt:data.finishedAt,deadline:data.deadline,budgetSeconds:data.budgetSeconds,modelCalls:data.steps.every(s=>modelCount(s).modelCallsState==='verified')?data.steps.reduce((n,s)=>n+s.modelCalls,0):null,modelCallsState:data.steps.every(s=>modelCount(s).modelCallsState==='verified')?'verified':'unknown',knownModelCalls:data.steps.reduce((n,s)=>n+(modelCount(s).modelCalls??0),0),cleanupVerified:data.cleanupVerified,problem:data.problem,webTarget:data.webTarget??null,
+    snapshot:data.snapshot?{id:data.snapshot.id,files:data.snapshot.files.length,bytes:data.snapshot.bytes,git:data.snapshot.git,excluded:data.snapshot.excluded.total,exclusionsRetained:data.snapshot.excluded.items.length,exclusionsTruncated:data.snapshot.excluded.truncated,redactedFiles:data.snapshot.redactedFiles}:null,
+-   steps:data.steps.map(s=>({tool:s.tool,id:s.id??null,state:s.state,complete:s.complete??false,coverageScope:s.coverageScope??'scanner-reported-files',eligibleFiles:s.eligibleFiles??null,cleanupVerified:s.cleanupVerified??null,version:s.version??s.details?.version??null,checkedFiles:s.checkedFiles??s.details?.coveredFiles??0,problem:s.problem??null,...(s.details?.fileCoverage?{fileCoverage:s.details.fileCoverage}:{}),...(s.details?.inputPolicy?{inputPolicy:s.details.inputPolicy}:{}),coverageNotes:scanCoverageNotes(s.tool,s.details),...(s.tool==='trivy'&&s.details?.dependencyScope==='including-development-1'?{dependencyScope:s.details.dependencyScope}:{}),...(scanInputRedaction(s.details?.inputRedaction)?{inputRedaction:scanInputRedaction(s.details.inputRedaction)}:{}),diagnostics:diagnosticSummary(s),...(s.details?.pythonEvidence?{pythonEvidence:s.details.pythonEvidence.state}:{}),...(s.details?.sourceLocations?{sourceLocations:s.details.sourceLocations}:{}),...(s.details?.executionLocations?{executionLocations:s.details.executionLocations}:{}),...(s.details?.observationSummary?{observationSummary:s.details.observationSummary}:{}),...(s.namespaceReview?{namespaceReview:s.namespaceReview}:{}),modelCalls:s.modelCalls??0,artifacts:s.artifacts?.length??0})),findings:data.findings.length,coverageComplete:false,manualChecks:['authentication','authorization','business-logic','architecture'],notice:'完成表示已选步骤结束；命中保持待验证。Git未提交状态未探测，按逐文件哈希固定实际内容。脱敏/排除文件、手工项与未选工具仍未覆盖；REA仅静态JavaScript图；PentAGI输出是未验证模型结论，调用次数预算不等同货币金额上限。'};
++   steps:data.steps.map(s=>({tool:s.tool,id:s.id??null,state:s.state,complete:s.complete??false,coverageScope:s.coverageScope??'scanner-reported-files',eligibleFiles:s.eligibleFiles??null,cleanupVerified:s.cleanupVerified??null,version:s.version??s.details?.version??null,checkedFiles:s.checkedFiles??s.details?.coveredFiles??0,problem:s.problem??null,...(s.details?.fileCoverage?{fileCoverage:s.details.fileCoverage}:{}),...(s.details?.inputPolicy?{inputPolicy:s.details.inputPolicy}:{}),coverageNotes:scanCoverageNotes(s.tool,s.details),...(s.tool==='trivy'&&s.details?.dependencyScope==='including-development-1'?{dependencyScope:s.details.dependencyScope}:{}),...(scanInputRedaction(s.details?.inputRedaction)?{inputRedaction:scanInputRedaction(s.details.inputRedaction)}:{}),diagnostics:diagnosticSummary(s),...(s.details?.pythonEvidence?{pythonEvidence:s.details.pythonEvidence.state}:{}),...(s.details?.sourceLocations?{sourceLocations:s.details.sourceLocations}:{}),...(s.details?.executionLocations?{executionLocations:s.details.executionLocations}:{}),...(s.details?.observationSummary?{observationSummary:s.details.observationSummary}:{}),...(s.namespaceReview?{namespaceReview:s.namespaceReview}:{}),...modelCount(s),artifacts:s.artifacts?.length??0})),findings:data.findings.length,coverageComplete:false,manualChecks:['authentication','authorization','business-logic','architecture'],notice:'完成表示已选步骤结束；命中保持待验证。Git未提交状态未探测，按逐文件哈希固定实际内容。脱敏/排除文件、手工项与未选工具仍未覆盖；REA仅静态JavaScript图；PentAGI输出是未验证模型结论，调用次数预算不等同货币金额上限。'};
+  }
+  status(eng,input){only(input,['id','requestId']);if(input.id&&input.requestId)throw Error('只提供任务ID或请求号');const db=this.db(eng),data=input.id?this.load(eng,input.id):(()=>{const row=input.requestId?db.prepare('SELECT id FROM security_joint WHERE request_id=?').get(identifier(input.requestId)):db.prepare('SELECT id FROM security_joint ORDER BY rowid DESC LIMIT 1').get();return row?this.load(eng,row.id):null})(),rejected=!data&&input.requestId?db.prepare('SELECT message FROM security_joint_rejection WHERE request_id=?').get(input.requestId):null;return{ok:true,engagement:eng,task:data?this.view(data):null,requestState:data?'accepted':rejected?'rejected':'unknown',...(rejected?{rejection:rejected.message}:{})}}
+  async wait(eng,input){
+--- before/work/harness-purge-improved/package/lib/redteam/personal-security-client.mjs
++++ current/work/harness-purge-improved/package/lib/redteam/personal-security-client.mjs
+@@ -179,13 +179,13 @@
+    h('div',{className:'rts-actions'},button(plan?.workspace?.mode==='deep'?'启动深度检查':'启动联合审查',start,!ready||!selected.length||pending||inProgress),task&&button('等待原联合任务',()=>update('wait'),!inProgress),task&&button('取消或核对停止',()=>update('cancel'),!inProgress&&task.cleanupVerified),task&&button('下载联合报告 JSON',download,inProgress)),
+    pending&&h('p',{className:'rts-alert'},'启动请求已保留；回执未确认时先核对原任务，不自动重发。'),error&&h('p',{className:'rts-alert',role:'alert'},error),
+    task?.workspace?.ruleProfiles?.semgrep&&h('p',{className:'rts-meta'},'本任务规则合同：17 条 · 深度执行点观察；普通检查R3尚未通过。SHA256 '+task.workspace.ruleProfiles.semgrep.rulesSha256),
+-   task&&h('div',null,task.webTarget&&h('p',{className:'rts-meta'},'运行版本关联：'+(task.webTarget.appRevision==='managed-source-copy-matched'?'受管源码副本前后匹配；依赖及内存行为未证明':'未证明；请查看报告artifacts中的运行身份核对')) ,h('p',null,'任务：'+task.id+' · '+(states[task.state]||task.state)),h('p',null,'工具命中 '+task.findings+' 条 · 子任务模型请求 '+(task.modelCalls??'未知')+' 次 · 停止核对：'+(task.cleanupVerified?'已确认':'未确认')),task.snapshot&&h('p',{className:'rts-meta'},'副本 '+task.snapshot.id+' · '+task.snapshot.files+' 文件 · 排除路径 '+task.snapshot.excluded+' · 脱敏文件 '+task.snapshot.redactedFiles),...task.steps.map(s=>h('p',{key:s.tool},s.tool+'：'+(s.state==='completed'?'步骤已完成':states[s.state]||s.state)+
++   task&&h('div',null,task.webTarget&&h('p',{className:'rts-meta'},'运行版本关联：'+(task.webTarget.appRevision==='managed-source-copy-matched'?'受管源码副本前后匹配；依赖及内存行为未证明':'未证明；请查看报告artifacts中的运行身份核对')) ,h('p',null,'任务：'+task.id+' · '+(states[task.state]||task.state)),h('p',null,'工具命中 '+task.findings+' 条 · 子任务模型请求 '+(task.modelCalls??'未知')+' 次'+(task.modelCalls==null&&task.knownModelCalls>0?'（已核对 '+task.knownModelCalls+' 次）':'')+' · 停止核对：'+(task.cleanupVerified?'已确认':'未确认')),task.snapshot&&h('p',{className:'rts-meta'},'副本 '+task.snapshot.id+' · '+task.snapshot.files+' 文件 · 排除路径 '+task.snapshot.excluded+' · 脱敏文件 '+task.snapshot.redactedFiles),...task.steps.map(s=>h('p',{key:s.tool},s.tool+'：'+(s.state==='completed'?'步骤已完成':states[s.state]||s.state)+
+      (s.fileCoverage?' · 受管副本已扫描 '+s.fileCoverage.scanned+'/'+s.fileCoverage.total+' 个文件 · 未覆盖 '+s.fileCoverage.uncovered+' 个'+
+       (s.fileCoverage.withoutLanguageRule?'（其中 '+s.fileCoverage.withoutLanguageRule+' 个 PHP 文件缺少语言规则）':''):'')+
+      (s.inputPolicy==='archive-xml-exclusions-1'?' · 未覆盖 JAR/WAR/PAR/EAR/ZIP/XML/POM 文件':'')+
+      (s.inputRedaction?' · '+trivyInputCoverageText(s.inputRedaction):'')+
+      (s.dependencyScope==='including-development-1'?' · 已启用开发依赖检查（按所支持锁文件识别）':'')+
+-     (s.id?' · '+s.id:''))),
++     (s.modelCallsState==='legacy'&&Number.isSafeInteger(s.modelCallsRecorded)?' · 原记录模型请求 '+s.modelCallsRecorded+' 次（未核对）':'')+(s.id?' · '+s.id:''))),
+     sourceStep&&h('section',{'aria-label':'命中位置'},h('h5',null,'命中位置'),
+      h('p',{className:'rts-meta'},'副本范围已关联 '+sourceStep.sourceLocations.bound+'/'+sourceStep.sourceLocations.total+' 条 · 未关联 '+sourceStep.sourceLocations.unavailable+' 条'),
+      h('p',{className:'rts-meta'},sourceStep.observationSummary?'执行点观察 '+sourceStep.observationSummary.executionPoints+' 条 · 其他待验证 '+sourceStep.observationSummary.other+' 条 · 总命中 '+sourceStep.observationSummary.total+' 条':'此任务未保存执行点分类，按原警告读取。'),

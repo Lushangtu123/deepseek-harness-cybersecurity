@@ -1,0 +1,39 @@
+{
+  "materialSha256": "2bbad0c542a3ba2a6b8a8cbce4681eba2756087d90b75c84f085c50ba36c12c0",
+  "claude": {
+    "requestedModel": "claude-opus-5-5",
+    "effort": "high",
+    "state": "failed",
+    "problem": "You've hit your 5-hour limit · resets 11:50pm (America/Los_Angeles)",
+    "receiptSha256": "e45052aa538ec163f7fe484ab0007f8ed70621b25bb76ca9492bcc106a04879c"
+  },
+  "deepseek": {
+    "officialName": "DeepSeek-V4.1-Flash",
+    "actualModels": [
+      "deepseek-flash"
+    ],
+    "finishReason": "stop",
+    "reportSha256": "55901fee6a2606342e8c0c0022a6534a2db05f80704e243788716ece1c015526",
+    "receiptSha256": "8113ebb169c4acf89e10816e4cb9a296251ad51733bef8f91e5201c99633a759"
+  },
+  "confirmedBlockingFindings": 0,
+  "triage": [
+    "Directory admission closes the reproduced cases under UID 1000. Existing foreign-owned, read-only and inaccessible directories now return false. The SDK's default destination and original configuration route remain the same as the Chrome-verified configuration.",
+    "The readiness field is additive. Professional installation checks ok, scope, the base file hashes and an empty workspace. The instructions put professional installation before first browser open. Browser and direct controller evidence are preserved separately from the HTTP receipt.",
+    "The path checks are not an atomic reservation across systemd startup. External mutation of the disposable home between preflight and startup is a conditional limitation, not a reproduced problem in a dedicated fresh VM.",
+    "Install, npm rebuild, live systemd, full production/dsh-purge config and migration were not rerun in this focused validation. Chrome directly confirmed the row and session state, while the baseline failure reason came from the controller events.",
+    "The final source digest, review material digest, actual official model and complete stop receipt were checked. This review closes the local workspace bootstrap candidate only."
+  ],
+  "temporaryWorkerRemoved": true,
+  "firstReview": {
+    "receiptSha256": "ab7932ab96997f39f36112c8c008a98ae7e2df4205f531633e3b50708588f7a8",
+    "confirmedBlockingFindings": 1,
+    "triage": [
+      "Confirmed in the old installer: a non-writable empty workspace was accepted and an unreadable one could raise PermissionError. Fixed in the candidate and reproduced under UID 1000 in the VM with six filesystem cases.",
+      "The old completion receipt checked HTTP and fixed-file hashes. It did not assert workspace creation, but it failed to make that boundary explicit. An additive workspaceInitializationChecked=false field and installation instructions state what is actually measured. Initializing during install would change files required pristine by the professional stage.",
+      "Production dsh-purge, existing-registry migration, a fresh package rebuild and full service installation were outside this focused test. Read-only inspection confirms the SDK returns an existing default before resolving a new path and skips initialization for other existing data.",
+      "173 export files identify the candidate package. 169 files identify the separate daily installed package checked at temporary-instance cleanup. The 42 database hashes compare logical content only.",
+      "The review cover note called the VM Debian. Actual os-release shows Ubuntu 24.04 with ID_LIKE=debian. The immutable submission is retained; the verification write-up uses the verified distribution."
+    ]
+  }
+}

@@ -1,0 +1,101 @@
+--- before/work/harness-purge-improved/package/lib/redteam/personal-python-evidence.mjs
++++ current/work/harness-purge-improved/package/lib/redteam/personal-python-evidence.mjs
+@@ -1,3 +1,4 @@
++import {createHash} from 'node:crypto';
+ import {execFileSync} from 'node:child_process';
+ import {fileURLToPath} from 'node:url';
+ 
+@@ -6,46 +7,80 @@
+ const line=n=>Number.isSafeInteger(n)&&n>0;
+ const unavailable=()=>({state:'unavailable',artifacts:[]});
+ 
++const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(k=>[k,canonical(value[k])])):value;
++const digest=value=>createHash('sha256').update(JSON.stringify(canonical(value)).replace(/[\u007f-\uffff]/g,c=>'\\u'+c.charCodeAt(0).toString(16).padStart(4,'0'))).digest('hex');
++const validPoint=(p,sourceSha)=>{
++ const position=v=>v&&['line','col','offset'].every(k=>Number.isSafeInteger(v[k]))&&v.line>0&&v.col>0&&v.offset>=0&&v.offset<=1048576;
++ return typeof sourceSha==='string'&&/^[a-f0-9]{64}$/.test(sourceSha)&&p&&p.sourceSha256===sourceSha&&typeof p.callee==='string'&&p.callee.length<=200&&position(p.call?.start)&&position(p.call?.end)&&p.call.end.offset>p.call.start.offset&&p.id===digest({sourceSha256:p.sourceSha256,callee:p.callee,call:p.call});
++};
++
+ export function collectPythonEvidence(snapshot,findings,deadline){
+  const files=Object.fromEntries(snapshot.files.filter(f=>f.path.endsWith('.py')).map(f=>[f.path,f.sha256]));
+- if(!Object.keys(files).length)return null;
++ if(!Object.keys(files).length)return findings.some(f=>rules.has(f?.rule))?{state:'unavailable',artifacts:[],findingLocations:findings.flatMap(f=>rules.has(f?.rule)?[{state:'unmatched',reason:'source-not-in-inventory',rule:f.rule}]:[])}:null;
+  if(Object.keys(files).length>64)return unavailable();
+  const timeout=Math.floor(Math.min(1500,deadline-performance.now()-500));
+  if(!(timeout>0))return unavailable();
+  const results=findings.flatMap(f=>{
+-  if(!rules.has(f.rule))return[];
++  if(!rules.has(f?.rule))return[];
+   const match=/^(.+):(\d+)$/.exec(f.location);
+-  return match&&Object.hasOwn(files,match[1])?[{check_id:f.rule,path:match[1],start:{line:Number(match[2])}}]:[];
++  const bound=f.sourceLocation?.state==='bound'?f.sourceLocation:null;
++  return [{check_id:f.rule,path:match?.[1]??'',originalLocation:typeof f.location==='string'?f.location:null,start:bound?{...bound.start}:match?{line:Number(match[2])}:{},...(bound?{end:{...bound.end}}:{})}];
+  });
+  try{
+   const output=execFileSync('/usr/bin/python3',['-B','-I',worker,'--managed',snapshot.sourceRoot],{
+-   input:JSON.stringify({files,results}),encoding:'utf8',timeout,killSignal:'SIGKILL',maxBuffer:128*1024,
++   input:JSON.stringify({files,results}),encoding:'utf8',timeout,killSignal:'SIGKILL',maxBuffer:2*1024*1024,
+    stdio:['pipe','pipe','pipe'],env:{PATH:'/usr/bin:/bin',LANG:'C.UTF-8'}
+   });
+   const report=JSON.parse(output),artifacts=[];
+-  if(report.version!==1||!Array.isArray(report.guardEvidence)||!Array.isArray(report.importEvidence)||!Array.isArray(report.plainStringEvidence))return unavailable();
++  const locationFields=f=>validPoint(f.executionPoint,files[f.file])&&f.pointId===f.executionPoint.id
++   ?{pointId:f.pointId,executionPoint:f.executionPoint,scannerSpan:f.scannerSpan}:{};
++  if(![1,2].includes(report.version)||!Array.isArray(report.guardEvidence)||!Array.isArray(report.importEvidence)||!Array.isArray(report.plainStringEvidence))return unavailable();
++  if(report.version===2&&(!Array.isArray(report.findingLocations)||report.findingLocations.length!==results.length||report.findingLocations.some((m,i)=>m.index!==i||!['bound','unmatched','ignored'].includes(m.state)||m.state==='bound'&&(!Object.hasOwn(files,m.path)||m.path!==results[i].path||m.rule!==results[i].check_id||!m.scannerSpan||digest(m.scannerSpan)!==digest({start:results[i].start,end:results[i].end})||!validPoint(m.point,files[m.path])||m.pointId!==m.point.id))))return unavailable();
++  const boundFinding=f=>Object.hasOwn(files,f.file)&&validPoint(f.executionPoint,files[f.file])&&f.pointId===f.executionPoint.id&&report.findingLocations.some((m,i)=>m.state==='bound'&&m.path===f.file&&m.pointId===f.pointId&&results[i].check_id===f.rule&&results[i].start.line===f.line);
+   for(const {finding:f,evidence:e} of report.guardEvidence){
+-   if(!results.some(r=>r.check_id===f.rule&&r.path===f.file&&r.start.line===f.line)||
+-     f.rule==='policy.harness.python.exec'||e.observation!=='literal-identifier-guard-observed'||e.evalLine!==f.line||
++   if(report.version===2&&!boundFinding(f)||!results.some(r=>r.check_id===f.rule&&r.path===f.file&&r.start.line===f.line)||
++     f.rule==='policy.harness.python.exec'||e.observation!=='literal-identifier-guard-observed'||e.evalLine!==(f.executionPoint?.call.start.line??f.line)||
+      ![e.assignmentLine,e.guardLine,e.literalCount].every(line))return unavailable();
+    artifacts.push({tool:'semgrep',evidenceKind:'python-eval-guard',path:f.file,line:f.line,rule:f.rule,status:'unverified',
+-    assignmentLine:e.assignmentLine,guardLine:e.guardLine,literalCount:e.literalCount});
++    assignmentLine:e.assignmentLine,guardLine:e.guardLine,literalCount:e.literalCount,...locationFields(f)});
+   }
+   for(const {finding:f,evidence:e} of report.plainStringEvidence){
+-   if(!results.some(r=>r.check_id===f.rule&&r.path===f.file&&r.start.line===f.line)||
++   if(report.version===2&&!boundFinding(f)||!results.some(r=>r.check_id===f.rule&&r.path===f.file&&r.start.line===f.line)||
+      e.observation!=='plain-string-guard-observed'||!['eval','exec'].includes(e.sink)||
+      (f.rule==='policy.harness.python.eval'&&e.sink!=='eval')||(f.rule==='policy.harness.python.exec'&&e.sink!=='exec')||
+      ![e.guardLine,e.executionLine].every(line))return unavailable();
+    artifacts.push({tool:'semgrep',evidenceKind:'python-string-guard',path:f.file,line:f.line,rule:f.rule,status:'unverified',
+-    guardLine:e.guardLine,executionLine:e.executionLine,sink:e.sink});
++    guardLine:e.guardLine,executionLine:e.executionLine,sink:e.sink,...locationFields(f)});
+   }
+   for(const e of report.importEvidence){
+    if(e.observation!=='direct-import-execution-flow-observed'||!Object.hasOwn(files,e.callerFile)||
+      !Object.hasOwn(files,e.calleeFile)||!['eval','exec'].includes(e.sink)||
+-     ![e.sourceLine,e.importLine,e.callLine,e.definitionLine,e.sinkLine].every(line))return unavailable();
++     ![e.sourceLine,e.importLine,e.callLine,e.definitionLine,e.sinkLine].every(line)||
++     report.version===2&&(!validPoint(e.callerLocation,files[e.callerFile])||!validPoint(e.sinkLocation,files[e.calleeFile])||e.sinkLocation.callee.split('.').at(-1)!==e.sink))return unavailable();
+    artifacts.push({tool:'semgrep',evidenceKind:'python-import-flow',path:e.callerFile,line:e.callLine,status:'unverified',
+-    calleeFile:e.calleeFile,sourceLine:e.sourceLine,importLine:e.importLine,definitionLine:e.definitionLine,sinkLine:e.sinkLine,sink:e.sink});
++    calleeFile:e.calleeFile,sourceLine:e.sourceLine,importLine:e.importLine,definitionLine:e.definitionLine,sinkLine:e.sinkLine,sink:e.sink,...(e.callerLocation&&e.sinkLocation?{callerLocation:e.callerLocation,sinkLocation:e.sinkLocation}:{})});
+   }
+-  return {state:artifacts.length>20?'truncated':'completed',artifacts:artifacts.slice(0,20)};
++  return {state:artifacts.length>20?'truncated':'completed',artifacts:artifacts.slice(0,20),...(report.version===2?{findingLocations:report.findingLocations}:{})};
+  }catch{return unavailable()}
+ }
++
++
++export function bindPythonExecutionPoints(findings,evidence){
++ const eligible=findings.filter(f=>rules.has(f.rule));
++ const maps=Array.isArray(evidence?.findingLocations)&&evidence.findingLocations.length===eligible.length?evidence.findingLocations:[];
++ const reasons=new Set(['invalid-finding','missing-or-invalid-span','source-not-in-inventory','no-supported-execution-point','ambiguous-execution-points','rule-execution-point-mismatch','source-parse-unavailable','point-limit']);
++ let index=0,bound=0;
++ const rows=findings.map(f=>{
++  if(!rules.has(f.rule))return f;
++  const m=maps[index++],source=f.sourceLocation,p=m?.point;
++  const original=source?.state==='bound'?{start:source.start,end:source.end}:null;
++  const matched=m?.state==='bound'&&source?.state==='bound'&&m.path===source.path&&m.rule===f.rule&&m.pointId===p?.id&&
++   ['eval','exec','builtins.eval','builtins.exec'].includes(p?.callee)&&validPoint(p,source.sourceSha256)&&m.scannerSpan&&digest(m.scannerSpan)===digest(original)&&
++   (source.start.offset<=p.call.start.offset&&p.call.end.offset<=source.end.offset||f.rule==='policy.harness.python.request-to-dynamic-code'&&p.argument&&digest(p.argument)===digest(original));
++  if(!matched){const {pointId,executionPoint,executionMapping,...originalFinding}=f;return{...originalFinding,executionMapping:{version:1,state:'unmatched',reason:reasons.has(m?.reason)?m.reason:'reviewer-unavailable'}};}
++  bound++;
++  const point=structuredClone(p),freeze=value=>{if(value&&typeof value==='object'){Object.values(value).forEach(freeze);Object.freeze(value)}};freeze(point);
++  return Object.freeze({...f,pointId:p.id,executionPoint:point,executionMapping:Object.freeze({version:1,state:'bound',protocol:'python-sink-locations-1'})});
++ });
++ return{findings:rows,summary:{version:1,total:eligible.length,bound,unmatched:eligible.length-bound}};
++}

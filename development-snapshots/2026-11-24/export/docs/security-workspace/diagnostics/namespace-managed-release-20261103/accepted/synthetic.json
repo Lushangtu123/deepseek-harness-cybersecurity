@@ -1,0 +1,22 @@
+{
+  "engagement": "vm-namespace-managed-release-20261103",
+  "previous": "phishguard-model-closure-20261102",
+  "project": "/home/purge/workspace/harness-acceptance/namespace-managed-release-20261103",
+  "profile": {
+    "repoRoot": "/home/purge/workspace/harness-acceptance/namespace-managed-release-20261103",
+    "tools": [
+      "semgrep"
+    ],
+    "url": null,
+    "expiresAt": "2026-11-04T09:20:45.724Z",
+    "revision": 1
+  },
+  "sourceHashes": {
+    "same_line.py": "7257aa6e74cd48d192b7e817104521763c597fb09a030bed340fd68506e56581",
+    "crlf_tabs.py": "08902773687c1a201e7773c169f13282e6a2d32ab3338dcd1365f6fee706e670",
+    "extra.py": "fb5312c0db81d10a450cef43e4ea85d4cdb497b2945557b0f809d4e2ac3508ac",
+    "helper.py": "b891922fcd65c306a006f4591b0bceba51d7ddb2a77feac95a50eccecbc6e664",
+    "constant.py": "ba237186b266baf4cbef611988fbce51fc7d268a0dbf3f915e9dad5e30ed2e6f"
+  },
+  "syntheticCredentialOnly": true
+}

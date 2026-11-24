@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "role": "candidate-evaluation",
+  "categories": {
+    "python/CWE-94": {
+      "minimumPositive": 20,
+      "minimumNegative": 30,
+      "minimumRawRecall": 0.9,
+      "maximumReviewedFalsePositiveRate": 0.05,
+      "maximumFalseExclusionRate": 0,
+      "maximumUnknownRate": 0.2,
+      "minimumConfirmedRecall": 0.9
+    },
+    "python/CWE-95": {
+      "minimumPositive": 20,
+      "minimumNegative": 30,
+      "minimumRawRecall": 0.9,
+      "maximumReviewedFalsePositiveRate": 0.05,
+      "maximumFalseExclusionRate": 0,
+      "maximumUnknownRate": 0.2,
+      "minimumConfirmedRecall": 0.9
+    }
+  }
+}

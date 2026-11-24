@@ -1,0 +1,47 @@
+{
+  "kind": "independent-native-condition-ast-check",
+  "rows": [
+    {
+      "file": "candidate/checks/regression_lib.py",
+      "conditionExpressions": 0,
+      "unchanged": true
+    },
+    {
+      "file": "candidate/checks/run_recovery_close_checks.py",
+      "conditionExpressions": 39,
+      "unchanged": true
+    },
+    {
+      "file": "candidate/checks/rev8_support.py",
+      "conditionExpressions": 0,
+      "unchanged": true
+    },
+    {
+      "file": "candidate/checks/run_rev8_checks.py",
+      "conditionExpressions": 13,
+      "unchanged": true
+    },
+    {
+      "file": "candidate/checks/run_unified_recovery_checks.py",
+      "conditionExpressions": 36,
+      "unchanged": true
+    },
+    {
+      "file": "candidate/checks/run_consumer_closure_checks.py",
+      "conditionExpressions": 19,
+      "unchanged": true
+    },
+    {
+      "file": "candidate/checks/run_rev6_checks.py",
+      "conditionExpressions": 22,
+      "unchanged": true
+    },
+    {
+      "file": "candidate/checks/run_regressions.py",
+      "conditionExpressions": 31,
+      "unchanged": true
+    }
+  ],
+  "sourceManifestSha256": "affef050148f527c0a21dfb7c989eded6cd9c07f30f945ba9eb1048395d27f63",
+  "notNativeExecution": true
+}

@@ -1,0 +1,18 @@
+# Personal fork: original remains installed separately. No host policy patch.
+- insert:
+    - id: dsh-purge
+      name: dsh-purge
+      inject: [systemPrompt, tools]
+      config:
+        enabled: true
+    - id: dsh-purge-redteam-store
+      name: dsh-purge/redteam/store
+      config:
+        root: !!js dshHomePath('redteam')
+    - id: dsh-purge-redteam-ui
+      name: dsh-purge/redteam/ui
+    - id: dsh-purge-personal-tools
+      name: dsh-purge/redteam/tools
+      inject: [tools, redteam]
+    - id: dsh-purge-personal-redteam
+      name: dsh-purge/personal-redteam

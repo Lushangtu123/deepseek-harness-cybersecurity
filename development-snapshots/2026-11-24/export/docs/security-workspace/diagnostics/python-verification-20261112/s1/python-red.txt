@@ -1,0 +1,83 @@
+EEEEFEE
+======================================================================
+ERROR: test_concurrent_instances_share_one_reservation_limit (__main__.ModelCountsTest.test_concurrent_instances_share_one_reservation_limit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.py", line 27, in test_concurrent_instances_share_one_reservation_limit
+    p=self.fixture();self.initialized(p,max_calls=3)
+                     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.py", line 10, in initialized
+    b=m.ModelBudget(path,**kwargs);b.initialize();return b
+                                   ^^^^^^^^^^^^
+AttributeError: 'ModelBudget' object has no attribute 'initialize'
+
+======================================================================
+ERROR: test_deleted_counter_does_not_reinitialize_on_resume (__main__.ModelCountsTest.test_deleted_counter_does_not_reinitialize_on_resume)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.py", line 20, in test_deleted_counter_does_not_reinitialize_on_resume
+    p=self.fixture();b=self.initialized(p);b.reserve({});p.unlink()
+                       ~~~~~~~~~~~~~~~~^^^
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.py", line 10, in initialized
+    b=m.ModelBudget(path,**kwargs);b.initialize();return b
+                                   ^^^^^^^^^^^^
+AttributeError: 'ModelBudget' object has no attribute 'initialize'
+
+======================================================================
+ERROR: test_initialization_is_explicit_and_cannot_overwrite_or_reset (__main__.ModelCountsTest.test_initialization_is_explicit_and_cannot_overwrite_or_reset)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.py", line 16, in test_initialization_is_explicit_and_cannot_overwrite_or_reset
+    p=self.fixture();b=self.initialized(p);self.assertEqual(b.snapshot()['calls'],0);b.reserve({})
+                       ~~~~~~~~~~~~~~~~^^^
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.py", line 10, in initialized
+    b=m.ModelBudget(path,**kwargs);b.initialize();return b
+                                   ^^^^^^^^^^^^
+AttributeError: 'ModelBudget' object has no attribute 'initialize'
+
+======================================================================
+ERROR: test_invalid_or_wrong_identity_counters_reject_forwarding (__main__.ModelCountsTest.test_invalid_or_wrong_identity_counters_reject_forwarding)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.py", line 24, in test_invalid_or_wrong_identity_counters_reject_forwarding
+    p=self.fixture();b=self.initialized(p);v=b.snapshot();mutate(v);m.atomic(p,v)
+                       ~~~~~~~~~~~~~~~~^^^
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.py", line 10, in initialized
+    b=m.ModelBudget(path,**kwargs);b.initialize();return b
+                                   ^^^^^^^^^^^^
+AttributeError: 'ModelBudget' object has no attribute 'initialize'
+
+======================================================================
+ERROR: test_status_projection_keeps_missing_unknown_and_legacy_number_labeled (__main__.ModelCountsTest.test_status_projection_keeps_missing_unknown_and_legacy_number_labeled)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.py", line 35, in test_status_projection_keeps_missing_unknown_and_legacy_number_labeled
+    out=m.model_count_view(job,v);self.assertIsNone(out['modelCalls']);self.assertEqual(out['modelCallsState'],'legacy');self.assertEqual(out['modelCallsRecorded'],0);self.assertEqual(json.dumps(v),before)
+        ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'adapter_counts' has no attribute 'model_count_view'
+
+======================================================================
+ERROR: test_valid_counter_can_prove_zero_but_corrupt_counter_cannot (__main__.ModelCountsTest.test_valid_counter_can_prove_zero_but_corrupt_counter_cannot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.py", line 37, in test_valid_counter_can_prove_zero_but_corrupt_counter_cannot
+    p=self.fixture();b=self.initialized(p);v={'tool':'pentagi','modelCallsProtocol':1};out=m.model_count_view(p.parent,v);self.assertEqual(out['modelCalls'],0);self.assertEqual(out['modelCallsState'],'verified')
+                       ~~~~~~~~~~~~~~~~^^^
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.py", line 10, in initialized
+    b=m.ModelBudget(path,**kwargs);b.initialize();return b
+                                   ^^^^^^^^^^^^
+AttributeError: 'ModelBudget' object has no attribute 'initialize'
+
+======================================================================
+FAIL: test_missing_counter_never_starts_at_zero (__main__.ModelCountsTest.test_missing_counter_never_starts_at_zero)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.py", line 13, in test_missing_counter_never_starts_at_zero
+    with self.assertRaises(ValueError):m.ModelBudget(p).reserve({})
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.003s
+
+FAILED (failures=1, errors=6)

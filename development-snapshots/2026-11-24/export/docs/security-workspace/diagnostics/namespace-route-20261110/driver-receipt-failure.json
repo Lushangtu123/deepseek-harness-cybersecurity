@@ -1,0 +1,7 @@
+{
+  "state": "confirmed",
+  "cause": "Recorded scanner fixture returned a non-SHA256 coverageKey; existing rule-profile receipt validation rejected it before namespace analysis.",
+  "productionDefect": false,
+  "originalFailureRetained": true,
+  "originalScratchRemoved": true
+}

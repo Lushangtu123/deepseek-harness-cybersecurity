@@ -1,0 +1,17 @@
+{
+  "containerById": {
+    "code": 1,
+    "stdout": "[]\n",
+    "stderr": "error: no such object: cec7d1dad995a676a23e1625b1b22059ba9477807b2b410f04fa02627bee483e\n"
+  },
+  "containerByName": {
+    "code": 1,
+    "stdout": "[]\n",
+    "stderr": "error: no such object: dsh-sec-cb7620df-9f2e-4c2c-9f1d-5e54824b7284\n"
+  },
+  "imageControl": {
+    "code": 0,
+    "stdout": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7\n",
+    "stderr": ""
+  }
+}

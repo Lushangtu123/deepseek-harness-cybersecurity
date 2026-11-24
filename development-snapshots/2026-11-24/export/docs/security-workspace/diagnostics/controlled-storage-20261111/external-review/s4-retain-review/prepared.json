@@ -1,0 +1,8 @@
+{
+  "promptSha256": "13c6c4602d4e091797d73171d7a31ce6d9f4e2a4d819f1c0e4ccb030d8b00950",
+  "sourceFiles": {
+    "verify-retain-r2.py": "db5360243b6ed75cf81548541b93bf86e0e6501e771fe90d20b465e3f3bfd98f"
+  },
+  "evidenceSha256": "ce859a25c4e00552750c38876a52a79bd8142cb844da82cbce99bb562f23a3f0",
+  "bytes": 5774
+}

@@ -1,0 +1,392 @@
+{
+  "scope": [
+    "DAILY-PROBE-COVERAGE-CONTRACT"
+  ],
+  "date": "2026-11-09",
+  "http": {
+    "passed": true,
+    "issues": [],
+    "reads": [
+      {
+        "round": 1,
+        "path": "/",
+        "status": 200,
+        "bytes": 45721,
+        "contentType": "text/html",
+        "responseFraming": "chunked",
+        "observedAssets": [
+          "/assets/index-BNyAYEM7.css",
+          "/assets/index-BXV-oxvX.js",
+          "/assets/vendor-DV2921Zo.css",
+          "/assets/vendor-DcuzkuQH.js"
+        ],
+        "unsafeReferences": 0,
+        "baseHrefs": [
+          "./"
+        ],
+        "bootstrapPreloads": [
+          {
+            "path": "/plugins/",
+            "queryPresent": true
+          },
+          {
+            "path": "/plugins/",
+            "queryPresent": true
+          }
+        ],
+        "bootstrapScripts": [
+          {
+            "path": "/__harness/banner.js",
+            "queryPresent": false
+          },
+          {
+            "path": "/__harness/storage.js",
+            "queryPresent": false
+          },
+          {
+            "path": "/plugins/",
+            "queryPresent": true
+          }
+        ],
+        "titleMatches": true,
+        "elapsedMs": 6
+      },
+      {
+        "round": 1,
+        "path": "/assets/index-BNyAYEM7.css",
+        "status": 200,
+        "bytes": 77471,
+        "contentType": "text/css",
+        "sha256": "47c890e8b3898eb4e5a53933bd318e58d4cf168cd7ccef46789d48a070bba591",
+        "elapsedMs": 22
+      },
+      {
+        "round": 1,
+        "path": "/assets/index-BXV-oxvX.js",
+        "status": 200,
+        "bytes": 941436,
+        "contentType": "text/javascript",
+        "sha256": "0f3fc6b857e4f8bd4d69619ce1010240cdaaa443abf0826532a24ef8f6e32ef0",
+        "elapsedMs": 18
+      },
+      {
+        "round": 1,
+        "path": "/assets/vendor-DV2921Zo.css",
+        "status": 200,
+        "bytes": 27312,
+        "contentType": "text/css",
+        "sha256": "4cea59483551208ce61ff27251da83d5f7a0893ef34cfe4b808d61be6e13ebc7",
+        "elapsedMs": 19
+      },
+      {
+        "round": 1,
+        "path": "/assets/vendor-DcuzkuQH.js",
+        "status": 200,
+        "bytes": 741114,
+        "contentType": "text/javascript",
+        "sha256": "c14ba1089d78f48b8959a7bc42c9013b4a57aa4122e053d54f74c0a4d1d156a7",
+        "elapsedMs": 32
+      },
+      {
+        "round": 2,
+        "path": "/",
+        "status": 200,
+        "bytes": 45721,
+        "contentType": "text/html",
+        "responseFraming": "chunked",
+        "observedAssets": [
+          "/assets/index-BNyAYEM7.css",
+          "/assets/index-BXV-oxvX.js",
+          "/assets/vendor-DV2921Zo.css",
+          "/assets/vendor-DcuzkuQH.js"
+        ],
+        "unsafeReferences": 0,
+        "baseHrefs": [
+          "./"
+        ],
+        "bootstrapPreloads": [
+          {
+            "path": "/plugins/",
+            "queryPresent": true
+          },
+          {
+            "path": "/plugins/",
+            "queryPresent": true
+          }
+        ],
+        "bootstrapScripts": [
+          {
+            "path": "/__harness/banner.js",
+            "queryPresent": false
+          },
+          {
+            "path": "/__harness/storage.js",
+            "queryPresent": false
+          },
+          {
+            "path": "/plugins/",
+            "queryPresent": true
+          }
+        ],
+        "titleMatches": true,
+        "elapsedMs": 2
+      },
+      {
+        "round": 2,
+        "path": "/assets/index-BNyAYEM7.css",
+        "status": 200,
+        "bytes": 77471,
+        "contentType": "text/css",
+        "sha256": "47c890e8b3898eb4e5a53933bd318e58d4cf168cd7ccef46789d48a070bba591",
+        "elapsedMs": 2
+      },
+      {
+        "round": 2,
+        "path": "/assets/index-BXV-oxvX.js",
+        "status": 200,
+        "bytes": 941436,
+        "contentType": "text/javascript",
+        "sha256": "0f3fc6b857e4f8bd4d69619ce1010240cdaaa443abf0826532a24ef8f6e32ef0",
+        "elapsedMs": 12
+      },
+      {
+        "round": 2,
+        "path": "/assets/vendor-DV2921Zo.css",
+        "status": 200,
+        "bytes": 27312,
+        "contentType": "text/css",
+        "sha256": "4cea59483551208ce61ff27251da83d5f7a0893ef34cfe4b808d61be6e13ebc7",
+        "elapsedMs": 12
+      },
+      {
+        "round": 2,
+        "path": "/assets/vendor-DcuzkuQH.js",
+        "status": 200,
+        "bytes": 741114,
+        "contentType": "text/javascript",
+        "sha256": "c14ba1089d78f48b8959a7bc42c9013b4a57aa4122e053d54f74c0a4d1d156a7",
+        "elapsedMs": 18
+      },
+      {
+        "round": 3,
+        "path": "/",
+        "status": 200,
+        "bytes": 45721,
+        "contentType": "text/html",
+        "responseFraming": "chunked",
+        "observedAssets": [
+          "/assets/index-BNyAYEM7.css",
+          "/assets/index-BXV-oxvX.js",
+          "/assets/vendor-DV2921Zo.css",
+          "/assets/vendor-DcuzkuQH.js"
+        ],
+        "unsafeReferences": 0,
+        "baseHrefs": [
+          "./"
+        ],
+        "bootstrapPreloads": [
+          {
+            "path": "/plugins/",
+            "queryPresent": true
+          },
+          {
+            "path": "/plugins/",
+            "queryPresent": true
+          }
+        ],
+        "bootstrapScripts": [
+          {
+            "path": "/__harness/banner.js",
+            "queryPresent": false
+          },
+          {
+            "path": "/__harness/storage.js",
+            "queryPresent": false
+          },
+          {
+            "path": "/plugins/",
+            "queryPresent": true
+          }
+        ],
+        "titleMatches": true,
+        "elapsedMs": 2
+      },
+      {
+        "round": 3,
+        "path": "/assets/index-BNyAYEM7.css",
+        "status": 200,
+        "bytes": 77471,
+        "contentType": "text/css",
+        "sha256": "47c890e8b3898eb4e5a53933bd318e58d4cf168cd7ccef46789d48a070bba591",
+        "elapsedMs": 10
+      },
+      {
+        "round": 3,
+        "path": "/assets/index-BXV-oxvX.js",
+        "status": 200,
+        "bytes": 941436,
+        "contentType": "text/javascript",
+        "sha256": "0f3fc6b857e4f8bd4d69619ce1010240cdaaa443abf0826532a24ef8f6e32ef0",
+        "elapsedMs": 8
+      },
+      {
+        "round": 3,
+        "path": "/assets/vendor-DV2921Zo.css",
+        "status": 200,
+        "bytes": 27312,
+        "contentType": "text/css",
+        "sha256": "4cea59483551208ce61ff27251da83d5f7a0893ef34cfe4b808d61be6e13ebc7",
+        "elapsedMs": 9
+      },
+      {
+        "round": 3,
+        "path": "/assets/vendor-DcuzkuQH.js",
+        "status": 200,
+        "bytes": 741114,
+        "contentType": "text/javascript",
+        "sha256": "c14ba1089d78f48b8959a7bc42c9013b4a57aa4122e053d54f74c0a4d1d156a7",
+        "elapsedMs": 17
+      }
+    ],
+    "expectedRounds": 3,
+    "expectedAssets": [
+      "/assets/index-BNyAYEM7.css",
+      "/assets/index-BXV-oxvX.js",
+      "/assets/vendor-DV2921Zo.css",
+      "/assets/vendor-DcuzkuQH.js"
+    ],
+    "expectedReads": 15,
+    "authenticationConfirmed": true,
+    "scope": "main /assets/ bundles and HTML reference inventory; declared bootstrap bodies/query values and dynamic resources are not validated",
+    "bootstrapBodiesValidated": false,
+    "contractSha256": "a2c0e10664cd70caf40cdb75c42f38dea42686588db1b2b813cdbdfb2f4473a3",
+    "managedEntryOwned": true,
+    "loginStatus": 303,
+    "localEntry": "http://127.0.0.1:49226",
+    "retries": 0
+  },
+  "intent": {
+    "probeSha256": "5bcae5474bacd9f1026ed8aad6ceb49053f320e7dd5ee5b6774d8173f7f42927",
+    "contractSha256": "a2c0e10664cd70caf40cdb75c42f38dea42686588db1b2b813cdbdfb2f4473a3",
+    "expectedAssets": 4,
+    "expectedRounds": 3,
+    "expectedSelectedReads": 15,
+    "method": "GET only; pinned CLI baseline; verified homepage framing; explicit local bootstrap scripts and two preload hints; no retries"
+  },
+  "localTests": 31,
+  "cliGuards": {
+    "existingOutputRejected": true,
+    "existingOutputUnchangedSha256": "21094835f97f4d235bd66d4a33fbcf548bccb5227c29d4773752f128eaa9998a",
+    "existingOutputExitCode": 2,
+    "wrongContractDigestRejected": true,
+    "wrongDigestExitCode": 1,
+    "negativeGuardsPrecedeManagerImportByCodePath": true
+  },
+  "alternateContractCli": {
+    "alternateValidContractSelfDigestMatches": true,
+    "rejectedByPinnedBaseline": true,
+    "exitCode": 1,
+    "managerAndNetworkPrecededByRejectionByCodePath": true
+  },
+  "findingsReproducedAndFixed": {
+    "cases": {
+      "F1-extra-preload": {
+        "oldPassed": true,
+        "newPassed": false
+      },
+      "B-unframed-prefix": {
+        "oldPassed": true,
+        "newPassed": false
+      },
+      "F2-empty-query": {
+        "oldPassed": true,
+        "newPassed": false
+      },
+      "F3-duplicate-bootstrap-path": {
+        "oldAccepted": true,
+        "newRejected": true
+      },
+      "F4-cli-baseline": {
+        "alternateValidContractSelfDigestMatches": true,
+        "rejectedByPinnedBaseline": true,
+        "exitCode": 1,
+        "managerAndNetworkPrecededByRejectionByCodePath": true
+      }
+    },
+    "scope": "Actual old/new modules and real HTTPResponse parser with inert byte streams; no network or VM changes"
+  },
+  "coreAssetHashesUnchanged": true,
+  "priorBatch": "work/harness-http-coverage-20261109",
+  "programDigest": "764760fdbf5577f6977b38142a2ea73bace1c2eb98797977412efd1662ea18e6",
+  "candidatePluginDeployed": false,
+  "ordinaryR3Qualified": false,
+  "wholeProductReleaseQualified": false,
+  "scopeItems": [
+    "DAILY-PROBE-COVERAGE-CONTRACT"
+  ],
+  "priorReviewHistory": [
+    {
+      "sourceVersion": "v1",
+      "folder": "external-review",
+      "state": "partial",
+      "finishReason": "length",
+      "promptSha256": "d3da42797b0d0622685b515b6fccffe3db0e954c238cbccdce8d42594d6d4e9a",
+      "receiptSha256": "2711aa21bcd17424bf82200a689c163ed597d9f39de4f7f34820637055092af7",
+      "usedToPassR2": false
+    },
+    {
+      "sourceVersion": "v1",
+      "folder": "external-review-a",
+      "state": "completed",
+      "finishReason": "stop",
+      "promptSha256": "3ebba43e841cf49fb60e8d2842b21741b4ccb888fc22d88f3d469b0621155b58",
+      "receiptSha256": "0eaf4f89e354f561161012786a2172845168812fe2b1d9cf93c092e135ee6a07",
+      "usedToPassR2": false
+    },
+    {
+      "sourceVersion": "v1",
+      "folder": "external-review-b",
+      "state": "completed",
+      "finishReason": "stop",
+      "promptSha256": "4f6d66abef07f4cef9355567f85c407a94e087cfcfc47a4418a5e2daa04ae409",
+      "receiptSha256": "c2b4e6030f41f1ce2dd5fab85bdcf8b8ce3816166e871e742924dcbded5482aa",
+      "usedToPassR2": false
+    }
+  ],
+  "sourceHashes": {
+    "scripts/harness_http_coverage.py": "5bcae5474bacd9f1026ed8aad6ceb49053f320e7dd5ee5b6774d8173f7f42927",
+    "scripts/tests/harness_http_coverage_test.py": "812e94f55b10393d00ce29146c62e04eed1d912bd7af6a1197309461c4e1f23e",
+    "docs/security-workspace/daily-http-contract.candidate.json": "a2c0e10664cd70caf40cdb75c42f38dea42686588db1b2b813cdbdfb2f4473a3",
+    "docs/security-workspace/http-coverage.md": "9c9654423ba4500e3dfefe7d7ec6366c97732b825fe029f3f602df64f93812dd"
+  },
+  "externalReview": {
+    "state": "completed-and-triaged",
+    "scopedBlockers": 0,
+    "requestedClaudeModel": "claude-opus-5-5",
+    "claudeState": "oauth-expired-401",
+    "reviewer": "DeepSeek V4.1 Flash",
+    "model": "deepseek-flash",
+    "effort": "high",
+    "finishReason": "stop",
+    "promptSha256": "8a96a53b14f5ec97e3bec1bd5e75f54ac5d2c5ebc3ddb418c73000002d689468",
+    "reportSha256": "b246c3d9dd7e93552e329ba39a905a17c9f9b7540260eec886c7cffd508729d9",
+    "receiptSha256": "d59c10941cc80502d5a061a2aa626dc22cfd1d0152caa63904954e9a631e64ac",
+    "temporaryReviewCopyRemoved": true,
+    "triageSha256": "b0e50285ec4c5cb4a1c407c780bc24d851efabb5c152581329f9dc974fb95999"
+  },
+  "followUp": [
+    {
+      "id": "SSH-RESET-LOWER-LAYER",
+      "status": "open"
+    },
+    {
+      "id": "SCORE-SIDEBAR-HISTORICAL-FAILURE",
+      "status": "open"
+    },
+    {
+      "id": "ORDINARY-R3",
+      "status": "pending"
+    }
+  ],
+  "githubPushed": false
+}

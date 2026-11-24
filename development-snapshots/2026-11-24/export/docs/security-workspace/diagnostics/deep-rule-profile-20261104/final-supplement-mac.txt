@@ -1,0 +1,37 @@
+(node:33419) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Ordinary plan reports missing R3 qualification without handing off files or starting tools (26.643291ms)
+✔ Deep S1 dispatch persists the original mode and identities and launches only selected steps (173.510375ms)
+✔ Mode dispatch rejects unqualified adapters, invalid modes and over-budget work before creating a task (19.108084ms)
+✔ A pinned runtime identity change after acceptance prevents dispatch of the original step (16.342833ms)
+✔ Child admission cannot swap the pinned identity after the parent pre-dispatch check (85.257ms)
+✔ Mode admission requires a current runtime identity instead of trusting a ready flag (16.616542ms)
+✔ Mode contract survives reopening the existing database and old joint tasks retain a null mode (232.977292ms)
+✔ Native service mode requests share one ledger and protect mode metadata against redaction (181.5255ms)
+✔ Ordinary submission binds the current preview, exact steps and bounded budget before R3 (27.866541ms)
+✔ A late S1 scanner result does not persist findings after the monotonic deadline (92.886166ms)
+✔ Managed Semgrep persists Python review evidence separately from findings (150.109625ms)
+✔ deep Semgrep selection binds the fixed profile to parent, child options and persisted runtime details (163.6775ms)
+✔ deep rule base mismatch is unavailable without silently dispatching the baseline (16.081666ms)
+✔ a deep profile changed after acceptance is rejected before handing off the source (15.489375ms)
+✔ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>delete s.rules (15.394125ms)
+✔ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>s.rules=null (15.204791ms)
+✔ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>s.deepRules={ready:false} (15.556916ms)
+✔ deep preflight does not snapshot a source with missing baseline or bundle identity: s=>delete s.deepRules (15.403292ms)
+✔ unconfirmed executed rule receipt cannot persist a selected17 result: undefined (82.273875ms)
+✔ unconfirmed executed rule receipt cannot persist a selected17 result: {"mode":"ordinary"} (81.133375ms)
+✔ unconfirmed executed rule receipt cannot persist a selected17 result: {"rulesSha256":"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"} (80.865667ms)
+✔ a valid planned profile cannot substitute for measured rule bytes and coverage identity: r=>r.executedRules.sha256=deepSemgrepProfile().baseRulesSha256 (79.930709ms)
+✔ a valid planned profile cannot substitute for measured rule bytes and coverage identity: r=>r.executedRules.count=16 (83.096459ms)
+✔ a valid planned profile cannot substitute for measured rule bytes and coverage identity: r=>delete r.executedRules (81.141375ms)
+✔ a valid planned profile cannot substitute for measured rule bytes and coverage identity: r=>r.coverageKey='legacy-key' (80.79775ms)
+✔ child admission rechecks deep bundle readiness after the parent check (79.327167ms)
+✔ legacy scan rejects an unexpected extra-rule receipt instead of recording it (15.787084ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2017.838459

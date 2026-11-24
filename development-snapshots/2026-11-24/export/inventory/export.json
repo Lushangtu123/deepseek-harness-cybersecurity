@@ -1,0 +1,1373 @@
+{
+  "schemaVersion": 1,
+  "configuration": "merged-kali-tools-personal2",
+  "source": "source candidate173 with evidence, lifecycle, snapshot and rule-transaction repairs; daily169/16 retained, candidate not deployed; ordinary R3 unqualified",
+  "guestFiles": {
+    "guest-home/.dsh-improved/cordis.patch.yml": {
+      "sourceSha256": "01605d29a130f965ee20e1e850e16b03e826f4d6b874eff13f4bba1f3fbb0bae",
+      "sha256": "01605d29a130f965ee20e1e850e16b03e826f4d6b874eff13f4bba1f3fbb0bae"
+    },
+    "guest-home/.dsh-improved/AGENTS.md": {
+      "sourceSha256": "b0366fce95984e239f0ad57eaf295631958356939db0d89f861a6c9d188b3a89",
+      "sha256": "b0366fce95984e239f0ad57eaf295631958356939db0d89f861a6c9d188b3a89"
+    },
+    "guest-home/.dsh-improved/prompt-inject.md": {
+      "sourceSha256": "dec02209f23a50f3340caf71695711482c73731ff859be4f94b9f3c41a033b1b",
+      "sha256": "dec02209f23a50f3340caf71695711482c73731ff859be4f94b9f3c41a033b1b"
+    },
+    "guest-home/.dsh-improved/profiles/web/cordis.patch.yml": {
+      "sourceSha256": "271108a1af0d6afb565eaf2b51a8ea0dadaf1eddc10f484a543ab1783aea4727",
+      "sha256": "271108a1af0d6afb565eaf2b51a8ea0dadaf1eddc10f484a543ab1783aea4727"
+    },
+    "guest-home/.dsh-improved/profiles/web/cordis.yml": {
+      "sourceSha256": "c300dcf2ebc5f02062d6591268d29d3db6fe45e0cb138f5467276fe2ba06076e",
+      "sha256": "c300dcf2ebc5f02062d6591268d29d3db6fe45e0cb138f5467276fe2ba06076e"
+    },
+    "guest-home/.dsh-improved/profiles/web/package.json": {
+      "sourceSha256": "71d84203cff4c4a5730ddb3fad25b036fb6413ad1c9b58b984020a4d0e5f37e5",
+      "sha256": "71d84203cff4c4a5730ddb3fad25b036fb6413ad1c9b58b984020a4d0e5f37e5"
+    },
+    "guest-home/.config/harness-vm-mode": {
+      "sourceSha256": "8452041bcae35587f9f3ae42653ed937837da105bed69d8c38a42d76601bf0b3",
+      "sha256": "8452041bcae35587f9f3ae42653ed937837da105bed69d8c38a42d76601bf0b3"
+    },
+    "guest-home/.config/systemd/user/dsh-original.service": {
+      "sourceSha256": "2e88b00e4aa6318e2760481e7c99a89fcb23cc8047edb32487630af0bf1a0b73",
+      "sha256": "2e88b00e4aa6318e2760481e7c99a89fcb23cc8047edb32487630af0bf1a0b73"
+    },
+    "guest-home/.config/systemd/user/dsh-original.service.d/30-personal-switch.conf": {
+      "sourceSha256": "c5b56857e107f621bbe12f6b07bb904fc37e631789bbad65c21ecb3fbc77cc7a",
+      "sha256": "c5b56857e107f621bbe12f6b07bb904fc37e631789bbad65c21ecb3fbc77cc7a"
+    },
+    "guest-home/.local/bin/harness-vm-web": {
+      "sourceSha256": "1525bf9ba0b3147261d06b2773c2bf538073a9f29dd38a42c97e74022d1e775f",
+      "sha256": "1525bf9ba0b3147261d06b2773c2bf538073a9f29dd38a42c97e74022d1e775f"
+    },
+    "guest-home/.local/bin/toolchain-versions": {
+      "sourceSha256": "9cf974bae3e1afe04f6e45851532806e2f73e917269514e06f3bdc81e2a720c6",
+      "sha256": "9cf974bae3e1afe04f6e45851532806e2f73e917269514e06f3bdc81e2a720c6"
+    },
+    "guest-home/.local/bin/dsh": {
+      "sourceSha256": "e858af8e342fca0e3fe65e1b8e3b475b260549ec0bd0cbc90f761c03bb468854",
+      "sha256": "e858af8e342fca0e3fe65e1b8e3b475b260549ec0bd0cbc90f761c03bb468854"
+    },
+    "guest-home/.local/bin/codegraph": {
+      "sourceSha256": "706175d4bb85d6a3e1fb58f50a24fa7780797b2487fab45d4694aab5f9892a5a",
+      "sha256": "706175d4bb85d6a3e1fb58f50a24fa7780797b2487fab45d4694aab5f9892a5a"
+    },
+    "guest-home/.local/bin/reverse-case": {
+      "sourceSha256": "8b40dbc919b292b6bf5ad085526dd1460f7702604172e8e83df3a443b791ba79",
+      "sha256": "8b40dbc919b292b6bf5ad085526dd1460f7702604172e8e83df3a443b791ba79"
+    },
+    "guest-home/.local/bin/reverse-route": {
+      "sourceSha256": "5bedaa47061bb533549724d2ffebc1bb3f271c4b8d33a8dbc4b6a756b0a79f9b",
+      "sha256": "5bedaa47061bb533549724d2ffebc1bb3f271c4b8d33a8dbc4b6a756b0a79f9b"
+    },
+    "guest-home/.dsh-improved/agent-presets/personal-review/agent.cordis.yml": {
+      "sourceSha256": "6390a6cd27a6f480c0db21c8feec5ecf22d1a94f3d7dd0035c9458ecc31c21e6",
+      "sha256": "6390a6cd27a6f480c0db21c8feec5ecf22d1a94f3d7dd0035c9458ecc31c21e6"
+    },
+    "guest-home/.dsh-improved/agent-presets/personal-review/preset.yml": {
+      "sourceSha256": "c5802ddf572c5e3cac0e58ab53879769569bd473930b0b26cbbd370313bd1afe",
+      "sha256": "c5802ddf572c5e3cac0e58ab53879769569bd473930b0b26cbbd370313bd1afe"
+    },
+    "guest-home/.dsh-improved/skills/codegraph-bootstrap/SKILL.md": {
+      "sourceSha256": "a24150589f64fbe8243e66b892a988f2389764f2d085a81a9d248ba6bd4a64e0",
+      "sha256": "a24150589f64fbe8243e66b892a988f2389764f2d085a81a9d248ba6bd4a64e0"
+    },
+    "guest-home/.dsh-improved/skills/codegraph-bootstrap/assets/claude-desktop-codegraph.example.json": {
+      "sourceSha256": "4a1d90c132f11ccbac8329d4640b73a6970d942d7306f476b0f2252f521ffc8e",
+      "sha256": "4a1d90c132f11ccbac8329d4640b73a6970d942d7306f476b0f2252f521ffc8e"
+    },
+    "guest-home/.dsh-improved/skills/codegraph-bootstrap/assets/deepseek-codegraph.example.yaml": {
+      "sourceSha256": "e984083e573348499398b2743b49b5fb9294cc1a293344955594671921dc6b5b",
+      "sha256": "e984083e573348499398b2743b49b5fb9294cc1a293344955594671921dc6b5b"
+    },
+    "guest-home/.dsh-improved/skills/codegraph-bootstrap/references/host-adapters.md": {
+      "sourceSha256": "3abfc14a06c9e5ba3e09f942b2db7187aac2667e83198aed1dfcff796a14124e",
+      "sha256": "3abfc14a06c9e5ba3e09f942b2db7187aac2667e83198aed1dfcff796a14124e"
+    },
+    "guest-home/.dsh-improved/skills/codegraph-bootstrap/references/native-setup.md": {
+      "sourceSha256": "d9001d74f984999e4126e9217a39c0926e22e7ffe0cf0e72b2ca183e67a0ec88",
+      "sha256": "d9001d74f984999e4126e9217a39c0926e22e7ffe0cf0e72b2ca183e67a0ec88"
+    },
+    "guest-home/.dsh-improved/skills/codegraph-bootstrap/scripts/inspect_dsh_config.py": {
+      "sourceSha256": "e80027267492c124bc31ebe1450fb794bf3a53753add5d81c2fbe56ec84200a1",
+      "sha256": "e80027267492c124bc31ebe1450fb794bf3a53753add5d81c2fbe56ec84200a1"
+    },
+    "guest-home/.dsh-improved/skills/pentagi/SKILL.md": {
+      "sourceSha256": "5470d3b8122a496ee38e5ccdce2150772b44168f7d5cdee156812e439627b856",
+      "sha256": "5470d3b8122a496ee38e5ccdce2150772b44168f7d5cdee156812e439627b856"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/SKILL.md": {
+      "sourceSha256": "5bda8d7d33f6bfeb01b0b4c8c098a982af1086062d4a69a3b0efabbcde1831b9",
+      "sha256": "5bda8d7d33f6bfeb01b0b4c8c098a982af1086062d4a69a3b0efabbcde1831b9"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/agents/openai.yaml": {
+      "sourceSha256": "ef28c618831dfa0e884cdbaf592807a5cec133da15e08e05dd8dcf1d747bb4d0",
+      "sha256": "ef28c618831dfa0e884cdbaf592807a5cec133da15e08e05dd8dcf1d747bb4d0"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/assets/templates/change-report.md": {
+      "sourceSha256": "184ca68248ae2d1a3b9d9565c4336ce146898721782b2b8904a1bc3bcfee9a62",
+      "sha256": "184ca68248ae2d1a3b9d9565c4336ce146898721782b2b8904a1bc3bcfee9a62"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/assets/templates/investment-memo.md": {
+      "sourceSha256": "e957d0eb9bde6ccf58c2cc1314a6195b2761a300abb5f42646a8d7559aff7de5",
+      "sha256": "e957d0eb9bde6ccf58c2cc1314a6195b2761a300abb5f42646a8d7559aff7de5"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/assets/templates/presentation-brief.md": {
+      "sourceSha256": "51faacb6b3eb51d8da92788f7e765b1418f93af758b49d019cdddef3d2703604",
+      "sha256": "51faacb6b3eb51d8da92788f7e765b1418f93af758b49d019cdddef3d2703604"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/assets/templates/project-brief.md": {
+      "sourceSha256": "f86a40cbbe2dbebdafe160c6f564dda2749ffb1f01371fba8372f984167f0445",
+      "sha256": "f86a40cbbe2dbebdafe160c6f564dda2749ffb1f01371fba8372f984167f0445"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/architecture-assessment.md": {
+      "sourceSha256": "36d07e4897018f133153f48bc6056f2a5ce2330f22805f869cf59a6b3e9a371d",
+      "sha256": "36d07e4897018f133153f48bc6056f2a5ce2330f22805f869cf59a6b3e9a371d"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/capability-routing.md": {
+      "sourceSha256": "52ff2300616fd02a96cc00919d6a567f3474c54fb8fe676837838fd98e1fc7e9",
+      "sha256": "52ff2300616fd02a96cc00919d6a567f3474c54fb8fe676837838fd98e1fc7e9"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/code-maintenance.md": {
+      "sourceSha256": "cbf4991337dc47ffb205162751fcb14d30907c8eefa492a51f184237bd9e0d05",
+      "sha256": "cbf4991337dc47ffb205162751fcb14d30907c8eefa492a51f184237bd9e0d05"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/codegraph-navigation.md": {
+      "sourceSha256": "594e881756580426ab71e0bc3b0a759b440fd7a286929a41a20557791a14073b",
+      "sha256": "594e881756580426ab71e0bc3b0a759b440fd7a286929a41a20557791a14073b"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/command-evidence.md": {
+      "sourceSha256": "2e7b0fefe73824ec1639e3ffde2ab48d9409ab9b912eddcf30c90e2aab73976b",
+      "sha256": "2e7b0fefe73824ec1639e3ffde2ab48d9409ab9b912eddcf30c90e2aab73976b"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/execution-preflight.md": {
+      "sourceSha256": "da6a5b62fdb0a2eba709521d1be2bc67625c9391a0789c4cce9676e1e4f4aa0f",
+      "sha256": "da6a5b62fdb0a2eba709521d1be2bc67625c9391a0789c4cce9676e1e4f4aa0f"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/functional-qa.md": {
+      "sourceSha256": "e4455d5c5e11b264f7f325d1b727dcba25fc4e06e20fa0b3f9a4cb4c04e7dd22",
+      "sha256": "e4455d5c5e11b264f7f325d1b727dcba25fc4e06e20fa0b3f9a4cb4c04e7dd22"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/github-remote-inspection.md": {
+      "sourceSha256": "05270e9e1823ca32f3cc04db7ed9d376d38c07f4ce8269c80a59202d9eaebfed",
+      "sha256": "05270e9e1823ca32f3cc04db7ed9d376d38c07f4ce8269c80a59202d9eaebfed"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/host-compatibility.md": {
+      "sourceSha256": "6113dceb3c8e9f471567b284bfcbc7eb78da3616367203edd34786b83be39a75",
+      "sha256": "6113dceb3c8e9f471567b284bfcbc7eb78da3616367203edd34786b83be39a75"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/investment-research.md": {
+      "sourceSha256": "5440e8b7f1f6f90da2c5d72812159e3f63c9e69113da5bc56cd8a711c57fc254",
+      "sha256": "5440e8b7f1f6f90da2c5d72812159e3f63c9e69113da5bc56cd8a711c57fc254"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/issue-intake.md": {
+      "sourceSha256": "f0a9795b63c1ab9a5e4e318dca1f16899bad3c2cc2aa6d9541d88190e510d6a5",
+      "sha256": "f0a9795b63c1ab9a5e4e318dca1f16899bad3c2cc2aa6d9541d88190e510d6a5"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/office-delivery.md": {
+      "sourceSha256": "586a956274bb95ba5080451bc1c350996bb9baa1a606b6124862d46db4f798ce",
+      "sha256": "586a956274bb95ba5080451bc1c350996bb9baa1a606b6124862d46db4f798ce"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/permissions.md": {
+      "sourceSha256": "f3a9d881ef7408bcff0d144a428795574b2ab8c2f9d9396928f224a327371c85",
+      "sha256": "f3a9d881ef7408bcff0d144a428795574b2ab8c2f9d9396928f224a327371c85"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/pr-maintenance.md": {
+      "sourceSha256": "e7f1a4caf830aea9cc8ed95f8b8a9c11d9d34bfad8bbdd856efa2898db857d72",
+      "sha256": "e7f1a4caf830aea9cc8ed95f8b8a9c11d9d34bfad8bbdd856efa2898db857d72"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/project-bootstrap.md": {
+      "sourceSha256": "db5aa0525ed588900ac77281f0c6196bca8da6fdcaa3dd0a17d4ec075731b351",
+      "sha256": "db5aa0525ed588900ac77281f0c6196bca8da6fdcaa3dd0a17d4ec075731b351"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/project-knowledge.md": {
+      "sourceSha256": "490889475c79a84ac3ba360c417f8ce90b40d2018d8cbecde2cc990d6c08d33b",
+      "sha256": "490889475c79a84ac3ba360c417f8ce90b40d2018d8cbecde2cc990d6c08d33b"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/quality-gates.md": {
+      "sourceSha256": "fa1dcf96c8a8844c8de313e2c44e8d3cc55cb349565c2dc223ffc9988c6633d2",
+      "sha256": "fa1dcf96c8a8844c8de313e2c44e8d3cc55cb349565c2dc223ffc9988c6633d2"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/security-patch-validation.md": {
+      "sourceSha256": "c69181a3cdd576639db3546b3a9198b24909897d5c4857696c7dc347e1deac40",
+      "sha256": "c69181a3cdd576639db3546b3a9198b24909897d5c4857696c7dc347e1deac40"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/skill-governance.md": {
+      "sourceSha256": "9c6da3c74867ba35a44c7e1aa61cdf0831f737ea4073186329c5ba1906b60fa3",
+      "sha256": "9c6da3c74867ba35a44c7e1aa61cdf0831f737ea4073186329c5ba1906b60fa3"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/task-retrospective.md": {
+      "sourceSha256": "35bd8d8e55601a8a64bb4b4e32adf85eac7491877aee6b371c82cadf7800c00f",
+      "sha256": "35bd8d8e55601a8a64bb4b4e32adf85eac7491877aee6b371c82cadf7800c00f"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/task-sizing.md": {
+      "sourceSha256": "b3934bd30cc434a6f1a4e17c7510dc6889695c363aa973de0533a69a878339a7",
+      "sha256": "b3934bd30cc434a6f1a4e17c7510dc6889695c363aa973de0533a69a878339a7"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/test-strategy.md": {
+      "sourceSha256": "6a7d746151479ec1e98976f7d0ceb9a37d800364a2392ce62b2c78b5b6878a03",
+      "sha256": "6a7d746151479ec1e98976f7d0ceb9a37d800364a2392ce62b2c78b5b6878a03"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/token-efficiency.md": {
+      "sourceSha256": "0d33dd88d66f74a3b4bd17501921d9d605022bcd7377aca0b844ef7867ba79a9",
+      "sha256": "0d33dd88d66f74a3b4bd17501921d9d605022bcd7377aca0b844ef7867ba79a9"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/user-profile.md": {
+      "sourceSha256": "35d76fadce8a7006cca129e9e1fb8b2d62930adcfca4a3a051ff5839f0694a74",
+      "sha256": "bd8d972a18d7024a009fa51572053d8e0c159c1baf2caaee703d130ad44fe5a9"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/version-aware-maintenance.md": {
+      "sourceSha256": "fc4de1ca0c05f7796ee430dea1d9efd1bf8574f04ea93b5a67cfe7b93aec0fd1",
+      "sha256": "fc4de1ca0c05f7796ee430dea1d9efd1bf8574f04ea93b5a67cfe7b93aec0fd1"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/work-coordination.md": {
+      "sourceSha256": "5ec8dc5d8dcb992e0422f73b9b52b3f2b8eee99d99e68134b1c4796449dd5032",
+      "sha256": "5ec8dc5d8dcb992e0422f73b9b52b3f2b8eee99d99e68134b1c4796449dd5032"
+    },
+    "guest-home/.dsh-improved/skills/personal-work-agent/scripts/evidence.py": {
+      "sourceSha256": "c79378f99193b827bcbd254c946bf69b7aa5ae1772672d594148814028af489e",
+      "sha256": "c79378f99193b827bcbd254c946bf69b7aa5ae1772672d594148814028af489e"
+    },
+    "guest-home/.dsh-improved/skills/project-builder/SKILL.md": {
+      "sourceSha256": "f347e89743fb9fbb35336e97192265b53097780736df29222139de8accb1dec7",
+      "sha256": "f347e89743fb9fbb35336e97192265b53097780736df29222139de8accb1dec7"
+    },
+    "guest-home/.dsh-improved/skills/project-builder/agents/openai.yaml": {
+      "sourceSha256": "4b6f5230ce57ddef04cad5b3286f5f9504a430d69d752adcfdb44626d11ef424",
+      "sha256": "4b6f5230ce57ddef04cad5b3286f5f9504a430d69d752adcfdb44626d11ef424"
+    },
+    "guest-home/.dsh-improved/skills/project-builder/references/acceptance.md": {
+      "sourceSha256": "446c26b0c2ec3a4dd422b565e76cf6feaf062b3b18d8ae25c8d768708e6d6039",
+      "sha256": "446c26b0c2ec3a4dd422b565e76cf6feaf062b3b18d8ae25c8d768708e6d6039"
+    },
+    "guest-home/.dsh-improved/skills/project-builder/references/pwa-handoff.md": {
+      "sourceSha256": "90d160a0eb5a8ee0c4a85b0b6eee739928f654c8e2f8495df01aa904111d22be",
+      "sha256": "90d160a0eb5a8ee0c4a85b0b6eee739928f654c8e2f8495df01aa904111d22be"
+    },
+    "guest-home/.dsh-improved/skills/reverse-engineer-anything/SKILL.md": {
+      "sourceSha256": "8818b645c9fd348399a50a8678b91cff20215690adad484e70282ff9f2ef91ee",
+      "sha256": "8818b645c9fd348399a50a8678b91cff20215690adad484e70282ff9f2ef91ee"
+    },
+    "guest-home/.dsh-improved/skills/reverse-engineer-anything/references/android-applications.md": {
+      "sourceSha256": "24ecaa1798eb4f28591884a7deb68df31e90313865515a23e3b466403f1abc39",
+      "sha256": "24ecaa1798eb4f28591884a7deb68df31e90313865515a23e3b466403f1abc39"
+    },
+    "guest-home/.dsh-improved/skills/reverse-engineer-anything/references/connection-and-recovery.md": {
+      "sourceSha256": "4754441e63e4252a0b230cf5aa12b78c0716463905305059bb7dea6713ba0bfc",
+      "sha256": "4754441e63e4252a0b230cf5aa12b78c0716463905305059bb7dea6713ba0bfc"
+    },
+    "guest-home/.dsh-improved/skills/reverse-engineer-anything/references/environments.md": {
+      "sourceSha256": "83e041f0a5243172af69eaadf62da0699617add3ff1d46b294e4bba7ece9d95f",
+      "sha256": "83e041f0a5243172af69eaadf62da0699617add3ff1d46b294e4bba7ece9d95f"
+    },
+    "guest-home/.dsh-improved/skills/reverse-engineer-anything/references/evidence-workflows.md": {
+      "sourceSha256": "f44b68acc6ebaa60c1f5d0670e4f9ff7212d351a0ecc6e6ca77ce38b9177ea57",
+      "sha256": "f44b68acc6ebaa60c1f5d0670e4f9ff7212d351a0ecc6e6ca77ce38b9177ea57"
+    },
+    "guest-home/.dsh-improved/skills/reverse-engineer-anything/references/javascript-applications.md": {
+      "sourceSha256": "619cfd15ffdf466452cc32002ae357fefec59d5dcad4c9dfc27630138f0f719d",
+      "sha256": "619cfd15ffdf466452cc32002ae357fefec59d5dcad4c9dfc27630138f0f719d"
+    },
+    "guest-home/.dsh-improved/skills/reverse-engineer-anything/references/native-and-artifacts.md": {
+      "sourceSha256": "cf394568ae91e9017d63056adb8872fb1df9e2f6bbe544a95d0fd9f064b06dd5",
+      "sha256": "cf394568ae91e9017d63056adb8872fb1df9e2f6bbe544a95d0fd9f064b06dd5"
+    },
+    "guest-home/.dsh-improved/skills/reverse-engineer-anything/references/runtime-observation.md": {
+      "sourceSha256": "852bd1e25e9f83f0e8c7d4f8441a043e2b2a7d5e39f729bf22ac77259a0207bd",
+      "sha256": "852bd1e25e9f83f0e8c7d4f8441a043e2b2a7d5e39f729bf22ac77259a0207bd"
+    },
+    "guest-home/.dsh-improved/skills/reverse-skill/SKILL.md": {
+      "sourceSha256": "2247e238f7294bc13de667634782010b3934f934d8b7ba4bc05c1580c7f533a2",
+      "sha256": "2247e238f7294bc13de667634782010b3934f934d8b7ba4bc05c1580c7f533a2"
+    },
+    "guest-home/.dsh-improved/tooling/toolchain-version-checker/index.mjs": {
+      "sourceSha256": "6322b0ca1ec558a6f12869b6e0b8e16b33aa094570bec11a95797288268a2e58",
+      "sha256": "6322b0ca1ec558a6f12869b6e0b8e16b33aa094570bec11a95797288268a2e58"
+    },
+    "guest-home/.dsh-improved/tooling/toolchain-version-checker/process.mjs": {
+      "sourceSha256": "47577471f07138778545e6fac059565784ab1c57175e44e5c3b15a2f886ef177",
+      "sha256": "47577471f07138778545e6fac059565784ab1c57175e44e5c3b15a2f886ef177"
+    },
+    "guest-home/.dsh-improved/tooling/toolchain-version-checker/check_versions.py": {
+      "sourceSha256": "afdfaa57b34407e7090b54c6b620439539e792f5bf46130b8c1fa9c718b4fef2",
+      "sha256": "afdfaa57b34407e7090b54c6b620439539e792f5bf46130b8c1fa9c718b4fef2"
+    },
+    "guest-home/.dsh-improved/tooling/toolchain-version-checker/catalog.json": {
+      "sourceSha256": "048bb6974b38c828bfd966f5cba5887c4f91f48ed1c07bd7a0ffe2c89df23bbb",
+      "sha256": "048bb6974b38c828bfd966f5cba5887c4f91f48ed1c07bd7a0ffe2c89df23bbb"
+    },
+    "guest-home/.dsh/toolchain/pentagi/pentagi.compose.yml": {
+      "sourcePath": ".dsh/toolchain/pentagi/pentagi.compose.yml",
+      "sourceSha256": "f47997cae58bef98f8b2aa006c4a919f91f435d81b6cdd0d3e24f7781d9ae0c2",
+      "sha256": "f47997cae58bef98f8b2aa006c4a919f91f435d81b6cdd0d3e24f7781d9ae0c2"
+    },
+    "guest-home/.dsh/toolchain/pentagi/Worker.Dockerfile": {
+      "sourcePath": ".dsh/toolchain/pentagi/Worker.Dockerfile",
+      "sourceSha256": "32de692ac14d7112842617d18c9d869407ab933f9bd3155d266657714ed38e17",
+      "sha256": "32de692ac14d7112842617d18c9d869407ab933f9bd3155d266657714ed38e17"
+    },
+    "guest-home/.dsh/toolchain/pentagi/deepseek-vm.provider.yml": {
+      "sourcePath": ".dsh/toolchain/pentagi/deepseek-vm.provider.yml",
+      "sourceSha256": "cfdb2e5db519fad8473398e9a6a2aa13c3da0f64fad0434d0a8b30bb5a7a7bd4",
+      "sha256": "cfdb2e5db519fad8473398e9a6a2aa13c3da0f64fad0434d0a8b30bb5a7a7bd4"
+    },
+    "guest-home/tools/harness-improved-runtime/package.json": {
+      "sourcePath": "tools/harness-improved-runtime/package.json",
+      "sourceSha256": "7142558726ec913b8c6e4c65a3a01f3f557245bec60f12e1738b80ae1e5e24e3",
+      "sha256": "7142558726ec913b8c6e4c65a3a01f3f557245bec60f12e1738b80ae1e5e24e3"
+    },
+    "guest-home/tools/rea-runtime/package.json": {
+      "sourcePath": "tools/rea-runtime/package.json",
+      "sourceSha256": "29f0b3fce7c59c841deebdede958c7babdc0ce1df09a430808ec3787819e94c3",
+      "sha256": "29f0b3fce7c59c841deebdede958c7babdc0ce1df09a430808ec3787819e94c3"
+    },
+    "guest-home/tools/codegraph-1.6.2/package.json": {
+      "sourcePath": "tools/codegraph-1.6.2/package.json",
+      "sourceSha256": "63e6b4811c6b404dde50e4a21acc7a51add9917ba648b7f667c7d4c83dd889ea",
+      "sha256": "63e6b4811c6b404dde50e4a21acc7a51add9917ba648b7f667c7d4c83dd889ea"
+    },
+    "guest-home/.dsh/toolchain/pentagi-cli.py": {
+      "sourcePath": ".dsh/toolchain/pentagi-cli.py",
+      "sourceSha256": "6894fdd4255d14010f4717f137cdad08d8d34db8fe7edf97d0ae5b9443447382",
+      "sha256": "6894fdd4255d14010f4717f137cdad08d8d34db8fe7edf97d0ae5b9443447382"
+    },
+    "runtime-overrides/@deepseek-ai/dsh-tools/lib/index.js": {
+      "sourcePath": "tools/harness-improved-runtime/node_modules/@deepseek-ai/dsh-tools/lib/index.js",
+      "sourceSha256": "ea623c244c4d5ae3edc33ebbd8354f4251fa16f13341a2b9687922b0ecb9a496",
+      "sha256": "ea623c244c4d5ae3edc33ebbd8354f4251fa16f13341a2b9687922b0ecb9a496",
+      "deployedBaselineSha256": "1e53932e7c4213ea24a7d87f06960b7a7702cb21f8a5741c97242b4a470a442a",
+      "sourceState": "candidate-not-deployed"
+    },
+    "runtime-overrides/@deepseek-ai/dsh-tools/package.json": {
+      "sourcePath": "tools/harness-improved-runtime/node_modules/@deepseek-ai/dsh-tools/package.json",
+      "sourceSha256": "625629cc08e44e134a9861a4d26b2f3a6d70bc2e50b12279275061607d7d702a",
+      "sha256": "625629cc08e44e134a9861a4d26b2f3a6d70bc2e50b12279275061607d7d702a"
+    },
+    "runtime-overrides/@deepseek-ai/dsh-tools/LICENSE": {
+      "sourcePath": "tools/harness-improved-runtime/node_modules/@deepseek-ai/dsh-tools/LICENSE",
+      "sourceSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+    },
+    "runtime-overrides/@deepseek-ai/dsh-tool-bash/lib/index.js": {
+      "sourcePath": "tools/harness-improved-runtime/node_modules/@deepseek-ai/dsh-tool-bash/lib/index.js",
+      "sourceSha256": "a1215d7bcaf82c0755be48321ef6bb45075f1cb33296d6263009e9d10fd596f6",
+      "sha256": "a1215d7bcaf82c0755be48321ef6bb45075f1cb33296d6263009e9d10fd596f6"
+    },
+    "runtime-overrides/@deepseek-ai/dsh-tool-bash/package.json": {
+      "sourcePath": "tools/harness-improved-runtime/node_modules/@deepseek-ai/dsh-tool-bash/package.json",
+      "sourceSha256": "8dd9d1846fd3ce9deeeeb4e5152390b8cd23818d08ed345e5eaca10530b33e06",
+      "sha256": "8dd9d1846fd3ce9deeeeb4e5152390b8cd23818d08ed345e5eaca10530b33e06"
+    },
+    "runtime-overrides/@deepseek-ai/dsh-tool-bash/LICENSE": {
+      "sourcePath": "tools/harness-improved-runtime/node_modules/@deepseek-ai/dsh-tool-bash/LICENSE",
+      "sourceSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+    },
+    "runtime-overrides/@deepseek-ai/dsh-permission-presets/lib/index.js": {
+      "sourcePath": "tools/harness-improved-runtime/node_modules/@deepseek-ai/dsh-permission-presets/lib/index.js",
+      "sourceSha256": "4f23c620145098d611d04d8363bc6716f49b26930c9141a21dc9a8df2b72ba63",
+      "sha256": "4f23c620145098d611d04d8363bc6716f49b26930c9141a21dc9a8df2b72ba63"
+    },
+    "runtime-overrides/@deepseek-ai/dsh-permission-presets/package.json": {
+      "sourcePath": "tools/harness-improved-runtime/node_modules/@deepseek-ai/dsh-permission-presets/package.json",
+      "sourceSha256": "3d2c934b4e3befffc4bd69ad1586518e3dba179059de338a47008082599747f2",
+      "sha256": "3d2c934b4e3befffc4bd69ad1586518e3dba179059de338a47008082599747f2"
+    },
+    "runtime-overrides/@deepseek-ai/dsh-permission-presets/LICENSE": {
+      "sourcePath": "tools/harness-improved-runtime/node_modules/@deepseek-ai/dsh-permission-presets/LICENSE",
+      "sourceSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+    },
+    "runtime-overrides/@deepseek-ai/dsh-user-approval/lib/index.js": {
+      "sourcePath": "tools/harness-improved-runtime/node_modules/@deepseek-ai/dsh-user-approval/lib/index.js",
+      "sourceSha256": "6a5ad1ba3c3dc3abbbae52e6c8c4463970ee0c1c8988cebb0d5cf2acd17ee90b",
+      "sha256": "6a5ad1ba3c3dc3abbbae52e6c8c4463970ee0c1c8988cebb0d5cf2acd17ee90b"
+    },
+    "runtime-overrides/@deepseek-ai/dsh-user-approval/package.json": {
+      "sourcePath": "tools/harness-improved-runtime/node_modules/@deepseek-ai/dsh-user-approval/package.json",
+      "sourceSha256": "4b99da619ffb88053bb43d8ecec7aaa6aa900862220d5665b0743954e7212fde",
+      "sha256": "4b99da619ffb88053bb43d8ecec7aaa6aa900862220d5665b0743954e7212fde"
+    },
+    "runtime-overrides/@deepseek-ai/dsh-user-approval/LICENSE": {
+      "sourcePath": "tools/harness-improved-runtime/node_modules/@deepseek-ai/dsh-user-approval/LICENSE",
+      "sourceSha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+    },
+    "guest-home/.config/harness-original-capabilities": {
+      "sourceSha256": "b6ac5bc39377e44ee783dff946f6703a994f5eb31a438e69dc0735b40060d2e8",
+      "sha256": "b6ac5bc39377e44ee783dff946f6703a994f5eb31a438e69dc0735b40060d2e8"
+    },
+    "guest-home/.config/systemd/user/harness-security.service": {
+      "sourceSha256": "91ff6bbea17ef57c9a5b8adf69aa7697d8ed834052778c7329ef75b4ec14faf6",
+      "sha256": "91ff6bbea17ef57c9a5b8adf69aa7697d8ed834052778c7329ef75b4ec14faf6"
+    },
+    "guest-home/.config/systemd/user/harness-security.socket": {
+      "sourceSha256": "f5465b56afbe42e943a7907b21553ebb17203295448745d51bb170a136d0dc16",
+      "sha256": "f5465b56afbe42e943a7907b21553ebb17203295448745d51bb170a136d0dc16"
+    },
+    "guest-home/.local/bin/kali-vm": {
+      "sourceSha256": "fe8aaf61317f6dc8f24e74da351a8b5951b1dbe1a0d8cdd178b0454e33134667",
+      "sha256": "fe8aaf61317f6dc8f24e74da351a8b5951b1dbe1a0d8cdd178b0454e33134667"
+    },
+    "guest-home/.dsh-improved/skills/kali/SKILL.md": {
+      "sourceSha256": "b233a0033abc67606ffd0339cdcd9d733e824e071b09447a69e9cf7599b057f2",
+      "sha256": "b233a0033abc67606ffd0339cdcd9d733e824e071b09447a69e9cf7599b057f2"
+    },
+    "guest-home/.local/lib/harness-kali-tools/chisel": {
+      "sourceSha256": "5e34c06045b5f16211ca989c346289950724f42179d98c15c2b8e4084a9db0cf",
+      "sha256": "5e34c06045b5f16211ca989c346289950724f42179d98c15c2b8e4084a9db0cf"
+    },
+    "guest-home/.local/lib/harness-kali-tools/dnsx": {
+      "sourceSha256": "9f3953b34f55319d586febd65df2cb325b56da86c25250f1854b8081eeac2155",
+      "sha256": "9f3953b34f55319d586febd65df2cb325b56da86c25250f1854b8081eeac2155"
+    },
+    "guest-home/.local/lib/harness-kali-tools/ffuf": {
+      "sourceSha256": "7b25f6a2d48528f742ad62a4e677badae5f5c2f2d68e24276a3575d22632b9e3",
+      "sha256": "7b25f6a2d48528f742ad62a4e677badae5f5c2f2d68e24276a3575d22632b9e3"
+    },
+    "guest-home/.local/lib/harness-kali-tools/frpc": {
+      "sourceSha256": "b3ef3d99d090f7a50fade01981dff55181e99b36569bb8bfbb0d84dfb68258ba",
+      "sha256": "b3ef3d99d090f7a50fade01981dff55181e99b36569bb8bfbb0d84dfb68258ba"
+    },
+    "guest-home/.local/lib/harness-kali-tools/frps": {
+      "sourceSha256": "d3986bd900c5d5057ba27b2e3ace4f680b1ec43dc94f75ec41a74f7efe8d29b3",
+      "sha256": "d3986bd900c5d5057ba27b2e3ace4f680b1ec43dc94f75ec41a74f7efe8d29b3"
+    },
+    "guest-home/.local/lib/harness-kali-tools/fscan": {
+      "sourceSha256": "e7fd8a4d8e7da03fee0b4d57dac1629e6ce35a8027edcc0e0cda3317ba134b7e",
+      "sha256": "e7fd8a4d8e7da03fee0b4d57dac1629e6ce35a8027edcc0e0cda3317ba134b7e"
+    },
+    "guest-home/.local/lib/harness-kali-tools/gogo": {
+      "sourceSha256": "4e1cf5537e19598c562265f87bc85d81268577356c5b5ac6879b04fddea1c72a",
+      "sha256": "4e1cf5537e19598c562265f87bc85d81268577356c5b5ac6879b04fddea1c72a"
+    },
+    "guest-home/.local/lib/harness-kali-tools/httpx": {
+      "sourceSha256": "0df754d6b16ccc701ce9d6fd8c5e2792f6a1097b5cfe55ef945847230b847df9",
+      "sha256": "0df754d6b16ccc701ce9d6fd8c5e2792f6a1097b5cfe55ef945847230b847df9"
+    },
+    "guest-home/.local/lib/harness-kali-tools/impacket": {
+      "sourceSha256": "37d074afd9097f6b3af74a70f88ab0f073560e301cf0ad9bbf2ec8c68d1dc815",
+      "sha256": "37d074afd9097f6b3af74a70f88ab0f073560e301cf0ad9bbf2ec8c68d1dc815"
+    },
+    "guest-home/.local/lib/harness-kali-tools/ksubdomain": {
+      "sourceSha256": "835954a41537bd30b99dc827c5e93ff9f5d98d0de752f50396766624f44c64fb",
+      "sha256": "835954a41537bd30b99dc827c5e93ff9f5d98d0de752f50396766624f44c64fb"
+    },
+    "guest-home/.local/lib/harness-kali-tools/masscan": {
+      "sourceSha256": "ec59ef1bd6d6f8ecb707b53d6c168f30618a7b959a04ff060b4a5188cc620afc",
+      "sha256": "ec59ef1bd6d6f8ecb707b53d6c168f30618a7b959a04ff060b4a5188cc620afc"
+    },
+    "guest-home/.local/lib/harness-kali-tools/nmap": {
+      "sourceSha256": "80834da5c165771672492c7ed0cca036d7e211fa6b9dfdb19939dcb01bf97289",
+      "sha256": "80834da5c165771672492c7ed0cca036d7e211fa6b9dfdb19939dcb01bf97289"
+    },
+    "guest-home/.local/lib/harness-kali-tools/nuclei": {
+      "sourceSha256": "e1e219bf2d506c32345d3e9e5bf9c3b9b96ac47d4063c1f6fa22627a209d690d",
+      "sha256": "e1e219bf2d506c32345d3e9e5bf9c3b9b96ac47d4063c1f6fa22627a209d690d"
+    },
+    "guest-home/.local/lib/harness-kali-tools/subfinder": {
+      "sourceSha256": "349d4a9b509bc72e85d002d958495b8ef468fae363dfb089846f11ceec9713b3",
+      "sha256": "349d4a9b509bc72e85d002d958495b8ef468fae363dfb089846f11ceec9713b3"
+    },
+    "guest-home/.local/lib/harness-kali-tools/suo5": {
+      "sourceSha256": "8a074ff9de5de7ede3fd120cac5ca7e9f5c0188740ca9f0d119a37806d844308",
+      "sha256": "8a074ff9de5de7ede3fd120cac5ca7e9f5c0188740ca9f0d119a37806d844308"
+    },
+    "guest-home/.local/lib/harness-kali-tools/curl": {
+      "sourceSha256": "18854e833d17886dcde9fa86eeeaf330050e91aed3951645b4c3e0d17bd6fca5",
+      "sha256": "18854e833d17886dcde9fa86eeeaf330050e91aed3951645b4c3e0d17bd6fca5"
+    },
+    "guest-home/.local/lib/harness-kali-tools/dig": {
+      "sourceSha256": "de440d68e5ec093b9b40af469b88da0d7a7d5523e4088b880aaa13639ac3c26a",
+      "sha256": "de440d68e5ec093b9b40af469b88da0d7a7d5523e4088b880aaa13639ac3c26a"
+    },
+    "guest-home/.local/lib/harness-kali-tools/file": {
+      "sourceSha256": "530acfaf18825dc39ba7ca7ed89a583e95c41ee6ddbfd4c95606887b908062ac",
+      "sha256": "530acfaf18825dc39ba7ca7ed89a583e95c41ee6ddbfd4c95606887b908062ac"
+    },
+    "guest-home/.local/lib/harness-kali-tools/nikto": {
+      "sourceSha256": "e65ed55692a4c5d63d8fa077b647f8de15b09ec383fdcdd8ff9ce921ef2a7d31",
+      "sha256": "e65ed55692a4c5d63d8fa077b647f8de15b09ec383fdcdd8ff9ce921ef2a7d31"
+    },
+    "guest-home/.local/lib/harness-kali-tools/openssl": {
+      "sourceSha256": "dd7624c9f0a8497892e82cf1aa2e0a0e0a8b0142bfe0eaf2dd2ff088e6575d0a",
+      "sha256": "dd7624c9f0a8497892e82cf1aa2e0a0e0a8b0142bfe0eaf2dd2ff088e6575d0a"
+    },
+    "guest-home/.local/lib/harness-kali-tools/sqlmap": {
+      "sourceSha256": "b34de061136479a9fd254b8227bea35b68fc2ea70e8e91473e3d41516bddfff2",
+      "sha256": "b34de061136479a9fd254b8227bea35b68fc2ea70e8e91473e3d41516bddfff2"
+    },
+    "guest-home/.local/lib/harness-kali-tools/strings": {
+      "sourceSha256": "b3eff90050c992ce297b0ba3ba978442f0d0446a38960126ef94a4e62ee6a406",
+      "sha256": "b3eff90050c992ce297b0ba3ba978442f0d0446a38960126ef94a4e62ee6a406"
+    },
+    "guest-home/.local/lib/harness-kali-tools/tcpdump": {
+      "sourceSha256": "ac9dba02fa60862b41d645ca5278a130f51f5309ad51f94eb1d8d0e871a989f6",
+      "sha256": "ac9dba02fa60862b41d645ca5278a130f51f5309ad51f94eb1d8d0e871a989f6"
+    },
+    "guest-home/.local/lib/harness-kali-tools/tshark": {
+      "sourceSha256": "2c43939eb73387da07f63a13a26da81313409ab612528fac1d6e74cac5144a8c",
+      "sha256": "2c43939eb73387da07f63a13a26da81313409ab612528fac1d6e74cac5144a8c"
+    },
+    "guest-home/.local/lib/harness-kali-tools/wget": {
+      "sourceSha256": "71304166502951c1ca94dda88bb383b1d6b1d00009d67d1c8a3a757a1f6e1d85",
+      "sha256": "71304166502951c1ca94dda88bb383b1d6b1d00009d67d1c8a3a757a1f6e1d85"
+    },
+    "guest-home/.local/lib/harness-kali-tools/whatweb": {
+      "sourceSha256": "c549ddc683a1088cad28c172505137fb7d3b064cbc5b4c6747a1c2b086e7cc0e",
+      "sha256": "c549ddc683a1088cad28c172505137fb7d3b064cbc5b4c6747a1c2b086e7cc0e"
+    }
+  },
+  "sanitizedGuestFiles": [
+    "guest-home/.dsh-improved/skills/personal-work-agent/references/user-profile.md"
+  ],
+  "excluded": [
+    "credentials",
+    "SSH keys",
+    "authentication URLs",
+    "sessions",
+    "databases",
+    "logs",
+    "VM images",
+    "recovery archives",
+    "usage history",
+    "personal user profile"
+  ],
+  "knownCredentialsExcluded": 3,
+  "plugins": [
+    {
+      "name": "dsh-context",
+      "version": "0.75.1",
+      "license": "Apache-2.0",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bowenliang123/dsh-context.git"
+      }
+    },
+    {
+      "name": "dsh-whale-widget",
+      "version": "0.4.2",
+      "license": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MeteorNOX/DeepSeek-Balance-Whale-Widget.git"
+      }
+    },
+    {
+      "name": "dshmarket",
+      "version": "1.70.2",
+      "license": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dsh-market/dsh-market.git"
+      }
+    }
+  ],
+  "toolchain": {
+    "rea": {
+      "repository": "https://github.com/morluto/rea",
+      "revision": "160d821ac9a0310afcb8d1fc427862dd6508add5",
+      "npmVersion": "6.8.0",
+      "zodOverride": "4.6.6"
+    },
+    "reverse-skill": {
+      "repository": "zhaoxuya520/reverse-skill",
+      "commit": "cab634bd855fc287f6e420c1f36fd1a6b9245960"
+    },
+    "pentagi": {
+      "repository": "vxcontrol/pentagi",
+      "registryManifestDigest": "sha256:623cad3f7b6a5b58ce855d5927f68eb664f19fda181f05a7dcabe1c2132ea375",
+      "imageConfigDigest": "sha256:29ebbf4709bff76fe23c2eff5b2e1796e780963172b6c755ea065170cf81e56e",
+      "revision": "cffed9485aa1cca70762cd08a57ac62a80406258",
+      "platform": "linux/arm64"
+    }
+  },
+  "recoveryPoint": "ready-storage-dashboard-20261101",
+  "restoreTarget": {
+    "system": "Linux",
+    "machine": "aarch64",
+    "user": "purge",
+    "home": "/home/purge",
+    "harnessVersion": "0.2.1-rc.3",
+    "codegraphVersion": "1.6.2",
+    "reverseDirectory": "reverse-skill-cab634bd855fc287f6e420c1f36fd1a6b9245960",
+    "ghidraDirectory": "ghidra_12.1.4_PUBLIC",
+    "pluginRoot": "tools/imported-dsh-plugins-20261027T185822Z"
+  },
+  "programFiles": {
+    ".github/workflows/release.yml": "706a6798d500ff519c9791491f20fcfc89adc050c3a06f36246034f3d81abbde",
+    ".gitignore": "ed5b2dfcb19b297ad4c71507628b3710e2d4fee5bed050648f732b326cbfa7e3",
+    ".npmignore": "7e04cab6ff4206c15db2a40b0a7fbc1e7ecdad17fa066c1194f02c32df0a026b",
+    "LICENSE": "b45f2c5ef6ed471d1dcdf63c10e432d856c8867be2828aece1b383bbece7662a",
+    "LICENSE-COMMERCIAL.md": "a0d104262cb7db3c99a3f82a7089a5538237b364a6ece72af34ffc04e7ac522f",
+    "NOTICE": "ad63c4be7b12bdc1a43b05d49a831933671be7f2a6f723a6c079e8653a8ac54f",
+    "PERSONAL-CHANGES.md": "76088dec50db57ad713d5b5f5d689390399aa0c7660e16dc3b6ce551af9ee1f3",
+    "README.md": "f932bb24fdcdf0b05196b7fec67bbb884f5ebbb0df04fadcc4890f87a28d6a0d",
+    "README.zh-CN.md": "d4df0d6e57d9da7c0e147cf7bd5929b8f2aa6b4a761f0e97096fd989725d983d",
+    "bin/dsh-purge.js": "759081efd77e2ac757d759eeb2d14552bfbf925944ee3a53247e36064196e1eb",
+    "bin/personal-cli.mjs": "ede2f67342870cb881ec46bbb20ef390cf75f359e5fb2b9f4e3264629f51a3fc",
+    "client.js": "371041b050c2e520e97c345ecf64b2c4499259cd999a45ca328ebfd34cfb804d",
+    "cordis.patch.yml": "9e1578290bd9912d47ecac286286aac6ca92f1e5241e8873f8af6c8ae35a3c44",
+    "docs/banner.svg": "14c10266d5b677eab4da37b70b0da3f6c81be775c1c4604375b79c31574eeb4f",
+    "docs/drill-auth-legal.html": "00c4328c1ac3ce4dad784911b7eeeec5931f5da202124028121dc55f14e601d0",
+    "docs/notice/image.png": "65b3671be490ac638ea70d04caeb333e0db97e4c0349b7b58b6f74816cef0fc1",
+    "docs/notice/laozhang-live-1.jpg": "b2c7b4a46cea72a32152676b99d871ba34fb871a1c89badefec67eabae63c068",
+    "docs/notice/laozhang-live-2.jpg": "d8c9287a65c6094adfd4c3401f47e664514385121d0ddbbc4fe640379f5c4078",
+    "docs/notice/laozhang-wechat-1.jpg": "80ed3f67fbbc18c3b6cbe2fd12c5191c22c9b0aaf8f55a565ea622f0309fa4b1",
+    "docs/preview/dock-auth.png": "70265078d8a430068515fd92dc38e41aa1ce88b2791b16a6a17fdde0ecd1982c",
+    "docs/preview/dock-clean.png": "68650a42fc78f728a08e213206171f8852e406d1759ecabc74ab1582272338d8",
+    "docs/preview/dock-drill.png": "30df7fac3ef8047d9e57101134a6570a8bceb02e5b36fb97cb8f1b11c6c539d9",
+    "docs/preview/own-servers-en.png": "ff27f6fd1993d2aa4bfad9fa7ce8ce10befdec4678152b341ff3d89509c6183d",
+    "docs/preview/own-servers.png": "bd83fdb9c94184d65ab7c6ed98610d7c62192f77ee90918ccbb9213d898eb81a",
+    "docs/preview/rules.png": "85789b0b06a90808a61c007a74914faee25166e1f2e9d314b39a1406bad964cd",
+    "docs/preview/settings.png": "b62ab223bcdaeddeb2d02fafef82d1d541501e5b89b4f1b1cce10d5a0d9a4da1",
+    "docs/redteam-upstream-DISCLOSURE": "7753f3c0da85e5efb883d4176a1b465538abb74bfd55a63c52b9d855cc09c0ec",
+    "docs/redteam-upstream-LICENSE": "153f23cd640e27a668e549556571bb99f49cfa3b9148fb5af8f44416b0d66a3d",
+    "docs/v1.1.34-prompt-inject.md": "475ca676aab6142a362164cb5dd55a5d9faad99842eecf833293aef456ab6f97",
+    "docs/修改文档.md": "deb0284888a2517071cf331527a98ad2349c6bb3ca931bd5f527dd55b437ebb8",
+    "docs/注入方式改造方案-1.1.34化.md": "86d5dc9da3066c7186a99ceacb92be436a0ff16aeb6cc5e22e6648686e10dd99",
+    "lib/asset-table.js": "c231906a4911279ecb2e3677fe7a6c5fc2e94a921b554a0bc6d5f5c3a7608440",
+    "lib/capability-protocol.js": "49a7c72d99b41128d50a105af7d7c4138654f2e9a4513a62fd535e1653dda2b7",
+    "lib/child-process-hide.mjs": "d22546fd288373c529376835acb5dd2d54c96261c7a9c7f42f6ca44251668088",
+    "lib/continue-retry.js": "b4710fb4eb9990801756e5396f447f9da227177db78d3fff4880509d527be6d0",
+    "lib/core.js": "12f2cd3b578b9acb17f4dc0e43c890540cb8da302257dfd6750aac0d39ebee8a",
+    "lib/default-prompt-inject.en.md": "1dd2fc61e09b5e10676001324fcf7961f165b3e7b3c3c5bcb9ef9de48977e983",
+    "lib/default-prompt-inject.md.bak": "fa2f43cbaefb801257d8af9dc929f9ac50d7acf812d6f1cccf8738c3617ae668",
+    "lib/default-prompt-inject.zh.md": "5bb958ea89006198f6cca1cc5d24387fb7457036e22593a067ce947390957bdc",
+    "lib/desktop.js": "106a5c195347f6ad5169838d3120ccd0af372b1b081c6cf37bd8eff7a0f8311f",
+    "lib/drill-grant.js": "fa908869d923fa404845a239bc3d313e0ab56dce54aefa729bc0658a3d709efc",
+    "lib/extract-asar.js": "95e7d38cd71d420676ac1327c71e85b350a69147d27c5b230c3770c75f2a7c9b",
+    "lib/hide-console.js": "93509f224c9884fa4483bbd47940fc18bb84060a7760315d1f64248ebb1d66f9",
+    "lib/hooks-deny.js": "77b3bf38048df223b5f8ca7625b92bf9e229bbb6fc8672bbb407d273b8e2474e",
+    "lib/host-clean.js": "3974977c015ec7ef198b530321deccea7407300f455fb0e46f17e7e587ca5ad4",
+    "lib/host.js": "954009fc82fceef7f2e55743b873055681991906192a7d02ef7c355f6edf5d62",
+    "lib/identity.js": "00e9663078443b41e766d127ef8eb2ecf52f2cdc8795f2138d2022ec9a2bb4dd",
+    "lib/index.js": "34443d8a9936cceda9a07d9e0587d8ba29c106c68e4dc2a79f786356b51853dd",
+    "lib/mnemon-settings.js": "b49cfa6bbe26477ab520a1d1af3b146123bc72c50d4a9810a7fd3227bc46dd88",
+    "lib/net-scope.js": "328a08ede7b68dee20eac1cb4ddc27f04aa61eacfadb64624d2f70f0d8f05d77",
+    "lib/official-update.js": "b044b2bd748026e6e6b6154313b9f5161e064b3286bc50a768b5543f409626f9",
+    "lib/official-update.wscript": "8bc8a555de6cc95e9e7d66d819a908236749639cca0a8764d5527f00951662e1",
+    "lib/personal-controls.mjs": "6a61df7063c921e4d1266f9260c74a2fbd441aade933bb54e5484ba0b678da4a",
+    "lib/personal-daily-filter.js": "6efc64f4286baaae6d22554502d12dfbbfd24048c50666b348897970da6b65a9",
+    "lib/personal-daily.js": "74b888e78c64c63eeadfac2b2c7845eb963cdcf810f7863f8df82851a392b781",
+    "lib/personal-http-auth.mjs": "03bbe5a54fffeebec4ae33750b2070f80022205e9c5fa7ea3d3d49589247c2db",
+    "lib/personal-joint-filter.js": "01e30001f25c1e993e5ff1ced1d18e629070736a13c091da4c21d424f3bf81c5",
+    "lib/personal-joint.js": "88ad5cff7465209e608654c090b2f9b03c906b7a1eed0b3ce45b101cf54dc6b3",
+    "lib/personal-original.mjs": "3f5c509adcdf325415e847b26b36e2ffd44d0cb38071345080289209043f50a4",
+    "lib/personal-pnpm-repair.mjs": "779b1c33b8f2ae092564a8cc2555bb7b985d5f8df058e8d5a3feba51a36c662b",
+    "lib/personal-redteam.js": "1fda3d86ad7f8a6ff27b0e17ee7f6a0c3c7908cf4ffab550f074b908ac35a941",
+    "lib/personal-reliability.js": "2af70d04c8e0456acbd71e32e272d63148147a854513e30758ac0521915e6245",
+    "lib/personal-review-filter.js": "467b5bd5b1e2bb18e9e1f7218047fa3701964742c888c0ec34b5df44dda64e65",
+    "lib/personal-review.js": "2933531c74865a3b204738b070a090d37a7c0e48627c8531ff1785eb5e15436a",
+    "lib/personal-startup-diagnostics.mjs": "76653f8f6a69829c2c0df43d528d52eb60ada20df658c3666e413166d0a4a3ca",
+    "lib/personal-startup-recovery.mjs": "f310ff20abbdf2ad0f36c52706d9d32010ec7f5d20fe9b326e5a24520290bc3e",
+    "lib/phase1-keep.js": "ed5beaf3339ec1e33765aa2b2bbd2d40c0b30c90476621e593b0e79e7d1b5104",
+    "lib/preset-default.js": "f9c2205278d8e769042ff365116435f54a0672af715aba9c905005e1f9931555",
+    "lib/reapply-cli.js": "828722e85b4eab6a604fee6dfca88083e0e2f70725b42f101e83dc56d755ffad",
+    "lib/reapply.js": "1cb05a4cde3d2021843d163709a632a50ffb9498a27b5b83b5d46c7977adc888",
+    "lib/redteam/client.js": "079493bf4e2e47bc49697ee2e3a9cf7da1c2ce087dbe71ef32ff56cd63a67d44",
+    "lib/redteam/evidence-ledger.mjs": "46a779fe5a344ebf29951b1d05391efd94c24e88f50b10624b11b3916d762571",
+    "lib/redteam/index.js": "3f3aaf18a768c551d16938ad2dc5a666f66fc59ee75a26e414d63e8eb39518ea",
+    "lib/redteam/ip-utils.js": "53ce639f4e184c531adb395bcb79a22b4591ca476bdbc8e7bc8a716ede5df72d",
+    "lib/redteam/personal-binding-client.mjs": "ed79852ca36e508272a56ea4acf53cb3308ab35ac887f76f750341fa661935dd",
+    "lib/redteam/personal-evidence-receipts.mjs": "f8729c9aea4e727c736b04bf84a577e7e4d053e80ccabaa522448ee0212879ee",
+    "lib/redteam/personal-evidence-redaction.mjs": "31d6f96fac3decd2b0d557f126e4c475a5ac9f0c63fba82b9a42ea609bdb6246",
+    "lib/redteam/personal-joint-adapter.mjs": "3e28380a8a6f51d4b1867f6746aaf52cb29eab4a5f6682ab4fe55fdb0a4d65ab",
+    "lib/redteam/personal-joint-kali.mjs": "ad303ceb1a7316dff6ca1dfdc07ac6f7f5942104fa0fa7080d26275e7d0640dc",
+    "lib/redteam/personal-joint-review.mjs": "78331e76fd90f3d01fa9fd2526715deeefdebff61643641080d7daf82ee971aa",
+    "lib/redteam/personal-kali-environment.mjs": "f34264f085d1d935c1722f8839fd332fa13ce76e85c247191b328175d25a7c09",
+    "lib/redteam/personal-namespace-evidence.mjs": "3c9558807b91acb1ac5c669f6d679f74b8d40df4efd2f000045edb8a2c8860f8",
+    "lib/redteam/personal-namespace-sandbox.mjs": "9f6161f87fbb996af53fc031f6f90ace515ff15c19d5167d9c66f8c848d11bfe",
+    "lib/redteam/personal-project-runtime.mjs": "d302b7606ee41721d25d7b7de938ea77701e3040fd8b921b858e9cb443f67195",
+    "lib/redteam/personal-project-slots.mjs": "ed2612f728f4f55293b325e639af0b2808cd250442c7a0cc1e1a2ba00431cdd4",
+    "lib/redteam/personal-python-evidence.mjs": "fb0c199197f573716f2a4b07e98312750127d7994191c7ac4509e44b95c034e5",
+    "lib/redteam/personal-review-control.mjs": "91f374b57b081593e1e4ed1d0c88528456dcbfe7b5aabc8c9ee0bb2c8b07d03c",
+    "lib/redteam/personal-review-python.mjs": "ff16068a8ee6c243f53acc2a1cb293d137bd9513617ba697397d8813a2bdc630",
+    "lib/redteam/personal-review-snapshot.mjs": "db9b8487449e99701c49d2bf6eef28c9cfe5a72ee7b3ba63f1edd9d143aacffc",
+    "lib/redteam/personal-runtime-source.mjs": "7d6951d9b53ce046c43db1eaf8252c5969ef6dc602380c9521ee9ae8a99a3d2c",
+    "lib/redteam/personal-runtime-transport.mjs": "e07ae710ee018d21a466c8f5f2ddc80cf8ca88eb248b2b77778924826561dbc8",
+    "lib/redteam/personal-runtime-ui.mjs": "c6609e64da573bc2d6b882421e74fe52028875544a4e6d3787a2a63e61261d2b",
+    "lib/redteam/personal-security-auth.mjs": "ad1189de9c1207ddf73937de6fd7126dfd44c423e58af7e2bd9decd48c89878b",
+    "lib/redteam/personal-security-client.mjs": "2a3d14aa689e9298dc89569ec1159fb88ccbda45434e68bec1dcf61f98e1bb70",
+    "lib/redteam/personal-security-comparison.mjs": "6bfa128ddf8a6795261542369c7db7c17fb82e158b3b653278cf344aadfea303",
+    "lib/redteam/personal-security-identity.mjs": "e68974ce5c706335e85bdf0ecb3d9861b0eccbee7b1e2f2b69a46b93bf14f40b",
+    "lib/redteam/personal-security-model.mjs": "9e4a8d9f67e94f553a04ac4072869e142d20aac96d3646da558b0bafdb08f994",
+    "lib/redteam/personal-security-observation.mjs": "0ffa80206d34adf785fb7e8299b43d952a9b0650ce5a9bf74c73b0e6550fb8ee",
+    "lib/redteam/personal-security-pages.mjs": "20c38cff0be44e4590c75df380b17d189337e22a4b78c066410b8f6eb03fba0d",
+    "lib/redteam/personal-security-parser-text.mjs": "8383fed880421ce77b80c7c6e1a750175b018286d730a4a88da5dd9b3c3d3f38",
+    "lib/redteam/personal-security-report.mjs": "6b787d3c59b3f4b35135ef55881d32d268fdd38a1a07d0d91404cb15bcbb7851",
+    "lib/redteam/personal-security-review.mjs": "6006f6f367a7add05fa5bfd29ac95bbc3ff90f7aa74261d25c2482a4211bd0df",
+    "lib/redteam/personal-security-runtime.mjs": "473f5a2d6f95df1b0c1509f09abbe0062a0d39c80091806efa3c2d7b08f72266",
+    "lib/redteam/personal-security-service.mjs": "663b8d4e7d553fc4c3d26a7aaa920c4fa5fcb3b4ae37a6e04e5bdc8b3cd836a2",
+    "lib/redteam/personal-security-source-location.mjs": "73e4d14e459309e0340d9264b8332dd60a31e42cd76d45a93dd2a83f32c0d80d",
+    "lib/redteam/personal-security-workbench.mjs": "19fc0d2fc89d28615869248150d23b5981f241f3c59abb71af0d254017c528ab",
+    "lib/redteam/personal-semgrep-profile.mjs": "93e406e08f5660cb6941a838879579be885e4dabf55f32b0e9f970e7a89f43ed",
+    "lib/redteam/personal-session-bindings.mjs": "ab18604ac7a30583939ee905ffa77bef26bb6c9d28ef2f9a1223f7f2e277d34a",
+    "lib/redteam/personal-session-resolution.mjs": "eee3996e6531646424c8915267e547f5f9235009253f5938264f959ec5d09919",
+    "lib/redteam/personal-toolchain-status.mjs": "95f433327a75f4e02498194f765830007a6b4936166c51734deb104f7c17c6f5",
+    "lib/redteam/personal-workspace-contract.mjs": "8dc6cd2dc5e822d930d68aaa90f718e5a1999dc483a8cbfe833af016d88d8879",
+    "lib/redteam/personal-workspace-input.mjs": "806339cb0e65da328cd1697f6587c4e5f030650f0668a220afa52613382d67be",
+    "lib/redteam/personal-workspace-policy.mjs": "1f5ed807f7cc7d8801866ec3e4c7837344aa5b605a48034501173cba2d5f8348",
+    "lib/redteam/personal-workspace-risk.mjs": "df5f53608ba910196e764edf82104cb166dde83824e026a79e2bb3b23bd2973f",
+    "lib/redteam/platform-config.js": "4c106ddab81845efe98bfb304035475278495e239e760ea4c3b3ed275edc6946",
+    "lib/redteam/preset-composition.js": "f5a2ff3a3cdf9a642515deb13f10bfaf100abdde7cffbb89183538dab6ef5bae",
+    "lib/redteam/report-replay.js": "f502847a536ea635d2a38eba7a1b6c331b1d5de42db9aba94ec4374af0fc1122",
+    "lib/redteam/role-section.js": "7df9e72dfbc27dcec7d66a2685ff3e1c4d4cf6f329fb8d5b34edba29a057846b",
+    "lib/redteam/schema.js": "8780f7237e8623cc423731b7feed41c2c033ced7fe944494e7d2e4fe89cb1e61",
+    "lib/redteam/score-rules.js": "5c99c9dff1d0496b94ccfd7ee90414da8bfb16e2d06ad3d0085769b06771bef4",
+    "lib/redteam/settings.js": "ce7e6d22733316819b792eb007418ed54b40ed3b6a66a6a86335eb6daff0ebcc",
+    "lib/redteam/skill-availability.js": "934a575a09f460b642adbd44d3540ae6e752838dc7ce4cb937ee426fa398ccc0",
+    "lib/redteam/skill-fixes.js": "953a9de698d2517c0c377afd3f01fff4ac387ea948f0687a04cfb5f3100bc68f",
+    "lib/redteam/store-core.js": "ae888198936f68d0dbc9c35312dc60af393bb0afcdffb7771e9f7f8e58ce34dd",
+    "lib/redteam/store.js": "9652f1ae962d866fecf923fbd106de3a19c9d34e21356ff2662670ab0a2765cd",
+    "lib/redteam/tools.js": "25f221a41b3f575efc42a3a137c6d5aab6505108b5d1fcb1d60c96f8177abe83",
+    "lib/redteam/ui.js": "49e8f7adb80fb43ae5755534cb5653ae59987bae62892a1b0f50c2578c115d98",
+    "lib/redteam/validate.js": "c8818f5b8bcf0683c28b8fffc052ef9c989a5bfdd275db82e96f55b1ac8ecf29",
+    "lib/restart-desktop.js": "ac01cf7b2c34a72e846bfa8d1036fcce4ac004494fc9025190195348630cbab1",
+    "lib/restart-web.js": "0e946e723d87dcdc81d40e6e721b508229539a81ce8362925da096bb621348f1",
+    "lib/rewind.js": "f05b181ffd7aceb27043efc58d3bb69b2b2fa892a959801476d4023fadbac72f",
+    "lib/rules.js": "f0c7d464f4cf4167737524ddf3fe66b9e1b810a39e3b5f073bd20451242e9a39",
+    "lib/settle-policy.js": "156b8ce93045c14a0fe3ee41f1f8f07a5c3637dc8faaecdc0747ba5b32029ea9",
+    "lib/skills.js": "37138e14e2dad92a18b63319b9a87d65228c7852fcdd2656054d61593f4dfcee",
+    "lib/surface.js": "c27259aa8deb2e3f576a1c8a065f3c13b3b4a9efc80a0509259fcdce6df2aed2",
+    "lib/table-key.js": "cd7ab3512992f35f5bc08150da245f60bf4f11efbf83f3120583a8e7ef821cda",
+    "lib/table-read.js": "b97cd96220253eadacb1f9164bf574287b3eda7b5d9c2fad41911993ade8bf8e",
+    "lib/uninstall-restart.js": "d5f9a4403849607f780488c0da934b3404c2ed4a44ef6d62c8ddfcd754aae487",
+    "lib/uninstall.js": "cc5bfce22028e9970d631cf783876a795b0ab67c86ef4e847815f9ff9bba3f3e",
+    "lib/update.js": "3b30a1856bbf31cb49e483de83d78a0533e1a695510d96ac9f53bca0db5799b4",
+    "lib/web.js": "e715a801eb98b176e5e455bada74cb540cee99959ee015dd5ae4155a2070b02c",
+    "lib/zip-extract.js": "e8cd202ac3ac69e71428ae3ac257ce9acc73507b83dcb24fda10b8c029b40025",
+    "package.json": "28b097fc6920b7fe150cda07fa017166cfb09124106436fc1d0e3afa721964d6",
+    "presets/redteam/agent.cordis.yml": "39ea8b170a5e6daa921ea185fe9eb0dd0342eedf177b051868c77e20e1225a55",
+    "presets/redteam/anchor-gate.mjs": "0c99a0dafc072a64179f9e9898aede546dbb6e701c2b453b4164a24f05fe4d16",
+    "presets/redteam/preset.yml": "a83460c126cee9dc972df015a98a6869709ca64202d96e2ff42321a2876affaa",
+    "release-notes.md": "8b699de924c5f6be487ce3e06178cdbc33ae410831d989f0ac2455e8b15694b0",
+    "screenshots.json": "9e6600ec59cce473c540b62cc47c83bc6091346065405cd807ee066a9b92bf44",
+    "scripts/build-client.mjs": "2324295139406a09c41f135e84b34e158a7698527bcb842df55f47f1978cc85f",
+    "scripts/embed-default-prompt.mjs": "a59fe2228bb08ebd10007cac9cfb2dc68de0b5719611b25ad29ef1e0687a7ea1",
+    "scripts/ensure-profile-bundle.mjs": "3c1673597b4ffd2f79dbe14f96fffa10e8f6133ace4367e9c4cbfa11f15df6c0",
+    "scripts/eval_evidence_batch.py": "9897972ad669a3c33dfe648703afbfd176325164776917f602ecfcbf206a5f42",
+    "scripts/eval_guard_review.py": "d285565a42bfd91e13386aca6d3e56e6e0387d336a95abdf7ade4683c2889b04",
+    "scripts/eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843",
+    "scripts/export-engagement-report.mjs": "0ad1d8e29301b7215a4c233b359db5c4e5a786a28d1370632590e44217e2d3f7",
+    "scripts/patch-client-dock.mjs": "31da200312b7f715f5ea98da8885b2db94193b8ebb9fb582d9f0ca076458ae3c",
+    "scripts/python_namespace_review.py": "6c8c7446b99a777e5f496c008c9eeebecebc15134a5aedb6c7be4a14144a6705",
+    "scripts/redteam-setup.sh": "a35da25c76aadd9954615123bf8318e3624ad02d6d434ad0fc7ac6fb3beb4855",
+    "scripts/security-joint-adapter.py": "7daa08a445378a2b974a4fa10c2598f22553e1f8b2e8a85a575f58c2707647ac",
+    "scripts/security-kali-bandit-requirements.txt": "f35df19ac0c4f4dbad1f8ebb1ab2affb25b3e66ace2b07d8ce6738d9a966c1ab",
+    "scripts/security-kali-lab.py": "4a957f390ac7bcc415f06b62cb5512f2f0ca519b0de619a3dac41d3a2f3b69fa",
+    "scripts/security-kali-project.py": "9fefaf3414f7bb9d64748c384c712fefaaffce51538485908a6fdc9bdd42aa6f",
+    "scripts/security-local-lab.py": "ccf41c979001ebb35f9e6e4e267c7db291869dc0ef5a68a8fb03850a5b011baa",
+    "scripts/security-output.sh": "f63f62c7c76f5e981ab4c7eea1bd52dd33d5ac3105199f5a2d83ab10c4334860",
+    "scripts/security-parser-check.py": "f8a0de94fd1b236b0997d5113dad72d8f3af2113c4580ba944dfabac4d078847",
+    "scripts/security-runtime-phishguard-lock.json": "7cc1936dc9353b0181cd470eb98f37b65bfe2e0ff00cb73aff70cc2f6f68d671",
+    "scripts/security-runtime-preflight.mjs": "192ea7181fb7b0d831ff5bfc807b2989ed85682dd889cd8a650197b035fb0eff",
+    "scripts/security-runtime-source.mjs": "8acfc2b501ed55981b12f2ff71ffbcf67ca2cdb408e32e07fd9421a00a6da895",
+    "scripts/security-runtime-template-build.py": "22dfd79fb5a4ed8cfaa4a0367b596445ee6407428cd81de7b3f3355541487b42",
+    "scripts/security-scanner-update.py": "7d7b88a61ef14aab38f48ad3fee658f8295ef9b01e2c224e4b207587c43bea30",
+    "scripts/security-service.mjs": "39a0a95672a8305544f613e0f85b8be924a6d8cde91b4478aefe7a1810fb8ca6",
+    "scripts/security-storage-preview.py": "679bfc5f741e4c76797797884071fb79b416e88248144c487c078bec0c0b5375",
+    "scripts/semgrep-deep17.json": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773"
+  },
+  "executionRequirements": {
+    ".local/bin/harness-vm-web": 448,
+    ".local/bin/toolchain-versions": 493,
+    ".local/bin/dsh": 493,
+    ".local/bin/codegraph": 493,
+    ".local/bin/reverse-case": 493,
+    ".local/bin/reverse-route": 493,
+    ".dsh/toolchain/pentagi-cli.py": 448,
+    ".local/bin/kali-vm": 448,
+    ".local/lib/harness-kali-tools/chisel": 448,
+    ".local/lib/harness-kali-tools/dnsx": 448,
+    ".local/lib/harness-kali-tools/ffuf": 448,
+    ".local/lib/harness-kali-tools/frpc": 448,
+    ".local/lib/harness-kali-tools/frps": 448,
+    ".local/lib/harness-kali-tools/fscan": 448,
+    ".local/lib/harness-kali-tools/gogo": 448,
+    ".local/lib/harness-kali-tools/httpx": 448,
+    ".local/lib/harness-kali-tools/impacket": 448,
+    ".local/lib/harness-kali-tools/ksubdomain": 448,
+    ".local/lib/harness-kali-tools/masscan": 448,
+    ".local/lib/harness-kali-tools/nmap": 448,
+    ".local/lib/harness-kali-tools/nuclei": 448,
+    ".local/lib/harness-kali-tools/subfinder": 448,
+    ".local/lib/harness-kali-tools/suo5": 448,
+    ".local/lib/harness-kali-tools/curl": 448,
+    ".local/lib/harness-kali-tools/dig": 448,
+    ".local/lib/harness-kali-tools/file": 448,
+    ".local/lib/harness-kali-tools/nikto": 448,
+    ".local/lib/harness-kali-tools/openssl": 448,
+    ".local/lib/harness-kali-tools/sqlmap": 448,
+    ".local/lib/harness-kali-tools/strings": 448,
+    ".local/lib/harness-kali-tools/tcpdump": 448,
+    ".local/lib/harness-kali-tools/tshark": 448,
+    ".local/lib/harness-kali-tools/wget": 448,
+    ".local/lib/harness-kali-tools/whatweb": 448
+  },
+  "originalCapabilities": {
+    "enabledAtExport": true,
+    "settingFile": ".config/harness-original-capabilities",
+    "sharedHome": ".dsh-improved",
+    "isolatedRuntime": "tools/harness-original-capabilities",
+    "isolatedRuntimeIncluded": false,
+    "verifiedRuntimeEntriesAtCopy": 62988,
+    "originalPluginVersion": "1.1.77",
+    "patchesApplied": 58,
+    "patchesTotal": 63,
+    "patchesSkipped": 5,
+    "retainedRecoveryPoints": [
+      "ready-recovery-guard-20261029",
+      "ready-recovery-proof-20261029",
+      "ready-recovery-resume-20261029"
+    ]
+  },
+  "selectiveBackports": {
+    "personalVersion": "1.1.77-personal.2",
+    "upstreamVersion": "1.1.82",
+    "upstreamCommit": "0c933dc7d3252698f3f0f9756932dcc88355f532",
+    "features": [
+      "zip-directory-entries",
+      "skills-realpath-import",
+      "owned-preset-cleanup",
+      "explicit-pnpm-key-repair"
+    ],
+    "retainedExisting": [
+      "atomic-write-file-modes",
+      "npm-launcher-symlink-protection"
+    ],
+    "deferred": [
+      "parent-child-permission-inheritance",
+      "automatic-profile-insertion",
+      "DSH-NEXT-detection"
+    ]
+  },
+  "recoveryRetention": {
+    "date": "2026-11-01",
+    "keptSnapshots": [
+      "ready-auth-zap-20261101",
+      "ready-original",
+      "ready-parser-probe-20261101",
+      "ready-pet-corner-20261030",
+      "ready-pet-menu-20261030",
+      "ready-professional-bootstrap-20261031",
+      "ready-recovery-guard-20261029",
+      "ready-recovery-proof-20261029",
+      "ready-recovery-resume-20261029",
+      "ready-scanner-admission-20261101",
+      "ready-security-audit-20261029",
+      "ready-security-background-20261029",
+      "ready-security-diagnostics-20261029",
+      "ready-security-lifecycle-20261030",
+      "ready-security-multiwindow-20261030",
+      "ready-security-pagination-20261030",
+      "ready-security-reload-20261030",
+      "ready-security-validated-20261029",
+      "ready-security-workflow-20261029",
+      "ready-session-lifecycle-20261101",
+      "ready-ssh-channel-20261031",
+      "ready-storage-dashboard-20261101",
+      "ready-storage-preview-20261101",
+      "ready-toolchain-20261025"
+    ],
+    "historicalSmallVerificationBundlesRetained": true,
+    "newOfflineValidationCopies": 1,
+    "previousOfflineImagesRetained": 1,
+    "latestTemporaryProbeCopyRemoved": true,
+    "latestProbeCopyBootTested": true
+  },
+  "hostToolUpdate": {
+    "date": "2026-11-01",
+    "baseRecoveryPoint": "ready-storage-dashboard-20261101",
+    "includedInVmRecoveryPoint": false,
+    "sha256": {
+      "manage.py": "378cf4d5422db4926715f5dcfac0855c19941920a7fb2b754605afdc2768daa4",
+      "egress_proxy.py": "ddb3ea6b057a549b7f4c33e1548695e42455851add6c905c669ca89f33343033",
+      "qemu-image.py": "9035d7e44bc5d6c110769fc32c3379d5a49aacf94a00c5277616ba8b1b0bf153",
+      "web-entry.mjs": "4cfb4d8fdb8cb82226d6136adbb706ca6f3caf4c0d54cb617b12099c8854d47c",
+      "web-health.mjs": "b2b0790e02951e2d89c82383b3a565d06cc5e49ec8cbcf1feca35807a3fd67f3"
+    },
+    "note": "Only egress_proxy.py changed after this recovery point; Kali bridge is not covered by that point."
+  },
+  "securityAudit": {
+    "date": "2026-10-30",
+    "phase": 1,
+    "runtimeLock": "docs/security-runtime-lock.json",
+    "installedProgramFiles": 127,
+    "runtimeAssetsIncludedInGit": false,
+    "includedInRecoveryPoint": true,
+    "runtimeVerificationDate": "2026-10-29",
+    "runtimePreflight": "work/harness-purge-improved/package/scripts/security-runtime-preflight.mjs",
+    "databaseMaintenance": "explicit Mac launcher option 9; anonymous official GHCR download and verified dedicated-VM import",
+    "databaseMaintenanceVerification": "docs/security-db-update-verification.json",
+    "acceptanceVerification": "docs/security-acceptance-verification.json",
+    "realModelSemgrepVerified": true,
+    "rulesVersion": "local-reviewed-2",
+    "rulesCount": 16,
+    "rulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+    "rulesVerification": "docs/security-rules-verification.json",
+    "previousRecoveryIncludesPhase1": true,
+    "ruleUpdateIncludedInRecoveryPoint": true,
+    "comparisonVerification": "docs/security-comparison-verification.json",
+    "comparisonSnapshotSchema": 2,
+    "comparisonUpdateIncludedInRecoveryPoint": true,
+    "reportExportVerification": "docs/security-download-verification.json",
+    "reportExportUpdateIncludedInRecoveryPoint": true,
+    "reportSummaryVerification": "docs/security-report-verification.json",
+    "reportSummaryUpdateIncludedInRecoveryPoint": true,
+    "statusValidationVerification": "docs/security-status-verification.json",
+    "statusValidationIncludedInRecoveryPoint": true,
+    "packageIdentityVerification": "docs/security-trivy-verification.json",
+    "packageIdentityVersion": 1,
+    "packageIdentityIncludedInRecoveryPoint": true,
+    "realOwnedProjectAuditVerified": true,
+    "realOwnedProjectAllFindingsUnverified": true,
+    "realOwnedProjectSemgrepCoverage": "partial",
+    "realOwnedProjectTrivyCoverage": "completed",
+    "modelWorkflowVerification": "docs/security-followups-verification.json",
+    "modelWorkflowIncludedInRecoveryPoint": true,
+    "modelResponseUtf8Budget": 6000,
+    "scannerDiagnosticItemLimit": 20,
+    "sameRunWaitMaximumSeconds": 30,
+    "workflowRecoveryVerification": "docs/security-lifecycle-verification.json",
+    "parserCandidateVerified": "1.183.0 reproduces PartialParsing; not adopted",
+    "parserReproducer": "work/harness-purge-vm/fixtures/semgrep-parser/repro.mjs",
+    "parserWorkaroundAppliedToRealProject": false,
+    "backgroundOwner": "harness-security.service",
+    "backgroundSocket": "/run/user/1000/harness-security.sock",
+    "backgroundUnitsIncludedInRecovery": true,
+    "callerExitCancelsOwnedScan": false,
+    "ownerStopInterrupts": true,
+    "automaticRescan": false,
+    "autoClockIntervalSeconds": 60,
+    "autoClockRequiresHostEntry": true,
+    "physicalMacSleepTested": true,
+    "sigkillOrphanRecoveryTested": true,
+    "paginationAndDiagnosticVerification": "docs/security-pagination-verification.json",
+    "paginationAndDiagnosticsIncludedInRecoveryPoint": true,
+    "ciWorkflow": ".github/workflows/verify.yml",
+    "ciCommand": "python3 -B scripts/ci.py --suite all",
+    "reloadAndSshSamplingVerification": "docs/security-reload-verification.json",
+    "reloadAndSshSamplingIncludedInRecoveryPoint": true,
+    "multiwindowBootstrapVerification": "docs/multiwindow-bootstrap-verification.json",
+    "multiwindowIncludedInRecoveryPoint": true
+  },
+  "publication": {
+    "repository": "Lushangtu123/deepseek-harness-cybersecurity",
+    "visibility": "public",
+    "explicitlyAuthorized": "2026-10-30",
+    "scope": "sanitized configuration, source and verification summaries only; excludes credentials, chat, project databases and VM disks"
+  },
+  "basicBootstrap": {
+    "scope": "basic-harness-plugin-web",
+    "instructions": "docs/basic-bootstrap.md",
+    "directPins": "inventory/bootstrap-lock.json",
+    "freshVmTested": true,
+    "completeProfessionalRecoveryTested": false,
+    "credentialsCopied": false
+  },
+  "petDrag": {
+    "instructions": "docs/pet-layout.md",
+    "verification": "docs/pet-drag-verification.json",
+    "includedInRecoveryPoint": true
+  },
+  "petMenu": {
+    "instructions": "docs/pet-layout.md",
+    "verification": "docs/pet-menu-verification.json",
+    "includedInRecoveryPoint": true
+  },
+  "professionalBootstrap": {
+    "instructions": "docs/professional-bootstrap.md",
+    "verification": "docs/professional-bootstrap-verification.json",
+    "assetLock": "inventory/professional-assets-lock.json",
+    "copiesSourceCredentialsOrUserData": false,
+    "modelAccountSetupRequired": true,
+    "largeAssetsIncludedInGit": false
+  },
+  "sshPentagiAcceptance": {
+    "instructions": "docs/ssh-pentagi.md",
+    "verification": "docs/ssh-pentagi-verification.json",
+    "managedSshConcurrencyMitigated": true,
+    "qemuSourceDefectDetermined": false,
+    "syntheticModelTasks": 1
+  },
+  "authenticatedZapAndParserText": {
+    "instructions": "docs/authenticated-zap.md",
+    "verification": "docs/authenticated-zap-verification.json",
+    "staticPrivateSessionsOnly": true,
+    "semanticParserGapStillPartial": true,
+    "realProjectScansStarted": 0
+  },
+  "sessionLifecycle": {
+    "instructions": "docs/session-lifecycle.md",
+    "verification": "docs/session-lifecycle-verification.json",
+    "staticSessionNewNameImportOnly": true,
+    "expiryMetadataDoesNotProbeTarget": true,
+    "automaticWriteReplay": false,
+    "realProjectScansStarted": 0
+  },
+  "semgrepParserSelfCheck": {
+    "instructions": "docs/semgrep-parser-check.md",
+    "verification": "docs/semgrep-parser-check-verification.json",
+    "manualOfflineSyntheticCandidateCheckOnly": true,
+    "scannerDefectRemains": true,
+    "scannerImageChanged": false,
+    "realProjectScansStarted": 0
+  },
+  "scannerAdmission": {
+    "instructions": "docs/scanner-admission.md",
+    "verification": "docs/scanner-admission-verification.json",
+    "alreadyLoadedSemgrepCandidateOnly": true,
+    "candidateActuallyAdopted": false,
+    "realProjectScansStarted": 0
+  },
+  "storagePreview": {
+    "instructions": "docs/storage-preview.md",
+    "verification": "docs/storage-preview-verification.json",
+    "readOnly": true,
+    "deletionAvailable": false,
+    "privateUsageDetailsExported": false
+  },
+  "storageDashboard": {
+    "instructions": "docs/storage-dashboard.md",
+    "readOnly": true,
+    "deletionAvailable": false,
+    "sharedSamplingSeconds": 60,
+    "newDaemon": false,
+    "privateUsageDetailsExported": false,
+    "verification": "docs/storage-dashboard-verification.json"
+  },
+  "kaliConnection": {
+    "enabledAtExport": true,
+    "transport": "fixed-address SSH tunnel through existing loopback egress proxy",
+    "identityVerifiedBy": "dedicated SSH client pinned host key",
+    "account": "harness",
+    "authMaterialIncluded": false,
+    "restoreRequiresLocalProvisioning": true,
+    "installerAndKaliDiskIncluded": false,
+    "singleTunnelSeconds": 600,
+    "docs": "docs/kali-connection.md",
+    "environmentPage": {
+      "enabledAtExport": true,
+      "selectedTarget": "kali",
+      "localConfigPreserved": true,
+      "availableTools": [
+        "nmap",
+        "nuclei",
+        "masscan",
+        "fscan",
+        "gogo",
+        "suo5",
+        "frpc",
+        "frps",
+        "chisel",
+        "ffuf",
+        "httpx",
+        "dnsx",
+        "subfinder",
+        "impacket",
+        "curl",
+        "wget",
+        "dig",
+        "openssl",
+        "tcpdump",
+        "tshark",
+        "whatweb",
+        "nikto",
+        "sqlmap",
+        "file",
+        "strings"
+      ],
+      "catalogTotal": 26,
+      "discoveryTimeoutMs": 12000,
+      "snapshotMaxAgeMs": 90000,
+      "fallbackToLocal": false,
+      "configIncluded": false
+    },
+    "toolExpansion": {
+      "rootlessBinaryCount": 8,
+      "lockFile": "work/harness-purge-vm/kali-tools-lock.json",
+      "binariesIncluded": false,
+      "missingTools": [
+        "ksubdomain"
+      ],
+      "chromeSavedAndRefreshVerified": true,
+      "actualVersionOrHelpChecks": 25,
+      "noExtraPrivileges": true
+    }
+  },
+  "securityReview": {
+    "preset": "personal-review",
+    "optional": true,
+    "defaultPresetUnchanged": true,
+    "docs": "docs/security-review.md",
+    "manualChecksRemainUnverified": true,
+    "kaliSyntheticTargetsOnly": true,
+    "hostPluginTrustRequired": true,
+    "osSandboxAdded": false,
+    "existingFindingsUnchanged": true
+  },
+  "securityWorkspaceP0": {
+    "design": "docs/security-workspace/design-v1.3.md",
+    "status": "initial-contracts-and-prototype; P0 remaining work open",
+    "sourceOnly": false,
+    "deployed": true,
+    "runtimeBaselineVersion": "1.1.77-personal.11",
+    "sourceDeploymentState": "candidate173 has scoped Chrome scoring and model acceptance with load recovery; daily169 remains the runtime baseline; ordinary R3 remains unqualified",
+    "newProgramFiles": [
+      "lib/redteam/personal-workspace-contract.mjs",
+      "lib/redteam/personal-workspace-policy.mjs",
+      "lib/redteam/personal-workspace-risk.mjs",
+      "lib/redteam/personal-workspace-input.mjs"
+    ],
+    "policyDraft": "docs/security-workspace/policy-draft.md",
+    "policyExecutionEnabled": false,
+    "modeDispatch": "docs/security-workspace/mode-dispatch.md",
+    "modeDispatchStage": "deployed S1 static slice; ordinary awaiting R3; full workspace not ready",
+    "deploymentAcceptance": "docs/security-workspace/namespace-managed-release-results.json",
+    "fullWorkspaceReady": false,
+    "latestProgramAcceptance": "docs/security-workspace/deep-rule-profile-results.json",
+    "programSourceMatchesDeployed": false,
+    "deployedBaselineProgramFiles": 169,
+    "executionObservationCandidate": "docs/security-workspace/execution-observation-results.json",
+    "executionObservationCandidateDeployed": false,
+    "executionObservationCandidateProgramFiles": 170,
+    "deepRuleProfileCandidate": "docs/security-workspace/deep-rule-profile-results.json",
+    "deepRuleProfileCandidateProgramFiles": 172,
+    "deepRuleProfileCandidateDeployed": false,
+    "retainedRollbackProgramFiles": 166,
+    "sourceLocationCandidate": "docs/security-workspace/diagnostics/source-locations-20261103/manifest.json",
+    "sourceLocationCandidateDeployed": true,
+    "sourceLocationLiveAcceptance": "docs/security-workspace/source-location-live-results.json",
+    "sourceLocationLiveScope": "prior component candidate acceptance; later native daily Harness chat and deployment accepted separately",
+    "sourceLocationDailyRelease": "docs/security-workspace/source-location-release-results.json",
+    "pythonStringEvidence": "docs/security-workspace/plain-string-guard-results.json",
+    "pythonStringEvidenceDeployed": true,
+    "offlineQualityGate": "docs/security-workspace/review-quality-v3-results.json",
+    "independentNormalControls": "docs/security-workspace/oracles/cpython-normal-20261103/manifest.json",
+    "namespaceArityDiagnostic": "docs/security-workspace/diagnostics/namespace-arity-20261103/manifest.json",
+    "namespaceArityRulesDeployed": false,
+    "offlineNamespaceStructuralReview": "docs/security-workspace/diagnostics/namespace-structural-review-20261103/manifest.json",
+    "namespaceStructuralReviewerDeployed": true,
+    "namespaceManagedCandidate": "docs/security-workspace/namespace-managed-results.json",
+    "namespaceManagedCandidateDeployed": true,
+    "namespaceManagedCandidateProgramFiles": 169,
+    "namespaceManagedDailyRelease": "docs/security-workspace/namespace-managed-release-results.json",
+    "independentOracleSlice": "docs/security-workspace/oracles/skf-viewer-20261103/manifest.json",
+    "independentOracleQualifiedForR3": false,
+    "officialCveDiagnostic": "docs/security-workspace/pymatgen-oracle-results.json",
+    "officialCveDiagnosticCwe": "CWE-77",
+    "officialCveDiagnosticQualifiedForCwe95": false,
+    "officialCveDiagnosticRulesInstalled": false,
+    "ordinaryPlanning": "docs/security-workspace/ordinary-calibration.md",
+    "instructions": "docs/security-workspace/README.md",
+    "sandboxCandidateEvidence": "docs/security-workspace/s1-feasibility.json",
+    "authorizationReviewDeferred": true,
+    "evidenceRedactionCandidate": {
+      "docs": "docs/security-workspace/evidence-redaction-candidate.md",
+      "deployed": false,
+      "scope": [
+        "POL-F1",
+        "POL-F2",
+        "POL-F4"
+      ],
+      "programFiles": 172
+    },
+    "lifecycleStateCandidate": {
+      "docs": "docs/security-workspace/lifecycle-state-candidate.md",
+      "deployed": false,
+      "scope": [
+        "UI-F1",
+        "UI-F2",
+        "PTC-F1",
+        "EXEC-F1"
+      ],
+      "programFiles": 172,
+      "runtimeOverride": "runtime-overrides/@deepseek-ai/dsh-tools/lib/index.js"
+    },
+    "sourceCandidateProgramFiles": 173,
+    "snapshotRulesCandidate": {
+      "docs": "docs/security-workspace/snapshot-rules-candidate.md",
+      "deployed": false,
+      "scope": [
+        "DS-UI-2",
+        "DS-RULES-2",
+        "POL-F5"
+      ],
+      "programFiles": 173
+    },
+    "reportSdkCandidate": {
+      "docs": "docs/security-workspace/report-sdk-candidate.md",
+      "results": "docs/security-workspace/report-sdk-results.json",
+      "deployed": false,
+      "scope": [
+        "PRE-F2",
+        "SDK-F1"
+      ],
+      "programFiles": 173,
+      "hostBridgePlanOnly": "docs/security-workspace/bridge-boundary-plan.md"
+    },
+    "scoringConsistencyCandidate": {
+      "docs": "docs/security-workspace/scoring-consistency-candidate.md",
+      "results": "docs/security-workspace/scoring-consistency-results.json",
+      "deployed": false,
+      "scope": [
+        "SCORE-REVIEW-01",
+        "SCORE-REVIEW-02",
+        "SCORE-REVIEW-03"
+      ],
+      "programFiles": 173,
+      "externalReviewCompleted": true,
+      "actualReviewer": "DeepSeek V4.1 Flash high after Claude refusal",
+      "wholeProductReleaseQualified": false,
+      "globalReleaseHold": true
+    },
+    "disabledScoreCandidate": {
+      "docs": "docs/security-workspace/disabled-score-candidate.md",
+      "results": "docs/security-workspace/disabled-score-results.json",
+      "deployed": false,
+      "scope": [
+        "INHERITED-NOCODE-DISABLED",
+        "INHERITED-DISABLED-COMPETITION"
+      ],
+      "programFiles": 173,
+      "externalReviewCompleted": true,
+      "actualReviewer": "DeepSeek V4.1 Flash high focused domains after Claude refusal",
+      "wholeProductReleaseQualified": false,
+      "globalReleaseHold": true
+    },
+    "chainCoverageCandidate": {
+      "docs": "docs/security-workspace/chain-coverage-candidate.md",
+      "results": "docs/security-workspace/chain-coverage-results.json",
+      "deployed": false,
+      "scope": [
+        "CHAIN-PAGE-COVERAGE",
+        "CHAIN-GLOBAL-QUALIFICATION",
+        "SCORE-EXCLUSION-LABELS"
+      ],
+      "programFiles": 173,
+      "externalReviewCompleted": true,
+      "wholeProductReleaseQualified": false,
+      "globalReleaseHold": true
+    },
+    "scoreExplanationCandidate": {
+      "docs": "docs/security-workspace/score-explanations-candidate.md",
+      "results": "docs/security-workspace/score-explanations-results.json",
+      "deployed": false,
+      "scope": [
+        "CHAIN-MAXIMUM-UNDEFINED",
+        "CHAIN-EXCLUSION-REASONS",
+        "SCORE-DEDUP-SCOPE"
+      ],
+      "programFiles": 173,
+      "externalReviewCompleted": true,
+      "wholeProductReleaseQualified": false,
+      "globalReleaseHold": true
+    },
+    "scoreRuleReceiptCandidate": {
+      "docs": "docs/security-workspace/score-rule-receipts-candidate.md",
+      "results": "docs/security-workspace/score-rule-receipts-results.json",
+      "deployed": false,
+      "scope": [
+        "SCORE-POINT-ID-METADATA",
+        "SCORE-ATOMIC-CHANGE-RECEIPTS"
+      ],
+      "programFiles": 173,
+      "externalReviewCompleted": true,
+      "wholeProductReleaseQualified": false,
+      "globalReleaseHold": true
+    },
+    "scoreCapConflictCandidate": {
+      "docs": "docs/security-workspace/score-cap-conflicts-candidate.md",
+      "results": "docs/security-workspace/score-cap-conflicts-results.json",
+      "deployed": false,
+      "scope": [
+        "SCORE-SHARED-CAP-CONFLICT"
+      ],
+      "programFiles": 173,
+      "externalReviewCompleted": true,
+      "wholeProductReleaseQualified": false,
+      "globalReleaseHold": true
+    },
+    "scoreCapStatusCandidate": {
+      "docs": "docs/security-workspace/score-cap-status-candidate.md",
+      "results": "docs/security-workspace/score-cap-status-results.json",
+      "deployed": false,
+      "scope": [
+        "SCORE-MODEL-CAP-STATUS"
+      ],
+      "programFiles": 173,
+      "externalReviewCompleted": true,
+      "wholeProductReleaseQualified": false,
+      "globalReleaseHold": true,
+      "chromeResults": "docs/security-workspace/score-cap-status-chrome-results.json",
+      "chromeAcceptance": "verified-with-load-recovery",
+      "windowCounterexampleResults": "docs/security-workspace/load-window-acceptance-results.json",
+      "completeStdoutFinalResults": "docs/security-workspace/relay-admission-results.json",
+      "rawFinalBindingResults": "docs/security-workspace/relay-start-binding-results.json"
+    },
+    "firstLoadRelayCandidate": {
+      "script": "scripts/harness_acceptance_relay.py",
+      "docs": "docs/security-workspace/first-load-relay.md",
+      "results": "docs/security-workspace/first-load-relay-results.json",
+      "scope": "acceptance relay",
+      "externalReviewCompleted": true,
+      "dailyDeployed": false,
+      "globalReleaseHold": true,
+      "historicalScoreRequestRootCauseConfirmed": false,
+      "hardeningResults": "docs/security-workspace/relay-hardening-results.json",
+      "maxConnectionHandlers": 16,
+      "maxConcurrentExecChannels": 8,
+      "finalCleanupRevisionChromeAccepted": true,
+      "dailyEntryAcceptanceResults": "docs/security-workspace/load-window-acceptance-results.json",
+      "admissionResults": "docs/security-workspace/relay-admission-results.json",
+      "admissionTimeoutSeconds": 5,
+      "maxQueuedBytesPerConnection": 65536,
+      "guestExecCountSampled": true,
+      "startFailureResults": "docs/security-workspace/relay-start-binding-results.json",
+      "execStartFailureStatus": 502,
+      "httpCoverageResults": "docs/security-workspace/http-coverage-results.json",
+      "httpCoverageContract": "docs/security-workspace/daily-http-contract.candidate.json",
+      "httpCoverageTool": "scripts/harness_http_coverage.py",
+      "sshResetInvestigation": {
+        "docs": "docs/security-workspace/ssh-forwarding-investigation.md",
+        "results": "docs/security-workspace/ssh-forwarding-investigation-results.json",
+        "state": "partial-observation-reviewed-and-archived",
+        "underlyingRootCauseConfirmed": false,
+        "historicalSidebarRootCauseConfirmed": false,
+        "scope": "8 known-port failures without packets observed in one fixed guest capture; exact host component unknown",
+        "supplementalClaudeReviewCompleted": true,
+        "hostObservationDocs": "docs/security-workspace/host-forwarding-observation.md",
+        "hostObservationResults": "docs/security-workspace/host-forwarding-observation-results.json",
+        "hostObservationState": "observation-reviewed-with-nonblocking-gaps"
+      }
+    },
+    "pythonExecutionLocationsCandidate": {
+      "docs": "docs/security-workspace/python-execution-locations.md",
+      "results": "docs/security-workspace/python-execution-locations-results.json",
+      "dailyDeployed": false,
+      "r3Qualified": false,
+      "sourceProgramFiles": 173,
+      "state": "accepted-offline-candidate",
+      "externalReviewCompleted": true,
+      "reviews": "docs/security-workspace/python-execution-locations-reviews.json",
+      "globalReleaseHold": true
+    },
+    "pythonExecutionVerificationCandidate": {
+      "docs": "docs/security-workspace/python-execution-verification.md",
+      "results": "docs/security-workspace/python-execution-verification-results.json",
+      "reviews": "docs/security-workspace/python-execution-verification-reviews.json",
+      "state": "preflight-completed-capability-gap-retained",
+      "dailyDeployed": false,
+      "githubPushed": false,
+      "r3Qualified": false,
+      "globalReleaseHold": true,
+      "sourceProgramFiles": 173,
+      "sourceProfileOnly": true,
+      "genericVerificationSupported": false
+    }
+  }
+}

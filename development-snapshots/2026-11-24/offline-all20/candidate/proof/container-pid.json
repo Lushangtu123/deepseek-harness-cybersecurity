@@ -1,0 +1,25 @@
+{
+ "argv": [
+  "docker",
+  "inspect",
+  "--type",
+  "container",
+  "-f",
+  "{{.State.Pid}}",
+  "08fcbdd1f46d64e5cf6cb37d508b462ab7e333e91f4e248d45b43eeb3ee1170f"
+ ],
+ "containerId": "08fcbdd1f46d64e5cf6cb37d508b462ab7e333e91f4e248d45b43eeb3ee1170f",
+ "containerName": "stdlib-cli-preflight-66e7bbb39ef1553b",
+ "kind": "zero-target-preflight-container-pid",
+ "preflightId": "c58ce185e8804901b0abae8510f8d081",
+ "protocolRevision": 3,
+ "query": {
+  "returncode": 0,
+  "stderr": "",
+  "stdout": "1688865\n"
+ },
+ "recordedAt": "2026-11-15T07:49:48.569788+00:00",
+ "tag": "66e7bbb39ef1553b",
+ "targetPid": 1688865,
+ "version": 3
+}

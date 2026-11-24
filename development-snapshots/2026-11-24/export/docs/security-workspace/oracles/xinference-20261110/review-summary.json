@@ -1,0 +1,33 @@
+{
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "tools": [],
+  "promptSha256": "2d4e76b1b3af02368681b252a3ad186dfa2d613524d44d2dd686204d949d10b8",
+  "receiptSha256": "06fe31dc8ac79b6edac0841ba48acd0adaaf35a88bebc91e67d9421e0700d30d",
+  "reportSha256": "9ac18899170a0ff72a5100c00f227734b30ac61385c01344e90fed4951a224f1",
+  "triage": {
+    "scopeBlockers": 0,
+    "canArchive": true,
+    "reportSha256": "9ac18899170a0ff72a5100c00f227734b30ac61385c01344e90fed4951a224f1",
+    "disposition": "Passed for diagnostic slice only; no R3 or product approval.",
+    "findings": {
+      "F1": "Closed as documentation of unsupported rule ID. No automatic decision claimed.",
+      "F2": "Original payload provenance preserved. Revised protocol dated at archival correction and points to v1.",
+      "F3": "Post-check proves only its own timestamp; failed-witness contemporaneous state remains unavailable.",
+      "F4": "Canonical binding, conversion and reviewer replay provided, with partial identity limitations.",
+      "F5": "Curated pair excluded from qualification with diagnostic oracle role. Retrospective mismatches remain explicit.",
+      "F6-F7": "Small string, CWE-95, method extraction/future flag and runtime differences disclosed.",
+      "F8": "Original payload and exact byte range checked. No in-scanner file measurement.",
+      "F9": "Actual requested Claude model verified; high was requested in CLI, receipt does not independently attest effort.",
+      "F10": "Two source hashes and all failure/success attempts registered by archive before future freezes."
+    },
+    "remaining": [
+      "N1: Replay scripts do not themselves assert every dependency hash. Partial identity is not R3-ready.",
+      "N2: Bridge log contains script digests without timestamps. Post-VM state is a processed host record.",
+      "N3: selection metadata alone is not enforced by the current gate. This pair is excluded via non-qualifying oracle kind.",
+      "N4: LICENSE identity is supplementary. NOTICE presence was not checked.",
+      "N5: Original replay argv contains host paths and stays in the private work archive."
+    ],
+    "R3Qualified": false
+  }
+}

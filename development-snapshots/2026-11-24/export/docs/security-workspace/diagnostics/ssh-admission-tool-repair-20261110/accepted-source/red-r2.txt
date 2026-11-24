@@ -1,0 +1,132 @@
+FFFFFFFFFFFFF
+======================================================================
+FAIL: test_bad_server_event_types_and_times_are_rejected (__main__.ReviewRegressions.test_bad_server_event_types_and_times_are_rejected) (kind='missing-time')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/r2.test.py", line 38, in test_bad_server_event_types_and_times_are_rejected
+    self.assertNotEqual(value.returncode,0,'Invalid server event accepted')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : Invalid server event accepted
+
+======================================================================
+FAIL: test_bad_server_event_types_and_times_are_rejected (__main__.ReviewRegressions.test_bad_server_event_types_and_times_are_rejected) (kind='truthy-string')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/r2.test.py", line 38, in test_bad_server_event_types_and_times_are_rejected
+    self.assertNotEqual(value.returncode,0,'Invalid server event accepted')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : Invalid server event accepted
+
+======================================================================
+FAIL: test_bad_server_event_types_and_times_are_rejected (__main__.ReviewRegressions.test_bad_server_event_types_and_times_are_rejected) (kind='bytes-bool')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/r2.test.py", line 38, in test_bad_server_event_types_and_times_are_rejected
+    self.assertNotEqual(value.returncode,0,'Invalid server event accepted')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : Invalid server event accepted
+
+======================================================================
+FAIL: test_bad_server_event_types_and_times_are_rejected (__main__.ReviewRegressions.test_bad_server_event_types_and_times_are_rejected) (kind='before-request')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/r2.test.py", line 38, in test_bad_server_event_types_and_times_are_rejected
+    self.assertNotEqual(value.returncode,0,'Invalid server event accepted')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : Invalid server event accepted
+
+======================================================================
+FAIL: test_bad_server_event_types_and_times_are_rejected (__main__.ReviewRegressions.test_bad_server_event_types_and_times_are_rejected) (kind='after-completion')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/r2.test.py", line 38, in test_bad_server_event_types_and_times_are_rejected
+    self.assertNotEqual(value.returncode,0,'Invalid server event accepted')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : Invalid server event accepted
+
+======================================================================
+FAIL: test_bad_server_event_types_and_times_are_rejected (__main__.ReviewRegressions.test_bad_server_event_types_and_times_are_rejected) (kind='reverse-order')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/r2.test.py", line 38, in test_bad_server_event_types_and_times_are_rejected
+    self.assertNotEqual(value.returncode,0,'Invalid server event accepted')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : Invalid server event accepted
+
+======================================================================
+FAIL: test_body_exception_retains_cleanup_details (__main__.ReviewRegressions.test_body_exception_retains_cleanup_details)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/r2.test.py", line 61, in test_body_exception_retains_cleanup_details
+    self.assertTrue(hasattr(caught,'cleanup'),'Cleanup details lost from failed body')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Cleanup details lost from failed body
+
+======================================================================
+FAIL: test_cancel_handler_records_without_async_exception (__main__.ReviewRegressions.test_cancel_handler_records_without_async_exception)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/r2.test.py", line 42, in test_cancel_handler_records_without_async_exception
+    try:m.expire(signal.SIGTERM,None)
+        ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/admission.py", line 265, in expire
+    raise TimeoutError('Isolated control interrupted; unwind owned worker cleanup')
+TimeoutError: Isolated control interrupted; unwind owned worker cleanup
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/r2.test.py", line 43, in test_cancel_handler_records_without_async_exception
+    except BaseException as error:self.fail('Cancellation raised during arbitrary bytecode: '+type(error).__name__)
+                                  ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Cancellation raised during arbitrary bytecode: TimeoutError
+
+======================================================================
+FAIL: test_cleanup_failure_exception_carries_full_report (__main__.ReviewRegressions.test_cleanup_failure_exception_carries_full_report)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/r2.test.py", line 65, in test_cleanup_failure_exception_carries_full_report
+    m=fixtures.load();self.assertTrue(hasattr(m,'CleanupFailure'),'Missing structured failure')
+                      ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing structured failure
+
+======================================================================
+FAIL: test_missing_analysis_test_source_is_rejected (__main__.ReviewRegressions.test_missing_analysis_test_source_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/r2.test.py", line 22, in test_missing_analysis_test_source_is_rejected
+    self.assertNotEqual(value.returncode,0,'Incomplete source set accepted')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0 : Incomplete source set accepted
+
+======================================================================
+FAIL: test_nonmain_cleanup_never_claims_supported_success (__main__.ReviewRegressions.test_nonmain_cleanup_never_claims_supported_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/r2.test.py", line 51, in test_nonmain_cleanup_never_claims_supported_success
+    self.assertFalse(result[0]['ok'],'Unsupported nonmain cleanup reported success')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false : Unsupported nonmain cleanup reported success
+
+======================================================================
+FAIL: test_partial_ready_line_has_local_deadline (__main__.ReviewRegressions.test_partial_ready_line_has_local_deadline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/r2.test.py", line 88, in test_partial_ready_line_has_local_deadline
+    m=fixtures.load();self.assertTrue(hasattr(m,'wait_ready'),'Missing bounded READY reader')
+                      ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing bounded READY reader
+
+======================================================================
+FAIL: test_real_sigint_is_recorded_at_cleanup_safe_point (__main__.ReviewRegressions.test_real_sigint_is_recorded_at_cleanup_safe_point)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-ssh-admission-fix-r2-20261110/tooling/r2.test.py", line 72, in test_real_sigint_is_recorded_at_cleanup_safe_point
+    m=fixtures.load();self.assertTrue(hasattr(m,'run_signals'),'Missing run-scoped signal ownership')
+                      ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Missing run-scoped signal ownership
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.559s
+
+FAILED (failures=13)

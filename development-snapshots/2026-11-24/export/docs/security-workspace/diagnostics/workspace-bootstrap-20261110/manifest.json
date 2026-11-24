@@ -1,0 +1,15 @@
+{
+  "backend-registry-result.json": "2a917888bf08d05cde45888bd84afbaedb8b0284a327af68658b330969d23148",
+  "changes.patch": "d08b719315fb95f3165b47e4624707b89cbda8ee24d4bdf7a6ff5d652cf9a502",
+  "cleanup-first-failure.json": "e9823f7dfb536e45d6b99248141d307b6e9702cf5d4bba69d69439d9e68f080c",
+  "export-verification-round2.json": "85e58745ca806aa1f0fa688a2edf7484e05fbfe31727e924011c2d58e93c6006",
+  "guest-permissions.json": "8a9d12dad3459a4c7fe8f8de9a8e1ee87e9de4c549784841fd44b1bc325b8292",
+  "professional-receipt-compat.txt": "e8707424848c2b9beedc744fa3300d7bde7a81730260986a21411df606e1463f",
+  "review-summary.json": "014379c3163f1f12405ae3130b788ae41e7207c5897fa51edfc555ac026208a7",
+  "source-check-final.json": "8a9fd08ac94abe58b7e9fbf4582824eb5a2284312f8fbeae3830ae6ad5a65268",
+  "ui-cleanup.json": "ebe910be49da2e5c610c9311bc23140c24848e212f1bc70781fe4cf7b4f33082",
+  "ui-observation.json": "4858ef333f8a09942e6b6b164fc093dfc66f47b0bd6b3c0feee61f206973abb7",
+  "workspace-permissions-green.txt": "17b17989834471948a6fb210deb26783c32ac128056d5d00cd2066e4112af9a3",
+  "workspace-permissions.patch": "e7c4bc523668d910e572b3aedd4b84dadb44ddca72834a030c662282d224e36c",
+  "xdg.json": "148bcd660ce9b0b66dd3dfadf0d917db94ab16e627498ecf5aaae7eb79f1eccc"
+}

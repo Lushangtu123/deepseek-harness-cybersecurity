@@ -1,0 +1,167 @@
+{
+  "state": "reviewed-local-integration-complete",
+  "test": "full reviewed R2 research tool acceptance against its owned loopback echo fixture",
+  "trials": [
+    {
+      "block": 0,
+      "mode": "unqueued",
+      "complete": 1,
+      "failed": 5,
+      "notSent": 0,
+      "executorInvocations": 6,
+      "serverEvents": 1,
+      "serverErrors": 0,
+      "workersReaped": true,
+      "serverStopped": true
+    },
+    {
+      "block": 0,
+      "mode": "existing-queue",
+      "complete": 6,
+      "failed": 0,
+      "notSent": 0,
+      "executorInvocations": 6,
+      "serverEvents": 6,
+      "serverErrors": 0,
+      "workersReaped": true,
+      "serverStopped": true
+    },
+    {
+      "block": 1,
+      "mode": "existing-queue",
+      "complete": 6,
+      "failed": 0,
+      "notSent": 0,
+      "executorInvocations": 6,
+      "serverEvents": 6,
+      "serverErrors": 0,
+      "workersReaped": true,
+      "serverStopped": true
+    },
+    {
+      "block": 1,
+      "mode": "unqueued",
+      "complete": 1,
+      "failed": 5,
+      "notSent": 0,
+      "executorInvocations": 6,
+      "serverEvents": 1,
+      "serverErrors": 0,
+      "workersReaped": true,
+      "serverStopped": true
+    },
+    {
+      "block": 2,
+      "mode": "unqueued",
+      "complete": 1,
+      "failed": 5,
+      "notSent": 0,
+      "executorInvocations": 6,
+      "serverEvents": 1,
+      "serverErrors": 0,
+      "workersReaped": true,
+      "serverStopped": true
+    },
+    {
+      "block": 2,
+      "mode": "existing-queue",
+      "complete": 6,
+      "failed": 0,
+      "notSent": 0,
+      "executorInvocations": 6,
+      "serverEvents": 6,
+      "serverErrors": 0,
+      "workersReaped": true,
+      "serverStopped": true
+    },
+    {
+      "block": 3,
+      "mode": "unqueued",
+      "complete": 1,
+      "failed": 5,
+      "notSent": 0,
+      "executorInvocations": 6,
+      "serverEvents": 1,
+      "serverErrors": 0,
+      "workersReaped": true,
+      "serverStopped": true
+    },
+    {
+      "block": 3,
+      "mode": "existing-queue",
+      "complete": 6,
+      "failed": 0,
+      "notSent": 0,
+      "executorInvocations": 6,
+      "serverEvents": 6,
+      "serverErrors": 0,
+      "workersReaped": true,
+      "serverStopped": true
+    }
+  ],
+  "aggregates": [
+    {
+      "trials": 4,
+      "clients": 24,
+      "connected": 24,
+      "complete": 4,
+      "failed": 20,
+      "notSent": 0,
+      "mode": "unqueued",
+      "errors": {
+        "reply|ConnectionResetError|54": 20
+      },
+      "notSentReasons": {}
+    },
+    {
+      "trials": 4,
+      "clients": 24,
+      "connected": 24,
+      "complete": 24,
+      "failed": 0,
+      "notSent": 0,
+      "mode": "existing-queue",
+      "errors": {},
+      "notSentReasons": {}
+    }
+  ],
+  "collectorAndOptimizedIndependentAnalyzerExitedZero": true,
+  "reviewedSourcesUnchanged": true,
+  "canonicalUnchangedDuringRun": true,
+  "installedManagerUnchanged": true,
+  "previousEvidenceUnchanged": true,
+  "controlsRun": 1,
+  "newVmDiagnosticRequests": 0,
+  "rawResultSha256": "d74af1956ed332a2c0b1415ff21a1ecdfb5f2bfaf26bcbdb15c4179d84f52bcf",
+  "contractSha256": "730a0614394d1a72de99c032e5f2d91c8d0a9921b4a605def095b41d7ab7b70a",
+  "independentAnalysisSha256": "5838c4b7daa9fe1f4ff96feff659ea8bf3529edac7859ed45a63002968a42aae",
+  "limitations": [
+    "Normal integration path with successful cleanup. Injected cleanup and not-sent cases were tested in the 45-method predecessor, not exercised by this run.",
+    "One paired scenario with a one-time accept pause. The sample is not a production failure-rate estimate.",
+    "Observed socket errors are not packet traces or direct proof of the historical VM root cause.",
+    "No SSH binary or real guest traffic is involved in collection. Review transport, if needed, is separate."
+  ],
+  "scopeBlockers": 0,
+  "review": {
+    "claudeQuotaReceiptSha256": "a18e6c7321ff60a0b0dfaeefa304bd69122d584a0c1aeecd906ce80880a0d712",
+    "model": "DeepSeek-V4.1-Flash",
+    "apiAlias": "deepseek-flash",
+    "effort": "high",
+    "finishReason": "stop",
+    "promptSha256": "63c7052a3029d44fa72ff850e883fd5e2186893c5b60cd2277845a209572a161",
+    "receiptSha256": "e75c18a4beac6b33244003f3061efa2f8d30f66fad512bf9d77d28abffe5e006",
+    "reportSha256": "201bf1751e754542565547128eb4a89ae9680eff09452a0703826e15854e67b5",
+    "triageSha256": "e52a28dfacdea4662a9cd97249b6b3034d3e56a581efa89c6d11d2c3114b2ab5",
+    "successfulVmTransportSshCalls": 4,
+    "transportCleanup": {
+      "removed": true,
+      "workerStopped": true,
+      "dailyProgramUnchanged": true,
+      "dailyProgramFilesChecked": 169,
+      "credentialCopiedToHost": false,
+      "scope": "only owned completed model-review scratch"
+    }
+  },
+  "preciseProductionRootCauseConfirmed": false,
+  "published": false
+}

@@ -1,0 +1,48 @@
+✔ deep rules are a fixed17 bundle preserving every baseline16 rule (2.668333ms)
+✔ only a matching deep workspace can select the pinned17 manifest (0.339166ms)
+✔ staging pins exact17 bytes and rejects changed base or bundle without overwriting an existing stage (3.295ms)
+✔ runtime deep readiness hashes the shipped bundle before advertising it and invalidates cached evidence (6.848875ms)
+(node:29554) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the scan-plan coverage key preserves its pre-profile golden value and binds selected rule bytes (20.802084ms)
+✔ Exact deep contract already rejects altered mode, count, hashes and added fields (0.1395ms)
+(node:29555) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Managed REA and PentAGI need saved consent, deduplicate, and keep analysis separate from findings (35.837208ms)
+✔ Uncertain REA stop blocks new joint requests until original child is reconciled (23.813125ms)
+✔ Model-side project redaction cannot silently change adapter authorization (0.33575ms)
+✔ Six-step artifact pages fit escaped model summaries without losing evidence or cursor identity (3.130292ms)
+✔ Joint panel retains an uncertain startup request and recovers it with read-only status, without replay (2.261333ms)
+✔ A paid PentAGI step is available after consent but never preselected by refresh (0.273292ms)
+✔ An authorized ZAP step is visible but network checks are never preselected on refresh (1.001625ms)
+✔ Joint panel pages Python evidence and keeps it separate from scanner findings (1.294ms)
+✔ Deep mode starts only the explicitly planned S1 steps and retains its mode (0.597291ms)
+(node:29557) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Joint review hands off a fixed redacted source copy and accounts for excluded files (207.86675ms)
+✔ Project-local git fsmonitor cannot execute code while collecting snapshot metadata (114.867125ms)
+✔ Project-local Git clean filters cannot execute during snapshot metadata collection (116.452542ms)
+✔ Unknown remote outcome blocks a different request and restart never replays the original child (92.345417ms)
+✔ Cancel before the scanner dispatch cannot launch a new scanner process (18.624334ms)
+✔ Native joint tool binds to the current project and forwards only to the managed service (18.037292ms)
+✔ Kali handoff is an explicit saved scope choice and parent cancellation awaits the original remote task (295.862ms)
+✔ Joint preset has a separate managed dispatch guard and preserves the restricted preset (0.69375ms)
+✔ Joint task pins scope, deduplicates start and records scanner evidence against the captured copy (109.371916ms)
+✔ Joint snapshots cannot rewrite or reopen an existing ordinary audit finding (84.678416ms)
+✔ Snapshot verification rejects additions as well as changed admitted files (64.529959ms)
+✔ Rejected starts have a durable read-only rejection receipt without creating tasks (19.27225ms)
+✔ Unified report retains parser diagnostics and explicitly reports bounded diagnostic coverage (84.4015ms)
+✔ Final joint wire rejects redaction-expanded results and altered task/hash/cursor identities (0.523417ms)
+✔ Joint coverage explanations may be redacted while structured coverage and control identities stay protected (0.399791ms)
+✔ Kali completeness describes the handed-off Python subset without claiming whole-project coverage (83.129667ms)
+✔ Redaction-expanded files are recorded as exclusions before adapter handoff (140.873417ms)
+✔ Completed Semgrep steps retain calibrated PHP coverage gaps and keep hits unverified (220.69575ms)
+✔ Joint views explain the known Trivy exclusion policy without inferring legacy coverage (16.327667ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1764.954

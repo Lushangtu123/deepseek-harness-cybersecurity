@@ -1,0 +1,219 @@
+{
+  "scope": "Isolated acceptance transport admission and complete-output evidence",
+  "candidateProgramDigest": "764760fdbf5577f6977b38142a2ea73bace1c2eb98797977412efd1662ea18e6",
+  "lifecycle": {
+    "authenticatedMaster": true,
+    "masterPID": 46715,
+    "clientFallbackDisabled": true,
+    "maxConcurrentExecChannels": 8,
+    "maxConnectionHandlers": 16,
+    "peakExecClients": 8,
+    "admissionTimeoutSeconds": 5.0,
+    "maxQueuedBytesPerConnection": 65536,
+    "masterStopped": true,
+    "remainingPids": [],
+    "stopped": true,
+    "controlDirectoryRemoved": true
+  },
+  "directGuestCount": {
+    "directMeasurement": "VM /proc cmdline exact QA root/port and python -c; excludes manager probe",
+    "samples": [
+      {
+        "activeGuestWorkers": 8,
+        "pids": [
+          1628279,
+          1628280,
+          1628281,
+          1628282,
+          1628284,
+          1628285,
+          1628286,
+          1628287
+        ]
+      },
+      {
+        "activeGuestWorkers": 8,
+        "pids": [
+          1628279,
+          1628280,
+          1628281,
+          1628282,
+          1628284,
+          1628285,
+          1628286,
+          1628287
+        ]
+      },
+      {
+        "activeGuestWorkers": 8,
+        "pids": [
+          1628279,
+          1628280,
+          1628281,
+          1628282,
+          1628284,
+          1628285,
+          1628286,
+          1628287
+        ]
+      }
+    ],
+    "timeoutResponse": {
+      "status": 503,
+      "elapsedSeconds": 5.001
+    },
+    "afterClientsClosed": {
+      "activeGuestWorkers": 0,
+      "pids": []
+    },
+    "cancelledWithoutExec": true,
+    "timedOutWithoutExec": true
+  },
+  "admittedPrefix": {
+    "queuedPrefixForwarded": true,
+    "loginStatus": 303,
+    "queuedMs": 206,
+    "activeGuestWorkersAfter": 0,
+    "responseHeadersAndBodyRetained": false
+  },
+  "normalReadRegression": {
+    "requests": 24,
+    "failures": 0
+  },
+  "traceSha256": "1dc2060b10772a6db416ffd043abd5d471df6293e4c93eaf74c5a53b3e7f9ca5",
+  "traceRows": 44,
+  "admissionRejections": [
+    {
+      "admissionReason": "client-disconnected",
+      "queuedMs": 0,
+      "bufferedRequestBytes": 44,
+      "execStarted": false
+    },
+    {
+      "admissionReason": "timeout",
+      "queuedMs": 5000,
+      "bufferedRequestBytes": 41,
+      "execStarted": false
+    }
+  ],
+  "guestCleanup": {
+    "stopped": true,
+    "dailyProgramFiles": 169,
+    "dailyProgramUnchanged": true,
+    "dailyConfigurationUnchanged": true,
+    "installedSdkUnchanged": true,
+    "temporaryDirectoryRemoved": true
+  },
+  "model": {
+    "programDigest": "764760fdbf5577f6977b38142a2ea73bace1c2eb98797977412efd1662ea18e6",
+    "nativeToolCalls": 3,
+    "nativeToolResults": 3,
+    "terminal": "completed",
+    "modelConfigured": "deepseek-flash",
+    "providerConfigured": "deepseek-official",
+    "providerRawModelFieldCaptured": false,
+    "configurationSha256": "bcc7f71a93e8c9c6a06e569d4df7fdde95c9273aac7f4edc13c88a344e5e6ace",
+    "expected": {
+      "projectPoints": 14,
+      "windowPoints": [
+        8,
+        1
+      ],
+      "fullCoverage": false,
+      "unreadHitCount": 497,
+      "sampleSumIsProjectTotal": false
+    },
+    "structuredAnswerMatched": true,
+    "middleUnobservedPoints": 5,
+    "unreadAttackChainRows": 497,
+    "cliFinalCount": 1,
+    "cliFinalCountScope": "complete captured stdout",
+    "fullStdoutSha256": "ceaf71ffb17fa6258921c787e86c5cf7487d176a0301ecd5487f84a8d87a4e14",
+    "fullStdoutBytes": 30194,
+    "cliFinalMatchesSameSessionAssistant": true,
+    "finalAfterLastToolResult": true,
+    "rawReceiptSha256": "246315aaf38838198a15a7470a87c19f8318cc75cecd267b05cc89ecd15c1c52",
+    "privateReceiptMode": "0600",
+    "temporaryDirectoryRemoved": true,
+    "dailyProgramMatched": true,
+    "checkedConfigsMatched": true,
+    "checkedSdkMatched": true,
+    "promptFixtureHashes": {
+      "native-cap-live.py": "d307ab83145ef148b081acac30d2588170eb39e870fd2e1db73a49a00c0e1cb3",
+      "native-cap-guest.py": "243be49e86fa7c0eaf81652631c95b65cfd11dfe1785fe0b295f6d38b448aa7a",
+      "seed.mjs": "4f8a29455f5db0d4f41727f82a11697958a963e405e6ffd3b79a8a0947de7956",
+      "qa-fence.mjs": "ca0ad7cbc6e6899898b09b24ca664ddfe4be69a1f369bdc53ea2efdce1268520",
+      "final-output.py": "db7bc094cd46561e5c07d48bbaeb8041a1d8d711f024a95bdb094037ee8b8a79"
+    }
+  },
+  "localTests": {
+    "relay": 7,
+    "finalCollector": 4,
+    "modelPositive": 1,
+    "modelNegative": 12
+  },
+  "browserRepeated": false,
+  "ordinaryR3Qualified": false,
+  "wholeProductReleaseQualified": false,
+  "date": "2026-11-08",
+  "scopeItems": [
+    "RELAY-ADMISSION-WAIT",
+    "RELAY-LIVE-EXEC-COUNTERS",
+    "FULL-STDOUT-FINAL-COUNT"
+  ],
+  "sourceHashes": {
+    "scripts/harness_acceptance_relay.py": "a4063bb2b8e60287b51e5902e5b3cca4d151d114586525d4c17edb28db856c81",
+    "scripts/tests/harness_acceptance_relay_test.py": "883708702019a07729ca42a3e24d5b1a19ec888cc56387f8182b12bc0608601c",
+    "scripts/harness_final_output.py": "db7bc094cd46561e5c07d48bbaeb8041a1d8d711f024a95bdb094037ee8b8a79",
+    "scripts/tests/harness_final_output_test.py": "d4a10aaac6402e46ff780617c1ee8cab743d050e9c5566e2e0b8f1ad70aa2800",
+    "docs/security-workspace/first-load-relay.md": "5ba57a748f647265f0923b4a0be3c02083b57287b09a93e961dd8246b856a2d1"
+  },
+  "externalReview": {
+    "state": "completed-and-triaged",
+    "scopedBlockers": 0,
+    "requestedClaudeModel": "claude-opus-5-5",
+    "claudeState": "weekly-quota-exhausted",
+    "reviewer": "DeepSeek V4.1 Flash",
+    "model": "deepseek-flash",
+    "effort": "high",
+    "finishReason": "stop",
+    "promptSha256": "36fd482610f3e946b40385149f32803b0a32af9369e13d438f9413c308ecf791",
+    "reportSha256": "f2180820113a0ad0bdc708c6da47cde95f6aca41c30027d7d04ff894a2d038ef",
+    "receiptSha256": "93d63c1ef39fa616fafe6f644e61f473bf670f2c20c5bac3b1a08deb83bf139e",
+    "temporaryReviewCopyRemoved": true,
+    "triageSha256": "defbed58ffb1fc7d36fdbbb4d986d4b94cfaab88182161a94ad1055119f1638b"
+  },
+  "followUp": [
+    {
+      "id": "RELAY-EXEC-START-CLASSIFICATION",
+      "status": "confirmed-open",
+      "severity": "low",
+      "reproduced": true
+    },
+    {
+      "id": "FINAL-SCRUB-SYMMETRY",
+      "status": "confirmed-open",
+      "severity": "low",
+      "reproduced": true
+    },
+    {
+      "id": "DAILY-PROBE-COVERAGE-CONTRACT",
+      "status": "open",
+      "scope": "future-run automation"
+    },
+    {
+      "id": "SSH-RESET-LOWER-LAYER",
+      "status": "open"
+    },
+    {
+      "id": "SCORE-SIDEBAR-HISTORICAL-FAILURE",
+      "status": "open"
+    },
+    {
+      "id": "ORDINARY-R3",
+      "status": "pending"
+    }
+  ],
+  "candidatePluginDeployed": false,
+  "githubPushed": false
+}

@@ -1,0 +1,30 @@
+{
+  "sourceType": "web-fetch",
+  "sources": [
+    "https://github.com/xorbitsai/inference/blob/4cefcaa1e63d7e29d26bcd4be96cb267da113871/xinference/model/llm/tool_parsers/llama3_tool_parser.py",
+    "https://github.com/xorbitsai/inference/blob/1b3d220f342ce68d34cec4586d9409d457dadc42/xinference/model/llm/tool_parsers/llama3_tool_parser.py"
+  ],
+  "priorIncidents": {
+    "file": 0,
+    "container": 0
+  },
+  "regexPatternCategories": [
+    "direct-instruction-injection",
+    "role-hijack",
+    "tool-use-injection",
+    "exfiltration",
+    "hidden-content",
+    "encoded-payload"
+  ],
+  "regexHits": [],
+  "modelAnalysis": {
+    "reviewer": "current Codex agent",
+    "confirmedHits": [],
+    "falsePositives": [],
+    "extendedSpans": [],
+    "newlyIdentified": []
+  },
+  "removedPassages": [],
+  "action": "proceed",
+  "sourceBytesRetainedForScanning": true
+}

@@ -1,0 +1,379 @@
+{
+  "state": "passed",
+  "nodeVersion": "v24.22.1",
+  "nodeExecutable": "/home/purge/.local/node/bin/node",
+  "nodeExecutableSha256": "c8c5721679d8d1a09e9987e345d5f9a64899bb85f7a384783ba8a93e6e62348a",
+  "programFilesRechecked": 173,
+  "scannerInvocations": 0,
+  "scannerReplays": 2,
+  "modelCalls": 0,
+  "qualificationCasesAdded": 0,
+  "ordinaryR3Qualified": false,
+  "scope": "Existing joint deep orchestration with recorded scanner JSON and fixture readiness. Default real namespace sandbox. No fresh scan or full UI/model acceptance.",
+  "cases": [
+    {
+      "name": "namespace-candidate",
+      "scannerReplayCalls": 1,
+      "replayScope": "entire recorded candidate scan",
+      "task": {
+        "id": "f471ea7e-0be9-4dbe-a408-b22740520658",
+        "engagement": "namespace-routing-diagnostic-namespace-candidate",
+        "state": "completed",
+        "scopeRevision": 1,
+        "workspace": {
+          "version": "workspace-dispatch-s1-2",
+          "mode": "deep",
+          "sandboxProfile": "S1",
+          "selectedSteps": [
+            "semgrep"
+          ],
+          "toolIdentities": {
+            "semgrep": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "budgetSeconds": 40,
+          "modelRequests": 0,
+          "fullWorkspaceReady": false,
+          "ruleProfiles": {
+            "semgrep": {
+              "version": 1,
+              "id": "deep-namespace17",
+              "mode": "deep",
+              "baseRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+              "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+              "ruleCount": 17,
+              "qualification": "managed-candidate-not-r3"
+            }
+          }
+        },
+        "startedAt": "2026-11-10T22:56:52.265Z",
+        "finishedAt": "2026-11-10T22:56:52.612Z",
+        "deadline": "2026-11-10T22:57:32.265Z",
+        "budgetSeconds": 40,
+        "modelCalls": 0,
+        "cleanupVerified": true,
+        "problem": null,
+        "webTarget": null,
+        "snapshot": {
+          "id": "85baea7aed284abedf6f43e0ca2429672e29a912d6d8ec36613a42cb37264c73",
+          "files": 2,
+          "bytes": 6203,
+          "git": {
+            "head": null,
+            "dirty": null,
+            "statusHash": null
+          },
+          "excluded": 0,
+          "exclusionsRetained": 0,
+          "exclusionsTruncated": false,
+          "redactedFiles": 0
+        },
+        "steps": [
+          {
+            "tool": "semgrep",
+            "id": "c4a9b506-3704-4ef4-aef0-d8658eb94a90",
+            "state": "completed",
+            "complete": true,
+            "coverageScope": "scanner-reported-files",
+            "eligibleFiles": null,
+            "cleanupVerified": null,
+            "version": "recorded-scan-replay",
+            "checkedFiles": 2,
+            "problem": null,
+            "fileCoverage": {
+              "scope": "managed-copy",
+              "scanned": 2,
+              "total": 2,
+              "uncovered": 0,
+              "withoutLanguageRule": null
+            },
+            "coverageNotes": [],
+            "diagnostics": {
+              "total": 0,
+              "retained": 0,
+              "truncated": false
+            },
+            "pythonEvidence": "completed",
+            "sourceLocations": {
+              "version": 1,
+              "state": "completed",
+              "total": 1,
+              "bound": 1,
+              "unavailable": 0
+            },
+            "observationSummary": {
+              "version": 1,
+              "total": 1,
+              "executionPoints": 1,
+              "other": 0
+            },
+            "namespaceReview": {
+              "version": 1,
+              "state": "completed",
+              "eligible": 1,
+              "checked": 1,
+              "observations": 1,
+              "unmatched": 0,
+              "retained": 1,
+              "cleanupVerified": true,
+              "execution": {
+                "profile": "namespace-ast-1",
+                "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+                "workerSha256": "6c8c7446b99a777e5f496c008c9eeebecebc15134a5aedb6c7be4a14144a6705",
+                "pythonVersion": "3.12.15",
+                "cleanupVerified": true
+              }
+            },
+            "modelCalls": 0,
+            "artifacts": 1
+          }
+        ],
+        "findings": 1,
+        "coverageComplete": false,
+        "manualChecks": [
+          "authentication",
+          "authorization",
+          "business-logic",
+          "architecture"
+        ],
+        "notice": "完成表示已选步骤结束；命中保持待验证。Git未提交状态未探测，按逐文件哈希固定实际内容。脱敏/排除文件、手工项与未选工具仍未覆盖；REA仅静态JavaScript图；PentAGI输出是未验证模型结论，调用次数预算不等同货币金额上限。"
+      },
+      "sections": {
+        "findings": [
+          {
+            "rule": "policy.harness.python.dynamic-code-namespace",
+            "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+            "severity": "medium",
+            "location": "before.py:46",
+            "evidence": "规则命中；源码片段未收录",
+            "subject": null,
+            "sourceLocation": {
+              "version": 1,
+              "state": "bound",
+              "scope": "managed-source-copy",
+              "snapshotId": "85baea7aed284abedf6f43e0ca2429672e29a912d6d8ec36613a42cb37264c73",
+              "path": "before.py",
+              "sourceSha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+              "byteLength": 2787,
+              "copyRedacted": false,
+              "start": {
+                "line": 46,
+                "col": 20,
+                "offset": 1466
+              },
+              "end": {
+                "line": 46,
+                "col": 46,
+                "offset": 1492
+              }
+            },
+            "observation": {
+              "version": 1,
+              "kind": "execution-point",
+              "confidence": "low",
+              "risk": "not-assessed",
+              "calleeIdentity": "unverified",
+              "inputControl": "unverified"
+            },
+            "tool": "semgrep",
+            "status": "unverified",
+            "sourceTask": "c4a9b506-3704-4ef4-aef0-d8658eb94a90",
+            "snapshotId": "85baea7aed284abedf6f43e0ca2429672e29a912d6d8ec36613a42cb37264c73"
+          }
+        ],
+        "artifacts": [
+          {
+            "tool": "semgrep",
+            "evidenceKind": "python-namespace-structure",
+            "path": "before.py",
+            "line": 46,
+            "rule": "policy.harness.python.dynamic-code-namespace",
+            "status": "unverified",
+            "sourceLocation": {
+              "version": 1,
+              "state": "bound",
+              "scope": "managed-source-copy",
+              "snapshotId": "85baea7aed284abedf6f43e0ca2429672e29a912d6d8ec36613a42cb37264c73",
+              "path": "before.py",
+              "sourceSha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+              "byteLength": 2787,
+              "copyRedacted": false,
+              "start": {
+                "line": 46,
+                "col": 20,
+                "offset": 1466
+              },
+              "end": {
+                "line": 46,
+                "col": 46,
+                "offset": 1492
+              }
+            },
+            "sink": "eval",
+            "argumentCount": 3,
+            "bindingHint": "no-direct-conflict-observed",
+            "builtinIdentity": "unverified",
+            "sourceKind": "parameter-name-observed",
+            "externalControl": "unverified",
+            "assignmentLines": [],
+            "constraintState": "unresolved",
+            "sourceTask": "c4a9b506-3704-4ef4-aef0-d8658eb94a90",
+            "snapshotId": "85baea7aed284abedf6f43e0ca2429672e29a912d6d8ec36613a42cb37264c73"
+          }
+        ]
+      },
+      "namespaceReview": {
+        "version": 1,
+        "state": "completed",
+        "eligible": 1,
+        "checked": 1,
+        "observations": 1,
+        "unmatched": 0,
+        "retained": 1,
+        "cleanupVerified": true,
+        "execution": {
+          "profile": "namespace-ast-1",
+          "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+          "workerSha256": "6c8c7446b99a777e5f496c008c9eeebecebc15134a5aedb6c7be4a14144a6705",
+          "pythonVersion": "3.12.15",
+          "cleanupVerified": true
+        }
+      },
+      "ordinaryFindingRows": 0
+    },
+    {
+      "name": "patched-only",
+      "scannerReplayCalls": 1,
+      "replayScope": "fixed-file subset of recorded candidate scan",
+      "task": {
+        "id": "2d1cf09f-6549-4a16-b836-a3efeaaef839",
+        "engagement": "namespace-routing-diagnostic-patched-only",
+        "state": "completed",
+        "scopeRevision": 1,
+        "workspace": {
+          "version": "workspace-dispatch-s1-2",
+          "mode": "deep",
+          "sandboxProfile": "S1",
+          "selectedSteps": [
+            "semgrep"
+          ],
+          "toolIdentities": {
+            "semgrep": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "budgetSeconds": 40,
+          "modelRequests": 0,
+          "fullWorkspaceReady": false,
+          "ruleProfiles": {
+            "semgrep": {
+              "version": 1,
+              "id": "deep-namespace17",
+              "mode": "deep",
+              "baseRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+              "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+              "ruleCount": 17,
+              "qualification": "managed-candidate-not-r3"
+            }
+          }
+        },
+        "startedAt": "2026-11-10T22:56:52.687Z",
+        "finishedAt": "2026-11-10T22:56:52.739Z",
+        "deadline": "2026-11-10T22:57:32.687Z",
+        "budgetSeconds": 40,
+        "modelCalls": 0,
+        "cleanupVerified": true,
+        "problem": null,
+        "webTarget": null,
+        "snapshot": {
+          "id": "89da5bb0d2c1d847a1c2e909c969d15822e2c20f98cf460e3c0d671bdfbd210c",
+          "files": 1,
+          "bytes": 3416,
+          "git": {
+            "head": null,
+            "dirty": null,
+            "statusHash": null
+          },
+          "excluded": 0,
+          "exclusionsRetained": 0,
+          "exclusionsTruncated": false,
+          "redactedFiles": 0
+        },
+        "steps": [
+          {
+            "tool": "semgrep",
+            "id": "162c7446-cf8c-449e-8434-5654a0517e09",
+            "state": "completed",
+            "complete": true,
+            "coverageScope": "scanner-reported-files",
+            "eligibleFiles": null,
+            "cleanupVerified": null,
+            "version": "recorded-scan-replay",
+            "checkedFiles": 1,
+            "problem": null,
+            "fileCoverage": {
+              "scope": "managed-copy",
+              "scanned": 1,
+              "total": 1,
+              "uncovered": 0,
+              "withoutLanguageRule": null
+            },
+            "coverageNotes": [],
+            "diagnostics": {
+              "total": 0,
+              "retained": 0,
+              "truncated": false
+            },
+            "pythonEvidence": "completed",
+            "sourceLocations": {
+              "version": 1,
+              "state": "completed",
+              "total": 0,
+              "bound": 0,
+              "unavailable": 0
+            },
+            "observationSummary": {
+              "version": 1,
+              "total": 0,
+              "executionPoints": 0,
+              "other": 0
+            },
+            "namespaceReview": {
+              "version": 1,
+              "state": "not-applicable",
+              "eligible": 0,
+              "checked": 0,
+              "observations": 0,
+              "unmatched": 0,
+              "retained": 0,
+              "cleanupVerified": true
+            },
+            "modelCalls": 0,
+            "artifacts": 0
+          }
+        ],
+        "findings": 0,
+        "coverageComplete": false,
+        "manualChecks": [
+          "authentication",
+          "authorization",
+          "business-logic",
+          "architecture"
+        ],
+        "notice": "完成表示已选步骤结束；命中保持待验证。Git未提交状态未探测，按逐文件哈希固定实际内容。脱敏/排除文件、手工项与未选工具仍未覆盖；REA仅静态JavaScript图；PentAGI输出是未验证模型结论，调用次数预算不等同货币金额上限。"
+      },
+      "sections": {
+        "findings": [],
+        "artifacts": []
+      },
+      "namespaceReview": {
+        "version": 1,
+        "state": "not-applicable",
+        "eligible": 0,
+        "checked": 0,
+        "observations": 0,
+        "unmatched": 0,
+        "retained": 0,
+        "cleanupVerified": true
+      },
+      "ordinaryFindingRows": 0
+    }
+  ]
+}

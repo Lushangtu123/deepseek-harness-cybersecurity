@@ -1,0 +1,20 @@
+{
+  "kind": "qualified-all20-offline-checks",
+  "total": 170,
+  "prior151Passed": true,
+  "new19Passed": true,
+  "new19Command": [
+    "/opt/homebrew/opt/python@3.13/bin/python3.13",
+    "-I",
+    "-B",
+    "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-all20-fixture-lifecycle-20261124/checks/test_all20_links.py"
+  ],
+  "new19ObservedExitCode": 0,
+  "new19StdErr": "evidence/new19-direct/stderr",
+  "new19SourceSha256": "1599fb887e0a9301408be0560ee6c78dd805b95b2e021ec71f5b8a29bee54f1f",
+  "firstSummary": "evidence/offline-final/summary.json",
+  "firstFixtureMistakePreserved": true,
+  "VMResult": false,
+  "new19Interpreter": "3.13.1 (main, Dec  3 2024, 17:59:52) [Clang 16.0.0 (clang-1600.0.26.4)]",
+  "new19StdErrSha256": "b0874ffc3c63d0f1b93298f63025d0f03255eeb721da9152dc4540119916d010"
+}

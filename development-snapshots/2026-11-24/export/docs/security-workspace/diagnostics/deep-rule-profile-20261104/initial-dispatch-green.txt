@@ -1,0 +1,27 @@
+✔ deep rules are a fixed17 bundle preserving every baseline16 rule (1.682791ms)
+✔ only a matching deep workspace can select the pinned17 manifest (0.353792ms)
+✔ staging pins exact17 bytes and rejects changed base or bundle without overwriting an existing stage (3.580292ms)
+(node:30638) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Ordinary plan reports missing R3 qualification without handing off files or starting tools (27.273708ms)
+✔ Deep S1 dispatch persists the original mode and identities and launches only selected steps (174.435625ms)
+✔ Mode dispatch rejects unqualified adapters, invalid modes and over-budget work before creating a task (19.638208ms)
+✔ A pinned runtime identity change after acceptance prevents dispatch of the original step (17.029125ms)
+✔ Child admission cannot swap the pinned identity after the parent pre-dispatch check (82.61425ms)
+✔ Mode admission requires a current runtime identity instead of trusting a ready flag (17.492084ms)
+✔ Mode contract survives reopening the existing database and old joint tasks retain a null mode (235.002375ms)
+✔ Native service mode requests share one ledger and protect mode metadata against redaction (183.240875ms)
+✔ Ordinary submission binds the current preview, exact steps and bounded budget before R3 (23.241167ms)
+✔ A late S1 scanner result does not persist findings after the monotonic deadline (85.826583ms)
+✔ Managed Semgrep persists Python review evidence separately from findings (154.829ms)
+✔ deep Semgrep selection binds the fixed profile to parent, child options and persisted runtime details (168.004083ms)
+✔ deep rule base mismatch is unavailable without silently dispatching the baseline (16.680625ms)
+✔ a deep profile changed after acceptance is rejected before handing off the source (16.20375ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1294.475709

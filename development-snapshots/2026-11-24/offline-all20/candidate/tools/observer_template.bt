@@ -1,0 +1,283 @@
+// dynstruct-v1 out-of-process observer template (admission revision).
+// Revision scope: the int-zero branch only.  v1 bytes are preserved in
+// tools/v1/observer_template.bt and the diff is checks/diffs/
+// observer_template.bt.diff; every other line is byte-identical to v1.
+// Rendered by tools/experiment_runner.py into runs/<attempt>/observer.bt.
+// The rendered bytes are hashed before start and verified by the collector.
+// Offsets come only from the pinned-image layout receipt; no offset is guessed.
+//
+// run=__RUN_ID__ tag=__TAG__ layout=__LAYOUT_SHA__ profile=__PROFILE_SHA__
+//
+// Output grammar (one event group per dynamic frame entry):
+//   EVENT <dyn_first> <dyn_flags> <dyn_units> <caller_first> <caller_flags> <caller_units> <caller_off>
+//   DCODE <i> <bytehex>
+//   DNAME <i> <len> / DNAMEW <i> <j> <bytehex>
+//   DCONST <i> n|i|?
+//   DCONST <i> i <negative> <digit>
+//   DCONST <i> s <len> / DCONSTW <i> <j> <bytehex>
+//   QUAL <len> / QUALW <j> <bytehex>
+//   KNAME <i> <len> / KNAMEW <i> <j> <bytehex>
+//   KCONST <i> n|i|? / KCONST <i> i <negative> <digit>
+//   KCONST <i> s <len> / KCONSTW <i> <j> <bytehex>
+//   UNSUPPORTED <reason>
+//
+// Hard filters: entered frame filename == "<string>"; caller filename == the
+// staged entry path; caller instruction offset == the binding CALL offset.
+// All other callers at other offsets are ignored.  Target stdout is never read.
+
+BEGIN { printf("BEGIN run=%s tag=%s\n", "__RUN_ID__", "__TAG__"); }
+
+uprobe:/proc/__TARGET_PID__/root/usr/lib/libpython3.12.so.1.0:_PyEval_EvalFrameDefault
+{
+  if (pid != __TARGET_PID__) { return; }
+  if (uid != __TARGET_UID__) { return; }
+  $frame = arg1;
+  if ($frame == 0) { return; }
+  $dcode = *(uint64*)$frame;
+  if ($dcode == 0) { return; }
+
+  $dfn = *(uint64*)($dcode + __CODE_FILENAME__);
+  if ($dfn == 0) { return; }
+  $dfstate = *(uint32*)($dfn + __STR_STATE__);
+  if ((($dfstate >> 2) & 7) != 1) { return; }
+  if ((($dfstate >> 5) & 1) != 1) { return; }
+  if ((($dfstate >> 6) & 1) != 1) { return; }
+  if (str($dfn + __STR_DATA__, 16) != "<string>") { return; }
+
+  $tstate = arg0;
+  $cframe = *(uint64*)($tstate + __TSTATE_CFRAME__);
+  if ($cframe == 0) { return; }
+  $cur = *(uint64*)$cframe;
+  if ($cur == 0) { return; }
+  $ccode = *(uint64*)$cur;
+  if ($ccode == 0) { return; }
+
+  $cfn = *(uint64*)($ccode + __CODE_FILENAME__);
+  if ($cfn == 0) { return; }
+  $cfstate = *(uint32*)($cfn + __STR_STATE__);
+  if ((($cfstate >> 2) & 7) != 1) { return; }
+  if ((($cfstate >> 5) & 1) != 1) { return; }
+  if ((($cfstate >> 6) & 1) != 1) { return; }
+  if (str($cfn + __STR_DATA__, __PATH_MAX__) != "__CALLER_PATH__") { return; }
+
+  $prev = *(uint64*)($cur + __FRAME_PREV_INSTR__);
+  $off = $prev - ($ccode + __CODE_ADAPTIVE__);
+  if ($off != __CALL_OFFSET__) { return; }
+
+  $du = *(int64*)($dcode + __CODE_SIZE__);
+  $cu = *(int64*)($ccode + __CODE_SIZE__);
+  if ($du < 1 || $du > __MAX_DYN_UNITS__) { printf("UNSUPPORTED dyn-units\n"); return; }
+  if ($cu < 1 || $cu > __MAX_CALLER_UNITS__) { printf("UNSUPPORTED caller-units\n"); return; }
+
+  $dfirst = *(int32*)($dcode + __CODE_FIRSTLINENO__);
+  $dflags = *(int32*)($dcode + __CODE_FLAGS__);
+  $cf = *(int32*)($ccode + __CODE_FIRSTLINENO__);
+  $cfl = *(int32*)($ccode + __CODE_FLAGS__);
+  // Plain integer map counter (not the count aggregation type): the
+  // comparisons below and the END printf therefore operate on int64.  The
+  // observer is a single-thread fixed-selfcheck source, so this is not a
+  // multi-thread atomic resource budget claim.
+  @events = @events + 1;
+  if (@events > __MAX_EVENTS__) { return; }
+  printf("EVENT %d %d %d %d %d %d %d\n", $dfirst, $dflags, $du, $cf, $cfl, $cu, $off);
+
+  $i = 0;
+  unroll(__MAX_DYN_BYTES__) {
+    if ($i < $du * 2) {
+      printf("DCODE %d %x\n", $i, *(uint8*)($dcode + __CODE_ADAPTIVE__ + $i));
+    }
+    $i++;
+  }
+
+  $consts = *(uint64*)($dcode + __CODE_CONSTS__);
+  if ($consts == 0) { printf("UNSUPPORTED dyn-consts-missing\n"); return; }
+  $cn = *(uint64*)($consts + __TUPLE_SIZE__);
+  if ($cn > __MAX_CONSTS__) { printf("UNSUPPORTED dyn-consts-count\n"); return; }
+  $i = 0;
+  unroll(__MAX_CONSTS__) {
+    if ($i < $cn) {
+      $cp = *(uint64*)($consts + __TUPLE_ITEMS__ + $i * 8);
+      if ($cp == 0) { printf("DCONST %d ?\n", $i); }
+      else {
+        $ct = *(uint64*)($cp + 8);
+        if ($ct == 0) { printf("DCONST %d ?\n", $i); }
+        else {
+          $ctnptr = *(uint64*)($ct + __TYPE_NAME__);
+          if ($ctnptr == 0) { printf("DCONST %d ?\n", $i); }
+          else {
+            $ctn = str($ctnptr, 16);
+            if ($ctn == "NoneType") { printf("DCONST %d n\n", $i); }
+            else if ($ctn == "int") {
+              $tag = *(uint64*)($cp + __INT_TAG__);
+              // lv_tag == 1 is the compact integer 0 (digits == 0), never
+              // None, which the type name above already recognises.  v1
+              // emitted the None token here and lost the integer zero.
+              if ($tag == 1) { printf("DCONST %d i 0 0\n", $i); }
+              else {
+                $nd = $tag >> 3;
+                $neg = $tag & 2;
+                if ($nd != 1) { printf("UNSUPPORTED dyn-int-digits\n"); }
+                else {
+                  $d0 = *(uint32*)($cp + __INT_DIGIT__);
+                  if ($d0 >= 1073741824) { printf("UNSUPPORTED dyn-int-range\n"); }
+                  else { printf("DCONST %d i %d %d\n", $i, $neg, $d0); }
+                }
+              }
+            }
+            else if ($ctn == "str") {
+              $slen = *(uint64*)($cp + __STR_LENGTH__);
+              $sstate = *(uint32*)($cp + __STR_STATE__);
+              if ($slen > __MAX_STR__ || ((($sstate >> 2) & 7) != 1) || ((($sstate >> 5) & 1) != 1) || ((($sstate >> 6) & 1) != 1)) {
+                printf("UNSUPPORTED dyn-str\n");
+              } else {
+                printf("DCONST %d s %d\n", $i, $slen);
+                $j = 0;
+                unroll(__MAX_STR__) {
+                  if ($j < $slen) { printf("DCONSTW %d %d %x\n", $i, $j, *(uint8*)($cp + __STR_DATA__ + $j)); }
+                  $j++;
+                }
+              }
+            }
+            else { printf("DCONST %d ?\n", $i); }
+          }
+        }
+      }
+    }
+    $i++;
+  }
+
+  $dnames = *(uint64*)($dcode + __CODE_NAMES__);
+  if ($dnames == 0) { printf("UNSUPPORTED dyn-names-missing\n"); return; }
+  $nn = *(uint64*)($dnames + __TUPLE_SIZE__);
+  if ($nn > __MAX_NAMES__) { printf("UNSUPPORTED dyn-names-count\n"); return; }
+  $i = 0;
+  unroll(__MAX_NAMES__) {
+    if ($i < $nn) {
+      $np = *(uint64*)($dnames + __TUPLE_ITEMS__ + $i * 8);
+      if ($np == 0) { printf("UNSUPPORTED dyn-name-missing\n"); }
+      else {
+        $nlen = *(uint64*)($np + __STR_LENGTH__);
+        $nstate = *(uint32*)($np + __STR_STATE__);
+        if ($nlen > __MAX_STR__ || ((($nstate >> 2) & 7) != 1) || ((($nstate >> 5) & 1) != 1) || ((($nstate >> 6) & 1) != 1)) {
+          printf("UNSUPPORTED dyn-name\n");
+        } else {
+          printf("DNAME %d %d\n", $i, $nlen);
+          $j = 0;
+          unroll(__MAX_STR__) {
+            if ($j < $nlen) { printf("DNAMEW %d %d %x\n", $i, $j, *(uint8*)($np + __STR_DATA__ + $j)); }
+            $j++;
+          }
+        }
+      }
+    }
+    $i++;
+  }
+
+  $q = *(uint64*)($ccode + __CODE_QUALNAME__);
+  if ($q == 0) { printf("UNSUPPORTED caller-qualname-missing\n"); return; }
+  $qlen = *(uint64*)($q + __STR_LENGTH__);
+  $qstate = *(uint32*)($q + __STR_STATE__);
+  if ($qlen > __MAX_STR__ || ((($qstate >> 2) & 7) != 1) || ((($qstate >> 5) & 1) != 1) || ((($qstate >> 6) & 1) != 1)) {
+    printf("UNSUPPORTED caller-qualname\n");
+  } else {
+    printf("QUAL %d\n", $qlen);
+    $j = 0;
+    unroll(__MAX_STR__) {
+      if ($j < $qlen) { printf("QUALW %d %x\n", $j, *(uint8*)($q + __STR_DATA__ + $j)); }
+      $j++;
+    }
+  }
+
+  $cconsts = *(uint64*)($ccode + __CODE_CONSTS__);
+  if ($cconsts == 0) { printf("UNSUPPORTED caller-consts-missing\n"); return; }
+  $kcn = *(uint64*)($cconsts + __TUPLE_SIZE__);
+  if ($kcn > __MAX_CONSTS__) { printf("UNSUPPORTED caller-consts-count\n"); return; }
+  $i = 0;
+  unroll(__MAX_CONSTS__) {
+    if ($i < $kcn) {
+      $kp = *(uint64*)($cconsts + __TUPLE_ITEMS__ + $i * 8);
+      if ($kp == 0) { printf("KCONST %d ?\n", $i); }
+      else {
+        $kt = *(uint64*)($kp + 8);
+        if ($kt == 0) { printf("KCONST %d ?\n", $i); }
+        else {
+          $ktnptr = *(uint64*)($kt + __TYPE_NAME__);
+          if ($ktnptr == 0) { printf("KCONST %d ?\n", $i); }
+          else {
+            $ktn = str($ktnptr, 16);
+            if ($ktn == "NoneType") { printf("KCONST %d n\n", $i); }
+            else if ($ktn == "int") {
+              $ktag = *(uint64*)($kp + __INT_TAG__);
+              // Compact integer 0 (see the DCONST branch above).
+              if ($ktag == 1) { printf("KCONST %d i 0 0\n", $i); }
+              else {
+                $knd = $ktag >> 3;
+                $kneg = $ktag & 2;
+                if ($knd != 1) { printf("UNSUPPORTED caller-int-digits\n"); }
+                else {
+                  $kd0 = *(uint32*)($kp + __INT_DIGIT__);
+                  if ($kd0 >= 1073741824) { printf("UNSUPPORTED caller-int-range\n"); }
+                  else { printf("KCONST %d i %d %d\n", $i, $kneg, $kd0); }
+                }
+              }
+            }
+            else if ($ktn == "str") {
+              $klen = *(uint64*)($kp + __STR_LENGTH__);
+              $kstate = *(uint32*)($kp + __STR_STATE__);
+              if ($klen > __MAX_STR__ || ((($kstate >> 2) & 7) != 1) || ((($kstate >> 5) & 1) != 1) || ((($kstate >> 6) & 1) != 1)) {
+                printf("UNSUPPORTED caller-str\n");
+              } else {
+                printf("KCONST %d s %d\n", $i, $klen);
+                $j = 0;
+                unroll(__MAX_STR__) {
+                  if ($j < $klen) { printf("KCONSTW %d %d %x\n", $i, $j, *(uint8*)($kp + __STR_DATA__ + $j)); }
+                  $j++;
+                }
+              }
+            }
+            else { printf("KCONST %d ?\n", $i); }
+          }
+        }
+      }
+    }
+    $i++;
+  }
+
+  $knames = *(uint64*)($ccode + __CODE_NAMES__);
+  if ($knames == 0) { printf("UNSUPPORTED caller-names-missing\n"); return; }
+  $knn = *(uint64*)($knames + __TUPLE_SIZE__);
+  if ($knn > __MAX_NAMES__) { printf("UNSUPPORTED caller-names-count\n"); return; }
+  $i = 0;
+  unroll(__MAX_NAMES__) {
+    if ($i < $knn) {
+      $knp = *(uint64*)($knames + __TUPLE_ITEMS__ + $i * 8);
+      if ($knp == 0) { printf("UNSUPPORTED caller-name-missing\n"); }
+      else {
+        $knlen = *(uint64*)($knp + __STR_LENGTH__);
+        $knstate = *(uint32*)($knp + __STR_STATE__);
+        if ($knlen > __MAX_STR__ || ((($knstate >> 2) & 7) != 1) || ((($knstate >> 5) & 1) != 1) || ((($knstate >> 6) & 1) != 1)) {
+          printf("UNSUPPORTED caller-name\n");
+        } else {
+          printf("KNAME %d %d\n", $i, $knlen);
+          $j = 0;
+          unroll(__MAX_STR__) {
+            if ($j < $knlen) { printf("KNAMEW %d %d %x\n", $i, $j, *(uint8*)($knp + __STR_DATA__ + $j)); }
+            $j++;
+          }
+        }
+      }
+    }
+    $i++;
+  }
+}
+
+// Normal stop: the runner sends SIGINT after the target client exits.  bpftrace
+// runs END for SIGINT/TERM, but not for SIGKILL.  The integer scalar count is
+// copied to a scratch variable and the map is cleared *before* the END record
+// is printed, so the default post-END map dump cannot add a trailing, untrusted
+// record.
+END {
+  $events = @events;
+  clear(@events);
+  printf("END run=%s tag=%s events=%d\n", "__RUN_ID__", "__TAG__", $events);
+}

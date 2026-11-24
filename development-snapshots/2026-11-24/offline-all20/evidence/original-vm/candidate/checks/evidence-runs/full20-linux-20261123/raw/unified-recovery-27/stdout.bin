@@ -1,0 +1,29 @@
+PASS B8-directory-permission-parent-incomplete3
+PASS B8-directory-io-child-held-incomplete3
+PASS B8-directory-partial-iteration-incomplete3
+PASS B8-empty-directory-success-with-proof
+PASS B8-absent-directory-success-with-proof
+PASS B8-absent-directory-known-ref-incomplete3
+PASS B8-directory-symlink-blocked78
+PASS B8-directory-not-directory-blocked78
+PASS B8-directory-ownership-blocked78
+PASS B8-directory-identity-change-blocked78
+PASS B8-creation-enumeration-blocks-before-resources
+PASS B9-direct-child-invalidates-bound-parent
+{"cleanup": {"checkedAt": "2026-11-24T16:39:08.402720+00:00", "clientState": {"proof": "not-started", "state": "exited"}, "clientStop": {"forced": false, "proof": "not-started", "state": "exited", "stopped": true}, "confirmed": true, "container": {"queries": {"name": {"state": "absent"}, "tag": {"state": "absent"}}, "removed": true, "state": "never-created"}, "finalStageCheck": "after-resources", "observerState": {"proof": "not-applicable", "state": "exited"}, "observerStop": {"proof": "not-applicable", "state": "exited", "stopped": true}, "resourceCreationPhase": null, "stage": {"lstatAfter": "absent", "removed": true, "state": "removed"}, "state": "confirmed"}, "cleanupConfirmed": true, "operationRole": "compile-0001-b7b7b7b7", "prepareId": "2bbfa900dc60c1eb161448b3305e898c", "replayed": false}
+PASS B9-cleanup-alias-invalidates-bound-parent
+PASS B9-standalone-child-independent
+PASS B9-multiple-known-children-parent-full-recheck
+PASS B9-parent-attempt-unreadable-variants
+PASS B9-parent-link-unconfirmed-incomplete3
+PASS B9-ambiguous-parent-blocked78
+PASS B9-parent-journal-failure-before-child
+PASS B9-child-final-journal-failure-no-success
+PASS B10-target-plan-unavailable-child-held-variants
+PASS B10-unreadable-child-retained-unknown
+PASS B10-ownership-contradiction-blocked78
+PASS D1-recover-attempt-read-variants
+PASS D1-run-prepare-nested-attempt-variants
+PASS D1-query-status-read-only
+PASS D1-actual-lockbusy-and-selector-ambiguity
+{"failed": [], "passed": 27, "total": 27}

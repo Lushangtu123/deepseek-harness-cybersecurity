@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "browser": "Google Chrome native CUA",
+  "state": "passed",
+  "scope": "formal React component with fixture API reading final VM real AST worker and joint records; not live Harness/model acceptance",
+  "taskId": "8d989a18-8a31-4ba2-9974-b7a21cc755f5",
+  "scanId": "4deb5ebe-702d-4bf8-8720-eb7108fab0f3",
+  "observed": {
+    "warnings": 21,
+    "namespaceEligible": 19,
+    "namespaceChecked": 19,
+    "namespaceRetained": 19,
+    "firstPage": [
+      "guard-append-eval.py:6:12",
+      "guard-append-exec.py:6:5",
+      "guard-complete-eval.py:5:12"
+    ],
+    "secondPage": [
+      "guard-complete-exec.py:5:5",
+      "guard-conditional-eval.py:5:12",
+      "guard-conditional-exec.py:5:5"
+    ],
+    "fixedSetRuntimeUnverified": true,
+    "builtinAndExternalControlUnverified": true,
+    "originalWarningsUnverified": true,
+    "paginationReplacesPriorPage": true,
+    "noMismatchErrorObserved": true
+  },
+  "newScans": 0,
+  "newWorkerCalls": 0,
+  "modelCalls": 0,
+  "temporaryTabClosed": true,
+  "previousTabRestored": true,
+  "testServerStopAccepted": true,
+  "browserIssues": [
+    "Mac initially locked, later retry obtained normal AX state",
+    "typeText dropped URL colons and caused NXDOMAIN; corrected with clipboard-restoring app.paste before application loaded"
+  ],
+  "limitation": "did not exercise native Harness service, actual model dialogue or a new scan"
+}

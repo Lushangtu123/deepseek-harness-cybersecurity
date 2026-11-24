@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "reviewTransport": {
+    "initialAutoReviewRejected": true,
+    "reason": "nonpublic candidate source transmission to Claude needed explicit authorization",
+    "userExplicitlyApproved": true,
+    "scope": "this iteration related source/tests/rule summaries via logged-in Claude Code; no credentials/private project data",
+    "subsequentInvocationSucceeded": true
+  },
+  "adjudication": {
+    "initialNullGuardFinding": "retracted by reviewer after full guard supplied",
+    "strictReadiness": "known base plus measured bundle checked before plan, acceptance, child, runner; cache invalidates",
+    "executionReceipt": "staged raw bytes measured; selected rules metadata only confirmed after exact receipt; local trusted runner, no cryptographic remote attestation",
+    "coverageKey": "unchanged function hash and old frozen170 source provenance stored; real plan golden plus changed selected SHA; retest and comparison reject incompatible keys",
+    "N1": "static import present; test runner return sentinel added, Mac/VM27 passed; last model review condition objectively met",
+    "N2": "child rejection now requires a non-null parent snapshot, Mac/VM27 passed",
+    "N3": "semgrepFileCoverage reads languages only, not count or SHA; package language sets equal baseline",
+    "shippedFiles": "offline npm dry-run confirms module and bundle included",
+    "deployment": "candidate not deployed; future release must drain active tasks; restart marks interrupted; no resumption with changed contract"
+  },
+  "postReviewProgramChanges": false,
+  "postReviewChanges": "test assertions only; supplement separately frozen and passed"
+}

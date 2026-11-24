@@ -1,0 +1,143 @@
+{
+  "phase": "research20",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "rulesSha256": "b1be84af0a007baa2f40891adf985cf81c2f84ff16aa70f927731621ff3e7328",
+  "datasetSha256": "f3da1c7a1a437956b90fd71d5447773669adaa91c3e0051a60564d8a56d57826",
+  "caseIds": [
+    "vulnerable",
+    "patched"
+  ],
+  "scannerExitCode": 0,
+  "native": {
+    "result": {
+      "version": "1.182.1",
+      "results": [
+        {
+          "check_id": "policy.harness.python.dynamic-code-namespace",
+          "path": "/src/vulnerable.py",
+          "start": {
+            "line": 111,
+            "col": 27,
+            "offset": 4007
+          },
+          "end": {
+            "line": 111,
+            "col": 84,
+            "offset": 4064
+          },
+          "extra": {
+            "message": "\u52a8\u6001\u6267\u884c\u70b9\u542b globals/locals \u53c2\u6570\uff1a\u9700\u6838\u5bf9\u8f93\u5165\u6765\u6e90\u3001\u540d\u79f0\u7ed1\u5b9a\u53ca\u7ea6\u675f\u662f\u5426\u8986\u76d6\u6267\u884c\u70b9\uff1b\u8fd9\u4e0d\u662f\u5df2\u786e\u8ba4\u6f0f\u6d1e",
+            "metadata": {
+              "category": "security",
+              "cwe": [
+                "CWE-95"
+              ],
+              "confidence": "LOW",
+              "source": "Harness local sink-inventory research candidate",
+              "requires-manual-review": true,
+              "evidence-level": "sink-only",
+              "qualification": "unverified",
+              "no-automatic-suppression": true,
+              "scope": "two or three positional arguments; no callee identity or input-source proof"
+            },
+            "severity": "WARNING",
+            "fingerprint": "requires login",
+            "lines": "requires login",
+            "validation_state": "NO_VALIDATOR",
+            "engine_kind": "OSS"
+          }
+        }
+      ],
+      "errors": [],
+      "paths": {
+        "scanned": [
+          "/src/patched.py",
+          "/src/vulnerable.py"
+        ]
+      },
+      "time": {
+        "rules": [],
+        "rules_parse_time": 0.006680965423583984,
+        "profiling_times": {
+          "config_time": 0.10425400733947754,
+          "core_time": 0.28550219535827637,
+          "ignores_time": 5.650520324707031e-05,
+          "total_time": 0.39756321907043457
+        },
+        "parsing_time": {
+          "total_time": 0.009121894836425781,
+          "per_file_time": {
+            "mean": 0.0018243789672851562,
+            "std_dev": 7.31013997210539e-06
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_files": []
+        },
+        "scanning_time": {
+          "total_time": 0.021296977996826172,
+          "per_file_time": {
+            "mean": 0.010648488998413086,
+            "std_dev": 1.1951328815484885e-09
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_files": []
+        },
+        "matching_time": {
+          "total_time": 0.008274316787719727,
+          "per_file_and_rule_time": {
+            "mean": 0.0016548633575439453,
+            "std_dev": 3.6890943420075928e-06
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_rules_on_files": []
+        },
+        "tainting_time": {
+          "total_time": 0.0015208721160888672,
+          "per_def_and_rule_time": {
+            "mean": 8.94630656522863e-05,
+            "std_dev": 1.435590259817221e-08
+          },
+          "very_slow_stats": {
+            "time_ratio": 0.0,
+            "count_ratio": 0.0
+          },
+          "very_slow_rules_on_defs": []
+        },
+        "fixpoint_timeouts": [],
+        "prefiltering": {
+          "project_level_time": 0.0,
+          "file_level_time": 0.0,
+          "rules_with_project_prefilters_ratio": 0.0,
+          "rules_with_file_prefilters_ratio": 1.0,
+          "rules_selected_ratio": 0.20833333333333334,
+          "rules_matched_ratio": 0.20833333333333334
+        },
+        "targets": [],
+        "total_bytes": 0,
+        "max_memory_bytes": 103551616
+      },
+      "engine_requested": "OSS",
+      "skipped_rules": [],
+      "profiling_results": []
+    },
+    "authentication": null
+  },
+  "stderr": "",
+  "temporaryRemoved": true,
+  "containerAbsent": true,
+  "runtimeRulesUnchanged": true,
+  "scannerManifestUnchanged": true,
+  "dailyProgramFilesMatched": 169,
+  "projectDatabaseLogicalHashesMatched": 42,
+  "startedAt": "2026-11-04T07:43:16.837836+00:00",
+  "finishedAt": "2026-11-04T07:43:18.404614+00:00"
+}

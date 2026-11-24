@@ -1,0 +1,979 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:deepseek-harness:security-workspace:p0:1",
+  "title": "Security workspace P0 draft; examples are synthetic, not runtime facts",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/plan"
+    },
+    {
+      "$ref": "#/$defs/step"
+    },
+    {
+      "$ref": "#/$defs/observation"
+    },
+    {
+      "$ref": "#/$defs/problem"
+    },
+    {
+      "$ref": "#/$defs/evidence"
+    },
+    {
+      "$ref": "#/$defs/coverage"
+    },
+    {
+      "$ref": "#/$defs/verification"
+    },
+    {
+      "$ref": "#/$defs/intelligenceMatch"
+    },
+    {
+      "$ref": "#/$defs/notification"
+    }
+  ],
+  "$defs": {
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "wallSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3600
+        },
+        "memoryBytes": {
+          "type": "integer",
+          "minimum": 16777216
+        },
+        "pids": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 512
+        },
+        "outputBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8388608
+        },
+        "modelRequests": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cpuMillis": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "tmpBytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "outputTokensPerCall": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "parallelism": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        }
+      },
+      "required": [
+        "wallSeconds",
+        "memoryBytes",
+        "pids",
+        "outputBytes",
+        "modelRequests",
+        "cpuMillis",
+        "tmpBytes",
+        "outputTokensPerCall"
+      ]
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "execution": {
+          "enum": [
+            "pending",
+            "running",
+            "ended",
+            "partial",
+            "failed",
+            "cancelled",
+            "interrupted",
+            "stop-unconfirmed"
+          ]
+        },
+        "ingestion": {
+          "enum": [
+            "recorded",
+            "partial",
+            "unknown"
+          ]
+        },
+        "coverage": {
+          "enum": [
+            "checked",
+            "incomplete",
+            "unknown",
+            "not-applicable"
+          ]
+        },
+        "cleanup": {
+          "enum": [
+            "pending",
+            "confirmed",
+            "unconfirmed",
+            "not-applicable"
+          ]
+        }
+      },
+      "required": [
+        "execution",
+        "ingestion",
+        "coverage",
+        "cleanup"
+      ]
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "step"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "tool": {
+          "enum": [
+            "semgrep",
+            "trivy",
+            "bandit",
+            "clamav",
+            "yara",
+            "zap",
+            "kali",
+            "rea",
+            "pentagi"
+          ]
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "inputIdentity": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "permission": {
+          "enum": [
+            "L0",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        "sandboxProfile": {
+          "enum": [
+            "S1",
+            "S2",
+            "S3",
+            "legacy-L1"
+          ]
+        },
+        "expectedEvidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "maxItems": 20
+        },
+        "budget": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/budget"
+            },
+            {
+              "not": {
+                "required": [
+                  "parallelism"
+                ]
+              }
+            }
+          ]
+        },
+        "resultDestination": {
+          "const": "workspace-observations"
+        },
+        "dimensions": {
+          "$ref": "#/$defs/dimensions"
+        },
+        "toolIdentity": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "imageId": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            },
+            "policyIdentity": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "required": [
+            "imageId",
+            "policyIdentity"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "tool",
+        "purpose",
+        "inputIdentity",
+        "reason",
+        "permission",
+        "sandboxProfile",
+        "expectedEvidence",
+        "budget",
+        "resultDestination",
+        "dimensions",
+        "toolIdentity"
+      ]
+    },
+    "plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "plan"
+        },
+        "contractVersion": {
+          "const": 1
+        },
+        "mode": {
+          "enum": [
+            "ordinary",
+            "deep"
+          ]
+        },
+        "scopeRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "inputIdentity": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "planIdentity": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "stepIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "maxItems": 20
+        },
+        "budget": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/budget"
+            },
+            {
+              "required": [
+                "parallelism"
+              ]
+            }
+          ]
+        },
+        "previewOnly": {
+          "const": true
+        },
+        "executable": {
+          "const": false
+        }
+      },
+      "required": [
+        "kind",
+        "contractVersion",
+        "mode",
+        "scopeRevision",
+        "inputIdentity",
+        "planIdentity",
+        "stepIds",
+        "budget",
+        "previewOnly",
+        "executable"
+      ]
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "observation"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "stepId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "category": {
+          "enum": [
+            "dependency",
+            "code",
+            "configuration",
+            "credential",
+            "malware"
+          ]
+        },
+        "ruleId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "originalSeverity": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "severity": {
+          "enum": [
+            "critical",
+            "high",
+            "medium",
+            "low",
+            "info",
+            "unknown"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "not-provided"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 800
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "maxItems": 20
+        },
+        "truncated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "stepId",
+        "category",
+        "ruleId",
+        "originalSeverity",
+        "severity",
+        "confidence",
+        "location",
+        "evidenceRefs",
+        "truncated"
+      ]
+    },
+    "problem": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "problem"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "fingerprint": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "fingerprintVersion": {
+          "const": 1
+        },
+        "observationIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "maxItems": 100
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "detection": {
+          "enum": [
+            "present",
+            "not-detected",
+            "uncovered"
+          ]
+        },
+        "disposition": {
+          "enum": [
+            "unhandled",
+            "confirmed",
+            "false-positive",
+            "not-affected",
+            "accepted-risk"
+          ]
+        },
+        "remediation": {
+          "enum": [
+            "unfixed",
+            "registered-fixed",
+            "retest-passed",
+            "retest-failed"
+          ]
+        },
+        "assessmentState": {
+          "enum": [
+            "sufficient",
+            "pending",
+            "not-applicable"
+          ]
+        },
+        "missingInputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "maxItems": 20
+        },
+        "provisional": {
+          "type": "boolean"
+        },
+        "recurrence": {
+          "type": "boolean"
+        },
+        "detectionReason": {
+          "enum": [
+            null,
+            "advisory-withdrawn"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "fingerprint",
+        "fingerprintVersion",
+        "observationIds",
+        "revision",
+        "detection",
+        "disposition",
+        "remediation",
+        "assessmentState",
+        "missingInputs",
+        "provisional",
+        "recurrence",
+        "detectionReason"
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "evidence"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "stepId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "mediaType": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "redacted": {
+          "type": "boolean"
+        },
+        "retentionUntil": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "kind",
+        "sha256",
+        "stepId",
+        "mediaType",
+        "bytes",
+        "redacted",
+        "retentionUntil"
+      ]
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "coverage"
+        },
+        "stepId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "scopeIdentity": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "subjectType": {
+          "enum": [
+            "file",
+            "component",
+            "http"
+          ]
+        },
+        "state": {
+          "enum": [
+            "checked",
+            "incomplete",
+            "unknown",
+            "not-applicable"
+          ]
+        },
+        "checked": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "total": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "reasonCodes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "maxItems": 30
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "maxItems": 30
+        }
+      },
+      "required": [
+        "kind",
+        "stepId",
+        "scopeIdentity",
+        "subjectType",
+        "state",
+        "checked",
+        "total",
+        "reasonCodes",
+        "evidenceRefs"
+      ]
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "verification"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "problemId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "validatorId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "validatorVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "inputIdentity": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "observation": {
+          "enum": [
+            "reproduced",
+            "conditions-matched",
+            "not-reproduced",
+            "manual-required",
+            "execution-failed",
+            "indeterminate"
+          ]
+        },
+        "controlEvidenceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "maxItems": 20
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "problemId",
+        "validatorId",
+        "validatorVersion",
+        "inputIdentity",
+        "observation",
+        "controlEvidenceRefs",
+        "evidenceRefs"
+      ]
+    },
+    "intelligenceMatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "intelligenceMatch"
+        },
+        "sbomIdentity": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "componentId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "componentVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "advisoryId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "sourceId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "sourceRevision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "matchState": {
+          "enum": [
+            "matched",
+            "not-matched",
+            "unknown",
+            "withdrawn"
+          ]
+        },
+        "fixState": {
+          "enum": [
+            "available",
+            "not-available",
+            "unknown"
+          ]
+        },
+        "fixedVersion": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 160
+        }
+      },
+      "required": [
+        "kind",
+        "sbomIdentity",
+        "componentId",
+        "componentVersion",
+        "advisoryId",
+        "sourceId",
+        "sourceRevision",
+        "matchState",
+        "fixState",
+        "fixedVersion"
+      ]
+    },
+    "notification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "notification"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "dedupeKey": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "subjectId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "changeType": {
+          "enum": [
+            "new-match",
+            "priority-increased",
+            "patch-available",
+            "disposition-invalidated",
+            "source-stale"
+          ]
+        },
+        "deliveryState": {
+          "enum": [
+            "pending",
+            "delivered",
+            "failed"
+          ]
+        },
+        "sourceRevision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "dedupeKey",
+        "subjectId",
+        "changeType",
+        "deliveryState",
+        "sourceRevision"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "kind": "plan",
+      "contractVersion": 1,
+      "mode": "ordinary",
+      "scopeRevision": 1,
+      "inputIdentity": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "planIdentity": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "stepIds": [
+        "sample-step"
+      ],
+      "budget": {
+        "wallSeconds": 60,
+        "memoryBytes": 536870912,
+        "pids": 64,
+        "outputBytes": 8388608,
+        "modelRequests": 0,
+        "cpuMillis": 1000,
+        "tmpBytes": 67108864,
+        "outputTokensPerCall": 0,
+        "parallelism": 1
+      },
+      "previewOnly": true,
+      "executable": false
+    },
+    {
+      "kind": "step",
+      "id": "sample-step",
+      "tool": "semgrep",
+      "purpose": "合成静态检查",
+      "inputIdentity": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "reason": "存在 Python 源码",
+      "permission": "L0",
+      "sandboxProfile": "S1",
+      "expectedEvidence": [
+        "native-results"
+      ],
+      "budget": {
+        "wallSeconds": 60,
+        "memoryBytes": 536870912,
+        "pids": 64,
+        "outputBytes": 8388608,
+        "modelRequests": 0,
+        "cpuMillis": 1000,
+        "tmpBytes": 67108864,
+        "outputTokensPerCall": 0
+      },
+      "resultDestination": "workspace-observations",
+      "dimensions": {
+        "execution": "pending",
+        "ingestion": "unknown",
+        "coverage": "unknown",
+        "cleanup": "pending"
+      },
+      "toolIdentity": {
+        "imageId": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "policyIdentity": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "kind": "observation",
+      "id": "sample-observation",
+      "stepId": "sample-step",
+      "category": "code",
+      "ruleId": "synthetic-eval",
+      "originalSeverity": "WARNING",
+      "severity": "medium",
+      "confidence": "not-provided",
+      "location": "src/app.py:1",
+      "evidenceRefs": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ],
+      "truncated": false
+    },
+    {
+      "kind": "problem",
+      "id": "sample-problem",
+      "fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "fingerprintVersion": 1,
+      "observationIds": [
+        "sample-observation"
+      ],
+      "revision": 1,
+      "detection": "present",
+      "disposition": "unhandled",
+      "remediation": "unfixed",
+      "assessmentState": "pending",
+      "missingInputs": [
+        "reachability"
+      ],
+      "provisional": true,
+      "recurrence": false,
+      "detectionReason": null
+    },
+    {
+      "kind": "evidence",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "stepId": "sample-step",
+      "mediaType": "application/json",
+      "bytes": 100,
+      "redacted": true,
+      "retentionUntil": "2026-12-01T00:00:00Z"
+    },
+    {
+      "kind": "coverage",
+      "stepId": "sample-step",
+      "scopeIdentity": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "subjectType": "file",
+      "state": "incomplete",
+      "checked": 1,
+      "total": 2,
+      "reasonCodes": [
+        "partial-parsing"
+      ],
+      "evidenceRefs": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ]
+    },
+    {
+      "kind": "verification",
+      "id": "sample-verification",
+      "problemId": "sample-problem",
+      "validatorId": "synthetic",
+      "validatorVersion": "1",
+      "inputIdentity": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "observation": "manual-required",
+      "controlEvidenceRefs": [],
+      "evidenceRefs": []
+    },
+    {
+      "kind": "intelligenceMatch",
+      "sbomIdentity": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "componentId": "synthetic-package",
+      "componentVersion": "1.0",
+      "advisoryId": "example-not-a-real-cve",
+      "sourceId": "synthetic",
+      "sourceRevision": "fixture-1",
+      "matchState": "unknown",
+      "fixState": "unknown",
+      "fixedVersion": null
+    },
+    {
+      "kind": "notification",
+      "id": "sample-notification",
+      "dedupeKey": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "subjectId": "sample-problem",
+      "changeType": "new-match",
+      "deliveryState": "pending",
+      "sourceRevision": "fixture-1"
+    }
+  ]
+}

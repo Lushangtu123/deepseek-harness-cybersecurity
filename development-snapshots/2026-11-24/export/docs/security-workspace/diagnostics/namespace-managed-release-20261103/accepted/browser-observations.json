@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "scope": "Native Google Chrome via CUA on deployed daily169; backend report independently read",
+  "session": "session-e9ccbc33-c9a7-4645-a212-80b720569173",
+  "engagement": "vm-namespace-managed-release-20261103",
+  "task": "115eee6b-7718-4f52-9a9d-d887da3476a1",
+  "model": "DeepSeek-V4.1-Flash",
+  "reasoningEffort": "High",
+  "mainChatRequestsObserved": 7,
+  "acceptedToolCallsObserved": 10,
+  "toolActions": [
+    {
+      "name": "redteam_session_bind"
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "plan",
+      "mode": "deep"
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "start",
+      "mode": "deep",
+      "steps": [
+        "semgrep"
+      ],
+      "requestId": "namespace-managed-native-release-20261103-001"
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "wait",
+      "id": "115eee6b-7718-4f52-9a9d-d887da3476a1",
+      "waitSeconds": 30
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "report",
+      "section": "findings",
+      "limit": 5,
+      "cursorUsed": false
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "report",
+      "section": "files",
+      "limit": 5,
+      "cursorUsed": false
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "report",
+      "section": "exclusions",
+      "limit": 5,
+      "cursorUsed": false
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "report",
+      "section": "diagnostics",
+      "limit": 5,
+      "cursorUsed": false
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "report",
+      "section": "artifacts",
+      "limit": 5,
+      "cursorUsed": false
+    },
+    {
+      "name": "redteam_joint_review",
+      "action": "report",
+      "section": "findings",
+      "limit": 5,
+      "cursorUsed": true
+    }
+  ],
+  "modelReadFiveSections": true,
+  "singleStartAndScan": true,
+  "namespaceNotApplicableAllZeroObserved": true,
+  "allFindingsRemainUnverified": true,
+  "sourceRangesMatched": [
+    [
+      2,
+      35,
+      59,
+      2,
+      48,
+      72
+    ],
+    [
+      2,
+      50,
+      74,
+      2,
+      63,
+      87
+    ]
+  ],
+  "mainChatCountKeptUnknownByModel": true,
+  "subtaskModelCalls": 0,
+  "formalSidebarAndFullViewPassed": true,
+  "sourcePositionPages": [
+    4,
+    3
+  ],
+  "copyOnlyByteColumnsAndRedactionDisclaimer": true,
+  "downloadObservedDone": true,
+  "fullViewSameTaskRecovered": true,
+  "oldTaskId": "bd86f6bf-d1b3-474c-b3df-f55172f4e956",
+  "oldTaskRawFindingsObserved": 56,
+  "oldTaskRemainsPartial": true,
+  "oldTaskPrecisionAndNamespaceStateNotInvented": true,
+  "originalBrowseProjectRestored": "phishguard-model-closure-20261102",
+  "ownedChromeTabsClosed": 2,
+  "previousUserNewTabRestored": true,
+  "observedUIQuirks": [
+    "selecting/adding workspace reset new-task preset; explicitly reselected joint preset before send",
+    "initial Mac lock required user unlock",
+    "full view opened a second tab; global browse restored in both tabs before closing"
+  ],
+  "modelSummaryInaccuracies": [
+    "The prose described offset73 as a single-byte gap; end offsets are exclusive, so bytes72 and73 separate59..72 and74..87. Exact coordinates were correct.",
+    "The broad phrase about16 policy.harness.python rules is imprecise: installed set also includes JS/TS; actual not-applicable state and counts came from task receipt."
+  ],
+  "limitation": "positive namespace19 observations were proven by previous candidate default-worker replay with research rule receipts; this daily native scan proves not-applicable/zero extra reviewer, not research-rule qualification"
+}

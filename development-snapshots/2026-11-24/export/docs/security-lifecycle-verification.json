@@ -1,0 +1,447 @@
+{
+  "recoveryPoint": "ready-security-lifecycle-20261030",
+  "date": "2026-10-30",
+  "sigkillAcceptance": {
+    "engagement": "personal-security-crash-20261030",
+    "runId": "6ba7f0bb-fd55-497e-86ae-45078b0f47aa",
+    "oldOwnerPid": 2526,
+    "newOwnerPid": 243709,
+    "faultSignal": "SIGKILL",
+    "journalKilledEvidence": [
+      "harness-security.service: Main process exited, code=killed, status=9/KILL"
+    ],
+    "liveOrphanObservedAfterKill": true,
+    "ownerAutoRestartedOnce": true,
+    "orphanRemovedByNewOwner": true,
+    "reconciledRunState": "interrupted",
+    "sameRequestDidNotRescan": true,
+    "runStates": {
+      "interrupted": 1
+    },
+    "unverifiedFindings": 0,
+    "scannerContainersRunning": 0,
+    "noModelApiCall": true,
+    "syntheticFiles": 1500
+  },
+  "restoredCopyBoot": {
+    "recoveryPoint": "ready-security-lifecycle-20261030",
+    "restoredDiskActuallyBooted": true,
+    "independentInodeAndNoQcowBacking": true,
+    "existingVirtualHardwareReused": true,
+    "guest": {
+      "proofHashesMatched": 2609,
+      "programHashesMatched": 126,
+      "savedFindingCounts": {
+        "personal-security-real-20261029": 95,
+        "personal-security-page-qa-20261029": 95,
+        "personal-security-followups-20261029": 8
+      },
+      "snapshotCrashStateCorrect": true,
+      "snapshotHasCrashFixture": true,
+      "ownerStateBeforeNativeStatus": "inactive",
+      "nativeStatus": {
+        "ok": true,
+        "findings": 95
+      },
+      "threeServicesActive": true,
+      "privateSocket0600": true,
+      "scannerContainersRunning": 0,
+      "noRunningAuditRows": true,
+      "runtimePreflight": {
+        "ok": true,
+        "readOnly": true,
+        "automaticChanges": false,
+        "scope": "local pinned images, rules and database identity; no scanner execution, model call, network download or GitHub latest check",
+        "tools": {
+          "semgrep": {
+            "ready": true,
+            "version": "1.182.1",
+            "reason": null,
+            "warning": null,
+            "checkedAt": "2026-10-30T15:58:17.077Z",
+            "cached": false,
+            "rules": {
+              "version": "local-reviewed-2",
+              "count": 16,
+              "languages": [
+                "javascript",
+                "python",
+                "typescript"
+              ]
+            }
+          },
+          "trivy": {
+            "ready": true,
+            "version": "0.76.1",
+            "reason": null,
+            "warning": null,
+            "checkedAt": "2026-10-30T15:58:17.077Z",
+            "cached": false,
+            "database": {
+              "state": "fresh",
+              "updatedAt": "2026-10-29T19:18:50.969Z",
+              "nextUpdate": "2026-10-30T19:18:50.969Z",
+              "ageDays": 0
+            },
+            "lastUpdate": {
+              "state": "current",
+              "checkedAt": "2026-10-29T22:59:00.361501+00:00"
+            }
+          },
+          "zap": {
+            "ready": true,
+            "version": "2.17.0",
+            "reason": null,
+            "warning": null,
+            "checkedAt": "2026-10-30T15:58:17.077Z",
+            "cached": false
+          }
+        }
+      }
+    },
+    "originalInodeReturned": true,
+    "originalUnchangedWhileCopyBooted": true,
+    "originalNowStarted": true,
+    "newCrashFixturePreservedOnOriginal": true,
+    "utmListUnchanged": true,
+    "newVmRegistered": false,
+    "isolationValidated": true,
+    "temporaryBootedDiskRetainedPrivately": "/Users/LOCAL_USER/Library/Application Support/Harness Purge Original/archived-validation/boot-probe-security-background-20261030-retry2/booted-copy.qcow2",
+    "phase": "original-running"
+  },
+  "host": {
+    "currentRecovery": "ready-security-lifecycle-20261030",
+    "recovery": {
+      "state": "matches",
+      "name": "ready-security-lifecycle-20261030",
+      "createdAt": "2026-10-30T15:57:16Z",
+      "scope": "improved-program-tools-config",
+      "helpersMatch": true,
+      "launchAgentsMatch": true,
+      "uncoveredFiles": [],
+      "groups": {
+        "program": {
+          "state": "matches",
+          "filesChecked": 126,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "runtime": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "tools": {
+          "state": "matches",
+          "filesChecked": 13,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "config": {
+          "state": "matches",
+          "filesChecked": 11,
+          "uncoveredFiles": [],
+          "differentFiles": []
+        },
+        "plugins": {
+          "state": "matches",
+          "filesChecked": 1320,
+          "uncoveredFiles": [],
+          "differentFiles": [],
+          "differentFileCount": 0,
+          "differenceDetailsTruncated": false
+        }
+      }
+    },
+    "managedHostHelpersMatched": 5,
+    "primaryOriginalInode": 60879843,
+    "originalRunning": true,
+    "registeredVmCount": 4,
+    "managedVmCount": 1,
+    "otherVmsStoppedAndUntouched": [
+      [
+        "C747665A-C888-4FA0-AFFE-534CB180A480",
+        "stopped"
+      ],
+      [
+        "41D71C07-8910-45A8-841E-9CFF888690A4",
+        "stopped"
+      ],
+      [
+        "CEDE3799-0A03-4A86-97FB-23E6B4798E2F",
+        "stopped"
+      ]
+    ],
+    "ownedTemporaryCopiesRemoved": [
+      "boot-probe-security-background-20261030",
+      "boot-probe-security-background-20261030-retry1",
+      "boot-probe-security-background-20261030-retry2"
+    ],
+    "originalDiskDeleted": false,
+    "newVmRegistered": false,
+    "permissionsExpanded": false
+  },
+  "physicalSleep": {
+    "hostEpoch": 1793376487.045919,
+    "hostLocalTime": "2026-10-30T09:08:07.045921-07:00",
+    "hostMonotonic": 51011.173634541,
+    "guest": {
+      "bootId": "d1d8bd73-b7f2-49c3-8ad0-31e305ff51c3",
+      "guestEpoch": 1793376486.7757993,
+      "uptime": "389.67",
+      "ownerPid": 2170,
+      "services": {
+        "dsh-original": "active",
+        "harness-security.service": "active",
+        "harness-security.socket": "active"
+      },
+      "scannerContainersRunning": 0,
+      "noRunningAuditRows": true
+    },
+    "clockOffsetSeconds": 0.10105299949645996,
+    "authenticatedAssetsAndBootstrapReady": true,
+    "webEntryPid": 27678,
+    "samples": [
+      {
+        "offsetSeconds": 0.10105299949645996,
+        "ready": true,
+        "observedAt": "2026-10-30T09:08:07.045921-07:00"
+      }
+    ],
+    "nativePowerEvents": [
+      {
+        "epoch": 1793376167.0,
+        "kind": "Sleep",
+        "text": "2026-10-30 09:02:47 -0700 Sleep               \tEntering Sleep state due to 'Clamshell Sleep':TCPKeepAlive=active Using AC (Charge:100%) 3 secs    "
+      },
+      {
+        "epoch": 1793376170.0,
+        "kind": "DarkWake",
+        "text": "2026-10-30 09:02:50 -0700 DarkWake            \tDarkWake from Deep Idle [CDNP] : due to smc.sysState.Wake(0x70070000) wifibt SMC.OutboxNotEmpty/ Using AC (Charge:100%) 10 secs   "
+      },
+      {
+        "epoch": 1793376180.0,
+        "kind": "Sleep",
+        "text": "2026-10-30 09:03:00 -0700 Sleep               \tEntering Sleep state due to 'Maintenance Sleep':TCPKeepAlive=active Using AC (Charge:100%) 169 secs  "
+      },
+      {
+        "epoch": 1793376349.0,
+        "kind": "Wake",
+        "text": "2026-10-30 09:05:49 -0700 Wake                \tWake from Deep Idle [CDNVA] : due to smc.sysState.Wake(0x70070000) lid SMC.OutboxNotEmpty RTP.multi-touch/UserActivity Assertion Using AC (Charge:100%)           "
+      }
+    ],
+    "physicalSleepAndWakeObserved": true,
+    "sameGuestBoot": true,
+    "sameAuditOwnerPid": true,
+    "sameWebEntryPid": true,
+    "manualServiceRestartOrClockSyncUsed": false,
+    "sleepToNormalWakeSeconds": 182.0,
+    "clockMonitorEvents": [
+      "VM clock maintenance: {\"state\":\"adjusted\",\"adjusted\":true,\"offsetSeconds\":-0.007198}"
+    ]
+  },
+  "realProject": {
+    "trackedRealProjectHashesMatched": 459,
+    "realProjectGitHeadUnchanged": true,
+    "realProjectSixAuditTablesUnchanged": true,
+    "realProjectFindings": 95,
+    "realProjectAllUnverified": true
+  },
+  "controllerTests": 142,
+  "controllerTestFiles": 18,
+  "historicalSuitesNotRerun": {
+    "plugin": 417,
+    "hostEntry": 124
+  },
+  "browserAcceptance": {
+    "nativeAccessibilityObserved": true,
+    "interruptedRunIdMatched": true,
+    "savedFindingsShown": 0,
+    "currentRecoveryCoverageBadgeObserved": true,
+    "screenshotSha256": "d78b6963748b476ed94b09b660536649da109701a828fa699163ecb19ee53de1",
+    "axSha256": "ce2ecd76bd8226014b7cf9301f83541c5492ad4ac9a123c7c9bc7e5d03ecfb31",
+    "existingTabHandleInitiallyUnavailable": true,
+    "freshTabWorked": true
+  },
+  "shutdownRaceFix": {
+    "observedFailure": "ConnectionResetError [Errno54] during web_entry_stop after guest stopped",
+    "behavior": "continue bounded wait on reset; require refused connection for shutdown success; persistent resets time out; unrelated errors propagate",
+    "redThenGreen": true,
+    "liveCopyReturnAfterFixPassed": true,
+    "oldHostHelperBackupRetained": true,
+    "includedInNewRecoveryPoint": true
+  },
+  "history": {
+    "firstCopyGuestObserver": "remote assertion exited1; sanitized exception lost original stderr; exact original assertion remains unattributed",
+    "originalReconcileObserver": "owner inactive before native status is expected socket activation; test now invokes native status before requiring active",
+    "retry1Copy": "guest2607/126/native status95 passed; normal return interrupted by concrete host shutdown reset; inode journal recovery returned original",
+    "finalCopy": "new point2609/126/native status95 and automatic original return passed",
+    "initialFullController": "one obsolete current recovery name expectation failed; updated to new point while asserting old point remains available; final142 passed"
+  },
+  "limits": [
+    "No new model-generation request or public/remote security scan during this phase",
+    "Physical sleep checks idle VM resume; scanner progress during physical sleep not tested or promised",
+    "Stable hash proof is selected files, not whole disk; known volatile chat remains in snapshot but excluded from byte proof",
+    "Historical SSH255 still lacks original stderr; Semgrep PartialParsing remains;95 real findings stayunverified",
+    "Native browser acceptance after waking saw selected synthetic crash project, saved interrupted task and0findings; no UI scan or scope save was submitted"
+  ],
+  "permissionsExpanded": false,
+  "gitCommitOrPush": false,
+  "commandReceipts": [
+    {
+      "id": "baseline",
+      "scope": "baseline",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "7d7847cf2e0a053bec2f439100eeab4af22c070fdf11648f6c9e4ec30f2c7a6c"
+    },
+    {
+      "id": "before-sleep-live",
+      "scope": "before-sleep-live",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "d48d98dec6d115de07f53b9e3a2bf8482f7a47314fa6fdd09c5eb31632f3c879"
+    },
+    {
+      "id": "controller-complete",
+      "scope": "controller-complete",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "657967d9ec2d7441d886ea52eddf8c730bb1104e5ab808cd3b69587ab207c07b"
+    },
+    {
+      "id": "controller-final",
+      "scope": "controller-final",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "b2d2ebc0f1cd6102de5f0b7bd1e0a91e2469f09b33c5fa6c80b3a9f00bfe64bc"
+    },
+    {
+      "id": "copy-boot-fixed",
+      "scope": "copy-fixed-live",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "2f53682a6b4b15c447de67f9f525d6ab88fb25b3429c3ab90ec98890f4d752e6"
+    },
+    {
+      "id": "copy-boot-retry1",
+      "scope": "copy-final-native",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "4009d3490706de7b5d97984bed37efe3ba18913796e206fd077d9bf5d31604c2"
+    },
+    {
+      "id": "copy-boot",
+      "scope": "copy-final",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "1f26fb55e0a161a238c48798ee499b0c31a7d0274f87359b6c8ea8aa4e012125"
+    },
+    {
+      "id": "copy-reconciliation-final",
+      "scope": "copy-final",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "e7f38609b9c6f2af12f875839d06101d4dd4a24282a6f9032b66a97fa195749f"
+    },
+    {
+      "id": "copy-reconciliation",
+      "scope": "copy",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "425f3593470d2f1392786619dc6332c1be1e3d2854682196c5fdb511c1a0a529"
+    },
+    {
+      "id": "copy-return-recovery",
+      "scope": "copy-return-recovery",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "5cf5d9e04031b40561906b7dcec884e4db1a983c9f64dffc5fa8508c54dac0c7"
+    },
+    {
+      "id": "crash",
+      "scope": "crash",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "912638106843111402b92ae24010ee272f457856c88556ab6ee0aac18079e697"
+    },
+    {
+      "id": "export-update",
+      "scope": "export-update",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "82c4cb462029b7b254c6b6f4e4f2880aeb13ab373a6e81eac3359875e7ccf57f"
+    },
+    {
+      "id": "final-host",
+      "scope": "final-host",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "830e42665c9f876b0272cb5add70c39f4e2f49b9909443cc2e0a8b70c0dbef26"
+    },
+    {
+      "id": "final-live",
+      "scope": "final-live",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "86b9e36f9656ef69733c4f0b1177da8a3913b8e5d099243a98eca64b9650733d"
+    },
+    {
+      "id": "post-copy-failure-reconcile",
+      "scope": "copy-reconcile",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "725fb2aeee5d315c48e18867919ea858d1b80dd65e86ac469be74094082b151e"
+    },
+    {
+      "id": "post-copy-native-reconcile",
+      "scope": "native-reconcile",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "c7a7ce7967610708311c7e391385e61102a0f184b96fdeb4688cea52df6b074b"
+    },
+    {
+      "id": "power-observe",
+      "scope": "physical-sleep-observe",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "ced680af65712e1f4b7365225f9cff92bcc53706600f49d49516f956571f8e7a"
+    },
+    {
+      "id": "sleep-after",
+      "scope": "physical-sleep",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "69265f1ec31772009b9fd717630a9593d7fae4fe82906045545fbb8f360e69b1"
+    },
+    {
+      "id": "sleep-before",
+      "scope": "physical-sleep",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "557b0f0d18d766616e683c908068f732352420dbfeb0fcf91ef9c74feaeb7b3a"
+    },
+    {
+      "id": "stop-fix-install",
+      "scope": "stop-fix-live",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "fbbe3fc4c8c6982248948caf3639b8a062e2bd78a5e509f5123c36695e45ba27"
+    },
+    {
+      "id": "stop-reset-green",
+      "scope": "stop-reset-green",
+      "state": "exited",
+      "returncode": 0,
+      "receiptSha256": "413b35f3bdd0225ee01aa74e97510c6548e61216da7f0548fbee1e00306ae2de"
+    },
+    {
+      "id": "stop-reset-red",
+      "scope": "stop-reset-red",
+      "state": "exited",
+      "returncode": 1,
+      "receiptSha256": "a20e6a4bcb63ff546ff6525eb1e664324e05ef9b60d5bf3560dbc3f648c64944"
+    }
+  ]
+}

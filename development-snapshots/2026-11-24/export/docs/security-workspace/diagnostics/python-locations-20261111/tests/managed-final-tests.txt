@@ -1,0 +1,15 @@
+✔ Managed mapping retains unmatched malformed locations and ignores null rows safely (0.867958ms)
+✔ No Python source still reports supported unmatched findings (0.068ms)
+✔ Import evidence requires both source-bound canonical point identities (0.967583ms)
+✔ Forged finding point identity is rejected instead of exposed (0.114375ms)
+✔ Indexed mapping cannot bind another file or an absent source digest (0.190125ms)
+✔ Guard and plain artifacts cannot discard forged finding IDs and complete (0.235458ms)
+✔ Missing scanner span becomes unavailable/unmatched instead of failing managed run (0.180084ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 47.568666

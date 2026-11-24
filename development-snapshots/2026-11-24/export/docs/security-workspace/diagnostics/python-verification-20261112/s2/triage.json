@@ -1,0 +1,15 @@
+{
+  "state": "closed-s2-r4",
+  "fixed": [
+    "random per-point frozen challenge",
+    "exact probe AST instead of substring",
+    "same call/return point and callee identity",
+    "default and multi-param type proofs rejected",
+    "stdout separate from result writer",
+    "invalid/empty trace becomes unknown",
+    "source allowlist before execution"
+  ],
+  "capabilityGap": "No generic unreviewed-source verification; exact reviewed profiles only; in-process monitoring is not adversarial attestation. Fresh holdout blocked.",
+  "r3Qualified": false,
+  "notes": "Trusted code/deps are separately frozen; APPPROVED_SOURCES applies to project file manifest. No generic-source verification or fresh holdout qualification."
+}

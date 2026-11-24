@@ -1,0 +1,10 @@
+{
+  "identity": {
+    "scanner": "0ed20daf5b9817557d4d75d47f90107288365f26aa02cd3b94cb566ba0c20a46",
+    "rules": "c4357ddb0d52f3273525be08d8f5cdc1182523c1f9502497722bb6a44fe4ef94",
+    "reviewer": "8445dc83ac2981e3a835a1eadbce1d7ab56e08711a7b6aa08d1f03cbf4e15a3c"
+  },
+  "datasetSha256": "bf62ff09beb0632dbe03ffe7e4f8c42f9e070886098e24a9c386aa4cfc68e2e0",
+  "freezeSha256": "2faf22ada9c9bd2d2ca580c239dd58b7c4c05794b00c69f55c3b3a83cb1fcb1f",
+  "historicalFreezeRejected": true
+}

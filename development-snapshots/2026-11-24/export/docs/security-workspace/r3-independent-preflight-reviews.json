@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "reviews": {
+    "protocol": {
+      "promptSha256": "f88eaf04d0a048927f19270369e9fe53cb8c61f14317fbde2c37b43b603feba1",
+      "claudeOutcome": "You've hit your weekly limit · resets Nov 13 at 1am (America/Los_Angeles)",
+      "claudeReceiptSha256": "a55a1e1b9d99a3e223ba1047fe6e376232226108cb3d0b8e78344fc2459c466b",
+      "actualFallbackModel": "deepseek-flash",
+      "requestedEffort": "high",
+      "finishReason": "stop",
+      "providerReceiptSha256": "5a552687cd101d39c930a1b29cad131b2a20168a7ae99155057808eeed8bbbe1",
+      "reportSha256": "81eb36e3f1e52e02600c570c767d46f1f6eeda0a9ccf077db73ccacb49ac9d62"
+    },
+    "protocol-r2": {
+      "promptSha256": "1e119d84939120c99ba67d25ecb17e069d08aa8194268f7b46e7bf900389bd69",
+      "claudeOutcome": "You've hit your weekly limit · resets Nov 13 at 1am (America/Los_Angeles)",
+      "claudeReceiptSha256": "2dd6cb01ea6ce4252de5d33d7487aaa09018aba47d1e8492206b30c1b52ed216",
+      "actualFallbackModel": "deepseek-flash",
+      "requestedEffort": "high",
+      "finishReason": "stop",
+      "providerReceiptSha256": "a3029351519ae1e6000f33513cefaefcd51f3c9bc925ba3f84f188cadb8ae028",
+      "reportSha256": "b2b7d290187c0b4bcb56a3a9ffc693b5074c171e8dd50fc340d2297da4d276b5"
+    },
+    "preflight-r2": {
+      "promptSha256": "4f97262425988f09ae7ec23f62c249f93246caec80d4995ccca74502638d9e6b",
+      "claudeOutcome": "You've hit your weekly limit · resets Nov 13 at 1am (America/Los_Angeles)",
+      "claudeReceiptSha256": "1c2b97701825e4f3328182cee6856e70492063a595a72da64181529b475d7aef",
+      "actualFallbackModel": "deepseek-flash",
+      "requestedEffort": "high",
+      "finishReason": "stop",
+      "providerReceiptSha256": "f53bd550debbe4dc7cbfa666cfe33072a6db7eabc831a7b3f484154fecc3f844",
+      "reportSha256": "49aa70b81a723962f2c88b3783adfe837237fda6427d3dbeffe7dcffe74c1852"
+    },
+    "delivery-r2": {
+      "promptSha256": "7a95d3117331f41fc004004d7767c3a2fa12c7dd4d96c3cf974569ed564fff0d",
+      "claudeOutcome": "You've hit your weekly limit · resets Nov 13 at 1am (America/Los_Angeles)",
+      "claudeReceiptSha256": "abf0cc08bd709b659ad5274983dc31162a0928b89fe893bbd1c69b90499f25c7",
+      "actualFallbackModel": "deepseek-flash",
+      "requestedEffort": "high",
+      "finishReason": "stop",
+      "providerReceiptSha256": "c8bd64131862c68a7accc37ae8fd5e74828efe1dc36dd4d47914bfb59bdfb24a",
+      "reportSha256": "9005f838bab3b9c7e91ae23f8922f59659ded428123a9e4bc296de09a7936f72"
+    }
+  },
+  "finalDisposition": "delivery reviewed, formal blind run remains blocked",
+  "finalNotes": "Final review found a confusing diagnostic decision label. Changed that single archival field to blocked-before-sampling, matching the formal gate. No scoring, evidence, or narrative bytes changed.",
+  "reviewedNarrativeSha256": "08ff43d61277cb6121075bed70cd1bfc5d93197456b232ef0b8b9374ce8542ac",
+  "reviewedStructuredResultsSha256": "dcc08347667671894fd779dbd0fb8ebdf73125a1c6f7d24b671ca7d4164393e1",
+  "archivedStructuredResultsSha256": "f6ff44279218a5f888241ebf3fdd719f41b01127301a6e5fabcc90548a46b27d",
+  "evidenceDirectory": "work/harness-r3-independent-acceptance-20261111"
+}

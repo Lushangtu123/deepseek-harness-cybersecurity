@@ -1,0 +1,1518 @@
+{
+  "version": 1,
+  "scope": "Frozen static rule composition and retained observations; not vulnerability confirmation",
+  "candidateRulesSha256": "c4357ddb0d52f3273525be08d8f5cdc1182523c1f9502497722bb6a44fe4ef94",
+  "baseRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "scannerVersion": "1.182.1",
+  "rulesDeployed": false,
+  "r3Qualified": false,
+  "composition": {
+    "preserved": [
+      "harness.python.eval",
+      "harness.python.pickle",
+      "harness.python.shell",
+      "harness.python.yaml-load",
+      "harness.javascript.eval",
+      "harness.python.sql-fstring",
+      "harness.python.exec",
+      "harness.python.os-system",
+      "harness.python.requests-verify-false",
+      "harness.python.tempfile-mktemp",
+      "harness.python.jwt-noverify",
+      "harness.javascript.child-process-exec",
+      "harness.javascript.dom-innerhtml",
+      "harness.javascript.document-write",
+      "harness.javascript.tls-reject-disabled",
+      "harness.javascript.sql-concat"
+    ],
+    "added": [
+      "harness.php.dynamic-eval",
+      "harness.php.unsafe-unserialize",
+      "harness.python.request-to-dynamic-code"
+    ]
+  },
+  "retainedObservations": {
+    "synthetic": {
+      "baselineRuleHits": 15,
+      "preservedRuleHits": 15,
+      "additionalRuleHits": 8
+    },
+    "owasp": {
+      "baselineRuleHits": 53,
+      "preservedRuleHits": 53,
+      "additionalRuleHits": 24
+    }
+  },
+  "synthetic": {
+    "datasetSha256": "64d5a04e348be308fc056bfcf3471d799ef31dcdf0ebb75d84f490a5f726337f",
+    "baseline": {
+      "version": 1,
+      "scope": "labelled static rule expectations only; not verified vulnerabilities or population accuracy",
+      "r3Qualified": false,
+      "findingStatus": "unverified",
+      "parserErrors": 0,
+      "unexpectedFindings": 0,
+      "totals": {
+        "total": 48,
+        "tp": 13,
+        "fp": 2,
+        "tn": 14,
+        "fn": 3,
+        "uncovered": 16,
+        "precision": 0.8666666666666667,
+        "recall": 0.8125
+      },
+      "byLanguage": {
+        "javascript": {
+          "total": 12,
+          "tp": 5,
+          "fp": 2,
+          "tn": 4,
+          "fn": 1,
+          "uncovered": 0,
+          "precision": 0.7142857142857143,
+          "recall": 0.8333333333333334
+        },
+        "php": {
+          "total": 16,
+          "tp": 0,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0,
+          "uncovered": 16,
+          "precision": null,
+          "recall": null
+        },
+        "python": {
+          "total": 16,
+          "tp": 6,
+          "fp": 0,
+          "tn": 8,
+          "fn": 2,
+          "uncovered": 0,
+          "precision": 1,
+          "recall": 0.75
+        },
+        "typescript": {
+          "total": 4,
+          "tp": 2,
+          "fp": 0,
+          "tn": 2,
+          "fn": 0,
+          "uncovered": 0,
+          "precision": 1,
+          "recall": 1
+        }
+      },
+      "byCategory": {
+        "CWE-502": {
+          "total": 16,
+          "tp": 4,
+          "fp": 0,
+          "tn": 4,
+          "fn": 0,
+          "uncovered": 8,
+          "precision": 1,
+          "recall": 1
+        },
+        "CWE-79": {
+          "total": 8,
+          "tp": 4,
+          "fp": 1,
+          "tn": 3,
+          "fn": 0,
+          "uncovered": 0,
+          "precision": 0.8,
+          "recall": 1
+        },
+        "CWE-95": {
+          "total": 24,
+          "tp": 5,
+          "fp": 1,
+          "tn": 7,
+          "fn": 3,
+          "uncovered": 8,
+          "precision": 0.8333333333333334,
+          "recall": 0.625
+        }
+      },
+      "bySplit": {
+        "development": {
+          "total": 24,
+          "tp": 7,
+          "fp": 0,
+          "tn": 8,
+          "fn": 1,
+          "uncovered": 8,
+          "precision": 1,
+          "recall": 0.875
+        },
+        "holdout": {
+          "total": 24,
+          "tp": 6,
+          "fp": 2,
+          "tn": 6,
+          "fn": 2,
+          "uncovered": 8,
+          "precision": 0.75,
+          "recall": 0.75
+        }
+      },
+      "cases": [
+        {
+          "id": "python-eval-1",
+          "file": "python-eval-1.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.python.eval",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "python-eval-2",
+          "file": "python-eval-2.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "python-eval-3",
+          "file": "python-eval-3.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "fn",
+          "findings": []
+        },
+        {
+          "id": "python-eval-4",
+          "file": "python-eval-4.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "python-eval-5",
+          "file": "python-eval-5.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "fn",
+          "findings": []
+        },
+        {
+          "id": "python-eval-6",
+          "file": "python-eval-6.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "python-eval-7",
+          "file": "python-eval-7.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.python.eval",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "python-eval-8",
+          "file": "python-eval-8.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "python-yaml-1",
+          "file": "python-yaml-1.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.python.yaml-load",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "python-yaml-2",
+          "file": "python-yaml-2.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "python-yaml-3",
+          "file": "python-yaml-3.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.python.yaml-load",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "python-yaml-4",
+          "file": "python-yaml-4.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "python-yaml-5",
+          "file": "python-yaml-5.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.python.yaml-load",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "python-yaml-6",
+          "file": "python-yaml-6.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "python-yaml-7",
+          "file": "python-yaml-7.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.python.yaml-load",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "python-yaml-8",
+          "file": "python-yaml-8.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "dom-html-1",
+          "file": "dom-html-1.js",
+          "language": "javascript",
+          "category": "CWE-79",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.dom-innerhtml",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "dom-html-2",
+          "file": "dom-html-2.js",
+          "language": "javascript",
+          "category": "CWE-79",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "dom-html-3",
+          "file": "dom-html-3.js",
+          "language": "javascript",
+          "category": "CWE-79",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.dom-innerhtml",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "dom-html-4",
+          "file": "dom-html-4.js",
+          "language": "javascript",
+          "category": "CWE-79",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "dom-html-5",
+          "file": "dom-html-5.js",
+          "language": "javascript",
+          "category": "CWE-79",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.dom-innerhtml",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "dom-html-6",
+          "file": "dom-html-6.js",
+          "language": "javascript",
+          "category": "CWE-79",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "fp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.dom-innerhtml",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "dom-html-7",
+          "file": "dom-html-7.ts",
+          "language": "typescript",
+          "category": "CWE-79",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.dom-innerhtml",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "dom-html-8",
+          "file": "dom-html-8.ts",
+          "language": "typescript",
+          "category": "CWE-79",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "javascript-eval-1",
+          "file": "javascript-eval-1.js",
+          "language": "javascript",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.eval",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "javascript-eval-2",
+          "file": "javascript-eval-2.js",
+          "language": "javascript",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "javascript-eval-3",
+          "file": "javascript-eval-3.js",
+          "language": "javascript",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.eval",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "javascript-eval-4",
+          "file": "javascript-eval-4.js",
+          "language": "javascript",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "javascript-eval-5",
+          "file": "javascript-eval-5.js",
+          "language": "javascript",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "fn",
+          "findings": []
+        },
+        {
+          "id": "javascript-eval-6",
+          "file": "javascript-eval-6.js",
+          "language": "javascript",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "fp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.eval",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "javascript-eval-7",
+          "file": "javascript-eval-7.ts",
+          "language": "typescript",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.eval",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "javascript-eval-8",
+          "file": "javascript-eval-8.ts",
+          "language": "typescript",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "php-eval-1",
+          "file": "php-eval-1.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "uncovered",
+          "findings": []
+        },
+        {
+          "id": "php-eval-2",
+          "file": "php-eval-2.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "safe",
+          "outcome": "uncovered",
+          "findings": []
+        },
+        {
+          "id": "php-eval-3",
+          "file": "php-eval-3.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "uncovered",
+          "findings": []
+        },
+        {
+          "id": "php-eval-4",
+          "file": "php-eval-4.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "safe",
+          "outcome": "uncovered",
+          "findings": []
+        },
+        {
+          "id": "php-eval-5",
+          "file": "php-eval-5.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "uncovered",
+          "findings": []
+        },
+        {
+          "id": "php-eval-6",
+          "file": "php-eval-6.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "uncovered",
+          "findings": []
+        },
+        {
+          "id": "php-eval-7",
+          "file": "php-eval-7.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "uncovered",
+          "findings": []
+        },
+        {
+          "id": "php-eval-8",
+          "file": "php-eval-8.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "uncovered",
+          "findings": []
+        },
+        {
+          "id": "php-unserialize-1",
+          "file": "php-unserialize-1.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "uncovered",
+          "findings": []
+        },
+        {
+          "id": "php-unserialize-2",
+          "file": "php-unserialize-2.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "safe",
+          "outcome": "uncovered",
+          "findings": []
+        },
+        {
+          "id": "php-unserialize-3",
+          "file": "php-unserialize-3.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "uncovered",
+          "findings": []
+        },
+        {
+          "id": "php-unserialize-4",
+          "file": "php-unserialize-4.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "safe",
+          "outcome": "uncovered",
+          "findings": []
+        },
+        {
+          "id": "php-unserialize-5",
+          "file": "php-unserialize-5.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "uncovered",
+          "findings": []
+        },
+        {
+          "id": "php-unserialize-6",
+          "file": "php-unserialize-6.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "uncovered",
+          "findings": []
+        },
+        {
+          "id": "php-unserialize-7",
+          "file": "php-unserialize-7.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "uncovered",
+          "findings": []
+        },
+        {
+          "id": "php-unserialize-8",
+          "file": "php-unserialize-8.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "uncovered",
+          "findings": []
+        }
+      ]
+    },
+    "combined": {
+      "version": 1,
+      "scope": "labelled static rule expectations only; not verified vulnerabilities or population accuracy",
+      "r3Qualified": false,
+      "findingStatus": "unverified",
+      "parserErrors": 0,
+      "unexpectedFindings": 0,
+      "totals": {
+        "total": 48,
+        "tp": 21,
+        "fp": 2,
+        "tn": 22,
+        "fn": 3,
+        "uncovered": 0,
+        "precision": 0.9130434782608695,
+        "recall": 0.875
+      },
+      "byLanguage": {
+        "javascript": {
+          "total": 12,
+          "tp": 5,
+          "fp": 2,
+          "tn": 4,
+          "fn": 1,
+          "uncovered": 0,
+          "precision": 0.7142857142857143,
+          "recall": 0.8333333333333334
+        },
+        "php": {
+          "total": 16,
+          "tp": 8,
+          "fp": 0,
+          "tn": 8,
+          "fn": 0,
+          "uncovered": 0,
+          "precision": 1,
+          "recall": 1
+        },
+        "python": {
+          "total": 16,
+          "tp": 6,
+          "fp": 0,
+          "tn": 8,
+          "fn": 2,
+          "uncovered": 0,
+          "precision": 1,
+          "recall": 0.75
+        },
+        "typescript": {
+          "total": 4,
+          "tp": 2,
+          "fp": 0,
+          "tn": 2,
+          "fn": 0,
+          "uncovered": 0,
+          "precision": 1,
+          "recall": 1
+        }
+      },
+      "byCategory": {
+        "CWE-502": {
+          "total": 16,
+          "tp": 8,
+          "fp": 0,
+          "tn": 8,
+          "fn": 0,
+          "uncovered": 0,
+          "precision": 1,
+          "recall": 1
+        },
+        "CWE-79": {
+          "total": 8,
+          "tp": 4,
+          "fp": 1,
+          "tn": 3,
+          "fn": 0,
+          "uncovered": 0,
+          "precision": 0.8,
+          "recall": 1
+        },
+        "CWE-95": {
+          "total": 24,
+          "tp": 9,
+          "fp": 1,
+          "tn": 11,
+          "fn": 3,
+          "uncovered": 0,
+          "precision": 0.9,
+          "recall": 0.75
+        }
+      },
+      "bySplit": {
+        "development": {
+          "total": 24,
+          "tp": 11,
+          "fp": 0,
+          "tn": 12,
+          "fn": 1,
+          "uncovered": 0,
+          "precision": 1,
+          "recall": 0.9166666666666666
+        },
+        "holdout": {
+          "total": 24,
+          "tp": 10,
+          "fp": 2,
+          "tn": 10,
+          "fn": 2,
+          "uncovered": 0,
+          "precision": 0.8333333333333334,
+          "recall": 0.8333333333333334
+        }
+      },
+      "cases": [
+        {
+          "id": "python-eval-1",
+          "file": "python-eval-1.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.python.eval",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "python-eval-2",
+          "file": "python-eval-2.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "python-eval-3",
+          "file": "python-eval-3.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "fn",
+          "findings": []
+        },
+        {
+          "id": "python-eval-4",
+          "file": "python-eval-4.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "python-eval-5",
+          "file": "python-eval-5.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "fn",
+          "findings": []
+        },
+        {
+          "id": "python-eval-6",
+          "file": "python-eval-6.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "python-eval-7",
+          "file": "python-eval-7.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.python.eval",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "python-eval-8",
+          "file": "python-eval-8.py",
+          "language": "python",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "python-yaml-1",
+          "file": "python-yaml-1.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.python.yaml-load",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "python-yaml-2",
+          "file": "python-yaml-2.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "python-yaml-3",
+          "file": "python-yaml-3.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.python.yaml-load",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "python-yaml-4",
+          "file": "python-yaml-4.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "python-yaml-5",
+          "file": "python-yaml-5.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.python.yaml-load",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "python-yaml-6",
+          "file": "python-yaml-6.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "python-yaml-7",
+          "file": "python-yaml-7.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.python.yaml-load",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "python-yaml-8",
+          "file": "python-yaml-8.py",
+          "language": "python",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "dom-html-1",
+          "file": "dom-html-1.js",
+          "language": "javascript",
+          "category": "CWE-79",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.dom-innerhtml",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "dom-html-2",
+          "file": "dom-html-2.js",
+          "language": "javascript",
+          "category": "CWE-79",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "dom-html-3",
+          "file": "dom-html-3.js",
+          "language": "javascript",
+          "category": "CWE-79",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.dom-innerhtml",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "dom-html-4",
+          "file": "dom-html-4.js",
+          "language": "javascript",
+          "category": "CWE-79",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "dom-html-5",
+          "file": "dom-html-5.js",
+          "language": "javascript",
+          "category": "CWE-79",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.dom-innerhtml",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "dom-html-6",
+          "file": "dom-html-6.js",
+          "language": "javascript",
+          "category": "CWE-79",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "fp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.dom-innerhtml",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "dom-html-7",
+          "file": "dom-html-7.ts",
+          "language": "typescript",
+          "category": "CWE-79",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.dom-innerhtml",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "dom-html-8",
+          "file": "dom-html-8.ts",
+          "language": "typescript",
+          "category": "CWE-79",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "javascript-eval-1",
+          "file": "javascript-eval-1.js",
+          "language": "javascript",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.eval",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "javascript-eval-2",
+          "file": "javascript-eval-2.js",
+          "language": "javascript",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "javascript-eval-3",
+          "file": "javascript-eval-3.js",
+          "language": "javascript",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.eval",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "javascript-eval-4",
+          "file": "javascript-eval-4.js",
+          "language": "javascript",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "javascript-eval-5",
+          "file": "javascript-eval-5.js",
+          "language": "javascript",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "fn",
+          "findings": []
+        },
+        {
+          "id": "javascript-eval-6",
+          "file": "javascript-eval-6.js",
+          "language": "javascript",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "fp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.eval",
+              "line": 3,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "javascript-eval-7",
+          "file": "javascript-eval-7.ts",
+          "language": "typescript",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.javascript.eval",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "javascript-eval-8",
+          "file": "javascript-eval-8.ts",
+          "language": "typescript",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "php-eval-1",
+          "file": "php-eval-1.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.php.dynamic-eval",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "php-eval-2",
+          "file": "php-eval-2.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "php-eval-3",
+          "file": "php-eval-3.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.php.dynamic-eval",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "php-eval-4",
+          "file": "php-eval-4.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "php-eval-5",
+          "file": "php-eval-5.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.php.dynamic-eval",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "php-eval-6",
+          "file": "php-eval-6.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "php-eval-7",
+          "file": "php-eval-7.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.php.dynamic-eval",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "php-eval-8",
+          "file": "php-eval-8.php",
+          "language": "php",
+          "category": "CWE-95",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "php-unserialize-1",
+          "file": "php-unserialize-1.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.php.unsafe-unserialize",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "php-unserialize-2",
+          "file": "php-unserialize-2.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "php-unserialize-3",
+          "file": "php-unserialize-3.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.php.unsafe-unserialize",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "php-unserialize-4",
+          "file": "php-unserialize-4.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "development",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "php-unserialize-5",
+          "file": "php-unserialize-5.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.php.unsafe-unserialize",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "php-unserialize-6",
+          "file": "php-unserialize-6.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        },
+        {
+          "id": "php-unserialize-7",
+          "file": "php-unserialize-7.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "vulnerable",
+          "outcome": "tp",
+          "findings": [
+            {
+              "rule": "policy.harness.php.unsafe-unserialize",
+              "line": 2,
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "php-unserialize-8",
+          "file": "php-unserialize-8.php",
+          "language": "php",
+          "category": "CWE-502",
+          "split": "holdout",
+          "label": "safe",
+          "outcome": "tn",
+          "findings": []
+        }
+      ]
+    }
+  },
+  "owasp": {
+    "sourceCommit": "f1291485808b66e20ddb6b01b10dc71b3df8c8ba",
+    "labelsSha256": "6396f37c97cfd0c018db3d8750095ce6c678a083f83620cfb3e88fe27a46bb0c",
+    "indexSha256": "3c3bcbaeeba23965b9805a003abe0f2518125fd2a9c9c72c65122538d94cade5",
+    "caseCount": 53,
+    "method": "case-file plus exact rule family; no sink-line oracle or runtime confirmation",
+    "results": {
+      "baseline": {
+        "legacyEvalAndExec": {
+          "positiveHit": 20,
+          "negativeHit": 33,
+          "positiveMiss": 0,
+          "negativeNoHit": 0
+        },
+        "additionalRequestFlow": {
+          "positiveHit": 0,
+          "negativeHit": 0,
+          "positiveMiss": 20,
+          "negativeNoHit": 33
+        }
+      },
+      "combined": {
+        "legacyEvalAndExec": {
+          "positiveHit": 20,
+          "negativeHit": 33,
+          "positiveMiss": 0,
+          "negativeNoHit": 0
+        },
+        "additionalRequestFlow": {
+          "positiveHit": 9,
+          "negativeHit": 15,
+          "positiveMiss": 11,
+          "negativeNoHit": 18
+        }
+      }
+    }
+  },
+  "admission": {
+    "state": "blocked",
+    "blockers": [
+      "D-16-category-thresholds-pending",
+      "independent-vulnerability-location-benchmark-incomplete",
+      "OWASP-negative-hit-rate-remains-high",
+      "Semgrep-and-Trivy-DB-publisher-proofs-incomplete",
+      "runtime-PHP-rule-admission-not-implemented"
+    ]
+  },
+  "cleanupVerified": true
+}

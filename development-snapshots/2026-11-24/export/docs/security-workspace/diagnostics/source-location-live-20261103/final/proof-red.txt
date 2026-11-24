@@ -1,0 +1,25 @@
+file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-source-location-live-closure-20261103/proof-contract.test.mjs:3
+import {AttemptLedger,validateLive,collectPages,validateAcceptance} from './proof-contract.mjs';
+                                                ^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module './proof-contract.mjs' does not provide an export named 'validateAcceptance'
+    at ModuleJob._instantiate (node:internal/modules/esm/module_job:181:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:264:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:583:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:98:5)
+
+Node.js v23.7.0
+✖ work/harness-source-location-live-closure-20261103/proof-contract.test.mjs (44.924875ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 51.33375
+
+✖ failing tests:
+
+test at work/harness-source-location-live-closure-20261103/proof-contract.test.mjs:1:1
+✖ work/harness-source-location-live-closure-20261103/proof-contract.test.mjs (44.924875ms)
+  'test failed'

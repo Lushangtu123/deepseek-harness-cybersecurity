@@ -1,0 +1,27 @@
+{
+  "createdAt": "2026-11-04T02:52:41.527211+00:00",
+  "candidates": {
+    "scripts/review_quality_gate.mjs": "1dc6d416bcd483aef67b797d754185e25982689ce2a432d49e667464f58d29ec",
+    "docs/security-workspace/review-quality-policy.candidate.json": "e9b429fc21e5d86578333e6cd4cfad9ef2455be578b7ea37336fced14c788ad1",
+    "docs/security-workspace/ordinary-rules-combined.candidate.json": "c4357ddb0d52f3273525be08d8f5cdc1182523c1f9502497722bb6a44fe4ef94",
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": "2dfd384c175692b7972917832b545c7058ae968cad68be34e718c021ec06e49f",
+    "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+    "work/harness-purge-improved/package/lib/redteam/personal-python-evidence.mjs": "4b0963715d0acb45e1b66a599a41c6901f3d38d4176ae55c295bff2e8b852e02"
+  },
+  "caseSources": [
+    {
+      "id": "skf-viewer-upstream",
+      "file": "original.py",
+      "sha256": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf"
+    },
+    {
+      "id": "skf-viewer-authored-fix",
+      "file": "fixed_control.py",
+      "sha256": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134"
+    }
+  ],
+  "oracleReceiptSha256": "7bb98fe070ad2162bcee89b816e0873023ed48e1aa1173ccfadb8596355319bc",
+  "protocolSha256": "1a7d56ccc33704b09989cfa4a65d92d61f7dff955eee7988a0eaca4f3310e4e6",
+  "ledgerBeforeSha256": "c964ad675f15a4585a59a559d4188cb132a2c270544558aa80b09c1bc1e7c9c2",
+  "intent": "compare existing runtime16 and unchanged combined19; current structural reviewer stays unverified, independent oracle reported separately; no numerical threshold changes"
+}

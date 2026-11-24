@@ -1,0 +1,157 @@
+✔ Joint source positions page same-line sites separately with copy-only unverified language (2.53575ms)
+✔ A mismatched snapshot cannot replace the already validated source-position page (0.619416ms)
+✔ Unavailable source ranges keep the finding visible without invented coordinates (0.268625ms)
+✔ A source-location task needs a real snapshot digest before exposing its detail controls (0.62125ms)
+✔ Duplicate Semgrep steps are rejected rather than lending another step identity (0.192458ms)
+✔ Missing model counts stay unknown and byte-column units are explicit (0.203291ms)
+✔ Source page rejects wrong source task while retaining the valid page (0.336834ms)
+✔ Source page rejects unavailable extra coordinates while retaining the valid page (0.240875ms)
+✔ Source page rejects empty range while retaining the valid page (0.52025ms)
+✔ Source page rejects wrong line label while retaining the valid page (0.640959ms)
+✔ A page for a different parent task cannot replace existing positions (0.4015ms)
+✖ Wait cannot replace the displayed task with null (0.535917ms)
+✖ Wait cannot replace the displayed task with another task (0.19075ms)
+✖ Python evidence also requires a concrete step id and snapshot SHA (0.1085ms)
+✖ A pending request is not cleared by an unrelated unacknowledged task (0.241ms)
+✖ Malformed model count is rejected: "0" (0.088208ms)
+✖ Malformed model count is rejected: -1 (0.065042ms)
+✖ Malformed model count is rejected: {} (0.061417ms)
+✖ Cancelling state is visible while stop remains unconfirmed (0.146041ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 11
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 60.153167
+
+✖ failing tests:
+
+test at work/harness-purge-improved/tests/joint-source-client.test.mjs:58:141
+✖ Wait cannot replace the displayed task with null (0.535917ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /原任务.*不匹配/. Input:
+  
+  '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/joint-source-client.test.mjs:59:134)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查',
+    expected: /原任务.*不匹配/,
+    operator: 'match'
+  }
+
+test at work/harness-purge-improved/tests/joint-source-client.test.mjs:58:141
+✖ Wait cannot replace the displayed task with another task (0.19075ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /原任务.*不匹配/. Input:
+  
+  '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查等待原联合任务取消或核对停止下载联合报告 JSON任务：other-task · 所选步骤已结束工具命中 0 条 · 子任务模型请求 未知 次 · 停止核对：已确认工具命中待验证；登录、越权、业务逻辑、架构、未选工具与排除内容仍未覆盖。'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/joint-source-client.test.mjs:59:134)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查等待原联合任务取消或核对停止下载联合报告 JSON任务：other-task · 所选步骤已结束工具命中 0 条 · 子任务模型请求 未知 次 · 停止核对：已确认工具命中待验证；登录、越权、业务逻辑、架构、未选工具与排除内容仍未覆盖。',
+    expected: /原任务.*不匹配/,
+    operator: 'match'
+  }
+
+test at work/harness-purge-improved/tests/joint-source-client.test.mjs:61:1
+✖ Python evidence also requires a concrete step id and snapshot SHA (0.1085ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /回执与项目不匹配/. Input:
+  
+  '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查等待原联合任务取消或核对停止下载联合报告 JSON任务：location-task-001 · 所选步骤已结束工具命中 2 条 · 子任务模型请求 未知 次 · 停止核对：已确认副本 invalid · undefined 文件 · 排除路径 undefined · 脱敏文件 undefinedsemgrep：步骤已完成Python 复核证据复核已完成 · 1 条补充证据查看 Python 证据工具命中待验证；登录、越权、业务逻辑、架构、未选工具与排除内容仍未覆盖。'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/joint-source-client.test.mjs:61:302)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查等待原联合任务取消或核对停止下载联合报告 JSON任务：location-task-001 · 所选步骤已结束工具命中 2 条 · 子任务模型请求 未知 次 · 停止核对：已确认副本 invalid · undefined 文件 · 排除路径 undefined · 脱敏文件 undefinedsemgrep：步骤已完成Python 复核证据复核已完成 · 1 条补充证据查看 Python 证据工具命中待验证；登录、越权、业务逻辑、架构、未选工具与排除内容仍未覆盖。',
+    expected: /回执与项目不匹配/,
+    operator: 'match'
+  }
+
+test at work/harness-purge-improved/tests/joint-source-client.test.mjs:62:1
+✖ A pending request is not cleared by an unrelated unacknowledged task (0.241ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/joint-source-client.test.mjs:62:334)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual'
+  }
+
+test at work/harness-purge-improved/tests/joint-source-client.test.mjs:63:32
+✖ Malformed model count is rejected: "0" (0.088208ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /回执与项目不匹配/. Input:
+  
+  '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查等待原联合任务取消或核对停止下载联合报告 JSON任务：location-task-001 · 所选步骤已结束工具命中 2 条 · 子任务模型请求 0 次 · 停止核对：已确认副本 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa · undefined 文件 · 排除路径 undefined · 脱敏文件 undefinedsemgrep：步骤已完成 · scan-001命中位置副本范围已关联 2/2 条 · 未关联 0 条列号使用 UTF-8 字节。仅核对扫描副本的字节范围，不证明扫描来源、AST、执行或漏洞；所有命中仍待验证。查看命中位置工具命中待验证；登录、越权、业务逻辑、架构、未选工具与排除内容仍未覆盖。'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/joint-source-client.test.mjs:63:184)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查等待原联合任务取消或核对停止下载联合报告 JSON任务：location-task-001 · 所选步骤已结束工具命中 2 条 · 子任务模型请求 0 次 · 停止核对：已确认副本 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa · undefined 文件 · 排除路径 undefined · 脱敏文件 undefinedsemgrep：步骤已完成 · scan-001命中位置副本范围已关联 2/2 条 · 未关联 0 条列号使用 UTF-8 字节。仅核对扫描副本的字节范围，不证明扫描来源、AST、执行或漏洞；所有命中仍待验证。查看命中位置工具命中待验证；登录、越权、业务逻辑、架构、未选工具与排除内容仍未覆盖。',
+    expected: /回执与项目不匹配/,
+    operator: 'match'
+  }
+
+test at work/harness-purge-improved/tests/joint-source-client.test.mjs:63:32
+✖ Malformed model count is rejected: -1 (0.065042ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /回执与项目不匹配/. Input:
+  
+  '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查等待原联合任务取消或核对停止下载联合报告 JSON任务：location-task-001 · 所选步骤已结束工具命中 2 条 · 子任务模型请求 -1 次 · 停止核对：已确认副本 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa · undefined 文件 · 排除路径 undefined · 脱敏文件 undefinedsemgrep：步骤已完成 · scan-001命中位置副本范围已关联 2/2 条 · 未关联 0 条列号使用 UTF-8 字节。仅核对扫描副本的字节范围，不证明扫描来源、AST、执行或漏洞；所有命中仍待验证。查看命中位置工具命中待验证；登录、越权、业务逻辑、架构、未选工具与排除内容仍未覆盖。'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/joint-source-client.test.mjs:63:184)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查等待原联合任务取消或核对停止下载联合报告 JSON任务：location-task-001 · 所选步骤已结束工具命中 2 条 · 子任务模型请求 -1 次 · 停止核对：已确认副本 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa · undefined 文件 · 排除路径 undefined · 脱敏文件 undefinedsemgrep：步骤已完成 · scan-001命中位置副本范围已关联 2/2 条 · 未关联 0 条列号使用 UTF-8 字节。仅核对扫描副本的字节范围，不证明扫描来源、AST、执行或漏洞；所有命中仍待验证。查看命中位置工具命中待验证；登录、越权、业务逻辑、架构、未选工具与排除内容仍未覆盖。',
+    expected: /回执与项目不匹配/,
+    operator: 'match'
+  }
+
+test at work/harness-purge-improved/tests/joint-source-client.test.mjs:63:32
+✖ Malformed model count is rejected: {} (0.061417ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /回执与项目不匹配/. Input:
+  
+  '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查等待原联合任务取消或核对停止下载联合报告 JSON任务：location-task-001 · 所选步骤已结束工具命中 2 条 · 子任务模型请求 [object Object] 次 · 停止核对：已确认副本 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa · undefined 文件 · 排除路径 undefined · 脱敏文件 undefinedsemgrep：步骤已完成 · scan-001命中位置副本范围已关联 2/2 条 · 未关联 0 条列号使用 UTF-8 字节。仅核对扫描副本的字节范围，不证明扫描来源、AST、执行或漏洞；所有命中仍待验证。查看命中位置工具命中待验证；登录、越权、业务逻辑、架构、未选工具与排除内容仍未覆盖。'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/joint-source-client.test.mjs:63:184)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查等待原联合任务取消或核对停止下载联合报告 JSON任务：location-task-001 · 所选步骤已结束工具命中 2 条 · 子任务模型请求 [object Object] 次 · 停止核对：已确认副本 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa · undefined 文件 · 排除路径 undefined · 脱敏文件 undefinedsemgrep：步骤已完成 · scan-001命中位置副本范围已关联 2/2 条 · 未关联 0 条列号使用 UTF-8 字节。仅核对扫描副本的字节范围，不证明扫描来源、AST、执行或漏洞；所有命中仍待验证。查看命中位置工具命中待验证；登录、越权、业务逻辑、架构、未选工具与排除内容仍未覆盖。',
+    expected: /回执与项目不匹配/,
+    operator: 'match'
+  }
+
+test at work/harness-purge-improved/tests/joint-source-client.test.mjs:64:1
+✖ Cancelling state is visible while stop remains unconfirmed (0.146041ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /取消中/. Input:
+  
+  '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查联合任务回执与项目不匹配'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/joint-source-client.test.mjs:64:156)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '联合安全审查VM · 受管工具源码副本 / 本地HTTP → 选择静态检查 / ZAP / Kali / REA / PentAGI → 统一证据报告Kali离线Python检查；REA＋reverse-skill静态JavaScript图。PentAGI子任务在禁网工作容器内读取副本，模型通过既有DeepSeek账号调用：最多16次请求、每次2048输出tokens，不是货币金额上限。默认360秒，聊天费用另计。核对联合范围与原任务核对深度检查范围 semgrep trivy · 未授权或未就绪 zap · 未授权或未就绪 kali · 未授权或未就绪 rea · 未授权或未就绪 pentagi · 未授权或未就绪Kali副本交接尚未授权；可在上方项目范围勾选并确认保存。启动联合审查联合任务回执与项目不匹配',
+    expected: /取消中/,
+    operator: 'match'
+  }

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Builder"
+  short_description: "Build new projects from brief to verified first release"
+  default_prompt: "Use $project-builder to build this project from scratch, reuse confirmed requirements, verify the first release, and hand off to Personal Work Agent."

@@ -1,0 +1,10 @@
+{
+  "confirmedBlockingFindings": 0,
+  "notes": {
+    "N1": "Legacy Python identity diagnostic priority differs, fail-closed; document.",
+    "N2": "v6 now adds v1 legacy blocker; document semantics and storage identity.",
+    "N3": "Storage-field mutation and valid-format identity negative tests added in S2.",
+    "N4": "Direct loader negative/drift cases added in S2; old test name corrected.",
+    "N5": "Installed-only source/hash and stdlib import closure carried into S2; run uses verified snapshot hash."
+  }
+}

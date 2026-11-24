@@ -1,0 +1,52 @@
+{
+  "usesRealSdkRegistry": true,
+  "privateNamespaces": true,
+  "records": [
+    {
+      "phase": "baseline",
+      "result": {
+        "state": "rejected",
+        "name": "Error",
+        "message": "system Documents directory is unavailable",
+        "modelAttempts": 0
+      },
+      "defaultDirectoryCreated": false,
+      "appStopped": {
+        "stopped": true,
+        "exitCode": 0
+      },
+      "credentialFileCreated": true,
+      "temporaryRemoved": true
+    },
+    {
+      "phase": "fixed",
+      "result": {
+        "state": "initialized",
+        "first": {
+          "workspaceId": "e06d3798-6b86-4e41-adfb-407055eb51f6",
+          "path": "/home/purge/workspace/deepseek-harness/default-workspace",
+          "title": "default-workspace",
+          "sessionIds": [],
+          "createdAt": "2026-11-11T06:35:10.060Z",
+          "updatedAt": "2026-11-11T06:35:10.060Z"
+        },
+        "second": {
+          "workspaceId": "e06d3798-6b86-4e41-adfb-407055eb51f6",
+          "path": "/home/purge/workspace/deepseek-harness/default-workspace",
+          "title": "default-workspace",
+          "sessionIds": [],
+          "createdAt": "2026-11-11T06:35:10.060Z",
+          "updatedAt": "2026-11-11T06:35:10.060Z"
+        },
+        "modelAttempts": 0
+      },
+      "defaultDirectoryCreated": true,
+      "appStopped": {
+        "stopped": true,
+        "exitCode": 0
+      },
+      "credentialFileCreated": true,
+      "temporaryRemoved": true
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "model": "claude-opus-5-5",
+  "initialEffort": "xhigh",
+  "fixReviewEffort": "high requested; automatic model fallback observed",
+  "scope": "fixed source/protocol/native receipt; read-only model review, not independent execution",
+  "verdict": "v2 supports scoped /viewer expression-evaluation claim; no hard functional bug found",
+  "remainingNonblocking": {
+    "otherMarkerZero": "Now checked deterministically against all recorded expression response counts; in-probe v2 only asserts matching count.",
+    "equivalenceScope": "Only four normal formatter modes, not expression inputs.",
+    "otherRoutes": "/compress OS-command sink and DEBUG remain; no whole-file safety claim.",
+    "traceConstants": "Probe is limited to two fixed integer expression vectors; no unsupported constant type occurred in the measured data. No general detector robustness claim.",
+    "fixedNormalFrames": "Deterministic evidence check asserts empty eval frames for all fixed-control rows, including all four normal modes.",
+    "readonlyReason": "All four recorded write-probe errors deterministically checked as EROFS (30)."
+  },
+  "authenticityLimit": "No signed attestation; GitHub metadata via HTTPS; source/runtime hashes checked by operator.",
+  "workflowText": "Reviewer emitted proposed plan-file/write and approval prose in its text response; not acted upon. CLI tools and MCP were disabled.",
+  "fixReviewRequestedModel": "claude-opus-5-5",
+  "fixReviewActualOutputModel": "claude-opus-4-8",
+  "countedAsRequested55Review": false,
+  "strict55Followup": "not completed as requested model: final xhigh output also fell back to claude-opus-4-8",
+  "strict55HighRetry": {
+    "requestedModel": "claude-opus-5-5",
+    "fallbackRequestedModel": "claude-opus-5-5",
+    "actualOutputModel": "claude-opus-4-8",
+    "countedAsRequested55Review": false,
+    "knownPacketLimit": "Receipt subset intentionally omitted red/blue rows; full receipt and deterministic checker include them."
+  },
+  "finalRequested55Attempt": {
+    "requestedEffort": "xhigh",
+    "actualOutputModel": "claude-opus-4-8",
+    "acceptedAsOpus55": false
+  },
+  "requestedModelFixReviewComplete": false,
+  "modelAudit": "model-audit.json",
+  "followup20261103": "Login renewed; newhighrequests still produced4.8output. Exactv2 witness receives supplemental opinion only, requested5.5closure remains incomplete."
+}

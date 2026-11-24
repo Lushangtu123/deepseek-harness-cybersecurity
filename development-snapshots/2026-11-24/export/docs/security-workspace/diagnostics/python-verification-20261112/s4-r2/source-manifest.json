@@ -1,0 +1,10 @@
+{
+  "scripts/verifier_snapshot.py": "fdf2d0d00ae75a158ec6bc38d49b7944030ef2ede101879da0ad8912fe558dca",
+  "scripts/reviewer_snapshot.py": "f9706edeba2279aca7a4b78d1a36d54e87a39e19359a585a50184493c47a662d",
+  "scripts/review_quality_gate.mjs": "623f85986748ffb14b2c94fab47f8d2d385535f45c11578c0a52fea44f1e8aee",
+  "scripts/verifier-dependencies.lock.json": "6fdb3995e50f63d50714c99c529550d741354286849d3b044ecf83ec97c35394",
+  "scripts/verifier_snapshot.test.py": "57514342548d13d9d8e7da4ba9956fc17ed741024cd2a88569a662a7d2422c22",
+  "scripts/verify_execution_controller.test.py": "4178a30ec5c393a354847926f5ce74757c103b25ae9197824ff8a9f3ba12a801",
+  "work/harness-purge-improved/tests/verification-artifacts.test.mjs": "e0c51d7eebdb86f0b460d10aba29ef7d3ef5193bb227fb1885d411cd9c2e24c6",
+  "docs/security-workspace/python-execution-verification.md": "74432f13248ce19be3ad51817adb0e9b63f4add6dcf71af1fe88da3001374504"
+}

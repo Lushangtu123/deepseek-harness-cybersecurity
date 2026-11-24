@@ -1,0 +1,88 @@
+(node:9321) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Semgrep parsing retains exact byte spans and rejects redacted control identities (2.9455ms)
+✔ Missing, negative, oversized or contradictory spans retain warnings without fabricated precision (0.536583ms)
+✔ Managed bindings cross-check raw UTF8 and CRLF bytes with snapshot identity (3.223334ms)
+✖ Changed bytes, shifted offsets and symlinks cannot inherit exact source identity (1.268375ms)
+✖ Legacy line-only input is explicitly unavailable while retaining finding status (0.675625ms)
+✖ Missing or non-boolean redaction provenance cannot imply an unredacted copy (0.679542ms)
+✖ Later evidence callbacks cannot replace a byte binding or append invented rows (0.719375ms)
+✔ A partially invalid or duplicate snapshot manifest cannot bind an earlier valid file (0.4795ms)
+✔ Only numeric scanner coordinates enter stored source metadata (0.811333ms)
+✔ Same-line sites survive managed persistence, pagination and reload, with immutable source hashes (93.176833ms)
+✔ Redacted managed bytes bind to their copy hash; original offsets never bind by accident (295.139459ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 7
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 469.729458
+
+✖ failing tests:
+
+test at work/harness-purge-improved/tests/source-location.test.mjs:49:1
+✖ Changed bytes, shifted offsets and symlinks cannot inherit exact source identity (1.268375ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'source-digest-mismatch'
+  - 'source-unavailable'
+            ^
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/source-location.test.mjs:61:11)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'source-digest-mismatch',
+    expected: 'source-unavailable',
+    operator: 'strictEqual'
+  }
+
+test at work/harness-purge-improved/tests/source-location.test.mjs:65:1
+✖ Legacy line-only input is explicitly unavailable while retaining finding status (0.675625ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'partial'
+  - 'unavailable'
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/source-location.test.mjs:68:48)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'partial',
+    expected: 'unavailable',
+    operator: 'strictEqual'
+  }
+
+test at work/harness-purge-improved/tests/source-location.test.mjs:71:1
+✖ Missing or non-boolean redaction provenance cannot imply an unredacted copy (0.679542ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/source-location.test.mjs:76:11)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual'
+  }
+
+test at work/harness-purge-improved/tests/source-location.test.mjs:80:1
+✖ Later evidence callbacks cannot replace a byte binding or append invented rows (0.719375ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception (TypeError).
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/source-location.test.mjs:84:10)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'throws'
+  }

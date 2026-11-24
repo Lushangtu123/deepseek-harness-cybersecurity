@@ -1,0 +1,141 @@
+.....F...FFFFFFFF.......F
+======================================================================
+FAIL: test_byte_offset_disagreement_is_partial_even_when_columns_match (__main__.NamespaceReviewTests.test_byte_offset_disagreement_is_partial_even_when_columns_match)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 198, in test_byte_offset_disagreement_is_partial_even_when_columns_match
+    self.assertEqual(report['state'],'partial');self.assertEqual(report['observations'],[])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'completed' != 'partial'
+- completed
++ partial
+
+
+======================================================================
+FAIL: test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint (__main__.NamespaceReviewTests.test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint) (source='def run[eval](value):\n    if value not in ("6*7", "7*8"):\n        raise ValueError("outside")\n    scope = {"__builtins__": {}}\n    return eval(value, scope)\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 185, in test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint
+    row=self.unknown(source)
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 33, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint (__main__.NamespaceReviewTests.test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint) (source='exec("eval = custom")\ndef run(value):\n    if value not in ("6*7", "7*8"):\n        raise ValueError("outside")\n    scope = {"__builtins__": {}}\n    return eval(value, scope)\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 185, in test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint
+    row=self.unknown(source)
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 33, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint (__main__.NamespaceReviewTests.test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint) (source='__builtins__["eval"] = custom\ndef run(value):\n    if value not in ("6*7", "7*8"):\n        raise ValueError("outside")\n    scope = {"__builtins__": {}}\n    return eval(value, scope)\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 185, in test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint
+    row=self.unknown(source)
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 33, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint (__main__.NamespaceReviewTests.test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint) (source='del __builtins__["eval"]\ndef run(value):\n    if value not in ("6*7", "7*8"):\n        raise ValueError("outside")\n    scope = {"__builtins__": {}}\n    return eval(value, scope)\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 185, in test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint
+    row=self.unknown(source)
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 33, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint (__main__.NamespaceReviewTests.test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint) (source='import builtins\nbuiltins.__dict__["eval"] = custom\ndef run(value):\n    if value not in ("6*7", "7*8"):\n        raise ValueError("outside")\n    scope = {"__builtins__": {}}\n    return eval(value, scope)\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 185, in test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint
+    row=self.unknown(source)
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 33, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint (__main__.NamespaceReviewTests.test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint) (source='import builtins\nbuiltins.__dict__.update({"eval": custom})\ndef run(value):\n    if value not in ("6*7", "7*8"):\n        raise ValueError("outside")\n    scope = {"__builtins__": {}}\n    return eval(value, scope)\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 185, in test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint
+    row=self.unknown(source)
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 33, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint (__main__.NamespaceReviewTests.test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint) (source='g = globals\ng()["eval"] = custom\ndef run(value):\n    if value not in ("6*7", "7*8"):\n        raise ValueError("outside")\n    scope = {"__builtins__": {}}\n    return eval(value, scope)\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 185, in test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint
+    row=self.unknown(source)
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 33, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint (__main__.NamespaceReviewTests.test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint) (source='execute = exec\nexecute("eval = custom")\ndef run(value):\n    if value not in ("6*7", "7*8"):\n        raise ValueError("outside")\n    scope = {"__builtins__": {}}\n    return eval(value, scope)\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 185, in test_direct_and_aliased_namespace_effects_invalidate_the_binding_hint
+    row=self.unknown(source)
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 33, in unknown
+    self.assertEqual(row['constraint']['state'],'unresolved')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixed-set-guard-observed' != 'unresolved'
+- fixed-set-guard-observed
++ unresolved
+
+
+======================================================================
+FAIL: test_unrecognized_rule_prefix_is_counted_and_not_completed (__main__.NamespaceReviewTests.test_unrecognized_rule_prefix_is_counted_and_not_completed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/python_namespace_review.test.py", line 204, in test_unrecognized_rule_prefix_is_counted_and_not_completed
+    self.assertEqual(report['state'],'partial')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'completed' != 'partial'
+- completed
++ partial
+
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.111s
+
+FAILED (failures=10)

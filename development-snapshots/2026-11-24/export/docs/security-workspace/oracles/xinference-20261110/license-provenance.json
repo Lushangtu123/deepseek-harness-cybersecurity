@@ -1,0 +1,9 @@
+{
+  "source": "https://github.com/xorbitsai/inference/blob/1b3d220f342ce68d34cec4586d9409d457dadc42/LICENSE",
+  "gitBlobSha1": "f49a4e16e68b128803cc2dcea614603632b04eac",
+  "commit": "1b3d220f342ce68d34cec4586d9409d457dadc42",
+  "noticeChecked": false,
+  "scope": "Pinned LICENSE identity. Repository NOTICE presence was not checked in this diagnostic.",
+  "localSha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+  "gitBlobIdentityMatched": false
+}

@@ -1,0 +1,17 @@
+{
+  "kind": "independent-staged-execution-preflight",
+  "frozenFileCopies": 311,
+  "sourceManifestSha256": "affef050148f527c0a21dfb7c989eded6cd9c07f30f945ba9eb1048395d27f63",
+  "usedBytes": 13753971,
+  "additionalArchiveAllowance": 12460365,
+  "headerReserve": 2097216,
+  "copyByFrozenListNotWholeTree": true,
+  "payloadAndAdmissionValidatorsPassed": true,
+  "externalReviews": [
+    "source-shared",
+    "source-suites",
+    "source-admission"
+  ],
+  "VMSubmissions": 0,
+  "sameProtected109": true
+}

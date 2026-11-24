@@ -1,0 +1,497 @@
+{
+ "failed": [],
+ "fixturesImported": 0,
+ "kind": "cli-preflight-integrity-regression-results",
+ "note": "Docker and bpftrace are recorded shims; these are not real-machine results.",
+ "passed": 28,
+ "realContainers": 0,
+ "results": [
+  {
+   "decision": "confirmed",
+   "expectedShaMatchesFile": true,
+   "passed": true,
+   "returncode": 0,
+   "state": "completed",
+   "targetExecutions": 1,
+   "test": "fresh-compile-confirmed"
+  },
+  {
+   "expectedShaMatchesFile": true,
+   "first": "{\"step\": \"compile-per-attempt\", \"state\": \"prepared\", \"sha256\": \"508b83d40d47d1de7396b95b68dc68c568fe468c4e23f17fa797014e66f361c3\", \"reused\": false}",
+   "passed": true,
+   "second": "{\"step\": \"compile-per-attempt\", \"state\": \"prepared\", \"sha256\": \"508b83d40d47d1de7396b95b68dc68c568fe468c4e23f17fa797014e66f361c3\", \"reused\": true}",
+   "test": "reuse-confirmed"
+  },
+  {
+   "decision": "excluded",
+   "derived": {
+    "decision": "excluded",
+    "observedEvents": 0,
+    "reason": "syntax-reject",
+    "syntaxReject": true,
+    "targetExit": 3
+   },
+   "passed": true,
+   "reason": "syntax-reject",
+   "returncode": 0,
+   "test": "q4-correct-syntax-reject"
+  },
+  {
+   "passed": true,
+   "reason": "syntax-reject-target-exit",
+   "reservationHeld": false,
+   "returncode": 3,
+   "settled": true,
+   "test": "q4-wrong-exit-settled-unknown"
+  },
+  {
+   "observationErrors": [
+    "end-missing"
+   ],
+   "passed": true,
+   "reason": "ValueError:recomputed-observation-state:end-missing",
+   "returncode": 3,
+   "test": "q4-missing-end"
+  },
+  {
+   "passed": true,
+   "payloadSyntax": "valid",
+   "reason": "frozen-reason-mismatch",
+   "returncode": 3,
+   "test": "q4-non-syntax-error"
+  },
+  {
+   "longClaim": null,
+   "passed": true,
+   "test": "syntax-claim-and-structure-unsupported",
+   "unsupportedDerived": {
+    "decision": "excluded",
+    "observedEvents": 0,
+    "reason": "no-dynamic-event",
+    "syntaxReject": false
+   },
+   "validClaim": "expected-payload-syntax-mismatch"
+  },
+  {
+   "passed": true,
+   "removeCalls": 0,
+   "returncode": 79,
+   "stageRetained": true,
+   "stderrTail": "runner: container-name-conflict\n",
+   "test": "cleanup-name-conflict-retains-stage"
+  },
+  {
+   "changedCleanup": {
+    "lstatAfter": "present",
+    "removed": false,
+    "state": "identity-changed"
+   },
+   "link": {
+    "error": "symlink"
+   },
+   "linkCleanup": {
+    "lstatAfter": "present",
+    "removed": false,
+    "state": "symlink"
+   },
+   "passed": true,
+   "test": "stage-symlink-and-identity"
+  },
+  {
+   "cleanupConfirmed": true,
+   "passed": true,
+   "recoverReturn": 0,
+   "recoverStdout": "{\"attempt\": 1, \"cleanupConfirmed\": true, \"executionState\": \"not-started\", \"replayed\": false, \"targetExecutions\": 0}",
+   "replayStarts": 0,
+   "runReturn": 79,
+   "runStarts": 1,
+   "targetExecutions": 0,
+   "test": "early-failure-recovery"
+  },
+  {
+   "first": 0,
+   "passed": true,
+   "second": 79,
+   "stderrTail": "runner: attempt-already-reserved\n",
+   "test": "duplicate-reservation",
+   "used": [
+    1
+   ]
+  },
+  {
+   "command": "-I -B -S /review/preflight/preflight_selfcheck.py --preflight-id 1ebdf67e8ae1eefe94cb9c06f961262e",
+   "evidenceFiles": [
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/cleanup.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/container-created.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/container-intent.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/container-pid.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/diagnostic-client.stderr",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/diagnostic-client.stdout",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/diagnostic-observer.stderr",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/diagnostic-observer.stdout",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/layout.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/observation.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/observer.bt",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/observer.raw",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/preflight-config.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/preflight-intent.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/preflight-receipt.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/process-client-identity.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/process-client-intent.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/process-diagnostics.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/process-observer-identity.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/process-observer-intent.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/stage-created.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/stage-intent.json",
+    "preflight/evidence/1ebdf67e8ae1eefe94cb9c06f961262e/stage-started.json"
+   ],
+   "mountDestinations": [
+    "/review/preflight"
+   ],
+   "observation": {
+    "begin": "run=preflight tag=ec390b16f957a09c",
+    "beginCount": 1,
+    "bufferParserSha256": "99254927899fc52bce161d701d4f20872b92a9074eedf93fce30f91e3e4ec678",
+    "bufferTemplateSha256": "99d0c902172a94c4c54613e7ac64a6a8aa2f53f3137cfadbff417f03232d207d",
+    "callerOffsetVerified": true,
+    "callerSha256": "24484cc8305b002a8fcb007e769b717cb6cd622b07e46991611b208b87ed3b65",
+    "codeSha256": "59fbf27117957f3b933508fb2670f31f9c6b2bc56f93e1b71367abb7e31df898",
+    "complete": true,
+    "end": "run=preflight tag=ec390b16f957a09c events=1",
+    "endComplete": true,
+    "endCount": 1,
+    "errors": [],
+    "events": 1,
+    "framingPolicy": "end-lf-padding-v1",
+    "frozenTemplateName": "observer_template_buffer_v2.bt",
+    "frozenTemplateSha256": "99d0c902172a94c4c54613e7ac64a6a8aa2f53f3137cfadbff417f03232d207d",
+    "intZero": true,
+    "marker": "BUFFER-PROTOCOL buffer-v2",
+    "markerCount": 1,
+    "observationProtocol": "buffer-v2",
+    "observationSha256": "7ca9fb5571875ce547a9eabbfaa4e89daad90583898da042a4e09b4b2223204c",
+    "observerRebuildVerified": true,
+    "observerSha256": "75b6f6d3c4cfa12bb79721a77b4c13c61ddff8753169bd4c205f14ce0559ec8e",
+    "rawBytes": 303,
+    "rawSha256": "93306fee9492ded1e96654f72cfed47d00ab249df6fadea1da95cd9e7becce26",
+    "structureSha256": "daa75692969ee231c422d100d6e347d01b8543ab75fff5d08322ff1d8943fc5c",
+    "structureVerified": true,
+    "trailingBlankLines": 0
+   },
+   "passed": true,
+   "returncode": null,
+   "state": "accepted",
+   "test": "preflight-accepted-independent-recompute"
+  },
+  {
+   "dockerCalls": 0,
+   "passed": true,
+   "returncode": 2,
+   "stderrTail": "usage: zero_target_preflight.py [-h] {preflight,status,recover} ...\nzero_target_preflight.py: error: argument command: invalid choice: 'run' (choose from 'preflight', 'status', 'recover')\n",
+   "test": "preflight-cannot-run-formal-target"
+  },
+  {
+   "observationAbsent": true,
+   "passed": true,
+   "reason": "preflight-collector-exit:1",
+   "receiptExists": false,
+   "returncode": 79,
+   "staleFileUnchanged": true,
+   "test": "collector-failure-no-stale-observation"
+  },
+  {
+   "claimState": "consumed",
+   "completed": true,
+   "first": 0,
+   "loserStderr": "preflight: preflight-locked\n",
+   "passed": true,
+   "retry": 79,
+   "second": 79,
+   "test": "same-license-concurrency-and-retry-rejected"
+  },
+  {
+   "passed": true,
+   "retry": 79,
+   "retryStderr": "preflight: preflight-license-consumed\n",
+   "status": "{\"bufferParserSha256\": \"99254927899fc52bce161d701d4f20872b92a9074eedf93fce30f91e3e4ec678\", \"bufferTemplateSha256\": \"99d0c902172a94c4c54613e7ac64a6a8aa2f53f3137cfadbff417f03232d207d\", \"claimSha256\": \"3897675aed1ef4b92c038c9a4c0776716824844c4f30ab5580e6306a6ad30a79\", \"completedSha256\": \"02e2f9330f2125dcf28a14304c93a53611c8230e93cea072c8da882aa3e55378\", \"diagnostics\": {\"bytes\": 13459, \"diagnosticVersion\": 1, \"file\": \"process-diagnostics.json\", \"incompleteReasons\": [], \"outcome\": {\"captureComplete\": true, \"captureError\": null, \"cleanupObserved\": {\"client\": {\"identity\": {\"bootId\": \"5b7a541a-ed07-4a48-a66b-8899bea3981f\", \"groupLeader\": true, \"pgid\": 2453277, \"pid\": 2453277, \"starttime\": 28215044}, \"members\": 0, \"proof\": \"group-query\", \"state\": \"exited\"}, \"container\": {\"beforeRemoval\": {\"observed\": {\"entrypoint\": [\"/usr/bin/python3.12\"], \"hostConfig\": {\"CapDrop\": [\"ALL\"], \"Memory\": 536870912, \"MemorySwap\": 536870912, \"NanoCpus\": 1000000000, \"NetworkMode\": \"none\", \"PidsLimit\": 64, \"ReadonlyRootfs\": true, \"SecurityOpt\": [\"no-new-privileges\"], \"Tmpfs\": {\"/tmp\": \"rw,size=32m,nosuid,nodev,noexec\"}}, \"id\": \"5f56052d4616a3b34310b50ff999618e744d26894eae47b7192037f9db3f887e\", \"image\": \"sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7\", \"labels\": {\"sce.role\": \"preflight\", \"sce.tag\": \"ce526f68914103c8\"}, \"mounts\": [{\"Destination\": \"/tmp\", \"RW\": true, \"Source\": \"\", \"Type\": \"tmpfs\"}, {\"Destination\": \"/review/preflight\", \"RW\": false, \"Source\": \"/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/preflight-replay-f8c0a268/preflight/evidence/dc7383aa54f6e494dbcc4abd75348abc/stage-ce526f68914103c8/tools\", \"Type\": \"bind\"}], \"name\": \"stdlib-cli-preflight-ce526f68914103c8\", \"pid\": 2453277, \"status\": \"exited\", \"user\": \"65534:65534\"}, \"state\": \"present\"}, \"queries\": {\"id\": {\"detail\": \"no-such-object\", \"state\": \"absent\"}, \"name\": {\"detail\": \"no-such-object\", \"state\": \"absent\"}, \"tag\": {\"rows\": [], \"state\": \"absent\"}}, \"removed\": true, \"state\": \"removed\"}, \"observer\": {\"identity\": {\"bootId\": \"5b7a541a-ed07-4a48-a66b-8899bea3981f\", \"groupLeader\": true, \"pgid\": 2453281, \"pid\": 2453281, \"starttime\": 28215052}, \"members\": 0, \"proof\": \"group-query\", \"state\": \"exited\"}}, \"confirmed\": true, \"incompleteReasons\": [], \"originalReason\": null, \"persistenceComplete\": true, \"phase\": \"success\"}, \"preflightId\": \"dc7383aa54f6e494dbcc4abd75348abc\", \"readiness\": {\"observedAt\": \"2026-11-24T16:39:50.784848+00:00\", \"processReturncode\": null, \"reason\": \"begin-and-required-lines-observed\", \"result\": \"ready\", \"stderrEof\": false, \"stdoutEof\": false, \"streamError\": null}, \"roles\": {\"client\": {\"pid\": 2453277, \"postCleanupReturncode\": {\"at\": \"2026-11-24T16:39:51.002204+00:00\", \"known\": true, \"method\": \"poll\", \"returncode\": 0}, \"streams\": {\"stderr\": {\"bytes\": 0, \"file\": \"diagnostic-client.stderr\", \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\", \"truncated\": false}, \"stdout\": {\"bytes\": 2353, \"file\": \"diagnostic-client.stdout\", \"sha256\": \"7e6a1bdaeaf05b658d0fc5924e6df5206dbbc22daff225571aea9343aab51d95\", \"truncated\": false}}}, \"observer\": {\"pid\": 2453281, \"postCleanupReturncode\": {\"at\": \"2026-11-24T16:39:51.002211+00:00\", \"known\": true, \"method\": \"poll\", \"returncode\": 0}, \"streams\": {\"stderr\": {\"bytes\": 23, \"file\": \"diagnostic-observer.stderr\", \"sha256\": \"5067c1c0a1d28dc1fb84af428f4026754522725d387b283d86f38540432aea6a\", \"truncated\": false}, \"stdout\": {\"bytes\": 303, \"file\": \"diagnostic-observer.stdout\", \"sha256\": \"2fd8ab734a4068be0d040c83406f7aa03b88ba3b6420bf464ff403affcf162e7\", \"truncated\": false}}}}, \"sha256\": \"92e5324cd42d19db061fa83ea1404bd4a68c811e26dde389aaea2d11e8373996\", \"state\": \"present\"}, \"evidenceDir\": \"preflight/evidence/dc7383aa54f6e494dbcc4abd75348abc\", \"framingPolicy\": \"end-lf-padding-v1\", \"observationProtocol\": \"buffer-v2\", \"preflightId\": \"dc7383aa54f6e494dbcc4abd75348abc\", \"preflightReceiptSha256\": \"e009b5bc317f03b3e11802872114746295edc37f71cbb005dc1df5de9caec672\", \"recoveries\": [], \"state\": \"completed\"}",
+   "test": "preflight-replay-status-by-original-id",
+   "unknown": "{\"preflightId\": \"ffffffffffffffffffffffffffffffff\", \"state\": \"unknown-id\"}"
+  },
+  {
+   "newAttempts": 0,
+   "observationReason": "runner: admission-preflight:observation-mismatch\n",
+   "observationReturn": 78,
+   "passed": true,
+   "rawReason": "runner: admission-preflight:observation-mismatch\n",
+   "rawReturn": 78,
+   "receiptReason": "ness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/cross-run-a-c761b9dc/preflight/evidence/bfe00acdf914439876f72f25304fdc13/preflight-receipt.json\n",
+   "receiptReturn": 78,
+   "test": "cross-run-raw-observation-receipt-mixing"
+  },
+  {
+   "judgeDecision": "unknown",
+   "judgeReason": "ValueError:digest-chain:attempt.layoutSha256 == verified layout bytes",
+   "newCreates": 0,
+   "newStarts": 0,
+   "passed": true,
+   "runReason": "runner: layout-digest\n",
+   "runReturn": 79,
+   "test": "layout-change-after-bind-rejected"
+  },
+  {
+   "dockerCalls": 0,
+   "passed": true,
+   "reason": "runner: manifest-file-mismatch:tools/observer_template_buffer_v2.bt\n",
+   "returncode": 78,
+   "test": "template-change-before-use-rejected"
+  },
+  {
+   "outcomes": {
+    "empty": "exited",
+    "malformed": "unknown",
+    "missing": "unknown",
+    "not_started": "exited",
+    "permission": "unknown",
+    "spawn_missing": "unknown"
+   },
+   "passed": true,
+   "test": "process-three-state-and-missing-identity"
+  },
+  {
+   "passed": true,
+   "replacement": {
+    "detail": "id-absent-name-replacement",
+    "observed": null,
+    "removed": false,
+    "state": "unknown"
+   },
+   "rmCalls": 0,
+   "test": "same-name-replacement-and-image-mismatch",
+   "wrongImage": {
+    "detail": "container-image-mismatch",
+    "observed": {
+     "entrypoint": [
+      "/usr/bin/python3.12"
+     ],
+     "hostConfig": {},
+     "id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+     "image": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+     "labels": {
+      "sce.tag": "0123456789abcdef"
+     },
+     "mounts": [],
+     "name": "name",
+     "pid": 1,
+     "status": "running",
+     "user": "65534:65534"
+    },
+    "removed": false,
+    "state": "unknown"
+   }
+  },
+  {
+   "firstConfirmed": false,
+   "firstStageCalls": [],
+   "passed": true,
+   "secondConfirmed": false,
+   "secondStageCalls": [],
+   "test": "unknown-resource-retains-stage",
+   "thirdConfirmed": true,
+   "thirdStageCalls": [
+    [
+     "stage",
+     "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/unknown-stage-84e61ab4/prepare/stage-test"
+    ]
+   ]
+  },
+  {
+   "passed": true,
+   "result": {
+    "detail": "still-running",
+    "forced": true,
+    "state": "alive",
+    "stopped": false
+   },
+   "signals": [
+    2,
+    15,
+    9
+   ],
+   "test": "forced-observer-stop-is-not-graceful"
+  },
+  {
+   "outcomes": {
+    "forced-stop": {
+     "acceptedReceipt": false,
+     "reason": "preflight-observer-forced-stop",
+     "returncode": 79
+    },
+    "missing-end": {
+     "acceptedReceipt": false,
+     "reason": "preflight-collector-exit:3",
+     "returncode": 79
+    },
+    "truncated": {
+     "acceptedReceipt": false,
+     "reason": "preflight-observer-truncated",
+     "returncode": 79
+    }
+   },
+   "passed": true,
+   "test": "preflight-observer-failure-modes"
+  },
+  {
+   "endInfo": {
+    "beginCount": 1,
+    "drainComplete": true,
+    "endCount": 1,
+    "forcedStop": true,
+    "framingPolicy": "end-lf-padding-v1",
+    "gracefulStop": false,
+    "line": "run=attempt-0001 tag=123c9da0ce9b events=1",
+    "marker": "BUFFER-PROTOCOL buffer-v2",
+    "markerCount": 1,
+    "multiple": false,
+    "observationProtocol": "buffer-v2",
+    "parseErrors": [],
+    "present": true,
+    "trailing": false,
+    "trailingBlankLines": 0,
+    "truncated": false
+   },
+   "observationErrors": [
+    "forced-stop"
+   ],
+   "observationState": "invalid",
+   "passed": true,
+   "returncode": 3,
+   "test": "formal-forced-observer-stop-blocks",
+   "verdictReason": "ValueError:recomputed-observation-state:forced-stop"
+  },
+  {
+   "cases": {
+    "changed-profile": {
+     "dockerCalls": 0,
+     "expected": "manifest-file-mismatch:tools/observer-profile.lock.json",
+     "newAttempts": 0,
+     "reason": "runner: manifest-file-mismatch:tools/observer-profile.lock.json\n",
+     "returncode": 78
+    },
+    "cross-run-preflight": {
+     "dockerCalls": 0,
+     "expected": "admission-preflight:",
+     "newAttempts": 0,
+     "reason": "runner: admission-preflight:missing:/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/formal-cross-run-preflight-0f2005ef/preflight/evidence/ffffffffffffffffffffffffffffffff/preflight-receipt.json\n",
+     "returncode": 78
+    },
+    "missing-manifest": {
+     "dockerCalls": 0,
+     "expected": "manifest-missing",
+     "newAttempts": 0,
+     "reason": "runner: manifest-missing\n",
+     "returncode": 78
+    },
+    "missing-preflight": {
+     "dockerCalls": 0,
+     "expected": "admission-preflight:missing",
+     "newAttempts": 0,
+     "reason": "runner: admission-preflight:missing:/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/formal-missing-preflight-8007b30b/preflight/evidence/644ac9b791314db8646250e22651e26c/preflight-receipt.json\n",
+     "returncode": 78
+    },
+    "missing-preflight-license": {
+     "dockerCalls": 0,
+     "expected": "admission-preflight:missing",
+     "newAttempts": 0,
+     "reason": "runner: admission-preflight:missing:/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/tmp/formal-missing-preflight-license-ba150ca9/codex-review/preflight-admission.json\n",
+     "returncode": 78
+    },
+    "missing-review": {
+     "dockerCalls": 0,
+     "expected": "admission-review-missing",
+     "newAttempts": 0,
+     "reason": "runner: admission-review-missing\n",
+     "returncode": 78
+    },
+    "review-blockers": {
+     "dockerCalls": 0,
+     "expected": "admission-review-blockers",
+     "newAttempts": 0,
+     "reason": "runner: admission-review-blockers\n",
+     "returncode": 78
+    },
+    "tampered-preflight": {
+     "dockerCalls": 0,
+     "expected": "admission-preflight-tampered",
+     "newAttempts": 0,
+     "reason": "runner: admission-preflight-tampered\n",
+     "returncode": 78
+    },
+    "tampered-preflight-tool": {
+     "dockerCalls": 0,
+     "expected": "admission-preflight:receipt-tool",
+     "newAttempts": 0,
+     "reason": "runner: admission-preflight:receipt-tool:structure.py\n",
+     "returncode": 78
+    },
+    "wrong-runtime": {
+     "dockerCalls": 0,
+     "expected": "admission-preflight:receipt-profile-identity",
+     "newAttempts": 0,
+     "reason": "runner: admission-preflight:receipt-profile-identity\n",
+     "returncode": 78
+    }
+   },
+   "passed": true,
+   "test": "formal-admission-binds-actual-evidence"
+  },
+  {
+   "cleanupConfirmed": true,
+   "passed": true,
+   "recoverReturn": 0,
+   "recoverStdout": "{\"attempt\": 1, \"cleanupConfirmed\": true, \"executionState\": \"observed\", \"replayed\": false, \"targetExecutions\": 1}",
+   "replayStarts": 0,
+   "runReturn": 0,
+   "test": "correct-settlement-and-recovery-no-replay"
+  },
+  {
+   "cases": {
+    "observation": {
+     "decision": "unknown",
+     "reason": "ValueError:digest-chain:attempt.observationSha256 == observation bytes"
+    },
+    "raw": {
+     "decision": "unknown",
+     "reason": "ValueError:digest-chain:attempt.observationRawSha256 == raw observer bytes"
+    },
+    "template": {
+     "decision": "unknown",
+     "reason": "ValueError:digest-chain:attempt.observerSha256 == rendered template bytes"
+    }
+   },
+   "passed": true,
+   "test": "tamper-observation-raw-template"
+  }
+ ],
+ "shimResolution": {
+  "bpftrace": {
+   "controlledDirectory": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/shims",
+   "executable": true,
+   "expectedPath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/shims/bpftrace",
+   "name": "bpftrace",
+   "resolvedPath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/shims/bpftrace",
+   "sha256": "6104b989cabdd9675d124c5ce48ad2b36e5462f89a291ed298fea635f0c3cf79"
+  },
+  "docker": {
+   "controlledDirectory": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/shims",
+   "executable": true,
+   "expectedPath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/shims/docker",
+   "name": "docker",
+   "resolvedPath": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1/candidate/checks/shims/docker",
+   "sha256": "2bc481cb094eaba100e8424c205adb5ebae9ae2c9c454571f02abde2dc0d7725"
+  }
+ },
+ "simulated": true,
+ "targetExecutions": 0,
+ "total": 28,
+ "version": 2
+}

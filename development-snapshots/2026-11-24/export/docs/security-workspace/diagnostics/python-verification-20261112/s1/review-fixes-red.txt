@@ -1,0 +1,45 @@
+(node:30850) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Missing or legacy model counts never turn into verified zero (0.559167ms)
+✔ Unknown step leaves total unknown while preserving verified subtotal (0.076375ms)
+✔ Only all-verified counts produce a known task total (0.070834ms)
+✔ Adapter missing counts remain unknown; invalid counts cannot enter state (0.768542ms)
+✖ A verified assertion without count protocol is not a verified count (0.45125ms)
+✖ Malformed unknown-zero response renders unknown rather than zero (4.597875ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 4
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 65.450042
+
+✖ failing tests:
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.mjs:18:1
+✖ A verified assertion without count protocol is not a verified count (0.45125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== null
+  
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.mjs:18:161)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: null,
+    operator: 'strictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.mjs:19:1
+✖ Malformed unknown-zero response renders unknown rather than zero (4.597875ms)
+  TypeError [Error]: m.modelRequestCountText is not a function
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/model-counts.test.mjs:19:174)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7)

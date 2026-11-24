@@ -1,0 +1,285 @@
+{
+  "scope": "Authored unit and byte-position development controls only; no independent qualification",
+  "sources": [
+    {
+      "sha256": "00d4a33ae7ae50f6f4f9c82fbd18ef38552a4b7853bc92333ee60825a7ce3802",
+      "source": "def run(value, eval):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "02e3e3983bdb8373b1ca32c0a6d51a74c7a79c2ae8d638fd3120caf3cdee0707",
+      "source": "globals()[\"eval\"] = custom\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "090e859fd2bddb04db053ce51a0268f1cdc0e9a44041762893696d523f73327d",
+      "source": "def run(value):\n    if value not in (\"dangerous()\",):\n        return \"bad\"\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "10399bfae0db5c5674cd8c1368dbf740a3d41d790a47323861c306c2cd0f7834",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    value = eval(value, scope)\n"
+    },
+    {
+      "sha256": "147f61c2ba6689eb20e39d2e092ce0280283c16e6e868508ac541cbf6c23ae4e",
+      "source": "execute = exec\nexecute(\"eval = custom\")\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "1a6f38e3c192aa48e8faa60436ad2f7c82939c0f2ad5c2ba9f67b235ad896cfe",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "1b0bb013b1dbc0576e68a26f9c4aa6413723c70e29e5e6908f570625fc22bd27",
+      "source": "def run(value):\n    if other not in (\"6*7\",):\n        raise ValueError()\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "1b953b1387d20773e43a5ca22ed85603c2ca62a0ca6acd9a0a6974edad066bff",
+      "source": "import builtins\nbuiltins.__dict__.update({\"eval\": custom})\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "1ea48e0cf78ee6fa492e58201177c476d6b3c121905365d8158e48863e9e2281",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    eval = custom\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "233ac6e36843010cc4bf4ffac71d6c4b95b7dae9b67af379a7c1a8f902765270",
+      "source": "# coding: utf-7\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    #+AAo-    value = other\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "236273a9596b7d066b4d98341bcff04e49c9a62b17e542f3635222789e3953f8",
+      "source": "from builtins import __dict__ as d\nd[\"eval\"] = custom\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "256da389139a3fc701205b3ca564a55b33405b817f0da32b733e9d6ff60d8137",
+      "source": "@decorate\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "26bc1784f2c20ad475660b3b6a36a5fe9b97ebe8f870a95f230127b98f651d01",
+      "source": "def run(value):\n    if value not in \"6*7\":\n        return \"bad\"\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "28a25af863f19fca85159825f858a1c5f96f6ba61ade240ecaf9717de1fcf161",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    local_scope = {}\n    return eval(value, scope, local_scope)\n"
+    },
+    {
+      "sha256": "2a423df41273b21e9548c92abf429429bdea390c2ed2e532fad64f0da95fdc9b",
+      "source": "from custom import *\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "2b415df21a7e41b8eb712992d2c2510937a3035b2a9472caed3da706fefde7be",
+      "source": "def run(value):\n    if value not in (\"6*7\",):\n        pass\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "2c334de84a8150504a721b5467aa5a5e848d29ac3cd78d56cf35b5a632fef40b",
+      "source": "# coding: latin-1\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "2cdd8de707e8b842249d572102d9ab0dff64dd769fa878bcce97e640a98bbd87",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    value += suffix\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "30bebe2a0814d32fd777a6ad83e24ba0d9f2c715695d77f57b9527de85054ba0",
+      "source": "def run(value=load()):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "343d79637e867e18831a0cbf71c907f98638eafe6f61e3b62b7c0fc592293184",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    exec(value, scope)\n"
+    },
+    {
+      "sha256": "3dc4d3a483261e960f1f1bcf1c21dfe6536949dc89e5076f80cab84fbd8ccd0a",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope[\"nested\"])\n"
+    },
+    {
+      "sha256": "3e98ff88b62b84a61b2f08dcf84b51fef3b1ac4a10be2075b6720511795b4b8a",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = mutate()\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "40e8de734585c3bab8a9f266a7ca5a457d8ea23f66114071a3e15acbf1919216",
+      "source": "raise RuntimeError(\"SOURCE_EXECUTED\")\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "4167a19aa62542a6a8838b0c229f69fc8566ca4eb7c241a5cab7b3271c588aaa",
+      "source": "def run(value):\n    if value not in (\"6*7\",):\n        return \"blocked\"\n    scope = {}\n    \"中文字🙂\"; eval(value, scope); exec(value, scope)\n"
+    },
+    {
+      "sha256": "475b5e925f835e38866d73ebf985a1d45a107b192fbde826914d1681d6dfc4ed",
+      "source": "def run(value):\n    while flag:\n        eval(value, {})\n        value = other\n"
+    },
+    {
+      "sha256": "5036a2ed3cdae7b69535086779c0e9c0f0a76a7e7904f7d70ab02fc969b47349",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, custom_mapping)\n"
+    },
+    {
+      "sha256": "5695b7810a11870c5a2bc0227c2ca28f6ba47b0200b924990fc15cc7afb370ab",
+      "source": "__builtins__[\"eval\"] = custom\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "5be801d904785a1850cc9c3118641df752b5881375bba3750b83be8464ecb3c8",
+      "source": "class Owner((eval := custom)):\n    pass\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "5c4a179cad22a8ffa3b1f79e01232427843cdea7f085e6853e0675841b935624",
+      "source": "def run(value):\r\n    if value not in (\"6*7\",):\r\n        return \"blocked\"\r\n    scope = {}\r\n    \"中文字🙂\"; eval(value, scope); exec(value, scope)\r\n"
+    },
+    {
+      "sha256": "5f88aca356c64efb3a6aed56571af1054122fa932e921489a807890549d4362e",
+      "source": "@(eval := decorate)\ndef helper():\n    pass\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "68bf6991d7be8b0e4d80239a5ad2e6780c338486e97cde456a99d4b10549547f",
+      "source": "def run(value):\n    if value not in dynamic:\n        return \"bad\"\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "6a1a71f1f755a242ab23030110ebb5c587bf86babcf85fc3e564e736fc623297",
+      "source": "# coding: UTF_8\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "6a26146b978de8e68fd0fe2fd7c3e43e045edeb32bfeb1cd0156782b739d89cb",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope.attr)\n"
+    },
+    {
+      "sha256": "6c4e85a450211be145ee0c51652dca5909bf21eaa095e49dcf8c94151959d68f",
+      "source": "def run(eval, value=eval(raw, {})):\n    return value\n"
+    },
+    {
+      "sha256": "6ddeda2b36ff08d35b6a3eaf9f5c3cfe8b7f319ba7f20d7a757704545269355a",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return consume(eval(value, scope))\n"
+    },
+    {
+      "sha256": "7070414f9fa3476b23a0dca41202aff260a15ab45b518f83c8d713a2f9e4bf29",
+      "source": "def helper(x: (eval := custom)):\n    pass\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "75e64d716720fa9a24ae2a34df817277a9c80fd1a4bc300d51632df9630509e4",
+      "source": "# coding: unknown_codec\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "767947d78f5ce60a512e81a41119b02509f510746627cb875e35426fad30883d",
+      "source": "def run(value):\n    if enabled and value not in (\"6*7\",):\n        raise ValueError()\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "850c81846a7618e60786235390d30b8e724a28e30a8ebff528fa9a88f8043ac6",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    global state\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "885a8712b3c6e46cde12035b7c8343bfe9a6d7f03aab4bc162ab8e461a6ca654",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    if condition:\n        value = other\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "94a9812dfc1d2eaa285f6ad65d4c7d53ae206459ccab4625920acdf60844d7b3",
+      "source": "from custom import eval\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "a3875f708cdf3f466e6c18d93834d4d0e210fa1d2e391d4c61bc4de0fd300641",
+      "source": "def run(value):\n\tif value not in (\"6*7\",):\n\t\treturn \"blocked\"\n\tscope = {}\n\t\"中文字🙂\"; eval(value, scope); exec(value, scope)\n"
+    },
+    {
+      "sha256": "a3c38949c6441c162c8e2ceca4bd039f13c8d8ff2f56ef0900df0a7c678defde",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    eval(value, scope); exec(value, scope)\n"
+    },
+    {
+      "sha256": "a61c924959958a852b41e96be63ead156fb2a2a862c0a0a8917da8657c90670f",
+      "source": "import builtins as b\nb.__dict__[\"eval\"] = custom\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "a6351943438b2c1640e93be3391d8ef65ba000a525636dbca486953530e816d8",
+      "source": "helper = lambda x=(eval := custom): x\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "a6f86292d52a83588018c2b1242a9a5b5c27fdc2333e7e6c16605850b3fd9cd8",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    if flag:\n        return eval(value, scope)\n"
+    },
+    {
+      "sha256": "a7a46fdc290c52781bb73470251fcacd7e1486c7aeb7951862c8109f1dcb6108",
+      "source": "def run[eval](value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "acc414da9e49d2b10e539cab4a6349ccc5e5a4ede19e91b447bad0f176e81784",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    local_scope = {}\n    exec(value, scope, local_scope)\n"
+    },
+    {
+      "sha256": "b344f61743a289b41bb16690bb75838fbdf836d0949ed6b5d2b146a8211bbe20",
+      "source": "# coding: utf-8\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "b674e16a79b195611bb967ba3e5e1ef6956cfc7522d39a8935795714700b7528",
+      "source": "exec(\"eval = custom\")\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "b7e1e62cdc625e2182cefbb87b5223e1ecf78ce35d954c9542939656d0ed8571",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    match other:\n        case value:\n            pass\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "b80f28aaf1857c3dcd4ea4b06cdda41bf17a859578c1bbb31036a4988674341c",
+      "source": "#!/usr/bin/python\n# coding=utf8\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "c14ee1b7d6c0ca41e941be8dba7df592d1d27c852105a46e11223440b1c5d748",
+      "source": "def helper() -> (eval := custom):\n    pass\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "c32765a668920ab082f8850b38b49425fc11d5551d31a7880d3efb79eef37a92",
+      "source": "def run(value: custom):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "c470ec64b8552b86c6d17cc66378979466bf833269ea87bd64640451179c1267",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    def helper(x=(value := other)):\n        pass\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "c89810d403f76dd527d9b7d728118841c6057d2894a027ae72199db6b8890a4b",
+      "source": "class Owner:\n    def run(value):\n        if value not in (\"6*7\", \"7*8\"):\n            raise ValueError(\"outside\")\n        scope = {\"__builtins__\": {}}\n        return eval(value, scope)\n"
+    },
+    {
+      "sha256": "cb753b2700871bd102dd5ae8b4c3022587d259e4b4a17a9a53e97fd43e4d6116",
+      "source": "import builtins\nbuiltins.eval = custom\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "ce27d675a3f61b37abbc0b18892cf03bf0582007462575336948e8b7c55a2620",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    import module as value\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "d1cc620ba9d391acb18b618bcaf670d90d5b1b9f2f32d907da165e692db0f6e6",
+      "source": "#!python\n# coding=cp1252\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "d468abbb1d906df41b03f02346545099e51931017c1d06913691e6454019076c",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    try:\n        load()\n    except Exception as value:\n        pass\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "dd016c1c334bcabccb9100d4b5feddbd73f11646ae37f0918f92c2ac8c5d4ce9",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, factory())\n"
+    },
+    {
+      "sha256": "e141aa340572b727bf16bc7666c72a14e381465ec30f34214ece52605117b4e9",
+      "source": "del __builtins__[\"eval\"]\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "e40ee5e988705295bc201819ca95b9169515455e046b4ab917457bcda4945f6f",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    value = other\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "e4d0cd9b083fc774bc4fac7d394a2735933ed2583b7602bc8ee2733899faf978",
+      "source": "def eval(value, scope):\n    return value\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "e57e06b8db9189031cfa49277d1be73c7400edfb8ccb85a726a0401c3bdc0203",
+      "source": "from builtins import eval as renamed\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "e593e5842b49c365ae64acac8abcac588e0ed08595ee9b364deaaf78b612f8b9",
+      "source": "def run(value):\n    return lambda: eval(value, {})\n"
+    },
+    {
+      "sha256": "ef3aba9514702ca6c647e923a0101cb164ecad7dc8102f2f8f37a3bdbe1b457e",
+      "source": "def run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    mutate()\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "f4ac50e8085644265c818f9809c1af5b9ea898b05b4f973402db7f506bc57682",
+      "source": "g = globals\ng()[\"eval\"] = custom\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "f4de384ca1da73100e362a38e7ace652e46fa0b90f9df14833d34ecc38fd14fb",
+      "source": "def helper(x=(eval := custom)):\n    pass\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    },
+    {
+      "sha256": "fd5b692038540823d0f1a61c7f2daefa72c01b575bb52b6c688f47a27cfc0de5",
+      "source": "import builtins\nbuiltins.__dict__[\"eval\"] = custom\ndef run(value):\n    if value not in (\"6*7\", \"7*8\"):\n        raise ValueError(\"outside\")\n    scope = {\"__builtins__\": {}}\n    return eval(value, scope)\n"
+    }
+  ]
+}

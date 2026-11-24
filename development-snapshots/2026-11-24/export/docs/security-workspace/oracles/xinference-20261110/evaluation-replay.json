@@ -1,0 +1,26 @@
+{
+  "state": "passed",
+  "capturedAt": "2026-11-10T22:01:55.093Z",
+  "checks": [
+    {
+      "phase": "baseline",
+      "originalReplayMatched": true,
+      "originalCanonicalBindingsMatched": true,
+      "correctedQualificationCases": 0,
+      "diagnosticCases": 2
+    },
+    {
+      "phase": "candidate",
+      "originalReplayMatched": true,
+      "originalCanonicalBindingsMatched": true,
+      "correctedQualificationCases": 0,
+      "diagnosticCases": 2
+    }
+  ],
+  "actualByteRangeMatched": true,
+  "offset": 1466,
+  "sourceSha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+  "retrospectiveCorrection": true,
+  "newFreezeCreated": false,
+  "correctionScope": "Selection metadata and non-qualifying oracle role added after feedback. Old freeze/run mismatch remains explicit. This is not a fresh acceptance run."
+}

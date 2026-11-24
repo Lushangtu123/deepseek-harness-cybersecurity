@@ -1,0 +1,21 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "script": "prepare.py",
+      "refused": true
+    },
+    {
+      "script": "build.py",
+      "refused": true
+    }
+  ],
+  "frozenHashesUnchanged": {
+    "intent.json": "1b0d2fbc1df91068ec2601b49dc79637e93b56fc4eeedcdb3bd4bd29fec99886",
+    "candidate-freeze.json": "42386b4d335571ebce2c633d187e1a3fd0ccd3353dfb5e89542017b2c7c84b0f",
+    "protocol.json": "5328d3e20f700fe538a8c0fdb60c8333017718a5127b0ac3d7731b17f51e4fe4",
+    "cases.json": "e3e3b23351e088efe74d018ad73f42bb02cb2689e575dbebd9b0daa7d39c33cb",
+    "arity17.candidate.json": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+    "combined20.candidate.json": "b1be84af0a007baa2f40891adf985cf81c2f84ff16aa70f927731621ff3e7328"
+  }
+}

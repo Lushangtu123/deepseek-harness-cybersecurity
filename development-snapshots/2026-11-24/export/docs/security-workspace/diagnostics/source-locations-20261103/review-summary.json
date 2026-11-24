@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "reviews": [
+    {
+      "receipt": "claude-review.json",
+      "scope": "core parser/binder/persistence/wire; B1 blocking fix required",
+      "requestedModel": "claude-opus-5-5",
+      "requestedEffort": "high",
+      "actualOutputModels": [
+        "claude-opus-5-5"
+      ],
+      "acceptedAsRequestedModel": true,
+      "receiptSha256": "db6c0aa13b24285a3644d5e7e3dca5185466c2856eb3a8158ba9ccc20c9490df",
+      "method": "Quoted-material reading; tools and MCP disabled; no native execution or independent vulnerability truth"
+    },
+    {
+      "receipt": "claude-fix.json",
+      "scope": "B1 copy-redaction provenance and adjacent hardening; scoped acceptance",
+      "requestedModel": "claude-opus-5-5",
+      "requestedEffort": "high",
+      "actualOutputModels": [
+        "claude-opus-5-5"
+      ],
+      "acceptedAsRequestedModel": true,
+      "receiptSha256": "145a4f18a8dc6ebeb439722be9a6a9c3ac0503c96c6906721d78f7ca9aadb074",
+      "method": "Quoted-material reading; tools and MCP disabled; no native execution or independent vulnerability truth"
+    }
+  ],
+  "outcome": "Core accepted conditionally, B1 corrected and targeted fix accepted; candidate not deployed or R3 qualified",
+  "candidateProgramFiles": 166,
+  "reviewedProgramDelta": {
+    "lib/redteam/personal-security-source-location.mjs": "73e4d14e459309e0340d9264b8332dd60a31e42cd76d45a93dd2a83f32c0d80d",
+    "lib/redteam/personal-security-workbench.mjs": "e2e003c6e808b49b600f582d32c5088e5fefddf538c4240b60c03c7497678596",
+    "lib/redteam/personal-joint-review.mjs": "4f7a30cfc16f56b3887ebaefebae46fb571e0314711a29f16b599df7dc43c8bd"
+  },
+  "blockingFixes": [
+    "Boolean copy-redaction provenance required across the entire manifest",
+    "Actual secret-before-calls managed-copy test binds copy hash; original out-of-range fixture stays unavailable"
+  ],
+  "adjacentHardening": [
+    "Failed reads reserve budget; exact admitted size passed to file reader",
+    "Bound metadata, points, finding rows and array immutable",
+    "No unrecognized raw coordinate fields serialized",
+    "Unavailable/partial/completed summary states explicit",
+    "Dedup message and source-only byte-binding semantics explicit"
+  ],
+  "postFixReviewDelta": "Only one test title and documentation were narrowed after the targeted fix review. Runtime program bytes unchanged. The11 focused tests were rerun on Mac; the full759 Mac/VM pass predates only that label edit. Frozen native test bytes preserved.",
+  "frozenNativeTestSha256": "18ea01ac8ba5b95c884499a63d8fb96c9a9e323ce3ee6fe60a70e8185217c38e",
+  "currentTestSha256": "1296a19acaec316d9d44131e0e3b4a47e6a0a276000cfade954963f213679d63",
+  "remainingLimits": [
+    "Valid byte coordinates do not authenticate scanner origin or an AST match; in-range coordinates from other bytes can fit",
+    "All actual source binding is to the managed copy, not original source identity or original offsets",
+    "Count summary remains mutable trusted-internal data; it is not execution or R3 authorization",
+    "Legacy ordinary-finding fingerprints and comparison snapshots remain line-based",
+    "No new independent samples, native fresh-scan/UI acceptance or deployment in this batch",
+    "Model review is scoped material review, not a complete security audit"
+  ],
+  "nativeInfrastructureFailures": "Initial and second bundles missed repository-level evaluators/fixtures; final264-file kit includes all8 deps and passes759 tests.",
+  "offlineReviewerRegistered": false,
+  "candidateDeployed": false,
+  "r3Qualified": false,
+  "previousSKFRequestedModelClosureComplete": false
+}

@@ -1,0 +1,38 @@
+{
+  "id": "4774e118-522e-4fd4-bdcf-47918c5d0b97",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Scoped review only; no R3/live claim.\n\nThe `scannerSpan` correction is fail-closed in `collectPythonEvidence`: a v2 `bound` row without `scannerSpan`, with a forged `pointId`, or with a mismatched span digest makes the whole managed result unavailable. `bindPythonExecutionPoints` independently requires `scannerSpan`, rechecks the point identity/SHA/span, and on failure removes stale `pointId`, `executionPoint`, and `executionMapping`. The isolated test covers the missing-span path. No security bypass was found in that fix.\n\nConfirmed scoped robustness defect: `bindPythonExecutionPoints` is not null-safe while `collectPythonEvidence` is. `collectPythonEvidence([null, ...])` is explicitly tested, but binding does `findings.filter(f=>rules.has(f.rule))`, which throws on a null row. Repro: `bindPythonExecutionPoints([null], evidence)`. The binder should use `f?.rule` and preserve null/non-rule rows unchanged or mark them unmatched. This is an availability/scope regression, not a privilege bypass.\n\nScoped binding gap: bind consumes `maps[index]` positionally but never checks `m.index===index`. `collectPythonEvidence` validates `m.index`, so the current pipeline is safe only if bind is called exclusively with collect output. A direct caller can pass reordered `findingLocations` containing otherwise valid same-path/rule/span points and bind a finding to another valid point. Add an index check or normalize before binding. Defense-in-depth, not a confirmed pipeline exploit.\n\nVM uniqueness guard: same-line uniqueness for files with points is correct. The zero-point branch is unconditional: `file.points.length===0 || matches.length===1`. A positive historical case whose points failed extraction passes and becomes `pointId:null`/`no-hit`; the score only rejects `unknown`, not `no-hit`. Allow zero points only for known no-hit/control cases, or fail positive cases with no points. Current four files may satisfy this, but the guard itself cannot distinguish the cases.\n\nConservative limitation: one malformed bound mapping collapses the whole collect result to unavailable. That is acceptable fail-closed behavior. No Chrome/new holdout/daily deploy/R3."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 12997,
+    "completion_tokens": 14912,
+    "total_tokens": 27909,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14438
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 12997
+  },
+  "streamDone": true,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 64103,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "26ea5097843f3bebd2a99b442c136cf29dfa714ac2fc70cf66a031f4729319fd",
+  "promptSha256": "eb05b4eafa2531f3f77cda040b40182c63829d821fed202f15e4a436f9cf18fd"
+}

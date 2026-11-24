@@ -1,0 +1,11 @@
+{
+  "logicalMatched": true,
+  "physicalChanged": [
+    {
+      "path": "/home/purge/.dsh-improved/redteam/engagements/vm-python-string-evidence-acceptance-20261103/assets.db",
+      "beforeSha256": "97e8d54f8a7255106f66cf1b213c4a4d7b558d21310b1c2bfedc3d0d526dddda",
+      "afterStopSha256": "c1d6cd1af9428cadf13edd47797debfcc312a0a6912d51c8e0b711fa7825b2eb"
+    }
+  ],
+  "writerOrMechanismEstablished": false
+}

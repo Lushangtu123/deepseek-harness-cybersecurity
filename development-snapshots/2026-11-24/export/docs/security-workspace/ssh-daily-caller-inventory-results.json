@@ -1,0 +1,270 @@
+{
+  "state": "reviewed-bounded-caller-inventory-complete",
+  "scopeBlockers": 0,
+  "audit": {
+    "observedAtUtc": "2026-11-10T20:09:13.757039+00:00",
+    "sourceHashes": {
+      "installed-manage.py": "69cc27ae32ba7be4362e6a4d94a4f253ac54d573380c98f58fa40bdb8758e401",
+      "installed-web-entry.mjs": "4cfb4d8fdb8cb82226d6136adbb706ca6f3caf4c0d54cb617b12099c8854d47c",
+      "installed-web-health.mjs": "b2b0790e02951e2d89c82383b3a565d06cc5e49ec8cbcf1feca35807a3fd67f3",
+      "installed-egress_proxy.py": "ddb3ea6b057a549b7f4c33e1548695e42455851add6c905c669ca89f33343033",
+      "installed-qemu-image.py": "9035d7e44bc5d6c110769fc32c3379d5a49aacf94a00c5277616ba8b1b0bf153",
+      "Harness.command": "4bb3df88e05c61b0442906c72f931b2f8da738373faf9a7b3b376eaa7c48c582",
+      "scripts/harness_launcher.py": "d3c302f047e4d397fe263773eda78513db158703f2c2670f8d4f5207ca23c582",
+      "scripts/security_db_update.py": "7ba8bb0812d6f7b0fc49904e845a4d7cd998fe59ef7df2177d4961535b04df04",
+      "scripts/harness_acceptance_relay.py": "9066f1884f100cbddcae9ef428c7e243df1683baee47c490e97f20169678875d",
+      "scripts/security_scanner_update.py": "98152bfbaa6bbf29a8db626d97ba106abf13d59f2e212f99277bc20f703c3796",
+      "scripts/storage_preview.py": "c6e3fd9045c88e281654ad8c31a34797a69686df8021dd3efb93ba099a480580",
+      "scripts/harness_launcher.test.py": "7d62d73d825f6bc8045ec76dbcfb64f727c15ad0c99f6e1fe9a2db4d309dee28",
+      "scripts/security_db_update.test.py": "d36370eb4fa080246d099edb4ec4750502a0f15054714f93f61afd571db1216e",
+      "scripts/security_db_transaction.py": "5cab529601a72065f06e9bf846c7020910c5753f6a17c8f53e7a2731e1f51d03",
+      "docs/launcher.md": "6839cb75e52df937e696e979d34d6961d56bd08c05452fe9a6cd68e3654460a9"
+    },
+    "exportManifestSha256": "9c487ca9a042e7e5fe2c181029680e15ccc2ed997031fd0ec5976ed80925a54b",
+    "canonicalFilesAtAudit": 1359,
+    "installedHostToolsMatchExport": {
+      "installed-manage.py": false,
+      "installed-web-entry.mjs": true,
+      "installed-web-health.mjs": true,
+      "installed-egress_proxy.py": true,
+      "installed-qemu-image.py": true
+    },
+    "managerNamedSshCalls": [
+      {
+        "function": "correlate_ssh_failure",
+        "lines": [
+          336
+        ]
+      },
+      {
+        "function": "measure_guest_clock",
+        "lines": [
+          439
+        ]
+      },
+      {
+        "function": "synchronize_clock",
+        "lines": [
+          454
+        ]
+      },
+      {
+        "function": "start",
+        "lines": [
+          487,
+          494
+        ]
+      },
+      {
+        "function": "switch",
+        "lines": [
+          534
+        ]
+      },
+      {
+        "function": "stop",
+        "lines": [
+          558
+        ]
+      },
+      {
+        "function": "deployment_status",
+        "lines": [
+          904
+        ]
+      },
+      {
+        "function": "refresh_capability_access",
+        "lines": [
+          1074
+        ]
+      },
+      {
+        "function": "original_capabilities",
+        "lines": [
+          1085
+        ]
+      },
+      {
+        "function": "repair_profile",
+        "lines": [
+          1108
+        ]
+      },
+      {
+        "function": "storage_capacity",
+        "lines": [
+          1126
+        ]
+      }
+    ],
+    "launchd": [
+      {
+        "label": "com.personal.harness-purge-original-web-entry",
+        "exitCode": 0,
+        "pid": 45300,
+        "state": "running",
+        "loadedArgvMatchesExpected": true
+      },
+      {
+        "label": "com.personal.harness-purge-original-egress",
+        "exitCode": 0,
+        "pid": 42220,
+        "state": "running",
+        "loadedArgvMatchesExpected": true
+      }
+    ],
+    "listenerSnapshots": [
+      {
+        "port": 49223,
+        "exitCode": 0,
+        "listenerFields": [
+          "p39674",
+          "cQEMULauncher",
+          "f21"
+        ],
+        "stderrBytes": 0
+      },
+      {
+        "port": 49224,
+        "exitCode": 0,
+        "listenerFields": [
+          "p39674",
+          "cQEMULauncher",
+          "f20"
+        ],
+        "stderrBytes": 0
+      },
+      {
+        "port": 49226,
+        "exitCode": 0,
+        "listenerFields": [
+          "p45300",
+          "cnode",
+          "f14"
+        ],
+        "stderrBytes": 0
+      }
+    ],
+    "boundedHistoricalDiagnostics": {
+      "sourceSha256": "6b91dddb727a42eb0460bebcdc063d25afbfdd9eb73703f5e9303bde77e9c11e",
+      "retainedCount": 50,
+      "oldestUtc": "2026-11-03T17:49:10.833897+00:00",
+      "newestUtc": "2026-11-09T05:57:27.798188+00:00",
+      "byPhaseAndReason": [
+        {
+          "phase": "clock-read",
+          "reason": "connection-reset",
+          "count": 1
+        },
+        {
+          "phase": "clock-read",
+          "reason": "queue-timeout",
+          "count": 16
+        },
+        {
+          "phase": "native-check",
+          "reason": "connection-refused",
+          "count": 6
+        },
+        {
+          "phase": "native-check",
+          "reason": "queue-timeout",
+          "count": 10
+        },
+        {
+          "phase": "native-check",
+          "reason": "remote-or-unknown-error",
+          "count": 15
+        },
+        {
+          "phase": "program-update",
+          "reason": "remote-or-unknown-error",
+          "count": 1
+        },
+        {
+          "phase": "service-readiness",
+          "reason": "queue-timeout",
+          "count": 1
+        }
+      ],
+      "scope": "bounded historical manager failure buffer; no request or success denominators; no direct-path attribution"
+    },
+    "testSuites": [
+      {
+        "suite": "harness_launcher.test.py",
+        "exitCode": 0,
+        "testMethods": 27,
+        "testLogSha256": "aab542eb8f9ca19c42a3b1ea193739dbf660650d4d42f21ee1d1b487ba8afe33",
+        "testLog": "harness_launcher.test.py.txt"
+      },
+      {
+        "suite": "security_db_update.test.py",
+        "exitCode": 0,
+        "testMethods": 8,
+        "testLogSha256": "aa7eae964b3011687dd304ddab99effb538990081eac430c111f89d4b6f59304",
+        "testLog": "security_db_update.test.py.txt"
+      }
+    ],
+    "newVmDiagnosticRequests": 0,
+    "scope": "source graph, launchd metadata, listening-socket snapshots and synthetic regression; no per-client runtime tracing"
+  },
+  "fixture": {
+    "state": "passed",
+    "updaterSha256": "7ba8bb0812d6f7b0fc49904e845a4d7cd998fe59ef7df2177d4961535b04df04",
+    "fixtureSourceSha256": "924e6a4bbd9d19591cbf67a5041c543746dbff4009f7cec7578421da628f24d7",
+    "bundleTransfer": {
+      "directSshExecRequestsIntercepted": 1,
+      "deadlineSeconds": 240,
+      "stdinWasExactFixture": true
+    },
+    "statusUsesManagedSsh": true,
+    "managedAdmissionDuringBundleTransfer": false,
+    "realSshProcesses": 0,
+    "scope": "synthetic call-boundary check; no actual update or VM connection"
+  },
+  "triage": {
+    "canArchive": true,
+    "scopeBlockers": 0,
+    "reportSha256": "082e2cfcd74ecb4665717456c9156241c3a31993c0f9630739c398bfe97ba6fd",
+    "disposition": "pass for bounded static and read-only caller inventory",
+    "documentationCorrections": [
+      "Limit generic HTTP statement to routes falling through local handlers.",
+      "Separate database check, recovery/current bookkeeping, upload, and post-upload start.",
+      "Qualify the connection between historical diagnostic and web-background paths as unconfirmed here."
+    ],
+    "postReviewLocalChecks": {
+      "historicalQueueRowsWithQueueStageAndNoExitCode": 27,
+      "installedExportDifferingTopLevelFunction": "storage_capacity"
+    },
+    "retainedGaps": [
+      "Historical lock holder and request identity",
+      "Other menu copies",
+      "Actual concurrency between upload and manager callers",
+      "SSH/HTTP shared bottleneck and production cause"
+    ]
+  },
+  "review": {
+    "model": "DeepSeek-V4.1-Flash",
+    "apiAlias": "deepseek-flash",
+    "effort": "high",
+    "finishReason": "stop",
+    "claudeQuotaReceiptSha256": "4b1e5b45b74fb1ef3ad0a364ce40f246f7cfd4033f8a9327127b98cc2b4833dc",
+    "samePromptSha256": "bf1c415fc4c07ef549ec11da2a3a2105360997cb080a5860f257bb9381681d97",
+    "receiptSha256": "0983b60ddfcfaa794ab273719306c93ed8e202f395e59bb825d4aafa2af76a3c",
+    "reportSha256": "082e2cfcd74ecb4665717456c9156241c3a31993c0f9630739c398bfe97ba6fd",
+    "successfulVmReviewTransportCalls": 4,
+    "transportCleanup": {
+      "removed": true,
+      "workerStopped": true,
+      "dailyProgramUnchanged": true,
+      "dailyProgramFilesChecked": 169,
+      "credentialCopiedToHost": false,
+      "scope": "only owned completed model-review scratch"
+    }
+  },
+  "preciseProductionRootCauseConfirmed": false,
+  "httpSshSharedBottleneckConfirmed": false,
+  "directMaintenancePathObservedExecuting": false,
+  "published": false
+}

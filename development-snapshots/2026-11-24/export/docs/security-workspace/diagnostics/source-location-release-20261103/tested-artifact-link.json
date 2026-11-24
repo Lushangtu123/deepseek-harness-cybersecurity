@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "programFilesMatched": 166,
+  "all166PerFileHashesMatched": true,
+  "sourceInventorySha256": "b00c7279a325f0c23d32e52f22c337d88de134f59ff71250e539cf04485eb2d4",
+  "vm778IntentSha256": "67e47b6a9e717fa7c3fb94493afeac184fb61762aa84f38ede00429f359592a8",
+  "testKitPath": "work/harness-source-location-live-native-closure-20261103/kit/work/harness-purge-improved/package",
+  "scope": "program bytes matched; test-only reachability improvements were separately tested"
+}

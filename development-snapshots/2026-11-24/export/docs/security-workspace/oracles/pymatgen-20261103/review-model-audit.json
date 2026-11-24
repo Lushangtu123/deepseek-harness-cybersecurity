@@ -1,0 +1,40 @@
+{
+  "reviews": [
+    {
+      "file": "pymatgen-review.json",
+      "requestedModel": "claude-opus-5-5",
+      "effort": "high",
+      "modelsRecorded": [
+        "claude-opus-5-5",
+        "claude-opus-4-8"
+      ],
+      "outputModelsRecorded": [
+        "claude-opus-4-8"
+      ],
+      "countedAsRequestedModelClosure": false,
+      "error": false,
+      "selfDeclaredModelIsNotAuthoritative": true
+    },
+    {
+      "file": "pymatgen-closure.json",
+      "requestedModel": "claude-opus-5-5",
+      "effort": "high",
+      "modelsRecorded": [
+        "claude-opus-5-5",
+        "claude-opus-4-8"
+      ],
+      "outputModelsRecorded": [
+        "claude-opus-5-5",
+        "claude-opus-4-8"
+      ],
+      "countedAsRequestedModelClosure": false,
+      "error": false,
+      "selfDeclaredModelIsNotAuthoritative": true
+    }
+  ],
+  "requestedModelReviewComplete": false,
+  "lastSupplementalOpinion": "packet-omission false finding withdrawn; no other concrete measurement bug found in focused review",
+  "packetCorrection": "candidateProgram was omitted only in initial prompt for brevity, not absent from original frozen file; actual169entry equality test passed",
+  "deterministicEvidenceCheck": "consistency.json",
+  "limitation": "actual output model4.8 despite5.5requested; supplemental text not requested-model closure or release qualification"
+}

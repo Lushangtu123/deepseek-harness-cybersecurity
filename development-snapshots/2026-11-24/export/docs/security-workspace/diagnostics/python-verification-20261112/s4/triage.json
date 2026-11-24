@@ -1,0 +1,10 @@
+{
+  "state": "superseded-by-split-review",
+  "finishReason": "length",
+  "reportAvailable": false,
+  "next": [
+    "s4-isolation",
+    "s4-scoring",
+    "s4-acceptance"
+  ]
+}

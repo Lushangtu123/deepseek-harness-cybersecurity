@@ -1,0 +1,1007 @@
+{
+  "scope": "offline VM read-only retention inventory and advisory capacity; no archive/delete/quota admission",
+  "tests": {
+    "macSnapshot": 82,
+    "vmSnapshot": 82,
+    "macBatch": 9,
+    "vmBatch": 9,
+    "macQualityGate": 43,
+    "vmQualityGate": 43,
+    "finalFailures": 0,
+    "redPhases": [
+      {
+        "tests": 75,
+        "failures": 13
+      },
+      {
+        "tests": 78,
+        "failures": 3
+      },
+      {
+        "tests": 79,
+        "failures": 1
+      },
+      {
+        "tests": 81,
+        "failures": 2,
+        "scope": "top-level device/pre-record lock from review"
+      },
+      {
+        "tests": 82,
+        "failures": 1,
+        "scope": "nonordinary record reason"
+      }
+    ]
+  },
+  "nativePreview": {
+    "state": "passed",
+    "plans": {
+      "normal-attempts": {
+        "plan": {
+          "version": 1,
+          "directory": "/home/purge/.cache/r3-retention-inventory-final-71a2a307c1c2/normal-attempts",
+          "directoryExists": true,
+          "generatedAt": "2026-11-11T18:01:06.732606+00:00",
+          "readOnly": true,
+          "deleteEnabled": false,
+          "resourceVerification": "recorded-only",
+          "policy": {
+            "minimumAgeDays": 0,
+            "budgetBytes": 268435456
+          },
+          "capacity": {
+            "knownLogicalBytes": 30039,
+            "complete": true,
+            "budgetBytes": 268435456,
+            "state": "within"
+          },
+          "hashedBytes": 29975,
+          "entries": [
+            {
+              "directory": "/home/purge/.cache/r3-retention-inventory-final-71a2a307c1c2/normal-attempts/review-3c62fc46bdaa41eebd11dca708bdb2bb",
+              "classification": "retain",
+              "safeToDelete": false,
+              "requires": [
+                "fresh-resource-check",
+                "archive-verification"
+              ],
+              "files": {
+                "attempt.json": {
+                  "bytes": 7429,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327183,
+                  "mtimeNs": 1794420066262976050,
+                  "type": "file",
+                  "sha256": "4db0248abf0d86478987b135fbff37f0c8d8aa323a576c1de82112a0459be1dd"
+                },
+                "client-1.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327196,
+                  "mtimeNs": 1794420065927976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-1.stdout": {
+                  "bytes": 65,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327195,
+                  "mtimeNs": 1794420065978976050,
+                  "type": "file",
+                  "sha256": "43df493495cfea5e8c488eea6c2ee78016b82b36bc13b7fea7c982c56e9b6d10"
+                },
+                "client-10.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327215,
+                  "mtimeNs": 1794420066241976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-10.stdout": {
+                  "bytes": 32,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327212,
+                  "mtimeNs": 1794420066259976050,
+                  "type": "file",
+                  "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd"
+                },
+                "client-2.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327199,
+                  "mtimeNs": 1794420065982976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-2.stdout": {
+                  "bytes": 10624,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327198,
+                  "mtimeNs": 1794420065991976050,
+                  "type": "file",
+                  "sha256": "d8fad64e986b76d0400ce13b80573b210b0b3fa0d31e4f07040c9778be10c4be"
+                },
+                "client-3.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327201,
+                  "mtimeNs": 1794420065997976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-3.stdout": {
+                  "bytes": 643,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327200,
+                  "mtimeNs": 1794420066140976050,
+                  "type": "file",
+                  "sha256": "dad005b20e9d412a444f000e0bf79e8ef33949b95ada8d764ec9e06dad7645de"
+                },
+                "client-4.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327203,
+                  "mtimeNs": 1794420066145976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-4.stdout": {
+                  "bytes": 32,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327202,
+                  "mtimeNs": 1794420066163976050,
+                  "type": "file",
+                  "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd"
+                },
+                "client-5.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327205,
+                  "mtimeNs": 1794420066167976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-5.stdout": {
+                  "bytes": 65,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327197,
+                  "mtimeNs": 1794420066178976050,
+                  "type": "file",
+                  "sha256": "43df493495cfea5e8c488eea6c2ee78016b82b36bc13b7fea7c982c56e9b6d10"
+                },
+                "client-6.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327207,
+                  "mtimeNs": 1794420066181976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-6.stdout": {
+                  "bytes": 11020,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327204,
+                  "mtimeNs": 1794420066190976050,
+                  "type": "file",
+                  "sha256": "5368b061123b8e420b4b623895e4cb3f41a94e9225eb34e0e1de55f5b7861ff7"
+                },
+                "client-7.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327209,
+                  "mtimeNs": 1794420066195976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-7.stdout": {
+                  "bytes": 65,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327206,
+                  "mtimeNs": 1794420066212976050,
+                  "type": "file",
+                  "sha256": "43df493495cfea5e8c488eea6c2ee78016b82b36bc13b7fea7c982c56e9b6d10"
+                },
+                "client-8.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327211,
+                  "mtimeNs": 1794420066216976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-8.stdout": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327208,
+                  "mtimeNs": 1794420066216976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-9.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327213,
+                  "mtimeNs": 1794420066228976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-9.stdout": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327210,
+                  "mtimeNs": 1794420066228976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "container.cid": {
+                  "bytes": 64,
+                  "mode": 420,
+                  "uid": 0,
+                  "device": 64769,
+                  "inode": 327194,
+                  "mtimeNs": 1794420065976976050,
+                  "type": "file"
+                },
+                "docker-config": {
+                  "bytes": 4096,
+                  "mode": 448,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327182,
+                  "mtimeNs": 1794420065922976050,
+                  "type": "directory"
+                },
+                "operation.lock": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327193,
+                  "mtimeNs": 1794420065922976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "recordSha256": "4db0248abf0d86478987b135fbff37f0c8d8aa323a576c1de82112a0459be1dd",
+              "state": "completed",
+              "finishedAt": "2026-11-11T18:01:06.264141+00:00",
+              "reasons": [
+                "unsafe-entry"
+              ]
+            }
+          ],
+          "planSha256": "7daa265cf7520745b4b266dc493ae2bb3e8613861b5b52b3a77e138801d48d1a"
+        },
+        "activeProtected": true,
+        "budgetExceededNoDeletion": true,
+        "cliMatches": true,
+        "contentModesMtimesAndEntriesUnchanged": true
+      },
+      "creation-attempts": {
+        "plan": {
+          "version": 1,
+          "directory": "/home/purge/.cache/r3-retention-inventory-final-71a2a307c1c2/creation-attempts",
+          "directoryExists": true,
+          "generatedAt": "2026-11-11T18:01:06.768326+00:00",
+          "readOnly": true,
+          "deleteEnabled": false,
+          "resourceVerification": "recorded-only",
+          "policy": {
+            "minimumAgeDays": 0,
+            "budgetBytes": 268435456
+          },
+          "capacity": {
+            "knownLogicalBytes": 6865,
+            "complete": true,
+            "budgetBytes": 268435456,
+            "state": "within"
+          },
+          "hashedBytes": 6865,
+          "entries": [
+            {
+              "directory": "/home/purge/.cache/r3-retention-inventory-final-71a2a307c1c2/creation-attempts/review-3c6f136f9e144905bf577b41a0538186",
+              "classification": "archive-candidate",
+              "safeToDelete": false,
+              "requires": [
+                "fresh-resource-check",
+                "archive-verification"
+              ],
+              "files": {
+                "attempt.json": {
+                  "bytes": 3096,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327224,
+                  "mtimeNs": 1794420066501976050,
+                  "type": "file",
+                  "sha256": "ba1f35131931079b1cc6caad01857971d4a43d81eb2f07fc89dc315f2b41a3ad"
+                },
+                "client-1.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327236,
+                  "mtimeNs": 1794420066355976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-1.stdout": {
+                  "bytes": 32,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327235,
+                  "mtimeNs": 1794420066374976050,
+                  "type": "file",
+                  "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd"
+                },
+                "client-2.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327238,
+                  "mtimeNs": 1794420066379976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-2.stdout": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327234,
+                  "mtimeNs": 1794420066379976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-3.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327240,
+                  "mtimeNs": 1794420066394976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-3.stdout": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327237,
+                  "mtimeNs": 1794420066394976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-4.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327242,
+                  "mtimeNs": 1794420066408976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-4.stdout": {
+                  "bytes": 32,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327239,
+                  "mtimeNs": 1794420066426976050,
+                  "type": "file",
+                  "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd"
+                },
+                "client-5.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327244,
+                  "mtimeNs": 1794420066434976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-5.stdout": {
+                  "bytes": 32,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327241,
+                  "mtimeNs": 1794420066450976050,
+                  "type": "file",
+                  "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd"
+                },
+                "client-6.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327246,
+                  "mtimeNs": 1794420066454976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-6.stdout": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327243,
+                  "mtimeNs": 1794420066454976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-7.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327248,
+                  "mtimeNs": 1794420066467976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-7.stdout": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327245,
+                  "mtimeNs": 1794420066467976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-8.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327250,
+                  "mtimeNs": 1794420066480976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-8.stdout": {
+                  "bytes": 32,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327247,
+                  "mtimeNs": 1794420066498976050,
+                  "type": "file",
+                  "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd"
+                },
+                "docker-config": {
+                  "bytes": 4096,
+                  "mode": 448,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327223,
+                  "mtimeNs": 1794420066350976050,
+                  "type": "directory"
+                },
+                "operation.lock": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327233,
+                  "mtimeNs": 1794420066350976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "recordSha256": "ba1f35131931079b1cc6caad01857971d4a43d81eb2f07fc89dc315f2b41a3ad",
+              "state": "recovered",
+              "finishedAt": "2026-11-11T18:01:06.503394+00:00",
+              "reasons": []
+            },
+            {
+              "directory": "/home/purge/.cache/r3-retention-inventory-final-71a2a307c1c2/creation-attempts/review-b97d23bea7b14db3aed0680f641d46d6",
+              "classification": "archive-candidate",
+              "safeToDelete": false,
+              "requires": [
+                "fresh-resource-check",
+                "archive-verification"
+              ],
+              "files": {
+                "attempt.json": {
+                  "bytes": 3513,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327227,
+                  "mtimeNs": 1794420066674976050,
+                  "type": "file",
+                  "sha256": "6c1efeec477d6951529289a4bd73ba3402ef195a02d3052ec9deb1a7372a695c"
+                },
+                "client-1.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327256,
+                  "mtimeNs": 1794420066514976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-1.stdout": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327255,
+                  "mtimeNs": 1794420066514976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-2.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327258,
+                  "mtimeNs": 1794420066518976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-2.stdout": {
+                  "bytes": 32,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327254,
+                  "mtimeNs": 1794420066535976050,
+                  "type": "file",
+                  "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd"
+                },
+                "client-3.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327260,
+                  "mtimeNs": 1794420066540976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-3.stdout": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327257,
+                  "mtimeNs": 1794420066539976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-4.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327262,
+                  "mtimeNs": 1794420066553976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-4.stdout": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327259,
+                  "mtimeNs": 1794420066553976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-5.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327264,
+                  "mtimeNs": 1794420066566976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-5.stdout": {
+                  "bytes": 32,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327261,
+                  "mtimeNs": 1794420066584976050,
+                  "type": "file",
+                  "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd"
+                },
+                "client-6.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327266,
+                  "mtimeNs": 1794420066605976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-6.stdout": {
+                  "bytes": 32,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327263,
+                  "mtimeNs": 1794420066622976050,
+                  "type": "file",
+                  "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd"
+                },
+                "client-7.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327268,
+                  "mtimeNs": 1794420066626976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-7.stdout": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327265,
+                  "mtimeNs": 1794420066626976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-8.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327270,
+                  "mtimeNs": 1794420066640976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-8.stdout": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327267,
+                  "mtimeNs": 1794420066640976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-9.stderr": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327272,
+                  "mtimeNs": 1794420066653976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "client-9.stdout": {
+                  "bytes": 32,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327269,
+                  "mtimeNs": 1794420066671976050,
+                  "type": "file",
+                  "sha256": "d543aa0a4f94710da934bcf414f72bb0bffa3b5fedc817ee476e3034075116fd"
+                },
+                "docker-config": {
+                  "bytes": 4096,
+                  "mode": 448,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327226,
+                  "mtimeNs": 1794420066510976050,
+                  "type": "directory"
+                },
+                "operation.lock": {
+                  "bytes": 0,
+                  "mode": 384,
+                  "uid": 1000,
+                  "device": 64769,
+                  "inode": 327253,
+                  "mtimeNs": 1794420066510976050,
+                  "type": "file",
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "recordSha256": "6c1efeec477d6951529289a4bd73ba3402ef195a02d3052ec9deb1a7372a695c",
+              "state": "recovered",
+              "finishedAt": "2026-11-11T18:01:06.675828+00:00",
+              "reasons": []
+            }
+          ],
+          "planSha256": "12eaab49a729f7e9f548bb3ada35f6feaea2ef1d098824451d25602791e0fdfe"
+        },
+        "activeProtected": true,
+        "budgetExceededNoDeletion": true,
+        "cliMatches": true,
+        "contentModesMtimesAndEntriesUnchanged": true
+      }
+    },
+    "newIndependentSamples": 0,
+    "scope": "read-only synthetic-cache preview, no Docker live check, archive or deletion"
+  },
+  "settledAttempts": [
+    {
+      "id": "3c62fc46bdaa41eebd11dca708bdb2bb",
+      "state": "completed",
+      "failure": null,
+      "cleanup": {
+        "checkedAt": "2026-11-11T18:01:06.145302+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "4db0248abf0d86478987b135fbff37f0c8d8aa323a576c1de82112a0459be1dd",
+      "laterContainerQueriesAbsent": true,
+      "sameSourceClientProbeEmpty": true
+    },
+    {
+      "id": "3c6f136f9e144905bf577b41a0538186",
+      "state": "recovered",
+      "failure": {
+        "kind": "controller-error",
+        "type": "OSError"
+      },
+      "cleanup": {
+        "checkedAt": "2026-11-11T18:01:06.434441+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "ba1f35131931079b1cc6caad01857971d4a43d81eb2f07fc89dc315f2b41a3ad",
+      "laterContainerQueriesAbsent": true,
+      "sameSourceClientProbeEmpty": true
+    },
+    {
+      "id": "b97d23bea7b14db3aed0680f641d46d6",
+      "state": "recovered",
+      "failure": {
+        "errorType": "FileNotFoundError",
+        "kind": "client-spawn-failed",
+        "notStarted": true,
+        "phase": "create"
+      },
+      "cleanup": {
+        "checkedAt": "2026-11-11T18:01:06.605982+00:00",
+        "clientsInitiallyStopped": true,
+        "clientsStopped": true,
+        "confirmed": true,
+        "creationResolved": true,
+        "errors": [],
+        "idAbsent": true,
+        "nameAbsent": true
+      },
+      "recordSha256": "6c1efeec477d6951529289a4bd73ba3402ef195a02d3052ec9deb1a7372a695c",
+      "laterContainerQueriesAbsent": true,
+      "sameSourceClientProbeEmpty": true
+    }
+  ],
+  "vmProtection": {
+    "dailyProgramFilesMatched": 169,
+    "dailyDatabasesLogicallyMatched": 42,
+    "dailyConfigPinsRuntimeMatched": true
+  },
+  "protectedUnchanged": {
+    "scripts/review_quality_gate.mjs": "848cbbf3fe606f8f488bdc724cdf7e7373b43580209cc7bda83ed477fedd6f0d",
+    "work/harness-purge-improved/package-files.json": "ce47db260931cfee4c418c9dd6a2145c4791e1c33855a37e876d9a561a05d023",
+    "docs/security-workspace/review-sample-ledger.json": "62f38218bb84fd4b1ff1ef2b8133d6deaa71c7d132d03501e1cf6a732b195b7e",
+    "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+    "work/harness-purge-improved/package/scripts/eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843"
+  },
+  "boundaries": {
+    "readOnlyPreview": true,
+    "deleteEnabled": false,
+    "archiveEnabled": false,
+    "quotaEnforced": false,
+    "resourceVerification": "recorded-only",
+    "independentSecurityAudit": false,
+    "newIndependentSamples": 0,
+    "r3Qualified": false,
+    "productionDeployment": false,
+    "githubPush": false,
+    "macPermissionsExpanded": false,
+    "physicalDiskAccounting": false,
+    "atomicFilesystemSnapshot": false,
+    "planProducerIdentityBound": false,
+    "planLimitMetadataBound": false,
+    "existingRecordLockContentionPossible": true
+  },
+  "reviewedFiles": {
+    "scripts/reviewer_snapshot.py": "7171cd344be2acf5dde60a0f467d49a9e2636b9e835f136f37d7745a7c9cbac3",
+    "scripts/reviewer_snapshot.test.py": "5b19ba72fbbe7e4608fd5c0c25783c046df888af6f88c81b21246488a3fe02d0",
+    "docs/security-workspace/reviewer-retention-inventory.md": "b233f234228b0b3df8a316207331831784ffe6a62d13f964333828d62a52bf85"
+  },
+  "review": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "promptSha256": "03a4113c4947d720e6a031f9b3f282788058e4854d44bd4e338f7b45cf9d7f07",
+    "receiptSha256": "2ea7d80cfec8e1d7cd67d7097d61f211791b67a87ca397811415a57ac25a99bc",
+    "reportSha256": "ed681096ea112ad9698f1867fe6e7b5e1e08da1ebe031084d4d6b788ce5d60ed",
+    "confirmedBlockingFindings": 0,
+    "triage": {
+      "confirmedBlockingFindings": 0,
+      "actualModel": "claude-opus-5-5",
+      "effort": "high",
+      "scope": "read-only advisory inventory and review fixes, not archive/delete/quota/release",
+      "notes": [
+        {
+          "id": "C1",
+          "classification": "closed by tested fd-device comparison and re-review",
+          "action": "Top-level attempt st_dev compared to parent fd before locking/traversal; mock red test showed traversal before fix, final82 pass Mac/VM. No real mount control claimed."
+        },
+        {
+          "id": "C2",
+          "classification": "initial-window closure confirmed; existing-record contention retained",
+          "action": "No SH when record missing/nonordinary; production first record follows EX, closing introduced initial window. Existing record SH can reject concurrent recover EX; documented separate/retry, no operation_lock change. New pre-record branch tested with mocks, not scheduled live race."
+        },
+        {
+          "id": "C3",
+          "classification": "accepted validation rejection priority",
+          "action": "Result/config jointly invalid rejects before actions with different first error; no execution state regression."
+        },
+        {
+          "id": "N1",
+          "classification": "fail-closed nested-stat error path retained",
+          "action": "Non-ENOENT error from second stat yields unreadable-entry/incomplete via outer handler; no candidate. Extra injected errno coverage remains future."
+        },
+        {
+          "id": "N2",
+          "classification": "conditional diagnostic race retained",
+          "action": "Record appearing between two stats can produce missing-lock plus record-unavailable even if lock exists; retain is guaranteed, capacity may still be observation-complete. Cache snapshot non-atomic; no claim fixed."
+        },
+        {
+          "id": "N3",
+          "classification": "pre-record activity ambiguity documented",
+          "action": "Missing record may mean initialization or orphan; current preview does not label it active and may retain observation-complete statistics. It is always protected; complete does not mean system idle."
+        },
+        {
+          "id": "N4",
+          "classification": "precision and excluded mount issue retained",
+          "action": "SH applies only existing ordinary records; practical contention is recover. Ordinary cross-device mounted files not prohibited, within excluded privileged-mutator scope. RootCID retained by owner policy even when0644 readable, not necessarily permission denial."
+        },
+        {
+          "id": "prior-R1-R5",
+          "classification": "privacy/scale/evidence limits retained",
+          "action": "Plan filenames private; rootCID and global conservative/scan limits restrict candidates and require later backup/batching. No ctime/extra flags/full log alignment/tool+UID+limits binding. Native minAge0 and CLI capacity/classification-only comparison retained."
+        },
+        {
+          "id": "evidence",
+          "classification": "source-binding limits disclosed",
+          "action": "Final VM structurally binds source digests; Mac logs contain no in-band source digest and correspond via captured command/current fixed artifacts, not external preseal. Earlier six native tasks separate from final3; total9 is bookkeeping."
+        }
+      ]
+    }
+  },
+  "remaining": [
+    "Archive/deletion execution with fresh resource checks and verified preservation is not implemented.",
+    "Write quotas, task admission, batched resume and physical allocation accounting are not implemented.",
+    "Pre-record orphan handling, final save/exit mapping, forensic field separation and earlier lifecycle/input refinements remain tracked.",
+    "Per-site mapping, nonce, independent evidence and genuinely fresh sample admission remain required."
+  ],
+  "firstReview": {
+    "reportSha256": "c70e334191d08fe0488ab51248d41bde1ac09c516ad2c87fe6fecbc41641e15f",
+    "receiptSha256": "fc0f2dfdd0fda910ff7240a7d55399afc6955a3682b5d32eaec6becbace4f014",
+    "triage": {
+      "confirmedBlockingFindings": 0,
+      "status": "C1 and C2 initial-window fixes require revision review",
+      "notes": [
+        {
+          "id": "C1",
+          "classification": "confirmed top-level device check gap, fixed for re-review",
+          "action": "Patch fstat fixture reproduced traversal on81-test candidate; compare attempt st_dev with parent before tree scan. Retain unsafe/incomplete, no file traversal."
+        },
+        {
+          "id": "C2",
+          "classification": "confirmed lock interference, initial window mitigated; existing-record contention documented",
+          "action": "Do not request SH without an ordinary existing attempt record; pre-record test reproduced unwanted lock request. Existing-record preview still temporarily blocks EX/recover; document run separately/retry, no change to operation_lock."
+        },
+        {
+          "id": "C3",
+          "classification": "accepted rejection-order change",
+          "action": "Pure _validate_attempt now checks committed result before docker-config privacy; both invalid reject before any action. No completion/recovery state semantic change."
+        },
+        {
+          "id": "R1",
+          "classification": "metadata privacy documented",
+          "action": "Plan includes relative filenames/structure, size and times; no raw body. Real project plans should be handled as private; external review uses synthetic caches only."
+        },
+        {
+          "id": "R2",
+          "classification": "root CID/scale limitation retained",
+          "action": "Root CID protected; no elevated read. Common successful records remain retain, and large caches may hit limits permanently without batches/cleanup. Future trusted backup and batched scan required; no claim hard quota implemented."
+        },
+        {
+          "id": "R3",
+          "classification": "intentional global protection retained",
+          "action": "Unexpected/active/incomplete entry demotes whole preview; explicit conservative policy, not quota admission."
+        },
+        {
+          "id": "R4",
+          "classification": "excluded mutator and open-flag refinements retained",
+          "action": "No atomic snapshot against same-user/privileged actor; ctime/O_NOCTTY/O_NOATIME refinements not implemented."
+        },
+        {
+          "id": "R5",
+          "classification": "future archive verification required",
+          "action": "Current candidate does not align history/counter with every expected log; future archive checks must verify full evidence and live resources."
+        },
+        {
+          "id": "binding-and-tests",
+          "classification": "future plan identity/batch/tests retained",
+          "action": "Plan self-digest not seal; no launcher/euid/limit binding. Other enumeration/depth/oversize/nlink/result variants remain extra tests. Native age0 and CLI comparisons only capacity/classification; no broader assertion claimed."
+        }
+      ]
+    },
+    "followup": "C1/top-device and C2/pre-record lock fixes re-reviewed; existing-record contention remains documented."
+  }
+}

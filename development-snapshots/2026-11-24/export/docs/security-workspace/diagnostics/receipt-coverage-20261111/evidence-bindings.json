@@ -1,0 +1,42 @@
+{
+  "scope": "Post-review archival supplement; byte/source bindings checked locally, not sent back to external reviewer; no retroactive sealing claim",
+  "reviewedCandidateInventorySha256": "2b11eeb747327b22ccef910b90acaeadd46a3fb2317249239dc9a3b426d534d3",
+  "exportVerifierSha256": "cc2dfb4519dda03ae74d3dd90a27bad8de7bed1a6c6d096089b7589bb12d0140",
+  "exportCheck": {
+    "ok": true,
+    "filesMatched": 1630,
+    "expectedFiles": 1630,
+    "programFilesMatched": 173,
+    "programExpected": 173,
+    "guestFilesMatched": 124,
+    "guestExpected": 124,
+    "textFilesChecked": 1619,
+    "upstreamImageFiles": 11,
+    "credentialPatternFindings": 0,
+    "integrityFindings": 0,
+    "unsupportedFindings": 0,
+    "issues": [],
+    "scope": "integrity, Python/JSON parse and fixed credential patterns; not a complete security audit"
+  },
+  "originalExportCheckArtifactSha256": "548705097498f7c277a6b7d24599db66c80947a268ab4712aa5f32739499d3a4",
+  "remoteScriptSha256": "97bb37b08fed6183b47ba7122b163e0facad3037bc2529a3bc7bbf45ebc130ed",
+  "payloadSourceDigests": {
+    "scripts/review_quality_gate.mjs": "848cbbf3fe606f8f488bdc724cdf7e7373b43580209cc7bda83ed477fedd6f0d",
+    "scripts/reviewer_snapshot.py": "942b82ee1b8f4da963a896bab00326cf57c7c57a0ea141f623b7caf523f0de84",
+    "scripts/reviewer_snapshot.test.py": "ded2f8ba29ecbfd6fffd228aafadfddf132c1c493b45538d9dc9093aff5eb536",
+    "scripts/eval_evidence_batch.test.py": "684293ec1ea35fa1590f729963101f78750fb6a2c8ef39053c33e3b954b51aab",
+    "work/harness-purge-improved/tests/review-quality-gate.test.mjs": "5be1894b3b7505717a406ea4cc8029a30a059ecafbe3c023e974c2b20e253260",
+    "work/harness-purge-improved/package/scripts/eval_evidence_batch.py": "942fbebd89e3cec94b4333a0efd1fab7312724a9d15332ed6e3aa2cb362eb05c",
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py": "5f0ffc92c7dd2256ae62c2eeed32db34a075f1d754f7a13f7efc94a88bdb0d14",
+    "work/harness-purge-improved/package/scripts/eval_import_review.py": "8e50382c7cfbf4aea1f0b01cb4d91ccc0bfac14500b0223e909c6194e61f1843",
+    "live.py": "08b132256be1ba02116652a5c152c6942faa17450cc1e668d60eddf88ff2ef5a"
+  },
+  "allPayloadsVerified": true,
+  "identityFunctionsSha256": "656ee2a2fe7fac234aea942e743b5db38005828d2124a49283f0489c4b3e57f3",
+  "identitySourceCurrentlyMatchesPriorStageGuest": true,
+  "vmBridgeSha256": "753b085609bbf3d1202b9dcb38fdbf218f8bf4847e11533ed8c838349f8994e2",
+  "compatibilityGateBeforeSha256": "9af19bf4a7e102c706f24919fd8fccaae3dc52aa1876905b4680a9c4c6275c8c",
+  "compatibilityGateMatchesFirstReviewFrozenSource": true,
+  "testSha256AtRedAndGreen": "5be1894b3b7505717a406ea4cc8029a30a059ecafbe3c023e974c2b20e253260",
+  "initialRedSourceSealed": false
+}

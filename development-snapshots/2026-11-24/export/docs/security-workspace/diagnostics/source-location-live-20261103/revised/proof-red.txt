@@ -1,0 +1,33 @@
+node:internal/modules/esm/resolve:275
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-source-location-live-final-20261103/proof-contract.mjs' imported from /Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-source-location-live-final-20261103/proof-contract.test.mjs
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:719:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:643:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:626:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:279:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:136:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/work/harness-source-location-live-final-20261103/proof-contract.mjs'
+}
+
+Node.js v23.7.0
+✖ work/harness-source-location-live-final-20261103/proof-contract.test.mjs (35.226292ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 39.601292
+
+✖ failing tests:
+
+test at work/harness-source-location-live-final-20261103/proof-contract.test.mjs:1:1
+✖ work/harness-source-location-live-final-20261103/proof-contract.test.mjs (35.226292ms)
+  'test failed'

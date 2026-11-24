@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /home/purge/.local/node/bin/node /home/purge/.local/lib/node_modules/@deepseek-ai/dsh/lib/bin.js "$@"

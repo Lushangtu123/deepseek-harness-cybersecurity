@@ -1,0 +1,15 @@
+✔ runner limit is applied before invocation and failed attempts remain recorded (0.989541ms)
+✔ live proof requires managed copy, pinned inputs and all sandbox limits (9.989833ms)
+✔ report collection verifies terminal count and stable identity (0.336916ms)
+✔ report collection rejects cursor cycles, drift and bounded truncation (6.106542ms)
+✔ live proof rejects additional capability, mounts, namespaces and commands (3.8095ms)
+✔ collector rejects a wrong section (0.133625ms)
+✔ acceptance requires complete task, proof and report bound to exactly one attempt (0.941083ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 68.932

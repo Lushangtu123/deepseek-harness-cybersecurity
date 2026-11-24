@@ -1,0 +1,69 @@
+✔ v3 same-line points are distinct, duplicate raw rule hits count once (4.422375ms)
+✔ v3 freeze requires exact source point inventory and location receipt (1.895792ms)
+✔ changed mapping/parser/freeze/report/scan/manifest bindings block precise scoring (4.551875ms)
+✔ v3 cannot borrow same-line point evidence or accept missing artifacts (2.42875ms)
+✔ same point repeated in dataset is rejected across rules and categories (0.423959ms)
+✔ Declared mapping cannot redirect an unchanged raw scan to another same-line point (0.674667ms)
+✖ v4 cannot accept a sandbox-verification label without actual verifier artifacts (0.399167ms)
+✖ legacy precise input is diagnostic until a v4 verifier-bound freeze exists (0.945916ms)
+✖ v4 freeze rejects a declared verifier plan with mismatched identity (0.67975ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 6
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 63.000708
+
+✖ failing tests:
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/review-verification-v4.test.mjs:3:1
+✖ v4 cannot accept a sandbox-verification label without actual verifier artifacts (0.399167ms)
+  Error: Invalid layered review evaluation input
+      at invalid (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/review_quality_gate.mjs:8:26)
+      at requireValue (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/review_quality_gate.mjs:9:48)
+      at evaluateReviewQuality (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/scripts/review_quality_gate.mjs:172:2)
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/review-verification-v4.test.mjs:3:321)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7)
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/review-verification-v4.test.mjs:4:1
+✖ legacy precise input is diagnostic until a v4 verifier-bound freeze exists (0.945916ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to:
+  
+  'eligible-for-release-review'
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/review-verification-v4.test.mjs:4:187)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'eligible-for-release-review',
+    expected: 'eligible-for-release-review',
+    operator: 'notStrictEqual'
+  }
+
+test at exports/deepseek-harness-vm/work/harness-purge-improved/tests/review-verification-v4.test.mjs:5:1
+✖ v4 freeze rejects a declared verifier plan with mismatched identity (0.67975ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/review-verification-v4.test.mjs:5:106)
+      at Test.runInAsyncScope (node:async_hooks:211:14)
+      at Test.run (node:internal/test_runner/test:980:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+      at Test.postRun (node:internal/test_runner/test:1091:19)
+      at Test.run (node:internal/test_runner/test:1019:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws'
+  }

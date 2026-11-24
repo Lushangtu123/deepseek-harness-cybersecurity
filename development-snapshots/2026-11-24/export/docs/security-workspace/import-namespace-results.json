@@ -1,0 +1,275 @@
+{
+  "state": "reviewed-import-namespace-candidate-complete",
+  "changedProgramFiles": [
+    "scripts/eval_guard_review.py",
+    "scripts/eval_import_review.py"
+  ],
+  "changedSourceFiles": [
+    "work/harness-purge-improved/package/scripts/eval_import_review.py",
+    "scripts/eval_import_review.test.py",
+    "scripts/eval_evidence_batch.test.py",
+    "scripts/python_namespace_review.test.py",
+    "work/harness-purge-improved/package/scripts/eval_guard_review.py",
+    "scripts/eval_guard_review.test.py"
+  ],
+  "tests": {
+    "macPlugin": 1000,
+    "macImport": 9,
+    "macBatch": 9,
+    "macGuard": 14,
+    "macNamespace": 35,
+    "vmImport": 9,
+    "vmBatch": 9,
+    "vmGuard": 14,
+    "vmNamespace": 35,
+    "vmSyntheticJointControls": 9
+  },
+  "vm": {
+    "state": "completed",
+    "startedAt": "2026-11-10T23:21:49.672550+00:00",
+    "driverExitCode": 0,
+    "resultSha256": "cfa10301c3387631e36b9935e090e9e6ea3e58aa9367c01fdf25f5b9c1a90921",
+    "dailyProgramFilesChecked": 169,
+    "dailyProgramUnchanged": true,
+    "runtimeConfigurationUnchanged": true,
+    "finishedAt": "2026-11-10T23:21:53.373262+00:00"
+  },
+  "controls": [
+    {
+      "control": {
+        "sink": "eval",
+        "suffix": ", {}",
+        "imported": true
+      },
+      "pathObservations": 1,
+      "namespaceObservations": 1,
+      "ordinaryFindingRows": 0
+    },
+    {
+      "control": {
+        "sink": "eval",
+        "suffix": ", {}, {}",
+        "imported": true
+      },
+      "pathObservations": 1,
+      "namespaceObservations": 1,
+      "ordinaryFindingRows": 0
+    },
+    {
+      "control": {
+        "sink": "exec",
+        "suffix": ", {}",
+        "imported": true
+      },
+      "pathObservations": 1,
+      "namespaceObservations": 1,
+      "ordinaryFindingRows": 0
+    },
+    {
+      "control": {
+        "sink": "exec",
+        "suffix": ", {}, {}",
+        "imported": true
+      },
+      "pathObservations": 1,
+      "namespaceObservations": 1,
+      "ordinaryFindingRows": 0
+    },
+    {
+      "control": {
+        "sink": "eval",
+        "suffix": ", scope",
+        "imported": false
+      },
+      "pathObservations": 0,
+      "namespaceObservations": 1,
+      "ordinaryFindingRows": 0
+    },
+    {
+      "control": {
+        "sink": "eval",
+        "suffix": ", {}, {}",
+        "calleeType": "eval",
+        "imported": false
+      },
+      "pathObservations": 0,
+      "namespaceObservations": 1,
+      "ordinaryFindingRows": 0
+    },
+    {
+      "control": {
+        "sink": "exec",
+        "suffix": ", {}",
+        "calleeType": "exec",
+        "imported": false
+      },
+      "pathObservations": 0,
+      "namespaceObservations": 1,
+      "ordinaryFindingRows": 0
+    },
+    {
+      "control": {
+        "sink": "eval",
+        "suffix": ", {}",
+        "callerType": "request",
+        "imported": false
+      },
+      "pathObservations": 0,
+      "namespaceObservations": 1,
+      "ordinaryFindingRows": 0
+    },
+    {
+      "control": {
+        "sink": "eval",
+        "suffix": ", {}",
+        "callerType": "execute",
+        "imported": false
+      },
+      "pathObservations": 0,
+      "namespaceObservations": 1,
+      "ordinaryFindingRows": 0
+    }
+  ],
+  "ordinaryR3Qualified": false,
+  "deployed": false,
+  "qualificationCasesAdded": 0,
+  "scannerInvocations": 0,
+  "modelCallsInAcceptance": 0,
+  "limits": [
+    "Conditional syntax path requires explicit canonical Flask query source and one directly imported sibling helper.",
+    "No full Flask request, runtime import resolution, builtin identity or remote exploit was verified.",
+    "Callee namespace support limited to exactly one/two empty literal dictionaries. Caller arity, binding and helper-shape contracts retained.",
+    "Class methods, longer chains and dynamic namespaces are not new input-path support.",
+    "Readiness and scanner receipts in VM joint integration are synthetic. No scanner or native-model/Chrome acceptance in this step.",
+    "All findings and artifacts remain unverified; no automatic R3 or vulnerability promotion."
+  ],
+  "genericBindingRepair": {
+    "failureReproduced": true,
+    "redSubcases": 6,
+    "policy": "Conservative rejection of any nonempty type_params anywhere in the source AST",
+    "sharedHelperAffects": [
+      "import-flow",
+      "literal-identifier-guard",
+      "plain-string-guard"
+    ],
+    "runtimeGenericSemanticsVerified": false
+  },
+  "scopeBlockers": 0,
+  "review": {
+    "model": "DeepSeek-V4.1-Flash",
+    "effort": "high",
+    "samePromptSha256": "dfa639c8c449c1aed87f5c4a926ee502c203615248ec3b19b409fb57106f2c31",
+    "claudeState": "failed-401-authentication-expired",
+    "claudeReceiptSha256": "a0a96ee805d0755673d7b9102e5cc978090d099c4a06b5b68bd9613e5d20b847",
+    "receiptSha256": "c50d965046eed401a95ba7ad3a6200094b26d6ee85086656eb0023768e3d9225",
+    "reportSha256": "4f25f1a87d70cf4e1f0f348537db6fea97830018dee0430cb43953e46ba1681e",
+    "cleanup": {
+      "removed": true,
+      "workerStopped": true,
+      "dailyProgramUnchanged": true,
+      "dailyProgramFilesChecked": 169,
+      "credentialCopiedToHost": false,
+      "scope": "only owned completed model-review scratch"
+    },
+    "triage": {
+      "at": "2026-11-11T02:47:42.461073+00:00",
+      "scope": "Final explicit import namespace helper path candidate and conservative generic binding rejection",
+      "scopeBlockers": 0,
+      "canArchive": true,
+      "reportSha256": "4f25f1a87d70cf4e1f0f348537db6fea97830018dee0430cb43953e46ba1681e",
+      "actualModel": "DeepSeek-V4.1-Flash",
+      "effort": "high",
+      "completion": "stop",
+      "reviewIsStatic": true,
+      "items": [
+        {
+          "id": "PEP695-binding-gap",
+          "classification": "confirmed-prior-defect-closed",
+          "basis": "R1 identified inherited missing type_params binding handling; six failing subcases retained before the shared rejection fix. Final source rejects any nonempty type_params in the AST. Import9, guard14 and four negative generic VM controls pass.",
+          "limitation": "Conservative rejection may omit otherwise observable nongeneric paths in the same file. Runtime semantics not modelled."
+        },
+        {
+          "id": "generic-class-alias-coverage",
+          "classification": "nonblocking-coverage-gap",
+          "basis": "Final tests execute generic functions on Mac and VM. Generic class/type-alias rejection follows the same AST-wide guard but no dedicated executable fixture was supplied.",
+          "closed": false
+        },
+        {
+          "id": "caller-protocol-isolation",
+          "classification": "verified-contract",
+          "basis": "Only target_sink opts into namespace mode; caller call-site and auto-discovery keep old single-Name contract. Negative caller tests and existing guard cases pass."
+        },
+        {
+          "id": "joint-evidence-provenance",
+          "classification": "verified-limited-acceptance",
+          "basis": "Nine VM fixtures use synthetic scanner and readiness receipts, real default AST process and namespace sandbox; all findings/artifacts remain unverified, ordinary finding rows0 and no scanner/model invocations. No runtime import or vulnerability claim."
+        },
+        {
+          "id": "first-cleanup-visibility",
+          "classification": "review-material-omission",
+          "basis": "Reviewer correctly noted missing dedicated first acceptance cleanup receipt in R2 frozen material. work root vm-cleanup.json exists and confirms workerStopped/scratchRemoved; both original receipt and R2 cleanup are included in final archive. No claim that reviewer saw the omitted first receipt.",
+          "confirmedByLocalEvidence": true
+        },
+        {
+          "id": "remaining-product-gaps",
+          "classification": "outside-step-unresolved",
+          "items": [
+            "class method import flow",
+            "longer helper call chains",
+            "runtime third-party import identity",
+            "real Flask source/builtin identity",
+            "independent R3 admission"
+          ]
+        }
+      ],
+      "ordinaryR3Qualified": false,
+      "deployed": false
+    }
+  },
+  "sourceLedgerEntries": 295,
+  "newAuthoredSourceHashes": [
+    "01eb34f274051a8d3310c20c0b6477f73dadf39e77dea03cad26aceb6f9b57ca",
+    "0ce272186b3be3be195998ad5b629faf5726d089c149a4819e632c25ea31a18e",
+    "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb",
+    "19345c6db63321269741dd63dafeabfac9d5eb1c07e583ea7911e21bea66839d",
+    "26d8bba8bdaf375770f2e8977856f31c5225a5d9623444b2b574e20b1c69de09",
+    "2ddcb4cfe028d9dc9f46e37a1e8d4f7cfcb721955123d3ac2026e41c57cf0656",
+    "3627a101700da45b4e852f2b39f4ddfd398547553cad126e1b4460e4261d6dd9",
+    "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+    "3fe82b0a870532e4c8cad267a5716edf0a5c5629d312a25c95bf5603d08e9d82",
+    "433956f25164c7f5d19cf5a171ffd7f45b30687f97e057f4a7350e8c895e9bf7",
+    "4351963bb884deeb92b513c147a9af0bb4616ae5aa1c91821d3cb536118bff38",
+    "44c0ed4ba76e97e5bf774d3007a114e55092f9110eb381d0dde3dfa0028b513f",
+    "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+    "529a0e06a330cdbd6a6292cd4a33f9dae3b82491d6435daccc9618d5df662b29",
+    "63c6edf506e70791a26d126f0bdcdd29af57c06e1e5627b50f245dac31f37b82",
+    "6a24cf221bc5fdfaf01d8a6cb61bd92f2e82deb18e45b076ea9fe839729c9c25",
+    "6be37904e4e8986fbe30af46fce74f3cdb4bfa2c11773724968530c57b002958",
+    "6f440ff86c70b591b0330e2a0d6b4ff2384f03b17a4d5fa1d93d02c0c40dc0a6",
+    "7208f4122e1b1b3a3b0a6c7ccd67dc602ce5c5ac039d59308e89f1cb0a866602",
+    "723475445977153045e5b36cbc4474beada9d4c56091c69c210cee8b6ff24fbf",
+    "758e9c085007c79ef23947d4649489fb4e3a0ecbbbed16a2ab6d88c8080a5a0e",
+    "7ab524a5196c099b311f659c89f791cd03fef6a553702723c38375d6cd6a384a",
+    "906ccf3a49cfd4d1fb79f93983e18fb246a927f1ee1ca5f9b750a3221bb3e934",
+    "93ef2032eee4382b794047d1538fbb6f268c1f28dc3c3eb41e2853803330761c",
+    "9e88dfba32f6e9b5de84caaa1d13316f23e36f7b6ee9036bec8111477b9f471d",
+    "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+    "aed2b46cf0697628f83355d5398e2cd6b8d777a8e76eb371d0614ab1afcd9318",
+    "b376e861b087a30988d79829eceaa8142dcf3b65b5d4475522c7d2251974fdda",
+    "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+    "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+    "c7da659ac6c9f56863effcf41f5c1758b317219cb93bb25765ee2782362fd0e0",
+    "d2702f160a7aa68f8133cad757bb3f84a164c6907ff9159dfc520257acdf16b2",
+    "d328dc6dc38c01946c97d19929a42e6c0e891e8f2ed854d6bae0bc8e0ebb34c3",
+    "d5f6253d7e19fafc04b31a2fa57a3ce179a0444a23fdf23e89f44e75bbf96756",
+    "d909a81bb966952305c3feb767cc61e3d65d1cb8a06e3ddd2829be2f9d9bce7f",
+    "de1f10e955652e862083dfbd2fb43f403ff4fce84f3ec384db5b3d95c7c31f59",
+    "e11980e8a560a9956bee29c07d955350074d65dfbb03580d16a3f03ed237eab0",
+    "e2ef45c450849a8e2840eafa7f016f313179772e61674a87f367d1a478f39688",
+    "e39eae0fda449645f95ae49330af3eeea8b74254d57a6a58b1a905fc80b5e0cf",
+    "ec18f2a43e76b40105bd1ee6aeab9012b61817ce4c4055b54a2720b01fe1fba9",
+    "eef3f66d77c39b20a233163b711a9ced3df2b748f9d5b401ee7e7fe4a45118cc",
+    "fa962e7cace89cd6b02fc8ceda805ec8b3948f4ec2e8d8dcf229e06adaafcd1f",
+    "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7"
+  ]
+}

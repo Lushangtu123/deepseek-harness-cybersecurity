@@ -1,0 +1,179 @@
+{
+  "state": "reviewed-native-managed-chain-acceptance-complete",
+  "at": "2026-11-11T05:59:15.126588+00:00",
+  "productSourceChanged": false,
+  "candidateProgramFiles": 173,
+  "dailyProgramFilesMatched": 169,
+  "dailyDatabaseLogicalDigestsMatched": 42,
+  "native": {
+    "nativeTurnCompleted": true,
+    "mainModelDispatches": 21,
+    "auxiliaryModelDispatches": 1,
+    "mainReasoningEffort": "high",
+    "adapterModel": "deepseek-flash",
+    "provider": "deepseek-official",
+    "rawProviderResponseModelNotExposed": true,
+    "nativeTools": 20,
+    "nativeToolErrors": 0,
+    "nativeRpcErrors": 0,
+    "startRequests": 1,
+    "scannerCalls": 1,
+    "fileHashesMatched": 18,
+    "rangesMatched": 9,
+    "findings": 9,
+    "importArtifacts": 4,
+    "namespaceArtifacts": 9,
+    "nativeReportPages": {
+      "findings": 5,
+      "files": 4,
+      "exclusions": 1,
+      "diagnostics": 1,
+      "artifacts": 4
+    },
+    "nativeSectionTotals": {
+      "findings": 9,
+      "files": 18,
+      "exclusions": 0,
+      "diagnostics": 0,
+      "artifacts": 13
+    },
+    "candidateFilesMatched": 173,
+    "ordinaryFindingRows": 0,
+    "noProjectSourceExecuted": true,
+    "ordinaryR3Qualified": false,
+    "deployed": false
+  },
+  "taskId": "28a46704-f3c9-40e3-a216-fd8d3068610a",
+  "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+  "tests": {
+    "nativeContract": 6,
+    "newProductRegressionInvocations": 0,
+    "priorMatchingProductRegressionTests": 1000
+  },
+  "allFindingsAndArtifacts": "unverified",
+  "qualificationCasesAdded": 0,
+  "authoredSourceHashesAdded": 0,
+  "all18SourcesAlreadyUsed": true,
+  "ordinaryR3Qualified": false,
+  "deployed": false,
+  "cleanup": {
+    "namespaceChildrenStopped": true,
+    "backendAcknowledged": true,
+    "appAcknowledged": true,
+    "guestPortClosedErrno": 111,
+    "ownedScannerContainersAbsent": 1,
+    "dailyProgramFilesMatched": 169,
+    "dailyDatabaseLogicalDigestsMatched": 42,
+    "dailyConfigAndPinsMatched": true,
+    "installedRuntimeMatched": true,
+    "outsideNamespaceAndHomeInodeMatched": true,
+    "candidateStagedFilesMatched": 182,
+    "credentialCopiesRemoved": true,
+    "temporaryRootRemoved": true
+  },
+  "hostRelay": {
+    "at": "2026-11-11T05:59:15.116262+00:00",
+    "port": 57861,
+    "connectErrno": 61,
+    "meaning": "ECONNREFUSED",
+    "execSessionId": 23222,
+    "execExitCode": 0,
+    "muxLifecycleStopped": true,
+    "masterStopped": true,
+    "remainingPids": [],
+    "controlDirectoryRemoved": true
+  },
+  "limitations": [
+    "Only the3-tool managedreview path in full nativeHarnesswas exercised; additionaltool/device/modesnotaccepted.",
+    "Test backend activation wrapper skips VM-wide production reconciliation; default candidate libraries, SDK, socket/clientguard and selectedjointpresetremainunchanged.",
+    "Native toolfence/NativeGate impose extra test-only scope andbudgetlimits; do notclaimproduction equivalentlimits.",
+    "Replaymodel=deepseek-flash comes fromadapter metadata; rawprovider responsemodelnotexposedbythisSDK.",
+    "Manualworkspace selection needed; defaultworkspacebootstraperrorrootcauseunknown.",
+    "No runtimeFlask/request reachability/importidentity/builtinidentity or exploitability established.",
+    "R3 independentadmission and dailycandidate deployment remainopen."
+  ],
+  "review": {
+    "model": "DeepSeek-V4.1-Flash",
+    "effort": "high",
+    "promptSha256": "ce0f0415b5d3128086a99393307b839e7e599f8261373dbb291128c3307f35eb",
+    "claudeState": "failed-five-hour-quota",
+    "receiptSha256": "1c5ebe94754633b2d23b9d7b6caf27e50255d971937503a0585533390c883c21",
+    "reportSha256": "3f676c50a41530b731cf1d18bc20c009101e206f01cec9e564b455f11c8948e3",
+    "triage": {
+      "at": "2026-11-11T06:07:12.981616+00:00",
+      "scopeBlockers": 0,
+      "canArchive": true,
+      "reportSha256": "3f676c50a41530b731cf1d18bc20c009101e206f01cec9e564b455f11c8948e3",
+      "actualModel": "DeepSeek-V4.1-Flash",
+      "effort": "high",
+      "completion": "stop",
+      "reviewIsStatic": true,
+      "verdict": "limited-pass-native-three-tool-chain",
+      "items": [
+        {
+          "id": "native-chain",
+          "classification": "verified-bounded-acceptance",
+          "basis": "FullHarnessUI→unchangedjointpreset/tools→fixedpathRPCclient→candidatebackend→defaultscanner→native15 reportpages;21main+1auxdispatch,20tools,1start/1scan,all5sectionscomplete."
+        },
+        {
+          "id": "namespace-docker-path",
+          "classification": "verified-staging-path",
+          "basis": "Physicaltemp package/store/worker paths used while native logical home/socket contract is privatelymounted; running scanner sourceMount is physicaltempstate. Outside169/42/config/pins/runtime/mnt/inode matched."
+        },
+        {
+          "id": "idempotency",
+          "classification": "record-clarification",
+          "basis": "NativeGate allows retry of identical requestId and arguments but rejects a different start. Actual native trace has one start. Not a universal/production exactly-once guarantee."
+        },
+        {
+          "id": "counts",
+          "classification": "record-clarification",
+          "basis": "173 is candidatepackage identity matches;18 is scanned syntheticfiles;1scan does not mean1totalcontainer: separate namespaceworker executes in its own restricted container."
+        },
+        {
+          "id": "model-proof",
+          "classification": "retained-evidence-limit",
+          "basis": "Requestedprovider/alias/high and adapter replay model are observed; raw providerresponse model not exposed, physical HTTP retry count not measured.21/1 are llm/stream dispatch counts, not guaranteedwire request counts."
+        },
+        {
+          "id": "workspace-bootstrap",
+          "classification": "observed-unresolved-nonblocking-this-chain",
+          "basis": "Defaultworkspacecreation UI failure was shown. Exactownedexisting folder manuallyselected and chainworked; rootcause and applicabilityoutside temporaryprofile not established. Musttrack beforegeneral UXreadiness."
+        },
+        {
+          "id": "ledger-body",
+          "classification": "review-material-omission-supplemented",
+          "basis": "Reviewer did not receive295-rowledgerbody. Independent membership check now confirmsall18 source hashes already present; appended receipt givesledgerSHA andperfilemembership,not a new model-reviewed claim.",
+          "supplement": "ledger-membership.json"
+        },
+        {
+          "id": "cleanup-proof-level",
+          "classification": "retained-evidence-limit",
+          "basis": "app-stopped original file was checked forexistence but not copied beforewholetempdir removal. Namespaceworker uses candidateinternalDockerinspect/cleanup, no secondindependent live observer. Credentialcopy deletion confirmed viaownedtree absence,not secureerase orforensics."
+        },
+        {
+          "id": "observer-errors",
+          "classification": "retained-diagnostic",
+          "basis": "RunningDockerobservation succeeded after no-such-object errors. Perpolltimestamps unavailable; pre-create race is plausible,inferred ratherthan independentlytimed."
+        },
+        {
+          "id": "scope-not-production",
+          "classification": "outside-step-unresolved",
+          "basis": "Testactivation intentionally skips VM-globalstartup reconciliation andaddsextrafences. Other tools/modes,productionstartuprecovery,independentR3,vulnerability confirmation and dailydeployment notpassed."
+        }
+      ],
+      "productSourceChanged": false,
+      "ordinaryR3Qualified": false,
+      "deployed": false
+    },
+    "cleanup": {
+      "removed": true,
+      "workerStopped": true,
+      "dailyProgramUnchanged": true,
+      "dailyProgramFilesChecked": 169,
+      "credentialCopiedToHost": false,
+      "scope": "only owned completed model-review scratch"
+    }
+  },
+  "sourceLedgerEntries": 295
+}

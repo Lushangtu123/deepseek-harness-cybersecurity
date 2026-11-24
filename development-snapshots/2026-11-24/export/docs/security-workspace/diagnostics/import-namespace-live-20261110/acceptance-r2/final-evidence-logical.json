@@ -1,0 +1,1740 @@
+{
+  "ok": true,
+  "engagement": "isolated-import-namespace-live",
+  "jointId": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+  "startRequest": "db0c8cfb-fb13-499e-9c2f-30095092aeba",
+  "events": [
+    {
+      "action": "plan",
+      "section": null,
+      "requestId": null,
+      "id": null,
+      "cursorUsed": false,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "status",
+      "section": null,
+      "requestId": null,
+      "id": null,
+      "cursorUsed": false,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "start",
+      "section": null,
+      "requestId": "db0c8cfb-fb13-499e-9c2f-30095092aeba",
+      "id": null,
+      "cursorUsed": false,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "wait",
+      "section": null,
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": false,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "artifacts",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": false,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "artifacts",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": true,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "artifacts",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": true,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "artifacts",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": true,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "findings",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": false,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "findings",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": true,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "findings",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": true,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "findings",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": true,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "findings",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": true,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "findings",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": false,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "findings",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": true,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "findings",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": true,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "findings",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": true,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "findings",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": true,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "files",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": false,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "files",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": true,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "exclusions",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": false,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "diagnostics",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": false,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "artifacts",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": false,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "artifacts",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": true,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "artifacts",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": true,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "report",
+      "section": "artifacts",
+      "requestId": null,
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "cursorUsed": true,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "plan",
+      "section": null,
+      "requestId": null,
+      "id": null,
+      "cursorUsed": false,
+      "outcome": "returned-ok"
+    },
+    {
+      "action": "status",
+      "section": null,
+      "requestId": null,
+      "id": null,
+      "cursorUsed": false,
+      "outcome": "returned-ok"
+    }
+  ],
+  "proofs": [
+    {
+      "containerName": "dsh-sec-64c71334-58cf-425f-b6e1-404562749cd5",
+      "outcome": "passed",
+      "observed": {
+        "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+        "running": true,
+        "sourceMount": {
+          "source": "/home/purge/.cache/import-namespace-live-i5j1nv48/state/engagements/isolated-import-namespace-live/runs/joint/f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b/source",
+          "readonly": true
+        },
+        "ruleSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+        "user": "1000:1000",
+        "network": "none",
+        "readonlyRoot": true,
+        "privileged": false,
+        "capDrop": [
+          "ALL"
+        ],
+        "securityOpt": [
+          "no-new-privileges"
+        ],
+        "memory": 805306368,
+        "memorySwap": 805306368,
+        "pids": 160,
+        "nanoCpus": 1000000000,
+        "command": [
+          "/policy-output.sh",
+          "/out",
+          "--deadline-seconds",
+          "229",
+          "semgrep",
+          "scan",
+          "--config",
+          "/policy/rules.json",
+          "--json",
+          "--output",
+          "/out/result.json",
+          "--metrics=off",
+          "--disable-version-check",
+          "--jobs",
+          "1",
+          "--timeout",
+          "5",
+          "--max-target-bytes",
+          "1000000",
+          "/src"
+        ]
+      },
+      "observerErrors": [
+        "Command failed: /usr/bin/sudo -n /usr/bin/docker inspect dsh-sec-64c71334-58cf-425f-b6e1-404562749cd5\nerror: no such object: dsh-sec-64c71334-58cf-425f-b6e1-404562749cd5\n"
+      ],
+      "tool": "semgrep",
+      "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+      "admissionIdentity": "598208862ad1449a5c64391f5bb0bef537e2ee334d89588e5b3582c900c4b608",
+      "sourceRoot": "/home/purge/.cache/import-namespace-live-i5j1nv48/state/engagements/isolated-import-namespace-live/runs/joint/f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b/source",
+      "expected": {
+        "sourceRoot": "/home/purge/.cache/import-namespace-live-i5j1nv48/state/engagements/isolated-import-namespace-live/runs/joint/f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b/source",
+        "project": "/home/purge/.cache/import-namespace-live-i5j1nv48/workspace/synthetic",
+        "stateRoot": "/home/purge/.cache/import-namespace-live-i5j1nv48/state",
+        "image": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+        "rules": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773"
+      },
+      "before": {
+        "case0/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "case0/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case1/evaluator.py": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+        "case1/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case2/evaluator.py": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+        "case2/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case3/evaluator.py": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+        "case3/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case4/evaluator.py": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+        "case4/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case5/evaluator.py": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+        "case5/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case6/evaluator.py": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+        "case6/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case7/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "case7/routes.py": "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+        "case8/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "case8/routes.py": "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb"
+      },
+      "after": {
+        "case0/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "case0/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case1/evaluator.py": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+        "case1/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case2/evaluator.py": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+        "case2/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case3/evaluator.py": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+        "case3/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case4/evaluator.py": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+        "case4/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case5/evaluator.py": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+        "case5/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case6/evaluator.py": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+        "case6/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "case7/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "case7/routes.py": "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+        "case8/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "case8/routes.py": "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb"
+      },
+      "sourceHashesMatch": true,
+      "manifestHashesMatch": true,
+      "findings": 9,
+      "declaredSpans": [
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case0/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case0/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 27
+            },
+            "end": {
+              "line": 2,
+              "col": 27,
+              "offset": 42
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case1/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case1/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 27
+            },
+            "end": {
+              "line": 2,
+              "col": 31,
+              "offset": 46
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case2/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case2/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 27
+            },
+            "end": {
+              "line": 2,
+              "col": 27,
+              "offset": 42
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case3/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case3/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 27
+            },
+            "end": {
+              "line": 2,
+              "col": 31,
+              "offset": 46
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case4/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case4/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 27
+            },
+            "end": {
+              "line": 2,
+              "col": 30,
+              "offset": 45
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case5/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case5/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 33
+            },
+            "end": {
+              "line": 2,
+              "col": 31,
+              "offset": 52
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case6/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case6/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 33
+            },
+            "end": {
+              "line": 2,
+              "col": 27,
+              "offset": 48
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case7/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case7/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 27
+            },
+            "end": {
+              "line": 2,
+              "col": 27,
+              "offset": 42
+            }
+          }
+        },
+        {
+          "rule": "policy.harness.python.dynamic-code-namespace",
+          "location": "case8/evaluator.py:2",
+          "scannerSpan": {
+            "version": 1,
+            "path": "case8/evaluator.py",
+            "start": {
+              "line": 2,
+              "col": 12,
+              "offset": 27
+            },
+            "end": {
+              "line": 2,
+              "col": 27,
+              "offset": 42
+            }
+          }
+        }
+      ],
+      "complete": true,
+      "version": "1.182.1",
+      "executedRules": {
+        "sha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+        "count": 17
+      },
+      "ruleProfile": {
+        "version": 1,
+        "id": "deep-namespace17",
+        "mode": "deep",
+        "baseRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+        "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+        "ruleCount": 17,
+        "qualification": "managed-candidate-not-r3"
+      },
+      "coverageKey": "a290538bad1c4bfecd0aff48e3aa4e113f5326a2cb884faea6ea219322131bd7",
+      "containerAbsent": true
+    }
+  ],
+  "report": {
+    "version": 1,
+    "engagement": "isolated-import-namespace-live",
+    "task": {
+      "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+      "engagement": "isolated-import-namespace-live",
+      "state": "completed",
+      "scopeRevision": 1,
+      "workspace": {
+        "version": "workspace-dispatch-s1-2",
+        "mode": "deep",
+        "sandboxProfile": "S1",
+        "selectedSteps": [
+          "semgrep"
+        ],
+        "toolIdentities": {
+          "semgrep": "598208862ad1449a5c64391f5bb0bef537e2ee334d89588e5b3582c900c4b608"
+        },
+        "budgetSeconds": 360,
+        "modelRequests": 0,
+        "fullWorkspaceReady": false,
+        "ruleProfiles": {
+          "semgrep": {
+            "version": 1,
+            "id": "deep-namespace17",
+            "mode": "deep",
+            "baseRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+            "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+            "ruleCount": 17,
+            "qualification": "managed-candidate-not-r3"
+          }
+        }
+      },
+      "startedAt": "2026-11-11T03:49:17.219Z",
+      "finishedAt": "2026-11-11T03:49:23.793Z",
+      "deadline": "2026-11-11T03:55:17.219Z",
+      "budgetSeconds": 360,
+      "modelCalls": 0,
+      "cleanupVerified": true,
+      "problem": null,
+      "webTarget": null,
+      "snapshot": {
+        "id": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+        "files": 18,
+        "bytes": 1665,
+        "git": {
+          "head": null,
+          "dirty": null,
+          "statusHash": null
+        },
+        "excluded": 0,
+        "exclusionsRetained": 0,
+        "exclusionsTruncated": false,
+        "redactedFiles": 0
+      },
+      "steps": [
+        {
+          "tool": "semgrep",
+          "id": "64c71334-58cf-425f-b6e1-404562749cd5",
+          "state": "completed",
+          "complete": true,
+          "coverageScope": "scanner-reported-files",
+          "eligibleFiles": null,
+          "cleanupVerified": null,
+          "version": "1.182.1",
+          "checkedFiles": 18,
+          "problem": null,
+          "fileCoverage": {
+            "scope": "managed-copy",
+            "scanned": 18,
+            "total": 18,
+            "uncovered": 0,
+            "withoutLanguageRule": 0
+          },
+          "coverageNotes": [],
+          "diagnostics": {
+            "total": 0,
+            "retained": 0,
+            "truncated": false
+          },
+          "pythonEvidence": "completed",
+          "sourceLocations": {
+            "version": 1,
+            "state": "completed",
+            "total": 9,
+            "bound": 9,
+            "unavailable": 0
+          },
+          "observationSummary": {
+            "version": 1,
+            "total": 9,
+            "executionPoints": 9,
+            "other": 0
+          },
+          "namespaceReview": {
+            "version": 1,
+            "state": "completed",
+            "eligible": 9,
+            "checked": 9,
+            "observations": 9,
+            "unmatched": 0,
+            "retained": 9,
+            "cleanupVerified": true,
+            "execution": {
+              "profile": "namespace-ast-1",
+              "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+              "workerSha256": "6c8c7446b99a777e5f496c008c9eeebecebc15134a5aedb6c7be4a14144a6705",
+              "pythonVersion": "3.12.15",
+              "cleanupVerified": true
+            }
+          },
+          "modelCalls": 0,
+          "artifacts": 13
+        }
+      ],
+      "findings": 9,
+      "coverageComplete": false,
+      "manualChecks": [
+        "authentication",
+        "authorization",
+        "business-logic",
+        "architecture"
+      ],
+      "notice": "完成表示已选步骤结束；命中保持待验证。Git未提交状态未探测，按逐文件哈希固定实际内容。脱敏/排除文件、手工项与未选工具仍未覆盖；REA仅静态JavaScript图；PentAGI输出是未验证模型结论，调用次数预算不等同货币金额上限。"
+    },
+    "findings": [
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case0/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case0/evaluator.py",
+          "sourceSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case1/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case1/evaluator.py",
+          "sourceSha256": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+          "byteLength": 47,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 31,
+            "offset": 46
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case2/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case2/evaluator.py",
+          "sourceSha256": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case3/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case3/evaluator.py",
+          "sourceSha256": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+          "byteLength": 47,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 31,
+            "offset": 46
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case4/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case4/evaluator.py",
+          "sourceSha256": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+          "byteLength": 46,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 30,
+            "offset": 45
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case5/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case5/evaluator.py",
+          "sourceSha256": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+          "byteLength": 53,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 33
+          },
+          "end": {
+            "line": 2,
+            "col": 31,
+            "offset": 52
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case6/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case6/evaluator.py",
+          "sourceSha256": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+          "byteLength": 49,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 33
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 48
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case7/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case7/evaluator.py",
+          "sourceSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "title": "动态执行点含 globals/locals 参数：需核对输入来源、名称绑定及约束是否覆盖执行点；这不是已确认漏洞",
+        "severity": "medium",
+        "location": "case8/evaluator.py:2",
+        "evidence": "规则命中；源码片段未收录",
+        "subject": null,
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case8/evaluator.py",
+          "sourceSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "observation": {
+          "version": 1,
+          "kind": "execution-point",
+          "confidence": "low",
+          "risk": "not-assessed",
+          "calleeIdentity": "unverified",
+          "inputControl": "unverified"
+        },
+        "tool": "semgrep",
+        "status": "unverified",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      }
+    ],
+    "files": [
+      {
+        "path": "case0/evaluator.py",
+        "sha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "originalSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "bytes": 43,
+        "redacted": false
+      },
+      {
+        "path": "case0/routes.py",
+        "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "originalSha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "bytes": 137,
+        "redacted": false
+      },
+      {
+        "path": "case1/evaluator.py",
+        "sha256": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+        "originalSha256": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+        "bytes": 47,
+        "redacted": false
+      },
+      {
+        "path": "case1/routes.py",
+        "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "originalSha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "bytes": 137,
+        "redacted": false
+      },
+      {
+        "path": "case2/evaluator.py",
+        "sha256": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+        "originalSha256": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+        "bytes": 43,
+        "redacted": false
+      },
+      {
+        "path": "case2/routes.py",
+        "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "originalSha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "bytes": 137,
+        "redacted": false
+      },
+      {
+        "path": "case3/evaluator.py",
+        "sha256": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+        "originalSha256": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+        "bytes": 47,
+        "redacted": false
+      },
+      {
+        "path": "case3/routes.py",
+        "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "originalSha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "bytes": 137,
+        "redacted": false
+      },
+      {
+        "path": "case4/evaluator.py",
+        "sha256": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+        "originalSha256": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+        "bytes": 46,
+        "redacted": false
+      },
+      {
+        "path": "case4/routes.py",
+        "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "originalSha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "bytes": 137,
+        "redacted": false
+      },
+      {
+        "path": "case5/evaluator.py",
+        "sha256": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+        "originalSha256": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+        "bytes": 53,
+        "redacted": false
+      },
+      {
+        "path": "case5/routes.py",
+        "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "originalSha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "bytes": 137,
+        "redacted": false
+      },
+      {
+        "path": "case6/evaluator.py",
+        "sha256": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+        "originalSha256": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+        "bytes": 49,
+        "redacted": false
+      },
+      {
+        "path": "case6/routes.py",
+        "sha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "originalSha256": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+        "bytes": 137,
+        "redacted": false
+      },
+      {
+        "path": "case7/evaluator.py",
+        "sha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "originalSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "bytes": 43,
+        "redacted": false
+      },
+      {
+        "path": "case7/routes.py",
+        "sha256": "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+        "originalSha256": "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+        "bytes": 146,
+        "redacted": false
+      },
+      {
+        "path": "case8/evaluator.py",
+        "sha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "originalSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+        "bytes": 43,
+        "redacted": false
+      },
+      {
+        "path": "case8/routes.py",
+        "sha256": "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb",
+        "originalSha256": "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb",
+        "bytes": 146,
+        "redacted": false
+      }
+    ],
+    "exclusions": [],
+    "diagnostics": [],
+    "artifacts": [
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-import-flow",
+        "path": "case0/routes.py",
+        "line": 5,
+        "status": "unverified",
+        "calleeFile": "case0/evaluator.py",
+        "sourceLine": 4,
+        "importLine": 2,
+        "definitionLine": 1,
+        "sinkLine": 2,
+        "sink": "eval",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-import-flow",
+        "path": "case1/routes.py",
+        "line": 5,
+        "status": "unverified",
+        "calleeFile": "case1/evaluator.py",
+        "sourceLine": 4,
+        "importLine": 2,
+        "definitionLine": 1,
+        "sinkLine": 2,
+        "sink": "eval",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-import-flow",
+        "path": "case2/routes.py",
+        "line": 5,
+        "status": "unverified",
+        "calleeFile": "case2/evaluator.py",
+        "sourceLine": 4,
+        "importLine": 2,
+        "definitionLine": 1,
+        "sinkLine": 2,
+        "sink": "exec",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-import-flow",
+        "path": "case3/routes.py",
+        "line": 5,
+        "status": "unverified",
+        "calleeFile": "case3/evaluator.py",
+        "sourceLine": 4,
+        "importLine": 2,
+        "definitionLine": 1,
+        "sinkLine": 2,
+        "sink": "exec",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case0/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case0/evaluator.py",
+          "sourceSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "sink": "eval",
+        "argumentCount": 2,
+        "bindingHint": "no-direct-conflict-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case1/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case1/evaluator.py",
+          "sourceSha256": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+          "byteLength": 47,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 31,
+            "offset": 46
+          }
+        },
+        "sink": "eval",
+        "argumentCount": 3,
+        "bindingHint": "no-direct-conflict-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case2/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case2/evaluator.py",
+          "sourceSha256": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "sink": "exec",
+        "argumentCount": 2,
+        "bindingHint": "no-direct-conflict-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case3/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case3/evaluator.py",
+          "sourceSha256": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+          "byteLength": 47,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 31,
+            "offset": 46
+          }
+        },
+        "sink": "exec",
+        "argumentCount": 3,
+        "bindingHint": "no-direct-conflict-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case4/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case4/evaluator.py",
+          "sourceSha256": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+          "byteLength": 46,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 30,
+            "offset": 45
+          }
+        },
+        "sink": "eval",
+        "argumentCount": 2,
+        "bindingHint": "no-direct-conflict-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case5/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case5/evaluator.py",
+          "sourceSha256": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+          "byteLength": 53,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 33
+          },
+          "end": {
+            "line": 2,
+            "col": 31,
+            "offset": 52
+          }
+        },
+        "sink": "eval",
+        "argumentCount": 3,
+        "bindingHint": "namespace-effects-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case6/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case6/evaluator.py",
+          "sourceSha256": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+          "byteLength": 49,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 33
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 48
+          }
+        },
+        "sink": "exec",
+        "argumentCount": 2,
+        "bindingHint": "namespace-effects-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case7/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case7/evaluator.py",
+          "sourceSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "sink": "eval",
+        "argumentCount": 2,
+        "bindingHint": "no-direct-conflict-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      },
+      {
+        "tool": "semgrep",
+        "evidenceKind": "python-namespace-structure",
+        "path": "case8/evaluator.py",
+        "line": 2,
+        "rule": "policy.harness.python.dynamic-code-namespace",
+        "status": "unverified",
+        "sourceLocation": {
+          "version": 1,
+          "state": "bound",
+          "scope": "managed-source-copy",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "path": "case8/evaluator.py",
+          "sourceSha256": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+          "byteLength": 43,
+          "copyRedacted": false,
+          "start": {
+            "line": 2,
+            "col": 12,
+            "offset": 27
+          },
+          "end": {
+            "line": 2,
+            "col": 27,
+            "offset": 42
+          }
+        },
+        "sink": "eval",
+        "argumentCount": 2,
+        "bindingHint": "no-direct-conflict-observed",
+        "builtinIdentity": "unverified",
+        "sourceKind": "parameter-name-observed",
+        "externalControl": "unverified",
+        "assignmentLines": [],
+        "constraintState": "unresolved",
+        "sourceTask": "64c71334-58cf-425f-b6e1-404562749cd5",
+        "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2"
+      }
+    ]
+  },
+  "runs": [
+    {
+      "id": "64c71334-58cf-425f-b6e1-404562749cd5",
+      "request_id": "joint-f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b-semgrep",
+      "request_hash": "17183fedc2bcee63af87b2d7a708065bda83b04ab888009748b9b2c5d0934f6a",
+      "tool": "semgrep",
+      "profile_revision": 1,
+      "state": "completed",
+      "started_at": "2026-11-11T03:49:20.374Z",
+      "finished_at": "2026-11-11T03:49:23.483Z",
+      "complete": 1,
+      "coverage_key": "a290538bad1c4bfecd0aff48e3aa4e113f5326a2cb884faea6ea219322131bd7",
+      "revision_ref": "未记录",
+      "error_code": null,
+      "details": {
+        "profile": {
+          "repoRoot": "/home/purge/.cache/import-namespace-live-i5j1nv48/workspace/synthetic",
+          "tools": [
+            "semgrep"
+          ],
+          "url": null,
+          "expiresAt": "2026-11-11T04:08:40.820Z",
+          "revision": 1
+        },
+        "version": "1.182.1",
+        "runtime": {
+          "checkedAt": "2026-11-11T03:49:19.467Z",
+          "database": null,
+          "rules": {
+            "sha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+            "version": "deep-namespace17",
+            "count": 17,
+            "languages": [
+              "javascript",
+              "python",
+              "typescript"
+            ]
+          },
+          "warning": null,
+          "requestedRuleProfile": {
+            "version": 1,
+            "id": "deep-namespace17",
+            "mode": "deep",
+            "baseRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+            "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+            "ruleCount": 17,
+            "qualification": "managed-candidate-not-r3"
+          },
+          "baseRules": {
+            "sha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+            "version": "local-reviewed-2",
+            "count": 16,
+            "languages": [
+              "javascript",
+              "python",
+              "typescript"
+            ]
+          },
+          "executedRules": {
+            "sha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+            "count": 17
+          },
+          "ruleProfile": {
+            "version": 1,
+            "id": "deep-namespace17",
+            "mode": "deep",
+            "baseRulesSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+            "rulesSha256": "e70603d05be7dc49ca3973b5d67ea02f25fb979ca3271bfc6bbeb19307ce9773",
+            "ruleCount": 17,
+            "qualification": "managed-candidate-not-r3"
+          }
+        },
+        "retestFindingId": null,
+        "joint": {
+          "id": "f015ad49-c78f-4cb0-9fbd-9cbfaf7fe01b",
+          "snapshotId": "9b0ffcc903a577a9d758bcd6087e39792bda11c045a6126c262d73c39e0e30c2",
+          "git": {
+            "head": null,
+            "dirty": null,
+            "statusHash": null
+          }
+        },
+        "sourceLocations": {
+          "version": 1,
+          "state": "completed",
+          "total": 9,
+          "bound": 9,
+          "unavailable": 0
+        },
+        "pythonEvidence": {
+          "state": "completed",
+          "artifacts": [
+            {
+              "tool": "semgrep",
+              "evidenceKind": "python-import-flow",
+              "path": "case0/routes.py",
+              "line": 5,
+              "status": "unverified",
+              "calleeFile": "case0/evaluator.py",
+              "sourceLine": 4,
+              "importLine": 2,
+              "definitionLine": 1,
+              "sinkLine": 2,
+              "sink": "eval"
+            },
+            {
+              "tool": "semgrep",
+              "evidenceKind": "python-import-flow",
+              "path": "case1/routes.py",
+              "line": 5,
+              "status": "unverified",
+              "calleeFile": "case1/evaluator.py",
+              "sourceLine": 4,
+              "importLine": 2,
+              "definitionLine": 1,
+              "sinkLine": 2,
+              "sink": "eval"
+            },
+            {
+              "tool": "semgrep",
+              "evidenceKind": "python-import-flow",
+              "path": "case2/routes.py",
+              "line": 5,
+              "status": "unverified",
+              "calleeFile": "case2/evaluator.py",
+              "sourceLine": 4,
+              "importLine": 2,
+              "definitionLine": 1,
+              "sinkLine": 2,
+              "sink": "exec"
+            },
+            {
+              "tool": "semgrep",
+              "evidenceKind": "python-import-flow",
+              "path": "case3/routes.py",
+              "line": 5,
+              "status": "unverified",
+              "calleeFile": "case3/evaluator.py",
+              "sourceLine": 4,
+              "importLine": 2,
+              "definitionLine": 1,
+              "sinkLine": 2,
+              "sink": "exec"
+            }
+          ]
+        },
+        "observationSummary": {
+          "version": 1,
+          "total": 9,
+          "executionPoints": 9,
+          "other": 0
+        },
+        "comparisonSnapshot": {
+          "available": true,
+          "reason": null
+        },
+        "coveredFiles": 18,
+        "fileCoverage": {
+          "scope": "managed-copy",
+          "scanned": 18,
+          "total": 18,
+          "uncovered": 0,
+          "withoutLanguageRule": 0
+        },
+        "diagnostics": {
+          "total": 0,
+          "items": [],
+          "truncated": false
+        }
+      }
+    }
+  ],
+  "ordinaryFindingRows": 0,
+  "fixtureSourceHashes": {
+    "case0/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+    "case0/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+    "case1/evaluator.py": "a1c3a00e76a8ceecd0018b8ca06d6b92711322b100a5ee53276c6a5aba0ea94f",
+    "case1/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+    "case2/evaluator.py": "23183852a49b2c30e87d8979a4f92aaf90783ff104d8cf98fc8659c21183a4b8",
+    "case2/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+    "case3/evaluator.py": "375ebbe52a6c13e8906c9c16e26692b337d74acda78f1b7a9a2797b066b62c00",
+    "case3/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+    "case4/evaluator.py": "51f40b5befed358d681688585713e20857d39002f8706dc0c098831a9359e40d",
+    "case4/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+    "case5/evaluator.py": "c2b2cb2c766e296281813a1d1fe3c52f86bc1f19aa3c379829e60043e1dde4a2",
+    "case5/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+    "case6/evaluator.py": "fc8abb97a55e4702f2e579d0244bf8aa1ae750dd7b8d2286114580ee7d2a40e7",
+    "case6/routes.py": "31fead307d92fd2ce8d45bef235407d5de6bd16876a70705e7a4e3acd8dc2376",
+    "case7/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+    "case7/routes.py": "be9af2dde17f971c0adfb8a7b39c56051167fc34fe21ce6c452a98cdd08ea451",
+    "case8/evaluator.py": "d540af7b8e21d1aa947b7a7e119aa904eb483f64e490598086e5a9c581268333",
+    "case8/routes.py": "13f60f15dba9ced1068d720178d2a1c19c0a23de89bbc5cbebe799a9309e38eb"
+  },
+  "newScannerCalls": 1,
+  "modelCalls": 0,
+  "proofValid": true,
+  "cleanupErrors": []
+}

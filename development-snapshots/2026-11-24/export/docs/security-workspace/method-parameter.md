@@ -1,0 +1,21 @@
+# 类方法与受限 try 路径的参数观察候选
+
+本轮扩展既有namespace结构复核器，同时支持模块顶层函数try主体内的词法参数观察。原顶层直线函数的约束行为保留。此前只接受模块顶层同步函数，且调用必须直接位于函数主体；顶层类方法与try中的简单赋值/返回会保留unsupported-scope或expression-unresolved。现在可识别顶层类中直接定义的同步方法，并沿最多8层try受保护主体收集执行前的词法前缀。参数名、赋值覆盖、导入/异常变量等绑定继续使用已有sourceKind和assignmentLines字段，未新增界面枚举。
+
+Python方法内的裸名称不沿类属性字典解析。类属性eval不视为方法局部eval绑定；参数/局部同名绑定及模块绑定继续标记冲突。无直接静态冲突只是一条观察，builtinIdentity仍unverified。类构造、装饰器、描述符与运行环境没有被证明，类方法的constraint固定保持unresolved。全文件命名空间影响检查继续运行。[Python名称解析](https://docs.python.org/3.12/reference/executionmodel.html#resolution-of-names)
+
+try路径只接受直接的Return、Expr或单名称Assign执行语句。前缀按外到内合并，对输入同名写入及其他绑定做保守观察。异常处理、else/finally、分支、循环、嵌套/异步函数、嵌套类、方法默认参数求值等不获得新增参数观察。固定集合语法不等于安全约束，externalControl和disposition继续unverified。源码只被解析，测试中的顶层raise从未执行。
+
+修改的产品程序为namespace Python worker和其沙箱固定SHA，接口版本不变。先增加回归，旧实现32项测试出现7个失败，修订后32项通过；随后按外审建议新增8/9层try边界和顶层函数try两项控制，Mac/VM最终各34项结构与4项协议通过。Mac 1000项插件回归和30项Node定向通过，产品字节在首次外审后未再修改。
+
+专用VM临时173项候选在导入前后逐项摘要核对，通过既有联合deep入口回放上一轮已用的Xinference17规则JSON。真实默认Docker沙箱读取新的固定worker字节，Python3.12.15，保持禁网/只读/UID65534/资源及清理核对。第46行三参数eval产生一条sourceKind=parameter-name-observed、bindingHint=no-direct-conflict-observed的结构证据。externalControl、builtinIdentity、status仍unverified，constraintState=unresolved。补丁子集eligible0/not-applicable。原始warning保留，普通发现表0新增。这个回放没有新扫描或业务模型调用，工具就绪与扫描回执仍为夹具。
+
+VM日常169项程序与规则/镜像清单前后相同，候选临时副本、专项临时目录和合成数据库移除。更新尚未部署，R3与新独立准入样本数保持false/0。已用源码和新增合成控制将在本轮结束时登记，不能将本次调参样本作为新的盲测。首次Claude因401登录过期失败，同一份材料按持续授权由DeepSeek官方V4.1 Flash high完整审查，未发现本步确认阻断。其建议的边界测试已补，修订后再次先请求Claude，仍为401；相同修订材料由DeepSeek官方V4.1 Flash high完整复审，无本步确认阻断，两轮材料摘要、实际响应和原文均保留。审查只做静态阅读，未替代实际测试。方法的unresolved原因沿用callee-or-scope-unresolved，前缀中较早try的异常处理或else写入也会保守降低来源分类，这些限制保持披露。
+
+
+最终复审保留一项非阻断覆盖建议。顶层函数try专项未包含固定集合guard，该具体组合未直接回归，不能仅凭测试名宣称已经覆盖。方法reason复用和前缀过度保守也保留记录。复用的kit清单createdAt来自上一轮路径验收，不作为本轮候选冻结时间；本轮baseline/attempt/job时间及导入前后重新计算的程序摘要分别保存。两个外部审查临时目录已确认移除，日常169项程序一致。
+
+[结构化结果](method-parameter-results.json) · [证据清单](diagnostics/method-parameter-20261110/manifest.json)
+
+
+后续[多参数helper输入路径候选](import-namespace.md)补齐了函数/方法try主体固定集合组合回归，并支持有限的显式导入helper语法链，尚未证明类方法运行时输入可达或完成部署。

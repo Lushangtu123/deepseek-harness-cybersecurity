@@ -1,0 +1,52 @@
+{
+  "state": "passed",
+  "capturedAt": "2026-11-10T22:05:10.406Z",
+  "records": [
+    {
+      "phase": "baseline",
+      "matched": true,
+      "runSha256": "8d019947e1a31fa7e793e50746b3f24d63369fa0ca984da02dd699d4c095ce73",
+      "outputs": [
+        {
+          "id": "xinference-before",
+          "raw": "no-hit",
+          "decision": "not-required",
+          "evidence": []
+        },
+        {
+          "id": "xinference-fixed",
+          "raw": "no-hit",
+          "decision": "not-required",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "phase": "candidate",
+      "matched": true,
+      "runSha256": "4f62d615002d46301f91364b4f3d6d392d2205b4939c52d628aa0909305b8d17",
+      "outputs": [
+        {
+          "id": "xinference-before",
+          "raw": "hit",
+          "decision": "unknown",
+          "evidence": [],
+          "location": {
+            "sourceSha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+            "line": 46,
+            "column": 20
+          },
+          "language": "python",
+          "cwe": "CWE-95"
+        },
+        {
+          "id": "xinference-fixed",
+          "raw": "no-hit",
+          "decision": "not-required",
+          "evidence": []
+        }
+      ]
+    }
+  ],
+  "scope": "Post-review reconstruction and replay. The original invocation was inline and is not backdated."
+}

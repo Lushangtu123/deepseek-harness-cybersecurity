@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "bytes": 11501,
+  "sha256": "5785af4131c72bcef1586cd1cf54028bfbb951e92923243b40037d95865c938f",
+  "allFiveSectionsEqual": true,
+  "taskEqual": true,
+  "counts": {
+    "findings": 7,
+    "files": 5,
+    "exclusions": 0,
+    "diagnostics": 0,
+    "artifacts": 0
+  },
+  "syntheticOnly": true
+}

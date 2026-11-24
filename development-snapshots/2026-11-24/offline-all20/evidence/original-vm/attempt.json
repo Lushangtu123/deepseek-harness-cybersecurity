@@ -1,0 +1,39 @@
+{
+  "actualVMApplicationWrites": true,
+  "admission": {
+    "bootId": "5b7a541a-ed07-4a48-a66b-8899bea3981f",
+    "executable": "/usr/bin/python3.12",
+    "machine": "aarch64",
+    "pgid": 2451456,
+    "pid": 2451456,
+    "platform": "linux",
+    "pythonSha256": "c86f21d0da9290ece2d7d49a3f7ed52aed59cb029abdf0ea25c79634f6cbe960",
+    "starttime": 28210466,
+    "uid": 1000,
+    "version": "3.12.3"
+  },
+  "bootId": "5b7a541a-ed07-4a48-a66b-8899bea3981f",
+  "caseIds": [
+    "settlement-parent-and-damaged-child-refused",
+    "settlement-linked-child-unavailable-variants",
+    "settlement-complete-scope-releases",
+    "settlement-semantic-unknown-with-confirmed-cleanup-can-settle",
+    "settlement-recompute-after-child-change",
+    "recovery-settlement-refuses-stale-parent-success",
+    "new-reservation-blocked-by-damaged-preparation",
+    "new-reservation-blocked-by-unknown-plans-directory",
+    "new-reservation-empty-directory-and-separate-batch",
+    "compile-and-bind-preparation-blocked-before-writes",
+    "query-status-available-with-damaged-batch",
+    "public-compile-known-failure-is-diagnostic-3"
+  ],
+  "full20": true,
+  "guestRoot": "/home/purge/workspace/harness-new-script-acceptance-20261113/stdlib-cli-all20-fixture-lifecycle-20261124-r1",
+  "kind": "full20-linux-attempt",
+  "noAutomaticReplay": true,
+  "pgid": 2451456,
+  "pid": 2451456,
+  "sourceManifestSha256": "affef050148f527c0a21dfb7c989eded6cd9c07f30f945ba9eb1048395d27f63",
+  "starttime": 28210466,
+  "state": "staging"
+}

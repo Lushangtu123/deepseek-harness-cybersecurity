@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "date": "2026-11-03",
+  "timezone": "America/Los_Angeles",
+  "candidateDeployed": false,
+  "candidateProgramFiles": 166,
+  "deployedProgramFiles": 165,
+  "rulesChanged": false,
+  "r3Qualified": false,
+  "scope": "formal React createJointPanel + genuine VM RPC/default Semgrep in a disposable synthetic test page; not complete native Harness chat/systemd or model-tool acceptance",
+  "overallAccepted": true,
+  "tests": {
+    "macPlugin": 778,
+    "vmPlugin": 778,
+    "newSourceUI": 19,
+    "proofContract": 7,
+    "cleanupParser": 2,
+    "vmFinalFocused": 28,
+    "pythonChanged": false
+  },
+  "realScanSessions": 3,
+  "realScannerInvocations": 3,
+  "scansPerOwnedSession": 1,
+  "subtaskModelCalls": 0,
+  "independentQualificationCasesAdded": 0,
+  "sampleLedgerKnownHashes": 220,
+  "final": {
+    "jointId": "0271811e-1368-40e8-a419-7bc1123cb26a",
+    "scanId": "cb7620df-9f2e-4c2c-9f1d-5e54824b7284",
+    "state": "completed",
+    "snapshotId": "763a94231e8924ef17b38bf4393fb1c72cb55d53eb6a966654150c35b6d907bf",
+    "files": 5,
+    "warnings": 7,
+    "bound": 7,
+    "unavailable": 0,
+    "allFindingsUnverified": true,
+    "ordinaryFindingRows": 0,
+    "admissionIdentityMatched": true,
+    "liveImageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+    "ruleSha256": "44ab404c318fd5cf6145b8aa1fed7a31b8eb22b67a0d2412fbab728276e803ed",
+    "sourceManifestMatchesObservedAfter": true,
+    "byteRangeOraclePassed": true,
+    "sameLineRanges": [
+      {
+        "start": {
+          "line": 2,
+          "col": 35,
+          "offset": 59
+        },
+        "end": {
+          "line": 2,
+          "col": 48,
+          "offset": 72
+        }
+      },
+      {
+        "start": {
+          "line": 2,
+          "col": 50,
+          "offset": 74
+        },
+        "end": {
+          "line": 2,
+          "col": 63,
+          "offset": 87
+        }
+      }
+    ],
+    "reportDownloadExactMatch": true,
+    "refreshRestoredSameTaskWithoutRescan": true,
+    "observerTransientErrors": 1,
+    "observerValidationViolations": 0
+  },
+  "cleanup": {
+    "initialCheckPassed": false,
+    "cause": "case-sensitive No such object parsing rejected Docker lowercase error: no such object",
+    "originalFailurePreserved": "diagnostics/source-location-live-20261103/final/cleanup-failure-final.json",
+    "recoveryPassed": true,
+    "containersAbsent": 1,
+    "processAbsent": true,
+    "portClosed": true,
+    "temporaryRootRemoved": true,
+    "dailyProgramHashesMatched": 165,
+    "databaseLogicalDigestsMatched": 40,
+    "pinsAndAccountConfigHashesMatched": true,
+    "correctionTestedVia": "2 local tests, 28 VM focused tests and actual lowercase error replay; no fourth real scan"
+  },
+  "review": {
+    "version": 1,
+    "attempts": [
+      {
+        "stage": "preliminary",
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "actualModels": [
+          "claude-opus-5-5"
+        ],
+        "success": true,
+        "scope": "static source/material review, no tool execution",
+        "closure": false
+      },
+      {
+        "stage": "revised",
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "actualModels": [
+          "claude-opus-5-5"
+        ],
+        "success": true,
+        "scope": "static source/material review, no tool execution",
+        "closure": false
+      },
+      {
+        "stage": "closure",
+        "requestedModel": "claude-opus-5-5",
+        "effort": "high",
+        "actualModels": [
+          "claude-opus-5-5"
+        ],
+        "success": true,
+        "scope": "static source/material review, no tool execution",
+        "closure": true
+      }
+    ],
+    "finalVerdict": "no scoped false-pass release blockers; positive runtime prerequisites confirmed in final live receipt",
+    "olderSKFRequestedModelClosureCompleted": false,
+    "cleanupParserCorrection": "case-insensitive exact object-ID negative result check; two tests and actual Docker error replay, no new live scanner run"
+  },
+  "unchanged": {
+    "hostFullAccess": false,
+    "kaliUpdated": false,
+    "real95FindingsVerified": false,
+    "namespaceRulesInstalled": false,
+    "offlineNamespaceReviewerAutoHooked": false,
+    "gitCommitOrPush": false
+  },
+  "remaining": [
+    "candidate deployment and full native Harness chat/model-tool acceptance",
+    "offline namespace reviewer production routing",
+    "independent detection quality/R3 qualification",
+    "older SKF post-fix requested-model closure"
+  ]
+}

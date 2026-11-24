@@ -1,0 +1,16 @@
+{
+  "fixed": [
+    "controller validates full source/point inventory before committing",
+    "optional locations binding retained and compared",
+    "raw original scan/manifest attached in reviewArtifact",
+    "review rejects scan_path None",
+    "UTF8 continuation endpoint test"
+  ],
+  "designClarifications": [
+    "execution point ID is call-only per approved design; argument fully bound by inventory SHA and recomputation",
+    "locations manifest/empty scan generated internally, not review artifacts",
+    "snapshot tests synthetic; isolated VM still pending"
+  ],
+  "reviewState": "closed; s2-r3 completed DeepSeek Flash high after Claude quota",
+  "r3Qualified": false
+}

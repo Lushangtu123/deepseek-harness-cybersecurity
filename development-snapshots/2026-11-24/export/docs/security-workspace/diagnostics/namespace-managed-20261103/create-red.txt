@@ -1,0 +1,42 @@
+✔ review sandbox sends data through stdin and mounts only trusted worker (1.87275ms)
+✔ unexpected capability prevents worker startup and still cleans owned container (5.358875ms)
+✔ lost worker reply is not retried and triggers removal (0.507833ms)
+✔ daemon failure cannot be confused with container absence (0.465792ms)
+✔ already cancelled review never creates a container (0.092833ms)
+✔ short remaining budget never starts work (0.34875ms)
+✖ unknown create outcome never claims cleanup success from an empty name lookup (0.369542ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 54.588833
+
+✖ failing tests:
+
+test at work/harness-purge-improved/tests/namespace-sandbox.test.mjs:12:1
+✖ unknown create outcome never claims cleanup success from an empty name lookup (0.369542ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  Error: create timed out
+      at async TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/namespace-sandbox.test.mjs:12:124)
+      at async Test.run (node:internal/test_runner/test:981:9)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:678:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: create timed out
+        at exec (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/namespace-sandbox.test.mjs:3:283)
+        at runNamespaceSandbox (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/package/lib/redteam/personal-namespace-sandbox.mjs:35:34)
+        at TestContext.<anonymous> (file:///Users/LOCAL_USER/Documents/Codex/2026-10-24/wo/exports/deepseek-harness-vm/work/harness-purge-improved/tests/namespace-sandbox.test.mjs:12:145)
+        at Test.runInAsyncScope (node:async_hooks:211:14)
+        at Test.run (node:internal/test_runner/test:980:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:678:18)
+        at Test.postRun (node:internal/test_runner/test:1091:19)
+        at Test.run (node:internal/test_runner/test:1019:12)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:678:7),
+    operator: 'rejects'
+  }

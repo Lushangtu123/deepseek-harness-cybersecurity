@@ -1,0 +1,278 @@
+{
+  "state": "passed",
+  "pythonVersion": "3.12.15",
+  "methodOnly": true,
+  "fullApiTested": false,
+  "observations": [
+    {
+      "source": "before.py",
+      "sourceSha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+      "methodSourceSha256": "66a025ea74dc17e2f7a9c8187efe1490178678c4e32f1f8362c4ee4ea1ecc5c2",
+      "vector": "json-string",
+      "input": "{\"name\":\"lookup\",\"parameters\":{\"value\":\"hello\"}}",
+      "result": [
+        [
+          null,
+          "lookup",
+          {
+            "value": "hello"
+          }
+        ]
+      ],
+      "dynamicFrames": [
+        {
+          "callerLine": 46,
+          "dynamicFilename": "<string>"
+        }
+      ],
+      "expectedMatched": true
+    },
+    {
+      "source": "before.py",
+      "sourceSha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+      "methodSourceSha256": "66a025ea74dc17e2f7a9c8187efe1490178678c4e32f1f8362c4ee4ea1ecc5c2",
+      "vector": "python-literals",
+      "input": "{'name':'lookup','parameters':{'flag':True,'empty':None}}",
+      "result": [
+        [
+          null,
+          "lookup",
+          {
+            "flag": true,
+            "empty": null
+          }
+        ]
+      ],
+      "dynamicFrames": [
+        {
+          "callerLine": 46,
+          "dynamicFilename": "<string>"
+        }
+      ],
+      "expectedMatched": true
+    },
+    {
+      "source": "before.py",
+      "sourceSha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+      "methodSourceSha256": "66a025ea74dc17e2f7a9c8187efe1490178678c4e32f1f8362c4ee4ea1ecc5c2",
+      "vector": "json-boolean",
+      "input": "{\"name\":\"lookup\",\"parameters\":{\"flag\":true}}",
+      "result": [
+        [
+          "{\"name\":\"lookup\",\"parameters\":{\"flag\":true}}",
+          null,
+          null
+        ]
+      ],
+      "dynamicFrames": [
+        {
+          "callerLine": 46,
+          "dynamicFilename": "<string>"
+        }
+      ],
+      "expectedMatched": true
+    },
+    {
+      "source": "before.py",
+      "sourceSha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+      "methodSourceSha256": "66a025ea74dc17e2f7a9c8187efe1490178678c4e32f1f8362c4ee4ea1ecc5c2",
+      "vector": "arithmetic-expression",
+      "input": "{\"name\":\"lookup\",\"parameters\":{\"value\":17389 * 7919}}",
+      "result": [
+        [
+          null,
+          "lookup",
+          {
+            "value": 137703491
+          }
+        ]
+      ],
+      "dynamicFrames": [
+        {
+          "callerLine": 46,
+          "dynamicFilename": "<string>"
+        }
+      ],
+      "expectedMatched": true
+    },
+    {
+      "source": "before.py",
+      "sourceSha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+      "methodSourceSha256": "66a025ea74dc17e2f7a9c8187efe1490178678c4e32f1f8362c4ee4ea1ecc5c2",
+      "vector": "benign-builtin-call",
+      "input": "{\"name\":\"lookup\",\"parameters\":{\"value\":str(17389 * 7919)}}",
+      "result": [
+        [
+          null,
+          "lookup",
+          {
+            "value": "137703491"
+          }
+        ]
+      ],
+      "dynamicFrames": [
+        {
+          "callerLine": 46,
+          "dynamicFilename": "<string>"
+        }
+      ],
+      "expectedMatched": true
+    },
+    {
+      "source": "before.py",
+      "sourceSha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+      "methodSourceSha256": "66a025ea74dc17e2f7a9c8187efe1490178678c4e32f1f8362c4ee4ea1ecc5c2",
+      "vector": "invalid-text",
+      "input": "not a tool call",
+      "result": [
+        [
+          "not a tool call",
+          null,
+          null
+        ]
+      ],
+      "dynamicFrames": [],
+      "expectedMatched": true
+    },
+    {
+      "source": "before.py",
+      "sourceSha256": "bc10f7f546f685ad025d108eb46bbdee2f1e37267fd9c0d2853df2ab12bc5b9a",
+      "methodSourceSha256": "66a025ea74dc17e2f7a9c8187efe1490178678c4e32f1f8362c4ee4ea1ecc5c2",
+      "vector": "wrong-shape",
+      "input": "[]",
+      "result": [
+        [
+          "[]",
+          null,
+          null
+        ]
+      ],
+      "dynamicFrames": [
+        {
+          "callerLine": 46,
+          "dynamicFilename": "<string>"
+        }
+      ],
+      "expectedMatched": true
+    },
+    {
+      "source": "fixed.py",
+      "sourceSha256": "4e09cd7602e0e8186c47b92f1562a97b44a3a9325fab718ec64cf5c2f5ea2d6a",
+      "methodSourceSha256": "7db084759d2244c7bcebbe1020bc8f9c93c82bfa59760d947f62b5f326cc7484",
+      "vector": "json-string",
+      "input": "{\"name\":\"lookup\",\"parameters\":{\"value\":\"hello\"}}",
+      "result": [
+        [
+          null,
+          "lookup",
+          {
+            "value": "hello"
+          }
+        ]
+      ],
+      "dynamicFrames": [],
+      "expectedMatched": true
+    },
+    {
+      "source": "fixed.py",
+      "sourceSha256": "4e09cd7602e0e8186c47b92f1562a97b44a3a9325fab718ec64cf5c2f5ea2d6a",
+      "methodSourceSha256": "7db084759d2244c7bcebbe1020bc8f9c93c82bfa59760d947f62b5f326cc7484",
+      "vector": "python-literals",
+      "input": "{'name':'lookup','parameters':{'flag':True,'empty':None}}",
+      "result": [
+        [
+          null,
+          "lookup",
+          {
+            "flag": true,
+            "empty": null
+          }
+        ]
+      ],
+      "dynamicFrames": [],
+      "expectedMatched": true
+    },
+    {
+      "source": "fixed.py",
+      "sourceSha256": "4e09cd7602e0e8186c47b92f1562a97b44a3a9325fab718ec64cf5c2f5ea2d6a",
+      "methodSourceSha256": "7db084759d2244c7bcebbe1020bc8f9c93c82bfa59760d947f62b5f326cc7484",
+      "vector": "json-boolean",
+      "input": "{\"name\":\"lookup\",\"parameters\":{\"flag\":true}}",
+      "result": [
+        [
+          null,
+          "lookup",
+          {
+            "flag": true
+          }
+        ]
+      ],
+      "dynamicFrames": [],
+      "expectedMatched": true
+    },
+    {
+      "source": "fixed.py",
+      "sourceSha256": "4e09cd7602e0e8186c47b92f1562a97b44a3a9325fab718ec64cf5c2f5ea2d6a",
+      "methodSourceSha256": "7db084759d2244c7bcebbe1020bc8f9c93c82bfa59760d947f62b5f326cc7484",
+      "vector": "arithmetic-expression",
+      "input": "{\"name\":\"lookup\",\"parameters\":{\"value\":17389 * 7919}}",
+      "result": [
+        [
+          "{\"name\":\"lookup\",\"parameters\":{\"value\":17389 * 7919}}",
+          null,
+          null
+        ]
+      ],
+      "dynamicFrames": [],
+      "expectedMatched": true
+    },
+    {
+      "source": "fixed.py",
+      "sourceSha256": "4e09cd7602e0e8186c47b92f1562a97b44a3a9325fab718ec64cf5c2f5ea2d6a",
+      "methodSourceSha256": "7db084759d2244c7bcebbe1020bc8f9c93c82bfa59760d947f62b5f326cc7484",
+      "vector": "benign-builtin-call",
+      "input": "{\"name\":\"lookup\",\"parameters\":{\"value\":str(17389 * 7919)}}",
+      "result": [
+        [
+          "{\"name\":\"lookup\",\"parameters\":{\"value\":str(17389 * 7919)}}",
+          null,
+          null
+        ]
+      ],
+      "dynamicFrames": [],
+      "expectedMatched": true
+    },
+    {
+      "source": "fixed.py",
+      "sourceSha256": "4e09cd7602e0e8186c47b92f1562a97b44a3a9325fab718ec64cf5c2f5ea2d6a",
+      "methodSourceSha256": "7db084759d2244c7bcebbe1020bc8f9c93c82bfa59760d947f62b5f326cc7484",
+      "vector": "invalid-text",
+      "input": "not a tool call",
+      "result": [
+        [
+          "not a tool call",
+          null,
+          null
+        ]
+      ],
+      "dynamicFrames": [],
+      "expectedMatched": true
+    },
+    {
+      "source": "fixed.py",
+      "sourceSha256": "4e09cd7602e0e8186c47b92f1562a97b44a3a9325fab718ec64cf5c2f5ea2d6a",
+      "methodSourceSha256": "7db084759d2244c7bcebbe1020bc8f9c93c82bfa59760d947f62b5f326cc7484",
+      "vector": "wrong-shape",
+      "input": "[]",
+      "result": [
+        [
+          "[]",
+          null,
+          null
+        ]
+      ],
+      "dynamicFrames": [],
+      "expectedMatched": true
+    }
+  ]
+}

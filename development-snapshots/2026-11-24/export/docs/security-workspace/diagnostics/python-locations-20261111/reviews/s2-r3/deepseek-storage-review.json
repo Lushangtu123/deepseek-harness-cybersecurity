@@ -1,0 +1,38 @@
+{
+  "id": "b01c22f4-5e69-4e89-bd59-847648d51bc1",
+  "object": "chat.completion",
+  "model": "deepseek-flash",
+  "observedModels": [
+    "deepseek-flash"
+  ],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Reviewed the new scan-required guard and five controller tests. No confirmed safety blocker or reproducible scope regression in the changed area.\n\nConfirmed:\n- `execute(..., _operation='review', scan_path=None)` rejects before `verify`, `inputs`, storage reservation, or attempt creation.\n- `locations()` is the remaining `None` path; `inputs` constructs the empty scan/narrowed manifest and preserves any supplied `locationBinding`.\n- Formal review recomputes the location binding, fails on drift without committing `result`, and emits v3 `reviewArtifact` from payload bytes.\n- Tests cover the guard, locations sandbox flags/receipt/recover-no-replay, binding drift, invalid inventory mutations, stale supplied binding, UTF-8 continuation rejection, and digest failure before task creation.\n\nConservative limitations / test-quality gaps, not blockers:\n- The scan guard is exercised at API level only; CLI `run` already requires `scan_path`.\n- The exact-byte reviewArtifact assertion uses `Path.read_text()`, which applies universal-newline translation. It does not strictly prove byte preservation for CRLF input; comparing `read_bytes().decode('utf-8')` would. The code path itself preserves raw bytes.\n- The UTF-8 test mutates only `call.start`; `call.end` continuation handling is not directly covered.\n- These are synthetic controller tests with the acknowledged mutable helper/synthetic backend; VM/Docker/live acceptance remains pending.\n\nCall-ID semantics not reopened. No R3 or live acceptance claimed."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 19034,
+    "completion_tokens": 7471,
+    "total_tokens": 26505,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 7158
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 19034
+  },
+  "streamDone": true,
+  "reasoningContentRetained": false,
+  "reasoningCharsReceived": 32121,
+  "provider": "https://api.deepseek.com",
+  "effort": "high",
+  "requestBodySha256": "beb7698e6011905e980a1eeafa97adce8090e0a273b69a90e478775e64fe76c6",
+  "promptSha256": "956175755a4de94cad56866b7c5a2c7629908e2dcc4c9b7c673b81153dc6393d"
+}

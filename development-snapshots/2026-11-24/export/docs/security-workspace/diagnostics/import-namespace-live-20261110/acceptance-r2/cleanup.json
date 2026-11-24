@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "programFilesMatched": 169,
+  "databaseLogicalDigestsMatched": 42,
+  "pinsAndConfigsMatched": true,
+  "ownedContainersAbsent": 1,
+  "guestPortClosed": true,
+  "ownedProcessAbsent": true,
+  "root": "/home/purge/.cache/import-namespace-live-i5j1nv48",
+  "temporaryRootRemoved": true
+}

@@ -1,0 +1,282 @@
+--- before/scripts/reviewer_snapshot.py
++++ current/scripts/reviewer_snapshot.py
+@@ -971,10 +971,21 @@
+         return job
+ 
+ 
++def verifier_module():
++    # Fixed shipped tool module only; bundle/project never selects executable host code.
++    import importlib.util
++    path=Path(__file__).resolve().with_name('verifier_snapshot.py')
++    spec=importlib.util.spec_from_file_location('trusted_verifier_snapshot',path)
++    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module
++
++def verify_execution(bundle,expected,root,manifest_path,scan_path,request_path,dataset_sha,freeze_sha,**kwargs):
++    return execute(bundle,expected,root,manifest_path,scan_path,dataset_sha,freeze_sha,_operation='verify-execution',_request_path=request_path,**kwargs)
++
++
+ def execute(bundle, expected, root, manifest_path, scan_path, dataset_sha, freeze_sha, *,
+-            attempts_root=None, timeout=30, _engine_factory=None, storage_policy=None, _operation='review'):
+-    if _operation not in {'review','locations'}:raise ValueError('unsupported operation')
+-    if _operation=='review' and scan_path is None:raise ValueError('review requires original scan file')
++            attempts_root=None, timeout=30, _engine_factory=None, storage_policy=None, _operation='review', _request_path=None):
++    if _operation not in {'review','locations','verify-execution'}:raise ValueError('unsupported operation')
++    if _operation in {'review','verify-execution'} and scan_path is None:raise ValueError('review requires original scan file')
+     if _engine_factory is None and sys.platform != 'linux':
+         raise ValueError('VM execution requires Linux; no Mac Docker invocation')
+     if os.geteuid() == 0 or isinstance(timeout, bool) or not isinstance(timeout, (float,int)) or not .1 <= timeout <= 30:
+@@ -984,8 +995,25 @@
+     base = Path(attempts_root) if attempts_root is not None else Path.home()/'.cache/harness-review-attempts'
+     if base.resolve() != base or not re.fullmatch(r'[A-Za-z0-9/_.-]+', str(base)):
+         raise ValueError('canonical mount-safe attempts directory required')
+-    manifest, files = verify(bundle, expected)
+-    payload, input_sha = inputs(root, manifest_path, scan_path)
++    if _operation=='verify-execution':
++        vm=verifier_module();manifest,verifier_files=vm.verify(bundle,expected)
++        files={n.removeprefix('code/'):v for n,v in verifier_files.items() if n.startswith('code/')}
++    else:manifest,files=verify(bundle,expected)
++    payload,input_sha=inputs(root,manifest_path,scan_path)
++    if _operation=='verify-execution':
++        raw=read(_request_path,262144);request=load_json(raw);source_manifest=load_json(payload['manifest.json'])
++        if not isinstance(request,dict) or set(request)!={'version','contract','point','challenge'} or request['version']!=1 or not isinstance(request['challenge'],str) or not HASH.fullmatch(request['challenge']):raise ValueError('Invalid verification request')
++        vm.contract(request['contract'])
++        if digest(request['contract']) not in manifest['recipes'] or manifest['recipes'][digest(request['contract'])]!=request['contract']:raise ValueError('Unfrozen verification recipe')
++        binding=source_manifest.get('locationBinding')
++        if not isinstance(binding,dict) or binding.get('snapshotSha256')!=manifest['staticSha256'] or binding.get('imageId')!=manifest['imageId'] or binding.get('uid')!=os.geteuid():raise ValueError('Location runtime mismatch')
++        validate_locations(binding.get('inventory'),payload)
++        row=binding['inventory']['files'].get(request['contract']['path'])
++        if row is None or request['point'] not in row['points']:raise ValueError('Unknown frozen point')
++        payload.update({n:v for n,v in verifier_files.items() if n.startswith('dependencies/')})
++        payload['verification-request.json']=raw
++        payload['verification.json']=json.dumps({**request,'manifest':source_manifest},separators=(',',':')).encode()
++        input_sha=digest({n:sha256(v).hexdigest() for n,v in payload.items()})
+     storage=storage_module(manifest['storageSha256'])
+     policy=storage.existing_policy(base) if storage_policy is None else storage.validate_policy(storage_policy)
+     if policy['cacheRoot']!=str(base):raise ValueError('storage policy cache mismatch')
+@@ -1040,6 +1068,9 @@
+                     '--mount',f'type=bind,src={stage},dst=/review,readonly','--entrypoint','python3',
+                     manifest['imageId'],'-I','-B','-S','-c',_CONTAINER_WATCHDOG,str(timeout),'/review/code/'+FILES[0],
+                     *(['--locations'] if operation=='locations' else []),'/review/sources','/review/manifest.json','/review/scan.json']
++        if operation=='verify-execution':
++            for flag,value in [('--memory','512m'),('--memory-swap','512m'),('--pids-limit','64'),('--tmpfs','/tmp:rw,nosuid,nodev,noexec,size=32m,mode=1777')]:command[command.index(flag)+1]=value
++            marker=command.index('/review/code/'+FILES[0]);command[marker:]=['/review/code/python_execution_verify.py','/review']
+         try:
+             if cancel:
+                 raise _Failure('interrupted', signal=cancel['signal'])
+@@ -1070,7 +1101,14 @@
+                 if not isinstance(report, dict) or type(report.get('version')) is not int or report['version'] not in [1,2]:
+                     raise ValueError('invalid report')
+                 location_binding=None
+-                if report['version']==2:
++                if operation=='verify-execution':
++                    request=load_json(payload['verification-request.json'])
++                    if (len(raw)>262144 or report['version']!=1 or report.get('operation')!='verify-execution'
++                        or report.get('decision') not in {'confirmed','excluded','unknown'} or report.get('pointId')!=request['point']['id']
++                        or report.get('sourceSha256')!=request['point']['sourceSha256'] or report.get('point')!=request['point']
++                        or report.get('contractSha256')!=digest(request['contract']) or report.get('runtimePython')!=manifest['pythonVersion']
++                        or report.get('challengeSha256')!=sha256(request['challenge'].encode()).hexdigest() or not isinstance(report.get('runs'),list) or len(report['runs'])>4):raise ValueError('Invalid verification report')
++                elif report['version']==2:
+                     inventory=report.get('locations')
+                     validate_locations(inventory,payload)
+                     if report.get('operation','review')!=operation:raise ValueError('operation mismatch')
+@@ -1120,6 +1158,10 @@
+             if location_binding is not None and operation=='review':
+                 result['reviewArtifact']={'locationBinding':location_binding,'reportJson':raw.decode('utf-8'),
+                     'scanJson':payload['scan.json'].decode('utf-8'),'manifestJson':payload['manifest.json'].decode('utf-8')}
++            if operation=='verify-execution':
++                receipt.update(version=1,operation=operation,verifierSha256=expected,requestSha256=input_files['verification-request.json'],policySha256=digest(manifest['policy']),uid=os.geteuid(),cleanupVerified=True)
++                result['verificationExecution']=dict(receipt)
++                result['verificationArtifact']={'reportJson':raw.decode(),'requestJson':payload['verification-request.json'].decode(),'manifestJson':payload['manifest.json'].decode(),'scanJson':payload['scan.json'].decode()}
+             # State and original result commit in one atomic record, not two files.
+             job.update(state='completed', finishedAt=receipt['finishedAt'], resultSha256=digest(result), result=result)
+             try:
+@@ -1158,8 +1200,13 @@
+     creator.add_argument('sources', type=Path)
+     creator.add_argument('destination', type=Path)
+     creator.add_argument('image_id')
++    freezer=commands.add_parser('freeze-verifier')
++    for name in ['static_bundle','static_sha','dependencies','lock_path','contracts_path','destination']:freezer.add_argument(name)
+     verifier = commands.add_parser('verify')
+     runner = commands.add_parser('run')
++    executor=commands.add_parser('verify-execution')
++    for name in ['bundle','expected','root','manifest_path','scan_path','request_path','dataset_sha','freeze_sha']:executor.add_argument(name)
++    executor.add_argument('--attempts-root',type=Path);executor.add_argument('--timeout',type=float,default=30)
+     locator = commands.add_parser('locations')
+     for command in [verifier, runner, locator]:
+         command.add_argument('bundle', type=Path)
+@@ -1190,7 +1237,11 @@
+     args = vars(parser.parse_args())
+     action = args.pop('action')
+     try:
+-        if action=='retention-inventory':
++        if action=='freeze-verifier':
++            args['lock']=load_json(read(args.pop('lock_path')));args['contracts']=load_json(read(args.pop('contracts_path')))
++            value=verifier_module().freeze(**args)
++        elif action=='verify-execution':value=verify_execution(**args)
++        elif action=='retention-inventory':
+             args['budget_bytes']=args.pop('budget_mib')*1024*1024
+             value=retention_inventory(**args)
+         elif action=='storage-reconcile' or action.startswith('archive-'):
+--- before/scripts/review_quality_gate.mjs
++++ current/scripts/review_quality_gate.mjs
+@@ -29,7 +29,7 @@
+ }
+ function executionValid(row,run,frozenSha256){
+  return record(row)&&[1,2,3].includes(row.version)&&row.state==='completed'&&
+-   (run.version!==3||row.version===3&&row.operation==='review')&&row.snapshotSha256===run.identity.reviewer&&row.datasetSha256===run.datasetSha256&&row.freezeSha256===frozenSha256&&
++   (run.version<3||row.version===3&&row.operation==='review')&&row.snapshotSha256===run.identity.reviewer&&row.datasetSha256===run.datasetSha256&&row.freezeSha256===frozenSha256&&
+    ['inputSha256','reportSha256'].every(key=>typeof row[key]==='string'&&hashPattern.test(row[key]))&&
+    timestamp(row.startedAt)&&timestamp(row.finishedAt)&&Date.parse(row.startedAt)>=Date.parse(run.startedAt)&&
+    Date.parse(row.finishedAt)>=Date.parse(row.startedAt);
+@@ -52,7 +52,7 @@
+  const receipts=Array.isArray(run.reviewerExecutions)?run.reviewerExecutions.slice(0,1000):[];
+  const seen=new Set(),covered=new Set(),invalidReceiptIndices=[],duplicateReceiptIndices=[],legacyReceiptIndices=[];
+  for(const [index,row] of receipts.entries()){
+-  if(record(row)&&(row.version===1||run.version===3&&row.version!==3))legacyReceiptIndices.push(index);
++  if(record(row)&&(row.version===1||run.version>=3&&row.version!==3))legacyReceiptIndices.push(index);
+   if(!executionValid(row,run,frozenSha256)||!receiptInputsValid(row)){invalidReceiptIndices.push(index);continue}
+   if(seen.has(row.inputSha256)){duplicateReceiptIndices.push(index);continue}
+   seen.add(row.inputSha256);
+@@ -151,16 +151,17 @@
+ const usageRequired=dataset=>({datasetSha256:digest(dataset),sourceSha256:[...new Set(dataset.cases.map(row=>row.sourceSha256))].sort(),
+  action:'Record every acceptance attempt, including failure, in the usage ledger before any further freeze; this offline tool does not write the ledger'});
+ 
+-export function freezeReviewInputs(dataset,policy,identity,ledger,reviewerSnapshot,locationExecutions){
++export function freezeReviewInputs(dataset,policy,identity,ledger,reviewerSnapshot,locationExecutions,verificationPlan){
+  validateDataset(dataset);
+  validatePolicy(policy);
+  requireValue(identityValid(identity));
+  if(reviewerSnapshot!==undefined)requireValue(snapshotValid(reviewerSnapshot)&&reviewerSnapshot.version===2&&digest(reviewerSnapshot)===identity.reviewer);
+  const locations=dataset.version===3?freezeLocations(dataset,identity,reviewerSnapshot,locationExecutions):undefined;
++ if(verificationPlan!==undefined)requireValue(dataset.version===3&&validVerificationPlan(verificationPlan,dataset,reviewerSnapshot));
+  const used=validateLedger(ledger);
+  const usedSet=new Set(used);
+  if(dataset.cases.some(row=>usedSet.has(row.sourceSha256)))throw Error('Acceptance source already used in the sample ledger');
+- return{version:dataset.version, ...(locations?{locations,locationsSha256:digest(locations)}:{}),createdAt:new Date().toISOString(),datasetSha256:digest(dataset),policySha256:digest(policy),ledgerSha256:digest(ledger),
++ return{version:verificationPlan===undefined?dataset.version:4,...(verificationPlan===undefined?{}:{verificationPlan:structuredClone(verificationPlan),verificationPlanSha256:digest(verificationPlan)}), ...(locations?{locations,locationsSha256:digest(locations)}:{}),createdAt:new Date().toISOString(),datasetSha256:digest(dataset),policySha256:digest(policy),ledgerSha256:digest(ledger),
+   identity:{...identity},...(reviewerSnapshot===undefined?{}:{reviewerSnapshot:structuredClone(reviewerSnapshot)}),
+   developmentSourceSha256:used,usageRequired:usageRequired(dataset)};
+ }
+@@ -169,16 +170,18 @@
+  validateDataset(dataset);
+  validatePolicy(policy);
+  const used=validateLedger(ledger);
+- requireValue([2,3].includes(run?.version)&&identityValid(run.identity)&&timestamp(run.startedAt)&&hashPattern.test(run.datasetSha256??'')&&hashPattern.test(run.freezeSha256??''));
+- requireValue([2,3].includes(freeze?.version)&&identityValid(freeze.identity)&&timestamp(freeze.createdAt));
++ requireValue([2,3,4].includes(run?.version)&&identityValid(run.identity)&&timestamp(run.startedAt)&&hashPattern.test(run.datasetSha256??'')&&hashPattern.test(run.freezeSha256??''));
++ requireValue([2,3,4].includes(freeze?.version)&&identityValid(freeze.identity)&&timestamp(freeze.createdAt));
+  requireValue(Array.isArray(freeze.developmentSourceSha256)&&freeze.developmentSourceSha256.length<=20000&&
+   freeze.developmentSourceSha256.every(value=>typeof value==='string'&&hashPattern.test(value)));
+  requireValue(Array.isArray(run.outputs)&&run.outputs.length<=dataset.cases.length);
+  const blockers=new Set(),overlap=[],records=new Map(),caseBlockers=[],artifactCases=new Map(),decisionBindings=new Map();
+  const precise=dataset.version===3;
+- if(run.version!==dataset.version||freeze.version!==dataset.version)blockers.add('location-schema-mismatch');
++ if(run.version!==freeze.version||(dataset.version!==3&&run.version!==2)||(dataset.version===3&&run.version<3))blockers.add('location-schema-mismatch');
+  const actual=precise?preciseArtifacts(dataset,run,freeze):null;
+  if(actual)for(const issue of actual.issues)blockers.add(issue);
++ const verified=run.version===4?verificationArtifacts(dataset,run,freeze):null;
++ if(verified)for(const issue of verified.issues)blockers.add(issue);
+  const ids=new Set(dataset.cases.map(row=>row.id));
+  for(const output of run.outputs){
+   requireValue(record(output)&&ids.has(output.id)&&!records.has(output.id)&&['hit','no-hit','unknown'].includes(output.raw)&&
+@@ -242,6 +245,12 @@
+    output={...output,raw:'unknown',decision:'unknown'};blockers.add('scan-location-mismatch');reasons.push('scan-location-mismatch');
+   }
+   let decision=output.decision;
++  if(run.version===4&&['confirmed','excluded'].includes(decision)){
++   const actualVerification=verified.cases.get(row.id);
++   if(!actualVerification||actualVerification.decision!==decision||!output.evidence.every(e=>e.kind==='sandbox-verification'&&e.artifactSha256===actualVerification.artifactSha256)){
++    decision='unknown';blockers.add('verification-evidence-unavailable-or-mismatched');reasons.push('verification-evidence-unavailable-or-mismatched');
++   }
++  }
+   if(['confirmed','excluded'].includes(decision)&&output.evidence.some(item=>conflicts.has(item.artifactSha256))){
+    decision='unknown';blockers.add('artifact-binding-conflict');reasons.push('artifact-binding-conflict');
+   }
+@@ -273,8 +282,8 @@
+   for(const reason of reasons)blockers.add(category+':'+reason);
+   categories[category]={...summary,diagnostic:countsFor(rows),excludedFromQualification:rows.filter(item=>!qualifyingSample(item.row)).map(item=>item.row.id),thresholds:limits??null,blockers:reasons};
+  }
+- return{version:7,legacyDiagnosticOnly:!precise,state:blockers.size?'blocked':precise?'eligible-for-release-review':'diagnostic-only',r3Qualified:false,executionEnabled:false,
+-  reviewerCoverage:coverage,...(actual?{executionPoints:dataset.cases.map(row=>({id:row.id,path:row.path,sourceSha256:row.sourceSha256,pointId:row.pointId,location:row.location,actual:actual.cases.get(row.id)??{raw:'unknown'}}))}:{}),
++ return{version:8,legacyDiagnosticOnly:run.version!==4,state:blockers.size?'blocked':run.version===4?'eligible-for-release-review':'diagnostic-only',r3Qualified:false,executionEnabled:false,
++  ...(verified?{verificationCoverage:{supportedCases:[...verified.cases.keys()],issues:verified.issues},humanSupplement:Array.isArray(run.humanSupplement)?run.humanSupplement.slice(0,1000):[]}:{}),reviewerCoverage:coverage,...(actual?{executionPoints:dataset.cases.map(row=>({id:row.id,path:row.path,sourceSha256:row.sourceSha256,pointId:row.pointId,location:row.location,actual:actual.cases.get(row.id)??{raw:'unknown'}}))}:{}),
+   categories,blockers:[...blockers],caseBlockers,developmentOverlap:overlap,usageRequired:usageRequired(dataset),freezeTrust:'self-attested; digest and attempt-consumption ledger need an independent release-review check',
+   artifactReuse:[...artifactCases].filter(([,cases])=>cases.size>1).map(([sha256,cases])=>({sha256,caseIds:[...cases]})),
+   definitions:{
+@@ -385,6 +394,67 @@
+  return{issues,cases};
+ }
+ 
++const verifierPolicy={version:1,maxInputs:4,inputSeconds:5,pointSeconds:30,memoryMiB:512,cpus:1,pids:64,tmpMiB:32,outputBytes:262144,network:'none',proof:'python-narrow-literal-1'};
++const probeTemplates=['control-literal-v1','expression-with-frozen-random-challenge-v1','statement-with-frozen-random-challenge-v1','syntax-error-v1'];
++const probeValues=c=>["'harness-control'",`str('${c}')#`,`__harness_probe__='${c}'`,"'"];
++const bytesHash=s=>typeof s==='string'?createHash('sha256').update(s).digest('hex'):null;
++function validVerificationPlan(plan,dataset,staticSnapshot){
++ try{
++  const v=plan.snapshot;requireValue(plan.version===1&&record(v)&&v.version===1&&v.kind==='python-execution-verifier'&&v.pythonVersion==='3.12.15'&&v.imageId===staticSnapshot.imageId&&v.staticSha256===digest(staticSnapshot)&&digest(v.staticSnapshot)===digest(staticSnapshot));
++  requireValue(digest(v.policy)===digest(verifierPolicy)&&digest(v.probes)===digest(probeTemplates)&&record(v.code)&&Object.keys(v.code).sort().join(',')==='eval_evidence_batch.py,eval_guard_review.py,eval_import_review.py,python_execution_verify.py'&&Object.values(v.code).every(h=>hashPattern.test(h)));
++  requireValue(v.controllerSha256===staticSnapshot.launcherSha256&&v.storageSha256===staticSnapshot.storageSha256&&hashPattern.test(v.verifierControllerSha256??'')&&record(v.dependencies)&&Object.keys(v.dependencies).length<=1000&&Object.values(v.dependencies).every(h=>hashPattern.test(h)));
++  requireValue(Array.isArray(v.sourceProfiles)&&v.sourceProfiles.length>0&&v.sourceProfiles.every(h=>hashPattern.test(h))&&record(v.recipes)&&Object.entries(v.recipes).every(([h,c])=>h===digest(c)&&c.version===1&&c.inputContract==='untrusted-data-only'));
++  for(const n of reviewerFiles)requireValue(v.code[n]===staticSnapshot.files[n]);
++  requireValue(Array.isArray(plan.requests)&&plan.requests.length===dataset.cases.filter(r=>r.pointId!==null).length&&plan.requests.length<=1000);
++  const seen=new Set(),challenges=new Set();
++  for(const r of plan.requests){
++   const c=dataset.cases.find(c=>c.id===r.caseId);requireValue(c&&c.pointId!==null&&!seen.has(c.id)&&r.point.id===c.pointId&&r.point.sourceSha256===c.sourceSha256&&r.contract.path===c.path&&pointValid(r.point,c.sourceSha256)&&v.sourceProfiles.includes(c.sourceSha256)&&v.recipes[digest(r.contract)]&&digest(v.recipes[digest(r.contract)])===digest(r.contract)&&hashPattern.test(r.challenge??'')&&!challenges.has(r.challenge));
++   seen.add(c.id);challenges.add(r.challenge);
++  }
++  return true;
++ }catch{return false}
++}
++function observedDecision(report,request){
++ const point=request.point,callee=point.callee.split('.').at(-1),probes=probeValues(request.challenge),calls=[];
++ if(report.pointId!==point.id||report.sourceSha256!==point.sourceSha256||digest(report.point)!==digest(point)||report.contractSha256!==digest(request.contract)||report.challengeSha256!==bytesHash(request.challenge)||report.runtimePython!=='3.12.15'||report.probePolicySha256!==digest({policy:verifierPolicy,probes:probeTemplates})||!Array.isArray(report.runs)||report.runs.length!==4)return'unknown';
++ let triggered=false;
++ for(const [i,r] of report.runs.entries()){
++  if(r.inputIndex!==i||r.probeSha256!==bytesHash(probes[i])||r.trace?.state!=='observed'||!Array.isArray(r.trace.calls)||!Array.isArray(r.trace.returns)||r.trace.calls.length>16||r.trace.returns.length>16)return'unknown';
++  for(const c of r.trace.calls){if(c.pointId!==point.id||c.callee!==callee||c.exactStr!==true||typeof c.argument!=='string'||c.argumentSha256!==bytesHash(c.argument))return'unknown';calls.push(c)}
++  if(r.trace.returns.some(v=>v.pointId!==point.id))return'unknown';
++  const exact=r.trace.calls.some(c=>c.argument===probes[i]||(i===1&&c.argument.startsWith(probes[i])));
++  const witnessed=r.trace.returns.some(v=>callee==='eval'?v.evalWitness===true&&v.returnValue===request.challenge:v.execWitness===true&&v.markerValue===request.challenge);
++  if(((callee==='eval'&&i===1)||(callee==='exec'&&i===2))&&exact&&witnessed)triggered=true;
++ }
++ if(triggered)return'confirmed';
++ const proof=report.proof,e=request.contract.entry;
++ if(!calls.length||!record(proof)||proof.domain!=='exact-str'||proof.sinkLine!==point.call.start.line||!Number.isSafeInteger(proof.guardLine)||proof.guardLine>=proof.sinkLine||!(e.kind==='function'&&proof.function===e.name&&digest(proof.parameters)===digest([e.parameter])||e.kind==='flask'&&digest(proof.parameters)===digest([])))return'unknown';
++ if(proof.kind==='single-quoted-string'&&calls.every(c=>c.argument.startsWith("'")&&c.argument.endsWith("'")&&!c.argument.slice(1,-1).includes("'")))return'excluded';
++ const literal=t=>typeof t==='string'&&t.length<=256&&/^(?:None|True|False|\d+(?:\.\d+)?|'[^'\n\r]*'|"[^"\n\r]*")$/.test(t);
++ if(proof.kind==='finite-literal-set'&&Array.isArray(proof.values)&&proof.values.length>0&&proof.values.length<=16&&proof.values.every(literal)&&calls.every(c=>proof.values.includes(c.argument)))return'excluded';
++ return'unknown';
++}
++function verificationArtifacts(dataset,run,freeze){
++ const cases=new Map(),issues=[];
++ if(!validVerificationPlan(freeze.verificationPlan,dataset,freeze.reviewerSnapshot)||digest(freeze.verificationPlan)!==freeze.verificationPlanSha256)return{cases,issues:['verification-plan-missing-or-changed']};
++ if(!Array.isArray(run.verifierExecutions)||!Array.isArray(run.verificationArtifacts)||run.verifierExecutions.length!==run.verificationArtifacts.length||run.verifierExecutions.length>1000)return{cases,issues:['verification-artifacts-missing']};
++ const pin=digest(freeze.verificationPlan.snapshot),seen=new Set();
++ for(const [i,r] of run.verifierExecutions.entries()){
++  try{
++   const a=run.verificationArtifacts[i],request=JSON.parse(a.requestJson),report=JSON.parse(a.reportJson),manifest=JSON.parse(a.manifestJson),planned=freeze.verificationPlan.requests.find(p=>p.point.id===request.point.id&&p.contract.path===request.contract.path);
++   requireValue(planned&&!seen.has(planned.caseId)&&digest({version:1,point:planned.point,contract:planned.contract,challenge:planned.challenge})===digest(request));
++   requireValue(r.version===1&&r.operation==='verify-execution'&&r.state==='completed'&&r.cleanupVerified===true&&r.verifierSha256===pin&&r.datasetSha256===run.datasetSha256&&r.freezeSha256===digest(freeze)&&r.policySha256===digest(verifierPolicy)&&Number.isSafeInteger(r.uid)&&r.uid>0&&timestamp(r.startedAt)&&timestamp(r.finishedAt)&&Date.parse(r.startedAt)>=Date.parse(run.startedAt)&&Date.parse(r.finishedAt)>=Date.parse(r.startedAt));
++   requireValue(record(r.inputFiles)&&Object.keys(r.inputFiles).length<=1100&&digest(r.inputFiles)===r.inputSha256&&r.reportSha256===bytesHash(a.reportJson)&&r.requestSha256===bytesHash(a.requestJson)&&r.inputFiles['verification-request.json']===r.requestSha256&&r.inputFiles['manifest.json']===bytesHash(a.manifestJson)&&r.inputFiles['scan.json']===bytesHash(a.scanJson));
++   requireValue(manifest.locationBinding?.snapshotSha256===run.identity.reviewer&&manifest.locationBinding.imageId===freeze.reviewerSnapshot.imageId&&manifest.locationBinding.uid===r.uid&&r.inputFiles['sources/'+planned.contract.path]===planned.point.sourceSha256);
++   requireValue(Object.entries(manifest.files).every(([n,h])=>r.inputFiles['sources/'+n]===h&&freeze.verificationPlan.snapshot.sourceProfiles.includes(h)));
++   requireValue(Object.entries(freeze.verificationPlan.snapshot.dependencies).every(([n,h])=>r.inputFiles['dependencies/'+n]===h));
++   const decision=observedDecision(report,request);requireValue(report.decision===decision||report.decision==='unknown');
++   seen.add(planned.caseId);cases.set(planned.caseId,{decision:report.decision==='unknown'?'unknown':decision,artifactSha256:r.reportSha256});
++  }catch{issues.push('verification-artifact-invalid:'+i)}
++ }
++ return{cases,issues};
++}
++
+ function readInput(path){
+  const limit=2*1024*1024,fd=openSync(path,constants.O_RDONLY|constants.O_NOFOLLOW|constants.O_NONBLOCK);
+  try{
+@@ -404,7 +474,7 @@
+ if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
+  try{
+   if(process.argv[2]==='--freeze'){
+-   if(![7,8,9].includes(process.argv.length))throw Error('Usage: review_quality_gate.mjs --freeze DATASET POLICY IDENTITY LEDGER [REVIEWER_SNAPSHOT [LOCATION_EXECUTIONS]]');
++   if(![7,8,9,10].includes(process.argv.length))throw Error('Usage: review_quality_gate.mjs --freeze DATASET POLICY IDENTITY LEDGER [REVIEWER_SNAPSHOT [LOCATION_EXECUTIONS [VERIFICATION_PLAN]]]');
+    console.log(JSON.stringify(freezeReviewInputs(...process.argv.slice(3).map(readInput)),null,2));
+   }else{
+    if(process.argv.length!==7)throw Error('Usage: review_quality_gate.mjs DATASET RUN FREEZE POLICY LEDGER');

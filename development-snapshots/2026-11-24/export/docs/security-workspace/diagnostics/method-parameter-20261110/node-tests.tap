@@ -1,0 +1,40 @@
+(node:34213) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ existing16 findings are explicitly not applicable and never launch a worker (1.733042ms)
+✔ eligible input carries exact full copy span and hash without importing source (1.871291ms)
+✔ eligible snapshot mismatch never reaches worker (1.022042ms)
+✔ eligible hash mismatch never reaches worker (0.89975ms)
+✔ eligible unbound mismatch never reaches worker (0.731416ms)
+✔ eligible label mismatch never reaches worker (0.59175ms)
+✔ changed same-size source refuses anchored request (0.77ms)
+✔ worker failure preserves original warning and reports unavailable (1.081125ms)
+✔ cleanup uncertainty must escape to block later tasks (1.266459ms)
+✔ joint collector preserves persisted scanner warning when namespace unavailable (141.993333ms)
+✔ joint collector preserves persisted scanner warning when namespace stop-unknown (90.183417ms)
+✔ joint collector preserves persisted scanner warning when namespace shutdown-stop-unknown (87.179125ms)
+✔ real AST worker output projects only copy-bound unverified structure (39.770083ms)
+✔ invalid worker output cannot become evidence: r=>r.observations[0].anchor.offset++ (38.567583ms)
+✔ invalid worker output cannot become evidence: r=>r.observations[0].sourceSha256='c'.repeat(64) (37.493791ms)
+✔ invalid worker output cannot become evidence: r=>r.observations[0].disposition='confirmed' (37.275167ms)
+✔ invalid worker output cannot become evidence: r=>r.observations.push(r.observations[0]) (37.303459ms)
+✔ invalid worker output cannot become evidence: r=>r.checks=0 (37.762875ms)
+✔ a preceding assignment on the same line remains structural unverified evidence (36.879083ms)
+✔ class method parameter observation reaches the existing artifact contract without confirming external input (38.453084ms)
+✔ excessive source writes remain unmatched instead of discarding valid worker output (39.381ms)
+✔ review sandbox sends data through stdin and mounts only trusted worker (2.313875ms)
+✔ unexpected capability prevents worker startup and still cleans owned container (5.967875ms)
+✔ lost worker reply is not retried and triggers removal (0.764459ms)
+✔ daemon failure cannot be confused with container absence (0.620292ms)
+✔ already cancelled review never creates a container (0.107041ms)
+✔ short remaining budget never starts work (0.439708ms)
+✔ unknown create outcome never claims cleanup success from an empty name lookup (0.667709ms)
+✔ budget exhaustion between create and inspect cannot produce an unbounded zero timeout (0.48325ms)
+✔ an unqualified Python runtime cannot produce accepted evidence (0.663625ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 747.691458

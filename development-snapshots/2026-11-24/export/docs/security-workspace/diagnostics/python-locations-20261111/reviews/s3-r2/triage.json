@@ -1,0 +1,21 @@
+{
+  "fixed": [
+    "missing scannerSpan no longer crashes helper",
+    "historical uniqueness assertion strengthened and VM re-run"
+  ],
+  "outOfScope": [
+    {
+      "state": "confirmed-existing-accuracy-defect",
+      "finding": "adapter missing modelCalls currently coerces to zero",
+      "file": "personal-joint-review.mjs:adapterResult/view",
+      "fixed": false
+    },
+    {
+      "state": "conditional-existing-hardening",
+      "finding": "returned ruleProfile metadata only shape checked; executedRules SHA independently enforced",
+      "file": "personal-security-workbench.mjs:start",
+      "fixed": false
+    }
+  ],
+  "r3Qualified": false
+}

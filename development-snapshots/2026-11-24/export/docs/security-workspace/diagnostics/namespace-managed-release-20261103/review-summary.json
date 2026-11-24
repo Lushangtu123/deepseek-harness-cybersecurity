@@ -1,0 +1,46 @@
+{
+  "actualRequestedModelReviews": [
+    {
+      "receipt": "first-attempt/claude-release.json",
+      "models": [
+        "claude-opus-5-5"
+      ],
+      "effort": "high",
+      "toolsEnabled": false,
+      "scope": "static deployment controller/rollback excerpts",
+      "result": "fixes requested and subsequently addressed"
+    },
+    {
+      "receipt": "first-attempt/claude-release-closure.json",
+      "models": [
+        "claude-opus-5-5"
+      ],
+      "effort": "high",
+      "toolsEnabled": false,
+      "scope": "static deployment controller/rollback excerpts",
+      "result": "fixes requested and subsequently addressed"
+    },
+    {
+      "receipt": "first-attempt/claude-release-final.json",
+      "models": [
+        "claude-opus-5-5"
+      ],
+      "effort": "high",
+      "toolsEnabled": false,
+      "scope": "static deployment controller/rollback excerpts",
+      "result": "no remaining code blockers; linger and no-optimize guards added before run"
+    }
+  ],
+  "finalReviewerScope": "before first deployment; final change show --all had actual VM check+four regressions, no extra model review",
+  "fourProtectionTests": true,
+  "detachedSupervisorNativeTest": true,
+  "realSIGTERMTemporaryRollbackTest": true,
+  "firstAttemptRollbackVerified": true,
+  "firstFailureRootCause": "systemctl show omitted empty Job property; --all retains it",
+  "retry": {
+    "sameCandidateBytes": true,
+    "uniqueOperationAndBackup": true,
+    "showAllNativeCheckPassed": true
+  },
+  "notIndependentSecurityAudit": true
+}

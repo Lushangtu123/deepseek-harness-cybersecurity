@@ -1,0 +1,108 @@
+{
+  "phases": [
+    {
+      "phase": "baseline",
+      "appStopped": {
+        "exitCode": 0,
+        "stopped": true
+      },
+      "guestPortClosedErrno": 111,
+      "runtimeObserverEvents": [
+        {
+          "at": "2026-11-11T06:45:26.548Z",
+          "kind": "initialize-start",
+          "documentsDirectory": null
+        },
+        {
+          "at": "2026-11-11T06:45:26.557Z",
+          "kind": "initialize-error",
+          "name": "Error",
+          "message": "system Documents directory is unavailable"
+        },
+        {
+          "at": "2026-11-11T06:50:12.269Z",
+          "kind": "initialize-start",
+          "documentsDirectory": null
+        },
+        {
+          "at": "2026-11-11T06:50:12.276Z",
+          "kind": "initialize-error",
+          "name": "Error",
+          "message": "system Documents directory is unavailable"
+        }
+      ],
+      "credentialStoreMetadata": {
+        "generatedStoreExists": true,
+        "refsCount": 0,
+        "recordsCount": 1,
+        "recordKinds": [
+          "grant"
+        ],
+        "credentialValuesCollected": false
+      },
+      "dailyProgramFilesMatched": 169,
+      "dailyDatabasesLogicallyMatched": 42,
+      "dailyConfigPinsSdkNamespaceAndInodeMatched": true,
+      "guiRequestObserved": true,
+      "defaultDirectoryCreated": false,
+      "temporaryRemoved": true
+    },
+    {
+      "phase": "fixed",
+      "appStopped": {
+        "exitCode": 0,
+        "stopped": true
+      },
+      "guestPortClosedErrno": 111,
+      "runtimeObserverEvents": [
+        {
+          "at": "2026-11-11T06:50:36.431Z",
+          "kind": "initialize-start",
+          "documentsDirectory": "/home/purge/workspace"
+        },
+        {
+          "at": "2026-11-11T06:50:36.456Z",
+          "kind": "initialize-complete",
+          "workspace": {
+            "id": "0fc11c05-d851-448f-a96f-efce2ae6f149",
+            "path": "/home/purge/workspace/deepseek-harness/default-workspace",
+            "title": "default-workspace",
+            "sessionCount": 0
+          }
+        }
+      ],
+      "credentialStoreMetadata": {
+        "generatedStoreExists": true,
+        "refsCount": 0,
+        "recordsCount": 1,
+        "recordKinds": [
+          "grant"
+        ],
+        "credentialValuesCollected": false
+      },
+      "dailyProgramFilesMatched": 169,
+      "dailyDatabasesLogicallyMatched": 42,
+      "dailyConfigPinsSdkNamespaceAndInodeMatched": true,
+      "guiRequestObserved": true,
+      "defaultDirectoryCreated": true,
+      "temporaryRemoved": true
+    }
+  ],
+  "noCredentialCopies": true,
+  "hostRelays": [
+    {
+      "phase": "baseline",
+      "stopped": true,
+      "masterStopped": true,
+      "controlDirectoryRemoved": true,
+      "localPortClosed": true
+    },
+    {
+      "phase": "fixed",
+      "stopped": true,
+      "masterStopped": true,
+      "controlDirectoryRemoved": true,
+      "localPortClosed": true
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "date": "2026-11-04",
+  "scope": [
+    "SCORE-SHARED-CAP-CONFLICT"
+  ],
+  "tests": {
+    "localPluginPassed": 999,
+    "vmPluginPassed": 999,
+    "pluginFiles": 107,
+    "pythonPassed": 352,
+    "pythonFiles": 43,
+    "focusedPassed": 79,
+    "initialExpectedFailures": 8,
+    "reviewRevisionExpectedFailures": 1,
+    "reviewProjectionExpectedFailures": 1,
+    "clientReproducible": true,
+    "nativeModelToolCall": false,
+    "browserEndToEnd": false
+  },
+  "native": {
+    "exitCode": 0,
+    "testFiles": 107,
+    "sdkSmokeExitCode": 0,
+    "node": "v24.22.1",
+    "python": "3.12.3",
+    "dailyProgramUnchanged": true,
+    "dailyOverrideUnchanged": true,
+    "temporaryCopyRemoved": true
+  },
+  "sourceHashes": {
+    "work/harness-purge-improved/package/lib/redteam/score-rules.js": "5c99c9dff1d0496b94ccfd7ee90414da8bfb16e2d06ad3d0085769b06771bef4",
+    "work/harness-purge-improved/package/lib/redteam/store-core.js": "18d5aa3c2c8b4e79e1643a0c30dc71ebe4771dda90ef4a57e00ab2f6d77184a3",
+    "work/harness-purge-improved/package/lib/redteam/tools.js": "26f825f9e154cd12ee6c6481d899dc0698e12e894cd592251247482b9910dab8",
+    "work/harness-purge-improved/package/lib/redteam/client.js": "079493bf4e2e47bc49697ee2e3a9cf7da1c2ce087dbe71ef32ff56cd63a67d44",
+    "work/harness-purge-improved/tests/score-cap-conflicts.test.mjs": "97ff7af376cf4cbb377df974aec2787387e3b7cefb8816d26a3b3696f01c03f6",
+    "work/harness-purge-improved/tests/score-project.test.mjs": "46e0f9e4d73b3162da9dd2d0040ebc1bff04f09db1643d0df6681482a46bed06",
+    "work/harness-purge-improved/package/client.js": "371041b050c2e520e97c345ecf64b2c4499259cd999a45ca328ebfd34cfb804d"
+  },
+  "initialExternalReview": {
+    "promptSha256": "19c49c2c572468b16594e604342fbbf8e5a91b2ac66f58f5bd56a14dd7f09253",
+    "claude": "provider-safety-refusal",
+    "claudeRequestedModel": "claude-opus-5-5",
+    "actualReviewer": "DeepSeek V4.1 Flash",
+    "actualApiAlias": "deepseek-flash",
+    "effort": "high",
+    "finishReason": "stop",
+    "reportSha256": "d6238d4cd256f7844c5217e73bde58c941cb01c5222eb63f98ca5099a06bbf44",
+    "receiptSha256": "4b7a15fd4343f28368ceb4ae009493581567568067a337d09c411bda246074a2",
+    "unchangedUserPacket": true,
+    "temporaryReviewCopyRemoved": true
+  },
+  "revisionExternalReview": {
+    "promptSha256": "631670fd43ff2d664ad1cdc7b10e576dd1cfa8f35e987797f4220106855be742",
+    "actualReviewer": "Claude Opus 5.5",
+    "actualModel": "claude-opus-5-5",
+    "effort": "high",
+    "finishReason": "end_turn",
+    "reportSha256": "666a0cfcbb8cae1228f4f210c0dd9a9fac4160675ca2beb9972226dea42c27d5",
+    "receiptSha256": "60e53f566dcc7701b31c2b2fb3722d42293717d702e81a95322a4b25b52bd52a",
+    "fallbackUsed": false
+  },
+  "externalReview": {
+    "state": "completed-and-triaged",
+    "remainingScopedP1P2Blockers": 0,
+    "promptSha256": "a812d440d8c548a6343db82ed329d16febca32b0a045fdea15645eb2aec589d9",
+    "claude": "provider-safety-refusal",
+    "claudeRequestedModel": "claude-opus-5-5",
+    "actualReviewer": "DeepSeek V4.1 Flash",
+    "actualApiAlias": "deepseek-flash",
+    "effort": "high",
+    "finishReason": "stop",
+    "reportSha256": "a31a20bf49267d0730a4d3e71df9e5afaeaa98f0bcee9efe82a4ed8e1198fd9c",
+    "receiptSha256": "a1ee30442d181c3e1e9f154b063b632abe2aad0030ca2bf3d1bf8776673546ea",
+    "unchangedUserPacket": true,
+    "temporaryReviewCopyRemoved": true
+  },
+  "capToggleProbe": {
+    "states": [
+      {
+        "enabled": true,
+        "score": 0,
+        "conflicts": 1
+      },
+      {
+        "enabled": false,
+        "score": 12,
+        "conflicts": 0
+      },
+      {
+        "enabled": true,
+        "score": 0,
+        "conflicts": 1
+      }
+    ],
+    "rawHits": 1,
+    "configPreserved": true
+  },
+  "reportConflictProbe": {
+    "request": "scoreReport",
+    "noticeRendered": true,
+    "noHits": true
+  },
+  "acceptance": {
+    "candidateProgramFiles": 173,
+    "dailyProgramFiles": 169,
+    "deployed": false,
+    "chromeEndToEnd": false,
+    "nativeModelToolCall": false,
+    "ordinaryR3Qualified": false,
+    "wholeProductReleaseQualified": false,
+    "realFindingsStillUnverified": 95
+  }
+}

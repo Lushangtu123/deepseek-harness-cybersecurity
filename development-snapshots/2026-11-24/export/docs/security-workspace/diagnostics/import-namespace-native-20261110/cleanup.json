@@ -1,0 +1,15 @@
+{
+  "namespaceChildrenStopped": true,
+  "backendAcknowledged": true,
+  "appAcknowledged": true,
+  "guestPortClosedErrno": 111,
+  "ownedScannerContainersAbsent": 1,
+  "dailyProgramFilesMatched": 169,
+  "dailyDatabaseLogicalDigestsMatched": 42,
+  "dailyConfigAndPinsMatched": true,
+  "installedRuntimeMatched": true,
+  "outsideNamespaceAndHomeInodeMatched": true,
+  "candidateStagedFilesMatched": 182,
+  "credentialCopiesRemoved": true,
+  "temporaryRootRemoved": true
+}

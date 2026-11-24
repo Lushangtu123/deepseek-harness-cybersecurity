@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "configuration": "merged-original-switch",
+  "date": "2026-10-29",
+  "baseCommit": "ccc44dc7fd6b583fdd6bc542e9c749f9787bc821",
+  "regression": {
+    "pluginJavascript": 326,
+    "hostJavascript": 98,
+    "hostPythonSuites": 13,
+    "hostPythonTests": 91,
+    "embeddedGuestTransitionTestsIncluded": 5,
+    "failures": 0
+  },
+  "deployment": {
+    "programFilesMatched": 115,
+    "guestExportFilesMatched": 94,
+    "hostHelpersMatched": 5,
+    "installationPreflightChecks": 233,
+    "originalCapabilities": false,
+    "coverage": {
+      "program": 115,
+      "runtime": 13,
+      "tools": 10,
+      "config": 9,
+      "plugins": 1320
+    }
+  },
+  "acceptance": {
+    "authenticatedEnableThenDisable": true,
+    "duplicateRejected": true,
+    "invalidAndCrossSiteWritesRejected": true,
+    "browserConfirmedOff": true,
+    "browserConfirmationCancelVerified": true,
+    "browserFinalEnableButtonExecuted": false,
+    "nativeRoleAndToolAssemblyVerifiedDuringMerge": true,
+    "newModelRequests": 0
+  },
+  "recovery": {
+    "name": "ready-merged-switch-20261029",
+    "proofFiles": 1559,
+    "offlineCopyRestorePassed": true,
+    "failedHostFileReplacementRollbackPassed": true,
+    "copyRegisteredOrBooted": false,
+    "oldRecoveryPointsPreserved": true
+  },
+  "excluded": [
+    "credentials",
+    "private login URLs",
+    "personal profile",
+    "chat history",
+    "databases",
+    "test logs",
+    "balance screenshots",
+    "runtime dependencies",
+    "VM disk and recovery archives"
+  ]
+}

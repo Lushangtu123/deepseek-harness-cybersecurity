@@ -1,0 +1,12 @@
+{
+  "type": "status",
+  "state": "completed",
+  "responseId": "8eebd996-5a48-48d7-a42e-d5bdeff94fad",
+  "time": "2026-11-24T16:51:36.470772+00:00",
+  "workspaceFilesWritten": 0,
+  "promptSha256": "ad411360e28a96f6a8a6ca6acc6d5d197fe60b4fa89a3060add07d514f86c2a9",
+  "requestedModel": "deepseek-flash",
+  "effort": "high",
+  "receiptSha256": "3a63b4df3770067c0b4284e59af8d3c4d27b6a38d495e2994b8c82030e52652a",
+  "reportSha256": "26fc392a212acd9f7f2a330445179a75fe7e66fb7090d509ce52fcd2da493baf"
+}

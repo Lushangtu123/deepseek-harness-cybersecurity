@@ -1,0 +1,11 @@
+[Unit]
+Description=Harness private security audit IPC
+
+[Socket]
+ListenStream=%t/harness-security.sock
+SocketMode=0600
+RemoveOnStop=yes
+Backlog=16
+
+[Install]
+WantedBy=sockets.target

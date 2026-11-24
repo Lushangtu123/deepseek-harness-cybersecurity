@@ -1,0 +1,11 @@
+{
+  "state": "closed",
+  "review": "DeepSeek V4.1 Flash high after Claude weekly quota failure",
+  "confirmedBlockers": [],
+  "testCount": 4,
+  "resolution": "Tests instrument actual fdopen read seam, verify same returned bytes and deterministic fstat mutation rejection",
+  "limitations": [
+    "reviewed source profiles only",
+    "white-box test seam changes require matching test update"
+  ]
+}

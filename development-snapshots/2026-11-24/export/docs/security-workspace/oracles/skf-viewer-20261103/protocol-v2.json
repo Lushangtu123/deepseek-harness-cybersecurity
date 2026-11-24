@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "createdAt": "2026-11-04T03:01:16.460056+00:00",
+  "sourceCommit": "35199b6f49658b75f860530c0f09b91e985198aa",
+  "sources": {
+    "original": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+    "fixed-control": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134"
+  },
+  "sinkLine": 37,
+  "sourceLine": 32,
+  "endpoint": "/viewer",
+  "requests": [
+    {
+      "id": "normal-default",
+      "kind": "normal",
+      "value": null
+    },
+    {
+      "id": "normal-normal",
+      "kind": "normal",
+      "value": "normal"
+    },
+    {
+      "id": "normal-red",
+      "kind": "normal",
+      "value": "red"
+    },
+    {
+      "id": "normal-blue",
+      "kind": "normal",
+      "value": "blue"
+    },
+    {
+      "id": "benign-expression-1",
+      "kind": "expression",
+      "value": "str(17389 * 7919)#",
+      "marker": "137703491"
+    },
+    {
+      "id": "benign-expression-2",
+      "kind": "expression",
+      "value": "str(92717 * 6373)#",
+      "marker": "590885441"
+    }
+  ],
+  "dependencies": {
+    "Flask": "3.1.2",
+    "Werkzeug": "3.1.3",
+    "Jinja2": "3.1.6",
+    "itsdangerous": "2.2.0",
+    "blinker": "1.9.0",
+    "click": "8.1.8",
+    "MarkupSafe": "3.0.3"
+  },
+  "runtimeImage": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "limitations": [
+    "Flask 3.1.2 / pinned Python 3.12 image; original Flask 0.10.1 requirements not reproduced.",
+    "Only /viewer code-injection behavior is checked; no whole-lab or other-route safety claim.",
+    "Fixed counterpart is authored control, not independent upstream negative."
+  ],
+  "probeSha256": "b9298b94266c3caeefa253129d395a8d81c5237f94e82af7c4458688210ef94c",
+  "revision": 2,
+  "previousProtocolSha256": "1a7d56ccc33704b09989cfa4a65d92d61f7dff955eee7988a0eaca4f3310e4e6",
+  "gitBlobSha1": "c339e78b4dc02235fea6b277ed9fc85a6860aacc",
+  "oldExpression": "eval(lines_type+\"_lines(line)\")",
+  "fixedExpression": "{\"normal\": normal_lines, \"red\": red_lines, \"blue\": blue_lines}.get(lines_type, normal_lines)(line)",
+  "inputFiles": {
+    "/wheels.json": "6effdf510151ce85186806bde5f5457b5fd44ab5099c00230b83778839250382",
+    "/src/original/CMD2.py": "fc8182f25018a8150dfcfdfc2f3c9b61ff994a8c5cede1cd0003aa894367cbcf",
+    "/src/original/templates/index.html": "bcc05d332521f72c97fd4ecb957734f9fd9d7a97e66b7f5e348941a16bb4bbb9",
+    "/src/original/access_log.txt": "11d2ced7fa616e006fdadd0400a8e8a7bc77054a0ae72821bf0802c92cf7fab1",
+    "/src/original/error_log.txt": "11d2ced7fa616e006fdadd0400a8e8a7bc77054a0ae72821bf0802c92cf7fab1",
+    "/src/fixed-control/CMD2.py": "8beb174ccd3dd6aa7ef18d56fbd6324c7724c766002d0a7122906b3c7f912134",
+    "/src/fixed-control/templates/index.html": "bcc05d332521f72c97fd4ecb957734f9fd9d7a97e66b7f5e348941a16bb4bbb9",
+    "/src/fixed-control/access_log.txt": "11d2ced7fa616e006fdadd0400a8e8a7bc77054a0ae72821bf0802c92cf7fab1",
+    "/src/fixed-control/error_log.txt": "11d2ced7fa616e006fdadd0400a8e8a7bc77054a0ae72821bf0802c92cf7fab1"
+  },
+  "dependencyTreeSha256": "8b849c8e46524b8b17f03922cd9b6082423931484e2fbf6a413a264205a0eb02",
+  "interpretation": "Strengthened diagnostic rerun of already-used sample; not a new independent holdout or modified detector candidate"
+}

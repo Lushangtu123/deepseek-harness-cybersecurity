@@ -1,0 +1,486 @@
+{
+ "attempts": [
+  {
+   "argvBase": [
+    "--expr="
+   ],
+   "attempt": 1,
+   "classId": "S",
+   "classTitle": "structure-controlled",
+   "expected": {
+    "decision": "confirmed",
+    "dynamicEvents": 1,
+    "reason": "structure-match",
+    "targetExit": 0
+   },
+   "fixture": "fixtures/structure-controlled/sce_raw_sink.py",
+   "outputRoot": "runs/0001",
+   "payloadRole": "computation",
+   "payloadTemplate": "len(\"${challenge}\")",
+   "probeIndex": 0,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "fb799416a87ce896e747acd66618a98e3e349c6800a58843b196560399ca2dba"
+  },
+  {
+   "argvBase": [
+    "--expr="
+   ],
+   "attempt": 2,
+   "classId": "S",
+   "classTitle": "structure-controlled",
+   "expected": {
+    "decision": "confirmed",
+    "dynamicEvents": 1,
+    "reason": "structure-match",
+    "targetExit": 0
+   },
+   "fixture": "fixtures/structure-controlled/sce_raw_sink.py",
+   "outputRoot": "runs/0002",
+   "payloadRole": "computation",
+   "payloadTemplate": "\"${challenge}\"[4:12]",
+   "probeIndex": 0,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "fb799416a87ce896e747acd66618a98e3e349c6800a58843b196560399ca2dba"
+  },
+  {
+   "argvBase": [
+    "--expr="
+   ],
+   "attempt": 3,
+   "classId": "S",
+   "classTitle": "structure-controlled",
+   "expected": {
+    "decision": "confirmed",
+    "dynamicEvents": 1,
+    "reason": "structure-match",
+    "targetExit": 0
+   },
+   "fixture": "fixtures/structure-controlled/sce_raw_sink.py",
+   "outputRoot": "runs/0003",
+   "payloadRole": "computation",
+   "payloadTemplate": "[len(\"${challenge}\"), 2][0]",
+   "probeIndex": 0,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "fb799416a87ce896e747acd66618a98e3e349c6800a58843b196560399ca2dba"
+  },
+  {
+   "argvBase": [
+    "--expr="
+   ],
+   "attempt": 4,
+   "classId": "S",
+   "classTitle": "structure-controlled",
+   "expected": {
+    "decision": "confirmed",
+    "dynamicEvents": 1,
+    "reason": "structure-match",
+    "targetExit": 0
+   },
+   "fixture": "fixtures/structure-controlled/sce_raw_sink.py",
+   "outputRoot": "runs/0004",
+   "payloadRole": "computation",
+   "payloadTemplate": "max(len(\"${challenge}\"), 7)",
+   "probeIndex": 0,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "fb799416a87ce896e747acd66618a98e3e349c6800a58843b196560399ca2dba"
+  },
+  {
+   "argvBase": [
+    "--expr="
+   ],
+   "attempt": 5,
+   "classId": "Q",
+   "classTitle": "safe-quoting-data",
+   "expected": {
+    "decision": "excluded",
+    "dynamicEvents": 1,
+    "reason": "data-only-structure",
+    "targetExit": 0
+   },
+   "fixture": "fixtures/safe-quoting/sce_quoted_sink.py",
+   "outputRoot": "runs/0005",
+   "payloadRole": "data",
+   "payloadTemplate": "${challenge}",
+   "probeIndex": 0,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "f03a1f1d698923b04e4b0a5a8709a8958c1cdc221d14c5969cde04c430afb47c"
+  },
+  {
+   "argvBase": [
+    "--expr="
+   ],
+   "attempt": 6,
+   "classId": "Q",
+   "classTitle": "safe-quoting-data",
+   "expected": {
+    "decision": "excluded",
+    "dynamicEvents": 1,
+    "reason": "data-only-structure",
+    "targetExit": 0
+   },
+   "fixture": "fixtures/safe-quoting/sce_quoted_sink.py",
+   "outputRoot": "runs/0006",
+   "payloadRole": "data",
+   "payloadTemplate": "probe-${challenge}",
+   "probeIndex": 0,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "f03a1f1d698923b04e4b0a5a8709a8958c1cdc221d14c5969cde04c430afb47c"
+  },
+  {
+   "argvBase": [
+    "--expr="
+   ],
+   "attempt": 7,
+   "classId": "Q",
+   "classTitle": "safe-quoting-data",
+   "expected": {
+    "decision": "excluded",
+    "dynamicEvents": 1,
+    "reason": "data-only-structure",
+    "targetExit": 0
+   },
+   "fixture": "fixtures/safe-quoting/sce_quoted_sink.py",
+   "outputRoot": "runs/0007",
+   "payloadRole": "data",
+   "payloadTemplate": "__probe__ = '${challenge}'",
+   "probeIndex": 0,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "f03a1f1d698923b04e4b0a5a8709a8958c1cdc221d14c5969cde04c430afb47c"
+  },
+  {
+   "argvBase": [
+    "--expr="
+   ],
+   "attempt": 8,
+   "classId": "Q",
+   "classTitle": "safe-quoting-data",
+   "expected": {
+    "decision": "excluded",
+    "dynamicEvents": 0,
+    "reason": "syntax-reject",
+    "targetExit": 3
+   },
+   "fixture": "fixtures/safe-quoting/sce_quoted_sink.py",
+   "outputRoot": "runs/0008",
+   "payloadRole": "data",
+   "payloadTemplate": "probe\"${challenge}",
+   "probeIndex": 0,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "f03a1f1d698923b04e4b0a5a8709a8958c1cdc221d14c5969cde04c430afb47c"
+  },
+  {
+   "argvBase": [
+    "--expr="
+   ],
+   "attempt": 9,
+   "classId": "E",
+   "classTitle": "stdout-echo",
+   "expected": {
+    "decision": "excluded",
+    "dynamicEvents": 0,
+    "reason": "no-dynamic-event",
+    "targetExit": 0
+   },
+   "fixture": "fixtures/echo/sce_echo_sink.py",
+   "outputRoot": "runs/0009",
+   "payloadRole": "echo",
+   "payloadTemplate": "${challenge}",
+   "probeIndex": 0,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "83b5e9cde7f5203571efb5cf8d5b24034d8816036140a1d23306c063ceb617b2"
+  },
+  {
+   "argvBase": [
+    "--expr="
+   ],
+   "attempt": 10,
+   "classId": "E",
+   "classTitle": "stdout-echo",
+   "expected": {
+    "decision": "excluded",
+    "dynamicEvents": 0,
+    "reason": "no-dynamic-event",
+    "targetExit": 0
+   },
+   "fixture": "fixtures/echo/sce_echo_sink.py",
+   "outputRoot": "runs/0010",
+   "payloadRole": "echo",
+   "payloadTemplate": "EVAL run=echo tag=${challenge} off=0",
+   "probeIndex": 0,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "83b5e9cde7f5203571efb5cf8d5b24034d8816036140a1d23306c063ceb617b2"
+  },
+  {
+   "argvBase": [
+    "--expr="
+   ],
+   "attempt": 11,
+   "classId": "E",
+   "classTitle": "stdout-echo",
+   "expected": {
+    "decision": "excluded",
+    "dynamicEvents": 0,
+    "reason": "no-dynamic-event",
+    "targetExit": 0
+   },
+   "fixture": "fixtures/echo/sce_echo_sink.py",
+   "outputRoot": "runs/0011",
+   "payloadRole": "echo",
+   "payloadTemplate": "challenge=${challenge}",
+   "probeIndex": 0,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "83b5e9cde7f5203571efb5cf8d5b24034d8816036140a1d23306c063ceb617b2"
+  },
+  {
+   "argvBase": [
+    "--expr="
+   ],
+   "attempt": 12,
+   "classId": "E",
+   "classTitle": "stdout-echo",
+   "expected": {
+    "decision": "excluded",
+    "dynamicEvents": 0,
+    "reason": "no-dynamic-event",
+    "targetExit": 0
+   },
+   "fixture": "fixtures/echo/sce_echo_sink.py",
+   "outputRoot": "runs/0012",
+   "payloadRole": "echo",
+   "payloadTemplate": "reported-structure-sha256=${challenge}",
+   "probeIndex": 0,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "83b5e9cde7f5203571efb5cf8d5b24034d8816036140a1d23306c063ceb617b2"
+  },
+  {
+   "argvBase": [
+    "--route=beta",
+    "--expr="
+   ],
+   "attempt": 13,
+   "classId": "W",
+   "classTitle": "wrong-function-same-offset",
+   "expected": {
+    "decision": "excluded",
+    "dynamicEvents": 1,
+    "reason": "caller-identity-mismatch",
+    "targetExit": 0
+   },
+   "fixture": "fixtures/wrong-function/sce_two_sites.py",
+   "outputRoot": "runs/0013",
+   "payloadRole": "computation",
+   "payloadTemplate": "len(\"${challenge}\")",
+   "probeIndex": 1,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "260f904b0f72b002fbd9b6be57df9ee18e4b65c36e10cefd4723fb28de4bac6b"
+  },
+  {
+   "argvBase": [
+    "--route=beta",
+    "--expr="
+   ],
+   "attempt": 14,
+   "classId": "W",
+   "classTitle": "wrong-function-same-offset",
+   "expected": {
+    "decision": "excluded",
+    "dynamicEvents": 1,
+    "reason": "caller-identity-mismatch",
+    "targetExit": 0
+   },
+   "fixture": "fixtures/wrong-function/sce_two_sites.py",
+   "outputRoot": "runs/0014",
+   "payloadRole": "computation",
+   "payloadTemplate": "\"${challenge}\"[4:12]",
+   "probeIndex": 1,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "260f904b0f72b002fbd9b6be57df9ee18e4b65c36e10cefd4723fb28de4bac6b"
+  },
+  {
+   "argvBase": [
+    "--route=beta",
+    "--expr="
+   ],
+   "attempt": 15,
+   "classId": "W",
+   "classTitle": "wrong-function-same-offset",
+   "expected": {
+    "decision": "excluded",
+    "dynamicEvents": 1,
+    "reason": "caller-identity-mismatch",
+    "targetExit": 0
+   },
+   "fixture": "fixtures/wrong-function/sce_two_sites.py",
+   "outputRoot": "runs/0015",
+   "payloadRole": "computation",
+   "payloadTemplate": "[len(\"${challenge}\"), 2][0]",
+   "probeIndex": 1,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "260f904b0f72b002fbd9b6be57df9ee18e4b65c36e10cefd4723fb28de4bac6b"
+  },
+  {
+   "argvBase": [
+    "--route=beta",
+    "--expr="
+   ],
+   "attempt": 16,
+   "classId": "W",
+   "classTitle": "wrong-function-same-offset",
+   "expected": {
+    "decision": "excluded",
+    "dynamicEvents": 1,
+    "reason": "caller-identity-mismatch",
+    "targetExit": 0
+   },
+   "fixture": "fixtures/wrong-function/sce_two_sites.py",
+   "outputRoot": "runs/0016",
+   "payloadRole": "computation",
+   "payloadTemplate": "max(len(\"${challenge}\"), 7)",
+   "probeIndex": 1,
+   "probePrefix": "--expr=",
+   "probeSuffix": "",
+   "sourceSha256": "260f904b0f72b002fbd9b6be57df9ee18e4b65c36e10cefd4723fb28de4bac6b"
+  }
+ ],
+ "challengeRules": {
+  "committedBeforeCompile": true,
+  "committedBeforeTargetStart": true,
+  "encoding": "lowercase hex",
+  "length": 32,
+  "noReplayOfReservedOrUnknown": true,
+  "singleUse": true,
+  "source": "os.urandom(16) in the runner"
+ },
+ "fixtures": [
+  {
+   "callable": "main",
+   "classId": "S",
+   "closureSources": {
+    "sce_raw_sink.py": "fixtures/structure-controlled/sce_raw_sink.py"
+   },
+   "localDiagnosticOnly": true,
+   "module": "sce_raw_sink",
+   "path": "fixtures/structure-controlled/sce_raw_sink.py",
+   "pointIdLocalDiagnostic": "ede6de067cf5fb7debc75bf80270e1d93bb961500753fd6ba4092883112e517d",
+   "pointSelector": {
+    "callee": "eval",
+    "function": "compute",
+    "kind": "call-in-function"
+   },
+   "sourceSha256": "fb799416a87ce896e747acd66618a98e3e349c6800a58843b196560399ca2dba"
+  },
+  {
+   "callable": "main",
+   "classId": "Q",
+   "closureSources": {
+    "sce_quoted_sink.py": "fixtures/safe-quoting/sce_quoted_sink.py"
+   },
+   "localDiagnosticOnly": true,
+   "module": "sce_quoted_sink",
+   "path": "fixtures/safe-quoting/sce_quoted_sink.py",
+   "pointIdLocalDiagnostic": "187b8709ab6a16d204460e7c3b12d92dc8fb36b49d6ede6d4bddd78957537fad",
+   "pointSelector": {
+    "callee": "eval",
+    "function": "render",
+    "kind": "call-in-function"
+   },
+   "sourceSha256": "f03a1f1d698923b04e4b0a5a8709a8958c1cdc221d14c5969cde04c430afb47c"
+  },
+  {
+   "callable": "main",
+   "classId": "E",
+   "closureSources": {
+    "sce_echo_sink.py": "fixtures/echo/sce_echo_sink.py"
+   },
+   "localDiagnosticOnly": true,
+   "module": "sce_echo_sink",
+   "path": "fixtures/echo/sce_echo_sink.py",
+   "pointIdLocalDiagnostic": "5dde1992a9dd07de81297c067fb9128545108e52406d2205de585d0f7fab49de",
+   "pointSelector": {
+    "callee": "eval",
+    "function": "compute",
+    "kind": "call-in-function"
+   },
+   "sourceSha256": "83b5e9cde7f5203571efb5cf8d5b24034d8816036140a1d23306c063ceb617b2"
+  },
+  {
+   "callable": "main",
+   "classId": "W",
+   "closureSources": {
+    "sce_two_sites.py": "fixtures/wrong-function/sce_two_sites.py"
+   },
+   "localDiagnosticOnly": true,
+   "module": "sce_two_sites",
+   "path": "fixtures/wrong-function/sce_two_sites.py",
+   "pointIdLocalDiagnostic": "3344008608402c09d61a0a63a9d81d1883cba737c0b76c29691c2c28fa945b7c",
+   "pointSelector": {
+    "callee": "eval",
+    "function": "alpha",
+    "kind": "call-in-function"
+   },
+   "sourceSha256": "260f904b0f72b002fbd9b6be57df9ee18e4b65c36e10cefd4723fb28de4bac6b"
+  }
+ ],
+ "kind": "stdlib-cli-structural-probe-experiment-plan",
+ "maxPerClass": 4,
+ "phase": "protocol-preparation",
+ "prepareSteps": [
+  {
+   "container": true,
+   "kind": "pure-tool-layout-derivation",
+   "output": "prepare/layout/layout.json",
+   "step": "layout-v1",
+   "targetExecuted": false,
+   "targetImported": false,
+   "tool": "tools/layout_probe.py"
+  },
+  {
+   "container": true,
+   "kind": "pure-tool-compile-binding",
+   "mode": "bind",
+   "output": "prepare/bind/bind.json",
+   "step": "bind-all",
+   "targetExecuted": false,
+   "targetImported": false,
+   "tool": "tools/experiment_compile.py"
+  },
+  {
+   "container": true,
+   "instances": 16,
+   "kind": "pure-tool-structure-compile",
+   "mode": "structure",
+   "outputPattern": "prepare/compile-%04d/expected.json",
+   "step": "compile-per-attempt",
+   "targetExecuted": false,
+   "targetImported": false,
+   "tool": "tools/experiment_compile.py"
+  }
+ ],
+ "profile": {
+  "imageId": "sha256:9479bc40712c72437ee2630d947c102cf0c1cd5200ec038026272427925b82e7",
+  "layoutStep": "layout-v1",
+  "name": "stdlib-cli-v2-experiment",
+  "observerGrammar": "dynstruct-v1",
+  "observerTemplate": "tools/observer_template.bt",
+  "pythonVersion": "3.12.15"
+ },
+ "state": "pending-host-protocol-review",
+ "targetExecutionBudget": 16,
+ "targetExecutions": 0,
+ "version": 1
+}
