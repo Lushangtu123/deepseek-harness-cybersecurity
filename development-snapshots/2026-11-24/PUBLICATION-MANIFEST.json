@@ -12,8 +12,8 @@
   ],
   "files": {
     "README.md": {
-      "bytes": 2506,
-      "sha256": "86d31dc5bcff1854780bc449b26e80f76ce643c7abf4d8d92d7d94399bc25d6e"
+      "bytes": 2605,
+      "sha256": "fe74c606a6cbdf1e1a86685a8cc849de2a94535ee901b0498e6be9ee7b1624fd"
     },
     "export/.github/workflows/verify.yml": {
       "bytes": 1004,
@@ -12254,6 +12254,7 @@
   "kind": "public-development-snapshot-publication-manifest",
   "localExportBase": "7dc7cf86264594e19371becbb5803f4e5f660b16",
   "note": "Embedded historical provenance hashes remain original; sanitized report byte digests are in this publication manifest, not substituted into original receipts.",
+  "rootRepositoryMetadataChange": "inventory/files.sha256.json refreshed to cover added snapshot; existing runtime/configuration bytes unchanged",
   "securityPatternFindings": [],
   "selfExcluded": true,
   "sourceUnchangedExceptPublicCopyHostPrefixInNonfrozenFiles": true,
